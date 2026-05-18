@@ -38,7 +38,7 @@ window.NS_API = (function () {
     const body = {
       message,
       content: btoa(unescape(encodeURIComponent(contentString))),
-      ...(sha ? { sha } : {})
+      ...(sha ? { sha } : {}),
     };
     const r = await fetch(
       `https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`,
@@ -47,12 +47,15 @@ window.NS_API = (function () {
         headers: {
           Authorization: `Bearer ${GITHUB_TOKEN}`,
           Accept: "application/vnd.github+json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
       }
     );
-    if (!r.ok) throw new Error(`gh-put-${r.status}`);
+    if (!r.ok) {
+      const errBody = await r.text();
+      throw new Error(`gh-put-${r.status}: ${errBody}`);
+    }
     return r.json();
   }
 
@@ -88,9 +91,12 @@ window.NS_API = (function () {
         message || "update project.json",
         sha
       );
-      return { ok: true, sha: result.content?.sha || result.sha };
+      const newSha = result.content?.sha;
+      if (!newSha) throw new Error("no-sha-in-response");
+      return { ok: true, sha: newSha };
     } catch (e) {
-      return { ok: true, mock: true, sha: "mock-" + Date.now() };
+      // Honest failure — caller will show error toast and can retry.
+      return { ok: false, error: e.message };
     }
   }
 
@@ -104,7 +110,7 @@ window.NS_API = (function () {
       const result = await githubPutFile(path, contentString, `upload ${piece.id} v${(piece.revision_count || 0) + 1}`);
       return { ok: true, path, mock: !!result.mock };
     } catch (e) {
-      return { ok: true, path, mock: true };
+      return { ok: false, path, error: e.message };
     }
   }
 
@@ -116,7 +122,7 @@ window.NS_API = (function () {
         description: "—",
         status: "Live",
         updated: new Date().toISOString().slice(0, 10),
-        path: item.path
+        path: item.path,
       }));
     } catch (e) {
       return window.MOCK_PROJECT.build_with_claude;
@@ -134,14 +140,14 @@ window.NS_API = (function () {
             "x-api-key": ANTHROPIC_API_KEY,
             "anthropic-version": "2023-06-01",
             "content-type": "application/json",
-            "anthropic-dangerous-direct-browser-access": "true"
+            "anthropic-dangerous-direct-browser-access": "true",
           },
           body: JSON.stringify({
             model: "claude-haiku-4-5",
             max_tokens: 1024,
             system: systemPrompt,
-            messages
-          })
+            messages,
+          }),
         });
         if (r.ok) {
           const data = await r.json();
@@ -167,6 +173,6 @@ window.NS_API = (function () {
     listBuildWithClaude,
     askClaude,
     isRealGithub,
-    isRealAnthropic
+    isRealAnthropic,
   };
 })();

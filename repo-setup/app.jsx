@@ -8,7 +8,7 @@ function SaveToast({ state }) {
   const map = {
     saving: { text: "Saving\u2026",           color: "#c08227" },
     saved:  { text: "Saved to GitHub \u2713", color: "#4f7a5b" },
-    error:  { text: "Save failed \u2014 retrying", color: "#c8401a" },
+    error:  { text: "Save failed \u2014 check console", color: "#c8401a" },
   };
   const { text, color } = map[state] || map.saved;
   return (
@@ -42,12 +42,16 @@ function App() {
   const saveTimerRef = useRefApp(null);
   const toastTimerRef = useRefApp(null);
   const firstSaveRef = useRefApp(true);
+  // shaRef ensures the save timeout always reads the current SHA,
+  // not a stale closure value from a previous render.
+  const shaRef = useRefApp(null);
 
   useEffectApp(() => {
     window.NS_API.loadProject().then(({ project, source, sha }) => {
       setProject(project);
       setSource(source);
       setSha(sha);
+      shaRef.current = sha;
     });
   }, []);
 
@@ -58,8 +62,11 @@ function App() {
     clearTimeout(toastTimerRef.current);
     setSaveState("saving");
     saveTimerRef.current = setTimeout(async () => {
-      const r = await window.NS_API.saveProject(project, sha, "tracker update");
-      if (r.sha) setSha(r.sha);
+      const r = await window.NS_API.saveProject(project, shaRef.current, "tracker update");
+      if (r.ok && r.sha) {
+        setSha(r.sha);
+        shaRef.current = r.sha;
+      }
       setSaveState(r.ok ? "saved" : "error");
       toastTimerRef.current = setTimeout(() => setSaveState(null), 2400);
     }, 800);
