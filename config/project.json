@@ -513,6 +513,12 @@
         "role": "Marketing Director",
         "org": "jaggaer",
         "admin": true
+      },
+      {
+        "id": "m-ny8dy",
+        "name": "New member",
+        "role": "Researcher",
+        "org": "jaggaer"
       }
     ]
   },
