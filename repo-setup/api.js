@@ -1,57 +1,32 @@
-// GitHub + Anthropic helpers. Both gracefully fall back when the placeholder
-// credentials are still in place — the app stays fully usable for design review.
+// GitHub + Anthropic helpers — all calls go through Vercel serverless proxies.
+// No tokens or API keys are exposed in the browser.
 
 window.NS_API = (function () {
-  const GITHUB_TOKEN = window.__CONFIG__.GITHUB_TOKEN;
   const GITHUB_REPO = window.__CONFIG__.GITHUB_REPO;
-  const ANTHROPIC_API_KEY = window.__CONFIG__.ANTHROPIC_API_KEY;
 
-  const isRealGithub =
-    typeof GITHUB_TOKEN === "string" &&
-    GITHUB_TOKEN.startsWith("ghp_") &&
-    GITHUB_TOKEN.length > 10 &&
-    !GITHUB_TOKEN.endsWith("...") &&
-    GITHUB_REPO &&
-    GITHUB_REPO.includes("/") &&
-    !GITHUB_REPO.includes("owner/");
+  // We're always "real" when deployed — proxies handle credential validation.
+  // In local dev without the proxy running, calls will 404 and fall back to mock.
+  const isRealGithub = !!(GITHUB_REPO && GITHUB_REPO.includes("/") && !GITHUB_REPO.includes("owner/"));
+  const isRealAnthropic = true; // proxy decides at runtime
 
-  const isRealAnthropic =
-    typeof ANTHROPIC_API_KEY === "string" &&
-    ANTHROPIC_API_KEY.startsWith("sk-ant-") &&
-    !ANTHROPIC_API_KEY.endsWith("...");
-
-  // ── GitHub ────────────────────────────────────────────────────────────────
+  // ── GitHub proxy helpers ──────────────────────────────────────────────────
   async function githubGetFile(path) {
-    if (!isRealGithub) throw new Error("no-creds");
-    const r = await fetch(
-      `https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`,
-      { headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: "application/vnd.github+json" } }
-    );
+    const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`);
     if (!r.ok) throw new Error(`gh-${r.status}`);
     return r.json();
   }
 
   async function githubPutFile(path, contentString, message, sha) {
-    if (!isRealGithub) {
-      return { mock: true, sha: "mock-" + Math.random().toString(36).slice(2, 10) };
-    }
     const body = {
       message,
       content: btoa(unescape(encodeURIComponent(contentString))),
       ...(sha ? { sha } : {}),
     };
-    const r = await fetch(
-      `https://api.github.com/repos/${GITHUB_REPO}/contents/${path}`,
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${GITHUB_TOKEN}`,
-          Accept: "application/vnd.github+json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      }
-    );
+    const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
     if (!r.ok) {
       const errBody = await r.text();
       throw new Error(`gh-put-${r.status}: ${errBody}`);
@@ -59,17 +34,13 @@ window.NS_API = (function () {
     return r.json();
   }
 
-  async function githubListBWC() {
-    if (!isRealGithub) throw new Error("no-creds");
-    const r = await fetch(
-      `https://api.github.com/repos/${GITHUB_REPO}/contents/build-with-claude`,
-      { headers: { Authorization: `Bearer ${GITHUB_TOKEN}`, Accept: "application/vnd.github+json" } }
-    );
+  async function githubListFolder(path) {
+    const r = await fetch(`/api/github?path=${encodeURIComponent(path)}&list=1`);
     if (!r.ok) throw new Error(`gh-list-${r.status}`);
     return r.json();
   }
 
-  // Top-level: load project state (project.json), with mock fallback.
+  // ── Project load / save ───────────────────────────────────────────────────
   async function loadProject() {
     try {
       const meta = await githubGetFile("config/project.json");
@@ -77,7 +48,6 @@ window.NS_API = (function () {
       const content = new TextDecoder("utf-8").decode(Uint8Array.from(raw, c => c.charCodeAt(0)));
       return { project: JSON.parse(content), source: "github", sha: meta.sha };
     } catch (e) {
-      // Deep clone the mock so writes don't poison subsequent loads in dev.
       const project = JSON.parse(JSON.stringify(window.MOCK_PROJECT));
       return { project, source: "mock", sha: null, error: e.message };
     }
@@ -95,7 +65,6 @@ window.NS_API = (function () {
       if (!newSha) throw new Error("no-sha-in-response");
       return { ok: true, sha: newSha };
     } catch (e) {
-      // Honest failure — caller will show error toast and can retry.
       return { ok: false, error: e.message };
     }
   }
@@ -116,7 +85,7 @@ window.NS_API = (function () {
 
   async function listBuildWithClaude() {
     try {
-      const list = await githubListBWC();
+      const list = await githubListFolder("build-with-claude");
       return list.map(item => ({
         name: item.name,
         description: "—",
@@ -129,41 +98,38 @@ window.NS_API = (function () {
     }
   }
 
-  // ── Anthropic ─────────────────────────────────────────────────────────────
+  // ── Anthropic proxy ───────────────────────────────────────────────────────
   async function askClaude(messages, systemPrompt) {
-    // Direct Anthropic API path
-    if (isRealAnthropic) {
-      try {
-        const r = await fetch("https://api.anthropic.com/v1/messages", {
-          method: "POST",
-          headers: {
-            "x-api-key": ANTHROPIC_API_KEY,
-            "anthropic-version": "2023-06-01",
-            "content-type": "application/json",
-            "anthropic-dangerous-direct-browser-access": "true",
-          },
-          body: JSON.stringify({
-            model: "claude-haiku-4-5",
-            max_tokens: 1024,
-            system: systemPrompt,
-            messages,
-          }),
-        });
-        if (r.ok) {
-          const data = await r.json();
-          return data.content?.[0]?.text || "";
-        }
-      } catch (e) { /* fall through */ }
+    try {
+      const r = await fetch("/api/anthropic", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-haiku-4-5",
+          max_tokens: 1024,
+          system: systemPrompt,
+          messages,
+        }),
+      });
+      if (r.ok) {
+        const data = await r.json();
+        return data.content?.[0]?.text || "";
+      }
+    } catch (e) { /* fall through to built-in */ }
+
+    // Built-in helper fallback (claude.ai artifact context only)
+    if (typeof window.claude !== "undefined") {
+      return await window.claude.complete({
+        messages: [
+          { role: "user", content: `${systemPrompt}\n\n— Conversation —\n` +
+              messages.map(m => `${m.role.toUpperCase()}: ${m.content}`).join("\n\n") +
+              `\n\nRespond as the project-aware colleague. Be concise.`
+          }
+        ]
+      });
     }
-    // Built-in helper fallback
-    return await window.claude.complete({
-      messages: [
-        { role: "user", content: `${systemPrompt}\n\n— Conversation —\n` +
-            messages.map(m => `${m.role.toUpperCase()}: ${m.content}`).join("\n\n") +
-            `\n\nRespond as the project-aware colleague. Be concise.`
-        }
-      ]
-    });
+
+    return "Claude is not available. Add ANTHROPIC_API_KEY to Vercel environment variables.";
   }
 
   return {
