@@ -51,7 +51,7 @@
               "id": "p-c1-3",
               "title": "S2P Buyer's FAQ on Generative AI Assistants",
               "format": "FAQ (Anchor)",
-              "assignee": "robert",
+              "assignee": "jason",
               "status": "uploaded",
               "revision_count": 0,
               "primary_keyword": "generative AI assistants procurement",
@@ -308,7 +308,7 @@
     {
       "id": "public-sector",
       "label": "Public Sector",
-      "subtitle": "UK ÃÂ· FR ÃÂ· ES",
+      "subtitle": "UK ÃÂÃÂ· FR ÃÂÃÂ· ES",
       "weight": 0.17,
       "geography": "UK / FR / ES",
       "clusters": [
@@ -394,7 +394,7 @@
     {
       "id": "higher-education",
       "label": "Higher Education",
-      "subtitle": "US ÃÂ· EU ÃÂ· UK",
+      "subtitle": "US ÃÂÃÂ· EU ÃÂÃÂ· UK",
       "weight": 0.17,
       "geography": "US / EU / UK",
       "clusters": [
@@ -642,7 +642,7 @@
   "build_with_claude": [
     {
       "name": "contract-analyser",
-      "description": "Drag-drop MSA Ã¢â â Claude returns redline summary + risk flags.",
+      "description": "Drag-drop MSA ÃÂ¢Ã¢ÂÂ Ã¢ÂÂ Claude returns redline summary + risk flags.",
       "status": "Live",
       "updated": "2026-05-14",
       "path": "build-with-claude/contract-analyser"
