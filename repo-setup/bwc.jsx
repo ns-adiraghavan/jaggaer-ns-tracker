@@ -1,4 +1,4 @@
-// Build With Claude â€” read-only panel. Lists /build-with-claude/ folder.
+// Build With Claude — read-only panel. Lists /build-with-claude/ folder.
 
 const { useState: useStateBWC, useEffect: useEffectBWC } = React;
 
@@ -17,7 +17,7 @@ function BWCPanel({ project }) {
       <header className="ns-bwc-head">
         <div className="ns-eyebrow ns-eyebrow-dark">WORKSTREAM B &middot; TECHNICAL BUILD</div>
         <h1 className="ns-bwc-title">
-          <em>Build With Claude</em><span className="ns-bwc-title-tail"> &mdash; apps in flight on the Jaggaer Agent Builder page.</span>
+          Build With Claude — apps in flight on the Jaggaer Agent Builder page.
         </h1>
         <div className="ns-bwc-deck">
           Read-only here. NS pushes to <code>/build-with-claude/</code> in the repo. This panel reflects what&apos;s there.

@@ -2,7 +2,7 @@
 
 const { useState: useStateApp, useEffect: useEffectApp, useRef: useRefApp } = React;
 
-// â”€â”€ Save Toast â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── Save Toast ────────────────────────────────────────────────────────────────
 function SaveToast({ state }) {
   if (!state) return null;
   const map = {
@@ -16,7 +16,7 @@ function SaveToast({ state }) {
       position: "fixed", bottom: 52, right: 24, zIndex: 9999,
       background: "#0f1923", border: `1px solid ${color}`,
       borderLeft: `3px solid ${color}`,
-      color: "#f5f2ec", fontFamily: "DM Sans, sans-serif",
+      color: "#f5f2ec", fontFamily: "Noto Sans, sans-serif",
       fontSize: "0.78rem", letterSpacing: "0.04em",
       padding: "10px 18px", borderRadius: "2px",
       boxShadow: "0 4px 20px rgba(0,0,0,0.4)",
@@ -117,7 +117,6 @@ function App() {
         <StatusFooter source={source} project={project} />
       </div>
 
-      <ClaudeRail project={project} currentUser={currentUser} />
       <SaveToast state={saveState} />
     </div>
   );

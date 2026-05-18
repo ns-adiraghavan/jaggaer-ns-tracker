@@ -12,7 +12,7 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
       <div className="ns-sidebar-head">
         <div className="ns-sidebar-mark">
           <span className="ns-mark-dot"></span>
-          <span className="ns-mark-text">NS<span className="ns-mark-x">Ã—</span>JG</span>
+          <span className="ns-mark-text">NS<span className="ns-mark-x">×</span>JG</span>
         </div>
         <div className="ns-sidebar-month">
           <div className="ns-eyebrow ns-eyebrow-light">CURRENT MONTH</div>
@@ -96,7 +96,7 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
         <div className="ns-user-actions">
           {currentUser.admin && (
             <button className={`ns-mini-btn ${adminMode ? "is-on" : ""}`} onClick={onToggleAdmin}>
-              {adminMode ? "Admin Â· on" : "Admin"}
+              {adminMode ? "Admin ✓" : "Admin"}
             </button>
           )}
           <button className="ns-mini-btn" onClick={onSignOut}>Switch</button>

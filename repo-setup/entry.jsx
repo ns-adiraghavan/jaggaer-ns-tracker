@@ -1,4 +1,4 @@
-// Entry: name selector. Roster pulled from project.team. No password â€” just attribution.
+// Entry: name selector. Roster pulled from project.team. No password — just attribution.
 const { useState } = React;
 
 function NameSelector({ project, onSelect }) {
@@ -25,7 +25,7 @@ function NameSelector({ project, onSelect }) {
           </div>
           <h1 className="ns-entry-title">
             The project<br/>
-            <em>tracker.</em>
+            <span className="accent-word">tracker.</span>
           </h1>
           <p className="ns-entry-deck">
             A single editorial workspace for content delivery, review and approval.
