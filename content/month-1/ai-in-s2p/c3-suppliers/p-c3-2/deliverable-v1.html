@@ -1,0 +1,833 @@
+<!-- uploaded by manager at 2026-05-18T05:34:39.524Z -->
+<!-- piece: Supplier Intelligence with Claude: A Practical Field Guide (Anchor) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3 Procurement Myths Costing Manufacturers Money | JAGGAER</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f2ec;
+    --accent: #c8401a;
+    --accent-light: #f0e6e1;
+    --steel: #1a2535;
+    --muted: #6b6560;
+    --rule: #d4cfc8;
+    --card-bg: #ffffff;
+    --myth-bg: #1a2535;
+    --reality-bg: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ─── */
+  .site-bar {
+    background: var(--steel);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.35rem;
+    color: #fff;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .logo span { color: var(--accent); }
+
+  .site-bar nav a {
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-left: 28px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .site-bar nav a:hover { color: #fff; }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--steel);
+    padding: 80px 48px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 480px; height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,64,26,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(200,64,26,0.15);
+    border: 1px solid rgba(200,64,26,0.35);
+    color: #e08060;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+
+  .hero-kicker::before {
+    content: '';
+    display: block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    color: #fff;
+    line-height: 1.15;
+    max-width: 760px;
+    margin-bottom: 22px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: #e08060;
+  }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 1.05rem;
+    max-width: 580px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 24px;
+  }
+
+  .hero-meta span {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-meta strong { color: rgba(255,255,255,0.8); }
+
+  /* ─── STAT STRIP ─── */
+  .stat-strip {
+    background: var(--accent);
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 3px solid #a33315;
+  }
+
+  .stat-cell {
+    padding: 28px 0;
+    border-right: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 32px;
+    padding-left: 32px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .stat-cell:first-child { padding-left: 0; }
+  .stat-cell:last-child { border-right: none; }
+
+  .stat-cell.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 2.4rem;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    color: rgba(255,255,255,0.82);
+    font-size: 0.82rem;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  .stat-source {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.68rem;
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  .content-wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 64px 48px;
+  }
+
+  .section-intro {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 680px;
+    margin-bottom: 64px;
+    border-left: 3px solid var(--accent);
+    padding-left: 20px;
+    line-height: 1.75;
+  }
+
+  /* ─── MYTH CARDS ─── */
+  .myth-block {
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .myth-block.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .myth-number-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .myth-num {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  .myth-divider {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* Myth/Reality 2-panel card */
+  .flip-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05);
+    border: 1px solid var(--rule);
+  }
+
+  .myth-panel {
+    background: var(--myth-bg);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .myth-panel::after {
+    content: '✕';
+    position: absolute;
+    top: -10px; right: -10px;
+    font-size: 7rem;
+    color: rgba(255,255,255,0.04);
+    font-weight: 900;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .panel-tag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .panel-tag.myth-tag { color: #e08060; }
+  .panel-tag.reality-tag { color: #3a9a6e; }
+
+  .panel-tag::before {
+    content: '';
+    display: block;
+    width: 18px; height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+  }
+
+  .myth-panel h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.35;
+    font-style: italic;
+  }
+
+  .reality-panel {
+    background: var(--reality-bg);
+    padding: 36px 32px;
+    border-left: 4px solid #3a9a6e;
+  }
+
+  .reality-panel h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .reality-panel p {
+    font-size: 0.92rem;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .reality-panel p:last-child { margin-bottom: 0; }
+
+  /* Capability pills */
+  .caps-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 16px;
+  }
+
+  .cap-pill {
+    background: #f0f7f4;
+    border: 1px solid #c5e0d5;
+    color: #2a7a56;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 4px 11px;
+    border-radius: 20px;
+  }
+
+  /* Inline data callout */
+  .data-callout {
+    background: linear-gradient(135deg, #fff8f5, #fff);
+    border: 1px solid #f0cfc0;
+    border-left: 4px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 4px 4px 0;
+    margin: 18px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .data-callout-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .data-callout-text {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  .data-callout-text cite {
+    display: block;
+    font-size: 0.72rem;
+    color: #999;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* ─── CLOSE SECTION ─── */
+  .close-section {
+    background: var(--steel);
+    padding: 72px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .close-section::before {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,64,26,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .close-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .close-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .close-left p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .speed-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .speed-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.06);
+    padding: 14px 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .arrow-icon {
+    width: 28px; height: 28px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    color: #fff;
+  }
+
+  .speed-row-text {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.4;
+  }
+
+  .speed-row-text strong {
+    color: #fff;
+    display: block;
+    font-size: 0.88rem;
+    margin-bottom: 2px;
+  }
+
+  /* CTA panel */
+  .cta-panel {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 6px;
+    padding: 36px 28px;
+  }
+
+  .cta-panel h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
+  .cta-panel p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    transition: background 0.2s, transform 0.15s;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary:hover { background: #a33315; transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 12px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: border-color 0.2s, color 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+  /* ─── FOOTER ─── */
+  .footnotes {
+    background: #f0ece4;
+    padding: 32px 48px;
+    max-width: 100%;
+  }
+
+  .footnotes-inner {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .footnotes h4 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .footnotes ol {
+    padding-left: 18px;
+  }
+
+  .footnotes li {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-kicker { animation: fadeUp 0.5s ease both; }
+  .hero h1 { animation: fadeUp 0.5s 0.12s ease both; }
+  .hero-sub { animation: fadeUp 0.5s 0.22s ease both; }
+  .hero-meta { animation: fadeUp 0.5s 0.32s ease both; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 720px) {
+    .site-bar { padding: 14px 20px; }
+    .site-bar nav { display: none; }
+    .hero { padding: 52px 20px 48px; }
+    .stat-strip { grid-template-columns: 1fr; padding: 0 20px; }
+    .stat-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); padding: 20px 0; }
+    .content-wrap { padding: 40px 20px; }
+    .flip-card { grid-template-columns: 1fr; }
+    .reality-panel { border-left: none; border-top: 4px solid #3a9a6e; }
+    .close-inner { grid-template-columns: 1fr; gap: 36px; }
+    .close-section { padding: 48px 20px; }
+    .footnotes { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SITE BAR -->
+<header class="site-bar">
+  <div class="logo">Jagg<span>aer</span></div>
+  <nav>
+    <a href="#">Solutions</a>
+    <a href="#">Industries</a>
+    <a href="#">Resources</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-kicker">Myth Buster · Discrete Manufacturing</div>
+  <h1>Your ERP Is Not<br>a Procurement <em>Strategy.</em></h1>
+  <p class="hero-sub">Three beliefs still costing manufacturers money — and what modern procurement teams are doing instead.</p>
+  <div class="hero-meta">
+    <span>By <strong>JAGGAER</strong></span>
+    <span>·</span>
+    <span>May 2026</span>
+    <span>·</span>
+    <span>8 min read</span>
+  </div>
+</section>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat-cell">
+    <div class="stat-number">38%</div>
+    <div class="stat-label">Rise in global supply chain disruptions in 2024 alone</div>
+    <div class="stat-source">Resilinc EventWatchAI, 2025</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-number">94%</div>
+    <div class="stat-label">Of companies report revenue impact from supply chain disruptions</div>
+    <div class="stat-source">Procurement Tactics, 2025</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-number">58%</div>
+    <div class="stat-label">Of disruption alerts were severe enough to trigger emergency WarRooms</div>
+    <div class="stat-source">Resilinc, 2024</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="content-wrap">
+
+  <p class="section-intro">
+    Supply chain disruptions are now <em>structural</em>, not cyclical. Yet many manufacturers still evaluate procurement technology using assumptions built for a quieter era. Here are three beliefs that need to be retired — and why the cost of holding onto them is rising every quarter.
+  </p>
+
+  <!-- MYTH 1 -->
+  <div class="myth-block">
+    <div class="myth-number-row">
+      <span class="myth-num">Myth 01</span>
+      <div class="myth-divider"></div>
+    </div>
+    <div class="flip-card">
+      <div class="myth-panel">
+        <div class="panel-tag myth-tag">The Myth</div>
+        <h2>"Our ERP handles procurement. We don't need another platform."</h2>
+      </div>
+      <div class="reality-panel">
+        <div class="panel-tag reality-tag">The Reality</div>
+        <h3>ERP records transactions. It doesn't manage risk.</h3>
+        <p>ERP systems are purpose-built to track what happened — purchase orders raised, invoices matched, contracts filed. They are not designed to detect a supplier's deteriorating financial health, flag a geopolitical exposure in your Tier 2 base, or surface a sourcing opportunity before your competitors act on it.</p>
+        <div class="data-callout">
+          <div class="data-callout-num">65%</div>
+          <div class="data-callout-text">
+            of procurement organizations cite digital transformation as their most important initiative, reflecting growing demand for better real-time visibility, supplier intelligence, and procurement decision support.
+            <cite>ProcureAbility State of Procurement H2 2025</cite>
+          </div>
+        </div>
+        <p>Modern procurement platforms don't replace ERP — they extend it with the capabilities ERP was never designed to provide: supplier risk monitoring, market intelligence, guided sourcing, and automated workflow orchestration. That's not duplication. That's the missing intelligence layer.</p>
+        <div class="caps-list">
+          <span class="cap-pill">Supplier Risk Monitoring</span>
+          <span class="cap-pill">Market Intelligence</span>
+          <span class="cap-pill">Sourcing Analytics</span>
+          <span class="cap-pill">Workflow Orchestration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MYTH 2 -->
+  <div class="myth-block">
+    <div class="myth-number-row">
+      <span class="myth-num">Myth 02</span>
+      <div class="myth-divider"></div>
+    </div>
+    <div class="flip-card">
+      <div class="myth-panel">
+        <div class="panel-tag myth-tag">The Myth</div>
+        <h2>"AI-driven sourcing works for indirect spend. Direct materials are far too complex for it."</h2>
+      </div>
+      <div class="reality-panel">
+        <div class="panel-tag reality-tag">The Reality</div>
+        <h3>Complexity is exactly <em>why</em> direct materials need intelligent sourcing.</h3>
+        <p>Managing direct materials means juggling supplier reliability, lead times, quality performance, pricing volatility, compliance exposure, and geopolitical risk — simultaneously, across dozens of categories. Doing all of that manually doesn't protect decision quality. It delays it.</p>
+        <div class="data-callout">
+          <div class="data-callout-num">50–70%</div>
+          <div class="data-callout-text">
+            reduction in sourcing event cycle times reported by manufacturers using AI-guided sourcing automation for direct materials categories.
+            <cite>Keelvar / Suplari Platform Benchmarks, 2026</cite>
+          </div>
+        </div>
+        <p>AI-guided sourcing doesn't remove the procurement professional from the decision. It removes the bottlenecks around them — accelerating RFQ cycles, automating bid evaluation across multiple criteria, and surfacing supplier pricing variance before it becomes a margin problem. Sourcing delays don't stay inside procurement. They hit production schedules, inventory levels, and ultimately, delivery performance.</p>
+        <div class="caps-list">
+          <span class="cap-pill">Faster RFQ Cycles</span>
+          <span class="cap-pill">Multi-criteria Award Optimization</span>
+          <span class="cap-pill">Pricing Variance Detection</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MYTH 3 -->
+  <div class="myth-block">
+    <div class="myth-number-row">
+      <span class="myth-num">Myth 03</span>
+      <div class="myth-divider"></div>
+    </div>
+    <div class="flip-card">
+      <div class="myth-panel">
+        <div class="panel-tag myth-tag">The Myth</div>
+        <h2>"We reviewed our suppliers three years ago. Our vendor base is qualified."</h2>
+      </div>
+      <div class="reality-panel">
+        <div class="panel-tag reality-tag">The Reality</div>
+        <h3>Qualification is a moment in time. Risk is continuous.</h3>
+        <p>A supplier that passed your assessment in 2022 may today face financial instability, regulatory violations, operational disruption, or new geopolitical exposure. Most organizations only discover those risks after disruption has already reached operations.</p>
+        <div class="data-callout">
+          <div class="data-callout-num">93%</div>
+          <div class="data-callout-text">
+            of executives report high confidence in overall supplier oversight — yet this same group identifies Tier 2 and Tier 3 suppliers as their most critical operational blind spots.
+            <cite>Tradeverifyd Supply Chain Report, 2025</cite>
+          </div>
+        </div>
+        <p>In manufacturing, where supply chains extend across multiple tiers, a problem deep in the supplier network can rapidly become a production stoppage. Labor violations in the supply chain alone rose 146% in 2024. Static onboarding processes cannot provide protection at that pace of change. Continuous supplier lifecycle management — covering financial health, compliance status, certifications, performance trends, and external risk signals — is now a baseline requirement, not a premium capability.</p>
+        <div class="caps-list">
+          <span class="cap-pill">Continuous Risk Monitoring</span>
+          <span class="cap-pill">Compliance Tracking</span>
+          <span class="cap-pill">Supplier Lifecycle Management</span>
+          <span class="cap-pill">Sub-tier Visibility</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- CLOSE SECTION -->
+<section class="close-section">
+  <div class="close-inner">
+    <div class="close-left">
+      <h2>The Real Competitive Advantage Is Speed of Response</h2>
+      <p>The manufacturers building procurement advantage today are not simply adopting more technology. They are collapsing the time between a risk signal and a response — and between a market shift and a sourcing action.</p>
+      <div class="speed-metrics">
+        <div class="speed-row">
+          <div class="arrow-icon">→</div>
+          <div class="speed-row-text">
+            <strong>Risk signal to response</strong>
+            From weeks of manual review to real-time supplier alerts and automated escalation
+          </div>
+        </div>
+        <div class="speed-row">
+          <div class="arrow-icon">→</div>
+          <div class="speed-row-text">
+            <strong>Market shift to sourcing action</strong>
+            From lagging indicator to proactive sourcing triggered by market intelligence
+          </div>
+        </div>
+        <div class="speed-row">
+          <div class="arrow-icon">→</div>
+          <div class="speed-row-text">
+            <strong>Supplier issue to mitigation</strong>
+            From discovering a failure after impact to intercepting it before it reaches production
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cta-panel">
+      <h3>Which Myth Is Your Organization Still Operating Under?</h3>
+      <p>Take a 5-minute self-assessment to identify where your procurement gaps are largest — and where JAGGAER can close them fastest.</p>
+      <a href="#" class="btn-primary">Take the Assessment</a>
+      <a href="#" class="btn-secondary">Explore JAGGAER P2P →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTNOTES -->
+<footer class="footnotes">
+  <div class="footnotes-inner">
+    <h4>Sources</h4>
+    <ol>
+      <li>Resilinc EventWatchAI Annual Report 2025 — Global supply chain disruptions rose 38% YoY in 2024</li>
+      <li>Procurement Tactics Supply Chain Statistics 2025 — 94% of companies report revenue impact from disruptions</li>
+      <li>ProcureAbility State of Procurement H2 2025 — 65% of procurement organizations prioritize digital transformation, citing ERP gaps</li>
+      <li>Keelvar / Suplari Platform Benchmarks 2026 — 50–70% reduction in sourcing event cycle times with AI-guided sourcing</li>
+      <li>Tradeverifyd Supply Chain Statistics 2025 — 93% of executives confident in oversight yet identify sub-tier suppliers as primary blind spot</li>
+      <li>Resilinc 2024 — Labor violations in supply chains rose 146% in 2024; 58% of disruption alerts triggered WarRooms</li>
+      <li>McKinsey Supply Chain Risk Survey 2025 — 82% of companies affected by new tariffs; only 42% have Tier 2+ visibility</li>
+    </ol>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.myth-block, .stat-cell').forEach(el => observer.observe(el));
+
+  // Stagger stat cells
+  document.querySelectorAll('.stat-cell').forEach((cell, i) => {
+    cell.style.transitionDelay = `${i * 0.12}s`;
+  });
+</script>
+
+</body>
+</html>
