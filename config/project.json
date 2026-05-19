@@ -698,6 +698,10 @@
         {
           "pillar": "discrete-manufacturing",
           "cluster": "dm1-tariffs"
+        },
+        {
+          "pillar": "ai-in-s2p",
+          "cluster": "c1-getting-started"
         }
       ]
     },
@@ -717,10 +721,6 @@
         {
           "pillar": "public-sector",
           "cluster": "ps2-einvoicing"
-        },
-        {
-          "pillar": "ai-in-s2p",
-          "cluster": "c1-getting-started"
         },
         {
           "pillar": "ai-in-s2p",
