@@ -775,3 +775,4 @@ function DrawerOverlay({ piece, cluster, pillar, project, mode, setMode, updateP
 window.Tracker = Tracker;
 window.STATUS_META = STATUS_META;
 window.VERDICT_META = VERDICT_META;
+window.PUBLISHING_SEQUENCE = PUBLISHING_SEQUENCE;

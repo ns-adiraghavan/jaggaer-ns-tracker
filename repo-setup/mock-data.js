@@ -44,7 +44,7 @@ window.MOCK_PROJECT = {
           intent: "informational",
           anchor_piece: "p-c3-2",
           pieces: [
-            { id: "p-c3-1", title: "Asking Claude to Pre-Screen RFP Responses", format: "How-to Guide", assignee: "jason", status: "uploaded", revision_count: 0, primary_keyword: "Claude RFP pre-screen", geography: "all" },
+            { id: "p-c3-1", title: "Asking Claude to Pre-Screen RFP Responses", format: "How-to Guide", assignee: "jason", status: "not-started", revision_count: 0, primary_keyword: "Claude RFP pre-screen", geography: "all" },
             { id: "p-c3-2", title: "Supplier Intelligence with Claude: A Practical Field Guide (Anchor)", format: "Field Guide (Anchor)", assignee: "robert", status: "not-started", revision_count: 0, primary_keyword: "supplier intelligence Claude", geography: "all" },
             { id: "p-c3-3", title: "Sourcing Event Briefs: From Blank Page to Brief in 10 Minutes", format: "Case Study", assignee: "orlagh", status: "not-started", revision_count: 0, primary_keyword: "sourcing event brief AI", geography: "eu" }
           ]
@@ -56,7 +56,7 @@ window.MOCK_PROJECT = {
           intent: "commercial",
           anchor_piece: "p-c4-1",
           pieces: [
-            { id: "p-c4-1", title: "The Procurement Prompt Library — 40 Working Prompts for S2P (Anchor)", format: "Resource Hub (Anchor)", assignee: "manager", status: "jaggaer-feedback", revision_count: 1, primary_keyword: "procurement prompt library", geography: "all" },
+            { id: "p-c4-1", title: "The Procurement Prompt Library — 40 Working Prompts for S2P (Anchor)", format: "Resource Hub (Anchor)", assignee: "manager", status: "not-started", revision_count: 0, primary_keyword: "procurement prompt library", geography: "all" },
             { id: "p-c4-2", title: "Webinar Recap: Claude in the S2P Stack — Live Q&A", format: "Webinar Recap", assignee: "manager", status: "not-started", revision_count: 0, primary_keyword: "Claude S2P webinar", geography: "all" }
           ]
         }
@@ -76,9 +76,9 @@ window.MOCK_PROJECT = {
           intent: "informational",
           anchor_piece: "p-dm1-2",
           pieces: [
-            { id: "p-dm1-1", title: "Section 232 Tariffs: What Discrete Manufacturers Are Doing Differently in 2026", format: "Analysis", assignee: "robert", status: "approved", revision_count: 1, primary_keyword: "section 232 tariffs manufacturing 2026", geography: "us" },
-            { id: "p-dm1-2", title: "The Reshoring Decision Framework (Anchor)", format: "Framework (Anchor)", assignee: "jason", status: "approved", revision_count: 2, primary_keyword: "reshoring decision framework", geography: "us" },
-            { id: "p-dm1-3", title: "How German OEMs Are Rewriting Supplier Contracts Post-Tariff", format: "Case Study", assignee: "orlagh", status: "uploaded", revision_count: 0, primary_keyword: "German OEM supplier contracts tariff", geography: "de" }
+            { id: "p-dm1-1", title: "Section 232 Tariffs: What Discrete Manufacturers Are Doing Differently in 2026", format: "Analysis", assignee: "robert", status: "not-started", revision_count: 0, primary_keyword: "section 232 tariffs manufacturing 2026", geography: "us" },
+            { id: "p-dm1-2", title: "The Reshoring Decision Framework (Anchor)", format: "Framework (Anchor)", assignee: "jason", status: "not-started", revision_count: 0, primary_keyword: "reshoring decision framework", geography: "us" },
+            { id: "p-dm1-3", title: "How German OEMs Are Rewriting Supplier Contracts Post-Tariff", format: "Case Study", assignee: "orlagh", status: "not-started", revision_count: 0, primary_keyword: "German OEM supplier contracts tariff", geography: "de" }
           ]
         },
         {
@@ -88,8 +88,8 @@ window.MOCK_PROJECT = {
           intent: "informational",
           anchor_piece: "p-dm2-2",
           pieces: [
-            { id: "p-dm2-1", title: "Mapping Tier-3 Suppliers Without a Spreadsheet War Room", format: "How-to Guide", assignee: "robert", status: "jaggaer-feedback", revision_count: 0, primary_keyword: "tier 3 supplier mapping", geography: "us" },
-            { id: "p-dm2-2", title: "Sub-Tier Risk: The CPO's Operating Playbook (Anchor)", format: "Playbook (Anchor)", assignee: "orlagh", status: "revised", revision_count: 1, primary_keyword: "sub-tier supplier risk playbook", geography: "all" },
+            { id: "p-dm2-1", title: "Mapping Tier-3 Suppliers Without a Spreadsheet War Room", format: "How-to Guide", assignee: "robert", status: "not-started", revision_count: 0, primary_keyword: "tier 3 supplier mapping", geography: "us" },
+            { id: "p-dm2-2", title: "Sub-Tier Risk: The CPO's Operating Playbook (Anchor)", format: "Playbook (Anchor)", assignee: "orlagh", status: "not-started", revision_count: 0, primary_keyword: "sub-tier supplier risk playbook", geography: "all" },
             { id: "p-dm2-3", title: "Single-Source Components: Five Questions Every CFO Should Ask", format: "Listicle", assignee: "jason", status: "not-started", revision_count: 0, primary_keyword: "single source components CFO", geography: "us" }
           ]
         },
@@ -100,7 +100,7 @@ window.MOCK_PROJECT = {
           intent: "informational",
           anchor_piece: "p-dm3-1",
           pieces: [
-            { id: "p-dm3-1", title: "The Critical Minerals Map: Where Your Risk Actually Lives (Anchor)", format: "Data Report (Anchor)", assignee: "robert", status: "uploaded", revision_count: 0, primary_keyword: "critical minerals supply map", geography: "all" },
+            { id: "p-dm3-1", title: "The Critical Minerals Map: Where Your Risk Actually Lives (Anchor)", format: "Data Report (Anchor)", assignee: "robert", status: "not-started", revision_count: 0, primary_keyword: "critical minerals supply map", geography: "all" },
             { id: "p-dm3-2", title: "Lithium, Cobalt, Gallium: A Procurement Lead's Pocket Brief", format: "Briefing Note", assignee: "jason", status: "not-started", revision_count: 0, primary_keyword: "lithium cobalt procurement brief", geography: "all" }
           ]
         },
@@ -131,8 +131,8 @@ window.MOCK_PROJECT = {
           intent: "informational",
           anchor_piece: "p-ps1-1",
           pieces: [
-            { id: "p-ps1-1", title: "EU AI Act for Public Procurement Teams: What Actually Changes (Anchor)", format: "Analysis (Anchor)", assignee: "orlagh", status: "approved", revision_count: 1, primary_keyword: "EU AI Act public procurement", geography: "eu" },
-            { id: "p-ps1-2", title: "High-Risk AI Systems in Tendering: A Compliance Checklist", format: "Checklist", assignee: "jason", status: "jaggaer-feedback", revision_count: 0, primary_keyword: "high risk AI tender compliance", geography: "eu" }
+            { id: "p-ps1-1", title: "EU AI Act for Public Procurement Teams: What Actually Changes (Anchor)", format: "Analysis (Anchor)", assignee: "orlagh", status: "not-started", revision_count: 0, primary_keyword: "EU AI Act public procurement", geography: "eu" },
+            { id: "p-ps1-2", title: "High-Risk AI Systems in Tendering: A Compliance Checklist", format: "Checklist", assignee: "jason", status: "not-started", revision_count: 0, primary_keyword: "high risk AI tender compliance", geography: "eu" }
           ]
         },
         {
@@ -142,7 +142,7 @@ window.MOCK_PROJECT = {
           intent: "informational",
           anchor_piece: "p-ps2-1",
           pieces: [
-            { id: "p-ps2-1", title: "Peppol, Factur-X, FACe: A Reader for Public Sector Procurement (Anchor)", format: "Explainer (Anchor)", assignee: "robert", status: "uploaded", revision_count: 0, primary_keyword: "Peppol Factur-X FACe public sector", geography: "eu" },
+            { id: "p-ps2-1", title: "Peppol, Factur-X, FACe: A Reader for Public Sector Procurement (Anchor)", format: "Explainer (Anchor)", assignee: "robert", status: "not-started", revision_count: 0, primary_keyword: "Peppol Factur-X FACe public sector", geography: "eu" },
             { id: "p-ps2-2", title: "France's E-Invoicing Reform: Timeline & What to Do This Quarter", format: "Briefing Note", assignee: "orlagh", status: "not-started", revision_count: 0, primary_keyword: "France e-invoicing reform 2026", geography: "fr" }
           ]
         },
@@ -172,7 +172,7 @@ window.MOCK_PROJECT = {
           intent: "informational",
           anchor_piece: "p-he1-1",
           pieces: [
-            { id: "p-he1-1", title: "Maverick Spend on Campus: Where It Hides, How to Surface It (Anchor)", format: "Field Guide (Anchor)", assignee: "jason", status: "jaggaer-feedback", revision_count: 0, primary_keyword: "maverick spend higher education", geography: "us" },
+            { id: "p-he1-1", title: "Maverick Spend on Campus: Where It Hides, How to Surface It (Anchor)", format: "Field Guide (Anchor)", assignee: "jason", status: "not-started", revision_count: 0, primary_keyword: "maverick spend higher education", geography: "us" },
             { id: "p-he1-2", title: "P-Card Programmes vs Punch-Out: A Trade-Off Read", format: "Analysis", assignee: "orlagh", status: "not-started", revision_count: 0, primary_keyword: "P-Card punch-out university", geography: "us" }
           ]
         },
@@ -183,8 +183,8 @@ window.MOCK_PROJECT = {
           intent: "informational",
           anchor_piece: "p-he2-1",
           pieces: [
-            { id: "p-he2-1", title: "Uniform Guidance & the Procurement Office: A Working Reader (Anchor)", format: "Reader (Anchor)", assignee: "robert", status: "approved", revision_count: 1, primary_keyword: "uniform guidance procurement university", geography: "us" },
-            { id: "p-he2-2", title: "UKRI Procurement Rules in 2026: The Quick Read for University Buyers", format: "Briefing Note", assignee: "orlagh", status: "uploaded", revision_count: 0, primary_keyword: "UKRI procurement rules 2026", geography: "uk" }
+            { id: "p-he2-1", title: "Uniform Guidance & the Procurement Office: A Working Reader (Anchor)", format: "Reader (Anchor)", assignee: "robert", status: "not-started", revision_count: 0, primary_keyword: "uniform guidance procurement university", geography: "us" },
+            { id: "p-he2-2", title: "UKRI Procurement Rules in 2026: The Quick Read for University Buyers", format: "Briefing Note", assignee: "orlagh", status: "not-started", revision_count: 0, primary_keyword: "UKRI procurement rules 2026", geography: "uk" }
           ]
         },
         {
@@ -212,7 +212,6 @@ window.MOCK_PROJECT = {
       { id: "anna", name: "Anna Vogel", role: "Marketing Director", org: "jaggaer", admin: true }
     ]
   },
-  // feedback indexed by piece id; each entry is one note
   feedback: {
     "p-c1-1": [
       { id: "fb-1", author: "indy", verdict: "approved", body: "Clean and useful. The install screenshots are exactly the right level of detail. Ship it.", ts: "2026-05-09T14:21:00Z" }
@@ -222,34 +221,10 @@ window.MOCK_PROJECT = {
     ],
     "p-c2-1": [
       { id: "fb-3", author: "indy", verdict: "needs-revision", body: "The walkthrough screenshots need updating — we shipped a new redline UI last sprint. Reach out to the product team for the latest.", ts: "2026-05-07T16:44:00Z" },
-      { id: "fb-4", author: "jason", verdict: "question", body: "Re-uploaded with the new screenshots and tightened the indemnity clause example. Indy — does the new UI match what you'd want to show externally?", ts: "2026-05-11T11:15:00Z" }
+      { id: "fb-4", author: "jason", verdict: "question", body: "Re-uploaded with the new screenshots and tightened the indemnity clause example. Indy — does the new UI match what you\'d want to show externally?", ts: "2026-05-11T11:15:00Z" }
     ],
     "p-c2-2": [
       { id: "fb-5", author: "anna", verdict: "approved", body: "This is the strongest piece in the cluster. Anchor is doing what an anchor should do.", ts: "2026-05-10T10:02:00Z" }
-    ],
-    "p-c4-1": [
-      { id: "fb-6", author: "anna", verdict: "needs-revision", body: "40 prompts is a lot. Can we organise them by S2P stage (sourcing, contracting, paying)? Right now it reads as a wall.", ts: "2026-05-13T13:30:00Z" }
-    ],
-    "p-dm1-1": [
-      { id: "fb-7", author: "indy", verdict: "approved", body: "Strong. The 2026 framing earns its keep.", ts: "2026-05-08T17:11:00Z" }
-    ],
-    "p-dm1-2": [
-      { id: "fb-8", author: "anna", verdict: "approved", body: "Anchor approved. Let's link this from the homepage when the cluster ships.", ts: "2026-05-09T11:45:00Z" }
-    ],
-    "p-dm2-1": [
-      { id: "fb-9", author: "indy", verdict: "question", body: "Is the tier-3 data in the example sourced or illustrative? We need to make that explicit before this goes out.", ts: "2026-05-14T08:50:00Z" }
-    ],
-    "p-ps1-1": [
-      { id: "fb-10", author: "anna", verdict: "approved", body: "Sharp read of the Act. Approved.", ts: "2026-05-06T15:20:00Z" }
-    ],
-    "p-ps1-2": [
-      { id: "fb-11", author: "indy", verdict: "needs-revision", body: "Checklist is solid. Please align row 7 (model risk assessment) with the language we use in the EU AI Act anchor piece — they should match.", ts: "2026-05-13T16:00:00Z" }
-    ],
-    "p-he1-1": [
-      { id: "fb-12", author: "anna", verdict: "needs-revision", body: "The metaphors land. The data box on page 2 needs a source line — where does the 18% maverick figure come from?", ts: "2026-05-14T12:00:00Z" }
-    ],
-    "p-he2-1": [
-      { id: "fb-13", author: "indy", verdict: "approved", body: "Reader is exactly right for our HE buyer persona. Approved.", ts: "2026-05-08T09:30:00Z" }
     ]
   },
   conversations: {}, // claude history per user, populated at runtime

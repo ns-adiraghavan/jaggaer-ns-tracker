@@ -73,85 +73,104 @@ function AdminOverview({ project }) {
 
 // ─── Schedule editor — drag-and-drop cluster → week board ─────────────────────
 function AdminSchedule({ project, setProject }) {
-  const PUBLISHING_SEQUENCE = window.PUBLISHING_SEQUENCE || [];
-
+  // Seed from window.PUBLISHING_SEQUENCE (exposed by tracker.jsx) if no saved schedule
   function getInitialSchedule() {
     if (project.schedule && project.schedule.length) return project.schedule;
-    const DEFAULT_WEEKS = [
-      { week: 1, label: "Week 1", goal: "Capture Claude + S2P and tariff procurement search traffic from day one", slots: [] },
-      { week: 2, label: "Week 2", goal: "Convert Path 2 users, demonstrate Claude, rank before EU AI Act deadline peaks", slots: [] },
-      { week: 3, label: "Week 3", goal: "Build cluster authority on supply chain risk and higher education spend governance", slots: [] },
-      { week: 4, label: "Week 4", goal: "Convert audiences built in weeks 1-3 to platform evaluation intent", slots: [] },
-    ];
-    return DEFAULT_WEEKS.map(w => {
-      const seq = PUBLISHING_SEQUENCE.find(s => s.week === w.week);
-      return { ...w, slots: (seq?.slots || []).map(s => ({ pillar: s.pillar, cluster: s.cluster })) };
-    });
+    const SEQ = window.PUBLISHING_SEQUENCE || [];
+    return SEQ.map(w => ({
+      week: w.week,
+      label: w.label,
+      goal: w.goal || "",
+      slots: (w.slots || []).map(s => ({ pillar: s.pillar, cluster: s.cluster }))
+    }));
   }
 
   const [weeks, setWeeks] = useStateAD(getInitialSchedule);
+  // dragging: { pillarId, clusterId, fromWeek }
   const [dragging, setDragging] = useStateAD(null);
+  // dragOver: week number | "pool" | null
   const [dragOver, setDragOver] = useStateAD(null);
+  // Per-zone enter counters to defeat dragLeave-on-child-enter flickering
+  const counters = useRefAD({});
 
   const assignedClusters = new Set(weeks.flatMap(w => w.slots.map(s => s.cluster)));
   const allClusters = project.pillars.flatMap(p => p.clusters.map(c => ({ ...c, pillarId: p.id })));
   const unscheduled = allClusters.filter(c => !assignedClusters.has(c.id));
   const clusterStats = window.computeStats(project).byCluster;
 
-  function persistSchedule(newWeeks) {
+  function persist(newWeeks) {
     setWeeks(newWeeks);
     setProject(prev => ({ ...prev, schedule: newWeeks }));
   }
 
+  // ── drag enter/leave with counter (defeats child-element flickering) ──
+  function onEnter(e, zone) {
+    e.preventDefault();
+    counters.current[zone] = (counters.current[zone] || 0) + 1;
+    setDragOver(zone);
+  }
+  function onLeave(e, zone) {
+    counters.current[zone] = (counters.current[zone] || 1) - 1;
+    if (counters.current[zone] <= 0) {
+      counters.current[zone] = 0;
+      setDragOver(prev => prev === zone ? null : prev);
+    }
+  }
+  function onOver(e) { e.preventDefault(); }
+
   function handleDragStart(e, pillarId, clusterId, fromWeek) {
+    // Reset all counters on new drag
+    counters.current = {};
     setDragging({ pillarId, clusterId, fromWeek });
+    // Required for Firefox
+    e.dataTransfer.setData("text/plain", clusterId);
     e.dataTransfer.effectAllowed = "move";
   }
 
   function handleDrop(e, toWeek) {
     e.preventDefault();
+    counters.current = {};
+    setDragOver(null);
     if (!dragging) return;
     const { pillarId, clusterId, fromWeek } = dragging;
     const next = weeks.map(w => ({ ...w, slots: [...w.slots] }));
-    // Remove from source week (if not from pool)
     if (fromWeek !== "pool") {
       const src = next.find(w => w.week === fromWeek);
       if (src) src.slots = src.slots.filter(s => s.cluster !== clusterId);
     }
-    // Add to target week (if not dropping back to pool)
     if (toWeek !== "pool") {
       const tgt = next.find(w => w.week === toWeek);
       if (tgt && !tgt.slots.find(s => s.cluster === clusterId)) {
         tgt.slots.push({ pillar: pillarId, cluster: clusterId });
       }
     }
-    persistSchedule(next);
+    persist(next);
+    setDragging(null);
+  }
+
+  function handleDragEnd() {
+    counters.current = {};
     setDragging(null);
     setDragOver(null);
   }
 
   function removeFromWeek(weekNum, clusterId) {
-    const next = weeks.map(w => ({
-      ...w, slots: w.week === weekNum ? w.slots.filter(s => s.cluster !== clusterId) : w.slots
-    }));
-    persistSchedule(next);
+    persist(weeks.map(w => ({ ...w, slots: w.week === weekNum ? w.slots.filter(s => s.cluster !== clusterId) : w.slots })));
   }
 
   function updateWeekGoal(weekNum, goal) {
-    const next = weeks.map(w => w.week === weekNum ? { ...w, goal } : w);
-    persistSchedule(next);
+    persist(weeks.map(w => w.week === weekNum ? { ...w, goal } : w));
   }
 
   function addWeek() {
-    const next = [...weeks, { week: weeks.length + 1, label: `Week ${weeks.length + 1}`, goal: "", slots: [] }];
-    persistSchedule(next);
+    persist([...weeks, { week: weeks.length + 1, label: `Week ${weeks.length + 1}`, goal: "", slots: [] }]);
   }
 
   function removeWeek(weekNum) {
-    const next = weeks.filter(w => w.week !== weekNum).map((w, i) => ({ ...w, week: i + 1, label: `Week ${i + 1}` }));
-    persistSchedule(next);
+    persist(weeks.filter(w => w.week !== weekNum).map((w, i) => ({ ...w, week: i + 1, label: `Week ${i + 1}` })));
   }
 
+  // Chip — pointer-events:none on all children so dragLeave only fires on the chip root
   function ClusterChip({ cluster, pillarId, fromWeek, removable, weekNum }) {
     const cs = clusterStats[cluster.id] || { approved: 0, total: cluster.pieces?.length || 0 };
     const col = pillarColour(pillarId);
@@ -161,11 +180,11 @@ function AdminSchedule({ project, setProject }) {
         className={`ns-scc ${isDraggingThis ? "is-dragging" : ""}`}
         draggable
         onDragStart={e => handleDragStart(e, pillarId, cluster.id, fromWeek)}
-        onDragEnd={() => { setDragging(null); setDragOver(null); }}
+        onDragEnd={handleDragEnd}
         style={{ background: col.bg, borderColor: col.border }}
       >
-        <span className="ns-scc-handle">⠿</span>
-        <div className="ns-scc-body">
+        <span className="ns-scc-handle" style={{ pointerEvents: "none" }}>⠿</span>
+        <div className="ns-scc-body" style={{ pointerEvents: "none" }}>
           <div className="ns-scc-tags">
             <span className="ns-scc-tag" style={{ color: col.text, background: col.bg, borderColor: col.border }}>{col.tag}</span>
             <span className="ns-scc-intent">{cluster.intent === "informational" ? "Info" : "Comm"}</span>
@@ -179,7 +198,7 @@ function AdminSchedule({ project, setProject }) {
           )}
         </div>
         {removable && (
-          <button className="ns-scc-rm" onClick={() => removeFromWeek(weekNum, cluster.id)} title="Remove from week">×</button>
+          <button className="ns-scc-rm" style={{ pointerEvents: "auto" }} onClick={e => { e.stopPropagation(); removeFromWeek(weekNum, cluster.id); }} title="Remove from week">×</button>
         )}
       </div>
     );
@@ -190,7 +209,7 @@ function AdminSchedule({ project, setProject }) {
       <div className="ns-admin-schedule-hd">
         <div>
           <div className="ns-eyebrow ns-eyebrow-dark" style={{ marginBottom: 6 }}>Publishing Schedule Editor</div>
-          <p className="ns-admin-schedule-rule">Drag clusters into weeks to set the publishing order. The Publishing Sequence view in the tracker reflects this layout.</p>
+          <p className="ns-admin-schedule-rule">Drag clusters between weeks to reorder. Changes save automatically and are reflected in the Publishing Sequence view.</p>
         </div>
         <button className="ns-schedule-add-week-btn" onClick={addWeek}>+ Add Week</button>
       </div>
@@ -203,8 +222,9 @@ function AdminSchedule({ project, setProject }) {
             <div
               key={week.week}
               className={`ns-schedule-col ${isOver ? "is-over" : ""}`}
-              onDragOver={e => { e.preventDefault(); setDragOver(week.week); }}
-              onDragLeave={e => { if (!e.currentTarget.contains(e.relatedTarget)) setDragOver(null); }}
+              onDragEnter={e => onEnter(e, week.week)}
+              onDragLeave={e => onLeave(e, week.week)}
+              onDragOver={onOver}
               onDrop={e => handleDrop(e, week.week)}
             >
               <div className="ns-schedule-col-head">
@@ -236,10 +256,11 @@ function AdminSchedule({ project, setProject }) {
                     />
                   );
                 })}
-                {week.slots.length === 0 && !isOver && (
-                  <div className="ns-schedule-col-empty">Drop clusters here</div>
+                {week.slots.length === 0 && (
+                  <div className={`ns-schedule-col-empty ${isOver ? "is-over" : ""}`}>
+                    {isOver ? "Release to add" : "Drop clusters here"}
+                  </div>
                 )}
-                {isOver && <div className="ns-schedule-col-drop-hint">Release to schedule</div>}
               </div>
             </div>
           );
@@ -249,8 +270,9 @@ function AdminSchedule({ project, setProject }) {
       {/* Unscheduled pool */}
       <div
         className={`ns-schedule-pool ${dragOver === "pool" ? "is-over" : ""}`}
-        onDragOver={e => { e.preventDefault(); setDragOver("pool"); }}
-        onDragLeave={e => { if (!e.currentTarget.contains(e.relatedTarget)) setDragOver(null); }}
+        onDragEnter={e => onEnter(e, "pool")}
+        onDragLeave={e => onLeave(e, "pool")}
+        onDragOver={onOver}
         onDrop={e => handleDrop(e, "pool")}
       >
         <div className="ns-schedule-pool-hd">
