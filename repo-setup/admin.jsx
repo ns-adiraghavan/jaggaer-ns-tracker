@@ -71,6 +71,40 @@ function AdminOverview({ project }) {
   );
 }
 
+// ─── ClusterChip — must live OUTSIDE AdminSchedule so React doesn't treat it as
+//     a new component type on every render (which kills the native drag session).
+function ClusterChip({ cluster, pillarId, fromWeek, removable, weekNum, isDraggingThis, stats, onDragStart, onDragEnd, onRemove }) {
+  const cs = stats || { approved: 0, total: cluster.pieces?.length || 0 };
+  const col = pillarColour(pillarId);
+  return (
+    <div
+      className={`ns-scc ${isDraggingThis ? "is-dragging" : ""}`}
+      draggable
+      onDragStart={e => onDragStart(e, pillarId, cluster.id, fromWeek)}
+      onDragEnd={onDragEnd}
+      style={{ background: col.bg, borderColor: col.border }}
+    >
+      <span className="ns-scc-handle" style={{ pointerEvents: "none" }}>⠿</span>
+      <div className="ns-scc-body" style={{ pointerEvents: "none" }}>
+        <div className="ns-scc-tags">
+          <span className="ns-scc-tag" style={{ color: col.text, background: col.bg, borderColor: col.border }}>{col.tag}</span>
+          <span className="ns-scc-intent">{cluster.intent === "informational" ? "Info" : "Comm"}</span>
+        </div>
+        <div className="ns-scc-name">{cluster.label}</div>
+        {cs.total > 0 && (
+          <div className="ns-scc-progress">
+            <div className="ns-scc-bar"><div className="ns-scc-fill" style={{ width: `${Math.round(cs.approved/cs.total*100)}%`, background: col.text, opacity: 0.7 }}></div></div>
+            <span className="ns-scc-frac" style={{ color: col.text }}>{cs.approved}/{cs.total}</span>
+          </div>
+        )}
+      </div>
+      {removable && (
+        <button className="ns-scc-rm" style={{ pointerEvents: "auto" }} onClick={e => { e.stopPropagation(); onRemove(weekNum, cluster.id); }} title="Remove from week">×</button>
+      )}
+    </div>
+  );
+}
+
 // ─── Schedule editor — drag-and-drop cluster → week board ─────────────────────
 function AdminSchedule({ project, setProject }) {
   // Seed from window.PUBLISHING_SEQUENCE (exposed by tracker.jsx) if no saved schedule
@@ -170,40 +204,6 @@ function AdminSchedule({ project, setProject }) {
     persist(weeks.filter(w => w.week !== weekNum).map((w, i) => ({ ...w, week: i + 1, label: `Week ${i + 1}` })));
   }
 
-  // Chip — pointer-events:none on all children so dragLeave only fires on the chip root
-  function ClusterChip({ cluster, pillarId, fromWeek, removable, weekNum }) {
-    const cs = clusterStats[cluster.id] || { approved: 0, total: cluster.pieces?.length || 0 };
-    const col = pillarColour(pillarId);
-    const isDraggingThis = dragging?.clusterId === cluster.id;
-    return (
-      <div
-        className={`ns-scc ${isDraggingThis ? "is-dragging" : ""}`}
-        draggable
-        onDragStart={e => handleDragStart(e, pillarId, cluster.id, fromWeek)}
-        onDragEnd={handleDragEnd}
-        style={{ background: col.bg, borderColor: col.border }}
-      >
-        <span className="ns-scc-handle" style={{ pointerEvents: "none" }}>⠿</span>
-        <div className="ns-scc-body" style={{ pointerEvents: "none" }}>
-          <div className="ns-scc-tags">
-            <span className="ns-scc-tag" style={{ color: col.text, background: col.bg, borderColor: col.border }}>{col.tag}</span>
-            <span className="ns-scc-intent">{cluster.intent === "informational" ? "Info" : "Comm"}</span>
-          </div>
-          <div className="ns-scc-name">{cluster.label}</div>
-          {cs.total > 0 && (
-            <div className="ns-scc-progress">
-              <div className="ns-scc-bar"><div className="ns-scc-fill" style={{ width: `${Math.round(cs.approved/cs.total*100)}%`, background: col.text, opacity: 0.7 }}></div></div>
-              <span className="ns-scc-frac" style={{ color: col.text }}>{cs.approved}/{cs.total}</span>
-            </div>
-          )}
-        </div>
-        {removable && (
-          <button className="ns-scc-rm" style={{ pointerEvents: "auto" }} onClick={e => { e.stopPropagation(); removeFromWeek(weekNum, cluster.id); }} title="Remove from week">×</button>
-        )}
-      </div>
-    );
-  }
-
   return (
     <div className="ns-admin-schedule">
       <div className="ns-admin-schedule-hd">
@@ -253,6 +253,11 @@ function AdminSchedule({ project, setProject }) {
                       key={slot.cluster}
                       cluster={cluster} pillarId={slot.pillar}
                       fromWeek={week.week} removable={true} weekNum={week.week}
+                      isDraggingThis={dragging?.clusterId === slot.cluster}
+                      stats={clusterStats[slot.cluster]}
+                      onDragStart={handleDragStart}
+                      onDragEnd={handleDragEnd}
+                      onRemove={removeFromWeek}
                     />
                   );
                 })}
@@ -288,6 +293,11 @@ function AdminSchedule({ project, setProject }) {
                 key={cluster.id}
                 cluster={cluster} pillarId={cluster.pillarId}
                 fromWeek="pool" removable={false}
+                isDraggingThis={dragging?.clusterId === cluster.id}
+                stats={clusterStats[cluster.id]}
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+                onRemove={removeFromWeek}
               />
             ))
           )}
