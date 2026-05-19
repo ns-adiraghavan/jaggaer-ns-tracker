@@ -94,7 +94,7 @@ function App() {
         setView={setView}
         adminMode={adminMode}
         onToggleAdmin={() => setAdminMode(a => !a)}
-        onSignOut={() => { setCurrentUser(null); setAdminMode(false); }}
+        onSignOut={() => { setCurrentUser(null); setAdminMode(false); setView("tracker"); setActivePillar(null); setActiveCluster(null); }}
       />
 
       <div className="ns-main-col">

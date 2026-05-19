@@ -474,8 +474,9 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
               <span className="ns-meta-sep">·</span>
               <span>{assigneeName(project, piece.assignee)}</span>
               {piece.geography && piece.geography !== "all" && <><span className="ns-meta-sep">·</span><span className="ns-piece-geo">{piece.geography.toUpperCase()}</span></>}
-              {piece.revision_count > 0 && <><span className="ns-meta-sep">·</span><span>rev {piece.revision_count}</span></>}
-              {feedback.length > 0 && <><span className="ns-meta-sep">·</span><span>{feedback.length} note{feedback.length === 1 ? "" : "s"}</span></>}
+              {(piece.revision_count > 0 || feedback.length > 0) && (
+                <><span className="ns-meta-sep">·</span><span className="ns-piece-meta-hint">{[piece.revision_count > 0 && `rev ${piece.revision_count}`, feedback.length > 0 && `${feedback.length}✎`].filter(Boolean).join(" ")}</span></>
+              )}
             </div>
           </div>
         </div>
