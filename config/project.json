@@ -688,5 +688,91 @@
       "path": "build-with-claude/tender-summariser"
     }
   ],
-  "conversations": {}
+  "conversations": {},
+  "schedule": [
+    {
+      "week": 1,
+      "label": "Week 1",
+      "goal": "Capture Claude + S2P and tariff procurement search traffic from day one",
+      "slots": [
+        {
+          "pillar": "discrete-manufacturing",
+          "cluster": "dm1-tariffs"
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "label": "Week 2",
+      "goal": "Convert Path 2 users, demonstrate Claude, rank before EU AI Act deadline peaks",
+      "slots": [
+        {
+          "pillar": "ai-in-s2p",
+          "cluster": "c2-contracts"
+        },
+        {
+          "pillar": "ai-in-s2p",
+          "cluster": "c3-suppliers"
+        },
+        {
+          "pillar": "public-sector",
+          "cluster": "ps1-eu-ai"
+        },
+        {
+          "pillar": "public-sector",
+          "cluster": "ps2-einvoicing"
+        },
+        {
+          "pillar": "ai-in-s2p",
+          "cluster": "c1-getting-started"
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "label": "Week 3",
+      "goal": "Build cluster authority on supply chain risk and higher education spend governance",
+      "slots": [
+        {
+          "pillar": "discrete-manufacturing",
+          "cluster": "dm2-subtier"
+        },
+        {
+          "pillar": "discrete-manufacturing",
+          "cluster": "dm3-minerals"
+        },
+        {
+          "pillar": "higher-education",
+          "cluster": "he1-maverick"
+        },
+        {
+          "pillar": "higher-education",
+          "cluster": "he2-grants"
+        }
+      ]
+    },
+    {
+      "week": 4,
+      "label": "Week 4",
+      "goal": "Convert audiences built in weeks 1–3 to platform evaluation intent",
+      "slots": [
+        {
+          "pillar": "ai-in-s2p",
+          "cluster": "c4-prompt-library"
+        },
+        {
+          "pillar": "discrete-manufacturing",
+          "cluster": "dm4-tco"
+        },
+        {
+          "pillar": "public-sector",
+          "cluster": "ps3-eval"
+        },
+        {
+          "pillar": "higher-education",
+          "cluster": "he3-modernisation"
+        }
+      ]
+    }
+  ]
 }
