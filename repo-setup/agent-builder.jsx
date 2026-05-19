@@ -478,47 +478,146 @@ function OutputSection({ label, items, color }) {
   );
 }
 
+// ─── Canned demo outputs (shown until Claude API is active) ───────────────────
+const MOCK_OUTPUTS = {
+  contracts: {
+    summary: "Auto-renewing agreement with 90-day exit notice window and unilateral pricing adjustment rights at renewal — moderate buyer risk.",
+    expiry_dates: [
+      "Initial term end: not specified — agreement runs until notice of non-renewal",
+      "Non-renewal notice must be given no less than 90 days before term end",
+      "Pricing adjustment notice: 60 days prior to renewal",
+    ],
+    auto_renewal: "Agreement automatically renews for successive one-year terms unless either party provides written notice of non-renewal at least 90 days before the end of the current term.",
+    risky_obligations: [
+      "Licensor may adjust pricing at each renewal with only 60 days' notice — buyer has limited time to renegotiate or exit",
+      "90-day non-renewal notice window is tight for procurement teams without automated contract tracking",
+      "No cap on pricing adjustment magnitude — unconstrained upward repricing at renewal",
+    ],
+    concerning_sections: [
+      "Auto-renewal clause: 90-day notice is shorter than many procurement review cycles — recommend flagging for calendar alert 120 days before term end",
+      "Unilateral pricing adjustment: no stated cap or CPI linkage — recommend negotiating a maximum annual increase percentage (e.g. CPI + 3%)",
+    ],
+  },
+  suppliers: {
+    diversification_priority: "High — heavy concentration in Taiwan (semiconductors, PCB) and China (rare earth, batteries) creates compounding single-event risk",
+    risk_flags: [
+      "Taiwan concentration: two critical categories (Semiconductors + PCB Manufacturing) sourced entirely from Taiwan — both exposed to the same geopolitical and natural disaster risk profile",
+      "China concentration: Rare Earth Materials and Battery Cells both sourced from China — subject to export controls and tariff volatility",
+      "No European or Americas-based source for any category except Precision Machining",
+    ],
+    alternatives: [
+      {
+        category: "Semiconductors",
+        region: "South Korea / Japan",
+        rationale: "Mature fab capacity outside Taiwan cross-strait risk zone; strong quality equivalence for most industrial applications",
+        example_suppliers: ["Samsung Foundry", "SK Hynix", "Renesas Electronics"],
+      },
+      {
+        category: "PCB Manufacturing",
+        region: "Vietnam / Thailand",
+        rationale: "Growing PCB capacity with lower geopolitical exposure; several Taiwan OEMs have established Vietnam operations",
+        example_suppliers: ["Tripod Technology (VN ops)", "Kinwong Electronic", "TTM Technologies"],
+      },
+      {
+        category: "Rare Earth Materials",
+        region: "Australia / Canada",
+        rationale: "Lynas (Australia) and MP Materials (USA) are the two largest non-China rare earth producers — actively scaling capacity",
+        example_suppliers: ["Lynas Rare Earths", "MP Materials", "Mkango Resources"],
+      },
+      {
+        category: "Battery Cells",
+        region: "South Korea / Poland",
+        rationale: "Samsung SDI and LG Energy Solution have European gigafactory capacity; reduces China dependency for EU-facing supply chains",
+        example_suppliers: ["Samsung SDI", "LG Energy Solution", "Northvolt"],
+      },
+    ],
+  },
+  rfp: {
+    rfp_title: "Request for Proposal: Fleet Management Software — US & Germany Operations",
+    background: "We are seeking a fleet management software solution to support 200 commercial vehicles across our US and Germany operations. The solution must integrate with our existing SAP environment and provide real-time visibility, predictive maintenance capability, and driver analytics to reduce total operating cost and compliance exposure.",
+    scope_of_work: [
+      "Real-time GPS tracking and geofencing for all 200 vehicles across both geographies",
+      "Bi-directional integration with SAP S/4HANA for cost centre allocation and purchase order generation",
+      "Predictive maintenance scheduling based on telematics data, with automated work order creation",
+      "Driver behaviour analytics including speed, braking, idling, and fatigue indicators",
+      "Regulatory compliance module covering EU tachograph rules (Germany) and FMCSA hours-of-service (US)",
+      "Mobile application for drivers and field managers (iOS and Android)",
+    ],
+    evaluation_criteria: [
+      { criterion: "Functional fit", weight: "30%", description: "Coverage of all stated requirements; depth of SAP integration; compliance module completeness" },
+      { criterion: "Total Cost of Ownership", weight: "25%", description: "3-year TCO including implementation, licensing, and ongoing support; pricing model transparency" },
+      { criterion: "Implementation approach", weight: "20%", description: "Project methodology, go-live timeline, training plan, and change management support" },
+      { criterion: "Security & data residency", weight: "15%", description: "GDPR compliance for Germany operations; data residency options; SOC 2 Type II certification" },
+      { criterion: "Vendor viability & references", weight: "10%", description: "Financial stability, customer retention rate, and at least two references in comparable fleet environments" },
+    ],
+    submission_requirements: [
+      "Executive summary (max 3 pages)",
+      "Detailed response to each evaluation criterion",
+      "SAP integration architecture diagram and connector documentation",
+      "3-year TCO model with clear breakdown of licensing, implementation, and support costs",
+      "Two customer references in comparable fleet environments (200+ vehicles, multi-country)",
+      "GDPR compliance statement and data processing agreement (DPA) draft",
+      "Proposed implementation timeline with key milestones",
+    ],
+    key_dates: [
+      { milestone: "RFP issued", date: "Week 1" },
+      { milestone: "Supplier Q&A deadline", date: "Week 2" },
+      { milestone: "Q&A responses published", date: "Week 3" },
+      { milestone: "Proposals due", date: "Week 5" },
+      { milestone: "Shortlist announced", date: "Week 7" },
+      { milestone: "Demos / presentations", date: "Week 8–9" },
+      { milestone: "Award decision", date: "Week 11" },
+    ],
+    questions: [
+      "Describe your SAP S/4HANA integration architecture — is this a native connector or middleware-dependent? What SAP modules are covered?",
+      "How does your platform handle multi-jurisdiction compliance — specifically EU tachograph rules and US FMCSA HOS simultaneously within one instance?",
+      "What is your data residency model for EU customers? Where is German vehicle and driver data stored and processed?",
+      "Provide your average go-live timeline for a 200-vehicle, two-country deployment, and identify the top three implementation risks you have encountered in comparable projects.",
+      "What does your predictive maintenance model use as input signals, and how is the maintenance alert threshold calibrated per vehicle type?",
+    ],
+  },
+};
+
 function DemoPane({ demoId }) {
   const [input, setInput] = useStateAB("");
   const [loading, setLoading] = useStateAB(false);
   const [result, setResult] = useStateAB(null);
-  const [error, setError] = useStateAB(null);
 
-  const runDemo = useCBAB(async () => {
+  const runDemo = useCBAB(() => {
     if (!input.trim()) return;
     setLoading(true);
     setResult(null);
-    setError(null);
-
-    try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system: DEMO_SYSTEM_PROMPTS[demoId],
-          messages: [{ role: "user", content: input.trim() }],
-        }),
-      });
-
-      const data = await response.json();
-      const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("");
-      const clean = text.replace(/```json|```/g, "").trim();
-      const parsed = JSON.parse(clean);
-      setResult(parsed);
-    } catch (e) {
-      setError("Could not process — check your API key or try again.");
-      console.error(e);
-    } finally {
+    // Simulate processing time — will be replaced by live Claude API call
+    setTimeout(() => {
+      setResult(MOCK_OUTPUTS[demoId]);
       setLoading(false);
-    }
+    }, 1500);
   }, [demoId, input]);
 
   const labels = { contracts: "contract text", suppliers: "supplier list", rfp: "sourcing requirement" };
 
   return (
     <div>
+      {/* API status byline */}
+      <div style={{
+        display: "flex", alignItems: "center", gap: "8px",
+        marginBottom: "14px",
+      }}>
+        <div style={{
+          width: "7px", height: "7px", borderRadius: "50%",
+          background: "#c08227",
+          flexShrink: 0,
+        }} />
+        <span style={{
+          fontFamily: "Noto Sans, sans-serif",
+          fontSize: "0.75rem",
+          color: "#888",
+          fontStyle: "italic",
+        }}>
+          Demo mode — showing representative output. Live Claude API analysis will be active once the API key is integrated.
+        </span>
+      </div>
+
       <textarea
         value={input}
         onChange={e => setInput(e.target.value)}
@@ -561,12 +660,6 @@ function DemoPane({ demoId }) {
       >
         {loading ? "Analysing…" : `Analyse ${labels[demoId]}`}
       </button>
-
-      {error && (
-        <div style={{ padding: "14px 18px", background: "#fff5f3", border: "1px solid #f0cfc0", borderLeft: "3px solid #c8401a", borderRadius: "0 3px 3px 0", fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", color: "#c8401a", marginBottom: "16px" }}>
-          {error}
-        </div>
-      )}
 
       {result && (
         <div>
@@ -859,6 +952,9 @@ function JAISection() {
 
 function AgentBuilderPanel() {
   return (
+    // flex: 1 + overflow-y: auto matches the .ns-bwc / .ns-admin / .ns-tracker pattern —
+    // the parent .ns-main-col is overflow:hidden so every panel must own its own scroll.
+    <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden" }}>
     <div style={{ maxWidth: "860px", margin: "0 auto", padding: "48px 40px 80px" }}>
 
       {/* Page hero */}
@@ -904,6 +1000,7 @@ function AgentBuilderPanel() {
 
       {/* Legal */}
       <LegalBlock />
+    </div>
     </div>
   );
 }
