@@ -73,6 +73,13 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           onClick={() => setView("bwc")}
           rightMeta="5 apps"
         />
+        <NavSection
+          label="Agent Builder"
+          active={view === "agent-builder"}
+          onClick={() => setView("agent-builder")}
+          rightMeta="live"
+        />
+
         {adminMode && (
           <NavSection
             label="Admin"

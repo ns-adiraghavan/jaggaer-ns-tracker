@@ -131,6 +131,7 @@ function App() {
           />
         )}
         {view === "bwc" && <BWCPanel project={project} />}
+        {view === "agent-builder" && <AgentBuilderPanel />}
         {view === "admin" && adminMode && (
           <AdminPanel project={project} setProject={setProject} adminTarget={adminTarget} setAdminTarget={setAdminTarget} />
         )}
