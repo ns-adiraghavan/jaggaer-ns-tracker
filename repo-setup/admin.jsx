@@ -1,6 +1,18 @@
 // Admin panel — edit project config inline. Writes back via GitHub save path.
+// v2: adds drag-and-drop Schedule editor + Month management
 
-const { useState: useStateAD } = React;
+const { useState: useStateAD, useRef: useRefAD } = React;
+
+// ─── Pillar colour map for schedule board ─────────────────────────────────────
+const PILLAR_COLOURS = {
+  "ai-in-s2p":              { bg: "rgba(30,111,168,0.10)", border: "rgba(30,111,168,0.32)", text: "#1e6fa8", tag: "AI" },
+  "discrete-manufacturing": { bg: "rgba(91,59,158,0.09)",  border: "rgba(91,59,158,0.28)",  text: "#5a3d9e", tag: "Mfg" },
+  "public-sector":          { bg: "rgba(200,64,26,0.08)",  border: "rgba(200,64,26,0.26)",  text: "#c8401a", tag: "Gov" },
+  "higher-education":       { bg: "rgba(30,122,69,0.09)",  border: "rgba(30,122,69,0.28)",  text: "#1e7a45", tag: "HE" },
+};
+function pillarColour(pillarId) {
+  return PILLAR_COLOURS[pillarId] || { bg: "rgba(17,24,32,0.06)", border: "rgba(17,24,32,0.20)", text: "#555", tag: "—" };
+}
 
 function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
   const [tab, setTab] = useStateAD(adminTarget?.kind || "overview");
@@ -16,16 +28,18 @@ function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
       </header>
 
       <nav className="ns-admin-tabs">
-        {[["overview","Overview"],["pillars","Pillars & Clusters"],["team","Team"],["raw","Raw JSON"]].map(([id, label]) => (
+        {[["overview","Overview"],["pillars","Pillars & Clusters"],["schedule","Publishing Schedule"],["months","Months"],["team","Team"],["raw","Raw JSON"]].map(([id, label]) => (
           <button key={id} className={`ns-admin-tab ${tab===id?"is-active":""}`} onClick={() => setTab(id)}>{label}</button>
         ))}
       </nav>
 
       <div className="ns-admin-body">
-        {tab === "overview" && <AdminOverview project={project} />}
-        {tab === "pillars"  && <AdminPillars  project={project} setProject={setProject} adminTarget={adminTarget} />}
-        {tab === "team"     && <AdminTeam     project={project} setProject={setProject} />}
-        {tab === "raw"      && <AdminRaw      project={project} />}
+        {tab === "overview"  && <AdminOverview  project={project} />}
+        {tab === "pillars"   && <AdminPillars   project={project} setProject={setProject} adminTarget={adminTarget} />}
+        {tab === "schedule"  && <AdminSchedule  project={project} setProject={setProject} />}
+        {tab === "months"    && <AdminMonths    project={project} setProject={setProject} />}
+        {tab === "team"      && <AdminTeam      project={project} setProject={setProject} />}
+        {tab === "raw"       && <AdminRaw       project={project} />}
       </div>
     </main>
   );
@@ -37,13 +51,13 @@ function AdminOverview({ project }) {
   const clusterCount = project.pillars.reduce((n, p) => n + p.clusters.length, 0);
   const teamCount = project.team.ns.length + project.team.jaggaer.length;
   const tiles = [
-    { num: stats.total,            label: "Pieces Total",           accent: false },
-    { num: stats.approved,         label: "Approved",               accent: true  },
-    { num: stats.awaiting,         label: "Awaiting Jaggaer",       accent: false },
-    { num: project.pillars.length, label: "Pillars",                accent: false },
-    { num: clusterCount,           label: "Clusters",               accent: false },
+    { num: stats.total,            label: "Pieces Total",    accent: false },
+    { num: stats.approved,         label: "Approved",        accent: true  },
+    { num: stats.awaiting,         label: "Awaiting Jaggaer",accent: false },
+    { num: project.pillars.length, label: "Pillars",         accent: false },
+    { num: clusterCount,           label: "Clusters",        accent: false },
     { num: Object.values(stats.byCluster).filter(c => c.ready).length, label: "Publish-Ready", accent: true },
-    { num: teamCount,              label: "Team Members",            accent: false },
+    { num: teamCount,              label: "Team Members",    accent: false },
   ];
   return (
     <div className="ns-admin-overview">
@@ -53,6 +67,324 @@ function AdminOverview({ project }) {
           <div className="ns-admin-stat-label">{t.label}</div>
         </div>
       ))}
+    </div>
+  );
+}
+
+// ─── Schedule editor — drag-and-drop cluster → week board ─────────────────────
+function AdminSchedule({ project, setProject }) {
+  const PUBLISHING_SEQUENCE = window.PUBLISHING_SEQUENCE || [];
+
+  function getInitialSchedule() {
+    if (project.schedule && project.schedule.length) return project.schedule;
+    const DEFAULT_WEEKS = [
+      { week: 1, label: "Week 1", goal: "Capture Claude + S2P and tariff procurement search traffic from day one", slots: [] },
+      { week: 2, label: "Week 2", goal: "Convert Path 2 users, demonstrate Claude, rank before EU AI Act deadline peaks", slots: [] },
+      { week: 3, label: "Week 3", goal: "Build cluster authority on supply chain risk and higher education spend governance", slots: [] },
+      { week: 4, label: "Week 4", goal: "Convert audiences built in weeks 1-3 to platform evaluation intent", slots: [] },
+    ];
+    return DEFAULT_WEEKS.map(w => {
+      const seq = PUBLISHING_SEQUENCE.find(s => s.week === w.week);
+      return { ...w, slots: (seq?.slots || []).map(s => ({ pillar: s.pillar, cluster: s.cluster })) };
+    });
+  }
+
+  const [weeks, setWeeks] = useStateAD(getInitialSchedule);
+  const [dragging, setDragging] = useStateAD(null);
+  const [dragOver, setDragOver] = useStateAD(null);
+
+  const assignedClusters = new Set(weeks.flatMap(w => w.slots.map(s => s.cluster)));
+  const allClusters = project.pillars.flatMap(p => p.clusters.map(c => ({ ...c, pillarId: p.id })));
+  const unscheduled = allClusters.filter(c => !assignedClusters.has(c.id));
+  const clusterStats = window.computeStats(project).byCluster;
+
+  function persistSchedule(newWeeks) {
+    setWeeks(newWeeks);
+    setProject(prev => ({ ...prev, schedule: newWeeks }));
+  }
+
+  function handleDragStart(e, pillarId, clusterId, fromWeek) {
+    setDragging({ pillarId, clusterId, fromWeek });
+    e.dataTransfer.effectAllowed = "move";
+  }
+
+  function handleDrop(e, toWeek) {
+    e.preventDefault();
+    if (!dragging) return;
+    const { pillarId, clusterId, fromWeek } = dragging;
+    const next = weeks.map(w => ({ ...w, slots: [...w.slots] }));
+    // Remove from source week (if not from pool)
+    if (fromWeek !== "pool") {
+      const src = next.find(w => w.week === fromWeek);
+      if (src) src.slots = src.slots.filter(s => s.cluster !== clusterId);
+    }
+    // Add to target week (if not dropping back to pool)
+    if (toWeek !== "pool") {
+      const tgt = next.find(w => w.week === toWeek);
+      if (tgt && !tgt.slots.find(s => s.cluster === clusterId)) {
+        tgt.slots.push({ pillar: pillarId, cluster: clusterId });
+      }
+    }
+    persistSchedule(next);
+    setDragging(null);
+    setDragOver(null);
+  }
+
+  function removeFromWeek(weekNum, clusterId) {
+    const next = weeks.map(w => ({
+      ...w, slots: w.week === weekNum ? w.slots.filter(s => s.cluster !== clusterId) : w.slots
+    }));
+    persistSchedule(next);
+  }
+
+  function updateWeekGoal(weekNum, goal) {
+    const next = weeks.map(w => w.week === weekNum ? { ...w, goal } : w);
+    persistSchedule(next);
+  }
+
+  function addWeek() {
+    const next = [...weeks, { week: weeks.length + 1, label: `Week ${weeks.length + 1}`, goal: "", slots: [] }];
+    persistSchedule(next);
+  }
+
+  function removeWeek(weekNum) {
+    const next = weeks.filter(w => w.week !== weekNum).map((w, i) => ({ ...w, week: i + 1, label: `Week ${i + 1}` }));
+    persistSchedule(next);
+  }
+
+  function ClusterChip({ cluster, pillarId, fromWeek, removable, weekNum }) {
+    const cs = clusterStats[cluster.id] || { approved: 0, total: cluster.pieces?.length || 0 };
+    const col = pillarColour(pillarId);
+    const isDraggingThis = dragging?.clusterId === cluster.id;
+    return (
+      <div
+        className={`ns-scc ${isDraggingThis ? "is-dragging" : ""}`}
+        draggable
+        onDragStart={e => handleDragStart(e, pillarId, cluster.id, fromWeek)}
+        onDragEnd={() => { setDragging(null); setDragOver(null); }}
+        style={{ background: col.bg, borderColor: col.border }}
+      >
+        <span className="ns-scc-handle">⠿</span>
+        <div className="ns-scc-body">
+          <div className="ns-scc-tags">
+            <span className="ns-scc-tag" style={{ color: col.text, background: col.bg, borderColor: col.border }}>{col.tag}</span>
+            <span className="ns-scc-intent">{cluster.intent === "informational" ? "Info" : "Comm"}</span>
+          </div>
+          <div className="ns-scc-name">{cluster.label}</div>
+          {cs.total > 0 && (
+            <div className="ns-scc-progress">
+              <div className="ns-scc-bar"><div className="ns-scc-fill" style={{ width: `${Math.round(cs.approved/cs.total*100)}%`, background: col.text, opacity: 0.7 }}></div></div>
+              <span className="ns-scc-frac" style={{ color: col.text }}>{cs.approved}/{cs.total}</span>
+            </div>
+          )}
+        </div>
+        {removable && (
+          <button className="ns-scc-rm" onClick={() => removeFromWeek(weekNum, cluster.id)} title="Remove from week">×</button>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="ns-admin-schedule">
+      <div className="ns-admin-schedule-hd">
+        <div>
+          <div className="ns-eyebrow ns-eyebrow-dark" style={{ marginBottom: 6 }}>Publishing Schedule Editor</div>
+          <p className="ns-admin-schedule-rule">Drag clusters into weeks to set the publishing order. The Publishing Sequence view in the tracker reflects this layout.</p>
+        </div>
+        <button className="ns-schedule-add-week-btn" onClick={addWeek}>+ Add Week</button>
+      </div>
+
+      {/* Board: week columns */}
+      <div className="ns-schedule-board">
+        {weeks.map(week => {
+          const isOver = dragOver === week.week;
+          return (
+            <div
+              key={week.week}
+              className={`ns-schedule-col ${isOver ? "is-over" : ""}`}
+              onDragOver={e => { e.preventDefault(); setDragOver(week.week); }}
+              onDragLeave={e => { if (!e.currentTarget.contains(e.relatedTarget)) setDragOver(null); }}
+              onDrop={e => handleDrop(e, week.week)}
+            >
+              <div className="ns-schedule-col-head">
+                <div className="ns-schedule-col-label">
+                  <span className="ns-schedule-col-num">{week.label}</span>
+                  <span className="ns-schedule-col-count">{week.slots.length}c</span>
+                </div>
+                <textarea
+                  className="ns-schedule-goal-input"
+                  value={week.goal}
+                  onChange={e => updateWeekGoal(week.week, e.target.value)}
+                  placeholder="Publishing goal for this week…"
+                  rows={2}
+                />
+                {weeks.length > 1 && week.slots.length === 0 && (
+                  <button className="ns-schedule-rm-week" onClick={() => removeWeek(week.week)}>✕ Remove</button>
+                )}
+              </div>
+              <div className="ns-schedule-col-body">
+                {week.slots.map(slot => {
+                  const pillar = project.pillars.find(p => p.id === slot.pillar);
+                  const cluster = pillar?.clusters.find(c => c.id === slot.cluster);
+                  if (!cluster) return null;
+                  return (
+                    <ClusterChip
+                      key={slot.cluster}
+                      cluster={cluster} pillarId={slot.pillar}
+                      fromWeek={week.week} removable={true} weekNum={week.week}
+                    />
+                  );
+                })}
+                {week.slots.length === 0 && !isOver && (
+                  <div className="ns-schedule-col-empty">Drop clusters here</div>
+                )}
+                {isOver && <div className="ns-schedule-col-drop-hint">Release to schedule</div>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Unscheduled pool */}
+      <div
+        className={`ns-schedule-pool ${dragOver === "pool" ? "is-over" : ""}`}
+        onDragOver={e => { e.preventDefault(); setDragOver("pool"); }}
+        onDragLeave={e => { if (!e.currentTarget.contains(e.relatedTarget)) setDragOver(null); }}
+        onDrop={e => handleDrop(e, "pool")}
+      >
+        <div className="ns-schedule-pool-hd">
+          <span className="ns-eyebrow ns-eyebrow-dark">Unscheduled</span>
+          <span className="ns-schedule-pool-count">{unscheduled.length} cluster{unscheduled.length !== 1 ? "s" : ""}</span>
+        </div>
+        <div className="ns-schedule-pool-chips">
+          {unscheduled.length === 0 ? (
+            <span className="ns-schedule-pool-done">All clusters scheduled ✓</span>
+          ) : (
+            unscheduled.map(cluster => (
+              <ClusterChip
+                key={cluster.id}
+                cluster={cluster} pillarId={cluster.pillarId}
+                fromWeek="pool" removable={false}
+              />
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Month management ─────────────────────────────────────────────────────────
+function AdminMonths({ project, setProject }) {
+  const [newLabel, setNewLabel] = useStateAD("");
+  const [confirmDelete, setConfirmDelete] = useStateAD(null);
+
+  const months = project.months || [];
+
+  function setActiveMonth(id) {
+    setProject(prev => ({ ...prev, active_month: id }));
+  }
+
+  function addMonth() {
+    const label = newLabel.trim();
+    if (!label) return;
+    const slug = label.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+    const id = "month-" + slug;
+    if (months.find(m => m.id === id)) { alert("A month with that ID already exists. Try a different label."); return; }
+    setProject(prev => ({
+      ...prev,
+      months: [...(prev.months || []), { id, label, active: false }]
+    }));
+    setNewLabel("");
+  }
+
+  function updateLabel(id, label) {
+    setProject(prev => ({
+      ...prev,
+      months: (prev.months || []).map(m => m.id === id ? { ...m, label } : m)
+    }));
+  }
+
+  function deleteMonth(id) {
+    if (id === project.active_month) { alert("Cannot delete the active month. Switch to another month first."); return; }
+    setProject(prev => ({ ...prev, months: (prev.months || []).filter(m => m.id !== id) }));
+    setConfirmDelete(null);
+  }
+
+  return (
+    <div className="ns-admin-months">
+      <div className="ns-admin-months-intro">
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{ marginBottom: 8 }}>Month Management</div>
+        <p className="ns-admin-months-rule">
+          Each month is an independent content cycle. The tracker shows the active month by default.
+          Add Month 2 here — pillars and clusters carry over from the config, but the piece statuses
+          are per-month. Content uploaded in the tracker goes into the active month's folder automatically.
+        </p>
+      </div>
+
+      <div className="ns-admin-month-list">
+        {months.length === 0 && (
+          <div className="ns-admin-months-empty">No months defined yet. Add one below.</div>
+        )}
+        {months.map(m => {
+          const isActive = m.id === project.active_month;
+          return (
+            <div key={m.id} className={`ns-admin-month-row ${isActive ? "is-active" : ""}`}>
+              <div className={`ns-admin-month-dot ${isActive ? "is-active" : ""}`}></div>
+              <input
+                type="text"
+                className="ns-admin-input ns-admin-month-label-input"
+                value={m.label}
+                onChange={e => updateLabel(m.id, e.target.value)}
+              />
+              <code className="ns-admin-month-id">{m.id}</code>
+              <div className="ns-admin-month-actions">
+                {isActive ? (
+                  <span className="ns-admin-month-active-badge">Active</span>
+                ) : (
+                  <button className="ns-admin-month-set-btn" onClick={() => setActiveMonth(m.id)}>Set active</button>
+                )}
+                {!isActive && (
+                  confirmDelete === m.id ? (
+                    <span className="ns-confirm-del">
+                      <button className="ns-admin-del-confirm" onClick={() => deleteMonth(m.id)}>✓ Delete</button>
+                      <button className="ns-admin-del-cancel" onClick={() => setConfirmDelete(null)}>✕</button>
+                    </span>
+                  ) : (
+                    <button className="ns-admin-del" onClick={() => setConfirmDelete(m.id)}>&times;</button>
+                  )
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="ns-admin-month-add-block">
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{ marginBottom: 12 }}>Add a New Month</div>
+        <div className="ns-admin-month-add-row">
+          <input
+            type="text"
+            className="ns-admin-input"
+            placeholder="e.g.  Month 2 — June 2026"
+            value={newLabel}
+            onChange={e => setNewLabel(e.target.value)}
+            onKeyDown={e => e.key === "Enter" && addMonth()}
+            style={{ flex: 1 }}
+          />
+          <button
+            className={`ns-admin-month-add-btn ${!newLabel.trim() ? "is-disabled" : ""}`}
+            onClick={addMonth}
+            disabled={!newLabel.trim()}
+          >
+            + Add Month
+          </button>
+        </div>
+        <p className="ns-admin-month-hint">
+          After adding, click "Set active" to switch the tracker to that month. The GitHub folder <code>content/month-2/</code> will be created automatically on first upload.
+        </p>
+      </div>
     </div>
   );
 }
@@ -106,9 +438,7 @@ function AdminPillars({ project, setProject, adminTarget }) {
   }
   function deleteCluster(pillarId, clusterId) {
     const cluster = project.pillars.find(p=>p.id===pillarId)?.clusters.find(c=>c.id===clusterId);
-    if ((cluster?.pieces||[]).some(pc => pc.status && pc.status !== "not-started")) {
-      alert("Cannot delete a cluster with pieces in progress."); setConfirmDelete(null); return;
-    }
+    if ((cluster?.pieces||[]).some(pc => pc.status && pc.status !== "not-started")) { alert("Cannot delete a cluster with pieces in progress."); setConfirmDelete(null); return; }
     setProject(prev => { const next = JSON.parse(JSON.stringify(prev)); next.pillars.find(x=>x.id===pillarId).clusters = next.pillars.find(x=>x.id===pillarId).clusters.filter(c=>c.id!==clusterId); return next; });
     setConfirmDelete(null);
   }
@@ -141,12 +471,11 @@ function AdminPillars({ project, setProject, adminTarget }) {
                   const isClusterOpen = expandedCluster === c.id;
                   return (
                     <div key={c.id} className="ns-admin-cluster-section">
-                      {/* Cluster header row */}
                       <div className={`ns-admin-cluster-h-row ${isClusterOpen?"is-open":""}`}>
                         <div className="ns-admin-cluster-seq-controls">
-                          <button className="ns-seq-btn" onClick={() => nudgeClusterSeq(p.id, c.id, -1)} title="Move earlier">▲</button>
+                          <button className="ns-seq-btn" onClick={() => nudgeClusterSeq(p.id, c.id, -1)}>▲</button>
                           <span className="ns-admin-cluster-seq">{c.sequence}</span>
-                          <button className="ns-seq-btn" onClick={() => nudgeClusterSeq(p.id, c.id, 1)} title="Move later">▼</button>
+                          <button className="ns-seq-btn" onClick={() => nudgeClusterSeq(p.id, c.id, 1)}>▼</button>
                         </div>
                         <input type="text" className="ns-admin-cluster-name-input"
                           value={c.label} onChange={e => updateCluster(p.id, c.id, { label: e.target.value })} />
@@ -172,7 +501,6 @@ function AdminPillars({ project, setProject, adminTarget }) {
                         )}
                       </div>
 
-                      {/* Inline piece list */}
                       {isClusterOpen && (
                         <div className="ns-admin-pieces-inline">
                           {c.pieces.map(piece => (
