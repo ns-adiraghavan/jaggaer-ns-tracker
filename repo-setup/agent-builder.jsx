@@ -752,22 +752,22 @@ function DemosBlock() {
 
 const YOUTUBE_VIDEOS = [
   {
-    id: "dQw4w9WgXcQ", // placeholder — replace with real Anthropic video IDs
-    title: "Getting Started with Claude for Business",
-    description: "Anthropic's overview of Claude's capabilities for enterprise workflows — a solid starting point for any procurement team.",
-    duration: "14 min",
+    id: "0vZ_UVLhSQQ",
+    title: "Getting Started with Claude.ai",
+    description: "Anthropic's official walkthrough of Claude.ai — the fastest way to get your procurement team oriented before trying the demos below.",
+    duration: "Anthropic",
   },
   {
-    id: "dQw4w9WgXcQ",
-    title: "Claude for Document Analysis",
-    description: "How to use Claude to read, summarise, and extract structured data from dense documents — directly applicable to contracts and RFPs.",
-    duration: "22 min",
+    id: "oqUclC3gqKs",
+    title: "A Day with Claude",
+    description: "A practical look at how Claude fits into real working days — document review, drafting, analysis. Useful framing for S2P professionals.",
+    duration: "Anthropic",
   },
   {
-    id: "dQw4w9WgXcQ",
-    title: "Prompt Engineering Fundamentals",
-    description: "Anthropic's guide to writing prompts that get precise, reliable outputs — especially useful for structured procurement tasks.",
-    duration: "18 min",
+    id: "T9aRN5JkmL8",
+    title: "AI Prompt Engineering: A Deep Dive",
+    description: "How to write prompts that produce precise, structured outputs — directly applicable to the contract, supplier, and RFP demos on this page.",
+    duration: "Anthropic",
   },
 ];
 
