@@ -28,11 +28,23 @@ function SaveToast({ state }) {
   );
 }
 
+// ── Session persistence helpers ───────────────────────────────────────────────
+const SESSION_KEY = "ns_jaggaer_user";
+function readSession() {
+  try { return JSON.parse(sessionStorage.getItem(SESSION_KEY)); } catch { return null; }
+}
+function writeSession(user) {
+  try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(user)); } catch {}
+}
+function clearSession() {
+  try { sessionStorage.removeItem(SESSION_KEY); } catch {}
+}
+
 function App() {
   const [project, setProject] = useStateApp(null);
   const [sha, setSha] = useStateApp(null);
   const [source, setSource] = useStateApp(null);
-  const [currentUser, setCurrentUser] = useStateApp(null);
+  const [currentUser, setCurrentUser] = useStateApp(readSession);
   const [view, setView] = useStateApp("tracker");
   const [activePillar, setActivePillar] = useStateApp(null);
   const [activeCluster, setActiveCluster] = useStateApp(null);
@@ -48,6 +60,13 @@ function App() {
 
   useEffectApp(() => {
     window.NS_API.loadProject().then(({ project, source, sha }) => {
+      // If a session user exists, verify they're still in the roster; evict if not.
+      const sessionUser = readSession();
+      if (sessionUser) {
+        const allMembers = [...project.team.ns, ...project.team.jaggaer];
+        const stillValid = allMembers.find(m => m.id === sessionUser.id);
+        if (!stillValid) { clearSession(); setCurrentUser(null); }
+      }
       setProject(project);
       setSource(source);
       setSha(sha);
@@ -78,7 +97,7 @@ function App() {
   }
 
   if (!currentUser) {
-    return <NameSelector project={project} onSelect={m => { setCurrentUser(m); if (m.admin) setAdminMode(false); }} />;
+    return <NameSelector project={project} onSelect={m => { writeSession(m); setCurrentUser(m); if (m.admin) setAdminMode(false); }} />;
   }
 
   return (
@@ -94,7 +113,7 @@ function App() {
         setView={setView}
         adminMode={adminMode}
         onToggleAdmin={() => setAdminMode(a => !a)}
-        onSignOut={() => { setCurrentUser(null); setAdminMode(false); setView("tracker"); setActivePillar(null); setActiveCluster(null); }}
+        onSignOut={() => { clearSession(); setCurrentUser(null); setAdminMode(false); setView("tracker"); setActivePillar(null); setActiveCluster(null); }}
       />
 
       <div className="ns-main-col">

@@ -1,7 +1,7 @@
 // Admin panel — edit project config inline. Writes back via GitHub save path.
 // v2: adds drag-and-drop Schedule editor + Month management
 
-const { useState: useStateAD, useRef: useRefAD } = React;
+const { useState: useStateAD, useRef: useRefAD, useEffect: useEffectAD } = React;
 
 // ─── Pillar colour map for schedule board ─────────────────────────────────────
 const PILLAR_COLOURS = {
@@ -16,6 +16,38 @@ function pillarColour(pillarId) {
 
 function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
   const [tab, setTab] = useStateAD(adminTarget?.kind || "overview");
+  // Draft: local copy of project — changes live here until Save is confirmed.
+  const [draft, setDraft] = useStateAD(() => JSON.parse(JSON.stringify(project)));
+  const [dirty, setDirty] = useStateAD(false);
+  const [saveFlash, setSaveFlash] = useStateAD(null); // "saved" | "reverted" | null
+
+  // Keep draft in sync if upstream project changes (e.g. tracker edits) while we're on a clean slate.
+  useEffectAD(() => {
+    if (!dirty) setDraft(JSON.parse(JSON.stringify(project)));
+  }, [project]);
+
+  function updateDraft(fn) {
+    setDraft(prev => { const next = JSON.parse(JSON.stringify(prev)); fn(next); return next; });
+    setDirty(true);
+  }
+
+  function handleSave() {
+    setProject(draft);
+    setDirty(false);
+    setSaveFlash("saved");
+    setTimeout(() => setSaveFlash(null), 2000);
+  }
+
+  function handleRevert() {
+    setDraft(JSON.parse(JSON.stringify(project)));
+    setDirty(false);
+    setSaveFlash("reverted");
+    setTimeout(() => setSaveFlash(null), 2000);
+  }
+
+  // Tabs that have editable state — show the save bar when dirty on these tabs
+  const editableTabs = ["pillars", "schedule", "months", "team", "bwc"];
+  const showSaveBar = editableTabs.includes(tab);
 
   return (
     <main className="ns-admin">
@@ -23,23 +55,69 @@ function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
         <div className="ns-admin-eyebrow">Admin · Config Editor</div>
         <h1 className="ns-admin-title">Edit the project, not the code.</h1>
         <p className="ns-admin-deck">
-          Pillars, clusters, pieces and the team roster all live in <code>config/project.json</code>. Changes save automatically.
+          Pillars, clusters, pieces and the team roster all live in <code>config/project.json</code>.
+          Make your changes, then hit Save to commit — or Revert to discard.
         </p>
       </header>
 
       <nav className="ns-admin-tabs">
-        {[["overview","Overview"],["pillars","Pillars & Clusters"],["schedule","Publishing Schedule"],["months","Months"],["team","Team"],["raw","Raw JSON"]].map(([id, label]) => (
+        {[["overview","Overview"],["pillars","Pillars & Clusters"],["schedule","Publishing Schedule"],["months","Months"],["team","Team"],["bwc","Build With Claude"],["raw","Raw JSON"]].map(([id, label]) => (
           <button key={id} className={`ns-admin-tab ${tab===id?"is-active":""}`} onClick={() => setTab(id)}>{label}</button>
         ))}
       </nav>
 
+      {showSaveBar && (
+        <div className="ns-admin-save-bar" style={{
+          display: "flex", alignItems: "center", gap: 12,
+          padding: "10px 24px",
+          background: dirty ? "rgba(200,64,26,0.07)" : "rgba(79,122,91,0.07)",
+          borderBottom: `2px solid ${dirty ? "#c8401a" : "#4f7a5b"}`,
+          transition: "all 0.2s",
+        }}>
+          <span style={{
+            fontSize: "0.75rem", letterSpacing: "0.06em", textTransform: "uppercase",
+            color: dirty ? "#c8401a" : "#4f7a5b", fontWeight: 600, flex: 1,
+          }}>
+            {saveFlash === "saved"    ? "✓ Saved to GitHub" :
+             saveFlash === "reverted" ? "↺ Changes reverted" :
+             dirty                   ? "Unsaved changes" :
+                                       "No unsaved changes"}
+          </span>
+          <button
+            onClick={handleRevert}
+            disabled={!dirty}
+            style={{
+              padding: "6px 16px", fontSize: "0.78rem", fontWeight: 600,
+              letterSpacing: "0.05em", textTransform: "uppercase",
+              background: "transparent", border: "1px solid rgba(245,242,236,0.2)",
+              color: dirty ? "#f5f2ec" : "rgba(245,242,236,0.3)",
+              borderRadius: "2px", cursor: dirty ? "pointer" : "not-allowed",
+              transition: "all 0.15s",
+            }}
+          >Revert</button>
+          <button
+            onClick={handleSave}
+            disabled={!dirty}
+            style={{
+              padding: "6px 20px", fontSize: "0.78rem", fontWeight: 600,
+              letterSpacing: "0.05em", textTransform: "uppercase",
+              background: dirty ? "#c8401a" : "rgba(200,64,26,0.2)",
+              border: "none", color: "#fff", borderRadius: "2px",
+              cursor: dirty ? "pointer" : "not-allowed",
+              transition: "all 0.15s",
+            }}
+          >Save Changes</button>
+        </div>
+      )}
+
       <div className="ns-admin-body">
-        {tab === "overview"  && <AdminOverview  project={project} />}
-        {tab === "pillars"   && <AdminPillars   project={project} setProject={setProject} adminTarget={adminTarget} />}
-        {tab === "schedule"  && <AdminSchedule  project={project} setProject={setProject} />}
-        {tab === "months"    && <AdminMonths    project={project} setProject={setProject} />}
-        {tab === "team"      && <AdminTeam      project={project} setProject={setProject} />}
-        {tab === "raw"       && <AdminRaw       project={project} />}
+        {tab === "overview"  && <AdminOverview  project={draft} />}
+        {tab === "pillars"   && <AdminPillars   project={draft} setProject={p => { setDraft(p); setDirty(true); }} adminTarget={adminTarget} />}
+        {tab === "schedule"  && <AdminSchedule  project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
+        {tab === "months"    && <AdminMonths    project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
+        {tab === "team"      && <AdminTeam      project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
+        {tab === "bwc"       && <AdminBWC       project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
+        {tab === "raw"       && <AdminRaw       project={draft} />}
       </div>
     </main>
   );
@@ -209,7 +287,7 @@ function AdminSchedule({ project, setProject }) {
       <div className="ns-admin-schedule-hd">
         <div>
           <div className="ns-eyebrow ns-eyebrow-dark" style={{ marginBottom: 6 }}>Publishing Schedule Editor</div>
-          <p className="ns-admin-schedule-rule">Drag clusters between weeks to reorder. Changes save automatically and are reflected in the Publishing Sequence view.</p>
+          <p className="ns-admin-schedule-rule">Drag clusters between weeks to reorder. Hit Save Changes above to commit — or Revert to discard.</p>
         </div>
         <button className="ns-schedule-add-week-btn" onClick={addWeek}>+ Add Week</button>
       </div>
@@ -623,6 +701,126 @@ function AdminTeam({ project, setProject }) {
           </table>
         </section>
       ))}
+    </div>
+  );
+}
+
+// ─── Build With Claude app manager ───────────────────────────────────────────
+function AdminBWC({ project, setProject }) {
+  const [confirmDelete, setConfirmDelete] = useStateAD(null);
+  const apps = project.build_with_claude || [];
+
+  const BWC_STATUSES = ["In Progress", "Ready for Review", "Live"];
+
+  function updateApp(id, patch) {
+    setProject(prev => ({
+      ...prev,
+      build_with_claude: (prev.build_with_claude || []).map(a => a.id === id ? { ...a, ...patch } : a),
+    }));
+  }
+
+  function addApp() {
+    const id = "bwc-" + Math.random().toString(36).slice(2, 8);
+    setProject(prev => ({
+      ...prev,
+      build_with_claude: [...(prev.build_with_claude || []), {
+        id,
+        name: "new-app",
+        label: "New App",
+        description: "",
+        status: "In Progress",
+        path: "build-with-claude/new-app",
+        updated: new Date().toISOString().slice(0, 10),
+      }],
+    }));
+  }
+
+  function deleteApp(id) {
+    setProject(prev => ({
+      ...prev,
+      build_with_claude: (prev.build_with_claude || []).filter(a => a.id !== id),
+    }));
+    setConfirmDelete(null);
+  }
+
+  return (
+    <div className="ns-admin-bwc">
+      <div style={{ marginBottom: 20 }}>
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{ marginBottom: 8 }}>Build With Claude Apps</div>
+        <p style={{ fontSize: "0.85rem", color: "rgba(245,242,236,0.5)", lineHeight: 1.6 }}>
+          Manage the app cards shown in the Build With Claude panel. Code lives in the repo — this controls what the panel displays.
+        </p>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        {apps.length === 0 && (
+          <div style={{ color: "rgba(245,242,236,0.35)", fontSize: "0.85rem", padding: "20px 0" }}>No apps yet.</div>
+        )}
+        {apps.map((app, i) => (
+          <div key={app.id} style={{
+            background: "rgba(245,242,236,0.04)", border: "1px solid rgba(245,242,236,0.1)",
+            borderRadius: 3, padding: "16px 20px", display: "flex", flexDirection: "column", gap: 10,
+          }}>
+            <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+              <span style={{ fontSize: "0.7rem", color: "rgba(245,242,236,0.3)", fontVariant: "small-caps", letterSpacing: "0.08em", width: 24 }}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <input
+                type="text"
+                className="ns-admin-input"
+                value={app.label || ""}
+                onChange={e => updateApp(app.id, { label: e.target.value })}
+                placeholder="Display name"
+                style={{ flex: 1, fontWeight: 600 }}
+              />
+              <select
+                className="ns-admin-input-sm"
+                value={app.status}
+                onChange={e => updateApp(app.id, { status: e.target.value })}
+              >
+                {BWC_STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+              {confirmDelete === app.id ? (
+                <span className="ns-confirm-del">
+                  <button className="ns-admin-del-confirm" onClick={() => deleteApp(app.id)}>✓ Delete</button>
+                  <button className="ns-admin-del-cancel" onClick={() => setConfirmDelete(null)}>✕</button>
+                </span>
+              ) : (
+                <button className="ns-admin-del" onClick={() => setConfirmDelete(app.id)}>&times;</button>
+              )}
+            </div>
+            <div style={{ display: "flex", gap: 10, paddingLeft: 34 }}>
+              <input
+                type="text"
+                className="ns-admin-input"
+                value={app.description || ""}
+                onChange={e => updateApp(app.id, { description: e.target.value })}
+                placeholder="Short description shown on the card"
+                style={{ flex: 2 }}
+              />
+              <input
+                type="text"
+                className="ns-admin-input"
+                value={app.path || ""}
+                onChange={e => updateApp(app.id, { path: e.target.value })}
+                placeholder="Repo path, e.g. build-with-claude/contract-analyser"
+                style={{ flex: 2, fontFamily: "JetBrains Mono, monospace", fontSize: "0.78rem" }}
+              />
+              <input
+                type="date"
+                className="ns-admin-input-sm"
+                value={app.updated || ""}
+                onChange={e => updateApp(app.id, { updated: e.target.value })}
+                style={{ width: 140 }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button className="ns-admin-add-cluster-btn" style={{ marginTop: 16 }} onClick={addApp}>
+        + Add app
+      </button>
     </div>
   );
 }

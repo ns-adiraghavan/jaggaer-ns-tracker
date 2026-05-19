@@ -229,10 +229,10 @@ window.MOCK_PROJECT = {
   },
   conversations: {}, // claude history per user, populated at runtime
   build_with_claude: [
-    { name: "contract-analyser", description: "Drag-drop MSA → Claude returns redline summary + risk flags.", status: "Live", updated: "2026-05-14", path: "/build-with-claude/contract-analyser" },
-    { name: "rfp-generator", description: "Generates a first-draft RFP from a 5-question intake.", status: "Ready for Review", updated: "2026-05-12", path: "/build-with-claude/rfp-generator" },
-    { name: "supplier-recommender", description: "Returns a ranked supplier shortlist with rationale.", status: "In Progress", updated: "2026-05-13", path: "/build-with-claude/supplier-recommender" },
-    { name: "spend-classifier", description: "UNSPSC tagging assistant for unclassified spend rows.", status: "In Progress", updated: "2026-05-10", path: "/build-with-claude/spend-classifier" },
-    { name: "tender-summariser", description: "Summarises long public-sector tenders into a one-page brief.", status: "Live", updated: "2026-05-11", path: "/build-with-claude/tender-summariser" }
+    { id: "bwc-1", name: "contract-analyser",   label: "Contract Analyser",   description: "Drag-drop MSA → Claude returns redline summary + risk flags.", status: "Live",             updated: "2026-05-14", path: "build-with-claude/contract-analyser" },
+    { id: "bwc-2", name: "rfp-generator",       label: "RFP Generator",       description: "Generates a first-draft RFP from a 5-question intake.", status: "Ready for Review", updated: "2026-05-12", path: "build-with-claude/rfp-generator" },
+    { id: "bwc-3", name: "supplier-recommender",label: "Supplier Recommender", description: "Returns a ranked supplier shortlist with rationale.", status: "In Progress",      updated: "2026-05-13", path: "build-with-claude/supplier-recommender" },
+    { id: "bwc-4", name: "spend-classifier",    label: "Spend Classifier",    description: "UNSPSC tagging assistant for unclassified spend rows.", status: "In Progress",      updated: "2026-05-10", path: "build-with-claude/spend-classifier" },
+    { id: "bwc-5", name: "tender-summariser",   label: "Tender Summariser",   description: "Summarises long public-sector tenders into a one-page brief.", status: "Live",        updated: "2026-05-11", path: "build-with-claude/tender-summariser" },
   ]
 };
