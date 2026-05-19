@@ -62,7 +62,7 @@
         {
           "id": "c2-contracts",
           "label": "Claude for Contracts",
-          "sequence": 1,
+          "sequence": 2,
           "intent": "commercial",
           "anchor_piece": "p-c2-2",
           "pieces": [
