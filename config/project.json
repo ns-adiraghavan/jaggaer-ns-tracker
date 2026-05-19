@@ -23,7 +23,7 @@
         {
           "id": "c1-getting-started",
           "label": "Getting Started with Claude in S2P",
-          "sequence": 2,
+          "sequence": 1,
           "intent": "informational",
           "anchor_piece": "p-c1-3",
           "pieces": [
