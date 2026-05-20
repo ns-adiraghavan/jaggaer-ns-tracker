@@ -1,4 +1,4 @@
-// Tracker v5 — inline editing (admin), fixed upload path/revision count
+// Tracker v6 — schedule-aware: Priority Actions, overdue/due colouring, real week tracking
 
 const { useState: useStateTR, useRef: useRefTR, useMemo: useMemoTR } = React;
 
@@ -26,6 +26,39 @@ const STATUS_META = {
 };
 
 const STATUS_ORDER = ["not-started", "uploaded", "jaggaer-feedback", "revised", "approved"];
+
+// ─── Schedule helpers ──────────────────────────────────────────────────────────
+function getScheduleContext(project) {
+  const activeMonth = (project.months || []).find(m => m.id === project.active_month) || (project.months || [])[0];
+  if (!activeMonth || !activeMonth.start_date) return { currentWeek: 1, startDate: null };
+  const start = new Date(activeMonth.start_date);
+  const now = new Date();
+  const diffDays = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  const currentWeek = Math.min(4, Math.max(1, Math.floor(diffDays / 7) + 1));
+  return { currentWeek, startDate: start };
+}
+
+function getPieceTiming(piece, currentWeek) {
+  const w = piece.schedule_week;
+  if (!w) return null;
+  if (piece.status === "approved") return "done";
+  if (w < currentWeek) return "overdue";
+  if (w === currentWeek) return "due";
+  return "upcoming";
+}
+
+function weeksLate(piece, currentWeek) {
+  if (!piece.schedule_week || piece.schedule_week >= currentWeek) return 0;
+  return currentWeek - piece.schedule_week;
+}
+
+const TIMING_META = {
+  overdue:  { color: "#b91c1c", bg: "#fef2f2", border: "#fca5a5", label: "Overdue" },
+  due:      { color: "#92400e", bg: "#fffbeb", border: "#fcd34d", label: "Due this week" },
+  upcoming: { color: "#6b6560", bg: "transparent", border: "transparent", label: "Upcoming" },
+  done:     { color: "#1e7a45", bg: "#e6f5ec", border: "#86efac", label: "Done" },
+};
+
 
 const VERDICT_META = {
   "approved":       { label: "Approved",      glyph: "✓" },
@@ -97,9 +130,10 @@ const INTERLINK_MAP = [
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function assigneeName(project, id) {
+  if (!id) return "—";
   const all = [...project.team.ns, ...project.team.jaggaer];
   const m = all.find(x => x.id === id);
-  return m ? m.name.split(" ")[0] : id;
+  return m ? m.name.split(" ")[0] : "—";
 }
 
 function StatusChip({ status }) {
@@ -176,9 +210,125 @@ function InlineCell({ value, type, options, onSave, children, className }) {
   );
 }
 
+
+// ─── Priority Actions panel ───────────────────────────────────────────────────
+function PriorityActions({ project, currentWeek, onOpenPiece }) {
+  const overdue = [];
+  const duethisweek = [];
+
+  for (const pillar of project.pillars) {
+    for (const cluster of pillar.clusters) {
+      for (const piece of cluster.pieces) {
+        const timing = getPieceTiming(piece, currentWeek);
+        if (timing === "overdue") overdue.push({ piece, cluster, pillar, late: weeksLate(piece, currentWeek) });
+        if (timing === "due") duethisweek.push({ piece, cluster, pillar });
+      }
+    }
+  }
+
+  if (overdue.length === 0 && duethisweek.length === 0) return null;
+
+  // Sort overdue by most weeks late first
+  overdue.sort((a, b) => b.late - a.late);
+
+  return (
+    <div style={{
+      margin: "0 0 0 0",
+      borderBottom: "1px solid #e0dbd4",
+    }}>
+      {/* Header */}
+      <div style={{
+        padding: "14px 24px",
+        background: overdue.length > 0 ? "#fef2f2" : "#fffbeb",
+        borderBottom: "1px solid " + (overdue.length > 0 ? "#fca5a5" : "#fcd34d"),
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+      }}>
+        <div style={{
+          width: "8px", height: "8px", borderRadius: "50%",
+          background: overdue.length > 0 ? "#b91c1c" : "#d97706",
+          flexShrink: 0,
+          boxShadow: overdue.length > 0 ? "0 0 0 3px rgba(185,28,28,0.15)" : "0 0 0 3px rgba(217,119,6,0.15)",
+        }} />
+        <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: overdue.length > 0 ? "#b91c1c" : "#92400e" }}>
+          Priority Actions
+        </div>
+        {overdue.length > 0 && (
+          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#b91c1c", background: "#fee2e2", padding: "2px 8px", borderRadius: "2px", fontWeight: 600 }}>
+            {overdue.length} overdue
+          </span>
+        )}
+        {duethisweek.length > 0 && (
+          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#92400e", background: "#fef3c7", padding: "2px 8px", borderRadius: "2px", fontWeight: 600 }}>
+            {duethisweek.length} due week {currentWeek}
+          </span>
+        )}
+        <div style={{ marginLeft: "auto", fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#888" }}>
+          Week {currentWeek} of 4
+        </div>
+      </div>
+
+      {/* Rows */}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {[...overdue.map(x => ({ ...x, timing: "overdue" })), ...duethisweek.map(x => ({ ...x, timing: "due" }))].map(({ piece, cluster, pillar, timing, late }) => {
+          const tm = TIMING_META[timing];
+          const feedbackCount = ((project.feedback || {})[piece.id] || []).length;
+          return (
+            <div
+              key={piece.id}
+              onClick={() => onOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: "history" })}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                padding: "10px 24px",
+                borderLeft: `3px solid ${tm.border}`,
+                background: tm.bg,
+                borderBottom: "1px solid #f0ece4",
+                cursor: "pointer",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = timing === "overdue" ? "#fee2e2" : "#fef3c7"}
+              onMouseLeave={e => e.currentTarget.style.background = tm.bg}
+            >
+              <div style={{ flexShrink: 0 }}>
+                <span style={{
+                  fontFamily: "Noto Sans, sans-serif", fontSize: "0.65rem", fontWeight: 700,
+                  letterSpacing: "0.1em", textTransform: "uppercase",
+                  color: tm.color, background: tm.bg,
+                  border: `1px solid ${tm.border}`,
+                  padding: "2px 7px", borderRadius: "2px",
+                  whiteSpace: "nowrap",
+                }}>
+                  {timing === "overdue" ? `Wk ${piece.schedule_week} · ${late}wk late` : `Wk ${piece.schedule_week} · Due now`}
+                </span>
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem", fontWeight: 500, color: "#0f1923", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  {piece.title}
+                </div>
+                <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#888", marginTop: "2px" }}>
+                  {pillar.label} · {cluster.label}
+                </div>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
+                <StatusChip status={piece.status} />
+                {feedbackCount > 0 && <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#888" }}>{feedbackCount}✎</span>}
+                <span style={{ color: tm.color, fontSize: "0.8rem" }}>→</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ─── Tracker root ─────────────────────────────────────────────────────────────
 function Tracker({ project, setProject, currentUser, activePillar, activeCluster, setActiveCluster, adminMode, onAdminEditPiece, onAdminEditCluster }) {
   const stats = window.computeStats(project);
+  const { currentWeek } = getScheduleContext(project);
   const pillars = activePillar ? project.pillars.filter(p => p.id === activePillar) : project.pillars;
   const [activeTab, setActiveTab] = useStateTR("tracker");
   const [viewMode, setViewMode] = useStateTR("table");
@@ -243,6 +393,9 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         activeTab={activeTab} setActiveTab={setActiveTab}
         viewMode={viewMode} setViewMode={setViewMode}
       />
+      {activeTab === "tracker" && (
+        <PriorityActions project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} />
+      )}
       {activeTab === "tracker" && viewMode === "cards" && (
         <div className="ns-tracker-body">
           {pillars.map(pillar => (
@@ -254,6 +407,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
               updatePiece={updatePiece} addFeedback={addFeedback}
               currentUser={currentUser} adminMode={adminMode}
               onAdminEditPiece={onAdminEditPiece} onAdminEditCluster={onAdminEditCluster}
+              currentWeek={currentWeek}
             />
           ))}
         </div>
@@ -357,8 +511,7 @@ function KPI({ big, small, label }) {
 // ─── Publishing sequence view ─────────────────────────────────────────────────
 function PublishingSequence({ project }) {
   const clusterStats = window.computeStats(project).byCluster;
-  const totalReady = Object.values(clusterStats).filter(c => c.ready).length;
-  const currentWeek = totalReady <= 2 ? 1 : totalReady <= 6 ? 2 : totalReady <= 10 ? 3 : 4;
+  const { currentWeek } = getScheduleContext(project);
 
   return (
     <div className="ns-sequence">
@@ -453,7 +606,7 @@ function InterlinkMap() {
 }
 
 // ─── Pillar block ─────────────────────────────────────────────────────────────
-function PillarBlock({ pillar, sequence, activeCluster, project, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onAdminEditCluster }) {
+function PillarBlock({ pillar, sequence, activeCluster, project, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onAdminEditCluster, currentWeek }) {
   const clusters = activeCluster ? pillar.clusters.filter(c => c.id === activeCluster) : pillar.clusters;
   if (clusters.length === 0) return null;
   const pillarStats = window.computeStats(project).byPillar[pillar.id];
@@ -479,7 +632,7 @@ function PillarBlock({ pillar, sequence, activeCluster, project, openPiece, setO
             updatePiece={updatePiece} addFeedback={addFeedback}
             currentUser={currentUser} adminMode={adminMode}
             onAdminEditPiece={onAdminEditPiece} onAdminEditCluster={onAdminEditCluster}
-            stagger={i}
+            stagger={i} currentWeek={currentWeek}
           />
         ))}
       </div>
@@ -488,13 +641,15 @@ function PillarBlock({ pillar, sequence, activeCluster, project, openPiece, setO
 }
 
 // ─── Cluster card ─────────────────────────────────────────────────────────────
-function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onAdminEditCluster, stagger }) {
+function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onAdminEditCluster, stagger, currentWeek }) {
   const total = cluster.pieces.length;
   const approved = cluster.pieces.filter(p => p.status === "approved").length;
   const inMotion = cluster.pieces.filter(p => ["uploaded","jaggaer-feedback","revised"].includes(p.status)).length;
   const ready = approved === total && total > 0;
   const anchor = cluster.pieces.find(p => p.id === cluster.anchor_piece);
   const weekSlot = PUBLISHING_SEQUENCE.find(w => w.slots.some(s => s.cluster === cluster.id));
+  const overdueCount = cluster.pieces.filter(p => getPieceTiming(p, currentWeek) === "overdue").length;
+  const dueCount = cluster.pieces.filter(p => getPieceTiming(p, currentWeek) === "due").length;
 
   const pal = CLUSTER_PALETTE[clusterIndex % CLUSTER_PALETTE.length];
   const headStyle = ready
@@ -513,6 +668,8 @@ function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpe
             <span className="ns-cluster-dot">·</span>
             <span className="ns-cluster-intent-badge" style={{ color: metaColor }}>{cluster.intent === "informational" ? "Informational" : "Commercial"}</span>
             {weekSlot && <span className="ns-cluster-week-badge" style={{ color: metaColor }}>Wk {weekSlot.week}</span>}
+            {overdueCount > 0 && !ready && <span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.62rem", fontWeight:700, letterSpacing:"0.08em", textTransform:"uppercase", color:"#b91c1c", background:"rgba(185,28,28,0.12)", padding:"2px 7px", borderRadius:"2px", marginLeft:"4px" }}>{overdueCount} overdue</span>}
+            {dueCount > 0 && overdueCount === 0 && !ready && <span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.62rem", fontWeight:700, letterSpacing:"0.08em", textTransform:"uppercase", color:"#92400e", background:"rgba(217,119,6,0.12)", padding:"2px 7px", borderRadius:"2px", marginLeft:"4px" }}>Due now</span>}
             {ready && <span className="ns-cluster-ready-badge">Publish-ready</span>}
             {adminMode && <button className="ns-admin-edit" onClick={() => onAdminEditCluster(cluster.id)}>Edit →</button>}
           </div>
@@ -530,6 +687,7 @@ function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpe
             project={project} openPiece={openPiece} setOpenPiece={setOpenPiece}
             updatePiece={updatePiece} addFeedback={addFeedback}
             currentUser={currentUser} adminMode={adminMode} onAdminEditPiece={onAdminEditPiece}
+            currentWeek={currentWeek}
           />
         ))}
       </ul>
@@ -589,11 +747,13 @@ function ProgressArc({ total, approved, inMotion, ready, palette }) {
 }
 
 // ─── Piece row (card view) ────────────────────────────────────────────────────
-function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece }) {
+function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, currentWeek }) {
   const isOpen = openPiece && openPiece.pieceId === piece.id;
   const feedback = (project.feedback || {})[piece.id] || [];
   const isNS = currentUser.org === "ns";
   const isJG = currentUser.org === "jaggaer";
+  const timing = getPieceTiming(piece, currentWeek);
+  const tm = timing ? TIMING_META[timing] : null;
 
   const nsMembers = project.team.ns.map(m => ({ value: m.id, label: m.name }));
 
@@ -608,7 +768,8 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
   const awaitsJaggaer = piece.status === "uploaded" || piece.status === "revised";
 
   return (
-    <li className={`ns-piece-row ${isLast ? "is-last" : ""} ${isAnchor ? "is-anchor" : ""} ${awaitsJaggaer && isJG ? "awaits" : ""} ${isOpen ? "is-open" : ""}`}>
+    <li className={`ns-piece-row ${isLast ? "is-last" : ""} ${isAnchor ? "is-anchor" : ""} ${awaitsJaggaer && isJG ? "awaits" : ""} ${isOpen ? "is-open" : ""} ${timing === "overdue" ? "is-overdue" : ""} ${timing === "due" ? "is-due" : ""}`}
+      style={timing === "overdue" ? { borderLeft: "3px solid #fca5a5" } : timing === "due" ? { borderLeft: "3px solid #fcd34d" } : {}}>
       <div className="ns-piece-main" onClick={() => setOpenPiece(isOpen ? null : { clusterId: cluster.id, pieceId: piece.id, mode: action?.mode || "history" })}>
         <div className="ns-piece-l">
           {adminMode ? (
@@ -665,6 +826,12 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
               {piece.geography && piece.geography !== "all" && <><span className="ns-meta-sep">·</span><span className="ns-piece-geo">{piece.geography.toUpperCase()}</span></>}
               {(piece.revision_count > 0 || feedback.length > 0) && (
                 <><span className="ns-meta-sep">·</span><span className="ns-piece-meta-hint">{[piece.revision_count > 0 && `rev ${piece.revision_count}`, feedback.length > 0 && `${feedback.length}✎`].filter(Boolean).join(" ")}</span></>
+              )}
+              {timing === "overdue" && tm && (
+                <><span className="ns-meta-sep">·</span><span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.68rem", fontWeight:700, color: tm.color }}>{weeksLate(piece, currentWeek)}wk overdue</span></>
+              )}
+              {timing === "due" && tm && (
+                <><span className="ns-meta-sep">·</span><span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.68rem", fontWeight:700, color: tm.color }}>Due this week</span></>
               )}
             </div>
           </div>
@@ -1016,7 +1183,7 @@ function PieceDetails({ piece, cluster, pillar, project }) {
     ["Intent",            cluster.intent === "informational" ? "Informational" : "Commercial"],
     ["Publishing week",   weekSlot ? weekSlot.label : "—"],
     ["Content Type",        piece.format],
-    ["Assignee",          (() => { const all=[...project.team.ns,...project.team.jaggaer]; return all.find(x=>x.id===piece.assignee)?.name || piece.assignee; })()],
+    ["Assignee",          (() => { if (!piece.assignee) return "—"; const all=[...project.team.ns,...project.team.jaggaer]; return all.find(x=>x.id===piece.assignee)?.name || "—"; })()],
     ["Geography",         (piece.geography || "all").toUpperCase()],
     ["User path",         piece.user_paths ? piece.user_paths.join(", ") : "—"],
     ["Primary keyword",   piece.primary_keyword || "—"],

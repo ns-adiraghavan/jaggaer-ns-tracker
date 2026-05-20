@@ -1,9 +1,6 @@
 // ══════════════════════════════════════════════════════════════════════════════
 // agent-builder.jsx  —  "Agent Builder" tab for the NS × Jaggaer tracker
 // ══════════════════════════════════════════════════════════════════════════════
-// Drop this file alongside the other .jsx files in repo-setup/.
-// Then make the three small edits at the bottom of this file to wire it in.
-// ══════════════════════════════════════════════════════════════════════════════
 
 const { useState: useStateAB, useRef: useRefAB, useCallback: useCBAB } = React;
 
@@ -29,7 +26,7 @@ function ABEyebrow({ children }) {
 
 function ABSectionHead({ title, sub }) {
   return (
-    <div style={{ marginBottom: "40px" }}>
+    <div style={{ marginBottom: "32px" }}>
       <h2 style={{
         fontFamily: "'Playfair Display', serif",
         fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
@@ -57,246 +54,56 @@ function ABCard({ children, style }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// BLOCK 1 — How to Install Claude
-// ─────────────────────────────────────────────────────────────────────────────
-
-const INSTALL_STEPS = [
-  {
-    n: "01",
-    title: "Go to claude.ai",
-    body: "Open your browser and navigate to claude.ai. You'll land on the login page.",
-  },
-  {
-    n: "02",
-    title: "Create or sign into your account",
-    body: "Sign up with a work email address, or log in if you already have an account. A free account gets you access to Claude's core capabilities immediately.",
-  },
-  {
-    n: "03",
-    title: "Choose your plan",
-    body: "For professional procurement use, Claude Pro gives you significantly higher usage limits and priority access during peak hours. For team-wide rollout, ask your IT admin about the Claude for Work (Teams) plan.",
-  },
-  {
-    n: "04",
-    title: "Bookmark or pin to your browser",
-    body: "Pin claude.ai to your browser taskbar or create a desktop shortcut. Most procurement professionals add it alongside their ERP and email — it works best as a persistent tab.",
-  },
-  {
-    n: "05",
-    title: "Try your first S2P prompt",
-    body: 'You\'re ready. Start with something concrete: paste a supplier contract clause and ask "What are the renewal terms and exit conditions here?" That\'s the fastest way to see the value.',
-  },
-];
-
-function InstallBlock() {
-  const [answer, setAnswer] = useStateAB(null); // null | "yes" | "no"
-
+// Inline JAI nudge strip — used throughout
+function JAINudge({ text, tight }) {
   return (
-    <div id="block-install">
-      <ABEyebrow>Block 1</ABEyebrow>
-      <ABSectionHead
-        title="How to Install Claude"
-        sub="Before we walk through setup, one quick question:"
-      />
-
-      {/* Branch prompt */}
-      {answer === null && (
-        <ABCard style={{ marginBottom: "32px", background: "#f5f2ec", border: "1px solid #ddd8cf" }}>
-          <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "1rem", fontWeight: 500, color: "#0f1923", marginBottom: "20px" }}>
-            Do you have IT permissions to install or sign up for new software tools?
-          </p>
-          <div style={{ display: "flex", gap: "12px" }}>
-            <button
-              onClick={() => setAnswer("yes")}
-              style={{
-                background: "#c8401a", color: "#fff",
-                border: "none", borderRadius: "2px",
-                padding: "11px 28px",
-                fontFamily: "Noto Sans, sans-serif",
-                fontSize: "0.82rem", fontWeight: 600,
-                letterSpacing: "0.06em", textTransform: "uppercase",
-                cursor: "pointer",
-              }}
-            >
-              Yes — show me the steps
-            </button>
-            <button
-              onClick={() => setAnswer("no")}
-              style={{
-                background: "transparent", color: "#0f1923",
-                border: "1px solid #c4bdb5", borderRadius: "2px",
-                padding: "11px 28px",
-                fontFamily: "Noto Sans, sans-serif",
-                fontSize: "0.82rem", fontWeight: 500,
-                letterSpacing: "0.06em",
-                cursor: "pointer",
-              }}
-            >
-              No / Not sure
-            </button>
-          </div>
-        </ABCard>
-      )}
-
-      {/* NO path */}
-      {answer === "no" && (
-        <ABCard style={{ marginBottom: "32px", borderLeft: "3px solid #c8401a" }}>
-          <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.95rem", color: "#0f1923", lineHeight: 1.7, marginBottom: "16px" }}>
-            <strong>No installation needed.</strong> You can see everything Claude can do for Source-to-Pay right here — no account required.
-          </p>
-          <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.9rem", color: "#6b6560", lineHeight: 1.6, marginBottom: "20px" }}>
-            Explore the live demos below: paste a contract, a supplier list, or a sourcing brief and watch Claude process it in real time.
-            When you're ready to request access through IT, come back here and select <em>"Yes"</em>.
-          </p>
-          <button
-            onClick={() => {
-              document.getElementById("block-demos")?.scrollIntoView({ behavior: "smooth" });
-              setAnswer(null);
-            }}
-            style={{
-              background: "transparent", color: "#c8401a",
-              border: "1px solid #c8401a", borderRadius: "2px",
-              padding: "10px 22px",
-              fontFamily: "Noto Sans, sans-serif",
-              fontSize: "0.8rem", fontWeight: 600,
-              letterSpacing: "0.06em", textTransform: "uppercase",
-              cursor: "pointer",
-            }}
-          >
-            Explore the demos below →
-          </button>
-        </ABCard>
-      )}
-
-      {/* YES path */}
-      {answer === "yes" && (
-        <div style={{ marginBottom: "32px" }}>
-          {INSTALL_STEPS.map((step, i) => (
-            <div
-              key={step.n}
-              style={{
-                display: "flex",
-                gap: "24px",
-                marginBottom: i < INSTALL_STEPS.length - 1 ? "0" : "0",
-                position: "relative",
-              }}
-            >
-              {/* Connector line */}
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
-                <div style={{
-                  width: "36px", height: "36px",
-                  background: "#0f1923", borderRadius: "50%",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  flexShrink: 0,
-                }}>
-                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.75rem", fontWeight: 700, color: "#c8401a" }}>{step.n}</span>
-                </div>
-                {i < INSTALL_STEPS.length - 1 && (
-                  <div style={{ width: "1px", flex: 1, background: "#e0dbd4", margin: "4px 0" }}></div>
-                )}
-              </div>
-              <div style={{ paddingBottom: "28px" }}>
-                <h4 style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#0f1923", marginBottom: "6px" }}>
-                  {step.title}
-                </h4>
-                <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.88rem", color: "#6b6560", lineHeight: 1.65 }}>
-                  {step.body}
-                </p>
-              </div>
-            </div>
-          ))}
-          <button
-            onClick={() => setAnswer(null)}
-            style={{ background: "transparent", border: "none", color: "#999", fontSize: "0.78rem", cursor: "pointer", padding: "0", marginTop: "8px" }}
-          >
-            ← Back to the question
-          </button>
-        </div>
-      )}
+    <div style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: "16px",
+      flexWrap: "wrap",
+      padding: tight ? "14px 18px" : "18px 22px",
+      background: "#0f1923",
+      borderRadius: "3px",
+      marginTop: tight ? "16px" : "28px",
+    }}>
+      <p style={{
+        fontFamily: "Noto Sans, sans-serif",
+        fontSize: "0.85rem",
+        color: "rgba(255,255,255,0.72)",
+        margin: 0,
+        lineHeight: 1.5,
+      }}>
+        {text}
+      </p>
+      <a
+        href="https://www.jaggaer.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          background: "#c8401a",
+          color: "#fff",
+          fontFamily: "Noto Sans, sans-serif",
+          fontSize: "0.75rem",
+          fontWeight: 600,
+          letterSpacing: "0.08em",
+          textTransform: "uppercase",
+          padding: "9px 18px",
+          borderRadius: "2px",
+          textDecoration: "none",
+          whiteSpace: "nowrap",
+          flexShrink: 0,
+        }}
+      >
+        Explore JAI →
+      </a>
     </div>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// BLOCK 2 — Basics of Claude
-// ─────────────────────────────────────────────────────────────────────────────
-
-const BASICS = [
-  {
-    term: "What is Claude?",
-    body: "Claude is an AI assistant built by Anthropic. Unlike a search engine that retrieves existing documents, Claude generates responses by reasoning through your question — reading, summarising, drafting, analysing, or structuring information in real time. For procurement professionals, that means you can give it a 40-page contract and ask it specific questions, rather than reading it yourself.",
-  },
-  {
-    term: "What are .md (Markdown) files?",
-    body: "Markdown is a lightweight text format that uses simple symbols — # for headings, ** for bold, - for bullets — to structure plain text. Claude's prompt library is stored as .md files because they're readable as plain text in any editor, and they render beautifully in GitHub, Notion, and most documentation tools. You don't need to know Markdown to use Claude, but it's worth knowing why the prompt files look the way they do.",
-  },
-  {
-    term: "How do prompts work?",
-    body: "A prompt is the instruction you give Claude. The quality of Claude's output is directly proportional to the clarity of your prompt. Good prompts: (1) give context — 'I'm a procurement manager at a mid-size manufacturer'; (2) specify the task precisely — 'Review this NDA and list all obligations that expire within 12 months'; (3) define the output format — 'Return a numbered list, not paragraphs'. The prompt library below gives you tested, ready-to-use prompts for common S2P tasks.",
-  },
-];
-
-function BasicsBlock() {
-  const [open, setOpen] = useStateAB(null);
-
-  return (
-    <div style={{ marginBottom: "64px" }}>
-      <ABEyebrow>Block 2</ABEyebrow>
-      <ABSectionHead
-        title="Basics of Claude"
-        sub="Three things worth understanding before you dive into the demos."
-      />
-      <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-        {BASICS.map((item, i) => (
-          <div
-            key={i}
-            style={{
-              border: "1px solid #e0dbd4",
-              borderRadius: "3px",
-              overflow: "hidden",
-              background: open === i ? "#fff" : "#faf8f5",
-            }}
-          >
-            <button
-              onClick={() => setOpen(open === i ? null : i)}
-              style={{
-                width: "100%", textAlign: "left",
-                background: "transparent", border: "none",
-                padding: "18px 24px",
-                display: "flex", alignItems: "center", justifyContent: "space-between",
-                cursor: "pointer",
-              }}
-            >
-              <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.92rem", fontWeight: 600, color: "#0f1923" }}>
-                {item.term}
-              </span>
-              <span style={{ color: "#c8401a", fontSize: "1rem", fontWeight: 300, transform: open === i ? "rotate(45deg)" : "none", transition: "transform 0.2s" }}>+</span>
-            </button>
-            {open === i && (
-              <div style={{ padding: "0 24px 20px", fontFamily: "Noto Sans, sans-serif", fontSize: "0.88rem", color: "#444", lineHeight: 1.75 }}>
-                {item.body}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      <div style={{ marginTop: "24px", padding: "16px 20px", background: "#f5f2ec", border: "1px solid #ddd8cf", borderLeft: "3px solid #c8401a", borderRadius: "0 3px 3px 0" }}>
-        <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", color: "#555", margin: 0 }}>
-          <strong style={{ color: "#0f1923" }}>Go deeper:</strong>{" "}
-          The full S2P Prompt Library is maintained on GitHub and updated as the engagement progresses.{" "}
-          <a href="https://github.com/ns-adiraghavan/jaggaer-ns-tracker" target="_blank" rel="noopener noreferrer" style={{ color: "#c8401a", textDecoration: "none", fontWeight: 500 }}>
-            Browse the prompt library →
-          </a>
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// BLOCK 3 — S2P Use Case Demos (live Claude API)
+// BLOCK 1 — S2P Use Case Demos (live Claude API) — NOW FIRST
 // ─────────────────────────────────────────────────────────────────────────────
 
 const DEMO_TABS = [
@@ -349,9 +156,9 @@ const DEMO_PLACEHOLDERS = {
 };
 
 const DEMO_JAI_NUDGES = {
-  contracts: "See this across all your contracts automatically in JAI →",
-  suppliers: "JAI does this across your entire supplier base, connected to your data →",
-  rfp: "Generate RFPs at scale with JAI — pre-built for S2P →",
+  contracts: "This is one clause. JAI runs this analysis across your entire contract portfolio — automatically, continuously, connected to your procurement data.",
+  suppliers: "JAI monitors your full supplier base in real time. Risk flags like these surface before they reach operations, not after.",
+  rfp: "JAI generates and manages sourcing events at scale — with your organisation's data, categories, and approval workflows built in.",
 };
 
 function ContractOutput({ data }) {
@@ -478,7 +285,7 @@ function OutputSection({ label, items, color }) {
   );
 }
 
-// ─── Canned demo outputs (shown until Claude API is active) ───────────────────
+// ─── Canned demo outputs ───────────────────────────────────────────────────────
 const MOCK_OUTPUTS = {
   contracts: {
     summary: "Auto-renewing agreement with 90-day exit notice window and unilateral pricing adjustment rights at renewal — moderate buyer risk.",
@@ -587,7 +394,6 @@ function DemoPane({ demoId }) {
     if (!input.trim()) return;
     setLoading(true);
     setResult(null);
-    // Simulate processing time — will be replaced by live Claude API call
     setTimeout(() => {
       setResult(MOCK_OUTPUTS[demoId]);
       setLoading(false);
@@ -598,23 +404,10 @@ function DemoPane({ demoId }) {
 
   return (
     <div>
-      {/* API status byline */}
-      <div style={{
-        display: "flex", alignItems: "center", gap: "8px",
-        marginBottom: "14px",
-      }}>
-        <div style={{
-          width: "7px", height: "7px", borderRadius: "50%",
-          background: "#c08227",
-          flexShrink: 0,
-        }} />
-        <span style={{
-          fontFamily: "Noto Sans, sans-serif",
-          fontSize: "0.75rem",
-          color: "#888",
-          fontStyle: "italic",
-        }}>
-          Demo mode — showing representative output. Live Claude API analysis will be active once the API key is integrated.
+      <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
+        <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#c08227", flexShrink: 0 }} />
+        <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.75rem", color: "#888", fontStyle: "italic" }}>
+          Demo mode — showing representative output. Live Claude API analysis activates once the API key is integrated.
         </span>
       </div>
 
@@ -670,32 +463,7 @@ function DemoPane({ demoId }) {
           {demoId === "suppliers" && <SupplierOutput data={result} />}
           {demoId === "rfp" && <RFPOutput data={result} />}
 
-          {/* JAI nudge — only after output */}
-          <div style={{
-            marginTop: "28px",
-            padding: "16px 20px",
-            background: "#0f1923",
-            borderRadius: "3px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "16px",
-            flexWrap: "wrap",
-          }}>
-            <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", color: "rgba(255,255,255,0.7)", margin: 0 }}>
-              {DEMO_JAI_NUDGES[demoId]}
-            </p>
-            <a href="https://www.jaggaer.com" target="_blank" rel="noopener noreferrer" style={{
-              background: "#c8401a", color: "#fff",
-              fontFamily: "Noto Sans, sans-serif",
-              fontSize: "0.75rem", fontWeight: 600,
-              letterSpacing: "0.08em", textTransform: "uppercase",
-              padding: "9px 18px", borderRadius: "2px",
-              textDecoration: "none", whiteSpace: "nowrap",
-            }}>
-              Explore JAI →
-            </a>
-          </div>
+          <JAINudge text={DEMO_JAI_NUDGES[demoId]} />
         </div>
       )}
     </div>
@@ -707,14 +475,13 @@ function DemosBlock() {
 
   return (
     <div id="block-demos" style={{ marginBottom: "64px" }}>
-      <ABEyebrow>Block 3</ABEyebrow>
+      <ABEyebrow>Try it now</ABEyebrow>
       <ABSectionHead
         title="S2P Use Case Demos"
-        sub="Three live Claude-powered tools. Paste your own data and see the output in real time."
+        sub="Three live Claude-powered tools. Paste your own data — contract text, a supplier list, or a sourcing brief — and see the analysis in real time."
       />
 
-      {/* Demo tabs */}
-      <div style={{ display: "flex", borderBottom: "1px solid #e0dbd4", marginBottom: "28px", gap: "0" }}>
+      <div style={{ display: "flex", borderBottom: "1px solid #e0dbd4", marginBottom: "28px" }}>
         {DEMO_TABS.map(tab => (
           <button
             key={tab.id}
@@ -742,32 +509,500 @@ function DemosBlock() {
       <ABCard>
         <DemoPane key={activeDemo} demoId={activeDemo} />
       </ABCard>
+
+      {/* JAI bridge — below demos, before the fold */}
+      <div style={{
+        marginTop: "24px",
+        padding: "24px 28px",
+        background: "#faf8f5",
+        border: "1px solid #e0dbd4",
+        borderRadius: "4px",
+        display: "grid",
+        gridTemplateColumns: "1fr auto",
+        gap: "24px",
+        alignItems: "center",
+      }}>
+        <div>
+          <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#c8401a", marginBottom: "6px" }}>
+            Want this without the prompting?
+          </div>
+          <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.88rem", color: "#0f1923", lineHeight: 1.6, margin: 0 }}>
+            JAI does everything you just saw — across your entire contract portfolio, supplier base, and sourcing pipeline — with no prompt writing required. It's pre-built for S2P, connected to your data, and running continuously.
+          </p>
+        </div>
+        <a
+          href="https://www.jaggaer.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            background: "#0f1923",
+            color: "#fff",
+            fontFamily: "Noto Sans, sans-serif",
+            fontSize: "0.78rem",
+            fontWeight: 600,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            padding: "13px 22px",
+            borderRadius: "2px",
+            textDecoration: "none",
+            whiteSpace: "nowrap",
+          }}
+        >
+          See JAI →
+        </a>
+      </div>
     </div>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// BLOCK 4 — Webinar Hub
+// BLOCK 2 — How to Install Claude (now below the demos)
+// ─────────────────────────────────────────────────────────────────────────────
+
+const INSTALL_STEPS = [
+  {
+    n: "01",
+    title: "Go to claude.ai",
+    body: "Open your browser and navigate to claude.ai. You'll land on the login page.",
+  },
+  {
+    n: "02",
+    title: "Create or sign into your account",
+    body: "Sign up with a work email address, or log in if you already have an account. A free account gets you access to Claude's core capabilities immediately.",
+  },
+  {
+    n: "03",
+    title: "Choose your plan",
+    body: "For professional procurement use, Claude Pro gives you significantly higher usage limits and priority access during peak hours. For team-wide rollout, ask your IT admin about the Claude for Work (Teams) plan.",
+  },
+  {
+    n: "04",
+    title: "Bookmark or pin to your browser",
+    body: "Pin claude.ai to your browser taskbar or create a desktop shortcut. Most procurement professionals add it alongside their ERP and email — it works best as a persistent tab.",
+  },
+  {
+    n: "05",
+    title: "Try your first S2P prompt",
+    body: 'You\'re ready. Start with something concrete: paste a supplier contract clause and ask "What are the renewal terms and exit conditions here?" That\'s the fastest way to see the value.',
+  },
+];
+
+function InstallBlock() {
+  const [answer, setAnswer] = useStateAB(null);
+  const [open, setOpen] = useStateAB(false);
+
+  return (
+    <div id="block-install" style={{ marginBottom: "40px" }}>
+      {/* Collapsible header */}
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          width: "100%",
+          background: "transparent",
+          border: "1px solid #e0dbd4",
+          borderRadius: open ? "4px 4px 0 0" : "4px",
+          padding: "18px 24px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          cursor: "pointer",
+          textAlign: "left",
+        }}
+      >
+        <div>
+          <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#c8401a", marginBottom: "4px" }}>
+            Setup Guide
+          </div>
+          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.15rem", fontWeight: 700, color: "#0f1923" }}>
+            How to Install Claude
+          </span>
+        </div>
+        <span style={{ color: "#c8401a", fontSize: "1.1rem", transform: open ? "rotate(45deg)" : "none", transition: "transform 0.2s", flexShrink: 0 }}>+</span>
+      </button>
+
+      {open && (
+        <div style={{ border: "1px solid #e0dbd4", borderTop: "none", borderRadius: "0 0 4px 4px", padding: "28px 24px", background: "#fff" }}>
+          {answer === null && (
+            <div style={{ marginBottom: "24px", padding: "20px 22px", background: "#f5f2ec", border: "1px solid #ddd8cf", borderRadius: "3px" }}>
+              <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.95rem", fontWeight: 500, color: "#0f1923", marginBottom: "16px" }}>
+                Do you have IT permissions to install or sign up for new software tools?
+              </p>
+              <div style={{ display: "flex", gap: "12px" }}>
+                <button
+                  onClick={() => setAnswer("yes")}
+                  style={{ background: "#c8401a", color: "#fff", border: "none", borderRadius: "2px", padding: "10px 24px", fontFamily: "Noto Sans, sans-serif", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", cursor: "pointer" }}
+                >
+                  Yes — show me the steps
+                </button>
+                <button
+                  onClick={() => setAnswer("no")}
+                  style={{ background: "transparent", color: "#0f1923", border: "1px solid #c4bdb5", borderRadius: "2px", padding: "10px 24px", fontFamily: "Noto Sans, sans-serif", fontSize: "0.8rem", fontWeight: 500, letterSpacing: "0.06em", cursor: "pointer" }}
+                >
+                  No / Not sure
+                </button>
+              </div>
+            </div>
+          )}
+
+          {answer === "no" && (
+            <div style={{ marginBottom: "24px", borderLeft: "3px solid #c8401a", paddingLeft: "18px" }}>
+              <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.9rem", color: "#0f1923", lineHeight: 1.7, marginBottom: "8px" }}>
+                <strong>No installation needed.</strong> You've already seen what Claude can do for S2P in the demos above — no account required.
+              </p>
+              <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", color: "#6b6560", lineHeight: 1.6, marginBottom: "16px" }}>
+                When you're ready to request access through IT, come back here and select <em>"Yes"</em>. Or — skip the setup entirely and let JAI handle it for your team.
+              </p>
+              <JAINudge text="JAI integrates into your existing procurement environment — no individual signups or IT tickets required." tight />
+              <button
+                onClick={() => setAnswer(null)}
+                style={{ background: "transparent", border: "none", color: "#999", fontSize: "0.78rem", cursor: "pointer", padding: "0", marginTop: "14px" }}
+              >
+                ← Back
+              </button>
+            </div>
+          )}
+
+          {answer === "yes" && (
+            <div>
+              {INSTALL_STEPS.map((step, i) => (
+                <div key={step.n} style={{ display: "flex", gap: "24px", position: "relative" }}>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
+                    <div style={{ width: "36px", height: "36px", background: "#0f1923", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.75rem", fontWeight: 700, color: "#c8401a" }}>{step.n}</span>
+                    </div>
+                    {i < INSTALL_STEPS.length - 1 && (
+                      <div style={{ width: "1px", flex: 1, background: "#e0dbd4", margin: "4px 0" }}></div>
+                    )}
+                  </div>
+                  <div style={{ paddingBottom: "28px" }}>
+                    <h4 style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#0f1923", marginBottom: "6px" }}>{step.title}</h4>
+                    <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.88rem", color: "#6b6560", lineHeight: 1.65 }}>{step.body}</p>
+                  </div>
+                </div>
+              ))}
+              <button
+                onClick={() => setAnswer(null)}
+                style={{ background: "transparent", border: "none", color: "#999", fontSize: "0.78rem", cursor: "pointer", padding: "0", marginTop: "4px" }}
+              >
+                ← Back
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BLOCK 3 — Basics of Claude (collapsible, below install)
+// ─────────────────────────────────────────────────────────────────────────────
+
+const BASICS = [
+  {
+    term: "What is Claude?",
+    body: "Claude is an AI assistant built by Anthropic. Unlike a search engine that retrieves existing documents, Claude generates responses by reasoning through your question — reading, summarising, drafting, analysing, or structuring information in real time. For procurement professionals, that means you can give it a 40-page contract and ask it specific questions, rather than reading it yourself.",
+  },
+  {
+    term: "What are .md (Markdown) files?",
+    body: "Markdown is a lightweight text format that uses simple symbols — # for headings, ** for bold, - for bullets — to structure plain text. Claude's prompt library is stored as .md files because they're readable as plain text in any editor, and they render beautifully in GitHub, Notion, and most documentation tools. You don't need to know Markdown to use Claude, but it's worth knowing why the prompt files look the way they do.",
+  },
+  {
+    term: "How do prompts work?",
+    body: "A prompt is the instruction you give Claude. The quality of Claude's output is directly proportional to the clarity of your prompt. Good prompts: (1) give context — 'I'm a procurement manager at a mid-size manufacturer'; (2) specify the task precisely — 'Review this NDA and list all obligations that expire within 12 months'; (3) define the output format — 'Return a numbered list, not paragraphs'. The prompt library below gives you tested, ready-to-use prompts for common S2P tasks.",
+  },
+];
+
+function BasicsBlock() {
+  const [open, setOpen] = useStateAB(null);
+  const [sectionOpen, setSectionOpen] = useStateAB(false);
+
+  return (
+    <div style={{ marginBottom: "40px" }}>
+      <button
+        onClick={() => setSectionOpen(!sectionOpen)}
+        style={{
+          width: "100%",
+          background: "transparent",
+          border: "1px solid #e0dbd4",
+          borderRadius: sectionOpen ? "4px 4px 0 0" : "4px",
+          padding: "18px 24px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          cursor: "pointer",
+          textAlign: "left",
+        }}
+      >
+        <div>
+          <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#c8401a", marginBottom: "4px" }}>
+            Background
+          </div>
+          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.15rem", fontWeight: 700, color: "#0f1923" }}>
+            Basics of Claude
+          </span>
+        </div>
+        <span style={{ color: "#c8401a", fontSize: "1.1rem", transform: sectionOpen ? "rotate(45deg)" : "none", transition: "transform 0.2s", flexShrink: 0 }}>+</span>
+      </button>
+
+      {sectionOpen && (
+        <div style={{ border: "1px solid #e0dbd4", borderTop: "none", borderRadius: "0 0 4px 4px", padding: "24px", background: "#fff" }}>
+          <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.88rem", color: "#6b6560", lineHeight: 1.6, marginBottom: "20px" }}>
+            Three things worth understanding before you start building with Claude.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+            {BASICS.map((item, i) => (
+              <div
+                key={i}
+                style={{ border: "1px solid #e0dbd4", borderRadius: "3px", overflow: "hidden", background: open === i ? "#fff" : "#faf8f5" }}
+              >
+                <button
+                  onClick={() => setOpen(open === i ? null : i)}
+                  style={{ width: "100%", textAlign: "left", background: "transparent", border: "none", padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer" }}
+                >
+                  <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.9rem", fontWeight: 600, color: "#0f1923" }}>{item.term}</span>
+                  <span style={{ color: "#c8401a", fontSize: "1rem", fontWeight: 300, transform: open === i ? "rotate(45deg)" : "none", transition: "transform 0.2s" }}>+</span>
+                </button>
+                {open === i && (
+                  <div style={{ padding: "0 20px 18px", fontFamily: "Noto Sans, sans-serif", fontSize: "0.87rem", color: "#444", lineHeight: 1.75 }}>
+                    {item.body}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: "20px", padding: "14px 18px", background: "#f5f2ec", border: "1px solid #ddd8cf", borderLeft: "3px solid #c8401a", borderRadius: "0 3px 3px 0" }}>
+            <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.83rem", color: "#555", margin: 0 }}>
+              <strong style={{ color: "#0f1923" }}>Go deeper:</strong>{" "}
+              The full S2P Prompt Library is on GitHub and updated as the engagement progresses.{" "}
+              <a href="https://github.com/ns-adiraghavan/jaggaer-ns-tracker" target="_blank" rel="noopener noreferrer" style={{ color: "#c8401a", textDecoration: "none", fontWeight: 500 }}>
+                Browse the prompt library →
+              </a>
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BLOCK 4 — Prompt Writing Guide (new) + JAI bridge
+// ─────────────────────────────────────────────────────────────────────────────
+
+const PROMPT_EXAMPLES = [
+  {
+    label: "Contract Review",
+    tag: "Contracts",
+    tagColor: "#3b6b88",
+    prompt: `You are a procurement contracts analyst. Review the clause below and identify:\n1. Any auto-renewal terms and the exact notice window required to exit\n2. Obligations that create financial exposure for the buyer\n3. Any clauses that should be reviewed by legal before signing\n\nReturn your findings as a numbered list under each heading. Be specific — quote the relevant language where relevant.\n\n[Paste clause here]`,
+    note: "The structure — role, task, numbered output format — is what gets you precise, structured results instead of a generic paragraph.",
+  },
+  {
+    label: "Supplier Risk Scan",
+    tag: "Suppliers",
+    tagColor: "#4f7a5b",
+    prompt: `I'm a procurement manager at a discrete manufacturer. Here is our current supplier list by category and country:\n\n[Paste supplier list]\n\nFor each category where we have geographic concentration risk, flag it and suggest two or three alternative supplier geographies with example vendors. Prioritise risks by potential production impact. Return as a table.`,
+    note: "Giving Claude your role and the output format (table) dramatically improves usability of the response.",
+  },
+  {
+    label: "RFP First Draft",
+    tag: "RFP / Sourcing",
+    tagColor: "#6b5b8e",
+    prompt: `Draft a professional RFP for the following sourcing requirement:\n\n[Describe what you're buying, volume, key integrations, and any compliance requirements]\n\nInclude: a scope of work section, evaluation criteria with weightings, submission requirements, and 4–5 questions for suppliers to address. Format with clear section headers. Keep language formal but plain — no procurement jargon.`,
+    note: "Specifying what to include and the tone gets you something close to publishable on the first pass.",
+  },
+];
+
+function PromptWritingBlock() {
+  const [active, setActive] = useStateAB(0);
+  const [copied, setCopied] = useStateAB(false);
+
+  const handleCopy = () => {
+    navigator.clipboard?.writeText(PROMPT_EXAMPLES[active].prompt).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  return (
+    <div style={{ marginBottom: "64px" }}>
+      <ABEyebrow>Prompt Craft</ABEyebrow>
+      <ABSectionHead
+        title="How to Prompt for S2P"
+        sub="The demos above run on carefully engineered prompts. Here's what those look like — and how to write your own."
+      />
+
+      {/* Three-part formula */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", marginBottom: "36px" }}>
+        {[
+          { n: "1", title: "Set the role", body: "Tell Claude what kind of expert it's acting as. 'You are a procurement contracts analyst' produces sharper output than no framing at all." },
+          { n: "2", title: "Be precise about the task", body: "Vague asks get vague answers. 'Review this contract' is weak. 'List every clause that creates financial exposure for the buyer' is strong." },
+          { n: "3", title: "Define the output format", body: "Tell Claude how to structure the answer — numbered list, table, JSON, paragraph. Without this, it chooses for you, and that's often not what you need." },
+        ].map(item => (
+          <div key={item.n} style={{ background: "#fff", border: "1px solid #e0dbd4", borderRadius: "4px", padding: "22px 20px" }}>
+            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", fontWeight: 900, color: "#c8401a", marginBottom: "10px", lineHeight: 1 }}>{item.n}</div>
+            <h4 style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", fontWeight: 600, color: "#0f1923", marginBottom: "8px" }}>{item.title}</h4>
+            <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem", color: "#6b6560", lineHeight: 1.65, margin: 0 }}>{item.body}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Example prompt tabs */}
+      <div style={{ background: "#fff", border: "1px solid #e0dbd4", borderRadius: "4px", overflow: "hidden" }}>
+        {/* Tab bar */}
+        <div style={{ display: "flex", borderBottom: "1px solid #e0dbd4", background: "#faf8f5" }}>
+          {PROMPT_EXAMPLES.map((ex, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              style={{
+                background: "transparent",
+                border: "none",
+                borderBottom: active === i ? "2px solid #c8401a" : "2px solid transparent",
+                padding: "12px 20px",
+                fontFamily: "Noto Sans, sans-serif",
+                fontSize: "0.8rem",
+                fontWeight: active === i ? 600 : 400,
+                color: active === i ? "#0f1923" : "#6b6560",
+                cursor: "pointer",
+                marginBottom: "-1px",
+                letterSpacing: "0.03em",
+              }}
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Prompt body */}
+        <div style={{ padding: "24px" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px", flexWrap: "wrap", gap: "8px" }}>
+            <span style={{
+              background: PROMPT_EXAMPLES[active].tagColor + "18",
+              color: PROMPT_EXAMPLES[active].tagColor,
+              fontFamily: "Noto Sans, sans-serif",
+              fontSize: "0.7rem",
+              fontWeight: 700,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              padding: "3px 10px",
+              borderRadius: "2px",
+              border: `1px solid ${PROMPT_EXAMPLES[active].tagColor}40`,
+            }}>
+              {PROMPT_EXAMPLES[active].tag}
+            </span>
+            <button
+              onClick={handleCopy}
+              style={{
+                background: "transparent",
+                border: "1px solid #e0dbd4",
+                borderRadius: "2px",
+                padding: "6px 14px",
+                fontFamily: "Noto Sans, sans-serif",
+                fontSize: "0.72rem",
+                fontWeight: 600,
+                letterSpacing: "0.06em",
+                color: copied ? "#4f7a5b" : "#6b6560",
+                cursor: "pointer",
+                transition: "color 0.2s",
+              }}
+            >
+              {copied ? "✓ Copied" : "Copy prompt"}
+            </button>
+          </div>
+
+          <pre style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: "0.78rem",
+            color: "#0f1923",
+            background: "#faf8f5",
+            border: "1px solid #e8e3da",
+            borderRadius: "3px",
+            padding: "18px",
+            lineHeight: 1.75,
+            whiteSpace: "pre-wrap",
+            margin: "0 0 16px",
+          }}>
+            {PROMPT_EXAMPLES[active].prompt}
+          </pre>
+
+          <div style={{ padding: "12px 16px", background: "#f5f2ec", borderLeft: "3px solid #c08227", borderRadius: "0 3px 3px 0" }}>
+            <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem", fontWeight: 600, color: "#0f1923" }}>Why it works: </span>
+            <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem", color: "#555" }}>{PROMPT_EXAMPLES[active].note}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* JAI bridge — the natural "or just don't bother" moment */}
+      <div style={{
+        marginTop: "24px",
+        padding: "28px 28px",
+        background: "#0f1923",
+        borderRadius: "4px",
+        display: "grid",
+        gridTemplateColumns: "1fr auto",
+        gap: "24px",
+        alignItems: "center",
+      }}>
+        <div>
+          <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#c8401a", marginBottom: "8px" }}>
+            Or skip the prompt engineering entirely
+          </div>
+          <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.88rem", color: "rgba(255,255,255,0.75)", lineHeight: 1.65, margin: "0 0 6px" }}>
+            JAI has these prompts — and thousands more — pre-built and running against your live procurement data. No crafting, no copy-pasting, no context-setting. You ask a business question, JAI answers it.
+          </p>
+          <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.8rem", color: "rgba(255,255,255,0.45)", margin: 0, fontStyle: "italic" }}>
+            Claude is the engine. JAI is the vehicle built for S2P.
+          </p>
+        </div>
+        <a
+          href="https://www.jaggaer.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            background: "#c8401a",
+            color: "#fff",
+            fontFamily: "Noto Sans, sans-serif",
+            fontSize: "0.78rem",
+            fontWeight: 600,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            padding: "14px 22px",
+            borderRadius: "2px",
+            textDecoration: "none",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Explore JAI →
+        </a>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BLOCK 5 — Webinar Hub
 // ─────────────────────────────────────────────────────────────────────────────
 
 const YOUTUBE_VIDEOS = [
   {
     id: "0vZ_UVLhSQQ",
     title: "Getting Started with Claude.ai",
-    description: "Anthropic's official walkthrough of Claude.ai — the fastest way to get your procurement team oriented before trying the demos below.",
-    duration: "Anthropic",
+    description: "Anthropic's official walkthrough of Claude.ai — the fastest way to get your procurement team oriented before trying the demos above.",
+    source: "Anthropic",
   },
   {
     id: "oqUclC3gqKs",
     title: "A Day with Claude",
     description: "A practical look at how Claude fits into real working days — document review, drafting, analysis. Useful framing for S2P professionals.",
-    duration: "Anthropic",
+    source: "Anthropic",
   },
   {
     id: "T9aRN5JkmL8",
     title: "AI Prompt Engineering: A Deep Dive",
     description: "How to write prompts that produce precise, structured outputs — directly applicable to the contract, supplier, and RFP demos on this page.",
-    duration: "Anthropic",
+    source: "Anthropic",
   },
 ];
 
@@ -777,13 +1012,12 @@ function WebinarBlock() {
 
   return (
     <div style={{ marginBottom: "64px" }}>
-      <ABEyebrow>Block 4</ABEyebrow>
+      <ABEyebrow>Learn</ABEyebrow>
       <ABSectionHead
         title="Claude Webinar Hub"
         sub="Curated Anthropic tutorials selected for S2P relevance — plus the upcoming Jaggaer × Netscribes live session."
       />
 
-      {/* YouTube embeds */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px", marginBottom: "40px" }}>
         {YOUTUBE_VIDEOS.map((video, i) => (
           <div key={i} style={{ background: "#fff", border: "1px solid #e0dbd4", borderRadius: "4px", overflow: "hidden" }}>
@@ -798,7 +1032,7 @@ function WebinarBlock() {
             </div>
             <div style={{ padding: "18px 20px" }}>
               <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#c8401a", marginBottom: "6px" }}>
-                {video.duration}
+                {video.source}
               </div>
               <h4 style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.95rem", fontWeight: 700, color: "#0f1923", marginBottom: "8px", lineHeight: 1.35 }}>
                 {video.title}
@@ -811,8 +1045,7 @@ function WebinarBlock() {
         ))}
       </div>
 
-      {/* Webinar registration placeholder */}
-      <div style={{ background: "#0f1923", borderRadius: "4px", padding: "36px", display: "grid", gridTemplateColumns: "1fr auto", gap: "40px", alignItems: "center", flexWrap: "wrap" }}>
+      <div style={{ background: "#0f1923", borderRadius: "4px", padding: "36px", display: "grid", gridTemplateColumns: "1fr auto", gap: "40px", alignItems: "center" }}>
         <div>
           <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#c8401a", marginBottom: "10px" }}>
             Coming Soon
@@ -820,7 +1053,7 @@ function WebinarBlock() {
           <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.4rem", fontWeight: 700, color: "#fff", marginBottom: "10px", lineHeight: 1.25 }}>
             Jaggaer × Netscribes:<br />Claude for S2P — Live Session
           </h3>
-          <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.65, maxWidth: "480px" }}>
+          <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.65, maxWidth: "480px", margin: 0 }}>
             A live walkthrough of the S2P demos above — with a Q&A on how procurement teams are using Claude in real workflows today. Register your interest to be notified when the date is confirmed.
           </p>
         </div>
@@ -832,35 +1065,11 @@ function WebinarBlock() {
                 placeholder="your.email@company.com"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                style={{
-                  background: "rgba(255,255,255,0.08)",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  borderRadius: "2px",
-                  padding: "12px 16px",
-                  fontFamily: "Noto Sans, sans-serif",
-                  fontSize: "0.85rem",
-                  color: "#fff",
-                  outline: "none",
-                  width: "100%",
-                  boxSizing: "border-box",
-                }}
+                style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "2px", padding: "12px 16px", fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", color: "#fff", outline: "none", width: "100%", boxSizing: "border-box" }}
               />
               <button
                 onClick={() => { if (email.includes("@")) setSubmitted(true); }}
-                style={{
-                  background: "#c8401a",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: "2px",
-                  padding: "12px",
-                  fontFamily: "Noto Sans, sans-serif",
-                  fontSize: "0.8rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  cursor: "pointer",
-                  width: "100%",
-                }}
+                style={{ background: "#c8401a", color: "#fff", border: "none", borderRadius: "2px", padding: "12px", fontFamily: "Noto Sans, sans-serif", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", width: "100%" }}
               >
                 Register My Interest
               </button>
@@ -879,30 +1088,7 @@ function WebinarBlock() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// BLOCK 5 — Legal Disclaimer
-// ─────────────────────────────────────────────────────────────────────────────
-
-function LegalBlock() {
-  return (
-    <div style={{
-      padding: "24px 28px",
-      background: "#f0ece4",
-      border: "1px solid #ddd8cf",
-      borderRadius: "3px",
-      marginBottom: "40px",
-    }}>
-      <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6b6560", marginBottom: "10px" }}>
-        Legal Notice
-      </div>
-      <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem", color: "#888", lineHeight: 1.7, margin: 0 }}>
-        This page is created independently by Netscribes on behalf of Jaggaer and is not affiliated with, endorsed by, or produced in partnership with Anthropic. Claude™ is a product of Anthropic, PBC. All Claude capabilities referenced here are based on publicly available features. Jaggaer and Netscribes are not co-marketing partners of Anthropic. Use of Claude is subject to Anthropic's Terms of Service and Usage Policies.
-      </p>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// JAI Agent OS placeholder section
+// JAI Agent OS placeholder
 // ─────────────────────────────────────────────────────────────────────────────
 
 function JAISection() {
@@ -916,20 +1102,8 @@ function JAISection() {
         <div style={{ flex: 1, height: "1px", background: "#e0dbd4" }}></div>
       </div>
 
-      <div style={{
-        background: "#faf8f5",
-        border: "1px dashed #c4bdb5",
-        borderRadius: "4px",
-        padding: "48px 36px",
-        textAlign: "center",
-      }}>
-        <div style={{
-          width: "48px", height: "48px",
-          background: "#e0dbd4",
-          borderRadius: "50%",
-          margin: "0 auto 20px",
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
+      <div style={{ background: "#faf8f5", border: "1px dashed #c4bdb5", borderRadius: "4px", padding: "48px 36px", textAlign: "center" }}>
+        <div style={{ width: "48px", height: "48px", background: "#e0dbd4", borderRadius: "50%", margin: "0 auto 20px", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <span style={{ fontSize: "1.2rem", color: "#888" }}>⚙</span>
         </div>
         <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.3rem", fontWeight: 700, color: "#0f1923", marginBottom: "12px" }}>
@@ -947,36 +1121,44 @@ function JAISection() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Root AgentBuilderPanel — the full page rendered when view === "agent-builder"
+// Legal
+// ─────────────────────────────────────────────────────────────────────────────
+
+function LegalBlock() {
+  return (
+    <div style={{ padding: "24px 28px", background: "#f0ece4", border: "1px solid #ddd8cf", borderRadius: "3px", marginBottom: "40px" }}>
+      <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6b6560", marginBottom: "10px" }}>
+        Legal Notice
+      </div>
+      <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem", color: "#888", lineHeight: 1.7, margin: 0 }}>
+        This page is created independently by Netscribes on behalf of Jaggaer and is not affiliated with, endorsed by, or produced in partnership with Anthropic. Claude™ is a product of Anthropic, PBC. All Claude capabilities referenced here are based on publicly available features. Jaggaer and Netscribes are not co-marketing partners of Anthropic. Use of Claude is subject to Anthropic's Terms of Service and Usage Policies.
+      </p>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Root AgentBuilderPanel
 // ─────────────────────────────────────────────────────────────────────────────
 
 function AgentBuilderPanel() {
   return (
-    // flex: 1 + overflow-y: auto matches the .ns-bwc / .ns-admin / .ns-tracker pattern —
-    // the parent .ns-main-col is overflow:hidden so every panel must own its own scroll.
     <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden" }}>
     <div style={{ maxWidth: "860px", margin: "0 auto", padding: "48px 40px 80px" }}>
 
       {/* Page hero */}
-      <div style={{ marginBottom: "64px", paddingBottom: "40px", borderBottom: "1px solid #e0dbd4" }}>
+      <div style={{ marginBottom: "56px", paddingBottom: "40px", borderBottom: "1px solid #e0dbd4" }}>
         <ABEyebrow>Agent Builder</ABEyebrow>
-        <h1 style={{
-          fontFamily: "'Playfair Display', serif",
-          fontSize: "clamp(2.2rem, 4vw, 3.2rem)",
-          fontWeight: 900,
-          color: "#0f1923",
-          lineHeight: 1.1,
-          marginBottom: "16px",
-        }}>
+        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.2rem, 4vw, 3.2rem)", fontWeight: 900, color: "#0f1923", lineHeight: 1.1, marginBottom: "16px" }}>
           Building With AI<br />for Source To Pay
         </h1>
-        <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "1rem", color: "#6b6560", lineHeight: 1.7, maxWidth: "580px" }}>
+        <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "1rem", color: "#6b6560", lineHeight: 1.7, maxWidth: "580px", marginBottom: "0" }}>
           A live prototype of the Agent Builder page — two sections, two toolsets. Build With Claude is active and ready to use. Build With JAI Agent OS is coming soon.
         </p>
       </div>
 
       {/* Section divider — Build With Claude */}
-      <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "48px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "40px" }}>
         <div style={{ width: "3px", height: "28px", background: "#c8401a", borderRadius: "2px", flexShrink: 0 }}></div>
         <div>
           <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#c8401a" }}>
@@ -988,11 +1170,23 @@ function AgentBuilderPanel() {
         </div>
       </div>
 
-      {/* The four blocks */}
-      <InstallBlock />
-      <div style={{ borderTop: "1px solid #e0dbd4", margin: "48px 0" }}></div>
-      <BasicsBlock />
+      {/* NEW ORDER: Demos → Setup/Basics (collapsible) → Prompt Writing → Webinar */}
       <DemosBlock />
+
+      <div style={{ borderTop: "1px solid #e0dbd4", margin: "8px 0 36px" }}></div>
+
+      <div style={{ marginBottom: "16px" }}>
+        <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", color: "#6b6560", lineHeight: 1.6, margin: 0 }}>
+          New to Claude? The guides below cover setup and the basics — expand whichever is relevant to you.
+        </p>
+      </div>
+
+      <InstallBlock />
+      <BasicsBlock />
+
+      <div style={{ borderTop: "1px solid #e0dbd4", margin: "8px 0 48px" }}></div>
+
+      <PromptWritingBlock />
       <WebinarBlock />
 
       {/* JAI section */}
@@ -1008,29 +1202,14 @@ function AgentBuilderPanel() {
 window.AgentBuilderPanel = AgentBuilderPanel;
 
 // ══════════════════════════════════════════════════════════════════════════════
-// WIRING INSTRUCTIONS
-// Apply these three changes to the existing files to activate the new tab.
+// WIRING INSTRUCTIONS (unchanged)
 // ══════════════════════════════════════════════════════════════════════════════
 //
-// 1. index.html — add this line BEFORE the <script> that loads app.jsx:
-//
+// 1. index.html — add BEFORE the app.jsx script:
 //    <script type="text/babel" data-presets="react" src="agent-builder.jsx"></script>
 //
+// 2. sidebar.jsx — add NavSection for "Agent Builder"
 //
-// 2. sidebar.jsx — in the <nav> block, after the "Build With Claude" NavSection,
-//    add this:
-//
-//    <NavSection
-//      label="Agent Builder"
-//      active={view === "agent-builder"}
-//      onClick={() => setView("agent-builder")}
-//      rightMeta="live"
-//    />
-//
-//
-// 3. app.jsx — in the <div className="ns-main-col"> block, add this alongside
-//    the other {view === "..."} branches:
-//
-//    {view === "agent-builder" && <AgentBuilderPanel />}
+// 3. app.jsx — add: {view === "agent-builder" && <AgentBuilderPanel />}
 //
 // ══════════════════════════════════════════════════════════════════════════════
