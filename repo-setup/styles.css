@@ -1349,12 +1349,12 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 
 /* Column header row */
 .ns-ct-head-row {
-  background: var(--base); position: sticky; top: 0; z-index: 10;
+  background: var(--surface-2); position: sticky; top: 0; z-index: 10;
 }
 .ns-ct-th {
   padding: 9px 12px; text-align: left;
   font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(240,237,230,0.45); border-bottom: 2px solid rgba(240,237,230,0.08);
+  color: var(--ink-2); border-bottom: 2px solid var(--surface-3);
   white-space: nowrap;
 }
 .ns-ct-th-num   { width: 40px; }

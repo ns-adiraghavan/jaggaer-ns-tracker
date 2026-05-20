@@ -102,7 +102,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
   const stats = window.computeStats(project);
   const pillars = activePillar ? project.pillars.filter(p => p.id === activePillar) : project.pillars;
   const [activeTab, setActiveTab] = useStateTR("tracker"); // tracker | sequence | interlinks
-  const [viewMode, setViewMode] = useStateTR("cards");     // cards | table
+  const [viewMode, setViewMode] = useStateTR("table");     // cards | table
   const [openPiece, setOpenPiece] = useStateTR(null);
 
   function updatePiece(clusterId, pieceId, patch) {
