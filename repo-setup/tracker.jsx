@@ -1,6 +1,23 @@
-// Tracker v3 — publishing sequence, full piece detail, interlink map, tile grid
+// Tracker v4 — compact table view, cluster colour palette from spreadsheet
 
 const { useState: useStateTR, useRef: useRefTR, useMemo: useMemoTR } = React;
+
+// Cluster colour palette — directly lifted from spreadsheet fills
+// Sequence within a pillar (0-indexed) → { bg, border, text, intentBg }
+const CLUSTER_PALETTE = [
+  { bg: "#EAF2F8", border: "#c5ddef", text: "#1a3a52", intentBg: "#d4eaf5", seqColor: "#1F618D" }, // C1 — soft blue
+  { bg: "#E9F7EF", border: "#c2e8d4", text: "#1a3d2b", intentBg: "#d2f0e0", seqColor: "#1E7A45" }, // C2 — soft green
+  { bg: "#FEF9E7", border: "#f0e4b0", text: "#4a3a0a", intentBg: "#faf0cc", seqColor: "#9A7D0A" }, // C3 — soft yellow
+  { bg: "#F5EEF8", border: "#dccce8", text: "#3a1f52", intentBg: "#ecddf5", seqColor: "#6C3483" }, // C4 — soft lavender
+];
+
+// Per-pillar dark accent (from spreadsheet pillar header fills)
+const PILLAR_ACCENT = {
+  "ai-in-s2p":               "#784212",
+  "discrete-manufacturing":  "#1F618D",
+  "public-sector":           "#1E8449",
+  "higher-education":        "#6C3483",
+};
 
 const STATUS_META = {
   "not-started":     { label: "Not Started",      color: "rgba(17,24,32,0.38)",  bg: "rgba(17,24,32,0.06)" },
@@ -85,6 +102,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
   const stats = window.computeStats(project);
   const pillars = activePillar ? project.pillars.filter(p => p.id === activePillar) : project.pillars;
   const [activeTab, setActiveTab] = useStateTR("tracker"); // tracker | sequence | interlinks
+  const [viewMode, setViewMode] = useStateTR("cards");     // cards | table
   const [openPiece, setOpenPiece] = useStateTR(null);
 
   function updatePiece(clusterId, pieceId, patch) {
@@ -130,13 +148,14 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         project={project} stats={stats}
         activeCluster={activeCluster} setActiveCluster={setActiveCluster}
         activeTab={activeTab} setActiveTab={setActiveTab}
+        viewMode={viewMode} setViewMode={setViewMode}
       />
-      {activeTab === "tracker" && (
+      {activeTab === "tracker" && viewMode === "cards" && (
         <div className="ns-tracker-body">
           {pillars.map(pillar => (
             <PillarBlock
               key={pillar.id} pillar={pillar}
-              sequence={project.pillars.indexOf(pillar) + 1}
+              sequence={project.pillars.indexOf(pillar)}
               activeCluster={activeCluster} project={project}
               openPiece={openPiece} setOpenPiece={setOpenPiece}
               updatePiece={updatePiece} addFeedback={addFeedback}
@@ -145,6 +164,14 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
             />
           ))}
         </div>
+      )}
+      {activeTab === "tracker" && viewMode === "table" && (
+        <CompactTable
+          pillars={pillars} project={project}
+          setOpenPiece={setOpenPiece}
+          currentUser={currentUser} adminMode={adminMode}
+          updatePiece={updatePiece} addFeedback={addFeedback}
+        />
       )}
       {activeTab === "sequence" && <PublishingSequence project={project} />}
       {activeTab === "interlinks" && <InterlinkMap />}
@@ -165,7 +192,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
 }
 
 // ─── Header ───────────────────────────────────────────────────────────────────
-function TrackerHeader({ project, stats, activeCluster, setActiveCluster, activeTab, setActiveTab }) {
+function TrackerHeader({ project, stats, activeCluster, setActiveCluster, activeTab, setActiveTab, viewMode, setViewMode }) {
   const totalPieces = project.pillars.reduce((n, p) => n + p.clusters.reduce((m, c) => m + c.pieces.length, 0), 0);
   const clusterStats = window.computeStats(project).byCluster;
   const readyClusters = Object.values(clusterStats).filter(c => c.ready).length;
@@ -195,13 +222,27 @@ function TrackerHeader({ project, stats, activeCluster, setActiveCluster, active
             </button>
           ))}
         </div>
-        {activeCluster && activeTab === "tracker" && (
-          <div className="ns-tracker-filter">
-            <span className="ns-eyebrow-rule"></span>
-            <span>Filtered — one cluster</span>
-            <button onClick={() => setActiveCluster(null)} className="ns-link-btn">Show all →</button>
-          </div>
-        )}
+        <div className="ns-tracker-nav-right">
+          {activeTab === "tracker" && (
+            <div className="ns-view-toggle">
+              <button className={`ns-view-btn ${viewMode === "cards" ? "is-active" : ""}`} onClick={() => setViewMode("cards")} title="Card view">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="0" y="0" width="6" height="6" rx="1" fill="currentColor"/><rect x="8" y="0" width="6" height="6" rx="1" fill="currentColor"/><rect x="0" y="8" width="6" height="6" rx="1" fill="currentColor"/><rect x="8" y="8" width="6" height="6" rx="1" fill="currentColor"/></svg>
+                Cards
+              </button>
+              <button className={`ns-view-btn ${viewMode === "table" ? "is-active" : ""}`} onClick={() => setViewMode("table")} title="Compact table">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="0" y="0" width="14" height="2.5" rx="1" fill="currentColor"/><rect x="0" y="4" width="14" height="2.5" rx="1" fill="currentColor" opacity="0.6"/><rect x="0" y="8" width="14" height="2.5" rx="1" fill="currentColor" opacity="0.6"/><rect x="0" y="12" width="14" height="2" rx="1" fill="currentColor" opacity="0.4"/></svg>
+                Table
+              </button>
+            </div>
+          )}
+          {activeCluster && activeTab === "tracker" && (
+            <div className="ns-tracker-filter">
+              <span className="ns-eyebrow-rule"></span>
+              <span>Filtered — one cluster</span>
+              <button onClick={() => setActiveCluster(null)} className="ns-link-btn">Show all →</button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
@@ -342,6 +383,7 @@ function PillarBlock({ pillar, sequence, activeCluster, project, openPiece, setO
         {clusters.map((c, i) => (
           <ClusterCard
             key={c.id} cluster={c} pillar={pillar} project={project}
+            clusterIndex={i}
             openPiece={openPiece} setOpenPiece={setOpenPiece}
             updatePiece={updatePiece} addFeedback={addFeedback}
             currentUser={currentUser} adminMode={adminMode}
@@ -355,19 +397,40 @@ function PillarBlock({ pillar, sequence, activeCluster, project, openPiece, setO
 }
 
 // ─── Cluster card ─────────────────────────────────────────────────────────────
-function ClusterCard({ cluster, pillar, project, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onAdminEditCluster, stagger }) {
+function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onAdminEditCluster, stagger }) {
   const total = cluster.pieces.length;
   const approved = cluster.pieces.filter(p => p.status === "approved").length;
   const inMotion = cluster.pieces.filter(p => ["uploaded","jaggaer-feedback","revised"].includes(p.status)).length;
   const ready = approved === total && total > 0;
   const anchor = cluster.pieces.find(p => p.id === cluster.anchor_piece);
-
-  // Find the week this cluster is scheduled in
   const weekSlot = PUBLISHING_SEQUENCE.find(w => w.slots.some(s => s.cluster === cluster.id));
+
+  // Colour palette — cycle through 4 tints, same as spreadsheet
+  const pal = CLUSTER_PALETTE[clusterIndex % CLUSTER_PALETTE.length];
+  const headStyle = ready
+    ? { background: "#1b4332", borderBottomColor: "rgba(110,231,160,0.2)" }
+    : { background: pal.bg, borderBottomColor: pal.border };
+  const titleColor = ready ? "#d1fae5" : pal.text;
+  const metaColor  = ready ? "rgba(209,250,229,0.6)" : pal.seqColor + "99";
+  const anchorColor = ready ? "rgba(209,250,229,0.45)" : pal.seqColor + "88";
 
   return (
     <article className={`ns-cluster-card ${ready ? "is-ready" : ""}`} style={{ animationDelay: `${stagger * 60}ms` }}>
-      <header className={`ns-cluster-head ${ready ? "is-ready" : ""}`}>
+      <header className={`ns-cluster-head ${ready ? "is-ready" : ""}`} style={headStyle}>
+        <div className="ns-cluster-head-meta">
+          <div className="ns-cluster-meta-row">
+            <span className="ns-cluster-seq-badge" style={{ color: metaColor }}>C{String(cluster.sequence).padStart(2, "0")}</span>
+            <span className="ns-cluster-dot">·</span>
+            <span className="ns-cluster-intent-badge" style={{ color: metaColor }}>{cluster.intent === "informational" ? "Informational" : "Commercial"}</span>
+            {weekSlot && <span className="ns-cluster-week-badge" style={{ color: metaColor }}>Wk {weekSlot.week}</span>}
+            {ready && <span className="ns-cluster-ready-badge">Publish-ready</span>}
+            {adminMode && <button className="ns-admin-edit" onClick={() => onAdminEditCluster(cluster.id)}>Edit →</button>}
+          </div>
+          <h3 className="ns-cluster-title" style={{ color: titleColor }}>{cluster.label}</h3>
+          {anchor && <div className="ns-anchor-cluster" style={{ color: anchorColor }}>Anchor: {anchor.title.split(":")[0].replace(" (Anchor)","")}</div>}
+        </div>
+        <ProgressArc total={total} approved={approved} inMotion={inMotion} ready={ready} palette={pal} />
+      </header>
         <div className="ns-cluster-head-meta">
           <div className="ns-cluster-meta-row">
             <span className="ns-cluster-seq-badge">C{String(cluster.sequence).padStart(2, "0")}</span>
@@ -399,7 +462,7 @@ function ClusterCard({ cluster, pillar, project, openPiece, setOpenPiece, update
 }
 
 // ─── Progress arc ─────────────────────────────────────────────────────────────
-function ProgressArc({ total, approved, inMotion, ready }) {
+function ProgressArc({ total, approved, inMotion, ready, palette }) {
   const size = 68, stroke = 4;
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
@@ -412,10 +475,18 @@ function ProgressArc({ total, approved, inMotion, ready }) {
       x2: size/2 + Math.cos(angle) * r,     y2: size/2 + Math.sin(angle) * r,
     };
   });
+
+  // On light palette backgrounds, use dark ink; on dark ready background, use light
+  const numColor   = ready ? "#6ee7a0" : (palette ? palette.text : "#fff");
+  const slashColor = ready ? "rgba(209,250,229,0.35)" : (palette ? palette.seqColor + "55" : "rgba(240,237,230,0.35)");
+  const totColor   = ready ? "rgba(209,250,229,0.50)" : (palette ? palette.seqColor + "88" : "rgba(240,237,230,0.50)");
+  const lblColor   = ready ? "rgba(209,250,229,0.60)" : (palette ? palette.seqColor + "99" : "rgba(240,237,230,0.40)");
+  const trackColor = palette && !ready ? palette.border : "rgba(17,24,32,0.10)";
+
   return (
     <div className={`ns-arc-wrap ${ready ? "is-ready" : ""}`}>
       <svg width={size} height={size}>
-        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="rgba(240,237,230,0.12)" strokeWidth={stroke} />
+        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={trackColor} strokeWidth={stroke} />
         {motionFrac > approvedFrac && (
           <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="rgba(200,64,26,0.30)"
             strokeWidth={stroke} strokeDasharray={`${c*motionFrac} ${c}`}
@@ -427,16 +498,16 @@ function ProgressArc({ total, approved, inMotion, ready }) {
           style={{ transition: "stroke-dasharray 500ms cubic-bezier(.4,0,.2,1)" }} />
         {ticks.map((t, i) => (
           <line key={i} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2}
-            stroke="rgba(240,237,230,0.18)" strokeWidth="1.5" />
+            stroke={palette && !ready ? palette.border : "rgba(240,237,230,0.18)"} strokeWidth="1.5" />
         ))}
       </svg>
       <div className="ns-arc-center">
         <div className="ns-arc-frac">
-          <span className="ns-arc-num">{approved}</span>
-          <span className="ns-arc-slash">/</span>
-          <span className="ns-arc-tot">{total}</span>
+          <span className="ns-arc-num" style={{ color: numColor }}>{approved}</span>
+          <span className="ns-arc-slash" style={{ color: slashColor }}>/</span>
+          <span className="ns-arc-tot" style={{ color: totColor }}>{total}</span>
         </div>
-        <div className="ns-arc-label">{ready ? "Ready" : "Done"}</div>
+        <div className="ns-arc-label" style={{ color: lblColor }}>{ready ? "Ready" : "Done"}</div>
       </div>
     </div>
   );
@@ -768,6 +839,120 @@ function DrawerOverlay({ piece, cluster, pillar, project, mode, setMode, updateP
           onAdminEditPiece={onAdminEditPiece} onClose={onClose}
         />
       </div>
+    </div>
+  );
+}
+
+// ─── Compact Table View ───────────────────────────────────────────────────────
+function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, updatePiece, addFeedback }) {
+  const isJG = currentUser.org === "jaggaer";
+
+  return (
+    <div className="ns-compact-table-wrap">
+      <table className="ns-compact-table">
+        <thead>
+          <tr className="ns-ct-head-row">
+            <th className="ns-ct-th ns-ct-th-num">#</th>
+            <th className="ns-ct-th">Title</th>
+            <th className="ns-ct-th">Format</th>
+            <th className="ns-ct-th">Primary Keyword</th>
+            <th className="ns-ct-th">Secondary Keyword</th>
+            <th className="ns-ct-th ns-ct-th-intent">Intent</th>
+            <th className="ns-ct-th ns-ct-th-path">User Path</th>
+            <th className="ns-ct-th ns-ct-th-status">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {pillars.map((pillar, pi) => {
+            const pillarAccent = PILLAR_ACCENT[pillar.id] || "#1a2535";
+            const rows = [];
+
+            // Pillar divider row
+            rows.push(
+              <tr key={`pillar-${pillar.id}`} className="ns-ct-pillar-row">
+                <td colSpan={8}>
+                  <div className="ns-ct-pillar-label" style={{ borderLeftColor: pillarAccent }}>
+                    <span className="ns-ct-pillar-name">{pillar.label}</span>
+                    {pillar.subtitle && <span className="ns-ct-pillar-sub">{pillar.subtitle}</span>}
+                    <span className="ns-ct-pillar-weight">{Math.round(pillar.weight * 100)}%</span>
+                  </div>
+                </td>
+              </tr>
+            );
+
+            pillar.clusters.forEach((cluster, ci) => {
+              const pal = CLUSTER_PALETTE[ci % CLUSTER_PALETTE.length];
+              const total = cluster.pieces.length;
+              const approved = cluster.pieces.filter(p => p.status === "approved").length;
+
+              // Cluster sub-header row
+              rows.push(
+                <tr key={`cluster-${cluster.id}`} className="ns-ct-cluster-row" style={{ background: pal.bg }}>
+                  <td colSpan={8}>
+                    <div className="ns-ct-cluster-label" style={{ color: pal.text }}>
+                      <span className="ns-ct-cluster-seq" style={{ color: pal.seqColor }}>C{String(cluster.sequence).padStart(2,"0")}</span>
+                      <span className="ns-ct-cluster-name">{cluster.label}</span>
+                      <span className={`ns-ct-cluster-intent ${cluster.intent}`} style={{ background: pal.intentBg, color: pal.seqColor }}>{cluster.intent}</span>
+                      <span className="ns-ct-cluster-frac" style={{ color: pal.seqColor + "99" }}>{approved}/{total}</span>
+                      {approved === total && total > 0 && <span className="ns-ct-ready-chip">Publish-ready</span>}
+                    </div>
+                  </td>
+                </tr>
+              );
+
+              // Piece rows
+              cluster.pieces.forEach((piece, idx) => {
+                const isAnchor = piece.id === cluster.anchor_piece;
+                const feedback = (project.feedback || {})[piece.id] || [];
+                const awaitsJG = isJG && (piece.status === "uploaded" || piece.status === "revised");
+                const canUploadNS = currentUser.org === "ns" && (piece.status === "not-started" || piece.status === "jaggaer-feedback");
+                const hasAction = awaitsJG || canUploadNS;
+
+                rows.push(
+                  <tr
+                    key={piece.id}
+                    className={`ns-ct-piece-row ${awaitsJG ? "awaits-jg" : ""} ${isAnchor ? "is-anchor" : ""}`}
+                    style={{ background: idx % 2 === 0 ? "#fff" : "#faf9f7" }}
+                    onClick={() => setOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: awaitsJG ? "feedback" : canUploadNS ? "upload" : "history" })}
+                  >
+                    <td className="ns-ct-td ns-ct-td-num">
+                      <span className="ns-ct-num" style={{ color: pal.seqColor + "aa" }}>{idx + 1}</span>
+                      {isAnchor && <span className="ns-ct-anchor-dot" title="Anchor piece" style={{ color: pal.seqColor }}>◆</span>}
+                    </td>
+                    <td className="ns-ct-td ns-ct-td-title">
+                      <span className="ns-ct-title">{piece.title}</span>
+                      {feedback.length > 0 && <span className="ns-ct-fb-hint">{feedback.length}✎</span>}
+                    </td>
+                    <td className="ns-ct-td ns-ct-td-format">
+                      <span className="ns-ct-format" style={{ background: pal.intentBg, color: pal.text }}>{piece.format}</span>
+                    </td>
+                    <td className="ns-ct-td ns-ct-td-kw">
+                      <span className="ns-ct-kw-primary">{piece.primary_keyword || "—"}</span>
+                    </td>
+                    <td className="ns-ct-td ns-ct-td-kw ns-ct-kw-sec">
+                      <span className="ns-ct-kw-secondary">{piece.secondary_keyword || "—"}</span>
+                    </td>
+                    <td className="ns-ct-td ns-ct-td-intent">
+                      <span className={`ns-ct-intent-badge ${cluster.intent}`}>{cluster.intent === "informational" ? "Info" : "Comm"}</span>
+                    </td>
+                    <td className="ns-ct-td ns-ct-td-path">
+                      {piece.user_paths ? piece.user_paths.map(p => (
+                        <span key={p} className="ns-ct-path-pill">{p.replace("Path ","P")}</span>
+                      )) : <span className="ns-ct-na">—</span>}
+                    </td>
+                    <td className="ns-ct-td ns-ct-td-status">
+                      <StatusChip status={piece.status} />
+                      {hasAction && <span className="ns-ct-action-dot" title={awaitsJG ? "Needs your feedback" : "Awaiting upload"} />}
+                    </td>
+                  </tr>
+                );
+              });
+            });
+
+            return rows;
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
