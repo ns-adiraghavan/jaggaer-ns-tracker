@@ -1,6 +1,6 @@
 /* ────────────────────────────────────────────────────────────────────────────
    Jaggaer × Netscribes — Project Tracker v3
-   Palette:  #0f1923 (dark base) · #f5f2ec (warm surface) · #c8401a (accent)
+   Palette:  #0f1923 (dark base) · #f5f2ec (warm surface) · #1a2f4e (accent navy)
    Type:     Playfair Display (hero moments) · Noto Sans (all UI)
    ──────────────────────────────────────────────────────────────────────────── */
 
@@ -22,9 +22,9 @@
   --paper-3:rgba(240,237,230,0.48);
   --paper-4:rgba(240,237,230,0.20);
   --paper-5:rgba(240,237,230,0.09);
-  --accent:      #c8401a;
-  --accent-mid:  rgba(200,64,26,0.22);
-  --accent-soft: rgba(200,64,26,0.10);
+  --accent:      #1a2f4e;
+  --accent-mid:  rgba(26,47,78,0.22);
+  --accent-soft: rgba(26,47,78,0.08);
 
   /* Status — richer, more distinct */
   --st-uploaded:    #1e6fa8;
@@ -228,7 +228,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-user-role { display: flex; align-items: center; gap: 7px; font-size: 10px; color: var(--ink-3); margin-top: 3px; }
 .ns-org-pill { font-size: 9px; font-weight: 700; letter-spacing: 0.10em; padding: 2px 6px; border-radius: 2px; }
 .ns-org-ns      { background: rgba(30,111,168,0.12); color: #1e6fa8; }
-.ns-org-jaggaer { background: rgba(200,64,26,0.10); color: var(--accent); }
+.ns-org-jaggaer { background: rgba(26,47,78,0.08); color: var(--accent); }
 .ns-user-actions { display: flex; gap: 6px; }
 .ns-mini-btn {
   font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
@@ -422,7 +422,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-piece-btn.is-primary {
   color: var(--accent); border-color: var(--accent-mid); background: var(--accent-soft);
 }
-.ns-piece-btn.is-primary:hover { background: rgba(200,64,26,0.15); }
+.ns-piece-btn.is-primary:hover { background: rgba(26,47,78,0.12); }
 .ns-piece-state-glyph { font-size: 14px; color: var(--ink-4); width: 22px; text-align: center; }
 
 /* ── Drawer ── */
@@ -690,7 +690,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
   padding: 7px 10px; border-bottom: 1px solid var(--surface-2); vertical-align: middle;
 }
 .ns-admin-table tr:last-child td { border-bottom: none; }
-.ns-admin-table tr.is-target td { background: rgba(200,64,26,0.05); }
+.ns-admin-table tr.is-target td { background: rgba(26,47,78,0.05); }
 .ns-admin-dim { color: var(--ink-3); font-size: 11px; }
 .ns-admin-pieces-cell { text-align: center; font-size: 12px; color: var(--ink-3); font-weight: 500; }
 .ns-admin-input-wide { min-width: 180px; }
@@ -921,7 +921,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
   border-bottom: 1px solid var(--surface-2);
 }
 .ns-admin-piece-row:last-of-type { border-bottom: none; }
-.ns-admin-piece-row.is-target { background: rgba(200,64,26,0.04); border-radius: var(--radius); padding-left: 6px; }
+.ns-admin-piece-row.is-target { background: rgba(26,47,78,0.04); border-radius: var(--radius); padding-left: 6px; }
 .ns-admin-piece-title { flex: 1; min-width: 0; }
 .ns-admin-add-piece-btn {
   display: block; width: 100%; margin-top: 10px;
@@ -969,7 +969,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-fullwidth-drawer .ns-drawer-body { padding: 24px 28px 28px; }
 
 /* Highlight the selected piece row */
-.ns-piece-row.is-open .ns-piece-main { background: rgba(200,64,26,0.04); }
+.ns-piece-row.is-open .ns-piece-main { background: rgba(26,47,78,0.04); }
 .ns-piece-row.is-open .ns-piece-title { color: var(--accent); }
 
 /* ════ Drawer overlay — full centered modal ══════════════════════════════ */
@@ -1413,7 +1413,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
   cursor: pointer; transition: background 100ms;
   border-bottom: 1px solid rgba(0,0,0,0.05);
 }
-.ns-ct-piece-row:hover { background: rgba(200,64,26,0.04) !important; }
+.ns-ct-piece-row:hover { background: rgba(26,47,78,0.04) !important; }
 .ns-ct-piece-row.awaits-jg { background: #fffbf5 !important; }
 .ns-ct-piece-row.is-anchor .ns-ct-title { font-weight: 600; }
 
@@ -1505,7 +1505,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
   text-transform: uppercase; color: #fff; background: var(--accent);
   padding: 10px 22px; border-radius: 4px; transition: background 150ms, opacity 150ms;
 }
-.ns-edit-save:hover { background: #a33315; }
+.ns-edit-save:hover { background: #0f1e33; }
 .ns-edit-save:disabled { opacity: 0.6; }
 .ns-edit-cancel {
   font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
