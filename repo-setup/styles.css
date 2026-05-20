@@ -1565,3 +1565,68 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-entry-logo-ns img  { height: 32px; width: auto; display: block; }
 .ns-entry-logo-sep { font-size: 16px; color: var(--ink-4); font-weight: 300; }
 .ns-entry-logo-jg img  { height: 28px; width: auto; display: block; }
+
+/* ════ Inline editing — admin table & card view ════════════════════════════ */
+
+/* The hint bar shown at top of table in admin mode */
+.ns-inline-edit-hint {
+  font-family: var(--font-ui); font-size: 11px; font-weight: 500;
+  color: var(--ink-3); background: #fffbf0; border-bottom: 1px solid #f0e4b0;
+  padding: 7px 20px; letter-spacing: 0.02em;
+}
+.ns-inline-hint-icon {
+  font-size: 12px; color: var(--accent); margin: 0 2px;
+}
+
+/* Wrapper for any inline-editable value */
+.ns-inline-cell {
+  display: inline-flex; align-items: center; gap: 4px;
+  cursor: text; border-radius: 3px;
+  padding: 1px 3px; margin: -1px -3px;
+  transition: background 120ms;
+  position: relative;
+}
+.ns-inline-cell:hover {
+  background: rgba(200, 64, 26, 0.07);
+}
+/* Pencil glyph — only visible on hover */
+.ns-inline-pencil {
+  font-size: 10px; color: var(--accent); opacity: 0;
+  transition: opacity 120ms; pointer-events: none; flex-shrink: 0;
+}
+.ns-inline-cell:hover .ns-inline-pencil { opacity: 1; }
+
+/* Inline text input */
+.ns-inline-input {
+  font-family: var(--font-ui); font-size: 12px; color: var(--ink);
+  border: 1.5px solid var(--accent); border-radius: 3px;
+  padding: 3px 7px; outline: none;
+  background: #fff; box-shadow: 0 0 0 3px rgba(200,64,26,0.10);
+  min-width: 120px; max-width: 420px; width: 100%;
+}
+.ns-inline-input.ns-ct-inline-title { min-width: 240px; font-size: 13px; }
+.ns-inline-input.ns-inline-title { min-width: 240px; font-size: 13px; }
+.ns-inline-input.ns-inline-meta { min-width: 80px; font-size: 11px; }
+
+/* Inline select */
+.ns-inline-select {
+  font-family: var(--font-ui); font-size: 12px; color: var(--ink);
+  border: 1.5px solid var(--accent); border-radius: 3px;
+  padding: 3px 6px; outline: none;
+  background: #fff; box-shadow: 0 0 0 3px rgba(200,64,26,0.10);
+  cursor: pointer;
+}
+
+/* Admin row in table gets subtle left indicator */
+.ns-ct-piece-row.is-admin-row:hover td:first-child {
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+/* Assignee cell in table */
+.ns-ct-td-assignee { white-space: nowrap; }
+.ns-ct-assignee {
+  font-size: 12px; color: var(--ink-2);
+}
+
+/* Colcount fix — table now has 9 columns (added Assignee) */
+/* colSpan values updated in JSX; no CSS needed here */

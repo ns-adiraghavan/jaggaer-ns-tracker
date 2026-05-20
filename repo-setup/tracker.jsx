@@ -1,17 +1,15 @@
-// Tracker v4 — compact table view, cluster colour palette from spreadsheet
+// Tracker v5 — inline editing (admin), fixed upload path/revision count
 
 const { useState: useStateTR, useRef: useRefTR, useMemo: useMemoTR } = React;
 
 // Cluster colour palette — directly lifted from spreadsheet fills
-// Sequence within a pillar (0-indexed) → { bg, border, text, intentBg }
 const CLUSTER_PALETTE = [
-  { bg: "#EAF2F8", border: "#c5ddef", text: "#1a3a52", intentBg: "#d4eaf5", seqColor: "#1F618D" }, // C1 — soft blue
-  { bg: "#E9F7EF", border: "#c2e8d4", text: "#1a3d2b", intentBg: "#d2f0e0", seqColor: "#1E7A45" }, // C2 — soft green
-  { bg: "#FEF9E7", border: "#f0e4b0", text: "#4a3a0a", intentBg: "#faf0cc", seqColor: "#9A7D0A" }, // C3 — soft yellow
-  { bg: "#F5EEF8", border: "#dccce8", text: "#3a1f52", intentBg: "#ecddf5", seqColor: "#6C3483" }, // C4 — soft lavender
+  { bg: "#EAF2F8", border: "#c5ddef", text: "#1a3a52", intentBg: "#d4eaf5", seqColor: "#1F618D" },
+  { bg: "#E9F7EF", border: "#c2e8d4", text: "#1a3d2b", intentBg: "#d2f0e0", seqColor: "#1E7A45" },
+  { bg: "#FEF9E7", border: "#f0e4b0", text: "#4a3a0a", intentBg: "#faf0cc", seqColor: "#9A7D0A" },
+  { bg: "#F5EEF8", border: "#dccce8", text: "#3a1f52", intentBg: "#ecddf5", seqColor: "#6C3483" },
 ];
 
-// Per-pillar dark accent (from spreadsheet pillar header fills)
 const PILLAR_ACCENT = {
   "ai-in-s2p":               "#784212",
   "discrete-manufacturing":  "#1F618D",
@@ -20,12 +18,14 @@ const PILLAR_ACCENT = {
 };
 
 const STATUS_META = {
-  "not-started":     { label: "Not Started",      color: "rgba(17,24,32,0.38)",  bg: "rgba(17,24,32,0.06)" },
-  "uploaded":        { label: "Uploaded",          color: "#1e6fa8",              bg: "#e8f2fa" },
-  "jaggaer-feedback":{ label: "Jaggaer Feedback",  color: "#b05e00",              bg: "#fdf0e0" },
-  "revised":         { label: "Revised",           color: "#5a3d9e",              bg: "#f0ecfa" },
-  "approved":        { label: "Approved",          color: "#1e7a45",              bg: "#e6f5ec" }
+  "not-started":      { label: "Not Started",      color: "rgba(17,24,32,0.38)",  bg: "rgba(17,24,32,0.06)" },
+  "uploaded":         { label: "Uploaded",          color: "#1e6fa8",              bg: "#e8f2fa" },
+  "jaggaer-feedback": { label: "Jaggaer Feedback",  color: "#b05e00",              bg: "#fdf0e0" },
+  "revised":          { label: "Revised",           color: "#5a3d9e",              bg: "#f0ecfa" },
+  "approved":         { label: "Approved",          color: "#1e7a45",              bg: "#e6f5ec" }
 };
+
+const STATUS_ORDER = ["not-started", "uploaded", "jaggaer-feedback", "revised", "approved"];
 
 const VERDICT_META = {
   "approved":       { label: "Approved",      glyph: "✓" },
@@ -33,7 +33,6 @@ const VERDICT_META = {
   "question":       { label: "Question",      glyph: "?" }
 };
 
-// Publishing sequence from the tracker spreadsheet
 const PUBLISHING_SEQUENCE = [
   {
     week: 1,
@@ -79,30 +78,110 @@ const PUBLISHING_SEQUENCE = [
   }
 ];
 
-// Cross-pillar interlink map from the tracker spreadsheet
 const INTERLINK_MAP = [
-  { pillar: "AI in S2P",              cluster: "C1 Getting Started",    anchor: "FAQ: What Can Claude Do Right Now",                 cross: "Link from each sector's AI angle back to Getting Started cluster" },
+  { pillar: "AI in S2P",              cluster: "C1 Getting Started",     anchor: "FAQ: What Can Claude Do Right Now",                  cross: "Link from each sector's AI angle back to Getting Started cluster" },
   { pillar: "AI in S2P",              cluster: "C2 Claude for Contracts", anchor: "P-S: What Happens When You Ask Claude to Audit Contracts", cross: "Manufacturing C2: Sub-tier bankruptcy contracts angle" },
-  { pillar: "AI in S2P",              cluster: "C3 Suppliers & Sourcing", anchor: "How-to Guide: 3 S2P Tasks in Claude Right Now",    cross: "Public Sector C2: E-invoicing as a Claude sourcing use case" },
-  { pillar: "AI in S2P",              cluster: "C4 Prompt Library",     anchor: "By the Numbers: 20 Fundamental Queries",            cross: "All pillars: prompt library is the master cross-pillar SEO resource" },
-  { pillar: "Discrete Manufacturing", cluster: "C1 Tariff & Trade",     anchor: "FAQ: CBAM & Carbon Cost of Supply Chain",           cross: "Public Sector C1: EU AI Act + CBAM as parallel compliance obligations" },
-  { pillar: "Discrete Manufacturing", cluster: "C2 Sub-Tier Risk",      anchor: "Whitepaper: Tier 2-4 Supplier Bankruptcy",          cross: "AI in S2P C2: Claude for auditing supplier contracts" },
-  { pillar: "Discrete Manufacturing", cluster: "C3 Critical Minerals",  anchor: "Data Snapshot: Steel, Aluminum & Rare Earth Volatility", cross: "Manufacturing C2: Critical minerals as a sub-tier risk driver" },
-  { pillar: "Discrete Manufacturing", cluster: "C4 Platform TCO",       anchor: "eBook: The Manufacturing CPO's Platform Evaluation Guide", cross: "Public Sector C3: Platform evaluation — same buyer, different sector" },
-  { pillar: "Public Sector",          cluster: "C1 EU AI Act",          anchor: "Whitepaper: AI in Government Procurement",          cross: "Manufacturing C4: Platform evaluation — AI as a buying criterion" },
-  { pillar: "Public Sector",          cluster: "C2 E-Invoicing",        anchor: "Data Snapshot: Government Contract Leakage",        cross: "Higher Ed C1: Maverick spend — same problem, different sector" },
-  { pillar: "Public Sector",          cluster: "C3 Platform Evaluation", anchor: "Q&A: Head of Procurement Platform Criteria",       cross: "Manufacturing C4 + Higher Ed C3: Cross-pillar platform evaluation" },
-  { pillar: "Higher Education",       cluster: "C1 Maverick Spend",     anchor: "Whitepaper: CFO & CPO Maverick Spend Playbook",     cross: "Public Sector C2: Off-contract spend — parallel government problem" },
-  { pillar: "Higher Education",       cluster: "C2 Grant Compliance",   anchor: "Checklist: Grant Compliance NSF/NIH/Horizon Europe", cross: "Higher Ed C3: Platform modernisation as the compliance solution" },
-  { pillar: "Higher Education",       cluster: "C3 Platform Modernisation", anchor: "P-S: From Spreadsheets to Platform",            cross: "Manufacturing C4 + Public Sector C3: Platform evaluation cross-pillar" },
+  { pillar: "AI in S2P",              cluster: "C3 Suppliers & Sourcing", anchor: "How-to Guide: 3 S2P Tasks in Claude Right Now",     cross: "Public Sector C2: E-invoicing as a Claude sourcing use case" },
+  { pillar: "AI in S2P",              cluster: "C4 Prompt Library",      anchor: "By the Numbers: 20 Fundamental Queries",             cross: "All pillars: prompt library is the master cross-pillar SEO resource" },
+  { pillar: "Discrete Manufacturing", cluster: "C1 Tariff & Trade",      anchor: "FAQ: CBAM & Carbon Cost of Supply Chain",            cross: "Public Sector C1: EU AI Act + CBAM as parallel compliance obligations" },
+  { pillar: "Discrete Manufacturing", cluster: "C2 Sub-Tier Risk",       anchor: "Whitepaper: Tier 2-4 Supplier Bankruptcy",           cross: "AI in S2P C2: Claude for auditing supplier contracts" },
+  { pillar: "Discrete Manufacturing", cluster: "C3 Critical Minerals",   anchor: "Data Snapshot: Steel, Aluminum & Rare Earth Volatility", cross: "Manufacturing C2: Critical minerals as a sub-tier risk driver" },
+  { pillar: "Discrete Manufacturing", cluster: "C4 Platform TCO",        anchor: "eBook: The Manufacturing CPO's Platform Evaluation Guide", cross: "Public Sector C3: Platform evaluation — same buyer, different sector" },
+  { pillar: "Public Sector",          cluster: "C1 EU AI Act",           anchor: "Whitepaper: AI in Government Procurement",           cross: "Manufacturing C4: Platform evaluation — AI as a buying criterion" },
+  { pillar: "Public Sector",          cluster: "C2 E-Invoicing",         anchor: "Data Snapshot: Government Contract Leakage",         cross: "Higher Ed C1: Maverick spend — same problem, different sector" },
+  { pillar: "Public Sector",          cluster: "C3 Platform Evaluation", anchor: "Q&A: Head of Procurement Platform Criteria",         cross: "Manufacturing C4 + Higher Ed C3: Cross-pillar platform evaluation" },
+  { pillar: "Higher Education",       cluster: "C1 Maverick Spend",      anchor: "Whitepaper: CFO & CPO Maverick Spend Playbook",      cross: "Public Sector C2: Off-contract spend — parallel government problem" },
+  { pillar: "Higher Education",       cluster: "C2 Grant Compliance",    anchor: "Checklist: Grant Compliance NSF/NIH/Horizon Europe",  cross: "Higher Ed C3: Platform modernisation as the compliance solution" },
+  { pillar: "Higher Education",       cluster: "C3 Platform Modernisation", anchor: "P-S: From Spreadsheets to Platform",              cross: "Manufacturing C4 + Public Sector C3: Platform evaluation cross-pillar" },
 ];
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function assigneeName(project, id) {
+  const all = [...project.team.ns, ...project.team.jaggaer];
+  const m = all.find(x => x.id === id);
+  return m ? m.name.split(" ")[0] : id;
+}
+
+function StatusChip({ status }) {
+  const meta = STATUS_META[status] || STATUS_META["not-started"];
+  return (
+    <span className="ns-status-chip" style={{ background: meta.bg, color: meta.color }}>
+      {meta.label}
+    </span>
+  );
+}
+
+// ─── Inline cell editor — shared by table + card views ────────────────────────
+// Renders the value normally; on admin hover shows pencil; on click flips to input/select.
+function InlineCell({ value, type, options, onSave, children, className }) {
+  const [editing, setEditing] = useStateTR(false);
+  const [draft, setDraft] = useStateTR(value);
+  const inputRef = useRefTR(null);
+
+  function activate(e) {
+    e.stopPropagation();
+    setDraft(value);
+    setEditing(true);
+    setTimeout(() => inputRef.current?.focus(), 0);
+  }
+
+  function commit(e) {
+    e.stopPropagation();
+    setEditing(false);
+    if (draft !== value) onSave(draft);
+  }
+
+  function onKey(e) {
+    e.stopPropagation();
+    if (e.key === "Enter") commit(e);
+    if (e.key === "Escape") { setEditing(false); setDraft(value); }
+  }
+
+  if (editing) {
+    if (type === "select") {
+      return (
+        <select
+          ref={inputRef}
+          className={`ns-inline-select ${className || ""}`}
+          value={draft}
+          onChange={e => setDraft(e.target.value)}
+          onBlur={commit}
+          onKeyDown={onKey}
+          onClick={e => e.stopPropagation()}
+        >
+          {options.map(o => (
+            <option key={o.value} value={o.value}>{o.label}</option>
+          ))}
+        </select>
+      );
+    }
+    return (
+      <input
+        ref={inputRef}
+        className={`ns-inline-input ${className || ""}`}
+        value={draft}
+        onChange={e => setDraft(e.target.value)}
+        onBlur={commit}
+        onKeyDown={onKey}
+        onClick={e => e.stopPropagation()}
+      />
+    );
+  }
+
+  return (
+    <span className={`ns-inline-cell ${className || ""}`} onClick={activate} title="Click to edit">
+      {children || value || "—"}
+      <span className="ns-inline-pencil">✎</span>
+    </span>
+  );
+}
 
 // ─── Tracker root ─────────────────────────────────────────────────────────────
 function Tracker({ project, setProject, currentUser, activePillar, activeCluster, setActiveCluster, adminMode, onAdminEditPiece, onAdminEditCluster }) {
   const stats = window.computeStats(project);
   const pillars = activePillar ? project.pillars.filter(p => p.id === activePillar) : project.pillars;
-  const [activeTab, setActiveTab] = useStateTR("tracker"); // tracker | sequence | interlinks
-  const [viewMode, setViewMode] = useStateTR("table");     // cards | table
+  const [activeTab, setActiveTab] = useStateTR("tracker");
+  const [viewMode, setViewMode] = useStateTR("table");
   const [openPiece, setOpenPiece] = useStateTR(null);
 
   function updatePiece(clusterId, pieceId, patch) {
@@ -278,8 +357,6 @@ function KPI({ big, small, label }) {
 // ─── Publishing sequence view ─────────────────────────────────────────────────
 function PublishingSequence({ project }) {
   const clusterStats = window.computeStats(project).byCluster;
-
-  // Determine current week based on how many clusters are publish-ready
   const totalReady = Object.values(clusterStats).filter(c => c.ready).length;
   const currentWeek = totalReady <= 2 ? 1 : totalReady <= 6 ? 2 : totalReady <= 10 ? 3 : 4;
 
@@ -299,7 +376,6 @@ function PublishingSequence({ project }) {
             return { pillar, cluster, cs, slot };
           });
           const weekReady = weekClusters.every(w => w.cs.ready);
-          const weekBlocked = weekClusters.some(w => !w.cs.ready);
 
           return (
             <div key={week.week} className={`ns-week-card ${isCurrent ? "is-current" : ""} ${weekReady ? "is-done" : ""}`}>
@@ -420,7 +496,6 @@ function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpe
   const anchor = cluster.pieces.find(p => p.id === cluster.anchor_piece);
   const weekSlot = PUBLISHING_SEQUENCE.find(w => w.slots.some(s => s.cluster === cluster.id));
 
-  // Colour palette — cycle through 4 tints, same as spreadsheet
   const pal = CLUSTER_PALETTE[clusterIndex % CLUSTER_PALETTE.length];
   const headStyle = ready
     ? { background: "#1b4332", borderBottomColor: "rgba(110,231,160,0.2)" }
@@ -477,7 +552,6 @@ function ProgressArc({ total, approved, inMotion, ready, palette }) {
     };
   });
 
-  // On light palette backgrounds, use dark ink; on dark ready background, use light
   const numColor   = ready ? "#6ee7a0" : (palette ? palette.text : "#fff");
   const slashColor = ready ? "rgba(209,250,229,0.35)" : (palette ? palette.seqColor + "55" : "rgba(240,237,230,0.35)");
   const totColor   = ready ? "rgba(209,250,229,0.50)" : (palette ? palette.seqColor + "88" : "rgba(240,237,230,0.50)");
@@ -514,12 +588,14 @@ function ProgressArc({ total, approved, inMotion, ready, palette }) {
   );
 }
 
-// ─── Piece row ────────────────────────────────────────────────────────────────
+// ─── Piece row (card view) ────────────────────────────────────────────────────
 function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece }) {
   const isOpen = openPiece && openPiece.pieceId === piece.id;
   const feedback = (project.feedback || {})[piece.id] || [];
   const isNS = currentUser.org === "ns";
   const isJG = currentUser.org === "jaggaer";
+
+  const nsMembers = project.team.ns.map(m => ({ value: m.id, label: m.name }));
 
   function primaryAction() {
     if (isNS && (piece.status === "not-started" || piece.status === "jaggaer-feedback"))
@@ -535,16 +611,57 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
     <li className={`ns-piece-row ${isLast ? "is-last" : ""} ${isAnchor ? "is-anchor" : ""} ${awaitsJaggaer && isJG ? "awaits" : ""} ${isOpen ? "is-open" : ""}`}>
       <div className="ns-piece-main" onClick={() => setOpenPiece(isOpen ? null : { clusterId: cluster.id, pieceId: piece.id, mode: action?.mode || "history" })}>
         <div className="ns-piece-l">
-          <StatusChip status={piece.status} />
+          {adminMode ? (
+            <InlineCell
+              value={piece.status}
+              type="select"
+              options={STATUS_ORDER.map(s => ({ value: s, label: STATUS_META[s].label }))}
+              onSave={val => updatePiece(cluster.id, piece.id, { status: val })}
+            >
+              <StatusChip status={piece.status} />
+            </InlineCell>
+          ) : (
+            <StatusChip status={piece.status} />
+          )}
           <div className="ns-piece-text">
             <div className="ns-piece-title-row">
               {isAnchor && <span className="ns-anchor-mark" title="Anchor piece">◆</span>}
-              <h4 className="ns-piece-title">{piece.title}</h4>
+              {adminMode ? (
+                <InlineCell
+                  value={piece.title}
+                  type="text"
+                  onSave={val => updatePiece(cluster.id, piece.id, { title: val })}
+                  className="ns-inline-title"
+                >
+                  <h4 className="ns-piece-title">{piece.title}</h4>
+                </InlineCell>
+              ) : (
+                <h4 className="ns-piece-title">{piece.title}</h4>
+              )}
             </div>
             <div className="ns-piece-meta">
-              <span>{piece.format}</span>
+              {adminMode ? (
+                <InlineCell
+                  value={piece.format}
+                  type="text"
+                  onSave={val => updatePiece(cluster.id, piece.id, { format: val })}
+                  className="ns-inline-meta"
+                >{piece.format}</InlineCell>
+              ) : (
+                <span>{piece.format}</span>
+              )}
               <span className="ns-meta-sep">·</span>
-              <span>{assigneeName(project, piece.assignee)}</span>
+              {adminMode ? (
+                <InlineCell
+                  value={piece.assignee}
+                  type="select"
+                  options={[{ value: "", label: "— unassigned —" }, ...nsMembers]}
+                  onSave={val => updatePiece(cluster.id, piece.id, { assignee: val })}
+                  className="ns-inline-meta"
+                >{assigneeName(project, piece.assignee)}</InlineCell>
+              ) : (
+                <span>{assigneeName(project, piece.assignee)}</span>
+              )}
               {piece.geography && piece.geography !== "all" && <><span className="ns-meta-sep">·</span><span className="ns-piece-geo">{piece.geography.toUpperCase()}</span></>}
               {(piece.revision_count > 0 || feedback.length > 0) && (
                 <><span className="ns-meta-sep">·</span><span className="ns-piece-meta-hint">{[piece.revision_count > 0 && `rev ${piece.revision_count}`, feedback.length > 0 && `${feedback.length}✎`].filter(Boolean).join(" ")}</span></>
@@ -565,21 +682,6 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
       </div>
     </li>
   );
-}
-
-function StatusChip({ status }) {
-  const meta = STATUS_META[status] || STATUS_META["not-started"];
-  return (
-    <span className="ns-status-chip" style={{ background: meta.bg, color: meta.color }}>
-      {meta.label}
-    </span>
-  );
-}
-
-function assigneeName(project, id) {
-  const all = [...project.team.ns, ...project.team.jaggaer];
-  const m = all.find(x => x.id === id);
-  return m ? m.name.split(" ")[0] : id;
 }
 
 // ─── Drawer ───────────────────────────────────────────────────────────────────
@@ -615,7 +717,7 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   );
 }
 
-// ─── Inline Edit ──────────────────────────────────────────────────────────────
+// ─── Edit panel (drawer) ──────────────────────────────────────────────────────
 function EditPiecePanel({ piece, cluster, project, updatePiece, onDone }) {
   const { useState: useStateEP } = React;
   const allMembers = [...project.team.ns, ...project.team.jaggaer];
@@ -640,8 +742,6 @@ function EditPiecePanel({ piece, cluster, project, updatePiece, onDone }) {
     setTimeout(() => { setSaved(false); onDone(); }, 900);
   }
 
-  const statuses = ["not-started","uploaded","jaggaer-feedback","revised","approved"];
-
   return (
     <div className="ns-edit-panel">
       <div className="ns-edit-eyebrow">EDIT PIECE</div>
@@ -660,7 +760,7 @@ function EditPiecePanel({ piece, cluster, project, updatePiece, onDone }) {
         </label>
         <label className="ns-edit-label">Status
           <select className="ns-edit-input ns-edit-select" value={form.status} onChange={field("status")}>
-            {statuses.map(s => <option key={s} value={s}>{STATUS_META[s]?.label || s}</option>)}
+            {STATUS_ORDER.map(s => <option key={s} value={s}>{STATUS_META[s]?.label || s}</option>)}
           </select>
         </label>
         <label className="ns-edit-label">Assignee
@@ -726,6 +826,10 @@ function DeletePiecePanel({ piece, cluster, deletePiece, onClose }) {
 }
 
 // ─── Upload ───────────────────────────────────────────────────────────────────
+// FIX 1: Upload path display now shows "deliverable-v{n}.html" to match api.js actual path.
+// FIX 2: revision_count increments on first upload too (not just re-uploads after feedback).
+//        First upload: not-started → uploaded, rev 0 → 1.
+//        Re-upload after feedback: jaggaer-feedback → revised, rev n → n+1.
 function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece }) {
   const [dragging, setDragging] = useStateTR(false);
   const [stage, setStage] = useStateTR("idle");
@@ -734,15 +838,22 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
   const [progress, setProgress] = useStateTR(0);
   const inputRef = useRefTR(null);
 
+  const nextRev = (piece.revision_count || 0) + 1;
+
   async function handleFile(file) {
     setStage("uploading"); setFilename(file.name); setBytes(file.size);
     const reader = new FileReader();
     const contents = await new Promise((res, rej) => { reader.onload = () => res(reader.result); reader.onerror = rej; reader.readAsText(file); });
     for (let i = 0; i <= 100; i += 6) { setProgress(i); await new Promise(r => setTimeout(r, 28)); }
     await window.NS_API.uploadPieceDeliverable(piece, cluster.id, pillar.id, project.active_month, contents, currentUser.id);
+    // Always increment revision_count on any upload; status depends on current state
     const newStatus = piece.status === "jaggaer-feedback" ? "revised" : "uploaded";
-    const newRev = piece.status === "jaggaer-feedback" ? (piece.revision_count || 0) + 1 : (piece.revision_count || 0);
-    updatePiece(cluster.id, piece.id, { status: newStatus, revision_count: newRev, last_upload: new Date().toISOString(), last_upload_by: currentUser.id });
+    updatePiece(cluster.id, piece.id, {
+      status: newStatus,
+      revision_count: nextRev,
+      last_upload: new Date().toISOString(),
+      last_upload_by: currentUser.id
+    });
     setStage("done");
   }
 
@@ -757,7 +868,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
             <div className="ns-drop-rule"></div>
             <div className="ns-drop-title">Drop deliverable here</div>
             <div className="ns-drop-sub">or click to choose · .html, .docx, .md</div>
-            <div className="ns-drop-path">→ <code>content/{project.active_month}/{pillar.id}/{cluster.id}/{piece.id}/v{(piece.revision_count||0)+1}.html</code></div>
+            <div className="ns-drop-path">→ <code>content/{project.active_month}/{pillar.id}/{cluster.id}/{piece.id}/deliverable-v{nextRev}.html</code></div>
           </>)}
           {stage === "uploading" && (<>
             <div className="ns-drop-rule"></div>
@@ -768,7 +879,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
           {stage === "done" && (<>
             <div className="ns-drop-rule is-done"></div>
             <div className="ns-drop-title">Committed ✓</div>
-            <div className="ns-drop-sub">{filename} · status → {piece.status==="jaggaer-feedback"?"Revised":"Uploaded"}</div>
+            <div className="ns-drop-sub">{filename} · deliverable-v{nextRev}.html · status → {piece.status==="jaggaer-feedback"?"Revised":"Uploaded"}</div>
             <div className="ns-drop-path">Jaggaer will see this in their queue.</div>
           </>)}
           <input ref={inputRef} type="file" hidden onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
@@ -891,11 +1002,9 @@ function FeedbackCard({ entry, project, ordinal }) {
   );
 }
 
-// ─── Piece details — full data from tracker ───────────────────────────────────
+// ─── Piece details ────────────────────────────────────────────────────────────
 function PieceDetails({ piece, cluster, pillar, project }) {
-  // Find the week this piece's cluster is scheduled
   const weekSlot = PUBLISHING_SEQUENCE.find(w => w.slots.some(s => s.cluster === cluster.id));
-  // Find interlink info for this cluster
   const interlinkRow = INTERLINK_MAP.find(r => {
     const clusterShort = cluster.label.split(" ").slice(0,2).join(" ");
     return r.pillar === pillar.label || r.cluster.includes(clusterShort);
@@ -959,17 +1068,24 @@ function DrawerOverlay({ piece, cluster, pillar, project, mode, setMode, updateP
 }
 
 // ─── Compact Table View ───────────────────────────────────────────────────────
-function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, updatePiece, addFeedback }) {
+function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, updatePiece }) {
   const isJG = currentUser.org === "jaggaer";
+  const nsMembers = project.team.ns.map(m => ({ value: m.id, label: m.name }));
 
   return (
     <div className="ns-compact-table-wrap">
+      {adminMode && (
+        <div className="ns-inline-edit-hint">
+          Admin mode — click any <span className="ns-inline-hint-icon">✎</span> field to edit inline. Enter or click away to save.
+        </div>
+      )}
       <table className="ns-compact-table">
         <thead>
           <tr className="ns-ct-head-row">
             <th className="ns-ct-th ns-ct-th-num">#</th>
             <th className="ns-ct-th">Title</th>
             <th className="ns-ct-th">Format</th>
+            <th className="ns-ct-th">Assignee</th>
             <th className="ns-ct-th">Primary Keyword</th>
             <th className="ns-ct-th">Secondary Keyword</th>
             <th className="ns-ct-th ns-ct-th-intent">Intent</th>
@@ -982,10 +1098,9 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
             const pillarAccent = PILLAR_ACCENT[pillar.id] || "#1a2535";
             const rows = [];
 
-            // Pillar divider row
             rows.push(
               <tr key={`pillar-${pillar.id}`} className="ns-ct-pillar-row">
-                <td colSpan={8}>
+                <td colSpan={9}>
                   <div className="ns-ct-pillar-label" style={{ borderLeftColor: pillarAccent }}>
                     <span className="ns-ct-pillar-name">{pillar.label}</span>
                     {pillar.subtitle && <span className="ns-ct-pillar-sub">{pillar.subtitle}</span>}
@@ -1000,10 +1115,9 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
               const total = cluster.pieces.length;
               const approved = cluster.pieces.filter(p => p.status === "approved").length;
 
-              // Cluster sub-header row
               rows.push(
                 <tr key={`cluster-${cluster.id}`} className="ns-ct-cluster-row" style={{ background: pal.bg }}>
-                  <td colSpan={8}>
+                  <td colSpan={9}>
                     <div className="ns-ct-cluster-label" style={{ color: pal.text }}>
                       <span className="ns-ct-cluster-seq" style={{ color: pal.seqColor }}>C{String(cluster.sequence).padStart(2,"0")}</span>
                       <span className="ns-ct-cluster-name">{cluster.label}</span>
@@ -1015,7 +1129,6 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                 </tr>
               );
 
-              // Piece rows
               cluster.pieces.forEach((piece, idx) => {
                 const isAnchor = piece.id === cluster.anchor_piece;
                 const feedback = (project.feedback || {})[piece.id] || [];
@@ -1026,7 +1139,7 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                 rows.push(
                   <tr
                     key={piece.id}
-                    className={`ns-ct-piece-row ${awaitsJG ? "awaits-jg" : ""} ${isAnchor ? "is-anchor" : ""}`}
+                    className={`ns-ct-piece-row ${awaitsJG ? "awaits-jg" : ""} ${isAnchor ? "is-anchor" : ""} ${adminMode ? "is-admin-row" : ""}`}
                     style={{ background: idx % 2 === 0 ? "#fff" : "#faf9f7" }}
                     onClick={() => setOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: awaitsJG ? "feedback" : canUploadNS ? "upload" : "history" })}
                   >
@@ -1034,13 +1147,55 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                       <span className="ns-ct-num" style={{ color: pal.seqColor + "aa" }}>{idx + 1}</span>
                       {isAnchor && <span className="ns-ct-anchor-dot" title="Anchor piece" style={{ color: pal.seqColor }}>◆</span>}
                     </td>
+
+                    {/* Title — inline editable for admin */}
                     <td className="ns-ct-td ns-ct-td-title">
-                      <span className="ns-ct-title">{piece.title}</span>
+                      {adminMode ? (
+                        <InlineCell
+                          value={piece.title}
+                          type="text"
+                          onSave={val => updatePiece(cluster.id, piece.id, { title: val })}
+                          className="ns-ct-inline-title"
+                        >
+                          <span className="ns-ct-title">{piece.title}</span>
+                        </InlineCell>
+                      ) : (
+                        <span className="ns-ct-title">{piece.title}</span>
+                      )}
                       {feedback.length > 0 && <span className="ns-ct-fb-hint">{feedback.length}✎</span>}
                     </td>
+
+                    {/* Format — inline editable for admin */}
                     <td className="ns-ct-td ns-ct-td-format">
-                      <span className="ns-ct-format" style={{ background: pal.intentBg, color: pal.text }}>{piece.format}</span>
+                      {adminMode ? (
+                        <InlineCell
+                          value={piece.format}
+                          type="text"
+                          onSave={val => updatePiece(cluster.id, piece.id, { format: val })}
+                        >
+                          <span className="ns-ct-format" style={{ background: pal.intentBg, color: pal.text }}>{piece.format}</span>
+                        </InlineCell>
+                      ) : (
+                        <span className="ns-ct-format" style={{ background: pal.intentBg, color: pal.text }}>{piece.format}</span>
+                      )}
                     </td>
+
+                    {/* Assignee — inline select for admin */}
+                    <td className="ns-ct-td ns-ct-td-assignee">
+                      {adminMode ? (
+                        <InlineCell
+                          value={piece.assignee}
+                          type="select"
+                          options={[{ value: "", label: "— unassigned —" }, ...nsMembers]}
+                          onSave={val => updatePiece(cluster.id, piece.id, { assignee: val })}
+                        >
+                          <span className="ns-ct-assignee">{assigneeName(project, piece.assignee)}</span>
+                        </InlineCell>
+                      ) : (
+                        <span className="ns-ct-assignee">{assigneeName(project, piece.assignee)}</span>
+                      )}
+                    </td>
+
                     <td className="ns-ct-td ns-ct-td-kw">
                       <span className="ns-ct-kw-primary">{piece.primary_keyword || "—"}</span>
                     </td>
@@ -1055,9 +1210,22 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                         <span key={p} className="ns-ct-path-pill">{p.replace("Path ","P")}</span>
                       )) : <span className="ns-ct-na">—</span>}
                     </td>
+
+                    {/* Status — inline select for admin */}
                     <td className="ns-ct-td ns-ct-td-status">
-                      <StatusChip status={piece.status} />
-                      {hasAction && <span className="ns-ct-action-dot" title={awaitsJG ? "Needs your feedback" : "Awaiting upload"} />}
+                      {adminMode ? (
+                        <InlineCell
+                          value={piece.status}
+                          type="select"
+                          options={STATUS_ORDER.map(s => ({ value: s, label: STATUS_META[s].label }))}
+                          onSave={val => updatePiece(cluster.id, piece.id, { status: val })}
+                        >
+                          <StatusChip status={piece.status} />
+                        </InlineCell>
+                      ) : (
+                        <StatusChip status={piece.status} />
+                      )}
+                      {hasAction && !adminMode && <span className="ns-ct-action-dot" title={awaitsJG ? "Needs your feedback" : "Awaiting upload"} />}
                     </td>
                   </tr>
                 );
