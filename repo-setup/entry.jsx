@@ -30,7 +30,7 @@ function NameSelector({ project, onSelect }) {
           </div>
           <h1 className="ns-entry-title">
             The project<br/>
-            <span className="accent-word">tracker.</span>
+            <span className="accent-word">workspace.</span>
           </h1>
           <p className="ns-entry-deck">
             A single editorial workspace for content delivery, review and approval.

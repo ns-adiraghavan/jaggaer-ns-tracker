@@ -749,7 +749,7 @@ function EditPiecePanel({ piece, cluster, project, updatePiece, onDone }) {
         <label className="ns-edit-label">Title
           <input className="ns-edit-input ns-edit-input-wide" value={form.title} onChange={field("title")} />
         </label>
-        <label className="ns-edit-label">Format
+        <label className="ns-edit-label">Content Type
           <input className="ns-edit-input" value={form.format} onChange={field("format")} />
         </label>
         <label className="ns-edit-label">Primary Keyword
@@ -1015,7 +1015,7 @@ function PieceDetails({ piece, cluster, pillar, project }) {
     ["Cluster",           cluster.label],
     ["Intent",            cluster.intent === "informational" ? "Informational" : "Commercial"],
     ["Publishing week",   weekSlot ? weekSlot.label : "—"],
-    ["Format",            piece.format],
+    ["Content Type",        piece.format],
     ["Assignee",          (() => { const all=[...project.team.ns,...project.team.jaggaer]; return all.find(x=>x.id===piece.assignee)?.name || piece.assignee; })()],
     ["Geography",         (piece.geography || "all").toUpperCase()],
     ["User path",         piece.user_paths ? piece.user_paths.join(", ") : "—"],
@@ -1084,7 +1084,7 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
           <tr className="ns-ct-head-row">
             <th className="ns-ct-th ns-ct-th-num">#</th>
             <th className="ns-ct-th">Title</th>
-            <th className="ns-ct-th">Format</th>
+            <th className="ns-ct-th">Content Type</th>
             <th className="ns-ct-th">Assignee</th>
             <th className="ns-ct-th">Primary Keyword</th>
             <th className="ns-ct-th">Secondary Keyword</th>
