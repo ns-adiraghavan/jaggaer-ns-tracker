@@ -10,9 +10,14 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
   return (
     <aside className="ns-sidebar">
       <div className="ns-sidebar-head">
-        <div className="ns-sidebar-mark">
-          <span className="ns-mark-dot"></span>
-          <span className="ns-mark-text">NS<span className="ns-mark-x">×</span>JG</span>
+        <div className="ns-sidebar-logos">
+          <div className="ns-sidebar-logo-ns">
+            <img src="netscribes-logo.png" alt="Netscribes" />
+          </div>
+          <span className="ns-sidebar-logo-sep">&times;</span>
+          <div className="ns-sidebar-logo-jg">
+            <img src="jaggaer-logo.png" alt="Jaggaer" />
+          </div>
         </div>
         <div className="ns-sidebar-month">
           <div className="ns-eyebrow ns-eyebrow-light">CURRENT MONTH</div>

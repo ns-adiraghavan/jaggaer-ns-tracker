@@ -19,9 +19,14 @@ function NameSelector({ project, onSelect }) {
     <div className="ns-entry-root">
       <div className="ns-entry-frame">
         <header className="ns-entry-header">
-          <div className="ns-entry-eyebrow">
-            <span className="ns-eyebrow-rule"></span>
-            <span>NETSCRIBES &nbsp;&times;&nbsp; JAGGAER</span>
+          <div className="ns-entry-logos">
+            <div className="ns-entry-logo-ns">
+              <img src="netscribes-logo.png" alt="Netscribes" />
+            </div>
+            <span className="ns-entry-logo-sep">&times;</span>
+            <div className="ns-entry-logo-jg">
+              <img src="jaggaer-logo.png" alt="Jaggaer" />
+            </div>
           </div>
           <h1 className="ns-entry-title">
             The project<br/>

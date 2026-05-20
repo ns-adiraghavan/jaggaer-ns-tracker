@@ -129,6 +129,20 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
     });
   }
 
+  function deletePiece(clusterId, pieceId) {
+    setProject(prev => {
+      const next = JSON.parse(JSON.stringify(prev));
+      for (const p of next.pillars) {
+        for (const c of p.clusters) {
+          if (c.id !== clusterId) continue;
+          c.pieces = c.pieces.filter(x => x.id !== pieceId);
+          if (next.feedback) delete next.feedback[pieceId];
+        }
+      }
+      return next;
+    });
+  }
+
   // Resolve open piece for overlay
   let overlayPillar = null, overlayCluster = null, overlayPiece = null;
   if (openPiece) {
@@ -155,7 +169,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
           {pillars.map(pillar => (
             <PillarBlock
               key={pillar.id} pillar={pillar}
-              sequence={project.pillars.indexOf(pillar) + 1}
+              sequence={project.pillars.indexOf(pillar)}
               activeCluster={activeCluster} project={project}
               openPiece={openPiece} setOpenPiece={setOpenPiece}
               updatePiece={updatePiece} addFeedback={addFeedback}
@@ -184,6 +198,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
           updatePiece={updatePiece} addFeedback={addFeedback}
           currentUser={currentUser} adminMode={adminMode}
           onAdminEditPiece={onAdminEditPiece}
+          deletePiece={deletePiece}
           onClose={() => setOpenPiece(null)}
         />
       )}
@@ -568,7 +583,7 @@ function assigneeName(project, id) {
 }
 
 // ─── Drawer ───────────────────────────────────────────────────────────────────
-function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onClose }) {
+function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePiece, addFeedback, deletePiece, currentUser, adminMode, onAdminEditPiece, onClose }) {
   const feedback = (project.feedback || {})[piece.id] || [];
   const isNS = currentUser.org === "ns";
   const isJG = currentUser.org === "jaggaer";
@@ -584,7 +599,8 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
           Notes {feedback.length > 0 && <span className="ns-tab-count">{feedback.length}</span>}
         </button>
         <button className={`ns-drawer-tab ${mode==="details"?"is-active":""}`} onClick={() => setMode("details")}>Details</button>
-        {adminMode && <button className="ns-drawer-tab" onClick={() => onAdminEditPiece(cluster.id, piece.id)}>Edit →</button>}
+        {adminMode && <button className={`ns-drawer-tab ${mode==="edit"?"is-active":""}`} onClick={() => setMode("edit")}>Edit</button>}
+        {adminMode && <button className={`ns-drawer-tab ns-drawer-tab-delete ${mode==="delete"?"is-active":""}`} onClick={() => setMode("delete")}>Delete</button>}
         <button className="ns-drawer-close" onClick={onClose}>Close ✕</button>
       </div>
       <div className="ns-drawer-body">
@@ -592,7 +608,119 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
         {mode === "feedback" && canFeedback && <FeedbackForm piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} onDone={() => setMode("history")} />}
         {mode === "history" && <NotesHistory piece={piece} project={project} />}
         {mode === "details" && <PieceDetails piece={piece} cluster={cluster} pillar={pillar} project={project} />}
+        {mode === "edit" && adminMode && <EditPiecePanel piece={piece} cluster={cluster} project={project} updatePiece={updatePiece} onDone={() => setMode("details")} />}
+        {mode === "delete" && adminMode && <DeletePiecePanel piece={piece} cluster={cluster} deletePiece={deletePiece} onClose={onClose} />}
       </div>
+    </div>
+  );
+}
+
+// ─── Inline Edit ──────────────────────────────────────────────────────────────
+function EditPiecePanel({ piece, cluster, project, updatePiece, onDone }) {
+  const { useState: useStateEP } = React;
+  const allMembers = [...project.team.ns, ...project.team.jaggaer];
+  const [form, setForm] = useStateEP({
+    title:             piece.title || "",
+    format:            piece.format || "",
+    primary_keyword:   piece.primary_keyword || "",
+    secondary_keyword: piece.secondary_keyword || "",
+    status:            piece.status || "not-started",
+    assignee:          piece.assignee || "",
+    geography:         piece.geography || "all",
+  });
+  const [saved, setSaved] = useStateEP(false);
+
+  function field(key) {
+    return e => setForm(f => ({ ...f, [key]: e.target.value }));
+  }
+
+  function save() {
+    updatePiece(cluster.id, piece.id, form);
+    setSaved(true);
+    setTimeout(() => { setSaved(false); onDone(); }, 900);
+  }
+
+  const statuses = ["not-started","uploaded","jaggaer-feedback","revised","approved"];
+
+  return (
+    <div className="ns-edit-panel">
+      <div className="ns-edit-eyebrow">EDIT PIECE</div>
+      <div className="ns-edit-grid">
+        <label className="ns-edit-label">Title
+          <input className="ns-edit-input ns-edit-input-wide" value={form.title} onChange={field("title")} />
+        </label>
+        <label className="ns-edit-label">Format
+          <input className="ns-edit-input" value={form.format} onChange={field("format")} />
+        </label>
+        <label className="ns-edit-label">Primary Keyword
+          <input className="ns-edit-input" value={form.primary_keyword} onChange={field("primary_keyword")} />
+        </label>
+        <label className="ns-edit-label">Secondary Keyword
+          <input className="ns-edit-input" value={form.secondary_keyword} onChange={field("secondary_keyword")} />
+        </label>
+        <label className="ns-edit-label">Status
+          <select className="ns-edit-input ns-edit-select" value={form.status} onChange={field("status")}>
+            {statuses.map(s => <option key={s} value={s}>{STATUS_META[s]?.label || s}</option>)}
+          </select>
+        </label>
+        <label className="ns-edit-label">Assignee
+          <select className="ns-edit-input ns-edit-select" value={form.assignee} onChange={field("assignee")}>
+            <option value="">— unassigned —</option>
+            {allMembers.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
+          </select>
+        </label>
+        <label className="ns-edit-label">Geography
+          <input className="ns-edit-input" value={form.geography} onChange={field("geography")} />
+        </label>
+      </div>
+      <div className="ns-edit-actions">
+        <button className="ns-edit-save" onClick={save} disabled={saved}>
+          {saved ? "Saved ✓" : "Save Changes"}
+        </button>
+        <button className="ns-edit-cancel" onClick={onDone}>Cancel</button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Delete confirm ───────────────────────────────────────────────────────────
+function DeletePiecePanel({ piece, cluster, deletePiece, onClose }) {
+  const { useState: useStateDP } = React;
+  const isApproved = piece.status === "approved";
+  const [confirmed, setConfirmed] = useStateDP(false);
+
+  if (isApproved) {
+    return (
+      <div className="ns-delete-panel">
+        <div className="ns-delete-warning">
+          <div className="ns-delete-icon">⚠</div>
+          <div className="ns-delete-title">Cannot delete an approved piece</div>
+          <p className="ns-delete-body">This piece has been approved. Deleting it would break the cluster's publish-readiness record. To remove it, first revert the status in Edit, then delete.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="ns-delete-panel">
+      {!confirmed ? (
+        <div className="ns-delete-warning">
+          <div className="ns-delete-icon">✕</div>
+          <div className="ns-delete-title">Delete this piece?</div>
+          <p className="ns-delete-body ns-delete-piece-name">"{piece.title}"</p>
+          <p className="ns-delete-body">This removes the piece from <strong>{cluster.label}</strong> and clears all its feedback notes. This cannot be undone.</p>
+          <div className="ns-delete-actions">
+            <button className="ns-delete-confirm-btn" onClick={() => setConfirmed(true)}>Yes, delete permanently</button>
+            <button className="ns-delete-cancel-btn" onClick={onClose}>Cancel</button>
+          </div>
+        </div>
+      ) : (
+        <div className="ns-delete-warning">
+          <div className="ns-delete-icon ns-delete-icon-gone">✓</div>
+          <div className="ns-delete-title">Deleting…</div>
+          {(() => { deletePiece(cluster.id, piece.id); setTimeout(onClose, 600); return null; })()}
+        </div>
+      )}
     </div>
   );
 }
@@ -805,7 +933,7 @@ function PieceDetails({ piece, cluster, pillar, project }) {
 }
 
 // ─── Drawer overlay ───────────────────────────────────────────────────────────
-function DrawerOverlay({ piece, cluster, pillar, project, mode, setMode, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onClose }) {
+function DrawerOverlay({ piece, cluster, pillar, project, mode, setMode, updatePiece, addFeedback, deletePiece, currentUser, adminMode, onAdminEditPiece, onClose }) {
   return (
     <div className="ns-overlay-backdrop" onClick={onClose}>
       <div className="ns-overlay-panel" onClick={e => e.stopPropagation()}>
@@ -821,6 +949,7 @@ function DrawerOverlay({ piece, cluster, pillar, project, mode, setMode, updateP
           piece={piece} cluster={cluster} pillar={pillar} project={project}
           mode={mode} setMode={setMode}
           updatePiece={updatePiece} addFeedback={addFeedback}
+          deletePiece={deletePiece}
           currentUser={currentUser} adminMode={adminMode}
           onAdminEditPiece={onAdminEditPiece} onClose={onClose}
         />
