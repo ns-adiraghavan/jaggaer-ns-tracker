@@ -99,15 +99,16 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 
 /* ════ Entry ══════════════════════════════════════════════════════════════ */
 .ns-entry-root {
-  min-height: 100vh; background: var(--base);
-  background-image:
-    radial-gradient(ellipse at 15% 0%, rgba(200,64,26,0.14), transparent 55%),
-    radial-gradient(ellipse at 85% 100%, rgba(200,64,26,0.06), transparent 45%);
-  color: var(--paper); display: flex; align-items: center; justify-content: center; padding: 48px 24px;
+  min-height: 100vh; background: var(--surface);
+  color: var(--ink); display: flex; align-items: center; justify-content: center; padding: 48px 24px;
 }
 .ns-entry-frame {
   width: 100%; max-width: 1080px;
-  border: 1px solid var(--paper-4); padding: 56px 64px 40px; position: relative;
+  background: #fff;
+  border: 1px solid #e0dbd2;
+  border-radius: 4px;
+  padding: 56px 64px 40px; position: relative;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
 }
 .ns-entry-frame::before, .ns-entry-frame::after {
   content: ""; position: absolute; width: 22px; height: 22px; border: 1.5px solid var(--accent);
@@ -119,43 +120,43 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-entry-eyebrow {
   display: inline-flex; align-items: center; gap: 14px;
   font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--paper-3); margin-bottom: 24px; font-weight: 600;
+  color: var(--ink-3); margin-bottom: 24px; font-weight: 600;
 }
 .ns-entry-eyebrow .ns-eyebrow-rule { background: var(--accent); width: 28px; opacity: 1; }
 .ns-entry-title {
   font-family: var(--font-display); font-weight: 600;
   font-size: clamp(52px, 7.5vw, 96px); line-height: 0.96;
-  letter-spacing: -0.02em; margin: 0 0 24px; color: var(--paper);
+  letter-spacing: -0.02em; margin: 0 0 24px; color: var(--ink);
 }
 .ns-entry-title .accent-word { color: var(--accent); }
-.ns-entry-deck { font-size: 16px; line-height: 1.6; max-width: 540px; color: var(--paper-2); font-weight: 300; }
+.ns-entry-deck { font-size: 16px; line-height: 1.6; max-width: 540px; color: var(--ink-3); font-weight: 300; }
 
 .ns-entry-roster {
   display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
-  padding-top: 32px; border-top: 1px solid var(--paper-4);
+  padding-top: 32px; border-top: 1px solid #e0dbd2;
 }
 .ns-roster-label {
   display: flex; align-items: center; gap: 10px;
   font-size: 10px; letter-spacing: 0.18em; font-weight: 600; text-transform: uppercase;
-  margin-bottom: 18px; color: var(--paper-2);
+  margin-bottom: 18px; color: var(--ink-3);
 }
 .ns-roster-rule { width: 16px; height: 1.5px; background: var(--accent); }
 .ns-roster-list { list-style: none; margin: 0; padding: 0; }
 .ns-roster-row {
   display: grid; grid-template-columns: 1fr auto auto; gap: 24px; align-items: baseline;
-  padding: 15px 0; border-bottom: 1px solid var(--paper-4); cursor: pointer;
+  padding: 15px 0; border-bottom: 1px solid #ece7de; cursor: pointer;
   transition: padding-left 200ms ease;
 }
 .ns-roster-row:hover, .ns-roster-row.is-hover { padding-left: 10px; }
-.ns-roster-name { font-family: var(--font-display); font-size: 26px; font-weight: 500; letter-spacing: -0.01em; }
+.ns-roster-name { font-family: var(--font-display); font-size: 26px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
 .ns-roster-admin { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-left: 10px; font-weight: 600; }
-.ns-roster-role { color: var(--paper-3); font-size: 12px; }
-.ns-roster-arrow { font-size: 16px; color: var(--paper-4); transition: color 200ms, transform 200ms; }
+.ns-roster-role { color: var(--ink-3); font-size: 12px; }
+.ns-roster-arrow { font-size: 16px; color: var(--ink-4); transition: color 200ms, transform 200ms; }
 .ns-roster-row:hover .ns-roster-arrow { color: var(--accent); transform: translateX(4px); }
 .ns-entry-foot {
-  margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--paper-4);
+  margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0dbd2;
   display: flex; justify-content: space-between;
-  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--paper-3); font-weight: 500;
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-4); font-weight: 500;
 }
 .ns-entry-foot-mid { color: var(--accent); }
 
@@ -168,7 +169,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
   background: #fff; color: var(--ink);
   display: flex; flex-direction: column; border-right: 1px solid #e8e3da; overflow: hidden;
 }
-.ns-sidebar-head { padding: 20px 20px 16px; border-bottom: 1px solid #e8e3da; }
+.ns-sidebar-head { padding: 16px 20px 14px; border-bottom: 1px solid #e8e3da; }
 .ns-sidebar-mark {
   display: flex; align-items: center; gap: 9px; margin-bottom: 20px;
   font-size: 13px; font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase;
@@ -244,27 +245,27 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 
 /* ── Tracker header ── */
 .ns-tracker-head {
-  background: var(--base); color: var(--paper);
+  background: #fff; color: var(--ink);
   padding: 20px 24px 18px; position: sticky; top: 0; z-index: 20;
-  border-bottom: 1px solid var(--base-3);
+  border-bottom: 1.5px solid #e8e3da;
 }
 .ns-tracker-head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
-.ns-tracker-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper-3); margin-bottom: 6px; }
+.ns-tracker-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 6px; }
 .ns-tracker-title {
   font-family: var(--font-display); font-size: 28px; font-weight: 600;
-  letter-spacing: -0.01em; color: var(--paper); margin: 0; line-height: 1.1;
+  letter-spacing: -0.01em; color: var(--ink); margin: 0; line-height: 1.1;
 }
 .ns-tracker-head-right { display: flex; gap: 24px; align-items: flex-start; flex-shrink: 0; }
 
 .ns-kpi { text-align: right; }
 .ns-kpi-num { display: flex; align-items: baseline; gap: 2px; justify-content: flex-end; }
-.ns-kpi-big { font-family: var(--font-display); font-size: 30px; font-weight: 600; color: var(--paper); line-height: 1; letter-spacing: -0.02em; }
-.ns-kpi-small { font-size: 14px; color: var(--paper-3); font-weight: 400; }
-.ns-kpi-label { font-size: 9px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--paper-4); margin-top: 4px; }
+.ns-kpi-big { font-family: var(--font-display); font-size: 30px; font-weight: 600; color: var(--ink); line-height: 1; letter-spacing: -0.02em; }
+.ns-kpi-small { font-size: 14px; color: var(--ink-3); font-weight: 400; }
+.ns-kpi-label { font-size: 9px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-4); margin-top: 4px; }
 
 .ns-tracker-filter {
   display: flex; align-items: center; gap: 10px; margin-top: 10px;
-  font-size: 10px; letter-spacing: 0.12em; font-weight: 600; text-transform: uppercase; color: var(--paper-3);
+  font-size: 10px; letter-spacing: 0.12em; font-weight: 600; text-transform: uppercase; color: var(--ink-3);
 }
 .ns-link-btn {
   color: var(--accent); font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
@@ -367,10 +368,10 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
   transform: translate(-50%, -50%); text-align: center; line-height: 1;
 }
 .ns-arc-frac { display: flex; align-items: baseline; justify-content: center; gap: 1px; }
-.ns-arc-num { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: #fff; letter-spacing: -0.01em; }
-.ns-arc-slash { font-size: 9px; color: rgba(240,237,230,0.35); margin: 0 1px; }
-.ns-arc-tot { font-size: 11px; color: rgba(240,237,230,0.50); font-weight: 400; }
-.ns-arc-label { font-size: 7px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(240,237,230,0.40); margin-top: 2px; }
+.ns-arc-num { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
+.ns-arc-slash { font-size: 9px; color: var(--ink-4); margin: 0 1px; }
+.ns-arc-tot { font-size: 11px; color: var(--ink-3); font-weight: 400; }
+.ns-arc-label { font-size: 7px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-4); margin-top: 2px; }
 .ns-arc-wrap.is-ready .ns-arc-num { color: #6ee7a0; }
 .ns-arc-wrap.is-ready .ns-arc-label { color: #6ee7a0; opacity: 0.7; }
 
@@ -538,10 +539,10 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 
 /* ════ Status bar ═════════════════════════════════════════════════════════ */
 .ns-status-bar {
-  background: var(--base-2); border-top: 1px solid var(--base-3);
+  background: #fff; border-top: 1px solid #e8e3da;
   padding: 0 20px; height: 36px; display: flex; align-items: center;
   justify-content: space-between; flex-shrink: 0;
-  font-size: 10px; color: var(--paper-3); letter-spacing: 0.09em; text-transform: uppercase; font-weight: 500;
+  font-size: 10px; color: var(--ink-4); letter-spacing: 0.09em; text-transform: uppercase; font-weight: 500;
 }
 .ns-status-bar-l { display: flex; align-items: center; gap: 9px; }
 .ns-status-bar-rule { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
@@ -754,19 +755,19 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
   display: flex; align-items: center; justify-content: space-between;
   margin-top: 14px; gap: 16px;
 }
-.ns-tracker-tabs { display: flex; gap: 0; background: rgba(240,237,230,0.08); border-radius: var(--radius); padding: 3px; }
+.ns-tracker-tabs { display: flex; gap: 0; background: var(--surface-2); border-radius: var(--radius); padding: 3px; }
 .ns-tracker-tab {
   font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--paper-3); padding: 7px 16px; border-radius: 3px;
+  color: var(--ink-3); padding: 7px 16px; border-radius: 3px;
   transition: color 140ms, background 140ms;
 }
-.ns-tracker-tab:hover { color: var(--paper-2); }
-.ns-tracker-tab.is-active { color: var(--paper); background: var(--base-3); box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+.ns-tracker-tab:hover { color: var(--ink-2); }
+.ns-tracker-tab.is-active { color: var(--ink); background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.10); }
 
 /* ════ Week badge on cluster card ════════════════════════════════════════ */
 .ns-cluster-week-badge {
   font-size: 9px; font-weight: 600; letter-spacing: 0.08em;
-  color: rgba(240,237,230,0.45); text-transform: uppercase;
+  text-transform: uppercase; /* colour set inline per palette */
 }
 
 /* ════ Geography chip on piece row ══════════════════════════════════════ */
@@ -1092,7 +1093,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-arc-wrap { flex-shrink: 0; }
 
 /* KPI numbers — prevent overflow on narrow screens */
-.ns-tracker-head-right { display: flex; gap: 20px; align-items: flex-start; flex-shrink: 0; }
+/* tracker-head-right gap handled above */
 
 /* Pillar sub — prevent overflow */
 .ns-pillar-sub { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-3); flex-wrap: nowrap; }
@@ -1549,16 +1550,16 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
   display: flex; align-items: center; gap: 10px; padding: 14px 20px 12px;
   border-bottom: 1px solid #e8e3da;
 }
-.ns-sidebar-logo-ns img  { height: 18px; width: auto; display: block; }
+.ns-sidebar-logo-ns img  { height: 16px; width: auto; display: block; }
 .ns-sidebar-logo-sep {
   font-size: 11px; color: var(--ink-4); font-weight: 300; flex-shrink: 0;
 }
-.ns-sidebar-logo-jg img { height: 14px; width: auto; display: block; }
+.ns-sidebar-logo-jg img { height: 11px; width: auto; display: block; }
 
 /* ════ Entry screen logo lockup ════════════════════════════════════════════ */
 .ns-entry-logos {
-  display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+  display: flex; align-items: center; gap: 14px; margin-bottom: 32px;
 }
-.ns-entry-logo-ns img  { height: 24px; width: auto; display: block; filter: brightness(0) invert(1); opacity: 0.85; }
-.ns-entry-logo-sep { font-size: 14px; color: var(--paper-3); font-weight: 300; }
-.ns-entry-logo-jg img  { height: 16px; width: auto; display: block; filter: brightness(0) invert(1); opacity: 0.7; }
+.ns-entry-logo-ns img  { height: 22px; width: auto; display: block; }
+.ns-entry-logo-sep { font-size: 13px; color: var(--ink-4); font-weight: 300; }
+.ns-entry-logo-jg img  { height: 14px; width: auto; display: block; }
