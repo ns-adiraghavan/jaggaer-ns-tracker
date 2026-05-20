@@ -120,7 +120,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-entry-eyebrow {
   display: inline-flex; align-items: center; gap: 14px;
   font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--ink-3); margin-bottom: 24px; font-weight: 600;
+  color: var(--ink-2); margin-bottom: 24px; font-weight: 600;
 }
 .ns-entry-eyebrow .ns-eyebrow-rule { background: var(--accent); width: 28px; opacity: 1; }
 .ns-entry-title {
@@ -129,7 +129,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
   letter-spacing: -0.02em; margin: 0 0 24px; color: var(--ink);
 }
 .ns-entry-title .accent-word { color: var(--accent); }
-.ns-entry-deck { font-size: 16px; line-height: 1.6; max-width: 540px; color: var(--ink-3); font-weight: 300; }
+.ns-entry-deck { font-size: 16px; line-height: 1.6; max-width: 540px; color: var(--ink-2); font-weight: 400; }
 
 .ns-entry-roster {
   display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
@@ -138,7 +138,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-roster-label {
   display: flex; align-items: center; gap: 10px;
   font-size: 10px; letter-spacing: 0.18em; font-weight: 600; text-transform: uppercase;
-  margin-bottom: 18px; color: var(--ink-3);
+  margin-bottom: 18px; color: var(--ink-2);
 }
 .ns-roster-rule { width: 16px; height: 1.5px; background: var(--accent); }
 .ns-roster-list { list-style: none; margin: 0; padding: 0; }
@@ -150,7 +150,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-roster-row:hover, .ns-roster-row.is-hover { padding-left: 10px; }
 .ns-roster-name { font-family: var(--font-display); font-size: 26px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); }
 .ns-roster-admin { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-left: 10px; font-weight: 600; }
-.ns-roster-role { color: var(--ink-3); font-size: 12px; }
+.ns-roster-role { color: var(--ink-2); font-size: 12px; }
 .ns-roster-arrow { font-size: 16px; color: var(--ink-4); transition: color 200ms, transform 200ms; }
 .ns-roster-row:hover .ns-roster-arrow { color: var(--accent); transform: translateX(4px); }
 .ns-entry-foot {
@@ -576,13 +576,13 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-admin { flex: 1; overflow-y: auto; }
 
 .ns-admin-head {
-  background: var(--base); color: var(--paper);
-  padding: 24px 28px 20px; border-bottom: 1px solid var(--base-3);
+  background: #fff; color: var(--ink);
+  padding: 24px 28px 20px; border-bottom: 1px solid var(--surface-3);
 }
-.ns-admin-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper-3); margin-bottom: 8px; }
-.ns-admin-title { font-size: 22px; font-weight: 700; color: var(--paper); margin: 0 0 4px; letter-spacing: -0.01em; }
-.ns-admin-deck { font-size: 13px; color: var(--paper-3); margin: 0; font-weight: 400; }
-.ns-admin-deck code { background: var(--paper-5); color: var(--paper-2); }
+.ns-admin-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; }
+.ns-admin-title { font-size: 22px; font-weight: 700; color: var(--ink); margin: 0 0 4px; letter-spacing: -0.01em; }
+.ns-admin-deck { font-size: 13px; color: var(--ink-3); margin: 0; font-weight: 400; }
+.ns-admin-deck code { background: var(--surface-2); color: var(--ink-2); }
 
 .ns-admin-tabs {
   display: flex; align-items: center; padding: 0 28px;
@@ -742,10 +742,10 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 
 /* Month switcher */
 .ns-month-switcher select {
-  background: none; border: none; color: var(--paper); font-size: 20px;
+  background: none; border: none; color: var(--ink); font-size: 20px;
   font-weight: 600; letter-spacing: -0.01em; cursor: pointer; outline: none; padding: 0; margin-top: 8px;
 }
-.ns-month-switcher select option { background: var(--base); }
+.ns-month-switcher select option { background: #fff; color: var(--ink); }
 
 /* Misc */
 .ns-eyebrow-ready { color: var(--st-approved); }
@@ -1137,30 +1137,30 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 
 .ns-schedule-col-head {
   padding: 12px 12px 10px;
-  background: var(--base);
+  background: var(--surface);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  border-bottom: 1px solid var(--base-3);
+  border-bottom: 1px solid var(--surface-3);
 }
 .ns-schedule-col-label {
   display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px;
 }
 .ns-schedule-col-num {
   font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--paper);
+  text-transform: uppercase; color: var(--ink);
 }
 .ns-schedule-col-count {
-  font-size: 9px; color: var(--paper-4); letter-spacing: 0.06em;
+  font-size: 9px; color: var(--ink-3); letter-spacing: 0.06em;
 }
 .ns-schedule-goal-input {
-  width: 100%; background: rgba(240,237,230,0.07); border: 1px solid rgba(240,237,230,0.12);
-  border-radius: var(--radius); color: var(--paper-2); font-size: 10.5px;
+  width: 100%; background: #fff; border: 1px solid var(--surface-3);
+  border-radius: var(--radius); color: var(--ink-2); font-size: 10.5px;
   line-height: 1.5; padding: 6px 8px; resize: none; outline: none;
   transition: border-color 140ms; font-family: var(--font-ui);
 }
 .ns-schedule-goal-input:focus { border-color: var(--accent); }
-.ns-schedule-goal-input::placeholder { color: var(--paper-4); }
+.ns-schedule-goal-input::placeholder { color: var(--ink-4); }
 .ns-schedule-rm-week {
-  font-size: 9px; color: rgba(240,237,230,0.35); margin-top: 8px;
+  font-size: 9px; color: var(--ink-3); margin-top: 8px;
   text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;
   transition: color 140ms; display: block;
 }
@@ -1320,17 +1320,18 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 }
 .ns-view-toggle {
   display: flex; align-items: center; gap: 2px;
-  background: rgba(240,237,230,0.18); border-radius: 5px; padding: 2px;
+  background: var(--surface-2); border-radius: 5px; padding: 2px;
 }
 .ns-view-btn {
   display: flex; align-items: center; gap: 5px;
   font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase;
-  color: rgba(240,237,230,0.45); padding: 5px 10px; border-radius: 4px;
+  color: var(--ink-3); padding: 5px 10px; border-radius: 4px;
   transition: background 130ms, color 130ms;
 }
-.ns-view-btn:hover { color: rgba(240,237,230,0.75); }
+.ns-view-btn:hover { color: var(--ink-2); }
 .ns-view-btn.is-active {
-  background: rgba(240,237,230,0.14); color: var(--paper);
+  background: #fff; color: var(--ink);
+  box-shadow: 0 1px 3px rgba(17,24,32,0.10);
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -1547,19 +1548,19 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 
 /* ════ Sidebar logos ════════════════════════════════════════════════════════ */
 .ns-sidebar-logos {
-  display: flex; align-items: center; gap: 10px; padding: 14px 20px 12px;
+  display: flex; align-items: center; gap: 12px; padding: 16px 20px 14px;
   border-bottom: 1px solid #e8e3da;
 }
-.ns-sidebar-logo-ns img  { height: 16px; width: auto; display: block; }
+.ns-sidebar-logo-ns img  { height: 22px; width: auto; display: block; }
 .ns-sidebar-logo-sep {
-  font-size: 11px; color: var(--ink-4); font-weight: 300; flex-shrink: 0;
+  font-size: 12px; color: var(--ink-4); font-weight: 300; flex-shrink: 0;
 }
-.ns-sidebar-logo-jg img { height: 11px; width: auto; display: block; }
+.ns-sidebar-logo-jg img { height: 15px; width: auto; display: block; }
 
 /* ════ Entry screen logo lockup ════════════════════════════════════════════ */
 .ns-entry-logos {
-  display: flex; align-items: center; gap: 14px; margin-bottom: 32px;
+  display: flex; align-items: center; gap: 18px; margin-bottom: 32px;
 }
-.ns-entry-logo-ns img  { height: 22px; width: auto; display: block; }
-.ns-entry-logo-sep { font-size: 13px; color: var(--ink-4); font-weight: 300; }
-.ns-entry-logo-jg img  { height: 14px; width: auto; display: block; }
+.ns-entry-logo-ns img  { height: 32px; width: auto; display: block; }
+.ns-entry-logo-sep { font-size: 16px; color: var(--ink-4); font-weight: 300; }
+.ns-entry-logo-jg img  { height: 20px; width: auto; display: block; }
