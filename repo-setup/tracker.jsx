@@ -155,7 +155,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
           {pillars.map(pillar => (
             <PillarBlock
               key={pillar.id} pillar={pillar}
-              sequence={project.pillars.indexOf(pillar)}
+              sequence={project.pillars.indexOf(pillar) + 1}
               activeCluster={activeCluster} project={project}
               openPiece={openPiece} setOpenPiece={setOpenPiece}
               updatePiece={updatePiece} addFeedback={addFeedback}
@@ -430,20 +430,6 @@ function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpe
           {anchor && <div className="ns-anchor-cluster" style={{ color: anchorColor }}>Anchor: {anchor.title.split(":")[0].replace(" (Anchor)","")}</div>}
         </div>
         <ProgressArc total={total} approved={approved} inMotion={inMotion} ready={ready} palette={pal} />
-      </header>
-        <div className="ns-cluster-head-meta">
-          <div className="ns-cluster-meta-row">
-            <span className="ns-cluster-seq-badge">C{String(cluster.sequence).padStart(2, "0")}</span>
-            <span className="ns-cluster-dot">·</span>
-            <span className="ns-cluster-intent-badge">{cluster.intent === "informational" ? "Informational" : "Commercial"}</span>
-            {weekSlot && <span className="ns-cluster-week-badge">Wk {weekSlot.week}</span>}
-            {ready && <span className="ns-cluster-ready-badge">Publish-ready</span>}
-            {adminMode && <button className="ns-admin-edit" onClick={() => onAdminEditCluster(cluster.id)}>Edit →</button>}
-          </div>
-          <h3 className="ns-cluster-title">{cluster.label}</h3>
-          {anchor && <div className="ns-anchor-cluster">Anchor: {anchor.title.split(":")[0].replace(" (Anchor)","")}</div>}
-        </div>
-        <ProgressArc total={total} approved={approved} inMotion={inMotion} ready={ready} />
       </header>
       <ul className="ns-piece-list">
         {cluster.pieces.map((piece, idx) => (
