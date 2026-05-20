@@ -78,8 +78,8 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
   text-transform: uppercase;
 }
 .ns-eyebrow-rule { display: inline-block; width: 18px; height: 1px; background: currentColor; opacity: 0.4; }
-.ns-eyebrow-light { color: var(--ink-4); }
-.ns-eyebrow-dark  { color: var(--ink-3); }
+.ns-eyebrow-light { color: var(--ink-2); }
+.ns-eyebrow-dark  { color: var(--ink); }
 .ns-eyebrow-sep   { opacity: 0.35; }
 
 /* ════ Loading ════════════════════════════════════════════════════════════ */
@@ -128,7 +128,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
   font-size: clamp(52px, 7.5vw, 96px); line-height: 0.96;
   letter-spacing: -0.02em; margin: 0 0 24px; color: var(--ink);
 }
-.ns-entry-title .accent-word { color: var(--accent); }
+.ns-entry-title .accent-word { color: #1a2f4e; }
 .ns-entry-deck { font-size: 16px; line-height: 1.6; max-width: 540px; color: var(--ink-2); font-weight: 400; }
 
 .ns-entry-roster {
@@ -185,14 +185,14 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-nav-section {
   width: 100%; display: flex; align-items: center; gap: 10px;
   padding: 9px 20px; text-align: left; font-size: 10px; letter-spacing: 0.13em; font-weight: 600;
-  text-transform: uppercase; color: var(--ink-4); transition: color 150ms; cursor: pointer;
+  text-transform: uppercase; color: var(--ink-2); transition: color 150ms; cursor: pointer;
 }
 .ns-nav-section-rule { width: 3px; height: 14px; background: transparent; border-radius: 2px; transition: background 150ms; flex-shrink: 0; }
-.ns-nav-section:hover { color: var(--ink-2); }
+.ns-nav-section:hover { color: var(--ink); }
 .ns-nav-section.is-active { color: var(--ink); }
 .ns-nav-section.is-active .ns-nav-section-rule { background: var(--accent); }
 .ns-nav-section-label { font-weight: 600; flex: 1; }
-.ns-nav-section-meta { font-size: 10px; color: var(--ink-4); font-weight: 400; letter-spacing: 0.05em; }
+.ns-nav-section-meta { font-size: 10px; color: var(--ink-2); font-weight: 400; letter-spacing: 0.05em; }
 
 .ns-sidebar-pillars { padding: 4px 0; }
 .ns-pillar-nav { border-bottom: 1px solid #ede8df; }
@@ -232,11 +232,12 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-user-actions { display: flex; gap: 6px; }
 .ns-mini-btn {
   font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--paper-3); padding: 6px 10px; border: 1px solid var(--base-4); border-radius: var(--radius);
-  transition: color 150ms, border-color 150ms; white-space: nowrap; flex: 1; text-align: center;
+  color: var(--ink-2); padding: 6px 10px; border: 1px solid var(--surface-3); border-radius: var(--radius);
+  background: var(--surface); transition: color 150ms, border-color 150ms, background 150ms;
+  white-space: nowrap; flex: 1; text-align: center;
 }
-.ns-mini-btn:hover { color: var(--paper-2); }
-.ns-mini-btn.is-on { color: var(--accent); border-color: var(--accent); }
+.ns-mini-btn:hover { color: var(--ink); border-color: var(--ink-3); background: var(--surface-2); }
+.ns-mini-btn.is-on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
 
 /* ════ Tracker ════════════════════════════════════════════════════════════ */
 .ns-tracker { flex: 1; overflow-y: auto; overflow-x: hidden; }
@@ -1555,7 +1556,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 .ns-sidebar-logo-sep {
   font-size: 12px; color: var(--ink-4); font-weight: 300; flex-shrink: 0;
 }
-.ns-sidebar-logo-jg img { height: 15px; width: auto; display: block; }
+.ns-sidebar-logo-jg img { height: 20px; width: auto; display: block; }
 
 /* ════ Entry screen logo lockup ════════════════════════════════════════════ */
 .ns-entry-logos {
@@ -1563,4 +1564,4 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 }
 .ns-entry-logo-ns img  { height: 32px; width: auto; display: block; }
 .ns-entry-logo-sep { font-size: 16px; color: var(--ink-4); font-weight: 300; }
-.ns-entry-logo-jg img  { height: 20px; width: auto; display: block; }
+.ns-entry-logo-jg img  { height: 28px; width: auto; display: block; }
