@@ -3,7 +3,8 @@
     {
       "id": "month-1",
       "label": "Month 1 - May 2026",
-      "active": true
+      "active": true,
+      "start_date": "2026-05-27"
     },
     {
       "id": "month-2",
@@ -31,44 +32,48 @@
               "id": "p-c1-1",
               "title": "How to Install Claude: A Step-by-Step Guide for Procurement Professionals",
               "format": "How-to Guide",
-              "assignee": "jason",
-              "status": "approved",
-              "revision_count": 1,
+              "assignee": null,
+              "status": "not-started",
+              "revision_count": 0,
               "primary_keyword": "how to install Claude procurement",
               "geography": "all",
               "user_paths": [
                 "Path 1",
                 "Path 2"
-              ]
+              ],
+              "schedule_week": 1
             },
             {
               "id": "p-c1-2",
               "title": "First Principles: What Claude Can Do for Source-to-Pay Teams",
               "format": "Explainer",
-              "assignee": "orlagh",
-              "status": "jaggaer-feedback",
+              "assignee": null,
+              "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "Claude source to pay teams",
               "geography": "all",
               "user_paths": [
                 "Path 2"
-              ]
+              ],
+              "schedule_week": 1
             },
             {
               "id": "p-c1-3",
               "title": "S2P Buyer's FAQ on Generative AI Assistants",
               "format": "FAQ (Anchor)",
-              "assignee": "jason",
-              "status": "uploaded",
+              "assignee": null,
+              "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "generative AI assistants procurement",
               "geography": "all",
               "user_paths": [
                 "Path 1",
                 "Path 2"
-              ]
+              ],
+              "schedule_week": 1
             }
-          ]
+          ],
+          "publish_week": 1
         },
         {
           "id": "c2-contracts",
@@ -81,30 +86,33 @@
               "id": "p-c2-1",
               "title": "Redlining Supplier MSAs with Claude: A Walkthrough",
               "format": "Walkthrough",
-              "assignee": "jason",
-              "status": "revised",
-              "revision_count": 1,
+              "assignee": null,
+              "status": "not-started",
+              "revision_count": 0,
               "primary_keyword": "redlining MSA Claude",
               "geography": "us",
               "user_paths": [
                 "Path 2",
                 "Path 3"
-              ]
+              ],
+              "schedule_week": 2
             },
             {
               "id": "p-c2-2",
               "title": "The Contract Review Playbook for Procurement (Anchor)",
               "format": "Playbook (Anchor)",
-              "assignee": "orlagh",
-              "status": "approved",
-              "revision_count": 2,
+              "assignee": null,
+              "status": "not-started",
+              "revision_count": 0,
               "primary_keyword": "contract review playbook procurement",
               "geography": "us",
               "user_paths": [
                 "Path 2"
-              ]
+              ],
+              "schedule_week": 2
             }
-          ]
+          ],
+          "publish_week": 2
         },
         {
           "id": "c3-suppliers",
@@ -117,22 +125,23 @@
               "id": "p-c3-1",
               "title": "Asking Claude to Pre-Screen RFP Responses",
               "format": "How-to Guide",
-              "assignee": "jason",
-              "status": "uploaded",
+              "assignee": null,
+              "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "Claude RFP pre-screen",
               "geography": "all",
               "user_paths": [
                 "Path 2",
                 "Path 3"
-              ]
+              ],
+              "schedule_week": 2
             },
             {
               "id": "p-c3-2",
               "title": "Supplier Intelligence with Claude: A Practical Field Guide (Anchor)",
               "format": "Field Guide (Anchor)",
-              "assignee": "orlagh",
-              "status": "uploaded",
+              "assignee": null,
+              "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "supplier intelligence Claude",
               "geography": "all",
@@ -141,22 +150,25 @@
               "user_paths": [
                 "Path 2",
                 "Path 3"
-              ]
+              ],
+              "schedule_week": 2
             },
             {
               "id": "p-c3-3",
               "title": "Sourcing Event Briefs: From Blank Page to Brief in 10 Minutes",
               "format": "Case Study",
-              "assignee": "orlagh",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "sourcing event brief AI",
               "geography": "eu",
               "user_paths": [
                 "Path 2"
-              ]
+              ],
+              "schedule_week": 2
             }
-          ]
+          ],
+          "publish_week": 2
         },
         {
           "id": "c4-prompt-library",
@@ -169,21 +181,22 @@
               "id": "p-c4-1",
               "title": "The Procurement Prompt Library - 40 Working Prompts for S2P (Anchor)",
               "format": "Resource Hub (Anchor)",
-              "assignee": "manager",
-              "status": "jaggaer-feedback",
-              "revision_count": 1,
+              "assignee": null,
+              "status": "not-started",
+              "revision_count": 0,
               "primary_keyword": "procurement prompt library",
               "geography": "all",
               "user_paths": [
                 "Path 2",
                 "Path 3"
-              ]
+              ],
+              "schedule_week": 4
             },
             {
               "id": "p-c4-2",
               "title": "Webinar Recap: Claude in the S2P Stack - Live Q&A",
               "format": "Webinar Recap",
-              "assignee": "manager",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "Claude S2P webinar",
@@ -191,9 +204,11 @@
               "user_paths": [
                 "Path 1",
                 "Path 2"
-              ]
+              ],
+              "schedule_week": 4
             }
-          ]
+          ],
+          "publish_week": 4
         }
       ]
     },
@@ -215,33 +230,37 @@
               "id": "p-dm1-1",
               "title": "Section 232 Tariffs: What Discrete Manufacturers Are Doing Differently in 2026",
               "format": "Analysis",
-              "assignee": "jason",
-              "status": "approved",
-              "revision_count": 1,
+              "assignee": null,
+              "status": "not-started",
+              "revision_count": 0,
               "primary_keyword": "section 232 tariffs manufacturing 2026",
-              "geography": "us"
+              "geography": "us",
+              "schedule_week": 1
             },
             {
               "id": "p-dm1-2",
               "title": "The Reshoring Decision Framework (Anchor)",
               "format": "Framework (Anchor)",
-              "assignee": "jason",
-              "status": "approved",
-              "revision_count": 2,
+              "assignee": null,
+              "status": "not-started",
+              "revision_count": 0,
               "primary_keyword": "reshoring decision framework",
-              "geography": "us"
+              "geography": "us",
+              "schedule_week": 1
             },
             {
               "id": "p-dm1-3",
               "title": "How German OEMs Are Rewriting Supplier Contracts Post-Tariff",
               "format": "Case Study",
-              "assignee": "orlagh",
-              "status": "uploaded",
+              "assignee": null,
+              "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "German OEM supplier contracts tariff",
-              "geography": "de"
+              "geography": "de",
+              "schedule_week": 1
             }
-          ]
+          ],
+          "publish_week": 1
         },
         {
           "id": "dm2-subtier",
@@ -254,7 +273,7 @@
               "id": "p-dm2-1",
               "title": "Why Supply Chain Visibility Breaks Down Beyond Tier 1",
               "format": "Thought Leadership",
-              "assignee": "orlagh",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "supply chain visibility beyond tier 1",
@@ -262,13 +281,14 @@
               "intent": "informational",
               "funnel": "TOFU",
               "geography": "all",
-              "notes": "NEW — not previously in tracker | URL: /supply-chain-visibility-beyond-tier-1 | Words: 1,200–1,800"
+              "notes": "NEW \u2014 not previously in tracker | URL: /supply-chain-visibility-beyond-tier-1 | Words: 1,200\u20131,800",
+              "schedule_week": 3
             },
             {
               "id": "p-dm2-2",
               "title": "Supplier Financial Risk Signals Procurement Should Monitor",
               "format": "Informational Article",
-              "assignee": "orlagh",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "supplier financial risk assessment",
@@ -276,13 +296,14 @@
               "intent": "informational",
               "funnel": "TOFU",
               "geography": "all",
-              "notes": "NEW — not previously in tracker | URL: /blog/supplier-financial-risk-signals-procurement | Words: 2,000–2,500"
+              "notes": "NEW \u2014 not previously in tracker | URL: /blog/supplier-financial-risk-signals-procurement | Words: 2,000\u20132,500",
+              "schedule_week": 3
             },
             {
               "id": "p-dm2-3",
               "title": "From Reactive to Predictive Supplier Risk Management",
               "format": "Strategic Solution Article",
-              "assignee": "orlagh",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "predictive supplier risk management",
@@ -290,13 +311,14 @@
               "intent": "commercial",
               "funnel": "MOFU",
               "geography": "all",
-              "notes": "UPDATED — title refined, keyword updated | URL: /predictive-supplier-risk-management | Words: 1,200–1,500"
+              "notes": "UPDATED \u2014 title refined, keyword updated | URL: /predictive-supplier-risk-management | Words: 1,200\u20131,500",
+              "schedule_week": 3
             },
             {
               "id": "p-dm2-4",
               "title": "Tier 2-4 Supplier Bankruptcy: The Hidden Supply Chain Risk",
               "format": "Whitepaper (gated)",
-              "assignee": "orlagh",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "tier 2 supplier bankruptcy risk",
@@ -304,9 +326,11 @@
               "intent": "commercial",
               "funnel": "BOFU",
               "geography": "all",
-              "notes": "UPDATED — title refined, keywords updated | URL: /tier-2-supplier-bankruptcy-supply-chain-risk | Words: 2,500–4,000"
+              "notes": "UPDATED \u2014 title refined, keywords updated | URL: /tier-2-supplier-bankruptcy-supply-chain-risk | Words: 2,500\u20134,000",
+              "schedule_week": 3
             }
-          ]
+          ],
+          "publish_week": 3
         },
         {
           "id": "dm3-minerals",
@@ -319,23 +343,26 @@
               "id": "p-dm3-1",
               "title": "The Critical Minerals Map: Where Your Risk Actually Lives (Anchor)",
               "format": "Data Report (Anchor)",
-              "assignee": "orlagh",
-              "status": "uploaded",
+              "assignee": null,
+              "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "critical minerals supply map",
-              "geography": "all"
+              "geography": "all",
+              "schedule_week": 3
             },
             {
               "id": "p-dm3-2",
               "title": "Lithium, Cobalt, Gallium: A Procurement Lead's Pocket Brief",
               "format": "Briefing Note",
-              "assignee": "jason",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "lithium cobalt procurement brief",
-              "geography": "all"
+              "geography": "all",
+              "schedule_week": 3
             }
-          ]
+          ],
+          "publish_week": 3
         },
         {
           "id": "dm4-tco",
@@ -348,30 +375,33 @@
               "id": "p-dm4-1",
               "title": "S2P Platform TCO for Discrete Manufacturing: A 3-Year Model (Anchor)",
               "format": "Calculator (Anchor)",
-              "assignee": "manager",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "S2P platform TCO manufacturing",
-              "geography": "all"
+              "geography": "all",
+              "schedule_week": 4
             },
             {
               "id": "p-dm4-2",
               "title": "Build vs Buy vs Configure: A Decision Memo Template",
               "format": "Template",
-              "assignee": "orlagh",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "build vs buy procurement platform",
-              "geography": "all"
+              "geography": "all",
+              "schedule_week": 4
             }
-          ]
+          ],
+          "publish_week": 4
         }
       ]
     },
     {
       "id": "public-sector",
       "label": "Public Sector",
-      "subtitle": "UK · FR · ES",
+      "subtitle": "UK \u00b7 FR \u00b7 ES",
       "weight": 0.17,
       "geography": "UK / FR / ES",
       "clusters": [
@@ -386,23 +416,26 @@
               "id": "p-ps1-1",
               "title": "EU AI Act for Public Procurement Teams: What Actually Changes (Anchor)",
               "format": "Analysis (Anchor)",
-              "assignee": "orlagh",
-              "status": "approved",
-              "revision_count": 1,
+              "assignee": null,
+              "status": "not-started",
+              "revision_count": 0,
               "primary_keyword": "EU AI Act public procurement",
-              "geography": "eu"
+              "geography": "eu",
+              "schedule_week": 2
             },
             {
               "id": "p-ps1-2",
               "title": "High-Risk AI Systems in Tendering: A Compliance Checklist",
               "format": "Checklist",
-              "assignee": "jason",
-              "status": "jaggaer-feedback",
+              "assignee": null,
+              "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "high risk AI tender compliance",
-              "geography": "eu"
+              "geography": "eu",
+              "schedule_week": 2
             }
-          ]
+          ],
+          "publish_week": 2
         },
         {
           "id": "ps2-einvoicing",
@@ -415,23 +448,26 @@
               "id": "p-ps2-1",
               "title": "Peppol, Factur-X, FACe: A Reader for Public Sector Procurement (Anchor)",
               "format": "Explainer (Anchor)",
-              "assignee": "jason",
-              "status": "uploaded",
+              "assignee": null,
+              "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "Peppol Factur-X FACe public sector",
-              "geography": "eu"
+              "geography": "eu",
+              "schedule_week": 2
             },
             {
               "id": "p-ps2-2",
               "title": "France's E-Invoicing Reform: Timeline & What to Do This Quarter",
               "format": "Briefing Note",
-              "assignee": "orlagh",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "France e-invoicing reform 2026",
-              "geography": "fr"
+              "geography": "fr",
+              "schedule_week": 2
             }
-          ]
+          ],
+          "publish_week": 2
         },
         {
           "id": "ps3-eval",
@@ -444,20 +480,22 @@
               "id": "p-ps3-1",
               "title": "Evaluating S2P Platforms for Public Sector: The 12-Criterion Scorecard (Anchor)",
               "format": "Scorecard (Anchor)",
-              "assignee": "manager",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "S2P platform evaluation public sector",
-              "geography": "eu"
+              "geography": "eu",
+              "schedule_week": 4
             }
-          ]
+          ],
+          "publish_week": 4
         }
       ]
     },
     {
       "id": "higher-education",
       "label": "Higher Education",
-      "subtitle": "US · EU · UK",
+      "subtitle": "US \u00b7 EU \u00b7 UK",
       "weight": 0.17,
       "geography": "US / EU / UK",
       "clusters": [
@@ -472,23 +510,26 @@
               "id": "p-he1-1",
               "title": "Maverick Spend on Campus: Where It Hides, How to Surface It (Anchor)",
               "format": "Field Guide (Anchor)",
-              "assignee": "jason",
-              "status": "jaggaer-feedback",
+              "assignee": null,
+              "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "maverick spend higher education",
-              "geography": "us"
+              "geography": "us",
+              "schedule_week": 3
             },
             {
               "id": "p-he1-2",
               "title": "P-Card Programmes vs Punch-Out: A Trade-Off Read",
               "format": "Analysis",
-              "assignee": "orlagh",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "P-Card punch-out university",
-              "geography": "us"
+              "geography": "us",
+              "schedule_week": 3
             }
-          ]
+          ],
+          "publish_week": 3
         },
         {
           "id": "he2-grants",
@@ -501,23 +542,26 @@
               "id": "p-he2-1",
               "title": "Uniform Guidance & the Procurement Office: A Working Reader (Anchor)",
               "format": "Reader (Anchor)",
-              "assignee": "jason",
-              "status": "approved",
-              "revision_count": 1,
+              "assignee": null,
+              "status": "not-started",
+              "revision_count": 0,
               "primary_keyword": "uniform guidance procurement university",
-              "geography": "us"
+              "geography": "us",
+              "schedule_week": 3
             },
             {
               "id": "p-he2-2",
               "title": "UKRI Procurement Rules in 2026: The Quick Read for University Buyers",
               "format": "Briefing Note",
-              "assignee": "orlagh",
-              "status": "uploaded",
+              "assignee": null,
+              "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "UKRI procurement rules 2026",
-              "geography": "uk"
+              "geography": "uk",
+              "schedule_week": 3
             }
-          ]
+          ],
+          "publish_week": 3
         },
         {
           "id": "he3-modernisation",
@@ -530,13 +574,15 @@
               "id": "p-he3-1",
               "title": "Replacing Legacy Procurement on Campus: A Phased Plan (Anchor)",
               "format": "Plan (Anchor)",
-              "assignee": "manager",
+              "assignee": null,
               "status": "not-started",
               "revision_count": 0,
               "primary_keyword": "replace legacy procurement campus",
-              "geography": "all"
+              "geography": "all",
+              "schedule_week": 4
             }
-          ]
+          ],
+          "publish_week": 4
         }
       ]
     }
@@ -717,7 +763,7 @@
   "build_with_claude": [
     {
       "name": "contract-analyser",
-      "description": "Drag-drop MSA → Claude returns redline summary + risk flags.",
+      "description": "Drag-drop MSA \u2192 Claude returns redline summary + risk flags.",
       "status": "Live",
       "updated": "2026-05-14",
       "path": "build-with-claude/contract-analyser"
@@ -817,7 +863,7 @@
     {
       "week": 4,
       "label": "Week 4",
-      "goal": "Convert audiences built in weeks 1–3 to platform evaluation intent",
+      "goal": "Convert audiences built in weeks 1\u20133 to platform evaluation intent",
       "slots": [
         {
           "pillar": "ai-in-s2p",
