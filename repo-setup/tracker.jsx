@@ -77,7 +77,7 @@ const VERDICT_META = {
 const PUBLISHING_SEQUENCE = [
   {
     week: 1,
-    label: "Week 1",
+    label: "Week 1 · 21–27 May",
     goal: "Capture Claude + S2P and tariff procurement search traffic from day one",
     slots: [
       { pillar: "ai-in-s2p",               cluster: "c1-getting-started",  pieces: 3 },
@@ -86,7 +86,7 @@ const PUBLISHING_SEQUENCE = [
   },
   {
     week: 2,
-    label: "Week 2",
+    label: "Week 2 · 28 May–3 Jun",
     goal: "Convert Path 2 users, demonstrate Claude, rank before EU AI Act deadline peaks",
     slots: [
       { pillar: "ai-in-s2p",               cluster: "c2-contracts",        pieces: 2 },
@@ -97,7 +97,7 @@ const PUBLISHING_SEQUENCE = [
   },
   {
     week: 3,
-    label: "Week 3",
+    label: "Week 3 · 4–10 Jun",
     goal: "Build cluster authority on supply chain risk and higher education spend governance",
     slots: [
       { pillar: "discrete-manufacturing",   cluster: "dm2-subtier",         pieces: 3 },
@@ -108,7 +108,7 @@ const PUBLISHING_SEQUENCE = [
   },
   {
     week: 4,
-    label: "Week 4",
+    label: "Week 4 · 11–17 Jun",
     goal: "Convert audiences built in weeks 1–3 to platform evaluation intent",
     slots: [
       { pillar: "ai-in-s2p",               cluster: "c4-prompt-library",   pieces: 2 },
