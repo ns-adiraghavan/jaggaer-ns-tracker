@@ -167,7 +167,10 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 /* ════ Sidebar ════════════════════════════════════════════════════════════ */
 .ns-sidebar {
   background: #fff; color: var(--ink);
-  display: flex; flex-direction: column; border-right: 1px solid #e8e3da; overflow: hidden;
+  display: flex; flex-direction: column; border-right: 1px solid #e8e3da;
+  overflow: visible; position: relative;
+  width: 248px; min-width: 248px;
+  transition: width 220ms cubic-bezier(.4,0,.2,1);
 }
 .ns-sidebar-head { padding: 16px 20px 14px; border-bottom: 1px solid #e8e3da; }
 .ns-sidebar-mark {
@@ -1632,12 +1635,7 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 /* colSpan values updated in JSX; no CSS needed here */
 
 /* ════ Sidebar collapse ═══════════════════════════════════════════════════ */
-.ns-sidebar {
-  position: relative;
-  transition: width 220ms cubic-bezier(.4,0,.2,1);
-  width: 248px;
-  min-width: 248px;
-}
+
 .ns-sidebar.is-collapsed {
   width: 44px;
   min-width: 44px;
@@ -1678,6 +1676,8 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
   flex-direction: column;
   flex: 1;
   overflow: hidden;
+  width: 248px;
+  min-width: 248px;
   opacity: 1;
   transition: opacity 150ms;
 }
