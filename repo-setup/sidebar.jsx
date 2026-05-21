@@ -38,12 +38,14 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
                 onChange={e => setActiveMonthId && setActiveMonthId(e.target.value)}
               >
                 {months.map(m => (
-                  <option key={m.id} value={m.id}>{m.label}</option>
+                  <option key={m.id} value={m.id}>{m.label.replace("Month ", "M")}</option>
                 ))}
               </select>
             </div>
           ) : (
-            <div className="ns-month-label">{monthLabel}</div>
+            <div className="ns-month-label" title={monthLabel}>
+              {monthLabel.replace("Month ", "M").replace(" · ", " · ")}
+            </div>
           )}
         </div>
       </div>

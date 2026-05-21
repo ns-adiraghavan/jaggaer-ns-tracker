@@ -746,8 +746,9 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 
 /* Month switcher */
 .ns-month-switcher select {
-  background: none; border: none; color: var(--ink); font-size: 20px;
-  font-weight: 600; letter-spacing: -0.01em; cursor: pointer; outline: none; padding: 0; margin-top: 8px;
+  background: none; border: none; color: var(--ink); font-size: 16px;
+  font-weight: 600; letter-spacing: -0.01em; cursor: pointer; outline: none; padding: 0; margin-top: 6px;
+  max-width: 100%; overflow: hidden;
 }
 .ns-month-switcher select option { background: #fff; color: var(--ink); }
 

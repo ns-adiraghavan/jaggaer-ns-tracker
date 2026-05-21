@@ -51,6 +51,7 @@ function App() {
   const [adminMode, setAdminMode] = useStateApp(false);
   const [adminTarget, setAdminTarget] = useStateApp(null);
   const [saveState, setSaveState] = useStateApp(null);
+  const [activeMonthId, setActiveMonthId] = useStateApp(null);
   const saveTimerRef = useRefApp(null);
   const toastTimerRef = useRefApp(null);
   const firstSaveRef = useRefApp(true);
@@ -114,6 +115,8 @@ function App() {
         adminMode={adminMode}
         onToggleAdmin={() => setAdminMode(a => !a)}
         onSignOut={() => { clearSession(); setCurrentUser(null); setAdminMode(false); setView("tracker"); setActivePillar(null); setActiveCluster(null); }}
+        activeMonthId={activeMonthId}
+        setActiveMonthId={setActiveMonthId}
       />
 
       <div className="ns-main-col">
@@ -126,6 +129,7 @@ function App() {
             activeCluster={activeCluster}
             setActiveCluster={setActiveCluster}
             adminMode={adminMode}
+            activeMonthId={activeMonthId}
             onAdminEditPiece={(clusterId, pieceId) => { setView("admin"); setAdminTarget({ kind: "pieces", clusterId, pieceId }); }}
             onAdminEditCluster={(clusterId) => { setView("admin"); setAdminTarget({ kind: "pillars", clusterId }); }}
           />
@@ -141,7 +145,7 @@ function App() {
             <p>Toggle admin in the sidebar to edit the project config.</p>
           </div>
         )}
-        <StatusFooter source={source} project={project} />
+        <StatusFooter source={source} project={project} activeMonthId={activeMonthId} />
       </div>
 
       <SaveToast state={saveState} />
@@ -149,9 +153,9 @@ function App() {
   );
 }
 
-function StatusFooter({ source, project }) {
+function StatusFooter({ source, project, activeMonthId }) {
   const stats = window.computeStats(project);
-  const activeMonth = (project.months || []).find(m => m.id === project.active_month) || (project.months || [])[0];
+  const activeMonth = (project.months || []).find(m => m.id === (activeMonthId || project.active_month)) || (project.months || [])[0];
   const monthLabel = activeMonth ? activeMonth.label : "Month 1";
 
   return (
