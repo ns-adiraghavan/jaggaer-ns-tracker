@@ -38,8 +38,15 @@ function getScheduleContext(project) {
   return { currentWeek, startDate: start };
 }
 
-function getPieceTiming(piece, currentWeek) {
-  const w = piece.schedule_week;
+// Derive the scheduled week for a piece from PUBLISHING_SEQUENCE by cluster ID.
+// This is the single source of truth — no piece.schedule_week field needed.
+function getClusterWeek(clusterId) {
+  const slot = PUBLISHING_SEQUENCE.find(w => w.slots.some(s => s.cluster === clusterId));
+  return slot ? slot.week : null;
+}
+
+function getPieceTiming(piece, currentWeek, clusterId) {
+  const w = clusterId ? getClusterWeek(clusterId) : piece.schedule_week;
   if (!w) return null;
   if (piece.status === "approved") return "done";
   if (w < currentWeek) return "overdue";
@@ -47,9 +54,10 @@ function getPieceTiming(piece, currentWeek) {
   return "upcoming";
 }
 
-function weeksLate(piece, currentWeek) {
-  if (!piece.schedule_week || piece.schedule_week >= currentWeek) return 0;
-  return currentWeek - piece.schedule_week;
+function weeksLate(piece, currentWeek, clusterId) {
+  const w = clusterId ? getClusterWeek(clusterId) : piece.schedule_week;
+  if (!w || w >= currentWeek) return 0;
+  return currentWeek - w;
 }
 
 const TIMING_META = {
@@ -213,15 +221,14 @@ function InlineCell({ value, type, options, onSave, children, className }) {
 
 // ─── Priority Actions panel ───────────────────────────────────────────────────
 function PriorityActions({ project, currentWeek, onOpenPiece }) {
-  const [expanded, setExpanded] = useStateTR(false);
   const overdue = [];
   const duethisweek = [];
 
   for (const pillar of project.pillars) {
     for (const cluster of pillar.clusters) {
       for (const piece of cluster.pieces) {
-        const timing = getPieceTiming(piece, currentWeek);
-        if (timing === "overdue") overdue.push({ piece, cluster, pillar, late: weeksLate(piece, currentWeek) });
+        const timing = getPieceTiming(piece, currentWeek, cluster.id);
+        if (timing === "overdue") overdue.push({ piece, cluster, pillar, late: weeksLate(piece, currentWeek, cluster.id) });
         if (timing === "due") duethisweek.push({ piece, cluster, pillar });
       }
     }
@@ -229,100 +236,99 @@ function PriorityActions({ project, currentWeek, onOpenPiece }) {
 
   if (overdue.length === 0 && duethisweek.length === 0) return null;
 
+  // Sort overdue by most weeks late first
   overdue.sort((a, b) => b.late - a.late);
-  const total = overdue.length + duethisweek.length;
-  const accentColor = overdue.length > 0 ? "#b91c1c" : "#92400e";
-  const headerBg = overdue.length > 0 ? "#fef2f2" : "#fffbeb";
-  const borderColor = overdue.length > 0 ? "#fca5a5" : "#fcd34d";
 
   return (
-    <div style={{ borderBottom: "1px solid #e0dbd4" }}>
-      {/* Clickable header strip — always visible */}
-      <button
-        onClick={() => setExpanded(e => !e)}
-        style={{
-          width: "100%", padding: "11px 24px",
-          background: headerBg,
-          borderBottom: expanded ? "1px solid " + borderColor : "none",
-          border: "none", display: "flex", alignItems: "center",
-          gap: "12px", cursor: "pointer", textAlign: "left",
-        }}
-      >
+    <div style={{
+      margin: "0 0 0 0",
+      borderBottom: "1px solid #e0dbd4",
+    }}>
+      {/* Header */}
+      <div style={{
+        padding: "14px 24px",
+        background: overdue.length > 0 ? "#fef2f2" : "#fffbeb",
+        borderBottom: "1px solid " + (overdue.length > 0 ? "#fca5a5" : "#fcd34d"),
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+      }}>
         <div style={{
-          width: "7px", height: "7px", borderRadius: "50%",
-          background: accentColor, flexShrink: 0,
+          width: "8px", height: "8px", borderRadius: "50%",
+          background: overdue.length > 0 ? "#b91c1c" : "#d97706",
+          flexShrink: 0,
           boxShadow: overdue.length > 0 ? "0 0 0 3px rgba(185,28,28,0.15)" : "0 0 0 3px rgba(217,119,6,0.15)",
         }} />
-        <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: accentColor }}>
+        <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: overdue.length > 0 ? "#b91c1c" : "#92400e" }}>
           Priority Actions
         </div>
         {overdue.length > 0 && (
-          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#b91c1c", background: "#fee2e2", padding: "2px 7px", borderRadius: "2px", fontWeight: 600 }}>
+          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#b91c1c", background: "#fee2e2", padding: "2px 8px", borderRadius: "2px", fontWeight: 600 }}>
             {overdue.length} overdue
           </span>
         )}
         {duethisweek.length > 0 && (
-          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#92400e", background: "#fef3c7", padding: "2px 7px", borderRadius: "2px", fontWeight: 600 }}>
-            {duethisweek.length} due wk {currentWeek}
+          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#92400e", background: "#fef3c7", padding: "2px 8px", borderRadius: "2px", fontWeight: 600 }}>
+            {duethisweek.length} due week {currentWeek}
           </span>
         )}
-        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "12px" }}>
-          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#aaa" }}>Week {currentWeek} of 4</span>
-          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: accentColor, fontWeight: 500 }}>
-            {expanded ? "Hide ↑" : `Show ${total} →`}
-          </span>
+        <div style={{ marginLeft: "auto", fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#888" }}>
+          Week {currentWeek} of 4
         </div>
-      </button>
+      </div>
 
-      {/* Rows — only when expanded */}
-      {expanded && (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {[...overdue.map(x => ({ ...x, timing: "overdue" })), ...duethisweek.map(x => ({ ...x, timing: "due" }))].map(({ piece, cluster, pillar, timing, late }) => {
-            const tm = TIMING_META[timing];
-            const feedbackCount = ((project.feedback || {})[piece.id] || []).length;
-            return (
-              <div
-                key={piece.id}
-                onClick={() => onOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: "history" })}
-                style={{
-                  display: "flex", alignItems: "center", gap: "12px",
-                  padding: "10px 24px",
-                  borderLeft: `3px solid ${tm.border}`,
-                  background: tm.bg, borderBottom: "1px solid #f0ece4",
-                  cursor: "pointer", transition: "background 0.15s",
-                }}
-                onMouseEnter={e => e.currentTarget.style.background = timing === "overdue" ? "#fee2e2" : "#fef3c7"}
-                onMouseLeave={e => e.currentTarget.style.background = tm.bg}
-              >
-                <div style={{ flexShrink: 0 }}>
-                  <span style={{
-                    fontFamily: "Noto Sans, sans-serif", fontSize: "0.65rem", fontWeight: 700,
-                    letterSpacing: "0.1em", textTransform: "uppercase",
-                    color: tm.color, background: tm.bg,
-                    border: `1px solid ${tm.border}`,
-                    padding: "2px 7px", borderRadius: "2px", whiteSpace: "nowrap",
-                  }}>
-                    {timing === "overdue" ? `Wk ${piece.schedule_week} · ${late}wk late` : `Wk ${piece.schedule_week} · Due now`}
-                  </span>
+      {/* Rows */}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {[...overdue.map(x => ({ ...x, timing: "overdue" })), ...duethisweek.map(x => ({ ...x, timing: "due" }))].map(({ piece, cluster, pillar, timing, late }) => {
+          const tm = TIMING_META[timing];
+          const feedbackCount = ((project.feedback || {})[piece.id] || []).length;
+          return (
+            <div
+              key={piece.id}
+              onClick={() => onOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: "history" })}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                padding: "10px 24px",
+                borderLeft: `3px solid ${tm.border}`,
+                background: tm.bg,
+                borderBottom: "1px solid #f0ece4",
+                cursor: "pointer",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = timing === "overdue" ? "#fee2e2" : "#fef3c7"}
+              onMouseLeave={e => e.currentTarget.style.background = tm.bg}
+            >
+              <div style={{ flexShrink: 0 }}>
+                <span style={{
+                  fontFamily: "Noto Sans, sans-serif", fontSize: "0.65rem", fontWeight: 700,
+                  letterSpacing: "0.1em", textTransform: "uppercase",
+                  color: tm.color, background: tm.bg,
+                  border: `1px solid ${tm.border}`,
+                  padding: "2px 7px", borderRadius: "2px",
+                  whiteSpace: "nowrap",
+                }}>
+                  {timing === "overdue" ? `Wk ${piece.schedule_week} · ${late}wk late` : `Wk ${piece.schedule_week} · Due now`}
+                </span>
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem", fontWeight: 500, color: "#0f1923", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  {piece.title}
                 </div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem", fontWeight: 500, color: "#0f1923", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    {piece.title}
-                  </div>
-                  <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#888", marginTop: "2px" }}>
-                    {pillar.label} · {cluster.label}
-                  </div>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
-                  <StatusChip status={piece.status} />
-                  {feedbackCount > 0 && <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#888" }}>{feedbackCount}✎</span>}
-                  <span style={{ color: tm.color, fontSize: "0.8rem" }}>→</span>
+                <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#888", marginTop: "2px" }}>
+                  {pillar.label} · {cluster.label}
                 </div>
               </div>
-            );
-          })}
-        </div>
-      )}
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
+                <StatusChip status={piece.status} />
+                {feedbackCount > 0 && <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#888" }}>{feedbackCount}✎</span>}
+                <span style={{ color: tm.color, fontSize: "0.8rem" }}>→</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -650,8 +656,8 @@ function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpe
   const ready = approved === total && total > 0;
   const anchor = cluster.pieces.find(p => p.id === cluster.anchor_piece);
   const weekSlot = PUBLISHING_SEQUENCE.find(w => w.slots.some(s => s.cluster === cluster.id));
-  const overdueCount = cluster.pieces.filter(p => getPieceTiming(p, currentWeek) === "overdue").length;
-  const dueCount = cluster.pieces.filter(p => getPieceTiming(p, currentWeek) === "due").length;
+  const overdueCount = cluster.pieces.filter(p => getPieceTiming(p, currentWeek, cluster.id) === "overdue").length;
+  const dueCount = cluster.pieces.filter(p => getPieceTiming(p, currentWeek, cluster.id) === "due").length;
 
   const pal = CLUSTER_PALETTE[clusterIndex % CLUSTER_PALETTE.length];
   const headStyle = ready
@@ -754,7 +760,7 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
   const feedback = (project.feedback || {})[piece.id] || [];
   const isNS = currentUser.org === "ns";
   const isJG = currentUser.org === "jaggaer";
-  const timing = getPieceTiming(piece, currentWeek);
+  const timing = getPieceTiming(piece, currentWeek, cluster.id);
   const tm = timing ? TIMING_META[timing] : null;
 
   const nsMembers = project.team.ns.map(m => ({ value: m.id, label: m.name }));
@@ -830,7 +836,7 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
                 <><span className="ns-meta-sep">·</span><span className="ns-piece-meta-hint">{[piece.revision_count > 0 && `rev ${piece.revision_count}`, feedback.length > 0 && `${feedback.length}✎`].filter(Boolean).join(" ")}</span></>
               )}
               {timing === "overdue" && tm && (
-                <><span className="ns-meta-sep">·</span><span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.68rem", fontWeight:700, color: tm.color }}>{weeksLate(piece, currentWeek)}wk overdue</span></>
+                <><span className="ns-meta-sep">·</span><span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.68rem", fontWeight:700, color: tm.color }}>{weeksLate(piece, currentWeek, cluster.id)}wk overdue</span></>
               )}
               {timing === "due" && tm && (
                 <><span className="ns-meta-sep">·</span><span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.68rem", fontWeight:700, color: tm.color }}>Due this week</span></>

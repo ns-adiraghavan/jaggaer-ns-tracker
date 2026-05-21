@@ -1015,7 +1015,7 @@ function WebinarBlock() {
       <ABEyebrow>Learn</ABEyebrow>
       <ABSectionHead
         title="Claude Webinar Hub"
-        sub="Curated Anthropic tutorials selected for S2P relevance — plus the upcoming Jaggaer × Netscribes live session."
+        sub="Curated Anthropic tutorials selected for S2P relevance — plus an upcoming live session on using Claude in procurement workflows."
       />
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px", marginBottom: "40px" }}>
@@ -1051,7 +1051,7 @@ function WebinarBlock() {
             Coming Soon
           </div>
           <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.4rem", fontWeight: 700, color: "#fff", marginBottom: "10px", lineHeight: 1.25 }}>
-            Jaggaer × Netscribes:<br />Claude for S2P — Live Session
+            Claude for S2P — Live Session
           </h3>
           <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.65, maxWidth: "480px", margin: 0 }}>
             A live walkthrough of the S2P demos above — with a Q&A on how procurement teams are using Claude in real workflows today. Register your interest to be notified when the date is confirmed.
@@ -1131,7 +1131,7 @@ function LegalBlock() {
         Legal Notice
       </div>
       <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem", color: "#888", lineHeight: 1.7, margin: 0 }}>
-        This page is created independently by Netscribes on behalf of Jaggaer and is not affiliated with, endorsed by, or produced in partnership with Anthropic. Claude™ is a product of Anthropic, PBC. All Claude capabilities referenced here are based on publicly available features. Jaggaer and Netscribes are not co-marketing partners of Anthropic. Use of Claude is subject to Anthropic's Terms of Service and Usage Policies.
+        This page is not affiliated with, endorsed by, or produced in partnership with Anthropic. Claude™ is a product of Anthropic, PBC. All Claude capabilities referenced here are based on publicly available features. Use of Claude is subject to Anthropic's Terms of Service and Usage Policies.
       </p>
     </div>
   );
@@ -1144,16 +1144,16 @@ function LegalBlock() {
 function AgentBuilderPanel() {
   return (
     <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden" }}>
-    <div style={{ maxWidth: "860px", margin: "0 auto", padding: "48px 40px 80px" }}>
+    <div style={{ maxWidth: "860px", margin: "0 auto", padding: "32px 40px 80px" }}>
 
       {/* Page hero */}
-      <div style={{ marginBottom: "56px", paddingBottom: "40px", borderBottom: "1px solid #e0dbd4" }}>
+      <div style={{ marginBottom: "40px", paddingBottom: "32px", borderBottom: "1px solid #e0dbd4" }}>
         <ABEyebrow>Agent Builder</ABEyebrow>
         <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.2rem, 4vw, 3.2rem)", fontWeight: 900, color: "#0f1923", lineHeight: 1.1, marginBottom: "16px" }}>
           Building With AI<br />for Source To Pay
         </h1>
         <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "1rem", color: "#6b6560", lineHeight: 1.7, maxWidth: "580px", marginBottom: "0" }}>
-          A live prototype of the Agent Builder page — two sections, two toolsets. Build With Claude is active and ready to use. Build With JAI Agent OS is coming soon.
+          Sample content outputs showing what AI-powered S2P tools could look like embedded in a Jaggaer page. The demos below are live — paste your own data and run them. Future solutions will be embedded here in the same format.
         </p>
       </div>
 
@@ -1161,9 +1161,6 @@ function AgentBuilderPanel() {
       <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "40px" }}>
         <div style={{ width: "3px", height: "28px", background: "#c8401a", borderRadius: "2px", flexShrink: 0 }}></div>
         <div>
-          <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#c8401a" }}>
-            Netscribes
-          </div>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", fontWeight: 700, color: "#0f1923", margin: 0 }}>
             Build With Claude
           </h2>
