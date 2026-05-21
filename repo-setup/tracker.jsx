@@ -221,6 +221,7 @@ function InlineCell({ value, type, options, onSave, children, className }) {
 
 // ─── Priority Actions panel ───────────────────────────────────────────────────
 function PriorityActions({ project, currentWeek, onOpenPiece }) {
+  const [expanded, setExpanded] = useStateTR(false);
   const overdue = [];
   const duethisweek = [];
 
@@ -238,97 +239,109 @@ function PriorityActions({ project, currentWeek, onOpenPiece }) {
 
   // Sort overdue by most weeks late first
   overdue.sort((a, b) => b.late - a.late);
+  const total = overdue.length + duethisweek.length;
+  const isRed = overdue.length > 0;
 
   return (
-    <div style={{
-      margin: "0 0 0 0",
-      borderBottom: "1px solid #e0dbd4",
-    }}>
-      {/* Header */}
-      <div style={{
-        padding: "14px 24px",
-        background: overdue.length > 0 ? "#fef2f2" : "#fffbeb",
-        borderBottom: "1px solid " + (overdue.length > 0 ? "#fca5a5" : "#fcd34d"),
-        display: "flex",
-        alignItems: "center",
-        gap: "12px",
-      }}>
+    <div style={{ borderBottom: "1px solid #e0dbd4" }}>
+      {/* Slim persistent strip — always visible, click to toggle */}
+      <div
+        onClick={() => setExpanded(e => !e)}
+        style={{
+          padding: "9px 24px",
+          background: isRed ? "#fef2f2" : "#fffbeb",
+          borderBottom: expanded ? "1px solid " + (isRed ? "#fca5a5" : "#fcd34d") : "none",
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          cursor: "pointer",
+          userSelect: "none",
+        }}
+      >
         <div style={{
-          width: "8px", height: "8px", borderRadius: "50%",
-          background: overdue.length > 0 ? "#b91c1c" : "#d97706",
+          width: "7px", height: "7px", borderRadius: "50%",
+          background: isRed ? "#b91c1c" : "#d97706",
           flexShrink: 0,
-          boxShadow: overdue.length > 0 ? "0 0 0 3px rgba(185,28,28,0.15)" : "0 0 0 3px rgba(217,119,6,0.15)",
+          boxShadow: isRed ? "0 0 0 2px rgba(185,28,28,0.18)" : "0 0 0 2px rgba(217,119,6,0.18)",
         }} />
-        <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: overdue.length > 0 ? "#b91c1c" : "#92400e" }}>
+        <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: isRed ? "#b91c1c" : "#92400e" }}>
           Priority Actions
         </div>
         {overdue.length > 0 && (
-          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#b91c1c", background: "#fee2e2", padding: "2px 8px", borderRadius: "2px", fontWeight: 600 }}>
+          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#b91c1c", background: "#fee2e2", padding: "1px 7px", borderRadius: "2px", fontWeight: 600 }}>
             {overdue.length} overdue
           </span>
         )}
         {duethisweek.length > 0 && (
-          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#92400e", background: "#fef3c7", padding: "2px 8px", borderRadius: "2px", fontWeight: 600 }}>
-            {duethisweek.length} due week {currentWeek}
+          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#92400e", background: "#fef3c7", padding: "1px 7px", borderRadius: "2px", fontWeight: 600 }}>
+            {duethisweek.length} due wk {currentWeek}
           </span>
         )}
-        <div style={{ marginLeft: "auto", fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#888" }}>
-          Week {currentWeek} of 4
+        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "10px" }}>
+          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#aaa" }}>
+            Wk {currentWeek} of 4
+          </span>
+          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: isRed ? "#b91c1c" : "#92400e", fontWeight: 600 }}>
+            {expanded ? `Hide ${total}` : `Show ${total} →`}
+          </span>
         </div>
       </div>
 
-      {/* Rows */}
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        {[...overdue.map(x => ({ ...x, timing: "overdue" })), ...duethisweek.map(x => ({ ...x, timing: "due" }))].map(({ piece, cluster, pillar, timing, late }) => {
-          const tm = TIMING_META[timing];
-          const feedbackCount = ((project.feedback || {})[piece.id] || []).length;
-          return (
-            <div
-              key={piece.id}
-              onClick={() => onOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: "history" })}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                padding: "10px 24px",
-                borderLeft: `3px solid ${tm.border}`,
-                background: tm.bg,
-                borderBottom: "1px solid #f0ece4",
-                cursor: "pointer",
-                transition: "background 0.15s",
-              }}
-              onMouseEnter={e => e.currentTarget.style.background = timing === "overdue" ? "#fee2e2" : "#fef3c7"}
-              onMouseLeave={e => e.currentTarget.style.background = tm.bg}
-            >
-              <div style={{ flexShrink: 0 }}>
-                <span style={{
-                  fontFamily: "Noto Sans, sans-serif", fontSize: "0.65rem", fontWeight: 700,
-                  letterSpacing: "0.1em", textTransform: "uppercase",
-                  color: tm.color, background: tm.bg,
-                  border: `1px solid ${tm.border}`,
-                  padding: "2px 7px", borderRadius: "2px",
-                  whiteSpace: "nowrap",
-                }}>
-                  {timing === "overdue" ? `Wk ${piece.schedule_week} · ${late}wk late` : `Wk ${piece.schedule_week} · Due now`}
-                </span>
-              </div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem", fontWeight: 500, color: "#0f1923", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                  {piece.title}
+      {/* Expandable rows */}
+      {expanded && (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {[...overdue.map(x => ({ ...x, timing: "overdue" })), ...duethisweek.map(x => ({ ...x, timing: "due" }))].map(({ piece, cluster, pillar, timing, late }) => {
+            const tm = TIMING_META[timing];
+            const feedbackCount = ((project.feedback || {})[piece.id] || []).length;
+            const clusterWeek = getClusterWeek(cluster.id);
+            return (
+              <div
+                key={piece.id}
+                onClick={() => onOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: "history" })}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  padding: "10px 24px",
+                  borderLeft: `3px solid ${tm.border}`,
+                  background: tm.bg,
+                  borderBottom: "1px solid #f0ece4",
+                  cursor: "pointer",
+                  transition: "background 0.15s",
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = timing === "overdue" ? "#fee2e2" : "#fef3c7"}
+                onMouseLeave={e => e.currentTarget.style.background = tm.bg}
+              >
+                <div style={{ flexShrink: 0 }}>
+                  <span style={{
+                    fontFamily: "Noto Sans, sans-serif", fontSize: "0.65rem", fontWeight: 700,
+                    letterSpacing: "0.1em", textTransform: "uppercase",
+                    color: tm.color, background: tm.bg,
+                    border: `1px solid ${tm.border}`,
+                    padding: "2px 7px", borderRadius: "2px",
+                    whiteSpace: "nowrap",
+                  }}>
+                    {timing === "overdue" ? `Wk ${clusterWeek} · ${late}wk late` : `Wk ${clusterWeek} · Due now`}
+                  </span>
                 </div>
-                <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#888", marginTop: "2px" }}>
-                  {pillar.label} · {cluster.label}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem", fontWeight: 500, color: "#0f1923", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {piece.title}
+                  </div>
+                  <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#888", marginTop: "2px" }}>
+                    {pillar.label} · {cluster.label}
+                  </div>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
+                  <StatusChip status={piece.status} />
+                  {feedbackCount > 0 && <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#888" }}>{feedbackCount}✎</span>}
+                  <span style={{ color: tm.color, fontSize: "0.8rem" }}>→</span>
                 </div>
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
-                <StatusChip status={piece.status} />
-                {feedbackCount > 0 && <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#888" }}>{feedbackCount}✎</span>}
-                <span style={{ color: tm.color, fontSize: "0.8rem" }}>→</span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
