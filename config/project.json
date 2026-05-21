@@ -8,8 +8,15 @@
     },
     {
       "id": "month-2",
-      "label": "Month 2 - June 2026",
-      "active": false
+      "label": "Month 2 · Jun–Jul 2026",
+      "active": false,
+      "start_date": "2026-06-18"
+    },
+    {
+      "id": "month-3",
+      "label": "Month 3 · Jul–Aug 2026",
+      "active": false,
+      "start_date": "2026-07-16"
     }
   ],
   "active_month": "month-1",
@@ -73,7 +80,8 @@
               "schedule_week": 1
             }
           ],
-          "publish_week": 1
+          "publish_week": 1,
+          "month_id": "month-1"
         },
         {
           "id": "c2-contracts",
@@ -112,7 +120,8 @@
               "schedule_week": 2
             }
           ],
-          "publish_week": 2
+          "publish_week": 2,
+          "month_id": "month-1"
         },
         {
           "id": "c3-suppliers",
@@ -168,7 +177,8 @@
               "schedule_week": 2
             }
           ],
-          "publish_week": 2
+          "publish_week": 2,
+          "month_id": "month-1"
         },
         {
           "id": "c4-prompt-library",
@@ -208,7 +218,8 @@
               "schedule_week": 4
             }
           ],
-          "publish_week": 4
+          "publish_week": 4,
+          "month_id": "month-1"
         }
       ]
     },
@@ -260,7 +271,8 @@
               "schedule_week": 1
             }
           ],
-          "publish_week": 1
+          "publish_week": 1,
+          "month_id": "month-1"
         },
         {
           "id": "dm2-subtier",
@@ -330,7 +342,8 @@
               "schedule_week": 3
             }
           ],
-          "publish_week": 3
+          "publish_week": 3,
+          "month_id": "month-1"
         },
         {
           "id": "dm3-minerals",
@@ -362,7 +375,8 @@
               "schedule_week": 3
             }
           ],
-          "publish_week": 3
+          "publish_week": 3,
+          "month_id": "month-1"
         },
         {
           "id": "dm4-tco",
@@ -394,7 +408,8 @@
               "schedule_week": 4
             }
           ],
-          "publish_week": 4
+          "publish_week": 4,
+          "month_id": "month-1"
         }
       ]
     },
@@ -435,7 +450,8 @@
               "schedule_week": 2
             }
           ],
-          "publish_week": 2
+          "publish_week": 2,
+          "month_id": "month-1"
         },
         {
           "id": "ps2-einvoicing",
@@ -467,7 +483,8 @@
               "schedule_week": 2
             }
           ],
-          "publish_week": 2
+          "publish_week": 2,
+          "month_id": "month-1"
         },
         {
           "id": "ps3-eval",
@@ -488,7 +505,8 @@
               "schedule_week": 4
             }
           ],
-          "publish_week": 4
+          "publish_week": 4,
+          "month_id": "month-1"
         }
       ]
     },
@@ -529,7 +547,8 @@
               "schedule_week": 3
             }
           ],
-          "publish_week": 3
+          "publish_week": 3,
+          "month_id": "month-1"
         },
         {
           "id": "he2-grants",
@@ -561,7 +580,8 @@
               "schedule_week": 3
             }
           ],
-          "publish_week": 3
+          "publish_week": 3,
+          "month_id": "month-1"
         },
         {
           "id": "he3-modernisation",
@@ -582,7 +602,8 @@
               "schedule_week": 4
             }
           ],
-          "publish_week": 4
+          "publish_week": 4,
+          "month_id": "month-1"
         }
       ]
     }
