@@ -2,7 +2,7 @@
 // fetch fails. Mirrors the project.json schema described in the brief verbatim.
 window.MOCK_PROJECT = {
   months: [
-    { id: "month-1", label: "Month 1 — May 2026", active: true },
+    { id: "month-1", label: "Month 1 — May 2026", active: true, start_date: "2026-05-21" },
     { id: "month-2", label: "Month 2 — June 2026", active: false }
   ],
   active_month: "month-1",
