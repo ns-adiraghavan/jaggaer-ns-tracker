@@ -6,9 +6,19 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
   const months = project.months || [];
   const activeMonth = months.find(m => m.id === (activeMonthId || project.active_month)) || months[0];
   const monthLabel = activeMonth ? activeMonth.label : "Month 1";
+  const [collapsed, setCollapsed] = React.useState(false);
 
   return (
-    <aside className="ns-sidebar">
+    <aside className={`ns-sidebar ${collapsed ? "is-collapsed" : ""}`}>
+      {/* Collapse toggle — always visible */}
+      <button
+        className="ns-sidebar-toggle"
+        onClick={() => setCollapsed(c => !c)}
+        title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+      >
+        {collapsed ? "›" : "‹"}
+      </button>
+      <div className="ns-sidebar-inner">
       <div className="ns-sidebar-logos">
         <div className="ns-sidebar-logo-ns">
           <img src="netscribes-logo.png" alt="Netscribes" />
@@ -114,6 +124,7 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           <button className="ns-mini-btn" onClick={onSignOut}>Switch</button>
         </div>
       </div>
+      </div>{/* ns-sidebar-inner */}
     </aside>
   );
 }
