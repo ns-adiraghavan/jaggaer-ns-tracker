@@ -2,10 +2,22 @@
 const { useMemo: useMemoSB } = React;
 
 function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCluster, setActiveCluster, view, setView, onSignOut, onToggleAdmin, adminMode, activeMonthId, setActiveMonthId }) {
-  const stats = useMemoSB(() => computeStats(project), [project]);
+  const stats = useMemoSB(() => computeStats(project, activeMonthId), [project, activeMonthId]);
   const months = project.months || [];
-  const activeMonth = months.find(m => m.id === (activeMonthId || project.active_month)) || months[0];
-  const monthLabel = activeMonth ? activeMonth.label : "Month 1";
+
+  // Only show months that have at least one cluster referencing them
+  const populatedMonthIds = new Set();
+  for (const p of project.pillars) {
+    for (const c of p.clusters) {
+      if (c.month_id) populatedMonthIds.add(c.month_id);
+      else populatedMonthIds.add(project.active_month); // fallback for untagged clusters
+    }
+  }
+  const populatedMonths = months.filter(m => populatedMonthIds.has(m.id));
+
+  const activeMonth = populatedMonths.find(m => m.id === (activeMonthId || project.active_month)) || populatedMonths[0];
+  const monthLabel = activeMonth ? activeMonth.label : 'Month 1';
+  const shortLabel = monthLabel.replace('Month ', 'M');
   const [collapsed, setCollapsed] = React.useState(false);
 
   return (
@@ -31,21 +43,19 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
       <div className="ns-sidebar-head">
         <div className="ns-sidebar-month">
           <div className="ns-eyebrow ns-eyebrow-light">CURRENT MONTH</div>
-          {months.length > 1 ? (
+          {populatedMonths.length > 1 ? (
             <div className="ns-month-switcher">
               <select
                 value={activeMonthId || project.active_month}
                 onChange={e => setActiveMonthId && setActiveMonthId(e.target.value)}
               >
-                {months.map(m => (
-                  <option key={m.id} value={m.id}>{m.label.replace("Month ", "M")}</option>
+                {populatedMonths.map(m => (
+                  <option key={m.id} value={m.id}>{m.label.replace('Month ', 'M')}</option>
                 ))}
               </select>
             </div>
           ) : (
-            <div className="ns-month-label" title={monthLabel}>
-              {monthLabel.replace("Month ", "M").replace(" · ", " · ")}
-            </div>
+            <div className="ns-month-label" title={monthLabel}>{shortLabel}</div>
           )}
         </div>
       </div>
@@ -176,20 +186,26 @@ function PillarNav({ pillar, sequence, pillarStats, clusterStats, expanded, acti
   );
 }
 
-function computeStats(project) {
+function computeStats(project, activeMonthId) {
+  const effectiveMonthId = activeMonthId || project.active_month;
   const byPillar = {};
   const byCluster = {};
   let total = 0, approved = 0, awaiting = 0;
   for (const p of project.pillars) {
     let pT = 0, pA = 0;
     for (const c of p.clusters) {
+      // Only count clusters belonging to the active month
+      if ((c.month_id || project.active_month) !== effectiveMonthId) {
+        byCluster[c.id] = { total: 0, approved: 0, ready: false };
+        continue;
+      }
       let cT = c.pieces.length, cA = 0;
       for (const piece of c.pieces) {
         total++;
         if (piece.status === "approved") { approved++; pA++; cA++; }
         if (piece.status === "uploaded" || piece.status === "revised") awaiting++;
       }
-      byCluster[c.id] = { total: cT, approved: cA, ready: cA === cT };
+      byCluster[c.id] = { total: cT, approved: cA, ready: cA === cT && cT > 0 };
       pT += cT;
     }
     byPillar[p.id] = { total: pT, approved: pA };

@@ -347,10 +347,19 @@ function PriorityActions({ project, currentWeek, onOpenPiece }) {
 }
 
 // ─── Tracker root ─────────────────────────────────────────────────────────────
-function Tracker({ project, setProject, currentUser, activePillar, activeCluster, setActiveCluster, adminMode, onAdminEditPiece, onAdminEditCluster }) {
-  const stats = window.computeStats(project);
+function Tracker({ project, setProject, currentUser, activePillar, activeCluster, setActiveCluster, adminMode, activeMonthId, onAdminEditPiece, onAdminEditCluster }) {
+  const effectiveMonthId = activeMonthId || project.active_month;
+  const stats = window.computeStats(project, effectiveMonthId);
   const { currentWeek } = getScheduleContext(project);
-  const pillars = activePillar ? project.pillars.filter(p => p.id === activePillar) : project.pillars;
+
+  // Filter pillars to only clusters belonging to the active month.
+  // Pillars with no clusters in this month are hidden entirely.
+  const filteredPillars = project.pillars.map(p => ({
+    ...p,
+    clusters: p.clusters.filter(c => (c.month_id || project.active_month) === effectiveMonthId),
+  })).filter(p => p.clusters.length > 0);
+
+  const pillars = activePillar ? filteredPillars.filter(p => p.id === activePillar) : filteredPillars;
   const [activeTab, setActiveTab] = useStateTR("tracker");
   const [viewMode, setViewMode] = useStateTR("table");
   const [openPiece, setOpenPiece] = useStateTR(null);
