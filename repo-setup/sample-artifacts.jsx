@@ -1,5 +1,5 @@
 // ══════════════════════════════════════════════════════════════════════════════
-// sample-artifacts.jsx — "Sample Artifacts" tab
+// sample-artifacts.jsx -- "Sample Artifacts" tab
 // External-facing content hub for the Jaggaer × NS engagement.
 // Structure: index page → individual articles.
 // Article 01: Agent Builder (live S2P demos)
@@ -95,7 +95,7 @@ function OutputSection({ label, items, color }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ARTICLE INDEX — the landing page
+// ARTICLE INDEX -- the landing page
 // ─────────────────────────────────────────────────────────────────────────────
 
 const ARTICLES = [
@@ -104,7 +104,7 @@ const ARTICLES = [
     n: "01",
     category: "Interactive",
     title: "Agent Builder",
-    sub: "Live AI-powered S2P tools — contract analysis, supplier risk scanning, RFP generation. Paste your own data and run them.",
+    sub: "Live AI-powered S2P tools -- contract analysis, supplier risk scanning, RFP generation. Paste your own data and run them.",
     tag: "Live demos",
     tagColor: "#c8401a",
     status: "live",
@@ -126,7 +126,7 @@ const ARTICLES = [
     n: "03",
     category: "Deep Dive",
     title: "Supplier Intelligence at Scale",
-    sub: "From static vendor lists to continuous risk monitoring — how AI changes what's possible across sub-tier supply chains.",
+    sub: "From static vendor lists to continuous risk monitoring -- how AI changes what's possible across sub-tier supply chains.",
     tag: "Coming soon",
     tagColor: "#888",
     status: "soon",
@@ -137,7 +137,7 @@ const ARTICLES = [
     n: "04",
     category: "Workshop",
     title: "Contracts, Unpacked",
-    sub: "A clause-by-clause walkthrough of the contract terms most likely to create downstream procurement exposure — and how AI surfaces them automatically.",
+    sub: "A clause-by-clause walkthrough of the contract terms most likely to create downstream procurement exposure -- and how AI surfaces them automatically.",
     tag: "Coming soon",
     tagColor: "#888",
     status: "soon",
@@ -148,7 +148,7 @@ const ARTICLES = [
     n: "05",
     category: "Research",
     title: "The Automation Opportunity in S2P",
-    sub: "Where AI delivers the fastest ROI across the source-to-pay cycle — with benchmarks from early adopters in manufacturing, public sector, and higher education.",
+    sub: "Where AI delivers the fastest ROI across the source-to-pay cycle -- with benchmarks from early adopters in manufacturing, public sector, and higher education.",
     tag: "Coming soon",
     tagColor: "#888",
     status: "soon",
@@ -182,7 +182,7 @@ function ArticleIndex({ onSelect }) {
             maxWidth: "560px",
             marginBottom: "0",
           }}>
-            A collection of AI-powered content formats — live tools, practical guides, and research — showing what procurement intelligence looks like when it's built for action, not just reading.
+            A collection of AI-powered content formats -- live tools, practical guides, and research -- showing what procurement intelligence looks like when it's built for action, not just reading.
           </p>
         </div>
 
@@ -201,7 +201,7 @@ function ArticleIndex({ onSelect }) {
                 About this series
               </div>
               <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.88rem", color: "#555", lineHeight: 1.65, margin: 0, maxWidth: "440px" }}>
-                These artifacts are part of Jaggaer's content intelligence programme — research, tools, and guides that show what modern procurement looks like in practice. Each one is built to be used, not just read.
+                These artifacts are part of Jaggaer's content intelligence programme -- research, tools, and guides that show what modern procurement looks like in practice. Each one is built to be used, not just read.
               </p>
             </div>
             <a
@@ -352,7 +352,7 @@ function ArticleCard({ article, index, onSelect }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ARTICLE SHELL — wraps any article with back nav + consistent chrome
+// ARTICLE SHELL -- wraps any article with back nav + consistent chrome
 // ─────────────────────────────────────────────────────────────────────────────
 
 function ArticleShell({ article, onBack, children }) {
@@ -392,7 +392,7 @@ function ArticleShell({ article, onBack, children }) {
           color: "#888",
           fontWeight: 500,
         }}>
-          {article.n} — {article.title}
+          {article.n} -- {article.title}
         </span>
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "8px" }}>
           <span style={{
@@ -422,7 +422,7 @@ function ArticleShell({ article, onBack, children }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ARTICLE 01 — Agent Builder
+// ARTICLE 01 -- Agent Builder
 // All the original agent-builder content, repackaged as an article.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -441,31 +441,31 @@ const DEMO_SYSTEM_PROMPTS = {
 
 const DEMO_PLACEHOLDERS = {
   contracts: `Paste a contract clause or excerpt here. Example:\n\n"This Agreement shall automatically renew for successive one-year terms unless either party provides written notice of non-renewal no less than 90 days prior to the end of the then-current term. Licensor reserves the right to adjust pricing at renewal with 60 days' advance notice."`,
-  suppliers: `Paste your supplier list here. Example:\n\nSupplier A — Taiwan — Semiconductors\nSupplier B — Taiwan — PCB Manufacturing\nSupplier C — Germany — Precision Machining\nSupplier D — China — Rare Earth Materials\nSupplier E — China — Battery Cells`,
+  suppliers: `Paste your supplier list here. Example:\n\nSupplier A -- Taiwan -- Semiconductors\nSupplier B -- Taiwan -- PCB Manufacturing\nSupplier C -- Germany -- Precision Machining\nSupplier D -- China -- Rare Earth Materials\nSupplier E -- China -- Battery Cells`,
   rfp: `Describe your sourcing requirement here. Example:\n\nWe need to source a fleet management software solution for 200 commercial vehicles across our US and Germany operations. Must integrate with SAP and provide real-time GPS tracking, maintenance scheduling, and driver behaviour analytics.`,
 };
 
 const MOCK_OUTPUTS = {
   contracts: {
-    summary: "Auto-renewing agreement with 90-day exit notice window and unilateral pricing adjustment rights at renewal — moderate buyer risk.",
+    summary: "Auto-renewing agreement with 90-day exit notice window and unilateral pricing adjustment rights at renewal -- moderate buyer risk.",
     expiry_dates: [
-      "Initial term end: not specified — agreement runs until notice of non-renewal",
+      "Initial term end: not specified -- agreement runs until notice of non-renewal",
       "Non-renewal notice must be given no less than 90 days before term end",
       "Pricing adjustment notice: 60 days prior to renewal",
     ],
     auto_renewal: "Agreement automatically renews for successive one-year terms unless either party provides written notice of non-renewal at least 90 days before the end of the current term.",
     risky_obligations: [
-      "Licensor may adjust pricing at each renewal with only 60 days' notice — buyer has limited time to renegotiate or exit",
+      "Licensor may adjust pricing at each renewal with only 60 days' notice -- buyer has limited time to renegotiate or exit",
       "90-day non-renewal notice window is tight for procurement teams without automated contract tracking",
-      "No cap on pricing adjustment magnitude — unconstrained upward repricing at renewal",
+      "No cap on pricing adjustment magnitude -- unconstrained upward repricing at renewal",
     ],
     concerning_sections: [
       "Auto-renewal clause: recommend flagging for calendar alert 120 days before term end",
-      "Unilateral pricing adjustment: no stated cap or CPI linkage — recommend negotiating a maximum annual increase percentage",
+      "Unilateral pricing adjustment: no stated cap or CPI linkage -- recommend negotiating a maximum annual increase percentage",
     ],
   },
   suppliers: {
-    diversification_priority: "High — heavy concentration in Taiwan (semiconductors, PCB) and China (rare earth, batteries) creates compounding single-event risk",
+    diversification_priority: "High -- heavy concentration in Taiwan (semiconductors, PCB) and China (rare earth, batteries) creates compounding single-event risk",
     risk_flags: [
       "Taiwan concentration: Semiconductors + PCB both exposed to same geopolitical and natural disaster risk profile",
       "China concentration: Rare Earth Materials and Battery Cells subject to export controls and tariff volatility",
@@ -477,7 +477,7 @@ const MOCK_OUTPUTS = {
     ],
   },
   rfp: {
-    rfp_title: "Request for Proposal: Fleet Management Software — US & Germany Operations",
+    rfp_title: "Request for Proposal: Fleet Management Software -- US & Germany Operations",
     background: "We are seeking a fleet management software solution for 200 commercial vehicles across US and Germany operations. The solution must integrate with SAP S/4HANA and provide real-time visibility, predictive maintenance, and driver analytics.",
     scope_of_work: [
       "Real-time GPS tracking and geofencing for all 200 vehicles across both geographies",
@@ -494,7 +494,7 @@ const MOCK_OUTPUTS = {
     submission_requirements: ["Executive summary (max 3 pages)", "SAP integration architecture diagram", "3-year TCO model", "Two comparable customer references"],
     key_dates: [{ milestone: "Proposals due", date: "Week 5" }, { milestone: "Shortlist announced", date: "Week 7" }, { milestone: "Award decision", date: "Week 11" }],
     questions: [
-      "Describe your SAP S/4HANA integration architecture — native connector or middleware?",
+      "Describe your SAP S/4HANA integration architecture -- native connector or middleware?",
       "How does your platform handle multi-jurisdiction compliance simultaneously within one instance?",
       "What is your data residency model for EU customers?",
     ],
@@ -571,7 +571,7 @@ function RFPOutput({ data }) {
               <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, color: "#c8401a", fontSize: "0.9rem", minWidth: "42px", flexShrink: 0 }}>{c.weight}</span>
               <div>
                 <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", fontWeight: 600, color: "#0f1923" }}>{c.criterion}</span>
-                <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem", color: "#666" }}> — {c.description}</span>
+                <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem", color: "#666" }}> -- {c.description}</span>
               </div>
             </div>
           ))}
@@ -597,9 +597,9 @@ function DemoPane({ demoId }) {
 
   const labels = { contracts: "contract text", suppliers: "supplier list", rfp: "sourcing requirement" };
   const jaiNudges = {
-    contracts: "This is one clause. JAI runs this analysis across your entire contract portfolio — automatically, continuously, connected to your procurement data.",
+    contracts: "This is one clause. JAI runs this analysis across your entire contract portfolio -- automatically, continuously, connected to your procurement data.",
     suppliers: "JAI monitors your full supplier base in real time. Risk flags like these surface before they reach operations, not after.",
-    rfp: "JAI generates and manages sourcing events at scale — with your organisation's data, categories, and approval workflows built in.",
+    rfp: "JAI generates and manages sourcing events at scale -- with your organisation's data, categories, and approval workflows built in.",
   };
 
   return (
@@ -607,7 +607,7 @@ function DemoPane({ demoId }) {
       <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
         <div style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#c08227" }} />
         <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.75rem", color: "#888", fontStyle: "italic" }}>
-          Demo mode — representative output shown. Live API analysis activates once the key is integrated.
+          Demo mode -- representative output shown. Live API analysis activates once the key is integrated.
         </span>
       </div>
       <textarea
@@ -651,7 +651,7 @@ function AgentBuilderArticle() {
           S2P Use Case Demos
         </h1>
         <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "1rem", color: "#6b6560", lineHeight: 1.7, maxWidth: "560px", marginBottom: "0" }}>
-          Three live AI-powered tools built for procurement. Paste your own data — a contract clause, a supplier list, or a sourcing brief — and see what structured intelligence looks like in practice.
+          Three live AI-powered tools built for procurement. Paste your own data -- a contract clause, a supplier list, or a sourcing brief -- and see what structured intelligence looks like in practice.
         </p>
       </div>
 
@@ -679,7 +679,7 @@ function AgentBuilderArticle() {
         <div>
           <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#c8401a", marginBottom: "6px" }}>Want this without the setup?</div>
           <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.88rem", color: "#0f1923", lineHeight: 1.6, margin: 0 }}>
-            JAI does everything you just saw — across your entire contract portfolio, supplier base, and sourcing pipeline — with no prompt writing required. Pre-built for S2P, connected to your data, running continuously.
+            JAI does everything you just saw -- across your entire contract portfolio, supplier base, and sourcing pipeline -- with no prompt writing required. Pre-built for S2P, connected to your data, running continuously.
           </p>
         </div>
         <a href="https://www.jaggaer.com" target="_blank" rel="noopener noreferrer" style={{ background: "#0f1923", color: "#fff", fontFamily: "Noto Sans, sans-serif", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "13px 22px", borderRadius: "2px", textDecoration: "none", whiteSpace: "nowrap", flexShrink: 0 }}>
@@ -687,7 +687,7 @@ function AgentBuilderArticle() {
         </a>
       </div>
 
-      {/* Getting Started — collapsible */}
+      {/* Getting Started -- collapsible */}
       <CollapsibleBlock
         eyebrow="Setup Guide"
         title="Getting Started with Claude"
@@ -740,7 +740,7 @@ function GettingStartedContent() {
             Do you have IT permissions to sign up for new software tools?
           </p>
           <div style={{ display: "flex", gap: "12px" }}>
-            <button onClick={() => setAnswer("yes")} style={{ background: "#c8401a", color: "#fff", border: "none", borderRadius: "2px", padding: "10px 24px", fontFamily: "Noto Sans, sans-serif", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", cursor: "pointer" }}>Yes — show me the steps</button>
+            <button onClick={() => setAnswer("yes")} style={{ background: "#c8401a", color: "#fff", border: "none", borderRadius: "2px", padding: "10px 24px", fontFamily: "Noto Sans, sans-serif", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", cursor: "pointer" }}>Yes -- show me the steps</button>
             <button onClick={() => setAnswer("no")} style={{ background: "transparent", color: "#0f1923", border: "1px solid #c4bdb5", borderRadius: "2px", padding: "10px 24px", fontFamily: "Noto Sans, sans-serif", fontSize: "0.8rem", fontWeight: 500, cursor: "pointer" }}>No / Not sure</button>
           </div>
         </div>
@@ -748,12 +748,12 @@ function GettingStartedContent() {
       {answer === "no" && (
         <div style={{ marginBottom: "24px", borderLeft: "3px solid #c8401a", paddingLeft: "18px" }}>
           <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.9rem", color: "#0f1923", lineHeight: 1.7, marginBottom: "8px" }}>
-            <strong>No installation needed.</strong> You've already seen what Claude can do in the demos above — no account required.
+            <strong>No installation needed.</strong> You've already seen what Claude can do in the demos above -- no account required.
           </p>
           <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", color: "#6b6560", lineHeight: 1.6, marginBottom: "16px" }}>
-            When you're ready to request access through IT, come back and select "Yes". Or — skip the setup entirely and let JAI handle it for your team.
+            When you're ready to request access through IT, come back and select "Yes". Or -- skip the setup entirely and let JAI handle it for your team.
           </p>
-          <JAINudge text="JAI integrates into your existing procurement environment — no individual signups or IT tickets required." tight />
+          <JAINudge text="JAI integrates into your existing procurement environment -- no individual signups or IT tickets required." tight />
           <button onClick={() => setAnswer(null)} style={{ background: "transparent", border: "none", color: "#999", fontSize: "0.78rem", cursor: "pointer", padding: "0", marginTop: "14px" }}>← Back</button>
         </div>
       )}
@@ -781,7 +781,7 @@ function GettingStartedContent() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ARTICLE 02 — Prompting 101
+// ARTICLE 02 -- Prompting 101
 // New article. External-facing. Practical. Subtle JAI pull-through.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -790,28 +790,28 @@ const PROMPT_PRINCIPLES = [
     n: "01",
     title: "Set the role",
     icon: "◈",
-    body: "Claude performs better when it knows what kind of expert it's acting as. "You are a procurement contracts analyst" produces tighter, more specialised output than starting cold. The role sets the frame — everything that follows inherits it.",
+    body: `Claude performs better when it knows what kind of expert it's acting as. "You are a procurement contracts analyst" produces tighter, more specialised output than starting cold. The role sets the frame — everything that follows inherits it.`,
     example: { bad: "Review this contract", good: "You are a procurement contracts analyst. Review this clause and list every obligation that creates financial exposure for the buyer." },
   },
   {
     n: "02",
     title: "Be specific about the task",
     icon: "◉",
-    body: "Vague asks return vague answers. The difference between a useful output and a generic one is almost always in how precisely the task is defined. Ask for exactly what you need — name the decision you're trying to make, the question you need answered, the risk you want assessed.",
+    body: `Vague asks return vague answers. The difference between a useful output and a generic one is almost always in how precisely the task is defined. Ask for exactly what you need — name the decision you're trying to make, the question you need answered, the risk you want assessed.`,
     example: { bad: "Tell me about supplier risk", good: "For each country in this supplier list where we have more than one critical supplier, flag the concentration risk and estimate the production impact if that geography became unavailable for 30 days." },
   },
   {
     n: "03",
     title: "Specify the output format",
     icon: "◎",
-    body: "Without a format instruction, Claude chooses its own structure — which is often longer than you need and harder to act on. Tell it how to respond: numbered list, table, JSON, bullet points, one paragraph. This single change makes outputs significantly more useful.",
+    body: "Without a format instruction, Claude chooses its own structure -- which is often longer than you need and harder to act on. Tell it how to respond: numbered list, table, JSON, bullet points, one paragraph. This single change makes outputs significantly more useful.",
     example: { bad: "Summarise this contract", good: "Summarise this contract. Return: (1) a one-sentence overall risk assessment, (2) three key obligations for the buyer, (3) any clauses that should be reviewed by legal. Use bullet points." },
   },
   {
     n: "04",
     title: "Provide context, not just content",
     icon: "◐",
-    body: "The more Claude understands about your situation, the more useful its answer. Don't just paste the document — tell Claude why you're asking. Your role, your organisation's context, the decision that depends on this answer. This context shapes interpretation.",
+    body: "The more Claude understands about your situation, the more useful its answer. Don't just paste the document -- tell Claude why you're asking. Your role, your organisation's context, the decision that depends on this answer. This context shapes interpretation.",
     example: { bad: "Is this supplier risky?", good: "I'm a procurement manager at a mid-size manufacturer with 60% of our critical components sourced from Southeast Asia. Review this supplier profile and tell me whether this is an acceptable addition to our supplier base or a risk concentration issue." },
   },
 ];
@@ -826,10 +826,10 @@ const PROMPT_TEMPLATES = [
 2. Obligations that create financial exposure for the buyer
 3. Any clauses that should be reviewed by legal before signing
 
-Return your findings as a numbered list under each heading. Be specific — quote the relevant language where relevant.
+Return your findings as a numbered list under each heading. Be specific -- quote the relevant language where relevant.
 
 [Paste clause here]`,
-    note: "The structure — role, numbered task, output format — is what gets you precise results instead of a generic paragraph.",
+    note: "The structure -- role, numbered task, output format -- is what gets you precise results instead of a generic paragraph.",
   },
   {
     label: "Supplier Risk Scan",
@@ -850,7 +850,7 @@ For each category where we have geographic concentration risk, flag it and sugge
 
 [Describe what you're buying, volume, key integrations, and compliance requirements]
 
-Include: a scope of work section, evaluation criteria with weightings, submission requirements, and 4–5 questions for suppliers to address. Format with clear section headers. Keep language formal but plain — no procurement jargon.`,
+Include: a scope of work section, evaluation criteria with weightings, submission requirements, and 4–5 questions for suppliers to address. Format with clear section headers. Keep language formal but plain -- no procurement jargon.`,
     note: "Specifying what to include and the tone gets you something close to publishable on the first pass.",
   },
   {
@@ -865,7 +865,7 @@ Analyse it and tell me:
 3. A one-paragraph recommendation for where to focus a spend review in Q4
 
 [Paste spend data here]`,
-    note: "Framing the ask as a prioritisation exercise — not a full analysis — keeps the output focused and decision-ready.",
+    note: "Framing the ask as a prioritisation exercise -- not a full analysis -- keeps the output focused and decision-ready.",
   },
 ];
 
@@ -880,11 +880,11 @@ const COMMON_MISTAKES = [
   },
   {
     mistake: "Pasting a document with no question",
-    fix: "Claude needs a question, not just content. 'Here's the contract' plus the document returns less than 'Here's the contract — what are the renewal terms?'",
+    fix: "Claude needs a question, not just content. 'Here's the contract' plus the document returns less than 'Here's the contract -- what are the renewal terms?'",
   },
   {
     mistake: "Accepting the first output without refining",
-    fix: "The first response is a draft. 'Make this more concise', 'focus only on financial risk', 'reformat as a table' — iterating takes 10 seconds and transforms the output.",
+    fix: "The first response is a draft. 'Make this more concise', 'focus only on financial risk', 'reformat as a table' -- iterating takes 10 seconds and transforms the output.",
   },
 ];
 
@@ -909,7 +909,7 @@ function Prompting101Article() {
           How to Write Prompts<br />That Actually Work
         </h1>
         <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "1rem", color: "#6b6560", lineHeight: 1.7, maxWidth: "560px", marginBottom: "20px" }}>
-          Most people underuse Claude because their prompts are too vague. This guide covers the four principles that produce useful, structured, immediately actionable outputs — with templates you can use today.
+          Most people underuse Claude because their prompts are too vague. This guide covers the four principles that produce useful, structured, immediately actionable outputs -- with templates you can use today.
         </p>
         <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
           {[["4 principles", "#c8401a"], ["12 templates", "#3b6b88"], ["Common mistakes", "#4f7a5b"]].map(([label, color]) => (
@@ -921,14 +921,14 @@ function Prompting101Article() {
         </div>
       </div>
 
-      {/* Section 1 — The four principles */}
+      {/* Section 1 -- The four principles */}
       <div style={{ marginBottom: "56px" }}>
         <SAEyebrow>The Framework</SAEyebrow>
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", fontWeight: 700, color: "#0f1923", marginBottom: "10px", lineHeight: 1.2 }}>
           Four Principles. One Formula.
         </h2>
         <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.92rem", color: "#6b6560", lineHeight: 1.65, maxWidth: "560px", marginBottom: "28px" }}>
-          Every effective prompt for procurement work applies some combination of these four moves. Learn them once and they work across contracts, suppliers, RFPs, spend data — anything.
+          Every effective prompt for procurement work applies some combination of these four moves. Learn them once and they work across contracts, suppliers, RFPs, spend data -- anything.
         </p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
@@ -967,9 +967,9 @@ function Prompting101Article() {
       </div>
 
       {/* JAI nudge #1 */}
-      <JAINudge text="JAI applies these principles automatically — every query is pre-structured with the right role, context, and format for your procurement data. No prompt engineering required." />
+      <JAINudge text="JAI applies these principles automatically -- every query is pre-structured with the right role, context, and format for your procurement data. No prompt engineering required." />
 
-      {/* Section 2 — Template library */}
+      {/* Section 2 -- Template library */}
       <div style={{ marginBottom: "56px", marginTop: "56px" }}>
         <SAEyebrow>Prompt Library</SAEyebrow>
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", fontWeight: 700, color: "#0f1923", marginBottom: "10px", lineHeight: 1.2 }}>
@@ -1019,7 +1019,7 @@ function Prompting101Article() {
         </div>
       </div>
 
-      {/* Section 3 — Common mistakes */}
+      {/* Section 3 -- Common mistakes */}
       <div style={{ marginBottom: "56px" }}>
         <SAEyebrow>Failure Modes</SAEyebrow>
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", fontWeight: 700, color: "#0f1923", marginBottom: "10px", lineHeight: 1.2 }}>
@@ -1067,7 +1067,7 @@ function Prompting101Article() {
         </div>
         <div style={{ marginTop: "24px", paddingTop: "20px", borderTop: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
           <p style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.85rem", color: "rgba(255,255,255,0.6)", margin: 0, maxWidth: "420px", lineHeight: 1.55 }}>
-            JAI builds all four of these into every query automatically — your procurement data, the right framing, the right format. No checklist needed.
+            JAI builds all four of these into every query automatically -- your procurement data, the right framing, the right format. No checklist needed.
           </p>
           <a href="https://www.jaggaer.com" target="_blank" rel="noopener noreferrer" style={{ background: "#c8401a", color: "#fff", fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "10px 18px", borderRadius: "2px", textDecoration: "none", whiteSpace: "nowrap", flexShrink: 0 }}>
             Explore JAI →
@@ -1139,7 +1139,7 @@ function LegalBlock() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ROOT — SampleArtifactsPanel
+// ROOT -- SampleArtifactsPanel
 // ─────────────────────────────────────────────────────────────────────────────
 
 function SampleArtifactsPanel() {
@@ -1165,13 +1165,13 @@ function SampleArtifactsPanel() {
 window.SampleArtifactsPanel = SampleArtifactsPanel;
 
 // ══════════════════════════════════════════════════════════════════════════════
-// WIRING — what needs to change in the other files:
+// WIRING -- what needs to change in the other files:
 //
 // index.html:
 //   REMOVE: <script type="text/babel" ... src="agent-builder.jsx"></script>
 //   ADD:    <script type="text/babel" ... src="sample-artifacts.jsx"></script>
 //
-// sidebar.jsx — NavSection label:
+// sidebar.jsx -- NavSection label:
 //   CHANGE: label="Agent Builder"
 //   TO:     label="Sample Artifacts"
 //   AND:    onClick={() => setView("sample-artifacts")}
