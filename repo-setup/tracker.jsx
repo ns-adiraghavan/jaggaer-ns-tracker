@@ -162,126 +162,269 @@ function InlineCell({ value, type, options, onSave, children, className }) {
 
 
 // ─── Priority Actions panel ───────────────────────────────────────────────────
-function PriorityActions({ project, currentWeek, onOpenPiece }) {
+// ─── Activity Bar — two panels: Priority Actions + Recent Activity ─────────────
+
+function ActivityBar({ project, currentWeek, onOpenPiece, currentUser }) {
   const [expanded, setExpanded] = useStateTR(false);
+
+  // ── Priority Actions: overdue + due-this-week pieces ──────────────────────
   const overdue = [];
   const duethisweek = [];
-
   for (const pillar of project.pillars) {
     for (const cluster of pillar.clusters) {
       for (const piece of cluster.pieces) {
         const timing = getPieceTiming(piece, currentWeek, cluster.id, project.schedule);
         if (timing === "overdue") overdue.push({ piece, cluster, pillar, late: weeksLate(piece, currentWeek, cluster.id, project.schedule) });
-        if (timing === "due") duethisweek.push({ piece, cluster, pillar });
+        if (timing === "due")     duethisweek.push({ piece, cluster, pillar });
       }
     }
   }
-
-  if (overdue.length === 0 && duethisweek.length === 0) return null;
-
-  // Sort overdue by most weeks late first
   overdue.sort((a, b) => b.late - a.late);
-  const total = overdue.length + duethisweek.length;
+  const priorityItems = [
+    ...overdue.map(x => ({ ...x, timing: "overdue" })),
+    ...duethisweek.map(x => ({ ...x, timing: "due" })),
+  ];
+  const hasPriority = priorityItems.length > 0;
   const isRed = overdue.length > 0;
+
+  // ── Recent Activity: pieces with last_updated, sorted newest first ─────────
+  const recentItems = [];
+  for (const pillar of project.pillars) {
+    for (const cluster of pillar.clusters) {
+      for (const piece of cluster.pieces) {
+        if (piece.last_updated && piece.status !== "not-started") {
+          recentItems.push({ piece, cluster, pillar });
+        }
+      }
+    }
+  }
+  // Sort by last_updated descending, take top 5
+  recentItems.sort((a, b) => new Date(b.piece.last_updated) - new Date(a.piece.last_updated));
+  const recentTop = recentItems.slice(0, 5);
+
+  // Relative time helper
+  function relTime(iso) {
+    if (!iso) return "";
+    const diff = Date.now() - new Date(iso).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1)   return "just now";
+    if (mins < 60)  return `${mins}m ago`;
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24)   return `${hrs}h ago`;
+    const days = Math.floor(hrs / 24);
+    return `${days}d ago`;
+  }
+
+  // Status → action label for recent activity
+  const STATUS_ACTION = {
+    "uploaded":         "Uploaded",
+    "jaggaer-feedback": "Feedback left",
+    "revised":          "Revised",
+    "approved":         "Approved",
+  };
+
+  const PANEL = {
+    fontFamily: "Noto Sans, sans-serif",
+  };
+
+  // If nothing to show at all, render nothing
+  if (!hasPriority && recentTop.length === 0) return null;
 
   return (
     <div style={{ borderBottom: "1px solid #e0dbd4" }}>
-      {/* Slim persistent strip — always visible, click to toggle */}
+
+      {/* ── Collapsed header strip ── */}
       <div
         onClick={() => setExpanded(e => !e)}
         style={{
-          padding: "9px 24px",
-          background: isRed ? "#fef2f2" : "#fffbeb",
-          borderBottom: expanded ? "1px solid " + (isRed ? "#fca5a5" : "#fcd34d") : "none",
           display: "flex",
           alignItems: "center",
-          gap: "10px",
+          gap: "0",
           cursor: "pointer",
           userSelect: "none",
+          borderBottom: expanded ? "1px solid #e0dbd4" : "none",
         }}
       >
+        {/* Left half — Priority Actions */}
         <div style={{
-          width: "7px", height: "7px", borderRadius: "50%",
-          background: isRed ? "#b91c1c" : "#d97706",
-          flexShrink: 0,
-          boxShadow: isRed ? "0 0 0 2px rgba(185,28,28,0.18)" : "0 0 0 2px rgba(217,119,6,0.18)",
-        }} />
-        <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: isRed ? "#b91c1c" : "#92400e" }}>
-          Priority Actions
+          flex: 1,
+          padding: "9px 20px",
+          background: hasPriority ? (isRed ? "#fef2f2" : "#fffbeb") : "#f8f6f2",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          borderRight: "1px solid #e0dbd4",
+        }}>
+          <div style={{
+            width: "7px", height: "7px", borderRadius: "50%",
+            background: !hasPriority ? "#ccc" : isRed ? "#b91c1c" : "#d97706",
+            flexShrink: 0,
+            boxShadow: hasPriority ? (isRed ? "0 0 0 2px rgba(185,28,28,0.18)" : "0 0 0 2px rgba(217,119,6,0.18)") : "none",
+          }} />
+          <span style={{ ...PANEL, fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: !hasPriority ? "#aaa" : isRed ? "#b91c1c" : "#92400e" }}>
+            Priority Actions
+          </span>
+          {overdue.length > 0 && (
+            <span style={{ ...PANEL, fontSize: "0.67rem", color: "#b91c1c", background: "#fee2e2", padding: "1px 6px", borderRadius: "2px", fontWeight: 600 }}>
+              {overdue.length} overdue
+            </span>
+          )}
+          {duethisweek.length > 0 && (
+            <span style={{ ...PANEL, fontSize: "0.67rem", color: "#92400e", background: "#fef3c7", padding: "1px 6px", borderRadius: "2px", fontWeight: 600 }}>
+              {duethisweek.length} due
+            </span>
+          )}
+          {!hasPriority && (
+            <span style={{ ...PANEL, fontSize: "0.67rem", color: "#aaa" }}>All clear</span>
+          )}
+          <span style={{ ...PANEL, marginLeft: "auto", fontSize: "0.67rem", color: "#aaa" }}>Wk {currentWeek}/4</span>
         </div>
-        {overdue.length > 0 && (
-          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#b91c1c", background: "#fee2e2", padding: "1px 7px", borderRadius: "2px", fontWeight: 600 }}>
-            {overdue.length} overdue
+
+        {/* Right half — Recent Activity */}
+        <div style={{
+          flex: 1,
+          padding: "9px 20px",
+          background: "#f8f6f2",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+        }}>
+          <div style={{
+            width: "7px", height: "7px", borderRadius: "50%",
+            background: recentTop.length > 0 ? "#1e6fa8" : "#ccc",
+            flexShrink: 0,
+            boxShadow: recentTop.length > 0 ? "0 0 0 2px rgba(30,111,168,0.15)" : "none",
+          }} />
+          <span style={{ ...PANEL, fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: recentTop.length > 0 ? "#1e6fa8" : "#aaa" }}>
+            Recent Activity
           </span>
-        )}
-        {duethisweek.length > 0 && (
-          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#92400e", background: "#fef3c7", padding: "1px 7px", borderRadius: "2px", fontWeight: 600 }}>
-            {duethisweek.length} due wk {currentWeek}
-          </span>
-        )}
-        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "10px" }}>
-          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#aaa" }}>
-            Wk {currentWeek} of 4
-          </span>
-          <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: isRed ? "#b91c1c" : "#92400e", fontWeight: 600 }}>
-            {expanded ? `Hide ${total}` : `Show ${total} →`}
+          {recentTop.length > 0 && (
+            <span style={{ ...PANEL, fontSize: "0.67rem", color: "#1e6fa8", background: "#e8f2fa", padding: "1px 6px", borderRadius: "2px", fontWeight: 600 }}>
+              {recentTop.length} recent
+            </span>
+          )}
+          {recentTop.length === 0 && (
+            <span style={{ ...PANEL, fontSize: "0.67rem", color: "#aaa" }}>No activity yet</span>
+          )}
+          <span style={{ ...PANEL, marginLeft: "auto", fontSize: "0.67rem", color: !hasPriority && recentTop.length === 0 ? "#ccc" : "#92400e", fontWeight: 600 }}>
+            {expanded ? "Hide ▲" : "Show ▼"}
           </span>
         </div>
       </div>
 
-      {/* Expandable rows */}
+      {/* ── Expanded two-column detail panel ── */}
       {expanded && (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {[...overdue.map(x => ({ ...x, timing: "overdue" })), ...duethisweek.map(x => ({ ...x, timing: "due" }))].map(({ piece, cluster, pillar, timing, late }) => {
-            const tm = TIMING_META[timing];
-            const feedbackCount = ((project.feedback || {})[piece.id] || []).length;
-            const clusterWeek = getClusterWeek(cluster.id);
-            return (
-              <div
-                key={piece.id}
-                onClick={() => onOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: "history" })}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "12px",
-                  padding: "10px 24px",
-                  borderLeft: `3px solid ${tm.border}`,
-                  background: tm.bg,
-                  borderBottom: "1px solid #f0ece4",
-                  cursor: "pointer",
-                  transition: "background 0.15s",
-                }}
-                onMouseEnter={e => e.currentTarget.style.background = timing === "overdue" ? "#fee2e2" : "#fef3c7"}
-                onMouseLeave={e => e.currentTarget.style.background = tm.bg}
-              >
-                <div style={{ flexShrink: 0 }}>
-                  <span style={{
-                    fontFamily: "Noto Sans, sans-serif", fontSize: "0.65rem", fontWeight: 700,
-                    letterSpacing: "0.1em", textTransform: "uppercase",
-                    color: tm.color, background: tm.bg,
-                    border: `1px solid ${tm.border}`,
-                    padding: "2px 7px", borderRadius: "2px",
-                    whiteSpace: "nowrap",
-                  }}>
-                    {timing === "overdue" ? `Wk ${clusterWeek} · ${late}wk late` : `Wk ${clusterWeek} · Due now`}
-                  </span>
-                </div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem", fontWeight: 500, color: "#0f1923", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                    {piece.title}
-                  </div>
-                  <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.72rem", color: "#888", marginTop: "2px" }}>
-                    {pillar.label} · {cluster.label}
-                  </div>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
-                  <StatusChip status={piece.status} />
-                  {feedbackCount > 0 && <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#888" }}>{feedbackCount}✎</span>}
-                  <span style={{ color: tm.color, fontSize: "0.8rem" }}>→</span>
-                </div>
+        <div style={{ display: "flex", alignItems: "flex-start", borderBottom: "1px solid #e0dbd4" }}>
+
+          {/* LEFT — Priority Actions list */}
+          <div style={{ flex: 1, borderRight: "1px solid #e0dbd4" }}>
+            {!hasPriority ? (
+              <div style={{ padding: "16px 20px", ...PANEL, fontSize: "0.78rem", color: "#aaa", fontStyle: "italic" }}>
+                No overdue or due pieces this week.
               </div>
-            );
-          })}
+            ) : (
+              priorityItems.map(({ piece, cluster, pillar, timing, late }) => {
+                const tm = TIMING_META[timing];
+                const clusterWeek = getClusterWeek(cluster.id, project.schedule);
+                const feedbackCount = ((project.feedback || {})[piece.id] || []).length;
+                return (
+                  <div
+                    key={piece.id}
+                    onClick={() => onOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: "history" })}
+                    style={{
+                      display: "flex", alignItems: "center", gap: "10px",
+                      padding: "9px 20px",
+                      borderLeft: `3px solid ${tm.border}`,
+                      background: tm.bg,
+                      borderBottom: "1px solid #f0ece4",
+                      cursor: "pointer",
+                      transition: "background 0.12s",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = timing === "overdue" ? "#fee2e2" : "#fef3c7"}
+                    onMouseLeave={e => e.currentTarget.style.background = tm.bg}
+                  >
+                    <span style={{
+                      ...PANEL, fontSize: "0.63rem", fontWeight: 700,
+                      letterSpacing: "0.09em", textTransform: "uppercase",
+                      color: tm.color, border: `1px solid ${tm.border}`,
+                      padding: "2px 6px", borderRadius: "2px", whiteSpace: "nowrap", flexShrink: 0,
+                    }}>
+                      {timing === "overdue" ? `Wk ${clusterWeek} · ${late}wk late` : `Wk ${clusterWeek} · Due now`}
+                    </span>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ ...PANEL, fontSize: "0.8rem", fontWeight: 500, color: "#0f1923", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                        {piece.title}
+                      </div>
+                      <div style={{ ...PANEL, fontSize: "0.68rem", color: "#888", marginTop: "1px" }}>
+                        {pillar.label} · {cluster.label}
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
+                      <StatusChip status={piece.status} />
+                      {feedbackCount > 0 && <span style={{ ...PANEL, fontSize: "0.68rem", color: "#888" }}>{feedbackCount}✎</span>}
+                      <span style={{ color: tm.color, fontSize: "0.78rem" }}>→</span>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
+
+          {/* RIGHT — Recent Activity list */}
+          <div style={{ flex: 1 }}>
+            {recentTop.length === 0 ? (
+              <div style={{ padding: "16px 20px", ...PANEL, fontSize: "0.78rem", color: "#aaa", fontStyle: "italic" }}>
+                No activity recorded yet.
+              </div>
+            ) : (
+              recentTop.map(({ piece, cluster, pillar }) => {
+                const sm = STATUS_META[piece.status] || STATUS_META["not-started"];
+                const actionLabel = STATUS_ACTION[piece.status] || piece.status;
+                const who = piece.last_updated_by
+                  ? (() => { const all = [...project.team.ns, ...project.team.jaggaer]; const m = all.find(x => x.id === piece.last_updated_by); return m ? m.name.split(" ")[0] : piece.last_updated_by; })()
+                  : null;
+                return (
+                  <div
+                    key={piece.id}
+                    onClick={() => onOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: "history" })}
+                    style={{
+                      display: "flex", alignItems: "center", gap: "10px",
+                      padding: "9px 20px",
+                      borderLeft: `3px solid ${sm.color}22`,
+                      background: "#fff",
+                      borderBottom: "1px solid #f0ece4",
+                      cursor: "pointer",
+                      transition: "background 0.12s",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = "#f8f6f2"}
+                    onMouseLeave={e => e.currentTarget.style.background = "#fff"}
+                  >
+                    {/* Status dot */}
+                    <div style={{
+                      width: "8px", height: "8px", borderRadius: "50%",
+                      background: sm.color, flexShrink: 0,
+                    }} />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ ...PANEL, fontSize: "0.8rem", fontWeight: 500, color: "#0f1923", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                        {piece.title}
+                      </div>
+                      <div style={{ ...PANEL, fontSize: "0.68rem", color: "#888", marginTop: "1px" }}>
+                        {pillar.label} · {cluster.label}
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "2px", flexShrink: 0 }}>
+                      <span style={{ ...PANEL, fontSize: "0.67rem", fontWeight: 600, color: sm.color, background: sm.bg, padding: "1px 6px", borderRadius: "2px" }}>
+                        {actionLabel}{who ? ` · ${who}` : ""}
+                      </span>
+                      <span style={{ ...PANEL, fontSize: "0.65rem", color: "#aaa" }}>
+                        {relTime(piece.last_updated)}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
         </div>
       )}
     </div>
@@ -366,7 +509,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         viewMode={viewMode} setViewMode={setViewMode}
       />
       {activeTab === "tracker" && (
-        <PriorityActions project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} />
+        <ActivityBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} currentUser={currentUser} />
       )}
       {activeTab === "tracker" && viewMode === "cards" && (
         <div className="ns-tracker-body">
@@ -1000,7 +1143,9 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
       status: newStatus,
       revision_count: nextRev,
       last_upload: new Date().toISOString(),
-      last_upload_by: currentUser.id
+      last_upload_by: currentUser.id,
+      last_updated: new Date().toISOString(),
+      last_updated_by: currentUser.id,
     });
     setStage("done");
   }
@@ -1056,7 +1201,11 @@ function FeedbackForm({ piece, cluster, project, currentUser, updatePiece, addFe
     setSubmitting(true);
     const entry = { id: "fb-"+Math.random().toString(36).slice(2,8), author: currentUser.id, verdict, body: body.trim() || "(no note)", ts: new Date().toISOString() };
     addFeedback(piece.id, entry);
-    updatePiece(cluster.id, piece.id, { status: verdict === "approved" ? "approved" : "jaggaer-feedback" });
+    updatePiece(cluster.id, piece.id, {
+      status: verdict === "approved" ? "approved" : "jaggaer-feedback",
+      last_updated: new Date().toISOString(),
+      last_updated_by: currentUser.id,
+    });
     await new Promise(r => setTimeout(r, 300));
     setSubmitting(false); setBody(""); onDone();
   }
@@ -1172,8 +1321,83 @@ function PieceDetails({ piece, cluster, pillar, project }) {
   ];
   if (interlinkRow) rows.push(["Cross-pillar link", interlinkRow.cross_pillar]);
 
+  // Build GitHub raw URL for the deliverable if one has been uploaded
+  const hasDeliverable = piece.status !== "not-started";
+  const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
+  const monthId = project.active_month || "month-1";
+  const deliverableUrl = hasDeliverable
+    ? `https://raw.githubusercontent.com/${REPO}/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable.html`
+    : null;
+  const repoViewUrl = hasDeliverable
+    ? `https://github.com/${REPO}/tree/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}`
+    : null;
+
   return (
     <div className="ns-details">
+      {/* Deliverable download bar — only when a file has been uploaded */}
+      {hasDeliverable && (
+        <div style={{
+          display: "flex", alignItems: "center", gap: "10px",
+          padding: "14px 20px",
+          background: "#f0f7ff",
+          border: "1px solid #c5ddef",
+          borderRadius: "4px",
+          marginBottom: "20px",
+        }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem", fontWeight: 600, color: "#1a3a52" }}>
+              deliverable.html
+            </div>
+            <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#6b8fa8", marginTop: "2px" }}>
+              {piece.revision_count > 1 ? `v${piece.revision_count} · ` : ""}
+              {piece.last_upload ? `Last uploaded ${new Date(piece.last_upload).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}` : "Uploaded"}
+            </div>
+          </div>
+          <a
+            href={deliverableUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: "Noto Sans, sans-serif",
+              fontSize: "0.72rem", fontWeight: 600,
+              color: "#1e6fa8",
+              background: "#fff",
+              border: "1px solid #c5ddef",
+              padding: "6px 14px",
+              borderRadius: "3px",
+              textDecoration: "none",
+              whiteSpace: "nowrap",
+              transition: "background 0.15s",
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = "#e8f2fa"}
+            onMouseLeave={e => e.currentTarget.style.background = "#fff"}
+          >
+            ↓ Download HTML
+          </a>
+          <a
+            href={repoViewUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: "Noto Sans, sans-serif",
+              fontSize: "0.72rem", fontWeight: 500,
+              color: "#6b8fa8",
+              background: "transparent",
+              border: "1px solid #c5ddef",
+              padding: "6px 14px",
+              borderRadius: "3px",
+              textDecoration: "none",
+              whiteSpace: "nowrap",
+              transition: "color 0.15s",
+            }}
+            onMouseEnter={e => e.currentTarget.style.color = "#1e6fa8"}
+            onMouseLeave={e => e.currentTarget.style.color = "#6b8fa8"}
+          >
+            View in GitHub →
+          </a>
+        </div>
+      )}
+
       <dl className="ns-detail-list">
         {rows.map(([k, v]) => (
           <div className="ns-detail-row" key={k}>
