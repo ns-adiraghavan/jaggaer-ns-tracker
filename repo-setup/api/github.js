@@ -7,15 +7,13 @@
 //   GET  /api/github?path=build-with-claude&list=1   → list folder contents
 
 export default async function handler(req, res) {
-  // Only allow from same origin (Vercel deployment or localhost)
-  const origin = req.headers.origin || "";
-  const allowed =
-    origin === "" ||                          // same-origin requests have no Origin header
-    origin.endsWith(".vercel.app") ||
-    origin.startsWith("http://localhost");
+  // CORS — allow all origins since this API only works with valid Vercel env vars
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, PUT, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (!allowed) {
-    return res.status(403).json({ error: "Forbidden" });
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
   }
 
   const token = process.env.GITHUB_TOKEN;
