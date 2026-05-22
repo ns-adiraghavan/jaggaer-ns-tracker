@@ -200,12 +200,14 @@ window.MOCK_PROJECT = {
               "title": "Supplier Intelligence with Claude: A Practical Field Guide (Anchor)",
               "format": "Field Guide (Anchor)",
               "assignee": null,
-              "status": "not-started",
-              "revision_count": 0,
+              "status": "uploaded",
+              "revision_count": 1,
               "primary_keyword": "supplier intelligence Claude",
               "geography": "all",
               "last_upload": "2026-05-18T05:34:40.861Z",
               "last_upload_by": "manager",
+              "last_updated": "2026-05-18T05:34:40.861Z",
+              "last_updated_by": "manager",
               "user_paths": [
                 "Path 2",
                 "Path 3"

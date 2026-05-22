@@ -187,19 +187,21 @@ function ActivityBar({ project, currentWeek, onOpenPiece, currentUser }) {
   const hasPriority = priorityItems.length > 0;
   const isRed = overdue.length > 0;
 
-  // ── Recent Activity: pieces with last_updated, sorted newest first ─────────
+  // ── Recent Activity: pieces with last_updated OR last_upload, sorted newest first ─────────
+  // Note: older uploads may have set last_upload without last_updated — fall back to last_upload
   const recentItems = [];
   for (const pillar of project.pillars) {
     for (const cluster of pillar.clusters) {
       for (const piece of cluster.pieces) {
-        if (piece.last_updated && piece.status !== "not-started") {
-          recentItems.push({ piece, cluster, pillar });
+        const ts = piece.last_updated || piece.last_upload;
+        if (ts && piece.status !== "not-started") {
+          recentItems.push({ piece, cluster, pillar, ts });
         }
       }
     }
   }
-  // Sort by last_updated descending, take top 5
-  recentItems.sort((a, b) => new Date(b.piece.last_updated) - new Date(a.piece.last_updated));
+  // Sort by effective timestamp descending, take top 5
+  recentItems.sort((a, b) => new Date(b.ts) - new Date(a.ts));
   const recentTop = recentItems.slice(0, 5);
 
   // Relative time helper
@@ -377,7 +379,7 @@ function ActivityBar({ project, currentWeek, onOpenPiece, currentUser }) {
                 No activity recorded yet.
               </div>
             ) : (
-              recentTop.map(({ piece, cluster, pillar }) => {
+              recentTop.map(({ piece, cluster, pillar, ts }) => {
                 const sm = STATUS_META[piece.status] || STATUS_META["not-started"];
                 const actionLabel = STATUS_ACTION[piece.status] || piece.status;
                 const who = piece.last_updated_by
@@ -417,7 +419,7 @@ function ActivityBar({ project, currentWeek, onOpenPiece, currentUser }) {
                         {actionLabel}{who ? ` · ${who}` : ""}
                       </span>
                       <span style={{ ...PANEL, fontSize: "0.65rem", color: "#aaa" }}>
-                        {relTime(piece.last_updated)}
+                        {relTime(ts)}
                       </span>
                     </div>
                   </div>
@@ -569,6 +571,23 @@ function TrackerHeader({ project, stats, activeCluster, setActiveCluster, active
         <div className="ns-tracker-head-left">
           <div className="ns-tracker-eyebrow">{monthLabel}</div>
           <h1 className="ns-tracker-title">{totalPieces} pieces · {project.pillars.length} pillars</h1>
+          {project.content_type_split && project.content_type_split.length > 0 && (
+            <div style={{ display: "flex", gap: "10px", marginTop: "5px", flexWrap: "wrap" }}>
+              {project.content_type_split.map(ct => (
+                <span key={ct.id} style={{
+                  fontFamily: "Noto Sans, sans-serif",
+                  fontSize: "0.68rem", fontWeight: 600,
+                  letterSpacing: "0.06em", textTransform: "uppercase",
+                  color: ct.id === "msv" ? "#1a6a3a" : ct.id === "ai-in-s2p" ? "#1e4fa8" : "#784212",
+                  background: ct.id === "msv" ? "#eaf4ee" : ct.id === "ai-in-s2p" ? "#eaf0fb" : "#fef3e8",
+                  border: `1px solid ${ct.id === "msv" ? "#b8dfc8" : ct.id === "ai-in-s2p" ? "#bad0f0" : "#f0d4a8"}`,
+                  padding: "2px 8px", borderRadius: "2px",
+                }}>
+                  {Math.round(ct.weight * 100)}% {ct.label}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
         <div className="ns-tracker-head-right">
           <KPI big={stats.approved} small={`/ ${stats.total}`} label="Approved" />
@@ -1326,7 +1345,7 @@ function PieceDetails({ piece, cluster, pillar, project }) {
   const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
   const monthId = project.active_month || "month-1";
   const deliverableUrl = hasDeliverable
-    ? `https://raw.githubusercontent.com/${REPO}/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable.html`
+    ? `https://raw.githubusercontent.com/${REPO}/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${piece.revision_count || 1}.html`
     : null;
   const repoViewUrl = hasDeliverable
     ? `https://github.com/${REPO}/tree/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}`
@@ -1473,7 +1492,7 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                   <div className="ns-ct-pillar-label" style={{ borderLeftColor: pillarAccent }}>
                     <span className="ns-ct-pillar-name">{pillar.label}</span>
                     {pillar.subtitle && <span className="ns-ct-pillar-sub">{pillar.subtitle}</span>}
-                    <span className="ns-ct-pillar-weight">{Math.round(pillar.weight * 100)}%</span>
+                    {pillar.weight != null && <span className="ns-ct-pillar-weight">{Math.round(pillar.weight * 100)}%</span>}
                   </div>
                 </td>
               </tr>

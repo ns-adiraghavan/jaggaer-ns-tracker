@@ -137,14 +137,48 @@ function AdminOverview({ project }) {
     { num: Object.values(stats.byCluster).filter(c => c.ready).length, label: "Publish-Ready", accent: true },
     { num: teamCount,              label: "Team Members",    accent: false },
   ];
+  const contentSplit = project.content_type_split || [];
   return (
-    <div className="ns-admin-overview">
-      {tiles.map(t => (
-        <div key={t.label} className={`ns-admin-stat-tile ${t.accent?"is-accent":""}`}>
-          <div className="ns-admin-stat-num">{t.num}</div>
-          <div className="ns-admin-stat-label">{t.label}</div>
+    <div>
+      <div className="ns-admin-overview">
+        {tiles.map(t => (
+          <div key={t.label} className={`ns-admin-stat-tile ${t.accent?"is-accent":""}`}>
+            <div className="ns-admin-stat-num">{t.num}</div>
+            <div className="ns-admin-stat-label">{t.label}</div>
+          </div>
+        ))}
+      </div>
+      {contentSplit.length > 0 && (
+        <div style={{ marginTop: "24px", padding: "16px 20px", background: "#f8f6f2", border: "1px solid #e8e3da", borderRadius: "4px" }}>
+          <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", marginBottom: "12px" }}>
+            Content Type Split
+          </div>
+          <div style={{ display: "flex", gap: "0", borderRadius: "3px", overflow: "hidden", height: "8px", marginBottom: "14px" }}>
+            {contentSplit.map((ct, i) => (
+              <div key={ct.id} style={{
+                flex: ct.weight,
+                background: ct.id === "msv" ? "#1a6a3a" : ct.id === "ai-in-s2p" ? "#1e4fa8" : "#c8401a",
+                opacity: 0.75,
+              }} title={`${ct.label}: ${Math.round(ct.weight * 100)}%`} />
+            ))}
+          </div>
+          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+            {contentSplit.map(ct => (
+              <div key={ct.id} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <div style={{
+                  width: "8px", height: "8px", borderRadius: "1px", flexShrink: 0,
+                  background: ct.id === "msv" ? "#1a6a3a" : ct.id === "ai-in-s2p" ? "#1e4fa8" : "#c8401a",
+                  opacity: 0.75,
+                }} />
+                <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem", color: "#444" }}>
+                  <strong style={{ color: "#111" }}>{Math.round(ct.weight * 100)}%</strong> {ct.label}
+                  {ct.pieces_est && <span style={{ color: "#999", marginLeft: "4px" }}>~{ct.pieces_est} pieces</span>}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
+      )}
     </div>
   );
 }
