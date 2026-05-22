@@ -40,13 +40,14 @@ function getScheduleContext(project) {
 
 // Derive the scheduled week for a piece from PUBLISHING_SEQUENCE by cluster ID.
 // This is the single source of truth — no piece.schedule_week field needed.
-function getClusterWeek(clusterId) {
-  const slot = PUBLISHING_SEQUENCE.find(w => w.slots.some(s => s.cluster === clusterId));
+function getClusterWeek(clusterId, schedule) {
+  if (!schedule) return null;
+  const slot = (schedule).find(w => w.slots.some(s => s.cluster === clusterId));
   return slot ? slot.week : null;
 }
 
-function getPieceTiming(piece, currentWeek, clusterId) {
-  const w = clusterId ? getClusterWeek(clusterId) : piece.schedule_week;
+function getPieceTiming(piece, currentWeek, clusterId, schedule) {
+  const w = clusterId ? getClusterWeek(clusterId, schedule) : piece.schedule_week;
   if (!w) return null;
   if (piece.status === "approved") return "done";
   if (w < currentWeek) return "overdue";
@@ -54,8 +55,8 @@ function getPieceTiming(piece, currentWeek, clusterId) {
   return "upcoming";
 }
 
-function weeksLate(piece, currentWeek, clusterId) {
-  const w = clusterId ? getClusterWeek(clusterId) : piece.schedule_week;
+function weeksLate(piece, currentWeek, clusterId, schedule) {
+  const w = clusterId ? getClusterWeek(clusterId, schedule) : piece.schedule_week;
   if (!w || w >= currentWeek) return 0;
   return currentWeek - w;
 }
@@ -74,66 +75,10 @@ const VERDICT_META = {
   "question":       { label: "Question",      glyph: "?" }
 };
 
-const PUBLISHING_SEQUENCE = [
-  {
-    week: 1,
-    label: "Week 1 · 21–27 May",
-    goal: "Capture Claude + S2P and tariff procurement search traffic from day one",
-    slots: [
-      { pillar: "ai-in-s2p",               cluster: "c1-getting-started",  pieces: 3 },
-      { pillar: "discrete-manufacturing",   cluster: "dm1-tariffs",         pieces: 3 },
-    ]
-  },
-  {
-    week: 2,
-    label: "Week 2 · 28 May–3 Jun",
-    goal: "Convert Path 2 users, demonstrate Claude, rank before EU AI Act deadline peaks",
-    slots: [
-      { pillar: "ai-in-s2p",               cluster: "c2-contracts",        pieces: 2 },
-      { pillar: "ai-in-s2p",               cluster: "c3-suppliers",        pieces: 3 },
-      { pillar: "public-sector",            cluster: "ps1-eu-ai",           pieces: 2 },
-      { pillar: "public-sector",            cluster: "ps2-einvoicing",      pieces: 2 },
-    ]
-  },
-  {
-    week: 3,
-    label: "Week 3 · 4–10 Jun",
-    goal: "Build cluster authority on supply chain risk and higher education spend governance",
-    slots: [
-      { pillar: "discrete-manufacturing",   cluster: "dm2-subtier",         pieces: 3 },
-      { pillar: "discrete-manufacturing",   cluster: "dm3-minerals",        pieces: 2 },
-      { pillar: "higher-education",         cluster: "he1-maverick",        pieces: 2 },
-      { pillar: "higher-education",         cluster: "he2-grants",          pieces: 2 },
-    ]
-  },
-  {
-    week: 4,
-    label: "Week 4 · 11–17 Jun",
-    goal: "Convert audiences built in weeks 1–3 to platform evaluation intent",
-    slots: [
-      { pillar: "ai-in-s2p",               cluster: "c4-prompt-library",   pieces: 2 },
-      { pillar: "discrete-manufacturing",   cluster: "dm4-tco",             pieces: 2 },
-      { pillar: "public-sector",            cluster: "ps3-eval",            pieces: 1 },
-      { pillar: "higher-education",         cluster: "he3-modernisation",   pieces: 1 },
-    ]
-  }
+// PUBLISHING_SEQUENCE — moved to project.json → project.schedule
 ];
 
-const INTERLINK_MAP = [
-  { pillar: "AI in S2P",              cluster: "C1 Getting Started",     anchor: "FAQ: What Can Claude Do Right Now",                  cross: "Link from each sector's AI angle back to Getting Started cluster" },
-  { pillar: "AI in S2P",              cluster: "C2 Claude for Contracts", anchor: "P-S: What Happens When You Ask Claude to Audit Contracts", cross: "Manufacturing C2: Sub-tier bankruptcy contracts angle" },
-  { pillar: "AI in S2P",              cluster: "C3 Suppliers & Sourcing", anchor: "How-to Guide: 3 S2P Tasks in Claude Right Now",     cross: "Public Sector C2: E-invoicing as a Claude sourcing use case" },
-  { pillar: "AI in S2P",              cluster: "C4 Prompt Library",      anchor: "By the Numbers: 20 Fundamental Queries",             cross: "All pillars: prompt library is the master cross-pillar SEO resource" },
-  { pillar: "Discrete Manufacturing", cluster: "C1 Tariff & Trade",      anchor: "FAQ: CBAM & Carbon Cost of Supply Chain",            cross: "Public Sector C1: EU AI Act + CBAM as parallel compliance obligations" },
-  { pillar: "Discrete Manufacturing", cluster: "C2 Sub-Tier Risk",       anchor: "Whitepaper: Tier 2-4 Supplier Bankruptcy",           cross: "AI in S2P C2: Claude for auditing supplier contracts" },
-  { pillar: "Discrete Manufacturing", cluster: "C3 Critical Minerals",   anchor: "Data Snapshot: Steel, Aluminum & Rare Earth Volatility", cross: "Manufacturing C2: Critical minerals as a sub-tier risk driver" },
-  { pillar: "Discrete Manufacturing", cluster: "C4 Platform TCO",        anchor: "eBook: The Manufacturing CPO's Platform Evaluation Guide", cross: "Public Sector C3: Platform evaluation — same buyer, different sector" },
-  { pillar: "Public Sector",          cluster: "C1 EU AI Act",           anchor: "Whitepaper: AI in Government Procurement",           cross: "Manufacturing C4: Platform evaluation — AI as a buying criterion" },
-  { pillar: "Public Sector",          cluster: "C2 E-Invoicing",         anchor: "Data Snapshot: Government Contract Leakage",         cross: "Higher Ed C1: Maverick spend — same problem, different sector" },
-  { pillar: "Public Sector",          cluster: "C3 Platform Evaluation", anchor: "Q&A: Head of Procurement Platform Criteria",         cross: "Manufacturing C4 + Higher Ed C3: Cross-pillar platform evaluation" },
-  { pillar: "Higher Education",       cluster: "C1 Maverick Spend",      anchor: "Whitepaper: CFO & CPO Maverick Spend Playbook",      cross: "Public Sector C2: Off-contract spend — parallel government problem" },
-  { pillar: "Higher Education",       cluster: "C2 Grant Compliance",    anchor: "Checklist: Grant Compliance NSF/NIH/Horizon Europe",  cross: "Higher Ed C3: Platform modernisation as the compliance solution" },
-  { pillar: "Higher Education",       cluster: "C3 Platform Modernisation", anchor: "P-S: From Spreadsheets to Platform",              cross: "Manufacturing C4 + Public Sector C3: Platform evaluation cross-pillar" },
+// INTERLINK_MAP — moved to project.json → project.interlink_map
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -228,8 +173,8 @@ function PriorityActions({ project, currentWeek, onOpenPiece }) {
   for (const pillar of project.pillars) {
     for (const cluster of pillar.clusters) {
       for (const piece of cluster.pieces) {
-        const timing = getPieceTiming(piece, currentWeek, cluster.id);
-        if (timing === "overdue") overdue.push({ piece, cluster, pillar, late: weeksLate(piece, currentWeek, cluster.id) });
+        const timing = getPieceTiming(piece, currentWeek, cluster.id, project.schedule);
+        if (timing === "overdue") overdue.push({ piece, cluster, pillar, late: weeksLate(piece, currentWeek, cluster.id, project.schedule) });
         if (timing === "due") duethisweek.push({ piece, cluster, pillar });
       }
     }
@@ -451,7 +396,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         />
       )}
       {activeTab === "sequence" && <PublishingSequence project={project} />}
-      {activeTab === "interlinks" && <InterlinkMap />}
+      {activeTab === "interlinks" && <InterlinkMap project={project} />}
 
       {overlayPiece && overlayCluster && overlayPillar && (
         <DrawerOverlay
@@ -550,12 +495,13 @@ function PublishingSequence({ project }) {
         <p className="ns-sequence-rule">Publish all pieces within a cluster before moving to the next. Add internal links between all pieces in the same cluster.</p>
       </div>
       <div className="ns-sequence-weeks">
-        {PUBLISHING_SEQUENCE.map(week => {
+        {(project.schedule || []).map(week => {
           const isCurrent = week.week === currentWeek;
           const weekClusters = week.slots.map(slot => {
             const pillar = project.pillars.find(p => p.id === slot.pillar);
             const cluster = pillar?.clusters.find(c => c.id === slot.cluster);
-            const cs = clusterStats[slot.cluster] || { approved: 0, total: slot.pieces, ready: false };
+            const total = cluster ? cluster.pieces.length : 0;
+            const cs = clusterStats[slot.cluster] || { approved: 0, total, ready: false };
             return { pillar, cluster, cs, slot };
           });
           const weekReady = weekClusters.every(w => w.cs.ready);
@@ -602,7 +548,13 @@ function PublishingSequence({ project }) {
 }
 
 // ─── Interlink map view ───────────────────────────────────────────────────────
-function InterlinkMap() {
+function InterlinkMap({ project }) {
+  const interlinkMap = project.interlink_map || [];
+  const enriched = interlinkMap.map(row => {
+    const pillarObj = project.pillars.find(p => p.id === row.pillar);
+    const clusterObj = pillarObj?.clusters.find(c => c.id === row.cluster);
+    return { ...row, pillarLabel: pillarObj?.label || row.pillar, clusterLabel: clusterObj?.label || row.cluster };
+  });
   return (
     <div className="ns-interlinks">
       <div className="ns-sequence-intro">
@@ -616,16 +568,18 @@ function InterlinkMap() {
               <th>Pillar</th>
               <th>Cluster</th>
               <th>Anchor Piece</th>
+              <th>Linking Rule</th>
               <th>Cross-Pillar Link Opportunity</th>
             </tr>
           </thead>
           <tbody>
-            {INTERLINK_MAP.map((row, i) => (
+            {enriched.map((row, i) => (
               <tr key={i} className={i % 2 === 0 ? "ns-interlink-row-even" : ""}>
-                <td className="ns-interlink-pillar">{row.pillar}</td>
-                <td className="ns-interlink-cluster">{row.cluster}</td>
-                <td className="ns-interlink-anchor">{row.anchor}</td>
-                <td className="ns-interlink-cross">{row.cross}</td>
+                <td className="ns-interlink-pillar">{row.pillarLabel}</td>
+                <td className="ns-interlink-cluster">{row.clusterLabel}</td>
+                <td className="ns-interlink-anchor">{row.anchor_label}</td>
+                <td className="ns-interlink-rule">{row.linking_rule}</td>
+                <td className="ns-interlink-cross">{row.cross_pillar}</td>
               </tr>
             ))}
           </tbody>
@@ -677,9 +631,9 @@ function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpe
   const inMotion = cluster.pieces.filter(p => ["uploaded","jaggaer-feedback","revised"].includes(p.status)).length;
   const ready = approved === total && total > 0;
   const anchor = cluster.pieces.find(p => p.id === cluster.anchor_piece);
-  const weekSlot = PUBLISHING_SEQUENCE.find(w => w.slots.some(s => s.cluster === cluster.id));
-  const overdueCount = cluster.pieces.filter(p => getPieceTiming(p, currentWeek, cluster.id) === "overdue").length;
-  const dueCount = cluster.pieces.filter(p => getPieceTiming(p, currentWeek, cluster.id) === "due").length;
+  const weekSlot = (project.schedule || []).find(w => w.slots.some(s => s.cluster === cluster.id));
+  const overdueCount = cluster.pieces.filter(p => getPieceTiming(p, currentWeek, cluster.id, project.schedule) === "overdue").length;
+  const dueCount = cluster.pieces.filter(p => getPieceTiming(p, currentWeek, cluster.id, project.schedule) === "due").length;
 
   const pal = CLUSTER_PALETTE[clusterIndex % CLUSTER_PALETTE.length];
   const headStyle = ready
@@ -782,7 +736,7 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
   const feedback = (project.feedback || {})[piece.id] || [];
   const isNS = currentUser.org === "ns";
   const isJG = currentUser.org === "jaggaer";
-  const timing = getPieceTiming(piece, currentWeek, cluster.id);
+  const timing = getPieceTiming(piece, currentWeek, cluster.id, project.schedule);
   const tm = timing ? TIMING_META[timing] : null;
 
   const nsMembers = project.team.ns.map(m => ({ value: m.id, label: m.name }));
@@ -858,7 +812,7 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
                 <><span className="ns-meta-sep">·</span><span className="ns-piece-meta-hint">{[piece.revision_count > 0 && `rev ${piece.revision_count}`, feedback.length > 0 && `${feedback.length}✎`].filter(Boolean).join(" ")}</span></>
               )}
               {timing === "overdue" && tm && (
-                <><span className="ns-meta-sep">·</span><span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.68rem", fontWeight:700, color: tm.color }}>{weeksLate(piece, currentWeek, cluster.id)}wk overdue</span></>
+                <><span className="ns-meta-sep">·</span><span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.68rem", fontWeight:700, color: tm.color }}>{weeksLate(piece, currentWeek, cluster.id, project.schedule)}wk overdue</span></>
               )}
               {timing === "due" && tm && (
                 <><span className="ns-meta-sep">·</span><span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.68rem", fontWeight:700, color: tm.color }}>Due this week</span></>
@@ -1201,11 +1155,8 @@ function FeedbackCard({ entry, project, ordinal }) {
 
 // ─── Piece details ────────────────────────────────────────────────────────────
 function PieceDetails({ piece, cluster, pillar, project }) {
-  const weekSlot = PUBLISHING_SEQUENCE.find(w => w.slots.some(s => s.cluster === cluster.id));
-  const interlinkRow = INTERLINK_MAP.find(r => {
-    const clusterShort = cluster.label.split(" ").slice(0,2).join(" ");
-    return r.pillar === pillar.label || r.cluster.includes(clusterShort);
-  });
+  const weekSlot = (project.schedule || []).find(w => w.slots.some(s => s.cluster === cluster.id));
+  const interlinkRow = (project.interlink_map || []).find(r => r.cluster === cluster.id);
 
   const rows = [
     ["Pillar",            pillar.label],
@@ -1222,7 +1173,7 @@ function PieceDetails({ piece, cluster, pillar, project }) {
     ["Revision count",    piece.revision_count || 0],
     ["Status",            STATUS_META[piece.status]?.label || piece.status],
   ];
-  if (interlinkRow) rows.push(["Cross-pillar link", interlinkRow.cross]);
+  if (interlinkRow) rows.push(["Cross-pillar link", interlinkRow.cross_pillar]);
 
   return (
     <div className="ns-details">
@@ -1440,4 +1391,4 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
 window.Tracker = Tracker;
 window.STATUS_META = STATUS_META;
 window.VERDICT_META = VERDICT_META;
-window.PUBLISHING_SEQUENCE = PUBLISHING_SEQUENCE;
+// PUBLISHING_SEQUENCE and INTERLINK_MAP now live in project.json — read via props.
