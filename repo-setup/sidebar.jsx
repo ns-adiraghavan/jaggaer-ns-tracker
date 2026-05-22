@@ -101,10 +101,10 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           rightMeta="5 apps"
         />
         <NavSection
-          label="Agent Builder"
-          active={view === "agent-builder"}
-          onClick={() => setView("agent-builder")}
-          rightMeta="live"
+          label="Sample Artifacts"
+          active={view === "sample-artifacts"}
+          onClick={() => setView("sample-artifacts")}
+          rightMeta="5 articles"
         />
 
         {adminMode && (
