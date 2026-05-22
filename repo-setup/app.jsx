@@ -2,6 +2,69 @@
 
 const { useState: useStateApp, useEffect: useEffectApp, useRef: useRefApp } = React;
 
+// ── Error Boundary — catches React render errors that would otherwise leave
+//    the app silently blank or stuck at the loading screen ──────────────────
+class AppErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { error: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{
+          minHeight: "100vh", background: "#0f1923", display: "flex",
+          alignItems: "center", justifyContent: "center", padding: "40px",
+        }}>
+          <div style={{
+            background: "#19242f", border: "1px solid #c8401a",
+            borderLeft: "4px solid #c8401a", borderRadius: "4px",
+            padding: "32px 40px", maxWidth: "640px", width: "100%",
+          }}>
+            <div style={{
+              fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem",
+              fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase",
+              color: "#c8401a", marginBottom: "16px",
+            }}>
+              Application Error
+            </div>
+            <div style={{
+              fontFamily: "'Playfair Display', serif", fontSize: "1.4rem",
+              color: "#f5f2ec", marginBottom: "12px",
+            }}>
+              Something went wrong loading the tracker.
+            </div>
+            <pre style={{
+              fontFamily: "JetBrains Mono, monospace", fontSize: "0.75rem",
+              color: "rgba(245,242,236,0.55)", background: "rgba(0,0,0,0.3)",
+              padding: "16px", borderRadius: "3px", overflow: "auto",
+              maxHeight: "200px", whiteSpace: "pre-wrap", wordBreak: "break-all",
+            }}>
+              {this.state.error.toString()}
+            </pre>
+            <button
+              onClick={() => window.location.reload()}
+              style={{
+                marginTop: "20px", background: "#c8401a", border: "none",
+                color: "#fff", padding: "10px 24px", borderRadius: "2px",
+                fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem",
+                fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase",
+                cursor: "pointer",
+              }}
+            >
+              Reload
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 // ── Save Toast ────────────────────────────────────────────────────────────────
 function SaveToast({ state }) {
   if (!state) return null;
@@ -44,6 +107,7 @@ function App() {
   const [project, setProject] = useStateApp(null);
   const [sha, setSha] = useStateApp(null);
   const [source, setSource] = useStateApp(null);
+  const [loadError, setLoadError] = useStateApp(null);
   const [currentUser, setCurrentUser] = useStateApp(readSession);
   const [view, setView] = useStateApp("tracker");
   const [activePillar, setActivePillar] = useStateApp(null);
@@ -55,12 +119,10 @@ function App() {
   const saveTimerRef = useRefApp(null);
   const toastTimerRef = useRefApp(null);
   const firstSaveRef = useRefApp(true);
-  // shaRef ensures the save timeout always reads the current SHA,
-  // not a stale closure value from a previous render.
   const shaRef = useRefApp(null);
 
   useEffectApp(() => {
-    window.NS_API.loadProject().then(({ project, source, sha }) => {
+    window.NS_API.loadProject().then(({ project, source, sha, error }) => {
       // If a session user exists, verify they're still in the roster; evict if not.
       const sessionUser = readSession();
       if (sessionUser) {
@@ -72,6 +134,14 @@ function App() {
       setSource(source);
       setSha(sha);
       shaRef.current = sha;
+      if (error) setLoadError(error);
+    }).catch(e => {
+      // Should never reach here (loadProject has its own catch), but just in case
+      console.error("[App] loadProject uncaught:", e);
+      const project = JSON.parse(JSON.stringify(window.MOCK_PROJECT));
+      setProject(project);
+      setSource("mock");
+      setLoadError(e.message);
     });
   }, []);
 
@@ -94,7 +164,12 @@ function App() {
   }, [project]);
 
   if (!project) {
-    return <div className="ns-loading"><div className="ns-loading-dot"></div><span>Reading project.json\u2026</span></div>;
+    return (
+      <div className="ns-loading">
+        <div className="ns-loading-dot"></div>
+        <span>Reading project.json\u2026</span>
+      </div>
+    );
   }
 
   if (!currentUser) {
@@ -120,6 +195,17 @@ function App() {
       />
 
       <div className="ns-main-col">
+        {loadError && source === "mock" && (
+          <div style={{
+            padding: "8px 24px", background: "#fffbeb",
+            borderBottom: "1px solid #fcd34d",
+            fontFamily: "Noto Sans, sans-serif", fontSize: "0.75rem",
+            color: "#92400e", display: "flex", alignItems: "center", gap: "8px",
+          }}>
+            <span style={{ fontWeight: 700 }}>⚠ GitHub sync unavailable</span>
+            <span>— showing mock data. Check Vercel environment variables.</span>
+          </div>
+        )}
         {view === "tracker" && (
           <Tracker
             project={project}
@@ -177,4 +263,8 @@ function StatusFooter({ source, project, activeMonthId }) {
 }
 
 const root = ReactDOM.createRoot(document.getElementById("app"));
-root.render(<App />);
+root.render(
+  <AppErrorBoundary>
+    <App />
+  </AppErrorBoundary>
+);

@@ -4,16 +4,27 @@
 window.NS_API = (function () {
   const GITHUB_REPO = window.__CONFIG__.GITHUB_REPO;
 
-  // We're always "real" when deployed — proxies handle credential validation.
-  // In local dev without the proxy running, calls will 404 and fall back to mock.
   const isRealGithub = !!(GITHUB_REPO && GITHUB_REPO.includes("/") && !GITHUB_REPO.includes("owner/"));
-  const isRealAnthropic = true; // proxy decides at runtime
+  const isRealAnthropic = true;
 
   // ── GitHub proxy helpers ──────────────────────────────────────────────────
+  // 5-second timeout on every GitHub call — if the Vercel function doesn't
+  // respond in time (cold start, env misconfiguration) we fall back to mock
+  // immediately rather than hanging the loading screen forever.
   async function githubGetFile(path) {
-    const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`);
-    if (!r.ok) throw new Error(`gh-${r.status}`);
-    return r.json();
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 5000);
+    try {
+      const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`, {
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
+      if (!r.ok) throw new Error(`gh-${r.status}`);
+      return r.json();
+    } catch (e) {
+      clearTimeout(timer);
+      throw e;
+    }
   }
 
   async function githubPutFile(path, contentString, message, sha) {
@@ -22,22 +33,41 @@ window.NS_API = (function () {
       content: btoa(unescape(encodeURIComponent(contentString))),
       ...(sha ? { sha } : {}),
     };
-    const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    if (!r.ok) {
-      const errBody = await r.text();
-      throw new Error(`gh-put-${r.status}: ${errBody}`);
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 10000);
+    try {
+      const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
+      if (!r.ok) {
+        const errBody = await r.text();
+        throw new Error(`gh-put-${r.status}: ${errBody}`);
+      }
+      return r.json();
+    } catch (e) {
+      clearTimeout(timer);
+      throw e;
     }
-    return r.json();
   }
 
   async function githubListFolder(path) {
-    const r = await fetch(`/api/github?path=${encodeURIComponent(path)}&list=1`);
-    if (!r.ok) throw new Error(`gh-list-${r.status}`);
-    return r.json();
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 5000);
+    try {
+      const r = await fetch(`/api/github?path=${encodeURIComponent(path)}&list=1`, {
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
+      if (!r.ok) throw new Error(`gh-list-${r.status}`);
+      return r.json();
+    } catch (e) {
+      clearTimeout(timer);
+      throw e;
+    }
   }
 
   // ── Project load / save ───────────────────────────────────────────────────
@@ -45,9 +75,12 @@ window.NS_API = (function () {
     try {
       const meta = await githubGetFile("config/project.json");
       const raw = atob(meta.content.replace(/\n/g, ""));
-      const content = new TextDecoder("utf-8").decode(Uint8Array.from(raw, c => c.charCodeAt(0)));
+      const content = new TextDecoder("utf-8").decode(
+        Uint8Array.from(raw, c => c.charCodeAt(0))
+      );
       return { project: JSON.parse(content), source: "github", sha: meta.sha };
     } catch (e) {
+      console.warn("[NS_API] GitHub load failed, using mock data:", e.message);
       const project = JSON.parse(JSON.stringify(window.MOCK_PROJECT));
       return { project, source: "mock", sha: null, error: e.message };
     }
@@ -65,6 +98,7 @@ window.NS_API = (function () {
       if (!newSha) throw new Error("no-sha-in-response");
       return { ok: true, sha: newSha };
     } catch (e) {
+      console.warn("[NS_API] GitHub save failed:", e.message);
       return { ok: false, error: e.message };
     }
   }
@@ -79,6 +113,7 @@ window.NS_API = (function () {
       const result = await githubPutFile(path, contentString, `upload ${piece.id} v${(piece.revision_count || 0) + 1}`);
       return { ok: true, path, mock: !!result.mock };
     } catch (e) {
+      console.warn("[NS_API] Upload failed:", e.message);
       return { ok: false, path, error: e.message };
     }
   }
@@ -115,17 +150,18 @@ window.NS_API = (function () {
         const data = await r.json();
         return data.content?.[0]?.text || "";
       }
-    } catch (e) { /* fall through to built-in */ }
+    } catch (e) { /* fall through */ }
 
-    // Built-in helper fallback (claude.ai artifact context only)
     if (typeof window.claude !== "undefined") {
       return await window.claude.complete({
         messages: [
-          { role: "user", content: `${systemPrompt}\n\n— Conversation —\n` +
+          {
+            role: "user",
+            content: `${systemPrompt}\n\n— Conversation —\n` +
               messages.map(m => `${m.role.toUpperCase()}: ${m.content}`).join("\n\n") +
-              `\n\nRespond as the project-aware colleague. Be concise.`
-          }
-        ]
+              `\n\nRespond as the project-aware colleague. Be concise.`,
+          },
+        ],
       });
     }
 
