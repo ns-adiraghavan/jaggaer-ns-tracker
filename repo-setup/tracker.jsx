@@ -75,11 +75,8 @@ const VERDICT_META = {
   "question":       { label: "Question",      glyph: "?" }
 };
 
-// PUBLISHING_SEQUENCE — moved to project.json → project.schedule
-];
-
-// INTERLINK_MAP — moved to project.json → project.interlink_map
-];
+// PUBLISHING_SEQUENCE — now read from project.json → project.schedule
+// INTERLINK_MAP — now read from project.json → project.interlink_map
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function assigneeName(project, id) {
