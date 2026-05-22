@@ -301,15 +301,17 @@
               "title": "Supplier Financial Risk Signals Procurement Should Monitor",
               "format": "Informational Article",
               "assignee": null,
-              "status": "not-started",
-              "revision_count": 0,
+              "status": "uploaded",
+              "revision_count": 1,
               "primary_keyword": "supplier financial risk assessment",
               "secondary_keyword": "supplier risk management",
               "intent": "informational",
               "funnel": "TOFU",
               "geography": "all",
               "notes": "NEW — not previously in tracker | URL: /blog/supplier-financial-risk-signals-procurement | Words: 2,000–2,500",
-              "schedule_week": 3
+              "schedule_week": 3,
+              "last_upload": "2026-05-22T13:57:23.235Z",
+              "last_upload_by": "orlagh"
             },
             {
               "id": "p-dm2-3",
