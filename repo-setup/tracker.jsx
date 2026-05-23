@@ -318,7 +318,7 @@ function ActivityBar({ project, currentWeek, onOpenPiece, currentUser }) {
         <div style={{ display: "flex", alignItems: "stretch", borderBottom: "1px solid #e0dbd4" }}>
 
           {/* LEFT — Priority Actions list */}
-          <div style={{ flex: 1, borderRight: "1px solid #e0dbd4", display: "flex", flexDirection: "column" }}>
+          <div style={{ flex: "0 0 50%", maxWidth: "50%", borderRight: "1px solid #e0dbd4", display: "flex", flexDirection: "column" }}>
             {!hasPriority ? (
               <div style={{ padding: "16px 20px", ...PANEL, fontSize: "0.78rem", color: "#aaa", fontStyle: "italic" }}>
                 No overdue or due pieces this week.
@@ -372,7 +372,7 @@ function ActivityBar({ project, currentWeek, onOpenPiece, currentUser }) {
           </div>
 
           {/* RIGHT — Recent Activity list */}
-          <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+          <div style={{ flex: "0 0 50%", maxWidth: "50%", display: "flex", flexDirection: "column" }}>
             {recentTop.length === 0 ? (
               <div style={{ padding: "16px 20px", ...PANEL, fontSize: "0.78rem", color: "#aaa", fontStyle: "italic" }}>
                 No activity recorded yet.

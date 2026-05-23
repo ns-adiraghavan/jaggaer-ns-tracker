@@ -19,7 +19,7 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
   const monthLabel = activeMonth ? activeMonth.label : 'Month 1';
   const shortLabel = monthLabel.replace('Month ', 'M');
   const [collapsed, setCollapsed] = React.useState(false);
-  const [navMode, setNavMode] = React.useState('pillar'); // 'pillar' | 'content-type'
+  const [navMode, setNavMode] = React.useState('content-type'); // 'pillar' | 'content-type'
 
   // Content-type stats — count pieces by content_type field
   const ctStats = React.useMemo(() => {
