@@ -76,7 +76,6 @@ const VERDICT_META = {
 };
 
 // PUBLISHING_SEQUENCE — now read from project.json → project.schedule
-// INTERLINK_MAP — now read from project.json → project.interlink_map
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function assigneeName(project, id) {
@@ -538,8 +537,6 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         />
       )}
       {activeTab === "sequence" && <PublishingSequence project={project} />}
-      {activeTab === "interlinks" && <InterlinkMap project={project} />}
-
       {overlayPiece && overlayCluster && overlayPillar && (
         <DrawerOverlay
           piece={overlayPiece} cluster={overlayCluster} pillar={overlayPillar}
@@ -598,7 +595,7 @@ function TrackerHeader({ project, stats, activeCluster, setActiveCluster, active
 
       <div className="ns-tracker-nav-row">
         <div className="ns-tracker-tabs">
-          {[["tracker","Content Tracker"],["sequence","Publishing Sequence"],["interlinks","Interlink Map"]].map(([id, label]) => (
+          {[["tracker","Content Tracker"],["sequence","Publishing Sequence"]].map(([id, label]) => (
             <button key={id} className={`ns-tracker-tab ${activeTab === id ? "is-active" : ""}`} onClick={() => setActiveTab(id)}>
               {label}
             </button>
@@ -706,47 +703,6 @@ function PublishingSequence({ project }) {
   );
 }
 
-// ─── Interlink map view ───────────────────────────────────────────────────────
-function InterlinkMap({ project }) {
-  const interlinkMap = project.interlink_map || [];
-  const enriched = interlinkMap.map(row => {
-    const pillarObj = project.pillars.find(p => p.id === row.pillar);
-    const clusterObj = pillarObj?.clusters.find(c => c.id === row.cluster);
-    return { ...row, pillarLabel: pillarObj?.label || row.pillar, clusterLabel: clusterObj?.label || row.cluster };
-  });
-  return (
-    <div className="ns-interlinks">
-      <div className="ns-sequence-intro">
-        <div className="ns-eyebrow ns-eyebrow-dark">Internal Linking & Cross-Pillar Interlink Map · SEO Topical Authority Strategy</div>
-        <p className="ns-sequence-rule">Every piece links to its cluster anchor. Anchor pieces link back to all supporting pieces. Cross-pillar links multiply authority across the full content ecosystem.</p>
-      </div>
-      <div className="ns-interlink-table-wrap">
-        <table className="ns-interlink-table">
-          <thead>
-            <tr>
-              <th>Pillar</th>
-              <th>Cluster</th>
-              <th>Anchor Piece</th>
-              <th>Linking Rule</th>
-              <th>Cross-Pillar Link Opportunity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {enriched.map((row, i) => (
-              <tr key={i} className={i % 2 === 0 ? "ns-interlink-row-even" : ""}>
-                <td className="ns-interlink-pillar">{row.pillarLabel}</td>
-                <td className="ns-interlink-cluster">{row.clusterLabel}</td>
-                <td className="ns-interlink-anchor">{row.anchor_label}</td>
-                <td className="ns-interlink-rule">{row.linking_rule}</td>
-                <td className="ns-interlink-cross">{row.cross_pillar}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
 
 // ─── Pillar block ─────────────────────────────────────────────────────────────
 function PillarBlock({ pillar, sequence, activeCluster, project, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onAdminEditCluster, currentWeek }) {
@@ -1321,8 +1277,6 @@ function FeedbackCard({ entry, project, ordinal }) {
 // ─── Piece details ────────────────────────────────────────────────────────────
 function PieceDetails({ piece, cluster, pillar, project }) {
   const weekSlot = (project.schedule || []).find(w => w.slots.some(s => s.cluster === cluster.id));
-  const interlinkRow = (project.interlink_map || []).find(r => r.cluster === cluster.id);
-
   const rows = [
     ["Pillar",            pillar.label],
     ["Cluster",           cluster.label],
@@ -1335,10 +1289,13 @@ function PieceDetails({ piece, cluster, pillar, project }) {
     ["Primary keyword",   piece.primary_keyword || "—"],
     ["Secondary keyword", piece.secondary_keyword || "—"],
     ["Anchor piece",      piece.id === cluster.anchor_piece ? "Yes — this is the cluster anchor" : "No"],
+    ["Funnel stage",      piece.funnel || "—"],
+    ["Target URL",        piece.url || piece.notes?.match(/URL:\s*(\S+)/)?.[1] || "—"],
+    ["Word count",        piece.notes?.match(/Words:\s*([\d,–-]+)/)?.[1] || "—"],
     ["Revision count",    piece.revision_count || 0],
     ["Status",            STATUS_META[piece.status]?.label || piece.status],
   ];
-  if (interlinkRow) rows.push(["Cross-pillar link", interlinkRow.cross_pillar]);
+  if (piece.notes) rows.push(["Notes", piece.notes.replace(/\s*\|\s*(URL|Words):[^|]*/g, "").trim()]);
 
   // Build GitHub raw URL for the deliverable if one has been uploaded
   const hasDeliverable = piece.status !== "not-started";
