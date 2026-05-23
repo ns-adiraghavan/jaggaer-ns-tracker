@@ -315,10 +315,10 @@ function ActivityBar({ project, currentWeek, onOpenPiece, currentUser }) {
 
       {/* ── Expanded two-column detail panel ── */}
       {expanded && (
-        <div style={{ display: "flex", alignItems: "flex-start", borderBottom: "1px solid #e0dbd4" }}>
+        <div style={{ display: "flex", alignItems: "stretch", borderBottom: "1px solid #e0dbd4" }}>
 
           {/* LEFT — Priority Actions list */}
-          <div style={{ flex: 1, borderRight: "1px solid #e0dbd4" }}>
+          <div style={{ flex: 1, borderRight: "1px solid #e0dbd4", display: "flex", flexDirection: "column" }}>
             {!hasPriority ? (
               <div style={{ padding: "16px 20px", ...PANEL, fontSize: "0.78rem", color: "#aaa", fontStyle: "italic" }}>
                 No overdue or due pieces this week.
@@ -372,7 +372,7 @@ function ActivityBar({ project, currentWeek, onOpenPiece, currentUser }) {
           </div>
 
           {/* RIGHT — Recent Activity list */}
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
             {recentTop.length === 0 ? (
               <div style={{ padding: "16px 20px", ...PANEL, fontSize: "0.78rem", color: "#aaa", fontStyle: "italic" }}>
                 No activity recorded yet.
@@ -508,6 +508,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         activeCluster={activeCluster} setActiveCluster={setActiveCluster}
         activeTab={activeTab} setActiveTab={setActiveTab}
         viewMode={viewMode} setViewMode={setViewMode}
+        currentUser={currentUser} onOpenPiece={setOpenPiece}
       />
       {activeTab === "tracker" && (
         <ActivityBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} currentUser={currentUser} />
@@ -553,8 +554,159 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
   );
 }
 
+
+// ─── Notification Bell — Jaggaer users see pieces awaiting their review ───────
+function NotificationBell({ project, currentUser, onOpenPiece }) {
+  const [open, setOpen] = useStateTR(false);
+  if (currentUser.org !== "jaggaer") return null;
+
+  const pending = [];
+  for (const pillar of project.pillars) {
+    for (const cluster of pillar.clusters) {
+      for (const piece of cluster.pieces) {
+        if (piece.status === "uploaded" || piece.status === "revised") {
+          pending.push({ piece, cluster, pillar });
+        }
+      }
+    }
+  }
+
+  const count = pending.length;
+  const PANEL = { fontFamily: "Noto Sans, sans-serif" };
+
+  return (
+    <div style={{ position: "relative" }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        title={count > 0 ? `${count} piece${count > 1 ? "s" : ""} awaiting your review` : "No items awaiting review"}
+        style={{
+          position: "relative",
+          background: count > 0 ? "#fff8f0" : "#f8f6f2",
+          border: `1px solid ${count > 0 ? "#f0c89a" : "#e0dbd4"}`,
+          borderRadius: "4px",
+          padding: "6px 10px",
+          cursor: "pointer",
+          display: "flex", alignItems: "center", gap: "6px",
+          transition: "background 0.15s",
+        }}
+        onMouseEnter={e => e.currentTarget.style.background = count > 0 ? "#fef3e8" : "#f0ece4"}
+        onMouseLeave={e => e.currentTarget.style.background = count > 0 ? "#fff8f0" : "#f8f6f2"}
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={count > 0 ? "#b05e00" : "#aaa"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+        {count > 0 && (
+          <span style={{
+            ...PANEL, fontSize: "0.68rem", fontWeight: 700,
+            color: "#b05e00",
+          }}>{count} to review</span>
+        )}
+        {count === 0 && (
+          <span style={{ ...PANEL, fontSize: "0.68rem", color: "#aaa" }}>All reviewed</span>
+        )}
+        {count > 0 && (
+          <span style={{
+            position: "absolute", top: "-5px", right: "-5px",
+            width: "16px", height: "16px",
+            background: "#c8401a", color: "#fff",
+            borderRadius: "50%", fontSize: "0.6rem", fontWeight: 700,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontFamily: "Noto Sans, sans-serif",
+            boxShadow: "0 0 0 2px #fff",
+          }}>{count}</span>
+        )}
+      </button>
+
+      {open && count > 0 && (
+        <>
+          {/* Backdrop */}
+          <div
+            style={{ position: "fixed", inset: 0, zIndex: 199 }}
+            onClick={() => setOpen(false)}
+          />
+          {/* Dropdown */}
+          <div style={{
+            position: "absolute", top: "calc(100% + 8px)", right: 0,
+            width: "340px",
+            background: "#fff",
+            border: "1px solid #e0dbd4",
+            borderRadius: "4px",
+            boxShadow: "0 8px 24px rgba(15,25,35,0.12)",
+            zIndex: 200,
+            overflow: "hidden",
+          }}>
+            <div style={{
+              padding: "10px 16px",
+              borderBottom: "1px solid #f0ece4",
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+            }}>
+              <span style={{ ...PANEL, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#b05e00" }}>
+                Awaiting Your Review
+              </span>
+              <span style={{ ...PANEL, fontSize: "0.68rem", color: "#aaa" }}>{count} piece{count > 1 ? "s" : ""}</span>
+            </div>
+            <div style={{ maxHeight: "320px", overflowY: "auto" }}>
+              {pending.map(({ piece, cluster, pillar }) => {
+                const sm = STATUS_META[piece.status];
+                const uploadedBy = piece.last_upload_by
+                  ? (() => { const all = [...project.team.ns, ...project.team.jaggaer]; const m = all.find(x => x.id === piece.last_upload_by); return m ? m.name.split(" ")[0] : piece.last_upload_by; })()
+                  : null;
+                const ts = piece.last_upload || piece.last_updated;
+                const diff = ts ? Math.floor((Date.now() - new Date(ts)) / 86400000) : null;
+                const daysAgo = diff === null ? "" : diff === 0 ? "today" : diff === 1 ? "yesterday" : `${diff}d ago`;
+                return (
+                  <div
+                    key={piece.id}
+                    onClick={() => { onOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: "feedback" }); setOpen(false); }}
+                    style={{
+                      padding: "10px 16px",
+                      borderBottom: "1px solid #f0ece4",
+                      cursor: "pointer",
+                      display: "flex", alignItems: "flex-start", gap: "10px",
+                      transition: "background 0.1s",
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = "#fdf9f5"}
+                    onMouseLeave={e => e.currentTarget.style.background = "transparent"}
+                  >
+                    <div style={{
+                      width: "8px", height: "8px", borderRadius: "50%",
+                      background: sm.color, flexShrink: 0, marginTop: "4px",
+                    }} />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ ...PANEL, fontSize: "0.78rem", fontWeight: 500, color: "#0f1923", lineHeight: 1.35,
+                        overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
+                        {piece.title}
+                      </div>
+                      <div style={{ ...PANEL, fontSize: "0.67rem", color: "#888", marginTop: "3px" }}>
+                        {pillar.label} · {cluster.label}
+                      </div>
+                      <div style={{ ...PANEL, fontSize: "0.67rem", color: sm.color, marginTop: "2px", display: "flex", gap: "6px", flexWrap: "wrap" }}>
+                        <span style={{ background: sm.bg, padding: "1px 6px", borderRadius: "2px", fontWeight: 600 }}>{sm.label}</span>
+                        {uploadedBy && <span style={{ color: "#aaa" }}>by {uploadedBy}{daysAgo ? ` · ${daysAgo}` : ""}</span>}
+                      </div>
+                    </div>
+                    <span style={{ ...PANEL, fontSize: "0.72rem", color: "#c8401a", fontWeight: 600, flexShrink: 0, marginTop: "2px" }}>Review →</span>
+                  </div>
+                );
+              })}
+            </div>
+            <div style={{
+              padding: "8px 16px",
+              background: "#faf8f4",
+              borderTop: "1px solid #f0ece4",
+              ...PANEL, fontSize: "0.67rem", color: "#aaa", textAlign: "center",
+            }}>
+              Click any piece to open the feedback form
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 // ─── Header ───────────────────────────────────────────────────────────────────
-function TrackerHeader({ project, stats, activeCluster, setActiveCluster, activeTab, setActiveTab, viewMode, setViewMode }) {
+function TrackerHeader({ project, stats, activeCluster, setActiveCluster, activeTab, setActiveTab, viewMode, setViewMode, currentUser, onOpenPiece }) {
   const totalPieces = project.pillars.reduce((n, p) => n + p.clusters.reduce((m, c) => m + c.pieces.length, 0), 0);
   const clusterStats = window.computeStats(project).byCluster;
   const readyClusters = Object.values(clusterStats).filter(c => c.ready).length;
@@ -569,27 +721,35 @@ function TrackerHeader({ project, stats, activeCluster, setActiveCluster, active
           <div className="ns-tracker-eyebrow">{monthLabel}</div>
           <h1 className="ns-tracker-title">{totalPieces} pieces · {project.pillars.length} pillars</h1>
           {project.content_type_split && project.content_type_split.length > 0 && (
-            <div style={{ display: "flex", gap: "10px", marginTop: "5px", flexWrap: "wrap" }}>
-              {project.content_type_split.map(ct => (
-                <span key={ct.id} style={{
-                  fontFamily: "Noto Sans, sans-serif",
-                  fontSize: "0.68rem", fontWeight: 600,
-                  letterSpacing: "0.06em", textTransform: "uppercase",
-                  color: ct.id === "msv" ? "#1a6a3a" : ct.id === "ai-in-s2p" ? "#1e4fa8" : "#784212",
-                  background: ct.id === "msv" ? "#eaf4ee" : ct.id === "ai-in-s2p" ? "#eaf0fb" : "#fef3e8",
-                  border: `1px solid ${ct.id === "msv" ? "#b8dfc8" : ct.id === "ai-in-s2p" ? "#bad0f0" : "#f0d4a8"}`,
-                  padding: "2px 8px", borderRadius: "2px",
-                }}>
-                  {Math.round(ct.weight * 100)}% {ct.label}
-                </span>
-              ))}
+            <div style={{ display: "flex", gap: "8px", marginTop: "6px", flexWrap: "wrap", alignItems: "center" }}>
+              {project.content_type_split.map(ct => {
+                const shortLabel = ct.id === "msv" ? "MSV-Driven" : ct.id === "ai-in-s2p" ? "AI in S2P (Claude)" : "Industry-Specific";
+                const color = ct.id === "msv" ? "#1a6a3a" : ct.id === "ai-in-s2p" ? "#1e4fa8" : "#784212";
+                const bg    = ct.id === "msv" ? "#eaf4ee" : ct.id === "ai-in-s2p" ? "#eaf0fb" : "#fef3e8";
+                const bdr   = ct.id === "msv" ? "#b8dfc8" : ct.id === "ai-in-s2p" ? "#bad0f0" : "#f0d4a8";
+                return (
+                  <span key={ct.id} title={ct.description} style={{
+                    fontFamily: "Noto Sans, sans-serif",
+                    fontSize: "0.67rem", fontWeight: 700,
+                    letterSpacing: "0.05em", textTransform: "uppercase",
+                    color, background: bg, border: `1px solid ${bdr}`,
+                    padding: "3px 10px", borderRadius: "2px", cursor: "default",
+                  }}>
+                    {Math.round(ct.weight * 100)}% {shortLabel}
+                    {ct.pieces_est && <span style={{ opacity: 0.65, fontWeight: 400 }}> · ~{ct.pieces_est}</span>}
+                  </span>
+                );
+              })}
             </div>
           )}
         </div>
-        <div className="ns-tracker-head-right">
-          <KPI big={stats.approved} small={`/ ${stats.total}`} label="Approved" />
-          <KPI big={stats.awaiting} small="" label="Awaiting Jaggaer" />
-          <KPI big={readyClusters} small={`/ ${totalClusters}`} label="Clusters Ready" />
+        <div className="ns-tracker-head-right" style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          <div style={{ display: "flex", gap: "20px" }}>
+            <KPI big={stats.approved} small={`/ ${stats.total}`} label="Approved" />
+            <KPI big={stats.awaiting} small="" label="Awaiting Jaggaer" />
+            <KPI big={readyClusters} small={`/ ${totalClusters}`} label="Clusters Ready" />
+          </div>
+          {currentUser && onOpenPiece && <NotificationBell project={project} currentUser={currentUser} onOpenPiece={onOpenPiece} />}
         </div>
       </div>
 
@@ -1558,19 +1718,45 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
 
                     {/* Status — inline select for admin */}
                     <td className="ns-ct-td ns-ct-td-status">
-                      {adminMode ? (
-                        <InlineCell
-                          value={piece.status}
-                          type="select"
-                          options={STATUS_ORDER.map(s => ({ value: s, label: STATUS_META[s].label }))}
-                          onSave={val => updatePiece(cluster.id, piece.id, { status: val })}
-                        >
+                      <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                        {adminMode ? (
+                          <InlineCell
+                            value={piece.status}
+                            type="select"
+                            options={STATUS_ORDER.map(s => ({ value: s, label: STATUS_META[s].label }))}
+                            onSave={val => updatePiece(cluster.id, piece.id, { status: val })}
+                          >
+                            <StatusChip status={piece.status} />
+                          </InlineCell>
+                        ) : (
                           <StatusChip status={piece.status} />
-                        </InlineCell>
-                      ) : (
-                        <StatusChip status={piece.status} />
-                      )}
-                      {hasAction && !adminMode && <span className="ns-ct-action-dot" title={awaitsJG ? "Needs your feedback" : "Awaiting upload"} />}
+                        )}
+                        {hasAction && !adminMode && <span className="ns-ct-action-dot" title={awaitsJG ? "Needs your feedback" : "Awaiting upload"} />}
+                        {piece.status !== "not-started" && (() => {
+                          const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
+                          const mId = project.active_month || "month-1";
+                          const dlUrl = `https://raw.githubusercontent.com/${REPO}/main/content/${mId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${piece.revision_count || 1}.html`;
+                          return (
+                            <a
+                              href={dlUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title="Download deliverable"
+                              onClick={e => e.stopPropagation()}
+                              style={{
+                                display: "inline-flex", alignItems: "center",
+                                fontFamily: "Noto Sans, sans-serif",
+                                fontSize: "0.65rem", fontWeight: 600,
+                                color: "#1e6fa8", background: "#e8f2fa",
+                                border: "1px solid #c5ddef",
+                                padding: "2px 7px", borderRadius: "2px",
+                                textDecoration: "none", whiteSpace: "nowrap",
+                                flexShrink: 0,
+                              }}
+                            >↓</a>
+                          );
+                        })()}
+                      </div>
                     </td>
                   </tr>
                 );

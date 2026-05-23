@@ -19,6 +19,24 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
   const monthLabel = activeMonth ? activeMonth.label : 'Month 1';
   const shortLabel = monthLabel.replace('Month ', 'M');
   const [collapsed, setCollapsed] = React.useState(false);
+  const [navMode, setNavMode] = React.useState('pillar'); // 'pillar' | 'content-type'
+
+  // Content-type stats — count pieces by content_type field
+  const ctStats = React.useMemo(() => {
+    const out = { 'msv': { total: 0, approved: 0 }, 'ai-in-s2p': { total: 0, approved: 0 }, 'industry-specific': { total: 0, approved: 0 } };
+    for (const p of project.pillars) {
+      for (const c of p.clusters) {
+        for (const piece of c.pieces) {
+          const ct = piece.content_type || 'msv';
+          if (out[ct]) {
+            out[ct].total++;
+            if (piece.status === 'approved') out[ct].approved++;
+          }
+        }
+      }
+    }
+    return out;
+  }, [project]);
 
   return (
     <aside className={`ns-sidebar ${collapsed ? "is-collapsed" : ""}`}>
@@ -68,29 +86,67 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           rightMeta={`${stats.approved}/${stats.total}`}
         />
 
-        <div className="ns-sidebar-pillars">
-          {project.pillars.map((p, i) => (
-            <PillarNav
-              key={p.id}
-              pillar={p}
-              sequence={i + 1}
-              pillarStats={stats.byPillar[p.id]}
-              clusterStats={stats.byCluster}
-              expanded={activePillar === p.id}
-              activeCluster={activeCluster}
-              onPillarClick={() => {
-                setView("tracker");
-                setActivePillar(activePillar === p.id ? null : p.id);
-                setActiveCluster(null);
+        {/* Nav mode toggle — Pillar vs Content Type */}
+        <div style={{
+          display: 'flex', margin: '4px 12px 2px',
+          background: '#f0ece4', borderRadius: '3px', padding: '2px',
+        }}>
+          {[['pillar','By Pillar'],['content-type','By Type']].map(([mode, label]) => (
+            <button
+              key={mode}
+              onClick={() => setNavMode(mode)}
+              style={{
+                flex: 1, padding: '4px 0',
+                fontFamily: 'Noto Sans, sans-serif',
+                fontSize: '0.63rem', fontWeight: 600,
+                letterSpacing: '0.05em', textTransform: 'uppercase',
+                border: 'none', borderRadius: '2px', cursor: 'pointer',
+                background: navMode === mode ? '#fff' : 'transparent',
+                color: navMode === mode ? '#0f1923' : '#888',
+                boxShadow: navMode === mode ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+                transition: 'all 0.15s',
               }}
-              onClusterClick={(c) => {
-                setView("tracker");
-                setActivePillar(p.id);
-                setActiveCluster(c.id);
-              }}
-            />
+            >{label}</button>
           ))}
         </div>
+
+        {navMode === 'pillar' && (
+          <div className="ns-sidebar-pillars">
+            {project.pillars.map((p, i) => (
+              <PillarNav
+                key={p.id}
+                pillar={p}
+                sequence={i + 1}
+                pillarStats={stats.byPillar[p.id]}
+                clusterStats={stats.byCluster}
+                expanded={activePillar === p.id}
+                activeCluster={activeCluster}
+                onPillarClick={() => {
+                  setView("tracker");
+                  setActivePillar(activePillar === p.id ? null : p.id);
+                  setActiveCluster(null);
+                }}
+                onClusterClick={(c) => {
+                  setView("tracker");
+                  setActivePillar(p.id);
+                  setActiveCluster(c.id);
+                }}
+              />
+            ))}
+          </div>
+        )}
+
+        {navMode === 'content-type' && (
+          <div className="ns-sidebar-pillars">
+            <ContentTypeNav
+              project={project}
+              ctStats={ctStats}
+              setView={setView}
+              setActivePillar={setActivePillar}
+              setActiveCluster={setActiveCluster}
+            />
+          </div>
+        )}
 
         <div className="ns-sidebar-divider"></div>
 
@@ -182,6 +238,120 @@ function PillarNav({ pillar, sequence, pillarStats, clusterStats, expanded, acti
           })}
         </ul>
       )}
+    </div>
+  );
+}
+
+
+function ContentTypeNav({ project, ctStats, setView, setActivePillar, setActiveCluster }) {
+  const CT_META = {
+    'msv':               { label: 'MSV-Driven',        color: '#1a6a3a', bg: '#eaf4ee', border: '#b8dfc8', desc: 'Broad · High search volume' },
+    'ai-in-s2p':         { label: 'AI in S2P (Claude)', color: '#1e4fa8', bg: '#eaf0fb', border: '#bad0f0', desc: 'Claude-focused · JAI traffic' },
+    'industry-specific': { label: 'Industry-Specific',  color: '#784212', bg: '#fef3e8', border: '#f0d4a8', desc: 'Vertical · Sales enablement' },
+  };
+
+  const [expanded, setExpanded] = React.useState({});
+
+  // Group pieces by content_type, with pillar + cluster context
+  const byType = { 'msv': [], 'ai-in-s2p': [], 'industry-specific': [] };
+  for (const pillar of project.pillars) {
+    for (const cluster of pillar.clusters) {
+      for (const piece of cluster.pieces) {
+        const ct = piece.content_type || 'msv';
+        if (byType[ct]) byType[ct].push({ piece, cluster, pillar });
+      }
+    }
+  }
+
+  return (
+    <div>
+      {Object.entries(CT_META).map(([ctId, meta]) => {
+        const items = byType[ctId] || [];
+        const approvedCount = items.filter(x => x.piece.status === 'approved').length;
+        const isOpen = expanded[ctId];
+        return (
+          <div key={ctId} style={{ marginBottom: '2px' }}>
+            <button
+              onClick={() => setExpanded(e => ({ ...e, [ctId]: !e[ctId] }))}
+              style={{
+                width: '100%', display: 'flex', alignItems: 'center', gap: '7px',
+                padding: '7px 12px',
+                background: isOpen ? meta.bg : 'transparent',
+                border: 'none', borderLeft: `3px solid ${isOpen ? meta.color : 'transparent'}`,
+                cursor: 'pointer', textAlign: 'left',
+                transition: 'all 0.15s',
+              }}
+              onMouseEnter={e => { if (!isOpen) e.currentTarget.style.background = '#f0ece4'; }}
+              onMouseLeave={e => { if (!isOpen) e.currentTarget.style.background = 'transparent'; }}
+            >
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{
+                  fontFamily: 'Noto Sans, sans-serif',
+                  fontSize: '0.7rem', fontWeight: 700,
+                  color: isOpen ? meta.color : '#555',
+                  letterSpacing: '0.02em',
+                  whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+                }}>{meta.label}</div>
+                <div style={{
+                  fontFamily: 'Noto Sans, sans-serif',
+                  fontSize: '0.62rem', color: '#999', marginTop: '1px',
+                }}>{meta.desc}</div>
+              </div>
+              <span style={{
+                fontFamily: 'Noto Sans, sans-serif',
+                fontSize: '0.62rem', color: '#999', flexShrink: 0,
+              }}>{approvedCount}/{items.length}</span>
+              <span style={{ color: '#bbb', fontSize: '0.65rem', flexShrink: 0 }}>{isOpen ? '▾' : '›'}</span>
+            </button>
+
+            {isOpen && (
+              <ul style={{ listStyle: 'none', margin: 0, padding: '0 0 4px 0' }}>
+                {items.map(({ piece, cluster, pillar }) => {
+                  const sm = { 'approved': '#1e7a45', 'uploaded': '#1e6fa8', 'jaggaer-feedback': '#b05e00', 'revised': '#5a3d9e', 'not-started': '#ccc' };
+                  const dotColor = sm[piece.status] || '#ccc';
+                  return (
+                    <li key={piece.id}>
+                      <button
+                        onClick={() => {
+                          setView('tracker');
+                          setActivePillar(pillar.id);
+                          setActiveCluster(cluster.id);
+                        }}
+                        style={{
+                          width: '100%', display: 'flex', alignItems: 'flex-start', gap: '7px',
+                          padding: '5px 12px 5px 22px',
+                          background: 'transparent', border: 'none',
+                          cursor: 'pointer', textAlign: 'left',
+                          transition: 'background 0.1s',
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.background = '#f5f2ec'}
+                        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                      >
+                        <div style={{
+                          width: '6px', height: '6px', borderRadius: '50%',
+                          background: dotColor, flexShrink: 0, marginTop: '4px',
+                        }} />
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{
+                            fontFamily: 'Noto Sans, sans-serif',
+                            fontSize: '0.68rem', color: '#333', lineHeight: 1.3,
+                            overflow: 'hidden', display: '-webkit-box',
+                            WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
+                          }}>{piece.title}</div>
+                          <div style={{
+                            fontFamily: 'Noto Sans, sans-serif',
+                            fontSize: '0.6rem', color: '#aaa', marginTop: '2px',
+                          }}>{pillar.label.split(' ')[0]} · {cluster.label}</div>
+                        </div>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
