@@ -2,19 +2,19 @@
   "months": [
     {
       "id": "month-1",
-      "label": "Month 1 \u00b7 May\u2013Jun 2026",
+      "label": "Month 1 · May–Jun 2026",
       "active": true,
       "start_date": "2026-05-21"
     },
     {
       "id": "month-2",
-      "label": "Month 2 \u00b7 Jun\u2013Jul 2026",
+      "label": "Month 2 · Jun–Jul 2026",
       "active": false,
       "start_date": "2026-06-18"
     },
     {
       "id": "month-3",
-      "label": "Month 3 \u00b7 Jul\u2013Aug 2026",
+      "label": "Month 3 · Jul–Aug 2026",
       "active": false,
       "start_date": "2026-07-16"
     }
@@ -57,6 +57,8 @@
           "sequence": 1,
           "intent": "informational",
           "anchor_piece": "p-c1-3",
+          "publish_week": 1,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-c1-1",
@@ -65,46 +67,50 @@
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "how to install Claude procurement",
+              "primary_keyword": "how to install Claude procurement professional",
+              "secondary_keyword": "Claude setup IT permissions S2P guide",
+              "intent": "informational",
               "geography": "all",
+              "schedule_week": 1,
               "user_paths": [
                 "Path 1",
                 "Path 2"
-              ],
-              "schedule_week": 1
+              ]
             },
             {
               "id": "p-c1-2",
-              "title": "First Principles: What Claude Can Do for Source-to-Pay Teams",
-              "format": "Explainer",
+              "title": "What Are .md Files in Claude — and Why S2P Teams Can't Skip This Step",
+              "format": "Educational Page",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "Claude source to pay teams",
+              "primary_keyword": "Claude basics markdown files S2P procurement",
+              "secondary_keyword": "how to use Claude AI procurement basics",
+              "intent": "informational",
               "geography": "all",
+              "schedule_week": 1,
               "user_paths": [
                 "Path 2"
-              ],
-              "schedule_week": 1
+              ]
             },
             {
               "id": "p-c1-3",
-              "title": "S2P Buyer's FAQ on Generative AI Assistants",
-              "format": "FAQ (Anchor)",
+              "title": "AI in S2P: What Claude Actually Delivers for Procurement in 2026 — Beyond the Hype",
+              "format": "FAQ Article",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "generative AI assistants procurement",
+              "primary_keyword": "AI S2P Claude use cases FAQ procurement",
+              "secondary_keyword": "what to ask Claude S2P procurement FAQ",
+              "intent": "informational",
               "geography": "all",
+              "schedule_week": 1,
               "user_paths": [
                 "Path 1",
                 "Path 2"
-              ],
-              "schedule_week": 1
+              ]
             }
-          ],
-          "publish_week": 1,
-          "month_id": "month-1"
+          ]
         },
         {
           "id": "c2-contracts",
@@ -112,96 +118,104 @@
           "sequence": 2,
           "intent": "commercial",
           "anchor_piece": "p-c2-2",
+          "publish_week": 2,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-c2-1",
-              "title": "Redlining Supplier MSAs with Claude: A Walkthrough",
-              "format": "Walkthrough",
+              "title": "Stop Manually Hunting for Risky Clauses. Use Claude to Find Them in Your Contracts",
+              "format": "MD File / Tutorial",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "redlining MSA Claude",
+              "primary_keyword": "use Claude review procurement contracts expiry risk",
+              "secondary_keyword": "Claude contract analysis S2P tutorial",
+              "intent": "commercial",
               "geography": "us",
+              "schedule_week": 2,
               "user_paths": [
                 "Path 2",
                 "Path 3"
-              ],
-              "schedule_week": 2
+              ]
             },
             {
               "id": "p-c2-2",
-              "title": "The Contract Review Playbook for Procurement (Anchor)",
-              "format": "Playbook (Anchor)",
+              "title": "What Happens When You Ask Claude to Audit Your Supplier Contracts",
+              "format": "Problem-Solution",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "contract review playbook procurement",
+              "primary_keyword": "Claude supplier contract audit S2P results",
+              "secondary_keyword": "AI contract review procurement outcomes",
+              "intent": "commercial",
               "geography": "us",
+              "schedule_week": 2,
               "user_paths": [
                 "Path 2"
-              ],
-              "schedule_week": 2
+              ]
             }
-          ],
-          "publish_week": 2,
-          "month_id": "month-1"
+          ]
         },
         {
           "id": "c3-suppliers",
           "label": "Claude for Suppliers & Sourcing",
           "sequence": 4,
-          "intent": "informational",
-          "anchor_piece": "p-c3-2",
+          "intent": "commercial",
+          "anchor_piece": "p-c3-3",
+          "publish_week": 2,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-c3-1",
-              "title": "Asking Claude to Pre-Screen RFP Responses",
+              "title": "How to Use Claude to Find Alternative Suppliers by Country or Category",
+              "format": "MD File / Tutorial",
+              "assignee": null,
+              "status": "not-started",
+              "revision_count": 0,
+              "primary_keyword": "use Claude find alternative suppliers procurement",
+              "secondary_keyword": "Claude supplier recommendation S2P",
+              "intent": "commercial",
+              "geography": "all",
+              "schedule_week": 2,
+              "user_paths": [
+                "Path 2",
+                "Path 3"
+              ]
+            },
+            {
+              "id": "p-c3-2",
+              "title": "How to Use Claude to Auto-Generate an RFP from Your Sourcing Brief",
+              "format": "MD File / Tutorial",
+              "assignee": null,
+              "status": "not-started",
+              "revision_count": 0,
+              "primary_keyword": "use Claude generate RFP procurement",
+              "secondary_keyword": "Claude RFP autogeneration sourcing tutorial",
+              "intent": "commercial",
+              "geography": "all",
+              "schedule_week": 2,
+              "user_paths": [
+                "Path 2",
+                "Path 3"
+              ]
+            },
+            {
+              "id": "p-c3-3",
+              "title": "3 S2P Tasks You Can Do in Claude Right Now — With Prompts and Outputs",
               "format": "How-to Guide",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "Claude RFP pre-screen",
+              "primary_keyword": "Claude S2P tasks procurement prompts guide",
+              "secondary_keyword": "AI sourcing contracts supplier procurement",
+              "intent": "commercial",
               "geography": "all",
-              "user_paths": [
-                "Path 2",
-                "Path 3"
-              ],
-              "schedule_week": 2
-            },
-            {
-              "id": "p-c3-2",
-              "title": "Supplier Intelligence with Claude: A Practical Field Guide (Anchor)",
-              "format": "Field Guide (Anchor)",
-              "assignee": null,
-              "status": "not-started",
-              "revision_count": 0,
-              "primary_keyword": "supplier intelligence Claude",
-              "geography": "all",
-              "last_upload": "2026-05-18T05:34:40.861Z",
-              "last_upload_by": "manager",
-              "user_paths": [
-                "Path 2",
-                "Path 3"
-              ],
-              "schedule_week": 2
-            },
-            {
-              "id": "p-c3-3",
-              "title": "Sourcing Event Briefs: From Blank Page to Brief in 10 Minutes",
-              "format": "Case Study",
-              "assignee": null,
-              "status": "not-started",
-              "revision_count": 0,
-              "primary_keyword": "sourcing event brief AI",
-              "geography": "eu",
+              "schedule_week": 2,
               "user_paths": [
                 "Path 2"
-              ],
-              "schedule_week": 2
+              ]
             }
-          ],
-          "publish_week": 2,
-          "month_id": "month-1"
+          ]
         },
         {
           "id": "c4-prompt-library",
@@ -209,40 +223,44 @@
           "sequence": 6,
           "intent": "commercial",
           "anchor_piece": "p-c4-1",
+          "publish_week": 4,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-c4-1",
-              "title": "The Procurement Prompt Library - 40 Working Prompts for S2P (Anchor)",
-              "format": "Resource Hub (Anchor)",
+              "title": "The Jaggaer S2P Claude Prompt Library: 20 Fundamental Queries Every Procurement Pro Needs",
+              "format": "By the Numbers",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "procurement prompt library",
+              "primary_keyword": "S2P Claude prompt library procurement fundamental",
+              "secondary_keyword": "Jaggaer GitHub S2P prompts Claude",
+              "intent": "commercial",
               "geography": "all",
+              "schedule_week": 4,
               "user_paths": [
                 "Path 2",
                 "Path 3"
-              ],
-              "schedule_week": 4
+              ]
             },
             {
               "id": "p-c4-2",
-              "title": "Webinar Recap: Claude in the S2P Stack - Live Q&A",
-              "format": "Webinar Recap",
+              "title": "Claude for S2P: Watch How It Works — Curated Videos and Original Jaggaer Webinars",
+              "format": "Webinar / Video Page",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "Claude S2P webinar",
+              "primary_keyword": "Claude S2P procurement webinar tutorial video",
+              "secondary_keyword": "AI S2P procurement how-to video guide",
+              "intent": "informational",
               "geography": "all",
+              "schedule_week": 4,
               "user_paths": [
                 "Path 1",
                 "Path 2"
-              ],
-              "schedule_week": 4
+              ]
             }
-          ],
-          "publish_week": 4,
-          "month_id": "month-1"
+          ]
         }
       ]
     },
@@ -255,47 +273,53 @@
       "clusters": [
         {
           "id": "dm1-tariffs",
-          "label": "Tariff Disruption & Reshoring",
+          "label": "Tariff & Trade Disruption",
           "sequence": 3,
           "intent": "informational",
           "anchor_piece": "p-dm1-2",
+          "publish_week": 1,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-dm1-1",
-              "title": "Section 232 Tariffs: What Discrete Manufacturers Are Doing Differently in 2026",
-              "format": "Analysis",
+              "title": "US Tariffs in H2 2026: Why Your Direct Procurement Numbers Need Recalculating",
+              "format": "Quick-take Blog",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "section 232 tariffs manufacturing 2026",
+              "primary_keyword": "tariff impact direct procurement 2026",
+              "secondary_keyword": "US tariff supply chain manufacturing",
+              "intent": "informational",
               "geography": "us",
               "schedule_week": 1
             },
             {
               "id": "p-dm1-2",
-              "title": "The Reshoring Decision Framework (Anchor)",
-              "format": "Framework (Anchor)",
+              "title": "CBAM & the Carbon Cost of Your Supply Chain: What Procurement Needs to Know Now",
+              "format": "FAQ Article",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "reshoring decision framework",
-              "geography": "us",
+              "primary_keyword": "CBAM procurement compliance manufacturing",
+              "secondary_keyword": "carbon border adjustment supply chain cost",
+              "intent": "informational",
+              "geography": "de",
               "schedule_week": 1
             },
             {
               "id": "p-dm1-3",
-              "title": "How German OEMs Are Rewriting Supplier Contracts Post-Tariff",
-              "format": "Case Study",
+              "title": "Nearshoring Doesn't Simplify Procurement. It Multiplies Risk.",
+              "format": "Data Snapshot",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "German OEM supplier contracts tariff",
-              "geography": "de",
+              "primary_keyword": "nearshoring procurement complexity 2026",
+              "secondary_keyword": "nearshoring supply chain risk data",
+              "intent": "informational",
+              "geography": "all",
               "schedule_week": 1
             }
-          ],
-          "publish_week": 1,
-          "month_id": "month-1"
+          ]
         },
         {
           "id": "dm2-subtier",
@@ -303,6 +327,8 @@
           "sequence": 5,
           "intent": "informational",
           "anchor_piece": "p-dm2-4",
+          "publish_week": 3,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-dm2-1",
@@ -314,10 +340,11 @@
               "primary_keyword": "supply chain visibility beyond tier 1",
               "secondary_keyword": "multi-tier supplier visibility challenges",
               "intent": "informational",
-              "funnel": "TOFU",
               "geography": "all",
-              "notes": "NEW \u2014 not previously in tracker | URL: /supply-chain-visibility-beyond-tier-1 | Words: 1,200\u20131,800",
-              "schedule_week": 3
+              "schedule_week": 3,
+              "funnel": "TOFU",
+              "url": "/supply-chain-visibility-beyond-tier-1",
+              "notes": "NEW — not previously in tracker | Words: 1,200–1,800"
             },
             {
               "id": "p-dm2-2",
@@ -329,10 +356,11 @@
               "primary_keyword": "supplier financial risk assessment",
               "secondary_keyword": "supplier risk management",
               "intent": "informational",
-              "funnel": "TOFU",
               "geography": "all",
-              "notes": "NEW \u2014 not previously in tracker | URL: /blog/supplier-financial-risk-signals-procurement | Words: 2,000\u20132,500",
               "schedule_week": 3,
+              "funnel": "TOFU",
+              "url": "/blog/supplier-financial-risk-signals-procurement",
+              "notes": "NEW — not previously in tracker | Words: 2,000–2,500",
               "last_upload": "2026-05-22T13:57:23.235Z",
               "last_upload_by": "orlagh"
             },
@@ -346,10 +374,11 @@
               "primary_keyword": "predictive supplier risk management",
               "secondary_keyword": "proactive procurement risk management",
               "intent": "commercial",
-              "funnel": "MOFU",
               "geography": "all",
-              "notes": "UPDATED \u2014 title refined, keyword updated | URL: /predictive-supplier-risk-management | Words: 1,200\u20131,500",
               "schedule_week": 3,
+              "funnel": "MOFU",
+              "url": "/predictive-supplier-risk-management",
+              "notes": "UPDATED — title refined, keyword updated | Words: 1,200–1,500",
               "last_upload": "2026-05-22T13:58:08.804Z",
               "last_upload_by": "manager"
             },
@@ -363,274 +392,301 @@
               "primary_keyword": "tier 2 supplier bankruptcy risk",
               "secondary_keyword": "supplier bankruptcy supply chain risk",
               "intent": "commercial",
-              "funnel": "BOFU",
               "geography": "all",
-              "notes": "UPDATED \u2014 title refined, keywords updated | URL: /tier-2-supplier-bankruptcy-supply-chain-risk | Words: 2,500\u20134,000",
-              "schedule_week": 3
+              "schedule_week": 3,
+              "funnel": "BOFU",
+              "url": "/tier-2-supplier-bankruptcy-supply-chain-risk",
+              "notes": "UPDATED — title refined, keywords updated | Words: 2,500–4,000"
             }
-          ],
-          "publish_week": 3,
-          "month_id": "month-1"
+          ]
         },
         {
           "id": "dm3-minerals",
-          "label": "Critical Minerals & Resilience",
+          "label": "Critical Minerals & Commodity Risk",
           "sequence": 7,
           "intent": "informational",
-          "anchor_piece": "p-dm3-1",
+          "anchor_piece": "p-dm3-2",
+          "publish_week": 3,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-dm3-1",
-              "title": "The Critical Minerals Map: Where Your Risk Actually Lives (Anchor)",
-              "format": "Data Report (Anchor)",
+              "title": "Most Procurement Platforms Are Missing Critical Mineral Risk in the Auto Supply Chain. What to Watch in H2 2026",
+              "format": "Quick-take Blog",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "critical minerals supply map",
+              "primary_keyword": "critical minerals automotive procurement",
+              "secondary_keyword": "rare earth supply chain risk 2026",
+              "intent": "informational",
               "geography": "all",
               "schedule_week": 3
             },
             {
               "id": "p-dm3-2",
-              "title": "Lithium, Cobalt, Gallium: A Procurement Lead's Pocket Brief",
-              "format": "Briefing Note",
+              "title": "Steel, Aluminum & Rare Earth Volatility: A Mid-2026 Reality Check for Procurement Teams",
+              "format": "Data Snapshot",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "lithium cobalt procurement brief",
+              "primary_keyword": "steel aluminum price volatility procurement 2026",
+              "secondary_keyword": "commodity procurement risk data",
+              "intent": "informational",
               "geography": "all",
               "schedule_week": 3
             }
-          ],
-          "publish_week": 3,
-          "month_id": "month-1"
+          ]
         },
         {
           "id": "dm4-tco",
-          "label": "Platform TCO",
+          "label": "Platform TCO & Consolidation",
           "sequence": 8,
           "intent": "commercial",
-          "anchor_piece": "p-dm4-1",
+          "anchor_piece": "p-dm4-2",
+          "publish_week": 4,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-dm4-1",
-              "title": "S2P Platform TCO for Discrete Manufacturing: A 3-Year Model (Anchor)",
-              "format": "Calculator (Anchor)",
+              "title": "The Hidden Costs in Your Procurement Platform Contract Nobody Talks About",
+              "format": "Hot Take",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "S2P platform TCO manufacturing",
+              "primary_keyword": "hidden costs procurement platform contract",
+              "secondary_keyword": "S2P platform true cost manufacturing",
+              "intent": "commercial",
               "geography": "all",
               "schedule_week": 4
             },
             {
               "id": "p-dm4-2",
-              "title": "Build vs Buy vs Configure: A Decision Memo Template",
-              "format": "Template",
+              "title": "Before You Sign That Procurement Platform Contract: A CPO Checklist for H2 2026",
+              "format": "eBook / Guide",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "build vs buy procurement platform",
+              "primary_keyword": "manufacturing CPO procurement platform guide",
+              "secondary_keyword": "S2P platform evaluation manufacturing",
+              "intent": "commercial",
               "geography": "all",
               "schedule_week": 4
             }
-          ],
-          "publish_week": 4,
-          "month_id": "month-1"
+          ]
         }
       ]
     },
     {
       "id": "public-sector",
       "label": "Public Sector",
-      "subtitle": "UK \u00b7 FR \u00b7 ES",
+      "subtitle": "UK · FR · ES",
       "weight": null,
       "geography": "UK / FR / ES",
       "clusters": [
         {
           "id": "ps1-eu-ai",
-          "label": "EU AI Act Compliance",
+          "label": "EU AI Act & Regulatory Compliance",
           "sequence": 9,
           "intent": "informational",
-          "anchor_piece": "p-ps1-1",
+          "anchor_piece": "p-ps1-2",
+          "publish_week": 2,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-ps1-1",
-              "title": "EU AI Act for Public Procurement Teams: What Actually Changes (Anchor)",
-              "format": "Analysis (Anchor)",
+              "title": "EU AI Act & Public Procurement: 8 Questions Contracting Authorities Are Asking",
+              "format": "FAQ Article",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "EU AI Act public procurement",
+              "primary_keyword": "EU AI Act public procurement FAQ",
+              "secondary_keyword": "AI Act contracting authority compliance 2026",
+              "intent": "informational",
               "geography": "eu",
               "schedule_week": 2
             },
             {
               "id": "p-ps1-2",
-              "title": "High-Risk AI Systems in Tendering: A Compliance Checklist",
-              "format": "Checklist",
+              "title": "Your Government Procurement AI Audit Trail Has Gaps. Here's What the EU AI Act Requires in 2026",
+              "format": "Whitepaper",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "high risk AI tender compliance",
+              "primary_keyword": "AI government procurement audit trail EU AI Act",
+              "secondary_keyword": "public sector AI compliance whitepaper",
+              "intent": "commercial",
               "geography": "eu",
               "schedule_week": 2
             }
-          ],
-          "publish_week": 2,
-          "month_id": "month-1"
+          ]
         },
         {
           "id": "ps2-einvoicing",
-          "label": "E-Invoicing Mandates",
+          "label": "E-Invoicing & AP Automation",
           "sequence": 10,
-          "intent": "informational",
-          "anchor_piece": "p-ps2-1",
+          "intent": "commercial",
+          "anchor_piece": "p-ps2-2",
+          "publish_week": 2,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-ps2-1",
-              "title": "Peppol, Factur-X, FACe: A Reader for Public Sector Procurement (Anchor)",
-              "format": "Explainer (Anchor)",
+              "title": "E-Invoicing Is Live in France & Spain. Is Your AP Stack Compliant?",
+              "format": "Quick-take Blog",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "Peppol Factur-X FACe public sector",
-              "geography": "eu",
+              "primary_keyword": "e-invoicing compliance France Spain 2026",
+              "secondary_keyword": "AP automation government e-invoicing mandate",
+              "intent": "commercial",
+              "geography": "fr",
               "schedule_week": 2
             },
             {
               "id": "p-ps2-2",
-              "title": "France's E-Invoicing Reform: Timeline & What to Do This Quarter",
-              "format": "Briefing Note",
+              "title": "Government Contract Leakage: 5 Numbers France, Spain & UK Cannot Ignore in 2026",
+              "format": "Data Snapshot",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "France e-invoicing reform 2026",
-              "geography": "fr",
+              "primary_keyword": "government contract leakage data 2026",
+              "secondary_keyword": "off-contract spend public sector UK France Spain",
+              "intent": "informational",
+              "geography": "eu",
               "schedule_week": 2
             }
-          ],
-          "publish_week": 2,
-          "month_id": "month-1"
+          ]
         },
         {
           "id": "ps3-eval",
-          "label": "Platform Evaluation",
+          "label": "Platform Evaluation & AI Adoption",
           "sequence": 11,
           "intent": "commercial",
           "anchor_piece": "p-ps3-1",
+          "publish_week": 4,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-ps3-1",
-              "title": "Evaluating S2P Platforms for Public Sector: The 12-Criterion Scorecard (Anchor)",
-              "format": "Scorecard (Anchor)",
+              "title": "What Central Government Procurement Leaders Actually Want in a Platform for 2026",
+              "format": "Q&A Piece",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "S2P platform evaluation public sector",
+              "primary_keyword": "central government procurement head platform criteria",
+              "secondary_keyword": "government CPO platform requirements 2026",
+              "intent": "commercial",
               "geography": "eu",
               "schedule_week": 4
             }
-          ],
-          "publish_week": 4,
-          "month_id": "month-1"
+          ]
         }
       ]
     },
     {
       "id": "higher-education",
       "label": "Higher Education",
-      "subtitle": "US \u00b7 EU \u00b7 UK",
+      "subtitle": "US · EU · UK",
       "weight": null,
       "geography": "US / EU / UK",
       "clusters": [
         {
           "id": "he1-maverick",
-          "label": "Maverick Spend",
+          "label": "Maverick Spend & Governance",
           "sequence": 12,
           "intent": "informational",
-          "anchor_piece": "p-he1-1",
+          "anchor_piece": "p-he1-2",
+          "publish_week": 3,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-he1-1",
-              "title": "Maverick Spend on Campus: Where It Hides, How to Surface It (Anchor)",
-              "format": "Field Guide (Anchor)",
+              "title": "Maverick Spend in US & UK Universities: What the Data Shows in 2026",
+              "format": "Data Snapshot",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "maverick spend higher education",
+              "primary_keyword": "maverick spend university data 2026",
+              "secondary_keyword": "off-contract spend higher education UK US",
+              "intent": "informational",
               "geography": "us",
               "schedule_week": 3
             },
             {
               "id": "p-he1-2",
-              "title": "P-Card Programmes vs Punch-Out: A Trade-Off Read",
-              "format": "Analysis",
+              "title": "R1 University Procurement Governance Is Broken. The 2026 CFO & CPO Playbook to Fix It",
+              "format": "Whitepaper",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "P-Card punch-out university",
+              "primary_keyword": "R1 university maverick spend CFO CPO playbook",
+              "secondary_keyword": "higher education procurement governance",
+              "intent": "commercial",
               "geography": "us",
               "schedule_week": 3
             }
-          ],
-          "publish_week": 3,
-          "month_id": "month-1"
+          ]
         },
         {
           "id": "he2-grants",
-          "label": "Grant Compliance",
+          "label": "Grant & Regulatory Compliance",
           "sequence": 13,
           "intent": "informational",
-          "anchor_piece": "p-he2-1",
+          "anchor_piece": "p-he2-2",
+          "publish_week": 3,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-he2-1",
-              "title": "Uniform Guidance & the Procurement Office: A Working Reader (Anchor)",
-              "format": "Reader (Anchor)",
+              "title": "OMB Uniform Guidance 2026: What University Procurement Teams Are Still Getting Wrong",
+              "format": "Quick-take Blog",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "uniform guidance procurement university",
+              "primary_keyword": "OMB Uniform Guidance university procurement 2026",
+              "secondary_keyword": "2 CFR 200 federal grant compliance",
+              "intent": "informational",
               "geography": "us",
               "schedule_week": 3
             },
             {
               "id": "p-he2-2",
-              "title": "UKRI Procurement Rules in 2026: The Quick Read for University Buyers",
-              "format": "Briefing Note",
+              "title": "Grant Procurement Compliance in 2026: The Checklist Most NSF, NIH & Horizon Europe Teams Miss",
+              "format": "Checklist",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "UKRI procurement rules 2026",
-              "geography": "uk",
+              "primary_keyword": "grant procurement compliance checklist NSF NIH Horizon Europe",
+              "secondary_keyword": "federal grant compliance university",
+              "intent": "commercial",
+              "geography": "all",
               "schedule_week": 3
             }
-          ],
-          "publish_week": 3,
-          "month_id": "month-1"
+          ]
         },
         {
           "id": "he3-modernisation",
-          "label": "Platform Modernisation",
+          "label": "Platform Modernisation & ROI",
           "sequence": 14,
           "intent": "commercial",
           "anchor_piece": "p-he3-1",
+          "publish_week": 4,
+          "month_id": "month-1",
           "pieces": [
             {
               "id": "p-he3-1",
-              "title": "Replacing Legacy Procurement on Campus: A Phased Plan (Anchor)",
-              "format": "Plan (Anchor)",
+              "title": "From Spreadsheets to Platform: How R1 Universities Are Modernising Procurement",
+              "format": "Problem-Solution",
               "assignee": null,
               "status": "not-started",
               "revision_count": 0,
-              "primary_keyword": "replace legacy procurement campus",
+              "primary_keyword": "R1 university procurement platform modernisation",
+              "secondary_keyword": "higher education procurement digitization 2026",
+              "intent": "commercial",
               "geography": "all",
               "schedule_week": 4
             }
-          ],
-          "publish_week": 4,
-          "month_id": "month-1"
+          ]
         }
       ]
     }
@@ -811,7 +867,7 @@
   "build_with_claude": [
     {
       "name": "contract-analyser",
-      "description": "Drag-drop MSA \u2192 Claude returns redline summary + risk flags.",
+      "description": "Drag-drop MSA → Claude returns redline summary + risk flags.",
       "status": "Live",
       "updated": "2026-05-14",
       "path": "build-with-claude/contract-analyser"
@@ -911,7 +967,7 @@
     {
       "week": 4,
       "label": "Week 4",
-      "goal": "Convert audiences built in weeks 1\u20133 to platform evaluation intent",
+      "goal": "Convert audiences built in weeks 1–3 to platform evaluation intent",
       "slots": [
         {
           "pillar": "ai-in-s2p",
