@@ -27,6 +27,22 @@ const STATUS_META = {
 
 const STATUS_ORDER = ["not-started", "uploaded", "jaggaer-feedback", "revised", "approved"];
 
+// ─── Force-download helper — raw.githubusercontent serves HTML inline; fetch → blob forces save ──
+async function forceDownload(url, filename) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) { window.open(url, "_blank"); return; }
+    const blob = await res.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = blobUrl; a.download = filename;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+  } catch { window.open(url, "_blank"); }
+}
+
+
 // ─── Schedule helpers ──────────────────────────────────────────────────────────
 function getScheduleContext(project) {
   const activeMonth = (project.months || []).find(m => m.id === project.active_month) || (project.months || [])[0];
@@ -160,10 +176,163 @@ function InlineCell({ value, type, options, onSave, children, className }) {
 }
 
 
-// ─── Priority Actions panel ───────────────────────────────────────────────────
-// ─── Activity Bar — two panels: Priority Actions + Recent Activity ─────────────
+// ─── Filter Bar — quick-filter chips: show overdue, due this week, recent activity ──────────
+function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveFilter }) {
+  const PANEL = { fontFamily: "Noto Sans, sans-serif" };
 
-function ActivityBar({ project, currentWeek, onOpenPiece, currentUser }) {
+  const overdue = [], due = [], recent = [];
+  for (const pillar of project.pillars) {
+    for (const cluster of pillar.clusters) {
+      for (const piece of cluster.pieces) {
+        const timing = getPieceTiming(piece, currentWeek, cluster.id, project.schedule);
+        if (timing === "overdue") overdue.push({ piece, cluster, pillar });
+        if (timing === "due")     due.push({ piece, cluster, pillar });
+        const ts = piece.last_updated || piece.last_upload;
+        if (ts && piece.status !== "not-started") recent.push({ piece, cluster, pillar, ts });
+      }
+    }
+  }
+  recent.sort((a, b) => new Date(b.ts) - new Date(a.ts));
+  const recentTop = recent.slice(0, 5);
+
+  const chips = [
+    overdue.length > 0 && {
+      id: "overdue", label: `${overdue.length} Overdue`,
+      color: "#b91c1c", bg: "#fef2f2", activeBg: "#fee2e2", border: "#fca5a5",
+      items: overdue,
+    },
+    due.length > 0 && {
+      id: "due", label: `${due.length} Due This Week`,
+      color: "#92400e", bg: "#fffbeb", activeBg: "#fef3c7", border: "#fcd34d",
+      items: due,
+    },
+    recentTop.length > 0 && {
+      id: "recent", label: `${recentTop.length} Recent`,
+      color: "#1e6fa8", bg: "#e8f2fa", activeBg: "#d4e8f7", border: "#c5ddef",
+      items: recentTop,
+    },
+  ].filter(Boolean);
+
+  if (chips.length === 0) return null;
+
+  return (
+    <div style={{ borderBottom: "1px solid #e0dbd4", background: "#faf8f4" }}>
+      {/* ── Chip row ── */}
+      <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "8px 20px", flexWrap: "wrap" }}>
+        <span style={{ ...PANEL, fontSize: "0.63rem", fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: "#aaa", marginRight: "4px" }}>
+          Filter
+        </span>
+        {chips.map(chip => {
+          const isActive = activeFilter === chip.id;
+          return (
+            <button
+              key={chip.id}
+              onClick={() => setActiveFilter(isActive ? null : chip.id)}
+              style={{
+                ...PANEL, fontSize: "0.68rem", fontWeight: 600,
+                color: chip.color,
+                background: isActive ? chip.activeBg : chip.bg,
+                border: `1px solid ${chip.border}`,
+                borderRadius: "3px", padding: "3px 10px",
+                cursor: "pointer", transition: "all 0.12s",
+                boxShadow: isActive ? `inset 0 0 0 1px ${chip.color}44` : "none",
+              }}
+            >{chip.label}</button>
+          );
+        })}
+        {activeFilter && (
+          <button
+            onClick={() => setActiveFilter(null)}
+            style={{
+              ...PANEL, fontSize: "0.63rem", color: "#aaa",
+              background: "transparent", border: "none",
+              cursor: "pointer", marginLeft: "2px",
+            }}
+          >✕ Clear</button>
+        )}
+        <span style={{ ...PANEL, marginLeft: "auto", fontSize: "0.65rem", color: "#bbb" }}>Wk {currentWeek}/4</span>
+      </div>
+
+      {/* ── Inline expanded list when filter active ── */}
+      {activeFilter && (() => {
+        const chip = chips.find(c => c.id === activeFilter);
+        if (!chip) return null;
+
+        function relTime(iso) {
+          if (!iso) return "";
+          const diff = Date.now() - new Date(iso).getTime();
+          const mins = Math.floor(diff / 60000);
+          if (mins < 1) return "just now";
+          if (mins < 60) return `${mins}m ago`;
+          const hrs = Math.floor(mins / 60);
+          if (hrs < 24) return `${hrs}h ago`;
+          return `${Math.floor(hrs / 24)}d ago`;
+        }
+
+        return (
+          <div style={{ borderTop: "1px solid #e0dbd4", maxHeight: "220px", overflowY: "auto" }}>
+            {chip.items.map(({ piece, cluster, pillar, ts, late }) => {
+              const sm = STATUS_META[piece.status] || STATUS_META["not-started"];
+              const clusterWeek = getClusterWeek(cluster.id, project.schedule);
+              const who = (piece.last_upload_by || piece.last_updated_by)
+                ? (() => { const all = [...project.team.ns, ...project.team.jaggaer]; const m = all.find(x => x.id === (piece.last_upload_by || piece.last_updated_by)); return m ? m.name.split(" ")[0] : null; })()
+                : null;
+              return (
+                <div
+                  key={piece.id}
+                  onClick={() => onOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: "history" })}
+                  style={{
+                    display: "flex", alignItems: "center", gap: "12px",
+                    padding: "7px 20px",
+                    borderBottom: "1px solid #f0ece4",
+                    borderLeft: `3px solid ${chip.color}`,
+                    background: "#fff",
+                    cursor: "pointer", transition: "background 0.1s",
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.background = "#faf8f4"}
+                  onMouseLeave={e => e.currentTarget.style.background = "#fff"}
+                >
+                  {activeFilter !== "recent" && (
+                    <span style={{
+                      ...PANEL, fontSize: "0.62rem", fontWeight: 700,
+                      color: chip.color, border: `1px solid ${chip.border}`,
+                      padding: "1px 6px", borderRadius: "2px", whiteSpace: "nowrap", flexShrink: 0,
+                    }}>
+                      {activeFilter === "overdue"
+                        ? `Wk ${clusterWeek} · ${weeksLate(piece, currentWeek, cluster.id, project.schedule)}wk late`
+                        : `Wk ${clusterWeek} · Due now`}
+                    </span>
+                  )}
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ ...PANEL, fontSize: "0.78rem", fontWeight: 500, color: "#0f1923", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                      {piece.title}
+                    </div>
+                    <div style={{ ...PANEL, fontSize: "0.67rem", color: "#888", marginTop: "1px" }}>
+                      {pillar.label} · {cluster.label}
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
+                    {activeFilter === "recent" && who && (
+                      <span style={{ ...PANEL, fontSize: "0.65rem", color: "#aaa" }}>{who} · {relTime(ts)}</span>
+                    )}
+                    <span style={{ ...PANEL, fontSize: "0.67rem", fontWeight: 600, color: sm.color, background: sm.bg, padding: "1px 6px", borderRadius: "2px" }}>
+                      {sm.label}
+                    </span>
+                    <span style={{ color: chip.color, fontSize: "0.75rem" }}>→</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })()}
+    </div>
+  );
+}
+
+// ─── (old ActivityBar removed — replaced by FilterBar above) ──────────────────
+
+function _OldActivityBar_UNUSED({ project, currentWeek, onOpenPiece, currentUser }) {
   const [expanded, setExpanded] = useStateTR(false);
 
   // ── Priority Actions: overdue + due-this-week pieces ──────────────────────
@@ -429,7 +598,7 @@ function ActivityBar({ project, currentWeek, onOpenPiece, currentUser }) {
         </div>
       )}
     </div>
-  );
+  return null;
 }
 
 // ─── Tracker root ─────────────────────────────────────────────────────────────
@@ -449,6 +618,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
   const [activeTab, setActiveTab] = useStateTR("tracker");
   const [viewMode, setViewMode] = useStateTR("table");
   const [openPiece, setOpenPiece] = useStateTR(null);
+  const [activeFilter, setActiveFilter] = useStateTR(null);
 
   function updatePiece(clusterId, pieceId, patch) {
     setProject(prev => {
@@ -511,7 +681,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         currentUser={currentUser} onOpenPiece={setOpenPiece}
       />
       {activeTab === "tracker" && (
-        <ActivityBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} currentUser={currentUser} />
+        <FilterBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
       )}
       {activeTab === "tracker" && viewMode === "cards" && (
         <div className="ns-tracker-body">
@@ -1489,10 +1659,8 @@ function PieceDetails({ piece, cluster, pillar, project }) {
               {piece.last_upload ? `Last uploaded ${new Date(piece.last_upload).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}` : "Uploaded"}
             </div>
           </div>
-          <a
-            href={deliverableUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => forceDownload(deliverableUrl, `${piece.id}-v${piece.revision_count || 1}.html`)}
             style={{
               fontFamily: "Noto Sans, sans-serif",
               fontSize: "0.72rem", fontWeight: 600,
@@ -1501,7 +1669,7 @@ function PieceDetails({ piece, cluster, pillar, project }) {
               border: "1px solid #c5ddef",
               padding: "6px 14px",
               borderRadius: "3px",
-              textDecoration: "none",
+              cursor: "pointer",
               whiteSpace: "nowrap",
               transition: "background 0.15s",
             }}
@@ -1509,7 +1677,7 @@ function PieceDetails({ piece, cluster, pillar, project }) {
             onMouseLeave={e => e.currentTarget.style.background = "#fff"}
           >
             ↓ Download HTML
-          </a>
+          </button>
           <a
             href={repoViewUrl}
             target="_blank"
@@ -1736,13 +1904,11 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                           const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
                           const mId = project.active_month || "month-1";
                           const dlUrl = `https://raw.githubusercontent.com/${REPO}/main/content/${mId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${piece.revision_count || 1}.html`;
+                          const dlFilename = `${piece.id}-v${piece.revision_count || 1}.html`;
                           return (
-                            <a
-                              href={dlUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                            <button
                               title="Download deliverable"
-                              onClick={e => e.stopPropagation()}
+                              onClick={e => { e.stopPropagation(); forceDownload(dlUrl, dlFilename); }}
                               style={{
                                 display: "inline-flex", alignItems: "center",
                                 fontFamily: "Noto Sans, sans-serif",
@@ -1750,10 +1916,10 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                                 color: "#1e6fa8", background: "#e8f2fa",
                                 border: "1px solid #c5ddef",
                                 padding: "2px 7px", borderRadius: "2px",
-                                textDecoration: "none", whiteSpace: "nowrap",
+                                cursor: "pointer", whiteSpace: "nowrap",
                                 flexShrink: 0,
                               }}
-                            >↓</a>
+                            >↓</button>
                           );
                         })()}
                       </div>
