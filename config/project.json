@@ -75,7 +75,8 @@
               "user_paths": [
                 "Path 1",
                 "Path 2"
-              ]
+              ],
+              "content_type": "ai-in-s2p"
             },
             {
               "id": "p-c1-2",
@@ -91,7 +92,8 @@
               "schedule_week": 1,
               "user_paths": [
                 "Path 2"
-              ]
+              ],
+              "content_type": "ai-in-s2p"
             },
             {
               "id": "p-c1-3",
@@ -108,7 +110,8 @@
               "user_paths": [
                 "Path 1",
                 "Path 2"
-              ]
+              ],
+              "content_type": "ai-in-s2p"
             }
           ]
         },
@@ -136,7 +139,8 @@
               "user_paths": [
                 "Path 2",
                 "Path 3"
-              ]
+              ],
+              "content_type": "ai-in-s2p"
             },
             {
               "id": "p-c2-2",
@@ -152,7 +156,8 @@
               "schedule_week": 2,
               "user_paths": [
                 "Path 2"
-              ]
+              ],
+              "content_type": "ai-in-s2p"
             }
           ]
         },
@@ -180,7 +185,8 @@
               "user_paths": [
                 "Path 2",
                 "Path 3"
-              ]
+              ],
+              "content_type": "ai-in-s2p"
             },
             {
               "id": "p-c3-2",
@@ -197,7 +203,8 @@
               "user_paths": [
                 "Path 2",
                 "Path 3"
-              ]
+              ],
+              "content_type": "ai-in-s2p"
             },
             {
               "id": "p-c3-3",
@@ -213,7 +220,8 @@
               "schedule_week": 2,
               "user_paths": [
                 "Path 2"
-              ]
+              ],
+              "content_type": "ai-in-s2p"
             }
           ]
         },
@@ -241,7 +249,8 @@
               "user_paths": [
                 "Path 2",
                 "Path 3"
-              ]
+              ],
+              "content_type": "ai-in-s2p"
             },
             {
               "id": "p-c4-2",
@@ -258,7 +267,8 @@
               "user_paths": [
                 "Path 1",
                 "Path 2"
-              ]
+              ],
+              "content_type": "ai-in-s2p"
             }
           ]
         }
@@ -291,7 +301,8 @@
               "secondary_keyword": "US tariff supply chain manufacturing",
               "intent": "informational",
               "geography": "us",
-              "schedule_week": 1
+              "schedule_week": 1,
+              "content_type": "msv"
             },
             {
               "id": "p-dm1-2",
@@ -304,7 +315,8 @@
               "secondary_keyword": "carbon border adjustment supply chain cost",
               "intent": "informational",
               "geography": "de",
-              "schedule_week": 1
+              "schedule_week": 1,
+              "content_type": "msv"
             },
             {
               "id": "p-dm1-3",
@@ -317,7 +329,8 @@
               "secondary_keyword": "nearshoring supply chain risk data",
               "intent": "informational",
               "geography": "all",
-              "schedule_week": 1
+              "schedule_week": 1,
+              "content_type": "msv"
             }
           ]
         },
@@ -344,7 +357,8 @@
               "schedule_week": 3,
               "funnel": "TOFU",
               "url": "/supply-chain-visibility-beyond-tier-1",
-              "notes": "NEW — not previously in tracker | Words: 1,200–1,800"
+              "notes": "NEW — not previously in tracker | Words: 1,200–1,800",
+              "content_type": "msv"
             },
             {
               "id": "p-dm2-2",
@@ -362,7 +376,8 @@
               "url": "/blog/supplier-financial-risk-signals-procurement",
               "notes": "NEW — not previously in tracker | Words: 2,000–2,500",
               "last_upload": "2026-05-22T13:57:23.235Z",
-              "last_upload_by": "orlagh"
+              "last_upload_by": "orlagh",
+              "content_type": "msv"
             },
             {
               "id": "p-dm2-3",
@@ -380,7 +395,8 @@
               "url": "/predictive-supplier-risk-management",
               "notes": "UPDATED — title refined, keyword updated | Words: 1,200–1,500",
               "last_upload": "2026-05-22T13:58:08.804Z",
-              "last_upload_by": "manager"
+              "last_upload_by": "manager",
+              "content_type": "industry-specific"
             },
             {
               "id": "p-dm2-4",
@@ -396,7 +412,8 @@
               "schedule_week": 3,
               "funnel": "BOFU",
               "url": "/tier-2-supplier-bankruptcy-supply-chain-risk",
-              "notes": "UPDATED — title refined, keywords updated | Words: 2,500–4,000"
+              "notes": "UPDATED — title refined, keywords updated | Words: 2,500–4,000",
+              "content_type": "industry-specific"
             }
           ]
         },
@@ -420,7 +437,8 @@
               "secondary_keyword": "rare earth supply chain risk 2026",
               "intent": "informational",
               "geography": "all",
-              "schedule_week": 3
+              "schedule_week": 3,
+              "content_type": "msv"
             },
             {
               "id": "p-dm3-2",
@@ -433,7 +451,8 @@
               "secondary_keyword": "commodity procurement risk data",
               "intent": "informational",
               "geography": "all",
-              "schedule_week": 3
+              "schedule_week": 3,
+              "content_type": "msv"
             }
           ]
         },
@@ -457,7 +476,8 @@
               "secondary_keyword": "S2P platform true cost manufacturing",
               "intent": "commercial",
               "geography": "all",
-              "schedule_week": 4
+              "schedule_week": 4,
+              "content_type": "industry-specific"
             },
             {
               "id": "p-dm4-2",
@@ -470,7 +490,8 @@
               "secondary_keyword": "S2P platform evaluation manufacturing",
               "intent": "commercial",
               "geography": "all",
-              "schedule_week": 4
+              "schedule_week": 4,
+              "content_type": "industry-specific"
             }
           ]
         }
@@ -503,7 +524,8 @@
               "secondary_keyword": "AI Act contracting authority compliance 2026",
               "intent": "informational",
               "geography": "eu",
-              "schedule_week": 2
+              "schedule_week": 2,
+              "content_type": "msv"
             },
             {
               "id": "p-ps1-2",
@@ -516,7 +538,8 @@
               "secondary_keyword": "public sector AI compliance whitepaper",
               "intent": "commercial",
               "geography": "eu",
-              "schedule_week": 2
+              "schedule_week": 2,
+              "content_type": "industry-specific"
             }
           ]
         },
@@ -540,7 +563,8 @@
               "secondary_keyword": "AP automation government e-invoicing mandate",
               "intent": "commercial",
               "geography": "fr",
-              "schedule_week": 2
+              "schedule_week": 2,
+              "content_type": "msv"
             },
             {
               "id": "p-ps2-2",
@@ -553,7 +577,8 @@
               "secondary_keyword": "off-contract spend public sector UK France Spain",
               "intent": "informational",
               "geography": "eu",
-              "schedule_week": 2
+              "schedule_week": 2,
+              "content_type": "msv"
             }
           ]
         },
@@ -577,7 +602,8 @@
               "secondary_keyword": "government CPO platform requirements 2026",
               "intent": "commercial",
               "geography": "eu",
-              "schedule_week": 4
+              "schedule_week": 4,
+              "content_type": "industry-specific"
             }
           ]
         }
@@ -610,7 +636,8 @@
               "secondary_keyword": "off-contract spend higher education UK US",
               "intent": "informational",
               "geography": "us",
-              "schedule_week": 3
+              "schedule_week": 3,
+              "content_type": "msv"
             },
             {
               "id": "p-he1-2",
@@ -623,7 +650,8 @@
               "secondary_keyword": "higher education procurement governance",
               "intent": "commercial",
               "geography": "us",
-              "schedule_week": 3
+              "schedule_week": 3,
+              "content_type": "industry-specific"
             }
           ]
         },
@@ -647,7 +675,8 @@
               "secondary_keyword": "2 CFR 200 federal grant compliance",
               "intent": "informational",
               "geography": "us",
-              "schedule_week": 3
+              "schedule_week": 3,
+              "content_type": "msv"
             },
             {
               "id": "p-he2-2",
@@ -660,7 +689,8 @@
               "secondary_keyword": "federal grant compliance university",
               "intent": "commercial",
               "geography": "all",
-              "schedule_week": 3
+              "schedule_week": 3,
+              "content_type": "industry-specific"
             }
           ]
         },
@@ -684,7 +714,8 @@
               "secondary_keyword": "higher education procurement digitization 2026",
               "intent": "commercial",
               "geography": "all",
-              "schedule_week": 4
+              "schedule_week": 4,
+              "content_type": "industry-specific"
             }
           ]
         }
