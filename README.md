@@ -18,7 +18,7 @@ It is also a reference build for Jaggaer's own team: a working example of what a
 3. [The Data Model — project.json](#3-the-data-model--projectjson)
 4. [Status Lifecycle](#4-status-lifecycle)
 5. [Content Type Model](#5-content-type-model)
-6. [Publishing Sequence & Interlink Map](#6-publishing-sequence--interlink-map)
+6. [Publishing Sequence](#6-publishing-sequence)
 7. [File-by-File Reference](#7-file-by-file-reference)
 8. [Deployment (Vercel)](#8-deployment-vercel)
 9. [Environment Variables](#9-environment-variables)
@@ -80,9 +80,9 @@ Browser (React via Babel CDN — no build step)
 │   ├── mock-data.js              ← fallback when GitHub is unavailable
 │   ├── api.js                    ← GitHub + Anthropic API helpers
 │   ├── entry.jsx                 ← name selector / login screen
-│   ├── sidebar.jsx               ← left navigation
-│   ├── tracker.jsx               ← main tracker (cards + table views)
-│   ├── claude-rail.jsx           ← Claude conversation rail (right column)
+│   ├── sidebar.jsx               ← left navigation (pillar + content-type views)
+│   ├── tracker.jsx               ← main tracker (cards + table views, notifications)
+│   ├── claude-rail.jsx           ← Claude conversation rail (right column, inactive)
 │   ├── bwc.jsx                   ← Build With Claude read-only panel
 │   ├── admin.jsx                 ← admin config editor
 │   ├── agent-builder.jsx         ← Agent Builder tab
@@ -114,8 +114,7 @@ Everything the app renders is derived from a single file: `config/project.json`.
   "feedback": {},
   "build_with_claude": [...],
   "conversations": {},
-  "schedule": [...],
-  "interlink_map": [...]
+  "schedule": [...]
 }
 ```
 
@@ -134,7 +133,7 @@ Everything the app renders is derived from a single file: `config/project.json`.
 
 ### content_type_split
 
-The three-type model that overlays the four industry pillars:
+The three-type model that overlays the four industry pillars. Displayed as badges in the tracker header and navigable via the sidebar "By Type" view.
 
 ```json
 {
@@ -146,7 +145,7 @@ The three-type model that overlays the four industry pillars:
 }
 ```
 
-Valid `id` values: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`. Each piece carries one of these as its `content_type` field.
+Valid `id` values: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`. Each piece carries one of these as its `content_type` field. The sidebar "By Type" toggle groups and lists all pieces by this classification, making the 50/25/25 split directly navigable.
 
 ### pillars
 
@@ -156,12 +155,12 @@ Valid `id` values: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`. Each piece car
   "label": "Discrete Manufacturing",
   "subtitle": "US & Germany",
   "weight": null,
-  "geography": "US, Germany",
+  "geography": "US / DE",
   "clusters": [...]
 }
 ```
 
-`weight` is `null` because pillar weights have been replaced by the `content_type_split` model. The field is preserved for schema compatibility.
+`weight` is `null` — pillar weights have been replaced by the `content_type_split` model. Preserved for schema compatibility.
 
 ### clusters
 
@@ -169,39 +168,40 @@ Valid `id` values: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`. Each piece car
 {
   "id": "dm1-tariffs",
   "label": "Tariff & Trade Disruption",
-  "sequence": 1,
+  "sequence": 3,
   "intent": "informational",
   "anchor_piece": "p-dm1-2",
   "month_id": "month-1",
+  "publish_week": 1,
   "pieces": [...]
 }
 ```
 
-`anchor_piece` must match the `id` of one piece in the `pieces` array. The anchor is called out visually in the tracker and is the linking hub for the cluster's internal link strategy.
-
-`intent` is either `"informational"` or `"commercial"`. The publishing sequence puts informational clusters first.
+`sequence` is the global cross-pillar publishing order (1–14 in Month 1). `anchor_piece` must match the `id` of one piece in `pieces`. `intent` is `"informational"` or `"commercial"` — informational clusters publish before commercial ones.
 
 ### pieces
 
-The full piece schema as of v3:
+Full piece schema:
 
 ```json
 {
-  "id": "p-dm1-2",
-  "title": "CBAM & the Carbon Cost of Your Supply Chain: What Procurement Needs to Know Now",
-  "format": "FAQ Article",
-  "assignee": "jason",
-  "status": "not-started",
-  "revision_count": 0,
-  "primary_keyword": "CBAM procurement compliance manufacturing",
-  "secondary_keyword": "carbon border adjustment supply chain cost",
-  "intent": "informational",
-  "geography": "DE",
-  "user_paths": ["path-2"],
+  "id": "p-dm2-3",
+  "title": "From Reactive to Predictive Supplier Risk Management",
+  "format": "Strategic Solution Article",
+  "assignee": "manager",
+  "status": "uploaded",
+  "revision_count": 1,
+  "primary_keyword": "predictive supplier risk management",
+  "secondary_keyword": "proactive procurement risk management",
+  "intent": "commercial",
+  "geography": "all",
   "content_type": "industry-specific",
-  "funnel_stage": "TOFU",
-  "url_slug": "/cbam-procurement-compliance-manufacturing",
-  "schedule_week": 1
+  "funnel": "MOFU",
+  "url": "/predictive-supplier-risk-management",
+  "notes": "UPDATED — title refined, keyword updated | Words: 1,200–1,500",
+  "schedule_week": 3,
+  "last_upload": "2026-05-22T13:58:08.804Z",
+  "last_upload_by": "manager"
 }
 ```
 
@@ -209,40 +209,41 @@ The full piece schema as of v3:
 |---|---|---|
 | `id` | `p-{cluster}-{n}` | Unique across entire project |
 | `status` | see §4 | Drives all UI state |
-| `content_type` | `msv` / `ai-in-s2p` / `industry-specific` | New in v3 |
-| `funnel_stage` | `TOFU` / `MOFU` / `BOFU` / `Informational` | New in v3 |
-| `url_slug` | `/slug-here` | New in v3 |
-| `schedule_week` | `1`–`4` | Used for overdue/due timing calculations |
-| `user_paths` | `["path-1"]` etc | AI in S2P pillar only |
+| `content_type` | `msv` / `ai-in-s2p` / `industry-specific` | Cross-cutting classification; drives sidebar "By Type" view |
+| `funnel` | `TOFU` / `MOFU` / `BOFU` | Shown in piece Details tab |
+| `url` | `/slug-here` | Target URL slug; shown in piece Details tab |
+| `notes` | free text | Editorial notes; shown in piece Details tab with URL/words extracted |
+| `schedule_week` | `1`–`4` | Drives overdue/due timing calculations |
+| `user_paths` | `["Path 1", "Path 2"]` | AI in S2P pillar only |
 
 ### team
 
 ```json
 {
   "ns": [
-    { "id": "jason", "name": "Jason", "role": "researcher", "org": "ns" }
+    { "id": "manager", "name": "Chahat K", "role": "NS Manager", "org": "ns", "admin": true }
   ],
   "jaggaer": [
-    { "id": "indy", "name": "Indy", "role": "client", "org": "jaggaer", "admin": true }
+    { "id": "anna", "name": "Jason R", "role": "Marketing", "org": "jaggaer", "admin": true }
   ]
 }
 ```
 
-`"admin": true` on a team member unlocks admin mode in the app (inline editing, piece deletion, config editing). The entry screen identifies admin users from this field.
+`"admin": true` unlocks admin mode. Both NS and Jaggaer can have admin users.
 
 ### feedback
 
-Runtime-written by the app. Structure:
+Runtime-written by the app:
 
 ```json
 {
-  "p-dm2-1": [
+  "p-dm2-2": [
     {
-      "id": "fb-a3x9k2",
+      "id": "fb-9",
       "author": "indy",
-      "verdict": "needs-revision",
-      "body": "Section 2 needs a stronger data point — the current stat is from 2023.",
-      "ts": "2026-05-22T14:32:00Z"
+      "verdict": "question",
+      "body": "Is the tier-3 data sourced or illustrative?",
+      "ts": "2026-05-14T08:50:00Z"
     }
   ]
 }
@@ -252,7 +253,7 @@ Valid verdicts: `"approved"`, `"needs-revision"`, `"question"`.
 
 ### schedule
 
-The publishing sequence. Read by `tracker.jsx` to drive the Publishing Sequence view and all timing calculations. Previously hardcoded in `tracker.jsx` — now lives here so updating the schedule requires only editing `project.json`.
+The publishing sequence. Drives the Publishing Sequence tab and all timing/overdue calculations. Edit here to change the sequence — no code change needed.
 
 ```json
 {
@@ -260,38 +261,15 @@ The publishing sequence. Read by `tracker.jsx` to drive the Publishing Sequence 
   "label": "Week 1",
   "goal": "Capture Claude + S2P and tariff procurement search traffic from day one",
   "slots": [
-    {
-      "pillar": "ai-in-s2p",
-      "cluster": "c1-getting-started",
-      "linking_rule": "All 3 link to each other; all link to JAI CTA"
-    }
+    { "pillar": "ai-in-s2p", "cluster": "c1-getting-started" },
+    { "pillar": "discrete-manufacturing", "cluster": "dm1-tariffs" }
   ]
 }
 ```
 
-To update the sequence: edit `schedule` in `project.json`. No code changes needed.
-
-### interlink_map
-
-The cross-pillar linking strategy. Read by `tracker.jsx` to drive the Interlink Map view and the piece detail drawer's cross-pillar link field. Previously hardcoded in `tracker.jsx`.
-
-```json
-{
-  "pillar": "discrete-manufacturing",
-  "cluster": "dm1-tariffs",
-  "anchor_label": "FAQ: CBAM & the Carbon Cost of Your Supply Chain",
-  "linking_rule": "Quick Blog + Data Snapshot both link to FAQ as anchor",
-  "cross_pillar": "Public Sector C1: EU AI Act + CBAM as parallel compliance obligations"
-}
-```
-
-`pillar` and `cluster` are IDs (matching the `id` fields in `pillars`). `tracker.jsx` enriches these to display labels at render time. To update the interlink strategy: edit `interlink_map` in `project.json`.
-
 ---
 
 ## 4. Status Lifecycle
-
-Every piece moves through exactly these states in order:
 
 ```
 not-started → uploaded → jaggaer-feedback → revised → approved
@@ -299,47 +277,55 @@ not-started → uploaded → jaggaer-feedback → revised → approved
 
 | Status | Who triggers it | What it means |
 |---|---|---|
-| `not-started` | Default | Piece exists in config but no file has been uploaded |
-| `uploaded` | NS uploads a file | Deliverable committed to GitHub; Jaggaer is cued |
-| `jaggaer-feedback` | Jaggaer submits feedback with verdict `needs-revision` or `question` | NS is cued to revise |
-| `revised` | NS re-uploads after feedback | New versioned file committed; Jaggaer is cued again |
-| `approved` | Jaggaer submits feedback with verdict `approved` | Counts toward cluster completion |
+| `not-started` | Default | Piece exists in config, nothing uploaded |
+| `uploaded` | NS uploads a file | Deliverable committed to GitHub; Jaggaer notification fires |
+| `jaggaer-feedback` | Jaggaer submits needs-revision or question | NS cued to revise |
+| `revised` | NS re-uploads after feedback | New versioned file committed; Jaggaer re-cued |
+| `approved` | Jaggaer submits approved verdict | Counts toward cluster completion |
 
-A cluster is **publish-ready** when every piece in it reaches `approved`. The progress arcs and the Publishing Sequence view reflect this live.
+A cluster is **publish-ready** when every piece reaches `approved`.
 
 ---
 
 ## 5. Content Type Model
 
-Month 1 uses a three-type content split that cuts across all four pillars:
+Month 1 uses a three-type split that cuts across all four industry pillars:
 
-| Type | ID | Weight | Purpose |
+| Type | ID | Target | ~Pieces |
 |---|---|---|---|
-| MSV-driven | `msv` | 50% | Broad horizontal pieces targeting high-search-volume procurement terms. Industry examples as callout sections. |
-| AI in S2P (Claude) | `ai-in-s2p` | 25% | Claude-focused content for the Build With Claude section. User journey mapped (Path 1/2/3). |
-| Industry-specific | `industry-specific` | 25% | Vertical content for one sector. Lower search volume, high SDR enablement value. eBooks and whitepapers. |
+| MSV-driven | `msv` | Broad horizontal, high-search-volume procurement terms. Industry examples as callout sections. | ~15 |
+| AI in S2P (Claude) | `ai-in-s2p` | Claude + S2P searches. User journey mapped (Path 1/2/3). Drives JAI traffic. | ~8 |
+| Industry-specific | `industry-specific` | Vertical, sector-explicit content. Lower search volume, high SDR enablement. eBooks and whitepapers. | ~8 |
 
-Each piece carries `"content_type": "msv"` (or `"ai-in-s2p"` or `"industry-specific"`). The tracker does not currently filter by content type in the UI — that column is available for a future sprint.
+Every piece has `"content_type"` set to one of these IDs. The sidebar **By Type** toggle (next to By Pillar) groups all 31 pieces by content type, making the 50/25/25 split navigable alongside the industry pillar view.
+
+**Month 1 classification (31 pieces):**
+- **MSV (12):** Tariff & Trade cluster, Sub-Tier visibility + financial risk pieces, Critical Minerals cluster, EU AI Act FAQ, E-invoicing quick-take, Contract Leakage snapshot, Maverick Spend snapshot, OMB Uniform Guidance quick-take
+- **AI in S2P (10):** All 10 pieces in the AI in S2P pillar
+- **Industry-specific (9):** Predictive Risk MOFU, Bankruptcy Whitepaper, Platform TCO & Consolidation cluster, EU AI Act Whitepaper, Platform Evaluation pieces, R1 University Whitepaper, NSF/NIH Checklist, Platform Modernisation
 
 **User paths (AI in S2P pillar only):**
 
 | Path | Description |
 |---|---|
-| Path 1 | Low-interest user. Lands on the page, not keen to figure it out themselves. Prefers a ready-made solution (JAI). |
-| Path 2 | Medium-interest user. Curious, wants to understand Claude, has some friction (IT permissions, setup). Wants to see it work first. |
-| Path 3 | Superuser. Already interested in AI, has or will get permissions, wants to go deep. Will fork the GitHub repo. |
+| Path 1 | Low-interest. Lands on page, prefers ready-made solution (JAI). |
+| Path 2 | Medium-interest. Curious about Claude, has some friction (IT permissions, setup). Wants to see it work first. |
+| Path 3 | Superuser. Already interested in AI, will install, go deep, possibly fork the repo. |
 
 ---
 
-## 6. Publishing Sequence & Interlink Map
+## 6. Publishing Sequence
 
-Both are now fully data-driven from `project.json`. To change either, edit the JSON — no code change required.
+Four-week sequence for Month 1. Informational clusters first (build audience), commercial clusters second (convert audience).
 
-**Publishing sequence rule:** Informational clusters first (build audience), commercial clusters second (convert audience). All pieces within a cluster must be approved before the cluster publishes. The app surfaces cluster publish-readiness via progress arcs and the Publishing Sequence tab.
+| Week | Goal | Clusters |
+|---|---|---|
+| **Week 1** | Capture Claude + S2P and tariff search traffic from day one | AI in S2P C1: Getting Started · DM C1: Tariff & Trade |
+| **Week 2** | Convert Path 2 users; demonstrate Claude; rank before EU AI Act peaks | AI in S2P C2+C3: Contracts + Suppliers · PS C1+C2: EU AI Act + E-Invoicing |
+| **Week 3** | Build cluster authority on supply chain risk and higher education governance | DM C2+C3: Sub-Tier Risk + Critical Minerals · HE C1+C2: Maverick Spend + Grant Compliance |
+| **Week 4** | Convert audiences built in weeks 1–3 to platform evaluation intent | AI in S2P C4: Prompt Library · DM C4: Platform TCO · PS C3: Platform Evaluation · HE C3: Platform Modernisation |
 
-**Interlink rule:** Every piece links to its cluster's anchor piece. Anchor pieces link back to all supporting pieces. Cross-pillar links multiply topical authority across the full content ecosystem.
-
-Both rules are displayed in the tracker UI and referenced in the piece detail drawer.
+Sequence is data-driven from `project.schedule`. Edit there to change order.
 
 ---
 
@@ -347,175 +333,157 @@ Both rules are displayed in the tracker UI and referenced in the piece detail dr
 
 ### index.html
 
-The app shell. Loads all `.jsx` files as Babel-transpiled scripts. No build step — React runs in-browser via CDN. Contains the script loading order (important: dependencies before consumers) and a single `<div id="root">`.
+App shell. Loads all `.jsx` files as Babel-transpiled scripts in dependency order. No build step. Contains a single `<div id="root">` and this config at the top:
 
-**Config constants at the top:**
 ```js
-const GITHUB_REPO = "ns-adiraghavan/jaggaer-ns-tracker";
-// GITHUB_TOKEN is NOT here — it lives in Vercel env and is injected server-side
+window.__CONFIG__ = { GITHUB_REPO: "ns-adiraghavan/jaggaer-ns-tracker" };
+// Token is NOT here — injected server-side by Vercel
 ```
 
 ### styles.css
 
 Full design system. Key CSS variables:
-```css
---ink: #0f1923          /* deep navy — primary text and dark surfaces */
---paper: #f0ede6        /* warm off-white — page background */
---accent: #c8401a       /* burnt orange/terracotta — Jaggaer brand */
---st-approved: #1e7a45  /* status: approved */
---st-feedback: #b05e00  /* status: jaggaer-feedback */
---st-revised: #5a3d9e   /* status: revised */
---st-uploaded: #1e6fa8  /* status: uploaded */
-```
 
-Cluster card colours cycle through four palette entries (`CLUSTER_PALETTE` in `tracker.jsx`) indexed by cluster position within its pillar.
+```css
+--ink: #0f1923          /* deep navy */
+--paper: #f0ede6        /* warm off-white page background */
+--accent: #c8401a       /* burnt orange — Jaggaer brand */
+--st-approved: #1e7a45
+--st-feedback: #b05e00
+--st-revised: #5a3d9e
+--st-uploaded: #1e6fa8
+```
 
 ### mock-data.js
 
-Fallback used when GitHub returns an error or the token is a placeholder. Must be kept in sync with `project.json`. After any `project.json` update, regenerate `mock-data.js` from it — it is a JS-wrapped snapshot of the same data.
-
-**To regenerate:** `window.MOCK_PROJECT = { ...paste project.json content here... };`
+Fallback used when GitHub returns an error or the token is a placeholder. Kept in sync with `project.json` — after any `project.json` update, the pillars array in `mock-data.js` must also be updated. The build process this session updated both files simultaneously.
 
 ### api.js
 
-All GitHub and Anthropic API calls. Calls `/api/github` and `/api/anthropic` (Vercel proxy routes) — never calls GitHub or Anthropic directly from the browser. **Do not revert this to direct API calls** — that would expose credentials and break Vercel's CORS policy.
+All GitHub and Anthropic API calls. Calls `/api/github` and `/api/anthropic` (Vercel proxy routes) — never calls external APIs directly from the browser. **Do not revert to direct calls** — that exposes credentials and breaks CORS.
 
 Key functions:
 - `fetchProject()` — GET `config/project.json`, returns parsed JSON + SHA
-- `saveProject(data, sha)` — PUT `config/project.json` with base64-encoded content
-- `uploadPieceDeliverable(piece, clusterId, pillarId, monthId, contents, userId)` — PUT versioned deliverable HTML to the content folder
-- `callClaude(messages, systemPrompt)` — POST to `/api/anthropic` with message history
+- `saveProject(data, sha)` — PUT `config/project.json` base64-encoded
+- `uploadPieceDeliverable(piece, clusterId, pillarId, monthId, contents, userId)` — PUT versioned deliverable to content folder
+- `callClaude(messages, systemPrompt)` — POST to `/api/anthropic`
 
 ### entry.jsx
 
-Name selector / login screen. Renders a list of all team members from `project.team.ns` and `project.team.jaggaer`. On selection, sets `currentUser` in app state. No password — identification only for feedback attribution.
+Name selector screen. Renders all team members from `project.team.ns` and `project.team.jaggaer`. Sets `currentUser` on selection. No password — identification for feedback attribution only.
 
 ### sidebar.jsx
 
-Left navigation. Renders pillar list dynamically from `project.pillars`. Clicking a pillar sets `activePillar` filter. Clicking a cluster sets `activeCluster` filter. Shows overall progress stats. Displays NS and Jaggaer logos at the top.
+Left navigation. Key features:
+
+**By Pillar / By Type toggle** — a two-button toggle just below the Tracker nav item:
+- **By Pillar** (default): P01–P04 industry pillar nav with expandable cluster list, approved/total fractions
+- **By Type**: three collapsible sections — MSV-Driven, AI in S2P (Claude), Industry-Specific — each listing every piece in that category with a status dot, title, pillar/cluster breadcrumb, and click-through to the cluster in the tracker
+
+This makes the 50/25/25 content type split navigable, not just a header badge.
 
 ### tracker.jsx
 
-The main content area. Three tabs:
+Main content area. Two tabs:
 
 **Content Tracker** — two view modes:
-- *Cards view*: cluster cards with coloured headers, progress arcs, piece rows, inline upload/feedback buttons
-- *Table view*: single continuous table with all pieces. Columns: #, Title, Content Type, Assignee, Primary Keyword, Secondary Keyword, Intent, User Path, Status
+- *Cards view*: cluster cards with coloured headers, progress arcs, piece rows
+- *Table view*: continuous table. Columns: #, Title, Content Type, Assignee, Primary Keyword, Secondary Keyword, Intent, User Path, Status
 
-Both views share the `DrawerOverlay` component for piece interaction.
+The status column in table view includes an inline **↓ download button** for any piece with an uploaded deliverable. Clicking downloads the raw HTML directly without opening the drawer.
 
-**Publishing Sequence** — reads from `project.schedule`. Shows week-by-week cluster readiness with progress bars. Live piece counts derived from cluster state (not stored in the slot).
-
-**Interlink Map** — reads from `project.interlink_map`. Pillar and cluster labels are enriched at render time from `project.pillars`. Columns: Pillar, Cluster, Anchor Piece, Linking Rule, Cross-Pillar Link Opportunity.
+**Publishing Sequence** — reads `project.schedule`. Week-by-week cluster readiness, live piece counts, goal statement per week.
 
 **Key components:**
-- `PriorityActions` — banner above the tracker listing overdue and due-this-week pieces
-- `ClusterCard` — card with coloured header, progress arc, piece list
-- `ProgressArc` — SVG arc showing approved/in-motion/total
+- `ActivityBar` — collapsed strip above the tracker; expands to two equal-height columns: Priority Actions (overdue + due-this-week) and Recent Activity
+- `NotificationBell` — visible to Jaggaer org users only. Shows a badge count of uploaded + revised pieces awaiting review. Dropdown lists each piece with status, uploader, days since upload, and a direct "Review →" click-through to the feedback form
+- `ClusterCard` — card with progress arc, anchor piece callout, piece list
 - `DrawerOverlay` — full modal overlay on piece click
-- `PieceDrawer` — tabbed panel inside overlay (Upload / Leave Feedback / Notes / Details / Edit / Delete)
-- `InlineCell` — admin-mode inline editing for text and select fields
+- `PieceDrawer` — tabbed: Upload / Leave Feedback / Notes / Details / Edit / Delete
+- `PieceDetails` — Details tab now shows: Funnel stage, Target URL, Word count (extracted from notes), Notes (cleaned), in addition to standard metadata
+- `InlineCell` — admin inline editing for text and select fields
 
 ### claude-rail.jsx
 
-Claude conversation interface (right column). **Currently not wired into the app** — the Anthropic API key is pending. When the key is available:
-1. Add `ANTHROPIC_API_KEY` to Vercel environment variables
-2. Add script tag for `claude-rail.jsx` to `index.html`
-3. Add `<ClaudeRail project={project} currentUser={currentUser} />` to `app.jsx`
-4. Update model string in `api/anthropic.js` to `claude-sonnet-4-6`
+Claude conversation rail. **Currently not wired into the app** — Anthropic API key is pending. When the key is available:
 
-The rail passes the full serialised `project` state as a system prompt context on each message, so Claude can answer questions about piece statuses, cluster readiness, and feedback history without hallucinating.
+1. Add `ANTHROPIC_API_KEY` to Vercel environment variables
+2. Update model in `api/anthropic.js` from `claude-haiku-4-5` to `claude-sonnet-4-6`
+3. Add script tag for `claude-rail.jsx` to `index.html`
+4. Add `<ClaudeRail project={project} currentUser={currentUser} />` to `app.jsx`
+
+The rail serialises full project state as system prompt context on each message. Claude reads statuses directly — no hallucination.
 
 ### bwc.jsx
 
-Build With Claude read-only panel. Lists entries from `project.build_with_claude`. Each entry shows app name, description, status, and a link to its folder in GitHub. NS pushes to the repo directly; this panel reflects whatever is there. No upload flow — visibility only.
+Build With Claude panel. Read-only. Lists `project.build_with_claude` entries: app name, description, status, GitHub link. NS pushes directly to the repo; this panel reflects it.
 
 ### admin.jsx
 
-Admin config editor. Unlocks when an admin user is logged in (`"admin": true` in the team roster). Tabs:
-- **Pillars & Clusters** — add/edit pillars and clusters; edit cluster metadata
-- **Pieces** — add pieces to clusters; full field editor
-- **Team** — add NS and Jaggaer team members *(remove is not yet implemented — see §13)*
-- **Schedule** — edit publishing sequence weeks and slots
-
-All changes write back to `project.json` via `saveProject()`.
+Config editor for admin users. Tabs: Pillars & Clusters, Pieces, Team, Schedule. All changes write back to `project.json` via `saveProject()`.
 
 ### agent-builder.jsx
 
-The Agent Builder tab — a separate content experience separate from the tracker flow. Five blocks:
-1. **S2P Use Case Demos** — three Claude-powered tools (Contracts, Suppliers, RFP). Currently in demo mode (mock outputs). Live Claude API activates once the key is integrated.
-2. **How to Install Claude** — collapsible, branching on IT permission answer
-3. **Basics of Claude** — collapsible accordion: What is Claude, Markdown files, How prompts work
-4. **How to Prompt for S2P** — three-part formula (role / task / format) with copyable example prompts
-5. **Webinar Hub** — curated YouTube embeds + live session registration
+Self-contained content experience for Jaggaer site visitors. Five sections: S2P Use Case Demos, Install Guide, Claude Basics, How to Prompt for S2P, Webinar Hub. Currently in demo mode (mock outputs). Live Claude API activates when key is integrated — see §12.
 
 ### app.jsx
 
-Root component. Responsibilities:
-- On load: call `fetchProject()`, hydrate state, fall back to `MOCK_PROJECT` on error
-- Debounced auto-save: any `project` state change triggers a 1.5s debounced `saveProject()` write to GitHub
-- Routing: `view` state determines which panel renders (tracker / bwc / admin / agent-builder)
-- Save confirmation toast: shown after each successful GitHub write
+Root component. Hydrates from GitHub on load, falls back to `MOCK_PROJECT` on error. Debounced auto-save (1.5s) on any project state change. Save confirmation toast after each successful write.
 
 ### api/github.js
 
-Vercel serverless function. Reads `GITHUB_TOKEN` and `GITHUB_REPO` from `process.env`. Proxies GET and PUT requests to `https://api.github.com/repos/{repo}/contents/{path}`.
+Vercel serverless. Reads `GITHUB_TOKEN` and `GITHUB_REPO` from `process.env`. Proxies GET and PUT to GitHub Contents API.
 
 ### api/anthropic.js
 
-Vercel serverless function. Reads `ANTHROPIC_API_KEY` from `process.env`. Proxies POST requests to `https://api.anthropic.com/v1/messages`. Currently uses `claude-haiku-4-5` — update to `claude-sonnet-4-6` when the key is activated.
+Vercel serverless. Reads `ANTHROPIC_API_KEY` from `process.env`. Proxies POST to Anthropic `/v1/messages`. Currently set to `claude-haiku-4-5` — update to `claude-sonnet-4-6` when key is activated.
 
 ---
 
 ## 8. Deployment (Vercel)
 
-1. Push the repo to GitHub at `ns-adiraghavan/jaggaer-ns-tracker`
-2. Import the repo into Vercel
+1. Push repo to GitHub at `ns-adiraghavan/jaggaer-ns-tracker`
+2. Import into Vercel
 3. Set **Root Directory** to `repo-setup`
 4. Set **Framework** to `Other` (no build step)
 5. Add environment variables (see §9)
 6. Deploy
 
-Vercel auto-detects `api/github.js` and `api/anthropic.js` as serverless functions from the `api/` folder within the root directory.
+Vercel auto-detects `api/github.js` and `api/anthropic.js` as serverless functions.
 
 ---
 
 ## 9. Environment Variables
 
-Set these in Vercel project settings → Environment Variables:
-
 | Variable | Value | Notes |
 |---|---|---|
-| `GITHUB_TOKEN` | `ghp_...` | Classic PAT, full repo scope. Never put in code. |
-| `GITHUB_REPO` | `ns-adiraghavan/jaggaer-ns-tracker` | Repo identifier for API calls |
-| `ANTHROPIC_API_KEY` | `sk-ant-...` | Pending purchase. Leave unset until ready. |
+| `GITHUB_TOKEN` | `ghp_...` | Classic PAT, full repo scope. Never in code. |
+| `GITHUB_REPO` | `ns-adiraghavan/jaggaer-ns-tracker` | Repo identifier |
+| `ANTHROPIC_API_KEY` | `sk-ant-...` | Pending. Leave unset until purchased. |
 
 ---
 
 ## 10. The Agent Builder Tab
 
-The Agent Builder tab (`agent-builder.jsx`) is a self-contained content experience aimed at Jaggaer's site visitors — primarily procurement professionals unfamiliar with Claude. It is not part of the tracker flow.
+Self-contained experience for Jaggaer's site visitors. Not part of the tracker flow.
 
-**Purpose:** Demonstrate what Claude can do for S2P, teach the basics, and bridge visitors toward JAI (Jaggaer AI) as the enterprise-grade version.
+**Five sections:**
+1. **S2P Use Case Demos** — Contracts, Suppliers, RFP tools. Demo mode (mock outputs). Live on API key integration.
+2. **How to Install Claude** — Collapsible, branches on IT permissions answer
+3. **Basics of Claude** — Accordion: What is Claude, Markdown files, How prompts work
+4. **How to Prompt for S2P** — Three-part formula (role / task / format) with copyable examples
+5. **Webinar Hub** — YouTube embeds + live session registration
 
-**Demo system prompts** are defined in `DEMO_SYSTEM_PROMPTS` in `agent-builder.jsx`. These are the prompts sent to Claude when a visitor pastes input into the Contracts, Suppliers, or RFP demo. They instruct Claude to return structured JSON only (no markdown fences), which the app then renders as styled output components.
-
-Currently in **demo mode** — the `DemoPane` component shows mock outputs (`MOCK_OUTPUTS`) after a 1.5s fake delay. When the Anthropic API key is integrated, replace the `setTimeout` mock in `runDemo()` with a real `callClaude()` call.
+Demo system prompts are in `DEMO_SYSTEM_PROMPTS` in `agent-builder.jsx`. They instruct Claude to return raw JSON only — no markdown fences. Strip fences before parsing: `text.replace(/```json|```/g, "").trim()`.
 
 ---
 
 ## 11. Prompts: How to Build Something Like This
 
-These are the prompts you would give Claude to build a tracker of this type from scratch for a new engagement.
-
----
-
 ### Prompt 1 — Project brief to app design seed
 
-Use this when starting a new engagement. Replace the bracketed sections with your actual project details.
-
 ```
-I need to build a collaborative content delivery and review tracker for [CLIENT] and [AGENCY]. 
+I need to build a collaborative content delivery and review tracker for [CLIENT] and [AGENCY].
 
 Here is the project context:
 - Client: [CLIENT NAME] — [one-line description]
@@ -538,306 +506,149 @@ The app should:
 6. Have a Claude conversation rail so both teams can ask questions about project state
 
 Design direction:
-- [Describe tone and aesthetic — e.g. "editorial B2B dashboard, dark steel base, warm off-white content, burnt orange accent"]
-- [Describe what should be memorable — e.g. "cluster progress arcs that show publish-readiness at a glance"]
+- [Describe tone and aesthetic]
+- [Describe what should be memorable]
 
 Technical requirements:
-- Single React artifact (JSX), Tailwind utility classes or custom CSS
-- GitHub as backend — all state in a config/project.json file, content files uploaded to /content/
+- Single React artifact (JSX), no build step
+- GitHub as backend — all state in config/project.json
 - Anthropic API for the Claude conversation rail
 - Vercel serverless functions as API proxies (no tokens in browser code)
 
-Produce: an app design seed document describing the full structure, schema, user model, status lifecycle, design direction, and technical notes. Do not write code yet.
+Produce: an app design seed document. Do not write code yet.
 ```
-
----
 
 ### Prompt 2 — Generate project.json from a spreadsheet
 
-Use this to convert an existing tracker spreadsheet into the project.json schema.
-
 ```
-I have a content tracker spreadsheet. I need to convert it into a project.json file for a React app.
+I have a content tracker spreadsheet. Convert it into a project.json file.
 
-Here is the schema the app expects:
+Schema the app expects:
+[Paste schema from §3]
 
-[Paste the project.json schema from this README, §3]
-
-Here is my tracker content:
-
-[Paste the spreadsheet content — or describe the structure if you're attaching the file]
+Tracker content:
+[Paste spreadsheet or attach file]
 
 Rules:
-- Generate IDs as: pillars → kebab-case label, clusters → p1c1 / p1c2 etc, pieces → p-{cluster-id}-{n}
-- All statuses start as "not-started"
-- All revision_counts start at 0
-- Set the anchor_piece to the piece in each cluster that is most likely to be the linking hub (usually the FAQ, Whitepaper, or Data Snapshot)
-- Populate schedule based on [describe your publishing sequence], with linking_rule per slot
-- Populate interlink_map with one entry per cluster, anchor_label from the anchor piece title, and cross_pillar describing the most relevant cross-pillar link opportunity
+- IDs: pillars → kebab-case label, clusters → {pillar-prefix}-{topic}, pieces → p-{cluster-id}-{n}
+- All statuses start as "not-started", revision_count as 0
+- Set anchor_piece to the FAQ, Whitepaper, or Data Snapshot in each cluster
+- Tag each piece with content_type: "msv" (broad horizontal), "ai-in-s2p" (Claude-focused), or "industry-specific" (vertical, gated)
+- Tag funnel: "TOFU", "MOFU", or "BOFU" based on format and intent
+- Populate schedule from the publishing sequence in the spreadsheet
+- sequence numbers are global cross-pillar (1, 2, 3... across all clusters)
 
-Return the complete project.json as valid JSON only.
+Return complete project.json as valid JSON only.
 ```
-
----
 
 ### Prompt 3 — Build the tracker component
 
-Use this once you have a project.json and a design direction.
-
 ```
-Build a React tracker component (tracker.jsx) for a content delivery and review app.
+Build a React tracker component (tracker.jsx).
 
-The component receives these props:
-- project: the full project.json state object (schema below)
+Props:
+- project: full project.json state
 - setProject: state setter
 - currentUser: { id, name, role, org } — "ns" or "jaggaer"
-- activePillar: string or null — filter by pillar ID
-- activeCluster: string or null — filter by cluster ID
+- activePillar: string | null
+- activeCluster: string | null
 - adminMode: boolean
 
-The project.json schema is:
-[Paste schema from §3]
-
-The component should render:
-1. A header with KPIs: total approved, awaiting client review, clusters ready to publish
-2. Two view modes toggled by buttons: Cards view and Table view
-3. Cards view: one section per pillar, one card per cluster. Each card shows:
-   - Coloured header (cycle through 4 palette colours by cluster index)
-   - Cluster name, sequence number, intent badge, publish week badge
-   - Progress arc (SVG circle showing approved/in-motion/total)
-   - Anchor piece called out distinctly
-   - List of piece rows with status chips and upload/feedback action buttons
-4. Table view: single continuous table. Rows grouped by pillar and cluster with header rows.
-5. A Publishing Sequence tab reading from project.schedule
-6. An Interlink Map tab reading from project.interlink_map
-7. A priority actions banner above the tracker showing overdue and due-this-week pieces
+Render:
+1. Header with KPIs: approved, awaiting Jaggaer review, clusters ready
+2. Notification bell (Jaggaer org only): badge count of uploaded+revised pieces; dropdown with piece list and Review → click-through
+3. Cards view and Table view toggle
+4. Cards: one section per pillar, one card per cluster with coloured header, progress arc, piece rows
+5. Table: continuous table grouped by pillar+cluster; status column includes inline ↓ download button for uploaded pieces
+6. Publishing Sequence tab reading project.schedule
+7. ActivityBar: collapsed strip, expands to two equal-height columns — Priority Actions (overdue/due) and Recent Activity
 
 Status lifecycle: not-started → uploaded → jaggaer-feedback → revised → approved
 Status colours: uploaded=#1e6fa8, jaggaer-feedback=#b05e00, revised=#5a3d9e, approved=#1e7a45
 
-Clicking any piece opens a full-screen modal overlay with tabs:
-- Upload (NS only, when piece is not-started or jaggaer-feedback)
-- Leave Feedback (Jaggaer only, when piece is uploaded or revised)
-- Notes (feedback history thread)
-- Details (piece metadata)
-- Edit (admin only — inline form)
-- Delete (admin only — two-step confirm, blocked if approved)
+Piece click opens DrawerOverlay with tabs: Upload (NS) / Leave Feedback (JG) / Notes / Details / Edit (admin) / Delete (admin)
+Details tab shows: Pillar, Cluster, Intent, Publishing week, Content Type, Funnel stage, Target URL, Word count, Assignee, Geography, User path, Primary keyword, Secondary keyword, Anchor piece, Revision count, Status, Notes
 
 Design: [describe your aesthetic]
 
-Write complete, working JSX. Export window.Tracker = Tracker at the end.
+Export window.Tracker = Tracker at the end.
 ```
 
----
-
-### Prompt 4 — Build the Claude conversation rail
+### Prompt 4 — Build the sidebar with content-type toggle
 
 ```
-Build a Claude conversation rail component (claude-rail.jsx) for a project tracker app.
+Build a sidebar component (sidebar.jsx) for a content tracker.
 
-The component receives:
-- project: full project state object
-- currentUser: { id, name, role, org }
+Props: project, currentUser, activePillar, setActivePillar, activeCluster, setActiveCluster, view, setView, adminMode, activeMonthId, setActiveMonthId
 
-It should:
-1. Always be visible as a right-side panel
-2. Feel like a senior colleague who knows the project, not a chatbot widget
-3. Show a message history (responses above, input at bottom)
-4. On each user message, call the Anthropic API at /api/anthropic with:
-   - A system prompt that includes the full serialised project state
-   - The full conversation history
-   - Model: claude-sonnet-4-6, max_tokens: 1000
+Features:
+1. Collapse toggle (‹ / ›)
+2. Logo strip (NS × Jaggaer logos)
+3. Active month label / switcher
+4. Tracker nav with approved/total fraction
+5. By Pillar / By Type toggle — pill toggle buttons
+   - By Pillar: P01–P04 with expandable cluster list, approved/total per cluster, click to filter
+   - By Type: three collapsible sections (MSV-Driven / AI in S2P / Industry-Specific). Each section lists every piece in that content_type with status dot, title, pillar·cluster breadcrumb, click navigates to that cluster
+6. Divider, then: Build With Claude, Sample Artifacts, Admin (admin only)
+7. User card at bottom with name, role, org pill, Admin toggle, Switch button
 
-The system prompt should tell Claude:
-- What the project is (client, agency, engagement type)
-- The status lifecycle (not-started → uploaded → jaggaer-feedback → revised → approved)
-- That it should read statuses from the project state and never hallucinate them
-- That responses should be concise and direct — status answers in 2–3 sentences, not paragraphs
-- The current date
+Content type colours: msv=#1a6a3a/bg#eaf4ee, ai-in-s2p=#1e4fa8/bg#eaf0fb, industry-specific=#784212/bg#fef3e8
 
-Example questions it should handle well:
-- "What's blocking Week 2 from publishing?"
-- "Which clusters are fully approved?"
-- "What does [client] still need to review?"
-- "How many pieces are approved across all pillars?"
-- "Are we on track for Week 3?"
-
-Design: [describe — e.g. "white panel, ink text, accent colour input border, minimal chrome"]
-
-Export window.ClaudeRail = ClaudeRail at the end.
+Export window.Sidebar = Sidebar and window.computeStats = computeStats at the end.
 ```
 
----
-
-### Prompt 5 — Build the admin panel
+### Prompt 5 — Build the Claude conversation rail
 
 ```
-Build an admin config editor component (admin.jsx) for a content tracker app.
+Build claude-rail.jsx. Props: project, currentUser.
 
-The component receives:
-- project: full project state object
-- setProject: state setter
+- Always-visible right panel
+- Feels like a senior colleague, not a chatbot
+- Full conversation history; input at bottom
+- Each message: POST to /api/anthropic with full serialised project state in system prompt
+- System prompt tells Claude: project context, status lifecycle, to read statuses not hallucinate them, to be concise (2–3 sentences for status answers)
+- Model: claude-sonnet-4-6, max_tokens: 1000
 
-It should render tabs for:
-1. Pillars & Clusters — add new pillar, add new cluster to any pillar, edit cluster metadata (label, intent, sequence, anchor piece, schedule week)
-2. Pieces — add new piece to any cluster; fields: title, format, primary keyword, secondary keyword, content type, funnel stage, url slug, geography, schedule week, assignee
-3. Team — add NS and Jaggaer team members; fields: name, role, org, admin flag
-4. Schedule — edit publishing sequence: add/remove weeks, add/remove slots per week, edit linking rule per slot
+Example questions to handle well:
+"What's blocking Week 2?" / "Which clusters are fully approved?" / "What does Indy still need to review?" / "Are we on track for Week 3?"
 
-Rules:
-- All changes update the project state immediately
-- project state is auto-saved to GitHub by the parent app (not this component's concern)
-- New IDs should be generated as kebab-case from the label + a short random suffix
-- Deleting a pillar or cluster is not permitted if any piece in it is approved
-- Adding a team member should check for duplicate IDs
-
-Design: [describe]
-
-Export window.AdminPanel = AdminPanel at the end.
+Export window.ClaudeRail = ClaudeRail.
 ```
 
 ---
 
 ## 12. Prompts: How to Build Agent Builder Artifacts
 
-The Agent Builder tab contains three Claude-powered demo tools. Here are the prompts for building each type of artifact — both the system prompts that drive the Claude API calls, and prompts for building the UI components.
-
----
-
-### Building a Claude-powered analysis tool (Contracts / Suppliers / RFP pattern)
-
-The pattern is: textarea input → Claude API with structured JSON system prompt → parse and render typed output.
-
-**System prompt structure** (what you send as the `system` parameter to the Anthropic API):
+### System prompt pattern for structured JSON tools
 
 ```
-You are a [expert role relevant to the task].
-The user will [describe what they paste in].
+You are a [expert role].
+The user will [describe input].
 
-Analyse it and return a structured response in exactly this JSON format (no markdown fences, raw JSON only):
+Return a structured response in exactly this JSON format (no markdown fences, raw JSON only):
 {
-  "[field_1]": "[description of what goes here]",
-  "[field_2]": ["array of strings if multiple items"],
+  "field_1": "description",
+  "field_2": ["array of strings"],
   ...
 }
 
-[Any additional rules — e.g. "Be specific. Give real supplier names where possible."]
-[Edge case handling — e.g. "If a field has no findings, use an empty array or null."]
+[Rules and edge cases]
 ```
 
-**Key requirements for structured output:**
-- Always specify `no markdown fences, raw JSON only` — otherwise Claude wraps the response in ```json blocks
-- Always specify the exact schema — field names, types, and whether arrays or strings
-- Strip any code fences before parsing: `text.replace(/```json|```/g, "").trim()`
-- Wrap `JSON.parse()` in try/catch — Claude occasionally returns explanatory text on error
+**Key requirements:**
+- Always specify `no markdown fences, raw JSON only`
+- Strip fences before parsing: `text.replace(/```json|```/g, "").trim()`
+- Wrap `JSON.parse()` in try/catch with graceful fallback to mock output
 
-**Example: Contract analysis system prompt**
-```
-You are an expert procurement contracts analyst. The user will paste a contract clause or excerpt.
-Analyse it and return a structured response in exactly this JSON format (no markdown fences, raw JSON only):
-{
-  "expiry_dates": ["list any expiration or renewal dates found, or empty array"],
-  "auto_renewal": "describe auto-renewal terms if present, or null",
-  "risky_obligations": ["list obligations that could expose the buyer to cost or liability"],
-  "concerning_sections": ["flag any clauses that warrant legal review, briefly explain each"],
-  "summary": "one-sentence plain-English summary of the key risk posture"
-}
-Be precise and practical. If a field has no findings, use an empty array or null.
-```
+### Connecting demos to live Claude API
 
-**Prompt to build the UI component for this pattern:**
-
-```
-Build a React component for a Claude-powered [task name] tool.
-
-The component:
-1. Shows a textarea for user input with a placeholder example
-2. Has a button that calls the Anthropic API at /api/anthropic
-3. Shows a loading state ("Analysing…") during the API call
-4. Parses the JSON response and renders it as styled output
-5. Shows a JAI nudge strip below the output (a dark banner with a "This is one tool. JAI does this across your entire [portfolio/supply chain/pipeline]" message and a CTA)
-
-The API call sends:
-- system: [paste your system prompt here]
-- messages: [{ role: "user", content: userInput }]
-- model: "claude-sonnet-4-6"
-- max_tokens: 1000
-
-The JSON response schema is:
-[paste the schema from your system prompt]
-
-Render the output fields as:
-- Summary: highlighted callout box with left border rule
-- Array fields: left-bordered list under a small-caps label
-- Nested object arrays: individual cards with category header
-
-Design: [describe — e.g. same as the Jaggaer design system: Playfair Display headers, Noto Sans body, #c8401a accent, white cards, #0f1923 dark surfaces]
-
-Also build a canned mock output object for demo mode — realistic data that matches the schema. When in demo mode (no API key), show this after a 1.5s delay instead of calling the API.
-```
-
----
-
-### Building a multi-step guided tool (Install Guide / Basics pattern)
-
-For tools that branch based on user input (like the IT permissions branch in the install guide):
-
-```
-Build a React component for a collapsible [topic] guide with branching.
-
-Structure:
-- Collapsed by default, showing a header with [title] and a + toggle
-- When expanded, first shows a question: "[your branching question]"
-- Two buttons: [Option A label] and [Option B label]
-- Option A shows: [describe path A content]
-- Option B shows: [describe path B content]
-- Both paths have a "← Back" button to return to the question
-
-[Option A content: e.g. numbered steps with connector lines between them]
-[Option B content: e.g. a brief message with a CTA to an alternative]
-
-Design: [describe]
-```
-
----
-
-### Building a prompt library / copyable prompt component
-
-```
-Build a React component displaying a tabbed prompt library.
-
-Data structure per prompt:
-{
-  label: "Display name for the tab",
-  tag: "Category label",
-  tagColor: "#hexcolor",
-  prompt: "The full prompt text with [placeholder] markers",
-  note: "One sentence explaining why this prompt structure works"
-}
-
-The component shows:
-- A tab bar with one tab per prompt
-- The active prompt in a monospace code block (pre-formatted, with line breaks preserved)
-- A "Copy prompt" button that copies to clipboard and shows "✓ Copied" for 2 seconds
-- Below the prompt: a "Why it works:" callout with the note
-
-Design: [describe]
-```
-
----
-
-### Connecting demos to the live Claude API
-
-When `ANTHROPIC_API_KEY` is set in Vercel and `api/anthropic.js` is deployed, replace the mock delay in each demo with a real API call:
+Replace the mock delay in `DemoPane.runDemo()`:
 
 ```javascript
-// Replace this mock:
-setTimeout(() => {
-  setResult(MOCK_OUTPUTS[demoId]);
-  setLoading(false);
-}, 1500);
+// Replace mock:
+setTimeout(() => { setResult(MOCK_OUTPUTS[demoId]); setLoading(false); }, 1500);
 
-// With this real call:
+// With real call:
 try {
   const response = await fetch("/api/anthropic", {
     method: "POST",
@@ -854,7 +665,6 @@ try {
   const clean = text.replace(/```json|```/g, "").trim();
   setResult(JSON.parse(clean));
 } catch (err) {
-  console.error("Claude API error:", err);
   setResult(MOCK_OUTPUTS[demoId]); // graceful fallback
 } finally {
   setLoading(false);
@@ -865,25 +675,22 @@ try {
 
 ## 13. Known Issues & Next Steps
 
-### Outstanding work
-
 | # | Issue | Notes |
 |---|---|---|
-| 1 | **Remove team member in Admin** | Add-only currently. Needs guard against removing active assignees. |
+| 1 | **Remove team member in Admin** | Add-only. Needs guard against removing active assignees. |
 | 2 | **Feedback deletion** | No admin ability to remove an erroneous feedback note. |
 | 3 | **BWC GitHub links** | Should resolve to `https://github.com/ns-adiraghavan/jaggaer-ns-tracker/tree/main/${app.path}` |
 | 4 | **Month switcher UI** | Months array in data model; no UI to browse non-active months yet. |
-| 5 | **Anthropic API key** | Pending purchase. Claude rail and live Agent Builder demos not active until key added to Vercel env. |
-| 6 | **Content type filter** | `content_type` field exists on all pieces; no UI filter for it yet. |
-| 7 | **Real file upload E2E** | `uploadPieceDeliverable` reads via FileReader and base64 encodes; confirm works end-to-end on Vercel with a real upload. |
+| 5 | **Anthropic API key** | Pending purchase. Claude rail and live Agent Builder demos inactive until key added to Vercel env. |
+| 6 | **Real file upload E2E** | `uploadPieceDeliverable` uses FileReader + base64; confirm works end-to-end on Vercel. |
 
 ### When the Anthropic key arrives
 
-1. Add `ANTHROPIC_API_KEY` to Vercel environment variables
-2. Update model string in `api/anthropic.js` from `claude-haiku-4-5` to `claude-sonnet-4-6`
+1. Add `ANTHROPIC_API_KEY` to Vercel env
+2. Update `api/anthropic.js`: `claude-haiku-4-5` → `claude-sonnet-4-6`
 3. Add `<script type="text/babel" src="claude-rail.jsx"></script>` to `index.html`
-4. Add `<ClaudeRail project={project} currentUser={currentUser} />` to `app.jsx` shell
-5. In `agent-builder.jsx`: replace mock delays in `DemoPane.runDemo()` with live API calls (see §12)
+4. Add `<ClaudeRail project={project} currentUser={currentUser} />` to `app.jsx`
+5. In `agent-builder.jsx`: replace `setTimeout` mock in `runDemo()` with live `fetch("/api/anthropic", ...)` call
 
 ### How to push a project.json update via PowerShell
 
@@ -904,4 +711,4 @@ Write-Host "Done" -ForegroundColor Green
 
 ---
 
-*Last updated: May 2026 — v3 schema (content_type_split, interlink_map and schedule moved to project.json, DM C1/C3/C4 updated per Orlagh's briefs)*
+*Last updated: May 2026 — v3.1. Changes: all piece titles/keywords/formats synced to Content Tracker v3 xlsx; Interlink Map tab removed from tracker UI; content_type field added to all 31 pieces; sidebar By Pillar / By Type toggle added; funnel/url/notes fields surfaced in Details tab; inline download button on status chip; Jaggaer notification bell; ActivityBar alignment fixed; content type badges updated in header; mock-data.js synced to project.json.*
