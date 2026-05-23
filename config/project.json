@@ -365,8 +365,8 @@
               "title": "Supplier Financial Risk Signals Procurement Should Monitor",
               "format": "Informational Article",
               "assignee": "manager",
-              "status": "uploaded",
-              "revision_count": 1,
+              "status": "not-started",
+              "revision_count": 0,
               "primary_keyword": "supplier financial risk assessment",
               "secondary_keyword": "supplier risk management",
               "intent": "informational",
@@ -375,8 +375,6 @@
               "funnel": "TOFU",
               "url": "/blog/supplier-financial-risk-signals-procurement",
               "notes": "NEW — not previously in tracker | Words: 2,000–2,500",
-              "last_upload": "2026-05-22T13:57:23.235Z",
-              "last_upload_by": "orlagh",
               "content_type": "msv"
             },
             {
@@ -384,8 +382,8 @@
               "title": "From Reactive to Predictive Supplier Risk Management",
               "format": "Strategic Solution Article",
               "assignee": "manager",
-              "status": "uploaded",
-              "revision_count": 1,
+              "status": "not-started",
+              "revision_count": 0,
               "primary_keyword": "predictive supplier risk management",
               "secondary_keyword": "proactive procurement risk management",
               "intent": "commercial",
@@ -394,8 +392,6 @@
               "funnel": "MOFU",
               "url": "/predictive-supplier-risk-management",
               "notes": "UPDATED — title refined, keyword updated | Words: 1,200–1,500",
-              "last_upload": "2026-05-22T13:58:08.804Z",
-              "last_upload_by": "manager",
               "content_type": "industry-specific"
             },
             {
@@ -778,123 +774,7 @@
       }
     ]
   },
-  "feedback": {
-    "p-c1-1": [
-      {
-        "id": "fb-1",
-        "author": "indy",
-        "verdict": "approved",
-        "body": "Clean and useful. The install screenshots are exactly the right level of detail. Ship it.",
-        "ts": "2026-05-09T14:21:00Z"
-      }
-    ],
-    "p-c1-2": [
-      {
-        "id": "fb-2",
-        "author": "anna",
-        "verdict": "needs-revision",
-        "body": "Loved the framing on agentic vs assistive. Can we cut the section on Slack integration - feels off-pillar for an S2P audience? Also, please add a callout for legal review on the contract redlining example.",
-        "ts": "2026-05-12T09:08:00Z"
-      }
-    ],
-    "p-c2-1": [
-      {
-        "id": "fb-3",
-        "author": "indy",
-        "verdict": "needs-revision",
-        "body": "The walkthrough screenshots need updating - we shipped a new redline UI last sprint. Reach out to the product team for the latest.",
-        "ts": "2026-05-07T16:44:00Z"
-      },
-      {
-        "id": "fb-4",
-        "author": "jason",
-        "verdict": "question",
-        "body": "Re-uploaded with the new screenshots and tightened the indemnity clause example. Indy - does the new UI match what you'd want to show externally?",
-        "ts": "2026-05-11T11:15:00Z"
-      }
-    ],
-    "p-c2-2": [
-      {
-        "id": "fb-5",
-        "author": "anna",
-        "verdict": "approved",
-        "body": "This is the strongest piece in the cluster. Anchor is doing what an anchor should do.",
-        "ts": "2026-05-10T10:02:00Z"
-      }
-    ],
-    "p-c4-1": [
-      {
-        "id": "fb-6",
-        "author": "anna",
-        "verdict": "needs-revision",
-        "body": "40 prompts is a lot. Can we organise them by S2P stage (sourcing, contracting, paying)? Right now it reads as a wall.",
-        "ts": "2026-05-13T13:30:00Z"
-      }
-    ],
-    "p-dm1-1": [
-      {
-        "id": "fb-7",
-        "author": "indy",
-        "verdict": "approved",
-        "body": "Strong. The 2026 framing earns its keep.",
-        "ts": "2026-05-08T17:11:00Z"
-      }
-    ],
-    "p-dm1-2": [
-      {
-        "id": "fb-8",
-        "author": "anna",
-        "verdict": "approved",
-        "body": "Anchor approved. Let's link this from the homepage when the cluster ships.",
-        "ts": "2026-05-09T11:45:00Z"
-      }
-    ],
-    "p-dm2-1": [
-      {
-        "id": "fb-9",
-        "author": "indy",
-        "verdict": "question",
-        "body": "Is the tier-3 data in the example sourced or illustrative? We need to make that explicit before this goes out.",
-        "ts": "2026-05-14T08:50:00Z"
-      }
-    ],
-    "p-ps1-1": [
-      {
-        "id": "fb-10",
-        "author": "anna",
-        "verdict": "approved",
-        "body": "Sharp read of the Act. Approved.",
-        "ts": "2026-05-06T15:20:00Z"
-      }
-    ],
-    "p-ps1-2": [
-      {
-        "id": "fb-11",
-        "author": "indy",
-        "verdict": "needs-revision",
-        "body": "Checklist is solid. Please align row 7 (model risk assessment) with the language we use in the EU AI Act anchor piece - they should match.",
-        "ts": "2026-05-13T16:00:00Z"
-      }
-    ],
-    "p-he1-1": [
-      {
-        "id": "fb-12",
-        "author": "anna",
-        "verdict": "needs-revision",
-        "body": "The metaphors land. The data box on page 2 needs a source line - where does the 18% maverick figure come from?",
-        "ts": "2026-05-14T12:00:00Z"
-      }
-    ],
-    "p-he2-1": [
-      {
-        "id": "fb-13",
-        "author": "indy",
-        "verdict": "approved",
-        "body": "Reader is exactly right for our HE buyer persona. Approved.",
-        "ts": "2026-05-08T09:30:00Z"
-      }
-    ]
-  },
+  "feedback": {},
   "build_with_claude": [
     {
       "name": "contract-analyser",
