@@ -54,6 +54,16 @@ function getScheduleContext(project) {
   return { currentWeek, startDate: start };
 }
 
+// Return "21 May – 27 May" for a given week number given month start date
+function weekDateRange(weekNum, startDate) {
+  if (!startDate) return null;
+  const start = new Date(startDate);
+  const weekStart = new Date(start.getTime() + (weekNum - 1) * 7 * 24 * 60 * 60 * 1000);
+  const weekEnd   = new Date(weekStart.getTime() + 6 * 24 * 60 * 60 * 1000);
+  const fmt = d => d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+  return `${fmt(weekStart)} – ${fmt(weekEnd)}`;
+}
+
 // Derive the scheduled week for a piece from PUBLISHING_SEQUENCE by cluster ID.
 // This is the single source of truth — no piece.schedule_week field needed.
 function getClusterWeek(clusterId, schedule) {
@@ -250,7 +260,15 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
             }}
           >✕ Clear</button>
         )}
-        <span style={{ ...PANEL, marginLeft: "auto", fontSize: "0.65rem", color: "#bbb" }}>Wk {currentWeek}/4</span>
+        {(() => {
+          const { startDate } = getScheduleContext(project);
+          const dr = weekDateRange(currentWeek, startDate);
+          return (
+            <span style={{ ...PANEL, marginLeft: "auto", fontSize: "0.65rem", color: "#bbb" }}>
+              Wk {currentWeek}/4{dr ? ` · ${dr}` : ""}
+            </span>
+          );
+        })()}
       </div>
 
       {/* ── Inline expanded list when filter active ── */}
@@ -702,7 +720,7 @@ function KPI({ big, small, label }) {
 // ─── Publishing sequence view ─────────────────────────────────────────────────
 function PublishingSequence({ project }) {
   const clusterStats = window.computeStats(project).byCluster;
-  const { currentWeek } = getScheduleContext(project);
+  const { currentWeek, startDate } = getScheduleContext(project);
 
   return (
     <div className="ns-sequence">
@@ -713,6 +731,7 @@ function PublishingSequence({ project }) {
       <div className="ns-sequence-weeks">
         {(project.schedule || []).map(week => {
           const isCurrent = week.week === currentWeek;
+          const dateRange = weekDateRange(week.week, startDate);
           const weekClusters = week.slots.map(slot => {
             const pillar = project.pillars.find(p => p.id === slot.pillar);
             const cluster = pillar?.clusters.find(c => c.id === slot.cluster);
@@ -721,6 +740,8 @@ function PublishingSequence({ project }) {
             return { pillar, cluster, cs, slot };
           });
           const weekReady = weekClusters.every(w => w.cs.ready);
+          const totalPieces = weekClusters.reduce((n, w) => n + (w.cs.total || 0), 0);
+          const approvedPieces = weekClusters.reduce((n, w) => n + (w.cs.approved || 0), 0);
 
           return (
             <div key={week.week} className={`ns-week-card ${isCurrent ? "is-current" : ""} ${weekReady ? "is-done" : ""}`}>
@@ -731,6 +752,26 @@ function PublishingSequence({ project }) {
                   {weekReady && <span className="ns-week-badge-done">Complete</span>}
                   {!weekReady && !isCurrent && week.week < currentWeek && <span className="ns-week-badge-blocked">Behind</span>}
                 </div>
+                {/* Calendar date range — the key clarity addition */}
+                {dateRange && (
+                  <div style={{
+                    fontFamily: "Noto Sans, sans-serif",
+                    fontSize: "0.7rem", fontWeight: 600,
+                    color: isCurrent ? "#c8401a" : "#888",
+                    letterSpacing: "0.02em",
+                    marginBottom: "6px",
+                    display: "flex", alignItems: "center", gap: "8px",
+                  }}>
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0 }}>
+                      <rect x="1" y="2" width="10" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.2" fill="none"/>
+                      <path d="M1 5h10" stroke="currentColor" strokeWidth="1.2"/>
+                      <path d="M4 1v2M8 1v2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+                    </svg>
+                    {dateRange}
+                    <span style={{ fontWeight: 400, color: "#aaa" }}>·</span>
+                    <span style={{ fontWeight: 400, color: "#aaa" }}>{approvedPieces}/{totalPieces} pieces approved</span>
+                  </div>
+                )}
                 <p className="ns-week-goal">{week.goal}</p>
               </div>
               <div className="ns-week-clusters">
@@ -799,6 +840,80 @@ function PillarBlock({ pillar, sequence, activeCluster, project, openPiece, setO
   );
 }
 
+// ─── Send to Editors button ───────────────────────────────────────────────────
+// Shown on fully-approved clusters (admin only). Calls /api/notify to send
+// an email to the editors list with links to all approved pieces.
+function SendToEditorsButton({ cluster, pillar, project }) {
+  const [state, setState] = useStateTR("idle"); // idle | sending | sent | error
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
+  const monthId = project.active_month || "month-1";
+
+  async function send(e) {
+    e.stopPropagation();
+    setState("sending");
+    try {
+      const pieces = cluster.pieces.map(p => ({
+        title: p.title,
+        format: p.format,
+        url: `https://github.com/${REPO}/tree/main/content/${monthId}/${pillar.id}/${cluster.id}/${p.id}`,
+      }));
+      const res = await fetch("/api/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "editors",
+          cluster: cluster.label,
+          pillar: pillar.label,
+          pieces,
+        }),
+      });
+      setState(res.ok ? "sent" : "error");
+      if (res.ok) setTimeout(() => setState("idle"), 4000);
+    } catch {
+      setState("error");
+    }
+  }
+
+  const label =
+    state === "sending" ? "Sending…" :
+    state === "sent"    ? "✓ Sent to editors" :
+    state === "error"   ? "Send failed — retry?" :
+    "Send to Editors →";
+
+  const col =
+    state === "sent"  ? "#1e7a45" :
+    state === "error" ? "#b91c1c" :
+    "#d1fae5";
+
+  return (
+    <button
+      onClick={send}
+      disabled={state === "sending" || state === "sent"}
+      style={{
+        ...FONT,
+        marginTop: "10px",
+        display: "inline-flex", alignItems: "center", gap: "6px",
+        fontSize: "0.68rem", fontWeight: 700,
+        letterSpacing: "0.06em", textTransform: "uppercase",
+        color: col,
+        background: "rgba(209,250,229,0.08)",
+        border: `1px solid ${state === "sent" ? "#6ee7a0" : state === "error" ? "#fca5a5" : "rgba(110,231,160,0.35)"}`,
+        padding: "5px 12px", borderRadius: "3px",
+        cursor: state === "sending" || state === "sent" ? "default" : "pointer",
+        transition: "all 0.15s",
+      }}
+    >
+      {state === "sending" && (
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        </svg>
+      )}
+      {label}
+    </button>
+  );
+}
+
 // ─── Cluster card ─────────────────────────────────────────────────────────────
 function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onAdminEditCluster, stagger, currentWeek }) {
   const total = cluster.pieces.length;
@@ -821,7 +936,7 @@ function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpe
   return (
     <article className={`ns-cluster-card ${ready ? "is-ready" : ""}`} style={{ animationDelay: `${stagger * 60}ms` }}>
       <header className={`ns-cluster-head ${ready ? "is-ready" : ""}`} style={headStyle}>
-        <div className="ns-cluster-head-meta">
+          <div className="ns-cluster-head-meta">
           <div className="ns-cluster-meta-row">
             <span className="ns-cluster-seq-badge" style={{ color: metaColor }}>C{String(cluster.sequence).padStart(2, "0")}</span>
             <span className="ns-cluster-dot">·</span>
@@ -834,6 +949,10 @@ function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpe
           </div>
           <h3 className="ns-cluster-title" style={{ color: titleColor }}>{cluster.label}</h3>
           {anchor && <div className="ns-anchor-cluster" style={{ color: anchorColor }}>Anchor: {anchor.title.split(":")[0].replace(" (Anchor)","")}</div>}
+          {/* Send to editors — only shown when cluster is fully approved */}
+          {ready && adminMode && (
+            <SendToEditorsButton cluster={cluster} pillar={pillar} project={project} />
+          )}
         </div>
         <ProgressArc total={total} approved={approved} inMotion={inMotion} ready={ready} palette={pal} />
       </header>
@@ -1010,6 +1129,108 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
   );
 }
 
+// ─── HTML Preview Panel ───────────────────────────────────────────────────────
+function PreviewPanel({ piece, cluster, pillar, project }) {
+  const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
+  const monthId = project.active_month || "month-1";
+  const rev = piece.revision_count || 1;
+  const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${rev}.html`;
+
+  const [blobUrl, setBlobUrl] = useStateTR(null);
+  const [loading, setLoading] = useStateTR(true);
+  const [error, setError] = useStateTR(null);
+
+  React.useEffect(() => {
+    let cancelled = false;
+    setLoading(true); setError(null); setBlobUrl(null);
+    fetch(rawUrl)
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.blob(); })
+      .then(blob => {
+        if (cancelled) return;
+        setBlobUrl(URL.createObjectURL(blob));
+        setLoading(false);
+      })
+      .catch(err => {
+        if (cancelled) return;
+        setError(err.message);
+        setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+      if (blobUrl) URL.revokeObjectURL(blobUrl);
+    };
+  }, [rawUrl]);
+
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", height: "100%", minHeight: "520px" }}>
+      {/* top bar */}
+      <div style={{
+        display: "flex", alignItems: "center", gap: "12px",
+        padding: "10px 20px",
+        background: "#f0f7ff", borderBottom: "1px solid #c5ddef",
+        flexShrink: 0,
+      }}>
+        <div style={{ flex: 1 }}>
+          <span style={{ ...FONT, fontSize: "0.72rem", fontWeight: 600, color: "#1a3a52" }}>
+            deliverable-v{rev}.html
+          </span>
+          {piece.last_upload && (
+            <span style={{ ...FONT, fontSize: "0.68rem", color: "#6b8fa8", marginLeft: "10px" }}>
+              · {new Date(piece.last_upload).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
+            </span>
+          )}
+        </div>
+        <button
+          onClick={() => forceDownload(rawUrl, `${piece.id}-v${rev}.html`)}
+          style={{
+            ...FONT, fontSize: "0.7rem", fontWeight: 600,
+            color: "#1e6fa8", background: "#fff",
+            border: "1px solid #c5ddef", padding: "5px 12px", borderRadius: "3px", cursor: "pointer",
+          }}>↓ Download</button>
+        <a href={`https://github.com/${REPO}/tree/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}`}
+          target="_blank" rel="noopener noreferrer"
+          style={{
+            ...FONT, fontSize: "0.7rem", fontWeight: 500,
+            color: "#6b8fa8", border: "1px solid #c5ddef", padding: "5px 12px",
+            borderRadius: "3px", textDecoration: "none",
+          }}>GitHub →</a>
+      </div>
+
+      {/* iframe area */}
+      <div style={{ flex: 1, position: "relative", background: "#fff" }}>
+        {loading && (
+          <div style={{
+            position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
+            background: "#faf8f4",
+          }}>
+            <div style={{ ...FONT, fontSize: "0.82rem", color: "#888" }}>Loading preview…</div>
+          </div>
+        )}
+        {error && (
+          <div style={{
+            position: "absolute", inset: 0, display: "flex", flexDirection: "column",
+            alignItems: "center", justifyContent: "center", gap: "12px",
+            background: "#faf8f4",
+          }}>
+            <div style={{ ...FONT, fontSize: "0.82rem", color: "#b91c1c" }}>Could not load preview</div>
+            <div style={{ ...FONT, fontSize: "0.72rem", color: "#888" }}>{error} — file may not be uploaded yet</div>
+          </div>
+        )}
+        {blobUrl && (
+          <iframe
+            src={blobUrl}
+            sandbox="allow-same-origin allow-scripts"
+            style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+            title={`Preview: ${piece.title}`}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ─── Drawer ───────────────────────────────────────────────────────────────────
 function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePiece, addFeedback, deletePiece, currentUser, adminMode, onAdminEditPiece, onClose }) {
   const feedback = (project.feedback || {})[piece.id] || [];
@@ -1017,12 +1238,18 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   const isJG = currentUser.org === "jaggaer";
   const canUpload = isNS && (piece.status === "not-started" || piece.status === "jaggaer-feedback");
   const canFeedback = isJG && (piece.status === "uploaded" || piece.status === "revised");
+  const hasDeliverable = piece.status !== "not-started";
 
   return (
     <div className="ns-piece-drawer">
       <div className="ns-drawer-tabs">
         {canUpload && <button className={`ns-drawer-tab ${mode==="upload"?"is-active":""}`} onClick={() => setMode("upload")}>Upload</button>}
         {canFeedback && <button className={`ns-drawer-tab ${mode==="feedback"?"is-active":""}`} onClick={() => setMode("feedback")}>Leave Feedback</button>}
+        {hasDeliverable && (
+          <button className={`ns-drawer-tab ${mode==="preview"?"is-active":""}`} onClick={() => setMode("preview")}>
+            Preview
+          </button>
+        )}
         <button className={`ns-drawer-tab ${mode==="history"?"is-active":""}`} onClick={() => setMode("history")}>
           Notes {feedback.length > 0 && <span className="ns-tab-count">{feedback.length}</span>}
         </button>
@@ -1031,9 +1258,10 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
         {adminMode && <button className={`ns-drawer-tab ns-drawer-tab-delete ${mode==="delete"?"is-active":""}`} onClick={() => setMode("delete")}>Delete</button>}
         <button className="ns-drawer-close" onClick={onClose}>Close ✕</button>
       </div>
-      <div className="ns-drawer-body">
+      <div className="ns-drawer-body" style={mode === "preview" ? { padding: 0, overflow: "hidden" } : {}}>
         {mode === "upload" && canUpload && <UploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} />}
         {mode === "feedback" && canFeedback && <FeedbackForm piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} onDone={() => setMode("history")} />}
+        {mode === "preview" && hasDeliverable && <PreviewPanel piece={piece} cluster={cluster} pillar={pillar} project={project} />}
         {mode === "history" && <NotesHistory piece={piece} project={project} />}
         {mode === "details" && <PieceDetails piece={piece} cluster={cluster} pillar={pillar} project={project} />}
         {mode === "edit" && adminMode && <EditPiecePanel piece={piece} cluster={cluster} project={project} updatePiece={updatePiece} onDone={() => setMode("details")} />}

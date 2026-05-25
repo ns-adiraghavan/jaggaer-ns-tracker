@@ -46,7 +46,7 @@ function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
   }
 
   // Tabs that have editable state — show the save bar when dirty on these tabs
-  const editableTabs = ["pillars", "schedule", "months", "team", "bwc"];
+  const editableTabs = ["pillars", "schedule", "months", "team", "bwc", "notifications"];
   const showSaveBar = editableTabs.includes(tab);
 
   return (
@@ -61,7 +61,7 @@ function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
       </header>
 
       <nav className="ns-admin-tabs">
-        {[["overview","Overview"],["pillars","Pillars & Clusters"],["schedule","Publishing Schedule"],["months","Months"],["team","Team"],["bwc","Build With Claude"],["raw","Raw JSON"]].map(([id, label]) => (
+        {[["overview","Overview"],["pillars","Pillars & Clusters"],["schedule","Publishing Schedule"],["months","Months"],["team","Team"],["bwc","Build With Claude"],["notifications","Notifications"],["raw","Raw JSON"]].map(([id, label]) => (
           <button key={id} className={`ns-admin-tab ${tab===id?"is-active":""}`} onClick={() => setTab(id)}>{label}</button>
         ))}
       </nav>
@@ -116,7 +116,8 @@ function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
         {tab === "schedule"  && <AdminSchedule  project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
         {tab === "months"    && <AdminMonths    project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
         {tab === "team"      && <AdminTeam      project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
-        {tab === "bwc"       && <AdminBWC       project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
+        {tab === "bwc"           && <AdminBWC           project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
+        {tab === "notifications" && <AdminNotifications  project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
         {tab === "raw"       && <AdminRaw       project={draft} />}
       </div>
     </main>
@@ -344,6 +345,23 @@ function AdminSchedule({ project, setProject }) {
                   <span className="ns-schedule-col-num">{week.label}</span>
                   <span className="ns-schedule-col-count">{week.slots.length}c</span>
                 </div>
+                {/* Show calendar dates derived from month start_date */}
+                {(() => {
+                  const activeMonth = (project.months || []).find(m => m.id === project.active_month) || (project.months || [])[0];
+                  if (!activeMonth?.start_date) return null;
+                  const start = new Date(activeMonth.start_date);
+                  const weekStart = new Date(start.getTime() + (week.week - 1) * 7 * 24 * 60 * 60 * 1000);
+                  const weekEnd   = new Date(weekStart.getTime() + 6 * 24 * 60 * 60 * 1000);
+                  const fmt = d => d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+                  return (
+                    <div style={{
+                      fontFamily: "Noto Sans, sans-serif",
+                      fontSize: "0.67rem", fontWeight: 600,
+                      color: "#c8401a", letterSpacing: "0.02em",
+                      marginBottom: "4px",
+                    }}>{fmt(weekStart)} – {fmt(weekEnd)}</div>
+                  );
+                })()}
                 <textarea
                   className="ns-schedule-goal-input"
                   value={week.goal}
@@ -450,6 +468,13 @@ function AdminMonths({ project, setProject }) {
     }));
   }
 
+  function updateStartDate(id, start_date) {
+    setProject(prev => ({
+      ...prev,
+      months: (prev.months || []).map(m => m.id === id ? { ...m, start_date } : m)
+    }));
+  }
+
   function deleteMonth(id) {
     if (id === project.active_month) { alert("Cannot delete the active month. Switch to another month first."); return; }
     setProject(prev => ({ ...prev, months: (prev.months || []).filter(m => m.id !== id) }));
@@ -481,6 +506,14 @@ function AdminMonths({ project, setProject }) {
                 className="ns-admin-input ns-admin-month-label-input"
                 value={m.label}
                 onChange={e => updateLabel(m.id, e.target.value)}
+              />
+              <input
+                type="date"
+                className="ns-admin-input"
+                value={m.start_date || ""}
+                onChange={e => updateStartDate(m.id, e.target.value)}
+                title="Week 1 start date — drives all publishing week date ranges"
+                style={{ width: "140px", fontSize: "0.78rem" }}
               />
               <code className="ns-admin-month-id">{m.id}</code>
               <div className="ns-admin-month-actions">
@@ -866,6 +899,144 @@ function AdminRaw({ project }) {
     <div>
       <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:12}}>Config · Read-only view</div>
       <pre className="ns-admin-pre">{JSON.stringify(stripped, null, 2)}</pre>
+    </div>
+  );
+}
+
+// ─── Notifications settings ───────────────────────────────────────────────────
+// Stores digest recipients in project.json under project.notifications.
+// Written to GitHub like all other config — no separate env var needed for the
+// recipient list. RESEND_API_KEY and DIGEST_FROM still live in Vercel env.
+function AdminNotifications({ project, setProject }) {
+  const notif = project.notifications || {};
+  const [digestTo, setDigestTo] = useStateAD(
+    Array.isArray(notif.digest_to) ? notif.digest_to.join(", ") : (notif.digest_to || "")
+  );
+  const [editorsTo, setEditorsTo] = useStateAD(
+    Array.isArray(notif.editors_to) ? notif.editors_to.join(", ") : (notif.editors_to || "")
+  );
+  const [testState, setTestState] = useStateAD(null); // null | "sending" | "sent" | "error"
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+
+  function save() {
+    const toArr = s => s.split(",").map(e => e.trim()).filter(Boolean);
+    setProject(prev => ({
+      ...prev,
+      notifications: {
+        ...prev.notifications,
+        digest_to: toArr(digestTo),
+        editors_to: toArr(editorsTo),
+      },
+    }));
+  }
+
+  // Save on blur so the parent draft stays in sync
+  function onBlur() { save(); }
+
+  async function sendTestDigest() {
+    setTestState("sending");
+    try {
+      const res = await fetch("/api/digest", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ force: true }),
+      });
+      setTestState(res.ok ? "sent" : "error");
+      setTimeout(() => setTestState(null), 4000);
+    } catch { setTestState("error"); setTimeout(() => setTestState(null), 4000); }
+  }
+
+  const inputStyle = {
+    ...FONT, width: "100%", padding: "8px 12px",
+    fontSize: "0.82rem", border: "1px solid #e0dbd4",
+    borderRadius: "3px", background: "#fff", color: "#1a2535",
+    boxSizing: "border-box",
+  };
+  const labelStyle = { ...FONT, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: "#888", display: "block", marginBottom: "6px" };
+  const hintStyle = { ...FONT, fontSize: "0.72rem", color: "#aaa", marginTop: "5px" };
+
+  return (
+    <div style={{ maxWidth: "600px", padding: "8px 0" }}>
+      <div style={{ ...FONT, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", marginBottom: "20px" }}>
+        Notification Settings
+      </div>
+
+      {/* Daily Digest */}
+      <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "4px", padding: "20px 24px", marginBottom: "16px" }}>
+        <div style={{ ...FONT, fontSize: "0.88rem", fontWeight: 700, color: "#1a2535", marginBottom: "4px" }}>
+          Daily Digest
+        </div>
+        <p style={{ ...FONT, fontSize: "0.78rem", color: "#888", marginBottom: "16px", lineHeight: 1.5 }}>
+          Sent at <strong>6pm IST</strong> — only on days where uploads, feedback, or approvals happened.
+          Uses Resend (free up to 3,000 emails/month — more than enough for this volume).
+        </p>
+        <label style={labelStyle}>Recipients (comma-separated)</label>
+        <input
+          type="text"
+          style={inputStyle}
+          value={digestTo}
+          onChange={e => setDigestTo(e.target.value)}
+          onBlur={onBlur}
+          placeholder="e.g. indy@jaggaer.com, chahat@netscribes.com"
+        />
+        <div style={hintStyle}>Everyone listed gets the daily digest. Add both NS and Jaggaer stakeholders.</div>
+      </div>
+
+      {/* Send to Editors */}
+      <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "4px", padding: "20px 24px", marginBottom: "16px" }}>
+        <div style={{ ...FONT, fontSize: "0.88rem", fontWeight: 700, color: "#1a2535", marginBottom: "4px" }}>
+          Send to Editors
+        </div>
+        <p style={{ ...FONT, fontSize: "0.78rem", color: "#888", marginBottom: "16px", lineHeight: 1.5 }}>
+          Triggered manually when a cluster is fully approved. Sends a formatted handover email with all piece titles and GitHub file links.
+        </p>
+        <label style={labelStyle}>Digital editors (comma-separated)</label>
+        <input
+          type="text"
+          style={inputStyle}
+          value={editorsTo}
+          onChange={e => setEditorsTo(e.target.value)}
+          onBlur={onBlur}
+          placeholder="e.g. editor@jaggaer.com, publishing@jaggaer.com"
+        />
+        <div style={hintStyle}>These recipients get the cluster handover email when you click "Send to Editors" on an approved cluster.</div>
+      </div>
+
+      {/* Setup checklist */}
+      <div style={{ background: "#faf8f4", border: "1px solid #e8e3da", borderRadius: "4px", padding: "20px 24px", marginBottom: "16px" }}>
+        <div style={{ ...FONT, fontSize: "0.78rem", fontWeight: 700, color: "#1a2535", marginBottom: "12px" }}>Setup checklist</div>
+        {[
+          ["RESEND_API_KEY", "Add to Vercel env — get from resend.com (free account, no card required)"],
+          ["DIGEST_FROM", "Your verified sender email in Resend (can be your own email on free plan)"],
+          ["Recipients above", "Set in this panel — saved to project.json, no env var needed"],
+          ["vercel.json cron", "Already included — requires Vercel Pro for automatic triggering; or trigger manually via POST /api/digest"],
+        ].map(([key, desc]) => (
+          <div key={key} style={{ display: "flex", gap: "10px", marginBottom: "8px" }}>
+            <span style={{ ...FONT, fontSize: "0.72rem", fontWeight: 700, color: "#c8401a", flexShrink: 0, minWidth: "140px" }}>{key}</span>
+            <span style={{ ...FONT, fontSize: "0.72rem", color: "#666" }}>{desc}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Manual test trigger */}
+      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        <button
+          onClick={sendTestDigest}
+          disabled={testState === "sending" || testState === "sent"}
+          style={{
+            ...FONT, fontSize: "0.75rem", fontWeight: 700,
+            letterSpacing: "0.06em", textTransform: "uppercase",
+            color: testState === "sent" ? "#1e7a45" : testState === "error" ? "#b91c1c" : "#c8401a",
+            background: "transparent",
+            border: `1px solid ${testState === "sent" ? "#86efac" : testState === "error" ? "#fca5a5" : "#e8cfc8"}`,
+            padding: "8px 18px", borderRadius: "3px",
+            cursor: testState ? "default" : "pointer",
+          }}
+        >
+          {testState === "sending" ? "Sending…" : testState === "sent" ? "✓ Digest sent" : testState === "error" ? "Send failed" : "Send test digest now →"}
+        </button>
+        <span style={{ ...FONT, fontSize: "0.7rem", color: "#aaa" }}>Sends immediately to digest recipients — useful for testing the email template</span>
+      </div>
     </div>
   );
 }
