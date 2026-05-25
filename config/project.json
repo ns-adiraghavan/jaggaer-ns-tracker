@@ -386,8 +386,8 @@
               "title": "From Reactive to Predictive Supplier Risk Management",
               "format": "Strategic Solution Article",
               "assignee": "manager",
-              "status": "not-started",
-              "revision_count": 0,
+              "status": "uploaded",
+              "revision_count": 1,
               "primary_keyword": "predictive supplier risk management",
               "secondary_keyword": "proactive procurement risk management",
               "intent": "commercial",
@@ -396,7 +396,11 @@
               "funnel": "MOFU",
               "url": "/predictive-supplier-risk-management",
               "notes": "UPDATED — title refined, keyword updated | Words: 1,200–1,500",
-              "content_type": "industry-specific"
+              "content_type": "industry-specific",
+              "last_upload": "2026-05-25T06:35:07.267Z",
+              "last_upload_by": "orlagh",
+              "last_updated": "2026-05-25T06:35:07.267Z",
+              "last_updated_by": "orlagh"
             },
             {
               "id": "p-dm2-4",
