@@ -22,10 +22,11 @@ It is also a reference build for Jaggaer's own team: a working example of what a
 7. [File-by-File Reference](#7-file-by-file-reference)
 8. [Deployment (Vercel)](#8-deployment-vercel)
 9. [Environment Variables](#9-environment-variables)
-10. [The Agent Builder Tab](#10-the-agent-builder-tab)
-11. [Prompts: How to Build Something Like This](#11-prompts-how-to-build-something-like-this)
-12. [Prompts: How to Build Agent Builder Artifacts](#12-prompts-how-to-build-agent-builder-artifacts)
-13. [Known Issues & Next Steps](#13-known-issues--next-steps)
+10. [Email Notifications](#10-email-notifications)
+11. [The Agent Builder Tab](#11-the-agent-builder-tab)
+12. [Prompts: How to Build Something Like This](#12-prompts-how-to-build-something-like-this)
+13. [Prompts: How to Build Agent Builder Artifacts](#13-prompts-how-to-build-agent-builder-artifacts)
+14. [Known Issues & Next Steps](#14-known-issues--next-steps)
 
 ---
 
@@ -400,7 +401,8 @@ The status column in table view includes an inline **↓ download button** for a
 - `ClusterCard` — card with progress arc, anchor piece callout, piece list
 - `DrawerOverlay` — full modal overlay on piece click
 - `PieceDrawer` — tabbed: Upload / Leave Feedback / Notes / Details / Edit / Delete
-- `PieceDetails` — Details tab now shows: Funnel stage, Target URL, Word count (extracted from notes), Notes (cleaned), in addition to standard metadata
+- `PieceDetails` — Details tab shows: Funnel stage, Target URL, Word count (extracted from notes), Notes (cleaned), in addition to standard metadata
+- `PreviewPanel` — renders uploaded HTML deliverables in a sandboxed iframe. Fetches via `/api/github` proxy (authenticated) — **not** `raw.githubusercontent.com`, which fails on private repos. Decodes the base64 GitHub Contents API response and passes it as `srcdoc` to the iframe. Top bar shows filename, upload date, uploader name (looked up from team roster), download button, and GitHub link. Download builds a blob from the already-fetched content — no second network request.
 - `InlineCell` — admin inline editing for text and select fields
 
 ### claude-rail.jsx
@@ -460,10 +462,105 @@ Vercel auto-detects `api/github.js` and `api/anthropic.js` as serverless functio
 | `GITHUB_TOKEN` | `ghp_...` | Classic PAT, full repo scope. Never in code. |
 | `GITHUB_REPO` | `ns-adiraghavan/jaggaer-ns-tracker` | Repo identifier |
 | `ANTHROPIC_API_KEY` | `sk-ant-...` | Pending. Leave unset until purchased. |
+| `RESEND_API_KEY` | From resend.com dashboard | Free tier: 3,000 emails/month. No domain verification needed. |
+| `APP_URL` | `https://jaggaer-ns-tracker.vercel.app` | Clean production URL used in digest email CTA. Optional — falls back to hardcoded value if unset. |
+| `DIGEST_TO` | `indy@jaggaer.com,chahat@netscribes.com` | Fallback recipient list. In practice, set via Admin → Notifications panel in the app — that takes priority over this env var. |
+| `EDITORS_TO` | Editors' email addresses | Recipients for the "Send to Editors" cluster approval email. |
+| `DIGEST_FROM` | Leave unset | Defaults to `onboarding@resend.dev` (Resend shared domain — no DNS verification needed). Only set this if you've verified a custom domain in Resend. |
 
 ---
 
-## 10. The Agent Builder Tab
+---
+
+## 10. Email Notifications
+
+Two email flows, both powered by [Resend](https://resend.com) (free tier, no domain verification required).
+
+### Setup
+
+1. Sign up at resend.com (personal email is fine — no company domain needed)
+2. Get your `RESEND_API_KEY` from the Resend dashboard
+3. Add `RESEND_API_KEY` and `EDITORS_TO` to Vercel environment variables
+4. Set digest recipients via **Admin → Notifications** inside the app (no env var needed)
+5. Deploy — done
+
+Emails send from `onboarding@resend.dev` by default. This is Resend's shared sender domain and requires no DNS records or IT permissions. To send from a custom domain (e.g. `tracker@netscribes.com`), verify it in Resend and set `DIGEST_FROM` in Vercel.
+
+### Flow 1 — Daily Digest (`api/digest.js`)
+
+Triggered by a POST to `/api/digest`. Designed to run at **6pm IST** via a GitHub Actions schedule (free) or Vercel Cron (Pro plan only).
+
+**Only sends if activity has happened since the last digest** — uploads, feedback submissions, or approvals. Stores a `config/digest-state.json` in the repo to track last-seen state between sends.
+
+Email contains:
+- KPI strip: Approved / Awaiting Review / Needs Revision counts
+- New uploads and revisions table
+- New Jaggaer feedback table
+- Newly approved pieces table
+- "Open Tracker →" CTA button linking to `APP_URL`
+
+**Recipients:** Reads `project.notifications.digest_to` from `project.json` first. Falls back to `DIGEST_TO` env var if not set. Manage via **Admin → Notifications** — no redeployment needed.
+
+**Manual trigger / test:**
+```bash
+curl -X POST https://jaggaer-ns-tracker.vercel.app/api/digest \
+  -H "Content-Type: application/json" \
+  -d '{"force": true}'
+```
+Or use the **Send Test Digest** button in Admin → Notifications.
+
+**GitHub Actions cron (free, recommended over Vercel Cron):**
+```yaml
+# .github/workflows/digest.yml
+name: Daily Digest
+on:
+  schedule:
+    - cron: '30 12 * * 1-5'   # 12:30 UTC = 6pm IST, weekdays only
+  workflow_dispatch:             # allows manual trigger from GitHub UI
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -X POST ${{ secrets.APP_URL }}/api/digest \
+            -H "Content-Type: application/json" \
+            -d '{"force": false}'
+```
+Add `APP_URL` as a GitHub Actions secret (`https://jaggaer-ns-tracker.vercel.app`).
+
+### Flow 2 — Send to Editors (`api/notify.js`)
+
+Triggered by the **Send to Editors →** button on fully-approved cluster cards (admin mode only).
+
+Sends a single formatted email with:
+- Cluster name, pillar, piece count
+- Table of all pieces with title, format, and direct GitHub file link
+- Green "all approved" confirmation bar
+
+**Recipients:** Reads `project.notifications.editors_to` from `project.json` first. Falls back to `EDITORS_TO` env var.
+
+### Recipient priority (both flows)
+
+```
+project.json  →  project.notifications.digest_to / editors_to   (wins)
+    ↓  if empty
+Vercel env vars  →  DIGEST_TO / EDITORS_TO                       (fallback)
+```
+
+Updating recipients in the Admin panel writes to `project.json` and takes effect on the next send. No Vercel redeployment needed.
+
+### Admin → Notifications panel
+
+Available in the Admin tab for admin users. Fields:
+- **Daily Digest recipients** — comma-separated email addresses
+- **Editors recipients** — comma-separated email addresses
+- **Send Test Digest** button — forces an immediate send regardless of activity
+
+Changes auto-save to `project.json` via the standard debounced GitHub write.
+
+---
+
+## 11. The Agent Builder Tab
 
 Self-contained experience for Jaggaer's site visitors. Not part of the tracker flow.
 
@@ -478,7 +575,7 @@ Demo system prompts are in `DEMO_SYSTEM_PROMPTS` in `agent-builder.jsx`. They in
 
 ---
 
-## 11. Prompts: How to Build Something Like This
+## 12. Prompts: How to Build Something Like This
 
 ### Prompt 1 — Project brief to app design seed
 
@@ -617,7 +714,7 @@ Export window.ClaudeRail = ClaudeRail.
 
 ---
 
-## 12. Prompts: How to Build Agent Builder Artifacts
+## 13. Prompts: How to Build Agent Builder Artifacts
 
 ### System prompt pattern for structured JSON tools
 
@@ -673,16 +770,21 @@ try {
 
 ---
 
-## 13. Known Issues & Next Steps
+## 14. Known Issues & Next Steps
 
-| # | Issue | Notes |
-|---|---|---|
-| 1 | **Remove team member in Admin** | Add-only. Needs guard against removing active assignees. |
-| 2 | **Feedback deletion** | No admin ability to remove an erroneous feedback note. |
-| 3 | **BWC GitHub links** | Should resolve to `https://github.com/ns-adiraghavan/jaggaer-ns-tracker/tree/main/${app.path}` |
-| 4 | **Month switcher UI** | Months array in data model; no UI to browse non-active months yet. |
-| 5 | **Anthropic API key** | Pending purchase. Claude rail and live Agent Builder demos inactive until key added to Vercel env. |
-| 6 | **Real file upload E2E** | `uploadPieceDeliverable` uses FileReader + base64; confirm works end-to-end on Vercel. |
+| # | Issue | Status | Notes |
+|---|---|---|---|
+| 1 | **Remove team member in Admin** | Open | Add-only. Needs guard against removing active assignees. |
+| 2 | **Feedback deletion** | Open | No admin ability to remove an erroneous feedback note. |
+| 3 | **BWC GitHub links** | Open | Should resolve to `https://github.com/ns-adiraghavan/jaggaer-ns-tracker/tree/main/${app.path}` |
+| 4 | **Month switcher UI** | Open | Months array in data model; no UI to browse non-active months yet. |
+| 5 | **Anthropic API key** | Pending | Claude rail and live Agent Builder demos inactive until key added to Vercel env. |
+| 6 | **Real file upload E2E** | Open | `uploadPieceDeliverable` uses FileReader + base64; confirm works end-to-end on Vercel. |
+| 7 | **Email digest cron** | Open | Vercel Cron requires Pro plan. Use GitHub Actions workflow (see §10) as free alternative. |
+| 8 | **Preview panel — private repo auth** | ✓ Fixed | Was fetching from `raw.githubusercontent.com` (no auth, fails on private repo). Now fetches via `/api/github` proxy and renders as `srcdoc`. |
+| 9 | **Preview showing raw HTML source** | ✓ Fixed | Root cause: unauthenticated fetch returned raw text. Fixed by proxy fetch + srcdoc. |
+| 10 | **Uploaded-by showing wrong name** | ✓ Fixed | Preview bar now reads `piece.last_upload_by`, looks up team roster, displays first name correctly. |
+| 11 | **Digest email linking to deploy URL** | ✓ Fixed | Was using `VERCEL_URL` (deployment-specific). Now uses `APP_URL` env var, falls back to clean production URL. |
 
 ### When the Anthropic key arrives
 
@@ -711,4 +813,4 @@ Write-Host "Done" -ForegroundColor Green
 
 ---
 
-*Last updated: May 2026 — v3.1. Changes: all piece titles/keywords/formats synced to Content Tracker v3 xlsx; Interlink Map tab removed from tracker UI; content_type field added to all 31 pieces; sidebar By Pillar / By Type toggle added; funnel/url/notes fields surfaced in Details tab; inline download button on status chip; Jaggaer notification bell; ActivityBar alignment fixed; content type badges updated in header; mock-data.js synced to project.json.*
+*Last updated: May 2026 — v3.2. Changes from v3.1: email notification system added (daily digest via `api/digest.js`, editors notification via `api/notify.js`, both using Resend free tier with shared sender domain — no DNS/IT setup required); Admin → Notifications panel for managing recipients without redeployment; HTML preview panel fixed (now fetches via authenticated `/api/github` proxy + `srcdoc` instead of unauthenticated raw URL); uploaded-by attribution corrected in preview bar (reads `last_upload_by` from piece metadata, looks up team roster); digest email CTA fixed to use clean production URL via `APP_URL` env var.*
