@@ -906,5 +906,12 @@
         }
       ]
     }
-  ]
+  ],
+  "notifications": {
+    "digest_to": [
+      "adi.raghavan@netscribes.com",
+      "chahat.khatter@netscribes.com"
+    ],
+    "editors_to": []
+  }
 }
