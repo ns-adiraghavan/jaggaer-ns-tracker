@@ -235,7 +235,7 @@ export default async function handler(req, res) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: process.env.DIGEST_FROM || "tracker@updates.jaggaer.com",
+        from: process.env.DIGEST_FROM || "NS x Jaggaer Tracker <onboarding@resend.dev>",
         to: recipients,
         subject: `Tracker digest · ${today} · ${stats.approved}/${stats.total} approved`,
         html: emailHtml,
