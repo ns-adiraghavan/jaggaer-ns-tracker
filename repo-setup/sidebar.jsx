@@ -162,7 +162,7 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           label="Sample Artifacts"
           active={view === "sample-artifacts"}
           onClick={() => setView("sample-artifacts")}
-          rightMeta="5 articles"
+          rightMeta="6 articles"
         />
 
         {adminMode && (
