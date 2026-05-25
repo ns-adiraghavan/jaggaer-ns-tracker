@@ -1,5 +1,6 @@
 // Admin panel — edit project config inline. Writes back via GitHub save path.
-// v2: adds drag-and-drop Schedule editor + Month management
+// v3: removed draft buffer — all edits write directly to live project state,
+//     synced via the same debounced GitHub save as the tracker. No more divergence.
 
 const { useState: useStateAD, useRef: useRefAD, useEffect: useEffectAD } = React;
 
@@ -16,38 +17,9 @@ function pillarColour(pillarId) {
 
 function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
   const [tab, setTab] = useStateAD(adminTarget?.kind || "overview");
-  // Draft: local copy of project — changes live here until Save is confirmed.
-  const [draft, setDraft] = useStateAD(() => JSON.parse(JSON.stringify(project)));
-  const [dirty, setDirty] = useStateAD(false);
-  const [saveFlash, setSaveFlash] = useStateAD(null); // "saved" | "reverted" | null
 
-  // Keep draft in sync if upstream project changes (e.g. tracker edits) while we're on a clean slate.
-  useEffectAD(() => {
-    if (!dirty) setDraft(JSON.parse(JSON.stringify(project)));
-  }, [project]);
-
-  function updateDraft(fn) {
-    setDraft(prev => { const next = JSON.parse(JSON.stringify(prev)); fn(next); return next; });
-    setDirty(true);
-  }
-
-  function handleSave() {
-    setProject(draft);
-    setDirty(false);
-    setSaveFlash("saved");
-    setTimeout(() => setSaveFlash(null), 2000);
-  }
-
-  function handleRevert() {
-    setDraft(JSON.parse(JSON.stringify(project)));
-    setDirty(false);
-    setSaveFlash("reverted");
-    setTimeout(() => setSaveFlash(null), 2000);
-  }
-
-  // Tabs that have editable state — show the save bar when dirty on these tabs
-  const editableTabs = ["pillars", "schedule", "months", "team", "bwc", "notifications", "topics"];
-  const showSaveBar = editableTabs.includes(tab);
+  // No draft buffer. All child tabs receive project + setProject directly.
+  // Changes write immediately to live state → debounced GitHub save in app.jsx fires automatically.
 
   return (
     <main className="ns-admin">
@@ -56,7 +28,7 @@ function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
         <h1 className="ns-admin-title">Edit the project, not the code.</h1>
         <p className="ns-admin-deck">
           Pillars, clusters, pieces and the team roster all live in <code>config/project.json</code>.
-          Make your changes, then hit Save to commit — or Revert to discard.
+          Changes save to GitHub automatically — the same way tracker status updates do.
         </p>
       </header>
 
@@ -66,60 +38,16 @@ function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
         ))}
       </nav>
 
-      {showSaveBar && (
-        <div className="ns-admin-save-bar" style={{
-          display: "flex", alignItems: "center", gap: 12,
-          padding: "10px 24px",
-          background: dirty ? "rgba(200,64,26,0.07)" : "rgba(79,122,91,0.07)",
-          borderBottom: `2px solid ${dirty ? "#c8401a" : "#4f7a5b"}`,
-          transition: "all 0.2s",
-        }}>
-          <span style={{
-            fontSize: "0.75rem", letterSpacing: "0.06em", textTransform: "uppercase",
-            color: dirty ? "#c8401a" : "#4f7a5b", fontWeight: 600, flex: 1,
-          }}>
-            {saveFlash === "saved"    ? "✓ Saved to GitHub" :
-             saveFlash === "reverted" ? "↺ Changes reverted" :
-             dirty                   ? "Unsaved changes" :
-                                       "No unsaved changes"}
-          </span>
-          <button
-            onClick={handleRevert}
-            disabled={!dirty}
-            style={{
-              padding: "6px 16px", fontSize: "0.78rem", fontWeight: 600,
-              letterSpacing: "0.05em", textTransform: "uppercase",
-              background: "transparent", border: "1px solid rgba(245,242,236,0.2)",
-              color: dirty ? "#f5f2ec" : "rgba(245,242,236,0.3)",
-              borderRadius: "2px", cursor: dirty ? "pointer" : "not-allowed",
-              transition: "all 0.15s",
-            }}
-          >Revert</button>
-          <button
-            onClick={handleSave}
-            disabled={!dirty}
-            style={{
-              padding: "6px 20px", fontSize: "0.78rem", fontWeight: 600,
-              letterSpacing: "0.05em", textTransform: "uppercase",
-              background: dirty ? "#c8401a" : "rgba(200,64,26,0.2)",
-              border: "none", color: "#fff", borderRadius: "2px",
-              cursor: dirty ? "pointer" : "not-allowed",
-              transition: "all 0.15s",
-            }}
-          >Save Changes</button>
-        </div>
-      )}
-
       <div className="ns-admin-body">
-        {tab === "overview"  && <AdminOverview  project={draft} />}
-        {tab === "pillars"   && <AdminPillars   project={draft} setProject={p => { setDraft(p); setDirty(true); }} adminTarget={adminTarget} />}
-        {tab === "schedule"  && <AdminSchedule  project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
-        {tab === "months"    && <AdminMonths    project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
-        {tab === "team"      && <AdminTeam      project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
-        {tab === "bwc"           && <AdminBWC           project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
-        {tab === "notifications" && <AdminNotifications  project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
-        {tab === "topics" && <window.CsvSyncPanel project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
-        {tab === "raw"       && <AdminRaw       project={draft} />}
+        {tab === "overview"      && <AdminOverview      project={project} />}
+        {tab === "pillars"       && <AdminPillars       project={project} setProject={setProject} adminTarget={adminTarget} />}
+        {tab === "schedule"      && <AdminSchedule      project={project} setProject={setProject} />}
+        {tab === "months"        && <AdminMonths        project={project} setProject={setProject} />}
+        {tab === "team"          && <AdminTeam          project={project} setProject={setProject} />}
+        {tab === "bwc"           && <AdminBWC           project={project} setProject={setProject} />}
+        {tab === "notifications" && <AdminNotifications project={project} setProject={setProject} />}
+        {tab === "topics"        && <window.CsvSyncPanel project={project} setProject={setProject} />}
+        {tab === "raw"           && <AdminRaw           project={project} />}
       </div>
     </main>
   );
@@ -221,7 +149,8 @@ function ClusterChip({ cluster, pillarId, fromWeek, removable, weekNum, isDraggi
 
 // ─── Schedule editor — drag-and-drop cluster → week board ─────────────────────
 function AdminSchedule({ project, setProject }) {
-  // Seed from window.PUBLISHING_SEQUENCE (exposed by tracker.jsx) if no saved schedule
+  // Seed local weeks from project.schedule, falling back to PUBLISHING_SEQUENCE.
+  // This is purely local drag state — we write back to project on every mutation.
   function getInitialSchedule() {
     if (project.schedule && project.schedule.length) return project.schedule;
     const SEQ = window.PUBLISHING_SEQUENCE || [];
@@ -234,12 +163,16 @@ function AdminSchedule({ project, setProject }) {
   }
 
   const [weeks, setWeeks] = useStateAD(getInitialSchedule);
-  // dragging: { pillarId, clusterId, fromWeek }
   const [dragging, setDragging] = useStateAD(null);
-  // dragOver: week number | "pool" | null
   const [dragOver, setDragOver] = useStateAD(null);
-  // Per-zone enter counters to defeat dragLeave-on-child-enter flickering
   const counters = useRefAD({});
+
+  // Keep local weeks in sync if project.schedule changes externally (e.g. another tab saves)
+  useEffectAD(() => {
+    if (project.schedule && project.schedule.length) {
+      setWeeks(project.schedule);
+    }
+  }, [project.schedule]);
 
   const assignedClusters = new Set(weeks.flatMap(w => w.slots.map(s => s.cluster)));
   const allClusters = project.pillars.flatMap(p => p.clusters.map(c => ({ ...c, pillarId: p.id })));
@@ -248,10 +181,10 @@ function AdminSchedule({ project, setProject }) {
 
   function persist(newWeeks) {
     setWeeks(newWeeks);
+    // Write directly to live project — triggers debounced GitHub save
     setProject(prev => ({ ...prev, schedule: newWeeks }));
   }
 
-  // ── drag enter/leave with counter (defeats child-element flickering) ──
   function onEnter(e, zone) {
     e.preventDefault();
     counters.current[zone] = (counters.current[zone] || 0) + 1;
@@ -267,10 +200,8 @@ function AdminSchedule({ project, setProject }) {
   function onOver(e) { e.preventDefault(); }
 
   function handleDragStart(e, pillarId, clusterId, fromWeek) {
-    // Reset all counters on new drag
     counters.current = {};
     setDragging({ pillarId, clusterId, fromWeek });
-    // Required for Firefox
     e.dataTransfer.setData("text/plain", clusterId);
     e.dataTransfer.effectAllowed = "move";
   }
@@ -323,12 +254,11 @@ function AdminSchedule({ project, setProject }) {
       <div className="ns-admin-schedule-hd">
         <div>
           <div className="ns-eyebrow ns-eyebrow-dark" style={{ marginBottom: 6 }}>Publishing Schedule Editor</div>
-          <p className="ns-admin-schedule-rule">Drag clusters between weeks to reorder. Hit Save Changes above to commit — or Revert to discard.</p>
+          <p className="ns-admin-schedule-rule">Drag clusters between weeks to reorder. Changes save automatically.</p>
         </div>
         <button className="ns-schedule-add-week-btn" onClick={addWeek}>+ Add Week</button>
       </div>
 
-      {/* Board: week columns */}
       <div className="ns-schedule-board">
         {weeks.map(week => {
           const isOver = dragOver === week.week;
@@ -346,7 +276,6 @@ function AdminSchedule({ project, setProject }) {
                   <span className="ns-schedule-col-num">{week.label}</span>
                   <span className="ns-schedule-col-count">{week.slots.length}c</span>
                 </div>
-                {/* Show calendar dates derived from month start_date */}
                 {(() => {
                   const activeMonth = (project.months || []).find(m => m.id === project.active_month) || (project.months || [])[0];
                   if (!activeMonth?.start_date) return null;
@@ -403,7 +332,6 @@ function AdminSchedule({ project, setProject }) {
         })}
       </div>
 
-      {/* Unscheduled pool */}
       <div
         className={`ns-schedule-pool ${dragOver === "pool" ? "is-over" : ""}`}
         onDragEnter={e => onEnter(e, "pool")}
@@ -905,9 +833,6 @@ function AdminRaw({ project }) {
 }
 
 // ─── Notifications settings ───────────────────────────────────────────────────
-// Stores digest recipients in project.json under project.notifications.
-// Written to GitHub like all other config — no separate env var needed for the
-// recipient list. RESEND_API_KEY and DIGEST_FROM still live in Vercel env.
 function AdminNotifications({ project, setProject }) {
   const notif = project.notifications || {};
   const [digestTo, setDigestTo] = useStateAD(
@@ -916,7 +841,7 @@ function AdminNotifications({ project, setProject }) {
   const [editorsTo, setEditorsTo] = useStateAD(
     Array.isArray(notif.editors_to) ? notif.editors_to.join(", ") : (notif.editors_to || "")
   );
-  const [testState, setTestState] = useStateAD(null); // null | "sending" | "sent" | "error"
+  const [testState, setTestState] = useStateAD(null);
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
   function save() {
@@ -931,7 +856,6 @@ function AdminNotifications({ project, setProject }) {
     }));
   }
 
-  // Save on blur so the parent draft stays in sync
   function onBlur() { save(); }
 
   async function sendTestDigest() {
@@ -962,7 +886,6 @@ function AdminNotifications({ project, setProject }) {
         Notification Settings
       </div>
 
-      {/* Daily Digest */}
       <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "4px", padding: "20px 24px", marginBottom: "16px" }}>
         <div style={{ ...FONT, fontSize: "0.88rem", fontWeight: 700, color: "#1a2535", marginBottom: "4px" }}>
           Daily Digest
@@ -983,7 +906,6 @@ function AdminNotifications({ project, setProject }) {
         <div style={hintStyle}>Everyone listed gets the daily digest. Add both NS and Jaggaer stakeholders.</div>
       </div>
 
-      {/* Send to Editors */}
       <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "4px", padding: "20px 24px", marginBottom: "16px" }}>
         <div style={{ ...FONT, fontSize: "0.88rem", fontWeight: 700, color: "#1a2535", marginBottom: "4px" }}>
           Send to Editors
@@ -1003,7 +925,6 @@ function AdminNotifications({ project, setProject }) {
         <div style={hintStyle}>These recipients get the cluster handover email when you click "Send to Editors" on an approved cluster.</div>
       </div>
 
-      {/* Setup checklist */}
       <div style={{ background: "#faf8f4", border: "1px solid #e8e3da", borderRadius: "4px", padding: "20px 24px", marginBottom: "16px" }}>
         <div style={{ ...FONT, fontSize: "0.78rem", fontWeight: 700, color: "#1a2535", marginBottom: "12px" }}>Setup checklist</div>
         {[
@@ -1019,7 +940,6 @@ function AdminNotifications({ project, setProject }) {
         ))}
       </div>
 
-      {/* Manual test trigger */}
       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
         <button
           onClick={sendTestDigest}
