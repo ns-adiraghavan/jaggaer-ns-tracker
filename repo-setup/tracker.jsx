@@ -1438,9 +1438,11 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then(data => {
         if (cancelled) return;
-        // Decode base64 → HTML string → Blob URL so iframe treats it as a real HTML document
-        const html = atob(data.content.replace(/\n/g, ""));
-        const blob = new Blob([html], { type: "text/html" });
+        // Decode base64 → UTF-8 bytes → Blob URL (TextDecoder preserves UTF-8, atob gives Latin-1)
+        const b64 = data.content.replace(/\n/g, "");
+        const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+        const html = new TextDecoder("utf-8").decode(bytes);
+        const blob = new Blob([html], { type: "text/html;charset=utf-8" });
         objectUrl = URL.createObjectURL(blob);
         setSrcdoc(objectUrl);
         setLoading(false);
@@ -1535,6 +1537,7 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
             sandbox="allow-same-origin allow-scripts"
             style={{ width: "100%", height: "100%", border: "none", display: "block" }}
             title={`Preview: ${piece.title}`}
+            onLoad={e => { try { e.target.contentWindow.scrollTo(0, 0); } catch(_) {} }}
           />
         )}
       </div>
