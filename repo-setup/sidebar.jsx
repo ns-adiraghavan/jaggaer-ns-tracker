@@ -1,7 +1,7 @@
 // Left sidebar - dark steel. Pillar/cluster nav with stats.
 const { useMemo: useMemoSB } = React;
 
-function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCluster, setActiveCluster, view, setView, onSignOut, onToggleAdmin, adminMode, activeMonthId, setActiveMonthId }) {
+function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCluster, setActiveCluster, view, setView, onSignOut, onToggleAdmin, adminMode, activeMonthId, setActiveMonthId, activeContentType, setActiveContentType }) {
   const stats = useMemoSB(() => computeStats(project, activeMonthId), [project, activeMonthId]);
   const months = project.months || [];
 
@@ -82,7 +82,7 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
         <NavSection
           label="Tracker"
           active={view === "tracker"}
-          onClick={() => { setView("tracker"); setActivePillar(null); setActiveCluster(null); }}
+          onClick={() => { setView("tracker"); setActivePillar(null); setActiveCluster(null); if (setActiveContentType) setActiveContentType(null); }}
           rightMeta={`${stats.approved}/${stats.total}`}
         />
 
@@ -144,6 +144,8 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
               setView={setView}
               setActivePillar={setActivePillar}
               setActiveCluster={setActiveCluster}
+              activeContentType={activeContentType}
+              setActiveContentType={setActiveContentType}
             />
           </div>
         )}
@@ -174,6 +176,34 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
       </nav>
 
       <div className="ns-sidebar-foot">
+        <a
+          href={`https://github.com/${(window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker"}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "flex", alignItems: "center", gap: "7px",
+            padding: "7px 14px 7px 12px",
+            margin: "0 8px 6px",
+            borderRadius: "4px",
+            background: "transparent",
+            border: "1px solid #e0dbd4",
+            textDecoration: "none",
+            color: "#666",
+            fontFamily: "Noto Sans, sans-serif",
+            fontSize: "0.68rem",
+            fontWeight: 500,
+            letterSpacing: "0.02em",
+            transition: "background 0.15s, border-color 0.15s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#f5f2ec"; e.currentTarget.style.borderColor = "#c8c0b4"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "#e0dbd4"; }}
+        >
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" style={{ flexShrink: 0, opacity: 0.7 }}>
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          <span>GitHub Repo</span>
+          <span style={{ marginLeft: "auto", opacity: 0.4, fontSize: "0.6rem" }}>↗</span>
+        </a>
         <div className="ns-user-card">
           <div className="ns-user-name">{currentUser.name}</div>
           <div className="ns-user-role">
@@ -243,7 +273,7 @@ function PillarNav({ pillar, sequence, pillarStats, clusterStats, expanded, acti
 }
 
 
-function ContentTypeNav({ project, ctStats, setView, setActivePillar, setActiveCluster }) {
+function ContentTypeNav({ project, ctStats, setView, setActivePillar, setActiveCluster, activeContentType, setActiveContentType }) {
   const CT_META = {
     'msv':               { label: 'MSV-Driven',        color: '#1a6a3a', bg: '#eaf4ee', border: '#b8dfc8', desc: 'Broad · High search volume' },
     'ai-in-s2p':         { label: 'AI in S2P (Claude)', color: '#1e4fa8', bg: '#eaf0fb', border: '#bad0f0', desc: 'Claude-focused · JAI traffic' },
@@ -272,7 +302,20 @@ function ContentTypeNav({ project, ctStats, setView, setActivePillar, setActiveC
         return (
           <div key={ctId} style={{ marginBottom: '2px' }}>
             <button
-              onClick={() => setExpanded(e => ({ ...e, [ctId]: !e[ctId] }))}
+              onClick={() => {
+              setExpanded(e => ({ ...e, [ctId]: !e[ctId] }));
+              // Toggle content type filter on the tracker
+              if (activeContentType === ctId) {
+                setActiveContentType(null);
+                setActivePillar(null);
+                setActiveCluster(null);
+              } else {
+                setActiveContentType(ctId);
+                setActivePillar(null);
+                setActiveCluster(null);
+                setView('tracker');
+              }
+            }}
               style={{
                 width: '100%', display: 'flex', alignItems: 'center', gap: '7px',
                 padding: '7px 12px',
@@ -314,8 +357,9 @@ function ContentTypeNav({ project, ctStats, setView, setActivePillar, setActiveC
                       <button
                         onClick={() => {
                           setView('tracker');
-                          setActivePillar(pillar.id);
-                          setActiveCluster(cluster.id);
+                          setActivePillar(null);
+                          setActiveCluster(null);
+                          // contentType filter handled by Tracker directly
                         }}
                         style={{
                           width: '100%', display: 'flex', alignItems: 'flex-start', gap: '7px',

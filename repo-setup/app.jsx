@@ -116,6 +116,7 @@ function App() {
   const [adminTarget, setAdminTarget] = useStateApp(null);
   const [saveState, setSaveState] = useStateApp(null);
   const [activeMonthId, setActiveMonthId] = useStateApp(null);
+  const [activeContentType, setActiveContentType] = useStateApp(null);
   const saveTimerRef = useRefApp(null);
   const toastTimerRef = useRefApp(null);
   const firstSaveRef = useRefApp(true);
@@ -189,9 +190,11 @@ function App() {
         setView={setView}
         adminMode={adminMode}
         onToggleAdmin={() => setAdminMode(a => !a)}
-        onSignOut={() => { clearSession(); setCurrentUser(null); setAdminMode(false); setView("tracker"); setActivePillar(null); setActiveCluster(null); }}
+        onSignOut={() => { clearSession(); setCurrentUser(null); setAdminMode(false); setView("tracker"); setActivePillar(null); setActiveCluster(null); setActiveContentType(null); }}
         activeMonthId={activeMonthId}
         setActiveMonthId={setActiveMonthId}
+        activeContentType={activeContentType}
+        setActiveContentType={setActiveContentType}
       />
 
       <div className="ns-main-col">
@@ -216,6 +219,7 @@ function App() {
             setActiveCluster={setActiveCluster}
             adminMode={adminMode}
             activeMonthId={activeMonthId}
+            activeContentType={activeContentType}
             onAdminEditPiece={(clusterId, pieceId) => { setView("admin"); setAdminTarget({ kind: "pieces", clusterId, pieceId }); }}
             onAdminEditCluster={(clusterId) => { setView("admin"); setAdminTarget({ kind: "pillars", clusterId }); }}
           />

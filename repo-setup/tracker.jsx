@@ -72,6 +72,26 @@ function getClusterWeek(clusterId, schedule) {
   return slot ? slot.week : null;
 }
 
+// Stub retained for PublishingSequence tab — week dates for Jaggaer publish calendar
+function getScheduleContext(project) {
+  const activeMonth = (project.months || []).find(m => m.id === project.active_month) || (project.months || [])[0];
+  if (!activeMonth || !activeMonth.start_date) return { currentWeek: null, startDate: null };
+  const start = new Date(activeMonth.start_date);
+  return { currentWeek: null, startDate: start }; // currentWeek intentionally null — no "overdue" concept
+}
+
+function weekDateRange(weekNum, startDate) {
+  if (!startDate) return null;
+  const start = new Date(startDate);
+  const weekStart = new Date(start.getTime() + (weekNum - 1) * 7 * 24 * 60 * 60 * 1000);
+  const weekEnd   = new Date(weekStart.getTime() + 6 * 24 * 60 * 60 * 1000);
+  const fmt = d => d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+  return `${fmt(weekStart)} – ${fmt(weekEnd)}`;
+}
+
+// Stub — always returns null (no overdue/due concept anymore)
+function getPieceTiming() { return null; }
+
 // ─── CSV helpers ───────────────────────────────────────────────────────────────
 const CSV_FIELDS = ["id","title","format","cluster","pillar","content_type","phase",
   "primary_keyword","secondary_keyword","intent","funnel","geography","assignee","notes","url"];
@@ -607,19 +627,31 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
 
 
 // ─── Tracker root ─────────────────────────────────────────────────────────────
-function Tracker({ project, setProject, currentUser, activePillar, activeCluster, setActiveCluster, adminMode, activeMonthId, onAdminEditPiece, onAdminEditCluster }) {
+function Tracker({ project, setProject, currentUser, activePillar, activeCluster, setActiveCluster, adminMode, activeMonthId, activeContentType, onAdminEditPiece, onAdminEditCluster }) {
   const effectiveMonthId = activeMonthId || project.active_month;
   const stats = window.computeStats(project, effectiveMonthId);
   const currentWeek = 1; // retained for Publishing Sequence tab only — not used for piece timing
 
   // Filter pillars to only clusters belonging to the active month.
-  // Pillars with no clusters in this month are hidden entirely.
+  // Also filter by content type when activeContentType is set (By Type sidebar nav).
   const filteredPillars = project.pillars.map(p => ({
     ...p,
-    clusters: p.clusters.filter(c => (c.month_id || project.active_month) === effectiveMonthId),
-  })).filter(p => p.clusters.length > 0);
+    clusters: p.clusters
+      .filter(c => (c.month_id || project.active_month) === effectiveMonthId)
+      .filter(c => !activeCluster || c.id === activeCluster)
+      .map(c => ({
+        ...c,
+        pieces: activeContentType
+          ? c.pieces.filter(pc => (pc.content_type || 'msv') === activeContentType)
+          : c.pieces,
+      }))
+      .filter(c => c.pieces.length > 0),
+  })).filter(p => {
+    if (activePillar && p.id !== activePillar) return false;
+    return p.clusters.length > 0;
+  });
 
-  const pillars = activePillar ? filteredPillars.filter(p => p.id === activePillar) : filteredPillars;
+  const pillars = filteredPillars; // pillar + contentType filtering handled in filteredPillars above
   const [activeTab, setActiveTab] = useStateTR("tracker");
   const [viewMode, setViewMode] = useStateTR("table");
   const [openPiece, setOpenPiece] = useStateTR(null);
@@ -1182,8 +1214,8 @@ function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpe
   const ready = approved === total && total > 0;
   const anchor = cluster.pieces.find(p => p.id === cluster.anchor_piece);
   const weekSlot = (project.schedule || []).find(w => w.slots.some(s => s.cluster === cluster.id));
-  const overdueCount = cluster.pieces.filter(p => getPieceTiming(p, currentWeek, cluster.id, project.schedule) === "overdue").length;
-  const dueCount = cluster.pieces.filter(p => getPieceTiming(p, currentWeek, cluster.id, project.schedule) === "due").length;
+  const overdueCount = 0; // Phase model — no overdue concept
+  const dueCount = 0;
 
   const pal = CLUSTER_PALETTE[clusterIndex % CLUSTER_PALETTE.length];
   const headStyle = ready
