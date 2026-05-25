@@ -46,7 +46,7 @@ function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
   }
 
   // Tabs that have editable state — show the save bar when dirty on these tabs
-  const editableTabs = ["pillars", "schedule", "months", "team", "bwc", "notifications"];
+  const editableTabs = ["pillars", "schedule", "months", "team", "bwc", "notifications", "topics"];
   const showSaveBar = editableTabs.includes(tab);
 
   return (
@@ -61,7 +61,7 @@ function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
       </header>
 
       <nav className="ns-admin-tabs">
-        {[["overview","Overview"],["pillars","Pillars & Clusters"],["schedule","Publishing Schedule"],["months","Months"],["team","Team"],["bwc","Build With Claude"],["notifications","Notifications"],["raw","Raw JSON"]].map(([id, label]) => (
+        {[["overview","Overview"],["pillars","Pillars & Clusters"],["schedule","Publishing Schedule"],["months","Months"],["team","Team"],["bwc","Build With Claude"],["notifications","Notifications"],["topics","Topic CSV Sync"],["raw","Raw JSON"]].map(([id, label]) => (
           <button key={id} className={`ns-admin-tab ${tab===id?"is-active":""}`} onClick={() => setTab(id)}>{label}</button>
         ))}
       </nav>
@@ -118,6 +118,7 @@ function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
         {tab === "team"      && <AdminTeam      project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
         {tab === "bwc"           && <AdminBWC           project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
         {tab === "notifications" && <AdminNotifications  project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
+        {tab === "topics" && <window.CsvSyncPanel project={draft} setProject={p => { setDraft(p); setDirty(true); }} />}
         {tab === "raw"       && <AdminRaw       project={draft} />}
       </div>
     </main>

@@ -1,4 +1,4 @@
-// Tracker v6 — schedule-aware: Priority Actions, overdue/due colouring, real week tracking
+// Tracker v7 — phase-aware: Phase 1 / Phase 2 model, CSV sync, content-type sub-views
 
 const { useState: useStateTR, useRef: useRefTR, useMemo: useMemoTR } = React;
 
@@ -43,56 +43,323 @@ async function forceDownload(url, filename) {
 }
 
 
-// ─── Schedule helpers ──────────────────────────────────────────────────────────
-function getScheduleContext(project) {
-  const activeMonth = (project.months || []).find(m => m.id === project.active_month) || (project.months || [])[0];
-  if (!activeMonth || !activeMonth.start_date) return { currentWeek: 1, startDate: null };
-  const start = new Date(activeMonth.start_date);
-  const now = new Date();
-  const diffDays = Math.floor((now - start) / (1000 * 60 * 60 * 24));
-  const currentWeek = Math.min(4, Math.max(1, Math.floor(diffDays / 7) + 1));
-  return { currentWeek, startDate: start };
+// ─── Phase helpers ────────────────────────────────────────────────────────────
+// Phase 1 = informational/TOFU content (builds audience)
+// Phase 2 = commercial/MOFU/BOFU content (converts audience)
+// Publishing sequence is a SEPARATE concept — Jaggaer's recommended publish order
+// for their web team, visible in the Publishing Sequence tab only.
+
+function getPhaseStats(project) {
+  let p1Total = 0, p1Done = 0, p2Total = 0, p2Done = 0;
+  for (const pillar of project.pillars || []) {
+    for (const cluster of pillar.clusters || []) {
+      for (const piece of cluster.pieces || []) {
+        const ph = piece.phase || 1;
+        if (ph === 1) { p1Total++; if (piece.status === "approved") p1Done++; }
+        else          { p2Total++; if (piece.status === "approved") p2Done++; }
+      }
+    }
+  }
+  const p1Complete = p1Total > 0 && p1Done === p1Total;
+  const currentPhase = p1Complete ? 2 : 1;
+  return { p1Total, p1Done, p2Total, p2Done, currentPhase, p1Complete };
 }
 
-// Return "21 May – 27 May" for a given week number given month start date
-function weekDateRange(weekNum, startDate) {
-  if (!startDate) return null;
-  const start = new Date(startDate);
-  const weekStart = new Date(start.getTime() + (weekNum - 1) * 7 * 24 * 60 * 60 * 1000);
-  const weekEnd   = new Date(weekStart.getTime() + 6 * 24 * 60 * 60 * 1000);
-  const fmt = d => d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
-  return `${fmt(weekStart)} – ${fmt(weekEnd)}`;
-}
-
-// Derive the scheduled week for a piece from PUBLISHING_SEQUENCE by cluster ID.
-// This is the single source of truth — no piece.schedule_week field needed.
+// Keep getClusterWeek for Publishing Sequence tab only
 function getClusterWeek(clusterId, schedule) {
   if (!schedule) return null;
   const slot = (schedule).find(w => w.slots.some(s => s.cluster === clusterId));
   return slot ? slot.week : null;
 }
 
-function getPieceTiming(piece, currentWeek, clusterId, schedule) {
-  const w = clusterId ? getClusterWeek(clusterId, schedule) : piece.schedule_week;
-  if (!w) return null;
-  if (piece.status === "approved") return "done";
-  if (w < currentWeek) return "overdue";
-  if (w === currentWeek) return "due";
-  return "upcoming";
+// ─── CSV helpers ───────────────────────────────────────────────────────────────
+const CSV_FIELDS = ["id","title","format","cluster","pillar","content_type","phase",
+  "primary_keyword","secondary_keyword","intent","funnel","geography","assignee","notes","url"];
+
+function projectToCsv(project) {
+  const rows = [CSV_FIELDS.join(",")];
+  for (const pillar of project.pillars || []) {
+    for (const cluster of pillar.clusters || []) {
+      for (const piece of cluster.pieces || []) {
+        const row = CSV_FIELDS.map(f => {
+          let val = "";
+          if (f === "cluster") val = cluster.label;
+          else if (f === "pillar") val = pillar.label;
+          else val = piece[f] !== undefined ? String(piece[f]) : "";
+          // Escape commas/quotes
+          if (val.includes(",") || val.includes('"') || val.includes("\n")) {
+            val = '"' + val.replace(/"/g, '""') + '"';
+          }
+          return val;
+        });
+        rows.push(row.join(","));
+      }
+    }
+  }
+  return rows.join("\n");
 }
 
-function weeksLate(piece, currentWeek, clusterId, schedule) {
-  const w = clusterId ? getClusterWeek(clusterId, schedule) : piece.schedule_week;
-  if (!w || w >= currentWeek) return 0;
-  return currentWeek - w;
+function csvToProjectUpdates(csvText, project) {
+  const lines = csvText.trim().split("\n");
+  const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ""));
+  const updates = {};
+  for (let i = 1; i < lines.length; i++) {
+    // Simple CSV parse — handles quoted fields
+    const cols = [];
+    let cur = "", inQ = false;
+    for (const ch of lines[i]) {
+      if (ch === '"') { inQ = !inQ; continue; }
+      if (ch === "," && !inQ) { cols.push(cur); cur = ""; continue; }
+      cur += ch;
+    }
+    cols.push(cur);
+    const row = {};
+    headers.forEach((h, idx) => { row[h] = (cols[idx] || "").trim(); });
+    if (row.id) updates[row.id] = row;
+  }
+
+  // Apply updates to project — match by piece id
+  const newProject = JSON.parse(JSON.stringify(project));
+  const updateableFields = ["title","format","content_type","primary_keyword",
+    "secondary_keyword","intent","funnel","geography","assignee","notes","url"];
+  let changed = 0;
+  for (const pillar of newProject.pillars || []) {
+    for (const cluster of pillar.clusters || []) {
+      for (const piece of cluster.pieces || []) {
+        const upd = updates[piece.id];
+        if (!upd) continue;
+        for (const f of updateableFields) {
+          if (upd[f] !== undefined && upd[f] !== String(piece[f] || "")) {
+            piece[f] = f === "phase" ? parseInt(upd[f]) || 1 : upd[f];
+            changed++;
+          }
+        }
+        if (upd.phase) piece.phase = parseInt(upd.phase) || 1;
+      }
+    }
+  }
+  return { newProject, changed };
 }
 
-const TIMING_META = {
-  overdue:  { color: "#b91c1c", bg: "#fef2f2", border: "#fca5a5", label: "Overdue" },
-  due:      { color: "#92400e", bg: "#fffbeb", border: "#fcd34d", label: "Due this week" },
-  upcoming: { color: "#6b6560", bg: "transparent", border: "transparent", label: "Upcoming" },
-  done:     { color: "#1e7a45", bg: "#e6f5ec", border: "#86efac", label: "Done" },
-};
+// ─── Phase Banner ─────────────────────────────────────────────────────────────
+function PhaseBanner({ project }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const { p1Total, p1Done, p2Total, p2Done, currentPhase, p1Complete } = getPhaseStats(project);
+
+  return (
+    <div style={{
+      display: "flex", alignItems: "stretch", gap: 0,
+      borderBottom: "1.5px solid #e0dbd4", background: "#fff",
+      fontSize: "0.72rem", fontFamily: "Noto Sans, sans-serif",
+    }}>
+      {/* Phase 1 block */}
+      <div style={{
+        flex: 1, padding: "10px 20px", display: "flex", alignItems: "center", gap: "12px",
+        borderRight: "1px solid #e0dbd4",
+        background: currentPhase === 1 ? "#fffbf5" : "#f8fdf9",
+        borderLeft: currentPhase === 1 ? "3px solid #c8401a" : "3px solid #1e7a45",
+      }}>
+        <div style={{ flexShrink: 0 }}>
+          <div style={{ fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
+            color: currentPhase === 1 ? "#c8401a" : "#1e7a45", fontSize: "0.62rem" }}>
+            {currentPhase === 1 ? "▶ Current — " : "✓ Complete — "}Phase 1
+          </div>
+          <div style={{ color: "#888", marginTop: "1px" }}>Informational · Audience-building</div>
+        </div>
+        <div style={{ marginLeft: "auto", textAlign: "right" }}>
+          <div style={{ fontWeight: 700, fontSize: "1rem",
+            color: p1Complete ? "#1e7a45" : "#0f1923" }}>{p1Done}/{p1Total}</div>
+          <div style={{ color: "#aaa" }}>approved</div>
+        </div>
+        {/* mini progress bar */}
+        <div style={{ width: "60px", height: "4px", background: "#e8e3da", borderRadius: "2px", flexShrink: 0 }}>
+          <div style={{ width: `${p1Total ? (p1Done/p1Total)*100 : 0}%`, height: "100%",
+            background: p1Complete ? "#1e7a45" : "#c8401a", borderRadius: "2px", transition: "width 0.3s" }} />
+        </div>
+      </div>
+
+      {/* Phase 2 block */}
+      <div style={{
+        flex: 1, padding: "10px 20px", display: "flex", alignItems: "center", gap: "12px",
+        background: currentPhase === 2 ? "#fffbf5" : "#fafafa",
+        borderLeft: currentPhase === 2 ? "3px solid #c8401a" : "3px solid #e0dbd4",
+        opacity: p1Complete ? 1 : 0.6,
+      }}>
+        <div style={{ flexShrink: 0 }}>
+          <div style={{ fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
+            color: currentPhase === 2 ? "#c8401a" : "#888", fontSize: "0.62rem" }}>
+            {currentPhase === 2 ? "▶ Current — " : (p2Done === p2Total && p2Total > 0 ? "✓ Complete — " : "Upcoming — ")}Phase 2
+          </div>
+          <div style={{ color: "#888", marginTop: "1px" }}>Commercial · Audience-conversion</div>
+        </div>
+        <div style={{ marginLeft: "auto", textAlign: "right" }}>
+          <div style={{ fontWeight: 700, fontSize: "1rem", color: "#0f1923" }}>{p2Done}/{p2Total}</div>
+          <div style={{ color: "#aaa" }}>approved</div>
+        </div>
+        <div style={{ width: "60px", height: "4px", background: "#e8e3da", borderRadius: "2px", flexShrink: 0 }}>
+          <div style={{ width: `${p2Total ? (p2Done/p2Total)*100 : 0}%`, height: "100%",
+            background: "#1e7a45", borderRadius: "2px", transition: "width 0.3s" }} />
+        </div>
+      </div>
+
+      {/* Recent activity count */}
+      {(() => {
+        const recent = [];
+        for (const p of project.pillars || [])
+          for (const c of p.clusters || [])
+            for (const pc of c.pieces || [])
+              if ((pc.last_updated || pc.last_upload) && pc.status !== "not-started") recent.push(pc);
+        recent.sort((a,b) => new Date(b.last_updated||b.last_upload) - new Date(a.last_updated||a.last_upload));
+        const top = recent[0];
+        return top ? (
+          <div style={{ padding: "10px 20px", borderLeft: "1px solid #e0dbd4", flexShrink: 0,
+            display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <div style={{ fontWeight: 600, color: "#1e6fa8", fontSize: "0.65rem",
+              textTransform: "uppercase", letterSpacing: "0.07em" }}>Latest</div>
+            <div style={{ color: "#444", maxWidth: "180px", overflow: "hidden",
+              textOverflow: "ellipsis", whiteSpace: "nowrap", marginTop: "1px" }}>{top.title}</div>
+            <div style={{ color: "#aaa", marginTop: "1px" }}>
+              {STATUS_META[top.status]?.label || top.status}
+            </div>
+          </div>
+        ) : null;
+      })()}
+    </div>
+  );
+}
+
+// ─── CSV Sync Panel (used in Admin) ──────────────────────────────────────────
+function CsvSyncPanel({ project, setProject }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const [uploadState, setUploadState] = React.useState("idle"); // idle|parsing|preview|saving|done|error
+  const [preview, setPreview] = React.useState(null); // { changed, newProject }
+  const [errorMsg, setErrorMsg] = React.useState("");
+  const fileRef = React.useRef();
+
+  function downloadCsv() {
+    const csv = projectToCsv(project);
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `jaggaer-topics-${new Date().toISOString().slice(0,10)}.csv`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+  }
+
+  function handleFile(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    setUploadState("parsing");
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try {
+        const { newProject, changed } = csvToProjectUpdates(ev.target.result, project);
+        setPreview({ changed, newProject });
+        setUploadState("preview");
+      } catch(err) {
+        setErrorMsg(err.message);
+        setUploadState("error");
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  }
+
+  function applyChanges() {
+    setUploadState("saving");
+    setProject(preview.newProject);
+    setTimeout(() => setUploadState("done"), 800);
+  }
+
+  const btnStyle = (color, bg, border) => ({
+    ...FONT, fontSize: "0.72rem", fontWeight: 600,
+    color, background: bg, border: `1px solid ${border}`,
+    padding: "7px 16px", borderRadius: "3px", cursor: "pointer",
+    letterSpacing: "0.04em",
+  });
+
+  return (
+    <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "4px", padding: "20px 24px" }}>
+      <div style={{ ...FONT, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em",
+        textTransform: "uppercase", color: "#888", marginBottom: "14px" }}>
+        Topic CSV Sync
+      </div>
+      <p style={{ ...FONT, fontSize: "0.82rem", color: "#666", marginBottom: "16px", lineHeight: 1.5 }}>
+        Download the current topic list as a CSV. Edit titles, keywords, format, phase, assignee, or content type offline.
+        Re-upload to sync changes back. Status and feedback are never overwritten.
+      </p>
+
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "16px" }}>
+        <button onClick={downloadCsv} style={btnStyle("#1e4fa8", "#eef3fb", "#c5d8f5")}>
+          ↓ Download Current Topics CSV
+        </button>
+        <button onClick={() => fileRef.current.click()}
+          style={btnStyle("#1a2535", "#f5f2ec", "#d4cfc8")}
+          disabled={uploadState === "parsing" || uploadState === "saving"}>
+          ↑ Upload Updated CSV
+        </button>
+        <input ref={fileRef} type="file" accept=".csv" style={{ display: "none" }} onChange={handleFile} />
+      </div>
+
+      {uploadState === "parsing" && (
+        <div style={{ ...FONT, fontSize: "0.78rem", color: "#888" }}>Parsing CSV…</div>
+      )}
+
+      {uploadState === "preview" && preview && (
+        <div style={{ background: preview.changed > 0 ? "#f0faf4" : "#faf8f4",
+          border: `1px solid ${preview.changed > 0 ? "#b6e5c8" : "#e0dbd4"}`,
+          borderRadius: "4px", padding: "14px 18px" }}>
+          <div style={{ ...FONT, fontSize: "0.82rem", fontWeight: 600,
+            color: preview.changed > 0 ? "#1e7a45" : "#888", marginBottom: "8px" }}>
+            {preview.changed > 0
+              ? `${preview.changed} field${preview.changed !== 1 ? "s" : ""} will be updated`
+              : "No changes detected — CSV matches current state"}
+          </div>
+          {preview.changed > 0 && (
+            <div style={{ display: "flex", gap: "8px", marginTop: "10px" }}>
+              <button onClick={applyChanges} style={btnStyle("#fff", "#1e7a45", "#1e7a45")}>
+                Apply {preview.changed} changes
+              </button>
+              <button onClick={() => { setUploadState("idle"); setPreview(null); }}
+                style={btnStyle("#888", "#fff", "#e0dbd4")}>
+                Cancel
+              </button>
+            </div>
+          )}
+          {preview.changed === 0 && (
+            <button onClick={() => { setUploadState("idle"); setPreview(null); }}
+              style={{ ...btnStyle("#888", "#fff", "#e0dbd4"), marginTop: "8px" }}>
+              Dismiss
+            </button>
+          )}
+        </div>
+      )}
+
+      {uploadState === "saving" && (
+        <div style={{ ...FONT, fontSize: "0.78rem", color: "#888" }}>Saving to GitHub…</div>
+      )}
+
+      {uploadState === "done" && (
+        <div style={{ ...FONT, fontSize: "0.78rem", color: "#1e7a45", fontWeight: 600 }}>
+          ✓ Topics synced. Changes will save to GitHub automatically.
+        </div>
+      )}
+
+      {uploadState === "error" && (
+        <div style={{ ...FONT, fontSize: "0.78rem", color: "#b91c1c" }}>
+          Error parsing CSV: {errorMsg}
+        </div>
+      )}
+
+      <div style={{ ...FONT, fontSize: "0.7rem", color: "#bbb", marginTop: "14px", lineHeight: 1.5 }}>
+        CSV columns: id · title · format · cluster · pillar · content_type · phase · primary_keyword · secondary_keyword · intent · funnel · geography · assignee · notes · url
+        <br />id and cluster/pillar are read-only — used for matching only.
+        Status, revision count, and feedback history are never affected by CSV sync.
+      </div>
+    </div>
+  );
+}
 
 
 const VERDICT_META = {
@@ -186,17 +453,18 @@ function InlineCell({ value, type, options, onSave, children, className }) {
 }
 
 
-// ─── Filter Bar — quick-filter chips: show overdue, due this week, recent activity ──────────
+// ─── Activity Bar — recent uploads/feedback, phase-filtered ─────────────────
 function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveFilter }) {
   const PANEL = { fontFamily: "Noto Sans, sans-serif" };
 
-  const overdue = [], due = [], recent = [];
+  const needsReview = [], needsRevision = [], recent = [];
   for (const pillar of project.pillars) {
     for (const cluster of pillar.clusters) {
       for (const piece of cluster.pieces) {
-        const timing = getPieceTiming(piece, currentWeek, cluster.id, project.schedule);
-        if (timing === "overdue") overdue.push({ piece, cluster, pillar });
-        if (timing === "due")     due.push({ piece, cluster, pillar });
+        if (piece.status === "uploaded" || piece.status === "revised")
+          needsReview.push({ piece, cluster, pillar });
+        if (piece.status === "jaggaer-feedback")
+          needsRevision.push({ piece, cluster, pillar });
         const ts = piece.last_updated || piece.last_upload;
         if (ts && piece.status !== "not-started") recent.push({ piece, cluster, pillar, ts });
       }
@@ -206,19 +474,19 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
   const recentTop = recent.slice(0, 5);
 
   const chips = [
-    overdue.length > 0 && {
-      id: "overdue", label: `${overdue.length} Overdue`,
-      color: "#b91c1c", bg: "#fef2f2", activeBg: "#fee2e2", border: "#fca5a5",
-      items: overdue,
+    needsReview.length > 0 && {
+      id: "review", label: `${needsReview.length} Awaiting Review`,
+      color: "#1e6fa8", bg: "#e8f2fa", activeBg: "#d4e8f7", border: "#c5ddef",
+      items: needsReview,
     },
-    due.length > 0 && {
-      id: "due", label: `${due.length} Due This Week`,
-      color: "#92400e", bg: "#fffbeb", activeBg: "#fef3c7", border: "#fcd34d",
-      items: due,
+    needsRevision.length > 0 && {
+      id: "revision", label: `${needsRevision.length} Needs Revision`,
+      color: "#b05e00", bg: "#fdf0e0", activeBg: "#fde8c8", border: "#f0c888",
+      items: needsRevision,
     },
     recentTop.length > 0 && {
       id: "recent", label: `${recentTop.length} Recent`,
-      color: "#1e6fa8", bg: "#e8f2fa", activeBg: "#d4e8f7", border: "#c5ddef",
+      color: "#555", bg: "#f5f2ec", activeBg: "#ede8e0", border: "#d4cfc8",
       items: recentTop,
     },
   ].filter(Boolean);
@@ -230,7 +498,7 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
       {/* ── Chip row ── */}
       <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "8px 20px", flexWrap: "wrap" }}>
         <span style={{ ...PANEL, fontSize: "0.63rem", fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: "#aaa", marginRight: "4px" }}>
-          Filter
+          Actions
         </span>
         {chips.map(chip => {
           const isActive = activeFilter === chip.id;
@@ -260,15 +528,6 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
             }}
           >✕ Clear</button>
         )}
-        {(() => {
-          const { startDate } = getScheduleContext(project);
-          const dr = weekDateRange(currentWeek, startDate);
-          return (
-            <span style={{ ...PANEL, marginLeft: "auto", fontSize: "0.65rem", color: "#bbb" }}>
-              Wk {currentWeek}/4{dr ? ` · ${dr}` : ""}
-            </span>
-          );
-        })()}
       </div>
 
       {/* ── Inline expanded list when filter active ── */}
@@ -316,9 +575,7 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
                       color: chip.color, border: `1px solid ${chip.border}`,
                       padding: "1px 6px", borderRadius: "2px", whiteSpace: "nowrap", flexShrink: 0,
                     }}>
-                      {activeFilter === "overdue"
-                        ? `Wk ${clusterWeek} · ${weeksLate(piece, currentWeek, cluster.id, project.schedule)}wk late`
-                        : `Wk ${clusterWeek} · Due now`}
+                      {activeFilter === "review" ? "Awaiting review" : "Needs revision"}
                     </span>
                   )}
                   <div style={{ flex: 1, minWidth: 0 }}>
@@ -353,7 +610,7 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
 function Tracker({ project, setProject, currentUser, activePillar, activeCluster, setActiveCluster, adminMode, activeMonthId, onAdminEditPiece, onAdminEditCluster }) {
   const effectiveMonthId = activeMonthId || project.active_month;
   const stats = window.computeStats(project, effectiveMonthId);
-  const { currentWeek } = getScheduleContext(project);
+  const currentWeek = 1; // retained for Publishing Sequence tab only — not used for piece timing
 
   // Filter pillars to only clusters belonging to the active month.
   // Pillars with no clusters in this month are hidden entirely.
@@ -429,7 +686,10 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         currentUser={currentUser} onOpenPiece={setOpenPiece}
       />
       {activeTab === "tracker" && (
-        <FilterBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+        <>
+          <PhaseBanner project={project} />
+          <FilterBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+        </>
       )}
       {activeTab === "tracker" && viewMode === "cards" && (
         <div className="ns-tracker-body">
@@ -1030,8 +1290,9 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
   const feedback = (project.feedback || {})[piece.id] || [];
   const isNS = currentUser.org === "ns";
   const isJG = currentUser.org === "jaggaer";
-  const timing = getPieceTiming(piece, currentWeek, cluster.id, project.schedule);
-  const tm = timing ? TIMING_META[timing] : null;
+  const phaseBadge = piece.phase === 2
+    ? { label: "P2", color: "#6C3483", bg: "#f5eef8" }
+    : { label: "P1", color: "#1F618D", bg: "#eaf2f8" };
 
   const nsMembers = project.team.ns.map(m => ({ value: m.id, label: m.name }));
 
@@ -1046,8 +1307,8 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
   const awaitsJaggaer = piece.status === "uploaded" || piece.status === "revised";
 
   return (
-    <li className={`ns-piece-row ${isLast ? "is-last" : ""} ${isAnchor ? "is-anchor" : ""} ${awaitsJaggaer && isJG ? "awaits" : ""} ${isOpen ? "is-open" : ""} ${timing === "overdue" ? "is-overdue" : ""} ${timing === "due" ? "is-due" : ""}`}
-      style={timing === "overdue" ? { borderLeft: "3px solid #fca5a5" } : timing === "due" ? { borderLeft: "3px solid #fcd34d" } : {}}>
+    <li className={`ns-piece-row ${isLast ? "is-last" : ""} ${isAnchor ? "is-anchor" : ""} ${awaitsJaggaer && isJG ? "awaits" : ""} ${isOpen ? "is-open" : ""}`}
+      style={{}}>
       <div className="ns-piece-main" onClick={() => setOpenPiece(isOpen ? null : { clusterId: cluster.id, pieceId: piece.id, mode: action?.mode || "history" })}>
         <div className="ns-piece-l">
           {adminMode ? (
@@ -1105,12 +1366,7 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
               {(piece.revision_count > 0 || feedback.length > 0) && (
                 <><span className="ns-meta-sep">·</span><span className="ns-piece-meta-hint">{[piece.revision_count > 0 && `rev ${piece.revision_count}`, feedback.length > 0 && `${feedback.length}✎`].filter(Boolean).join(" ")}</span></>
               )}
-              {timing === "overdue" && tm && (
-                <><span className="ns-meta-sep">·</span><span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.68rem", fontWeight:700, color: tm.color }}>{weeksLate(piece, currentWeek, cluster.id, project.schedule)}wk overdue</span></>
-              )}
-              {timing === "due" && tm && (
-                <><span className="ns-meta-sep">·</span><span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.68rem", fontWeight:700, color: tm.color }}>Due this week</span></>
-              )}
+              <><span className="ns-meta-sep">·</span><span style={{ fontFamily:"Noto Sans,sans-serif", fontSize:"0.6rem", fontWeight:700, color: phaseBadge.color, background: phaseBadge.bg, padding:"1px 5px", borderRadius:"2px", border:`1px solid ${phaseBadge.color}44` }}>{phaseBadge.label}</span></>
             </div>
           </div>
         </div>
@@ -1171,7 +1427,7 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100%", minHeight: "520px" }}>
+    <div style={{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
       {/* top bar */}
       <div style={{
         display: "flex", alignItems: "center", gap: "12px",
@@ -1222,7 +1478,7 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
       </div>
 
       {/* iframe area */}
-      <div style={{ flex: 1, position: "relative", background: "#fff" }}>
+      <div style={{ flex: 1, minHeight: 0, position: "relative", background: "#fff" }}>
         {loading && (
           <div style={{
             position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
@@ -1264,7 +1520,7 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   const hasDeliverable = piece.status !== "not-started";
 
   return (
-    <div className="ns-piece-drawer">
+    <div className={`ns-piece-drawer${mode === "preview" ? " is-preview" : ""}`}>
       <div className="ns-drawer-tabs">
         {canUpload && <button className={`ns-drawer-tab ${mode==="upload"?"is-active":""}`} onClick={() => setMode("upload")}>Upload</button>}
         {canFeedback && <button className={`ns-drawer-tab ${mode==="feedback"?"is-active":""}`} onClick={() => setMode("feedback")}>Leave Feedback</button>}
@@ -1919,6 +2175,9 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
 }
 
 window.Tracker = Tracker;
+window.CsvSyncPanel = CsvSyncPanel;
+window.projectToCsv = projectToCsv;
+window.csvToProjectUpdates = csvToProjectUpdates;
 window.STATUS_META = STATUS_META;
 window.VERDICT_META = VERDICT_META;
 // PUBLISHING_SEQUENCE and INTERLINK_MAP now live in project.json — read via props.
