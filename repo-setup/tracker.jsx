@@ -1134,20 +1134,27 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
   const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
   const monthId = project.active_month || "month-1";
   const rev = piece.revision_count || 1;
-  const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${rev}.html`;
+  // Fetch via /api/github proxy (authenticated) — raw.githubusercontent.com fails on private repos
+  const githubPath = `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${rev}.html`;
+  const githubTreeUrl = `https://github.com/${REPO}/tree/main/${githubPath}`;
 
-  const [blobUrl, setBlobUrl] = useStateTR(null);
+  const [srcdoc, setSrcdoc] = useStateTR(null);
   const [loading, setLoading] = useStateTR(true);
   const [error, setError] = useStateTR(null);
 
   React.useEffect(() => {
     let cancelled = false;
-    setLoading(true); setError(null); setBlobUrl(null);
-    fetch(rawUrl)
-      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.blob(); })
-      .then(blob => {
+    let objectUrl = null;
+    setLoading(true); setError(null); setSrcdoc(null);
+    fetch(`/api/github?path=${encodeURIComponent(githubPath)}`)
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+      .then(data => {
         if (cancelled) return;
-        setBlobUrl(URL.createObjectURL(blob));
+        // Decode base64 → HTML string → Blob URL so iframe treats it as a real HTML document
+        const html = atob(data.content.replace(/\n/g, ""));
+        const blob = new Blob([html], { type: "text/html" });
+        objectUrl = URL.createObjectURL(blob);
+        setSrcdoc(objectUrl);
         setLoading(false);
       })
       .catch(err => {
@@ -1157,9 +1164,9 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
       });
     return () => {
       cancelled = true;
-      if (blobUrl) URL.revokeObjectURL(blobUrl);
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
-  }, [rawUrl]);
+  }, [githubPath]);
 
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
@@ -1181,15 +1188,31 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
               · {new Date(piece.last_upload).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
             </span>
           )}
+          {piece.last_upload_by && (() => {
+            const all = [...(project.team.ns || []), ...(project.team.jaggaer || [])];
+            const member = all.find(x => x.id === piece.last_upload_by);
+            const name = member ? member.name.split(" ")[0] : piece.last_upload_by;
+            return <span style={{ ...FONT, fontSize: "0.68rem", color: "#6b8fa8", marginLeft: "6px" }}>· uploaded by {name}</span>;
+          })()}
         </div>
         <button
-          onClick={() => forceDownload(rawUrl, `${piece.id}-v${rev}.html`)}
+          onClick={() => {
+            if (srcdoc) {
+              // srcdoc holds the blob URL — fetch it to get raw HTML for download
+              fetch(srcdoc).then(r => r.blob()).then(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url; a.download = `${piece.id}-v${rev}.html`;
+                a.click(); setTimeout(() => URL.revokeObjectURL(url), 5000);
+              });
+            }
+          }}
           style={{
             ...FONT, fontSize: "0.7rem", fontWeight: 600,
             color: "#1e6fa8", background: "#fff",
             border: "1px solid #c5ddef", padding: "5px 12px", borderRadius: "3px", cursor: "pointer",
           }}>↓ Download</button>
-        <a href={`https://github.com/${REPO}/tree/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}`}
+        <a href={githubTreeUrl}
           target="_blank" rel="noopener noreferrer"
           style={{
             ...FONT, fontSize: "0.7rem", fontWeight: 500,
@@ -1218,9 +1241,9 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
             <div style={{ ...FONT, fontSize: "0.72rem", color: "#888" }}>{error} — file may not be uploaded yet</div>
           </div>
         )}
-        {blobUrl && (
+        {srcdoc && (
           <iframe
-            src={blobUrl}
+            src={srcdoc}
             sandbox="allow-same-origin allow-scripts"
             style={{ width: "100%", height: "100%", border: "none", display: "block" }}
             title={`Preview: ${piece.title}`}
