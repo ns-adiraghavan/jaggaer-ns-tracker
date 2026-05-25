@@ -166,7 +166,7 @@ export default async function handler(req, res) {
 
     // 6. Build email HTML
     const today = new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
-    const appUrl = `https://${process.env.VERCEL_URL || "your-app.vercel.app"}`;
+    const appUrl = process.env.APP_URL || `https://${process.env.VERCEL_URL || "jaggaer-ns-tracker.vercel.app"}`;
 
     function section(title, items, cols) {
       if (!items.length) return "";
