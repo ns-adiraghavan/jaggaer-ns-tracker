@@ -1,571 +1,742 @@
-<!-- uploaded by manager at 2026-05-22T13:58:06.813Z -->
-<!-- piece: From Reactive to Predictive Supplier Risk Management -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Supplier Financial Risk Signals Procurement Should Monitor</title>
-<meta name="description" content="Know the financial warning signs before a supplier fails. A practical checklist covering liquidity, credit, margins and behavioural signals for procurement teams.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#0A0A1A;--body:#1F2937;--muted:#6B7280;
-  --accent:#BE1A28;--accent-bg:#FDF2F2;
-  --border:#E5E2DA;--bg:#FFFFFF;--surface:#F9F8F4;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Jost',sans-serif;font-weight:400;background:var(--bg);color:var(--body);line-height:1.78;font-size:15.5px;-webkit-font-smoothing:antialiased}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Reactive to Predictive Supplier Risk Management Now</title>
+  <meta name="description" content="Discover how procurement teams shift to predictive supplier risk management using AI, data signals, and real-time monitoring to act before disruptions hit.">
+  <link rel="canonical" href="https://www.jaggaer.com/predictive-supplier-risk-management">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-/* OUTER LAYOUT */
-.outer-wrap{display:flex;max-width:1120px;margin:0 auto;align-items:flex-start;gap:0}
-.page{flex:1;min-width:0;max-width:800px;padding:0 28px 100px}
-@media(max-width:900px){.outer-wrap{display:block}.toc-sidebar{display:none}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is predictive supplier risk management?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Predictive supplier risk management continuously monitors financial, operational, and environmental signals to identify risk before disruption strikes. Unlike periodic audits, it maintains a persistent intelligence layer scoring signals in real time. Deloitte's 2025 research found 93% of organisations remain at low maturity for this capability." }},
+      { "@type": "Question", "name": "How does AI help in supplier risk analysis?",
+        "acceptedAnswer": { "@type": "Answer", "text": "AI processes multi-source data streams simultaneously at a scale manual review cannot match. AI-driven platforms built on ensemble machine learning demonstrated 89% accuracy predicting disruptions 2–4 weeks in advance (Huang, Academic Journal of Computing & Information Science, 2025). That lead-time advantage separates early detection from reactive response." }},
+      { "@type": "Question", "name": "How can procurement reduce supply chain risk?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Procurement teams reduce supply chain risk by shifting from periodic reviews to continuous supplier monitoring, implementing risk-tiered segmentation, and activating early engagement protocols when signals emerge. Companies using AI-enabled risk monitoring report up to 20% reduction in third-party financial exposure (Deloitte, 2025)." }},
+      { "@type": "Question", "name": "What data signals indicate a supplier is at risk?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Key signals include declining on-time delivery rates, rising quality rejection rates, slower RFQ responsiveness, payment delays, and deteriorating liquidity ratios. Behavioural signals — unusual sub-contracting spikes and reduced order fulfilment consistency — typically appear weeks before financial distress becomes visible in reported data." }},
+      { "@type": "Question", "name": "What is the difference between supplier monitoring and supplier intelligence?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Supplier monitoring tracks firm-level signals — delivery performance, credit indicators, and quality metrics. Supply chain risk intelligence integrates those signals with macro-environmental data — geopolitical events, trade policy shifts, climate disruptions — to build a complete, forward-looking risk picture that monitoring alone cannot produce." }},
+      { "@type": "Question", "name": "How far in advance can AI detect supplier financial distress?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Validated AI deployments place the advance warning window at 2–4 weeks with 89% accuracy (Huang, 2025). Performance depends on data quality and whether tier-2 and tier-3 suppliers are actively covered — gaps in monitoring coverage are typically where performance shortfalls appear." }},
+      { "@type": "Question", "name": "What tools predict supplier failure?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Supplier monitoring tools that combine financial data feeds, operational metrics, and external signals into a continuous risk score provide the earliest indication of failure risk. Prioritise signal coverage depth, alert configurability, and ERP integration. 42% of executives believe AI-enabled automation could reduce third-party exposure by at least 20% (Deloitte, 2025)." }},
+      { "@type": "Question", "name": "How do procurement teams prioritise which suppliers to monitor?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Start with the top 10–15% of suppliers by spend and supply chain criticality. Tier remaining suppliers by risk exposure and establish monitoring thresholds calibrated to each tier. 94% of businesses currently operate with significant supply chain blind spots, making structured prioritisation the essential first step." }},
+      { "@type": "Question", "name": "What is reactive vs predictive procurement?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Reactive procurement reviews supplier health on a schedule and responds after problems emerge. Predictive procurement monitors signals continuously and acts before conditions deteriorate. 93% of TPRM leaders report low AI maturity in risk management (Deloitte, 2025) — most organisations remain reactive by default." }},
+      { "@type": "Question", "name": "What is continuous supplier monitoring?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Continuous supplier monitoring replaces periodic audits with a persistent intelligence layer that ingests real-time signals and scores them without waiting for the next scheduled review. 94% of businesses operate with significant supply chain blind spots — continuous monitoring is the structural fix." }},
+      { "@type": "Question", "name": "What is a supplier risk scorecard?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A supplier risk scorecard aggregates financial health, operational performance, compliance status, and external signals into a composite rating per supplier. In predictive programmes, scorecards update continuously — reflecting current condition, not condition at last audit. Quarterly reviews capture snapshots; real-time scoring tracks the drift." }}
+    ]
+  }
+  </script>
 
-/* TOC SIDEBAR */
-.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 16px 24px 20px;scrollbar-width:thin}
-.toc-sidebar::-webkit-scrollbar{width:3px}.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border)}
-.toc-head{background:var(--ink);padding:10px 14px;margin-bottom:4px}
-.toc-head-lbl{font-size:9.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#E8734A}
-.toc-nav{border:1px solid var(--border);border-top:none}
-.toc-nav a{display:block;padding:8px 12px;font-size:11.5px;font-weight:400;color:var(--muted);line-height:1.4;border:none;border-bottom:1px solid var(--border);transition:color 0.18s,background 0.18s;cursor:pointer;text-decoration:none}
-.toc-nav a:last-child{border-bottom:none}
-.toc-nav a:hover{color:var(--ink);background:var(--surface)}
-.toc-nav a.toc-active{color:var(--accent);font-weight:600;background:var(--accent-bg);border-left:2px solid var(--accent)}
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; font-size: 17px; line-height: 1.75; color: #2D2D2D; background: #FFFFFF; }
 
-/* HEADER */
-.a-header{border-top:3px solid var(--accent);padding-top:36px;margin-bottom:30px}
-.a-meta{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
-h1{font-family:'Cormorant Garamond',serif;font-size:42px;line-height:1.18;color:var(--ink);font-weight:700;letter-spacing:-0.01em;max-width:700px}
+    /* ── Progress Bar ── */
+    #progress-bar { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: #CC0000; z-index: 1000; transition: width 0.08s linear; }
 
-/* ARTICLE META BAR */
-.article-meta-bar{display:flex;align-items:center;gap:16px;margin-top:16px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);flex-wrap:wrap}
-.amb-item{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:6px}
-.amb-label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink)}
-.amb-sep{color:var(--border);font-size:14px;line-height:1}
+    /* ── Article Header ── */
+    .article-header { background: #CC0000; padding: 72px 48px 56px; width: 100%; }
+    .article-header-inner { max-width: 760px; margin: 0 auto; }
+    .article-label { display: block; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-bottom: 16px; }
+    .article-header h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 52px; font-weight: 800; line-height: 1.08; color: #FFFFFF; }
 
-p{margin-bottom:14px;color:var(--body);line-height:1.78}
-.intro{font-size:16px;line-height:1.82;margin:26px 0 0}
-a{color:var(--accent);text-decoration:none;border-bottom:1px solid #F0B0B4;transition:border-color 0.2s}
-a:hover{border-color:var(--accent)}
+    /* ── Meta Bar ── */
+    .article-meta { display: flex; align-items: center; gap: 28px; margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.18); }
+    .meta-item { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.78); }
 
-/* HEADINGS */
-h2{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:700;color:var(--ink);margin:44px 0 14px;line-height:1.22;letter-spacing:-0.005em;padding-bottom:10px;border-bottom:1px solid var(--border)}
-h3{font-size:13.5px;font-weight:600;color:var(--ink);margin:26px 0 8px;letter-spacing:0.07em;text-transform:uppercase}
+    /* ── Page Layout ── */
+    .page-wrapper { display: flex; align-items: flex-start; max-width: 1110px; margin: 0 auto; padding: 0 24px; gap: 48px; }
 
-/* SECTION DIVIDER */
-.sdiv{display:flex;align-items:center;gap:14px;margin:44px 0 0}
-.sdiv hr{flex:1;border:none;border-top:1px solid var(--border)}
-.sdiv span{font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+    /* ══════════════════════════════════════
+       TOC SIDEBAR
+    ══════════════════════════════════════ */
+    .toc-sidebar {
+      width: 208px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 24px;
+      height: fit-content;
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+      padding: 40px 0;
+    }
+    .toc-inner {
+      background: #FAFAFA;
+      border: 1px solid #EBEBEB;
+      border-radius: 4px;
+      padding: 20px 0 16px;
+    }
+    .toc-heading {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #AAAAAA;
+      padding: 0 16px;
+      margin-bottom: 12px;
+    }
+    .toc-divider { border: none; border-top: 1px solid #E8E8E8; margin: 0 0 10px; }
+    .toc-nav { display: flex; flex-direction: column; }
+    .toc-link {
+      display: block;
+      padding: 7px 16px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #777;
+      text-decoration: none;
+      line-height: 1.42;
+      border-left: 3px solid transparent;
+      transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+    .toc-link:hover { color: #CC0000; background: #FFF5F5; border-left-color: rgba(204,0,0,0.25); }
+    .toc-link.active { color: #CC0000; border-left-color: #CC0000; font-weight: 600; background: #FFF5F5; }
 
-/* STAT BANNER */
-.s-banner{display:grid;grid-template-columns:auto 1fr;margin:30px 0;border:1px solid var(--ink)}
-.s-num{background:var(--ink);font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:#E8734A;line-height:1;padding:18px 24px;display:flex;align-items:center;justify-content:center;min-width:90px}
-.s-cap{background:var(--ink);border-left:1px solid #2a2a3a;padding:16px 20px;display:flex;flex-direction:column;justify-content:center}
-.s-cap strong{display:block;font-size:13.5px;font-weight:500;color:#fff;line-height:1.5;margin-bottom:5px}
-.s-cap span{font-size:11px;color:#6B7280;font-weight:300;letter-spacing:0.03em}
+    /* ── Article Body ── */
+    article { flex: 1; min-width: 0; max-width: 760px; padding: 48px 0 80px; }
+    h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 700; color: #1A1A1A; border-left: 4px solid #CC0000; padding-left: 16px; margin-top: 56px; margin-bottom: 16px; line-height: 1.2; }
+    h3 { font-family: 'Inter', sans-serif; font-size: 19px; font-weight: 600; color: #CC0000; margin-top: 32px; margin-bottom: 12px; }
+    p { margin-bottom: 20px; }
+    .stat { font-size: 22px; font-weight: 800; color: #CC0000; }
+    a { color: #CC0000; text-decoration: none; font-weight: 500; }
+    a:hover { text-decoration: underline; }
+    .internal-link { font-size: 14px; font-weight: 600; color: #CC0000; margin-bottom: 24px; }
+    .section-divider { border: none; border-top: 1px solid #E5E5E5; margin: 48px 0 0; }
 
-/* KEY TAKEAWAYS */
-.kt{border:1px solid var(--border);margin:30px 0}
-.kt-hd{background:var(--ink);padding:11px 18px;display:flex;align-items:center;gap:10px}
-.kt-hl{font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#E8734A}
-.kt-hs{font-size:10.5px;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;color:#6B7280}
-.kt-row{display:flex;gap:16px;padding:11px 18px;border-bottom:1px solid var(--border);align-items:flex-start}
-.kt-row:last-child{border:none}
-.kt-n{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--accent);line-height:1;flex-shrink:0;min-width:18px}
-.kt-t{font-size:13.5px;line-height:1.62;color:var(--body)}
+    /* ── Key Takeaways ── */
+    .key-takeaways { background: #1A1A1A; border-left: 5px solid #CC0000; padding: 28px 32px; margin: 40px 0; border-radius: 2px; }
+    .kt-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #CC0000; margin-bottom: 16px; }
+    .key-takeaways ul { list-style: none; padding: 0; margin: 0; }
+    .key-takeaways li { font-size: 15px; line-height: 1.6; color: #FFFFFF; padding-left: 22px; position: relative; margin-bottom: 10px; }
+    .key-takeaways li:last-child { margin-bottom: 0; }
+    .key-takeaways li::before { content: '→'; color: #CC0000; font-weight: 700; position: absolute; left: 0; }
 
-/* CALLOUTS */
-.co-dk{background:var(--ink);padding:20px 24px;margin:22px 0}
-.co-dk .lbl{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#E8734A;margin-bottom:8px}
-.co-dk p{font-size:13.5px;color:#D1D5DB;margin:0;line-height:1.7;font-weight:300}
-.co-dk p strong{color:#fff;font-weight:500}
-.co-st{background:var(--accent-bg);border-left:3px solid var(--accent);padding:15px 20px;margin:22px 0}
-.co-st .lbl{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
-.co-st p{font-size:13.5px;color:#3B0B0E;margin:0;line-height:1.65}
+    /* ── CTA Block ── */
+    .cta-block { background: #F5F5F5; border-left: 4px solid #CC0000; padding: 20px 24px; margin-top: 32px; font-size: 16px; line-height: 1.65; }
+    .cta-block a { color: #CC0000; font-weight: 600; }
+    .cta-block a:hover { text-decoration: underline; }
 
-/* TABLES */
-.tbl{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
-.tbl th{background:var(--ink);color:#fff;padding:10px 14px;text-align:left;font-weight:500;font-size:11px;letter-spacing:0.08em;text-transform:uppercase}
-.tbl td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--body);vertical-align:middle}
-.tbl tbody tr:last-child td{border:none}
-.tbl tbody tr:hover td{background:var(--surface)}
-.bk{display:inline-block;padding:2px 9px;font-size:10.5px;font-weight:600}
-.bk-ok{background:#D1FAE5;color:#065F46}
-.bk-am{background:#FEF3C7;color:#78350F}
-.bk-rd{background:#FEE2E2;color:#7F1D1D}
-.fl{display:inline-block;padding:2px 9px;font-size:10.5px;font-weight:700;text-transform:uppercase}
-.fl-y{background:#FEF9C3;color:#713F12}
-.fl-a{background:#FEF3C7;color:#78350F}
-.fl-r{background:#FEE2E2;color:#7F1D1D}
+    /* ══════════════════════════════════════
+       INFOGRAPHIC: Reactive vs Predictive
+    ══════════════════════════════════════ */
+    .compare-block { display: grid; grid-template-columns: 1fr 1fr; margin: 36px 0; border-radius: 4px; overflow: hidden; border: 1px solid #E5E5E5; }
+    .compare-header { padding: 14px 22px; display: flex; align-items: center; }
+    .compare-col--reactive .compare-header { border-bottom: 1px solid #E8E8E8; background: #F5F5F5; }
+    .compare-col--predictive .compare-header { border-bottom: 1px solid #252525; background: #1A1A1A; }
+    .compare-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; }
+    .compare-col--reactive .compare-badge { background: #E8E8E8; color: #777; }
+    .compare-col--predictive .compare-badge { background: #CC0000; color: #FFFFFF; }
+    .compare-col--reactive { background: #FAFAFA; }
+    .compare-col--predictive { background: #1F1F1F; }
+    .compare-row { padding: 11px 22px; font-size: 14px; font-weight: 500; line-height: 1.45; }
+    .compare-col--reactive .compare-row { color: #666; border-bottom: 1px solid #EDEDED; }
+    .compare-col--reactive .compare-row:last-child { border-bottom: none; }
+    .compare-col--predictive .compare-row { color: #999; border-bottom: 1px solid #272727; }
+    .compare-col--predictive .compare-row:last-child { border-bottom: none; }
+    .compare-col--predictive .compare-row strong { color: #FFFFFF; font-weight: 600; }
 
-/* COMPACT CHECKLIST */
-.cl{border:1px solid var(--border);margin:22px 0}
-.cl-top{background:var(--ink);padding:11px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.cl-tl{display:flex;align-items:center;gap:14px}
-.cl-ttl{font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#9CA3AF}
-.cl-pr{display:flex;align-items:center;gap:8px}
-.cl-pb{width:100px;height:3px;background:#374151;overflow:hidden}
-.cl-pf{height:100%;background:#E8734A;width:0%;transition:width 0.35s}
-.cl-pl{font-size:10.5px;color:#6B7280}
-.cl-pl strong{color:#E8734A}
-.cl-rst{font-size:9.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#6B7280;background:none;border:1px solid #374151;padding:3px 10px;cursor:pointer;font-family:'Jost',sans-serif;transition:all 0.2s}
-.cl-rst:hover{color:#fff;border-color:#9CA3AF}
-.cl-grid{display:grid;grid-template-columns:repeat(5,1fr)}
-@media(max-width:640px){.cl-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:380px){.cl-grid{grid-template-columns:1fr}}
-.cl-col{border-right:1px solid var(--border)}
-.cl-col:last-child{border-right:none}
-.cl-ch{padding:7px 10px;display:flex;align-items:center;gap:6px;background:var(--surface);border-bottom:1px solid var(--border);border-top:1px solid var(--border)}
-.cl-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.cl-cn{font-size:9.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink);line-height:1.2}
-.cl-r{display:flex;align-items:flex-start;gap:6px;padding:7px 10px;border-bottom:1px solid #F3F1EC;cursor:pointer;transition:background 0.12s}
-.cl-r:last-child{border:none}
-.cl-r:hover{background:#FDF9F5}
-.cl-r.ck{background:#F0FDF4}
-.cl-r.ck .cl-rt{color:#9CA3AF;text-decoration:line-through;text-decoration-color:#A7D7B5}
-.cl-rn{font-size:9px;color:#D1D5DB;font-weight:600;flex-shrink:0;margin-top:2px;min-width:12px;text-align:right}
-.cl-bx{width:12px;height:12px;border:1.5px solid #D1D5DB;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;margin-top:1px}
-.cl-r.ck .cl-bx{background:#22C55E;border-color:#22C55E}
-.cl-tk{font-size:8px;color:#fff;font-weight:700;opacity:0;line-height:1}
-.cl-r.ck .cl-tk{opacity:1}
-.cl-rt{font-size:10.5px;color:#374151;line-height:1.35}
-.cl-ft{background:var(--ink);padding:9px 18px;font-size:11.5px;color:#9CA3AF;line-height:1.55}
-.cl-ft strong{color:#E8A090}
+    /* ══════════════════════════════════════
+       INFOGRAPHIC: AI Accuracy Card
+    ══════════════════════════════════════ */
+    .ai-accuracy-card { background: #1A1A1A; border-radius: 4px; padding: 28px 32px; margin: 32px 0; display: flex; align-items: center; gap: 36px; }
+    .accuracy-left { flex-shrink: 0; text-align: center; }
+    .accuracy-number { font-family: 'Barlow Condensed', sans-serif; font-size: 80px; font-weight: 800; color: #CC0000; line-height: 1; display: block; }
+    .accuracy-unit { font-size: 12px; font-weight: 600; color: #666; letter-spacing: 0.1em; text-transform: uppercase; }
+    .accuracy-right { flex: 1; }
+    .accuracy-kicker { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #CC0000; margin-bottom: 8px; display: block; }
+    .accuracy-headline { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; color: #FFFFFF; line-height: 1.2; margin-bottom: 10px; }
+    .accuracy-sub { font-size: 13.5px; color: #888; line-height: 1.5; margin: 0; }
+    .accuracy-meta { display: flex; gap: 28px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #2A2A2A; }
+    .am-num { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 800; color: #FFFFFF; line-height: 1; display: block; }
+    .am-lbl { font-size: 10.5px; color: #666; text-transform: uppercase; letter-spacing: 0.08em; }
 
+    /* ══════════════════════════════════════
+       INFOGRAPHIC: Signal Categories Grid
+    ══════════════════════════════════════ */
+    .signal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+    .signal-card { border: 1px solid #E8E8E8; border-top: 3px solid #CC0000; border-radius: 2px; padding: 20px 18px; }
+    .sc-kicker { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #CC0000; margin-bottom: 8px; display: block; }
+    .sc-title { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; color: #1A1A1A; margin-bottom: 14px; line-height: 1.1; }
+    .sc-list { list-style: none; padding: 0; margin: 0; }
+    .sc-list li { font-size: 13px; color: #555; padding: 4px 0 4px 16px; position: relative; line-height: 1.4; border-bottom: 1px solid #F0F0F0; }
+    .sc-list li:last-child { border-bottom: none; }
+    .sc-list li::before { content: '—'; color: #CC0000; font-weight: 700; position: absolute; left: 0; font-size: 11px; top: 6px; }
 
+    /* ══════════════════════════════════════
+       INFOGRAPHIC: Cost Banner
+    ══════════════════════════════════════ */
+    .cost-banner { background: #1A1A1A; border-radius: 4px; padding: 28px 32px; margin: 28px 0; }
+    .cost-banner-kicker { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #CC0000; margin-bottom: 20px; display: block; }
+    .cost-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .cost-metric { padding: 18px 16px; text-align: center; background: #222; border-radius: 2px; }
+    .cost-metric-num { font-family: 'Barlow Condensed', sans-serif; font-size: 34px; font-weight: 800; color: #CC0000; line-height: 1; display: block; margin-bottom: 7px; }
+    .cost-metric-desc { font-size: 12px; color: #888; line-height: 1.45; }
+    .cost-metric-src { font-size: 10.5px; color: #555; margin-top: 4px; display: block; }
 
+    /* ══════════════════════════════════════
+       INFOGRAPHIC: Framework Steps
+    ══════════════════════════════════════ */
+    .framework-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; margin: 28px 0; position: relative; }
+    .framework-steps::before { content: ''; position: absolute; top: 23px; left: calc(12.5% + 1px); right: calc(12.5% + 1px); height: 2px; background: #E0E0E0; z-index: 0; }
+    .framework-step { position: relative; z-index: 1; text-align: center; padding: 0 10px; }
+    .fs-num { width: 48px; height: 48px; border-radius: 50%; background: #CC0000; color: #FFFFFF; font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+    .fs-title { font-size: 13px; font-weight: 700; color: #1A1A1A; margin-bottom: 6px; line-height: 1.3; }
+    .fs-desc { font-size: 12px; color: #777; line-height: 1.5; }
 
+    /* ══════════════════════════════════════
+       FAQ Accordion
+    ══════════════════════════════════════ */
+    .faq-section { margin-top: 48px; border-top: 1px solid #E5E5E5; padding-top: 40px; }
+    .faq-section > h2 { margin-top: 0; }
+    .faq-list { margin-top: 24px; display: flex; flex-direction: column; gap: 8px; }
+    .faq-item { background: #FFFFFF; border: 1px solid #E5E5E5; border-radius: 6px; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+    .faq-item:hover, .faq-item.open { border-color: #CC0000; box-shadow: 0 2px 12px rgba(204,0,0,0.08); }
+    .faq-trigger { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; background: none; border: none; cursor: pointer; padding: 20px 24px; text-align: left; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 600; color: #1A1A1A; line-height: 1.4; transition: background 0.15s, color 0.15s; -webkit-tap-highlight-color: transparent; }
+    .faq-item.open .faq-trigger { color: #CC0000; background: #FFF8F8; }
+    .faq-trigger:focus-visible { outline: 2px solid #CC0000; outline-offset: -2px; border-radius: 4px; }
+    .faq-icon { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid #E0E0E0; display: flex; align-items: center; justify-content: center; transition: background 0.2s, border-color 0.2s, transform 0.35s cubic-bezier(0.4,0,0.2,1); background: #FFFFFF; }
+    .faq-item.open .faq-icon { background: #CC0000; border-color: #CC0000; transform: rotate(180deg); }
+    .faq-icon svg { display: block; transition: stroke 0.2s; }
+    .faq-item.open .faq-icon svg { stroke: #FFFFFF; }
+    .faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.38s cubic-bezier(0.4,0,0.2,1); }
+    .faq-item.open .faq-body { grid-template-rows: 1fr; }
+    .faq-body-inner { overflow: hidden; }
+    .faq-answer { padding: 0 24px 22px; font-size: 15.5px; line-height: 1.75; color: #444; border-top: 1px solid #F0F0F0; padding-top: 18px; margin: 0; }
 
-
-/* QUICK STAT BOX */
-.qs-box{background:var(--ink);margin:20px 0;padding:20px 24px}
-.qs-inner{display:flex;align-items:stretch;gap:0}
-.qs-stat{flex:1;padding:0 20px}
-.qs-stat:first-child{padding-left:0}
-.qs-stat:last-child{padding-right:0}
-.qs-n{display:block;font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:700;color:#E8734A;line-height:1;margin-bottom:6px}
-.qs-label{font-size:12px;color:#9CA3AF;font-weight:300;line-height:1.5}
-.qs-label a{color:#9CA3AF;border-bottom:1px solid #374151}
-.qs-label a:hover{color:#E8734A;border-color:#E8734A}
-.qs-divider{width:1px;background:#252535;flex-shrink:0;margin:0 4px}
-@media(max-width:500px){.qs-inner{flex-direction:column}.qs-divider{width:100%;height:1px;margin:12px 0}}
-
-
-/* CAMPFIRE STAT */
-.camp-stat{border:1px solid var(--border);border-left:3px solid #D97706;padding:14px 16px;margin:0 0 14px;background:var(--surface)}
-.camp-label{font-size:9.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#D97706;margin-bottom:7px}
-.camp-body{font-size:13px;color:var(--body);line-height:1.6;margin-bottom:8px}
-.camp-src{font-size:10.5px;color:var(--muted);border-bottom:1px solid var(--border);text-decoration:none;font-weight:500}
-.camp-src:hover{color:var(--red);border-color:var(--red)}
-/* FAQ ROWS */
-.faq-rows{margin:0;border-top:1px solid var(--border)}
-.faq-row{display:grid;grid-template-columns:2fr 3fr;gap:20px 32px;padding:12px 0;border-bottom:1px solid var(--border);align-items:baseline}
-@media(max-width:580px){.faq-row{grid-template-columns:1fr;gap:4px}}
-.faq-q{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.4;display:flex;gap:10px;align-items:baseline}
-.faq-q-num{font-size:9.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);flex-shrink:0;margin-top:1px}
-.faq-a{font-size:12.5px;color:#4B5563;line-height:1.6;font-weight:300}
-
-/* INTRO SUB LINE */
-.intro-sub{font-size:15px;font-weight:400;color:#6B7280;line-height:1.65;margin:10px 0 0;display:flex;align-items:center;justify-content:flex-end;gap:14px}
-.intro-sub::after{content:'';display:block;width:4px;height:36px;background:#BE1A28;flex-shrink:0}
-
-
-/* TABLE NOTE */
-.tbl-note{font-size:15.5px;color:var(--muted);font-style:normal;padding:12px 0 0;margin:0;line-height:1.78}
-
-</style>
+    /* ── Responsive ── */
+    @media (max-width: 1060px) {
+      .toc-sidebar { display: none; }
+      .page-wrapper { padding: 0; max-width: 100%; }
+      article { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+    }
+    @media (max-width: 768px) {
+      .article-header { padding: 40px 24px 36px; }
+      .article-header h1 { font-size: 36px; }
+      .stat { font-size: 18px; }
+      .key-takeaways { padding: 20px; }
+      .faq-trigger { font-size: 15px; padding: 16px 18px; }
+      .faq-answer { padding: 0 18px 18px; padding-top: 16px; font-size: 15px; }
+      .compare-block { grid-template-columns: 1fr; }
+      .signal-grid { grid-template-columns: 1fr; }
+      .cost-metrics { grid-template-columns: 1fr; gap: 4px; }
+      .framework-steps { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .framework-steps::before { display: none; }
+      .ai-accuracy-card { flex-direction: column; gap: 20px; text-align: center; }
+      .accuracy-number { font-size: 64px; }
+      .accuracy-meta { justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .framework-steps { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="outer-wrap">
+<div id="progress-bar"></div>
 
-<!-- ===================== TOC SIDEBAR ===================== -->
-<aside class="toc-sidebar" id="tocSidebar">
-  <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
-  <nav class="toc-nav" id="tocNav">
-    <a href="#why-different">Why Financial Risk Is Different</a>
-    <a href="#complete-checklist">Complete Checklist: 25 Signals</a>
-    <a href="#five-categories">The Five Signal Categories</a>
-    <a href="#balance-sheet">Balance Sheet &amp; Liquidity Signals</a>
-    <a href="#profitability">Profitability &amp; Margin Signals</a>
-    <a href="#credit-payment">Credit &amp; Payment Behaviour</a>
-    <a href="#operational">Operational &amp; Behavioural Signals</a>
-    <a href="#market-external">Market &amp; External Signals</a>
-    <a href="#monitoring-programme">Building a Monitoring Programme</a>
-    <a href="#when-signals-fire">What to Do When Signals Fire</a>
-    <a href="#people-also-ask">People Also Ask</a>
-  </nav>
-</aside>
-
-<!-- ===================== ARTICLE ===================== -->
-<main class="page">
-
-<header class="a-header">
-  <div class="a-meta">Procurement Risk &middot; Supply Chain Management</div>
-  <h1>Supplier Financial Risk Signals Procurement Should Monitor</h1>
-  <!-- ARTICLE META BAR -->
-  <div class="article-meta-bar">
-    <span class="amb-item"><span class="amb-label">Audience</span> Procurement and Supply Chain Leaders</span>
-    <span class="amb-sep">|</span>
-    <span class="amb-item"><span class="amb-label">Read Time</span> 5&#8211;7 minute read</span>
+<!-- ── Header ── -->
+<header class="article-header">
+  <div class="article-header-inner">
+    <span class="article-label">Blog · Supplier Risk Management</span>
+    <h1>How Procurement Is Moving from Reactive to Predictive Risk Management</h1>
+    <div class="article-meta">
+      <span class="meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        8 min read
+      </span>
+    </div>
   </div>
 </header>
 
-<!-- INTRO -->
-<p class="intro">Watch the financial signals before the disruption hits. With more than 30% of 2025 supply chain disruptions exceeding $5 million in direct costs as per <a href="https://www.rapidratings.com/post/the-2025-risk-survey-report">RapidRatings (2025)</a>, early detection is not optional. Supply chain risk management now depends on how quickly procurement teams can spot supplier instability. Warning signs often surface through credit activity, liquidity pressure, and payment behaviour long before operations are affected.</p>
-<p class="intro-sub">This article explores 5 categories of financial risk signals within a supplier risk management framework procurement teams should monitor.</p>
+<!-- ── Page wrapper: TOC + Article ── -->
+<div class="page-wrapper">
 
-<div class="s-banner">
-  <div class="s-num">30%</div>
-  <div class="s-cap">
-    <strong>of supply chain disruptions in 2025 exceeded $5 million in direct costs when financial warning signals went undetected.</strong>
-    <span>Source: RapidRatings, 2025</span>
-  </div>
-</div>
+  <!-- ════════════════════════════════════════
+       TABLE OF CONTENTS — sticky left sidebar
+  ════════════════════════════════════════ -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-inner">
+      <span class="toc-heading">Contents</span>
+      <hr class="toc-divider">
+      <nav class="toc-nav" aria-label="Article sections">
+        <a class="toc-link" href="#s1">The Limits of Reactive Risk</a>
+        <a class="toc-link" href="#s2">What Predictive Risk Means</a>
+        <a class="toc-link" href="#s3">How AI Changes Detection</a>
+        <a class="toc-link" href="#s4">Data Signals &amp; Models</a>
+        <a class="toc-link" href="#s5">Benefits of Proactive Procurement</a>
+        <a class="toc-link" href="#s6">Building a Predictive Strategy</a>
+        <a class="toc-link" href="#faq">Frequently Asked Questions</a>
+      </nav>
+    </div>
+  </aside>
 
-<!-- KEY TAKEAWAYS -->
-<div class="kt">
-  <div class="kt-hd"><span class="kt-hl">Key Takeaways</span><span class="kt-hs">&nbsp;:&nbsp;Five things to carry forward</span></div>
-  <div class="kt-row"><div class="kt-n">1</div><div class="kt-t">Sector-level inflation can signal structural supply base stress before any individual supplier&rsquo;s performance metrics reflect it as 42% of US manufacturers absorb input cost increases directly into margins.</div></div>
-  <div class="kt-row"><div class="kt-n">2</div><div class="kt-t">Balance sheet ratios are the foundation of <strong>supplier risk analysis</strong>: a current ratio below 1.0, interest coverage under 2.0x, or Altman Z-score below 1.81 are thresholds worth tracking.</div></div>
-  <div class="kt-row"><div class="kt-n">3</div><div class="kt-t">Margin compression alongside Days Sales Outstanding trending above 60 days can indicate a supplier increasingly reliant on external credit rather than earnings to fund operations.</div></div>
-  <div class="kt-row"><div class="kt-n">4</div><div class="kt-t">Credit rating downgrades and accelerated payment term requests both signal supplier liquidity under strain, with each reflecting a different stage of financial deterioration procurement should monitor.</div></div>
-  <div class="kt-row"><div class="kt-n">5</div><div class="kt-t"><strong>Supply chain risk management</strong> effectiveness depends on pre-defined escalation thresholds embedded in S2P platforms: signal detection without a structured response framework delivers awareness without protection.</div></div>
-</div>
+  <!-- ════════════════════════════════════════
+       ARTICLE BODY
+  ════════════════════════════════════════ -->
+  <article>
 
-<div class="sdiv"><hr><span>Why Internal Data Misses the Signal</span><hr></div>
+    <p>Supply chain disruptions cost organisations an average of $1.5M per day. If your risk programme only activates after a disruption, you are already too late. Most procurement teams cannot detect supplier risk signals until it is too late to act. Predictive supplier risk management closes that gap. It replaces scheduled reviews with continuous intelligence — converting the window before disruption into preparation time.</p>
 
-<h2 id="why-different">Why Financial Risk Is Different From Other Supplier Risks</h2>
+    <div class="key-takeaways">
+      <span class="kt-label">The Business Case</span>
+      <ul>
+        <li>Nearly <span class="stat">80%</span> of organisations experienced supply chain disruptions in 2024 (BCI, 2024)</li>
+        <li><span class="stat">93%</span> of third-party risk leaders report low maturity in AI-enabled risk management (Deloitte, 2025)</li>
+        <li>Only <span class="stat">27%</span> of companies have introduced AI into procurement or supply chain functions (Inspectorio, 2025)</li>
+        <li><span class="stat">42%</span> of risk leaders believe AI could reduce third-party financial exposure by at least 20% (Deloitte, 2025)</li>
+      </ul>
+    </div>
 
-<h3>Why Financial Distress Doesn&rsquo;t Show Up in Your Own Data</h3>
-<p>Supplier financial deterioration accumulates in credit registries, insurer limit databases and payment behaviour repositories. Manufacturing supplier’s late payment rates rise closer to formal insolvency, a signal procurement’s transactional architecture structurally cannot receive and <a href="https://tradeverifyd.com/resources/supply-chain-statistics">Tradeverifyd’s 2026 Supply Chain Report</a> also confirms that 21% of procurement leaders operate with no real-time visibility into supplier disruptions.</p>
+    <hr class="section-divider">
 
-<h3>How Fast Financial Failure Cascades Compared to Operational Risk</h3>
-<p>Supplier insolvency removes procurement’s response window immediately. Unlike logistics delays or quality failures that allow intervention, insolvency transfers asset control at filing and limits procurement to recovery and alternative sourcing. That speed leaves little room for delayed visibility. <a href="https://sphera.com/company/news/half-of-companies-lose-revenue-due-to-supply-chain-disruption/">Sphera’s May 2026 report</a> found organisations take 8.7 hours to detect a disruption and 40.9 hours to assess its impact, a lag insolvency proceedings rarely allow.</p>
+    <!-- ── S1: The Limits of Reactive Risk ── -->
+    <h2 id="s1">The Limits of Reactive Supplier Risk Management</h2>
 
-<div class="co-dk">
-  <div class="lbl">&#128273; Key Takeaway</div>
-  <p>Financial failure is one of the few disruptions that can erase procurement’s response window overnight, which is why early financial monitoring is critical to effective <strong>supplier risk management</strong>.</p>
-</div>
+    <p>Nearly <span class="stat">80%</span> of organisations experienced a supply chain disruption in 2024 (BCI, 2024). Disruptions surged <span class="stat">38%</span> year-on-year (Elite Asia, 2024). The default procurement response model has not changed. Periodic assessments create a structural blind spot — they capture a snapshot of supplier health, not the trajectory between reviews. By the time a problem is confirmed through a scheduled assessment, the best response options are already unavailable.</p>
 
+    <h3>Why periodic audits and point-in-time assessments leave procurement exposed</h3>
 
-<div class="sdiv"><hr><span>The 25 Signals: Start Here</span><hr></div>
+    <p><span class="stat">65%</span> of organisations describe their supply chains as vulnerable to very vulnerable (Oliver Wyman, 2025). Annual reviews capture a snapshot. They do not monitor the drift. <span class="stat">42%</span> of executives cite lack of real-time data as their primary limitation when a disruption hits (Tradeverifyd, 2026).</p>
 
-<h2 id="complete-checklist">The Complete Checklist: All 25 Signals at a Glance</h2>
-<p>Review what your programme already tracks. The signals you are not watching are exactly where the risk enters undetected and what the sections below are built to explain.</p>
+    <h3>How global supply chain disruptions reveal the reactive gap</h3>
 
-<div class="cl">
-  <div class="cl-top">
-    <div class="cl-tl">
-      <span class="cl-ttl">25 Signals</span>
-      <div class="cl-pr">
-        <div class="cl-pb"><div class="cl-pf" id="clF"></div></div>
-        <span class="cl-pl"><strong id="clN">0</strong>/25 reviewed</span>
+    <p>Reactive procurement has no warning window and monitoring closes that gap. Teams monitoring geopolitical indicators had weeks to adjust to events like the Red Sea crisis. Teams on scheduled assessments did not. Without supplier monitoring tools tracking signals in real time, that gap is structural — not correctable through more frequent reviews.</p>
+
+    <p>Businesses face a <span class="stat">27%</span> annual probability of significant supply chain disruption (World Economic Forum, 2023), with recoveries running 2–3 years. That detection lag compounds in cost with every quarter a reactive model stays in place.</p>
+
+    <hr class="section-divider">
+
+    <!-- ── S2: What Predictive Risk Management Means ── -->
+    <h2 id="s2">What Predictive Supplier Risk Management Means</h2>
+
+    <p>Predictive supplier risk management is a monitoring discipline. Only <span class="stat">27%</span> of companies have introduced AI into procurement or supply chain functions (Inspectorio, 2025). The gap reflects a structural issue: most procurement functions receive supplier information on a schedule. Predictive risk management replaces that schedule with continuous signal processing.</p>
+
+    <h3>Defining supply chain risk prediction and continuous monitoring</h3>
+
+    <p>Supply chain risk management monitoring replaces the audit cycle with a persistent intelligence layer. Supplier monitoring tools keep that detection continuous, with human response reserved only for signals that warrant it.</p>
+
+    <h3>How predictive risk management differs from traditional SRM</h3>
+
+    <p>Traditional SRM evaluates past performance at fixed intervals. Predictive risk management scores supplier health continuously — trajectory versus history defines how much lead time procurement has to act.</p>
+
+    <!-- Reactive vs Predictive Comparison -->
+    <div class="compare-block" aria-label="Reactive vs predictive procurement comparison">
+      <div class="compare-col compare-col--reactive">
+        <div class="compare-header"><span class="compare-badge">Reactive</span></div>
+        <div class="compare-row">Scheduled, periodic audits</div>
+        <div class="compare-row">Backward-looking data</div>
+        <div class="compare-row">Responds after failure occurs</div>
+        <div class="compare-row">Fixed review cadence</div>
+        <div class="compare-row">Relationship-based SRM</div>
+      </div>
+      <div class="compare-col compare-col--predictive">
+        <div class="compare-header"><span class="compare-badge">Predictive</span></div>
+        <div class="compare-row"><strong>Continuous signal monitoring</strong></div>
+        <div class="compare-row"><strong>Real-time risk scoring</strong></div>
+        <div class="compare-row"><strong>Acts before conditions deteriorate</strong></div>
+        <div class="compare-row"><strong>Threshold-triggered escalation</strong></div>
+        <div class="compare-row"><strong>Signal-based intelligence</strong></div>
       </div>
     </div>
-    <button class="cl-rst" onclick="clReset()">Reset</button>
-  </div>
-  <div class="cl-grid" id="clG"></div>
-  <div class="cl-ft"><strong>Convergence Rule:</strong> Two or more signals across different categories, especially balance sheet + credit behaviour, warrant immediate escalation regardless of scorecard performance.</div>
-</div>
 
-<div class="sdiv"><hr><span>The Five Signal Categories</span><hr></div>
+    <p>The critical question is not which column describes your ambition — it is whether your current setup gives you enough lead time to act before exposure becomes cost.</p>
+
+    <p class="internal-link"><a href="https://www.jaggaer.com/solutions/supplier-risk-management/">Learn about Jaggaer's supplier risk management capabilities</a></p>
+
+    <hr class="section-divider">
+
+    <!-- ── S3: How AI Changes Risk Detection ── -->
+    <h2 id="s3">How AI Supplier Risk Detection Changes Procurement</h2>
 
-<h2 id="five-categories">The Five Categories of Financial Risk Signal</h2>
-<p>Each signal in the checklist above belongs to one of five categories. What follows breaks down where each signal surfaces, what triggers it, and why it matters in practice, so procurement can build a detection programme that acts before the disruption does.</p>
+    <p>AI supplier risk detection systems now predict high-impact disruptions 2–4 weeks in advance with <span class="stat">89%</span> accuracy (Huang, <em>Academic Journal of Computing &amp; Information Science</em>, 2025). Ensemble machine learning drives that result — multiple models processing financial, operational, and environmental data simultaneously to produce a composite risk score at a speed and scale manual review cannot replicate. That lead time didn't exist with periodic assessments.</p>
 
-
-<h2 id="balance-sheet">Balance Sheet and Liquidity Signals</h2>
-
-<h3>What the Current Ratio Tells You and When to Worry</h3>
-<p>The current ratio measures whether a supplier can cover short-term obligations without external credit. A reading below 1.0 signals elevated short-term liquidity stress.</p>
-
-<table class="tbl">
-  <thead><tr><th>Current Ratio</th><th>Indicative Risk Level</th><th>Suggested Procurement Action</th></tr></thead>
-  <tbody>
-    <tr><td>Above 1.5</td><td><span class="bk bk-ok">Acceptable</span></td><td>Routine monitoring</td></tr>
-    <tr><td>1.0 to 1.5</td><td><span class="bk bk-am">Elevated</span></td><td>Amber flag / increased review</td></tr>
-    <tr><td>Below 1.0</td><td><span class="bk bk-rd">Critical</span></td><td>Escalate supplier risk assessment</td></tr>
-  </tbody>
-</table>
-
-<p class="tbl-note">Most procurement teams only check this number during onboarding. By the time it surfaces again, the supplier is already past the amber threshold.</p>
-
-<h3>Working Capital and Cash Reserve Warning Signs</h3>
-<p>Negative working capital can indicate liquidity pressure because current liabilities exceed current assets. This matters because borrowed liquidity disappears when lenders reduce exposure. Declining year-over-year cash reserves and accounts receivable growing faster than revenue often surface before procurement sees operational impact.</p>
-
-<h3>Debt, Leverage and Interest Coverage Thresholds</h3>
-<p>An interest coverage ratio below 2.0x signals earnings can no longer absorb revenue pressure without risking debt service failure. Below 1.0, operating earnings no longer cover interest obligations. An Altman Z-score below 1.81 marks the formal distress zone. Together, these indicators reveal whether a supplier’s financial structure can withstand its current operating environment.</p>
-
-<div class="co-st">
-  <div class="lbl">&#128204; Key Stat</div>
-  <p>Only <strong>46% of US manufacturers maintained a debt-to-earnings ratio below 1.5 in 2025</strong>, down from 52% three years earlier. That means most of the US manufacturing supply base already operates with leverage levels that leave little buffer against revenue shocks.  <a href="https://www.kaplancollectionagency.com/business-advice/52-manufacturing-statistics-on-debt-distress-and-tariff-pressures/">The Kaplan Group, February 2026</a></p>
-</div>
-
-<div class="sdiv"><hr><span>Profitability, Credit &amp; Payment Signals</span><hr></div>
-
-<h2 id="profitability">Profitability and Margin Signals</h2>
-<p>Margin deterioration follows a sequence that begins in a supplier&rsquo;s income statement and ends as a procurement continuity problem.</p>
-
-<h3>Gross and Operating Margin Deterioration</h3>
-<p>Gross-margin deterioration signals rising cost pressure or weakening pricing power, especially in margin-sensitive sectors. The pattern is predictable: deferred maintenance, delayed sub-supplier payments, then workforce reductions, all progressing through S2P scorecards that track delivery performance rather than margin health.</p>
-<div class="camp-stat"><div class="camp-label">Campfire Interactive · December 2025</div><div class="camp-body">US automotive suppliers entered 2026 at <strong>decade-low profitability</strong> as OEM price-downs and unrecovered tariff costs compressed margins beyond what most supplier risk monitoring systems detect.</div><a class="camp-src" href="https://campfire-interactive.com/news/the-2026-supplier-profitability-crisis-why-margins-are-collapsing-and-how-to-protect-yours">View source →</a></div>
-
-<h3>Revenue Concentration Risk</h3>
-<p>A single customer accounting for more than 25% of revenue creates immediate concentration risk. One contract reduction can destabilise cash flow and most S2P supplier profiles never capture that exposure, leaving procurement blindsided when the relationship weakens.</p>
-
-<h3>Rising Days Sales Outstanding as a Cash Flow Signal</h3>
-<p>Rising Days Sales Outstanding, particularly above 60 days, signals a cash flow and cash collection problem. <a href="https://group.atradius.com/knowledge-and-research/reports/b2b-payment-practices-trends-in-north-america-2025">Atradius North America 2025</a> found 43% of North American B2B credit sales overdue, highlighting how widespread the cash pressure problem has become across suppliers.</p>
-
-
-
-
-
-
-
-
-<script></script>
-
-<div class="sdiv"><hr><span>Credit &amp; Payment Signals</span><hr></div>
-
-<h2 id="credit-payment">Credit and Payment Behaviour Signals</h2>
-<p>Three external systems form the backbone of any effective supplier risk assessment, detecting financial deterioration before procurement does: rating agencies, trade credit insurers, and payment requests.</p>
-
-<h3>Credit Rating Downgrades and What Triggers Them</h3>
-<p>A supplier credit rating downgrade below investment grade confirms that S&amp;P, Moody’s, or Fitch has formally revised its default probability, increasing borrowing costs and risking debt covenant triggers. For procurement, that often means supplier credit risk is beginning to affect operational stability. Downgrades are triggered when declining interest coverage, rising leverage, or sustained margin compression breach the agency’s debt service threshold.</p>
-
-<h3>Trade Credit Insurance Withdrawal: What It Means</h3>
-<p>Trade credit insurance withdrawal by Allianz Trade, Atradius, or Coface confirms a supplier has crossed a distress threshold identified through proprietary payment data inaccessible to procurement. <a href="https://au-group.com/en/studies-and-publications/global-credit-insurance-market-survey-2025">AU Group&rsquo;s Credit Insurance Market Survey (September 2025)</a> confirms these three carriers hold more than 65% of global capacity. Insurer cover withdrawal is the most precise external distress signal procurement systems can receive.</p>
-
-<h3>When a Supplier Asks to Change Payment Terms</h3>
-<p>An accelerated payment request is a late-stage distress signal. It confirms that alternative liquidity sources and credit options have been exhausted. <a href="https://atradius.us/knowledge-and-research/resources/how-to-forecast-insolvencies">Atradius (March 2026)</a> confirms insolvency is rarely sudden, identifying payment term requests among the final behavioural confirmations before failure.</p>
-
-<div class="sdiv"><hr><span>Operational &amp; Market Signals</span><hr></div>
-
-<h2 id="operational">Operational and Behavioural Signals</h2>
-<p>Operational behaviour often reveals supplier distress before financial disclosures, giving procurement earlier visibility into internal instability.</p>
-
-<h3>Senior Leadership Departures and Auditor Changes</h3>
-<p>Unplanned CFO departures often signal breakdowns in treasury management and creditor communication before financial distress becomes visible externally. Auditor resignations carry similar weight, frequently reflecting going-concern disputes that indicate lenders, auditors, and leadership no longer share confidence in the supplier’s financial stability.</p>
-
-<h3>Deferred Capex, Redundancies and Site Closures</h3>
-<p>Workforce reductions alongside capital expenditure cuts usually signal suppliers are protecting liquidity over operational resilience. When these signals persist across multiple quarters, the business is often managing contraction, not temporary pressure. In supplier risk analysis, site closures matter because productive capacity declines before financial distress becomes publicly visible.</p>
-
-<h3>Communication Patterns That Signal Internal Distress</h3>
-<p>A shift from proactive supplier engagement to delayed, escalation-driven responses signals structural pressure has reached the relationship layer. Tracking response times and account-level contact changes within S2P supplier scorecards converts these qualitative observations into structured risk indicators, enabling earlier review.</p>
-
-<div class="sdiv"><hr><span>Market &amp; External Signals</span><hr></div>
-
-<h2 id="market-external">Market and External Signals</h2>
-<p>Suppliers rarely fail in isolation. Sector-wide cost pressure, tight credit conditions, foreign exchange and trade volatility usually weaken the broader supply base first.</p>
-
-<h3>Sector-Level Distress and Input Cost Inflation</h3>
-<p>Sector-wide cost pressure weakens the supply base before individual suppliers show distress. When input cost inflation outpaces pricing power and credit conditions simultaneously tighten, individual supplier deterioration typically follows. Effective <strong>supply chain risk management</strong> requires monitoring sector-wide cost pressures alongside company-specific data, as the two often move in tandem. </p>
-<div class="qs-box">
-  <div class="qs-inner">
-    <div class="qs-stat"><span class="qs-n">42%</span><span class="qs-label">of US manufacturers absorbed input cost increases directly into margins in 2025</span></div>
-    <div class="qs-divider"></div>
-    <div class="qs-stat"><span class="qs-n">5.4%</span><span class="qs-label">rise in raw material prices per <a href="https://www.manufacturingdive.com/news/manufacturers-plan-price-hikes-over-reshoring-to-combat-tariff-effects-ism/808157/">ISM&rsquo;s December 2025 Planning Forecast</a>, invisible to invoice-based procurement reporting</span></div>
-  </div>
-</div>
-
-<h3>Customer Concentration and Major Contract Losses</h3>
-<p>Suppliers with high customer concentration carry financial vulnerability that standard credit scores do not fully capture. A major contract loss can trigger rapid liquidity deterioration without warning to procurement counterparts. Requesting customer concentration disclosures during annual financial reviews, with thresholds embedded in the S2P platform, is the only reliable way to surface this exposure before it fires.</p>
-
-<h3>FX Exposure and Trade Press Monitoring</h3>
-<p>Unhedged foreign currency exposure can quickly erode supplier margins when exchange rates shift sharply. In practice, trade press often reveals contract losses and facility closures before formal disclosures appear, especially among private suppliers with limited bureau visibility.</p>
-
-<div class="sdiv"><hr><span>Building Your Monitoring Programme</span><hr></div>
-
-<h2 id="monitoring-programme">How to Build a Financial Risk Monitoring Programme</h2>
-<p>Identifying signals is the first step. A structured supplier financial risk assessment programme requires a monitoring architecture defining frequency, supplier tiers, and response thresholds. Without this, signal detection produces alerts that go unacted on.</p>
-
-<h3>Segmenting Your Supplier Base by Financial Risk Exposure</h3>
-<p>Effective supplier risk management evaluates suppliers by spend concentration, category criticality, and financial health, not spend volume alone. A low-spend sole-source supplier can represent greater operational risk than a high-spend supplier with qualified alternatives. A three-tier classification of critical, strategic, and standard suppliers should govern monitoring frequency and data depth within S2P supplier profiles.</p>
-
-<h3>Layering Automated Data With Human Intelligence</h3>
-<p>Automated risk feeds detect financial deterioration, but supplier interactions often reveal instability earlier. Organizations with risk-optimized procurement management report <a href="https://www.everstream.ai/articles/how-ai-transforms-supplier-risk-management/">30% lower revenue losses</a> from supply disruptions and cut disruption impact assessment time by <a href="https://www.everstream.ai/articles/how-ai-transforms-supplier-risk-management/">50-70%</a>. High-performing teams combine external monitoring with relationship intelligence to strengthen supplier risk management.</p>
-
-<h3>Defining Escalation Thresholds: Yellow, Amber and Red Flags</h3>
-<p>Effective risk programmes define escalation thresholds in advance so procurement action is triggered by data, not by relationship proximity or category manager discretion.</p>
-
-<table class="tbl">
-  <thead><tr><th>Flag</th><th>Threshold Trigger</th><th>Procurement Action</th></tr></thead>
-  <tbody>
-    <tr><td><span class="fl fl-y">Yellow</span></td><td>DSO increase &gt;15 days, one quarter</td><td>Enhanced monitoring, direct engagement</td></tr>
-    <tr><td><span class="fl fl-a">Amber</span></td><td>Credit downgrade or auditor change</td><td>Senior review, contingency sourcing assessment</td></tr>
-    <tr><td><span class="fl fl-r">Red</span></td><td>Going concern disclosure or covenant breach</td><td>Immediate escalation, dual-sourcing activation</td></tr>
-  </tbody>
-</table>
-<p>Embedding these thresholds in S2P supplier scorecards converts escalation into a workflow-triggered event, closing the response lag that defines reactive risk programmes.</p>
-
-<div class="sdiv"><hr><span>When Signals Fire</span><hr></div>
-
-<h2 id="when-signals-fire">What to Do When Signals Fire</h2>
-<p>Detection without action is not risk management. A monitoring programme needs a defined response sequence at every escalation level, or the signals it surfaces will go unacted on.</p>
-
-<h3>Engaging the Supplier Directly</h3>
-<p>At amber status, procurement should engage senior finance stakeholders directly, not operational contacts who may lack visibility into liquidity or credit exposure.</p>
-
-<div class="co-st">
-  <div class="lbl">&#128204; Key Stat</div>
-  <p><a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html">Deloitte&rsquo;s 2025 Global CPO Survey</a> found <strong>61% of procurement leaders cited enhanced supplier information sharing</strong> as their most effective risk mitigation strategy.</p>
-</div>
-
-<h3>Reviewing Your Contractual Exposure</h3>
-<p>At amber classification, procurement should immediately assess termination clauses, minimum volume commitments, tooling ownership, and payment terms that may disadvantage the buying organisation during supplier insolvency. Outstanding purchase orders, inventory positions, and supplier-held assets should be quantified before disruption occurs. Early legal coordination reduces exposure if the supplier&rsquo;s position deteriorates further.</p>
-
-<h3>Contingency Planning and When to Escalate</h3>
-<p><a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html">Deloitte&rsquo;s 2025 Global CPO Survey</a> found 74% of leading organisations maintain active alternative sources, recognising pre-qualified suppliers are the only contingency that functions reliably under insolvency timelines. Escalation to CPO and CFO level is appropriate at red classification, with board-level briefing warranted for critical category or sole-source suppliers.</p>
-
-
-
-<div class="sdiv"><hr><span>People Also Ask</span><hr></div>
-
-<h2 id="people-also-ask">People Also Ask</h2>
-<div class="faq-rows">
-
-  <div class="faq-row">
-    <div class="faq-q"><span class="faq-q-num">Q01</span>What are the warning signs of supplier financial distress?</div>
-    <div class="faq-a">Supplier risk management monitors indicators spanning balance sheet stress, margin compression, credit behaviour changes, leadership departures, and payment pattern shifts.</div>
-  </div>
-
-  <div class="faq-row">
-    <div class="faq-q"><span class="faq-q-num">Q02</span>How do you assess financial risk in your supply chain?</div>
-    <div class="faq-a">A supplier risk assessment analyses liquidity ratios, profitability trends, credit behaviour alongside external signals from rating agencies and trade credit insurers.</div>
-  </div>
-
-  <div class="faq-row">
-    <div class="faq-q"><span class="faq-q-num">Q03</span>What is a supplier financial risk assessment?</div>
-    <div class="faq-a">A structured evaluation of a supplier&rsquo;s liquidity, leverage, profitability, and credit health, increasingly prioritised as US corporate bankruptcies reached an 11-year high in 2025.</div>
-  </div>
-
-  <div class="faq-row">
-    <div class="faq-q"><span class="faq-q-num">Q04</span>What financial metrics should procurement monitor for suppliers?</div>
-    <div class="faq-a">A supplier risk scorecard should track liquidity ratios, interest coverage, Altman Z-score, margin trends, Days Sales Outstanding, and credit ratings as core supplier risk monitoring metrics.</div>
-  </div>
-
-  <div class="faq-row">
-    <div class="faq-q"><span class="faq-q-num">Q05</span>What does it mean when a supplier asks for early payment?</div>
-    <div class="faq-a">An early payment request typically signals that a supplier&rsquo;s alternative credit and liquidity options have been exhausted, representing a late-stage distress confirmation.</div>
-  </div>
-
-  <div class="faq-row">
-    <div class="faq-q"><span class="faq-q-num">Q06</span>How do you monitor supplier credit risk?</div>
-    <div class="faq-a">Supplier credit risk monitoring involves tracking credit rating changes from S&amp;P, Moody&rsquo;s, or Fitch, reviewing trade credit insurance limits, and analysing DSO trends.</div>
-  </div>
-
-  <div class="faq-row">
-    <div class="faq-q"><span class="faq-q-num">Q07</span>What is trade credit insurance and why does its withdrawal matter?</div>
-    <div class="faq-a">Trade credit insurance protects against customer non-payment. When major insurers withdraw cover, it signals a supplier has crossed a verified distress threshold identified through proprietary data procurement cannot access independently.</div>
-  </div>
-
-  <div class="faq-row">
-    <div class="faq-q"><span class="faq-q-num">Q08</span>What should procurement do when a supplier is in financial difficulty?</div>
-    <div class="faq-a">Supply chain risk management best practices require direct engagement with senior finance stakeholders, contractual exposure review, and pre-qualifying alternative suppliers before disruption occurs.</div>
-  </div>
-
-  <div class="faq-row">
-    <div class="faq-q"><span class="faq-q-num">Q09</span>How do you segment suppliers by financial risk?</div>
-    <div class="faq-a">Segment suppliers into critical, strategic, and standard tiers based on spend concentration, category criticality, and financial health. Suppliers should receive monitoring intensity proportional to their operational exposure.</div>
-  </div>
-
-  <div class="faq-row">
-    <div class="faq-q"><span class="faq-q-num">Q10</span>What is the current ratio and why does it matter for supplier risk?</div>
-    <div class="faq-a">The current ratio measures a supplier&rsquo;s ability to cover short-term obligations without external credit. A reading below 1.0 may indicate elevated liquidity stress.</div>
-  </div>
-
-</div>
-
-
-</main>
-</div><!-- /outer-wrap -->
+    <!-- AI Accuracy Card -->
+    <div class="ai-accuracy-card" aria-label="AI disruption detection accuracy">
+      <div class="accuracy-left">
+        <span class="accuracy-number">89%</span>
+        <span class="accuracy-unit">Accuracy</span>
+      </div>
+      <div class="accuracy-right">
+        <span class="accuracy-kicker">AI Disruption Detection</span>
+        <div class="accuracy-headline">Predicts high-impact disruptions<br>2–4 weeks in advance</div>
+        <p class="accuracy-sub">Ensemble machine learning across financial, operational, and environmental data. Source: Huang, <em>Academic Journal of Computing &amp; Information Science</em>, 2025.</p>
+        <div class="accuracy-meta">
+          <div class="am-item"><span class="am-num">2–4 wks</span><span class="am-lbl">Advance warning</span></div>
+          <div class="am-item"><span class="am-num">35%</span><span class="am-lbl">Loss reduction</span></div>
+          <div class="am-item"><span class="am-num">28%</span><span class="am-lbl">Fewer disruptions</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>AI tools for risk monitoring in supply chains — from signals to alerts</h3>
+
+    <p>AI risk monitoring tools direct procurement attention to the suppliers that actually require it — filtering noise before it reaches the team. They continuously ingest signals across payment behaviour, delivery performance, news events, and credit indicators, scoring each against supplier-specific baselines to surface prioritised alerts.</p>
+
+    <h3>How far in advance can AI detect supplier financial distress?</h3>
+
+    <p>Performance depends on data quality and whether tier-2 and tier-3 suppliers are actively covered. Monitoring coverage gaps are typically where shortfalls appear.</p>
+
+    <hr class="section-divider">
+
+    <!-- ── S4: Data Signals ── -->
+    <h2 id="s4">Data Signals Used in Predictive Risk Models</h2>
+
+    <p>Predictive risk models draw on three categories of signals: financial, operational, and geopolitical. Together, these feed into composite risk scores that no single-source analysis can produce. Geopolitical challenges are the top headwind for third-party risk leaders — cited by <span class="stat">61%</span> in Deloitte's 8th Annual TPRM Survey.</p>
+
+    <!-- Signal Categories Grid -->
+    <div class="signal-grid" aria-label="Three categories of predictive risk signals">
+      <div class="signal-card">
+        <span class="sc-kicker">Signal Type 01</span>
+        <div class="sc-title">Financial &amp; Credit</div>
+        <ul class="sc-list">
+          <li>Payment delays</li>
+          <li>Debt &amp; liquidity ratios</li>
+          <li>Gross profit margins</li>
+          <li>Revenue trends</li>
+          <li>Cash-to-current liabilities</li>
+        </ul>
+      </div>
+      <div class="signal-card">
+        <span class="sc-kicker">Signal Type 02</span>
+        <div class="sc-title">Operational &amp; Behavioural</div>
+        <ul class="sc-list">
+          <li>On-time delivery rates</li>
+          <li>Quality rejection rates</li>
+          <li>RFQ responsiveness</li>
+          <li>Sub-contracting spikes</li>
+          <li>Cyber incident exposure</li>
+        </ul>
+      </div>
+      <div class="signal-card">
+        <span class="sc-kicker">Signal Type 03</span>
+        <div class="sc-title">Geopolitical &amp; Climate</div>
+        <ul class="sc-list">
+          <li>Conflict zone exposure</li>
+          <li>Trade policy shifts</li>
+          <li>Extreme weather events</li>
+          <li>Shipping route disruption</li>
+          <li>Infrastructure risk</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Financial and credit signals</h3>
+
+    <p>Payment delays, debt ratios, and gross profit margins are the earliest quantifiable indicators of supplier stress. Debt service ratios and cash-to-current-liabilities metrics are particularly reliable — they flag distress weeks before it appears in audited financials. Supplier monitoring tools that ingest these signals continuously give procurement a detection window that relationship-based SRM and periodic audits cannot provide.</p>
+
+    <h3>Operational and behavioural signals</h3>
+
+    <p>Behavioural signals surface supplier stress weeks or months before it appears in reported data. Delivery degradation and quality drift typically precede financial deterioration. Extreme weather became the top disruption cause in 2025 — billion-dollar events now occur every three weeks (Marsh, 2026; BCI, 2025). Cyber incidents compound this further: nearly one-third of procurement managers reported increased supply chain cyberattacks in 2025 (Marsh, 2026).</p>
+
+    <h3>Geopolitical and supply chain risk intelligence signals</h3>
+
+    <p>More than <span class="stat">90%</span> of organisations have exposure to a high-risk geopolitical country or active conflict zone (Marsh Sentrisk). The Red Sea crisis cut container shipping capacity by <span class="stat">9%</span> (J.P. Morgan Research, 2024). Supply chain risk analytics that incorporate geopolitical signals allow procurement to move before these events lock in the cost.</p>
+
+    <p class="internal-link"><a href="https://www.jaggaer.com/solutions/supply-chain-analytics/">Explore Jaggaer's supply chain risk analytics</a></p>
+
+    <hr class="section-divider">
+
+    <!-- ── S5: Benefits of Proactive Procurement ── -->
+    <h2 id="s5">Benefits of Proactive Procurement Risk Management</h2>
+
+    <p>Proactive procurement risk management delivers three measurable benefits: reduced financial exposure, faster response times, and stronger supplier relationships. <span class="stat">42%</span> of risk leaders believe AI alone could reduce third-party financial exposure by at least 20% (Deloitte, 2025). Early intervention is categorically cheaper than emergency response — and that gap widens with every hour a disruption goes undetected.</p>
+
+    <h3>From disruption response to disruption prevention</h3>
+
+    <p>Effective manufacturing risk management and broader supply chain resilience both depend on pre-positioning alternatives rather than scrambling at premium cost. Supply chain risk analytics make that pre-positioning possible — surfacing signals early enough to act rather than react. In the deployment documented in Huang (2025), losses fell <span class="stat">35%</span> and disruption frequency dropped <span class="stat">28%</span>.</p>
+
+    <h3>Procurement impact: reduced exposure across manufacturing and global supply chains</h3>
+
+    <!-- Cost of Disruption Banner -->
+    <div class="cost-banner" aria-label="Cost of supply chain disruption data">
+      <span class="cost-banner-kicker">The Cost of Disruption</span>
+      <div class="cost-metrics">
+        <div class="cost-metric">
+          <span class="cost-metric-num">$1.5M</span>
+          <div class="cost-metric-desc">average cost per day, per disruption</div>
+          <span class="cost-metric-src">Supply Chain Dive</span>
+        </div>
+        <div class="cost-metric">
+          <span class="cost-metric-num">$184B</span>
+          <div class="cost-metric-desc">total annual global disruption cost</div>
+          <span class="cost-metric-src">Marsh, 2026</span>
+        </div>
+        <div class="cost-metric">
+          <span class="cost-metric-num">&gt;$50M</span>
+          <div class="cost-metric-desc">expected cost of a major incident</div>
+          <span class="cost-metric-src">Deloitte, 2025</span>
+        </div>
+      </div>
+    </div>
+
+    <p>That figure escalates sharply when procurement responds reactively. For a procurement function managing $500M in supply spend, a 20% reduction in third-party exposure through supply chain risk management solutions is not an incremental gain — it is a material P&amp;L impact, and one that comfortably justifies platform investment.</p>
+
+    <p class="internal-link"><a href="https://www.jaggaer.com/solutions/supplier-intelligence/">See how Jaggaer's Supplier Intelligence reduces supply chain exposure</a></p>
+
+    <h3>Stronger supplier relationships through early engagement</h3>
+
+    <p>By the time a supplier fails, procurement is simultaneously managing re-sourcing, qualification costs, and production delays — costs that compound and options narrow fast. Proactive procurement risk management changes that equation entirely: identifying a supplier under stress at the signal stage creates space for collaborative intervention, capacity planning, or dual-sourcing. That early-stage engagement is what preserves the relationship before it reaches breaking point.</p>
+
+    <hr class="section-divider">
+
+    <!-- ── S6: Building a Predictive Risk Strategy ── -->
+    <h2 id="s6">Building a Predictive Risk Strategy</h2>
+
+    <p>Supply chain risk management strategies must be sequenced: framework first, then tooling, then process change. Most organisations skip that order. <span class="stat">89%</span> of operations leaders say technology investments haven't fully delivered expected results (PwC, 2026). The highest-leverage entry point is identifying which supplier relationships carry undisclosed concentration risk before any platform goes live.</p>
+
+    <h3>Supply chain risk management framework for predictive capability</h3>
+
+    <p>A predictive supplier risk management framework runs on four sequential components — each detailed in the steps below. Dynamic risk assessment is the highest-potential TPRM starting point (Deloitte, 2025).</p>
+
+    <!-- Framework Steps Visual -->
+    <div class="framework-steps" aria-label="Four components of a predictive supplier risk framework">
+      <div class="framework-step">
+        <div class="fs-num">1</div>
+        <div class="fs-title">Data Ingestion</div>
+        <div class="fs-desc">Continuous signals across financial, operational &amp; geopolitical categories</div>
+      </div>
+      <div class="framework-step">
+        <div class="fs-num">2</div>
+        <div class="fs-title">AI Scoring</div>
+        <div class="fs-desc">Output calibrated to supplier-specific baselines in real time</div>
+      </div>
+      <div class="framework-step">
+        <div class="fs-num">3</div>
+        <div class="fs-title">Alert Escalation</div>
+        <div class="fs-desc">Threshold-triggered workflows that route only what needs attention</div>
+      </div>
+      <div class="framework-step">
+        <div class="fs-num">4</div>
+        <div class="fs-title">Engagement Protocols</div>
+        <div class="fs-desc">Pre-defined early-signal action plans by supplier tier</div>
+      </div>
+    </div>
+
+    <h3>Choosing the right supply chain risk management tools and software</h3>
+
+    <p>Tooling decisions made before the framework is defined lock in data gaps. When evaluating supply chain risk management software, the critical question is whether the platform supports AI supplier risk detection — identifying financial stress before it appears in audited financials and integrating that signal with operational and geopolitical data in real time. <span class="stat">87%</span> of organisations say poor data quality hampered digital progress (PwC, 2026) — establish a signal baseline before platform selection. Jaggaer's platform delivers continuous signal ingestion, AI scoring per supplier tier, and threshold-triggered escalation to procurement teams.</p>
+
+    <h3>Supply chain risk management best practices for the transition</h3>
+
+    <p>Start with the top 10–15% of suppliers by spend and criticality. <span class="stat">65%</span> of organisations have at least one single point of failure hidden in their upstream supply chain (Marsh Sentrisk) — surface it before it surfaces you. Successful procurement risk transformation depends on assigning signal ownership before thresholds: a monitoring programme without a named escalation owner defaults back to reactive, regardless of how sophisticated the platform is. Procurement risk transformation at scale requires this ownership model to be in place before any tooling goes live.</p>
+
+    <!-- ── FAQ Accordion ── -->
+    <section class="faq-section" aria-label="Frequently Asked Questions" id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What is predictive supplier risk management?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
+          </button>
+          <div class="faq-body" role="region"><div class="faq-body-inner">
+            <p class="faq-answer">Predictive supplier risk management continuously monitors financial, operational, and environmental signals to identify risk before disruption strikes. Unlike periodic audits, it maintains a persistent intelligence layer scoring signals in real time. Deloitte's 2025 research found <span class="stat">93%</span> of organisations remain at low maturity for this capability.</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>How does AI help in supplier risk analysis?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
+          </button>
+          <div class="faq-body" role="region"><div class="faq-body-inner">
+            <p class="faq-answer">AI processes multi-source data streams simultaneously at a scale manual review cannot match. AI-driven platforms built on ensemble machine learning demonstrated <span class="stat">89%</span> accuracy predicting disruptions 2–4 weeks in advance (Huang, <em>Academic Journal of Computing &amp; Information Science</em>, 2025). That lead-time advantage separates early detection from reactive response.</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>How can procurement reduce supply chain risk?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
+          </button>
+          <div class="faq-body" role="region"><div class="faq-body-inner">
+            <p class="faq-answer">Procurement reduces supply chain risk by shifting from periodic reviews to continuous supplier monitoring, implementing risk-tiered segmentation, and activating early engagement protocols when signals emerge. Companies using AI-enabled risk monitoring report up to <span class="stat">20%</span> reduction in third-party financial exposure (Deloitte, 2025).</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What data signals indicate a supplier is at risk?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
+          </button>
+          <div class="faq-body" role="region"><div class="faq-body-inner">
+            <p class="faq-answer">Key signals include declining on-time delivery rates, rising quality rejection rates, slower RFQ responsiveness, payment delays, and deteriorating liquidity ratios. Behavioural signals — unusual sub-contracting spikes and reduced order fulfilment consistency — typically appear weeks before financial distress becomes visible in reported data.</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What is the difference between supplier monitoring and supplier intelligence?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
+          </button>
+          <div class="faq-body" role="region"><div class="faq-body-inner">
+            <p class="faq-answer">Supplier monitoring tracks firm-level signals — delivery performance, credit indicators, and quality metrics. Supply chain risk intelligence integrates those signals with macro-environmental data — geopolitical events, trade policy, climate disruptions — to build a forward-looking risk picture that monitoring alone cannot produce.</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>How far in advance can AI detect supplier financial distress?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
+          </button>
+          <div class="faq-body" role="region"><div class="faq-body-inner">
+            <p class="faq-answer">Validated AI deployments place the advance warning window at 2–4 weeks with <span class="stat">89%</span> accuracy (Huang, 2025). Performance depends on data quality and whether tier-2 and tier-3 suppliers are actively covered — monitoring coverage gaps are typically where performance shortfalls appear.</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What tools predict supplier failure?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
+          </button>
+          <div class="faq-body" role="region"><div class="faq-body-inner">
+            <p class="faq-answer">Supplier monitoring tools that combine financial data feeds, operational metrics, and external signals into a continuous risk score provide the earliest indication of failure risk. Prioritise signal coverage depth, alert configurability, and ERP integration. <span class="stat">42%</span> of executives believe AI-enabled automation could reduce third-party exposure by at least 20% (Deloitte, 2025).</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>How do procurement teams prioritise which suppliers to monitor?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
+          </button>
+          <div class="faq-body" role="region"><div class="faq-body-inner">
+            <p class="faq-answer">Start with the top 10–15% of suppliers by spend and supply chain criticality. Tier remaining suppliers by risk exposure and set monitoring thresholds per tier. <span class="stat">94%</span> of businesses operate with significant supply chain blind spots (Procurement Tactics, 2025) — structured prioritisation is the essential first step.</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What is reactive vs predictive procurement?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
+          </button>
+          <div class="faq-body" role="region"><div class="faq-body-inner">
+            <p class="faq-answer">Reactive procurement reviews supplier health on a schedule and responds after problems emerge. Predictive procurement monitors signals continuously and acts before conditions deteriorate. <span class="stat">93%</span> of TPRM leaders report low AI maturity in risk management (Deloitte, 2025) — most organisations remain reactive by default.</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What is continuous supplier monitoring?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
+          </button>
+          <div class="faq-body" role="region"><div class="faq-body-inner">
+            <p class="faq-answer">Continuous supplier monitoring replaces periodic audits with a persistent intelligence layer that ingests real-time signals and scores them without waiting for the next scheduled review. <span class="stat">94%</span> of businesses operate with significant supply chain blind spots (Procurement Tactics, 2025) — continuous monitoring is the structural fix.</p>
+          </div></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" aria-expanded="false">
+            <span>What is a supplier risk scorecard?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"/></svg></span>
+          </button>
+          <div class="faq-body" role="region"><div class="faq-body-inner">
+            <p class="faq-answer">A supplier risk scorecard aggregates financial health, operational performance, compliance status, and external signals into a composite rating per supplier. In predictive programmes, scorecards update continuously — reflecting current condition, not condition at last audit. Quarterly reviews capture snapshots; real-time scoring tracks the drift.</p>
+          </div></div>
+        </div>
+
+      </div><!-- /.faq-list -->
+    </section>
+
+    <!-- ── Conclusion ── -->
+    <h2>Conclusion</h2>
+
+    <p>The constraints are real. Legacy systems, fragmented data, and stretched bandwidth are not excuses — they are procurement's actual operating conditions. A deferred decision compounds in cost the longer it is delayed. Procurement risk transformation does not require a full platform overhaul — it begins with a decision to monitor signals before they become disruptions.</p>
+
+    <p>The next move is specific. Audit your top suppliers for concentration risk that your current monitoring would not catch until failure. Supply chain risk management best practices begin there — not with platform selection. Supply chain risk analytics applied at that stage convert audit findings into actionable scores before failure propagates. Predictive risk management does not eliminate disruption, but in 2026 it is one of the highest-return investments available to procurement leadership.</p>
+
+    <p class="cta-block">Explore how <a href="https://www.jaggaer.com/solutions/supplier-risk-management/">Jaggaer's supplier risk management tools</a> support continuous monitoring at scale — from signal ingestion through to threshold-triggered escalation across your full supplier base.</p>
+
+  </article>
+</div><!-- /.page-wrapper -->
 
 <script>
-var CL=[
-  {id:'bs',name:'Balance Sheet',color:'#2563EB',items:[
-    {n:1,t:'Current ratio declining toward or below 1.0'},
-    {n:2,t:'Negative working capital'},
-    {n:3,t:'Cash reserves declining year-over-year'},
-    {n:4,t:'Accounts receivable growing faster than revenue'},
-    {n:5,t:'Interest coverage below 2.0x or Altman Z-score below 1.81'}
-  ]},
-  {id:'pm',name:'Profitability',color:'#D97706',items:[
-    {n:6,t:'Gross margin deteriorating year-over-year'},
-    {n:7,t:'Operating margin turning negative'},
-    {n:8,t:'Revenue concentration above 25% with one customer'},
-    {n:9,t:'Days Sales Outstanding trending above 60 days'},
-    {n:10,t:'Delayed sub-supplier payments'}
-  ]},
-  {id:'cp',name:'Credit & Payment',color:'#BE1A28',items:[
-    {n:11,t:'Credit rating downgrade below investment grade'},
-    {n:12,t:'Trade credit insurance limit reduction'},
-    {n:13,t:'Accelerated payment term request'},
-    {n:14,t:'Debt covenant breach or waiver request'},
-    {n:15,t:'Credit agency watch-list placement'}
-  ]},
-  {id:'ob',name:'Operational',color:'#6D28D9',items:[
-    {n:16,t:'Unplanned CFO departure'},
-    {n:17,t:'Auditor resignation or replacement following going concern opinion'},
-    {n:18,t:'Workforce reductions alongside capex deferrals'},
-    {n:19,t:'Site closures or capacity reductions'},
-    {n:20,t:'Shift from proactive to delayed, escalation-driven communication'}
-  ]},
-  {id:'me',name:'Market & External',color:'#047857',items:[
-    {n:21,t:'Sector input cost inflation outpacing supplier pricing power'},
-    {n:22,t:'Tightening commercial lending standards at sector level'},
-    {n:23,t:'Major customer contract loss or non-renewal'},
-    {n:24,t:'High single-customer revenue concentration'},
-    {n:25,t:'Significant unhedged foreign currency exposure'}
-  ]}
-];
-var ck=[];
-function clBuild(){
-  var g=document.getElementById('clG');g.innerHTML='';
-  CL.forEach(function(cat){
-    var col=document.createElement('div');col.className='cl-col';
-    var rows='';
-    cat.items.forEach(function(i){
-      var done=ck.indexOf(i.n)>-1;
-      rows+='<div class="cl-r'+(done?' ck':'')+'" onclick="clTick('+i.n+')"><span class="cl-rn">'+i.n+'</span><div class="cl-bx"><span class="cl-tk">&#10003;</span></div><span class="cl-rt">'+i.t+'</span></div>';
-    });
-    col.innerHTML='<div class="cl-ch"><div class="cl-dot" style="background:'+cat.color+'"></div><span class="cl-cn">'+cat.name+'</span></div>'+rows;
-    g.appendChild(col);
-  });
-  var p=Math.round(ck.length/25*100);
-  document.getElementById('clF').style.width=p+'%';
-  document.getElementById('clN').textContent=ck.length;
-}
-function clTick(n){var i=ck.indexOf(n);if(i>-1){ck.splice(i,1);}else{ck.push(n);}clBuild();}
-function clReset(){ck=[];clBuild();}
-clBuild();
+  /* ── Progress Bar ── */
+  (function () {
+    var bar = document.getElementById('progress-bar');
+    function update() {
+      var scrolled = window.scrollY || document.documentElement.scrollTop;
+      var total = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
 
-/* ---- TOC ACTIVE SECTION HIGHLIGHT ---- */
-(function(){
-  var headings=document.querySelectorAll('h2[id]');
-  var links=document.querySelectorAll('.toc-nav a');
-  function getId(a){return a.getAttribute('href').replace('#','');}
-  var observer=new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        links.forEach(function(l){l.classList.remove('toc-active');});
-        var match=document.querySelector('.toc-nav a[href="#'+entry.target.id+'"]');
-        if(match){match.classList.add('toc-active');}
-      }
+  /* ── FAQ Accordion ── */
+  (function () {
+    var items = document.querySelectorAll('.faq-item');
+    items.forEach(function (item) {
+      var trigger = item.querySelector('.faq-trigger');
+      trigger.addEventListener('click', function () {
+        var isOpen = item.classList.contains('open');
+        items.forEach(function (other) {
+          if (other !== item) {
+            other.classList.remove('open');
+            other.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+          }
+        });
+        if (isOpen) {
+          item.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+        } else {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
     });
-  },{rootMargin:'-10% 0px -80% 0px',threshold:0});
-  headings.forEach(function(h){observer.observe(h);});
-  links.forEach(function(link){
-    link.addEventListener('click',function(e){
-      e.preventDefault();
-      var target=document.getElementById(getId(link));
-      if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
-    });
-  });
-})();
+  })();
+
+  /* ── TOC Active Section Highlighting ── */
+  (function () {
+    var headings = document.querySelectorAll('h2[id], section[id]');
+    var links    = document.querySelectorAll('.toc-link');
+    if (!headings.length || !links.length) return;
+
+    function setActive(id) {
+      links.forEach(function (l) { l.classList.remove('active'); });
+      var target = document.querySelector('.toc-link[href="#' + id + '"]');
+      if (target) target.classList.add('active');
+    }
+
+    /* IntersectionObserver: highlight section entering viewport top third */
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: '-8% 0% -80% 0%', threshold: 0 });
+
+    headings.forEach(function (h) { observer.observe(h); });
+
+    /* Fallback: activate first link on load */
+    if (links.length) links[0].classList.add('active');
+
+    /* Scroll-spy fallback for browsers with partial IntersectionObserver support */
+    window.addEventListener('scroll', function () {
+      var scrollY = window.scrollY + 120;
+      var current = null;
+      headings.forEach(function (h) {
+        if (h.offsetTop <= scrollY) current = h.id;
+      });
+      if (current) setActive(current);
+    }, { passive: true });
+  })();
 </script>
+
 </body>
 </html>
