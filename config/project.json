@@ -964,5 +964,9 @@
         }
       ]
     }
-  ]
+  ],
+  "notifications": {
+    "digest_to": [],
+    "editors_to": []
+  }
 }
