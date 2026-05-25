@@ -966,7 +966,10 @@
     }
   ],
   "notifications": {
-    "digest_to": [],
+    "digest_to": [
+      "chahat.khatter@netscribes.com",
+      "adi.raghavan@netscribes.com"
+    ],
     "editors_to": []
   }
 }
