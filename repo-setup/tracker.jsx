@@ -17,25 +17,37 @@ const PILLAR_ACCENT = {
   "higher-education":        "#6C3483",
 };
 
-const STATUS_META = {
-  "not-started":       { label: "Not Started",       color: "rgba(17,24,32,0.38)", bg: "rgba(17,24,32,0.06)" },
-  "brief-uploaded":    { label: "Brief Uploaded",     color: "#0e6655",             bg: "#e8f5f0" },
-  "writing":           { label: "Writing",            color: "#1e6fa8",             bg: "#e8f2fa" },
-  "robert-review":     { label: "Robert Review",      color: "#7d6608",             bg: "#fefde8" },
-  "marketing-review":  { label: "Marketing Review",   color: "#6c3483",             bg: "#f5eef8" },
-  "jaggaer-feedback":  { label: "Jaggaer Feedback",   color: "#b05e00",             bg: "#fdf0e0" },
-  "revised":           { label: "Revised",            color: "#5a3d9e",             bg: "#f0ecfa" },
-  "approved":          { label: "Approved",           color: "#1e7a45",             bg: "#e6f5ec" },
-};
-
-const STATUS_ORDER = [
-  "not-started", "brief-uploaded", "writing",
-  "robert-review", "marketing-review",
-  "jaggaer-feedback", "revised", "approved"
+// ─── Workflow stages — read from project.workflow_stages if present, else use defaults ──
+// Each stage: { id, label, color, bg, actor }
+// actor: "jaggaer" | "ns" | "person:<id>" — controls who sees the action button
+const DEFAULT_WORKFLOW_STAGES = [
+  { id: "not-started",      label: "Not Started",        color: "rgba(17,24,32,0.38)", bg: "rgba(17,24,32,0.06)", actor: "jaggaer" },
+  { id: "brief-uploaded",   label: "Brief Uploaded",     color: "#0e6655",             bg: "#e8f5f0",             actor: "ns" },
+  { id: "abhishek-review",  label: "Abhishek Review",    color: "#1a6b8a",             bg: "#e5f3f8",             actor: "person:abhishek" },
+  { id: "writing",          label: "Writing",            color: "#1e6fa8",             bg: "#e8f2fa",             actor: "ns" },
+  { id: "robert-review",    label: "Robert Review",      color: "#7d6608",             bg: "#fefde8",             actor: "person:m-9toiv" },
+  { id: "marketing-review", label: "Marketing Review",   color: "#6c3483",             bg: "#f5eef8",             actor: "jaggaer" },
+  { id: "editors",          label: "Editors",            color: "#b05e00",             bg: "#fdf0e0",             actor: "jaggaer" },
+  { id: "approved",         label: "Approved",           color: "#1e7a45",             bg: "#e6f5ec",             actor: null },
 ];
 
-// Which statuses count as "in motion" for progress arc
-const IN_MOTION_STATUSES = ["brief-uploaded","writing","robert-review","marketing-review","jaggaer-feedback","revised"];
+function getWorkflowStages(project) {
+  return (project.workflow_stages && project.workflow_stages.length)
+    ? project.workflow_stages
+    : DEFAULT_WORKFLOW_STAGES;
+}
+
+function buildStatusMeta(stages) {
+  const meta = {};
+  stages.forEach(s => { meta[s.id] = { label: s.label, color: s.color, bg: s.bg }; });
+  return meta;
+}
+
+// Static STATUS_META for components that can't easily receive project prop (keeps StatusChip working)
+// Will be overridden per-render where project is available
+const STATUS_META = buildStatusMeta(DEFAULT_WORKFLOW_STAGES);
+const STATUS_ORDER = DEFAULT_WORKFLOW_STAGES.map(s => s.id);
+const IN_MOTION_STATUSES = DEFAULT_WORKFLOW_STAGES.filter(s => s.id !== "not-started" && s.id !== "approved").map(s => s.id);
 
 // ─── Force-download helper — raw.githubusercontent serves HTML inline; fetch → blob forces save ──
 async function forceDownload(url, filename) {
@@ -408,8 +420,8 @@ function assigneeName(project, id) {
   return m ? m.name.split(" ")[0] : "—";
 }
 
-function StatusChip({ status }) {
-  const meta = STATUS_META[status] || STATUS_META["not-started"];
+function StatusChip({ status, stageMeta }) {
+  const meta = (stageMeta || STATUS_META)[status] || STATUS_META["not-started"] || { label: status, color: "#888", bg: "#eee" };
   return (
     <span className="ns-status-chip" style={{ background: meta.bg, color: meta.color }}>
       {meta.label}
@@ -757,7 +769,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
           updatePiece={updatePiece} addFeedback={addFeedback}
         />
       )}
-      {activeTab === "sequence" && <PublishingSequence project={project} />}
+      
       {overlayPiece && overlayCluster && overlayPillar && (
         <DrawerOverlay
           piece={overlayPiece} cluster={overlayCluster} pillar={overlayPillar}
@@ -977,7 +989,7 @@ function TrackerHeader({ project, stats, activeCluster, setActiveCluster, active
 
       <div className="ns-tracker-nav-row">
         <div className="ns-tracker-tabs">
-          {[["tracker","Content Tracker"],["sequence","Publishing Sequence"]].map(([id, label]) => (
+          {[["tracker","Content Tracker"]].map(([id, label]) => (
             <button key={id} className={`ns-tracker-tab ${activeTab === id ? "is-active" : ""}`} onClick={() => setActiveTab(id)}>
               {label}
             </button>
@@ -1340,33 +1352,37 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
 
   const nsMembers = project.team.ns.map(m => ({ value: m.id, label: m.name }));
 
+  const stages = getWorkflowStages(project);
+  const stageMeta = buildStatusMeta(stages);
+  const stageOrder = stages.map(s => s.id);
+  const currentStageIdx = stageOrder.indexOf(piece.status);
+  const currentStage = stages.find(s => s.id === piece.status);
+  const nextStage = stages[currentStageIdx + 1] || null;
+
+  function actorMatches(actor) {
+    if (!actor) return false;
+    if (actor === "ns") return isNS;
+    if (actor === "jaggaer") return isJG;
+    if (actor.startsWith("person:")) return currentUser.id === actor.slice(7);
+    return false;
+  }
+
   function primaryAction() {
-    // Jaggaer: uploads the brief to kick things off
-    if (isJG && piece.status === "not-started")
-      return { label: "Upload Brief", mode: "brief" };
-    // NS: writes the article after brief is received
-    if (isNS && piece.status === "brief-uploaded")
-      return { label: "Upload Article", mode: "upload" };
-    // Robert D (m-9toiv): content review
-    if (currentUser.id === "m-9toiv" && piece.status === "writing")
-      return { label: "Review Content", mode: "robert-review" };
-    // NS: revise after Robert's feedback
-    if (isNS && piece.status === "robert-review")
-      return { label: "Upload Revision", mode: "upload" };
-    // Marketing team (Jason R / Orlagh M): review before Jaggaer sees it
-    const isMarketing = isJG && (currentUser.role === "Marketing" || currentUser.role === "SEO, Digital Marketing");
-    if (isMarketing && currentUser.id !== "m-9toiv" && piece.status === "robert-review")
-      return { label: "Marketing Review", mode: "marketing-review" };
-    // Jaggaer (Indy / Anna R): final feedback/approval once marketing has cleared it
-    if (isJG && currentUser.id !== "m-9toiv" && !isMarketing && (piece.status === "marketing-review" || piece.status === "revised"))
-      return { label: "Leave Feedback", mode: "feedback" };
-    // NS: upload revision after Jaggaer feedback
-    if (isNS && piece.status === "jaggaer-feedback")
-      return { label: "Upload Revision", mode: "upload" };
-    return null;
+    if (!currentStage || piece.status === "approved") return null;
+    const actor = currentStage.actor;
+    if (!actorMatches(actor)) return null;
+    // Label logic
+    if (piece.status === "not-started") return { label: "Upload Brief", mode: "brief" };
+    if (actor === "ns") return { label: nextStage ? `Submit → ${nextStage.label}` : "Submit", mode: "upload" };
+    // Named person or Jaggaer reviewer
+    return { label: "Review", mode: "review" };
   }
   const action = primaryAction();
-  const awaitsJaggaer = piece.status === "marketing-review" || piece.status === "revised";
+
+  // "Awaits" highlight: piece is waiting on Jaggaer org (any stage where actor = jaggaer, excluding not-started)
+  const awaitsJaggaer = isJG && currentStage && currentStage.actor === "jaggaer" && piece.status !== "not-started";
+  // Observer: Indy/Anna can always open and view, even when it's Robert's or NS's turn
+  const isObserver = isJG && !actorMatches(currentStage?.actor);
 
   return (
     <li className={`ns-piece-row ${isLast ? "is-last" : ""} ${isAnchor ? "is-anchor" : ""} ${awaitsJaggaer && isJG ? "awaits" : ""} ${isOpen ? "is-open" : ""}`}
@@ -1377,13 +1393,13 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
             <InlineCell
               value={piece.status}
               type="select"
-              options={STATUS_ORDER.map(s => ({ value: s, label: STATUS_META[s].label }))}
+              options={stageOrder.map(s => ({ value: s, label: stageMeta[s]?.label || s }))}
               onSave={val => updatePiece(cluster.id, piece.id, { status: val })}
             >
-              <StatusChip status={piece.status} />
+              <StatusChip status={piece.status} stageMeta={stageMeta} />
             </InlineCell>
           ) : (
-            <StatusChip status={piece.status} />
+            <StatusChip status={piece.status} stageMeta={stageMeta} />
           )}
           <div className="ns-piece-text">
             <div className="ns-piece-title-row">
@@ -1581,34 +1597,34 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   const isNS = currentUser.org === "ns";
   const isJG = currentUser.org === "jaggaer";
 
-  // Tab visibility rules
-  const canUploadBrief = isJG && piece.status === "not-started";
-  const canUploadArticle = isNS && piece.status === "brief-uploaded";
-  const canUploadRevision = isNS && (piece.status === "robert-review" || piece.status === "jaggaer-feedback");
-  const canUpload = canUploadArticle || canUploadRevision;
-  // Robert D is Jaggaer org, id: m-9toiv — content reviewer
-  const isRobert = currentUser.id === "m-9toiv";
-  const canRobertReview = isRobert && piece.status === "writing";
-  // Marketing review: Jaggaer org, role contains "Marketing" — Jason R (anna) and Orlagh M
-  const isMarketing = isJG && (currentUser.role === "Marketing" || currentUser.role === "SEO, Digital Marketing");
-  const canMarketingReview = isMarketing && !isRobert && piece.status === "robert-review";
-  // Jaggaer final feedback: CMO (Indy) or PM (Anna R) — not Robert, not marketing reviewers
-  const canJaggaerFeedback = isJG && !isRobert && !isMarketing && (piece.status === "marketing-review" || piece.status === "revised");
-  const hasDeliverable = !["not-started","brief-uploaded"].includes(piece.status);
+  const stages = getWorkflowStages(project);
+  const stageMeta = buildStatusMeta(stages);
+  const stageOrder = stages.map(s => s.id);
+  const currentStageIdx = stageOrder.indexOf(piece.status);
+  const currentStage = stages.find(s => s.id === piece.status);
+  const nextStage = stages[currentStageIdx + 1] || null;
+
+  function actorMatches(actor) {
+    if (!actor) return false;
+    if (actor === "ns") return isNS;
+    if (actor === "jaggaer") return isJG;
+    if (actor.startsWith("person:")) return currentUser.id === actor.slice(7);
+    return false;
+  }
+
+  const isCurrentActor = currentStage && actorMatches(currentStage.actor);
+  const canBrief = isCurrentActor && piece.status === "not-started"; // Jaggaer uploads brief
+  const canUpload = isCurrentActor && isNS && piece.status !== "not-started"; // NS submits article/revision
+  const canReview = isCurrentActor && !isNS && piece.status !== "not-started" && piece.status !== "approved";
+  const hasDeliverable = currentStageIdx > stageOrder.indexOf("brief-uploaded");
 
   return (
-    <div className={`ns-piece-drawer${mode === "preview" ? " is-preview" : ""}`}>
+    <div className={`ns-piece-drawer${mode === "preview" || mode === "annotate" ? " is-preview" : ""}`}>
       <div className="ns-drawer-tabs">
-        {canUploadBrief && <button className={`ns-drawer-tab is-primary-tab ${mode==="brief"?"is-active":""}`} onClick={() => setMode("brief")}>Upload Brief</button>}
-        {canUpload && <button className={`ns-drawer-tab ${mode==="upload"?"is-active":""}`} onClick={() => setMode("upload")}>{canUploadRevision ? "Upload Revision" : "Upload Article"}</button>}
-        {canRobertReview && <button className={`ns-drawer-tab is-primary-tab ${mode==="robert-review"?"is-active":""}`} onClick={() => setMode("robert-review")}>Content Review</button>}
-        {canMarketingReview && <button className={`ns-drawer-tab is-primary-tab ${mode==="marketing-review"?"is-active":""}`} onClick={() => setMode("marketing-review")}>Marketing Review</button>}
-        {canJaggaerFeedback && <button className={`ns-drawer-tab is-primary-tab ${mode==="feedback"?"is-active":""}`} onClick={() => setMode("feedback")}>Leave Feedback</button>}
-        {hasDeliverable && (
-          <button className={`ns-drawer-tab ${mode==="annotate"?"is-active":""}`} onClick={() => setMode("annotate")}>
-            Preview & Comment
-          </button>
-        )}
+        {canBrief && <button className={`ns-drawer-tab is-primary-tab ${mode==="brief"?"is-active":""}`} onClick={() => setMode("brief")}>Upload Brief</button>}
+        {canUpload && <button className={`ns-drawer-tab is-primary-tab ${mode==="upload"?"is-active":""}`} onClick={() => setMode("upload")}>{nextStage ? `Submit → ${nextStage.label}` : "Submit"}</button>}
+        {canReview && <button className={`ns-drawer-tab is-primary-tab ${mode==="review"?"is-active":""}`} onClick={() => setMode("review")}>Review</button>}
+        {hasDeliverable && <button className={`ns-drawer-tab ${mode==="annotate"?"is-active":""}`} onClick={() => setMode("annotate")}>Preview & Comment</button>}
         <button className={`ns-drawer-tab ${mode==="history"?"is-active":""}`} onClick={() => setMode("history")}>
           Notes {feedback.length > 0 && <span className="ns-tab-count">{feedback.length}</span>}
         </button>
@@ -1618,11 +1634,9 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
         <button className="ns-drawer-close" onClick={onClose}>Close ✕</button>
       </div>
       <div className="ns-drawer-body" style={(mode === "preview" || mode === "annotate") ? { padding: 0, overflow: "hidden" } : {}}>
-        {mode === "brief" && canUploadBrief && <BriefUploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} />}
-        {mode === "upload" && canUpload && <UploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} />}
-        {mode === "robert-review" && canRobertReview && <InternalReviewPanel piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} reviewStage="robert-review" nextStatus="marketing-review" stageName="Content Review" onDone={() => setMode("history")} />}
-        {mode === "marketing-review" && canMarketingReview && <InternalReviewPanel piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} reviewStage="marketing-review" nextStatus="marketing-review" stageName="Marketing Review" onDone={() => setMode("history")} />}
-        {mode === "feedback" && canJaggaerFeedback && <FeedbackForm piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} onDone={() => setMode("history")} />}
+        {mode === "brief" && canBrief && <BriefUploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} />}
+        {mode === "upload" && canUpload && <UploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} />}
+        {mode === "review" && canReview && <ReviewPanel piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} stages={stages} stageMeta={stageMeta} onDone={() => setMode("history")} />}
         {mode === "preview" && hasDeliverable && <PreviewPanel piece={piece} cluster={cluster} pillar={pillar} project={project} />}
         {mode === "annotate" && hasDeliverable && <AnnotatePanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} addFeedback={addFeedback} updatePiece={updatePiece} onDone={() => setMode("history")} />}
         {mode === "history" && <NotesHistory piece={piece} project={project} />}
@@ -1742,12 +1756,7 @@ function DeletePiecePanel({ piece, cluster, deletePiece, onClose }) {
   );
 }
 
-// ─── Upload ───────────────────────────────────────────────────────────────────
-// FIX 1: Upload path display now shows "deliverable-v{n}.html" to match api.js actual path.
-// FIX 2: revision_count increments on first upload too (not just re-uploads after feedback).
-//        First upload: not-started → uploaded, rev 0 → 1.
-//        Re-upload after feedback: jaggaer-feedback → revised, rev n → n+1.
-function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece }) {
+function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece, stages }) {
   const [dragging, setDragging] = useStateTR(false);
   const [stage, setStage] = useStateTR("idle");
   const [filename, setFilename] = useStateTR(null);
@@ -1755,6 +1764,10 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
   const [progress, setProgress] = useStateTR(0);
   const inputRef = useRefTR(null);
 
+  const workflowStages = stages || getWorkflowStages(project);
+  const stageOrder = workflowStages.map(s => s.id);
+  const currentIdx = stageOrder.indexOf(piece.status);
+  const nextStage = workflowStages[currentIdx + 1] || null;
   const nextRev = (piece.revision_count || 0) + 1;
 
   async function handleFile(file) {
@@ -1763,10 +1776,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
     const contents = await new Promise((res, rej) => { reader.onload = () => res(reader.result); reader.onerror = rej; reader.readAsText(file); });
     for (let i = 0; i <= 100; i += 6) { setProgress(i); await new Promise(r => setTimeout(r, 28)); }
     await window.NS_API.uploadPieceDeliverable(piece, cluster.id, pillar.id, project.active_month, contents, currentUser.id);
-    // Status routing: brief-uploaded → writing; robert-review → writing (re-uploaded after Robert feedback); jaggaer-feedback → revised
-    let newStatus = "writing";
-    if (piece.status === "jaggaer-feedback") newStatus = "revised";
-    else if (piece.status === "robert-review") newStatus = "robert-review"; // stays at robert-review so Robert can re-check
+    const newStatus = nextStage ? nextStage.id : piece.status;
     updatePiece(cluster.id, piece.id, {
       status: newStatus,
       revision_count: nextRev,
@@ -1777,6 +1787,8 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
     });
     setStage("done");
   }
+
+  return (
     <div className="ns-upload">
       <div className="ns-upload-l">
         <div className={`ns-dropzone ${dragging?"is-dragging":""} ${stage!=="idle"?"is-busy":""}`}
@@ -1798,37 +1810,60 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
           {stage === "done" && (<>
             <div className="ns-drop-rule is-done"></div>
             <div className="ns-drop-title">Committed ✓</div>
-            <div className="ns-drop-sub">{filename} · deliverable-v{nextRev}.html · status → {piece.status==="jaggaer-feedback"?"Revised":"Writing"}</div>
-            <div className="ns-drop-path">{piece.status==="jaggaer-feedback" ? "Jaggaer will see your revision." : "Robert will be cued to review."}</div>
+            <div className="ns-drop-sub">{filename} · deliverable-v{nextRev}.html</div>
+            <div className="ns-drop-path">Status → <strong>{nextStage?.label || "submitted"}</strong>{nextStage ? ` · ${nextStage.actor === "ns" ? "NS" : nextStage.actor?.startsWith("person:") ? nextStage.actor.slice(7) : "Jaggaer"} is cued.` : ""}</div>
           </>)}
           <input ref={inputRef} type="file" hidden onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
         </div>
       </div>
       <div className="ns-upload-r">
-        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>Conventions</div>
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>What happens next</div>
         <ul className="ns-upload-rules">
           <li>One file per upload. Re-uploads create a new versioned file.</li>
           <li>Versions are preserved — nothing is overwritten.</li>
-          <li>Status moves to <strong>{piece.status==="jaggaer-feedback"?"Revised":"Writing"}</strong>; {piece.status==="jaggaer-feedback" ? "Jaggaer is cued." : "Robert is cued to review."}</li>
+          {nextStage && <li>Status moves to <strong>{nextStage.label}</strong>.</li>}
         </ul>
       </div>
     </div>
   );
 }
-
-// ─── Feedback form ────────────────────────────────────────────────────────────
-function FeedbackForm({ piece, cluster, project, currentUser, updatePiece, addFeedback, onDone }) {
+// ─── Review Panel — unified for all non-NS review stages ─────────────────────
+// Handles any stage where actor is "jaggaer" or "person:<id>".
+// On "approved" → advances to next workflow stage.
+// On "needs-revision" → sends back to the most recent NS stage (writing).
+// On "question" → leaves status unchanged, logs the note.
+function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFeedback, stages, stageMeta, onDone }) {
   const [verdict, setVerdict] = useStateTR("approved");
   const [body, setBody] = useStateTR("");
   const [submitting, setSubmitting] = useStateTR(false);
 
+  const workflowStages = stages || getWorkflowStages(project);
+  const stageOrder = workflowStages.map(s => s.id);
+  const currentIdx = stageOrder.indexOf(piece.status);
+  const currentStage = workflowStages[currentIdx];
+  const nextStage = workflowStages[currentIdx + 1] || null;
+  // "Send back" goes to the most recent NS-actor stage before current
+  const sendBackStage = [...workflowStages].slice(0, currentIdx).reverse().find(s => s.actor === "ns") || workflowStages[0];
+  const isLastStage = nextStage?.id === "approved" || !nextStage;
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+
   async function submit() {
     if (!body.trim() && verdict !== "approved") return;
     setSubmitting(true);
-    const entry = { id: "fb-"+Math.random().toString(36).slice(2,8), author: currentUser.id, verdict, body: body.trim() || "(no note)", ts: new Date().toISOString(), stage: "jaggaer" };
+    let newStatus = piece.status;
+    if (verdict === "approved") newStatus = nextStage ? nextStage.id : "approved";
+    else if (verdict === "needs-revision") newStatus = sendBackStage.id;
+    // "question" keeps current status
+    const entry = {
+      id: "fb-"+Math.random().toString(36).slice(2,8),
+      author: currentUser.id, verdict,
+      body: body.trim() || "(no note)",
+      ts: new Date().toISOString(),
+      stage: piece.status,
+    };
     addFeedback(piece.id, entry);
     updatePiece(cluster.id, piece.id, {
-      status: verdict === "approved" ? "approved" : "jaggaer-feedback",
+      status: newStatus,
       last_updated: new Date().toISOString(),
       last_updated_by: currentUser.id,
     });
@@ -1839,7 +1874,9 @@ function FeedbackForm({ piece, cluster, project, currentUser, updatePiece, addFe
   return (
     <div className="ns-feedback">
       <div className="ns-feedback-l">
-        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>Your Verdict</div>
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>
+          {currentStage?.label || "Review"} — Your Verdict
+        </div>
         <div className="ns-verdict-row">
           {["approved","needs-revision","question"].map(v => (
             <button key={v} className={`ns-verdict ${verdict===v?`is-on ${v}`:""}`} onClick={() => setVerdict(v)}>
@@ -1852,30 +1889,32 @@ function FeedbackForm({ piece, cluster, project, currentUser, updatePiece, addFe
           Note {verdict==="approved"?"(optional)":"(required)"}
         </div>
         <textarea className="ns-feedback-textarea" value={body} onChange={e => setBody(e.target.value)}
-          placeholder={verdict==="approved" ? "Anything for NS on the way out — optional." : verdict==="needs-revision" ? "What needs to change and where. Be specific — section, paragraph, claim." : "Ask the writer something. They'll see it in their queue."}>
+          placeholder={verdict==="approved" ? "Anything for the team on the way out — optional." : verdict==="needs-revision" ? "What needs to change and where. Be specific — section, paragraph, claim." : "Ask a question. Status stays; NS and Jaggaer both see it."}>
         </textarea>
         <div className="ns-feedback-actions">
           <button className="ns-feedback-submit" disabled={submitting||(verdict!=="approved"&&!body.trim())} onClick={submit}>
-            {submitting ? "Submitting…" : `Submit · ${verdict==="approved"?"→ Approved":"→ Jaggaer Feedback"}`}
+            {submitting ? "Submitting…" : verdict==="approved" ? `Approve → ${nextStage?.label || "Done"}` : verdict==="needs-revision" ? `Send Back → ${sendBackStage.label}` : "Log Question"}
           </button>
         </div>
       </div>
       <div className="ns-feedback-r">
-        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>Process</div>
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>Stage</div>
         <ol className="ns-feedback-process">
-          <li><strong>Approved</strong> — counts toward cluster completion.</li>
-          <li><strong>Needs revision</strong> — NS sees note, re-uploads.</li>
-          <li><strong>Question</strong> — open thread; status stays.</li>
+          <li><strong>Approved</strong> — advances to <em>{nextStage?.label || "complete"}</em>.</li>
+          <li><strong>Needs revision</strong> — sends back to <em>{sendBackStage.label}</em>.</li>
+          <li><strong>Question</strong> — open thread, status unchanged.</li>
         </ol>
-        <div style={{marginTop:16}}>
-          <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:8}}>Cluster State</div>
-          <div className="ns-feedback-cluster-state">
-            {cluster.pieces.filter(p => p.status==="approved").length} of {cluster.pieces.length} approved.
-            {cluster.pieces.every(p => p.status==="approved" || p.id===piece.id) && verdict==="approved" && (
-              <div className="ns-feedback-readymsg">Approving this piece marks the cluster <strong>publish-ready</strong>.</div>
-            )}
+        {isLastStage && (
+          <div style={{marginTop:16}}>
+            <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:8}}>Cluster State</div>
+            <div className="ns-feedback-cluster-state">
+              {cluster.pieces.filter(p => p.status==="approved").length} of {cluster.pieces.length} approved.
+              {cluster.pieces.every(p => p.status==="approved" || p.id===piece.id) && verdict==="approved" && (
+                <div className="ns-feedback-readymsg">Approving this piece marks the cluster <strong>publish-ready</strong>.</div>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
@@ -2327,79 +2366,6 @@ function BriefUploadPanel({ piece, cluster, pillar, project, currentUser, update
   );
 }
 
-// ─── Internal Review Panel (Robert content review / Marketing review) ──────────
-function InternalReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFeedback, reviewStage, nextStatus, stageName, onDone }) {
-  const [verdict, setVerdict] = useStateTR("approved");
-  const [body, setBody] = useStateTR("");
-  const [submitting, setSubmitting] = useStateTR(false);
-  const FONT = { fontFamily: "Noto Sans, sans-serif" };
-
-  async function submit() {
-    if (!body.trim() && verdict !== "approved") return;
-    setSubmitting(true);
-    const entry = {
-      id: "fb-"+Math.random().toString(36).slice(2,8),
-      author: currentUser.id,
-      verdict,
-      body: body.trim() || "(no note)",
-      ts: new Date().toISOString(),
-      stage: reviewStage,
-    };
-    addFeedback(piece.id, entry);
-    // Routing: approved → advance to nextStatus; needs-revision → send back to writing for NS to re-upload
-    const newStatus = verdict === "approved" ? nextStatus : "robert-review";
-    updatePiece(cluster.id, piece.id, {
-      status: newStatus,
-      last_updated: new Date().toISOString(),
-      last_updated_by: currentUser.id,
-    });
-    await new Promise(r => setTimeout(r, 300));
-    setSubmitting(false); setBody(""); onDone();
-  }
-
-  const INTERNAL_VERDICTS = ["approved", "needs-revision", "question"];
-
-  return (
-    <div className="ns-feedback">
-      <div className="ns-feedback-l">
-        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>{stageName} Verdict</div>
-        <div className="ns-verdict-row">
-          {INTERNAL_VERDICTS.map(v => (
-            <button key={v} className={`ns-verdict ${verdict===v?`is-on ${v}`:""}`} onClick={() => setVerdict(v)}>
-              <span className="ns-verdict-glyph">{VERDICT_META[v].glyph}</span>
-              <span>{VERDICT_META[v].label}</span>
-            </button>
-          ))}
-        </div>
-        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:8,marginTop:16}}>
-          Note {verdict==="approved"?"(optional)":"(required)"}
-        </div>
-        <textarea className="ns-feedback-textarea" value={body} onChange={e => setBody(e.target.value)}
-          placeholder={verdict==="approved" ? "Any final notes for the writer — optional." : verdict==="needs-revision" ? "What needs to change and where. Be specific — section, paragraph, claim." : "Ask the writer something."}>
-        </textarea>
-        <div className="ns-feedback-actions">
-          <button className="ns-feedback-submit" disabled={submitting||(verdict!=="approved"&&!body.trim())} onClick={submit}>
-            {submitting ? "Submitting…" : verdict==="approved" ? `Approve → ${nextStatus==="marketing-review"?"Goes to Marketing":"Goes to Jaggaer"}` : "Send Back to NS →"}
-          </button>
-        </div>
-      </div>
-      <div className="ns-feedback-r">
-        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>This Stage</div>
-        <ol className="ns-feedback-process">
-          <li><strong>Approved</strong> — moves to the next stage ({nextStatus==="marketing-review"?"Marketing Review":"Jaggaer Feedback"}).</li>
-          <li><strong>Needs revision</strong> — NS sees note and re-uploads.</li>
-          <li><strong>Question</strong> — open thread; status stays.</li>
-        </ol>
-        <div style={{marginTop:16, padding:"12px", background:"#f0f7f4", borderRadius:"4px", border:"1px solid #c2e8d4"}}>
-          <div style={{...FONT, fontSize:"0.72rem", fontWeight:600, color:"#1e7a45", marginBottom:4}}>Internal Review</div>
-          <div style={{...FONT, fontSize:"0.72rem", color:"#444", lineHeight:1.5}}>
-            This review is not visible to Jaggaer. Only approved pieces proceed to client review.
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // ─── Annotate Panel — iframe preview with inline comment sidebar ───────────────
 function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedback, updatePiece, onDone }) {

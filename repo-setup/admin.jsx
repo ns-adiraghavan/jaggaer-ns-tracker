@@ -33,13 +33,14 @@ function AdminPanel({ project, setProject, adminTarget, setAdminTarget }) {
       </header>
 
       <nav className="ns-admin-tabs">
-        {[["overview","Overview"],["pillars","Pillars & Clusters"],["schedule","Publishing Schedule"],["months","Months"],["team","Team"],["bwc","Build With Claude"],["notifications","Notifications"],["topics","Topic CSV Sync"],["raw","Raw JSON"]].map(([id, label]) => (
+        {[["overview","Overview"],["workflow","Workflow"],["pillars","Pillars & Clusters"],["schedule","Publishing Schedule"],["months","Months"],["team","Team"],["bwc","Build With Claude"],["notifications","Notifications"],["topics","Topic CSV Sync"],["raw","Raw JSON"]].map(([id, label]) => (
           <button key={id} className={`ns-admin-tab ${tab===id?"is-active":""}`} onClick={() => setTab(id)}>{label}</button>
         ))}
       </nav>
 
       <div className="ns-admin-body">
         {tab === "overview"      && <AdminOverview      project={project} />}
+        {tab === "workflow"      && <AdminWorkflow      project={project} setProject={setProject} />}
         {tab === "pillars"       && <AdminPillars       project={project} setProject={setProject} adminTarget={adminTarget} />}
         {tab === "schedule"      && <AdminSchedule      project={project} setProject={setProject} />}
         {tab === "months"        && <AdminMonths        project={project} setProject={setProject} />}
@@ -957,6 +958,213 @@ function AdminNotifications({ project, setProject }) {
           {testState === "sending" ? "Sending…" : testState === "sent" ? "✓ Digest sent" : testState === "error" ? "Send failed" : "Send test digest now →"}
         </button>
         <span style={{ ...FONT, fontSize: "0.7rem", color: "#aaa" }}>Sends immediately to digest recipients — useful for testing the email template</span>
+      </div>
+    </div>
+  );
+}
+
+// ─── Workflow Editor ──────────────────────────────────────────────────────────
+// Lets admin drag stages to reorder, rename them, set the actor, and add/remove stages.
+// Writes to project.workflow_stages → auto-saves to GitHub via app.jsx debounce.
+const DEFAULT_STAGE_COLORS = [
+  { color: "#0e6655", bg: "#e8f5f0" },
+  { color: "#1e6fa8", bg: "#e8f2fa" },
+  { color: "#7d6608", bg: "#fefde8" },
+  { color: "#6c3483", bg: "#f5eef8" },
+  { color: "#b05e00", bg: "#fdf0e0" },
+  { color: "#5a3d9e", bg: "#f0ecfa" },
+  { color: "#1e7a45", bg: "#e6f5ec" },
+];
+
+function AdminWorkflow({ project, setProject }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+
+  const defaultStages = [
+    { id: "not-started",      label: "Not Started",        color: "rgba(17,24,32,0.38)", bg: "rgba(17,24,32,0.06)", actor: "jaggaer" },
+    { id: "brief-uploaded",   label: "Brief Uploaded",     color: "#0e6655",             bg: "#e8f5f0",             actor: "ns" },
+    { id: "abhishek-review",  label: "Abhishek Review",    color: "#1a6b8a",             bg: "#e5f3f8",             actor: "person:abhishek" },
+    { id: "writing",          label: "Writing",            color: "#1e6fa8",             bg: "#e8f2fa",             actor: "ns" },
+    { id: "robert-review",    label: "Robert Review",      color: "#7d6608",             bg: "#fefde8",             actor: "person:m-9toiv" },
+    { id: "marketing-review", label: "Marketing Review",   color: "#6c3483",             bg: "#f5eef8",             actor: "jaggaer" },
+    { id: "editors",          label: "Editors",            color: "#b05e00",             bg: "#fdf0e0",             actor: "jaggaer" },
+    { id: "approved",         label: "Approved",           color: "#1e7a45",             bg: "#e6f5ec",             actor: null },
+  ];
+
+  const getStages = () => (project.workflow_stages && project.workflow_stages.length)
+    ? project.workflow_stages : defaultStages;
+
+  const [stages, setStages] = useStateAD(getStages);
+  const [dragging, setDragging] = useStateAD(null);
+  const [dragOver, setDragOver] = useStateAD(null);
+  const [editingId, setEditingId] = useStateAD(null);
+  const counters = useRefAD({});
+
+  useEffectAD(() => {
+    if (project.workflow_stages && project.workflow_stages.length) setStages(project.workflow_stages);
+  }, [project.workflow_stages]);
+
+  const allMembers = [...(project.team?.ns || []), ...(project.team?.jaggaer || [])];
+
+  function persist(next) {
+    setStages(next);
+    setProject(prev => ({ ...prev, workflow_stages: next }));
+  }
+
+  function updateStage(id, patch) {
+    persist(stages.map(s => s.id === id ? { ...s, ...patch } : s));
+  }
+
+  function moveStage(fromIdx, toIdx) {
+    if (fromIdx === toIdx) return;
+    const next = [...stages];
+    const [removed] = next.splice(fromIdx, 1);
+    next.splice(toIdx, 0, removed);
+    persist(next);
+  }
+
+  function addStage() {
+    const colorIdx = stages.length % DEFAULT_STAGE_COLORS.length;
+    const newId = "stage-" + Math.random().toString(36).slice(2, 7);
+    const newStage = { id: newId, label: "New Stage", actor: "jaggaer", ...DEFAULT_STAGE_COLORS[colorIdx] };
+    persist([...stages.slice(0, -1), newStage, stages[stages.length - 1]]);
+    setEditingId(newId);
+  }
+
+  function removeStage(id) {
+    if (id === "not-started" || id === "approved") return; // guards
+    persist(stages.filter(s => s.id !== id));
+  }
+
+  function actorLabel(actor) {
+    if (!actor) return "—";
+    if (actor === "ns") return "NS (writers)";
+    if (actor === "jaggaer") return "Jaggaer (any)";
+    if (actor.startsWith("person:")) {
+      const m = allMembers.find(x => x.id === actor.slice(7));
+      return m ? m.name : actor.slice(7);
+    }
+    return actor;
+  }
+
+  const actorOptions = [
+    { value: "ns",      label: "NS (writers)" },
+    { value: "jaggaer", label: "Jaggaer (any)" },
+    ...allMembers.map(m => ({ value: `person:${m.id}`, label: `${m.name} (${m.org === "ns" ? "NS" : "JG"})` })),
+    { value: "",        label: "— no actor (terminal)" },
+  ];
+
+  return (
+    <div>
+      <div style={{ marginBottom: 24 }}>
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{ marginBottom: 8 }}>Workflow Stage Editor</div>
+        <p style={{ ...FONT, fontSize: "0.85rem", color: "#666", lineHeight: 1.6, maxWidth: 600 }}>
+          Drag stages to reorder. Each stage has an <strong>actor</strong> — the person or team whose turn it is.
+          NS stages = upload. Jaggaer/named stages = review. The workflow reads live from this config — no code changes needed.
+        </p>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "20px" }}>
+        {stages.map((stage, idx) => {
+          const isFirst = idx === 0;
+          const isLast = idx === stages.length - 1;
+          const isEditing = editingId === stage.id;
+          const isLocked = stage.id === "not-started" || stage.id === "approved";
+
+          return (
+            <div
+              key={stage.id}
+              draggable={!isLocked}
+              onDragStart={e => { setDragging(idx); e.dataTransfer.effectAllowed = "move"; }}
+              onDragOver={e => { e.preventDefault(); setDragOver(idx); }}
+              onDrop={e => { e.preventDefault(); if (dragging !== null && dragging !== idx) moveStage(dragging, idx); setDragging(null); setDragOver(null); }}
+              onDragEnd={() => { setDragging(null); setDragOver(null); }}
+              style={{
+                display: "flex", alignItems: "center", gap: "10px",
+                padding: "10px 14px",
+                background: dragOver === idx ? "#f0f7ff" : "#fff",
+                border: `1px solid ${dragOver === idx ? "#c5ddef" : "#e8e3da"}`,
+                borderLeft: `4px solid ${stage.color}`,
+                borderRadius: "4px",
+                cursor: isLocked ? "default" : "grab",
+                opacity: dragging === idx ? 0.5 : 1,
+                transition: "border-color 0.15s, background 0.15s",
+              }}
+            >
+              {/* drag handle */}
+              {!isLocked && <span style={{ color: "#ccc", fontSize: "1rem", cursor: "grab", userSelect: "none" }}>⠿</span>}
+              {isLocked && <span style={{ color: "#ddd", fontSize: "0.7rem", width: "16px" }}>🔒</span>}
+
+              {/* stage pill */}
+              <span style={{ ...FONT, fontSize: "0.72rem", fontWeight: 700, background: stage.bg, color: stage.color, padding: "3px 8px", borderRadius: "3px", whiteSpace: "nowrap", minWidth: "110px", textAlign: "center" }}>
+                {stage.label}
+              </span>
+
+              {/* step number */}
+              <span style={{ ...FONT, fontSize: "0.68rem", color: "#aaa", minWidth: "28px" }}>#{idx + 1}</span>
+
+              {isEditing ? (
+                <div style={{ display: "flex", gap: "8px", flex: 1, flexWrap: "wrap", alignItems: "center" }}>
+                  <input
+                    autoFocus
+                    value={stage.label}
+                    onChange={e => updateStage(stage.id, { label: e.target.value })}
+                    style={{ ...FONT, fontSize: "0.82rem", padding: "5px 8px", border: "1px solid #c5ddef", borderRadius: "3px", width: "160px" }}
+                    placeholder="Stage name"
+                  />
+                  <select
+                    value={stage.actor || ""}
+                    onChange={e => updateStage(stage.id, { actor: e.target.value || null })}
+                    style={{ ...FONT, fontSize: "0.78rem", padding: "5px 8px", border: "1px solid #c5ddef", borderRadius: "3px" }}
+                  >
+                    {actorOptions.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+                  </select>
+                  <button onClick={() => setEditingId(null)} style={{ ...FONT, fontSize: "0.72rem", fontWeight: 600, color: "#1e7a45", background: "#e6f5ec", border: "1px solid #86efac", padding: "5px 10px", borderRadius: "3px", cursor: "pointer" }}>Done</button>
+                </div>
+              ) : (
+                <div style={{ flex: 1, display: "flex", alignItems: "center", gap: "10px" }}>
+                  <span style={{ ...FONT, fontSize: "0.78rem", color: "#555" }}>Actor: <strong>{actorLabel(stage.actor)}</strong></span>
+                  {!isLocked && (
+                    <button onClick={() => setEditingId(stage.id)} style={{ ...FONT, fontSize: "0.68rem", color: "#888", background: "transparent", border: "1px solid #e8e3da", padding: "3px 8px", borderRadius: "3px", cursor: "pointer" }}>Edit</button>
+                  )}
+                </div>
+              )}
+
+              {!isLocked && (
+                <button
+                  onClick={() => removeStage(stage.id)}
+                  title="Remove stage"
+                  style={{ ...FONT, fontSize: "0.72rem", color: "#b03a2e", background: "transparent", border: "1px solid #fca5a5", padding: "3px 8px", borderRadius: "3px", cursor: "pointer", flexShrink: 0 }}
+                >✕</button>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+        <button
+          onClick={addStage}
+          style={{ ...FONT, fontSize: "0.78rem", fontWeight: 600, color: "#c8401a", background: "transparent", border: "1px solid #e8cfc8", padding: "8px 16px", borderRadius: "3px", cursor: "pointer" }}
+        >
+          + Add Stage
+        </button>
+        <button
+          onClick={() => persist(defaultStages)}
+          style={{ ...FONT, fontSize: "0.72rem", color: "#888", background: "transparent", border: "1px solid #e8e3da", padding: "8px 16px", borderRadius: "3px", cursor: "pointer" }}
+        >
+          Reset to defaults
+        </button>
+        <span style={{ ...FONT, fontSize: "0.7rem", color: "#aaa" }}>Changes save automatically to GitHub.</span>
+      </div>
+
+      <div style={{ marginTop: 32, padding: "16px 20px", background: "#faf9f7", border: "1px solid #e8e3da", borderRadius: "4px" }}>
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{ marginBottom: 8 }}>How actors work</div>
+        <ul style={{ ...FONT, fontSize: "0.78rem", color: "#555", lineHeight: 1.7, paddingLeft: "16px" }}>
+          <li><strong>NS (writers)</strong> — NS team members see an Upload button when a piece reaches this stage.</li>
+          <li><strong>Jaggaer (any)</strong> — Any Jaggaer team member sees a Review button.</li>
+          <li><strong>Named person</strong> — Only that specific person sees the Review button. Others on their team can still view and comment.</li>
+          <li><strong>No actor</strong> — Terminal stage. No action button shown (use for "Approved").</li>
+        </ul>
       </div>
     </div>
   );
