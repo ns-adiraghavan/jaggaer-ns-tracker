@@ -35,6 +35,15 @@
   --st-revised-bg:  #f0ecfa;
   --st-approved:    #1e7a45;
   --st-approved-bg: #e6f5ec;
+  /* New workflow stages */
+  --st-brief:       #0e6655;
+  --st-brief-bg:    #e8f5f0;
+  --st-writing:     #1e6fa8;
+  --st-writing-bg:  #e8f2fa;
+  --st-robert:      #7d6608;
+  --st-robert-bg:   #fefde8;
+  --st-marketing:   #6c3483;
+  --st-marketing-bg:#f5eef8;
   --st-none:        rgba(17,24,32,0.30);
   --st-none-bg:     rgba(17,24,32,0.05);
 
@@ -448,6 +457,8 @@ code { font-family: var(--font-mono); font-size: 0.82em; background: var(--ink-5
 }
 .ns-drawer-tab:hover { color: var(--ink-2); }
 .ns-drawer-tab.is-active { color: var(--ink); border-bottom-color: var(--accent); }
+.ns-drawer-tab.is-primary-tab { color: var(--accent); font-weight: 600; }
+.ns-drawer-tab.is-primary-tab.is-active { border-bottom-color: var(--accent); }
 .ns-tab-count {
   background: var(--accent-mid); color: var(--accent); font-size: 9px;
   padding: 1px 5px; border-radius: 10px; margin-left: 4px; font-weight: 700;

@@ -18,14 +18,24 @@ const PILLAR_ACCENT = {
 };
 
 const STATUS_META = {
-  "not-started":      { label: "Not Started",      color: "rgba(17,24,32,0.38)",  bg: "rgba(17,24,32,0.06)" },
-  "uploaded":         { label: "Uploaded",          color: "#1e6fa8",              bg: "#e8f2fa" },
-  "jaggaer-feedback": { label: "Jaggaer Feedback",  color: "#b05e00",              bg: "#fdf0e0" },
-  "revised":          { label: "Revised",           color: "#5a3d9e",              bg: "#f0ecfa" },
-  "approved":         { label: "Approved",          color: "#1e7a45",              bg: "#e6f5ec" }
+  "not-started":       { label: "Not Started",       color: "rgba(17,24,32,0.38)", bg: "rgba(17,24,32,0.06)" },
+  "brief-uploaded":    { label: "Brief Uploaded",     color: "#0e6655",             bg: "#e8f5f0" },
+  "writing":           { label: "Writing",            color: "#1e6fa8",             bg: "#e8f2fa" },
+  "robert-review":     { label: "Robert Review",      color: "#7d6608",             bg: "#fefde8" },
+  "marketing-review":  { label: "Marketing Review",   color: "#6c3483",             bg: "#f5eef8" },
+  "jaggaer-feedback":  { label: "Jaggaer Feedback",   color: "#b05e00",             bg: "#fdf0e0" },
+  "revised":           { label: "Revised",            color: "#5a3d9e",             bg: "#f0ecfa" },
+  "approved":          { label: "Approved",           color: "#1e7a45",             bg: "#e6f5ec" },
 };
 
-const STATUS_ORDER = ["not-started", "uploaded", "jaggaer-feedback", "revised", "approved"];
+const STATUS_ORDER = [
+  "not-started", "brief-uploaded", "writing",
+  "robert-review", "marketing-review",
+  "jaggaer-feedback", "revised", "approved"
+];
+
+// Which statuses count as "in motion" for progress arc
+const IN_MOTION_STATUSES = ["brief-uploaded","writing","robert-review","marketing-review","jaggaer-feedback","revised"];
 
 // ─── Force-download helper — raw.githubusercontent serves HTML inline; fetch → blob forces save ──
 async function forceDownload(url, filename) {
@@ -481,7 +491,7 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
   for (const pillar of project.pillars) {
     for (const cluster of pillar.clusters) {
       for (const piece of cluster.pieces) {
-        if (piece.status === "uploaded" || piece.status === "revised")
+        if (piece.status === "robert-review" || piece.status === "marketing-review" || piece.status === "writing")
           needsReview.push({ piece, cluster, pillar });
         if (piece.status === "jaggaer-feedback")
           needsRevision.push({ piece, cluster, pillar });
@@ -774,7 +784,9 @@ function NotificationBell({ project, currentUser, onOpenPiece }) {
   for (const pillar of project.pillars) {
     for (const cluster of pillar.clusters) {
       for (const piece of cluster.pieces) {
-        if (piece.status === "uploaded" || piece.status === "revised") {
+        const isRobertCurrent = currentUser.id === "m-9toiv";
+        const isMarketingCurrent = currentUser.org === "jaggaer" && (currentUser.role === "Marketing" || currentUser.role === "SEO, Digital Marketing");
+        if (!isRobertCurrent && !isMarketingCurrent && (piece.status === "marketing-review" || piece.status === "revised")) {
           pending.push({ piece, cluster, pillar });
         }
       }
@@ -1210,7 +1222,7 @@ function SendToEditorsButton({ cluster, pillar, project }) {
 function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onAdminEditCluster, stagger, currentWeek }) {
   const total = cluster.pieces.length;
   const approved = cluster.pieces.filter(p => p.status === "approved").length;
-  const inMotion = cluster.pieces.filter(p => ["uploaded","jaggaer-feedback","revised"].includes(p.status)).length;
+  const inMotion = cluster.pieces.filter(p => IN_MOTION_STATUSES.includes(p.status)).length;
   const ready = approved === total && total > 0;
   const anchor = cluster.pieces.find(p => p.id === cluster.anchor_piece);
   const weekSlot = (project.schedule || []).find(w => w.slots.some(s => s.cluster === cluster.id));
@@ -1329,14 +1341,32 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
   const nsMembers = project.team.ns.map(m => ({ value: m.id, label: m.name }));
 
   function primaryAction() {
-    if (isNS && (piece.status === "not-started" || piece.status === "jaggaer-feedback"))
-      return { label: piece.status === "jaggaer-feedback" ? "Upload Revision" : "Upload", mode: "upload" };
-    if (isJG && (piece.status === "uploaded" || piece.status === "revised"))
+    // Jaggaer: uploads the brief to kick things off
+    if (isJG && piece.status === "not-started")
+      return { label: "Upload Brief", mode: "brief" };
+    // NS: writes the article after brief is received
+    if (isNS && piece.status === "brief-uploaded")
+      return { label: "Upload Article", mode: "upload" };
+    // Robert D (m-9toiv): content review
+    if (currentUser.id === "m-9toiv" && piece.status === "writing")
+      return { label: "Review Content", mode: "robert-review" };
+    // NS: revise after Robert's feedback
+    if (isNS && piece.status === "robert-review")
+      return { label: "Upload Revision", mode: "upload" };
+    // Marketing team (Jason R / Orlagh M): review before Jaggaer sees it
+    const isMarketing = isJG && (currentUser.role === "Marketing" || currentUser.role === "SEO, Digital Marketing");
+    if (isMarketing && currentUser.id !== "m-9toiv" && piece.status === "robert-review")
+      return { label: "Marketing Review", mode: "marketing-review" };
+    // Jaggaer (Indy / Anna R): final feedback/approval once marketing has cleared it
+    if (isJG && currentUser.id !== "m-9toiv" && !isMarketing && (piece.status === "marketing-review" || piece.status === "revised"))
       return { label: "Leave Feedback", mode: "feedback" };
+    // NS: upload revision after Jaggaer feedback
+    if (isNS && piece.status === "jaggaer-feedback")
+      return { label: "Upload Revision", mode: "upload" };
     return null;
   }
   const action = primaryAction();
-  const awaitsJaggaer = piece.status === "uploaded" || piece.status === "revised";
+  const awaitsJaggaer = piece.status === "marketing-review" || piece.status === "revised";
 
   return (
     <li className={`ns-piece-row ${isLast ? "is-last" : ""} ${isAnchor ? "is-anchor" : ""} ${awaitsJaggaer && isJG ? "awaits" : ""} ${isOpen ? "is-open" : ""}`}
@@ -1550,18 +1580,33 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   const feedback = (project.feedback || {})[piece.id] || [];
   const isNS = currentUser.org === "ns";
   const isJG = currentUser.org === "jaggaer";
-  const canUpload = isNS && (piece.status === "not-started" || piece.status === "jaggaer-feedback");
-  const canFeedback = isJG && (piece.status === "uploaded" || piece.status === "revised");
-  const hasDeliverable = piece.status !== "not-started";
+
+  // Tab visibility rules
+  const canUploadBrief = isJG && piece.status === "not-started";
+  const canUploadArticle = isNS && piece.status === "brief-uploaded";
+  const canUploadRevision = isNS && (piece.status === "robert-review" || piece.status === "jaggaer-feedback");
+  const canUpload = canUploadArticle || canUploadRevision;
+  // Robert D is Jaggaer org, id: m-9toiv — content reviewer
+  const isRobert = currentUser.id === "m-9toiv";
+  const canRobertReview = isRobert && piece.status === "writing";
+  // Marketing review: Jaggaer org, role contains "Marketing" — Jason R (anna) and Orlagh M
+  const isMarketing = isJG && (currentUser.role === "Marketing" || currentUser.role === "SEO, Digital Marketing");
+  const canMarketingReview = isMarketing && !isRobert && piece.status === "robert-review";
+  // Jaggaer final feedback: CMO (Indy) or PM (Anna R) — not Robert, not marketing reviewers
+  const canJaggaerFeedback = isJG && !isRobert && !isMarketing && (piece.status === "marketing-review" || piece.status === "revised");
+  const hasDeliverable = !["not-started","brief-uploaded"].includes(piece.status);
 
   return (
     <div className={`ns-piece-drawer${mode === "preview" ? " is-preview" : ""}`}>
       <div className="ns-drawer-tabs">
-        {canUpload && <button className={`ns-drawer-tab ${mode==="upload"?"is-active":""}`} onClick={() => setMode("upload")}>Upload</button>}
-        {canFeedback && <button className={`ns-drawer-tab ${mode==="feedback"?"is-active":""}`} onClick={() => setMode("feedback")}>Leave Feedback</button>}
+        {canUploadBrief && <button className={`ns-drawer-tab is-primary-tab ${mode==="brief"?"is-active":""}`} onClick={() => setMode("brief")}>Upload Brief</button>}
+        {canUpload && <button className={`ns-drawer-tab ${mode==="upload"?"is-active":""}`} onClick={() => setMode("upload")}>{canUploadRevision ? "Upload Revision" : "Upload Article"}</button>}
+        {canRobertReview && <button className={`ns-drawer-tab is-primary-tab ${mode==="robert-review"?"is-active":""}`} onClick={() => setMode("robert-review")}>Content Review</button>}
+        {canMarketingReview && <button className={`ns-drawer-tab is-primary-tab ${mode==="marketing-review"?"is-active":""}`} onClick={() => setMode("marketing-review")}>Marketing Review</button>}
+        {canJaggaerFeedback && <button className={`ns-drawer-tab is-primary-tab ${mode==="feedback"?"is-active":""}`} onClick={() => setMode("feedback")}>Leave Feedback</button>}
         {hasDeliverable && (
-          <button className={`ns-drawer-tab ${mode==="preview"?"is-active":""}`} onClick={() => setMode("preview")}>
-            Preview
+          <button className={`ns-drawer-tab ${mode==="annotate"?"is-active":""}`} onClick={() => setMode("annotate")}>
+            Preview & Comment
           </button>
         )}
         <button className={`ns-drawer-tab ${mode==="history"?"is-active":""}`} onClick={() => setMode("history")}>
@@ -1572,10 +1617,14 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
         {adminMode && <button className={`ns-drawer-tab ns-drawer-tab-delete ${mode==="delete"?"is-active":""}`} onClick={() => setMode("delete")}>Delete</button>}
         <button className="ns-drawer-close" onClick={onClose}>Close ✕</button>
       </div>
-      <div className="ns-drawer-body" style={mode === "preview" ? { padding: 0, overflow: "hidden" } : {}}>
+      <div className="ns-drawer-body" style={(mode === "preview" || mode === "annotate") ? { padding: 0, overflow: "hidden" } : {}}>
+        {mode === "brief" && canUploadBrief && <BriefUploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} />}
         {mode === "upload" && canUpload && <UploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} />}
-        {mode === "feedback" && canFeedback && <FeedbackForm piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} onDone={() => setMode("history")} />}
+        {mode === "robert-review" && canRobertReview && <InternalReviewPanel piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} reviewStage="robert-review" nextStatus="marketing-review" stageName="Content Review" onDone={() => setMode("history")} />}
+        {mode === "marketing-review" && canMarketingReview && <InternalReviewPanel piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} reviewStage="marketing-review" nextStatus="marketing-review" stageName="Marketing Review" onDone={() => setMode("history")} />}
+        {mode === "feedback" && canJaggaerFeedback && <FeedbackForm piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} onDone={() => setMode("history")} />}
         {mode === "preview" && hasDeliverable && <PreviewPanel piece={piece} cluster={cluster} pillar={pillar} project={project} />}
+        {mode === "annotate" && hasDeliverable && <AnnotatePanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} addFeedback={addFeedback} updatePiece={updatePiece} onDone={() => setMode("history")} />}
         {mode === "history" && <NotesHistory piece={piece} project={project} />}
         {mode === "details" && <PieceDetails piece={piece} cluster={cluster} pillar={pillar} project={project} />}
         {mode === "edit" && adminMode && <EditPiecePanel piece={piece} cluster={cluster} project={project} updatePiece={updatePiece} onDone={() => setMode("details")} />}
@@ -1714,8 +1763,10 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
     const contents = await new Promise((res, rej) => { reader.onload = () => res(reader.result); reader.onerror = rej; reader.readAsText(file); });
     for (let i = 0; i <= 100; i += 6) { setProgress(i); await new Promise(r => setTimeout(r, 28)); }
     await window.NS_API.uploadPieceDeliverable(piece, cluster.id, pillar.id, project.active_month, contents, currentUser.id);
-    // Always increment revision_count on any upload; status depends on current state
-    const newStatus = piece.status === "jaggaer-feedback" ? "revised" : "uploaded";
+    // Status routing: brief-uploaded → writing; robert-review → writing (re-uploaded after Robert feedback); jaggaer-feedback → revised
+    let newStatus = "writing";
+    if (piece.status === "jaggaer-feedback") newStatus = "revised";
+    else if (piece.status === "robert-review") newStatus = "robert-review"; // stays at robert-review so Robert can re-check
     updatePiece(cluster.id, piece.id, {
       status: newStatus,
       revision_count: nextRev,
@@ -1726,8 +1777,6 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
     });
     setStage("done");
   }
-
-  return (
     <div className="ns-upload">
       <div className="ns-upload-l">
         <div className={`ns-dropzone ${dragging?"is-dragging":""} ${stage!=="idle"?"is-busy":""}`}
@@ -1749,8 +1798,8 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
           {stage === "done" && (<>
             <div className="ns-drop-rule is-done"></div>
             <div className="ns-drop-title">Committed ✓</div>
-            <div className="ns-drop-sub">{filename} · deliverable-v{nextRev}.html · status → {piece.status==="jaggaer-feedback"?"Revised":"Uploaded"}</div>
-            <div className="ns-drop-path">Jaggaer will see this in their queue.</div>
+            <div className="ns-drop-sub">{filename} · deliverable-v{nextRev}.html · status → {piece.status==="jaggaer-feedback"?"Revised":"Writing"}</div>
+            <div className="ns-drop-path">{piece.status==="jaggaer-feedback" ? "Jaggaer will see your revision." : "Robert will be cued to review."}</div>
           </>)}
           <input ref={inputRef} type="file" hidden onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
         </div>
@@ -1760,7 +1809,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
         <ul className="ns-upload-rules">
           <li>One file per upload. Re-uploads create a new versioned file.</li>
           <li>Versions are preserved — nothing is overwritten.</li>
-          <li>Status moves to <strong>{piece.status==="jaggaer-feedback"?"Revised":"Uploaded"}</strong>; Jaggaer is cued.</li>
+          <li>Status moves to <strong>{piece.status==="jaggaer-feedback"?"Revised":"Writing"}</strong>; {piece.status==="jaggaer-feedback" ? "Jaggaer is cued." : "Robert is cued to review."}</li>
         </ul>
       </div>
     </div>
@@ -1776,7 +1825,7 @@ function FeedbackForm({ piece, cluster, project, currentUser, updatePiece, addFe
   async function submit() {
     if (!body.trim() && verdict !== "approved") return;
     setSubmitting(true);
-    const entry = { id: "fb-"+Math.random().toString(36).slice(2,8), author: currentUser.id, verdict, body: body.trim() || "(no note)", ts: new Date().toISOString() };
+    const entry = { id: "fb-"+Math.random().toString(36).slice(2,8), author: currentUser.id, verdict, body: body.trim() || "(no note)", ts: new Date().toISOString(), stage: "jaggaer" };
     addFeedback(piece.id, entry);
     updatePiece(cluster.id, piece.id, {
       status: verdict === "approved" ? "approved" : "jaggaer-feedback",
@@ -2077,16 +2126,19 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
               cluster.pieces.forEach((piece, idx) => {
                 const isAnchor = piece.id === cluster.anchor_piece;
                 const feedback = (project.feedback || {})[piece.id] || [];
-                const awaitsJG = isJG && (piece.status === "uploaded" || piece.status === "revised");
-                const canUploadNS = currentUser.org === "ns" && (piece.status === "not-started" || piece.status === "jaggaer-feedback");
-                const hasAction = awaitsJG || canUploadNS;
+                const awaitsJG = isJG && (piece.status === "marketing-review" || piece.status === "revised");
+                const canUploadNS = currentUser.org === "ns" && (piece.status === "brief-uploaded" || piece.status === "robert-review" || piece.status === "jaggaer-feedback");
+                const awaitsRobert = currentUser.id === "m-9toiv" && piece.status === "writing";
+                const isMarketing = isJG && (currentUser.role === "Marketing" || currentUser.role === "SEO, Digital Marketing");
+                const awaitsMarketing = isMarketing && currentUser.id !== "m-9toiv" && piece.status === "robert-review";
+                const hasAction = awaitsJG || canUploadNS || awaitsRobert || awaitsMarketing;
 
                 rows.push(
                   <tr
                     key={piece.id}
                     className={`ns-ct-piece-row ${awaitsJG ? "awaits-jg" : ""} ${isAnchor ? "is-anchor" : ""} ${adminMode ? "is-admin-row" : ""}`}
                     style={{ background: idx % 2 === 0 ? "#fff" : "#faf9f7" }}
-                    onClick={() => setOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: awaitsJG ? "feedback" : canUploadNS ? "upload" : "history" })}
+                    onClick={() => setOpenPiece({ clusterId: cluster.id, pieceId: piece.id, mode: awaitsJG ? "feedback" : awaitsRobert ? "robert-review" : awaitsMarketing ? "marketing-review" : canUploadNS ? "upload" : "history" })}
                   >
                     <td className="ns-ct-td ns-ct-td-num">
                       <span className="ns-ct-num" style={{ color: pal.seqColor + "aa" }}>{idx + 1}</span>
@@ -2205,6 +2257,306 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
           })}
         </tbody>
       </table>
+    </div>
+  );
+}
+
+// ─── Brief Upload Panel (Jaggaer uploads the SEO brief to kick off a piece) ───
+function BriefUploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece }) {
+  const [dragging, setDragging] = useStateTR(false);
+  const [stage, setStage] = useStateTR("idle");
+  const [filename, setFilename] = useStateTR(null);
+  const [bytes, setBytes] = useStateTR(0);
+  const [progress, setProgress] = useStateTR(0);
+  const inputRef = useRefTR(null);
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+
+  async function handleFile(file) {
+    setStage("uploading"); setFilename(file.name); setBytes(file.size);
+    const reader = new FileReader();
+    const contents = await new Promise((res, rej) => { reader.onload = () => res(reader.result); reader.onerror = rej; reader.readAsText(file); });
+    for (let i = 0; i <= 100; i += 8) { setProgress(i); await new Promise(r => setTimeout(r, 22)); }
+    await window.NS_API.uploadPieceDeliverable(piece, cluster.id, pillar.id, project.active_month, contents, currentUser.id);
+    updatePiece(cluster.id, piece.id, {
+      status: "brief-uploaded",
+      last_upload: new Date().toISOString(),
+      last_upload_by: currentUser.id,
+      last_updated: new Date().toISOString(),
+      last_updated_by: currentUser.id,
+    });
+    setStage("done");
+  }
+
+  return (
+    <div className="ns-upload">
+      <div className="ns-upload-l">
+        <div className={`ns-dropzone ${dragging?"is-dragging":""} ${stage!=="idle"?"is-busy":""}`}
+          onDragOver={e => { e.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)}
+          onDrop={e => { e.preventDefault(); setDragging(false); const f = e.dataTransfer.files?.[0]; if(f) handleFile(f); }}
+          onClick={() => stage === "idle" && inputRef.current?.click()}>
+          {stage === "idle" && (<>
+            <div className="ns-drop-rule"></div>
+            <div className="ns-drop-title">Drop SEO Brief here</div>
+            <div className="ns-drop-sub">or click to choose · .pdf, .docx, .md, .html</div>
+            <div className="ns-drop-path">→ <code>content/{project.active_month}/{pillar.id}/{cluster.id}/{piece.id}/brief-v1.html</code></div>
+          </>)}
+          {stage === "uploading" && (<>
+            <div className="ns-drop-rule"></div>
+            <div className="ns-drop-title">Uploading {filename}…</div>
+            <div className="ns-drop-progress"><div className="ns-drop-progress-fill" style={{width:`${progress}%`}}></div></div>
+            <div className="ns-drop-sub">{Math.round(bytes/1024)} KB · committing to GitHub</div>
+          </>)}
+          {stage === "done" && (<>
+            <div className="ns-drop-rule is-done"></div>
+            <div className="ns-drop-title">Brief Uploaded ✓</div>
+            <div className="ns-drop-sub">{filename} · NS will see this in their queue.</div>
+            <div className="ns-drop-path">Status → Brief Uploaded. NS can now write the article.</div>
+          </>)}
+          <input ref={inputRef} type="file" hidden onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
+        </div>
+      </div>
+      <div className="ns-upload-r">
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>What happens next</div>
+        <ul className="ns-upload-rules">
+          <li>Status moves to <strong>Brief Uploaded</strong>. NS writers are notified.</li>
+          <li>NS writes the article and uploads it. It goes to Robert for content review.</li>
+          <li>After Robert and marketing sign off, it comes back to you for final approval.</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+// ─── Internal Review Panel (Robert content review / Marketing review) ──────────
+function InternalReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFeedback, reviewStage, nextStatus, stageName, onDone }) {
+  const [verdict, setVerdict] = useStateTR("approved");
+  const [body, setBody] = useStateTR("");
+  const [submitting, setSubmitting] = useStateTR(false);
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+
+  async function submit() {
+    if (!body.trim() && verdict !== "approved") return;
+    setSubmitting(true);
+    const entry = {
+      id: "fb-"+Math.random().toString(36).slice(2,8),
+      author: currentUser.id,
+      verdict,
+      body: body.trim() || "(no note)",
+      ts: new Date().toISOString(),
+      stage: reviewStage,
+    };
+    addFeedback(piece.id, entry);
+    // Routing: approved → advance to nextStatus; needs-revision → send back to writing for NS to re-upload
+    const newStatus = verdict === "approved" ? nextStatus : "robert-review";
+    updatePiece(cluster.id, piece.id, {
+      status: newStatus,
+      last_updated: new Date().toISOString(),
+      last_updated_by: currentUser.id,
+    });
+    await new Promise(r => setTimeout(r, 300));
+    setSubmitting(false); setBody(""); onDone();
+  }
+
+  const INTERNAL_VERDICTS = ["approved", "needs-revision", "question"];
+
+  return (
+    <div className="ns-feedback">
+      <div className="ns-feedback-l">
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>{stageName} Verdict</div>
+        <div className="ns-verdict-row">
+          {INTERNAL_VERDICTS.map(v => (
+            <button key={v} className={`ns-verdict ${verdict===v?`is-on ${v}`:""}`} onClick={() => setVerdict(v)}>
+              <span className="ns-verdict-glyph">{VERDICT_META[v].glyph}</span>
+              <span>{VERDICT_META[v].label}</span>
+            </button>
+          ))}
+        </div>
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:8,marginTop:16}}>
+          Note {verdict==="approved"?"(optional)":"(required)"}
+        </div>
+        <textarea className="ns-feedback-textarea" value={body} onChange={e => setBody(e.target.value)}
+          placeholder={verdict==="approved" ? "Any final notes for the writer — optional." : verdict==="needs-revision" ? "What needs to change and where. Be specific — section, paragraph, claim." : "Ask the writer something."}>
+        </textarea>
+        <div className="ns-feedback-actions">
+          <button className="ns-feedback-submit" disabled={submitting||(verdict!=="approved"&&!body.trim())} onClick={submit}>
+            {submitting ? "Submitting…" : verdict==="approved" ? `Approve → ${nextStatus==="marketing-review"?"Goes to Marketing":"Goes to Jaggaer"}` : "Send Back to NS →"}
+          </button>
+        </div>
+      </div>
+      <div className="ns-feedback-r">
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>This Stage</div>
+        <ol className="ns-feedback-process">
+          <li><strong>Approved</strong> — moves to the next stage ({nextStatus==="marketing-review"?"Marketing Review":"Jaggaer Feedback"}).</li>
+          <li><strong>Needs revision</strong> — NS sees note and re-uploads.</li>
+          <li><strong>Question</strong> — open thread; status stays.</li>
+        </ol>
+        <div style={{marginTop:16, padding:"12px", background:"#f0f7f4", borderRadius:"4px", border:"1px solid #c2e8d4"}}>
+          <div style={{...FONT, fontSize:"0.72rem", fontWeight:600, color:"#1e7a45", marginBottom:4}}>Internal Review</div>
+          <div style={{...FONT, fontSize:"0.72rem", color:"#444", lineHeight:1.5}}>
+            This review is not visible to Jaggaer. Only approved pieces proceed to client review.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Annotate Panel — iframe preview with inline comment sidebar ───────────────
+function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedback, updatePiece, onDone }) {
+  const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
+  const monthId = project.active_month || "month-1";
+  const rev = piece.revision_count || 1;
+  const githubPath = `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${rev}.html`;
+
+  const [srcdoc, setSrcdoc] = useStateTR(null);
+  const [loading, setLoading] = useStateTR(true);
+  const [error, setError] = useStateTR(null);
+  const [commentText, setCommentText] = useStateTR("");
+  const [section, setSection] = useStateTR("");
+  const [submitting, setSubmitting] = useStateTR(false);
+  const [submitted, setSubmitted] = useStateTR(false);
+
+  const existingAnnotations = ((project.feedback || {})[piece.id] || []).filter(f => f.annotation);
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+
+  React.useEffect(() => {
+    let cancelled = false;
+    setLoading(true); setError(null); setSrcdoc(null);
+    fetch(`/api/github?path=${encodeURIComponent(githubPath)}`)
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+      .then(data => {
+        if (cancelled) return;
+        const b64 = data.content.replace(/\n/g, "");
+        const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+        const html = new TextDecoder("utf-8").decode(bytes);
+        const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+        setSrcdoc(URL.createObjectURL(blob));
+        setLoading(false);
+      })
+      .catch(err => { if (!cancelled) { setError(err.message); setLoading(false); } });
+    return () => { cancelled = true; };
+  }, [githubPath]);
+
+  async function submitAnnotation() {
+    if (!commentText.trim()) return;
+    setSubmitting(true);
+    const entry = {
+      id: "ann-"+Math.random().toString(36).slice(2,8),
+      author: currentUser.id,
+      verdict: "question",
+      body: commentText.trim(),
+      ts: new Date().toISOString(),
+      annotation: true,
+      section: section.trim() || "General",
+    };
+    addFeedback(piece.id, entry);
+    await new Promise(r => setTimeout(r, 300));
+    setCommentText(""); setSection(""); setSubmitting(false); setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 2000);
+  }
+
+  return (
+    <div style={{ display: "flex", height: "100%", minHeight: 0 }}>
+      {/* iframe left */}
+      <div style={{ flex: 1, minWidth: 0, position: "relative", borderRight: "1px solid #e8e3da" }}>
+        {/* top bar */}
+        <div style={{ display:"flex", alignItems:"center", gap:"12px", padding:"8px 16px", background:"#f0f7ff", borderBottom:"1px solid #c5ddef", flexShrink:0 }}>
+          <span style={{ ...FONT, fontSize:"0.72rem", fontWeight:600, color:"#1a3a52" }}>
+            deliverable-v{rev}.html
+          </span>
+          <span style={{ ...FONT, fontSize:"0.68rem", color:"#6b8fa8" }}>
+            — Highlight a section, then add your comment →
+          </span>
+        </div>
+        <div style={{ position:"absolute", top:"41px", bottom:0, left:0, right:0, background:"#fff" }}>
+          {loading && (
+            <div style={{ position:"absolute", inset:0, display:"flex", alignItems:"center", justifyContent:"center", background:"#faf8f4" }}>
+              <span style={{ ...FONT, fontSize:"0.82rem", color:"#888" }}>Loading preview…</span>
+            </div>
+          )}
+          {error && (
+            <div style={{ position:"absolute", inset:0, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"8px", background:"#faf8f4" }}>
+              <span style={{ ...FONT, fontSize:"0.82rem", color:"#b91c1c" }}>Could not load preview</span>
+              <span style={{ ...FONT, fontSize:"0.72rem", color:"#888" }}>{error}</span>
+            </div>
+          )}
+          {srcdoc && (
+            <iframe
+              src={srcdoc}
+              sandbox="allow-same-origin allow-scripts"
+              style={{ width:"100%", height:"100%", border:"none", display:"block" }}
+              title={`Annotate: ${piece.title}`}
+            />
+          )}
+        </div>
+      </div>
+
+      {/* comment sidebar right */}
+      <div style={{ width:"300px", flexShrink:0, display:"flex", flexDirection:"column", background:"#faf9f7" }}>
+        {/* new comment form */}
+        <div style={{ padding:"16px", borderBottom:"1px solid #e8e3da" }}>
+          <div style={{ ...FONT, fontSize:"0.68rem", fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase", color:"#888", marginBottom:"10px" }}>
+            Add Comment
+          </div>
+          <input
+            value={section}
+            onChange={e => setSection(e.target.value)}
+            placeholder="Section (e.g. Introduction, Myth 2…)"
+            style={{ ...FONT, width:"100%", fontSize:"0.78rem", padding:"7px 10px", border:"1px solid #d4cfc8", borderRadius:"3px", marginBottom:"8px", background:"#fff", color:"#0d0d0d", boxSizing:"border-box" }}
+          />
+          <textarea
+            value={commentText}
+            onChange={e => setCommentText(e.target.value)}
+            placeholder="Your comment — be specific about what to change and why."
+            rows={4}
+            style={{ ...FONT, width:"100%", fontSize:"0.78rem", padding:"7px 10px", border:"1px solid #d4cfc8", borderRadius:"3px", resize:"vertical", background:"#fff", color:"#0d0d0d", boxSizing:"border-box", lineHeight:1.5 }}
+          />
+          <button
+            onClick={submitAnnotation}
+            disabled={submitting || !commentText.trim()}
+            style={{ ...FONT, marginTop:"8px", width:"100%", padding:"8px", fontSize:"0.78rem", fontWeight:600, background: submitted?"#1e7a45":"#c8401a", color:"#fff", border:"none", borderRadius:"3px", cursor: commentText.trim()?"pointer":"not-allowed", opacity: commentText.trim()?1:0.5, transition:"background 0.2s" }}>
+            {submitted ? "Comment Added ✓" : submitting ? "Adding…" : "Add Comment →"}
+          </button>
+          <div style={{ ...FONT, fontSize:"0.68rem", color:"#aaa", marginTop:"6px", lineHeight:1.4 }}>
+            Comments are tagged to your name and saved to the Notes thread.
+          </div>
+        </div>
+
+        {/* existing inline annotations */}
+        <div style={{ flex:1, overflowY:"auto", padding:"16px" }}>
+          <div style={{ ...FONT, fontSize:"0.68rem", fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase", color:"#888", marginBottom:"10px" }}>
+            Inline Comments {existingAnnotations.length > 0 && `(${existingAnnotations.length})`}
+          </div>
+          {existingAnnotations.length === 0 ? (
+            <div style={{ ...FONT, fontSize:"0.78rem", color:"#bbb", lineHeight:1.5 }}>
+              No inline comments yet. Add one above.
+            </div>
+          ) : (
+            <div style={{ display:"flex", flexDirection:"column", gap:"10px" }}>
+              {existingAnnotations.map(ann => {
+                const all = [...(project.team.ns||[]), ...(project.team.jaggaer||[])];
+                const author = all.find(a => a.id === ann.author) || { name: ann.author, org:"ns" };
+                const date = new Date(ann.ts);
+                const dateStr = date.toLocaleDateString("en-GB",{day:"numeric",month:"short"}) + " · " + date.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
+                return (
+                  <div key={ann.id} style={{ background:"#fff", border:"1px solid #e8e3da", borderLeft:"3px solid #c8401a", borderRadius:"0 3px 3px 0", padding:"10px 12px" }}>
+                    <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:"4px" }}>
+                      <span style={{ ...FONT, fontSize:"0.7rem", fontWeight:600, color:"#1a2535" }}>{author.name.split(" ")[0]}</span>
+                      <span style={{ ...FONT, fontSize:"0.65rem", color:"#aaa" }}>{dateStr}</span>
+                    </div>
+                    {ann.section && ann.section !== "General" && (
+                      <div style={{ ...FONT, fontSize:"0.65rem", color:"#c8401a", fontWeight:600, marginBottom:"4px", letterSpacing:"0.04em" }}>
+                        § {ann.section}
+                      </div>
+                    )}
+                    <p style={{ ...FONT, fontSize:"0.78rem", color:"#444", lineHeight:1.5, margin:0 }}>{ann.body}</p>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
