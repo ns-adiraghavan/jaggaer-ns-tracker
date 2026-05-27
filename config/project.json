@@ -374,7 +374,7 @@
               "title": "Why Supply Chain Visibility Breaks Down Beyond Tier 1",
               "format": "Thought Leadership",
               "assignee": "null",
-              "status": "uploaded",
+              "status": "robert-review",
               "revision_count": 1,
               "primary_keyword": "supply chain visibility beyond tier 1",
               "secondary_keyword": "multi-tier supplier visibility challenges",
@@ -396,7 +396,7 @@
               "title": "Supplier Financial Risk Signals Procurement Should Monitor",
               "format": "Informational Article",
               "assignee": "manager",
-              "status": "uploaded",
+              "status": "robert-review",
               "revision_count": 1,
               "primary_keyword": "supplier financial risk assessment",
               "secondary_keyword": "supplier risk management",
@@ -418,7 +418,7 @@
               "title": "From Reactive to Predictive Supplier Risk Management",
               "format": "Strategic Solution Article",
               "assignee": "manager",
-              "status": "uploaded",
+              "status": "robert-review",
               "revision_count": 1,
               "primary_keyword": "predictive supplier risk management",
               "secondary_keyword": "proactive procurement risk management",
@@ -808,12 +808,6 @@
         "role": "NS Manager",
         "org": "ns",
         "admin": true
-      },
-      {
-        "id": "abhishek",
-        "name": "Abhishek",
-        "role": "Editor",
-        "org": "ns"
       }
     ],
     "jaggaer": [
@@ -845,6 +839,12 @@
       {
         "id": "m-9toiv",
         "name": "Robert D",
+        "role": "Marketing",
+        "org": "jaggaer"
+      },
+      {
+        "id": "abhishek",
+        "name": "Abhishek",
         "role": "Marketing",
         "org": "jaggaer"
       }
@@ -981,5 +981,63 @@
       "adi.raghavan@netscribes.com"
     ],
     "editors_to": []
-  }
+  },
+  "workflow_stages": [
+    {
+      "id": "not-started",
+      "label": "Not Started",
+      "color": "rgba(17,24,32,0.38)",
+      "bg": "rgba(17,24,32,0.06)",
+      "actor": "jaggaer"
+    },
+    {
+      "id": "brief-uploaded",
+      "label": "Brief Uploaded",
+      "color": "#0e6655",
+      "bg": "#e8f5f0",
+      "actor": "ns"
+    },
+    {
+      "id": "abhishek-review",
+      "label": "Abhishek Review",
+      "color": "#1a6b8a",
+      "bg": "#e5f3f8",
+      "actor": "person:abhishek"
+    },
+    {
+      "id": "writing",
+      "label": "Writing",
+      "color": "#1e6fa8",
+      "bg": "#e8f2fa",
+      "actor": "ns"
+    },
+    {
+      "id": "robert-review",
+      "label": "Robert Review",
+      "color": "#7d6608",
+      "bg": "#fefde8",
+      "actor": "person:m-9toiv"
+    },
+    {
+      "id": "marketing-review",
+      "label": "Marketing Review",
+      "color": "#6c3483",
+      "bg": "#f5eef8",
+      "actor": "jaggaer"
+    },
+    {
+      "id": "editors",
+      "label": "Editors",
+      "color": "#b05e00",
+      "bg": "#fdf0e0",
+      "actor": "jaggaer"
+    },
+    {
+      "id": "approved",
+      "label": "Approved",
+      "color": "#1e7a45",
+      "bg": "#e6f5ec",
+      "actor": null
+    }
+  ]
 }
