@@ -1464,6 +1464,62 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
 }
 
 // ─── HTML Preview Panel ───────────────────────────────────────────────────────
+// Injects a line-number gutter into the iframe so reviewers can cite "¶12" etc.
+function injectLineNumbers(html) {
+  // We inject a small script + style into the fetched HTML that:
+  // 1. Numbers every block element (h1-h6, p, li, blockquote, td) with a left margin gutter
+  // 2. Highlights the element on hover
+  // 3. Posts a message to parent when clicked so the section field can be auto-populated
+  const injected = `
+<style id="__ns_lnum">
+  .__ns_lnum_wrap { position:relative; }
+  .__ns_lnum_gutter {
+    position:absolute; left:-52px; top:0; width:44px;
+    font-family:monospace; font-size:10px; color:#aaa;
+    text-align:right; padding-top:2px; line-height:inherit;
+    user-select:none; cursor:pointer; letter-spacing:0;
+    transition:color 0.1s;
+  }
+  .__ns_lnum_wrap:hover .__ns_lnum_gutter { color:#c8401a; }
+  .__ns_lnum_wrap.is-highlighted { background:#fff8f0 !important; outline:2px solid #c8401a; outline-offset:2px; }
+</style>
+<script id="__ns_lnum_script">
+(function(){
+  var tags = ['p','h1','h2','h3','h4','h5','h6','li','blockquote','td','figcaption'];
+  var n = 0;
+  tags.forEach(function(tag){
+    document.querySelectorAll(tag).forEach(function(el){
+      if(el.closest('.__ns_lnum_wrap')) return;
+      n++;
+      var orig = el.style.cssText || '';
+      el.style.position = 'relative';
+      el.style.marginLeft = (el.tagName.match(/^H/) ? '56px' : '56px');
+      var wrap = document.createElement('div');
+      wrap.className = '__ns_lnum_wrap';
+      wrap.style.position = 'relative';
+      el.parentNode.insertBefore(wrap, el);
+      wrap.appendChild(el);
+      var gutter = document.createElement('span');
+      gutter.className = '__ns_lnum_gutter';
+      gutter.textContent = '\u00B6' + n;
+      gutter.dataset.ln = n;
+      wrap.insertBefore(gutter, el);
+      gutter.addEventListener('click', function(){
+        document.querySelectorAll('.__ns_lnum_wrap.is-highlighted').forEach(function(w){ w.classList.remove('is-highlighted'); });
+        wrap.classList.add('is-highlighted');
+        var excerpt = el.textContent.slice(0, 60).trim();
+        window.parent.postMessage({ type:'__ns_line_click', lineNum: n, excerpt: excerpt }, '*');
+        setTimeout(function(){ wrap.classList.remove('is-highlighted'); }, 2500);
+      });
+    });
+  });
+})();
+</script>`;
+  // Inject before </body> or at end
+  if (html.includes("</body>")) return html.replace("</body>", injected + "</body>");
+  return html + injected;
+}
+
 function PreviewPanel({ piece, cluster, pillar, project }) {
   const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
   const monthId = project.active_month || "month-1";
@@ -1487,7 +1543,7 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
         // Decode base64 → UTF-8 bytes → Blob URL (TextDecoder preserves UTF-8, atob gives Latin-1)
         const b64 = data.content.replace(/\n/g, "");
         const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-        const html = new TextDecoder("utf-8").decode(bytes);
+        const html = injectLineNumbers(new TextDecoder("utf-8").decode(bytes));
         const blob = new Blob([html], { type: "text/html;charset=utf-8" });
         objectUrl = URL.createObjectURL(blob);
         setSrcdoc(objectUrl);
@@ -1616,6 +1672,9 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   const canBrief = isCurrentActor && piece.status === "not-started"; // Jaggaer uploads brief
   const canUpload = isCurrentActor && isNS && piece.status !== "not-started"; // NS submits article/revision
   const canReview = isCurrentActor && !isNS && piece.status !== "not-started" && piece.status !== "approved";
+  // NS can replace a draft they already submitted, as long as it hasn't reached any review stage yet
+  const nsWritingStages = stages.filter(s => s.actor === "ns" && s.id !== "not-started").map(s => s.id);
+  const canReplace = !canUpload && isNS && nsWritingStages.includes(piece.status);
   const hasDeliverable = currentStageIdx > stageOrder.indexOf("brief-uploaded");
 
   return (
@@ -1623,6 +1682,7 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
       <div className="ns-drawer-tabs">
         {canBrief && <button className={`ns-drawer-tab is-primary-tab ${mode==="brief"?"is-active":""}`} onClick={() => setMode("brief")}>Upload Brief</button>}
         {canUpload && <button className={`ns-drawer-tab is-primary-tab ${mode==="upload"?"is-active":""}`} onClick={() => setMode("upload")}>{nextStage ? `Submit → ${nextStage.label}` : "Submit"}</button>}
+        {canReplace && <button className={`ns-drawer-tab ${mode==="replace"?"is-active":""}`} onClick={() => setMode("replace")} title="Replace your draft before it enters review">↩ Replace Draft</button>}
         {canReview && <button className={`ns-drawer-tab is-primary-tab ${mode==="review"?"is-active":""}`} onClick={() => setMode("review")}>Review</button>}
         {hasDeliverable && <button className={`ns-drawer-tab ${mode==="annotate"?"is-active":""}`} onClick={() => setMode("annotate")}>Preview & Comment</button>}
         <button className={`ns-drawer-tab ${mode==="history"?"is-active":""}`} onClick={() => setMode("history")}>
@@ -1636,11 +1696,12 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
       <div className="ns-drawer-body" style={(mode === "preview" || mode === "annotate") ? { padding: 0, overflow: "hidden" } : {}}>
         {mode === "brief" && canBrief && <BriefUploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} />}
         {mode === "upload" && canUpload && <UploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} />}
+        {mode === "replace" && canReplace && <ReplaceDraftPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} onDone={() => setMode("details")} />}
         {mode === "review" && canReview && <ReviewPanel piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} stages={stages} stageMeta={stageMeta} onDone={() => setMode("history")} />}
         {mode === "preview" && hasDeliverable && <PreviewPanel piece={piece} cluster={cluster} pillar={pillar} project={project} />}
         {mode === "annotate" && hasDeliverable && <AnnotatePanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} addFeedback={addFeedback} updatePiece={updatePiece} onDone={() => setMode("history")} />}
         {mode === "history" && <NotesHistory piece={piece} project={project} />}
-        {mode === "details" && <PieceDetails piece={piece} cluster={cluster} pillar={pillar} project={project} />}
+        {mode === "details" && <PieceDetails piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} adminMode={adminMode} />}
         {mode === "edit" && adminMode && <EditPiecePanel piece={piece} cluster={cluster} project={project} updatePiece={updatePiece} onDone={() => setMode("details")} />}
         {mode === "delete" && adminMode && <DeletePiecePanel piece={piece} cluster={cluster} deletePiece={deletePiece} onClose={onClose} />}
       </div>
@@ -1755,6 +1816,79 @@ function DeletePiecePanel({ piece, cluster, deletePiece, onClose }) {
     </div>
   );
 }
+
+// ─── Replace Draft Panel — NS replaces their own draft BEFORE it enters review ─
+// Does NOT advance status. Overwrites the same version file in GitHub.
+function ReplaceDraftPanel({ piece, cluster, pillar, project, currentUser, updatePiece, stages, onDone }) {
+  const [dragging, setDragging] = useStateTR(false);
+  const [stage, setStage] = useStateTR("idle");
+  const [filename, setFilename] = useStateTR(null);
+  const [bytes, setBytes] = useStateTR(0);
+  const [progress, setProgress] = useStateTR(0);
+  const inputRef = useRefTR(null);
+  const rev = piece.revision_count || 1;
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+
+  async function handleFile(file) {
+    setStage("uploading"); setFilename(file.name); setBytes(file.size);
+    const reader = new FileReader();
+    const contents = await new Promise((res, rej) => { reader.onload = () => res(reader.result); reader.onerror = rej; reader.readAsText(file); });
+    for (let i = 0; i <= 100; i += 6) { setProgress(i); await new Promise(r => setTimeout(r, 28)); }
+    // uploadPieceDeliverable writes deliverable-v{rev}.html — same rev, same status
+    await window.NS_API.uploadPieceDeliverable(piece, cluster.id, pillar.id, project.active_month, contents, currentUser.id);
+    updatePiece(cluster.id, piece.id, {
+      last_upload: new Date().toISOString(),
+      last_upload_by: currentUser.id,
+      last_updated: new Date().toISOString(),
+      last_updated_by: currentUser.id,
+    });
+    setStage("done");
+  }
+
+  return (
+    <div className="ns-upload">
+      <div className="ns-upload-l">
+        <div style={{ ...FONT, fontSize: "0.7rem", background: "#fff8e6", border: "1px solid #f0d070", color: "#7a5800", padding: "8px 14px", borderRadius: "3px", marginBottom: "12px" }}>
+          This replaces your current draft <strong>without</strong> advancing the workflow. Status stays at <strong>{STATUS_META[piece.status]?.label || piece.status}</strong>.
+        </div>
+        <div className={`ns-dropzone ${dragging?"is-dragging":""} ${stage!=="idle"?"is-busy":""}`}
+          onDragOver={e => { e.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)}
+          onDrop={e => { e.preventDefault(); setDragging(false); const f = e.dataTransfer.files?.[0]; if(f) handleFile(f); }}
+          onClick={() => stage === "idle" && inputRef.current?.click()}>
+          {stage === "idle" && (<>
+            <div className="ns-drop-rule"></div>
+            <div className="ns-drop-title">Drop replacement file here</div>
+            <div className="ns-drop-sub">or click to choose · .html, .docx, .md</div>
+            <div className="ns-drop-path">→ <code>…/{piece.id}/deliverable-v{rev}.html</code> (overwrites)</div>
+          </>)}
+          {stage === "uploading" && (<>
+            <div className="ns-drop-rule"></div>
+            <div className="ns-drop-title">Replacing {filename}…</div>
+            <div className="ns-drop-progress"><div className="ns-drop-progress-fill" style={{width:`${progress}%`}}></div></div>
+            <div className="ns-drop-sub">{Math.round(bytes/1024)} KB · committing to GitHub</div>
+          </>)}
+          {stage === "done" && (<>
+            <div className="ns-drop-rule is-done"></div>
+            <div className="ns-drop-title">Replaced ✓</div>
+            <div className="ns-drop-sub">{filename} · deliverable-v{rev}.html updated</div>
+            <div className="ns-drop-path">Status unchanged · <button onClick={onDone} style={{...FONT,background:"none",border:"none",color:"#c8401a",fontWeight:600,cursor:"pointer",fontSize:"0.78rem",padding:0}}>Close drawer →</button></div>
+          </>)}
+          <input ref={inputRef} type="file" hidden onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
+        </div>
+      </div>
+      <div className="ns-upload-r">
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>When to use this</div>
+        <ul className="ns-upload-rules">
+          <li>Caught an error in your draft before anyone reviewed it.</li>
+          <li>Brief changed and you need to update before submitting.</li>
+          <li>Same revision number — no version history entry created.</li>
+          <li>To formally submit to the next reviewer, use the <strong>Submit</strong> tab.</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 
 function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece, stages }) {
   const [dragging, setDragging] = useStateTR(false);
@@ -1965,7 +2099,7 @@ function FeedbackCard({ entry, project, ordinal }) {
 }
 
 // ─── Piece details ────────────────────────────────────────────────────────────
-function PieceDetails({ piece, cluster, pillar, project }) {
+function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode }) {
   const weekSlot = (project.schedule || []).find(w => w.slots.some(s => s.cluster === cluster.id));
   const rows = [
     ["Pillar",            pillar.label],
@@ -2059,6 +2193,7 @@ function PieceDetails({ piece, cluster, pillar, project }) {
           >
             View in GitHub →
           </a>
+          {(currentUser?.org === "ns" || adminMode) && null}
         </div>
       )}
 
@@ -2385,6 +2520,18 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
   const existingAnnotations = ((project.feedback || {})[piece.id] || []).filter(f => f.annotation);
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
+  // Listen for paragraph-click messages from the iframe
+  React.useEffect(() => {
+    function onMsg(e) {
+      if (e.data && e.data.type === "__ns_line_click") {
+        const ref = `¶${e.data.lineNum}${e.data.excerpt ? ` — "${e.data.excerpt.slice(0,40)}…"` : ""}`;
+        setSection(ref);
+      }
+    }
+    window.addEventListener("message", onMsg);
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
+
   React.useEffect(() => {
     let cancelled = false;
     setLoading(true); setError(null); setSrcdoc(null);
@@ -2394,7 +2541,7 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
         if (cancelled) return;
         const b64 = data.content.replace(/\n/g, "");
         const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-        const html = new TextDecoder("utf-8").decode(bytes);
+        const html = injectLineNumbers(new TextDecoder("utf-8").decode(bytes));
         const blob = new Blob([html], { type: "text/html;charset=utf-8" });
         setSrcdoc(URL.createObjectURL(blob));
         setLoading(false);
@@ -2431,7 +2578,7 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
             deliverable-v{rev}.html
           </span>
           <span style={{ ...FONT, fontSize:"0.68rem", color:"#6b8fa8" }}>
-            — Highlight a section, then add your comment →
+            — Click any ¶ number to reference it, then add your comment →
           </span>
         </div>
         <div style={{ position:"absolute", top:"41px", bottom:0, left:0, right:0, background:"#fff" }}>
@@ -2467,7 +2614,7 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
           <input
             value={section}
             onChange={e => setSection(e.target.value)}
-            placeholder="Section (e.g. Introduction, Myth 2…)"
+            placeholder="Click ¶ in preview to reference, or type section name…"
             style={{ ...FONT, width:"100%", fontSize:"0.78rem", padding:"7px 10px", border:"1px solid #d4cfc8", borderRadius:"3px", marginBottom:"8px", background:"#fff", color:"#0d0d0d", boxSizing:"border-box" }}
           />
           <textarea
