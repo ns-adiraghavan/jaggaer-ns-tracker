@@ -773,7 +773,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
       {overlayPiece && overlayCluster && overlayPillar && (
         <DrawerOverlay
           piece={overlayPiece} cluster={overlayCluster} pillar={overlayPillar}
-          project={project} mode={openPiece.mode || "history"}
+        project={project} mode={openPiece.mode || (overlayPiece && overlayPiece.revision_count ? "annotate" : "details")}
           setMode={m => setOpenPiece(prev => ({ ...prev, mode: m }))}
           updatePiece={updatePiece} addFeedback={addFeedback}
           currentUser={currentUser} adminMode={adminMode}
@@ -1472,16 +1472,18 @@ function injectLineNumbers(html) {
   // 3. Posts a message to parent when clicked so the section field can be auto-populated
   const injected = `
 <style id="__ns_lnum">
+  body { padding-left: 52px !important; box-sizing: border-box; }
   .__ns_lnum_wrap { position:relative; }
   .__ns_lnum_gutter {
-    position:absolute; left:-52px; top:0; width:44px;
-    font-family:monospace; font-size:10px; color:#aaa;
-    text-align:right; padding-top:2px; line-height:inherit;
-    user-select:none; cursor:pointer; letter-spacing:0;
+    position:absolute; left:-50px; top:2px; width:42px;
+    font-family:monospace; font-size:10px; color:#c0bbb5;
+    text-align:right; line-height:inherit;
+    user-select:none; cursor:pointer;
     transition:color 0.1s;
+    white-space:nowrap;
   }
   .__ns_lnum_wrap:hover .__ns_lnum_gutter { color:#c8401a; }
-  .__ns_lnum_wrap.is-highlighted { background:#fff8f0 !important; outline:2px solid #c8401a; outline-offset:2px; }
+  .__ns_lnum_wrap.is-highlighted { background:#fff8f0 !important; outline:2px solid #c8401a; outline-offset:2px; border-radius:2px; }
 </style>
 <script id="__ns_lnum_script">
 (function(){
@@ -1491,9 +1493,6 @@ function injectLineNumbers(html) {
     document.querySelectorAll(tag).forEach(function(el){
       if(el.closest('.__ns_lnum_wrap')) return;
       n++;
-      var orig = el.style.cssText || '';
-      el.style.position = 'relative';
-      el.style.marginLeft = (el.tagName.match(/^H/) ? '56px' : '56px');
       var wrap = document.createElement('div');
       wrap.className = '__ns_lnum_wrap';
       wrap.style.position = 'relative';
