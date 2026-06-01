@@ -504,12 +504,9 @@ Vercel env vars → DIGEST_TO / EDITORS_TO                       (fallback)
 
 | # | Issue | Status |
 |---|---|---|
-| 1 | **Remove team member in Admin** | Open — add-only; no delete yet |
-| 2 | **Feedback deletion** | Open — no admin ability to remove erroneous notes |
-| 3 | **BWC GitHub links** | Open — should resolve to `https://github.com/ns-adiraghavan/jaggaer-ns-tracker/tree/main/${app.path}` |
-| 4 | **Month switcher UI** | Open — months array exists in data model; no browse UI yet |
-| 5 | **Anthropic API key** | Pending — Claude rail and live Sample Artifacts demos inactive until key added |
-| 6 | **File upload E2E** | Open — `uploadPieceDeliverable` uses FileReader + base64; confirm works end-to-end on Vercel |
+| 1 | **Feedback deletion** | Open — no admin ability to remove an individual erroneous feedback note (deleting a piece clears all its feedback, but individual note removal isn't exposed) |
+| 2 | **Month switcher** | Open — switcher UI exists in sidebar and works when multiple months are in `project.json`, but only Month 1 is currently configured |
+| 3 | **Anthropic API key** | Pending — Claude rail and live Sample Artifacts demos inactive until key added to Vercel env |
 
 ---
 
