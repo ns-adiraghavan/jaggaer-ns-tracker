@@ -57,14 +57,18 @@ function categoriseStages(stages) {
     if (id === "not-started" || id === "approved") return;
 
     const actor = stage.actor || "";
-    const isNS = actor === "ns";
-    const isPerson = actor.startsWith("person:");
-    const isJG = actor === "jaggaer";
+    const actors = Array.isArray(actor) ? actor : (actor ? [actor] : []);
+    const isNS = actors.includes("ns");
+    const isPerson = actors.some(a => a.startsWith("person:"));
+    const isJG = actors.includes("jaggaer");
 
     if (isNS) {
       // NS-actor stages: if there's a non-NS stage before this one in the order, it was
       // sent back. If this is the first NS stage, it's an upload.
-      const prevNonNS = stages.slice(0, idx).some(s => s.actor !== "ns" && s.id !== "not-started");
+      const prevNonNS = stages.slice(0, idx).some(s => {
+        const pa = Array.isArray(s.actor) ? s.actor : (s.actor ? [s.actor] : []);
+        return !pa.includes("ns") && s.id !== "not-started";
+      });
       if (prevNonNS) sendbackStages.add(id);
       else nsUploadStages.add(id);
     } else if (isJG || isPerson) {
@@ -218,15 +222,19 @@ export default async function handler(req, res) {
     function nextAction(stageId) {
       const stage = stages.find(s => s.id === stageId);
       if (!stage) return "—";
-      const actor = stage.actor || "";
-      if (!actor) return "Done";
-      if (actor === "ns") return "NS to act";
-      if (actor === "jaggaer") return "Jaggaer to review";
-      if (actor.startsWith("person:")) {
-        const m = allMembers.find(x => x.id === actor.slice(7));
-        return m ? `${m.name.split(" ")[0]} to review` : actor.slice(7);
-      }
-      return stage.label;
+      const actor = stage.actor;
+      const actors = Array.isArray(actor) ? actor : (actor ? [actor] : []);
+      if (!actors.length) return "Done";
+      const labels = actors.map(a => {
+        if (a === "ns") return "NS to act";
+        if (a === "jaggaer") return "Jaggaer to review";
+        if (a.startsWith("person:")) {
+          const m = allMembers.find(x => x.id === a.slice(7));
+          return m ? `${m.name.split(" ")[0]} to review` : a.slice(7);
+        }
+        return a;
+      });
+      return labels.join(" + ");
     }
 
     const verdictLabel = { "approved": "Approved ✓", "needs-revision": "Needs revision", "question": "Question raised" };

@@ -1361,10 +1361,19 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
 
   function actorMatches(actor) {
     if (!actor) return false;
-    if (actor === "ns") return isNS;
-    if (actor === "jaggaer") return isJG;
-    if (actor.startsWith("person:")) return currentUser.id === actor.slice(7);
-    return false;
+    const actors = Array.isArray(actor) ? actor : [actor];
+    return actors.some(a => {
+      if (a === "ns") return isNS;
+      if (a === "jaggaer") return isJG;
+      if (a.startsWith("person:")) return currentUser.id === a.slice(7);
+      return false;
+    });
+  }
+
+  function hasActorType(actor, type) {
+    if (!actor) return false;
+    const actors = Array.isArray(actor) ? actor : [actor];
+    return actors.includes(type);
   }
 
   function primaryAction() {
@@ -1373,14 +1382,14 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
     if (!actorMatches(actor)) return null;
     // Label logic
     if (piece.status === "not-started") return { label: "Upload Brief", mode: "brief" };
-    if (actor === "ns") return { label: nextStage ? `Submit → ${nextStage.label}` : "Submit", mode: "upload" };
+    if (hasActorType(actor, "ns") || isNS) return { label: nextStage ? `Submit → ${nextStage.label}` : "Submit", mode: "upload" };
     // Named person or Jaggaer reviewer
     return { label: "Review", mode: "review" };
   }
   const action = primaryAction();
 
-  // "Awaits" highlight: piece is waiting on Jaggaer org (any stage where actor = jaggaer, excluding not-started)
-  const awaitsJaggaer = isJG && currentStage && currentStage.actor === "jaggaer" && piece.status !== "not-started";
+  // "Awaits" highlight: piece is waiting on Jaggaer org (any stage where actor includes jaggaer, excluding not-started)
+  const awaitsJaggaer = isJG && currentStage && hasActorType(currentStage.actor, "jaggaer") && piece.status !== "not-started";
   // Observer: Indy/Anna can always open and view, even when it's Robert's or NS's turn
   const isObserver = isJG && !actorMatches(currentStage?.actor);
 
@@ -1661,19 +1670,28 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
 
   function actorMatches(actor) {
     if (!actor) return false;
-    if (actor === "ns") return isNS;
-    if (actor === "jaggaer") return isJG;
-    if (actor.startsWith("person:")) return currentUser.id === actor.slice(7);
-    return false;
+    const actors = Array.isArray(actor) ? actor : [actor];
+    return actors.some(a => {
+      if (a === "ns") return isNS;
+      if (a === "jaggaer") return isJG;
+      if (a.startsWith("person:")) return currentUser.id === a.slice(7);
+      return false;
+    });
+  }
+
+  function hasActorType(actor, type) {
+    if (!actor) return false;
+    const actors = Array.isArray(actor) ? actor : [actor];
+    return actors.includes(type);
   }
 
   const isCurrentActor = currentStage && actorMatches(currentStage.actor);
   const canBrief = isCurrentActor && piece.status === "not-started"; // Jaggaer uploads brief
-  const canUpload = isCurrentActor && isNS && piece.status !== "not-started"; // NS submits article/revision
+  // NS can upload/reupload at any non-terminal stage, regardless of whose actor turn it is
+  const canUpload = isNS && piece.status !== "not-started" && piece.status !== "approved";
   const canReview = isCurrentActor && !isNS && piece.status !== "not-started" && piece.status !== "approved";
-  // NS can replace a draft they already submitted, as long as it hasn't reached any review stage yet
-  const nsWritingStages = stages.filter(s => s.actor === "ns" && s.id !== "not-started").map(s => s.id);
-  const canReplace = !canUpload && isNS && nsWritingStages.includes(piece.status);
+  // canReplace is now redundant (canUpload covers it), kept as false to avoid stale tab
+  const canReplace = false;
   const hasDeliverable = currentStageIdx > stageOrder.indexOf("brief-uploaded");
 
   return (

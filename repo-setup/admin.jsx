@@ -1036,21 +1036,38 @@ function AdminWorkflow({ project, setProject }) {
   }
 
   function actorLabel(actor) {
-    if (!actor) return "—";
-    if (actor === "ns") return "NS (writers)";
-    if (actor === "jaggaer") return "Jaggaer (any)";
-    if (actor.startsWith("person:")) {
-      const m = allMembers.find(x => x.id === actor.slice(7));
-      return m ? m.name : actor.slice(7);
-    }
-    return actor;
+    if (!actor || (Array.isArray(actor) && actor.length === 0)) return "—";
+    const actors = Array.isArray(actor) ? actor : [actor];
+    return actors.map(a => {
+      if (a === "ns") return "NS (writers)";
+      if (a === "jaggaer") return "Jaggaer (any)";
+      if (a.startsWith("person:")) {
+        const m = allMembers.find(x => x.id === a.slice(7));
+        return m ? m.name : a.slice(7);
+      }
+      return a;
+    }).join(" + ");
+  }
+
+  // Normalise actor to array for multi-select handling
+  function toActorArray(actor) {
+    if (!actor) return [];
+    return Array.isArray(actor) ? actor : [actor];
+  }
+
+  function toggleActor(stageId, value, currentActor) {
+    const current = toActorArray(currentActor);
+    const next = current.includes(value)
+      ? current.filter(a => a !== value)
+      : [...current, value];
+    // Normalise: single value stored as string, multiple as array, empty as null
+    updateStage(stageId, { actor: next.length === 0 ? null : next.length === 1 ? next[0] : next });
   }
 
   const actorOptions = [
     { value: "ns",      label: "NS (writers)" },
     { value: "jaggaer", label: "Jaggaer (any)" },
     ...allMembers.map(m => ({ value: `person:${m.id}`, label: `${m.name} (${m.org === "ns" ? "NS" : "JG"})` })),
-    { value: "",        label: "— no actor (terminal)" },
   ];
 
   return (
@@ -1058,8 +1075,8 @@ function AdminWorkflow({ project, setProject }) {
       <div style={{ marginBottom: 24 }}>
         <div className="ns-eyebrow ns-eyebrow-dark" style={{ marginBottom: 8 }}>Workflow Stage Editor</div>
         <p style={{ ...FONT, fontSize: "0.85rem", color: "#666", lineHeight: 1.6, maxWidth: 600 }}>
-          Drag stages to reorder. Each stage has an <strong>actor</strong> — the person or team whose turn it is.
-          NS stages = upload. Jaggaer/named stages = review. The workflow reads live from this config — no code changes needed.
+          Drag stages to reorder. Each stage has one or more <strong>actors</strong> — the person or team whose turn it is.
+          NS stages = upload. Jaggaer/named stages = review. Multiple actors = parallel review. The workflow reads live from this config — no code changes needed.
         </p>
       </div>
 
@@ -1111,13 +1128,32 @@ function AdminWorkflow({ project, setProject }) {
                     style={{ ...FONT, fontSize: "0.82rem", padding: "5px 8px", border: "1px solid #c5ddef", borderRadius: "3px", width: "160px" }}
                     placeholder="Stage name"
                   />
-                  <select
-                    value={stage.actor || ""}
-                    onChange={e => updateStage(stage.id, { actor: e.target.value || null })}
-                    style={{ ...FONT, fontSize: "0.78rem", padding: "5px 8px", border: "1px solid #c5ddef", borderRadius: "3px" }}
-                  >
-                    {actorOptions.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
-                  </select>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px", background: "#f8f8f8", border: "1px solid #c5ddef", borderRadius: "3px", padding: "6px 10px", minWidth: "200px" }}>
+                    <span style={{ ...FONT, fontSize: "0.68rem", color: "#888", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "2px" }}>Actors (select all that apply)</span>
+                    {actorOptions.map(o => {
+                      const checked = toActorArray(stage.actor).includes(o.value);
+                      return (
+                        <label key={o.value} style={{ ...FONT, fontSize: "0.78rem", display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", color: checked ? "#1a2535" : "#666" }}>
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={() => toggleActor(stage.id, o.value, stage.actor)}
+                            style={{ margin: 0, cursor: "pointer" }}
+                          />
+                          {o.label}
+                        </label>
+                      );
+                    })}
+                    <label style={{ ...FONT, fontSize: "0.78rem", display: "flex", alignItems: "center", gap: "6px", cursor: "pointer", color: (!stage.actor || (Array.isArray(stage.actor) && stage.actor.length === 0)) ? "#c8401a" : "#999", borderTop: "1px solid #e8e3da", marginTop: "4px", paddingTop: "4px" }}>
+                      <input
+                        type="radio"
+                        checked={!stage.actor || (Array.isArray(stage.actor) && stage.actor.length === 0)}
+                        onChange={() => updateStage(stage.id, { actor: null })}
+                        style={{ margin: 0, cursor: "pointer" }}
+                      />
+                      — no actor (terminal)
+                    </label>
+                  </div>
                   <button onClick={() => setEditingId(null)} style={{ ...FONT, fontSize: "0.72rem", fontWeight: 600, color: "#1e7a45", background: "#e6f5ec", border: "1px solid #86efac", padding: "5px 10px", borderRadius: "3px", cursor: "pointer" }}>Done</button>
                 </div>
               ) : (
@@ -1163,7 +1199,9 @@ function AdminWorkflow({ project, setProject }) {
           <li><strong>NS (writers)</strong> — NS team members see an Upload button when a piece reaches this stage.</li>
           <li><strong>Jaggaer (any)</strong> — Any Jaggaer team member sees a Review button.</li>
           <li><strong>Named person</strong> — Only that specific person sees the Review button. Others on their team can still view and comment.</li>
+          <li><strong>Multiple actors</strong> — Select more than one to make a stage parallel (e.g. Abhishek + Jaggaer). All selected actors see their action button simultaneously.</li>
           <li><strong>No actor</strong> — Terminal stage. No action button shown (use for "Approved").</li>
+          <li><strong>NS can always reupload</strong> — Regardless of whose turn it is, NS writers can replace the deliverable at any non-terminal stage.</li>
         </ul>
       </div>
     </div>
