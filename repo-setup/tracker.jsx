@@ -1521,6 +1521,18 @@ function injectLineNumbers(html) {
       });
     });
   });
+  // Listen for scroll-to commands from parent sidebar
+  window.addEventListener('message', function(e) {
+    if (!e.data || e.data.type !== '__ns_scroll_to') return;
+    var target = document.querySelector('.__ns_lnum_gutter[data-ln="' + e.data.lineNum + '"]');
+    if (!target) return;
+    var w = target.closest('.__ns_lnum_wrap');
+    if (!w) return;
+    document.querySelectorAll('.__ns_lnum_wrap.is-highlighted').forEach(function(x){ x.classList.remove('is-highlighted'); });
+    w.classList.add('is-highlighted');
+    w.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(function(){ w.classList.remove('is-highlighted'); }, 2500);
+  });
 })();
 </script>`;
   // Inject before </body> or at end
@@ -2533,8 +2545,12 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
   const [section, setSection] = useStateTR("");
   const [submitting, setSubmitting] = useStateTR(false);
   const [submitted, setSubmitted] = useStateTR(false);
+  const iframeRef = useRefTR(null);
 
-  const existingAnnotations = ((project.feedback || {})[piece.id] || []).filter(f => f.annotation);
+  const allAnnotations = ((project.feedback || {})[piece.id] || []).filter(f => f.annotation);
+  const currentRev = piece.revision_count || 1;
+  const existingAnnotations = allAnnotations.filter(f => (f.revision || 1) === currentRev);
+  const staleAnnotations = allAnnotations.filter(f => (f.revision || 1) < currentRev);
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
   // Listen for paragraph-click messages from the iframe
@@ -2578,6 +2594,7 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
       ts: new Date().toISOString(),
       annotation: true,
       section: section.trim() || "General",
+      revision: currentRev,
     };
     addFeedback(piece.id, entry);
     await new Promise(r => setTimeout(r, 300));
@@ -2612,6 +2629,7 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
           )}
           {srcdoc && (
             <iframe
+              ref={iframeRef}
               src={srcdoc}
               sandbox="allow-same-origin allow-scripts"
               style={{ width:"100%", height:"100%", border:"none", display:"block" }}
@@ -2654,6 +2672,8 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
 
         {/* existing inline annotations */}
         <div style={{ flex:1, overflowY:"auto", padding:"16px" }}>
+          {/* helper to scroll iframe to a paragraph number */}
+          {/* current-version comments */}
           <div style={{ ...FONT, fontSize:"0.68rem", fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase", color:"#888", marginBottom:"10px" }}>
             Inline Comments {existingAnnotations.length > 0 && `(${existingAnnotations.length})`}
           </div>
@@ -2665,18 +2685,28 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
             <div style={{ display:"flex", flexDirection:"column", gap:"10px" }}>
               {existingAnnotations.map(ann => {
                 const all = [...(project.team.ns||[]), ...(project.team.jaggaer||[])];
-                const author = all.find(a => a.id === ann.author) || { name: ann.author, org:"ns" };
+                const author = all.find(a => a.id === ann.author) || { name: ann.author };
                 const date = new Date(ann.ts);
                 const dateStr = date.toLocaleDateString("en-GB",{day:"numeric",month:"short"}) + " · " + date.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
+                const paraNum = ann.section ? parseInt(ann.section.replace("¶","")) : null;
+                function scrollToLine() {
+                  if (!paraNum || !iframeRef.current) return;
+                  iframeRef.current.contentWindow.postMessage({ type:"__ns_scroll_to", lineNum: paraNum }, "*");
+                }
                 return (
-                  <div key={ann.id} style={{ background:"#fff", border:"1px solid #e8e3da", borderLeft:"3px solid #c8401a", borderRadius:"0 3px 3px 0", padding:"10px 12px" }}>
+                  <div key={ann.id}
+                    onClick={paraNum ? scrollToLine : undefined}
+                    style={{ background:"#fff", border:"1px solid #e8e3da", borderLeft:"3px solid #c8401a", borderRadius:"0 3px 3px 0", padding:"10px 12px", cursor: paraNum ? "pointer" : "default", transition:"box-shadow 0.15s" }}
+                    onMouseEnter={e => { if (paraNum) e.currentTarget.style.boxShadow = "0 2px 8px rgba(200,64,26,0.15)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.boxShadow = "none"; }}>
                     <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:"4px" }}>
                       <span style={{ ...FONT, fontSize:"0.7rem", fontWeight:600, color:"#1a2535" }}>{author.name.split(" ")[0]}</span>
                       <span style={{ ...FONT, fontSize:"0.65rem", color:"#aaa" }}>{dateStr}</span>
                     </div>
                     {ann.section && ann.section !== "General" && (
-                      <div style={{ ...FONT, fontSize:"0.65rem", color:"#c8401a", fontWeight:600, marginBottom:"4px", letterSpacing:"0.04em" }}>
-                        § {ann.section}
+                      <div style={{ ...FONT, fontSize:"0.65rem", color:"#c8401a", fontWeight:600, marginBottom:"4px", letterSpacing:"0.04em", display:"flex", alignItems:"center", gap:"4px" }}>
+                        {ann.section}
+                        {paraNum && <span style={{ fontSize:"0.6rem", color:"#e0a898" }}>↑ click to jump</span>}
                       </div>
                     )}
                     <p style={{ ...FONT, fontSize:"0.78rem", color:"#444", lineHeight:1.5, margin:0 }}>{ann.body}</p>
@@ -2684,6 +2714,39 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
                 );
               })}
             </div>
+          )}
+
+          {/* stale comments from previous versions */}
+          {staleAnnotations.length > 0 && (
+            <details style={{ marginTop:"18px" }}>
+              <summary style={{ ...FONT, fontSize:"0.68rem", fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase", color:"#bbb", cursor:"pointer", userSelect:"none", marginBottom:"8px", listStyle:"none", display:"flex", alignItems:"center", gap:"6px" }}>
+                <span>▸</span>
+                <span>Previous versions ({staleAnnotations.length})</span>
+              </summary>
+              <div style={{ display:"flex", flexDirection:"column", gap:"8px", marginTop:"8px" }}>
+                {staleAnnotations.map(ann => {
+                  const all = [...(project.team.ns||[]), ...(project.team.jaggaer||[])];
+                  const author = all.find(a => a.id === ann.author) || { name: ann.author };
+                  const date = new Date(ann.ts);
+                  const dateStr = date.toLocaleDateString("en-GB",{day:"numeric",month:"short"});
+                  return (
+                    <div key={ann.id} style={{ background:"#faf9f7", border:"1px solid #ece8e1", borderLeft:"3px solid #d4cfc8", borderRadius:"0 3px 3px 0", padding:"8px 10px", opacity:0.75 }}>
+                      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"3px" }}>
+                        <span style={{ ...FONT, fontSize:"0.68rem", fontWeight:600, color:"#888" }}>{author.name.split(" ")[0]}</span>
+                        <div style={{ display:"flex", gap:"6px", alignItems:"center" }}>
+                          <span style={{ ...FONT, fontSize:"0.6rem", background:"#e8e3da", color:"#888", padding:"1px 5px", borderRadius:"2px", fontWeight:600 }}>v{ann.revision || 1}</span>
+                          <span style={{ ...FONT, fontSize:"0.62rem", color:"#bbb" }}>{dateStr}</span>
+                        </div>
+                      </div>
+                      {ann.section && ann.section !== "General" && (
+                        <div style={{ ...FONT, fontSize:"0.63rem", color:"#b0a89e", fontWeight:600, marginBottom:"3px" }}>{ann.section}</div>
+                      )}
+                      <p style={{ ...FONT, fontSize:"0.75rem", color:"#888", lineHeight:1.5, margin:0 }}>{ann.body}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </details>
           )}
         </div>
       </div>
