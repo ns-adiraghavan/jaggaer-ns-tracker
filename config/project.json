@@ -1030,13 +1030,6 @@
       "actor": "ns"
     },
     {
-      "id": "abhishek-review",
-      "label": "Abhishek Review",
-      "color": "#1a6b8a",
-      "bg": "#e5f3f8",
-      "actor": "person:abhishek"
-    },
-    {
       "id": "writing",
       "label": "Writing",
       "color": "#1e6fa8",
