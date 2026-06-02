@@ -862,7 +862,19 @@
       }
     ]
   },
-  "feedback": {},
+  "feedback": {
+    "p-dm2-1": [
+      {
+        "id": "ann-tri3l3",
+        "author": "m-9toiv",
+        "verdict": "question",
+        "body": "change to: Unfortunately, most disruptions don't come from Tier 1 suppliers.",
+        "ts": "2026-06-02T13:16:45.683Z",
+        "annotation": true,
+        "section": "¶54 — \"Most procurement teams have full visibil…\""
+      }
+    ]
+  },
   "build_with_claude": [
     {
       "name": "contract-analyser",
