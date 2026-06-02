@@ -872,6 +872,15 @@
         "ts": "2026-06-02T13:16:45.683Z",
         "annotation": true,
         "section": "¶54 — \"Most procurement teams have full visibil…\""
+      },
+      {
+        "id": "ann-dhiagg",
+        "author": "m-9toiv",
+        "verdict": "question",
+        "body": "change first sentence to: \"This kind of failure is why supply chain visibility beyond Tier 1 is critical.\"",
+        "ts": "2026-06-02T13:41:45.902Z",
+        "annotation": true,
+        "section": "¶54 — \"That is what supply chain visibility bey…\""
       }
     ]
   },
