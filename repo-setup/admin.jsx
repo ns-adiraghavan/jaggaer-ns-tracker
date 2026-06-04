@@ -899,9 +899,11 @@ function AdminNotifications({ project, setProject }) {
         }),
       });
       const data = await res.json();
+      const noRecipients = !data.stakeholder?.sent && !data.editors?.sent &&
+        (data.stakeholder?.reason?.includes("No") || data.editors?.reason?.includes("No") || (data.reason || "").includes("No"));
       const anySent = data.stakeholder?.sent || data.editors?.sent;
-      setTestApprovedState(anySent ? "sent" : "error");
-      setTimeout(() => setTestApprovedState(null), 4000);
+      setTestApprovedState(anySent ? "sent" : noRecipients ? "no-recipients" : "error");
+      setTimeout(() => setTestApprovedState(null), 5000);
     } catch { setTestApprovedState("error"); setTimeout(() => setTestApprovedState(null), 4000); }
   }
 
@@ -1020,14 +1022,14 @@ function AdminNotifications({ project, setProject }) {
             style={{
               ...FONT, fontSize: "0.75rem", fontWeight: 700,
               letterSpacing: "0.06em", textTransform: "uppercase",
-              color: testApprovedState === "sent" ? "#1e7a45" : testApprovedState === "error" ? "#b91c1c" : "#c8401a",
+              color: testApprovedState === "sent" ? "#1e7a45" : testApprovedState === "error" ? "#b91c1c" : testApprovedState === "no-recipients" ? "#b05e00" : "#c8401a",
               background: "transparent",
-              border: `1px solid ${testApprovedState === "sent" ? "#86efac" : testApprovedState === "error" ? "#fca5a5" : "#e8cfc8"}`,
+              border: `1px solid ${testApprovedState === "sent" ? "#86efac" : testApprovedState === "error" ? "#fca5a5" : testApprovedState === "no-recipients" ? "#f0cfa0" : "#e8cfc8"}`,
               padding: "8px 18px", borderRadius: "3px",
               cursor: testApprovedState ? "default" : "pointer", whiteSpace: "nowrap",
             }}
           >
-            {testApprovedState === "sending" ? "Sending…" : testApprovedState === "sent" ? "✓ Emails sent" : testApprovedState === "error" ? "Send failed" : "Send test approval →"}
+            {testApprovedState === "sending" ? "Sending…" : testApprovedState === "sent" ? "✓ Emails sent" : testApprovedState === "error" ? "Send failed" : testApprovedState === "no-recipients" ? "No recipients set" : "Send test approval →"}
           </button>
           <span style={{ ...FONT, fontSize: "0.7rem", color: "#aaa" }}>Fires to approved_to + editors_to — tests both piece-approval email templates</span>
         </div>
