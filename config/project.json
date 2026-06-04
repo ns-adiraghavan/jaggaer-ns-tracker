@@ -1068,7 +1068,7 @@
     },
     {
       "id": "editors",
-      "label": "Editors",
+      "label": "Editors/Final Check",
       "color": "#b05e00",
       "bg": "#fdf0e0",
       "actor": "jaggaer"
