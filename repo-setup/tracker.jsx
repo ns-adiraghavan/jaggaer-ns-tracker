@@ -1234,7 +1234,8 @@ function SendToEditorsButton({ cluster, pillar, project }) {
 function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onAdminEditCluster, stagger, currentWeek }) {
   const total = cluster.pieces.length;
   const approved = cluster.pieces.filter(p => p.status === "approved").length;
-  const inMotion = cluster.pieces.filter(p => IN_MOTION_STATUSES.includes(p.status)).length;
+  const liveInMotion = getWorkflowStages(project).filter(s => s.id !== "not-started" && s.id !== "approved").map(s => s.id);
+  const inMotion = cluster.pieces.filter(p => liveInMotion.includes(p.status)).length;
   const ready = approved === total && total > 0;
   const anchor = cluster.pieces.find(p => p.id === cluster.anchor_piece);
   const weekSlot = (project.schedule || []).find(w => w.slots.some(s => s.cluster === cluster.id));
@@ -1781,7 +1782,7 @@ function EditPiecePanel({ piece, cluster, project, updatePiece, onDone }) {
         </label>
         <label className="ns-edit-label">Status
           <select className="ns-edit-input ns-edit-select" value={form.status} onChange={field("status")}>
-            {STATUS_ORDER.map(s => <option key={s} value={s}>{STATUS_META[s]?.label || s}</option>)}
+            {getWorkflowStages(project).map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
           </select>
         </label>
         <label className="ns-edit-label">Assignee
@@ -2439,18 +2440,21 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                     {/* Status — inline select for admin */}
                     <td className="ns-ct-td ns-ct-td-status">
                       <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                        {adminMode ? (
-                          <InlineCell
-                            value={piece.status}
-                            type="select"
-                            options={STATUS_ORDER.map(s => ({ value: s, label: STATUS_META[s].label }))}
-                            onSave={val => updatePiece(cluster.id, piece.id, { status: val })}
-                          >
-                            <StatusChip status={piece.status} />
-                          </InlineCell>
-                        ) : (
-                          <StatusChip status={piece.status} />
-                        )}
+                        {(() => {
+                          const _sm = buildStatusMeta(getWorkflowStages(project));
+                          return adminMode ? (
+                            <InlineCell
+                              value={piece.status}
+                              type="select"
+                              options={getWorkflowStages(project).map(s => ({ value: s.id, label: s.label }))}
+                              onSave={val => updatePiece(cluster.id, piece.id, { status: val })}
+                            >
+                              <StatusChip status={piece.status} stageMeta={_sm} />
+                            </InlineCell>
+                          ) : (
+                            <StatusChip status={piece.status} stageMeta={_sm} />
+                          );
+                        })()}
                         {hasAction && !adminMode && <span className="ns-ct-action-dot" title={awaitsJG ? "Needs your feedback" : "Awaiting upload"} />}
                         {piece.status !== "not-started" && (() => {
                           const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
