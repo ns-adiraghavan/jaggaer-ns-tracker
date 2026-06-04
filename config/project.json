@@ -1058,7 +1058,10 @@
       "label": "Abhishek Review",
       "color": "#6c3483",
       "bg": "#f5eef8",
-      "actor": "person:abhishek"
+      "actor": [
+        "person:abhishek",
+        "person:m-ny8dy"
+      ]
     },
     {
       "id": "robert-review",
