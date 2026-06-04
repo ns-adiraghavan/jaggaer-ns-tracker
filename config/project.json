@@ -1029,7 +1029,10 @@
       "adi.raghavan@netscribes.com",
       "garvita.dua@netscribes.com"
     ],
-    "editors_to": [],
+    "editors_to": [
+      "adi.raghavan@netscribes.com",
+      "garvita.dua@netscribes.com"
+    ],
     "approved_to": []
   },
   "workflow_stages": [
