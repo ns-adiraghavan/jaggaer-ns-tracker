@@ -846,6 +846,7 @@ function AdminNotifications({ project, setProject }) {
     Array.isArray(notif.approved_to) ? notif.approved_to.join(", ") : (notif.approved_to || "")
   );
   const [testState, setTestState] = useStateAD(null);
+  const [testApprovedState, setTestApprovedState] = useStateAD(null);
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
   function save() {
@@ -874,6 +875,34 @@ function AdminNotifications({ project, setProject }) {
       setTestState(res.ok ? "sent" : "error");
       setTimeout(() => setTestState(null), 4000);
     } catch { setTestState("error"); setTimeout(() => setTestState(null), 4000); }
+  }
+
+  async function sendTestApproved() {
+    setTestApprovedState("sending");
+    try {
+      const res = await fetch("/api/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "piece-approved",
+          piece: {
+            id: "test-piece",
+            title: "Test Piece — Email Preview",
+            format: "How-to Guide",
+            url: "",
+            deliverablePath: null,
+          },
+          cluster: "Test Cluster",
+          pillar: "Test Pillar",
+          approvedBy: "Admin (test)",
+          note: "This is a test email triggered from Admin → Notifications. No action required.",
+        }),
+      });
+      const data = await res.json();
+      const anySent = data.stakeholder?.sent || data.editors?.sent;
+      setTestApprovedState(anySent ? "sent" : "error");
+      setTimeout(() => setTestApprovedState(null), 4000);
+    } catch { setTestApprovedState("error"); setTimeout(() => setTestApprovedState(null), 4000); }
   }
 
   const inputStyle = {
@@ -913,12 +942,12 @@ function AdminNotifications({ project, setProject }) {
 
       <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "4px", padding: "20px 24px", marginBottom: "16px" }}>
         <div style={{ ...FONT, fontSize: "0.88rem", fontWeight: 700, color: "#1a2535", marginBottom: "4px" }}>
-          Send to Editors
+          Editors
         </div>
         <p style={{ ...FONT, fontSize: "0.78rem", color: "#888", marginBottom: "16px", lineHeight: 1.5 }}>
-          Triggered manually when a cluster is fully approved. Sends a formatted handover email with all piece titles and GitHub file links.
+          Editors receive two emails per approved piece: one automatically when the piece is approved (with the HTML viewable inline and a download link), and a separate manual cluster handover via the <strong>Send to Editors</strong> button on a fully-approved cluster.
         </p>
-        <label style={labelStyle}>Digital editors (comma-separated)</label>
+        <label style={labelStyle}>Editor recipients (comma-separated)</label>
         <input
           type="text"
           style={inputStyle}
@@ -927,7 +956,7 @@ function AdminNotifications({ project, setProject }) {
           onBlur={onBlur}
           placeholder="e.g. editor@jaggaer.com, publishing@jaggaer.com"
         />
-        <div style={hintStyle}>These recipients get the cluster handover email when you click "Send to Editors" on an approved cluster.</div>
+        <div style={hintStyle}>Gets the inline-HTML email automatically on each piece approval, plus the manual cluster handover when you click "Send to Editors".</div>
       </div>
 
       <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "4px", padding: "20px 24px", marginBottom: "16px" }}>
@@ -965,23 +994,43 @@ function AdminNotifications({ project, setProject }) {
         ))}
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <button
-          onClick={sendTestDigest}
-          disabled={testState === "sending" || testState === "sent"}
-          style={{
-            ...FONT, fontSize: "0.75rem", fontWeight: 700,
-            letterSpacing: "0.06em", textTransform: "uppercase",
-            color: testState === "sent" ? "#1e7a45" : testState === "error" ? "#b91c1c" : "#c8401a",
-            background: "transparent",
-            border: `1px solid ${testState === "sent" ? "#86efac" : testState === "error" ? "#fca5a5" : "#e8cfc8"}`,
-            padding: "8px 18px", borderRadius: "3px",
-            cursor: testState ? "default" : "pointer",
-          }}
-        >
-          {testState === "sending" ? "Sending…" : testState === "sent" ? "✓ Digest sent" : testState === "error" ? "Send failed" : "Send test digest now →"}
-        </button>
-        <span style={{ ...FONT, fontSize: "0.7rem", color: "#aaa" }}>Sends immediately to digest recipients — useful for testing the email template</span>
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <button
+            onClick={sendTestDigest}
+            disabled={testState === "sending" || testState === "sent"}
+            style={{
+              ...FONT, fontSize: "0.75rem", fontWeight: 700,
+              letterSpacing: "0.06em", textTransform: "uppercase",
+              color: testState === "sent" ? "#1e7a45" : testState === "error" ? "#b91c1c" : "#c8401a",
+              background: "transparent",
+              border: `1px solid ${testState === "sent" ? "#86efac" : testState === "error" ? "#fca5a5" : "#e8cfc8"}`,
+              padding: "8px 18px", borderRadius: "3px",
+              cursor: testState ? "default" : "pointer", whiteSpace: "nowrap",
+            }}
+          >
+            {testState === "sending" ? "Sending…" : testState === "sent" ? "✓ Digest sent" : testState === "error" ? "Send failed" : "Send test digest →"}
+          </button>
+          <span style={{ ...FONT, fontSize: "0.7rem", color: "#aaa" }}>Fires to digest recipients — tests the daily digest template</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <button
+            onClick={sendTestApproved}
+            disabled={testApprovedState === "sending" || testApprovedState === "sent"}
+            style={{
+              ...FONT, fontSize: "0.75rem", fontWeight: 700,
+              letterSpacing: "0.06em", textTransform: "uppercase",
+              color: testApprovedState === "sent" ? "#1e7a45" : testApprovedState === "error" ? "#b91c1c" : "#c8401a",
+              background: "transparent",
+              border: `1px solid ${testApprovedState === "sent" ? "#86efac" : testApprovedState === "error" ? "#fca5a5" : "#e8cfc8"}`,
+              padding: "8px 18px", borderRadius: "3px",
+              cursor: testApprovedState ? "default" : "pointer", whiteSpace: "nowrap",
+            }}
+          >
+            {testApprovedState === "sending" ? "Sending…" : testApprovedState === "sent" ? "✓ Emails sent" : testApprovedState === "error" ? "Send failed" : "Send test approval →"}
+          </button>
+          <span style={{ ...FONT, fontSize: "0.7rem", color: "#aaa" }}>Fires to approved_to + editors_to — tests both piece-approval email templates</span>
+        </div>
       </div>
     </div>
   );

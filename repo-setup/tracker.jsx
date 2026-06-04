@@ -2032,14 +2032,24 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
     });
     // Fire approval notification when piece reaches final "approved" status
     if (newStatus === "approved") {
+      // Build the GitHub path to the deliverable so the server can fetch + embed the HTML
+      const _monthId = project.active_month || "month-1";
+      const _rev = piece.revision_count || 1;
+      const _deliverablePath = `content/${_monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${_rev}.html`;
       fetch("/api/notify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "piece-approved",
-          piece: { id: piece.id, title: piece.title, format: piece.format || "", url: piece.url || "" },
+          piece: {
+            id: piece.id,
+            title: piece.title,
+            format: piece.format || "",
+            url: piece.url || "",          // target CMS URL (may be empty)
+            deliverablePath: _deliverablePath, // GitHub repo path to the .html file
+          },
           cluster: cluster.label,
-          pillar: "",
+          pillar: pillar.label || "",
           approvedBy: currentUser.name || currentUser.id,
           note: body.trim(),
         }),

@@ -104,7 +104,7 @@ export default async function handler(req, res) {
     const stageLabel = Object.fromEntries(stages.map(s => [s.id, s.label || s.id]));
 
     // 3. Load digest state (last sent + last known piece statuses)
-    let digestState = { last_sent: null, piece_states: {} };
+    let digestState = { last_sent: null };
     let digestSha = null;
     try {
       const raw = await fetch(`${GITHUB_API}/repos/${process.env.GITHUB_REPO}/contents/config/digest-state.json`, {
@@ -118,25 +118,26 @@ export default async function handler(req, res) {
     } catch {}
 
     const lastSent = digestState.last_sent ? new Date(digestState.last_sent) : new Date(0);
-    const prevStates = digestState.piece_states || {};
 
-    // 4. Scan all pieces for status changes since last digest
-    const submitted   = []; // moved into an NS upload stage
-    const inReview    = []; // moved into a review stage
-    const sentBack    = []; // moved back to NS for revision
-    const approved    = []; // reached approved
-    const currentStates = {};
-
+    // 4. Scan all pieces for activity since last digest
+    // IMPORTANT: use timestamps (last_updated, last_upload) as the source of truth —
+    // NOT stage-ID comparison against digest-state.json. Stage IDs change when admins
+    // edit the workflow, which would otherwise cause every piece to appear as "changed".
+    const submitted   = []; // NS upload/resubmit since last digest
+    const inReview    = []; // moved into a review stage since last digest
+    const sentBack    = []; // sent back to NS for revision since last digest
+    const approved    = []; // reached approved since last digest
     for (const pillar of project.pillars || []) {
       for (const cluster of pillar.clusters || []) {
         for (const piece of cluster.pieces || []) {
-          currentStates[piece.id] = piece.status;
-          const prev = prevStates[piece.id];
-          const changed = prev !== undefined && prev !== piece.status;
+          // Use timestamps — immune to workflow stage ID changes
+          const updatedTs  = piece.last_updated ? new Date(piece.last_updated) : null;
+          const uploadTs   = piece.last_upload  ? new Date(piece.last_upload)  : null;
+          const recentUpdate = updatedTs && updatedTs > lastSent;
+          const recentUpload = uploadTs  && uploadTs  > lastSent;
+          const hasActivity  = recentUpdate || recentUpload;
 
-          // Also catch pieces uploaded/updated since last digest (even if state matches — re-upload case)
-          const uploadTs = piece.last_upload ? new Date(piece.last_upload) : null;
-          const freshUpload = uploadTs && uploadTs > lastSent;
+          if (!hasActivity) continue;
 
           const item = {
             title:   piece.title,
@@ -147,13 +148,13 @@ export default async function handler(req, res) {
             by: piece.last_updated_by || piece.last_upload_by || "—",
           };
 
-          if (piece.status === "approved" && changed) {
+          if (piece.status === "approved") {
             approved.push(item);
-          } else if (sendbackStages.has(piece.status) && changed) {
+          } else if (sendbackStages.has(piece.status)) {
             sentBack.push(item);
-          } else if (reviewStages.has(piece.status) && changed) {
+          } else if (reviewStages.has(piece.status)) {
             inReview.push(item);
-          } else if (nsUploadStages.has(piece.status) && (changed || freshUpload)) {
+          } else if (nsUploadStages.has(piece.status) || recentUpload) {
             submitted.push(item);
           }
         }
@@ -325,8 +326,10 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Resend failed", detail: err });
     }
 
-    // 10. Update digest-state.json in GitHub
-    const newState = { last_sent: new Date().toISOString(), piece_states: currentStates };
+    // 10. Update digest-state.json in GitHub — only store last_sent timestamp
+    // piece_states is no longer used for change detection (timestamps are); drop it to
+    // avoid the stale-stage-ID problem when admins edit the workflow.
+    const newState = { last_sent: new Date().toISOString() };
     try {
       if (!digestSha) {
         const r = await fetch(`${GITHUB_API}/repos/${process.env.GITHUB_REPO}/contents/config/digest-state.json`, {
