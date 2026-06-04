@@ -112,8 +112,8 @@
               "title": "AI in S2P: What Claude Actually Delivers for Procurement in 2026 — Beyond the Hype",
               "format": "FAQ Article",
               "assignee": "null",
-              "status": "brief-uploaded",
-              "revision_count": 0,
+              "status": "writing",
+              "revision_count": 1,
               "primary_keyword": "AI S2P Claude use cases FAQ procurement",
               "secondary_keyword": "what to ask Claude S2P procurement FAQ",
               "intent": "informational",
@@ -125,7 +125,11 @@
               ],
               "content_type": "ai-in-s2p",
               "phase": 1,
-              "funnel": "TOFU"
+              "funnel": "TOFU",
+              "last_upload": "2026-06-04T12:52:16.711Z",
+              "last_upload_by": "manager",
+              "last_updated": "2026-06-04T12:52:16.711Z",
+              "last_updated_by": "manager"
             }
           ]
         },
