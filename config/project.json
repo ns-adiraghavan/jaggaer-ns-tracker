@@ -452,8 +452,8 @@
               "title": "Tier 2-4 Supplier Bankruptcy: The Hidden Supply Chain Risk",
               "format": "Whitepaper (gated)",
               "assignee": "null",
-              "status": "brief-uploaded",
-              "revision_count": 0,
+              "status": "writing",
+              "revision_count": 1,
               "primary_keyword": "tier 2 supplier bankruptcy risk",
               "secondary_keyword": "supplier bankruptcy supply chain risk",
               "intent": "commercial",
@@ -463,7 +463,11 @@
               "url": "/tier-2-supplier-bankruptcy-supply-chain-risk",
               "notes": "UPDATED — title refined, keywords updated | Words: 2,500–4,000",
               "content_type": "industry-specific",
-              "phase": 2
+              "phase": 2,
+              "last_upload": "2026-06-04T12:55:15.761Z",
+              "last_upload_by": "manager",
+              "last_updated": "2026-06-04T12:55:15.761Z",
+              "last_updated_by": "manager"
             }
           ]
         },
