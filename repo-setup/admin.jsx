@@ -842,6 +842,9 @@ function AdminNotifications({ project, setProject }) {
   const [editorsTo, setEditorsTo] = useStateAD(
     Array.isArray(notif.editors_to) ? notif.editors_to.join(", ") : (notif.editors_to || "")
   );
+  const [approvedTo, setApprovedTo] = useStateAD(
+    Array.isArray(notif.approved_to) ? notif.approved_to.join(", ") : (notif.approved_to || "")
+  );
   const [testState, setTestState] = useStateAD(null);
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
@@ -853,6 +856,7 @@ function AdminNotifications({ project, setProject }) {
         ...prev.notifications,
         digest_to: toArr(digestTo),
         editors_to: toArr(editorsTo),
+        approved_to: toArr(approvedTo),
       },
     }));
   }
@@ -924,6 +928,26 @@ function AdminNotifications({ project, setProject }) {
           placeholder="e.g. editor@jaggaer.com, publishing@jaggaer.com"
         />
         <div style={hintStyle}>These recipients get the cluster handover email when you click "Send to Editors" on an approved cluster.</div>
+      </div>
+
+      <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "4px", padding: "20px 24px", marginBottom: "16px" }}>
+        <div style={{ ...FONT, fontSize: "0.88rem", fontWeight: 700, color: "#1a2535", marginBottom: "4px" }}>
+          Piece Approved Alert
+        </div>
+        <p style={{ ...FONT, fontSize: "0.78rem", color: "#888", marginBottom: "16px", lineHeight: 1.5 }}>
+          Sent automatically when any individual piece reaches <strong>Approved</strong> status.
+          Separate from the daily digest and the cluster-level Send to Editors.
+        </p>
+        <label style={labelStyle}>Recipients (comma-separated)</label>
+        <input
+          type="text"
+          style={inputStyle}
+          value={approvedTo}
+          onChange={e => setApprovedTo(e.target.value)}
+          onBlur={onBlur}
+          placeholder="e.g. indy@jaggaer.com, chahat@netscribes.com"
+        />
+        <div style={hintStyle}>These recipients are notified as soon as a piece is approved — useful for real-time visibility without waiting for the daily digest.</div>
       </div>
 
       <div style={{ background: "#faf8f4", border: "1px solid #e8e3da", borderRadius: "4px", padding: "20px 24px", marginBottom: "16px" }}>

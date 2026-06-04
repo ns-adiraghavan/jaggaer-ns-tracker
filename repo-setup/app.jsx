@@ -226,6 +226,7 @@ function App() {
         )}
         {view === "bwc" && <BWCPanel project={project} />}
         {view === "sample-artifacts" && <SampleArtifactsPanel />}
+        {view === "style-guide" && <StyleGuidePanel project={project} adminMode={adminMode} />}
         {view === "admin" && adminMode && (
           <AdminPanel project={project} setProject={setProject} adminTarget={adminTarget} setAdminTarget={setAdminTarget} />
         )}

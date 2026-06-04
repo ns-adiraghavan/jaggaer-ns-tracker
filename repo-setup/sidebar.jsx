@@ -164,6 +164,12 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           onClick={() => setView("sample-artifacts")}
           rightMeta="6 articles"
         />
+        <NavSection
+          label="Style Guide"
+          active={view === "style-guide"}
+          onClick={() => setView("style-guide")}
+          rightMeta="docx"
+        />
 
         {adminMode && (
           <NavSection

@@ -1699,8 +1699,8 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
 
   const isCurrentActor = currentStage && actorMatches(currentStage.actor);
   const canBrief = isCurrentActor && piece.status === "not-started"; // Jaggaer uploads brief
-  // NS can upload/reupload at any non-terminal stage, regardless of whose actor turn it is
-  const canUpload = isNS && piece.status !== "not-started" && piece.status !== "approved";
+  // NS (or admin) can upload/reupload at any non-terminal stage, regardless of whose actor turn it is
+  const canUpload = (isNS || adminMode) && piece.status !== "not-started" && piece.status !== "approved";
   const canReview = isCurrentActor && !isNS && piece.status !== "not-started" && piece.status !== "approved";
   // canReplace is now redundant (canUpload covers it), kept as false to avoid stale tab
   const canReplace = false;
@@ -2030,6 +2030,21 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
       last_updated: new Date().toISOString(),
       last_updated_by: currentUser.id,
     });
+    // Fire approval notification when piece reaches final "approved" status
+    if (newStatus === "approved") {
+      fetch("/api/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "piece-approved",
+          piece: { id: piece.id, title: piece.title, format: piece.format || "", url: piece.url || "" },
+          cluster: cluster.label,
+          pillar: "",
+          approvedBy: currentUser.name || currentUser.id,
+          note: body.trim(),
+        }),
+      }).catch(() => {}); // fire-and-forget; don't block UI on email failure
+    }
     await new Promise(r => setTimeout(r, 300));
     setSubmitting(false); setBody(""); onDone();
   }
