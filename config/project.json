@@ -430,7 +430,7 @@
               "title": "From Reactive to Predictive Supplier Risk Management",
               "format": "Strategic Solution Article",
               "assignee": "manager",
-              "status": "robert-review",
+              "status": "editors",
               "revision_count": 3,
               "primary_keyword": "predictive supplier risk management",
               "secondary_keyword": "proactive procurement risk management",
@@ -443,8 +443,8 @@
               "content_type": "industry-specific",
               "last_upload": "2026-06-05T11:40:13.557Z",
               "last_upload_by": "m-5jitd",
-              "last_updated": "2026-06-05T11:40:13.557Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-06-05T14:03:11.763Z",
+              "last_updated_by": "m-9toiv",
               "phase": 2
             },
             {
@@ -906,6 +906,16 @@
         "verdict": "approved",
         "body": "Please proceed",
         "ts": "2026-06-05T14:03:05.910Z",
+        "stage": "robert-review"
+      }
+    ],
+    "p-dm2-3": [
+      {
+        "id": "fb-s4ktxc",
+        "author": "m-9toiv",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-06-05T14:03:11.763Z",
         "stage": "robert-review"
       }
     ]
