@@ -1731,7 +1731,7 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
         {mode === "preview" && hasDeliverable && <PreviewPanel piece={piece} cluster={cluster} pillar={pillar} project={project} />}
         {mode === "annotate" && hasDeliverable && <AnnotatePanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} addFeedback={addFeedback} updatePiece={updatePiece} onDone={() => setMode("history")} />}
         {mode === "history" && <NotesHistory piece={piece} project={project} />}
-        {mode === "details" && <PieceDetails piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} adminMode={adminMode} />}
+        {mode === "details" && <PieceDetails piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} adminMode={adminMode} updatePiece={updatePiece} />}
         {mode === "edit" && adminMode && <EditPiecePanel piece={piece} cluster={cluster} project={project} updatePiece={updatePiece} onDone={() => setMode("details")} />}
         {mode === "delete" && adminMode && <DeletePiecePanel piece={piece} cluster={cluster} deletePiece={deletePiece} onClose={onClose} />}
       </div>
@@ -2153,8 +2153,196 @@ function FeedbackCard({ entry, project, ordinal }) {
   );
 }
 
+// ─── Brief & Keyword Files Section ────────────────────────────────────────────
+// Shown in the Details tab. Jaggaer can attach SEO briefs / keyword files here.
+// All users can see attached files and download them. Jaggaer can add more files at any stage.
+function BriefFilesSection({ piece, cluster, pillar, project, currentUser, updatePiece }) {
+  const [uploadStage, setUploadStage] = useStateTR("idle"); // idle | uploading | done | error
+  const [uploadFilename, setUploadFilename] = useStateTR(null);
+  const [uploadError, setUploadError] = useStateTR(null);
+  const [dragging, setDragging] = useStateTR(false);
+  const inputRef = useRefTR(null);
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+
+  const isJaggaer = currentUser?.org === "jaggaer";
+  const briefFiles = piece.brief_files || [];
+
+  async function handleFile(file) {
+    setUploadStage("uploading"); setUploadFilename(file.name); setUploadError(null);
+    try {
+      const result = await window.NS_API.uploadBriefFile(piece, cluster.id, pillar.id, project.active_month, file, currentUser.id);
+      if (!result.ok) throw new Error(result.error || "Upload failed");
+      const now = new Date().toISOString();
+      const newRecord = { filename: file.name, path: result.path, uploaded_by: currentUser.id, uploaded_at: now };
+      updatePiece(cluster.id, piece.id, {
+        brief_files: [...briefFiles, newRecord],
+        brief_last_updated: now,
+        last_updated: now,
+        last_updated_by: currentUser.id,
+      });
+      setUploadStage("done");
+    } catch (e) {
+      setUploadError(e.message);
+      setUploadStage("error");
+    }
+  }
+
+  const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
+  function fileUrl(bf) {
+    return `https://raw.githubusercontent.com/${REPO}/main/${bf.path}`;
+  }
+  function allTeam() {
+    return [...(project.team?.ns || []), ...(project.team?.jaggaer || [])];
+  }
+  function memberName(id) {
+    const m = allTeam().find(x => x.id === id);
+    return m ? m.name.split(" ")[0] : id;
+  }
+  function formatDate(ts) {
+    if (!ts) return "";
+    return new Date(ts).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  }
+
+  return (
+    <div style={{ marginTop: "28px", ...FONT }}>
+      {/* Section header */}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+        <div style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1a2535" }}>
+          Brief & Keyword Files
+        </div>
+        <div style={{ flex: 1, height: "1px", background: "#e8e3da" }} />
+        {isJaggaer && (
+          <span style={{ fontSize: "0.68rem", color: "#6b6560" }}>Jaggaer only</span>
+        )}
+      </div>
+
+      {/* Attached files list */}
+      {briefFiles.length > 0 && (
+        <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "12px" }}>
+          {briefFiles.map((bf, idx) => {
+            const ext = bf.filename.split(".").pop().toUpperCase();
+            return (
+              <div key={idx} style={{
+                display: "flex", alignItems: "center", gap: "10px",
+                padding: "10px 14px",
+                background: "#faf8f4",
+                border: "1px solid #e8e3da",
+                borderRadius: "3px",
+              }}>
+                <div style={{
+                  fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em",
+                  color: "#c8401a", background: "#fdf0e8",
+                  border: "1px solid #f0cfc0",
+                  padding: "2px 7px", borderRadius: "2px", flexShrink: 0,
+                }}>
+                  {ext}
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: "0.8rem", fontWeight: 500, color: "#1a2535", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    {bf.filename}
+                  </div>
+                  <div style={{ fontSize: "0.68rem", color: "#9b948c", marginTop: "1px" }}>
+                    {memberName(bf.uploaded_by)} · {formatDate(bf.uploaded_at)}
+                  </div>
+                </div>
+                <a
+                  href={fileUrl(bf)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    fontSize: "0.7rem", fontWeight: 600, color: "#1e6fa8",
+                    background: "#fff", border: "1px solid #c5ddef",
+                    padding: "5px 12px", borderRadius: "3px",
+                    textDecoration: "none", whiteSpace: "nowrap",
+                    transition: "background 0.15s",
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.background = "#e8f2fa"}
+                  onMouseLeave={e => e.currentTarget.style.background = "#fff"}
+                >
+                  ↓ Download
+                </a>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Empty state — non-Jaggaer */}
+      {!isJaggaer && briefFiles.length === 0 && (
+        <div style={{ fontSize: "0.8rem", color: "#9b948c", padding: "10px 0" }}>
+          No brief or keyword files attached yet.
+        </div>
+      )}
+
+      {/* Upload widget — Jaggaer only */}
+      {isJaggaer && (
+        <div
+          style={{
+            border: `1.5px dashed ${dragging ? "#c8401a" : uploadStage === "done" ? "#1e7a45" : "#d4cfc8"}`,
+            borderRadius: "4px",
+            padding: "14px 18px",
+            background: dragging ? "#fff8f5" : uploadStage === "done" ? "#f0faf5" : "#faf8f4",
+            cursor: uploadStage === "uploading" ? "default" : "pointer",
+            transition: "all 0.15s",
+            textAlign: "center",
+          }}
+          onDragOver={e => { e.preventDefault(); setDragging(true); }}
+          onDragLeave={() => setDragging(false)}
+          onDrop={e => { e.preventDefault(); setDragging(false); const f = e.dataTransfer.files?.[0]; if (f && uploadStage !== "uploading") handleFile(f); }}
+          onClick={() => uploadStage !== "uploading" && inputRef.current?.click()}
+        >
+          {uploadStage === "idle" && (
+            <>
+              <div style={{ fontSize: "0.78rem", fontWeight: 600, color: "#1a2535", marginBottom: "3px" }}>
+                {briefFiles.length > 0 ? "Attach another file" : "Attach SEO brief or keyword file"}
+              </div>
+              <div style={{ fontSize: "0.7rem", color: "#9b948c" }}>
+                PDF, DOCX, XLSX, CSV, HTML · drag & drop or click
+              </div>
+            </>
+          )}
+          {uploadStage === "uploading" && (
+            <div style={{ fontSize: "0.78rem", color: "#1a2535", fontWeight: 500 }}>
+              Uploading {uploadFilename}…
+            </div>
+          )}
+          {uploadStage === "done" && (
+            <div style={{ fontSize: "0.78rem", color: "#1e7a45", fontWeight: 600 }}>
+              ✓ {uploadFilename} attached
+              <span
+                style={{ marginLeft: "12px", color: "#1e6fa8", fontWeight: 400, fontSize: "0.7rem", textDecoration: "underline", cursor: "pointer" }}
+                onClick={e => { e.stopPropagation(); setUploadStage("idle"); setUploadFilename(null); }}
+              >
+                Add another
+              </span>
+            </div>
+          )}
+          {uploadStage === "error" && (
+            <div style={{ fontSize: "0.78rem", color: "#c8401a", fontWeight: 500 }}>
+              Upload failed — {uploadError || "unknown error"}
+              <span
+                style={{ marginLeft: "12px", color: "#1e6fa8", fontWeight: 400, fontSize: "0.7rem", textDecoration: "underline", cursor: "pointer" }}
+                onClick={e => { e.stopPropagation(); setUploadStage("idle"); }}
+              >
+                Retry
+              </span>
+            </div>
+          )}
+          <input
+            ref={inputRef}
+            type="file"
+            accept=".pdf,.docx,.doc,.xlsx,.xls,.csv,.html,.md,.txt"
+            hidden
+            onChange={e => { const f = e.target.files?.[0]; if (f) { e.target.value = ""; handleFile(f); } }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Piece details ────────────────────────────────────────────────────────────
-function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode }) {
+function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode, updatePiece }) {
   const weekSlot = (project.schedule || []).find(w => w.slots.some(s => s.cluster === cluster.id));
   const rows = [
     ["Pillar",            pillar.label],
@@ -2260,6 +2448,13 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode 
           </div>
         ))}
       </dl>
+
+      {/* ── Brief & Keyword Files ── */}
+      <BriefFilesSection
+        piece={piece} cluster={cluster} pillar={pillar}
+        project={project} currentUser={currentUser}
+        updatePiece={updatePiece}
+      />
     </div>
   );
 }
@@ -2505,15 +2700,19 @@ function BriefUploadPanel({ piece, cluster, pillar, project, currentUser, update
 
   async function handleFile(file) {
     setStage("uploading"); setFilename(file.name); setBytes(file.size);
-    const reader = new FileReader();
-    const contents = await new Promise((res, rej) => { reader.onload = () => res(reader.result); reader.onerror = rej; reader.readAsText(file); });
-    for (let i = 0; i <= 100; i += 8) { setProgress(i); await new Promise(r => setTimeout(r, 22)); }
-    await window.NS_API.uploadPieceDeliverable(piece, cluster.id, pillar.id, project.active_month, contents, currentUser.id);
+    for (let i = 0; i <= 80; i += 8) { setProgress(i); await new Promise(r => setTimeout(r, 22)); }
+    const result = await window.NS_API.uploadBriefFile(piece, cluster.id, pillar.id, project.active_month, file, currentUser.id);
+    for (let i = 82; i <= 100; i += 6) { setProgress(i); await new Promise(r => setTimeout(r, 18)); }
+    const now = new Date().toISOString();
+    const newFileRecord = { filename: file.name, path: result.path, uploaded_by: currentUser.id, uploaded_at: now };
+    const existing = piece.brief_files || [];
     updatePiece(cluster.id, piece.id, {
       status: "brief-uploaded",
-      last_upload: new Date().toISOString(),
+      brief_files: [...existing, newFileRecord],
+      brief_last_updated: now,
+      last_upload: now,
       last_upload_by: currentUser.id,
-      last_updated: new Date().toISOString(),
+      last_updated: now,
       last_updated_by: currentUser.id,
     });
     setStage("done");
@@ -2530,7 +2729,7 @@ function BriefUploadPanel({ piece, cluster, pillar, project, currentUser, update
             <div className="ns-drop-rule"></div>
             <div className="ns-drop-title">Drop SEO Brief here</div>
             <div className="ns-drop-sub">or click to choose · .pdf, .docx, .md, .html</div>
-            <div className="ns-drop-path">→ <code>content/{project.active_month}/{pillar.id}/{cluster.id}/{piece.id}/brief-v1.html</code></div>
+            <div className="ns-drop-path">→ <code>content/{project.active_month}/{pillar.id}/{cluster.id}/{piece.id}/brief-v{(piece.brief_files||[]).length + 1}.{'{ext}'}</code></div>
           </>)}
           {stage === "uploading" && (<>
             <div className="ns-drop-rule"></div>
