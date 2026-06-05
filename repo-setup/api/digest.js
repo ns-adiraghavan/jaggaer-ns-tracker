@@ -6,14 +6,14 @@
 // Required Vercel env vars:
 //   GITHUB_TOKEN        (already set)
 //   GITHUB_REPO         (already set)
-//   RESEND_API_KEY      (add when Resend account created — free tier: 100 emails/day)
+//   MAILEROO_API_KEY    (set in Vercel env)
 //   DIGEST_TO           (comma-separated recipient emails — fallback if not in project.json)
-//   DIGEST_FROM         (verified sender address in Resend)
+//   DIGEST_FROM         (sender address on your verified Maileroo domain)
 
 export const config = { maxDuration: 30 };
 
 const GITHUB_API = "https://api.github.com";
-const RESEND_API = "https://api.resend.com/emails";
+const MAILEROO_API = "https://smtp.maileroo.com/api/v2/emails";
 
 async function fetchGitHub(path) {
   const res = await fetch(`${GITHUB_API}/repos/${process.env.GITHUB_REPO}/contents/${path}`, {
@@ -307,15 +307,16 @@ export default async function handler(req, res) {
 </html>`;
 
     // 9. Send
-    const emailRes = await fetch(RESEND_API, {
+    const fromAddr = process.env.DIGEST_FROM || "tracker@maileroo.com";
+    const emailRes = await fetch(MAILEROO_API, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "X-Sending-Key": process.env.MAILEROO_API_KEY,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: process.env.DIGEST_FROM || "NS x Jaggaer Tracker <onboarding@resend.dev>",
-        to: recipients,
+        from: { address: fromAddr, display_name: "NS × Jaggaer Tracker" },
+        to: recipients.map(addr => ({ address: addr })),
         subject: `Tracker · ${today}`,
         html: emailHtml,
       }),

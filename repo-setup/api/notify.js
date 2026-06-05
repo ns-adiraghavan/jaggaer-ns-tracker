@@ -8,9 +8,9 @@
 // POST /api/notify   { type: "editors", cluster, pillar, pieces }
 //   → manual cluster handover button (still available, separate from auto per-piece emails)
 //
-// Env vars:  RESEND_API_KEY, GITHUB_TOKEN, GITHUB_REPO, DIGEST_FROM
+// Env vars:  MAILEROO_API_KEY, GITHUB_TOKEN, GITHUB_REPO, DIGEST_FROM
 
-const RESEND_API  = "https://api.resend.com/emails";
+const MAILEROO_API = "https://smtp.maileroo.com/api/v2/emails";
 const GITHUB_API  = "https://api.github.com";
 
 async function loadProject() {
@@ -49,22 +49,23 @@ function extractBody(html) {
 
 async function sendEmail({ to, subject, html }) {
   if (!to || !to.length) return { sent: false, reason: "No recipients" };
-  const res = await fetch(RESEND_API, {
+  const fromAddr = process.env.DIGEST_FROM || "tracker@maileroo.com";
+  const res = await fetch(MAILEROO_API, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "X-Sending-Key": process.env.MAILEROO_API_KEY,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: process.env.DIGEST_FROM || "NS x Jaggaer Tracker <onboarding@resend.dev>",
-      to,
+      from: { address: fromAddr, display_name: "NS × Jaggaer Tracker" },
+      to: to.map(addr => ({ address: addr })),
       subject,
       html,
     }),
   });
   if (!res.ok) {
     const err = await res.text();
-    throw new Error(`Resend error: ${err}`);
+    throw new Error(`Maileroo error: ${err}`);
   }
   return { sent: true };
 }
