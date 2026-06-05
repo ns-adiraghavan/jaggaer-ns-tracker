@@ -127,15 +127,18 @@ export default async function handler(req, res) {
     const inReview    = []; // moved into a review stage since last digest
     const sentBack    = []; // sent back to NS for revision since last digest
     const approved    = []; // reached approved since last digest
+    const briefsAttached = []; // Jaggaer attached a brief/keyword file since last digest
     for (const pillar of project.pillars || []) {
       for (const cluster of pillar.clusters || []) {
         for (const piece of cluster.pieces || []) {
           // Use timestamps — immune to workflow stage ID changes
           const updatedTs  = piece.last_updated ? new Date(piece.last_updated) : null;
           const uploadTs   = piece.last_upload  ? new Date(piece.last_upload)  : null;
+          const briefTs    = piece.brief_last_updated ? new Date(piece.brief_last_updated) : null;
           const recentUpdate = updatedTs && updatedTs > lastSent;
           const recentUpload = uploadTs  && uploadTs  > lastSent;
-          const hasActivity  = recentUpdate || recentUpload;
+          const recentBrief  = briefTs   && briefTs   > lastSent;
+          const hasActivity  = recentUpdate || recentUpload || recentBrief;
 
           if (!hasActivity) continue;
 
@@ -147,6 +150,19 @@ export default async function handler(req, res) {
             stageLabel: stageLabel[piece.status] || piece.status,
             by: piece.last_updated_by || piece.last_upload_by || "—",
           };
+
+          // Brief attachment: detect separately so it surfaces even on in-flight pieces
+          if (recentBrief) {
+            const latestBrief = (piece.brief_files || []).slice(-1)[0];
+            briefsAttached.push({
+              ...item,
+              briefFilename: latestBrief?.filename || "file",
+              briefCount: (piece.brief_files || []).length,
+            });
+          }
+
+          // Only bucket into workflow sections if the status/upload itself changed
+          if (!recentUpdate && !recentUpload) continue;
 
           if (piece.status === "approved") {
             approved.push(item);
@@ -191,7 +207,8 @@ export default async function handler(req, res) {
       || inReview.length > 0
       || sentBack.length > 0
       || approved.length > 0
-      || newNotes.length > 0;
+      || newNotes.length > 0
+      || briefsAttached.length > 0;
 
     if (!hasActivity) {
       return res.status(200).json({ sent: false, reason: "No activity since last digest" });
@@ -285,11 +302,15 @@ export default async function handler(req, res) {
         item => [item.title, item.cluster, "✓ Done"]
       )}
 
+      ${section("Brief / keyword files attached", "#0e6655", briefsAttached,
+        item => [item.title, item.cluster, `${item.briefFilename}${item.briefCount > 1 ? ` (+${item.briefCount - 1} total)` : ""}`]
+      )}
+
       ${section("Feedback added", "#c8401a", newNotes,
         item => [item.title, item.cluster, verdictLabel[item.verdict] || item.verdict]
       )}
 
-      ${force && !submittedItems.length && !sentBack.length && !approved.length && !newNotes.length
+      ${force && !submittedItems.length && !sentBack.length && !approved.length && !newNotes.length && !briefsAttached.length
         ? '<p style="color:#aaa;font-size:13px;margin:0;">No changes today — digest triggered manually.</p>'
         : ""}
 
@@ -352,6 +373,7 @@ export default async function handler(req, res) {
         sentBack: sentBack.length,
         approved: approved.length,
         newNotes: newNotes.length,
+        briefsAttached: briefsAttached.length,
       },
     });
 
