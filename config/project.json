@@ -408,7 +408,7 @@
               "title": "Supplier Financial Risk Signals Procurement Should Monitor",
               "format": "Informational Article",
               "assignee": "manager",
-              "status": "robert-review",
+              "status": "editors",
               "revision_count": 3,
               "primary_keyword": "supplier financial risk assessment",
               "secondary_keyword": "supplier risk management",
@@ -421,8 +421,8 @@
               "content_type": "msv",
               "last_upload": "2026-06-05T11:42:28.975Z",
               "last_upload_by": "jason",
-              "last_updated": "2026-06-05T11:42:28.975Z",
-              "last_updated_by": "jason",
+              "last_updated": "2026-06-05T14:03:05.910Z",
+              "last_updated_by": "m-9toiv",
               "phase": 1
             },
             {
@@ -897,6 +897,16 @@
         "ts": "2026-06-02T13:41:45.902Z",
         "annotation": true,
         "section": "¶54 — \"That is what supply chain visibility bey…\""
+      }
+    ],
+    "p-dm2-2": [
+      {
+        "id": "fb-che3ym",
+        "author": "m-9toiv",
+        "verdict": "approved",
+        "body": "Please proceed",
+        "ts": "2026-06-05T14:03:05.910Z",
+        "stage": "robert-review"
       }
     ]
   },
