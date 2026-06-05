@@ -1,0 +1,1219 @@
+<!-- uploaded by m-e10nz at 2026-06-05T11:41:54.721Z -->
+<!-- piece: Why Supply Chain Visibility Breaks Down Beyond Tier 1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Supply Chain Visibility Breaks Down Beyond Tier 1 in 2026 | JAGGAER</title>
+<meta name="description" content="Most supply chain risk hides below Tier 1. Discover why multi-tier supplier visibility fails, where blind spots form, and what it takes to see your full supply chain.">
+<meta name="keywords" content="supply chain visibility beyond tier 1, multi-tier supplier visibility challenges, supplier visibility gaps, tier 2 supplier transparency, supply chain blind spots, procurement visibility issues">
+<meta property="og:title" content="Why Supply Chain Visibility Breaks Down Beyond Tier 1 in 2026">
+<meta property="og:description" content="Most supply chain risk hides below Tier 1. Discover why multi-tier supplier visibility fails, where blind spots form, and what it takes to see your full supply chain.">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://www.jaggaer.com/supply-chain-visibility-beyond-tier-1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+<style>
+/* ── JAGGAER Design System Tokens ─────────────────────────────── */
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-light-grey:  #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-navy:        #1B3A5C;
+  --color-teal:        #4D8194;
+  --font-base:         Inter, system-ui, -apple-system, sans-serif;
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-size-display: clamp(1.75rem, 4vw, 2.75rem);
+  --font-weight-heading: 400;
+  --line-height-base:  1.6;
+  --line-height-heading: 1.1;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --container-width:   1240px;
+  --container-narrow:  1024px;
+  --container-padding: clamp(1rem, 3vw, 2rem);
+  --column-gap:        1.5rem;
+  --border-radius:     1rem;
+  --border-radius-sm:  0.5rem;
+  --border-color:      #dce0e8;
+  --border:            1px solid var(--border-color);
+  --toc-width:         220px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-ink);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SITE HEADER ───────────────────────────────────────────────── */
+.site-header {
+  background: var(--color-white);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--container-padding);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 3px solid var(--color-red);
+  box-shadow: 0 1px 0 var(--border-color);
+}
+.logo {
+  font-family: var(--font-base);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+.logo span { color: var(--color-red); }
+.header-tag {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+/* ── ARTICLE HEADER: inline in article column, Image 1 pattern ── */
+.eyebrow {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: var(--space-s);
+}
+.article-header {
+  padding-top: var(--space-l);
+  margin-bottom: var(--space-m);
+}
+.article-header h1 {
+  font-family: var(--font-base);
+  font-size: var(--font-size-h1);
+  font-weight: 400;
+  color: var(--color-ink);
+  line-height: var(--line-height-heading);
+  max-width: 700px;
+  margin-bottom: var(--space-m);
+  letter-spacing: -0.01em;
+}
+.article-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  padding: var(--space-xs) 14px;
+  background: var(--color-cream);
+  border: var(--border);
+  border-radius: var(--border-radius-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-l);
+}
+.amb-item {
+  font-size: 0.71875rem;
+  color: var(--color-ink-3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.amb-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+.amb-sep { color: var(--border-color); font-size: 14px; line-height: 1; }
+
+/* ── PAGE WRAPPER ─────────────────────────────────────────────── */
+.page-wrapper {
+  display: flex;
+  align-items: flex-start;
+  max-width: calc(var(--container-width) + var(--toc-width) + 2rem);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* ── TOC SIDEBAR ─────────────────────────────────────────────── */
+.toc-sidebar {
+  width: var(--toc-width);
+  flex-shrink: 0;
+  position: sticky;
+  top: 80px;
+  padding: var(--space-xl) var(--space-m) var(--space-xl) 0;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+.toc-sidebar::-webkit-scrollbar { width: 3px; }
+.toc-sidebar::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
+.toc-label {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  margin-bottom: var(--space-m);
+  padding-bottom: var(--space-xs);
+  border-bottom: var(--border);
+}
+.toc-list { list-style: none; }
+.toc-list li { margin-bottom: 2px; }
+.toc-list a {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--color-ink-3);
+  text-decoration: none;
+  padding: 6px 10px 6px 12px;
+  border-left: 2px solid transparent;
+  border-radius: 0 3px 3px 0;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  line-height: 1.4;
+}
+.toc-list a:hover { color: var(--color-ink); border-left-color: var(--border-color); background: rgba(11,13,18,0.04); }
+.toc-list a.active { color: var(--color-teal); border-left-color: var(--color-teal); background: #E9EFF4; font-weight: 600; }
+
+/* ── ARTICLE WRAP ────────────────────────────────────────────── */
+.article-wrap {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-xl) 0 var(--space-2xl) var(--space-xl);
+  border-left: var(--border);
+}
+.article-body { max-width: 740px; }
+
+/* ── TYPOGRAPHY ──────────────────────────────────────────────── */
+.article-body p {
+  font-size: var(--font-size-base);
+  line-height: 1.8;
+  color: var(--color-ink-2);
+  margin-bottom: var(--space-m);
+  font-weight: 400;
+}
+.article-body p:last-child { margin-bottom: 0; }
+.article-body h2 {
+  font-size: var(--font-size-h3);
+  font-weight: 400;
+  color: var(--color-ink);
+  margin: var(--space-xl) 0 var(--space-s);
+  line-height: var(--line-height-heading);
+  scroll-margin-top: 90px;
+}
+.article-body { counter-reset: sec-n; }
+.article-body h3 {
+  font-size: var(--font-size-h5);
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: var(--space-xl) 0 var(--space-xs);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+.article-body a { color: var(--color-teal); text-decoration: none; border-bottom: 1px solid rgba(77,129,148,0.3); transition: color 0.18s ease, border-color 0.18s ease; }
+.article-body a:hover { color: var(--color-navy); border-bottom-color: var(--color-navy); }
+cite.src { font-style: normal; font-size: 0.78em; color: var(--color-ink-3); margin-left: 3px; }
+cite.src a { color: var(--color-ink-3); border-bottom: 1px solid rgba(106,113,128,0.28); }
+cite.src a:hover { color: var(--color-teal); }
+.section-rule { border: none; border-top: var(--border); margin: var(--space-xl) 0 0; }
+
+/* ── STATS BAR (replaces exec-insight) ───────────────────────── */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: var(--border);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin: var(--space-l) 0 var(--space-s);
+}
+.stats-bar__item {
+  background: var(--color-white);
+  padding: var(--space-m) var(--space-l);
+  border-right: var(--border);
+}
+.stats-bar__item:last-child { border-right: none; }
+.stats-bar__num {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-ink);
+  margin-bottom: var(--space-xs);
+  letter-spacing: -0.02em;
+}
+.stats-bar__num--dim  { color: var(--color-ink-3); }
+.stats-bar__num--risk { color: var(--color-red); }
+.stats-bar__label {
+  font-size: var(--font-size-sm);
+  color: var(--color-ink-3);
+  line-height: 1.4;
+}
+.stats-bar__prefix {
+  font-size: var(--font-size-xs);
+  font-style: italic;
+  color: var(--color-ink-3);
+  margin-bottom: var(--space-2xs);
+  line-height: 1;
+}
+.ei-below-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-ink-2);
+  margin-bottom: var(--space-xl) !important;
+}
+
+/* ── INLINE NOTE (replaces pull-quote) ───────────────────────── */
+.inline-note {
+  font-size: var(--font-size-sm);
+  font-style: italic;
+  color: var(--color-ink-3);
+  border-left: 2px solid var(--border-color);
+  padding-left: var(--space-m);
+  margin: var(--space-m) 0 !important;
+  line-height: 1.6;
+}
+
+/* ── STAT TRIO ───────────────────────────────────────────────── */
+.stat-trio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border-color);
+  border: var(--border);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin: var(--space-l) 0;
+}
+.stat-trio__item {
+  background: var(--color-white);
+  padding: var(--space-m) var(--space-s);
+  text-align: center;
+}
+.stat-trio__num {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-red);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-xs);
+}
+.stat-trio__label {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  color: var(--color-ink-3);
+  line-height: 1.4;
+}
+.stat-trio__period {
+  display: inline-block;
+  margin-top: var(--space-xs);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  background: var(--color-cream);
+  border: var(--border);
+  border-radius: 3px;
+  padding: 1px 6px;
+}
+
+/* ── TIER TABLE ──────────────────────────────────────────────── */
+.tier-table {
+  margin: var(--space-l) 0;
+  border: var(--border);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.tier-table table { width: 100%; border-collapse: collapse; font-size: var(--font-size-sm); min-width: 440px; }
+.tier-table thead th {
+  padding: var(--space-s) var(--space-m);
+  text-align: left;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--border-color);
+  white-space: nowrap;
+}
+.tier-table thead th:first-child { background: var(--color-cream); color: var(--color-ink-3); border-right: var(--border); }
+.tier-table thead .th-tier1 { background: rgba(27,58,92,0.06); color: var(--color-navy); border-bottom-color: var(--color-navy); border-right: var(--border); }
+.tier-table thead .th-tier2 { background: rgba(210,36,40,0.05); color: var(--color-red); border-bottom-color: var(--color-red); }
+.tier-table tbody tr { border-bottom: var(--border); }
+.tier-table tbody tr:last-child { border-bottom: none; }
+.tier-table tbody td { padding: var(--space-s) var(--space-m); line-height: 1.4; vertical-align: middle; color: var(--color-ink-2); }
+.tier-table tbody td:first-child { font-weight: 600; font-size: var(--font-size-xs); color: var(--color-ink-3); background: var(--color-cream); border-right: var(--border); white-space: nowrap; text-transform: uppercase; letter-spacing: 0.05em; }
+.tc-yes { color: var(--color-navy); background: rgba(27,58,92,0.02); border-right: var(--border); }
+.tc-no { color: var(--color-ink-3); font-style: italic; background: rgba(210,36,40,0.02); }
+
+/* ── BARRIER GRID ────────────────────────────────────────────── */
+.barrier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-s);
+  margin: var(--space-l) 0 var(--space-xl);
+}
+.barrier-card {
+  border: var(--border);
+  border-top: 3px solid var(--color-teal);
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+  background: var(--color-white);
+  padding: var(--space-m);
+  transition: border-top-color 0.2s ease, box-shadow 0.2s ease;
+}
+.barrier-card:hover { border-top-color: var(--color-navy); box-shadow: 0 4px 16px rgba(11,13,18,0.07); }
+.barrier-card__n { font-size: 1.5rem; font-weight: 800; color: var(--border-color); line-height: 1; margin-bottom: var(--space-xs); letter-spacing: -0.02em; }
+.barrier-card__title { font-size: var(--font-size-sm); font-weight: 700; color: var(--color-ink); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--space-xs); line-height: 1.3; }
+.barrier-card__text { font-size: var(--font-size-xs); color: var(--color-ink-3); line-height: 1.55; margin-bottom: var(--space-s); }
+.barrier-card__stat { font-size: var(--font-size-xs); font-weight: 600; color: var(--color-ink-2); line-height: 1.4; padding-top: var(--space-xs); border-top: var(--border); }
+
+/* ── CALLOUT (Financial Panel) ───────────────────────────────── */
+.callout {
+  margin: var(--space-xl) 0;
+  border: var(--border);
+  border-top: 3px solid var(--color-navy);
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+  overflow: hidden;
+  background: var(--color-white);
+}
+.callout-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  padding: var(--space-s) var(--space-l);
+  background: var(--color-cream);
+  border-bottom: var(--border);
+}
+.callout-header svg { opacity: 0.7; }
+.callout-stats { display: grid; grid-template-columns: repeat(4, 1fr); }
+.callout-stat { padding: var(--space-m); border-right: var(--border); }
+.callout-stat:last-child { border-right: none; }
+.cs-num { display: block; font-size: 2.2rem; font-weight: 800; color: var(--color-ink); line-height: 1; letter-spacing: -0.025em; margin-bottom: var(--space-xs); }
+.cs-desc { display: block; font-size: var(--font-size-xs); color: var(--color-ink-3); line-height: 1.45; margin-bottom: var(--space-xs); }
+.cs-src { font-size: 0.7rem; color: var(--color-ink-3); font-style: italic; text-decoration: none; border-bottom: 1px solid rgba(106,113,128,0.2); transition: color 0.15s ease; }
+.cs-src:hover { color: var(--color-teal); }
+.callout-takeaway {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-m);
+  padding: var(--space-m) var(--space-l);
+  background: var(--color-light-blue);
+  border-top: var(--border);
+}
+.callout-takeaway strong { flex-shrink: 0; font-size: var(--font-size-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-red); font-style: normal; display: inline; margin-top: 2px; }
+.callout-takeaway-text { font-size: var(--font-size-sm); font-style: italic; color: var(--color-navy); line-height: 1.6; }
+
+/* ── SRM MATRIX ──────────────────────────────────────────────── */
+.srm-matrix {
+  margin: var(--space-xl) 0;
+  border: var(--border);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.srm-matrix__heading { background: var(--color-ink); padding: var(--space-xs) var(--space-m); font-size: var(--font-size-xs); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.srm-matrix__heading em { color: rgba(255,255,255,0.9); font-style: normal; }
+.srm-matrix table { width: 100%; border-collapse: collapse; font-size: var(--font-size-sm); min-width: 420px; }
+.srm-matrix thead th { padding: var(--space-s) var(--space-m); text-align: left; font-size: var(--font-size-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 2px solid var(--border-color); white-space: nowrap; }
+.srm-matrix thead th:first-child { background: var(--color-cream); color: var(--color-ink-3); border-right: var(--border); width: 34%; }
+.srm-matrix thead .sth-standard { background: rgba(106,113,128,0.07); color: var(--color-ink-2); border-bottom-color: var(--color-ink-3); border-right: var(--border); }
+.srm-matrix thead .sth-multi { background: rgba(210,36,40,0.05); color: var(--color-red); border-bottom-color: var(--color-red); }
+.srm-matrix tbody tr { border-bottom: var(--border); }
+.srm-matrix tbody tr:last-child { border-bottom: none; }
+.srm-matrix tbody td { padding: var(--space-xs) var(--space-m); line-height: 1.4; vertical-align: middle; color: var(--color-ink-2); }
+.srm-matrix tbody td:first-child { font-weight: 600; font-size: var(--font-size-xs); color: var(--color-ink-3); background: var(--color-cream); border-right: var(--border); }
+.sm-no { color: var(--color-ink-3); font-style: italic; background: rgba(106,113,128,0.03); border-right: var(--border); }
+.sm-yes { color: var(--color-navy); font-weight: 600; background: rgba(210,36,40,0.02); }
+.srm-matrix__caption { padding: var(--space-xs) var(--space-m); font-size: var(--font-size-xs); color: var(--color-ink-3); background: var(--color-cream); border-top: var(--border); font-style: italic; line-height: 1.5; }
+.srm-matrix__caption strong { font-style: normal; font-weight: 600; color: var(--color-ink-2); }
+
+/* ── QUAL FLOW ────────────────────────────────────────────────── */
+.qual-flow { margin: var(--space-l) 0 var(--space-xl); }
+.qual-flow__label { font-size: var(--font-size-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ink-3); margin-bottom: var(--space-s); }
+.qual-flow__steps { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: stretch; border: var(--border); border-radius: var(--border-radius-sm); overflow: hidden; }
+.qual-flow__arrow { display: flex; align-items: center; justify-content: center; padding: 0 var(--space-2xs); background: var(--color-cream); color: var(--color-ink-3); font-size: 0.7rem; border-left: var(--border); border-right: var(--border); }
+.qual-flow__step { background: var(--color-white); padding: var(--space-m); }
+.qual-flow__step--risk { background: rgba(210,36,40,0.03); border-left: 2px solid var(--color-red); }
+.qual-flow__n { font-size: var(--font-size-xs); font-weight: 700; color: var(--border-color); margin-bottom: var(--space-xs); line-height: 1; letter-spacing: 0.05em; }
+.qual-flow__step--risk .qual-flow__n { color: rgba(210,36,40,0.4); }
+.qual-flow__title { font-size: var(--font-size-sm); font-weight: 700; color: var(--color-ink); margin-bottom: var(--space-2xs); line-height: 1.3; }
+.qual-flow__sub { font-size: var(--font-size-xs); color: var(--color-ink-3); line-height: 1.4; }
+.qual-flow__step--risk .qual-flow__title { color: var(--color-red); }
+
+/* ── REQ FRAMEWORK ───────────────────────────────────────────── */
+.req-framework { margin: var(--space-l) 0 var(--space-xl); border: var(--border); border-radius: var(--border-radius-sm); overflow: hidden; }
+.req-step { display: flex; align-items: flex-start; gap: var(--space-m); padding: var(--space-m) var(--space-l); background: var(--color-white); border-bottom: var(--border); transition: background 0.2s ease; }
+.req-step:last-child { border-bottom: none; }
+.req-step:hover { background: var(--color-cream); }
+.req-step__n { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: transparent; color: var(--color-navy); border: 1.5px solid var(--color-navy); font-size: var(--font-size-xs); font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.req-step__title { font-size: var(--font-size-sm); font-weight: 700; color: var(--color-ink); margin-bottom: var(--space-2xs); line-height: 1.3; }
+.req-step__body { font-size: var(--font-size-xs); color: var(--color-ink-3); line-height: 1.55; margin: 0; }
+
+/* ── SIGNAL GRID ─────────────────────────────────────────────── */
+.signal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xs); margin: var(--space-m) 0 var(--space-l); }
+.signal-item { padding: var(--space-s) var(--space-m); border: var(--border); border-left: 3px solid var(--color-teal); border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; background: var(--color-white); transition: background 0.2s ease; }
+.signal-item:hover { background: var(--color-light-blue); }
+.signal-item__name { display: block; font-size: var(--font-size-sm); font-weight: 700; color: var(--color-ink); margin-bottom: var(--space-2xs); line-height: 1.3; }
+.signal-item__desc { font-size: var(--font-size-xs); color: var(--color-ink-3); line-height: 1.4; }
+
+/* ── IN-CONTENT CTA ──────────────────────────────────────────── */
+.jg-cta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  margin: var(--space-xl) 0;
+  padding: var(--space-m) var(--space-l);
+  background: var(--color-light-blue);
+  border: var(--border);
+  border-left: 3px solid var(--color-red);
+  border-radius: var(--border-radius-sm);
+  transition: box-shadow 0.2s ease;
+}
+.jg-cta:hover { box-shadow: 0 4px 16px rgba(11,13,18,0.07); }
+.jg-cta__brand { font-size: var(--font-size-xs); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-red); background: rgba(210,36,40,0.08); padding: var(--space-2xs) var(--space-xs); white-space: nowrap; flex-shrink: 0; align-self: flex-start; border-radius: 3px; }
+.jg-cta__body { flex: 1; min-width: 0; }
+.jg-cta__headline { display: block; font-size: var(--font-size-base); font-weight: 700; color: var(--color-ink); line-height: 1.3; margin-bottom: var(--space-2xs); }
+.jg-cta__sub { display: block; font-size: var(--font-size-xs); font-weight: 400; color: var(--color-ink-3); line-height: 1.4; }
+.jg-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-xs) var(--space-m);
+  background: var(--color-red);
+  color: var(--color-white) !important;
+  font-family: var(--font-base);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  border: none !important;
+  border-radius: var(--border-radius-sm);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+.jg-cta__btn:hover { background: var(--color-grey) !important; }
+
+/* ── DEMO CTA SECTION: Image 2 horizontal bar style ──────────── */
+.demo-cta-section {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  margin: var(--space-2xl) 0 var(--space-xl);
+  padding: var(--space-m) var(--space-l);
+  background: var(--color-cream);
+  border: var(--border);
+  border-left: 3px solid var(--color-red);
+  border-radius: var(--border-radius-sm);
+  transition: box-shadow 0.2s ease;
+}
+.demo-cta-section:hover { box-shadow: 0 4px 16px rgba(11,13,18,0.07); }
+.demo-cta__brand {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  background: rgba(210,36,40,0.08);
+  padding: var(--space-2xs) var(--space-xs);
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+  border-radius: 3px;
+}
+.demo-cta__body { flex: 1; min-width: 0; }
+.demo-cta__title {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-ink);
+  line-height: 1.3;
+  margin-bottom: var(--space-2xs);
+}
+.demo-cta__sub {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  color: var(--color-ink-3);
+  line-height: 1.4;
+}
+.demo-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-s) var(--space-l);
+  background: var(--color-red);
+  color: var(--color-white) !important;
+  font-family: var(--font-base);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  border: 1px solid var(--color-red) !important;
+  border-radius: var(--border-radius-sm);
+  text-decoration: none !important;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.demo-cta__btn:hover { background: var(--color-grey) !important; border-color: var(--color-grey) !important; }
+
+/* ── PEOPLE ALSO ASK ─────────────────────────────────────────── */
+.paa-section { margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--border-color); scroll-margin-top: 90px; }
+.paa-title { font-size: var(--font-size-h3); font-weight: 400; color: var(--color-ink); margin-bottom: var(--space-l); line-height: var(--line-height-heading); }
+.faq-item { border: var(--border); border-radius: var(--border-radius-sm); margin-bottom: var(--space-xs); overflow: hidden; transition: border-color 0.2s ease; }
+.faq-item.open { border-color: var(--color-teal); }
+.faq-question { width: 100%; background: var(--color-white); border: none; padding: var(--space-m) var(--space-l); text-align: left; cursor: pointer; display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-m); transition: background 0.18s ease; font-family: var(--font-base); }
+.faq-question:hover { background: var(--color-cream); }
+.faq-item.open .faq-question { background: var(--color-light-blue); }
+.faq-q-text { font-size: var(--font-size-sm); font-weight: 600; color: var(--color-ink); line-height: 1.45; text-align: left; }
+.faq-icon { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--border-color); flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 1px; transition: all 0.22s ease; }
+.faq-item.open .faq-icon { background: var(--color-teal); border-color: var(--color-teal); }
+.faq-icon svg { transition: transform 0.25s ease; }
+.faq-item.open .faq-icon svg { transform: rotate(45deg); }
+.faq-item.open .faq-icon svg path { stroke: white; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1); }
+.faq-item.open .faq-answer { max-height: 300px; }
+.faq-answer-inner { font-size: var(--font-size-sm); color: var(--color-ink-2); line-height: 1.75; font-weight: 400; border-top: var(--border); margin: 0 var(--space-l); padding: var(--space-s) 0 var(--space-m); }
+
+/* ── EXPERT SIDEBAR ──────────────────────────────────────────── */
+.expert-sidebar { width: 220px; flex-shrink: 0; position: sticky; top: 80px; padding: var(--space-xl) 0 var(--space-xl) 0; max-height: calc(100vh - 80px); overflow-y: auto; scrollbar-width: thin; border-left: var(--border); }
+.expert-sidebar::-webkit-scrollbar { width: 3px; }
+.expert-sidebar::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
+.exp-head { background: var(--color-cream); border: var(--border); border-left: none; padding: var(--space-xs) var(--space-m); margin-bottom: var(--space-xs); margin-left: var(--space-m); margin-right: 0; }
+.exp-head-lbl { display: block; font-size: var(--font-size-xs); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-teal); line-height: 1.4; }
+.exp-list { border: var(--border); border-top: none; margin-left: var(--space-m); margin-right: 0; }
+.exp-item { padding: var(--space-s) var(--space-m); border-bottom: var(--border); }
+.exp-item:last-child { border-bottom: none; }
+.exp-source { display: block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-teal); font-style: normal; margin-bottom: var(--space-2xs); }
+.exp-stat { font-size: var(--font-size-xs); font-weight: 400; color: var(--color-ink-3); line-height: 1.55; margin: 0 0 var(--space-xs); }
+.exp-stat strong { font-weight: 700; color: var(--color-ink); font-size: 0.85rem; }
+.exp-link { font-size: 0.65rem; font-weight: 600; color: var(--color-ink-3); text-decoration: none; border-bottom: 1px solid rgba(106,113,128,0.22); transition: color 0.18s ease; }
+.exp-link:hover { color: var(--color-teal); }
+
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 1240px) { .expert-sidebar { display: none; } }
+@media (max-width: 900px) {
+  .toc-sidebar { display: none; }
+  .article-wrap { padding: var(--space-xl) 0 var(--space-2xl); border-left: none; }
+  .page-wrapper { padding: 0 var(--container-padding); }
+}
+@media (max-width: 640px) {
+  .callout-stats { grid-template-columns: repeat(2, 1fr); }
+  .callout-stat:nth-child(2) { border-right: none; }
+  .callout-stat:nth-child(3), .callout-stat:nth-child(4) { border-top: var(--border); }
+  .callout-stat:nth-child(4) { border-right: none; }
+  .stat-trio { grid-template-columns: 1fr; }
+  .stats-bar { grid-template-columns: 1fr; }
+  .stats-bar__item { border-right: none; border-bottom: var(--border); }
+  .stats-bar__item:last-child { border-bottom: none; }
+  .barrier-grid { grid-template-columns: 1fr; }
+  .signal-grid { grid-template-columns: 1fr; }
+  .demo-cta-section { flex-direction: column; align-items: flex-start; gap: var(--space-s); }
+  .demo-cta__btn { align-self: flex-start; }
+  .jg-cta { flex-direction: column; align-items: flex-start; gap: var(--space-s); }
+  .jg-cta__btn { align-self: flex-start; }
+}
+@media (max-width: 620px) {
+  .qual-flow__steps { grid-template-columns: 1fr; }
+  .qual-flow__arrow { padding: var(--space-2xs) var(--space-m); border: none; border-top: var(--border); border-bottom: var(--border); justify-content: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- SITE HEADER -->
+<header class="site-header" role="banner">
+  <a href="https://www.jaggaer.com" class="logo">JAGG<span>AER</span></a>
+  <span class="header-tag">Thought Leadership</span>
+</header>
+
+<!-- PAGE LAYOUT -->
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <nav class="toc-sidebar" aria-label="Table of contents">
+    <div class="toc-label">Contents</div>
+    <ul class="toc-list" id="toc-list">
+      <li><a href="#false-security">Why Tier 1 Visibility Creates a False Sense of Security</a></li>
+      <li><a href="#where-risk-lives">Where Risk Actually Lives in the Supply Chain</a></li>
+      <li><a href="#why-difficult">Multi-Tier Visibility in 2026</a></li>
+      <li><a href="#cost-invisible">Cost of Invisible Supply Chain Risk in 2026</a></li>
+      <li><a href="#srm-falls-short">Why SRM Systems Fall Short in 2026</a></li>
+      <li><a href="#what-required">What Visibility Requires in 2026</a></li>
+      <li><a href="#paa">People Also Ask</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN ARTICLE -->
+  <main class="article-wrap" role="main">
+    <article class="article-body">
+
+      <!-- ARTICLE HEADER: inline in article column, matching Image 1 -->
+      <header class="article-header">
+        <div class="eyebrow">Supply Chain Intelligence</div>
+        <h1 id="top">Why Supply Chain Visibility Breaks Down Beyond Tier 1 in 2026</h1>
+        <div class="article-meta-bar" role="complementary" aria-label="Article metadata">
+          <span class="amb-item"><span class="amb-label">Audience</span> Procurement and Supply Chain Leaders</span>
+          <span class="amb-sep">|</span>
+          <span class="amb-item"><span class="amb-label">Read Time</span> 7 minute read</span>
+          <span class="amb-sep">|</span>
+          <span class="amb-item">
+            <span class="amb-label">Published</span>
+            <time datetime="2026-06">June 2026</time>
+          </span>
+        </div>
+      </header>
+      <p>Most procurement teams have full visibility of their Tier 1 suppliers. Unfortunately, most disruptions don't come from Tier 1 suppliers. In April 2025, China restricted rare earth exports. Within weeks, automotive lines across Europe and Japan halted. No Tier 1 supplier had failed. No alert had triggered. Every scorecard was green.</p>
+
+      <p>This kind of failure is why supply chain visibility beyond Tier 1 is critical. The disruption originated four tiers deep, in refiners most OEMs had never mapped. Sub-tier risk awareness has declined for two consecutive years. <cite class="src">(<a href="https://www.mckinsey.com/capabilities/operations/our-insights/decoding-disruption-to-reshape-manufacturing-footprints" target="_blank" rel="noopener">McKinsey</a>)</cite></p>
+
+      <div class="stats-bar" role="region" aria-label="Key statistics">
+        <div class="stats-bar__item">
+          <div class="stats-bar__num">95%</div>
+          <div class="stats-bar__label">of companies have Tier 1 visibility</div>
+        </div>
+        <div class="stats-bar__item">
+          <div class="stats-bar__prefix">But only</div>
+          <div class="stats-bar__num stats-bar__num--dim">42%</div>
+          <div class="stats-bar__label">see beyond Tier 1</div>
+        </div>
+        <div class="stats-bar__item">
+          <div class="stats-bar__prefix">And</div>
+          <div class="stats-bar__num stats-bar__num--risk">85%</div>
+          <div class="stats-bar__label">of risk incidents originate at Tier 2–4</div>
+        </div>
+      </div>
+      <p class="ei-below-text">The visibility exists where the risk does not. <cite class="src">(<a href="https://www.mckinsey.com/capabilities/operations/our-insights/decoding-disruption-to-reshape-manufacturing-footprints" target="_blank" rel="noopener">McKinsey Supply Chain Risk Pulse, 2025</a> &middot; <a href="https://sphera.com/company/news/amid-rising-global-supply-chain-risks-sphera-study-highlights-urgent-need-for-enhanced-n-tier-supply-chain-transparency" target="_blank" rel="noopener">Sphera, 500 CPOs, February 2025</a>)</cite></p>
+
+      <hr class="section-rule">
+
+      <!-- SECTION 1 -->
+      <h2 id="false-security">Why Tier 1 Visibility Creates a False Sense of Security</h2>
+
+      <h3 id="tier1-misses">What Tier 1 Visibility Actually Tells You and What It Misses</h3>
+
+      <p>Tier 1 supplier management answers one question: is my direct supplier delivering? It cannot answer what determines resilience. It cannot reveal what that supplier depends on, or what fails when geopolitics shift. Supply chain leaders gave their weakest maturity scores to supply visibility over the next five years. <cite class="src">(<a href="https://www.mckinsey.com/capabilities/operations/our-insights/decoding-disruption-to-reshape-manufacturing-footprints" target="_blank" rel="noopener">McKinsey</a>)</cite> Supplier visibility gaps begin with programs built around a perimeter that stops at the purchase order boundary.</p>
+
+      <h3 id="relationship-gap">Tier 1 vs Tier 2 Supplier: Why the Relationship Gap Changes Everything</h3>
+
+      <p>With a Tier 1, the buyer holds a contract, enforces audit rights, and negotiates with spend authority. With a Tier 2 (any organization supplying directly to the Tier 1), none of those conditions apply. Tier 1 suppliers protect sub-tier networks as proprietary investment. <cite class="src">(<a href="https://supplychaindigital.com/supplier-relationship-management-srm/sphera-cpo-cso-survey" target="_blank" rel="noopener">Sphera</a>)</cite> Closing that gap requires intelligence architecture independent of what suppliers choose to share.</p>
+
+      <div class="tier-table" role="region" aria-label="Tier 1 vs Tier 2+ supplier comparison">
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th class="th-tier1">Tier 1 Supplier</th>
+              <th class="th-tier2">Tier 2+ Supplier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Commercial contract</td><td class="tc-yes">Direct, enforceable contract</td><td class="tc-no">No contract exists</td></tr>
+            <tr><td>Audit rights</td><td class="tc-yes">Contractually mandated</td><td class="tc-no">Not applicable</td></tr>
+            <tr><td>Spend authority</td><td class="tc-yes">Full negotiating leverage</td><td class="tc-no">No direct leverage</td></tr>
+            <tr><td>Network disclosure</td><td class="tc-yes">Expected, enforceable</td><td class="tc-no">Withheld as proprietary investment</td></tr>
+            <tr><td>Visibility status</td><td class="tc-yes">95% of companies have it</td><td class="tc-no">Only 42% see this deep</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="jg-cta" role="complementary">
+        <span class="jg-cta__brand">JAGGAER</span>
+        <div class="jg-cta__body">
+          <span class="jg-cta__headline">JAGGAER maps sub-tier supplier networks across Tier 2, 3, and 4</span>
+          <span class="jg-cta__sub">Multi-tier supplier network mapping, sub-tier dependency data, and continuous monitoring.</span>
+        </div>
+        <a href="#" class="jg-cta__btn">View Supplier Intelligence &rarr;</a>
+      </div>
+
+      <hr class="section-rule">
+
+      <!-- SECTION 2 -->
+      <h2 id="where-risk-lives">Where Risk Actually Lives in the Supply Chain</h2>
+
+      <h3 id="tier2-matter">What Is a Tier 2 Supplier and Why Does It Matter?</h3>
+
+      <p>The highest-risk supplier is often one the buyer has never engaged. A Tier 2 supplier providing raw materials or sub-components to a Tier 1 is frequently the sole qualified source for a critical material. In automotive or aerospace, a single Tier 1 may depend on dozens of such relationships. The scale of that sub-tier exposure became measurable in 2024: across every major risk category, deterioration accelerated simultaneously. <cite class="src">(<a href="https://www.globenewswire.com/news-release/2025/01/21/3012921/0/en/Sphera-Research-Highlights-Increased-Financial-Instability-and-Escalating-Risks-from-Disasters-Disrupting-Supply-Chains-in-2024.html" target="_blank" rel="noopener">Sphera</a>)</cite></p>
+
+      <div class="stat-trio" role="region" aria-label="2024 supply chain incident statistics from Sphera">
+        <div class="stat-trio__item">
+          <span class="stat-trio__num">+61%</span>
+          <span class="stat-trio__label">Force majeure declarations</span>
+          <span class="stat-trio__period">YoY 2024</span>
+        </div>
+        <div class="stat-trio__item">
+          <span class="stat-trio__num">+54%</span>
+          <span class="stat-trio__label">Hazardous materials risks</span>
+          <span class="stat-trio__period">YoY 2024</span>
+        </div>
+        <div class="stat-trio__item">
+          <span class="stat-trio__num">+22%</span>
+          <span class="stat-trio__label">Quality incident reports</span>
+          <span class="stat-trio__period">YoY 2024</span>
+        </div>
+      </div>
+
+      <h3 id="concentration">The Concentration Problem Below Tier 1</h3>
+
+      <p>Apparent diversification at Tier 1 frequently masks concentration below it. A manufacturer sourcing from three Tier 2 suppliers appears well-hedged, until all three draw from the same Tier 3 source in one geographic cluster. Over 80% of large European firms are no more than three supply chain steps from a Chinese rare earth producer. <cite class="src">(<a href="https://www.ecb.europa.eu/press/economic-bulletin/focus/2025/html/ecb.ebbox202506_01~44d432008e.en.html" target="_blank" rel="noopener">ECB</a>)</cite> That dependency was embedded for decades before 2025 made it visible.</p>
+
+      <h3 id="disruptions-origin">Why Global Supply Chain Disruptions Almost Always Originate Sub-Tier</h3>
+
+      <p>Every major disruption, from Tohoku to the 2025 rare earth crisis, traced back to sub-tier concentration nobody mapped. The risk was not unpredictable. It was unmonitored. Disruptions lasting more than one month occur every 3.7 years and can cost up to 45% of annual profit over a decade. <cite class="src">(<a href="https://www.weforum.org/stories/2025/01/supply-chain-disruption-digital-winners-losers/" target="_blank" rel="noopener">McKinsey / WEF</a>)</cite></p>
+
+      <p class="inline-note">The risk was not unpredictable. It was unmonitored.</p>
+
+      <div class="callout" role="region" aria-label="Financial case for sub-tier visibility">
+        <div class="callout-header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          The Financial Case for Sub-Tier Visibility
+        </div>
+        <div class="callout-stats">
+          <div class="callout-stat">
+            <span class="cs-num">85%</span>
+            <span class="cs-desc">of risk incidents trace to sub-tier suppliers that standard Tier 1 management cannot monitor or pre-empt</span>
+            <a href="https://sphera.com/company/news/amid-rising-global-supply-chain-risks-sphera-study-highlights-urgent-need-for-enhanced-n-tier-supply-chain-transparency" target="_blank" rel="noopener" class="cs-src">Sphera, 500 CPOs, Feb 2025</a>
+          </div>
+          <div class="callout-stat">
+            <span class="cs-num">45%</span>
+            <span class="cs-desc">of annual profit at risk per decade from disruptions lasting more than one month</span>
+            <a href="https://www.weforum.org/stories/2025/01/supply-chain-disruption-digital-winners-losers/" target="_blank" rel="noopener" class="cs-src">McKinsey / WEF, Jan 2025</a>
+          </div>
+          <div class="callout-stat">
+            <span class="cs-num">+61%</span>
+            <span class="cs-desc">rise in force majeure declarations across supply chains in 2024</span>
+            <a href="https://www.globenewswire.com/news-release/2025/01/21/3012921/0/en/Sphera-Research-Highlights-Increased-Financial-Instability-and-Escalating-Risks-from-Disasters-Disrupting-Supply-Chains-in-2024.html" target="_blank" rel="noopener" class="cs-src">Sphera, Jan 2025</a>
+          </div>
+          <div class="callout-stat">
+            <span class="cs-num">80%+</span>
+            <span class="cs-desc">of large European firms within 3 supply chain steps of a Chinese rare earth producer</span>
+            <a href="https://www.ecb.europa.eu/press/economic-bulletin/focus/2025/html/ecb.ebbox202506_01~44d432008e.en.html" target="_blank" rel="noopener" class="cs-src">ECB, Sep 2025</a>
+          </div>
+        </div>
+        <div class="callout-takeaway">
+          <strong>Takeaway</strong>
+          <span class="callout-takeaway-text">Tier 1 management ensures only that the impact arrives without warning.</span>
+        </div>
+      </div>
+
+      <hr class="section-rule">
+
+      <!-- SECTION 3 -->
+      <h2 id="why-difficult">Why Multi-Tier Visibility Is So Difficult in 2026</h2>
+
+      <div class="barrier-grid" role="region" aria-label="Three barriers to sub-tier visibility">
+        <div class="barrier-card">
+          <div class="barrier-card__n">01</div>
+          <div class="barrier-card__title">Data Fragmentation</div>
+          <p class="barrier-card__text">Every tier below Tier 1 is a separate data estate owned by a separate entity and inaccessible by default.</p>
+          <div class="barrier-card__stat">70% lack Tier 2&ndash;4 data accuracy &middot; 26% still use manual assessments</div>
+        </div>
+        <div class="barrier-card">
+          <div class="barrier-card__n">02</div>
+          <div class="barrier-card__title">Supplier Reluctance</div>
+          <p class="barrier-card__text">Tier 1 suppliers protect sub-tier networks as proprietary. Many have only partial knowledge of their own upstream exposure.</p>
+          <div class="barrier-card__stat">Tier 2 transparency cannot be mandated into existence</div>
+        </div>
+        <div class="barrier-card">
+          <div class="barrier-card__n">03</div>
+          <div class="barrier-card__title">System Limitations</div>
+          <p class="barrier-card__text">Standard SRM platforms are built around enrolled, contracted suppliers. That architecture holds at Tier 1 and fails below it.</p>
+          <div class="barrier-card__stat">Only 7% of supply chains execute decisions in real time (Gartner)</div>
+        </div>
+      </div>
+
+      <h3 id="data-fragmentation">Data Fragmentation Across Supplier Tiers</h3>
+
+      <p>ERP and SRM systems map only what sits inside a purchase order. Every tier below is inaccessible by default. These multi-tier supplier visibility challenges compound structurally: the further from a direct contract, the older and less reliable the data becomes. <cite class="src">(<a href="https://sphera.com/company/news/amid-rising-global-supply-chain-risks-sphera-study-highlights-urgent-need-for-enhanced-n-tier-supply-chain-transparency" target="_blank" rel="noopener">Sphera</a>)</cite> Sub-tier intelligence defaults to self-reported onboarding data, often eighteen months stale. These are the supply chain blind spots no dashboard surfaces.</p>
+
+      <blockquote class="pull-quote">
+        <p>Supplier visibility gaps are not a data collection problem. They are an architectural assumption: that the purchase order boundary and the risk boundary are the same line.</p>
+      </blockquote>
+
+      <h3 id="supplier-reluctance">Supplier Reluctance to Disclose Sub-Tier Networks</h3>
+
+      <p>Tier 1 suppliers decline to share sub-tier networks to protect proprietary sourcing relationships. <cite class="src">(<a href="https://sphera.com/company/news/amid-rising-global-supply-chain-risks-sphera-study-highlights-urgent-need-for-enhanced-n-tier-supply-chain-transparency" target="_blank" rel="noopener">Sphera</a>)</cite> Many have only partial upstream knowledge themselves. Tier 2 supplier transparency cannot be mandated into existence.</p>
+
+      <h3 id="srm-limits">System Limitations of Standard Supply Chain Risk Management Software</h3>
+
+      <p>Standard supply chain risk management software is built for enrolled, contracted suppliers. It holds at Tier 1 and fails below it. The consequence is not just slow response: it is response without situational awareness, without pre-positioned alternatives, and without a network map to interrogate. <cite class="src">(<a href="https://www.gartner.com/en/supply-chain/topics/future-of-supply-chain" target="_blank" rel="noopener">Gartner</a>)</cite> By the time a sub-tier disruption propagates, the mitigation window has already closed.</p>
+
+      <div class="srm-matrix" role="region" aria-label="Supply chain visibility beyond Tier 1 — platform comparison">
+        <div class="srm-matrix__heading">
+          <em>Supply Chain Visibility Beyond Tier 1</em> &nbsp;&middot;&nbsp; Platform Capability Comparison
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Visibility Dimension</th>
+              <th class="sth-standard">Standard SRM</th>
+              <th class="sth-multi">True Multi-Tier Visibility</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Visibility scope</td><td class="sm-no">Tier 1 only</td><td class="sm-yes">Tier 1 to Tier 4+</td></tr>
+            <tr><td>Data freshness</td><td class="sm-no">18+ months stale at sub-tier</td><td class="sm-yes">Continuously enriched</td></tr>
+            <tr><td>Sub-tier coverage</td><td class="sm-no">Not accessible by design</td><td class="sm-yes">AI-inferred from trade data</td></tr>
+            <tr><td>Financial distress signals</td><td class="sm-no">Not monitored</td><td class="sm-yes">Real-time signal feeds</td></tr>
+            <tr><td>Alert lead time</td><td class="sm-no">Post-disruption</td><td class="sm-yes">Weeks before propagation</td></tr>
+          </tbody>
+        </table>
+        <div class="srm-matrix__caption"><strong>Supplier visibility gaps</strong> persist precisely because standard SRM architecture stops at the purchase order boundary. The tier where most risk originates is the tier these systems cannot see.</div>
+      </div>
+
+      <div class="jg-cta" role="complementary">
+        <span class="jg-cta__brand">JAGGAER</span>
+        <div class="jg-cta__body">
+          <span class="jg-cta__headline">JAGGAER Supplier Network: a database of supplier records across all tiers</span>
+          <span class="jg-cta__sub">A global database of supplier records, qualification data, and onboarding tools across all tiers.</span>
+        </div>
+        <a href="#" class="jg-cta__btn">View Supplier Network &rarr;</a>
+      </div>
+
+      <hr class="section-rule">
+
+      <!-- SECTION 4 -->
+      <h2 id="cost-invisible">The Cost of Invisible Supply Chain Risk in 2026</h2>
+
+      <h3 id="disruptions-warning">When Global Supply Chain Disruptions Strike Without Warning</h3>
+
+      <p>Without sub-tier maps, teams cannot answer basic triage questions: which suppliers are affected, which components are at risk, what alternatives exist. A single disruption can cost up to 42% of annual EBITDA. <cite class="src">(<a href="https://www.gtreview.com/magazine/the-supply-chain-issue-2025/supply-chains-from-just-in-time-to-just-in-case/" target="_blank" rel="noopener">McKinsey</a>)</cite> 73% still report significant losses despite near-universal confidence in their risk data <cite class="src">(<a href="https://sphera.com/company/news/sphera-finds-a-confidence-paradox-in-supply-chain-risk/" target="_blank" rel="noopener">Sphera</a>)</cite>. This is the predictable outcome of visibility that stops at Tier 1.</p>
+
+      <h3 id="qualification-gap">The Qualification Gap: What Happens After a Sub-Tier Failure</h3>
+
+      <p>Most organizations enter the qualification gap with no pre-positioned alternatives. The dependency was never visible to their systems. In sectors with long qualification cycles, what follows is not a crisis to be managed but a cost to be absorbed. The sequence below is not a contingency scenario. Without sub-tier maps, it is a structural certainty.</p>
+
+      <div class="qual-flow" role="region" aria-label="Qualification gap: how the response window closes after sub-tier failure">
+        <div class="qual-flow__label">The Qualification Gap: How the Response Window Closes</div>
+        <div class="qual-flow__steps">
+          <div class="qual-flow__step">
+            <div class="qual-flow__n">01</div>
+            <div class="qual-flow__title">Sub-tier failure</div>
+            <div class="qual-flow__sub">Invisible to Tier 1 systems at point of occurrence</div>
+          </div>
+          <div class="qual-flow__arrow" aria-hidden="true">&#8594;</div>
+          <div class="qual-flow__step">
+            <div class="qual-flow__n">02</div>
+            <div class="qual-flow__title">Propagates to Tier 1</div>
+            <div class="qual-flow__sub">Days to weeks; scorecards still green</div>
+          </div>
+          <div class="qual-flow__arrow" aria-hidden="true">&#8594;</div>
+          <div class="qual-flow__step">
+            <div class="qual-flow__n">03</div>
+            <div class="qual-flow__title">Procurement discovers</div>
+            <div class="qual-flow__sub">Line disruption confirmed; no alternatives mapped</div>
+          </div>
+          <div class="qual-flow__arrow" aria-hidden="true">&#8594;</div>
+          <div class="qual-flow__step qual-flow__step--risk">
+            <div class="qual-flow__n">04</div>
+            <div class="qual-flow__title">Qualification begins</div>
+            <div class="qual-flow__sub">12&ndash;24 months minimum in regulated industries</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="inline-note">Visibility dashboards can show green right up until the line stops.</p>
+
+      <hr class="section-rule">
+
+      <!-- SECTION 5 -->
+      <h2 id="srm-falls-short">Why Traditional SRM Systems Fall Short in 2026</h2>
+
+      <h3 id="srm-built">How Supply Chain Risk Management Tools Were Built and What They Were Not Built For</h3>
+
+      <p>SRM platforms evolved from supplier information management systems built for enrolled, contracted suppliers. They are effective for Tier 1 and structurally inadequate beyond it. Digital investment in real-time supply chain execution is expected to increase fivefold by 2028. <cite class="src">(<a href="https://www.gartner.com/en/supply-chain/topics/future-of-supply-chain" target="_blank" rel="noopener">Gartner</a>)</cite></p>
+
+      <h3 id="tier1-architecture">The Tier 1 Data Architecture Problem</h3>
+
+      <p>Enterprise procurement systems are organized around the purchase order. No PO means no supplier in the data estate, regardless of criticality. 57% of CPOs identify siloed structures as a major obstacle. <cite class="src">(<a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" target="_blank" rel="noopener">Deloitte</a>)</cite> Procurement visibility issues persist precisely here: the risk lives in what the tools cannot see.</p>
+
+      <div class="jg-cta" role="complementary">
+        <span class="jg-cta__brand">JAGGAER</span>
+        <div class="jg-cta__body">
+          <span class="jg-cta__headline">See what JAGGAER Source-to-Pay sees beyond standard SRM platforms</span>
+          <span class="jg-cta__sub">Integrated modules for supplier intelligence, AI-enabled sourcing workflows, and procurement analytics.</span>
+        </div>
+        <a href="#" class="jg-cta__btn">Compare JAGGAER with standard SRM &rarr;</a>
+      </div>
+
+      <hr class="section-rule">
+
+      <!-- SECTION 6 -->
+      <h2 id="what-required">What True Multi-Tier Visibility Requires in 2026</h2>
+
+      <div class="req-framework" role="region" aria-label="Three requirements for multi-tier visibility">
+        <div class="req-step">
+          <div class="req-step__n" aria-hidden="true">1</div>
+          <div>
+            <div class="req-step__title">A Framework Beyond Direct Suppliers</div>
+            <p class="req-step__body">Risk management must extend to every node whose failure can propagate, shifting the boundary from purchase order to production dependency.</p>
+          </div>
+        </div>
+        <div class="req-step">
+          <div class="req-step__n" aria-hidden="true">2</div>
+          <div>
+            <div class="req-step__title">Continuous Data Enrichment</div>
+            <p class="req-step__body">Financial distress signals, geopolitical tracking, trade flow analysis, and compliance monitoring, maintained as a living model, not a static record.</p>
+          </div>
+        </div>
+        <div class="req-step">
+          <div class="req-step__n" aria-hidden="true">3</div>
+          <div>
+            <div class="req-step__title">Purpose-Built Technology</div>
+            <p class="req-step__body">Network graph infrastructure, AI-based inference from trade data, and contextual alert architectures delivering signals with sufficient lead time to act.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 id="framework">A Supply Chain Risk Management Framework That Goes Beyond Direct Suppliers</h3>
+
+      <p>Effective supply chain risk management strategies share one principle: governance must extend to every node whose failure could propagate upstream, whether or not a direct contract exists. This shifts the boundary from purchase order to production dependency, requiring contractual sub-tier disclosure, incentivized data-sharing, and third-party network intelligence. Supply chain risk management best practices demand this as a baseline.</p>
+
+      <h3 id="continuous">Supply Chain Visibility and Risk Monitoring as a Continuous Capability in 2026</h3>
+
+      <p>Sub-tier mapping degrades the moment maintenance stops. A map current at onboarding can be misleading within months. Effective supply chain visibility and risk monitoring requires four continuous signal inputs:</p>
+
+      <div class="signal-grid" role="region" aria-label="Four continuous monitoring signal types">
+        <div class="signal-item">
+          <span class="signal-item__name">Financial distress signals</span>
+          <span class="signal-item__desc">Early-warning indicators of supplier deterioration across the extended network</span>
+        </div>
+        <div class="signal-item">
+          <span class="signal-item__name">Geopolitical tracking</span>
+          <span class="signal-item__desc">Trade policy shifts, export controls, and geographic concentration exposure</span>
+        </div>
+        <div class="signal-item">
+          <span class="signal-item__name">Trade flow analysis</span>
+          <span class="signal-item__desc">Inferred sub-tier relationships from cross-border shipment and customs data</span>
+        </div>
+        <div class="signal-item">
+          <span class="signal-item__name">Compliance monitoring</span>
+          <span class="signal-item__desc">Regulatory exposure and certification status across Tier 2&ndash;4 dependencies</span>
+        </div>
+      </div>
+
+      <h3 id="technology">Supply Chain Risk Management Technology for Multi-Tier Mapping in 2026</h3>
+
+      <p>Purpose-built technology closes what voluntary disclosure cannot. Network graph infrastructure models multi-tier dependencies; AI-based inference identifies sub-tier relationships from trade data; contextual alert architectures deliver signals with sufficient lead time to act. Real-time execution remains the widest gap in enterprise supply chain management. <cite class="src">(<a href="https://www.gartner.com/en/supply-chain/topics/future-of-supply-chain" target="_blank" rel="noopener">Gartner</a>)</cite></p>
+
+      <!-- CTA repositioned: immediately after first paragraph of the technology section -->
+      <div class="jg-cta" role="complementary">
+        <span class="jg-cta__brand">JAGGAER</span>
+        <div class="jg-cta__body">
+          <span class="jg-cta__headline">JAGGAER Supplier Intelligence: network mapping, trade data, and alert architecture</span>
+          <span class="jg-cta__sub">Network graph infrastructure, trade data analysis, and supplier event monitoring.</span>
+        </div>
+        <a href="#" class="jg-cta__btn">See Technology Components &rarr;</a>
+      </div>
+
+      <p>The organizations that navigated 2025's disruptions with the least damage understood one thing: exposure below the direct supplier boundary is where risk lives. Supply chain visibility beyond Tier 1 is not a differentiating capability. It is the operating baseline.</p>
+
+      <p>The companies solving multi-tier supplier visibility challenges now will be better positioned when the next disruption propagates upstream. Continuous mapping, monitoring, and supplier intelligence are how they get there.</p>
+
+      <hr class="section-rule">
+
+      <!-- FULL-WIDTH DEMO CTA: immediately before People Also Ask, Image 2 style -->
+      <div class="demo-cta-section" role="complementary" aria-label="Request a demo of JAGGAER Supplier Intelligence">
+        <span class="demo-cta__brand">JAGGAER</span>
+        <div class="demo-cta__body">
+          <span class="demo-cta__title">See your full supply chain visibility programme in one platform</span>
+          <span class="demo-cta__sub">Request a demo to see how JAGGAER Supplier Intelligence maps sub-tier networks, monitors financial signals, and surfaces risk across Tier 1 to Tier 4+.</span>
+        </div>
+        <a href="#" class="demo-cta__btn">Request a Demo &rarr;</a>
+      </div>
+
+      <!-- PEOPLE ALSO ASK -->
+      <section class="paa-section" id="paa" aria-label="People also ask">
+        <h2 class="paa-title">People Also Ask</h2>
+
+        <div class="faq-item" role="region">
+          <button class="faq-question" aria-expanded="false" onclick="togglePaa(this)">
+            <span class="faq-q-text">Why is supply chain visibility limited to Tier 1?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#6a7180" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer" role="region"><div class="faq-answer-inner">Enterprise procurement systems only track suppliers with active purchase orders. No PO means no visibility, regardless of how critical that supplier is operationally.</div></div>
+        </div>
+
+        <div class="faq-item" role="region">
+          <button class="faq-question" aria-expanded="false" onclick="togglePaa(this)">
+            <span class="faq-q-text">What are the challenges in multi-tier supply chains?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#6a7180" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer" role="region"><div class="faq-answer-inner">The core multi-tier supplier visibility challenges are data fragmentation, supplier reluctance to disclose, and platform architecture gaps. Standard SRM tools cannot monitor suppliers outside the purchase order boundary.</div></div>
+        </div>
+
+        <div class="faq-item" role="region">
+          <button class="faq-question" aria-expanded="false" onclick="togglePaa(this)">
+            <span class="faq-q-text">How do companies improve supplier visibility?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#6a7180" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer" role="region"><div class="faq-answer-inner">By combining contractual sub-tier disclosure requirements, incentivized Tier 1 data-sharing, and third-party network intelligence, treated as a continuous capability, not a one-time project.</div></div>
+        </div>
+
+        <div class="faq-item" role="region">
+          <button class="faq-question" aria-expanded="false" onclick="togglePaa(this)">
+            <span class="faq-q-text">Why do supply chain disruptions happen unexpectedly?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#6a7180" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer" role="region"><div class="faq-answer-inner">Most disruptions originate in sub-tier layers organizations have never mapped. Concentration risk accumulates silently until a geopolitical event activates it and propagates it to Tier 1.</div></div>
+        </div>
+
+        <div class="faq-item" role="region">
+          <button class="faq-question" aria-expanded="false" onclick="togglePaa(this)">
+            <span class="faq-q-text">What is multi-tier supply chain mapping?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#6a7180" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer" role="region"><div class="faq-answer-inner">Global supply chain mapping beyond Tier 1 means continuously identifying supplier relationships through trade data and AI inference to surface sub-tier concentration risks before they cause disruption.</div></div>
+        </div>
+
+        <div class="faq-item" role="region">
+          <button class="faq-question" aria-expanded="false" onclick="togglePaa(this)">
+            <span class="faq-q-text">How does data fragmentation cause supply chain blind spots?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#6a7180" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer" role="region"><div class="faq-answer-inner">Each tier below Tier 1 is a separate data estate inaccessible by default. Sub-tier intelligence defaults to stale, self-reported data often eighteen months outdated.</div></div>
+        </div>
+
+        <div class="faq-item" role="region">
+          <button class="faq-question" aria-expanded="false" onclick="togglePaa(this)">
+            <span class="faq-q-text">How do geopolitical risks expose supply chain blind spots?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#6a7180" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer" role="region"><div class="faq-answer-inner">Geopolitical events activate sub-tier risks that already exist. China's 2025 rare earth restrictions revealed over 80% of large European firms sat within three supply chain steps of a Chinese producer.</div></div>
+        </div>
+
+        <div class="faq-item" role="region">
+          <button class="faq-question" aria-expanded="false" onclick="togglePaa(this)">
+            <span class="faq-q-text">What technology is used to map multi-tier supply chains?</span>
+            <span class="faq-icon" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6h8" stroke="#6a7180" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer" role="region"><div class="faq-answer-inner">Purpose-built platforms combining network graph infrastructure, AI-based inference from trade data, and continuous third-party intelligence feeds. Standard SRM platforms cannot see beyond the purchase order boundary.</div></div>
+        </div>
+
+      </section>
+
+    </article>
+  </main>
+
+  <!-- EXPERT SIDEBAR -->
+  <aside class="expert-sidebar" aria-label="What the Experts Are Saying"
+         itemscope itemtype="https://schema.org/ItemList">
+    <div class="exp-head">
+      <span class="exp-head-lbl" itemprop="name">What the Experts Are Saying</span>
+    </div>
+    <div class="exp-list">
+      <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <meta itemprop="position" content="1">
+        <cite class="exp-source" itemprop="name">McKinsey &middot; 2025</cite>
+        <p class="exp-stat">Sub-tier risk awareness has declined for <strong>two consecutive years</strong>.</p>
+        <a class="exp-link" href="https://www.mckinsey.com/capabilities/operations/our-insights/decoding-disruption-to-reshape-manufacturing-footprints" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+      </div>
+      <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <meta itemprop="position" content="2">
+        <cite class="exp-source" itemprop="name">Sphera &middot; 500 CPOs &middot; Feb 2025</cite>
+        <p class="exp-stat"><strong>85%</strong> of risk incidents trace to sub-tier suppliers.</p>
+        <a class="exp-link" href="https://sphera.com/company/news/amid-rising-global-supply-chain-risks-sphera-study-highlights-urgent-need-for-enhanced-n-tier-supply-chain-transparency" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+      </div>
+      <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <meta itemprop="position" content="3">
+        <cite class="exp-source" itemprop="name">McKinsey / WEF &middot; Jan 2025</cite>
+        <p class="exp-stat">Disruptions can cost up to <strong>45%</strong> of annual profit per decade.</p>
+        <a class="exp-link" href="https://www.weforum.org/stories/2025/01/supply-chain-disruption-digital-winners-losers/" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+      </div>
+      <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <meta itemprop="position" content="4">
+        <cite class="exp-source" itemprop="name">ECB &middot; Sep 2025</cite>
+        <p class="exp-stat"><strong>80%+</strong> of European firms within 3 supply chain steps of a Chinese rare earth producer.</p>
+        <a class="exp-link" href="https://www.ecb.europa.eu/press/economic-bulletin/focus/2025/html/ecb.ebbox202506_01~44d432008e.en.html" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+      </div>
+      <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <meta itemprop="position" content="5">
+        <cite class="exp-source" itemprop="name">Deloitte CPO Survey &middot; 2025</cite>
+        <p class="exp-stat"><strong>57%</strong> of CPOs cite siloed structures as a major procurement obstacle.</p>
+        <a class="exp-link" href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+      </div>
+      <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <meta itemprop="position" content="6">
+        <cite class="exp-source" itemprop="name">Gartner &middot; Future of Supply Chain</cite>
+        <p class="exp-stat">Only <strong>7%</strong> of supply chains execute decisions in real time.</p>
+        <a class="exp-link" href="https://www.gartner.com/en/supply-chain/topics/future-of-supply-chain" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+  function togglePaa(btn) {
+    var item = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el) {
+      el.classList.remove('open');
+      el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+  document.addEventListener('keydown', function(e) {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('faq-question')) {
+      e.preventDefault();
+      togglePaa(e.target);
+    }
+  });
+  (function() {
+    var h2Ids = ['false-security','where-risk-lives','why-difficult','cost-invisible','srm-falls-short','what-required','paa'];
+    var sections = h2Ids.map(function(id) { return document.getElementById(id); }).filter(Boolean);
+    var tocLinks = document.querySelectorAll('.toc-list a');
+    if (!tocLinks.length || !sections.length) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.getAttribute('id');
+          tocLinks.forEach(function(link) {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-60px 0px -70% 0px', threshold: 0 });
+    sections.forEach(function(section) { observer.observe(section); });
+  })();
+</script>
+</body>
+</html>
