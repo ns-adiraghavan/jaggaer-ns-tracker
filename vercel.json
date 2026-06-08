@@ -4,5 +4,8 @@
       "path": "/api/digest",
       "schedule": "30 12 * * *"
     }
+  ],
+  "rewrites": [
+    { "source": "/demo", "destination": "/repo-setup/jai-demo.html" }
   ]
 }
