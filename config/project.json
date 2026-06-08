@@ -1064,6 +1064,13 @@
       "actor": "jaggaer"
     },
     {
+      "id": "stage-nq11b",
+      "label": "SME Review (Confirmation of topics)",
+      "actor": "person:m-ny8dy",
+      "color": "#0e6655",
+      "bg": "#e8f5f0"
+    },
+    {
       "id": "brief-uploaded",
       "label": "Brief Uploaded",
       "color": "#0e6655",
@@ -1100,13 +1107,6 @@
       "color": "#b05e00",
       "bg": "#fdf0e0",
       "actor": "jaggaer"
-    },
-    {
-      "id": "stage-nq11b",
-      "label": "SME Review (Confirmation of topics)",
-      "actor": "person:m-ny8dy",
-      "color": "#0e6655",
-      "bg": "#e8f5f0"
     },
     {
       "id": "approved",
