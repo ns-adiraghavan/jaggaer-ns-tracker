@@ -89,8 +89,8 @@
               "title": "What Are .md Files in Claude — and Why S2P Teams Can't Skip This Step",
               "format": "Educational Page",
               "assignee": "jason",
-              "status": "brief-uploaded",
-              "revision_count": 1,
+              "status": "writing",
+              "revision_count": 2,
               "primary_keyword": "Claude basics markdown files S2P procurement",
               "secondary_keyword": "how to use Claude AI procurement basics",
               "intent": "informational",
@@ -102,10 +102,10 @@
               "content_type": "ai-in-s2p",
               "phase": 1,
               "funnel": "TOFU",
-              "last_upload": "2026-06-04T12:51:17.391Z",
-              "last_upload_by": "manager",
-              "last_updated": "2026-06-04T12:51:17.391Z",
-              "last_updated_by": "manager"
+              "last_upload": "2026-06-08T12:01:49.158Z",
+              "last_upload_by": "jason",
+              "last_updated": "2026-06-08T12:01:49.158Z",
+              "last_updated_by": "jason"
             },
             {
               "id": "p-c1-3",
