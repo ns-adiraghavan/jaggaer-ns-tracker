@@ -111,14 +111,22 @@ window.NS_API = (function () {
       `<!-- piece: ${piece.title} -->\n` +
       (typeof file === "string" ? file : `[binary upload: ${file.name}, ${file.size} bytes]`);
     try {
-      // Always fetch SHA before PUT — if the file already exists at this path
-      // (e.g. from a failed previous attempt), GitHub requires the SHA or it 422s.
+      // Fetch SHA with a longer timeout — file may be large (base64 HTML via GitHub API)
       let sha;
       try {
-        const existing = await githubGetFile(path);
-        sha = existing.sha;
-      } catch (_) {
-        // 404 = new file, no SHA needed
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 15000);
+        const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`, { signal: controller.signal });
+        clearTimeout(timer);
+        if (r.ok) {
+          const data = await r.json();
+          sha = data.sha;
+          console.log(`[NS_API] deliverable-v${nextRev} exists, using SHA`, sha?.slice(0, 8));
+        } else {
+          console.log(`[NS_API] deliverable-v${nextRev} not found (${r.status}), creating new`);
+        }
+      } catch (e) {
+        console.log(`[NS_API] SHA fetch skipped (${e.message}), proceeding without`);
         sha = undefined;
       }
       const result = await githubPutFile(path, contentString, `upload ${piece.id} v${nextRev}`, sha);
@@ -137,13 +145,21 @@ window.NS_API = (function () {
       `<!-- piece: ${piece.title} -->\n` +
       (typeof file === "string" ? file : `[binary upload: ${file.name}, ${file.size} bytes]`);
     try {
-      // Must fetch SHA — file exists at this rev and GitHub requires SHA for updates
+      // File exists at this rev — fetch SHA with longer timeout for large HTML files
       let sha;
       try {
-        const existing = await githubGetFile(path);
-        sha = existing.sha;
-      } catch (_) {
-        sha = undefined; // file somehow missing — PUT without SHA
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 15000);
+        const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`, { signal: controller.signal });
+        clearTimeout(timer);
+        if (r.ok) {
+          const data = await r.json();
+          sha = data.sha;
+          console.log(`[NS_API] replace: found SHA`, sha?.slice(0, 8));
+        }
+      } catch (e) {
+        console.log(`[NS_API] replace: SHA fetch skipped (${e.message})`);
+        sha = undefined;
       }
       const result = await githubPutFile(path, contentString, `replace ${piece.id} v${rev}`, sha);
       return { ok: true, path, mock: !!result.mock };
