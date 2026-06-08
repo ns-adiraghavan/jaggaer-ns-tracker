@@ -103,63 +103,25 @@ window.NS_API = (function () {
     }
   }
 
-  // Upload an SEO brief or keyword file attached by Jaggaer.
-  // Supports any file type (PDF, DOCX, XLSX, etc) — reads as base64.
-  // Path: content/{month}/{pillar}/{cluster}/{pieceId}/brief-v{n}.{ext}
-  async function uploadBriefFile(piece, cluster, pillar, month, file, author) {
-    const ext = file.name.split(".").pop().toLowerCase() || "bin";
-    const existing = (piece.brief_files || []).length;
-    const vNum = existing + 1;
-    const path = `content/${month}/${pillar}/${cluster}/${piece.id}/brief-v${vNum}.${ext}`;
-
-    // Read as base64 (works for binary PDF/DOCX and text alike)
-    const base64Content = await new Promise((res, rej) => {
-      const r = new FileReader();
-      r.onload = () => {
-        // readAsDataURL returns "data:application/pdf;base64,XXXX" — strip the prefix
-        const result = r.result;
-        const comma = result.indexOf(",");
-        res(comma >= 0 ? result.slice(comma + 1) : result);
-      };
-      r.onerror = rej;
-      r.readAsDataURL(file);
-    });
-
-    // PUT directly with pre-encoded base64 — skip the btoa wrapper in githubPutFile
-    const body = {
-      message: `brief: attach ${file.name} to ${piece.id}`,
-      content: base64Content,
-    };
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 15000);
-    try {
-      const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-        signal: controller.signal,
-      });
-      clearTimeout(timer);
-      if (!r.ok) {
-        const errBody = await r.text();
-        throw new Error(`gh-put-${r.status}: ${errBody}`);
-      }
-      return { ok: true, path, filename: file.name, ext, vNum };
-    } catch (e) {
-      clearTimeout(timer);
-      console.warn("[NS_API] Brief upload failed:", e.message);
-      return { ok: false, path, filename: file.name, error: e.message };
-    }
-  }
-
   async function uploadPieceDeliverable(piece, cluster, pillar, month, file, author) {
-    const path = `content/${month}/${pillar}/${cluster}/${piece.id}/deliverable-v${(piece.revision_count || 0) + 1}.html`;
+    const nextRev = (piece.revision_count || 0) + 1;
+    const path = `content/${month}/${pillar}/${cluster}/${piece.id}/deliverable-v${nextRev}.html`;
     const contentString =
       `<!-- uploaded by ${author} at ${new Date().toISOString()} -->\n` +
       `<!-- piece: ${piece.title} -->\n` +
       (typeof file === "string" ? file : `[binary upload: ${file.name}, ${file.size} bytes]`);
     try {
-      const result = await githubPutFile(path, contentString, `upload ${piece.id} v${(piece.revision_count || 0) + 1}`);
+      // Always fetch SHA before PUT — if the file already exists at this path
+      // (e.g. from a failed previous attempt), GitHub requires the SHA or it 422s.
+      let sha;
+      try {
+        const existing = await githubGetFile(path);
+        sha = existing.sha;
+      } catch (_) {
+        // 404 = new file, no SHA needed
+        sha = undefined;
+      }
+      const result = await githubPutFile(path, contentString, `upload ${piece.id} v${nextRev}`, sha);
       return { ok: true, path, mock: !!result.mock };
     } catch (e) {
       console.warn("[NS_API] Upload failed:", e.message);
@@ -167,9 +129,33 @@ window.NS_API = (function () {
     }
   }
 
+  async function replaceDeliverable(piece, cluster, pillar, month, file, author) {
+    const rev = piece.revision_count || 1;
+    const path = `content/${month}/${pillar}/${cluster}/${piece.id}/deliverable-v${rev}.html`;
+    const contentString =
+      `<!-- replaced by ${author} at ${new Date().toISOString()} -->\n` +
+      `<!-- piece: ${piece.title} -->\n` +
+      (typeof file === "string" ? file : `[binary upload: ${file.name}, ${file.size} bytes]`);
+    try {
+      // Must fetch SHA — file exists at this rev and GitHub requires SHA for updates
+      let sha;
+      try {
+        const existing = await githubGetFile(path);
+        sha = existing.sha;
+      } catch (_) {
+        sha = undefined; // file somehow missing — PUT without SHA
+      }
+      const result = await githubPutFile(path, contentString, `replace ${piece.id} v${rev}`, sha);
+      return { ok: true, path, mock: !!result.mock };
+    } catch (e) {
+      console.warn("[NS_API] Replace failed:", e.message);
+      return { ok: false, path, error: e.message };
+    }
+  }
+
+
   async function listBuildWithClaude() {
     try {
-      const list = await githubListFolder("build-with-claude");
       return list.map(item => ({
         name: item.name,
         description: "—",
@@ -220,8 +206,8 @@ window.NS_API = (function () {
   return {
     loadProject,
     saveProject,
-    uploadBriefFile,
     uploadPieceDeliverable,
+    replaceDeliverable,
     listBuildWithClaude,
     askClaude,
     isRealGithub,
