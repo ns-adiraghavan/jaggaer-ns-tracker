@@ -1,0 +1,1012 @@
+<!-- uploaded by m-e10nz at 2026-06-08T12:54:37.665Z -->
+<!-- piece: How to Install Claude: A Step-by-Step Guide for Procurement Professionals -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Install Claude for Procurement in 2026 | Guide</title>
+<meta name="description" content="A step-by-step 2026 guide to installing Claude for Procurement. Configure Claude Desktop, connect supplier data via MCP, and establish data governance.">
+<meta property="og:title" content="How to Install Claude for Procurement in 2026: A Step-by-Step Guide">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   JAGGAER ARTICLE — AGENCY DESIGN SYSTEM v2.0
+   Colors, Typography, Spacing, Components
+   ═══════════════════════════════════════════════════════ */
+:root {
+  /* Brand Colors */
+  --color-ink:        #0B0D12;
+  --color-ink-2:      #3a3f4a;
+  --color-ink-3:      #6a7180;
+  --color-red:        #D22428;
+  --color-grey:       #3F434F;
+  --color-border:     #dce0e8;
+  --color-cream:      #eef0f3;
+  /* Updated light grey for dark sections per brief */
+  --color-light-grey: #F3F4F6;
+  --color-light-blue: #E9EFF4;
+  --color-white:      #ffffff;
+  --color-teal:       #4D8194;
+  --color-dark-blue:  #1B3A5C;
+  --color-navy:       #1B3A5C;
+  --accent:           var(--color-red);
+  --accent-bg:        #FDF2F2;
+
+  /* Typography — Inter-based design system */
+  --font-base: Inter, system-ui, -apple-system, sans-serif;
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-size-display: clamp(1.75rem, 4vw, 2.75rem);
+  --font-weight-heading: 400;
+  --line-height-base:    1.6;
+  --line-height-heading: 1.1;
+
+  /* Spacing */
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+
+  /* Layout */
+  --container-width:   1240px;
+  --container-narrow:  1024px;
+  --container-padding: clamp(1rem, 3vw, 2rem);
+
+  /* Radius & Borders */
+  --radius:    1rem;
+  --radius-sm: 0.5rem;
+  --border:    1px solid var(--color-border);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-ink-2);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Headings ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-base);
+  font-weight: var(--font-weight-heading);
+  line-height: var(--line-height-heading);
+  color: var(--color-ink);
+}
+h1 { font-size: var(--font-size-h1); letter-spacing: -0.01em; max-width: 700px; }
+h2 {
+  font-size: var(--font-size-h2);
+  letter-spacing: -0.005em;
+  margin: var(--space-xl) 0 var(--space-s);
+  padding-bottom: var(--space-xs);
+  border-bottom: var(--border);
+}
+h3 {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: var(--space-m) 0 var(--space-xs);
+}
+
+/* ── Links ── */
+a { color: var(--color-red); text-decoration: none; border-bottom: 1px solid #F0B0B4; transition: border-color 0.2s ease; }
+a:hover { border-color: var(--color-red); }
+
+/* ── Paragraphs ── */
+p { margin-bottom: var(--space-s); line-height: 1.75; color: var(--color-ink-2); }
+p:last-child { margin-bottom: 0; }
+
+/* ── Container ── */
+.container { width: 100%; max-width: var(--container-width); margin-inline: auto; padding-inline: var(--container-padding); }
+
+/* ── Eyebrow ── */
+.eyebrow {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: var(--space-xs);
+  display: block;
+}
+
+/* ── Badge ── */
+.badge { display: inline-block; padding: .2rem .65rem; border-radius: 9999px; font-size: var(--font-size-xs); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.badge-blue { background: var(--color-light-blue); color: var(--color-dark-blue); }
+.badge-row { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+
+/* ── Site Header ── */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--color-white);
+  border-bottom: var(--border);
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+.site-header .container { display: flex; align-items: center; justify-content: space-between; }
+.header-logo { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; color: var(--color-ink); text-decoration: none; border-bottom: none; }
+.header-logo span { color: var(--color-red); }
+.header-tag { font-size: var(--font-size-xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--color-ink-3); }
+
+/* ══════════════════════════════════════════
+   CONTENT-FIRST HEADER (Garvita pattern)
+   No dark hero. Clean content-first opening.
+   ══════════════════════════════════════════ */
+.a-header {
+  border-top: 3px solid var(--color-red);
+  padding-top: var(--space-l);
+  margin-bottom: var(--space-m);
+}
+.a-meta {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: var(--space-s);
+}
+.article-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  margin-top: var(--space-s);
+  padding: var(--space-xs) 14px;
+  background: var(--color-cream);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  flex-wrap: wrap;
+}
+.amb-item {
+  font-size: var(--font-size-xs);
+  color: var(--color-ink-3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.amb-label {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+.amb-sep { color: var(--color-border); font-size: var(--font-size-base); line-height: 1; }
+
+/* Banner lead sentence */
+.a-lead {
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  color: var(--color-ink-2);
+  line-height: 1.75;
+  margin-top: var(--space-m);
+  max-width: 700px;
+}
+
+/* ── Intro paragraphs ── */
+.intro {
+  font-size: var(--font-size-base);
+  line-height: 1.75;
+  margin: var(--space-m) 0 0;
+}
+.intro-sub {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--color-ink-3);
+  line-height: 1.65;
+  margin: 10px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+.intro-sub::after {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 36px;
+  background: var(--color-red);
+  flex-shrink: 0;
+}
+
+/* ── Article Layout ── */
+.article-wrapper { padding-block: var(--space-xl) var(--space-2xl); }
+.article-layout {
+  display: grid;
+  grid-template-columns: 210px 1fr 220px;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+/* ── TOC Sidebar ── */
+.toc-sidebar {
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.toc-sidebar::-webkit-scrollbar { width: 3px; }
+.toc-sidebar::-webkit-scrollbar-thumb { background: var(--color-border); }
+.toc-label {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  margin-bottom: var(--space-s);
+  padding-bottom: var(--space-xs);
+  border-bottom: var(--border);
+}
+.toc-list { list-style: none; }
+.toc-list li { margin-bottom: 2px; }
+.toc-list a {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-ink-3);
+  text-decoration: none;
+  border-bottom: none;
+  padding: 5px 10px 5px 12px;
+  border-left: 2px solid transparent;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  transition: all 200ms ease;
+  line-height: 1.4;
+}
+.toc-list a:hover { color: var(--color-ink); background: var(--color-cream); border-left-color: var(--color-border); }
+.toc-list a.active { color: var(--color-teal); border-left-color: var(--color-teal); }
+
+/* ── Section Divider ── */
+.sdiv { display: flex; align-items: center; gap: 14px; margin: var(--space-xl) 0 0; }
+.sdiv hr { flex: 1; border: none; border-top: var(--border); }
+.sdiv span {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  white-space: nowrap;
+}
+
+/* ── Article Sections ── */
+.article-section { scroll-margin-top: 80px; margin-bottom: var(--space-2xl); }
+.section-header { border-top: var(--border); padding-top: var(--space-m); margin-bottom: var(--space-m); }
+.section-header .eyebrow { margin-bottom: var(--space-xs); }
+.section-header h2 { margin-top: var(--space-xs); }
+.article-body h3 {
+  font-size: var(--font-size-h4);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: normal;
+  margin-top: var(--space-l);
+  margin-bottom: var(--space-s);
+  scroll-margin-top: 80px;
+  color: var(--color-ink);
+}
+
+/* ── Advantage Cards — updated to light grey ── */
+.advantage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-s); margin-block: var(--space-m); }
+.advantage-card {
+  background: var(--color-light-grey);
+  border: var(--border);
+  border-top: 3px solid var(--color-border);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  padding: var(--space-m);
+  transition: border-top-color 200ms ease, box-shadow 200ms ease;
+}
+.advantage-card:hover { border-top-color: var(--color-teal); box-shadow: 0 4px 20px rgba(11,13,18,.08); }
+.advantage-num { font-size: 1.5rem; font-weight: 800; color: #1B3A5C; line-height: 1; margin-bottom: var(--space-xs); }
+.advantage-title { font-size: var(--font-size-xs); font-weight: 700; color: var(--color-ink); text-transform: uppercase; letter-spacing: .05em; margin-bottom: var(--space-2xs); }
+.advantage-text { font-size: var(--font-size-xs); color: var(--color-ink-3); line-height: 1.5; margin: 0; }
+
+/* ── Comparison Table ── */
+.table-wrapper { border: var(--border); border-radius: var(--radius-sm); overflow: hidden; margin-block: var(--space-m); }
+.agency-table { width: 100%; border-collapse: collapse; font-size: var(--font-size-sm); }
+.agency-table th {
+  padding: var(--space-s) var(--space-m);
+  background: var(--color-light-grey);
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 1px solid #C2C2C7;
+  color: var(--color-ink);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.agency-table th:first-child { color: var(--color-ink-3); width: 30%; }
+.agency-table td { padding: var(--space-s) var(--space-m); border-bottom: 1px solid #ebedf0; color: var(--color-ink-2); vertical-align: top; }
+.agency-table tbody tr:last-child td { border-bottom: none; }
+.agency-table tbody tr:nth-child(even) td { background: #fafafa; }
+.agency-table td:first-child { font-weight: 600; color: var(--color-ink); }
+.agency-table td:nth-child(2) { color: var(--color-ink-3); }
+.agency-table td:nth-child(3) { color: var(--color-ink); }
+
+/* ── Step Framework ── */
+.step-framework { border: var(--border); border-radius: var(--radius-sm); overflow: hidden; margin-block: var(--space-m); }
+.step-item {
+  display: flex;
+  gap: var(--space-m);
+  padding: var(--space-m);
+  border-bottom: var(--border);
+  background: var(--color-white);
+  transition: background 200ms ease;
+}
+.step-item:last-child { border-bottom: none; }
+.step-item:hover { background: var(--color-light-grey); }
+.step-num {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--color-light-grey);
+  border: 1.5px solid var(--color-ink);
+  color: var(--color-ink);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px;
+}
+.step-title { font-size: var(--font-size-sm); font-weight: 700; color: var(--color-ink); margin-bottom: var(--space-2xs); line-height: 1.3; }
+.step-body { font-size: var(--font-size-sm); color: var(--color-ink-3); line-height: 1.6; margin: 0; }
+.step-body a { color: var(--color-teal); }
+
+/* ── Callout ── */
+.callout { padding: var(--space-m) var(--space-l); border-radius: var(--radius-sm); border-left: 3px solid; margin-block: var(--space-m); }
+.callout-warn { background: #fff8e1; border-color: #DCC479; }
+.callout-warn .callout-label { font-size: var(--font-size-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #574941; margin-bottom: var(--space-xs); }
+.callout-warn p { font-size: var(--font-size-sm); color: #574941; margin: 0; line-height: 1.65; }
+.callout-warn a { color: #7a4a30; }
+.callout-info { background: var(--color-light-blue); border-color: var(--color-teal); }
+.callout-info p { font-size: var(--font-size-sm); color: var(--color-dark-blue); margin: 0; line-height: 1.65; }
+
+/* ── Executive Insight — updated to light grey ── */
+.executive-insight {
+  background: var(--color-light-grey);
+  color: var(--color-ink);
+  border: var(--border);
+  border-left: 3px solid var(--color-teal);
+  border-radius: var(--radius-sm);
+  padding: var(--space-l);
+  margin-block: var(--space-m);
+}
+.ei-label {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: var(--space-xs);
+}
+.ei-stat { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--color-ink); line-height: 1; margin-bottom: var(--space-xs); }
+.ei-text { font-size: var(--font-size-sm); color: var(--color-ink-2); margin: 0; line-height: 1.6; }
+.ei-text a { color: var(--color-teal); border-bottom: 1px solid rgba(77,129,148,.3); }
+
+/* ── Pull Quote ── */
+.pull-quote { border-left: 3px solid var(--color-teal); padding: var(--space-m) 0 var(--space-m) var(--space-l); margin-block: var(--space-l); }
+.pull-quote p { font-size: var(--font-size-lg); font-weight: 400; color: var(--color-ink); line-height: 1.5; font-style: italic; margin: 0; }
+
+/* ── Workflow Grid — updated to light grey ── */
+.workflow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-s); margin-block: var(--space-m); }
+.workflow-item {
+  padding: var(--space-s) var(--space-m);
+  background: var(--color-light-grey);
+  border: var(--border);
+  border-left: 3px solid var(--color-border);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  transition: border-left-color 200ms ease;
+}
+.workflow-item:hover { border-left-color: var(--color-teal); }
+.workflow-name { font-size: var(--font-size-sm); font-weight: 600; color: var(--color-ink); margin-bottom: var(--space-2xs); }
+.workflow-desc { font-size: var(--font-size-xs); color: var(--color-ink-3); line-height: 1.5; margin: 0; }
+
+/* ── Takeaway Strip — updated to light grey ── */
+.takeaway-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  background: var(--color-light-grey);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-m) var(--space-l);
+  margin-block: var(--space-m);
+}
+.takeaway-kw { font-size: var(--font-size-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-red); white-space: nowrap; flex-shrink: 0; }
+.takeaway-rule { width: 1px; height: 20px; background: var(--color-border); flex-shrink: 0; }
+.takeaway-text { font-size: var(--font-size-sm); color: var(--color-ink-2); line-height: 1.5; font-style: italic; margin: 0; }
+.takeaway-text a { color: var(--color-teal); }
+
+/* ══════════════════════════════════════════
+   CTA BLOCK — Refined per brief
+   Headline + supporting copy as distinct <p>
+   Consultative, not promotional
+   ══════════════════════════════════════════ */
+.cta-block {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  padding: var(--space-m) var(--space-l);
+  background: var(--color-light-grey);
+  border: var(--border);
+  border-left: 3px solid var(--color-red);
+  border-radius: var(--radius-sm);
+  margin-block: var(--space-xl);
+  transition: box-shadow 200ms ease;
+}
+.cta-block:hover { box-shadow: 0 4px 20px rgba(11,13,18,.08); }
+.cta-brand {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  background: rgba(210,36,40,.08);
+  padding: 4px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 2px;
+  border-radius: 9999px;
+}
+.cta-body { flex: 1; min-width: 0; }
+/* Headline is now a distinct <p> element */
+.cta-headline {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 0 0 var(--space-2xs);
+  line-height: 1.35;
+}
+/* Supporting copy is a distinct <p> element */
+.cta-sub {
+  font-size: var(--font-size-xs);
+  color: var(--color-ink-3);
+  line-height: 1.5;
+  margin: 0;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-base);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  line-height: 1.4;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: none;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn-primary { background: var(--color-red); color: var(--color-white); border-color: var(--color-red); }
+.btn-primary:hover { background: var(--color-grey); border-color: var(--color-grey); color: var(--color-white); border-bottom: none; }
+
+/* ── Gov Timeline — updated to light grey ── */
+.gov-timeline { border: var(--border); border-radius: var(--radius-sm); overflow: hidden; margin-block: var(--space-m); }
+.gov-head {
+  background: var(--color-light-grey);
+  border-bottom: var(--border);
+  padding: var(--space-s) var(--space-l);
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+}
+.gov-head-lbl { font-size: var(--font-size-xs); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--color-ink-3); }
+.gov-head-title { font-size: var(--font-size-sm); font-weight: 600; color: var(--color-ink); }
+.gov-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-m);
+  padding: var(--space-s) var(--space-l);
+  border-bottom: var(--border);
+  background: var(--color-white);
+  transition: background 200ms ease;
+}
+.gov-item:last-child { border-bottom: none; }
+.gov-item:hover { background: var(--color-light-grey); }
+.gov-date { font-size: var(--font-size-xs); font-weight: 700; color: var(--color-red); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; min-width: 90px; flex-shrink: 0; margin-top: 2px; }
+.gov-text { font-size: var(--font-size-sm); color: var(--color-ink-2); line-height: 1.55; margin: 0; }
+.gov-text strong { font-weight: 600; color: var(--color-ink); }
+.gov-text a { color: var(--color-teal); }
+.gov-text cite { font-style: normal; font-size: var(--font-size-xs); color: var(--color-ink-3); }
+
+/* ── Verify List ── */
+.verify-list { margin-block: var(--space-s); }
+.verify-item { padding: var(--space-s) 0; border-bottom: var(--border); font-size: var(--font-size-sm); line-height: 1.65; }
+.verify-item:last-child { border-bottom: none; }
+.verify-item strong { font-weight: 600; color: var(--color-ink); }
+.verify-item a { color: var(--color-teal); }
+.verify-item cite { font-style: normal; font-size: var(--font-size-xs); color: var(--color-ink-3); }
+
+/* ── Checklist ── */
+.checklist { list-style: none; border: var(--border); border-radius: var(--radius-sm); overflow: hidden; margin-block: var(--space-s); }
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-s);
+  padding: var(--space-s) var(--space-m);
+  border-bottom: var(--border);
+  font-size: var(--font-size-sm);
+  color: var(--color-ink-2);
+  line-height: 1.55;
+  background: var(--color-white);
+  transition: background 200ms ease;
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li:hover { background: var(--color-light-grey); }
+.checklist-box { flex-shrink: 0; width: 16px; height: 16px; border: 1.5px solid var(--color-border); border-radius: 3px; margin-top: 1px; }
+.checklist li a { color: var(--color-teal); font-weight: 500; }
+
+/* ── FAQ — updated border highlight to teal ── */
+.faq-item { border: var(--border); border-radius: var(--radius-sm); margin-bottom: var(--space-xs); overflow: hidden; transition: border-color 200ms ease; }
+.faq-item[open] { border-color: var(--color-teal); }
+summary {
+  padding: var(--space-m) var(--space-l);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--color-ink);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-white);
+  transition: background 200ms ease;
+}
+summary:hover { background: var(--color-light-grey); }
+summary::-webkit-details-marker { display: none; }
+.faq-icon { font-size: 1.2rem; color: var(--color-teal); flex-shrink: 0; transition: transform 300ms ease; line-height: 1; }
+.faq-item[open] .faq-icon { transform: rotate(45deg); }
+.faq-body { padding: 0 var(--space-l) var(--space-m); font-size: var(--font-size-sm); color: var(--color-ink-2); border-top: var(--border); line-height: 1.75; }
+
+/* ── Expert Sidebar ── */
+.expert-sidebar { position: sticky; top: 80px; max-height: calc(100vh - 100px); overflow-y: auto; scrollbar-width: thin; }
+.expert-sidebar::-webkit-scrollbar { width: 3px; }
+.expert-sidebar::-webkit-scrollbar-thumb { background: var(--color-border); }
+.exp-card { border: var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.exp-header { background: var(--color-light-grey); padding: var(--space-s) var(--space-m); font-size: var(--font-size-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-red); }
+.exp-item { padding: var(--space-s) var(--space-m); border-bottom: var(--border); background: var(--color-white); }
+.exp-item:last-child { border-bottom: none; }
+.exp-source { display: block; font-size: var(--font-size-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-red); margin-bottom: 4px; }
+.exp-stat { font-size: var(--font-size-sm); color: var(--color-ink-2); line-height: 1.4; margin-bottom: 4px; }
+.exp-stat strong { font-weight: 800; color: var(--color-ink); font-size: var(--font-size-sm); }
+.exp-link { font-size: var(--font-size-xs); font-weight: 600; color: var(--color-ink-3); border-bottom: 1px solid rgba(106,113,128,.25); }
+.exp-link:hover { color: var(--color-teal); border-color: var(--color-teal); }
+
+/* ── Intro Block ── */
+.intro-block { padding: var(--space-m) 0; border-top: var(--border); margin-bottom: var(--space-xl); }
+.intro-block p { font-size: var(--font-size-base); }
+.intro-block p.opening-statement {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--color-ink);
+  line-height: 1.7;
+  margin-bottom: var(--space-s);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) { .article-layout { grid-template-columns: 180px 1fr 190px; } }
+@media (max-width: 900px) {
+  .article-layout { grid-template-columns: 1fr; }
+  .toc-sidebar, .expert-sidebar { display: none; }
+  .advantage-grid, .workflow-grid { grid-template-columns: 1fr; }
+  .cta-block { flex-direction: column; align-items: flex-start; gap: var(--space-s); }
+  .takeaway-strip { flex-direction: column; align-items: flex-start; gap: var(--space-xs); }
+}
+@media (max-width: 560px) {
+  .advantage-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Step screenshot placeholders ── */
+.step-visual { margin-top: var(--space-s); border: var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.step-visual-box {
+  background: var(--color-cream);
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-teal);
+}
+.step-visual-caption {
+  margin: 0;
+  padding: var(--space-xs) var(--space-m);
+  font-size: var(--font-size-xs);
+  color: var(--color-ink-3);
+  font-style: italic;
+  line-height: 1.4;
+  border-top: var(--border);
+  background: var(--color-white);
+}
+</style>
+</head>
+<body>
+
+<!-- ── Site Header ── -->
+<header class="site-header">
+  <div class="container">
+    <a href="https://www.jaggaer.com" class="header-logo">JAGG<span>AER</span></a>
+    <span class="header-tag">AI in Procurement</span>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════
+     CONTENT-FIRST OPENING (Garvita pattern)
+     No dark hero banner. Clean header with
+     red top border, eyebrow, H1, meta bar.
+     ══════════════════════════════════════════ -->
+<div class="article-wrapper">
+  <div class="container">
+
+    <!-- Content-first header (reference image pattern) -->
+    <header class="a-header">
+      <div style="display:flex; align-items:center; gap:var(--space-s); flex-wrap:wrap; margin-bottom:var(--space-xs);">
+        <div class="a-meta" style="margin-bottom:0;">AI in S2P Series</div>
+        <div class="badge-row" style="margin:0;">
+          <span class="badge badge-blue">Installation Guide</span>
+          <span class="badge badge-blue">AI Tools</span>
+          <span class="badge" style="background:#fff3f3; color:#D22428;">2026</span>
+        </div>
+      </div>
+      <h1>How to Install Claude: A Step-by-Step Guide for Procurement Professionals</h1>
+      <div class="article-meta-bar">
+        <span class="amb-item"><span class="amb-label">Audience</span> Procurement and Supply Chain Leaders</span>
+        <span class="amb-sep">|</span>
+        <span class="amb-item"><span class="amb-label">Read Time</span> 5&ndash;7 minute read</span>
+        <span class="amb-sep">|</span>
+        <span class="amb-item"><span class="amb-label">Published</span> June 2026</span>
+      </div>
+    </header>
+
+    <!-- Article layout with sidebars -->
+    <div class="article-layout">
+
+      <!-- TOC Sidebar -->
+      <nav class="toc-sidebar" aria-label="Table of contents">
+        <div class="toc-label">Contents</div>
+        <ul class="toc-list" id="toc-list">
+          <li><a href="#intro">Introduction</a></li>
+          <li><a href="#why-desktop">Why Use Claude Desktop</a></li>
+          <li><a href="#install-guide">Step-by-Step Installation</a></li>
+          <li><a href="#mcp-cowork">MCP &amp; Cowork Agents</a></li>
+          <li><a href="#privacy">Data Privacy &amp; Governance</a></li>
+          <li><a href="#what-changed">Governance Changes (2025&ndash;26)</a></li>
+          <li><a href="#paa">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- Article Body -->
+      <main class="article-body">
+
+        <!-- ── INTRO ── -->
+        <section class="article-section" id="intro">
+          <div class="intro-block">
+            <p>Most procurement teams have tried AI in some form. The problem is rarely adoption. It&rsquo;s access.</p>
+            <p><a href="https://www.supplychainbrain.com/articles/42787-poor-contract-management-creates-ticking-risks-for-procurement-departments" target="_blank" rel="noopener">McKinsey</a> data puts poor contract management at roughly 9% of annual revenue. 60% of organisations still review contracts by hand. <a href="https://www.prnewswire.com/news-releases/procurement-at-the-tipping-point-deloittes-2025-chief-procurement-officer-survey-reveals-the-pressure-and-promise-of-technology-disruption-302533074.html" target="_blank" rel="noopener">Deloitte</a>&rsquo;s 2025 CPO Survey found that Digital Masters, the teams with AI deeply connected to their document workflows, are achieving 3.2x GenAI ROI compared to 1.5x for everyone else. The gap isn&rsquo;t technology. It&rsquo;s integration depth.</p>
+            <p>This guide covers installation, MCP and Cowork setup, data privacy configuration, and the governance steps your IT and legal teams will need before go-live.</p>
+          </div>
+        </section>
+
+        <!-- ── WHY DESKTOP ── -->
+        <section class="article-section" id="why-desktop">
+          <div class="section-header">
+            <span class="eyebrow">Deployment Decision</span>
+            <h2>Why Procurement Teams Must Use Claude Desktop Over the Browser Version</h2>
+          </div>
+
+          <p>Browser-based Claude requires a manual upload every session. For teams processing hundreds of supplier agreements a week, that friction compounds. Contract files, RFQ response sets, and supplier scorecards live on local drives, not in a browser upload queue. The table below shows the practical differences.</p>
+
+          <div class="table-wrapper">
+            <table class="agency-table">
+              <thead><tr><th></th><th>Browser Version</th><th>Claude Desktop</th></tr></thead>
+              <tbody>
+                <tr><td>File access</td><td>Manual upload every session</td><td>Reads local files directly</td></tr>
+                <tr><td>Data routing</td><td>Passes through external infrastructure</td><td>Stays within your environment</td></tr>
+                <tr><td>Multi-doc workflows</td><td>One file at a time</td><td>Full sets, persistent access</td></tr>
+                <tr><td>Governance readiness</td><td>Requires external data routing controls</td><td>Data local by default</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Claude Desktop removes that constraint. It runs at the file system level, where documents already live: no uploads, no session resets, no data moving through infrastructure your governance team has not cleared. Sensitive supplier pricing data stays local unless explicitly routed. The gap between an AI pilot and a production deployment is almost never a technology problem. It is a document access problem.</p>
+
+          <h3>Five Structural Advantages for Manufacturing Procurement</h3>
+          <div class="advantage-grid">
+            <div class="advantage-card"><div class="advantage-num">01</div><div class="advantage-title">Local File Access</div><p class="advantage-text">Reference contracts and spend files without uploading them first.</p></div>
+            <div class="advantage-card"><div class="advantage-num">02</div><div class="advantage-title">Multi-Document Analysis</div><p class="advantage-text">Process a full RFQ response set across all supplier proposals in one workflow.</p></div>
+            <div class="advantage-card"><div class="advantage-num">03</div><div class="advantage-title">MCP Integration</div><p class="advantage-text">Connect Claude for Procurement to local data repositories under IT-defined access rules.</p></div>
+            <div class="advantage-card"><div class="advantage-num">04</div><div class="advantage-title">Cowork Automation</div><p class="advantage-text">Run multi-step procurement workflows on desktop without developer support.</p></div>
+            <div class="advantage-card"><div class="advantage-num">05</div><div class="advantage-title">Data Control</div><p class="advantage-text">Sensitive supplier data stays local unless explicitly routed externally.</p></div>
+          </div>
+
+          <div class="cta-block">
+            <span class="cta-brand">JAGGAER</span>
+            <div class="cta-body">
+              <p class="cta-headline">JAGGAER connects contract, supplier, and spend data in one platform</p>
+              <p class="cta-sub">Integrates with your existing procurement infrastructure.</p>
+            </div>
+            <a href="https://www.jaggaer.com/demo" class="btn btn-primary" target="_blank" rel="noopener">Request a Demo &rarr;</a>
+          </div>
+        </section>
+
+        <!-- ── INSTALLATION ── -->
+        <section class="article-section" id="install-guide">
+          <div class="section-header">
+            <span class="eyebrow">Step-by-Step Setup</span>
+            <h2>Step-by-Step Installation Guide for Claude Desktop</h2>
+          </div>
+
+          <p>The technical installation takes roughly half a day. The governance conversation with IT and legal typically takes longer, which is why these steps cover both. Complete every step before your first live deployment.</p>
+
+          <div class="step-framework">
+            <div class="step-item">
+              <div class="step-num">1</div>
+              <div>
+                <div class="step-title">Create or Access an Anthropic Account</div>
+                <p class="step-body">Get IT and leadership involved before any download. Navigate to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> to confirm or create an enterprise account. <a href="https://www.anthropic.com/product/enterprise" target="_blank" rel="noopener">Anthropic</a>&rsquo;s Enterprise plan includes SSO, role-based permissions, audit logs, and configurable retention.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">2</div>
+              <div>
+                <div class="step-title">Download Claude Desktop</div>
+                <p class="step-body">Log in and navigate to the Claude Desktop download page, available for macOS and Windows.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">3</div>
+              <div>
+                <div class="step-title">Install the Application</div>
+                <p class="step-body">Run the installer and coordinate with IT on endpoint security and DLP. <a href="https://www.anthropic.com/product/enterprise" target="_blank" rel="noopener">Anthropic</a> is SOC 2 Type II certified, GDPR compliant, and HIPAA-eligible.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">4</div>
+              <div>
+                <div class="step-title">Sign In and Configure Initial Settings</div>
+                <p class="step-body">Review privacy settings on first launch. Confirm access controls and retention settings match policy before the team uses live supplier data.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">5</div>
+              <div>
+                <div class="step-title">Verify Access and Test a Procurement Workflow</div>
+                <p class="step-body">Save a supplier contract locally and open it in Claude Desktop. Ask the tool to extract obligations, payment terms, renewal clauses, and liability caps. Manufacturing teams: upload a scorecard for Claude for Procurement to flag SLA breaches and summarise corrective actions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout callout-warn">
+            <div class="callout-label">September 2025 Policy Update: Action Required</div>
+            <p><a href="https://docs.anthropic.com/en/docs/claude-code/data-usage" target="_blank" rel="noopener">Anthropic</a> introduced a model training toggle for consumer accounts in August 2025, pre-set to &#8220;on.&#8221; Enterprise accounts are unaffected. Standard accounts must disable this toggle before handling sensitive supplier data. <cite>(<a href="https://anonyome.com/knowledge-center/ai-privacy/claude-privacy/" target="_blank" rel="noopener">Anonyome Labs</a>, April 2026)</cite></p>
+          </div>
+
+          <div class="cta-block">
+            <span class="cta-brand">JAGGAER</span>
+            <div class="cta-body">
+              <p class="cta-headline">JAGGAER&rsquo;s sourcing modules cover supplier evaluation, contract tracking, and onboarding</p>
+              <p class="cta-sub">Connects to your supplier data and contract repositories.</p>
+            </div>
+            <a href="https://www.jaggaer.com/solutions/sourcing" class="btn btn-primary" target="_blank" rel="noopener">Explore Sourcing &rarr;</a>
+          </div>
+        </section>
+
+        <!-- ── MCP & COWORK ── -->
+        <section class="article-section" id="mcp-cowork">
+          <div class="section-header">
+            <span class="eyebrow">Data Connectivity</span>
+            <h2>Connecting Claude for Procurement to Local Data Safely (MCP &amp; Cowork)</h2>
+          </div>
+
+          <h3>What Is MCP?</h3>
+          <p>MCP, an open standard from <a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a>, connects Claude for Procurement to your procurement infrastructure through a governance layer IT controls. Contract repositories, ERP spend files, supplier databases, compliance libraries. Data stays local under the same IT governance framework.</p>
+
+          <h3>What Are Cowork Agents?</h3>
+          <p>Cowork is Anthropic&rsquo;s desktop automation tool for procurement staff, not developers. Configuration work a procurement lead can own, without an IT build. Agents monitor folders, run sequences, generate outputs, and route exceptions for human review.</p>
+
+          <div class="table-wrapper" style="margin-top:var(--space-m);">
+            <table class="agency-table" aria-label="MCP versus Cowork comparison">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>MCP</th>
+                  <th>Cowork</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Layer</td>
+                  <td>Data connectivity and governance</td>
+                  <td>Workflow automation</td>
+                </tr>
+                <tr>
+                  <td>Configured by</td>
+                  <td>IT team</td>
+                  <td>Procurement operations leads</td>
+                </tr>
+                <tr>
+                  <td>Controls</td>
+                  <td>Access rules, data scope</td>
+                  <td>Folder monitoring, output routing</td>
+                </tr>
+                <tr>
+                  <td>Governance</td>
+                  <td>Data stays local under IT policy</td>
+                  <td>Exceptions routed for human review</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Example Workflows Enabled by MCP and Cowork</h3>
+          <div class="workflow-grid">
+            <div class="workflow-item"><div class="workflow-name">Supplier Risk Audit Automation</div><div class="workflow-desc">Pulls risk signals, analyzes against internal criteria, delivers a tiered summary for review.</div></div>
+            <div class="workflow-item"><div class="workflow-name">Contract Obligation Monitoring</div><div class="workflow-desc">Surfaces contracts needing action and prepares renegotiation language for the category manager.</div></div>
+            <div class="workflow-item"><div class="workflow-name">Spend Categorization</div><div class="workflow-desc">Maps ERP transactions to taxonomy, flags uncategorized spend, highlights off-contract purchasing before month-end.</div></div>
+            <div class="workflow-item"><div class="workflow-name">Vendor Onboarding Validation</div><div class="workflow-desc">Reviews vendor documents against the onboarding checklist and routes a gap summary.</div></div>
+            <div class="workflow-item"><div class="workflow-name">RFx Response Comparison</div><div class="workflow-desc">Analyzes supplier responses against weighted criteria and generates a comparison matrix to accelerate shortlisting.</div></div>
+            <div class="workflow-item"><div class="workflow-name">Policy Compliance Monitoring</div><div class="workflow-desc">Cross-references purchases against approved supplier lists. Exceptions surface before they become audit findings.</div></div>
+          </div>
+
+          <p><a href="https://www.prnewswire.com/news-releases/new-study-finds-that-while-adoption-varies-by-industry-procurement-professionals-are-widely-embracing-ai-302549785.html" target="_blank" rel="noopener">Ironclad</a>&rsquo;s 2025 survey ranked tracking supplier commitments (77%) and workflow automation (67%) as the top two AI use cases. Both produce outputs a professional can verify against the source immediately, making them sensible starting points.</p>
+
+          <div class="takeaway-strip">
+            <span class="takeaway-kw">Key Insight</span>
+            <span class="takeaway-rule" aria-hidden="true"></span>
+            <p class="takeaway-text"><a href="https://www.deloitte.com/us/en/alliances/articles/deloitte-coupa-future-of-procurement.html" target="_blank" rel="noopener">Deloitte</a>&rsquo;s 2025 CPO Survey: Digital Masters deploy GenAI at 2x the rate of peers. The difference in return is not about adoption scale. It is about integration depth.</p>
+          </div>
+
+          <div class="cta-block">
+            <span class="cta-brand">JAGGAER</span>
+            <div class="cta-body">
+              <p class="cta-headline">JAGGAER manages the full supplier lifecycle, from risk and spend data to onboarding</p>
+              <p class="cta-sub">Covers Tier 1 through Tier 4 supplier data.</p>
+            </div>
+            <a href="https://www.jaggaer.com/solutions/supplier-management" class="btn btn-primary" target="_blank" rel="noopener">See It in Action &rarr;</a>
+          </div>
+        </section>
+
+        <!-- ── PRIVACY ── -->
+        <section class="article-section" id="privacy">
+          <div class="section-header">
+            <span class="eyebrow">Governance &amp; Compliance</span>
+            <h2>Ensuring Procurement Data Privacy in 2026: The Anthropic Enterprise Policy</h2>
+          </div>
+
+          <p>Procurement teams handle supplier pricing data and financial assessments under NDA. The most common governance failure is not technical. It is the review that gets skipped: what do existing supplier agreements permit when AI analyzes contract documents?</p>
+
+          <h3 id="what-changed">Claude Governance and Platform Changes: 2025&ndash;2026</h3>
+          <div class="gov-timeline">
+            <div class="gov-head">
+              <span class="gov-head-lbl">Policy Timeline</span>
+              <span class="gov-head-title">Anthropic Platform &amp; Governance Updates: 2025&ndash;2026</span>
+            </div>
+            <div class="gov-item"><span class="gov-date">Aug 2025</span><p class="gov-text"><strong>Consumer training toggle introduced.</strong> A training toggle added for Free, Pro, and Max accounts, pre-set to &#8220;on.&#8221; Enterprise accounts excluded. Standard accounts must opt out. <cite>(<a href="https://docs.anthropic.com/en/docs/claude-code/data-usage" target="_blank" rel="noopener">Anthropic docs</a>)</cite></p></div>
+            <div class="gov-item"><span class="gov-date">Sept 15, 2025</span><p class="gov-text"><strong>API log retention cut to 7 days.</strong> Reduced from 30 days, lowering the data footprint for standard-plan teams. <cite>(<a href="https://docs.anthropic.com/en/docs/claude-code/data-usage" target="_blank" rel="noopener">Anthropic docs</a>)</cite></p></div>
+            <div class="gov-item"><span class="gov-date">Sept 28, 2025</span><p class="gov-text"><strong>Training opt-out deadline.</strong> Standard accounts that missed this deadline may have data in model training.</p></div>
+            <div class="gov-item"><span class="gov-date">Ongoing 2025</span><p class="gov-text"><strong>SOC 2 Type II maintained.</strong> Available under NDA. HIPAA-eligible configurations remain available for regulated environments.</p></div>
+            <div class="gov-item"><span class="gov-date">Apr 2026</span><p class="gov-text"><strong>Independent privacy review published.</strong> <a href="https://anonyome.com/knowledge-center/ai-privacy/claude-privacy/" target="_blank" rel="noopener">Anonyome Labs</a> confirmed enterprise protections and flagged opt-out risks. <cite>(April 2026)</cite></p></div>
+          </div>
+
+          <h3>What to Verify Before Deployment</h3>
+          <div class="verify-list">
+            <div class="verify-item"><p><strong>Model training.</strong> Claude Enterprise excludes customer data from training by contract. Standard accounts need the September 2025 toggle disabled before handling sensitive data. <cite>(<a href="https://docs.anthropic.com/en/docs/claude-code/data-usage" target="_blank" rel="noopener">Anthropic docs</a>)</cite></p></div>
+            <div class="verify-item"><p><strong>Data retention.</strong> Consumer plans default to 30 days; API logs reduced to 7 days from September 15, 2025. Claude Enterprise offers configurable periods. <cite>(<a href="https://docs.anthropic.com/en/docs/claude-code/data-usage" target="_blank" rel="noopener">Anthropic docs</a>)</cite></p></div>
+            <div class="verify-item"><p><strong>Security certifications.</strong> SOC 2 Type II under NDA. HIPAA: Zero Data Retention required. GDPR: data residency at AWS EU or Vertex AI. <cite>(<a href="https://anonyome.com/knowledge-center/ai-privacy/claude-privacy/" target="_blank" rel="noopener">Anonyome Labs</a>, April 2026)</cite></p></div>
+            <div class="verify-item"><p><strong>MCP connection scope.</strong> IT defines access scope per connection and activates audit logging from day one.</p></div>
+            <div class="verify-item"><p><strong>Third-party obligations.</strong> Legal should confirm AI-assisted analysis is permitted under existing supplier NDAs.</p></div>
+          </div>
+
+          <h3>Procurement AI Governance Checklist</h3>
+          <p style="font-size:var(--font-size-sm);color:var(--color-ink-2);margin-bottom:var(--space-s);font-style:italic;">Run through this before your first live deployment:</p>
+          <ul class="checklist">
+            <li><span class="checklist-box"></span>Enterprise agreement reviewed; model training opt-out confirmed. <a href="https://docs.anthropic.com/en/docs/claude-code/data-usage" target="_blank" rel="noopener">Verify at Anthropic docs</a>.</li>
+            <li><span class="checklist-box"></span>Data retention settings aligned with your document retention policy.</li>
+            <li><span class="checklist-box"></span>SOC 2 Type II reviewed; GDPR/HIPAA configurations applied where required.</li>
+            <li><span class="checklist-box"></span>IT endpoint security review completed before rollout.</li>
+            <li><span class="checklist-box"></span>MCP connections reviewed; access scope defined per data source.</li>
+            <li><span class="checklist-box"></span>Supplier NDAs reviewed by legal for AI-use permissibility.</li>
+            <li><span class="checklist-box"></span>Cowork workflows compliance-approved; MCP audit logging enabled.</li>
+            <li><span class="checklist-box"></span>Escalation path defined for outputs requiring human review.</li>
+          </ul>
+        </section>
+
+        <!-- ── CONCLUSION ── -->
+        <section class="article-section" id="conclusion">
+          <div class="section-header">
+            <span class="eyebrow">Deployment Readiness</span>
+            <h2>From Installation to Business Value</h2>
+          </div>
+          <p>This guide covers the full deployment path for Claude Desktop: installation, MCP and Cowork configuration, and the governance steps IT and legal need before go-live. The installation is the shorter part. Governance preparation is where most teams invest the most time.</p>
+
+          <div class="executive-insight">
+            <div class="ei-label">Industry Benchmark</div>
+            <div class="ei-stat">73% &ndash; 80%</div>
+            <p class="ei-text"><a href="https://www.prnewswire.com/news-releases/new-study-finds-that-while-adoption-varies-by-industry-procurement-professionals-are-widely-embracing-ai-302549785.html" target="_blank" rel="noopener">Ironclad</a>&rsquo;s 2025 survey found 73% of procurement teams already using AI, rising to 76% in manufacturing. Of those using it for contract work, 80% rate the impact at 8.3/10. <a href="https://www.abajournal.com/news/article/jpmorgan_chase_uses_tech_to_save_360000_hours_of_annual_work_by_lawyers_and" target="_blank" rel="noopener">JPMorgan</a>&rsquo;s COiN platform eliminated 360,000 hours of annual legal review work, the clearest benchmark for what document automation achieves at scale.</p>
+          </div>
+
+          <p>Start with one workflow. Validate what the tool produces on real supplier documents before anyone acts on it. Confirm governance before go-live. That is what separates a deployment that delivers measurable value from one that stays in proof-of-concept.</p>
+        </section>
+
+        <!-- ══════════════════════════════════════════
+             NEW CTA BLOCK — Request a Demo
+             Positioned immediately before FAQ section
+             ══════════════════════════════════════════ -->
+        <!-- ── FAQ ── -->
+        <section class="article-section" id="paa" aria-label="Frequently asked questions">
+          <div class="section-header">
+            <span class="eyebrow">Reference</span>
+            <h2>Frequently Asked Questions</h2>
+          </div>
+          <details class="faq-item"><summary>What are the 5 P&rsquo;s of procurement?<span class="faq-icon">+</span></summary><div class="faq-body">People, Process, Performance, Price, and Policy: the five dimensions procurement leaders manage across sourcing, contracting, and supplier relationships.</div></details>
+          <details class="faq-item"><summary>What are the 7 steps of procurement?<span class="faq-icon">+</span></summary><div class="faq-body">Need identification, purchase requisition, supplier evaluation, PO creation, order receipt, invoice processing, and record maintenance.</div></details>
+          <details class="faq-item"><summary>What are the 5 stages of procurement?<span class="faq-icon">+</span></summary><div class="faq-body">Needs assessment, sourcing, contracting, purchase execution, and contract management.</div></details>
+          <details class="faq-item"><summary>How to be a good procurement professional?<span class="faq-icon">+</span></summary><div class="faq-body">Effective procurement professionals combine commercial judgment, supplier skills, and fluency in AI-assisted analysis.</div></details>
+          <details class="faq-item"><summary>What are the 4 types of procurement?<span class="faq-icon">+</span></summary><div class="faq-body">Direct, indirect, services, and project procurement each carry distinct supplier relationships and contract structures.</div></details>
+          <details class="faq-item"><summary>What are the 10 C&rsquo;s of procurement?<span class="faq-icon">+</span></summary><div class="faq-body">Competency, Capacity, Commitment, Control, Cash, Cost, Consistency, Culture, Clean conduct, and Communication: a supplier evaluation framework mapping to AI risk categories.</div></details>
+          <details class="faq-item"><summary>What are the 5 pillars of procurement?<span class="faq-icon">+</span></summary><div class="faq-body">Cost management, quality assurance, risk management, supplier relationship management, and sustainability: procurement&#8217;s five foundational disciplines.</div></details>
+          <details class="faq-item"><summary>Which comes first, PO or PR?<span class="faq-icon">+</span></summary><div class="faq-body">A PR always comes first; once approved, it triggers a PO to the supplier.</div></details>
+          <details class="faq-item"><summary>What are the 7 R&rsquo;s in purchasing?<span class="faq-icon">+</span></summary><div class="faq-body">Right product, quantity, condition, place, time, source, and price: the operational standard for purchasing decisions at transaction and category level.</div></details>
+          <details class="faq-item"><summary>What are the 13 modes of procurement?<span class="faq-icon">+</span></summary><div class="faq-body">Open tendering, restricted tendering, RFP, two-stage tendering, RFQ, single-source, competitive negotiation, framework agreements, reverse auctions, design-build, PPP, force account, and direct contracting.</div></details>
+        </section>
+
+      </main>
+
+      <!-- Expert Sidebar -->
+      <aside class="expert-sidebar" aria-label="What the Experts Are Saying" itemscope itemtype="https://schema.org/ItemList">
+        <div class="exp-card">
+          <div class="exp-header" itemprop="name">What the Experts Are Saying</div>
+          <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><meta itemprop="position" content="1"><cite class="exp-source">Ironclad &middot; Sept 2025</cite><p class="exp-stat"><strong>73%</strong> of procurement professionals report using AI in at least one procurement workflow.</p><a class="exp-link" href="https://www.prnewswire.com/news-releases/new-study-finds-that-while-adoption-varies-by-industry-procurement-professionals-are-widely-embracing-ai-302549785.html" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a></div>
+          <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><meta itemprop="position" content="2"><cite class="exp-source">Ironclad &middot; Nov 2025</cite><p class="exp-stat"><strong>80%</strong> of contract-focused teams using AI rate its business impact at 8.3 out of 10.</p><a class="exp-link" href="https://ironcladapp.com/resources/articles/procurement-ai-contracting" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a></div>
+          <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><meta itemprop="position" content="3"><cite class="exp-source">McKinsey &middot; Nov 2025</cite><p class="exp-stat"><strong>~9%</strong> of annual revenue eroded by poor contract management, per McKinsey research.</p><a class="exp-link" href="https://www.supplychainbrain.com/articles/42787-poor-contract-management-creates-ticking-risks-for-procurement-departments" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a></div>
+          <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><meta itemprop="position" content="4"><cite class="exp-source">Vallor &middot; Nov 2025</cite><p class="exp-stat"><strong>60%</strong> of organisations reviewing contracts manually, limiting procurement throughput.</p><a class="exp-link" href="https://www.supplychainbrain.com/articles/42787-poor-contract-management-creates-ticking-risks-for-procurement-departments" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a></div>
+          <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><meta itemprop="position" content="5"><cite class="exp-source">Ironclad &middot; Sept 2025</cite><p class="exp-stat"><strong>77%</strong> of procurement teams rank supplier commitment tracking as their top AI use case.</p><a class="exp-link" href="https://www.prnewswire.com/news-releases/new-study-finds-that-while-adoption-varies-by-industry-procurement-professionals-are-widely-embracing-ai-302549785.html" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a></div>
+        </div>
+      </aside>
+
+    </div><!-- /article-layout -->
+  </div><!-- /container -->
+</div><!-- /article-wrapper -->
+
+<script>
+// TOC active state on scroll
+(function(){
+  var sections = ['intro','why-desktop','install-guide','mcp-cowork','privacy','paa']
+    .map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var links = document.querySelectorAll('.toc-list a');
+  if (!links.length || !sections.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){
+        var id = e.target.id;
+        links.forEach(function(l){ l.classList.toggle('active', l.getAttribute('href')==='#'+id); });
+      }
+    });
+  }, { rootMargin:'-60px 0px -70% 0px', threshold:0 });
+  sections.forEach(function(s){ obs.observe(s); });
+})();
+</script>
+</body>
+</html>
