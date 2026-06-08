@@ -1102,6 +1102,13 @@
       "actor": "jaggaer"
     },
     {
+      "id": "stage-nq11b",
+      "label": "New Stage",
+      "actor": "jaggaer",
+      "color": "#0e6655",
+      "bg": "#e8f5f0"
+    },
+    {
       "id": "approved",
       "label": "Approved",
       "color": "#1e7a45",
