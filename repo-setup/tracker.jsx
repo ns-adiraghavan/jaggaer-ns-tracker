@@ -678,6 +678,23 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
   const [viewMode, setViewMode] = useStateTR("table");
   const [openPiece, setOpenPiece] = useStateTR(null);
   const [activeFilter, setActiveFilter] = useStateTR(null);
+  const [searchQuery, setSearchQuery] = useStateTR("");
+
+  // Apply search filter on top of pillar/cluster/content-type filters
+  const sq = searchQuery.trim().toLowerCase();
+  const searchedPillars = !sq ? pillars : pillars.map(p => ({
+    ...p,
+    clusters: p.clusters.map(c => ({
+      ...c,
+      pieces: c.pieces.filter(pc =>
+        pc.title?.toLowerCase().includes(sq) ||
+        pc.primary_keyword?.toLowerCase().includes(sq) ||
+        pc.secondary_keyword?.toLowerCase().includes(sq) ||
+        pc.format?.toLowerCase().includes(sq) ||
+        (pc.status && (STATUS_META[pc.status]?.label || pc.status).toLowerCase().includes(sq))
+      ),
+    })).filter(c => c.pieces.length > 0),
+  })).filter(p => p.clusters.length > 0);
 
   function updatePiece(clusterId, pieceId, patch) {
     setProject(prev => {
@@ -738,6 +755,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         activeTab={activeTab} setActiveTab={setActiveTab}
         viewMode={viewMode} setViewMode={setViewMode}
         currentUser={currentUser} onOpenPiece={setOpenPiece}
+        searchQuery={searchQuery} setSearchQuery={setSearchQuery}
       />
       {activeTab === "tracker" && (
         <>
@@ -747,7 +765,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
       )}
       {activeTab === "tracker" && viewMode === "cards" && (
         <div className="ns-tracker-body">
-          {pillars.map(pillar => (
+          {searchedPillars.map(pillar => (
             <PillarBlock
               key={pillar.id} pillar={pillar}
               sequence={project.pillars.indexOf(pillar)}
@@ -759,11 +777,16 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
               currentWeek={currentWeek}
             />
           ))}
+          {sq && searchedPillars.length === 0 && (
+            <div style={{ fontFamily: "Noto Sans, sans-serif", padding: "48px 32px", color: "#9b948c", fontSize: "0.9rem", textAlign: "center" }}>
+              No pieces match "<strong>{searchQuery}</strong>"
+            </div>
+          )}
         </div>
       )}
       {activeTab === "tracker" && viewMode === "table" && (
         <CompactTable
-          pillars={pillars} project={project}
+          pillars={searchedPillars} project={project}
           setOpenPiece={setOpenPiece}
           currentUser={currentUser} adminMode={adminMode}
           updatePiece={updatePiece} addFeedback={addFeedback}
@@ -940,7 +963,7 @@ function NotificationBell({ project, currentUser, onOpenPiece }) {
 }
 
 // ─── Header ───────────────────────────────────────────────────────────────────
-function TrackerHeader({ project, stats, activeCluster, setActiveCluster, activeTab, setActiveTab, viewMode, setViewMode, currentUser, onOpenPiece }) {
+function TrackerHeader({ project, stats, activeCluster, setActiveCluster, activeTab, setActiveTab, viewMode, setViewMode, currentUser, onOpenPiece, searchQuery, setSearchQuery }) {
   const totalPieces = project.pillars.reduce((n, p) => n + p.clusters.reduce((m, c) => m + c.pieces.length, 0), 0);
   const clusterStats = window.computeStats(project).byCluster;
   const readyClusters = Object.values(clusterStats).filter(c => c.ready).length;
@@ -996,6 +1019,46 @@ function TrackerHeader({ project, stats, activeCluster, setActiveCluster, active
           ))}
         </div>
         <div className="ns-tracker-nav-right">
+          {activeTab === "tracker" && setSearchQuery && (
+            <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style={{ position: "absolute", left: "9px", color: "#9b948c", pointerEvents: "none" }}>
+                <circle cx="5.5" cy="5.5" r="4.5" stroke="currentColor" strokeWidth="1.4"/>
+                <line x1="8.9" y1="8.9" x2="12" y2="12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+              </svg>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                placeholder="Search pieces…"
+                style={{
+                  fontFamily: "Noto Sans, sans-serif",
+                  fontSize: "0.78rem",
+                  color: "#1a2535",
+                  background: "#fff",
+                  border: "1px solid #e8e3da",
+                  borderRadius: "3px",
+                  padding: "6px 28px 6px 28px",
+                  width: "200px",
+                  outline: "none",
+                  transition: "border-color 0.15s, width 0.2s",
+                }}
+                onFocus={e => { e.currentTarget.style.borderColor = "#c8401a"; e.currentTarget.style.width = "260px"; }}
+                onBlur={e => { e.currentTarget.style.borderColor = "#e8e3da"; e.currentTarget.style.width = "200px"; }}
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  style={{
+                    position: "absolute", right: "7px",
+                    background: "none", border: "none",
+                    color: "#9b948c", cursor: "pointer",
+                    fontSize: "0.8rem", lineHeight: 1, padding: "0 2px",
+                  }}
+                  title="Clear search"
+                >✕</button>
+              )}
+            </div>
+          )}
           {activeTab === "tracker" && (
             <div className="ns-view-toggle">
               <button className={`ns-view-btn ${viewMode === "cards" ? "is-active" : ""}`} onClick={() => setViewMode("cards")} title="Card view">
@@ -1864,8 +1927,8 @@ function ReplaceDraftPanel({ piece, cluster, pillar, project, currentUser, updat
     const reader = new FileReader();
     const contents = await new Promise((res, rej) => { reader.onload = () => res(reader.result); reader.onerror = rej; reader.readAsText(file); });
     for (let i = 0; i <= 100; i += 6) { setProgress(i); await new Promise(r => setTimeout(r, 28)); }
-    // uploadPieceDeliverable writes deliverable-v{rev}.html — same rev, same status
-    await window.NS_API.uploadPieceDeliverable(piece, cluster.id, pillar.id, project.active_month, contents, currentUser.id);
+    // replaceDeliverable fetches existing SHA and overwrites deliverable-v{rev}.html in place
+    await window.NS_API.replaceDeliverable(piece, cluster.id, pillar.id, project.active_month, contents, currentUser.id);
     updatePiece(cluster.id, piece.id, {
       last_upload: new Date().toISOString(),
       last_upload_by: currentUser.id,
@@ -2341,6 +2404,199 @@ function BriefFilesSection({ piece, cluster, pillar, project, currentUser, updat
   );
 }
 
+// ─── Publishing Info Section — shown at top of Details for approved pieces ───
+function PublishingInfoSection({ piece, cluster, project, currentUser, updatePiece }) {
+  const { useState: useSPI } = React;
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const isJaggaer = currentUser?.org === "jaggaer";
+  const pub = piece.publishing || {};
+  const [form, setForm] = useSPI({
+    published_by:     pub.published_by || "",
+    launch_date:      pub.launch_date || "",
+    live_url:         pub.live_url || "",
+    performance_data: pub.performance_data || "",
+  });
+  const [saved, setSaved] = useSPI(false);
+  const [editing, setEditing] = useSPI(false);
+
+  function field(key) {
+    return e => setForm(f => ({ ...f, [key]: e.target.value }));
+  }
+  function save() {
+    updatePiece(cluster.id, piece.id, {
+      publishing: { ...pub, ...form, updated_at: new Date().toISOString() },
+    });
+    setSaved(true);
+    setTimeout(() => { setSaved(false); setEditing(false); }, 1200);
+  }
+  function cancel() {
+    setForm({
+      published_by:     pub.published_by || "",
+      launch_date:      pub.launch_date || "",
+      live_url:         pub.live_url || "",
+      performance_data: pub.performance_data || "",
+    });
+    setEditing(false);
+  }
+
+  const hasAny = pub.published_by || pub.launch_date || pub.live_url || pub.performance_data;
+
+  return (
+    <div style={{
+      ...FONT,
+      background: "#f0faf5",
+      border: "1.5px solid #a8d8bc",
+      borderLeft: "4px solid #1e7a45",
+      borderRadius: "4px",
+      padding: "20px 24px 20px",
+      marginBottom: "24px",
+    }}>
+      {/* Header row */}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+        <div style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#1e7a45" }}>
+          ✓ Publishing Info
+        </div>
+        <div style={{ flex: 1, height: "1px", background: "#a8d8bc" }} />
+        {isJaggaer && !editing && (
+          <button
+            onClick={() => setEditing(true)}
+            style={{
+              fontSize: "0.7rem", fontWeight: 600, color: "#1e7a45",
+              background: "#fff", border: "1px solid #a8d8bc",
+              padding: "4px 12px", borderRadius: "3px", cursor: "pointer",
+              transition: "background 0.15s",
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = "#e0f5ea"}
+            onMouseLeave={e => e.currentTarget.style.background = "#fff"}
+          >
+            {hasAny ? "Edit" : "+ Add Publishing Info"}
+          </button>
+        )}
+      </div>
+
+      {/* Read mode */}
+      {!editing && (
+        <div style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: "8px 14px" }}>
+          {[
+            ["Published By",     pub.published_by],
+            ["Launch Date",      pub.launch_date],
+            ["Live URL",         pub.live_url],
+            ["Performance Data", pub.performance_data],
+          ].map(([label, val]) => (
+            <React.Fragment key={label}>
+              <div style={{ fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#2a7a56", paddingTop: "2px" }}>
+                {label}
+              </div>
+              <div style={{ fontSize: "0.82rem", color: val ? "#1a2535" : "#9b948c" }}>
+                {val
+                  ? (label === "Live URL" || label === "Performance Data")
+                    ? <a href={val} target="_blank" rel="noopener noreferrer" style={{ color: "#1e6fa8", textDecoration: "underline", wordBreak: "break-all" }}>{val}</a>
+                    : val
+                  : (isJaggaer ? <span style={{ fontStyle: "italic" }}>—</span> : "—")
+                }
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
+      )}
+
+      {/* Edit mode — Jaggaer only */}
+      {editing && isJaggaer && (
+        <div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "16px" }}>
+            <label style={{ display: "flex", flexDirection: "column", gap: "5px", fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#2a7a56" }}>
+              Published By
+              <input
+                value={form.published_by}
+                onChange={field("published_by")}
+                placeholder="e.g. Jason R"
+                style={{
+                  fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem",
+                  padding: "8px 10px", borderRadius: "3px",
+                  border: "1px solid #a8d8bc", background: "#fff",
+                  color: "#1a2535", fontWeight: 400,
+                  outline: "none",
+                }}
+              />
+            </label>
+            <label style={{ display: "flex", flexDirection: "column", gap: "5px", fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#2a7a56" }}>
+              Launch Date
+              <input
+                type="date"
+                value={form.launch_date}
+                onChange={field("launch_date")}
+                style={{
+                  fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem",
+                  padding: "8px 10px", borderRadius: "3px",
+                  border: "1px solid #a8d8bc", background: "#fff",
+                  color: "#1a2535", fontWeight: 400,
+                  outline: "none",
+                }}
+              />
+            </label>
+            <label style={{ display: "flex", flexDirection: "column", gap: "5px", fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#2a7a56" }}>
+              Live URL
+              <input
+                value={form.live_url}
+                onChange={field("live_url")}
+                placeholder="https://jaggaer.com/blog/..."
+                style={{
+                  fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem",
+                  padding: "8px 10px", borderRadius: "3px",
+                  border: "1px solid #a8d8bc", background: "#fff",
+                  color: "#1a2535", fontWeight: 400,
+                  outline: "none",
+                }}
+              />
+            </label>
+            <label style={{ display: "flex", flexDirection: "column", gap: "5px", fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#2a7a56" }}>
+              Performance Data URL
+              <input
+                value={form.performance_data}
+                onChange={field("performance_data")}
+                placeholder="https://analytics... or GA link"
+                style={{
+                  fontFamily: "Noto Sans, sans-serif", fontSize: "0.82rem",
+                  padding: "8px 10px", borderRadius: "3px",
+                  border: "1px solid #a8d8bc", background: "#fff",
+                  color: "#1a2535", fontWeight: 400,
+                  outline: "none",
+                }}
+              />
+            </label>
+          </div>
+          <div style={{ display: "flex", gap: "10px" }}>
+            <button
+              onClick={save}
+              disabled={saved}
+              style={{
+                fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem", fontWeight: 600,
+                background: saved ? "#1e7a45" : "#1e7a45", color: "#fff",
+                border: "none", padding: "9px 20px", borderRadius: "3px",
+                cursor: saved ? "default" : "pointer",
+                opacity: saved ? 0.8 : 1, transition: "opacity 0.15s",
+              }}
+            >
+              {saved ? "Saved ✓" : "Save Publishing Info"}
+            </button>
+            <button
+              onClick={cancel}
+              style={{
+                fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem", fontWeight: 500,
+                background: "transparent", color: "#6b6560",
+                border: "1px solid #c8c3bb", padding: "9px 16px", borderRadius: "3px",
+                cursor: "pointer",
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Piece details ────────────────────────────────────────────────────────────
 function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode, updatePiece }) {
   const weekSlot = (project.schedule || []).find(w => w.slots.some(s => s.cluster === cluster.id));
@@ -2377,6 +2633,39 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
 
   return (
     <div className="ns-details">
+      {/* ── Publishing Info — top of details, approved pieces only ── */}
+      {piece.status === "approved" && (
+        <PublishingInfoSection
+          piece={piece} cluster={cluster} project={project}
+          currentUser={currentUser} updatePiece={updatePiece}
+        />
+      )}
+
+      {/* ── Brief upload nudge — not-started pieces, Jaggaer only ── */}
+      {piece.status === "not-started" && currentUser?.org === "jaggaer" && (
+        <div style={{
+          fontFamily: "Noto Sans, sans-serif",
+          background: "#fffbf5",
+          border: "1.5px dashed #e0b87c",
+          borderLeft: "4px solid #b05e00",
+          borderRadius: "4px",
+          padding: "16px 20px",
+          marginBottom: "20px",
+          display: "flex",
+          alignItems: "center",
+          gap: "14px",
+        }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#b05e00", marginBottom: "4px" }}>
+              Brief not uploaded yet
+            </div>
+            <div style={{ fontSize: "0.8rem", color: "#6b5838", lineHeight: 1.5 }}>
+              Upload the SEO brief and keyword file to kick off writing. Use the <strong>Upload Brief</strong> tab above.
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Deliverable download bar — only when a file has been uploaded */}
       {hasDeliverable && (
         <div style={{
