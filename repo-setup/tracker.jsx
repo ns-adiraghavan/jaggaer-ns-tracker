@@ -496,35 +496,53 @@ function InlineCell({ value, type, options, onSave, children, className }) {
 
 
 // ─── Activity Bar — recent uploads/feedback, phase-filtered ─────────────────
-function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveFilter }) {
+function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveFilter, currentUser }) {
   const PANEL = { fontFamily: "Noto Sans, sans-serif" };
+  const stages = (project.workflow_stages && project.workflow_stages.length)
+    ? project.workflow_stages : DEFAULT_WORKFLOW_STAGES;
+  const stageMeta = {};
+  stages.forEach(s => { stageMeta[s.id] = s; });
 
-  const needsReview = [], needsRevision = [], recent = [];
+  // Determine which stage ids are "my turn" based on current user
+  function isMyTurn(actor) {
+    if (!actor || !currentUser) return false;
+    const actors = Array.isArray(actor) ? actor : [actor];
+    return actors.some(a => {
+      if (a === "ns") return currentUser.org === "ns";
+      if (a === "jaggaer") return currentUser.org === "jaggaer";
+      if (typeof a === "string" && a.startsWith("person:")) return currentUser.id === a.slice(7);
+      return false;
+    });
+  }
+
+  const myTurnStageIds = new Set(stages.filter(s => isMyTurn(s.actor)).map(s => s.id));
+  const terminalIds = new Set(["not-started", "approved"]);
+
+  const myActions = [], recent = [];
+
   for (const pillar of project.pillars) {
     for (const cluster of pillar.clusters) {
       for (const piece of cluster.pieces) {
-        if (piece.status === "robert-review" || piece.status === "marketing-review" || piece.status === "writing")
-          needsReview.push({ piece, cluster, pillar });
-        if (piece.status === "jaggaer-feedback")
-          needsRevision.push({ piece, cluster, pillar });
+        if (!terminalIds.has(piece.status) && myTurnStageIds.has(piece.status)) {
+          myActions.push({ piece, cluster, pillar });
+        }
         const ts = piece.last_updated || piece.last_upload;
-        if (ts && piece.status !== "not-started") recent.push({ piece, cluster, pillar, ts });
+        if (ts && !terminalIds.has(piece.status)) recent.push({ piece, cluster, pillar, ts });
       }
     }
   }
   recent.sort((a, b) => new Date(b.ts) - new Date(a.ts));
   const recentTop = recent.slice(0, 5);
 
+  // Label depends on role
+  const actionLabel = currentUser?.org === "jaggaer" ? "Awaiting Your Review" : "Your Turn";
+
   const chips = [
-    needsReview.length > 0 && {
-      id: "review", label: `${needsReview.length} Awaiting Review`,
+    myActions.length > 0 && {
+      id: "mine", label: `${myActions.length} ${actionLabel}`,
       color: "#1e6fa8", bg: "#e8f2fa", activeBg: "#d4e8f7", border: "#c5ddef",
-      items: needsReview,
-    },
-    needsRevision.length > 0 && {
-      id: "revision", label: `${needsRevision.length} Needs Revision`,
-      color: "#b05e00", bg: "#fdf0e0", activeBg: "#fde8c8", border: "#f0c888",
-      items: needsRevision,
+      items: myActions,
+      tag: currentUser?.org === "jaggaer" ? "Awaiting review" : "Your turn",
     },
     recentTop.length > 0 && {
       id: "recent", label: `${recentTop.length} Recent`,
@@ -534,6 +552,17 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
   ].filter(Boolean);
 
   if (chips.length === 0) return null;
+
+  function relTime(iso) {
+    if (!iso) return "";
+    const diff = Date.now() - new Date(iso).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return "just now";
+    if (mins < 60) return `${mins}m ago`;
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return `${hrs}h ago`;
+    return `${Math.floor(hrs / 24)}d ago`;
+  }
 
   return (
     <div style={{ borderBottom: "1px solid #e0dbd4", background: "#faf8f4" }}>
@@ -576,23 +605,10 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
       {activeFilter && (() => {
         const chip = chips.find(c => c.id === activeFilter);
         if (!chip) return null;
-
-        function relTime(iso) {
-          if (!iso) return "";
-          const diff = Date.now() - new Date(iso).getTime();
-          const mins = Math.floor(diff / 60000);
-          if (mins < 1) return "just now";
-          if (mins < 60) return `${mins}m ago`;
-          const hrs = Math.floor(mins / 60);
-          if (hrs < 24) return `${hrs}h ago`;
-          return `${Math.floor(hrs / 24)}d ago`;
-        }
-
         return (
           <div style={{ borderTop: "1px solid #e0dbd4", maxHeight: "220px", overflowY: "auto" }}>
-            {chip.items.map(({ piece, cluster, pillar, ts, late }) => {
-              const sm = STATUS_META[piece.status] || STATUS_META["not-started"];
-              const clusterWeek = getClusterWeek(cluster.id, project.schedule);
+            {chip.items.map(({ piece, cluster, pillar, ts }) => {
+              const sm = stageMeta[piece.status] || { label: piece.status, color: "#888", bg: "#f0ece4" };
               const who = (piece.last_upload_by || piece.last_updated_by)
                 ? (() => { const all = [...project.team.ns, ...project.team.jaggaer]; const m = all.find(x => x.id === (piece.last_upload_by || piece.last_updated_by)); return m ? m.name.split(" ")[0] : null; })()
                 : null;
@@ -611,13 +627,13 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
                   onMouseEnter={e => e.currentTarget.style.background = "#faf8f4"}
                   onMouseLeave={e => e.currentTarget.style.background = "#fff"}
                 >
-                  {activeFilter !== "recent" && (
+                  {activeFilter !== "recent" && chip.tag && (
                     <span style={{
                       ...PANEL, fontSize: "0.62rem", fontWeight: 700,
                       color: chip.color, border: `1px solid ${chip.border}`,
                       padding: "1px 6px", borderRadius: "2px", whiteSpace: "nowrap", flexShrink: 0,
                     }}>
-                      {activeFilter === "review" ? "Awaiting review" : "Needs revision"}
+                      {chip.tag}
                     </span>
                   )}
                   <div style={{ flex: 1, minWidth: 0 }}>
@@ -760,7 +776,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
       {activeTab === "tracker" && (
         <>
           <PhaseBanner project={project} />
-          <FilterBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+          <FilterBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} activeFilter={activeFilter} setActiveFilter={setActiveFilter} currentUser={currentUser} />
         </>
       )}
       {activeTab === "tracker" && viewMode === "cards" && (
