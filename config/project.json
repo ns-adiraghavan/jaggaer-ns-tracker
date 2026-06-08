@@ -2,19 +2,19 @@
   "months": [
     {
       "id": "month-1",
-      "label": "Month 1 \u00b7 May\u2013Jun 2026",
+      "label": "Month 1 · May–Jun 2026",
       "active": true,
       "start_date": "2026-05-21"
     },
     {
       "id": "month-2",
-      "label": "Month 2 \u00b7 Jun\u2013Jul 2026",
+      "label": "Month 2 · Jun–Jul 2026",
       "active": false,
       "start_date": "2026-06-18"
     },
     {
       "id": "month-3",
-      "label": "Month 3 \u00b7 Jul\u2013Aug 2026",
+      "label": "Month 3 · Jul–Aug 2026",
       "active": false,
       "start_date": "2026-07-16"
     }
@@ -86,7 +86,7 @@
             },
             {
               "id": "p-c1-2",
-              "title": "What Are .md Files in Claude \u2014 and Why S2P Teams Can't Skip This Step",
+              "title": "What Are .md Files in Claude — and Why S2P Teams Can't Skip This Step",
               "format": "Educational Page",
               "assignee": "jason",
               "status": "marketing-review",
@@ -109,11 +109,11 @@
             },
             {
               "id": "p-c1-3",
-              "title": "AI in S2P: What Claude Actually Delivers for Procurement in 2026 \u2014 Beyond the Hype",
+              "title": "AI in S2P: What Claude Actually Delivers for Procurement in 2026 — Beyond the Hype",
               "format": "FAQ Article",
               "assignee": "m-5jitd",
-              "status": "writing",
-              "revision_count": 1,
+              "status": "marketing-review",
+              "revision_count": 2,
               "primary_keyword": "AI S2P Claude use cases FAQ procurement",
               "secondary_keyword": "what to ask Claude S2P procurement FAQ",
               "intent": "informational",
@@ -126,10 +126,10 @@
               "content_type": "ai-in-s2p",
               "phase": 1,
               "funnel": "TOFU",
-              "last_upload": "2026-06-04T12:52:16.711Z",
-              "last_upload_by": "manager",
-              "last_updated": "2026-06-04T12:52:16.711Z",
-              "last_updated_by": "manager"
+              "last_upload": "2026-06-08T12:50:59.215Z",
+              "last_upload_by": "m-5jitd",
+              "last_updated": "2026-06-08T12:50:59.215Z",
+              "last_updated_by": "m-5jitd"
             }
           ]
         },
@@ -234,7 +234,7 @@
             },
             {
               "id": "p-c3-3",
-              "title": "3 S2P Tasks You Can Do in Claude Right Now \u2014 With Prompts and Outputs",
+              "title": "3 S2P Tasks You Can Do in Claude Right Now — With Prompts and Outputs",
               "format": "How-to Guide",
               "assignee": "null",
               "status": "stage-nq11b",
@@ -284,7 +284,7 @@
             },
             {
               "id": "p-c4-2",
-              "title": "Claude for S2P: Watch How It Works \u2014 Curated Videos and Original Jaggaer Webinars",
+              "title": "Claude for S2P: Watch How It Works — Curated Videos and Original Jaggaer Webinars",
               "format": "Webinar / Video Page",
               "assignee": "null",
               "status": "stage-nq11b",
@@ -395,7 +395,7 @@
               "schedule_week": 3,
               "funnel": "TOFU",
               "url": "/supply-chain-visibility-beyond-tier-1",
-              "notes": "NEW \u2014 not previously in tracker | Words: 1,200\u20131,800",
+              "notes": "NEW — not previously in tracker | Words: 1,200–1,800",
               "content_type": "msv",
               "phase": 1,
               "last_upload": "2026-06-05T11:41:56.518Z",
@@ -417,7 +417,7 @@
               "schedule_week": 3,
               "funnel": "TOFU",
               "url": "/blog/supplier-financial-risk-signals-procurement",
-              "notes": "NEW \u2014 not previously in tracker | Words: 2,000\u20132,500",
+              "notes": "NEW — not previously in tracker | Words: 2,000–2,500",
               "content_type": "msv",
               "last_upload": "2026-06-05T11:42:28.975Z",
               "last_upload_by": "jason",
@@ -439,7 +439,7 @@
               "schedule_week": 3,
               "funnel": "MOFU",
               "url": "/predictive-supplier-risk-management",
-              "notes": "UPDATED \u2014 title refined, keyword updated | Words: 1,200\u20131,500",
+              "notes": "UPDATED — title refined, keyword updated | Words: 1,200–1,500",
               "content_type": "industry-specific",
               "last_upload": "2026-06-05T11:40:13.557Z",
               "last_upload_by": "m-5jitd",
@@ -461,7 +461,7 @@
               "schedule_week": 3,
               "funnel": "BOFU",
               "url": "/tier-2-supplier-bankruptcy-supply-chain-risk",
-              "notes": "UPDATED \u2014 title refined, keywords updated | Words: 2,500\u20134,000",
+              "notes": "UPDATED — title refined, keywords updated | Words: 2,500–4,000",
               "content_type": "industry-specific",
               "phase": 2,
               "last_upload": "2026-06-04T12:55:15.761Z",
@@ -562,7 +562,7 @@
     {
       "id": "public-sector",
       "label": "Public Sector",
-      "subtitle": "UK \u00b7 FR \u00b7 ES",
+      "subtitle": "UK · FR · ES",
       "weight": null,
       "geography": "UK / FR / ES",
       "clusters": [
@@ -684,7 +684,7 @@
     {
       "id": "higher-education",
       "label": "Higher Education",
-      "subtitle": "US \u00b7 EU \u00b7 UK",
+      "subtitle": "US · EU · UK",
       "weight": null,
       "geography": "US / EU / UK",
       "clusters": [
@@ -887,7 +887,7 @@
         "body": "change to: Unfortunately, most disruptions don't come from Tier 1 suppliers.",
         "ts": "2026-06-02T13:16:45.683Z",
         "annotation": true,
-        "section": "\u00b654 \u2014 \"Most procurement teams have full visibil\u2026\""
+        "section": "¶54 — \"Most procurement teams have full visibil…\""
       },
       {
         "id": "ann-dhiagg",
@@ -896,7 +896,7 @@
         "body": "change first sentence to: \"This kind of failure is why supply chain visibility beyond Tier 1 is critical.\"",
         "ts": "2026-06-02T13:41:45.902Z",
         "annotation": true,
-        "section": "\u00b654 \u2014 \"That is what supply chain visibility bey\u2026\""
+        "section": "¶54 — \"That is what supply chain visibility bey…\""
       }
     ],
     "p-dm2-2": [
@@ -923,7 +923,7 @@
   "build_with_claude": [
     {
       "name": "contract-analyser",
-      "description": "Drag-drop MSA \u2192 Claude returns redline summary + risk flags.",
+      "description": "Drag-drop MSA → Claude returns redline summary + risk flags.",
       "status": "Live",
       "updated": "2026-05-14",
       "path": "build-with-claude/contract-analyser"
@@ -1023,7 +1023,7 @@
     {
       "week": 4,
       "label": "Week 4",
-      "goal": "Convert audiences built in weeks 1\u20133 to platform evaluation intent",
+      "goal": "Convert audiences built in weeks 1–3 to platform evaluation intent",
       "slots": [
         {
           "pillar": "ai-in-s2p",
