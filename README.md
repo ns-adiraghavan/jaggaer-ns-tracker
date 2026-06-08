@@ -387,25 +387,33 @@ Sample Artifacts tab — external-facing content hub showcasing Jaggaer OS / JAI
 
 ### jai-demo.html — JAI Interactive Demo
 
-Self-contained, single-file interactive demo of JAI and AI-in-procurement tooling. No API key required. No build step. Accessible two ways:
+Self-contained, single-file (~2,170 lines) interactive demo of JAI and AI-in-procurement tooling. No API key required. No build step. Accessible two ways:
 
-- **In the tracker:** via the JAI Demo nav entry in the sidebar — renders in an iframe with a tracker back bar above it. Login required (normal tracker session).
-- **Direct URL (no login):** `https://jaggaer-ns-tracker.vercel.app/demo` — served by a `vercel.json` rewrite rule pointing `/demo` directly at `jai-demo.html`. No React, no session check, no login gate.
+- **In the tracker:** via the JAI Demo nav entry in the sidebar, renders in an iframe with a tracker back bar above it. Login required (normal tracker session).
+- **Direct URL (no login):** `https://jaggaer-ns-tracker.vercel.app/demo`, served by a `vercel.json` rewrite rule pointing `/demo` directly at `jai-demo.html`. No React, no session check, no login gate.
 
 #### What the demo contains
 
-Twelve interactive tools organised into four capability groups mirroring the live JAI page structure:
+Fifteen interactive tools organised into four capability groups mirroring the live JAI page structure:
 
 | Capability Group | Tools |
 |---|---|
 | Conversation Window | Approval Path Checker, Supplier Message Drafter, Sole-Source Justifier, Prompt Builder |
 | Deep Research | Supplier Risk Scanner, Contract Clause Analyser, Invoice Exception Detector, Spend Classifier, Tender Summariser, Spend Diagnostic |
-| Guided Sourcing | RFP Builder |
-| Know where you stand | Procurement Myth Check |
+| Guided Sourcing | RFP Builder, Should-Cost Estimator, Bid Comparison & Award |
+| Know where you stand | Procurement Myth Check, AI Readiness Scorecard |
 
-Every tool is input-aware — it parses real user input (supplier geographies, clause text, invoice line items, approval thresholds) and produces genuinely responsive output. A customer-type lens (Manufacturing / Higher Education / Public Sector) is available on every tool, loading vertical-specific examples and tagging results accordingly.
+Every tool is input-aware, parsing real user input (supplier geographies, clause text, invoice line items, approval thresholds, cost-stack decomposition, bid normalisation, maturity scoring) and producing genuinely responsive output. A customer-type lens (Manufacturing / Higher Education / Public Sector) is available on applicable tools, loading vertical-specific examples and tagging results accordingly.
 
 Each tool carries a contrast strip comparing the generic demo output to what JAI does with live organisational data, making the demo-to-product mapping explicit.
+
+#### Entry experience
+
+A sandbox intent box sits above the capability console on the home page. Visitors can type what they are trying to do (e.g. "check my supplier risk" or "compare bids") and get keyword-routed to the matching tool, or choose from quick-start chips. The full capability list remains below for those who prefer to browse.
+
+#### Tool switcher
+
+Every tool page carries a "Keep exploring" rail at the foot: capability-coloured dots, a capability tag per pill, siblings-first ordering (tools in the same capability group appear first), and a Surprise Me dice button for random discovery.
 
 #### Design system
 
@@ -413,19 +421,26 @@ Implements the JAGGAER v2.0 web design guidelines. Key tokens:
 
 | Token | Value |
 |---|---|
-| Typeface | Inter (300–800) from Google Fonts — single approved typeface |
+| Primary typeface | Inter (300-800) from Google Fonts, the single approved UI typeface |
+| Stats / numbers typeface | Poppins (600-900), matching jaggaer.com (WordPress/Elementor). Used on hero counters, how-section numbers, diagnostic outputs, scorecard results |
 | Heading weight | 400 (light), differentiating word emphasised |
-| JAI gradient | 90° #5300CE → #E22B83, AI-branded contexts only |
+| JAI gradient | 90 deg #5300CE to #E22B83, AI-branded contexts only |
 | CTA red | #D22428, primary CTAs and JAGGAER wordmark only |
 | Accent green | #4D8194, eyebrows and section labels |
 
+#### CTA section
+
+Two-column layout matching the real jaggaer.com site: left-side "Talk to an expert. See JAI live." copy with a "See how JAI powers:" feature list, right-side dark "Request a Demo" card (name, company, role, email, country, challenge textarea) linking to jaggaer.com/book-a-demo.
+
 #### Suggested talking points
 
-- Lead with a tool — open Supplier Risk Scanner or Approval Path Checker and let them type their own example
+- Lead with a tool, open Supplier Risk Scanner or Approval Path Checker and let them type their own example
 - Point at the contrast strip: *"That's the generic version. Here's what JAI does with your real data"*
+- Walk through the sourcing suite: RFP Builder, then Should-Cost Estimator, then Bid Comparison, three tools that show a sourcing event end-to-end
+- Try the AI Readiness Scorecard, it surfaces gaps and links to the tool that addresses each one
 - Use the hinge line: *"One question replaces your help desk and your analyst"*
-- Close on the Spend Diagnostic — it puts a number on the status quo and leads naturally into *"let's model your real numbers"*
-- Diagnostic figures are directional estimates from published benchmarks — *"directional; a specialist models your real numbers"* is the honest and stronger position
+- Close on the Spend Diagnostic, it puts a number on the status quo and leads naturally into *"let's model your real numbers"*
+- Diagnostic figures are directional estimates from published benchmarks, *"directional; a specialist models your real numbers"* is the honest and stronger position
 
 ### admin.jsx
 
@@ -556,4 +571,4 @@ Write-Host "Done" -ForegroundColor Green
 
 ---
 
-*Last updated: June 2026 — v3.4. Changes from v3.3: Build With Claude panel removed (`bwc.jsx` and `/build-with-claude/` repo folder — safe to delete from GitHub). JAI interactive demo (`jai-demo.html`) added with two access modes: tracker sidebar via iframe (login-gated) and direct URL at `/demo` via `vercel.json` rewrite (no login). `vercel.json` moved into `repo-setup/` — this is required; the repo-root copy is ignored by Vercel. Email delivery migrated from Resend to Maileroo.*
+*Last updated: June 2026, v3.5. Changes from v3.4: JAI interactive demo expanded from 12 to 15 tools (added Should-Cost Estimator, Bid Comparison & Award, AI Readiness Scorecard). Sandbox entry experience added. Tool switcher redesigned. Stats font corrected to Poppins. Talk to an expert CTA rebuilt to match real site. All em-dashes removed from demo file.*
