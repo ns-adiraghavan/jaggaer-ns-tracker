@@ -2038,7 +2038,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
             <div className="ns-drop-rule is-done"></div>
             <div className="ns-drop-title">Committed ✓</div>
             <div className="ns-drop-sub">{filename} · deliverable-v{nextRev}.html</div>
-            <div className="ns-drop-path">Status → <strong>{nextStage?.label || "submitted"}</strong>{nextStage ? ` · ${nextStage.actor === "ns" ? "NS" : nextStage.actor?.startsWith("person:") ? nextStage.actor.slice(7) : "Jaggaer"} is cued.` : ""}</div>
+            <div className="ns-drop-path">Status → <strong>{nextStage?.label || "submitted"}</strong>{nextStage ? ` · ${nextStage.actor === "ns" ? "NS" : (typeof nextStage.actor === "string" && nextStage.actor.startsWith("person:")) ? nextStage.actor.slice(7) : "Jaggaer"} is cued.` : ""}</div>
           </>)}
           <input ref={inputRef} type="file" hidden onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
         </div>
