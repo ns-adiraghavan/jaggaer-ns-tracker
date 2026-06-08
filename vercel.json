@@ -6,6 +6,6 @@
     }
   ],
   "rewrites": [
-    { "source": "/demo", "destination": "/repo-setup/jai-demo.html" }
+    { "source": "/demo", "destination": "/jai-demo.html" }
   ]
 }
