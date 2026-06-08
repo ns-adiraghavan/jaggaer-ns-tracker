@@ -4,6 +4,19 @@
 
 const { useState: useStateAD, useRef: useRefAD, useEffect: useEffectAD } = React;
 
+// Module-scope default stages — mirrors tracker.jsx DEFAULT_WORKFLOW_STAGES.
+// Used by addPiece() to determine the correct initial status for new pieces.
+const DEFAULT_WORKFLOW_STAGES_ADMIN = [
+  { id: "not-started",      label: "Not Started",              actor: "jaggaer" },
+  { id: "sme-review",       label: "SME Review (Confirmation of topics)", actor: "jaggaer" },
+  { id: "brief-uploaded",   label: "Brief Uploaded",           actor: "ns" },
+  { id: "writing",          label: "Writing",                  actor: "ns" },
+  { id: "abhishek-review",  label: "Abhishek Review",          actor: "person:abhishek" },
+  { id: "robert-review",    label: "Robert Review",            actor: "person:m-9toiv" },
+  { id: "editors",          label: "Editors/Final Check",      actor: "jaggaer" },
+  { id: "approved",         label: "Approved",                 actor: null },
+];
+
 // ─── Pillar colour map for schedule board ─────────────────────────────────────
 const PILLAR_COLOURS = {
   "ai-in-s2p":              { bg: "rgba(30,111,168,0.10)", border: "rgba(30,111,168,0.32)", text: "#1e6fa8", tag: "AI" },
@@ -539,18 +552,23 @@ function AdminPillars({ project, setProject, adminTarget }) {
     setProject(prev => {
       const next = JSON.parse(JSON.stringify(prev));
       const c = next.pillars.find(x=>x.id===pillarId).clusters.find(x=>x.id===clusterId);
-      c.pieces.push({ id: "piece-"+Math.random().toString(36).slice(2,8), title: "New piece", format: "Article", assignee: project.team.ns[0]?.id||"", status: "not-started", primary_keyword: "", geography: "all", revision_count: 0 });
+      // Default to the second stage (sme-review / first actionable stage) — "not-started" is reserved
+      // for the legacy pre-brief state; new pieces enter the workflow at stage index 1.
+      const stages = next.workflow_stages && next.workflow_stages.length ? next.workflow_stages : DEFAULT_WORKFLOW_STAGES_ADMIN;
+      const defaultStatus = stages.length > 1 ? stages[1].id : stages[0].id;
+      c.pieces.push({ id: "piece-"+Math.random().toString(36).slice(2,8), title: "New piece", format: "Article", assignee: project.team.ns[0]?.id||"", status: defaultStatus, primary_keyword: "", geography: "all", revision_count: 0 });
       return next;
     });
   }
   function deleteCluster(pillarId, clusterId) {
     const cluster = project.pillars.find(p=>p.id===pillarId)?.clusters.find(c=>c.id===clusterId);
-    if ((cluster?.pieces||[]).some(pc => pc.status && pc.status !== "not-started")) { alert("Cannot delete a cluster with pieces in progress."); setConfirmDelete(null); return; }
+    // Block deletion if any piece has work in progress: has a revision or is approved
+    if ((cluster?.pieces||[]).some(pc => pc.status === "approved" || (pc.revision_count && pc.revision_count > 0))) { alert("Cannot delete a cluster with pieces in progress."); setConfirmDelete(null); return; }
     setProject(prev => { const next = JSON.parse(JSON.stringify(prev)); next.pillars.find(x=>x.id===pillarId).clusters = next.pillars.find(x=>x.id===pillarId).clusters.filter(c=>c.id!==clusterId); return next; });
     setConfirmDelete(null);
   }
   function deletePiece(clusterId, pieceId, status) {
-    if (status && status !== "not-started") { alert("Cannot delete a piece in progress."); setConfirmDelete(null); return; }
+    if (status === "approved") { alert("Cannot delete an approved piece."); setConfirmDelete(null); return; }
     setProject(prev => { const next = JSON.parse(JSON.stringify(prev)); for (const p of next.pillars) { const c = p.clusters.find(x=>x.id===clusterId); if(c) c.pieces = c.pieces.filter(x=>x.id!==pieceId); } return next; });
     setConfirmDelete(null);
   }
