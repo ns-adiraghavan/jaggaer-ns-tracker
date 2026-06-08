@@ -1104,7 +1104,10 @@
     {
       "id": "stage-nq11b",
       "label": "SME Review (Confirmation of topics)",
-      "actor": "jaggaer",
+      "actor": [
+        "jaggaer",
+        "person:m-ny8dy"
+      ],
       "color": "#0e6655",
       "bg": "#e8f5f0"
     },
