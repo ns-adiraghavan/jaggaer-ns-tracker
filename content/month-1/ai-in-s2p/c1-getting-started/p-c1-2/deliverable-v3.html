@@ -1,0 +1,1788 @@
+<!-- uploaded by jason at 2026-06-08T12:02:06.771Z -->
+<!-- piece: What Are .md Files in Claude — and Why S2P Teams Can't Skip This Step -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Are .md Files in Claude? Why S2P Teams Can't Skip This Step in 2026?</title>
+<meta name="description" content="Discover what .md (Markdown) files are in Claude and why procurement teams must use them to preserve contract hierarchies and maximize data extraction accuracy.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/what-are-md-files-claude-procurement">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What Are .md Files in Claude? Why S2P Teams Can't Skip This Step in 2026?">
+<meta property="og:description" content="Discover what .md (Markdown) files are in Claude and why procurement teams must use them to preserve contract hierarchies and maximize data extraction accuracy.">
+<meta property="og:url" content="https://www.jaggaer.com/blog/what-are-md-files-claude-procurement">
+<meta property="og:image" content="https://www.jaggaer.com/wp-content/uploads/md-files-claude-procurement.png">
+<meta property="og:site_name" content="JAGGAER">
+<meta property="article:published_time" content="2026-06-03">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What Are .md Files in Claude? Why S2P Teams Can't Skip This Step in 2026?">
+<meta name="twitter:description" content="Discover what .md (Markdown) files are in Claude and why procurement teams must use them to preserve contract hierarchies and maximize data extraction accuracy.">
+<meta name="twitter:image" content="https://www.jaggaer.com/wp-content/uploads/md-files-claude-procurement.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is the CLAUDE Agents MD file?","acceptedAnswer":{"@type":"Answer","text":"CLAUDE.md is a plain Markdown file that Claude Code reads automatically at the start of every session, functioning as a persistent system prompt that defines project rules, conventions, and agent behaviour without manual re-briefing."}},
+    {"@type":"Question","name":"What is the main purpose of a CLAUDE .md file in your project?","acceptedAnswer":{"@type":"Answer","text":"CLAUDE.md gives Claude persistent project context like structure, conventions, and workflows, loaded automatically before every session begins. Without it, Claude starts from a blank slate and must be re-briefed from scratch each time."}},
+    {"@type":"Question","name":"What should go in the CLAUDE MD file?","acceptedAnswer":{"@type":"Answer","text":"A CLAUDE.md file should contain a project overview, tech stack, common commands, code conventions, and explicit behaviour rules. Recommended length is under 200 lines."}},
+    {"@type":"Question","name":"Is CLAUDE md necessary?","acceptedAnswer":{"@type":"Answer","text":"CLAUDE.md is not mandatory but strongly recommended. Without it, Claude resets every session. For S2P teams, the equivalent is converting procurement documents to .md before upload, a structured input applied at the document level."}},
+    {"@type":"Question","name":"What is a .md file in AI?","acceptedAnswer":{"@type":"Answer","text":"A .md file is a plain-text Markdown document. LLMs including Claude were trained on Markdown-heavy data and process its structure natively, making it the most accurate input format for document analysis workflows."}},
+    {"@type":"Question","name":"Why are .md files used?","acceptedAnswer":{"@type":"Answer","text":"Markdown files are portable, platform-independent, and require no proprietary software. In AI workflows, converting documents to .md reduces token usage by 65-90% with no content loss, preserving document hierarchy for more reliable outputs."}},
+    {"@type":"Question","name":"Is Claude better than ChatGPT?","acceptedAnswer":{"@type":"Answer","text":"Claude leads on long-document analysis and nuanced writing, with a 200K token context window. ChatGPT leads on multimodal tasks like image generation, voice, and plugins. For enterprise document workflows, Claude is the recommended starting point."}},
+    {"@type":"Question","name":"What is the full form of .MD file?","acceptedAnswer":{"@type":"Answer","text":"MD stands for Markdown Documentation. A .md file is a plain-text document using Markdown syntax with simple inline symbols defining headings, lists, and tables without proprietary code or binary data."}},
+    {"@type":"Question","name":"Where is the CLAUDE MD file stored?","acceptedAnswer":{"@type":"Answer","text":"CLAUDE.md is stored at three levels: globally at ~/.claude/CLAUDE.md for personal preferences, at the project root for team-wide conventions, or in subdirectories for specific rules. More specific files override broader ones."}},
+    {"@type":"Question","name":"What are markdown files in Claude?","acceptedAnswer":{"@type":"Answer","text":"In Claude, .md files work as both inputs carrying document structure for accurate extraction and outputs, where Claude generates Markdown Artifacts: formatted, editable documents rendered in a dedicated side panel."}}
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Convert Your S2P Documents to .md",
+  "description": "A step-by-step guide for procurement teams to convert contracts, RFPs, and supplier documents to Markdown format for use with Claude.",
+  "estimatedCost": {"@type":"MonetaryAmount","currency":"USD","value":"0"},
+  "totalTime": "PT5M",
+  "tool": [
+    {"@type":"HowToTool","name":"Markitdown Online (browser-based, no-code)"},
+    {"@type":"HowToTool","name":"Microsoft MarkItDown Python library"}
+  ],
+  "step": [
+    {"@type":"HowToStep","position":1,"name":"Identify your document type","text":"Confirm your source format. All common S2P document types are supported including PDF, DOCX, XLSX, PPTX, HTML, and CSV."},
+    {"@type":"HowToStep","position":2,"name":"Choose your conversion method","text":"For non-technical teams: use Markitdown Online or file2markdown.ai in the browser — no installation required, processing stays local. For technical teams: use Microsoft MarkItDown Python library for high document volumes."},
+    {"@type":"HowToStep","position":3,"name":"Review the output","text":"Spend 30 seconds scanning the .md file. Confirm headings are intact, tables have rendered correctly, and clause numbering follows the original document order."},
+    {"@type":"HowToStep","position":4,"name":"Upload to Claude and set your task","text":"Upload the .md file directly into Claude. State your extraction task clearly — what terms you need, what format you want the output in, and what the document is."}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   JAGGAER DESIGN SYSTEM — CSS VARIABLES (Complete)
+   ============================================================ */
+:root {
+  /* Colors */
+  --color-ink:           #0B0D12;
+  --color-ink-2:         #3a3f4a;
+  --color-ink-3:         #6a7180;
+  --color-red:           #D22428;
+  --color-grey:          #3F434F;
+  --color-light-grey:    #dce0e8;
+  --color-cream:         #eef0f3;
+  --color-light-blue:    #E9EFF4;
+  --color-white:         #ffffff;
+  --color-teal:          #4D8194;  /* links, active states, eyebrows — Do's */
+  --color-navy:          #1B3A5C;  /* dark section backgrounds — Do's */
+  --color-green:         #4D8194;  /* alias used in guidelines Do's list */
+  /* JAI */
+  --jai-a:               #5300CE;
+  --jai-b:               #E22B83;
+  --jai-gradient:        linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  /* Typography */
+  --font-base:           Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs:        0.75rem;
+  --font-size-sm:        0.875rem;
+  --font-size-base:      0.875rem;
+  --font-size-lg:        1.125rem;
+  --font-size-h5:        clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:        clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:        clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:        clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:        clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-size-display:   clamp(1.75rem, 4vw, 2.75rem);
+  --font-weight-heading: 400;
+  --line-height-base:    1.6;
+  --line-height-heading: 1.1;
+  /* Spacing */
+  --space-2xs:  0.44rem;
+  --space-xs:   0.67rem;
+  --space-s:    clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:    clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:    clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:   clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl:  clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --section-padding: var(--space-2xl);
+  /* Layout */
+  --container-width:   1240px;
+  --container-narrow:  1024px;
+  --container-wide:    1800px;
+  --container-padding: clamp(1.25rem, 3vw, 2rem);
+  --column-gap:        1.5rem;
+  /* Radius */
+  --border-radius:    1rem;
+  --border-radius-sm: 0.5rem;
+  /* Borders */
+  --border-color: #dce0e8;
+  --border:       1px solid var(--border-color);
+}
+
+/* ============================================================
+   MOTION — reduced-motion support
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-ink-2);
+  background: var(--color-white);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   TYPOGRAPHY — heading defaults per guidelines
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-base);
+  font-weight: var(--font-weight-heading);
+  line-height: var(--line-height-heading);
+  color: var(--color-ink);
+}
+h1 { font-size: var(--font-size-h1); font-weight: 800; }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+h4 { font-size: var(--font-size-h4); }
+h5 { font-size: var(--font-size-h5); }
+
+p {
+  color: var(--color-ink-2);
+  line-height: var(--line-height-base);
+  margin-bottom: var(--space-s);
+  font-size: var(--font-size-base);
+}
+p:last-child { margin-bottom: 0; }
+
+/* Eyebrow / section label */
+.eyebrow {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+}
+
+/* Gradient text — JAI pages only */
+.text-gradient {
+  background: var(--jai-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+a {
+  color: var(--color-teal);
+  text-decoration: none;
+  border-bottom: 1px solid #b0ccd6;
+  transition: border-color 0.2s ease;
+}
+a:hover { color: var(--color-navy); border-color: var(--color-teal); }
+
+/* ============================================================
+   LAYOUT — container & grid
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+.outer-wrap {
+  display: flex;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  align-items: flex-start;
+  padding-inline: var(--container-padding);
+}
+
+.split-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--column-gap);
+  align-items: center;
+}
+@media (max-width: 768px) { .split-2 { grid-template-columns: 1fr; } }
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--column-gap);
+}
+@media (max-width: 992px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 576px) { .grid-3 { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   SIDEBARS
+   ============================================================ */
+.expert-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 30px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  padding: 0 16px 24px 14px;
+  scrollbar-width: thin;
+}
+.expert-sidebar::-webkit-scrollbar { width: 3px; }
+.expert-sidebar::-webkit-scrollbar-thumb { background: var(--border-color); }
+
+.exp-head {
+  background: var(--color-cream);
+  padding: var(--space-xs) var(--space-s);
+  margin-bottom: 4px;
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}
+.exp-head-lbl {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  display: block;
+}
+.exp-list {
+  border: var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+}
+.exp-item {
+  padding: 12px 13px;
+  border-bottom: var(--border);
+}
+.exp-item:last-child { border-bottom: none; }
+.exp-source {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  display: block;
+  margin-bottom: 5px;
+}
+.exp-stat {
+  font-size: var(--font-size-xs);
+  color: var(--color-ink-2);
+  line-height: 1.5;
+  margin: 0 0 7px;
+  font-weight: 400;
+}
+.exp-stat strong { font-weight: 700; color: var(--color-ink); }
+.exp-link {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-ink-3);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-color);
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.exp-link:hover { color: var(--color-teal); border-color: var(--color-teal); }
+
+.toc-sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 30px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  padding: 0 14px 24px 18px;
+  scrollbar-width: thin;
+}
+.toc-sidebar::-webkit-scrollbar { width: 3px; }
+.toc-sidebar::-webkit-scrollbar-thumb { background: var(--border-color); }
+
+.toc-head {
+  background: var(--color-cream);
+  padding: var(--space-xs) var(--space-s);
+  margin-bottom: 4px;
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}
+.toc-head-lbl {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-red);
+}
+.toc-nav {
+  border: var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+}
+.toc-nav a {
+  display: block;
+  padding: 7px 11px;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: var(--color-ink-3);
+  line-height: 1.4;
+  border: none;
+  border-bottom: var(--border);
+  transition: color 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.toc-nav a:last-child { border-bottom: none; }
+.toc-nav a:hover { color: var(--color-ink); background: var(--color-cream); }
+.toc-nav a.toc-active {
+  color: var(--color-teal);
+  font-weight: 600;
+  background: var(--color-light-blue);
+  border-left: 2px solid var(--color-teal);
+}
+
+@media (max-width: 1100px) { .expert-sidebar { display: none; } }
+@media (max-width: 900px) { .outer-wrap { display: block; } .toc-sidebar { display: none; } }
+
+/* ============================================================
+   ARTICLE MAIN COLUMN
+   ============================================================ */
+.page {
+  flex: 1;
+  min-width: 0;
+  max-width: 760px;
+  padding: 0 var(--container-padding) var(--space-2xl);
+}
+
+/* ============================================================
+   ARTICLE HEADER
+   ============================================================ */
+.a-header {
+  border-top: 3px solid var(--color-red);
+  padding-top: var(--space-l);
+  margin-bottom: var(--space-m);
+}
+.a-meta {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  margin-bottom: 12px;
+}
+
+/* H1 — eyebrow + bold headline pattern per guidelines */
+.article-h1-eyebrow {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: var(--space-xs);
+  display: block;
+}
+h1.article-title {
+  font-size: var(--font-size-h1);
+  font-weight: 800;
+  line-height: var(--line-height-heading);
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+  max-width: 680px;
+  margin-bottom: var(--space-xs);
+}
+
+.article-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 9px 13px;
+  background: var(--color-cream);
+  border: var(--border);
+  border-radius: var(--border-radius-sm);
+  flex-wrap: wrap;
+}
+.amb-item {
+  font-size: 0.6875rem;
+  color: var(--color-ink-3);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.amb-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+.amb-sep { color: var(--border-color); font-size: 13px; }
+
+/* ============================================================
+   SECTION DIVIDER
+   ============================================================ */
+.sdiv {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: var(--space-xl) 0 0;
+}
+.sdiv hr { flex: 1; border: none; border-top: var(--border); }
+.sdiv span {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  white-space: nowrap;
+}
+
+/* Section H2 — eyebrow above every headline per Do's */
+.section-eyebrow {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  display: block;
+  margin-bottom: var(--space-xs);
+  margin-top: var(--space-m);
+}
+h2.section-h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-ink);
+  margin-bottom: 12px;
+  line-height: var(--line-height-heading);
+  padding-bottom: 9px;
+  border-bottom: var(--border);
+}
+h3.section-h3 {
+  font-size: var(--font-size-h4);
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: var(--space-m) 0 var(--space-xs);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ============================================================
+   BUTTONS — per guidelines
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.5rem;
+  padding-right: 1.25rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-base);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  border-bottom: none;
+}
+.btn:hover { border-bottom: none; }
+.btn-primary     { background: var(--color-red); color: #fff; border-color: var(--color-red); }
+.btn-primary:hover { background: var(--color-grey); border-color: var(--color-grey); }
+.btn-outline     { background: transparent; color: var(--color-ink); border-color: currentColor; }
+.btn-outline:hover { background: var(--color-grey); color: #fff; border-color: var(--color-grey); }
+.btn-outline-dark     { background: transparent; color: #fff; border: 1px solid #fff; }
+.btn-outline-dark:hover { background: #fff; color: var(--color-grey); }
+.btn-white       { background: #fff; color: var(--color-ink); border: 1px solid var(--border-color); }
+.btn-white:hover { border-color: var(--color-ink-3); }
+
+/* JAI CTA variant — gradient background, purple border accent */
+.jag-cta.jai-variant {
+  background: linear-gradient(135deg, #5300ce10, #e22b8310);
+  border-left-color: #5300CE;
+  border-color: #5300ce22;
+}
+.jag-cta.jai-variant .jag-cta-label {
+  background: linear-gradient(90deg, #5300CE, #E22B83);
+  color: #fff;
+  border-radius: 9999px;
+}
+.jag-cta.jai-variant .jag-cta-head { color: var(--color-ink); }
+.btn-jai {
+  background: linear-gradient(90deg, #5300ce, #e22b83);
+  color: #fff;
+  border: none;
+  transition: opacity 0.2s ease;
+}
+.btn-jai:hover { opacity: 0.88; border-bottom: none; }
+
+/* CTA inline button (article CTAs) */
+.jag-cta-btn {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--color-red);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--border-radius-sm);
+  text-decoration: none;
+  border: 1px solid var(--color-red);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  line-height: 1.4;
+}
+.jag-cta-btn:hover {
+  background: var(--color-grey);
+  border-color: var(--color-grey);
+  border-bottom: 1px solid var(--color-grey);
+}
+
+/* ============================================================
+   BADGES & TAGS — per guidelines
+   ============================================================ */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.badge-blue  { background: var(--color-light-blue); color: #1B3A5C; }
+.badge-green { background: #e5eeeb; color: #558156; }
+.badge-grey  { background: var(--color-cream); color: var(--color-grey); }
+.badge-red   { background: #fff3f3; color: var(--color-red); }
+
+/* ============================================================
+   STATS & METRICS — per guidelines
+   ============================================================ */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  background: var(--color-white);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin: var(--space-m) 0;
+}
+.stat-item {
+  padding: 0.75rem 1.25rem;
+  border-right: var(--border);
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.stat-item:last-child { border-right: none; }
+.stat-number {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-ink);
+  flex-shrink: 0;
+}
+.stat-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-ink-3);
+  line-height: 1.4;
+}
+
+/* Inline stat banner (compact) */
+.s-banner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  margin: var(--space-m) 0;
+  border: var(--border);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+.s-num {
+  background: var(--color-cream);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-red);
+  line-height: 1;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: var(--border);
+  white-space: nowrap;
+}
+.s-cap {
+  background: var(--color-cream);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.s-cap strong {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+.s-cap span { font-size: 0.6875rem; color: var(--color-ink-3); font-weight: 400; }
+.s-cap span a { color: var(--color-ink-3); border-bottom-color: var(--border-color); font-size: 0.6875rem; }
+.s-cap span a:hover { color: var(--color-teal); border-color: var(--color-teal); }
+
+/* ============================================================
+   TABLES — per guidelines
+   ============================================================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.875rem;
+}
+th {
+  padding: 1rem 1.5rem;
+  background: var(--color-cream);
+  font-weight: 700;
+  text-align: left;
+  border-bottom: 1px solid #C2C2C7;
+  color: var(--color-ink);
+  font-size: var(--font-size-sm);
+}
+td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #ebedf0;
+  color: var(--color-ink-2);
+  font-size: var(--font-size-sm);
+}
+tr:last-child td { border-bottom: none; }
+
+/* Syntax demo table (Markdown reference) */
+.syn-wrap { margin: var(--space-m) 0; }
+.syn-legend {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 7px;
+  font-size: 0.6875rem;
+  color: var(--color-ink-3);
+}
+.syn-lb { display: inline-flex; align-items: center; gap: 5px; }
+.syn-lb-box { width: 11px; height: 11px; border-radius: 2px; flex-shrink: 0; }
+.syn-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  border: 1px solid var(--color-ink-2);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+.syn-tbl th {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  padding: 8px 13px;
+  text-align: left;
+  font-weight: 700;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--color-ink-2);
+}
+.syn-tbl th:first-child { border-right: 1px solid var(--color-ink-2); }
+.syn-tbl td {
+  padding: 9px 13px;
+  border-bottom: 1px solid #D1CEC8;
+  vertical-align: middle;
+}
+.syn-tbl tr:last-child td { border-bottom: none; }
+.syn-tbl td:first-child {
+  background: #F0EDE6;
+  font-family: 'Courier New', Courier, monospace;
+  color: #2C3E50;
+  border-right: 1px solid var(--color-ink-2);
+  width: 48%;
+  font-size: 0.75rem;
+}
+.syn-tbl td:last-child { background: var(--color-white); color: var(--color-ink); }
+.syn-sym { color: #B7650A; font-weight: 600; }
+.syn-h1 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-ink);
+  border-bottom: 2px solid var(--color-red);
+  padding-bottom: 2px;
+  display: inline-block;
+}
+.syn-h2-r { font-size: 0.875rem; font-weight: 600; color: var(--color-ink-2); }
+
+/* ============================================================
+   ACCORDION / FAQ — per guidelines
+   (smooth open/close using interpolate-size)
+   ============================================================ */
+:root { interpolate-size: allow-keywords; }
+
+.faq-section {
+  border: var(--border);
+  border-radius: 0;
+  overflow: hidden;
+  margin: var(--space-m) 0;
+}
+.faq-item {
+  border-bottom: var(--border);
+}
+.faq-item:last-child { border-bottom: none; }
+.faq-summary {
+  padding: 1.25rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-ink);
+  font-size: var(--font-size-sm);
+  background: var(--color-white);
+  transition: background 0.2s ease;
+}
+.faq-summary::-webkit-details-marker { display: none; }
+.faq-summary:hover { background: var(--color-cream); }
+.faq-icon {
+  font-size: 1.2rem;
+  color: var(--color-teal);
+  flex-shrink: 0;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+details[open] .faq-icon { transform: rotate(45deg); }
+details {
+  height: auto;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+details:not([open]) { height: 3.75rem; }
+.faq-body {
+  padding: 0 1.5rem 1.25rem;
+  color: var(--color-ink-2);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   CALLOUT / HIGHLIGHT BLOCKS
+   ============================================================ */
+.co-dk {
+  background: var(--color-light-blue);
+  padding: 1rem 1.25rem;
+  margin: var(--space-m) 0;
+  border-left: 3px solid var(--color-teal);
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+.co-dk .lbl {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  margin-bottom: 7px;
+  display: block;
+}
+.co-dk p { font-size: 0.875rem; color: #1B3A5C; margin: 0; line-height: 1.6; }
+.co-dk p strong { color: var(--color-navy); font-weight: 600; }
+
+.s2p-ctx {
+  background: #fff3f3;
+  border-left: 3px solid var(--color-red);
+  padding: 11px 15px;
+  margin-top: 12px;
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+.s2p-ctx .lbl {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  display: block;
+  margin-bottom: 5px;
+}
+.s2p-ctx p { font-size: 0.875rem; color: var(--color-ink-2); margin: 0; line-height: 1.6; }
+
+/* ============================================================
+   CTA BLOCKS
+   ============================================================ */
+.jag-cta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  border: var(--border);
+  border-left: 3px solid var(--color-red);
+  background: var(--color-cream);
+  padding: 1rem 1.25rem;
+  margin: var(--space-m) 0;
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+.jag-cta-label {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  background: #fff3f3;
+  padding: 2px 7px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 2px;
+  border-radius: 9999px;
+}
+.jag-cta-body { flex: 1; min-width: 0; }
+.jag-cta-head {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 0 0 3px;
+  line-height: 1.4;
+}
+.jag-cta-sub { font-size: 0.75rem; color: var(--color-ink-3); margin: 0; line-height: 1.5; }
+@media (max-width: 580px) {
+  .jag-cta { flex-direction: column; align-items: flex-start; gap: var(--space-xs); }
+}
+
+/* ============================================================
+   STEPS
+   ============================================================ */
+.steps-wrap {
+  border: var(--border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin: var(--space-m) 0;
+}
+.step-row {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  border-bottom: var(--border);
+}
+.step-row:last-child { border-bottom: none; }
+.step-n {
+  background: var(--color-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: var(--color-red);
+  border-right: var(--border);
+}
+.step-body { padding: 12px 16px; }
+.step-ttl {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  margin-bottom: 5px;
+}
+.step-body p { font-size: 0.875rem; margin-bottom: 0; line-height: 1.6; }
+
+.fmt-pills { display: flex; flex-wrap: wrap; gap: 5px; margin: 7px 0 3px; }
+.fmt-pill {
+  font-family: 'Courier New', monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  background: var(--color-cream);
+  border: var(--border);
+  border-top: 2px solid var(--color-red);
+  padding: 2px 8px;
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+}
+
+.opt-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border-color);
+  margin: 8px 0 3px;
+  border: var(--border);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+.opt-panel { background: var(--color-white); padding: 12px 14px; }
+.opt-panel.hl { background: var(--color-cream); }
+.opt-tag {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  display: block;
+  margin-bottom: 3px;
+}
+.opt-name { font-size: 0.75rem; font-weight: 700; color: var(--color-ink); margin-bottom: 5px; }
+.opt-panel p { font-size: 0.875rem; line-height: 1.6; margin-bottom: 7px; color: var(--color-ink-2); }
+
+.step-flow {
+  display: flex;
+  align-items: stretch;
+  margin: 7px 0;
+  border: var(--border);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+.flow-node {
+  flex: 1;
+  background: var(--color-ink-2);
+  color: #fff;
+  padding: 7px 3px;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.flow-node.active { background: var(--color-red); }
+.flow-arr {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  padding: 7px 5px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.terminal {
+  background: #1E2D45;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin: 8px 0;
+}
+.term-hdr {
+  background: #0F1F3D;
+  padding: 6px 11px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.t-dot { width: 7px; height: 7px; border-radius: 50%; }
+.term-body {
+  padding: 10px 14px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: #A8C0DD;
+}
+.term-body .cmd { color: #FAF8F4; }
+.term-body .cmt { color: #4A6A8A; }
+.time-badge {
+  display: inline-block;
+  background: var(--color-ink);
+  color: #fff;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  margin-top: 5px;
+  border-radius: 9999px;
+}
+
+/* ============================================================
+   CONV META BAR
+   ============================================================ */
+.conv-meta {
+  display: flex;
+  gap: 0;
+  border: var(--border);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin-bottom: var(--space-m);
+}
+.conv-meta-item {
+  flex: 1;
+  padding: 10px 14px;
+  border-right: var(--border);
+  background: var(--color-cream);
+}
+.conv-meta-item:last-child { border-right: none; }
+.conv-meta-lbl {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+  display: block;
+  margin-bottom: 3px;
+}
+.conv-meta-val { font-size: 0.8125rem; font-weight: 600; color: var(--color-ink); }
+@media (max-width: 580px) {
+  .conv-meta { flex-direction: column; }
+  .conv-meta-item { border-right: none; border-bottom: var(--border); }
+  .opt-split { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   SPLIT SCREEN VISUAL
+   ============================================================ */
+.split-screen {
+  margin: var(--space-m) 0;
+  border: var(--border);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  font-size: 0.8125rem;
+}
+.ss-chrome {
+  background: #2C3E50;
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.ss-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.ss-url {
+  flex: 1;
+  background: #3D5166;
+  border-radius: 3px;
+  padding: 2px 9px;
+  margin-left: 7px;
+}
+.ss-url span { font-size: 0.625rem; color: rgba(255,255,255,0.45); }
+.ss-panels { display: grid; grid-template-columns: 1fr 1fr; }
+.ss-left { background: #1A2535; padding: 14px 16px; border-right: 2px solid rgba(255,255,255,0.07); }
+.ss-right { background: #FAFAF8; padding: 14px 16px; }
+.ss-tag {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.ss-tag-in { color: rgba(255,255,255,0.35); }
+.ss-tag-in span { background: rgba(210,36,40,0.3); color: #E88A8A; padding: 1px 6px; border-radius: 2px; }
+.ss-tag-out { color: var(--color-ink-3); }
+.ss-tag-out span { background: #E8F4E8; color: #2D6A2D; padding: 1px 6px; border-radius: 2px; }
+.ss-code { font-family: 'Courier New', monospace; font-size: 0.6875rem; line-height: 1.8; color: #8BAFC8; }
+.ss-sym { color: #F0A500; }
+.ss-dim { color: #5C7A96; padding-left: 10px; }
+.ss-hl { color: #E2DDD6; }
+.ss-check-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 0;
+  border-bottom: var(--border);
+}
+.ss-check-row:last-of-type { border-bottom: none; }
+.ss-box {
+  width: 13px;
+  height: 13px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+.ss-label { font-size: 0.75rem; color: var(--color-ink); font-weight: 500; }
+.ss-badge { margin-left: auto; font-size: 0.625rem; padding: 1px 6px; font-weight: 600; white-space: nowrap; border-radius: 9999px; }
+.ss-note { margin-top: 9px; font-size: 0.625rem; color: var(--color-ink-3); font-style: italic; }
+@media (max-width: 580px) { .ss-panels { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   PLATFORM ILLUSTRATION
+   ============================================================ */
+.platform-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-s);
+  margin: var(--space-m) auto var(--space-m);
+  max-width: 560px;
+}
+
+/* ============================================================
+   INTRO
+   ============================================================ */
+p.intro {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: var(--space-s) 0 0;
+  color: var(--color-ink-2);
+}
+
+/* ============================================================
+   CONCLUSION
+   ============================================================ */
+.blockquote-stat {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-ink);
+  border-left: 3px solid var(--color-red);
+  padding: 10px 16px;
+  margin: var(--space-m) 0;
+  line-height: 1.6;
+  background: #fff3f3;
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+.blockquote-stat cite { font-size: 0.6875rem; font-style: italic; color: var(--color-ink-3); display: block; margin-top: 4px; }
+.blockquote-stat cite a { font-size: 0.6875rem; color: var(--color-teal); border-bottom-color: var(--border-color); }
+
+
+
+/* ============================================================
+   REASON BLOCKS — flat, no box
+   ============================================================ */
+.reason-block {
+  margin: var(--space-m) 0;
+}
+.reason-hd {
+  padding: 0 0 var(--space-xs) 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  border-bottom: var(--border);
+  margin-bottom: var(--space-s);
+}
+.reason-num {
+  font-size: var(--font-size-h4);
+  font-weight: 800;
+  color: var(--color-red);
+  line-height: 1;
+  flex-shrink: 0;
+}
+h3.reason-title {
+  font-size: var(--font-size-h5);
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.3;
+  margin: 0;
+}
+.reason-body { padding: 0; }
+.reason-body p { font-size: 0.875rem; line-height: 1.6; margin-bottom: 11px; }
+.reason-body p:last-child { margin-bottom: 0; }
+   ============================================================ */
+.steps-wrap .step-row {
+  transition: border-left-color 0.3s ease, background 0.3s ease;
+  border-left: 3px solid transparent;
+}
+.steps-wrap .step-row.step-active {
+  border-left-color: var(--color-red);
+  background: #fffafa;
+}
+.steps-wrap .step-row.step-active .step-n {
+  background: var(--color-red);
+  color: #fff;
+}
+.steps-wrap .step-row.step-done .step-n {
+  background: #e5eeeb;
+  color: #558156;
+}
+.steps-wrap .step-row.step-done {
+  opacity: 0.65;
+}
+
+</style>
+</head>
+<body>
+<div class="outer-wrap">
+
+<!-- TOC SIDEBAR -->
+<aside class="toc-sidebar" id="tocSidebar">
+  <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+  <nav class="toc-nav" id="tocNav">
+    <a href="#demystifying">What is a .md file?</a>
+    <a href="#technical-view">How Claude Uses .md in Artifacts</a>
+    <a href="#how-to-convert">How to Convert Your S2P Documents to .md</a>
+    <a href="#three-reasons">Three Reasons S2P Teams Can&rsquo;t Skip Markdown Conversion</a>
+    <a href="#conclusion">Conclusion: Markdown Conversion as a Standard Procurement SOP</a>
+    <a href="#people-also-ask">People Also Ask</a>
+  </nav>
+</aside>
+
+<!-- ARTICLE -->
+<main class="page">
+<header class="a-header">
+  <div class="a-meta">Procurement Technology &middot; Source-to-Pay</div>
+  <span class="article-h1-eyebrow">AI in Source-to-Pay &middot; June 2026</span>
+  <h1 class="article-title">What Are .md Files in Claude? Why S2P Teams Can&rsquo;t Skip This Step in 2026</h1>
+  <div class="article-meta-bar">
+    <span class="amb-item"><span class="amb-label">Audience</span> Procurement and Supply Chain Professionals</span>
+    <span class="amb-sep">|</span>
+    <span class="amb-item"><span class="amb-label">Read Time</span> 5 minutes</span>
+  </div>
+</header>
+
+<p class="intro">Most S2P teams upload contracts, RFPs, and supplier documents directly into Claude and wonder why those outputs need so much manual correction. The extractions missed the context entirely. The answer is the format, not the model. So, before you upload another document in Claude, create the .md file. It takes 30 seconds and fixes the problem at the source. A .md file changes everything about the quality of the output procurement teams gets from AI.</p>
+<p class="intro" style="margin-top:10px">This guide covers what .md files are, how Claude uses them, and why Markdown conversion is the step that separates procurement teams getting real value from AI in 2026 from those still fixing its outputs.</p>
+
+<div class="s-banner">
+  <div class="s-num">65%</div>
+  <div class="s-cap">
+    <strong>minimum reduction in token usage when procurement documents are converted to Markdown before AI ingestion, with no content loss.</strong>
+    <span>Source: <a href="https://www.mindstudio.ai/blog/convert-files-markdown-reduce-ai-tokens" target="_blank">MindStudio, 2026</a></span>
+  </div>
+</div>
+
+<!-- H2 ONE -->
+<div class="sdiv"><hr><span>Foundational Concepts</span><hr></div>
+
+<span class="section-eyebrow">Foundational Concepts</span>
+<h2 class="section-h2" id="demystifying">Demystifying Markdown: What Is a .md File?</h2>
+
+<h3 class="section-h3">What Is a .md File?</h3>
+<p>A .md file is a plain-text document. No embedded fonts, no hidden formatting code, no binary data. The &ldquo;MD&rdquo; in the extension stands for Markdown Documentation. Markdown is a lightweight markup language that uses simple inline symbols to define structure and formatting within the text itself.</p>
+<p>Unlike Microsoft Word or Google Docs, there is no visual editor. Formatting is written directly into the content.</p>
+
+<div class="syn-wrap">
+  <div class="syn-legend">
+    <span class="syn-lb"><span class="syn-lb-box" style="background:#F0EDE6;border:1px solid #C8C4BC"></span> Raw .md syntax</span>
+    <span class="syn-lb"><span class="syn-lb-box" style="background:#F9F8F4;border:1px solid #E5E2DA"></span> Rendered output</span>
+  </div>
+  <table class="syn-tbl">
+    <thead><tr><th>Raw .md syntax</th><th>Rendered output</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="syn-sym">#&nbsp;</span>Payment Terms</td>
+        <td><span class="syn-h1">Payment Terms</span></td>
+      </tr>
+      <tr>
+        <td><span class="syn-sym">##&nbsp;</span>Renewal Clause</td>
+        <td><span class="syn-h2-r">Renewal Clause</span></td>
+      </tr>
+      <tr>
+        <td><span class="syn-sym">**</span>Net 30<span class="syn-sym">**</span></td>
+        <td><strong>Net 30</strong></td>
+      </tr>
+      <tr>
+        <td><span class="syn-sym">-&nbsp;</span>Termination &nbsp;<span class="syn-sym">-&nbsp;</span>Liability cap</td>
+        <td>&bull; Termination &nbsp; &bull; Liability cap</td>
+      </tr>
+      <tr>
+        <td style="font-size:0.6875rem"><span class="syn-sym">|</span> Clause <span class="syn-sym">|</span> Value <span class="syn-sym">|</span><br><span class="syn-sym">|---|---|</span><br><span class="syn-sym">|</span> Payment <span class="syn-sym">|</span> Net 30 <span class="syn-sym">|</span></td>
+        <td><table style="font-size:0.75rem;border-collapse:collapse;width:auto"><tr><td style="border:1px solid #E5E2DA;padding:3px 8px;background:#F9F8F4;font-weight:600">Payment</td><td style="border:1px solid #E5E2DA;padding:3px 8px">Net 30</td></tr></table></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>This is what separates .md from other formats. It stores only content and structure, expressed as plain text that both humans and AI systems can read directly.</p>
+
+<h3 class="section-h3">Why Use Markdown?</h3>
+<p>Markdown is portable, platform-independent, and future-proof. A .md file created on Windows opens identically on macOS, Linux, or mobile. It requires no proprietary software, no licence, and no special viewer. Any text editor can read it.</p>
+
+<!-- PLATFORM ILLUSTRATION -->
+<div class="platform-grid">
+  <!-- macOS window -->
+  <div>
+    <svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.10)">
+      <rect width="320" height="210" rx="8" fill="#ECEBE6"/>
+      <defs>
+        <linearGradient id="mac-tb" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#E2E0DA"/>
+          <stop offset="100%" stop-color="#D4D2CC"/>
+        </linearGradient>
+        <linearGradient id="mac-sidebar" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#DDD9D0"/>
+          <stop offset="100%" stop-color="#D4D0C8"/>
+        </linearGradient>
+      </defs>
+      <rect width="320" height="28" rx="8" fill="url(#mac-tb)"/>
+      <rect y="18" width="320" height="10" fill="url(#mac-tb)"/>
+      <circle cx="18" cy="14" r="5.5" fill="#FF5F57"/><circle cx="18" cy="14" r="5.5" fill="none" stroke="#E0443E" stroke-width="0.5"/>
+      <circle cx="34" cy="14" r="5.5" fill="#FEBC2E"/><circle cx="34" cy="14" r="5.5" fill="none" stroke="#D4A012" stroke-width="0.5"/>
+      <circle cx="50" cy="14" r="5.5" fill="#28C840"/><circle cx="50" cy="14" r="5.5" fill="none" stroke="#1DA832" stroke-width="0.5"/>
+      <text x="160" y="18" font-size="10" fill="#4B4B4B" text-anchor="middle" font-family="Helvetica Neue,sans-serif" font-weight="500">supplier_contract.md – TextEdit</text>
+      <rect y="28" width="320" height="22" fill="#F5F4EF"/>
+      <rect y="49" width="320" height="1" fill="#D1CFC8"/>
+      <rect x="10" y="34" width="28" height="10" rx="2" fill="#DDDBD5"/>
+      <rect x="44" y="34" width="28" height="10" rx="2" fill="#DDDBD5"/>
+      <rect x="78" y="34" width="28" height="10" rx="2" fill="#DDDBD5"/>
+      <rect x="200" y="36" width="50" height="6" rx="2" fill="#DDDBD5"/>
+      <rect x="260" y="36" width="50" height="6" rx="2" fill="#DDDBD5"/>
+      <rect x="0" y="50" width="68" height="160" fill="url(#mac-sidebar)"/>
+      <rect x="68" y="50" width="1" height="160" fill="#C8C6C0"/>
+      <text x="10" y="68" font-size="8" fill="#6B6860" font-family="Helvetica Neue,sans-serif" font-weight="600" letter-spacing="0.05em">FAVOURITES</text>
+      <text x="14" y="84" font-size="9" fill="#3D3C39" font-family="Helvetica Neue,sans-serif"> Documents</text>
+      <text x="14" y="99" font-size="9" fill="#3D3C39" font-family="Helvetica Neue,sans-serif"> Desktop</text>
+      <text x="14" y="114" font-size="9" fill="#3D3C39" font-family="Helvetica Neue,sans-serif"> Downloads</text>
+      <text x="10" y="132" font-size="8" fill="#6B6860" font-family="Helvetica Neue,sans-serif" font-weight="600" letter-spacing="0.05em">LOCATIONS</text>
+      <text x="14" y="148" font-size="9" fill="#3D3C39" font-family="Helvetica Neue,sans-serif"> Macintosh HD</text>
+      <rect x="6" y="153" width="56" height="16" rx="3" fill="#D22428" opacity="0.15"/>
+      <text x="14" y="164" font-size="9" fill="#D22428" font-family="Helvetica Neue,sans-serif" font-weight="600"> contract</text>
+      <rect x="69" y="50" width="251" height="160" fill="#FFFFFF"/>
+      <text x="82" y="72" font-size="10.5" fill="#0B0D12" font-family="Menlo,monospace" font-weight="700"># Payment Terms</text>
+      <text x="82" y="88" font-size="10" fill="#3D6B9E" font-family="Menlo,monospace">## Renewal Clause</text>
+      <text x="82" y="104" font-size="10" fill="#1F2937" font-family="Menlo,monospace">**Net 30 days**</text>
+      <text x="82" y="119" font-size="10" fill="#4B5563" font-family="Menlo,monospace">- Termination rights</text>
+      <text x="82" y="134" font-size="10" fill="#4B5563" font-family="Menlo,monospace">- Liability cap: $500K</text>
+      <text x="82" y="150" font-size="10" fill="#6B7280" font-family="Menlo,monospace">| Clause   | Value  |</text>
+      <text x="82" y="165" font-size="10" fill="#6B7280" font-family="Menlo,monospace">|----------|--------|</text>
+      <text x="82" y="180" font-size="10" fill="#4B5563" font-family="Menlo,monospace">| Payment  | Net 30 |</text>
+      <rect x="308" y="50" width="8" height="160" fill="#F0EDE8"/>
+      <rect x="309" y="68" width="6" height="36" rx="3" fill="#BFBDB8"/>
+      <rect y="199" width="320" height="11" rx="0" fill="#E2E0DA"/>
+      <rect y="199" width="320" height="2" fill="#C8C6C0"/>
+      <text x="82" y="208" font-size="7" fill="#8A8880" font-family="Helvetica Neue,sans-serif">Plain Text · UTF-8 · Line 1 of 9</text>
+    </svg>
+    <p style="font-size:0.625rem;color:var(--color-ink-3);margin:5px 0 0;text-align:center;font-weight:600;letter-spacing:0.05em">macOS</p>
+  </div>
+  <!-- Linux window -->
+  <div>
+    <svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,0.28)">
+      <rect width="320" height="210" rx="4" fill="#1E1E2E"/>
+      <rect width="320" height="26" rx="4" fill="#181825"/>
+      <rect y="18" width="320" height="8" fill="#181825"/>
+      <rect x="279" y="7" width="11" height="11" rx="1" fill="#313244"/>
+      <rect x="294" y="7" width="11" height="11" rx="1" fill="#313244"/>
+      <rect x="309" y="7" width="11" height="11" rx="1" fill="#F38BA8" opacity="0.85"/>
+      <text x="311" y="17" font-size="9" fill="#1E1E2E" font-family="monospace" font-weight="700">x</text>
+      <text x="20" y="17" font-size="9.5" fill="#CDD6F4" font-family="monospace">supplier_contract.md (~) - VIM</text>
+      <rect x="0" y="26" width="32" height="172" fill="#181825"/>
+      <rect x="32" y="26" width="1" height="172" fill="#313244"/>
+      <text x="24" y="41" font-size="9.5" fill="#45475A" font-family="monospace" text-anchor="end">1</text>
+      <text x="24" y="57" font-size="9.5" fill="#45475A" font-family="monospace" text-anchor="end">2</text>
+      <text x="24" y="73" font-size="9.5" fill="#45475A" font-family="monospace" text-anchor="end">3</text>
+      <text x="24" y="89" font-size="9.5" fill="#45475A" font-family="monospace" text-anchor="end">4</text>
+      <text x="24" y="105" font-size="9.5" fill="#45475A" font-family="monospace" text-anchor="end">5</text>
+      <text x="24" y="121" font-size="9.5" fill="#45475A" font-family="monospace" text-anchor="end">6</text>
+      <text x="24" y="137" font-size="9.5" fill="#45475A" font-family="monospace" text-anchor="end">7</text>
+      <text x="24" y="153" font-size="9.5" fill="#45475A" font-family="monospace" text-anchor="end">8</text>
+      <text x="24" y="169" font-size="9.5" fill="#45475A" font-family="monospace" text-anchor="end">9</text>
+      <rect x="33" y="28" width="287" height="15" fill="#313244" opacity="0.6"/>
+      <text x="40" y="41" font-size="10.5" fill="#CBA6F7" font-family="monospace" font-weight="700"># Payment Terms</text>
+      <text x="40" y="57" font-size="10" fill="#89DCEB" font-family="monospace">## Renewal Clause</text>
+      <text x="40" y="73" font-size="10" fill="#A6E3A1" font-family="monospace">**Net 30 days**</text>
+      <text x="40" y="89" font-size="10" fill="#CDD6F4" font-family="monospace">- Termination rights</text>
+      <text x="40" y="105" font-size="10" fill="#CDD6F4" font-family="monospace">- Liability cap: $500K</text>
+      <text x="40" y="121" font-size="10" fill="#F38BA8" font-family="monospace">| Clause   | Value  |</text>
+      <text x="40" y="137" font-size="10" fill="#585B70" font-family="monospace">|----------|--------|</text>
+      <text x="40" y="153" font-size="10" fill="#CDD6F4" font-family="monospace">| Payment  | Net 30 |</text>
+      <text x="37" y="169" font-size="10" fill="#45475A" font-family="monospace">~</text>
+      <text x="37" y="185" font-size="10" fill="#45475A" font-family="monospace">~</text>
+      <rect y="198" width="320" height="12" fill="#313244"/>
+      <rect y="198" width="320" height="1" fill="#45475A"/>
+      <rect x="0" y="198" width="96" height="12" fill="#CBA6F7"/>
+      <text x="6" y="208" font-size="8" fill="#1E1E2E" font-family="monospace" font-weight="700"> NORMAL </text>
+      <text x="104" y="208" font-size="8" fill="#CDD6F4" font-family="monospace">supplier_contract.md</text>
+      <text x="304" y="208" font-size="8" fill="#6C7086" font-family="monospace" text-anchor="end">1:1</text>
+    </svg>
+    <p style="font-size:0.625rem;color:var(--color-ink-3);margin:5px 0 0;text-align:center;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">Linux</p>
+  </div>
+</div>
+
+<p>For procurement teams feeding documents into AI tools, structural integrity is what matters most. Every clause hierarchy, payment term, and supplier obligation in a .md file remains intact rather than being flattened during processing. When using Claude specifically, .md files give the AI persistent context about a document&rsquo;s structure. It already understands hierarchies and relationships without repeated prompting.</p>
+
+<h3 class="section-h3">.md Files in Claude: What S2P Teams Need to Know</h3>
+<p>A .md file gives Claude the structural context it needs to process a document accurately and completely from the first query. For S2P teams, this is the step that connects Markdown&rsquo;s technical advantages to real procurement outcomes. The next section looks at exactly how Claude uses .md files technically, and what that means for procurement workflows.</p>
+<p style="font-size:0.8125rem;color:var(--color-ink-3);font-style:italic;border-left:2px solid var(--border-color);padding-left:12px;margin:14px 0">Before feeding documents into Claude, procurement teams also need to decide whether the browser or desktop version better fits their data privacy requirements.</p>
+
+<div class="jag-cta jai-variant">
+  <span class="jag-cta-label">JAI</span>
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">JAGGAER AI Uses Claude</p>
+    <p class="jag-cta-sub">JAI uses Claude and other models to provide instant analysis and answers from live procurement data. Data never leaves your environment and never trains a model.</p>
+  </div>
+  <a href="https://www.jaggaer.com/solutions/jai" class="btn btn-jai" target="_blank" style="font-size:0.75rem;padding:0.5rem 1.25rem;border-bottom:none;flex-shrink:0;">See How JAI Uses Claude &rarr;</a>
+</div>
+
+<!-- H2 TWO -->
+<div class="sdiv"><hr><span>Under the Hood</span><hr></div>
+
+<span class="section-eyebrow">Under the Hood</span>
+<h2 class="section-h2" id="technical-view">The Technical View: How Claude Uses .md in Artifacts</h2>
+
+<div class="split-screen">
+  <div class="ss-chrome">
+    <div class="ss-dot" style="background:#E74C3C"></div>
+    <div class="ss-dot" style="background:#F39C12"></div>
+    <div class="ss-dot" style="background:#2ECC71"></div>
+    <div class="ss-url"><span>claude.ai</span></div>
+  </div>
+  <div class="ss-panels">
+    <div class="ss-left">
+      <div class="ss-tag ss-tag-in"><span>INPUT</span> supplier_onboarding.md</div>
+      <div class="ss-code">
+        <div><span class="ss-sym">#</span> <span class="ss-hl">Supplier Onboarding Requirements</span></div>
+        <div><span class="ss-sym">##</span> <span class="ss-hl">Delivery Capability</span></div>
+        <div class="ss-dim">- Lead time: 14 days max</div>
+        <div class="ss-dim">- Regions: EU, APAC, NA</div>
+        <div><span class="ss-sym">##</span> <span class="ss-hl">ESG Compliance</span></div>
+        <div class="ss-dim">- ISO 14001 required</div>
+        <div class="ss-dim">- Scope 3 reporting</div>
+        <div><span class="ss-sym">##</span> <span class="ss-hl">Pricing Benchmarks</span></div>
+        <div class="ss-dim">- Framework agreement eligible</div>
+        <div class="ss-dim">- Volume discount &gt; 500 units</div>
+      </div>
+    </div>
+    <div class="ss-right">
+      <div class="ss-tag ss-tag-out"><span>ARTIFACT</span> Supplier Onboarding Checklist</div>
+      <div class="ss-check-row">
+        <div class="ss-box" style="background:#22C55E">&#10003;</div>
+        <span class="ss-label">Delivery Capability</span>
+        <span class="ss-badge" style="background:#D1FAE5;color:#065F46">Met</span>
+      </div>
+      <div class="ss-check-row">
+        <div class="ss-box" style="background:#22C55E">&#10003;</div>
+        <span class="ss-label">ESG Compliance</span>
+        <span class="ss-badge" style="background:#D1FAE5;color:#065F46">Met</span>
+      </div>
+      <div class="ss-check-row">
+        <div class="ss-box" style="background:#FEF3C7;border:1.5px solid #D97706"></div>
+        <span class="ss-label">Pricing Benchmarks</span>
+        <span class="ss-badge" style="background:#FEF3C7;color:#78350F">Review</span>
+      </div>
+      <div class="ss-check-row">
+        <div class="ss-box" style="background:#FEE2E2;border:1.5px solid #D22428"></div>
+        <span class="ss-label">Framework Agreement</span>
+        <span class="ss-badge" style="background:#FEE2E2;color:#7F1D1D">Missing</span>
+      </div>
+      <div class="ss-check-row">
+        <div class="ss-box" style="background:#22C55E">&#10003;</div>
+        <span class="ss-label">ISO 14001 Certification</span>
+        <span class="ss-badge" style="background:#D1FAE5;color:#065F46">Met</span>
+      </div>
+      <div class="ss-note">Extracted from supplier_onboarding.md &mdash; editable &amp; exportable</div>
+    </div>
+  </div>
+</div>
+
+<p>.md files work in two directions inside Claude. As input, they carry the document structure Claude needs to process content accurately. As output, Claude packages its response as a Markdown Artifact. It&rsquo;s a dedicated side-panel workspace that renders the content in real time, independent from the chat itself. The result is a formatted, editable document which can be reviewed, iterated on, and exported without leaving the conversation. The Artifact updates with a follow-up question and the original document stays in context throughout.</p>
+
+<div class="co-dk">
+  <div class="lbl">S2P Application</div>
+  <p>For S2P teams, the output is concrete. A procurement manager running supplier onboarding can upload the requirements document as a .md file. They can ask Claude to produce an Artifact mapping each criterion: delivery capability, ESG compliance, pricing benchmarks, framework agreement eligibility against what the supplier has submitted. As the document structure is preserved by .md files, Claude pulls each requirement from the correct section rather than scanning unstructured text.</p>
+</div>
+
+<p>Teams can provide distinct execution rules in skill-based Markdown files (Skill.md). These tell Claude how to orchestrate tool use or structure step-by-step processes when assembling complex artifacts. What comes back is a structured, editable checklist the team can act on immediately. The hours of manual review are eliminated.</p>
+
+<!-- H2 HOW TO CONVERT -->
+<div class="sdiv"><hr><span>Step-by-Step Guide</span><hr></div>
+
+<span class="section-eyebrow">Step-by-Step Guide</span>
+<h2 class="section-h2" id="how-to-convert"><span style="background:linear-gradient(90deg,#5300CE,#E22B83);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:800;">How to Convert</span> Your S2P Documents to .md</h2>
+<p>Converting procurement documents to Markdown is a one-time setup that pays back on every document processed after. There are two routes depending on your team&rsquo;s technical setup.</p>
+
+<div class="conv-meta">
+  <div class="conv-meta-item">
+    <span class="conv-meta-lbl">Difficulty</span>
+    <span class="conv-meta-val">Low to Intermediate</span>
+  </div>
+  <div class="conv-meta-item">
+    <span class="conv-meta-lbl">Time per document</span>
+    <span class="conv-meta-val">30 sec &ndash; 5 min</span>
+  </div>
+  <div class="conv-meta-item">
+    <span class="conv-meta-lbl">Tools required</span>
+    <span class="conv-meta-val">Browser or Python</span>
+  </div>
+</div>
+
+<div class="steps-wrap">
+  <div class="step-row">
+    <div class="step-n">01</div>
+    <div class="step-body">
+      <div class="step-ttl">Identify your document type</div>
+      <p>Confirm your source format. All common S2P document types are supported.</p>
+      <div class="fmt-pills">
+        <span class="fmt-pill">.PDF</span><span class="fmt-pill">.DOCX</span><span class="fmt-pill">.XLSX</span>
+        <span class="fmt-pill">.PPTX</span><span class="fmt-pill">.HTML</span><span class="fmt-pill">.CSV</span>
+      </div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-n">02</div>
+    <div class="step-body">
+      <div class="step-ttl">Choose your conversion method</div>
+      <div class="opt-split">
+        <div class="opt-panel hl">
+          <span class="opt-tag">Option A &mdash; No-code</span>
+          <div class="opt-name">Browser Tool</div>
+          <p>Use <a href="https://markitdown.online/" target="_blank">Markitdown Online</a> or <a href="https://www.file2markdown.ai/" target="_blank">file2markdown.ai</a>. Runs in browser. No installation required. Processing stays local so confidential documents remain private.</p>
+          <div class="step-flow">
+            <div class="flow-node">Upload</div><div class="flow-arr">&rsaquo;</div>
+            <div class="flow-node active">Convert</div><div class="flow-arr">&rsaquo;</div>
+            <div class="flow-node">Preview</div><div class="flow-arr">&rsaquo;</div>
+            <div class="flow-node">Download</div>
+          </div>
+          <span class="time-badge">&#9202; Under 30 seconds</span>
+        </div>
+        <div class="opt-panel">
+          <span class="opt-tag">Option B &mdash; Technical</span>
+          <div class="opt-name">Microsoft MarkItDown</div>
+          <p>Open-source <a href="https://github.com/microsoft/markitdown" target="_blank">Python library</a> by Microsoft. Best for high document volumes and automated pipelines.</p>
+          <div class="terminal">
+            <div class="term-hdr">
+              <div class="t-dot" style="background:#FF5F57"></div>
+              <div class="t-dot" style="background:#FEBC2E"></div>
+              <div class="t-dot" style="background:#28C840"></div>
+            </div>
+            <div class="term-body">
+              <div class="cmt"># Install</div><div class="cmd">pip install markitdown</div>
+              <div class="cmt"># Convert</div><div class="cmd">markitdown contract.pdf > contract.md</div>
+            </div>
+          </div>
+          <span class="time-badge">&#9202; 5 min setup</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-n">03</div>
+    <div class="step-body">
+      <div class="step-ttl">Review the output</div>
+      <p>Spend 30 seconds scanning the .md file. Confirm headings are intact, tables have rendered correctly, and clause numbering follows the original document order. A quick review here prevents extraction errors downstream.</p>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-n">04</div>
+    <div class="step-body">
+      <div class="step-ttl">Upload to Claude and set your task</div>
+      <p>Upload the .md file directly into Claude. State your extraction task clearly: what terms you need, what format you want the output in, and what the document is. Claude reads the structure immediately and produces a formatted Artifact ready to act on.</p>
+    </div>
+  </div>
+</div>
+
+<!-- H2 THREE REASONS -->
+<div class="sdiv"><hr><span>Why It Matters</span><hr></div>
+
+<span class="section-eyebrow">Why It Matters</span>
+<h2 class="section-h2" id="three-reasons">Three Reasons S2P Teams Can&rsquo;t Skip the Markdown Conversion Step in 2026</h2>
+<p>Structured input produces accurate output. S2P teams lose time correcting AI outputs that missed context, misread structure, or extracted the wrong terms. Converting documents to .md before uploading to Claude eliminates that problem at the source, making every downstream procurement decision faster and more reliable.</p>
+<p style="font-size:0.8125rem;color:var(--color-ink-3);font-style:italic;border-left:2px solid var(--border-color);padding-left:12px;margin:14px 0">Understanding what .md files do is only half the picture. The other half is knowing exactly which S2P workflows Claude can execute natively once documents are structured correctly.</p>
+
+<div class="reason-block">
+  <div class="reason-hd">
+    <span class="reason-num">1</span>
+    <h3 class="reason-title">.md files preserve contract hierarchies and give Claude the context to extract meaning</h3>
+  </div>
+  <div class="reason-body">
+    <p>Markdown keeps clause relationships intact so Claude understands how terms connect across a document. Without structure, Claude reads a contract as a block of text and loses the relationships between clauses that make each term meaningful. Claude knows which obligation sits under which condition, which exception applies to which clause, and how terms connect across the document. That is what turns a document upload into a useful output.</p>
+    <div class="s2p-ctx">
+      <span class="lbl">S2P Context</span>
+      <p><strong>JAGGAER Contracts AI</strong> reduces the contract review time for legal teams by up to <strong>60%</strong> and cuts manual labor costs from legal operations by up to <strong>50%</strong>. These are outcomes that depend entirely on the AI receiving structured and unambiguous document inputs.</p>
+    </div>
+  </div>
+</div>
+
+<div class="jag-cta">
+
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">AI-Powered Contract Management, Built for Your Industry</p>
+    <p class="jag-cta-sub">JAGGAER&rsquo;s CLM extracts contract data, automates clause analysis, and delivers industry-specific solutions across the full contract lifecycle.</p>
+  </div>
+  <a href="https://www.jaggaer.com/solutions/contracts" class="jag-cta-btn" target="_blank">Explore Contract Management &rarr;</a>
+</div>
+
+<div class="reason-block">
+  <div class="reason-hd">
+    <span class="reason-num">2</span>
+    <h3 class="reason-title">.md files maximise data extraction accuracy</h3>
+  </div>
+  <div class="reason-body">
+    <p>Markdown removes structural ambiguity, so Claude reads what is there rather than guessing what it means. When a document structure is ambiguous, Claude fills the gaps with inference, and every inferred connection is a potential error. Making document structure explicit means extraction is consistent, complete, and reliable.</p>
+    <div class="s2p-ctx">
+      <span class="lbl">S2P Context</span>
+      <p>Payment terms, renewal windows, and delivery obligations extracted from a .md file come from their correct position in the document. Thus, procurement teams get outputs they can act on without a manual review cycle.</p>
+    </div>
+  </div>
+</div>
+
+<!-- EXTRACTION COMPARISON REMOVED -->
+
+<div class="reason-block">
+  <div class="reason-hd">
+    <span class="reason-num">3</span>
+    <h3 class="reason-title">.md files make procurement outputs traceable and verifiable</h3>
+  </div>
+  <div class="reason-body">
+    <p>Procurement decisions need to be defensible. Markdown works with version control, making every document processed attributable and reviewable. When a term is disputed or an output is questioned, the exact version of the document Claude processed is verifiable. No other format provides that level of traceability.</p>
+    <div class="s2p-ctx">
+      <span class="lbl">S2P Context</span>
+      <p>When a contract clause is challenged during a supplier dispute, the procurement team can verify exactly which version of the document Claude processed and confirm what it contained at the time of extraction.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONCLUSION -->
+<div class="sdiv"><hr><span>Conclusion</span><hr></div>
+
+<span class="section-eyebrow">Conclusion</span>
+<h2 class="section-h2" id="conclusion">Making Markdown a Standard Procurement SOP</h2>
+
+<div class="blockquote-stat">
+  44% of procurement leaders are actively piloting Agentic AI in 2026. Yet data quality remains the primary barrier to scaling it.
+  <cite>Source: <a href="https://www.gep.com/research-reports/2026-procurement-executive-insight-report" target="_blank">2026 Procurement Executive Insight Report, GEP</a></cite>
+</div>
+
+<p>.md conversion is the document-level fix for that problem. It standardises how procurement documents enter Claude and eliminates structural ambiguity before it reaches the model. Outputs no longer require a manual correction cycle before they are usable.</p>
+<p>Three reasons why S2P teams should not skip Markdown conversion:</p>
+
+<!-- Stats bar for the 3 reasons summary -->
+<div class="stats-bar" style="grid-template-columns: repeat(3, 1fr); margin: var(--space-m) 0;">
+  <div class="stat-item">
+    <span class="stat-number" style="font-size: 1.1rem; color: var(--color-red);">1</span>
+    <span class="stat-label">Contract hierarchies stay intact, so every term is in context.</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number" style="font-size: 1.1rem; color: var(--color-red);">2</span>
+    <span class="stat-label">Structural ambiguity is eliminated, so outputs are reliable from the first query.</span>
+  </div>
+  <div class="stat-item" style="border-right: none;">
+    <span class="stat-number" style="font-size: 1.1rem; color: var(--color-red);">3</span>
+    <span class="stat-label">Every document is attributable and verifiable when decisions are challenged.</span>
+  </div>
+</div>
+
+<p>Write it into your SOP now. Apply it to every contract, RFP, and supplier document before upload. The 30 seconds spent converting a document is recovered the moment Claude returns an output the team can act on directly.</p>
+
+<div class="jag-cta">
+
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">Structured Documents. Smarter S2P. One Platform.</p>
+    <p class="jag-cta-sub">JAGGAER One connects sourcing, contracts, supplier intelligence, and procurement into a single AI-powered source-to-pay platform.</p>
+  </div>
+  <a href="https://www.jaggaer.com/solutions/source-to-pay" class="jag-cta-btn" target="_blank">Explore JAGGAER One &rarr;</a>
+</div>
+
+<!-- PEOPLE ALSO ASK — Accordion per guidelines -->
+<div class="sdiv"><hr><span>Frequently Asked Questions</span><hr></div>
+
+<span class="section-eyebrow">Frequently Asked Questions</span>
+<h2 class="section-h2" id="people-also-ask">Frequently Asked Questions</h2>
+
+<div class="faq-section">
+  <details class="faq-item">
+    <summary class="faq-summary">What is the CLAUDE Agents MD file?<span class="faq-icon">+</span></summary>
+    <div class="faq-body">CLAUDE.md is a plain Markdown file that Claude Code reads automatically at the start of every session, functioning as a persistent system prompt that defines project rules, conventions, and agent behaviour without manual re-briefing.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">What is the main purpose of a CLAUDE .md file in your project?<span class="faq-icon">+</span></summary>
+    <div class="faq-body">CLAUDE.md gives Claude persistent project context like structure, conventions, and workflows, loaded automatically before every session begins. Without it, Claude starts from a blank slate and must be re-briefed from scratch each time.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">What should go in the CLAUDE MD file?<span class="faq-icon">+</span></summary>
+    <div class="faq-body">A CLAUDE.md file should contain a project overview, tech stack, common commands, code conventions, and explicit behaviour rules. Recommended length is under 200 lines.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">Is CLAUDE md necessary?<span class="faq-icon">+</span></summary>
+    <div class="faq-body">CLAUDE.md is not mandatory but strongly recommended. Without it, Claude resets every session. For S2P teams, the equivalent is converting procurement documents to .md before upload, a structured input applied at the document level.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">What is a .md file in AI?<span class="faq-icon">+</span></summary>
+    <div class="faq-body">A .md file is a plain-text Markdown document. LLMs including Claude were trained on Markdown-heavy data and process its structure natively, making it the most accurate input format for document analysis workflows.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">Why are .md files used?<span class="faq-icon">+</span></summary>
+    <div class="faq-body">Markdown files are portable, platform-independent, and require no proprietary software. In AI workflows, converting documents to .md reduces token usage by 65&ndash;90% with no content loss, preserving document hierarchy for more reliable outputs.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">Is Claude better than ChatGPT?<span class="faq-icon">+</span></summary>
+    <div class="faq-body">Claude leads on long-document analysis and nuanced writing, with a 200K token context window. ChatGPT leads on multimodal tasks like image generation, voice, and plugins. For enterprise document workflows, Claude is the recommended starting point.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">What is the full form of .MD file?<span class="faq-icon">+</span></summary>
+    <div class="faq-body">MD stands for Markdown Documentation. A .md file is a plain-text document using Markdown syntax with simple inline symbols defining headings, lists, and tables without proprietary code or binary data.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">Where is the CLAUDE MD file stored?<span class="faq-icon">+</span></summary>
+    <div class="faq-body">CLAUDE.md is stored at three levels: globally at ~/.claude/CLAUDE.md for personal preferences, at the project root for team-wide conventions, or in subdirectories for specific rules. More specific files override broader ones.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">What are markdown files in Claude?<span class="faq-icon">+</span></summary>
+    <div class="faq-body">In Claude, .md files work as both inputs carrying document structure for accurate extraction and outputs, where Claude generates Markdown Artifacts: formatted, editable documents rendered in a dedicated side panel.</div>
+  </details>
+</div>
+
+</main>
+
+<!-- EXPERT SIDEBAR -->
+<aside class="expert-sidebar">
+  <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+  <div class="exp-list">
+    <div class="exp-item">
+      <cite class="exp-source">MindStudio &middot; 2026</cite>
+      <p class="exp-stat">Markdown conversion reduces AI token usage by <strong>65&ndash;90%</strong> with no content loss.</p>
+      <a class="exp-link" href="https://www.mindstudio.ai/blog/convert-files-markdown-reduce-ai-tokens" target="_blank">View source &rarr;</a>
+    </div>
+
+
+    <div class="exp-item">
+      <cite class="exp-source">GEP &middot; 2026</cite>
+      <p class="exp-stat"><strong>44%</strong> of procurement leaders are piloting Agentic AI, yet data quality remains the primary barrier to scaling it.</p>
+      <a class="exp-link" href="https://www.gep.com/research-reports/2026-procurement-executive-insight-report" target="_blank">View source &rarr;</a>
+    </div>
+    <div class="exp-item">
+      <cite class="exp-source">Tech-Insider &middot; 2026</cite>
+      <p class="exp-stat">Claude reaches <strong>~95% functional accuracy</strong> on document analysis tasks, leading ChatGPT on long-form processing.</p>
+      <a class="exp-link" href="https://tech-insider.org/claude-vs-chatgpt-2026/" target="_blank">View source &rarr;</a>
+    </div>
+  </div>
+</aside>
+
+</div><!-- /outer-wrap -->
+
+<script>
+(function(){
+  /* TOC active on scroll */
+  var headings = document.querySelectorAll("h2[id]");
+  var links = document.querySelectorAll(".toc-nav a");
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        links.forEach(function(l){ l.classList.remove("toc-active"); });
+        var id = entry.target.id;
+        var match = document.querySelector(".toc-nav a[href='#"+id+"']");
+        if(match){ match.classList.add("toc-active"); }
+      }
+    });
+  }, { rootMargin: "-10% 0px -80% 0px", threshold: 0 });
+  headings.forEach(function(h){ observer.observe(h); });
+  links.forEach(function(link){
+    link.addEventListener("click", function(e){
+      e.preventDefault();
+      var id = link.getAttribute("href").replace("#","");
+      var target = document.getElementById(id);
+      if(target){ target.scrollIntoView({ behavior:"smooth", block:"start" }); }
+    });
+  });
+})();
+
+/* Step scroll-highlighter */
+(function(){
+  var rows = document.querySelectorAll('.steps-wrap .step-row');
+  if(!rows.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var idx = Array.from(rows).indexOf(entry.target);
+        rows.forEach(function(r, i){
+          r.classList.remove('step-active','step-done');
+          if(i === idx) r.classList.add('step-active');
+          else if(i < idx) r.classList.add('step-done');
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+  rows.forEach(function(r){ io.observe(r); });
+})();
+
+</script>
+
+</body>
+</html>
