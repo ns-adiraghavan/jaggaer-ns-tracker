@@ -23,7 +23,6 @@ It is not an internal NS workflow tool. NS coordinates however they want. This a
 8. [Deployment (Vercel)](#8-deployment-vercel)
 9. [Environment Variables](#9-environment-variables)
 10. [Email Notifications](#10-email-notifications)
-11. [Known Issues & Next Steps](#11-known-issues--next-steps)
 
 ---
 
@@ -63,13 +62,6 @@ Browser (React via Babel CDN — no build step)
 │               └── {piece-id}/
 │                   └── deliverable-v{n}.html   ← uploaded content files
 │
-├── build-with-claude/
-│   ├── contract-analyser/
-│   ├── rfp-generator/
-│   ├── supplier-recommender/
-│   ├── spend-classifier/
-│   └── tender-summariser/
-│
 ├── repo-setup/                   ← Vercel serves this folder as the app root
 │   ├── index.html
 │   ├── styles.css
@@ -79,10 +71,11 @@ Browser (React via Babel CDN — no build step)
 │   ├── sidebar.jsx
 │   ├── tracker.jsx
 │   ├── claude-rail.jsx           ← exists but not wired in (API key pending)
-│   ├── sample-artifacts.jsx      ← Sample Artifacts tab (formerly Agent Builder)
-│   ├── bwc.jsx
+│   ├── sample-artifacts.jsx      ← Sample Artifacts tab
+│   ├── jai-demo.html             ← JAI interactive demo (standalone, no login at /demo)
 │   ├── admin.jsx
 │   ├── app.jsx
+│   ├── vercel.json               ← must live here (Vercel root dir = repo-setup/)
 │   ├── api/
 │   │   ├── github.js             ← Vercel serverless proxy
 │   │   ├── anthropic.js          ← Vercel serverless proxy
@@ -93,6 +86,10 @@ Browser (React via Babel CDN — no build step)
 │
 └── README.md
 ```
+
+> **Removed:** `bwc.jsx` and the `/build-with-claude/` directory are no longer part of the active app and can be deleted from the repo.
+
+> **Note on vercel.json:** Because Vercel's root directory is set to `repo-setup/`, `vercel.json` must live inside `repo-setup/` — not the repo root. The repo-root copy (if it still exists) is ignored by Vercel.
 
 ---
 
@@ -110,7 +107,6 @@ Everything the app renders derives from `config/project.json`. Adding pillars, c
   "pillars": [...],
   "team": { "ns": [...], "jaggaer": [...] },
   "feedback": {},
-  "build_with_claude": [...],
   "schedule": [...],
   "workflow_stages": [...],
   "notifications": { "digest_to": [...], "editors_to": [...] }
@@ -355,6 +351,8 @@ Left navigation. **By Pillar / By Type toggle:**
 - **By Pillar** (default): P01–P04 industry pillar nav with expandable cluster list
 - **By Type**: MSV-Driven / AI in S2P / Industry-Specific — lists every piece with status dot and click-through
 
+Nav sections: Tracker, Sample Artifacts, JAI Demo, Style Guide, Admin (admin mode only).
+
 ### tracker.jsx
 
 Main content area. Two tabs:
@@ -368,12 +366,11 @@ Main content area. Two tabs:
 **Key components:**
 
 - `DrawerOverlay` — full modal overlay on piece click. Tabs: Upload / Replace Draft / Review / Preview & Comment / Notes / Details / Edit (admin) / Delete (admin)
-- `UploadPanel` — NS submits a file and advances to the next workflow stage. Versioned: each submit creates `deliverable-v{n}.html`.
-- `ReplaceDraftPanel` — NS replaces their current draft *without* advancing the workflow. Used to fix errors before a reviewer sees it. Status unchanged; no version increment.
-- `ReviewPanel` — unified review for any non-NS stage (Jaggaer, named reviewer). Verdicts: Approved (advances) / Needs Revision (sends back to last NS stage) / Question (status unchanged, note logged).
-- `PreviewPanel` — renders uploaded HTML deliverables in a sandboxed iframe. Fetches via `/api/github` proxy (authenticated). Shows filename, upload date, uploader name, download button, GitHub link. Injects paragraph-number gutter (`¶1`, `¶2`…) into the rendered HTML for easy reference.
-- `AnnotatePanel` — Preview with an inline comment sidebar. Click any `¶` number in the rendered article to auto-populate the section reference field. Comment is saved to the feedback thread tagged to the author.
-- `InlineCell` — admin inline editing for text and select fields
+- `UploadPanel` — NS submits a file and advances to the next workflow stage. Versioned: each submit creates `deliverable-v{n}.html`
+- `ReplaceDraftPanel` — NS replaces their current draft *without* advancing the workflow. Status unchanged; no version increment
+- `ReviewPanel` — unified review for any non-NS stage. Verdicts: Approved (advances) / Needs Revision (sends back to last NS stage) / Question (status unchanged, note logged)
+- `PreviewPanel` — renders uploaded HTML deliverables in a sandboxed iframe. Injects paragraph-number gutter (`¶1`, `¶2`…) for easy reference
+- `AnnotatePanel` — Preview with inline comment sidebar. Click any `¶` number to auto-populate the section reference field
 
 ### claude-rail.jsx
 
@@ -386,19 +383,57 @@ Claude conversation rail. **Not wired into the app** — Anthropic API key pendi
 
 ### sample-artifacts.jsx
 
-Sample Artifacts tab — external-facing content hub showcasing Jaggaer OS / JAI. Index landing with numbered article cards. Article 01 (Agent Builder live demos), Article 02 (Prompting 101), Articles 03–05 as coming-soon placeholders. Anna Vogel owns the AgentOS section.
+Sample Artifacts tab — external-facing content hub showcasing Jaggaer OS / JAI. Index landing with numbered article cards. Article 01 (Agent Builder live demos), Article 02 (Prompting 101), Articles 03–05 as coming-soon placeholders.
 
-### bwc.jsx
+### jai-demo.html — JAI Interactive Demo
 
-Build With Claude panel. Read-only. Lists `project.build_with_claude` entries with app name, description, status, and GitHub link.
+Self-contained, single-file interactive demo of JAI and AI-in-procurement tooling. No API key required. No build step. Accessible two ways:
+
+- **In the tracker:** via the JAI Demo nav entry in the sidebar — renders in an iframe with a tracker back bar above it. Login required (normal tracker session).
+- **Direct URL (no login):** `https://jaggaer-ns-tracker.vercel.app/demo` — served by a `vercel.json` rewrite rule pointing `/demo` directly at `jai-demo.html`. No React, no session check, no login gate.
+
+#### What the demo contains
+
+Twelve interactive tools organised into four capability groups mirroring the live JAI page structure:
+
+| Capability Group | Tools |
+|---|---|
+| Conversation Window | Approval Path Checker, Supplier Message Drafter, Sole-Source Justifier, Prompt Builder |
+| Deep Research | Supplier Risk Scanner, Contract Clause Analyser, Invoice Exception Detector, Spend Classifier, Tender Summariser, Spend Diagnostic |
+| Guided Sourcing | RFP Builder |
+| Know where you stand | Procurement Myth Check |
+
+Every tool is input-aware — it parses real user input (supplier geographies, clause text, invoice line items, approval thresholds) and produces genuinely responsive output. A customer-type lens (Manufacturing / Higher Education / Public Sector) is available on every tool, loading vertical-specific examples and tagging results accordingly.
+
+Each tool carries a contrast strip comparing the generic demo output to what JAI does with live organisational data, making the demo-to-product mapping explicit.
+
+#### Design system
+
+Implements the JAGGAER v2.0 web design guidelines. Key tokens:
+
+| Token | Value |
+|---|---|
+| Typeface | Inter (300–800) from Google Fonts — single approved typeface |
+| Heading weight | 400 (light), differentiating word emphasised |
+| JAI gradient | 90° #5300CE → #E22B83, AI-branded contexts only |
+| CTA red | #D22428, primary CTAs and JAGGAER wordmark only |
+| Accent green | #4D8194, eyebrows and section labels |
+
+#### Suggested talking points
+
+- Lead with a tool — open Supplier Risk Scanner or Approval Path Checker and let them type their own example
+- Point at the contrast strip: *"That's the generic version. Here's what JAI does with your real data"*
+- Use the hinge line: *"One question replaces your help desk and your analyst"*
+- Close on the Spend Diagnostic — it puts a number on the status quo and leads naturally into *"let's model your real numbers"*
+- Diagnostic figures are directional estimates from published benchmarks — *"directional; a specialist models your real numbers"* is the honest and stronger position
 
 ### admin.jsx
 
 Config editor for admin users. Tabs:
 - **Pillars & Clusters** — add/edit pillars and clusters
 - **Pieces** — add/edit pieces
-- **Team** — add team members (removal not yet implemented)
-- **Workflow** — drag to reorder stages, rename, set actor per stage. Saves to `project.workflow_stages`.
+- **Team** — add team members
+- **Workflow** — drag to reorder stages, rename, set actor per stage. Saves to `project.workflow_stages`
 - **Notifications** — manage digest and editors email recipients, send test digest
 
 ### app.jsx
@@ -432,7 +467,9 @@ Daily digest email. Triggered by Vercel Cron at 12:30 UTC (6pm IST). Only sends 
 5. Add environment variables (see §9)
 6. Deploy
 
-Vercel auto-detects `api/*.js` files as serverless functions. The Cron job for the daily digest is configured in `vercel.json`.
+Vercel auto-detects `api/*.js` files as serverless functions. The Cron job and the `/demo` rewrite are both configured in `vercel.json` — which **must live inside `repo-setup/`**, not the repo root.
+
+The `/demo` route (`https://jaggaer-ns-tracker.vercel.app/demo`) is served by a Vercel rewrite pointing directly to `jai-demo.html`. No login required, no React, no session.
 
 ---
 
@@ -443,21 +480,21 @@ Vercel auto-detects `api/*.js` files as serverless functions. The Cron job for t
 | `GITHUB_TOKEN` | Classic PAT, full repo scope. Never in code. |
 | `GITHUB_REPO` | `ns-adiraghavan/jaggaer-ns-tracker` |
 | `ANTHROPIC_API_KEY` | Pending. Leave unset until purchased. |
-| `RESEND_API_KEY` | From resend.com dashboard. Free tier: 3,000 emails/month. |
+| `MAILEROO_API_KEY` | Email delivery. Get from Maileroo dashboard. |
 | `APP_URL` | Clean production URL used in digest email CTA. Optional — falls back to hardcoded value. |
-| `DIGEST_TO` | Fallback recipient list. In practice, manage via **Admin → Notifications** — that takes priority. |
-| `DIGEST_FROM` | Leave unset. Defaults to `onboarding@resend.dev` (Resend shared domain — no DNS setup). Only set if using a verified custom domain. |
+| `DIGEST_TO` | Fallback recipient list. Manage via **Admin → Notifications** — that takes priority. |
+| `DIGEST_FROM` | Leave unset. Defaults to Maileroo shared domain. Only set if using a verified custom domain. |
 
 ---
 
 ## 10. Email Notifications
 
-Two email flows, both via [Resend](https://resend.com) (free tier, no domain verification required).
+Two email flows, both via Maileroo.
 
 ### Setup
 
-1. Sign up at resend.com
-2. Get `RESEND_API_KEY` from the dashboard
+1. Sign up at maileroo.com
+2. Get `MAILEROO_API_KEY` from the dashboard
 3. Add to Vercel environment variables
 4. Set recipients via **Admin → Notifications** in the app
 5. Deploy
@@ -482,7 +519,7 @@ curl -X POST https://jaggaer-ns-tracker.vercel.app/api/digest \
 ```
 Or use **Send Test Digest** in Admin → Notifications.
 
-**After any schema migration** — force-trigger once to reset `digest-state.json` with current piece statuses. Otherwise the digest may not detect changes correctly.
+**After any schema migration** — force-trigger once to reset `digest-state.json` with current piece statuses.
 
 ### Flow 2 — Send to Editors (`api/notify.js`)
 
@@ -497,16 +534,6 @@ project.json → project.notifications.digest_to / editors_to   (wins)
     ↓  if empty
 Vercel env vars → DIGEST_TO / EDITORS_TO                       (fallback)
 ```
-
----
-
-## 11. Known Issues & Next Steps
-
-| # | Issue | Status |
-|---|---|---|
-| 1 | **Feedback deletion** | Open — no admin ability to remove an individual erroneous feedback note (deleting a piece clears all its feedback, but individual note removal isn't exposed) |
-| 2 | **Month switcher** | Open — switcher UI exists in sidebar and works when multiple months are in `project.json`, but only Month 1 is currently configured |
-| 3 | **Anthropic API key** | Pending — Claude rail and live Sample Artifacts demos inactive until key added to Vercel env |
 
 ---
 
@@ -529,4 +556,4 @@ Write-Host "Done" -ForegroundColor Green
 
 ---
 
-*Last updated: June 2026 — v3.3. Changes from v3.2: workflow stages now fully configurable via Admin panel and `project.workflow_stages` (no hardcoded statuses anywhere); daily digest rewritten to be stage-aware; digest email simplified to action-oriented sections only; paragraph-number gutter added to HTML preview for comment referencing; ReplaceDraftPanel added for NS pre-review corrections; Sample Artifacts tab renamed from Agent Builder.*
+*Last updated: June 2026 — v3.4. Changes from v3.3: Build With Claude panel removed (`bwc.jsx` and `/build-with-claude/` repo folder — safe to delete from GitHub). JAI interactive demo (`jai-demo.html`) added with two access modes: tracker sidebar via iframe (login-gated) and direct URL at `/demo` via `vercel.json` rewrite (no login). `vercel.json` moved into `repo-setup/` — this is required; the repo-root copy is ignored by Vercel. Email delivery migrated from Resend to Maileroo.*
