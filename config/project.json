@@ -65,8 +65,8 @@
               "title": "How to Install Claude: A Step-by-Step Guide for Procurement Professionals",
               "format": "How-to Guide",
               "assignee": "m-e10nz",
-              "status": "writing",
-              "revision_count": 1,
+              "status": "marketing-review",
+              "revision_count": 2,
               "primary_keyword": "how to install Claude procurement professional",
               "secondary_keyword": "Claude setup IT permissions S2P guide",
               "intent": "informational",
@@ -79,10 +79,10 @@
               "content_type": "ai-in-s2p",
               "phase": 1,
               "funnel": "TOFU",
-              "last_upload": "2026-06-04T12:50:21.531Z",
-              "last_upload_by": "manager",
-              "last_updated": "2026-06-04T12:50:21.531Z",
-              "last_updated_by": "manager"
+              "last_upload": "2026-06-08T13:06:55.062Z",
+              "last_upload_by": "m-e10nz",
+              "last_updated": "2026-06-08T13:06:55.062Z",
+              "last_updated_by": "m-e10nz"
             },
             {
               "id": "p-c1-2",
