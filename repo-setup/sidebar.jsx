@@ -165,6 +165,12 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           rightMeta="6 articles"
         />
         <NavSection
+          label="JAI Demo"
+          active={view === "jai-demo"}
+          onClick={() => setView("jai-demo")}
+          rightMeta="live"
+        />
+        <NavSection
           label="Style Guide"
           active={view === "style-guide"}
           onClick={() => setView("style-guide")}
