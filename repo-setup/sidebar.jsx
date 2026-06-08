@@ -153,12 +153,6 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
         <div className="ns-sidebar-divider"></div>
 
         <NavSection
-          label="Build With Claude"
-          active={view === "bwc"}
-          onClick={() => setView("bwc")}
-          rightMeta="5 apps"
-        />
-        <NavSection
           label="Sample Artifacts"
           active={view === "sample-artifacts"}
           onClick={() => setView("sample-artifacts")}

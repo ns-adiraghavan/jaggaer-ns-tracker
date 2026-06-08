@@ -225,7 +225,6 @@ function App() {
           />
         )}
         {view === "jai-demo" && <JAIDemoPanel onBack={() => setView("tracker")} />}
-        {view === "bwc" && <BWCPanel project={project} />}
         {view === "sample-artifacts" && <SampleArtifactsPanel />}
         {view === "style-guide" && <StyleGuidePanel project={project} adminMode={adminMode} />}
         {view === "admin" && adminMode && (
