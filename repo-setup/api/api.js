@@ -54,6 +54,58 @@ window.NS_API = (function () {
     }
   }
 
+  // Raw PUT — `base64Content` is already base64 of the file's bytes (used for
+  // binary deliverables like PDF/DOCX, where wrapping in btoa would corrupt them).
+  async function githubPutRaw(path, base64Content, message, sha) {
+    const body = { message, content: base64Content, ...(sha ? { sha } : {}) };
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 20000);
+    try {
+      const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+        signal: controller.signal,
+      });
+      clearTimeout(timer);
+      if (!r.ok) {
+        const errBody = await r.text();
+        throw new Error(`gh-put-${r.status}: ${errBody}`);
+      }
+      return r.json();
+    } catch (e) {
+      clearTimeout(timer);
+      throw e;
+    }
+  }
+
+  // Fetch an existing file's SHA (needed to overwrite). Returns undefined if absent.
+  async function fetchSha(path) {
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 15000);
+      const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`, { signal: controller.signal });
+      clearTimeout(timer);
+      if (r.ok) { const data = await r.json(); return data.sha; }
+    } catch (e) { /* not found / timeout — proceed without */ }
+    return undefined;
+  }
+
+  // Normalises the upload payload coming from the UI. Accepts either the new
+  // { ext, binary, b64|text, name } object or a legacy plain string.
+  function normaliseDeliverable(payload) {
+    if (payload && typeof payload === "object") {
+      return {
+        ext: (payload.ext || "html").toLowerCase(),
+        binary: !!payload.binary,
+        b64: payload.b64 || null,
+        text: payload.text != null ? payload.text : null,
+        name: payload.name || null,
+      };
+    }
+    return { ext: "html", binary: false, b64: null, text: String(payload || ""), name: null };
+  }
+
   async function githubListFolder(path) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 5000);
@@ -105,32 +157,20 @@ window.NS_API = (function () {
 
   async function uploadPieceDeliverable(piece, cluster, pillar, month, file, author) {
     const nextRev = (piece.revision_count || 0) + 1;
-    const path = `content/${month}/${pillar}/${cluster}/${piece.id}/deliverable-v${nextRev}.html`;
-    const contentString =
-      `<!-- uploaded by ${author} at ${new Date().toISOString()} -->\n` +
-      `<!-- piece: ${piece.title} -->\n` +
-      (typeof file === "string" ? file : `[binary upload: ${file.name}, ${file.size} bytes]`);
+    const d = normaliseDeliverable(file);
+    const path = `content/${month}/${pillar}/${cluster}/${piece.id}/deliverable-v${nextRev}.${d.ext}`;
     try {
-      // Fetch SHA with a longer timeout — file may be large (base64 HTML via GitHub API)
-      let sha;
-      try {
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 15000);
-        const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`, { signal: controller.signal });
-        clearTimeout(timer);
-        if (r.ok) {
-          const data = await r.json();
-          sha = data.sha;
-          console.log(`[NS_API] deliverable-v${nextRev} exists, using SHA`, sha?.slice(0, 8));
-        } else {
-          console.log(`[NS_API] deliverable-v${nextRev} not found (${r.status}), creating new`);
-        }
-      } catch (e) {
-        console.log(`[NS_API] SHA fetch skipped (${e.message}), proceeding without`);
-        sha = undefined;
+      const sha = await fetchSha(path); // new path normally — but be safe
+      let result;
+      if (d.binary && d.b64) {
+        result = await githubPutRaw(path, d.b64, `upload ${piece.id} v${nextRev} (${d.ext})`, sha);
+      } else {
+        const contentString =
+          `<!-- uploaded by ${author} at ${new Date().toISOString()} -->\n` +
+          `<!-- piece: ${piece.title} -->\n` + (d.text || "");
+        result = await githubPutFile(path, contentString, `upload ${piece.id} v${nextRev}`, sha);
       }
-      const result = await githubPutFile(path, contentString, `upload ${piece.id} v${nextRev}`, sha);
-      return { ok: true, path, mock: !!result.mock };
+      return { ok: true, path, ext: d.ext, mock: !!result.mock };
     } catch (e) {
       console.warn("[NS_API] Upload failed:", e.message);
       return { ok: false, path, error: e.message };
@@ -139,32 +179,43 @@ window.NS_API = (function () {
 
   async function replaceDeliverable(piece, cluster, pillar, month, file, author) {
     const rev = piece.revision_count || 1;
-    const path = `content/${month}/${pillar}/${cluster}/${piece.id}/deliverable-v${rev}.html`;
-    const contentString =
-      `<!-- replaced by ${author} at ${new Date().toISOString()} -->\n` +
-      `<!-- piece: ${piece.title} -->\n` +
-      (typeof file === "string" ? file : `[binary upload: ${file.name}, ${file.size} bytes]`);
+    const d = normaliseDeliverable(file);
+    const path = `content/${month}/${pillar}/${cluster}/${piece.id}/deliverable-v${rev}.${d.ext}`;
     try {
-      // File exists at this rev — fetch SHA with longer timeout for large HTML files
-      let sha;
-      try {
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 15000);
-        const r = await fetch(`/api/github?path=${encodeURIComponent(path)}`, { signal: controller.signal });
-        clearTimeout(timer);
-        if (r.ok) {
-          const data = await r.json();
-          sha = data.sha;
-          console.log(`[NS_API] replace: found SHA`, sha?.slice(0, 8));
-        }
-      } catch (e) {
-        console.log(`[NS_API] replace: SHA fetch skipped (${e.message})`);
-        sha = undefined;
+      const sha = await fetchSha(path); // exists at this rev — overwrite needs SHA
+      let result;
+      if (d.binary && d.b64) {
+        result = await githubPutRaw(path, d.b64, `replace ${piece.id} v${rev} (${d.ext})`, sha);
+      } else {
+        const contentString =
+          `<!-- replaced by ${author} at ${new Date().toISOString()} -->\n` +
+          `<!-- piece: ${piece.title} -->\n` + (d.text || "");
+        result = await githubPutFile(path, contentString, `replace ${piece.id} v${rev}`, sha);
       }
-      const result = await githubPutFile(path, contentString, `replace ${piece.id} v${rev}`, sha);
-      return { ok: true, path, mock: !!result.mock };
+      return { ok: true, path, ext: d.ext, mock: !!result.mock };
     } catch (e) {
       console.warn("[NS_API] Replace failed:", e.message);
+      return { ok: false, path, error: e.message };
+    }
+  }
+
+  // Brief / keyword attachments (Jaggaer). Reads the File here and commits the
+  // raw bytes (base64) so PDFs/DOCX round-trip intact.
+  async function uploadBriefFile(piece, cluster, pillar, month, file, author) {
+    const safeName = String(file.name || "brief").replace(/[^A-Za-z0-9._-]/g, "_");
+    const path = `content/${month}/${pillar}/${cluster}/${piece.id}/brief/${safeName}`;
+    try {
+      const b64 = await new Promise((res, rej) => {
+        const reader = new FileReader();
+        reader.onerror = rej;
+        reader.onload = () => { const s = String(reader.result); res(s.slice(s.indexOf(",") + 1)); };
+        reader.readAsDataURL(file);
+      });
+      const sha = await fetchSha(path);
+      const result = await githubPutRaw(path, b64, `brief ${piece.id}: ${safeName}`, sha);
+      return { ok: true, path, mock: !!result.mock };
+    } catch (e) {
+      console.warn("[NS_API] Brief upload failed:", e.message);
       return { ok: false, path, error: e.message };
     }
   }
@@ -172,6 +223,7 @@ window.NS_API = (function () {
 
   async function listBuildWithClaude() {
     try {
+      const list = await githubListFolder("build-with-claude");
       return list.map(item => ({
         name: item.name,
         description: "—",
@@ -224,6 +276,7 @@ window.NS_API = (function () {
     saveProject,
     uploadPieceDeliverable,
     replaceDeliverable,
+    uploadBriefFile,
     listBuildWithClaude,
     askClaude,
     isRealGithub,
