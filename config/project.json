@@ -1127,7 +1127,10 @@
       "label": "CTA Check",
       "color": "#b05e00",
       "bg": "#fdf0e0",
-      "actor": null
+      "actor": [
+        "person:m-pznem",
+        "person:m-izu4e"
+      ]
     },
     {
       "id": "approved",
