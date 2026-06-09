@@ -6,6 +6,16 @@
 //   PUT  /api/github?path=config/project.json        → githubPutFile (body: { message, content, sha? })
 //   GET  /api/github?path=build-with-claude&list=1   → list folder contents
 
+// Raise the body-parser limit so large base64-encoded binary deliverables
+// (PDFs, DOCX, etc.) don't get rejected by Vercel's default 1 MB cap.
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "10mb",
+    },
+  },
+};
+
 export default async function handler(req, res) {
   // CORS — allow all origins since this API only works with valid Vercel env vars
   res.setHeader("Access-Control-Allow-Origin", "*");
