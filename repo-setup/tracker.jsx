@@ -2151,6 +2151,7 @@ function ReplaceDraftPanel({ piece, cluster, pillar, project, currentUser, updat
   const [filename, setFilename] = useStateTR(null);
   const [bytes, setBytes] = useStateTR(0);
   const [progress, setProgress] = useStateTR(0);
+  const [errorMsg, setErrorMsg] = useStateTR(null);
   const inputRef = useRefTR(null);
   const rev = piece.revision_count || 1;
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
@@ -2159,8 +2160,12 @@ function ReplaceDraftPanel({ piece, cluster, pillar, project, currentUser, updat
     setStage("uploading"); setFilename(file.name); setBytes(file.size);
     const payload = await readDeliverableFile(file);
     for (let i = 0; i <= 100; i += 6) { setProgress(i); await new Promise(r => setTimeout(r, 28)); }
-    // replaceDeliverable fetches existing SHA and overwrites deliverable-v{rev} in place
-    await window.NS_API.replaceDeliverable(piece, cluster.id, pillar.id, project.active_month, payload, currentUser.id);
+    const result = await window.NS_API.replaceDeliverable(piece, cluster.id, pillar.id, project.active_month, payload, currentUser.id);
+    if (!result.ok) {
+      setStage("error");
+      setErrorMsg(result.error || "GitHub commit failed — check console");
+      return;
+    }
     updatePiece(cluster.id, piece.id, {
       deliverable_ext: payload.ext,
       last_upload: new Date().toISOString(),
@@ -2199,6 +2204,12 @@ function ReplaceDraftPanel({ piece, cluster, pillar, project, currentUser, updat
             <div className="ns-drop-sub">{filename} · {deliverableFileName(piece)} updated</div>
             <div className="ns-drop-path">Status unchanged · <button onClick={onDone} style={{...FONT,background:"none",border:"none",color:"#c8401a",fontWeight:600,cursor:"pointer",fontSize:"0.78rem",padding:0}}>Close drawer →</button></div>
           </>)}
+          {stage === "error" && (<>
+            <div className="ns-drop-rule" style={{background:"#c8401a"}}></div>
+            <div className="ns-drop-title" style={{color:"#c8401a"}}>Upload failed ✕</div>
+            <div className="ns-drop-sub" style={{color:"#c8401a"}}>{errorMsg}</div>
+            <div className="ns-drop-path"><button onClick={() => { setStage("idle"); setErrorMsg(null); }} style={{...FONT,background:"none",border:"none",color:"#c8401a",cursor:"pointer",fontFamily:"Noto Sans,sans-serif",fontSize:"0.78rem",fontWeight:600,padding:0}}>Try again →</button></div>
+          </>)}
           <input ref={inputRef} type="file" accept=".html,.htm,.md,.markdown,.txt,.pdf,.docx,.doc,.xlsx,.xls" hidden onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
         </div>
       </div>
@@ -2222,9 +2233,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
   const [filename, setFilename] = useStateTR(null);
   const [bytes, setBytes] = useStateTR(0);
   const [progress, setProgress] = useStateTR(0);
-  const inputRef = useRefTR(null);
-
-  const workflowStages = stages || getWorkflowStages(project);
+  const [errorMsg, setErrorMsg] = useStateTR(null);
   const stageOrder = workflowStages.map(s => s.id);
   const currentIdx = stageOrder.indexOf(piece.status);
   const nextStage = workflowStages[currentIdx + 1] || null;
@@ -2234,7 +2243,12 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
     setStage("uploading"); setFilename(file.name); setBytes(file.size);
     const payload = await readDeliverableFile(file);
     for (let i = 0; i <= 100; i += 6) { setProgress(i); await new Promise(r => setTimeout(r, 28)); }
-    await window.NS_API.uploadPieceDeliverable(piece, cluster.id, pillar.id, project.active_month, payload, currentUser.id);
+    const result = await window.NS_API.uploadPieceDeliverable(piece, cluster.id, pillar.id, project.active_month, payload, currentUser.id);
+    if (!result.ok) {
+      setStage("error");
+      setErrorMsg(result.error || "GitHub commit failed — check console");
+      return;
+    }
     const newStatus = nextStage ? nextStage.id : piece.status;
     updatePiece(cluster.id, piece.id, {
       status: newStatus,
@@ -2270,8 +2284,14 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
           {stage === "done" && (<>
             <div className="ns-drop-rule is-done"></div>
             <div className="ns-drop-title">Committed ✓</div>
-            <div className="ns-drop-sub">{filename} · deliverable-v{nextRev}.html</div>
+            <div className="ns-drop-sub">{filename} · deliverable-v{nextRev}.{filename ? filename.split('.').pop().toLowerCase() : "html"}</div>
             <div className="ns-drop-path">Status → <strong>{nextStage?.label || "submitted"}</strong>{nextStage ? ` · ${nextStage.actor === "ns" ? "NS" : (typeof nextStage.actor === "string" && nextStage.actor.startsWith("person:")) ? nextStage.actor.slice(7) : "Jaggaer"} is cued.` : ""}</div>
+          </>)}
+          {stage === "error" && (<>
+            <div className="ns-drop-rule" style={{background:"#c8401a"}}></div>
+            <div className="ns-drop-title" style={{color:"#c8401a"}}>Upload failed ✕</div>
+            <div className="ns-drop-sub" style={{color:"#c8401a"}}>{errorMsg}</div>
+            <div className="ns-drop-path"><button onClick={() => { setStage("idle"); setErrorMsg(null); }} style={{background:"none",border:"none",color:"#c8401a",cursor:"pointer",fontFamily:"Noto Sans,sans-serif",fontSize:"0.78rem",fontWeight:600,padding:0}}>Try again →</button></div>
           </>)}
           <input ref={inputRef} type="file" hidden onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
         </div>
@@ -2296,6 +2316,8 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
   const [verdict, setVerdict] = useStateTR("approved");
   const [body, setBody] = useStateTR("");
   const [submitting, setSubmitting] = useStateTR(false);
+
+  const inputRef = useRefTR(null);
 
   const workflowStages = stages || getWorkflowStages(project);
   const stageOrder = workflowStages.map(s => s.id);
@@ -2911,7 +2933,7 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
         }}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem", fontWeight: 600, color: "#1a3a52" }}>
-              deliverable.html
+              {deliverableFileName(piece)}
             </div>
             <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#6b8fa8", marginTop: "2px" }}>
               {piece.revision_count > 1 ? `v${piece.revision_count} · ` : ""}
@@ -2935,7 +2957,7 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
             onMouseEnter={e => e.currentTarget.style.background = "#e8f2fa"}
             onMouseLeave={e => e.currentTarget.style.background = "#fff"}
           >
-            ↓ Download HTML
+            ↓ Download {deliverableExt(piece).toUpperCase()}
           </button>
           <a
             href={repoViewUrl}
