@@ -875,6 +875,12 @@
         "name": "Abhishek V",
         "role": "Marketing",
         "org": "jaggaer"
+      },
+      {
+        "id": "m-pznem",
+        "name": "New member",
+        "role": "Researcher",
+        "org": "jaggaer"
       }
     ]
   },
