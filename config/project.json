@@ -1075,7 +1075,10 @@
       "label": "Brief Uploaded",
       "color": "#0e6655",
       "bg": "#e8f5f0",
-      "actor": "ns"
+      "actor": [
+        "ns",
+        "jaggaer"
+      ]
     },
     {
       "id": "writing",
