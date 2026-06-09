@@ -131,6 +131,7 @@ function App() {
         const stillValid = allMembers.find(m => m.id === sessionUser.id);
         if (!stillValid) { clearSession(); setCurrentUser(null); }
       }
+      if (window.NS_syncWorkflow) window.NS_syncWorkflow(project);
       setProject(project);
       setSource(source);
       setSha(sha);
@@ -145,6 +146,10 @@ function App() {
       setLoadError(e.message);
     });
   }, []);
+
+  useEffectApp(() => {
+    if (project && window.NS_syncWorkflow) window.NS_syncWorkflow(project);
+  }, [project]);
 
   useEffectApp(() => {
     if (!project) return;

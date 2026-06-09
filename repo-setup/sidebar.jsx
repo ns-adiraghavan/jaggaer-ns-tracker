@@ -411,6 +411,16 @@ function computeStats(project, activeMonthId) {
   const byPillar = {};
   const byCluster = {};
   let total = 0, approved = 0, awaiting = 0;
+  // "Awaiting Jaggaer" = pieces sitting at a Jaggaer-side stage. Derived from the
+  // live workflow so it can't drift when stages are renamed/reordered.
+  const wf = (project.workflow_stages && project.workflow_stages.length) ? project.workflow_stages : [];
+  const stageById = {}; wf.forEach(s => { stageById[s.id] = s; });
+  const jids = new Set((project.team && project.team.jaggaer || []).map(m => "person:" + m.id));
+  function jaggaerSide(actor) {
+    if (!actor) return false;
+    const a = Array.isArray(actor) ? actor : [actor];
+    return a.some(x => x === "jaggaer" || jids.has(x));
+  }
   for (const p of project.pillars) {
     let pT = 0, pA = 0;
     for (const c of p.clusters) {
@@ -423,7 +433,8 @@ function computeStats(project, activeMonthId) {
       for (const piece of c.pieces) {
         total++;
         if (piece.status === "approved") { approved++; pA++; cA++; }
-        if (piece.status === "uploaded" || piece.status === "revised") awaiting++;
+        const st = stageById[piece.status];
+        if (st && piece.status !== "approved" && piece.status !== "not-started" && jaggaerSide(st.actor)) awaiting++;
       }
       byCluster[c.id] = { total: cT, approved: cA, ready: cA === cT && cT > 0 };
       pT += cT;
