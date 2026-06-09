@@ -2234,6 +2234,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
   const [bytes, setBytes] = useStateTR(0);
   const [progress, setProgress] = useStateTR(0);
   const [errorMsg, setErrorMsg] = useStateTR(null);
+  const workflowStages = stages || getWorkflowStages(project);
   const stageOrder = workflowStages.map(s => s.id);
   const currentIdx = stageOrder.indexOf(piece.status);
   const nextStage = workflowStages[currentIdx + 1] || null;
