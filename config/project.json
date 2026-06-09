@@ -1106,7 +1106,7 @@
     },
     {
       "id": "editors",
-      "label": "Editors/Final Check",
+      "label": "CTA Check",
       "color": "#b05e00",
       "bg": "#fdf0e0",
       "actor": "jaggaer"
