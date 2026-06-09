@@ -217,8 +217,8 @@
               "title": "How to Use Claude to Auto-Generate an RFP from Your Sourcing Brief",
               "format": "MD File / Tutorial",
               "assignee": "null",
-              "status": "stage-nq11b",
-              "revision_count": 0,
+              "status": "brief-uploaded",
+              "revision_count": 1,
               "primary_keyword": "use Claude generate RFP procurement",
               "secondary_keyword": "Claude RFP autogeneration sourcing tutorial",
               "intent": "commercial",
@@ -230,7 +230,12 @@
               ],
               "content_type": "ai-in-s2p",
               "phase": 2,
-              "funnel": "MOFU"
+              "funnel": "MOFU",
+              "deliverable_ext": "md",
+              "last_upload": "2026-06-09T12:57:28.251Z",
+              "last_upload_by": "manager",
+              "last_updated": "2026-06-09T12:57:28.251Z",
+              "last_updated_by": "manager"
             },
             {
               "id": "p-c3-3",
