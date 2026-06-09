@@ -1111,7 +1111,7 @@
     {
       "id": "stage-e9nfc",
       "label": "New Stage",
-      "actor": "jaggaer",
+      "actor": null,
       "color": "#1e6fa8",
       "bg": "#e8f2fa"
     },
