@@ -2234,6 +2234,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
   const [bytes, setBytes] = useStateTR(0);
   const [progress, setProgress] = useStateTR(0);
   const [errorMsg, setErrorMsg] = useStateTR(null);
+  const inputRef = useRefTR(null);
   const workflowStages = stages || getWorkflowStages(project);
   const stageOrder = workflowStages.map(s => s.id);
   const currentIdx = stageOrder.indexOf(piece.status);
@@ -2294,7 +2295,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
             <div className="ns-drop-sub" style={{color:"#c8401a"}}>{errorMsg}</div>
             <div className="ns-drop-path"><button onClick={() => { setStage("idle"); setErrorMsg(null); }} style={{background:"none",border:"none",color:"#c8401a",cursor:"pointer",fontFamily:"Noto Sans,sans-serif",fontSize:"0.78rem",fontWeight:600,padding:0}}>Try again →</button></div>
           </>)}
-          <input ref={inputRef} type="file" hidden onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
+          <input ref={inputRef} type="file" accept=".html,.htm,.md,.markdown,.txt,.pdf,.docx,.doc,.xlsx,.xls" hidden onChange={e => e.target.files?.[0] && handleFile(e.target.files[0])} />
         </div>
       </div>
       <div className="ns-upload-r">
