@@ -993,6 +993,16 @@
         "annotation": true,
         "section": "¶20 — \"Get a 360° Supplier Snapshot…\"",
         "revision": 3
+      },
+      {
+        "id": "ann-74lseq",
+        "author": "m-pznem",
+        "verdict": "question",
+        "body": "change cta to promote https://www.jaggaer.com/download/ebook-guide/agile-supply-chain",
+        "ts": "2026-06-10T13:34:48.627Z",
+        "annotation": true,
+        "section": "¶30 — \"Monitor Financial Signals…\"",
+        "revision": 3
       }
     ],
     "p-dm2-3": [
