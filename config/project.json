@@ -413,7 +413,7 @@
               "title": "Supplier Financial Risk Signals Procurement Should Monitor",
               "format": "Informational Article",
               "assignee": "manager",
-              "status": "editors",
+              "status": "writing",
               "revision_count": 3,
               "primary_keyword": "supplier financial risk assessment",
               "secondary_keyword": "supplier risk management",
@@ -426,8 +426,8 @@
               "content_type": "msv",
               "last_upload": "2026-06-05T11:42:28.975Z",
               "last_upload_by": "jason",
-              "last_updated": "2026-06-05T14:03:05.910Z",
-              "last_updated_by": "m-9toiv",
+              "last_updated": "2026-06-10T13:35:04.109Z",
+              "last_updated_by": "m-pznem",
               "phase": 1
             },
             {
@@ -1003,6 +1003,14 @@
         "annotation": true,
         "section": "¶30 — \"Monitor Financial Signals…\"",
         "revision": 3
+      },
+      {
+        "id": "fb-miv0u5",
+        "author": "m-pznem",
+        "verdict": "needs-revision",
+        "body": "Update CTAs as requested",
+        "ts": "2026-06-10T13:35:04.109Z",
+        "stage": "editors"
       }
     ],
     "p-dm2-3": [
