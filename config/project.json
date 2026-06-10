@@ -435,7 +435,7 @@
               "title": "From Reactive to Predictive Supplier Risk Management",
               "format": "Strategic Solution Article",
               "assignee": "manager",
-              "status": "editors",
+              "status": "writing",
               "revision_count": 4,
               "primary_keyword": "predictive supplier risk management",
               "secondary_keyword": "proactive procurement risk management",
@@ -448,8 +448,8 @@
               "content_type": "industry-specific",
               "last_upload": "2026-06-08T13:03:03.881Z",
               "last_upload_by": "m-5jitd",
-              "last_updated": "2026-06-08T13:03:03.881Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-06-10T13:51:15.901Z",
+              "last_updated_by": "m-pznem",
               "phase": 2
             },
             {
@@ -1041,6 +1041,14 @@
         "annotation": true,
         "section": "¶3 — \"Close the Reactive Gap…\"",
         "revision": 4
+      },
+      {
+        "id": "fb-1prckj",
+        "author": "m-pznem",
+        "verdict": "needs-revision",
+        "body": "Update CTAS as noted",
+        "ts": "2026-06-10T13:51:15.901Z",
+        "stage": "editors"
       }
     ]
   },
