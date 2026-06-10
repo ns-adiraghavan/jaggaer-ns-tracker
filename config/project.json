@@ -925,6 +925,16 @@
         "annotation": true,
         "section": "¶38 — \"Where Risk Actually Lives in the Supply …\"",
         "revision": 4
+      },
+      {
+        "id": "ann-y1w1l2",
+        "author": "m-pznem",
+        "verdict": "question",
+        "body": "Change the CTA above to a demo CTA",
+        "ts": "2026-06-10T13:27:16.763Z",
+        "annotation": true,
+        "section": "¶40 — \"The Cost of Invisible Supply Chain Risk …\"",
+        "revision": 4
       }
     ],
     "p-dm2-2": [
