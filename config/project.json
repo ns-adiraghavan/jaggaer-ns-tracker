@@ -963,6 +963,16 @@
         "body": "Update CTAs as requested",
         "ts": "2026-06-10T13:29:53.097Z",
         "stage": "editors"
+      },
+      {
+        "id": "ann-9madsn",
+        "author": "m-pznem",
+        "verdict": "question",
+        "body": "I found a better assets, please use this one instead of the eBook I previously suggested: https://www.jaggaer.com/wp-content/uploads/Seven-Strategies-to-Cut-Costs-Reduce-Risk-and-Drive-Margin-Expansion_CFO.pdf",
+        "ts": "2026-06-10T13:52:48.962Z",
+        "annotation": true,
+        "section": "¶38 — \"Where Risk Actually Lives in the Supply …\"",
+        "revision": 4
       }
     ],
     "p-dm2-2": [
