@@ -915,6 +915,16 @@
         "ts": "2026-06-02T13:41:45.902Z",
         "annotation": true,
         "section": "¶54 — \"That is what supply chain visibility bey…\""
+      },
+      {
+        "id": "ann-fw8k18",
+        "author": "m-pznem",
+        "verdict": "question",
+        "body": "Change the CTA above to promote this eBook: https://www.jaggaer.com/download/ebook-guide/agile-supply-chain",
+        "ts": "2026-06-10T13:25:42.557Z",
+        "annotation": true,
+        "section": "¶38 — \"Where Risk Actually Lives in the Supply …\"",
+        "revision": 4
       }
     ],
     "p-dm2-2": [
