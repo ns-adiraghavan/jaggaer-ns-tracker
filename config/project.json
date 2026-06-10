@@ -1021,6 +1021,16 @@
         "body": "(no note)",
         "ts": "2026-06-05T14:03:11.763Z",
         "stage": "robert-review"
+      },
+      {
+        "id": "ann-wwa400",
+        "author": "m-pznem",
+        "verdict": "question",
+        "body": "change cta to promote https://www.jaggaer.com/download/whitepaper/supplier-risk-vendor-onboarding-trustpair",
+        "ts": "2026-06-10T13:45:16.301Z",
+        "annotation": true,
+        "section": "¶22 — \"End-To-End Risk Management…\"",
+        "revision": 4
       }
     ]
   },
