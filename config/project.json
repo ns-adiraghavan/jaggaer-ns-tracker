@@ -391,7 +391,7 @@
               "title": "Why Supply Chain Visibility Breaks Down Beyond Tier 1",
               "format": "Thought Leadership",
               "assignee": "null",
-              "status": "editors",
+              "status": "writing",
               "revision_count": 4,
               "primary_keyword": "supply chain visibility beyond tier 1",
               "secondary_keyword": "multi-tier supplier visibility challenges",
@@ -405,8 +405,8 @@
               "phase": 1,
               "last_upload": "2026-06-05T11:41:56.518Z",
               "last_upload_by": "m-e10nz",
-              "last_updated": "2026-06-05T11:41:56.518Z",
-              "last_updated_by": "m-e10nz"
+              "last_updated": "2026-06-10T13:29:53.097Z",
+              "last_updated_by": "m-pznem"
             },
             {
               "id": "p-dm2-2",
@@ -955,6 +955,14 @@
         "annotation": true,
         "section": "¶28 — \"The organizations that navigated 2025's …\"",
         "revision": 4
+      },
+      {
+        "id": "fb-6eh7qh",
+        "author": "m-pznem",
+        "verdict": "needs-revision",
+        "body": "Update CTAs as requested",
+        "ts": "2026-06-10T13:29:53.097Z",
+        "stage": "editors"
       }
     ],
     "p-dm2-2": [
