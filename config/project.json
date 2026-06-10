@@ -935,6 +935,16 @@
         "annotation": true,
         "section": "¶40 — \"The Cost of Invisible Supply Chain Risk …\"",
         "revision": 4
+      },
+      {
+        "id": "ann-2fn4tl",
+        "author": "m-pznem",
+        "verdict": "question",
+        "body": "change the CTA above to promote this whitepaper: https://www.jaggaer.com/download/whitepaper/supplier-risk-vendor-onboarding-trustpair",
+        "ts": "2026-06-10T13:28:51.556Z",
+        "annotation": true,
+        "section": "¶42 — \"What True Multi-Tier Visibility Requires…\"",
+        "revision": 4
       }
     ],
     "p-dm2-2": [
