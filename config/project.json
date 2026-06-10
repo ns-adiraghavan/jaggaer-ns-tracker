@@ -983,6 +983,16 @@
         "annotation": true,
         "section": "¶8 — \"Supplier Risk Oversight…\"",
         "revision": 3
+      },
+      {
+        "id": "ann-aekd3r",
+        "author": "m-pznem",
+        "verdict": "question",
+        "body": "Change to a demo cta",
+        "ts": "2026-06-10T13:34:05.438Z",
+        "annotation": true,
+        "section": "¶20 — \"Get a 360° Supplier Snapshot…\"",
+        "revision": 3
       }
     ],
     "p-dm2-3": [
