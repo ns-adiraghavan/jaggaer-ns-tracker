@@ -391,8 +391,8 @@
               "title": "Why Supply Chain Visibility Breaks Down Beyond Tier 1",
               "format": "Thought Leadership",
               "assignee": "null",
-              "status": "writing",
-              "revision_count": 4,
+              "status": "marketing-review",
+              "revision_count": 5,
               "primary_keyword": "supply chain visibility beyond tier 1",
               "secondary_keyword": "multi-tier supplier visibility challenges",
               "intent": "informational",
@@ -403,10 +403,12 @@
               "notes": "NEW — not previously in tracker | Words: 1,200–1,800",
               "content_type": "msv",
               "phase": 1,
-              "last_upload": "2026-06-05T11:41:56.518Z",
+              "last_upload": "2026-06-11T07:03:37.634Z",
               "last_upload_by": "m-e10nz",
-              "last_updated": "2026-06-10T13:29:53.097Z",
-              "last_updated_by": "m-pznem"
+              "last_updated": "2026-06-11T07:03:37.634Z",
+              "last_updated_by": "m-e10nz",
+              "deliverable_ext": "html",
+              "return_to_stage": null
             },
             {
               "id": "p-dm2-2",
