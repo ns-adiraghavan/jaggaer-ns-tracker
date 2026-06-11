@@ -182,17 +182,20 @@ function getPieceTiming() { return null; }
 
 // ─── CSV helpers ───────────────────────────────────────────────────────────────
 const CSV_FIELDS = ["id","title","format","cluster","pillar","content_type","phase",
-  "primary_keyword","secondary_keyword","intent","funnel","geography","assignee","notes","url"];
+  "primary_keyword","secondary_keyword","intent","funnel","geography","assignee","notes","url",
+  "valid_clusters"];
 
 function projectToCsv(project) {
   const rows = [CSV_FIELDS.join(",")];
   for (const pillar of project.pillars || []) {
     for (const cluster of pillar.clusters || []) {
       for (const piece of cluster.pieces || []) {
+        const pillarClusterLabels = (pillar.clusters || []).map(c => c.label).join(" | ");
         const row = CSV_FIELDS.map(f => {
           let val = "";
           if (f === "cluster") val = cluster.label;
           else if (f === "pillar") val = pillar.label;
+          else if (f === "valid_clusters") val = pillarClusterLabels;
           else val = piece[f] !== undefined ? String(piece[f]) : "";
           // Escape commas/quotes
           if (val.includes(",") || val.includes('"') || val.includes("\n")) {
