@@ -230,9 +230,9 @@ function projectToCsv(project) {
 function csvToProjectUpdates(csvText, project) {
   const lines = csvText.trim().split("\n");
   const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ""));
-  const updates = {};
+  const rows = [];
   for (let i = 1; i < lines.length; i++) {
-    // Simple CSV parse — handles quoted fields
+    if (!lines[i].trim()) continue;
     const cols = [];
     let cur = "", inQ = false;
     for (const ch of lines[i]) {
@@ -243,14 +243,32 @@ function csvToProjectUpdates(csvText, project) {
     cols.push(cur);
     const row = {};
     headers.forEach((h, idx) => { row[h] = (cols[idx] || "").trim(); });
-    if (row.id) updates[row.id] = row;
+    rows.push(row);
   }
 
-  // Apply updates to project — match by piece id
+  // Build lookup of existing piece ids
+  const existingIds = new Set();
+  for (const pillar of project.pillars || [])
+    for (const cluster of pillar.clusters || [])
+      for (const piece of cluster.pieces || [])
+        existingIds.add(piece.id);
+
+  const updates = {};    // existing piece id -> row
+  const newPieces = [];  // rows with no matching id
+  for (const row of rows) {
+    if (row.id && existingIds.has(row.id)) {
+      updates[row.id] = row;
+    } else if (row.title && row.cluster) {
+      newPieces.push(row);
+    }
+  }
+
   const newProject = JSON.parse(JSON.stringify(project));
   const updateableFields = ["title","format","content_type","primary_keyword",
     "secondary_keyword","intent","funnel","geography","assignee","notes","url"];
   let changed = 0;
+
+  // 1. Update existing pieces
   for (const pillar of newProject.pillars || []) {
     for (const cluster of pillar.clusters || []) {
       for (const piece of cluster.pieces || []) {
@@ -258,14 +276,55 @@ function csvToProjectUpdates(csvText, project) {
         if (!upd) continue;
         for (const f of updateableFields) {
           if (upd[f] !== undefined && upd[f] !== String(piece[f] || "")) {
-            piece[f] = f === "phase" ? parseInt(upd[f]) || 1 : upd[f];
+            piece[f] = upd[f];
             changed++;
           }
         }
-        if (upd.phase) piece.phase = parseInt(upd.phase) || 1;
+        if (upd.phase) {
+          const parsed = parseInt(upd.phase) || 1;
+          if (parsed !== piece.phase) { piece.phase = parsed; changed++; }
+        }
       }
     }
   }
+
+  // 2. Add new pieces — match cluster by label (case-insensitive), pillar optional
+  for (const row of newPieces) {
+    let targetCluster = null;
+    for (const pillar of newProject.pillars || []) {
+      const pillarMatch = !row.pillar ||
+        pillar.label.toLowerCase() === row.pillar.toLowerCase();
+      if (!pillarMatch) continue;
+      const cluster = (pillar.clusters || []).find(
+        c => c.label.toLowerCase() === row.cluster.toLowerCase()
+      );
+      if (cluster) { targetCluster = cluster; break; }
+    }
+    if (!targetCluster) continue; // unknown cluster — skip
+
+    const newId = "piece-" + targetCluster.id + "-"
+      + (targetCluster.pieces.length + 1) + "-"
+      + Math.random().toString(36).slice(2, 6);
+
+    targetCluster.pieces.push({
+      id: newId,
+      title: row.title || "Untitled",
+      format: row.format || "",
+      content_type: row.content_type || "",
+      phase: parseInt(row.phase) || 1,
+      primary_keyword: row.primary_keyword || "",
+      secondary_keyword: row.secondary_keyword || "",
+      intent: row.intent || "",
+      funnel: row.funnel || "",
+      geography: row.geography || "",
+      assignee: row.assignee || "",
+      notes: row.notes || "",
+      url: row.url || "",
+      status: "not-started",
+    });
+    changed++;
+  }
+
   return { newProject, changed };
 }
 
@@ -414,8 +473,9 @@ function CsvSyncPanel({ project, setProject }) {
         Topic CSV Sync
       </div>
       <p style={{ ...FONT, fontSize: "0.82rem", color: "#666", marginBottom: "16px", lineHeight: 1.5 }}>
-        Download the current topic list as a CSV. Edit titles, keywords, format, phase, assignee, or content type offline.
-        Re-upload to sync changes back. Status and feedback are never overwritten.
+        Download the current topic list as a CSV. Edit existing fields offline, or add new rows to create new topics.
+        New rows need a <strong>title</strong> and a <strong>cluster</strong> name matching an existing cluster exactly. Leave <strong>id</strong> blank for new topics.
+        Status and feedback are never overwritten.
       </p>
 
       <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "16px" }}>
@@ -482,7 +542,7 @@ function CsvSyncPanel({ project, setProject }) {
 
       <div style={{ ...FONT, fontSize: "0.7rem", color: "#bbb", marginTop: "14px", lineHeight: 1.5 }}>
         CSV columns: id · title · format · cluster · pillar · content_type · phase · primary_keyword · secondary_keyword · intent · funnel · geography · assignee · notes · url
-        <br />id and cluster/pillar are read-only — used for matching only.
+        <br />To update an existing topic: keep its id. To add a new topic: leave id blank, set cluster to an exact existing cluster name.
         Status, revision count, and feedback history are never affected by CSV sync.
       </div>
     </div>
