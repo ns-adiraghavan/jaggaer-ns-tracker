@@ -588,35 +588,35 @@
           "pieces": [
             {
               "id": "p-ps1-1",
-              "title": "EU AI Act & Public Procurement: 8 Questions Contracting Authorities Are Asking",
-              "format": "FAQ Article",
+              "title": "EU AI Act: The Complete Guide",
+              "format": "Blog/Article",
               "assignee": "null",
               "status": "stage-nq11b",
               "revision_count": 0,
-              "primary_keyword": "EU AI Act public procurement FAQ",
-              "secondary_keyword": "AI Act contracting authority compliance 2026",
+              "primary_keyword": "EU AI Act",
+              "secondary_keyword": "EU AI Act Compliance High Risk",
               "intent": "informational",
               "geography": "eu",
               "schedule_week": 2,
               "content_type": "msv",
               "phase": 1,
-              "funnel": "TOFU"
+              "funnel": "NA"
             },
             {
               "id": "p-ps1-2",
-              "title": "Your Government Procurement AI Audit Trail Has Gaps. Here's What the EU AI Act Requires in 2026",
-              "format": "Whitepaper",
+              "title": "EU AI Act Rules for General-Purpose AI: What GPAI Providers Need to Know",
+              "format": "Blog/Article",
               "assignee": "null",
               "status": "stage-nq11b",
               "revision_count": 0,
-              "primary_keyword": "AI government procurement audit trail EU AI Act",
-              "secondary_keyword": "public sector AI compliance whitepaper",
-              "intent": "commercial",
+              "primary_keyword": "EU AI Act GPAI",
+              "secondary_keyword": "EU AI Act transparency requirements",
+              "intent": "informational",
               "geography": "eu",
               "schedule_week": 2,
-              "content_type": "industry-specific",
+              "content_type": "msv",
               "phase": 2,
-              "funnel": "BOFU"
+              "funnel": "NA"
             }
           ]
         },
