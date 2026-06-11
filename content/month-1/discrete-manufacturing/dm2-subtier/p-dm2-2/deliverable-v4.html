@@ -1,0 +1,1413 @@
+<!-- uploaded by jason at 2026-06-11T06:58:18.756Z -->
+<!-- piece: Supplier Financial Risk Signals Procurement Should Monitor -->
+<!-- uploaded by jason at 2026-06-05T11:40:50.405Z -->
+<!-- piece: Supplier Financial Risk Signals Procurement Should Monitor -->
+<!-- uploaded by manager at 2026-06-02T13:45:45.852Z -->
+<!-- piece: Supplier Financial Risk Signals Procurement Should Monitor -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supplier Financial Risk Signals Procurement Should Monitor in 2026</title>
+<meta name="description" content="Know the financial warning signs before a supplier fails. A practical checklist covering liquidity, credit, margins and behavioural signals for procurement teams.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   JAGGAER DESIGN TOKENS (from guidelines v2.0)
+   ============================================================ */
+:root {
+  /* Colors */
+  --color-ink:        #0B0D12;
+  --color-ink-2:      #3a3f4a;
+  --color-ink-3:      #6a7180;
+  --color-red:        #D22428;
+  --color-grey:       #3F434F;
+  --color-light-grey: #dce0e8;
+  --color-cream:      #eef0f3;
+  --color-light-blue: #E9EFF4;
+  --color-white:      #ffffff;
+  --color-navy:       #1B3A5C;
+  --color-teal:       #4D8194;
+
+  /* Legacy aliases kept for article components */
+  --ink:        var(--color-ink);
+  --body:       var(--color-ink-2);
+  --muted:      var(--color-ink-3);
+  --accent:     var(--color-red);
+  --accent-bg:  #FDF2F2;
+  --border:     var(--color-light-grey);
+  --bg:         var(--color-white);
+  --surface:    var(--color-cream);
+
+  /* Typography */
+  --font-base:            Inter, system-ui, -apple-system, sans-serif;
+  --font-size-xs:         0.75rem;
+  --font-size-sm:         0.875rem;
+  --font-size-base:       0.875rem; /* 14px */
+  --font-size-lg:         1.125rem;
+  --font-size-h5:         clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:         clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:         clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:         clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:         clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-size-display:    clamp(1.75rem, 4vw, 2.75rem);
+  --font-weight-heading:  400;
+  --line-height-base:     1.6;
+  --line-height-heading:  1.1;
+
+  /* Spacing */
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --section-padding: var(--space-2xl);
+
+  /* Layout */
+  --container-width:   1240px;
+  --container-narrow:  1024px;
+  --container-wide:    1800px;
+  --container-padding: clamp(1rem, 3vw, 2rem);
+  --column-gap:        1.5rem;
+
+  /* Radius */
+  --border-radius:    1rem;
+  --border-radius-sm: 0.5rem;
+
+  /* Borders */
+  --border-color: #dce0e8;
+  --border-rule:  1px solid var(--border-color);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-base);
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--body);
+  line-height: var(--line-height-base);
+  font-size: var(--font-size-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   OUTER LAYOUT
+   ============================================================ */
+.outer-wrap {
+  display: flex;
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  align-items: flex-start;
+  gap: 0;
+}
+.page {
+  flex: 1;
+  min-width: 0;
+  max-width: var(--container-narrow);
+  padding: 0 var(--container-padding) var(--space-2xl);
+}
+@media (max-width: 1100px) { .expert-sidebar { display: none; } }
+@media (max-width: 900px)  { .outer-wrap { display: block; } .toc-sidebar { display: none; } }
+
+/* ============================================================
+   EXPERT SIDEBAR
+   ============================================================ */
+.expert-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 30px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  padding: 0 20px 24px 16px;
+  scrollbar-width: thin;
+}
+.expert-sidebar::-webkit-scrollbar { width: 3px; }
+.expert-sidebar::-webkit-scrollbar-thumb { background: var(--border); }
+
+.exp-head {
+  background: var(--color-cream);
+  padding: 10px 14px;
+  margin-bottom: 4px;
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}
+.exp-head-lbl {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  display: block;
+  line-height: 1.4;
+}
+.exp-list {
+  border: var(--border-rule);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+  overflow: hidden;
+}
+.exp-item {
+  padding: 14px 14px;
+  border-bottom: var(--border-rule);
+}
+.exp-item:last-child { border-bottom: none; }
+.exp-source {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  display: block;
+  margin-bottom: 6px;
+}
+.exp-stat {
+  font-size: var(--font-size-xs);
+  color: var(--body);
+  line-height: 1.55;
+  margin: 0 0 8px;
+  font-weight: 400;
+}
+.exp-stat strong {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 0.8125rem;
+}
+.exp-link {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.exp-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ============================================================
+   TOC SIDEBAR
+   ============================================================ */
+.toc-sidebar {
+  width: 210px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 30px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  padding: 0 16px 24px 20px;
+  scrollbar-width: thin;
+}
+.toc-sidebar::-webkit-scrollbar { width: 3px; }
+.toc-sidebar::-webkit-scrollbar-thumb { background: var(--border); }
+
+.toc-head {
+  background: var(--color-cream);
+  padding: 10px 14px;
+  margin-bottom: 4px;
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}
+.toc-head-lbl {
+  font-size: 0.59375rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+}
+.toc-nav {
+  border: var(--border-rule);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+  overflow: hidden;
+}
+.toc-nav a {
+  display: block;
+  padding: 8px 12px;
+  font-size: 0.71875rem;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.4;
+  border: none;
+  border-bottom: var(--border-rule);
+  transition: color 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.toc-nav a:last-child { border-bottom: none; }
+.toc-nav a:hover { color: var(--ink); background: var(--surface); }
+.toc-nav a.toc-active {
+  color: var(--color-red);
+  font-weight: 600;
+  background: var(--accent-bg);
+  border-left: 2px solid var(--color-red);
+}
+
+/* ============================================================
+   HEADER & EYEBROW
+   ============================================================ */
+.a-header {
+  border-top: 3px solid var(--color-red);
+  padding-top: var(--space-l);
+  margin-bottom: var(--space-m);
+}
+.a-meta {
+  /* Eyebrow pattern from guidelines */
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: var(--space-s);
+}
+
+/* ============================================================
+   HEADINGS (Inter, weight 400, clamp sizes)
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-base);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #0B0D12;
+}
+h1 { font-size: clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem); max-width: 700px; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem); margin: var(--space-xl) 0 var(--space-s); padding-bottom: var(--space-xs); border-bottom: var(--border-rule); }
+h3 { font-size: clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem); margin: var(--space-m) 0 var(--space-xs); }
+h4 { font-size: clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem); }
+h5 { font-size: clamp(1rem, 0.95rem + 0.23vw, 1.13rem); }
+
+/* Eyebrow / section label */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4D8194;
+}
+
+/* Gradient text — JAI pages only */
+.text-gradient {
+  background: linear-gradient(90deg, #5300ce, #e22b83);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================
+   ARTICLE META BAR
+   ============================================================ */
+.article-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  margin-top: var(--space-s);
+  padding: var(--space-xs) 14px;
+  background: var(--surface);
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  flex-wrap: wrap;
+}
+.amb-item {
+  font-size: 0.71875rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.amb-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.amb-sep { color: var(--border); font-size: 14px; line-height: 1; }
+
+/* ============================================================
+   BODY TEXT & LINKS
+   ============================================================ */
+p {
+  margin-bottom: var(--space-s);
+  color: var(--body);
+  line-height: var(--line-height-base);
+}
+.intro {
+  font-size: 1rem;
+  line-height: 1.75;
+  margin: var(--space-m) 0 0;
+}
+a {
+  color: var(--color-red);
+  text-decoration: none;
+  border-bottom: 1px solid #F0B0B4;
+  transition: border-color 0.2s ease;
+}
+a:hover { border-color: var(--color-red); }
+
+/* ============================================================
+   SECTION DIVIDER
+   ============================================================ */
+.sdiv {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: var(--space-xl) 0 0;
+}
+.sdiv hr {
+  flex: 1;
+  border: none;
+  border-top: var(--border-rule);
+}
+.sdiv span {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   STAT BANNER (guidelines: stat-item pattern)
+   ============================================================ */
+.s-banner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  margin: var(--space-m) 0;
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+.s-num {
+  background: var(--color-cream);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #0B0D12;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+}
+.s-cap {
+  background: var(--color-cream);
+  border-left: var(--border-rule);
+  padding: var(--space-s) var(--space-m);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.s-cap strong {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+.s-cap span { font-size: var(--font-size-xs); color: var(--muted); font-weight: 300; letter-spacing: 0.03em; }
+
+/* ============================================================
+   KEY TAKEAWAYS
+   ============================================================ */
+.kt {
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin: var(--space-m) 0;
+}
+.kt-hd {
+  background: var(--color-cream);
+  padding: 11px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.kt-hl {
+  font-size: 0.65625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+}
+.kt-hs {
+  font-size: 0.65625rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.kt-row {
+  display: flex;
+  gap: var(--space-m);
+  padding: 11px 18px;
+  border-bottom: var(--border-rule);
+  align-items: flex-start;
+}
+.kt-row:last-child { border: none; }
+.kt-n {
+  font-family: var(--font-base);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-red);
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 18px;
+}
+.kt-t { font-size: 0.8125rem; line-height: 1.62; color: var(--body); }
+
+/* ============================================================
+   CALLOUTS (guidelines: callout-info / callout-warn patterns)
+   ============================================================ */
+.co-dk {
+  background: var(--color-cream);
+  padding: var(--space-m) 24px;
+  margin: var(--space-m) 0;
+  border-left: 3px solid var(--border);
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+.co-dk .lbl {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: 8px;
+}
+.co-dk p {
+  font-size: 0.8125rem;
+  color: var(--body);
+  margin: 0;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.co-dk p strong { color: var(--ink); font-weight: 600; }
+
+.co-st {
+  background: var(--color-light-blue);
+  border-left: 3px solid var(--color-teal);
+  padding: 15px 20px;
+  margin: var(--space-m) 0;
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+.co-st .lbl {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: 6px;
+}
+.co-st p { font-size: 0.8125rem; color: var(--color-navy); margin: 0; line-height: 1.65; }
+
+/* ============================================================
+   TABLES (guidelines spec)
+   ============================================================ */
+table, .tbl {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 14px 0;
+  font-size: 0.9375rem;
+}
+th, .tbl th {
+  background: #eef0f3;
+  color: var(--ink);
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #C2C2C7;
+}
+td, .tbl td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #ebedf0;
+  color: #3a3f4a;
+  vertical-align: middle;
+}
+tbody tr:last-child td, .tbl tbody tr:last-child td { border: none; }
+tbody tr:hover td, .tbl tbody tr:hover td { background: var(--surface); }
+
+/* Badge-style status cells (guidelines: badge pattern) */
+.bk {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.bk-ok  { background: #e5eeeb; color: #558156; }
+.bk-am  { background: #FEF3C7; color: #78350F; }
+.bk-rd  { background: #fff3f3; color: var(--color-red); }
+
+.fl { display: inline-block; padding: 0.2rem 0.65rem; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; border-radius: 9999px; }
+.fl-y { background: #FEF9C3; color: #713F12; }
+.fl-a { background: #FEF3C7; color: #78350F; }
+.fl-r { background: #fff3f3; color: var(--color-red); }
+
+/* ============================================================
+   COMPACT CHECKLIST
+   ============================================================ */
+.cl {
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin: var(--space-m) 0;
+}
+.cl-top {
+  background: var(--color-cream);
+  padding: 11px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.cl-tl { display: flex; align-items: center; gap: 14px; }
+.cl-ttl {
+  font-size: 0.65625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cl-pr { display: flex; align-items: center; gap: 8px; }
+.cl-pb { width: 100px; height: 3px; background: var(--border); overflow: hidden; border-radius: 2px; }
+.cl-pf { height: 100%; background: var(--color-red); width: 0%; transition: width 0.35s ease; }
+.cl-pl { font-size: 0.65625rem; color: var(--muted); }
+.cl-pl strong { color: var(--color-red); }
+.cl-rst {
+  font-size: 0.59375rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  padding: 3px 10px;
+  cursor: pointer;
+  font-family: var(--font-base);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.cl-rst:hover { color: var(--ink); border-color: var(--muted); }
+.cl-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+@media (max-width: 640px) { .cl-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 380px) { .cl-grid { grid-template-columns: 1fr; } }
+.cl-col { border-right: var(--border-rule); }
+.cl-col:last-child { border-right: none; }
+.cl-ch {
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface);
+  border-bottom: var(--border-rule);
+  border-top: var(--border-rule);
+}
+.cl-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.cl-cn {
+  font-size: 0.59375rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.cl-r {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 7px 10px;
+  border-bottom: 1px solid #F3F1EC;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.cl-r:last-child { border: none; }
+.cl-r:hover { background: #FDF9F5; }
+.cl-r.ck { background: #F0FDF4; }
+.cl-r.ck .cl-rt { color: var(--muted); text-decoration: line-through; text-decoration-color: #A7D7B5; }
+.cl-rn { font-size: 0.5625rem; color: #D1D5DB; font-weight: 600; flex-shrink: 0; margin-top: 2px; min-width: 12px; text-align: right; }
+.cl-bx {
+  width: 12px; height: 12px;
+  border: 1.5px solid #D1D5DB;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-top: 1px;
+  border-radius: 2px;
+}
+.cl-r.ck .cl-bx { background: #22C55E; border-color: #22C55E; }
+.cl-tk { font-size: 0.5rem; color: #fff; font-weight: 700; opacity: 0; line-height: 1; }
+.cl-r.ck .cl-tk { opacity: 1; }
+.cl-rt { font-size: 0.65625rem; color: #374151; line-height: 1.35; }
+.cl-ft {
+  background: var(--color-cream);
+  padding: 9px 18px;
+  font-size: 0.71875rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.cl-ft strong { color: var(--body); }
+
+/* ============================================================
+   STATS BAR / QUICK STAT BOX (guidelines: stats-bar / stat-item pattern)
+   ============================================================ */
+
+/* Canonical spec classes */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  background: #fff;
+  border: 1px solid #dce0e8;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+.stat-item {
+  padding: 1.5rem 2rem;
+  border-right: 1px solid #dce0e8;
+}
+.stat-item:last-child { border-right: none; }
+.stat-number {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #0B0D12;
+}
+.stat-number.gradient {
+  background: linear-gradient(90deg, #5300ce, #e22b83);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hero single-stat variant — lavender tinted bg */
+.stats-bar--hero {
+  background: #f0eef8;
+  border-color: #e2ddf2;
+  margin: var(--space-m) 0;
+}
+.stats-bar--hero .stat-item {
+  border-right: none;
+}
+.stat-item--split {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.stats-bar--hero .stat-number {
+  flex-shrink: 0;
+}
+.stat-cap {
+  flex: 1;
+  border-left: 1px solid #e2ddf2;
+  padding-left: 2rem;
+}
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-ink-2);
+  line-height: 1.55;
+  margin: 0 0 4px;
+  font-weight: 400;
+}
+.stat-source {
+  font-size: var(--font-size-xs);
+  color: var(--muted);
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+/* Article-level aliases (qs-box / qs-stat / qs-n) map to spec */
+.qs-box {
+  background: #fff;
+  margin: var(--space-m) 0;
+  border: 1px solid #dce0e8;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+.qs-inner { display: flex; align-items: stretch; gap: 0; }
+.qs-stat { flex: 1; padding: 1.5rem 2rem; border-right: 1px solid #dce0e8; }
+.qs-stat:last-child { border-right: none; }
+.qs-n {
+  display: block;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #0B0D12;
+  margin-bottom: 6px;
+}
+.qs-label { font-size: var(--font-size-xs); color: var(--muted); font-weight: 300; line-height: 1.5; }
+.qs-label a { color: var(--muted); border-bottom: var(--border-rule); }
+.qs-label a:hover { color: var(--accent); border-color: var(--accent); }
+.qs-divider { width: 1px; background: var(--border); flex-shrink: 0; margin: 0 4px; }
+@media (max-width: 500px) {
+  .qs-inner { flex-direction: column; }
+  .qs-divider { width: 100%; height: 1px; margin: 12px 0; }
+  .qs-stat { border-right: none; border-bottom: var(--border-rule); }
+  .qs-stat:last-child { border-bottom: none; }
+}
+
+/* ============================================================
+   CAMPFIRE STAT
+   ============================================================ */
+.camp-stat {
+  border: var(--border-rule);
+  border-left: 3px solid #D97706;
+  padding: 14px 16px;
+  margin: 0 0 14px;
+  background: var(--surface);
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+.camp-label {
+  font-size: 0.59375rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #D97706;
+  margin-bottom: 7px;
+}
+.camp-body { font-size: 0.8125rem; color: var(--body); line-height: 1.6; margin-bottom: 8px; }
+.camp-src {
+  font-size: 0.65625rem;
+  color: var(--muted);
+  border-bottom: var(--border-rule);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.camp-src:hover { color: var(--color-red); border-color: var(--color-red); }
+
+/* ============================================================
+   FAQ ACCORDION (details/summary pattern)
+   ============================================================ */
+.faq-rows {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faq-item {
+  border: 1px solid #dce0e8;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+
+.faq-summary {
+  padding: 1.25rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  font-size: var(--font-size-xs);
+  color: var(--ink);
+  gap: 16px;
+  user-select: none;
+}
+.faq-summary::-webkit-details-marker { display: none; }
+
+.faq-summary-inner {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.faq-q-num {
+  font-size: 0.59375rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  flex-shrink: 0;
+}
+
+.faq-chevron {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--muted);
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+details[open] .faq-chevron { transform: rotate(45deg); }
+
+.faq-body {
+  padding: 0 1.5rem 1.25rem;
+  color: #3a3f4a;
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* Smooth open/close using interpolate-size */
+:root { interpolate-size: allow-keywords; }
+details                { height: auto; overflow: hidden; transition: height 0.3s ease; }
+details:not([open])   { height: 3.75rem; }
+
+/* ============================================================
+   INTRO SUB LINE
+   ============================================================ */
+.intro-sub {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 10px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+.intro-sub::after {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 36px;
+  background: var(--color-red);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   CTA BUTTONS (guidelines: btn-primary spec)
+   ============================================================ */
+.jag-cta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  border: var(--border-rule);
+  border-left: 3px solid var(--color-red);
+  background: var(--surface);
+  padding: var(--space-s) var(--space-m);
+  margin: var(--space-m) 0;
+  border-radius: var(--border-radius-sm);
+}
+.jag-cta-label {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  background: var(--accent-bg);
+  padding: 3px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 2px;
+  border-radius: 9999px;
+}
+.jag-cta-body { flex: 1; min-width: 0; }
+.jag-cta-head {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 4px;
+  line-height: 1.4;
+}
+.jag-cta-sub { font-size: 0.75rem; color: var(--muted); margin: 0; line-height: 1.5; }
+
+/* ============================================================
+   BUTTON SYSTEM
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.5rem;
+  padding-right: 1.25rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: var(--font-base);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Primary — main CTA */
+.btn-primary              { background: #D22428; color: #fff; border-color: #D22428; }
+.btn-primary:hover        { background: #3F434F; border-color: #3F434F; }
+
+/* Outline — secondary on light bg */
+.btn-outline             { background: transparent; color: #0B0D12; border-color: currentColor; }
+.btn-outline:hover       { background: #3F434F; color: #fff; border-color: #3F434F; }
+
+/* Outline on dark bg */
+.btn-outline-dark        { background: transparent; color: #fff; border-color: #fff; }
+.btn-outline-dark:hover  { background: #fff; color: #3F434F; }
+
+/* White — for use on tinted backgrounds */
+.btn-white               { background: #fff; color: #0B0D12; }
+.btn-white:hover         { border-color: #6a7180; }
+
+/* JAI gradient */
+.btn-jai                 { background: linear-gradient(90deg, #5300ce, #e22b83); color: #fff; border: none; }
+.btn-jai:hover           { opacity: 0.88; }
+
+/* jag-cta-btn: primary applied via .btn system */
+.jag-cta-btn { flex-shrink: 0; }
+@media (max-width: 580px) {
+  .jag-cta { flex-direction: column; align-items: flex-start; gap: var(--space-s); }
+  .jag-cta-btn { align-self: flex-start; }
+}
+</style>
+</head>
+<body>
+<div class="outer-wrap">
+<!-- ===================== TOC SIDEBAR ===================== -->
+<aside class="toc-sidebar" id="tocSidebar">
+  <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+  <nav class="toc-nav" id="tocNav">
+    <a href="#why-different">Why Financial Risk Is Different</a>
+    <a href="#complete-checklist">Complete Checklist: 25 Signals</a>
+    <a href="#five-categories">The Five Signal Categories</a>
+    <a href="#balance-sheet">Balance Sheet &amp; Liquidity Signals</a>
+    <a href="#profitability">Profitability &amp; Margin Signals</a>
+    <a href="#credit-payment">Credit &amp; Payment Behaviour</a>
+    <a href="#operational">Operational &amp; Behavioural Signals</a>
+    <a href="#market-external">Market &amp; External Signals</a>
+    <a href="#monitoring-programme">Building a Monitoring Programme</a>
+    <a href="#when-signals-fire">What to Do When Signals Fire</a>
+    <a href="#people-also-ask">People Also Ask</a>
+  </nav>
+</aside>
+<!-- ===================== ARTICLE ===================== -->
+<main class="page">
+<header class="a-header">
+  <div class="a-meta">Procurement Risk &middot; Supply Chain Management</div>
+  <h1>Supplier Financial Risk Signals Procurement Should Monitor in 2026</h1>
+  <!-- ARTICLE META BAR -->
+  <div class="article-meta-bar">
+    <span class="amb-item"><span class="amb-label">Audience</span> Procurement and Supply Chain Leaders</span>
+    <span class="amb-sep">|</span>
+    <span class="amb-item"><span class="amb-label">Read Time</span> 5&#8211;7 minute read</span>
+  </div>
+</header>
+<!-- INTRO -->
+<p class="intro">Watch the financial signals before the disruption hits. With more than 30% of 2025 supply chain disruptions exceeding $5 million in direct costs as per <a href="https://www.rapidratings.com/post/the-2025-risk-survey-report">RapidRatings (2025)</a>, early detection is not optional. Supply chain risk management now depends on how quickly procurement teams can spot supplier instability. Warning signs often surface through credit activity, liquidity pressure, and payment behaviour long before operations are affected.</p>
+<p class="intro-sub">This article explores 5 categories of financial risk signals within a supplier risk management framework procurement teams should monitor.</p>
+<div class="stats-bar stats-bar--hero">
+  <div class="stat-item stat-item--split">
+    <span class="stat-number gradient">30%</span>
+    <div class="stat-cap">
+      <p class="stat-label">of supply chain disruptions in 2025 exceeded $5 million in direct costs when financial warning signals went undetected.</p>
+      <span class="stat-source">Source: RapidRatings, 2025</span>
+    </div>
+  </div>
+</div>
+<!-- KEY TAKEAWAYS -->
+<div class="kt">
+  <div class="kt-hd"><span class="kt-hl">Key Takeaways</span><span class="kt-hs">&nbsp;:&nbsp;Five things to carry forward</span></div>
+  <div class="kt-row"><div class="kt-n">1</div><div class="kt-t">Sector-level inflation can signal structural supply base stress before any individual supplier&rsquo;s performance metrics reflect it as 42% of US manufacturers absorb input cost increases directly into margins.</div></div>
+  <div class="kt-row"><div class="kt-n">2</div><div class="kt-t">Balance sheet ratios are the foundation of <strong>supplier risk analysis</strong>: a current ratio below 1.0, interest coverage under 2.0x, or Altman Z-score below 1.81 are thresholds worth tracking.</div></div>
+  <div class="kt-row"><div class="kt-n">3</div><div class="kt-t">Margin compression alongside Days Sales Outstanding trending above 60 days can indicate a supplier increasingly reliant on external credit rather than earnings to fund operations.</div></div>
+  <div class="kt-row"><div class="kt-n">4</div><div class="kt-t">Credit rating downgrades and accelerated payment term requests both signal supplier liquidity under strain, with each reflecting a different stage of financial deterioration procurement should monitor.</div></div>
+  <div class="kt-row"><div class="kt-n">5</div><div class="kt-t"><strong>Supply chain risk management</strong> effectiveness depends on pre-defined escalation thresholds embedded in S2P platforms: signal detection without a structured response framework delivers awareness without protection.</div></div>
+</div>
+<p style="font-size:0.8125rem;color:var(--muted);line-height:1.65;margin:18px 0 0;padding-left:14px;border-left:2px solid var(--border);">The signals in this article give you a warning. What determines whether that warning becomes action or cost is whether monitoring converts that window before disruption into preparation time.</p>
+<div class="sdiv"><hr><span>Why Internal Data Misses the Signal</span><hr></div>
+<h2 id="why-different">Why Financial Risk Is Different From Other Supplier Risks</h2>
+<h3>Why Financial Distress Doesn&rsquo;t Show Up in Your Own Data</h3>
+<p>Supplier financial deterioration accumulates in credit registries, insurer limit databases and payment behaviour repositories. Manufacturing suppliers&rsquo; late payment rates rise closer to formal insolvency, a signal procurement&rsquo;s transactional architecture structurally cannot receive and <a href="https://tradeverifyd.com/resources/supply-chain-statistics">Tradeverifyd&rsquo;s 2026 Supply Chain Report</a> also confirms that 21% of procurement leaders operate with no real-time visibility into supplier disruptions.</p>
+<h3>How Fast Financial Failure Cascades Compared to Operational Risk</h3>
+<p>Supplier insolvency removes procurement&rsquo;s response window immediately. Unlike logistics delays or quality failures that allow intervention, insolvency transfers asset control at filing and limits procurement to recovery and alternative sourcing. That speed leaves little room for delayed visibility. <a href="https://sphera.com/company/news/half-of-companies-lose-revenue-due-to-supply-chain-disruption/">Sphera&rsquo;s May 2026 report</a> found organisations take 8.7 hours to detect a disruption and 40.9 hours to assess its impact, a lag insolvency proceedings rarely allow.</p>
+<div class="co-dk">
+  <div class="lbl">&#128273; Key Takeaway</div>
+  <p>Financial failure is one of the few disruptions that can erase procurement&rsquo;s response window overnight, which is why early financial monitoring is critical to effective <strong>supplier risk management</strong>.</p>
+</div>
+<div class="jag-cta">
+  <span class="jag-cta-label">JAGGAER</span>
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">Supplier Risk: The Modern Guide to Secure Vendor Onboarding</p>
+    <p class="jag-cta-sub">JAGGAER&rsquo;s guide to supplier risk categories, onboarding stages and verification workflows.</p>
+  </div>
+  <a href="https://www.jaggaer.com/download/whitepaper/supplier-risk-vendor-onboarding-trustpair" class="btn btn-primary jag-cta-btn">Download the Whitepaper &rarr;</a>
+</div>
+<div class="sdiv"><hr><span>The 25 Signals: Start Here</span><hr></div>
+<h2 id="complete-checklist">The Complete Checklist: All 25 Signals at a Glance</h2>
+<p>Review what your programme already tracks. The signals you are not watching are exactly where the risk enters undetected and what the sections below are built to explain.</p>
+<div class="cl">
+  <div class="cl-top">
+    <div class="cl-tl">
+      <span class="cl-ttl">25 Signals</span>
+      <div class="cl-pr">
+        <div class="cl-pb"><div class="cl-pf" id="clF"></div></div>
+        <span class="cl-pl"><strong id="clN">0</strong>/25 reviewed</span>
+      </div>
+    </div>
+    <button class="cl-rst" onclick="clReset()">Reset</button>
+  </div>
+  <div class="cl-grid" id="clG"></div>
+  <div class="cl-ft"><strong>Convergence Rule:</strong> Two or more signals across different categories, especially balance sheet + credit behaviour, warrant immediate escalation regardless of scorecard performance.</div>
+</div>
+<div class="sdiv"><hr><span>The Five Signal Categories</span><hr></div>
+<h2 id="five-categories">The Five Categories of Financial Risk Signal</h2>
+<p>Each signal in the checklist above belongs to one of five categories. What follows breaks down where each signal surfaces, what triggers it, and why it matters in practice, so procurement can build a detection programme that acts before the disruption does.</p>
+<h2 id="balance-sheet">Balance Sheet and Liquidity Signals</h2>
+<h3>What the Current Ratio Tells You and When to Worry</h3>
+<p>The current ratio measures whether a supplier can cover short-term obligations without external credit. A reading below 1.0 signals elevated short-term liquidity stress.</p>
+<table class="tbl">
+  <thead><tr><th>Current Ratio</th><th>Indicative Risk Level</th><th>Suggested Procurement Action</th></tr></thead>
+  <tbody>
+    <tr><td>Above 1.5</td><td><span class="bk bk-ok">Acceptable</span></td><td>Routine monitoring</td></tr>
+    <tr><td>1.0 to 1.5</td><td><span class="bk bk-am">Elevated</span></td><td>Amber flag / increased review</td></tr>
+    <tr><td>Below 1.0</td><td><span class="bk bk-rd">Critical</span></td><td>Escalate supplier risk assessment</td></tr>
+  </tbody>
+</table>
+<h3>Working Capital and Cash Reserve Warning Signs</h3>
+<p>Negative working capital can indicate liquidity pressure because current liabilities exceed current assets. This matters because borrowed liquidity disappears when lenders reduce exposure. Declining year-over-year cash reserves and accounts receivable growing faster than revenue often surface before procurement sees operational impact.</p>
+<h3>Debt, Leverage and Interest Coverage Thresholds</h3>
+<p>An interest coverage ratio below 2.0x signals earnings can no longer absorb revenue pressure without risking debt service failure. Below 1.0, operating earnings no longer cover interest obligations. An Altman Z-score below 1.81 marks the formal distress zone. Together, these indicators reveal whether a supplier&rsquo;s financial structure can withstand its current operating environment.</p>
+<div class="co-st">
+  <div class="lbl">&#128204; Key Stat</div>
+  <p>Only <strong>46% of US manufacturers maintained a debt-to-earnings ratio below 1.5 in 2025</strong>, down from 52% three years earlier. That means most of the US manufacturing supply base already operates with leverage levels that leave little buffer against revenue shocks. <a href="https://www.kaplancollectionagency.com/business-advice/52-manufacturing-statistics-on-debt-distress-and-tariff-pressures/">The Kaplan Group, February 2026</a></p>
+</div>
+<div class="sdiv"><hr><span>Profitability, Credit &amp; Payment Signals</span><hr></div>
+<h2 id="profitability">Profitability and Margin Signals</h2>
+<p>Margin deterioration follows a sequence that begins in a supplier&rsquo;s income statement and ends as a procurement continuity problem.</p>
+<h3>Gross and Operating Margin Deterioration</h3>
+<p>Gross-margin deterioration signals rising cost pressure or weakening pricing power, especially in margin-sensitive sectors. The pattern is predictable: deferred maintenance, delayed sub-supplier payments, then workforce reductions, all progressing through S2P scorecards that track delivery performance rather than margin health.</p>
+<div class="camp-stat"><div class="camp-label">Campfire Interactive &mdash; December 2025</div><div class="camp-body">US automotive suppliers entered 2026 at <strong>decade-low profitability</strong> as OEM price-downs and unrecovered tariff costs compressed margins beyond what most supplier risk monitoring systems detect.</div><a class="camp-src" href="https://campfire-interactive.com/news/the-2026-supplier-profitability-crisis-why-margins-are-collapsing-and-how-to-protect-yours">View source &rarr;</a></div>
+<h3>Revenue Concentration Risk</h3>
+<p>A single customer accounting for more than 25% of revenue creates immediate concentration risk. One contract reduction can destabilise cash flow and most S2P supplier profiles never capture that exposure, leaving procurement blindsided when the relationship weakens.</p>
+<h3>Rising Days Sales Outstanding as a Cash Flow Signal</h3>
+<p>Rising Days Sales Outstanding, particularly above 60 days, signals a cash flow and cash collection problem. <a href="https://group.atradius.com/knowledge-and-research/reports/b2b-payment-practices-trends-in-north-america-2025">Atradius North America 2025</a> found 43% of North American B2B credit sales overdue, highlighting how widespread the cash pressure problem has become across suppliers.</p>
+<div class="jag-cta">
+  <span class="jag-cta-label">JAGGAER</span>
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">Get a 360&deg; Supplier Snapshot</p>
+    <p class="jag-cta-sub">A JAGGAER demo walks through supplier risk scores, financial metrics and alerts in the Supplier Management dashboard.</p>
+  </div>
+  <a href="https://www.jaggaer.com/book-a-demo" class="btn btn-primary jag-cta-btn">Book a Demo &rarr;</a>
+</div>
+<div class="sdiv"><hr><span>Credit &amp; Payment Signals</span><hr></div>
+<h2 id="credit-payment">Credit and Payment Behaviour Signals</h2>
+<p>Three external systems form the backbone of any effective supplier risk assessment, detecting financial deterioration before procurement does: rating agencies, trade credit insurers, and payment requests.</p>
+<h3>Credit Rating Downgrades and What Triggers Them</h3>
+<p>A supplier credit rating downgrade below investment grade confirms that S&amp;P, Moody&rsquo;s, or Fitch has formally revised its default probability, increasing borrowing costs and risking debt covenant triggers. For procurement, that often means supplier credit risk is beginning to affect operational stability. Downgrades are triggered when declining interest coverage, rising leverage, or sustained margin compression breach the agency&rsquo;s debt service threshold.</p>
+<h3>Trade Credit Insurance Withdrawal: What It Means</h3>
+<p>Trade credit insurance withdrawal by Allianz Trade, Atradius, or Coface confirms a supplier has crossed a distress threshold identified through proprietary payment data inaccessible to procurement. <a href="https://au-group.com/en/studies-and-publications/global-credit-insurance-market-survey-2025">AU Group&rsquo;s Credit Insurance Market Survey (September 2025)</a> confirms these three carriers hold more than 65% of global capacity. Insurer cover withdrawal is the most precise external distress signal procurement systems can receive.</p>
+<h3>When a Supplier Asks to Change Payment Terms</h3>
+<p>An accelerated payment request is a late-stage distress signal. It confirms that alternative liquidity sources and credit options have been exhausted. <a href="https://atradius.us/knowledge-and-research/resources/how-to-forecast-insolvencies">Atradius (March 2026)</a> confirms insolvency is rarely sudden, identifying payment term requests among the final behavioural confirmations before failure.</p>
+<div class="sdiv"><hr><span>Operational &amp; Market Signals</span><hr></div>
+<h2 id="operational">Operational and Behavioural Signals</h2>
+<p>Operational behaviour often reveals supplier distress before financial disclosures, giving procurement earlier visibility into internal instability.</p>
+<h3>Senior Leadership Departures and Auditor Changes</h3>
+<p>Unplanned CFO departures often signal breakdowns in treasury management and creditor communication before financial distress becomes visible externally. Auditor resignations carry similar weight, frequently reflecting going-concern disputes that indicate lenders, auditors, and leadership no longer share confidence in the supplier&rsquo;s financial stability.</p>
+<h3>Deferred Capex, Redundancies and Site Closures</h3>
+<p>Workforce reductions alongside capital expenditure cuts usually signal suppliers are protecting liquidity over operational resilience. When these signals persist across multiple quarters, the business is often managing contraction, not temporary pressure. In supplier risk analysis, site closures matter because productive capacity declines before financial distress becomes publicly visible.</p>
+<h3>Communication Patterns That Signal Internal Distress</h3>
+<p>A shift from proactive supplier engagement to delayed, escalation-driven responses signals structural pressure has reached the relationship layer. Tracking response times and account-level contact changes within S2P supplier scorecards converts these qualitative observations into structured risk indicators, enabling earlier review.</p>
+<div class="jag-cta">
+  <span class="jag-cta-label">JAGGAER</span>
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">A Framework for Supply Chain Resilience</p>
+    <p class="jag-cta-sub">JAGGAER&rsquo;s guide to building resilience criteria into supplier evaluation, from qualification through Tier-N analysis.</p>
+  </div>
+  <a href="https://www.jaggaer.com/download/ebook-guide/agile-supply-chain" class="btn btn-primary jag-cta-btn">Download the eBook &rarr;</a>
+</div>
+<div class="sdiv"><hr><span>Market &amp; External Signals</span><hr></div>
+<h2 id="market-external">Market and External Signals</h2>
+<p>Suppliers rarely fail in isolation. Sector-wide cost pressure, tight credit conditions, foreign exchange and trade volatility usually weaken the broader supply base first.</p>
+<h3>Sector-Level Distress and Input Cost Inflation</h3>
+<p>Sector-wide cost pressure weakens the supply base before individual suppliers show distress. When input cost inflation outpaces pricing power and credit conditions simultaneously tighten, individual supplier deterioration typically follows. Effective <strong>supply chain risk management</strong> requires monitoring sector-wide cost pressures alongside company-specific data, as the two often move in tandem.</p>
+<div class="qs-box">
+  <div class="qs-inner">
+    <div class="qs-stat"><span class="qs-n">42%</span><span class="qs-label">of US manufacturers absorbed input cost increases directly into margins in 2025</span></div>
+    <div class="qs-divider"></div>
+    <div class="qs-stat"><span class="qs-n">5.4%</span><span class="qs-label">rise in raw material prices per <a href="https://www.manufacturingdive.com/news/manufacturers-plan-price-hikes-over-reshoring-to-combat-tariff-effects-ism/808157/">ISM&rsquo;s December 2025 Planning Forecast</a>, invisible to invoice-based procurement reporting</span></div>
+  </div>
+</div>
+<h3>Customer Concentration and Major Contract Losses</h3>
+<p>Suppliers with high customer concentration carry financial vulnerability that standard credit scores do not fully capture. A major contract loss can trigger rapid liquidity deterioration without warning to procurement counterparts. Requesting customer concentration disclosures during annual financial reviews, with thresholds embedded in the S2P platform, is the only reliable way to surface this exposure before it fires.</p>
+<h3>FX Exposure and Trade Press Monitoring</h3>
+<p>Unhedged foreign currency exposure can quickly erode supplier margins when exchange rates shift sharply. In practice, trade press often reveals contract losses and facility closures before formal disclosures appear, especially among private suppliers with limited bureau visibility.</p>
+<div class="sdiv"><hr><span>Building Your Monitoring Programme</span><hr></div>
+<h2 id="monitoring-programme">How to Build a Financial Risk Monitoring Programme</h2>
+<p>Identifying signals is the first step. A structured supplier financial risk assessment programme requires a monitoring architecture defining frequency, supplier tiers, and response thresholds. Without this, signal detection produces alerts that go unacted on.</p>
+<h3>Segmenting Your Supplier Base by Financial Risk Exposure</h3>
+<p>Effective supplier risk management evaluates suppliers by spend concentration, category criticality, and financial health, not spend volume alone. A low-spend sole-source supplier can represent greater operational risk than a high-spend supplier with qualified alternatives. A three-tier classification of critical, strategic, and standard suppliers should govern monitoring frequency and data depth within S2P supplier profiles. This classification covers every supplier you hold a contract with. But in most manufacturing supply chains, the highest-risk supplier is one the buyer has never directly engaged.</p>
+<h3>Layering Automated Data With Human Intelligence</h3>
+<p>Automated risk feeds detect financial deterioration, but supplier interactions often reveal instability earlier. Organizations with risk-optimized procurement management report <a href="https://www.everstream.ai/articles/how-ai-transforms-supplier-risk-management/">30% lower revenue losses</a> from supply disruptions and cut disruption impact assessment time by <a href="https://www.everstream.ai/articles/how-ai-transforms-supplier-risk-management/">50&ndash;70%</a>. High-performing teams combine external monitoring with relationship intelligence to strengthen supplier risk management.</p>
+<h3>Defining Escalation Thresholds: Yellow, Amber and Red Flags</h3>
+<p>Effective risk programmes define escalation thresholds in advance so procurement action is triggered by data, not by relationship proximity or category manager discretion.</p>
+<table class="tbl">
+  <thead><tr><th>Flag</th><th>Threshold Trigger</th><th>Procurement Action</th></tr></thead>
+  <tbody>
+    <tr><td><span class="fl fl-y">Yellow</span></td><td>DSO increase &gt;15 days, one quarter</td><td>Enhanced monitoring, direct engagement</td></tr>
+    <tr><td><span class="fl fl-a">Amber</span></td><td>Credit downgrade or auditor change</td><td>Senior review, contingency sourcing assessment</td></tr>
+    <tr><td><span class="fl fl-r">Red</span></td><td>Going concern disclosure or covenant breach</td><td>Immediate escalation, dual-sourcing activation</td></tr>
+  </tbody>
+</table>
+<p>Embedding these thresholds in S2P supplier scorecards converts escalation into a workflow-triggered event, closing the response lag that defines reactive risk programmes.</p>
+<div class="jag-cta">
+  <span class="jag-cta-label">JAGGAER</span>
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">See your full supplier risk programme in one platform</p>
+    <p class="jag-cta-sub">Book a demo to see how JAGGAER One connects every step.</p>
+  </div>
+  <a href="#" class="btn btn-primary jag-cta-btn">Book a Demo &rarr;</a>
+</div>
+<div class="sdiv"><hr><span>When Signals Fire</span><hr></div>
+<h2 id="when-signals-fire">What to Do When Signals Fire</h2>
+<p>Detection without action is not risk management. A monitoring programme needs a defined response sequence at every escalation level, or the signals it surfaces will go unacted on.</p>
+<h3>Engaging the Supplier Directly</h3>
+<p>At amber status, procurement should engage senior finance stakeholders directly, not operational contacts who may lack visibility into liquidity or credit exposure.</p>
+<div class="co-st">
+  <div class="lbl">&#128204; Key Stat</div>
+  <p><a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html">Deloitte&rsquo;s 2025 Global CPO Survey</a> found <strong>61% of procurement leaders cited enhanced supplier information sharing</strong> as their most effective risk mitigation strategy.</p>
+</div>
+<h3>Reviewing Your Contractual Exposure</h3>
+<p>At amber classification, procurement should immediately assess termination clauses, minimum volume commitments, tooling ownership, and payment terms that may disadvantage the buying organisation during supplier insolvency. Outstanding purchase orders, inventory positions, and supplier-held assets should be quantified before disruption occurs. Early legal coordination reduces exposure if the supplier&rsquo;s position deteriorates further.</p>
+<h3>Contingency Planning and When to Escalate</h3>
+<p><a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html">Deloitte&rsquo;s 2025 Global CPO Survey</a> found 74% of leading organisations maintain active alternative sources, recognising pre-qualified suppliers are the only contingency that functions reliably under insolvency timelines. Escalation to CPO and CFO level is appropriate at red classification, with board-level briefing warranted for critical category or sole-source suppliers.</p>
+<div class="sdiv"><hr><span>Before You Move On</span><hr></div>
+<p style="font-size:0.875rem;color:var(--body);line-height:1.75;margin:22px 0 0;">This framework maps the signals within your direct supplier boundary. It doesn&rsquo;t address the exposure of risks associated with Tier 2&ndash;4 suppliers, or how to convert the window before disruption into preparation time rather than reactive risk management.</p>
+<div class="sdiv"><hr><span>People Also Ask</span><hr></div>
+<h2 id="people-also-ask">People Also Ask</h2>
+<div class="faq-rows">
+
+  <details class="faq-item">
+    <summary class="faq-summary">
+      <span class="faq-summary-inner"><span class="faq-q-num">Q01</span>What are the warning signs of supplier financial distress?</span>
+      <span class="faq-chevron" aria-hidden="true">+</span>
+    </summary>
+    <div class="faq-body">Supplier risk management monitors indicators spanning balance sheet stress, margin compression, credit behaviour changes, leadership departures, and payment pattern shifts.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">
+      <span class="faq-summary-inner"><span class="faq-q-num">Q02</span>How do you assess financial risk in your supply chain?</span>
+      <span class="faq-chevron" aria-hidden="true">+</span>
+    </summary>
+    <div class="faq-body">A supplier risk assessment analyses liquidity ratios, profitability trends, credit behaviour alongside external signals from rating agencies and trade credit insurers.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">
+      <span class="faq-summary-inner"><span class="faq-q-num">Q03</span>What is a supplier financial risk assessment?</span>
+      <span class="faq-chevron" aria-hidden="true">+</span>
+    </summary>
+    <div class="faq-body">A structured evaluation of a supplier&rsquo;s liquidity, leverage, profitability, and credit health, increasingly prioritised as US corporate bankruptcies reached an 11-year high in 2025.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">
+      <span class="faq-summary-inner"><span class="faq-q-num">Q04</span>What financial metrics should procurement monitor for suppliers?</span>
+      <span class="faq-chevron" aria-hidden="true">+</span>
+    </summary>
+    <div class="faq-body">A supplier risk scorecard should track liquidity ratios, interest coverage, Altman Z-score, margin trends, Days Sales Outstanding, and credit ratings as core supplier risk monitoring metrics.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">
+      <span class="faq-summary-inner"><span class="faq-q-num">Q05</span>What does it mean when a supplier asks for early payment?</span>
+      <span class="faq-chevron" aria-hidden="true">+</span>
+    </summary>
+    <div class="faq-body">An early payment request typically signals that a supplier&rsquo;s alternative credit and liquidity options have been exhausted, representing a late-stage distress confirmation.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">
+      <span class="faq-summary-inner"><span class="faq-q-num">Q06</span>How do you monitor supplier credit risk?</span>
+      <span class="faq-chevron" aria-hidden="true">+</span>
+    </summary>
+    <div class="faq-body">Supplier credit risk monitoring involves tracking credit rating changes from S&amp;P, Moody&rsquo;s, or Fitch, reviewing trade credit insurance limits, and analysing DSO trends.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">
+      <span class="faq-summary-inner"><span class="faq-q-num">Q07</span>What is trade credit insurance and why does its withdrawal matter?</span>
+      <span class="faq-chevron" aria-hidden="true">+</span>
+    </summary>
+    <div class="faq-body">Trade credit insurance protects against customer non-payment. When major insurers withdraw cover, it signals a supplier has crossed a verified distress threshold identified through proprietary data procurement cannot access independently.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">
+      <span class="faq-summary-inner"><span class="faq-q-num">Q08</span>What should procurement do when a supplier is in financial difficulty?</span>
+      <span class="faq-chevron" aria-hidden="true">+</span>
+    </summary>
+    <div class="faq-body">Supply chain risk management best practices require direct engagement with senior finance stakeholders, contractual exposure review, and pre-qualifying alternative suppliers before disruption occurs.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">
+      <span class="faq-summary-inner"><span class="faq-q-num">Q09</span>How do you segment suppliers by financial risk?</span>
+      <span class="faq-chevron" aria-hidden="true">+</span>
+    </summary>
+    <div class="faq-body">Segment suppliers into critical, strategic, and standard tiers based on spend concentration, category criticality, and financial health. Suppliers should receive monitoring intensity proportional to their operational exposure.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">
+      <span class="faq-summary-inner"><span class="faq-q-num">Q10</span>What is the current ratio and why does it matter for supplier risk?</span>
+      <span class="faq-chevron" aria-hidden="true">+</span>
+    </summary>
+    <div class="faq-body">The current ratio measures a supplier&rsquo;s ability to cover short-term obligations without external credit. A reading below 1.0 may indicate elevated liquidity stress.</div>
+  </details>
+
+</div>
+</main>
+<!-- ===================== EXPERT SIDEBAR ===================== -->
+<aside class="expert-sidebar" id="expertSidebar"
+  aria-label="Expert citations and industry research on supplier financial risk"
+  itemscope itemtype="https://schema.org/ItemList">
+  <meta itemprop="name" content="What the Experts Are Saying: Supplier Financial Risk Research">
+  <meta itemprop="description" content="Third-party citations and industry data on supplier financial risk signals, procurement monitoring, and supply chain disruption costs.">
+  <div class="exp-head">
+    <span class="exp-head-lbl">What the Experts Are Saying</span>
+  </div>
+  <div class="exp-list">
+    <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="1">
+      <cite class="exp-source" itemprop="name">RapidRatings &middot; 2025</cite>
+      <p class="exp-stat"><strong>30%</strong> of supply chain disruptions exceeded $5M in costs.</p>
+      <a class="exp-link" href="https://www.rapidratings.com/post/the-2025-risk-survey-report" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+    </div>
+    <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="2">
+      <cite class="exp-source" itemprop="name">Everstream AI</cite>
+      <p class="exp-stat">Risk-optimized procurement leads to <strong>30%</strong> lower losses and <strong>50&ndash;70%</strong> faster assessments.</p>
+      <a class="exp-link" href="https://www.everstream.ai/articles/how-ai-transforms-supplier-risk-management/" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+    </div>
+    <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="3">
+      <cite class="exp-source" itemprop="name">Tradeverifyd &middot; 2026</cite>
+      <p class="exp-stat"><strong>21%</strong> of procurement leaders lack real-time visibility.</p>
+      <a class="exp-link" href="https://tradeverifyd.com/resources/supply-chain-statistics" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+    </div>
+    <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="4">
+      <cite class="exp-source" itemprop="name">Deloitte CPO Survey &middot; 2025</cite>
+      <p class="exp-stat"><strong>61%</strong> of procurement leaders value sharing supplier information for risk mitigation.</p>
+      <a class="exp-link" href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+    </div>
+    <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="position" content="5">
+      <cite class="exp-source" itemprop="name">The Kaplan Group &middot; Feb 2026</cite>
+      <p class="exp-stat">Only <strong>46%</strong> of US manufacturers held debt-to-earnings below 1.5 in 2025.</p>
+      <a class="exp-link" href="https://www.kaplancollectionagency.com/business-advice/52-manufacturing-statistics-on-debt-distress-and-tariff-pressures/" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+    </div>
+  </div>
+</aside>
+</div><!-- /outer-wrap -->
+<script>
+var CL=[
+  {id:'bs',name:'Balance Sheet',color:'#2563EB',items:[
+    {n:1,t:'Current ratio declining toward or below 1.0'},
+    {n:2,t:'Negative working capital'},
+    {n:3,t:'Cash reserves declining year-over-year'},
+    {n:4,t:'Accounts receivable growing faster than revenue'},
+    {n:5,t:'Interest coverage below 2.0x or Altman Z-score below 1.81'}
+  ]},
+  {id:'pm',name:'Profitability',color:'#D97706',items:[
+    {n:6,t:'Gross margin deteriorating year-over-year'},
+    {n:7,t:'Operating margin turning negative'},
+    {n:8,t:'Revenue concentration above 25% with one customer'},
+    {n:9,t:'Days Sales Outstanding trending above 60 days'},
+    {n:10,t:'Delayed sub-supplier payments'}
+  ]},
+  {id:'cp',name:'Credit & Payment',color:'#D22428',items:[
+    {n:11,t:'Credit rating downgrade below investment grade'},
+    {n:12,t:'Trade credit insurance limit reduction'},
+    {n:13,t:'Accelerated payment term request'},
+    {n:14,t:'Debt covenant breach or waiver request'},
+    {n:15,t:'Credit agency watch-list placement'}
+  ]},
+  {id:'ob',name:'Operational',color:'#6D28D9',items:[
+    {n:16,t:'Unplanned CFO departure'},
+    {n:17,t:'Auditor resignation or replacement following going concern opinion'},
+    {n:18,t:'Workforce reductions alongside capex deferrals'},
+    {n:19,t:'Site closures or capacity reductions'},
+    {n:20,t:'Shift from proactive to delayed, escalation-driven communication'}
+  ]},
+  {id:'me',name:'Market & External',color:'#047857',items:[
+    {n:21,t:'Sector input cost inflation outpacing supplier pricing power'},
+    {n:22,t:'Tightening commercial lending standards at sector level'},
+    {n:23,t:'Major customer contract loss or non-renewal'},
+    {n:24,t:'High single-customer revenue concentration'},
+    {n:25,t:'Significant unhedged foreign currency exposure'}
+  ]}
+];
+var ck=[];
+function clBuild(){
+  var g=document.getElementById('clG');g.innerHTML='';
+  CL.forEach(function(cat){
+    var col=document.createElement('div');col.className='cl-col';
+    var rows='';
+    cat.items.forEach(function(i){
+      var done=ck.indexOf(i.n)>-1;
+      var cls='cl-r'+(done?' ck':''); rows+='<div class="'+cls+'" onclick="clTick('+i.n+')">'+'<span class="cl-rn">'+i.n+'</span><div class="cl-bx"><span class="cl-tk">&#10003;</span></div><span class="cl-rt">'+i.t+'</span></div>';
+    });
+    col.innerHTML='<div class="cl-ch"><div class="cl-dot" style="background:'+cat.color+'"></div><span class="cl-cn">'+cat.name+'</span></div>'+rows;
+    g.appendChild(col);
+  });
+  var p=Math.round(ck.length/25*100);
+  document.getElementById('clF').style.width=p+'%';
+  document.getElementById('clN').textContent=ck.length;
+}
+function clTick(n){var i=ck.indexOf(n);if(i>-1){ck.splice(i,1);}else{ck.push(n);}clBuild();}
+function clReset(){ck=[];clBuild();}
+clBuild();
+/* ---- TOC ACTIVE SECTION HIGHLIGHT ---- */
+(function(){
+  var headings=document.querySelectorAll('h2[id]');
+  var links=document.querySelectorAll('.toc-nav a');
+  function getId(a){return a.getAttribute('href').replace('#','');}
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        links.forEach(function(l){l.classList.remove('toc-active');});
+        var match=document.querySelector('.toc-nav a[href="#'+entry.target.id+'"]');
+        if(match){match.classList.add('toc-active');}
+      }
+    });
+  },{rootMargin:'-10% 0px -80% 0px',threshold:0});
+  headings.forEach(function(h){observer.observe(h);});
+  links.forEach(function(link){
+    link.addEventListener('click',function(e){
+      e.preventDefault();
+      var target=document.getElementById(getId(link));
+      if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+})();
+</script>
+</body>
+</html>
