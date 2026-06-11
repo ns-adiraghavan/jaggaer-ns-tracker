@@ -152,26 +152,6 @@ async function forceDownload(url, filename) {
 
 
 // ─── Phase helpers ────────────────────────────────────────────────────────────
-// Phase 1 = informational/TOFU content (builds audience)
-// Phase 2 = commercial/MOFU/BOFU content (converts audience)
-// Publishing sequence is a SEPARATE concept — Jaggaer's recommended publish order
-// for their web team, visible in the Publishing Sequence tab only.
-
-function getPhaseStats(project) {
-  let p1Total = 0, p1Done = 0, p2Total = 0, p2Done = 0;
-  for (const pillar of project.pillars || []) {
-    for (const cluster of pillar.clusters || []) {
-      for (const piece of cluster.pieces || []) {
-        const ph = piece.phase || 1;
-        if (ph === 1) { p1Total++; if (piece.status === "approved") p1Done++; }
-        else          { p2Total++; if (piece.status === "approved") p2Done++; }
-      }
-    }
-  }
-  const p1Complete = p1Total > 0 && p1Done === p1Total;
-  const currentPhase = p1Complete ? 2 : 1;
-  return { p1Total, p1Done, p2Total, p2Done, currentPhase, p1Complete };
-}
 
 // Keep getClusterWeek for Publishing Sequence tab only
 function getClusterWeek(clusterId, schedule) {
@@ -326,93 +306,6 @@ function csvToProjectUpdates(csvText, project) {
   }
 
   return { newProject, changed };
-}
-
-// ─── Phase Banner ─────────────────────────────────────────────────────────────
-function PhaseBanner({ project }) {
-  const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  const { p1Total, p1Done, p2Total, p2Done, currentPhase, p1Complete } = getPhaseStats(project);
-
-  return (
-    <div style={{
-      display: "flex", alignItems: "stretch", gap: 0,
-      borderBottom: "1.5px solid #e0dbd4", background: "#fff",
-      fontSize: "0.72rem", fontFamily: "Noto Sans, sans-serif",
-    }}>
-      {/* Phase 1 block */}
-      <div style={{
-        flex: 1, padding: "10px 20px", display: "flex", alignItems: "center", gap: "12px",
-        borderRight: "1px solid #e0dbd4",
-        background: currentPhase === 1 ? "#fffbf5" : "#f8fdf9",
-        borderLeft: currentPhase === 1 ? "3px solid #c8401a" : "3px solid #1e7a45",
-      }}>
-        <div style={{ flexShrink: 0 }}>
-          <div style={{ fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
-            color: currentPhase === 1 ? "#c8401a" : "#1e7a45", fontSize: "0.62rem" }}>
-            {currentPhase === 1 ? "▶ Current — " : "✓ Complete — "}Phase 1
-          </div>
-          <div style={{ color: "#888", marginTop: "1px" }}>Informational · Audience-building</div>
-        </div>
-        <div style={{ marginLeft: "auto", textAlign: "right" }}>
-          <div style={{ fontWeight: 700, fontSize: "1rem",
-            color: p1Complete ? "#1e7a45" : "#0f1923" }}>{p1Done}/{p1Total}</div>
-          <div style={{ color: "#aaa" }}>approved</div>
-        </div>
-        {/* mini progress bar */}
-        <div style={{ width: "60px", height: "4px", background: "#e8e3da", borderRadius: "2px", flexShrink: 0 }}>
-          <div style={{ width: `${p1Total ? (p1Done/p1Total)*100 : 0}%`, height: "100%",
-            background: p1Complete ? "#1e7a45" : "#c8401a", borderRadius: "2px", transition: "width 0.3s" }} />
-        </div>
-      </div>
-
-      {/* Phase 2 block */}
-      <div style={{
-        flex: 1, padding: "10px 20px", display: "flex", alignItems: "center", gap: "12px",
-        background: currentPhase === 2 ? "#fffbf5" : "#fafafa",
-        borderLeft: currentPhase === 2 ? "3px solid #c8401a" : "3px solid #e0dbd4",
-        opacity: p1Complete ? 1 : 0.6,
-      }}>
-        <div style={{ flexShrink: 0 }}>
-          <div style={{ fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
-            color: currentPhase === 2 ? "#c8401a" : "#888", fontSize: "0.62rem" }}>
-            {currentPhase === 2 ? "▶ Current — " : (p2Done === p2Total && p2Total > 0 ? "✓ Complete — " : "Upcoming — ")}Phase 2
-          </div>
-          <div style={{ color: "#888", marginTop: "1px" }}>Commercial · Audience-conversion</div>
-        </div>
-        <div style={{ marginLeft: "auto", textAlign: "right" }}>
-          <div style={{ fontWeight: 700, fontSize: "1rem", color: "#0f1923" }}>{p2Done}/{p2Total}</div>
-          <div style={{ color: "#aaa" }}>approved</div>
-        </div>
-        <div style={{ width: "60px", height: "4px", background: "#e8e3da", borderRadius: "2px", flexShrink: 0 }}>
-          <div style={{ width: `${p2Total ? (p2Done/p2Total)*100 : 0}%`, height: "100%",
-            background: "#1e7a45", borderRadius: "2px", transition: "width 0.3s" }} />
-        </div>
-      </div>
-
-      {/* Recent activity count */}
-      {(() => {
-        const recent = [];
-        for (const p of project.pillars || [])
-          for (const c of p.clusters || [])
-            for (const pc of c.pieces || [])
-              if ((pc.last_updated || pc.last_upload) && pc.status !== "not-started") recent.push(pc);
-        recent.sort((a,b) => new Date(b.last_updated||b.last_upload) - new Date(a.last_updated||a.last_upload));
-        const top = recent[0];
-        return top ? (
-          <div style={{ padding: "10px 20px", borderLeft: "1px solid #e0dbd4", flexShrink: 0,
-            display: "flex", flexDirection: "column", justifyContent: "center" }}>
-            <div style={{ fontWeight: 600, color: "#1e6fa8", fontSize: "0.65rem",
-              textTransform: "uppercase", letterSpacing: "0.07em" }}>Latest</div>
-            <div style={{ color: "#444", maxWidth: "180px", overflow: "hidden",
-              textOverflow: "ellipsis", whiteSpace: "nowrap", marginTop: "1px" }}>{top.title}</div>
-            <div style={{ color: "#aaa", marginTop: "1px" }}>
-              {STATUS_META[top.status]?.label || top.status}
-            </div>
-          </div>
-        ) : null;
-      })()}
-    </div>
-  );
 }
 
 // ─── CSV Sync Panel (used in Admin) ──────────────────────────────────────────
@@ -940,7 +833,6 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
       />
       {activeTab === "tracker" && (
         <>
-          <PhaseBanner project={project} />
           <FilterBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} activeFilter={activeFilter} setActiveFilter={setActiveFilter} currentUser={currentUser} />
         </>
       )}
@@ -2311,11 +2203,16 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
       setErrorMsg(result.error || "GitHub commit failed — check console");
       return;
     }
-    const newStatus = nextStage ? nextStage.id : piece.status;
+    // If a reviewer sent this back and stored return_to_stage, jump straight back
+    // to them instead of climbing the full chain from the next stage.
+    const newStatus = piece.return_to_stage
+      ? piece.return_to_stage
+      : (nextStage ? nextStage.id : piece.status);
     updatePiece(cluster.id, piece.id, {
       status: newStatus,
       revision_count: nextRev,
       deliverable_ext: payload.ext,
+      return_to_stage: null, // consumed — clear it
       last_upload: new Date().toISOString(),
       last_upload_by: currentUser.id,
       last_updated: new Date().toISOString(),
@@ -2347,7 +2244,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
             <div className="ns-drop-rule is-done"></div>
             <div className="ns-drop-title">Committed ✓</div>
             <div className="ns-drop-sub">{filename} · deliverable-v{nextRev}.{filename ? filename.split('.').pop().toLowerCase() : "html"}</div>
-            <div className="ns-drop-path">Status → <strong>{nextStage?.label || "submitted"}</strong>{nextStage ? ` · ${nextStage.actor === "ns" ? "NS" : (typeof nextStage.actor === "string" && nextStage.actor.startsWith("person:")) ? nextStage.actor.slice(7) : "Jaggaer"} is cued.` : ""}</div>
+            <div className="ns-drop-path">Status → <strong>{piece.return_to_stage ? (workflowStages.find(s => s.id === piece.return_to_stage)?.label || piece.return_to_stage) : (nextStage?.label || "submitted")}</strong>{!piece.return_to_stage && nextStage ? ` · ${nextStage.actor === "ns" ? "NS" : (typeof nextStage.actor === "string" && nextStage.actor.startsWith("person:")) ? nextStage.actor.slice(7) : "Jaggaer"} is cued.` : (piece.return_to_stage ? " · returning to reviewer." : "")}</div>
           </>)}
           {stage === "error" && (<>
             <div className="ns-drop-rule" style={{background:"#c8401a"}}></div>
@@ -2363,7 +2260,9 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
         <ul className="ns-upload-rules">
           <li>One file per upload. Re-uploads create a new versioned file.</li>
           <li>Versions are preserved — nothing is overwritten.</li>
-          {nextStage && <li>Status moves to <strong>{nextStage.label}</strong>.</li>}
+          {(piece.return_to_stage || nextStage) && (
+            <li>Status moves to <strong>{piece.return_to_stage ? (workflowStages.find(s => s.id === piece.return_to_stage)?.label || piece.return_to_stage) : nextStage.label}</strong>{piece.return_to_stage ? " — returning directly to the reviewer who sent this back." : "."}</li>
+          )}
         </ul>
       </div>
     </div>
@@ -2386,7 +2285,9 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
   const currentIdx = stageOrder.indexOf(piece.status);
   const currentStage = workflowStages[currentIdx];
   const nextStage = workflowStages[currentIdx + 1] || null;
-  // "Send back" goes to the most recent NS-actor stage before current
+  // "Send back" goes to the nearest NS-actor stage before current.
+  // Return-to-sender: after NS fixes and re-uploads, the piece jumps back to
+  // THIS reviewer's stage (not restarting from Abhishek/Orlagh).
   const sendBackStage = [...workflowStages].slice(0, currentIdx).reverse().find(s => s.actor === "ns") || workflowStages[0];
   const isLastStage = nextStage?.id === "approved" || !nextStage;
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
@@ -2395,8 +2296,15 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
     if (!body.trim() && verdict !== "approved") return;
     setSubmitting(true);
     let newStatus = piece.status;
-    if (verdict === "approved") newStatus = nextStage ? nextStage.id : "approved";
-    else if (verdict === "needs-revision") newStatus = sendBackStage.id;
+    let extraFields = {};
+    if (verdict === "approved") {
+      newStatus = nextStage ? nextStage.id : "approved";
+      extraFields = { return_to_stage: null }; // clear any pending return
+    } else if (verdict === "needs-revision") {
+      newStatus = sendBackStage.id;
+      // Store which stage to return to after NS fixes — skip the chain below this reviewer
+      extraFields = { return_to_stage: piece.status };
+    }
     // "question" keeps current status
     const entry = {
       id: "fb-"+Math.random().toString(36).slice(2,8),
@@ -2410,6 +2318,7 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
       status: newStatus,
       last_updated: new Date().toISOString(),
       last_updated_by: currentUser.id,
+      ...extraFields,
     });
     // Fire approval notification when piece reaches final "approved" status
     if (newStatus === "approved") {
@@ -2467,10 +2376,52 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
         </div>
       </div>
       <div className="ns-feedback-r">
+        {/* ── Brief files — always shown if briefs have been uploaded ── */}
+        {(piece.brief_files || []).length > 0 && (() => {
+          const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
+          const briefFiles = piece.brief_files || [];
+          const allTeam = [...(project.team?.ns || []), ...(project.team?.jaggaer || [])];
+          return (
+            <div style={{ marginBottom: "18px" }}>
+              <div style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+                color: "#1a2535", marginBottom: "8px", fontFamily: "Noto Sans, sans-serif" }}>
+                Brief & Keywords
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                {briefFiles.map((bf, idx) => {
+                  const ext = bf.filename.split(".").pop().toUpperCase();
+                  const url = `https://raw.githubusercontent.com/${REPO}/main/${bf.path}`;
+                  const uploader = allTeam.find(m => m.id === bf.uploaded_by);
+                  const uploaderName = uploader ? uploader.name.split(" ")[0] : bf.uploaded_by;
+                  return (
+                    <div key={idx} style={{
+                      display: "flex", alignItems: "center", gap: "8px",
+                      padding: "8px 12px",
+                      background: "#faf8f4", border: "1px solid #e8e3da", borderRadius: "3px",
+                      fontFamily: "Noto Sans, sans-serif",
+                    }}>
+                      <span style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.06em",
+                        color: "#c8401a", background: "#fdf0e8", border: "1px solid #f0cfc0",
+                        padding: "1px 5px", borderRadius: "2px", flexShrink: 0 }}>{ext}</span>
+                      <span style={{ flex: 1, minWidth: 0, fontSize: "0.75rem", color: "#333",
+                        overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                        title={bf.filename}>{bf.filename}</span>
+                      <a href={url} target="_blank" rel="noopener noreferrer"
+                        style={{ fontSize: "0.72rem", fontWeight: 600, color: "#1e6fa8",
+                          textDecoration: "none", flexShrink: 0, padding: "3px 8px",
+                          border: "1px solid #c5ddef", borderRadius: "2px", background: "#fff",
+                          whiteSpace: "nowrap" }}>↓ Open</a>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })()}
         <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>Stage</div>
         <ol className="ns-feedback-process">
           <li><strong>Approved</strong> — advances to <em>{nextStage?.label || "complete"}</em>.</li>
-          <li><strong>Needs revision</strong> — sends back to <em>{sendBackStage.label}</em>.</li>
+          <li><strong>Needs revision</strong> — sends to NS (<em>{sendBackStage.label}</em>). When NS re-uploads, it returns directly to <em>{currentStage?.label || "this stage"}</em> — not the full chain.</li>
           <li><strong>Question</strong> — open thread, status unchanged.</li>
         </ol>
         {isLastStage && (
