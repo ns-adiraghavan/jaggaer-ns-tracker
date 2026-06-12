@@ -487,6 +487,20 @@ details.faq-item{overflow:hidden}
 .dir-hint a{color:var(--red);font-weight:600;cursor:pointer;border-bottom:1px solid transparent;transition:border-color .2s}
 .dir-hint a:hover{border-bottom-color:var(--red)}
 @media (max-width:760px){.tool-grid{grid-template-columns:1fr}.tool-group-desc{display:none}}
+
+/* ===== START HERE (orientation path for AI newcomers) ===== */
+.start-section{position:relative}
+.start-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.25rem}
+.start-card{position:relative;background:var(--white);border:var(--border);border-radius:var(--radius);padding:1.7rem 1.6rem 1.45rem;display:flex;flex-direction:column;cursor:pointer;transition:box-shadow .22s,transform .22s,border-color .22s;overflow:hidden}
+.start-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.start-card:hover{box-shadow:0 14px 36px rgba(11,13,18,.09);transform:translateY(-3px);border-color:#e7caca}
+.start-card:hover::before{transform:scaleX(1)}
+.start-num{font-family:'Poppins',sans-serif;font-size:1.75rem;font-weight:800;color:var(--red);line-height:1;margin-bottom:.7rem;letter-spacing:-.02em}
+.start-card-title{font-size:1.06rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:.55rem}
+.start-card-body{font-size:.85rem;color:var(--ink-2);line-height:1.62;flex:1;margin-bottom:1.05rem}
+.start-card-cta{font-size:.8rem;font-weight:700;color:var(--red);display:flex;align-items:center;gap:6px;transition:gap .2s}
+.start-card:hover .start-card-cta{gap:10px}
+@media (max-width:760px){.start-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -502,42 +516,49 @@ details.faq-item{overflow:hidden}
     <a onclick="go('diagnostic')">Diagnostic</a>
   </div>
   <a class="nav-cta" onclick="go('home');setTimeout(function(){var r=document.getElementById('reading');if(r)r.scrollIntoView({behavior:'smooth'});},80)">Further reading</a>
-  <a href="/" style="display:inline-flex;align-items:center;gap:5px;margin-left:10px;padding:.35rem .85rem;border:1px solid #dce0e8;border-radius:6px;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#3a3f4a;text-decoration:none;background:#fff;transition:background .2s,border-color .2s;" onmouseover="this.style.background='#eef0f3';this.style.borderColor='#b0b8c4'" onmouseout="this.style.background='#fff';this.style.borderColor='#dce0e8'">← Tracker</a>
 </nav>
 
 <div id="page-home" class="subpage active">
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-eyebrow" style="color:var(--green)"><span class="pg-dot" style="position:relative;display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:6px"></span>A hands-on look at AI in source-to-pay</div>
-      <h1>See what AI actually does<br><strong>for the procurement work <span class="text-grad">you already do.</span></strong></h1>
-      <p class="hero-sub">Most of the AI talk in procurement stays abstract. This page doesn't. Pick a task you do every week — reviewing a contract clause, comparing bids, chasing a late supplier — and run it. Each tool works on an example or on text you paste, and shows you the exact prompt behind it, so you can do the same thing yourself in any AI assistant.</p>
-      <div class="hero-actions"><a class="btn-jai" onclick="document.getElementById('tool-directory').scrollIntoView({behavior:'smooth'})">↓ See the tools</a><a class="btn-outline-dark" onclick="document.querySelector('.how-section').scrollIntoView({behavior:'smooth'})">How to build your own</a></div>
+      <div class="hero-eyebrow" style="color:var(--green)"><span class="pg-dot" style="position:relative;display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:6px"></span>A hands-on introduction to AI, made for procurement</div>
+      <h1>You don't need to know<br><strong>anything about AI <span class="text-grad">to start here.</span></strong></h1>
+      <p class="hero-sub">Most AI advice is written for engineers. This isn't. It's a calm, hands-on way for procurement people to see what AI actually does — using tasks you already know cold, like reading a clause, comparing three bids, or chasing a late supplier. No setup, no jargon, nothing leaves your browser. Start at the top, and by the end you'll be doing it yourself.</p>
+      <div class="hero-actions"><a class="btn-jai" onclick="document.getElementById('start-here').scrollIntoView({behavior:'smooth'})">Start here →</a><a class="btn-outline-dark" onclick="document.getElementById('tool-directory').scrollIntoView({behavior:'smooth'})">Browse all the tools</a></div>
     </div>
   </section>
   <div class="stats-strip">
-    <div class="stat-cell"><div class="stat-num" data-count="14" data-suffix="">0</div><div class="stat-label">Tools you can try</div></div>
+    <div class="stat-cell"><div class="stat-num" data-count="15" data-suffix="">0</div><div class="stat-label">Tools you can try</div></div>
     <div class="stat-cell"><div class="stat-num" data-count="4" data-suffix="">0</div><div class="stat-label">Areas of procurement covered</div></div>
     <div class="stat-cell"><div class="stat-num" data-count="0" data-suffix="">0</div><div class="stat-label">Logins or setup needed</div></div>
     <div class="stat-cell"><div class="stat-num" data-count="100" data-suffix="%">0%</div><div class="stat-label">Runs in your browser</div></div>
   </div>
-  <section class="section">
-    <div class="section-inner">
-      <span class="eyebrow">The tools</span>
-      <h2 class="section-heading">Start with a task<br><strong>you already <span class="text-grad">recognise.</span></strong></h2>
-      <p class="section-sub">Fifteen small tools, grouped by the kind of work you're doing. Each one takes a real procurement task and shows what AI can do with it in a few seconds. Open any that looks familiar — it runs on an example, or on text you paste. Nothing leaves your browser.</p>
-      <div class="tool-directory" id="tool-directory"></div>
-      <div class="dir-hint">New to this? Start with <a onclick="go('prompt')">the four-part prompt</a> — it's the idea every other tool is built on.</div>
-    </div>
-  </section>
-
   <section class="section band-section">
     <div class="band-inner">
       <span class="eyebrow">The whole idea</span>
       <h2 class="band-head">These aren't magic.<br>They're just <strong>clear instructions.</strong></h2>
-      <p class="band-body">Every tool here is really an AI prompt with a little structure around it. Once you see the pattern — tell the AI who it is, give it context, ask for one thing, say how you want the answer — you can recreate any of these in a normal chat window. <strong>That's the point: to make AI approachable enough to try on your own work.</strong></p>
+      <p class="band-body">If AI has felt like a black box, here's the secret: every tool on this page is just a clear instruction written in plain English. Tell the AI who to be, give it the context it can't guess, ask for one thing, and say how you want the answer back. That's it. Once you've seen the pattern a couple of times, you can do this anywhere — on your own work, in any chat window. <strong>No magic, no code, no catch.</strong></p>
     </div>
   </section>
-  <section class="section how-section">
+  <section class="section start-section" id="start-here">
+    <div class="section-inner">
+      <span class="eyebrow">Start here</span>
+      <h2 class="section-heading">Never used AI before?<br><strong>Take these <span class="text-grad">three first.</span></strong></h2>
+      <p class="section-sub">About ten minutes, no setup. By the end you'll know how to talk to an AI, what it's genuinely good at, and where it would help your work first — and the rest of this page will make a lot more sense.</p>
+      <div class="start-grid" id="start-grid"></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-inner">
+      <span class="eyebrow">Try it on your work</span>
+      <h2 class="section-heading">Now run it on something<br><strong>from your <span class="text-grad">actual week.</span></strong></h2>
+      <p class="section-sub">Twelve tools, grouped by the kind of work you do. Open whichever looks like your Tuesday — each runs instantly on an example, or on text you paste. They're not the point in themselves; they're here to show you what's possible, and to hand you the exact prompt so you can do it for real.</p>
+      <div class="tool-directory" id="tool-directory"></div>
+      <div class="dir-hint">Every one of these is a prompt you can copy and reuse. The <a onclick="go('prompt')">four-part prompt</a> up in <em>Start here</em> is the pattern behind all of them.</div>
+    </div>
+  </section>
+
+    <section class="section how-section">
     <div class="section-inner">
       <span class="eyebrow">Make your own</span>
       <h2 class="section-heading">Three steps to <strong>build any of these.</strong></h2>
@@ -552,7 +573,7 @@ details.faq-item{overflow:hidden}
   <section class="section faq-section">
     <div class="section-inner">
       <span class="eyebrow">Good questions</span>
-      <h2 class="section-heading">Before you <strong>start playing.</strong></h2>
+      <h2 class="section-heading">A few <strong>honest questions.</strong></h2>
       <div class="faq-wrap">
         <details class="faq-item"><summary class="faq-summary">Do I need any special software?<span class="faq-plus"></span></summary><div class="faq-body">No. Everything on this page runs in your browser, and the prompts behind each tool work in any AI assistant you already have — Claude, ChatGPT, Copilot, Gemini. If you can open a chat window, you have everything you need.</div></details>
         <details class="faq-item"><summary class="faq-summary">Is it safe to paste in our information?<span class="faq-plus"></span></summary><div class="faq-body">The tools here run entirely in your browser and send nothing anywhere. When you move to a real AI assistant, start with example or anonymised data, and check your organisation's policy before putting in anything sensitive. A good habit: ask yourself “would I email this to an outside party?” before you paste it.</div></details>
@@ -1910,9 +1931,26 @@ var GROUP_TINT={
   spend:{stroke:'#52607a',soft:'#ecedf3',grad:'#52607a'},
   start:{stroke:'#b05e00',soft:'#fbf0e2',grad:'#b05e00'}
 };
+
+var STARTS=[
+  {n:"01",page:"prompt",title:"Learn the one skill that matters",body:"Every tool here is just a prompt underneath. This shows you the simple shape of a good one — who the AI should be, what it needs to know, the one thing to do, and how to lay the answer out. Five minutes, and the rest of the page clicks into place."},
+  {n:"02",page:"myths",title:"Get an honest reality check",body:"What AI genuinely does for procurement, and what it doesn’t. No hype, no doom — just a straight answer to the question everyone actually has the first time: can I trust this?"},
+  {n:"03",page:"readiness",title:"Find your first win",body:"A two-minute read that points to the one place AI would save you the most time this month. You don’t have to boil the ocean — just start there."}
+];
+function renderStartHere(){
+  var g=document.getElementById("start-grid");if(!g)return;
+  g.innerHTML=STARTS.map(function(x){
+    return '<div class="start-card" onclick="go(\''+x.page+'\')">'+
+      '<div class="start-num">'+x.n+'</div>'+
+      '<div class="start-card-title">'+x.title+'</div>'+
+      '<div class="start-card-body">'+x.body+'</div>'+
+      '<div class="start-card-cta">Start →</div></div>';
+  }).join("");
+}
+
 function renderDirectory(){
   var wrap=document.getElementById('tool-directory');if(!wrap)return;
-  wrap.innerHTML=CAP_PILLARS.map(function(g){
+  wrap.innerHTML=CAP_PILLARS.filter(function(g){return g.id!=='start';}).map(function(g){
     var t=GROUP_TINT[g.id]||{};
     var cards=g.tools.map(function(tool){
       return '<div class="tool-card" style="--gc:'+t.grad+';--gc-soft:'+t.soft+';--gc-stroke:'+t.stroke+'" onclick="go(\''+tool.page+'\')">'+
@@ -2241,7 +2279,7 @@ function routeSandbox(){
   res.innerHTML=html;res.classList.add('show');
 }
 
-buildPB();renderPB();buildMyths();calcDiag();calcReadiness();initObservers();renderDirectory();renderReading();
+buildPB();renderPB();buildMyths();calcDiag();calcReadiness();initObservers();renderStartHere();renderDirectory();renderReading();
 </script>
 </body>
 </html>
