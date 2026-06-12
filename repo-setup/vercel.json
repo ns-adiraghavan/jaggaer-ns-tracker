@@ -6,6 +6,13 @@
     }
   ],
   "rewrites": [
-    { "source": "/demo", "destination": "/jai-demo.html" }
+    {
+      "source": "/demo",
+      "destination": "/jai-demo.html"
+    },
+    {
+      "source": "/ai",
+      "destination": "/ai-playground.html"
+    }
   ]
 }

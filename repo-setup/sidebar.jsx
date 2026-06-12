@@ -153,10 +153,10 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
         <div className="ns-sidebar-divider"></div>
 
         <NavSection
-          label="Sample Artifacts"
-          active={view === "sample-artifacts"}
-          onClick={() => setView("sample-artifacts")}
-          rightMeta="6 articles"
+          label="AI Playground"
+          active={view === "ai-playground"}
+          onClick={() => setView("ai-playground")}
+          rightMeta="interactive"
         />
         <NavSection
           label="JAI Demo"

@@ -230,7 +230,7 @@ function App() {
           />
         )}
         {view === "jai-demo" && <JAIDemoPanel onBack={() => setView("tracker")} />}
-        {view === "sample-artifacts" && <SampleArtifactsPanel />}
+        {view === "ai-playground" && <AIPlaygroundPanel onBack={() => setView("tracker")} />}
         {view === "style-guide" && <StyleGuidePanel project={project} adminMode={adminMode} />}
         {view === "admin" && adminMode && (
           <AdminPanel project={project} setProject={setProject} adminTarget={adminTarget} setAdminTarget={setAdminTarget} />
@@ -306,6 +306,33 @@ function JAIDemoPanel({ onBack }) {
         }}>
           JAI Demo — JAGGAER AI for Procurement
         </span>
+        <a
+          href="/demo"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            marginLeft: "auto",
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
+            background: "none",
+            border: "1px solid #e0dbd4",
+            borderRadius: "3px",
+            padding: "5px 12px",
+            fontFamily: "Noto Sans, sans-serif",
+            fontSize: "0.68rem",
+            fontWeight: 600,
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            color: "#444",
+            textDecoration: "none",
+            transition: "border-color 0.15s, background 0.15s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#f5f2ec"; e.currentTarget.style.borderColor = "#c8c0b4"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.borderColor = "#e0dbd4"; }}
+        >
+          ↗ Open full page
+        </a>
       </div>
 
       {/* Full-bleed iframe */}
@@ -318,6 +345,101 @@ function JAIDemoPanel({ onBack }) {
           display: "block",
         }}
         title="JAI Demo"
+      />
+    </div>
+  );
+}
+
+
+function AIPlaygroundPanel({ onBack }) {
+  return (
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      height: "calc(100vh - 36px)",
+      overflow: "hidden",
+    }}>
+      <div style={{
+        flexShrink: 0,
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+        padding: "10px 20px",
+        background: "#fff",
+        borderBottom: "1px solid #e8e3da",
+      }}>
+        <button
+          onClick={onBack}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            background: "none",
+            border: "1px solid #e0dbd4",
+            borderRadius: "3px",
+            padding: "5px 12px",
+            fontFamily: "Noto Sans, sans-serif",
+            fontSize: "0.72rem",
+            fontWeight: 600,
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            color: "#444",
+            cursor: "pointer",
+            transition: "border-color 0.15s, background 0.15s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#f5f2ec"; e.currentTarget.style.borderColor = "#c8c0b4"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.borderColor = "#e0dbd4"; }}
+        >
+          ← Back to Tracker
+        </button>
+        <div style={{ width: "1px", height: "16px", background: "#e0dbd4" }} />
+        <span style={{
+          fontFamily: "Noto Sans, sans-serif",
+          fontSize: "0.68rem",
+          fontWeight: 700,
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          color: "#888",
+        }}>
+          AI Playground — Hands-On AI for Procurement
+        </span>
+        <a
+          href="/ai"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            marginLeft: "auto",
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
+            background: "none",
+            border: "1px solid #e0dbd4",
+            borderRadius: "3px",
+            padding: "5px 12px",
+            fontFamily: "Noto Sans, sans-serif",
+            fontSize: "0.68rem",
+            fontWeight: 600,
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            color: "#444",
+            textDecoration: "none",
+            transition: "border-color 0.15s, background 0.15s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#f5f2ec"; e.currentTarget.style.borderColor = "#c8c0b4"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.borderColor = "#e0dbd4"; }}
+        >
+          ↗ Open full page
+        </a>
+      </div>
+      <iframe
+        src="ai-playground.html"
+        style={{
+          flex: 1,
+          width: "100%",
+          border: "none",
+          display: "block",
+        }}
+        title="AI Playground"
       />
     </div>
   );
