@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#0B0D12;--ink-2:#3a3f4a;--ink-3:#6a7180;--red:#D22428;--grey:#3F434F;--green:#4D8194;--light-grey:#dce0e8;--cream:#eef0f3;--light-blue:#E9EFF4;--white:#fff;--jai-a:#D22428;--jai-b:#D22428;--jai-grad:#D22428;--space-2xs:0.44rem;--space-xs:0.67rem;--space-s:clamp(0.75rem,0.68rem + 0.37vw,1rem);--space-m:clamp(1rem,0.85rem + 0.74vw,1.5rem);--space-l:clamp(1.5rem,1.28rem + 1.11vw,2.25rem);--space-xl:clamp(2rem,1.59rem + 2.04vw,3.38rem);--space-2xl:clamp(3rem,2.39rem + 3.05vw,5.06rem);--fs-h1:clamp(2.07rem,calc(1.8rem + 1.12vw),2.4rem);--fs-h2:clamp(1.73rem,1.56rem + 0.85vw,2.2rem);--fs-h3:clamp(1.44rem,1.32rem + 0.58vw,1.76rem);--fs-display:clamp(1.75rem,4vw,2.75rem);--container-width:1240px;--container-padding:clamp(1rem,3vw,2rem);--radius:1rem;--radius-sm:.5rem;--border:1px solid #dce0e8;interpolate-size:allow-keywords}
+:root{--ink:#0B0D12;--ink-2:#3a3f4a;--ink-3:#6a7180;--red:#D22428;--grey:#3F434F;--green:#4D8194;--light-grey:#dce0e8;--cream:#eef0f3;--light-blue:#E9EFF4;--white:#fff;--jai-a:#7A1FB0;--jai-b:#D6248B;--jai-grad:linear-gradient(100deg,#7A1FB0,#D6248B);--jai-ink:#0B0D12;--space-2xs:0.44rem;--space-xs:0.67rem;--space-s:clamp(0.75rem,0.68rem + 0.37vw,1rem);--space-m:clamp(1rem,0.85rem + 0.74vw,1.5rem);--space-l:clamp(1.5rem,1.28rem + 1.11vw,2.25rem);--space-xl:clamp(2rem,1.59rem + 2.04vw,3.38rem);--space-2xl:clamp(3rem,2.39rem + 3.05vw,5.06rem);--fs-h1:clamp(2.07rem,calc(1.8rem + 1.12vw),2.4rem);--fs-h2:clamp(1.73rem,1.56rem + 0.85vw,2.2rem);--fs-h3:clamp(1.44rem,1.32rem + 0.58vw,1.76rem);--fs-display:clamp(1.75rem,4vw,2.75rem);--container-width:1240px;--container-padding:clamp(1rem,3vw,2rem);--radius:1rem;--radius-sm:.5rem;--border:1px solid #dce0e8;interpolate-size:allow-keywords}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:Inter,system-ui,sans-serif;font-size:.875rem;line-height:1.6;color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased}
@@ -100,11 +100,11 @@ body{font-family:Inter,system-ui,sans-serif;font-size:.875rem;line-height:1.6;co
 .band-head strong{font-weight:700}
 .band-body{font-size:1.05rem;color:var(--ink-2);line-height:1.75;max-width:640px;margin:0 auto}
 .band-body strong{color:var(--ink);font-weight:700}
-.cta-section{background:var(--ink);padding:clamp(3rem,6vw,5rem) 2rem;text-align:center}
+.cta-section{background:var(--ink);background:radial-gradient(ellipse 80% 60% at 60% 20%,rgba(122,31,176,.18) 0%,transparent 70%),var(--ink);padding:clamp(3rem,6vw,5rem) 2rem;text-align:center}
 .cta-inner{max-width:640px;margin:0 auto}
 .cta-section h2{font-size:var(--fs-h2);font-weight:400;color:#fff;line-height:1.2;margin-bottom:1.25rem}
 .cta-section h2 strong{font-weight:700}
-.cta-section p{font-size:1rem;color:rgba(255,255,255,.55);margin-bottom:2rem;line-height:1.7}
+.cta-section p{font-size:1rem;color:rgba(255,255,255,.78);margin-bottom:2rem;line-height:1.7}
 .cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 .subpage{display:none}
 .subpage.active{display:block}
@@ -172,21 +172,9 @@ body{font-family:Inter,system-ui,sans-serif;font-size:.875rem;line-height:1.6;co
 .output-item::before{content:'→';color:#4D8194;flex-shrink:0;font-weight:700}
 .reset-link{margin-top:1.5rem;background:transparent;border:none;color:#999;font-size:.78rem;cursor:pointer;padding:0;font-family:Inter,sans-serif}
 .reset-link:hover{color:var(--red)}
-.jai-strip{margin-top:1.75rem;background:var(--ink);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.jai-strip{margin-top:1.75rem;background:var(--ink);background:radial-gradient(ellipse 80% 100% at 75% 0%,rgba(122,31,176,.2) 0%,transparent 60%),var(--ink);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
 .jai-strip-head{padding:1.1rem 1.75rem;border-bottom:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:3px}
 .jai-strip-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35)}
-.jai-strip-title{font-size:1rem;font-weight:600;color:#fff;line-height:1.35}
-.jai-strip-title em{font-style:normal;color:var(--red)}
-.jai-strip-body{padding:.4rem 1.75rem 1.4rem}
-.contrast-row{padding:.85rem 0;border-bottom:1px solid rgba(255,255,255,.05);display:grid;grid-template-columns:120px 1fr 1fr;gap:1.25rem;align-items:stretch}
-.contrast-row:last-child{border-bottom:none}
-.contrast-dim{font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.38);align-self:center}
-.contrast-item{font-size:.8rem;line-height:1.45;padding:0 0 0 16px;position:relative;display:flex;flex-direction:column;justify-content:center}
-.contrast-item.claude{color:var(--ink-3);border-left:1px solid rgba(255,255,255,.1)}
-.contrast-item.jai-col{color:rgba(255,255,255,.92);border-left:1px solid transparent;border-image:var(--red) 1}
-.cc-head{font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px;display:block}
-.cc-head.claude-head{color:rgba(255,255,255,.3)}
-.cc-head.jai-head{color:var(--red)}
 .annot-grid{display:grid;grid-template-columns:1fr 260px;gap:1.25rem}
 .annot-clause{background:var(--cream);border:var(--border);border-radius:var(--radius-sm);padding:1.25rem 1.5rem}
 .annot-clause p{font-family:'Courier New',monospace;font-size:.82rem;line-height:1.9;color:var(--ink-2);margin:0}
@@ -338,28 +326,28 @@ details.faq-item{overflow:hidden}
 .sandbox-divider::before,.sandbox-divider::after{content:'';flex:1;height:1px;background:var(--light-grey)}
 
 /* ===== UPGRADED "JUMP TO ANOTHER TOOL" SUBBAR ===== */
-.tool-switcher{margin-top:2.5rem;padding:1.4rem 1.5rem 1.5rem;border:1px solid #e6ddf5;border-radius:var(--radius);background:linear-gradient(180deg,#faf7ff 0%,#fff 70%);position:relative;overflow:hidden}
+.tool-switcher{margin-top:2.5rem;padding:1.25rem 1.5rem 1.35rem;border:1px solid #e6ddf5;border-radius:var(--radius);background:linear-gradient(180deg,#faf7ff 0%,#fff 70%);position:relative;overflow:hidden}
 .tool-switcher::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red)}
-.tool-switcher-top{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.25rem}
-.tool-switcher-headline{display:flex;flex-direction:column;gap:3px}
+.tool-switcher-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+.tool-switcher-headline{display:flex;flex-direction:column;gap:4px}
 .tool-switcher-label{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:0}
 .tool-switcher-tease{font-size:.86rem;color:var(--ink-2);font-weight:500}
 .tool-switcher-tease b{color:var(--red);font-weight:700}
 .ts-surprise{background:var(--ink);color:#fff;border:none;font-family:Inter,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.02em;padding:8px 15px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:transform .15s,opacity .2s;white-space:nowrap}
 .ts-surprise:hover{opacity:.9;transform:translateY(-1px)}
 .ts-surprise .dice{font-size:.85rem}
-.tool-switcher-row{margin-top:1rem}
+.tool-switcher-row{margin-top:.75rem}
 .ts-pill{padding:9px 15px}
 .ts-pill .ts-cap{font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.55;margin-left:2px}
 .ts-pill.on .ts-cap{opacity:.7}
 
 /* ===== TALK TO AN EXPERT (aligned to jaggaer.com/solutions/jai) ===== */
-.expert-section{background:#23272f;padding:clamp(3rem,6vw,5rem) 2rem}
+.expert-section{background:#23272f;background:radial-gradient(ellipse 60% 70% at 80% 40%,rgba(122,31,176,.18) 0%,transparent 65%),#23272f;padding:clamp(3rem,6vw,5rem) 2rem}
 .expert-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
 .expert-left h2{font-size:clamp(1.9rem,3.4vw,2.5rem);font-weight:400;color:#fff;line-height:1.18;margin-bottom:1.2rem}
 .expert-left h2 strong{font-weight:700}
 .expert-left h2 .text-grad{font-weight:700}
-.expert-lead{color:rgba(255,255,255,.62);font-size:1rem;line-height:1.7;margin-bottom:2.2rem;max-width:440px}
+.expert-lead{color:rgba(255,255,255,.82);font-size:1rem;line-height:1.7;margin-bottom:2.2rem;max-width:440px}
 .expert-powers-label{font-size:1rem;font-weight:700;color:#fff;margin-bottom:.25rem}
 .expert-list{list-style:none;margin-top:.75rem;border-top:1px solid rgba(255,255,255,.13)}
 .expert-list li{display:flex;align-items:center;gap:14px;padding:1rem 2px;border-bottom:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.85);font-size:.95rem}
@@ -501,6 +489,186 @@ details.faq-item{overflow:hidden}
 .start-card-cta{font-size:.8rem;font-weight:700;color:var(--red);display:flex;align-items:center;gap:6px;transition:gap .2s}
 .start-card:hover .start-card-cta{gap:10px}
 @media (max-width:760px){.start-grid{grid-template-columns:1fr}}
+
+/* ============ ADDED: brand-consistent CTA + JAI surfaces ============ */
+
+/* Equal side margins everywhere: unify section + hero + strips to one rhythm */
+.hero-inner{max-width:1180px}
+.hero-sub{max-width:680px}
+.stat-cell{padding:1.5rem clamp(1rem,3vw,2rem)}
+
+/* RED BOXY number treatment (used for the non-JAI proof stats) */
+.proof-strip{border-bottom:var(--border);background:var(--white)}
+.proof-inner{max-width:1180px;margin:0 auto;padding:clamp(1.75rem,3.5vw,2.5rem) clamp(1rem,3vw,2rem);display:flex;justify-content:center;align-items:stretch;gap:clamp(1.25rem,4vw,3rem);flex-wrap:wrap}
+.proof-box{background:var(--red);color:#fff;border-radius:var(--radius-sm);padding:1.1rem 1.4rem;min-width:148px;text-align:left;display:flex;flex-direction:column;justify-content:center}
+.proof-box.alt{background:var(--ink)}
+.proof-num{font-family:'Poppins',sans-serif;font-size:clamp(2rem,5vw,2.8rem);font-weight:800;line-height:.95;letter-spacing:-.02em;color:#fff;margin-bottom:.35rem}
+.proof-label{font-size:.82rem;color:rgba(255,255,255,.85);line-height:1.4}
+.proof-connector{font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;color:var(--ink-3);align-self:center}
+.proof-read{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,3vw,2rem) clamp(1.5rem,3vw,2rem);text-align:center}
+.proof-read p{font-size:.95rem;color:var(--ink-2);line-height:1.6;max-width:640px;margin:0 auto;font-weight:500}
+@media (max-width:680px){.proof-inner{flex-direction:column}}
+
+/* SHIFT band: red boxy big number, equal margins */
+.shift-section{background:var(--cream)}
+.shift-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:clamp(1.25rem,3vw,2rem);align-items:center}
+.shift-big{background:var(--red);color:#fff;font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3rem);letter-spacing:-.02em;padding:1.1rem 1.5rem;border-radius:var(--radius-sm);line-height:1;white-space:nowrap}
+.shift-text p{font-size:1rem;color:var(--ink-2);line-height:1.65;max-width:640px}
+.shift-text strong{color:var(--ink);font-weight:700}
+@media (max-width:680px){.shift-inner{grid-template-columns:1fr}.shift-big{justify-self:start}}
+
+/* JAI gradient CTA band (the "think about AI" + "get specific" calls) */
+.jai-cta{background:var(--ink);background:radial-gradient(ellipse 70% 80% at 30% 50%,rgba(122,31,176,.22) 0%,transparent 65%),var(--ink);padding:clamp(2.25rem,5vw,3.5rem) clamp(1rem,3vw,2rem)}
+.jai-cta-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center}
+.jai-cta-copy .eyebrow-jai{color:rgba(255,255,255,.6);margin-bottom:.5rem;background:none;-webkit-text-fill-color:rgba(255,255,255,.6)}
+.jai-cta-copy h2{font-size:var(--fs-h3);font-weight:700;color:#fff;line-height:1.2;margin-bottom:.5rem;letter-spacing:-.01em}
+.jai-cta-copy p{font-size:.95rem;color:rgba(255,255,255,.78);line-height:1.6;max-width:560px}
+.btn-jai-grad{background:var(--jai-grad);color:#fff;border:none;font-family:Inter,sans-serif;font-size:.9rem;font-weight:700;padding:.85rem 1.6rem;border-radius:.65rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;transition:transform .15s,box-shadow .2s;box-shadow:0 8px 24px rgba(122,31,176,.35)}
+.btn-jai-grad:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(122,31,176,.5)}
+.btn-jai-grad .arr{transition:transform .2s}
+.btn-jai-grad:hover .arr{transform:translateX(4px)}
+@media (max-width:680px){.jai-cta-inner{grid-template-columns:1fr}}
+
+/* JAI comparison strip (per-tool, dark + purple) — spacing tightened */
+.jai-strip{margin-top:1.5rem;background:var(--ink);background:radial-gradient(ellipse 80% 100% at 75% 0%,rgba(122,31,176,.2) 0%,transparent 60%),var(--ink);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.jai-strip-head{padding:.95rem 1.4rem;border-bottom:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:3px}
+.jai-strip-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;width:fit-content}
+.jai-strip-title{font-size:.95rem;font-weight:600;color:#fff;line-height:1.35}
+.jai-strip-title em{font-style:normal;background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.jai-strip-body{padding:.3rem 1.4rem 1.2rem}
+.contrast-row{padding:.8rem 0;border-bottom:1px solid rgba(255,255,255,.07);display:grid;grid-template-columns:108px 1fr 1fr;gap:1.1rem;align-items:stretch}
+.contrast-row:last-child{border-bottom:none}
+.contrast-dim{font-size:.64rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);align-self:center}
+.contrast-item{font-size:.78rem;line-height:1.4;padding:0 0 0 14px;position:relative;display:flex;flex-direction:column;justify-content:center}
+.contrast-item.claude{color:rgba(255,255,255,.72);border-left:1px solid rgba(255,255,255,.15)}
+.contrast-item.jai-col{color:rgba(255,255,255,.92);border-left:2px solid transparent;border-image:var(--jai-grad) 1}
+.cc-head{font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px;display:block}
+.cc-head.claude-head{color:rgba(255,255,255,.5)}
+.cc-head.jai-head{background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.jai-strip-foot{padding:.9rem 1.4rem;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.jai-strip-foot span{font-size:.8rem;color:rgba(255,255,255,.82)}
+.btn-jai-mini{background:var(--jai-grad);color:#fff;border:none;font-family:Inter,sans-serif;font-size:.78rem;font-weight:700;padding:.55rem 1.1rem;border-radius:.5rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:opacity .2s}
+.btn-jai-mini:hover{opacity:.9}
+@media (max-width:680px){.contrast-row{grid-template-columns:1fr;gap:.5rem}}
+
+/* ===== PROMPT LIBRARY: dial / wheel selector ===== */
+.lib-section{background:var(--white)}
+.lib-wrap{max-width:1180px;margin:2rem auto 0;display:grid;grid-template-columns:300px 1fr;gap:clamp(1.5rem,4vw,3rem);align-items:start}
+.lib-dial{position:sticky;top:80px;display:flex;flex-direction:column;align-items:center;gap:1.25rem}
+.dial{position:relative;width:260px;height:260px}
+.dial svg{width:100%;height:100%;transform:rotate(-90deg)}
+.dial-center{position:absolute;inset:44px;border-radius:50%;background:var(--white);border:var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.75rem;box-shadow:0 8px 28px rgba(11,13,18,.08);overflow:visible}
+.dial-center-count{font-family:'Poppins',sans-serif;font-size:2rem;font-weight:800;color:var(--ink);line-height:1}
+.dial-center-label{font-size:.64rem;font-weight:600;color:var(--ink-3);letter-spacing:.03em;margin-top:5px;line-height:1.25;word-break:break-word;max-width:100px;display:block}
+.dial-seg{cursor:pointer;transition:opacity .2s;transform-origin:center}
+.dial-seg:hover{opacity:.85}
+.dial-legend{display:flex;flex-direction:column;gap:.5rem;width:100%}
+.dial-legend-btn{display:flex;align-items:center;gap:9px;background:var(--white);border:var(--border);border-radius:var(--radius-sm);padding:.65rem .85rem;cursor:pointer;font-family:Inter,sans-serif;text-align:left;transition:all .18s;width:100%}
+.dial-legend-btn:hover{border-color:var(--ink-3)}
+.dial-legend-btn.on{border-color:transparent;background:var(--ink)}
+.dial-legend-dot{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+.dial-legend-btn>span{display:flex;flex-direction:column;gap:1px;min-width:0}.dial-legend-name{display:block;font-size:.85rem;font-weight:700;color:var(--ink);line-height:1.2;transition:color .2s}
+.dial-legend-btn.on .dial-legend-name{color:#fff}
+.dial-legend-sub{display:block;font-size:.68rem;color:var(--ink-3);line-height:1.3}
+.dial-legend-btn.on .dial-legend-sub{color:rgba(255,255,255,.55)}
+.dial-legend-n{margin-left:auto;font-family:'Poppins',sans-serif;font-size:.85rem;font-weight:800;color:var(--ink-3);transition:color .2s}
+.dial-legend-btn.on .dial-legend-n{color:#fff}
+.lib-panel{min-height:340px}
+.lib-panel-head{margin-bottom:1.1rem}
+.lib-panel-head h3{font-size:1.25rem;font-weight:700;color:var(--ink);margin-bottom:.3rem;letter-spacing:-.01em}
+.lib-panel-head p{font-size:.9rem;color:var(--ink-3);line-height:1.55;max-width:560px}
+.lib-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem}
+.lib-card{border:var(--border);border-radius:var(--radius-sm);padding:1.1rem 1.2rem;cursor:pointer;transition:all .18s;background:var(--white);position:relative;overflow:hidden}
+.lib-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--lc,#D22428);transform:scaleY(0);transform-origin:top;transition:transform .22s}
+.lib-card:hover{border-color:var(--lc,#D22428);transform:translateY(-2px);box-shadow:0 10px 26px rgba(11,13,18,.07)}
+.lib-card:hover::before{transform:scaleY(1)}
+.lib-card-icon{width:30px;height:30px;margin-bottom:.7rem;color:var(--lc,#D22428)}
+.lib-card-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.lib-card-title{font-size:.95rem;font-weight:700;color:var(--ink);line-height:1.25;margin-bottom:.3rem}
+.lib-card-does{font-size:.8rem;color:var(--ink-2);line-height:1.5;margin-bottom:.6rem}
+.lib-card-prompt{font-size:.72rem;color:var(--ink-3);line-height:1.45;border-top:var(--border);padding-top:.55rem}
+.lib-card-prompt b{color:var(--ink-2);font-weight:700}
+.lib-card-cta{font-size:.76rem;font-weight:700;color:var(--lc,#D22428);display:flex;align-items:center;gap:6px;margin-top:.7rem}
+.lib-card-cta .arr{transition:transform .2s}
+.lib-card:hover .lib-card-cta .arr{transform:translateX(4px)}
+@media (max-width:820px){.lib-wrap{grid-template-columns:1fr}.lib-dial{position:static;flex-direction:column}.lib-cards{grid-template-columns:1fr}}
+/* ============ END ADDED ============ */
+
+/* ===== JAI INTRO SECTION ===== */
+.jai-section{background:var(--cream)}
+.jai-lede{max-width:760px;margin:0 auto 2.5rem;text-align:center}
+.jai-lede h2{font-size:var(--fs-h2);font-weight:400;line-height:1.15;color:var(--ink)}
+.jai-lede h2 strong{font-weight:700}
+.jai-split{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:clamp(2rem,4.5vw,3.5rem);align-items:center;max-width:1180px;margin:0 auto}
+.jai-copy .eyebrow-jai{color:var(--red)}
+.jai-copy h3{font-size:clamp(1.6rem,3vw,2rem);font-weight:700;line-height:1.15;color:var(--ink);margin-bottom:1rem;letter-spacing:-.01em}
+.jai-copy p{font-size:1rem;color:var(--ink-2);line-height:1.7}
+.jai-copy p strong{color:var(--ink);font-weight:700}
+/* ---- JAI mockup ---- */
+.jai-mock{background:var(--white);border:1px solid #e4ddf2;border-radius:14px;overflow:hidden;box-shadow:0 18px 50px rgba(83,0,140,.12);font-size:11px;line-height:1.4;color:var(--ink)}
+.jm-bubble{background:var(--white);border:var(--border);border-radius:12px 12px 12px 3px;padding:9px 12px;font-size:11.5px;color:var(--ink-2);margin:0 0 0 auto;max-width:74%;box-shadow:0 4px 14px rgba(11,13,18,.06);position:relative;top:10px;right:14px;z-index:2}
+.jm-bar{background:linear-gradient(90deg,#6a1bb0,#b8228f);padding:11px 14px;display:flex;align-items:center;gap:9px}
+.jm-bar-burger{display:flex;flex-direction:column;gap:2.5px}
+.jm-bar-burger span{width:13px;height:1.6px;background:rgba(255,255,255,.9);border-radius:2px;display:block}
+.jm-bar-logo{font-weight:800;font-size:12px;color:#fff;letter-spacing:.02em;display:flex;align-items:center;gap:5px}
+.jm-bar-logo .spark{font-size:11px}
+.jm-bar-actions{margin-left:auto;display:flex;gap:9px;color:rgba(255,255,255,.85);font-size:12px}
+.jm-body{padding:13px 14px 0}
+.jm-thinking{color:#1f9d55;font-size:10.5px;font-weight:600;display:flex;align-items:center;gap:5px;margin-bottom:11px}
+.jm-h{font-size:11.5px;font-weight:700;color:var(--ink);margin:0 0 7px}
+.jm-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:10.5px}
+.jm-table th{text-align:right;font-weight:600;color:var(--ink-3);padding:0 0 6px;font-size:9.5px}
+.jm-table th:first-child{text-align:left}
+.jm-table td{text-align:right;padding:5px 0;color:var(--ink-2);border-top:1px solid #f0f0f3}
+.jm-table td:first-child{text-align:left}
+.jm-pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:9.5px;font-weight:600}
+.jm-pill.ok{background:#e3f5ec;color:#1f9d55}
+.jm-pill.rej{background:#fde9ec;color:#d22428}
+.jm-pill.draft{background:#fdf0e3;color:#b8731b}
+.jm-card{border:var(--border);border-radius:9px;padding:11px 12px;margin-bottom:13px}
+.jm-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.jm-card-title{font-size:10.5px;font-weight:600;color:var(--ink)}
+.jm-toggle{display:flex;gap:0;border:var(--border);border-radius:6px;overflow:hidden}
+.jm-toggle span{font-size:9px;padding:3px 9px;color:var(--ink-3)}
+.jm-toggle span.on{background:#2563eb;color:#fff}
+.jm-donut-row{display:flex;align-items:center;gap:14px}
+.jm-donut{width:74px;height:74px;border-radius:50%;flex-shrink:0;position:relative;background:conic-gradient(#2f9e44 0 62%,#4dabf7 62% 84%,#f7b955 84% 95%,#e8505b 95% 100%)}
+.jm-donut::after{content:'736k';position:absolute;inset:18px;background:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--ink)}
+.jm-legend{flex:1;font-size:9.5px}
+.jm-legend-row{display:flex;align-items:center;gap:6px;padding:2px 0;color:var(--ink-3)}
+.jm-legend-row .dot{width:7px;height:7px;border-radius:2px;flex-shrink:0}
+.jm-legend-row b{margin-left:auto;color:var(--ink);font-weight:700}
+.jm-legend-row .pct{color:var(--ink-3);font-weight:500;width:34px;text-align:right}
+.jm-sumlabel{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.jm-action{display:grid;grid-template-columns:64px 1fr 1fr;gap:8px;font-size:10px;align-items:center;padding:5px 0;border-top:1px solid #f0f0f3}
+.jm-action:first-of-type{border-top:none}
+.jm-input{margin:13px -14px 0;border-top:var(--border);padding:11px 14px;display:flex;align-items:center;gap:9px;background:#fafafa}
+.jm-input-field{flex:1;color:var(--ink-3);font-size:10.5px}
+.jm-input-plus{width:20px;height:20px;border:var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:13px}
+.jm-input-chip{font-size:9px;color:#2563eb;border:1px solid #cfe0ff;background:#eef4ff;border-radius:6px;padding:2px 8px;display:inline-flex;align-items:center;gap:4px}
+/* ---- impact callout ---- */
+.jai-impact{max-width:1180px;margin:clamp(2rem,4vw,3rem) auto 0;background:var(--white);border:var(--border);border-radius:var(--radius);padding:clamp(1.5rem,3vw,2.25rem)}
+.jai-impact-head{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1.5rem}
+.jai-impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.jai-impact-num{font-family:'Poppins',sans-serif;font-size:clamp(2.2rem,4.5vw,2.9rem);font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.02em;margin-bottom:.4rem}
+.jai-impact-label{font-size:.85rem;color:var(--ink-3);line-height:1.4}
+@media (max-width:820px){.jai-split{grid-template-columns:1fr;gap:2rem}.jm-bubble{max-width:88%}}
+
+/* JAI showcase = dark ink surface (brand marker for JAI) + abridged height */
+.jai-section{background:var(--ink);background:radial-gradient(ellipse 90% 70% at 70% 30%,rgba(122,31,176,.22) 0%,rgba(214,36,139,.08) 50%,transparent 75%),var(--ink)}
+.jai-section .jai-lede h2{color:#fff}
+.jai-section .jai-lede h2 strong{color:#fff}
+.jai-lede{margin-bottom:1.75rem}
+.jai-copy h3{color:#fff}
+.jai-copy p{color:rgba(255,255,255,.72)}
+.jai-copy p strong{color:#fff}
+.jai-copy .eyebrow-jai{background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.jai-impact{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.jai-impact-head{color:rgba(255,255,255,.65)}
+.jai-impact-num{color:#fff}
+.jai-impact-label{color:rgba(255,255,255,.82)}
+.jai-section{padding-top:clamp(2.5rem,5vw,3.5rem);padding-bottom:clamp(2.5rem,5vw,3.5rem)}
+.jai-split{align-items:center}
 </style>
 </head>
 <body>
@@ -508,82 +676,154 @@ details.faq-item{overflow:hidden}
   <a class="nav-logo" onclick="go('home')"><img src="data:image/png;base64,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" alt="JAGGAER" class="nav-logo-img"></a>
   <div class="nav-badge">Hands-on AI</div>
   <div class="nav-links">
-    <a onclick="go('home')">All tools</a>
-    <a onclick="go('supplier')">Supplier Risk</a>
-    <a onclick="go('contract')">Contracts</a>
-    <a onclick="go('rfp')">RFP</a>
-    <a onclick="go('invoice')">Invoices</a>
-    <a onclick="go('diagnostic')">Diagnostic</a>
+    <a onclick="go('home')">Overview</a>
+    <a onclick="go('home');setTimeout(function(){var r=document.getElementById('start-here');if(r)r.scrollIntoView({behavior:'smooth'});},80)">Start here</a>
+    <a onclick="go('home');setTimeout(function(){var r=document.getElementById('library');if(r)r.scrollIntoView({behavior:'smooth'});},80)">Prompt library</a>
+    <a onclick="go('home');setTimeout(function(){var r=document.getElementById('jai');if(r)r.scrollIntoView({behavior:'smooth'});},80)">JAI</a>
   </div>
-  <a class="nav-cta" onclick="go('home');setTimeout(function(){var r=document.getElementById('reading');if(r)r.scrollIntoView({behavior:'smooth'});},80)">Further reading</a>
+  <a class="nav-cta" href="https://www.jaggaer.com/book-a-demo" target="_blank">Book a demo</a>
 </nav>
 
 <div id="page-home" class="subpage active">
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-eyebrow" style="color:var(--green)"><span class="pg-dot" style="position:relative;display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:6px"></span>A hands-on introduction to AI, made for procurement</div>
-      <h1>You don't need to know<br><strong>anything about AI <span class="text-grad">to start here.</span></strong></h1>
-      <p class="hero-sub">Most AI advice is written for engineers. This isn't. It's a calm, hands-on way for procurement people to see what AI actually does — using tasks you already know cold, like reading a clause, comparing three bids, or chasing a late supplier. No setup, no jargon, nothing leaves your browser. Start at the top, and by the end you'll be doing it yourself.</p>
-      <div class="hero-actions"><a class="btn-jai" onclick="document.getElementById('start-here').scrollIntoView({behavior:'smooth'})">Start here →</a><a class="btn-outline-dark" onclick="document.getElementById('tool-directory').scrollIntoView({behavior:'smooth'})">Browse all the tools</a></div>
+      <div class="hero-eyebrow" style="color:var(--green)"><span class="pg-dot" style="position:relative;display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:6px"></span>The AI-driven procurement shift</div>
+      <h1>Transform your procurement<br><strong>function for an <span class="text-grad">AI-driven world.</span></strong></h1>
+      <p class="hero-sub">AI now handles the routine work of procurement: reading the contract, comparing the bids, chasing the late supplier. That gives your team back the hours that used to disappear into busywork, and puts them on the decisions that were always the real job. This page shows you how it works, on tasks you already know.</p>
     </div>
   </section>
-  <div class="stats-strip">
-    <div class="stat-cell"><div class="stat-num" data-count="15" data-suffix="">0</div><div class="stat-label">Tools you can try</div></div>
-    <div class="stat-cell"><div class="stat-num" data-count="4" data-suffix="">0</div><div class="stat-label">Areas of procurement covered</div></div>
-    <div class="stat-cell"><div class="stat-num" data-count="0" data-suffix="">0</div><div class="stat-label">Logins or setup needed</div></div>
-    <div class="stat-cell"><div class="stat-num" data-count="100" data-suffix="%">0%</div><div class="stat-label">Runs in your browser</div></div>
+
+  <!-- PROOF: the gap between intent and action (red boxy numbers) -->
+  <div class="proof-strip">
+    <div class="proof-inner">
+      <div class="proof-box">
+        <div class="proof-num"><span data-count="80" data-suffix="%">0%</span></div>
+        <div class="proof-label">of CPOs plan to deploy generative AI within three years.</div>
+      </div>
+      <div class="proof-connector">but</div>
+      <div class="proof-box alt">
+        <div class="proof-num"><span data-count="36" data-suffix="%">0%</span></div>
+        <div class="proof-label">have a meaningful implementation running today.</div>
+      </div>
+    </div>
+    <div class="proof-read">
+      <p>The gap between wanting to use AI and actually using it is where most teams sit right now.</p>
+    </div>
   </div>
-  <section class="section band-section">
-    <div class="band-inner">
-      <span class="eyebrow">The whole idea</span>
-      <h2 class="band-head">These aren't magic.<br>They're just <strong>clear instructions.</strong></h2>
-      <p class="band-body">If AI has felt like a black box, here's the secret: every tool on this page is just a clear instruction written in plain English. Tell the AI who to be, give it the context it can't guess, ask for one thing, and say how you want the answer back. That's it. Once you've seen the pattern a couple of times, you can do this anywhere — on your own work, in any chat window. <strong>No magic, no code, no catch.</strong></p>
+
+  <!-- SHIFT band (red boxy number) -->
+  <section class="section shift-section">
+    <div class="shift-inner">
+      <div class="shift-big">25&ndash;40%</div>
+      <div class="shift-text">
+        <p><strong>That is the efficiency gain teams see when AI takes on the routine work.</strong> The hours you get back move straight to the strategic side of procurement, where your judgement earns its keep.</p>
+      </div>
     </div>
   </section>
+
+  <!-- ARE YOU NEW TO THIS (red boxy stat strip) -->
+  <section class="section" id="begin">
+    <div class="section-inner">
+      <span class="eyebrow">Where to begin</span>
+      <h2 class="section-heading">Are you <strong>new to this?</strong></h2>
+      <p class="section-sub">Learn how to put AI to work across the tasks you already know, with nothing to install and nothing that leaves your browser. Start small, see what it can do, and build from there.</p>
+    </div>
+    <div class="stats-strip" style="margin-top:clamp(1.5rem,3vw,2.25rem)">
+      <div class="stat-cell"><div class="stat-num" data-count="15" data-suffix="">0</div><div class="stat-label">Tools you can try</div></div>
+      <div class="stat-cell"><div class="stat-num" data-count="4" data-suffix="">0</div><div class="stat-label">Areas of procurement covered</div></div>
+      <div class="stat-cell"><div class="stat-num" data-count="0" data-suffix="">0</div><div class="stat-label">Logins or setup needed</div></div>
+      <div class="stat-cell"><div class="stat-num" data-count="100" data-suffix="%">0%</div><div class="stat-label">Runs in your browser</div></div>
+    </div>
+  </section>
+
+  <!-- CTA 1: think about AI (JAI gradient way) -->
+  <section class="jai-cta">
+    <div class="jai-cta-inner">
+      <div class="jai-cta-copy">
+        <span class="eyebrow eyebrow-jai">Talk it through</span>
+        <h2>Not sure where AI fits your team?</h2>
+        <p>Book a short call with JAGGAER. We will walk through where AI can help your procurement work first, and what is worth leaving for later. No pressure, no jargon, just a clear read on your starting point.</p>
+      </div>
+      <a class="btn-jai-grad" href="https://www.jaggaer.com/book-a-demo" target="_blank">Book a call <span class="arr">&#8594;</span></a>
+    </div>
+  </section>
+
+  <!-- FOLLOW THESE 3 STEPS FIRST (the three ways to start) -->
   <section class="section start-section" id="start-here">
     <div class="section-inner">
       <span class="eyebrow">Start here</span>
-      <h2 class="section-heading">Never used AI before?<br><strong>Take these <span class="text-grad">three first.</span></strong></h2>
-      <p class="section-sub">About ten minutes, no setup. By the end you'll know how to talk to an AI, what it's genuinely good at, and where it would help your work first — and the rest of this page will make a lot more sense.</p>
+      <h2 class="section-heading">Follow these <strong>3 steps first.</strong></h2>
+      <p class="section-sub">You do not need to know much about AI to start here. Take ten minutes to see where AI can help you, and how to talk to it so it gets your tasks done.</p>
       <div class="start-grid" id="start-grid"></div>
     </div>
   </section>
-  <section class="section">
+
+  <!-- PROMPT LIBRARY: dial / wheel -->
+  <section class="section lib-section" id="library">
     <div class="section-inner">
-      <span class="eyebrow">Try it on your work</span>
-      <h2 class="section-heading">Now run it on something<br><strong>from your <span class="text-grad">actual week.</span></strong></h2>
-      <p class="section-sub">Twelve tools, grouped by the kind of work you do. Open whichever looks like your Tuesday — each runs instantly on an example, or on text you paste. They're not the point in themselves; they're here to show you what's possible, and to hand you the exact prompt so you can do it for real.</p>
-      <div class="tool-directory" id="tool-directory"></div>
-      <div class="dir-hint">Every one of these is a prompt you can copy and reuse. The <a onclick="go('prompt')">four-part prompt</a> up in <em>Start here</em> is the pattern behind all of them.</div>
+      <span class="eyebrow">A prompt library for S2P</span>
+      <h2 class="section-heading">Pick the kind of work,<br><strong>then run it on <span class="text-grad">your own task.</span></strong></h2>
+      <p class="section-sub">Twelve ready-made prompts, grouped by what you actually do. Turn the dial to a group, open a tool, and run it on an example or on text you paste. Each one is yours to copy and reuse.</p>
+    </div>
+    <div class="lib-wrap">
+      <div class="lib-dial">
+        <div class="dial" id="lib-dial"></div>
+        <div class="dial-legend" id="lib-legend"></div>
+      </div>
+      <div class="lib-panel" id="lib-panel"></div>
     </div>
   </section>
 
-    <section class="section how-section">
-    <div class="section-inner">
-      <span class="eyebrow">Make your own</span>
-      <h2 class="section-heading">Three steps to <strong>build any of these.</strong></h2>
-      <p class="section-sub">There's no trick to it. Every tool on this page is a prompt with a little structure around it — something you could put together yourself in a few minutes. The “Make this yourself” box on each tool gives you the exact wording. Here's the shape of it.</p>
-      <div class="how-grid">
-        <div class="how-card reveal"><div class="how-num">01</div><div class="how-title">Pick one concrete task</div><div class="how-body">Not “help with procurement” — something specific you'd recognise on a Tuesday: “flag the renewal traps in this clause”, “sort these 40 invoice lines”, “draft a firm chaser to a late supplier”. The narrower the task, the better the answer.</div></div>
-        <div class="how-card reveal"><div class="how-num">02</div><div class="how-title">Write a clear prompt</div><div class="how-body">Four moves, every time: a <b>role</b> (“you are a contracts analyst”), the <b>context</b> it can't guess (your industry, your constraint), the <b>task</b> (one specific thing), and the <b>format</b> you want back (a table, a ranked list, under 200 words). The recipe under each tool is exactly this, filled in.</div></div>
-        <div class="how-card reveal"><div class="how-num">03</div><div class="how-title">Paste your data, then push back</div><div class="how-body">Drop in your own text and read the answer like an editor, not a reader. “You missed the indemnity clause.” “Show your assumptions.” “Make it shorter.” The second and third turn are almost always where a rough answer becomes a useful one.</div></div>
-      </div>
+  <!-- CTA 2 / JAI showcase: get specific about JAI (dark + abridged) -->
+  <section class="section jai-section" id="jai">
+    <div class="jai-lede">
+      <h2>Want AI that solves all your<br><strong>procurement business problems?</strong></h2>
     </div>
-  </section>
-  <section class="section faq-section">
-    <div class="section-inner">
-      <span class="eyebrow">Good questions</span>
-      <h2 class="section-heading">A few <strong>honest questions.</strong></h2>
-      <div class="faq-wrap">
-        <details class="faq-item"><summary class="faq-summary">Do I need any special software?<span class="faq-plus"></span></summary><div class="faq-body">No. Everything on this page runs in your browser, and the prompts behind each tool work in any AI assistant you already have — Claude, ChatGPT, Copilot, Gemini. If you can open a chat window, you have everything you need.</div></details>
-        <details class="faq-item"><summary class="faq-summary">Is it safe to paste in our information?<span class="faq-plus"></span></summary><div class="faq-body">The tools here run entirely in your browser and send nothing anywhere. When you move to a real AI assistant, start with example or anonymised data, and check your organisation's policy before putting in anything sensitive. A good habit: ask yourself “would I email this to an outside party?” before you paste it.</div></details>
-        <details class="faq-item"><summary class="faq-summary">Will the answers always be right?<span class="faq-plus"></span></summary><div class="faq-body">No — and that's worth saying plainly. Treat anything AI gives you as a fast, helpful first draft, not the final word. It's great at structure and at spotting things to check; you bring the judgement and the sign-off.</div></details>
-        <details class="faq-item"><summary class="faq-summary">I'm not technical. Can I still do this?<span class="faq-plus"></span></summary><div class="faq-body">Yes. If you can write an email, you can write a prompt. The “Make this yourself” box under each tool gives you the exact wording to copy and start from — change a few words and it's yours.</div></details>
-        <details class="faq-item"><summary class="faq-summary">What should I try first?<span class="faq-plus"></span></summary><div class="faq-body">Pick the task you do most often and find its tool above. Run the example, then paste in something real and small. Most people get the “oh, I get it now” moment within their first two or three goes.</div></details>
+    <div class="jai-split">
+      <div class="jai-mock">
+        <div class="jm-bubble">How can I make invoice processing and approvals more efficient?</div>
+        <div class="jm-bar">
+          <div class="jm-bar-burger"><span></span><span></span><span></span></div>
+          <div class="jm-bar-logo"><span class="spark">&#10022;</span> JAI</div>
+          <div class="jm-bar-actions"><span>&#8599;</span><span>&#9634;</span><span>&#10005;</span></div>
+        </div>
+        <div class="jm-body">
+          <div class="jm-thinking">&#10003; Thinking complete</div>
+          <div class="jm-h">Approval cycle times by status</div>
+          <table class="jm-table">
+            <tr><th>Workflow status</th><th>Invoice events</th><th>Avg. days</th></tr>
+            <tr><td><span class="jm-pill ok">Completed</span></td><td>736,304</td><td>1.8</td></tr>
+            <tr><td><span class="jm-pill rej">Rejected</span></td><td>16,518</td><td>29.3</td></tr>
+            <tr><td><span class="jm-pill draft">Draft</span></td><td>10</td><td>9.9</td></tr>
+          </table>
+          <div class="jm-sumlabel">Recommended actions</div>
+          <div class="jm-action"><div><span class="jm-pill rej">High</span></div><div>Improve PO-to-invoice matching</div><div>~20k invoices resolved</div></div>
+          <div class="jm-action"><div><span class="jm-pill draft">Med</span></div><div>Fast-track high-value invoices</div><div>Better cash flow</div></div>
+          <div class="jm-input">
+            <div class="jm-input-plus">+</div>
+            <div class="jm-input-field">How can I help you?</div>
+            <div class="jm-input-chip">&#9906; Deep Research</div>
+          </div>
+        </div>
+      </div>
+      <div class="jai-copy">
+        <span class="eyebrow eyebrow-jai">JAGGAER's AI, JAI</span>
+        <h3>Meet your S2P concierge</h3>
+        <p>The tools on this page show you the shape of the work. JAI does it for real. It sits inside your platform, reads your live procurement data, and is trained on your policies. <strong>You ask a question, it answers from your own numbers</strong>, and it picks the right model for each task.</p>
+        <div class="jai-impact" style="margin-top:1.5rem">
+          <div class="jai-impact-head">Impact JAI has created</div>
+          <div class="jai-impact-grid">
+            <div><div class="jai-impact-num">75%</div><div class="jai-impact-label">Fewer support tickets</div></div>
+            <div><div class="jai-impact-num">40+</div><div class="jai-impact-label">Workflows accelerated</div></div>
+            <div><div class="jai-impact-num">40M+</div><div class="jai-impact-label">Transactions a year</div></div>
+          </div>
+        </div>
+        <a class="btn-jai-mini" style="margin-top:1.5rem" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a>
       </div>
     </div>
   </section>
 
+  <!-- Further reading (lightweight, ties to the content series) -->
   <section class="section reading-section" id="reading">
     <div class="section-inner">
       <span class="eyebrow">Keep learning</span>
@@ -626,7 +866,9 @@ Do this:
 4. For each concentration, suggest 2–3 alternative sourcing regions and name a few real example suppliers in each, with a short rationale.
 
 Format: a one-line priority first, then "Risks" as a short list, then "Alternatives" as a short list.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Country and category are the two fields that matter — include both, even roughly.</li><li>Add your own definition of a critical category (“can't run the line without it”) so it weighs the right things.</li><li>Follow up with “which of these would take longest to qualify a backup for?” to get a sequencing plan.</li></ol><p class="recipe-foot">The output you get depends on your data and which assistant you use, so treat the first answer as a draft to refine — not a finished deliverable. That back-and-forth is the skill worth building.</p></div></div>
-  </div></section>
+  </div>
+      <div class="jai-strip"><div class="jai-strip-head"><div class="jai-strip-eyebrow">This tool vs JAI, same task</div><div class="jai-strip-title">This scans what you paste. JAI monitors your entire base, continuously.</div></div><div class="jai-strip-body"><div class="contrast-row"><div class="contrast-dim">Coverage</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Suppliers you paste manually</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Full approved supplier list, updated continuously</div></div><div class="contrast-row"><div class="contrast-dim">Risk signals</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Geographic concentration only</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Financial health, ESG, sanctions, news, real-time</div></div><div class="contrast-row"><div class="contrast-dim">Sub-tier</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Tier 1 only</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Tier 2 and Tier 3 mapping and monitoring</div></div></div><div class="jai-strip-foot"><span>JAI does this across your whole platform, continuously.</span><a class="btn-jai-mini" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI <span class="arr">&#8594;</span></a></div></div>
+      </div></section>
 </div>
 
 <div id="page-contract" class="subpage">
@@ -660,7 +902,9 @@ For each issue you find:
 - Explain the practical consequence in one plain sentence.
 
 Then give me: the single change you'd negotiate first, and one question to ask the supplier. List the issues highest-risk first.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Paste real clause text (strip anything you can't share).</li><li>Tell it your risk appetite — a startup and a regulated buyer should flag different things.</li><li>Ask it to redline the riskiest clause in your favour so you have a starting position.</li></ol><p class="recipe-foot">The output you get depends on your data and which assistant you use, so treat the first answer as a draft to refine — not a finished deliverable. That back-and-forth is the skill worth building.</p></div></div>
-  </div></section>
+  </div>
+      <div class="jai-strip"><div class="jai-strip-head"><div class="jai-strip-eyebrow">This tool vs JAI, same task</div><div class="jai-strip-title">This reads one clause. JAI reads your whole portfolio, and alerts before windows close.</div></div><div class="jai-strip-body"><div class="contrast-row"><div class="contrast-dim">Scope</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>One clause at a time, on demand</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Entire portfolio, continuous, automatic</div></div><div class="contrast-row"><div class="contrast-dim">Trigger</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Someone thinks to check</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>System alerts before renewal windows close</div></div><div class="contrast-row"><div class="contrast-dim">Pricing caps</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Noted in the analysis</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Tracked against indexed benchmarks across all contracts</div></div></div><div class="jai-strip-foot"><span>JAI does this across your whole platform, continuously.</span><a class="btn-jai-mini" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI <span class="arr">&#8594;</span></a></div></div>
+      </div></section>
 </div>
 
 <div id="page-rfp" class="subpage">
@@ -692,7 +936,9 @@ Produce:
 3. Five sharp supplier questions that would actually separate a strong bid from a weak one.
 
 Keep it practical and ready to drop into a document.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>One or two honest sentences is enough — you don't need a formal brief.</li><li>State your #1 priority (cost, speed, or compliance) so the weights reflect reality.</li><li>Once it's close, ask it to expand the outline into a full RFP document.</li></ol><p class="recipe-foot">The output you get depends on your data and which assistant you use, so treat the first answer as a draft to refine — not a finished deliverable. That back-and-forth is the skill worth building.</p></div></div>
-  </div></section>
+  </div>
+      <div class="jai-strip"><div class="jai-strip-head"><div class="jai-strip-eyebrow">This tool vs JAI, same task</div><div class="jai-strip-title">This gets you a first draft. JAI runs the entire sourcing event.</div></div><div class="jai-strip-body"><div class="contrast-row"><div class="contrast-dim">Input</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Free-text brief you write</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Your category history, past RFPs, approved vendors</div></div><div class="contrast-row"><div class="contrast-dim">Eval weights</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Generic defaults</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Tuned to your organisation's actual priorities</div></div><div class="contrast-row"><div class="contrast-dim">Compliance</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Not checked</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Regulatory and policy compliance built in</div></div></div><div class="jai-strip-foot"><span>JAI does this across your whole platform, continuously.</span><a class="btn-jai-mini" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI <span class="arr">&#8594;</span></a></div></div>
+      </div></section>
 </div>
 
 <div id="page-invoice" class="subpage">
@@ -725,7 +971,9 @@ Return:
 - A one-line summary: how many reviewed, how many flagged, total $ at risk.
 - For each exception: the line, the issue type, why it's flagged, and the action to take (hold, escalate, query the vendor).
 - The count of clean lines at the end.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Keep the pipe format (vendor and amount are what duplicate-detection needs).</li><li>Set your own tolerance — “flag anything over 5% above the PO”.</li><li>Ask it to sort exceptions by dollars at risk so you work the biggest first.</li></ol><p class="recipe-foot">The output you get depends on your data and which assistant you use, so treat the first answer as a draft to refine — not a finished deliverable. That back-and-forth is the skill worth building.</p></div></div>
-  </div></section>
+  </div>
+      <div class="jai-strip"><div class="jai-strip-head"><div class="jai-strip-eyebrow">This tool vs JAI, same task</div><div class="jai-strip-title">This checks what you paste. JAI checks 100% of AP inbound, no sampling.</div></div><div class="jai-strip-body"><div class="contrast-row"><div class="contrast-dim">Coverage</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Invoices you paste manually</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>100% of AP inbound, no sampling, no batch delay</div></div><div class="contrast-row"><div class="contrast-dim">Rule types</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Patterns the AI notices</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>150+ configurable rules with org-specific thresholds</div></div><div class="contrast-row"><div class="contrast-dim">Integration</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Standalone output</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Exceptions surfaced directly in your ERP workflow</div></div></div><div class="jai-strip-foot"><span>JAI does this across your whole platform, continuously.</span><a class="btn-jai-mini" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI <span class="arr">&#8594;</span></a></div></div>
+      </div></section>
 </div>
 
 <div id="page-prompt" class="subpage">
@@ -838,7 +1086,9 @@ Format: [exactly how you want the answer — a numbered list, a table with these
 - How we work today: [spreadsheets / ERP / a procurement platform]
 
 Give me a rough, clearly-labelled estimate of where AI or automation could save money or time, broken into: sourcing savings, off-contract (maverick) spend recovery, and invoice leakage. Show the assumption (as a %) behind each number, total it, and say plainly that it's directional, not a business case. Be conservative.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Use real numbers, even rough ones — the estimate is only as good as the inputs.</li><li>Ask it to show every assumption so you can challenge the ones that look generous.</li><li>Treat the total as a hypothesis to test, not a promise to bank.</li></ol><p class="recipe-foot">The output you get depends on your data and which assistant you use, so treat the first answer as a draft to refine — not a finished deliverable. That back-and-forth is the skill worth building.</p></div></div>
-  </div></section>
+  </div>
+      <div class="jai-strip"><div class="jai-strip-head"><div class="jai-strip-eyebrow">This tool vs JAI, same task</div><div class="jai-strip-title">This estimates from three inputs. JAI models from your actual ledger.</div></div><div class="jai-strip-body"><div class="contrast-row"><div class="contrast-dim">Inputs</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Three sliders and a benchmark</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Your real spend, supplier, and contract data</div></div><div class="contrast-row"><div class="contrast-dim">Granularity</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>One blended estimate</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Category-by-category opportunity, ranked by ROI</div></div><div class="contrast-row"><div class="contrast-dim">Action</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>A number to consider</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>A prioritised roadmap and live tracking against it</div></div></div><div class="jai-strip-foot"><span>JAI does this across your whole platform, continuously.</span><a class="btn-jai-mini" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI <span class="arr">&#8594;</span></a></div></div>
+      </div></section>
 </div>
 
 <div id="page-approval" class="subpage">
@@ -868,7 +1118,9 @@ Based on typical procurement policy, tell me:
 3. The forms or documents I'd probably need.
 
 If anything depends on our own internal thresholds, say so and tell me exactly what to check. Keep it to a short, ordered answer.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Always include the amount — it drives the whole approval path.</li><li>Paste your real thresholds and it stops guessing and gets specific.</li><li>Add “we're public sector” or “this is grant-funded” and watch the rules change.</li></ol><p class="recipe-foot">The output you get depends on your data and which assistant you use, so treat the first answer as a draft to refine — not a finished deliverable. That back-and-forth is the skill worth building.</p></div></div>
-  </div></section>
+  </div>
+      <div class="jai-strip"><div class="jai-strip-head"><div class="jai-strip-eyebrow">This tool vs JAI, same task</div><div class="jai-strip-title">This reads a generic policy. JAI enforces yours, in real time, in-app.</div></div><div class="jai-strip-body"><div class="contrast-row"><div class="contrast-dim">Thresholds</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Illustrative tiers we picked</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Your actual approval matrix and delegation of authority</div></div><div class="contrast-row"><div class="contrast-dim">Suppliers</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Generic on/off-contract logic</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Checks against your preferred and approved supplier list</div></div><div class="contrast-row"><div class="contrast-dim">Forms</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Named generically</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Links your real templates, pre-filled with context</div></div></div><div class="jai-strip-foot"><span>JAI does this across your whole platform, continuously.</span><a class="btn-jai-mini" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI <span class="arr">&#8594;</span></a></div></div>
+      </div></section>
 </div>
 
 <div id="page-email" class="subpage">
@@ -905,7 +1157,9 @@ Tone I want: [firm / warm / formal].
 Outcome I need: [the specific thing you want them to do, by when].
 
 Write a short, clear message: a subject line, a tight body that states the issue and the ask, and a professional close. Don't over-apologise or pad it. Then give me one alternative opening line.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>The awkward details are what make it land — put them in.</li><li>Switch the tone word and the whole message re-shapes around it.</li><li>Ask for a firmer and a softer version, then pick the opening you'd actually send.</li></ol><p class="recipe-foot">The output you get depends on your data and which assistant you use, so treat the first answer as a draft to refine — not a finished deliverable. That back-and-forth is the skill worth building.</p></div></div>
-  </div></section>
+  </div>
+      <div class="jai-strip"><div class="jai-strip-head"><div class="jai-strip-eyebrow">This tool vs JAI, same task</div><div class="jai-strip-title">This drafts from what you type. JAI drafts from the full relationship.</div></div><div class="jai-strip-body"><div class="contrast-row"><div class="contrast-dim">Context</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>The situation you describe</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>The live PO, contract terms, and SLA history</div></div><div class="contrast-row"><div class="contrast-dim">Facts</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Generic placeholders</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Real dates, amounts, and clause references pulled in</div></div><div class="contrast-row"><div class="contrast-dim">Send</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Copy and paste</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Logged against the supplier record, traceable</div></div></div><div class="jai-strip-foot"><span>JAI does this across your whole platform, continuously.</span><a class="btn-jai-mini" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI <span class="arr">&#8594;</span></a></div></div>
+      </div></section>
 </div>
 
 <div id="page-classifier" class="subpage">
@@ -935,7 +1189,9 @@ Lines:
 Use these categories: [your category list — or ask it to propose a sensible set]. For each line give: the category, and an "off-contract / unclear" flag if it has no PO, no contract, or is ambiguous.
 
 Return a simple table (line, category, flag), then one line on which categories hold the most flagged spend.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Paste a messy export — the rougher it is, the better the test.</li><li>Give it your own category list so the output matches how you already report.</li><li>Ask which category to clean up first to recover the most off-contract spend.</li></ol><p class="recipe-foot">The output you get depends on your data and which assistant you use, so treat the first answer as a draft to refine — not a finished deliverable. That back-and-forth is the skill worth building.</p></div></div>
-  </div></section>
+  </div>
+      <div class="jai-strip"><div class="jai-strip-head"><div class="jai-strip-eyebrow">This tool vs JAI, same task</div><div class="jai-strip-title">This sorts what you paste. JAI classifies <em>all</em> your spend, continuously.</div></div><div class="jai-strip-body"><div class="contrast-row"><div class="contrast-dim">Coverage</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>The lines you paste</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Every transaction across your ledger</div></div><div class="contrast-row"><div class="contrast-dim">Taxonomy</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Generic categories</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Your category tree, mapped to UNSPSC if you use it</div></div><div class="contrast-row"><div class="contrast-dim">Off-contract</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Flagged by keyword</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Checked against your live contracts and catalogues</div></div></div><div class="jai-strip-foot"><span>JAI does this across your whole platform, continuously.</span><a class="btn-jai-mini" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI <span class="arr">&#8594;</span></a></div></div>
+      </div></section>
 </div>
 
 <div id="page-tender" class="subpage">
@@ -965,7 +1221,9 @@ Proposal:
 Extract: headline price (and what's included versus extra), key commitments (SLAs, timelines, integrations), certifications, and anything vague, missing, or conditional I should question before shortlisting.
 
 Format as short sections — Price, Commitments, Certifications, Watch-outs — then end with the three questions you'd ask this supplier.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Paste the proposal text, even if it's several pages.</li><li>Run two proposals together and ask for a side-by-side comparison table.</li><li>“What's the catch?” reliably surfaces conditions buried in the fine print.</li></ol><p class="recipe-foot">The output you get depends on your data and which assistant you use, so treat the first answer as a draft to refine — not a finished deliverable. That back-and-forth is the skill worth building.</p></div></div>
-  </div></section>
+  </div>
+      <div class="jai-strip"><div class="jai-strip-head"><div class="jai-strip-eyebrow">This tool vs JAI, same task</div><div class="jai-strip-title">This reads one document. JAI compares <em>all</em> the responses side by side.</div></div><div class="jai-strip-body"><div class="contrast-row"><div class="contrast-dim">Scope</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>One proposal at a time</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Every response in the event, normalised to compare</div></div><div class="contrast-row"><div class="contrast-dim">Scoring</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Extraction only</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Scored against your evaluation criteria automatically</div></div><div class="contrast-row"><div class="contrast-dim">Gaps</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Surfaced from the text</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Checked against your mandatory requirements list</div></div></div><div class="jai-strip-foot"><span>JAI does this across your whole platform, continuously.</span><a class="btn-jai-mini" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI <span class="arr">&#8594;</span></a></div></div>
+      </div></section>
 </div>
 
 <div id="page-solesource" class="subpage">
@@ -998,8 +1256,11 @@ Draft it with these sections:
 4. How we'll confirm the price is fair and reasonable.
 
 Write it in plain, defensible language an auditor would accept, and leave clear [brackets] wherever I need to add specifics.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Give the genuine reason in plain words first — the structure follows from it.</li><li>Fill the [brackets] with your specifics and numbers before it goes anywhere.</li><li>Read it back as if you were the auditor: does every claim actually hold up?</li></ol><p class="recipe-foot">The output you get depends on your data and which assistant you use, so treat the first answer as a draft to refine — not a finished deliverable. That back-and-forth is the skill worth building.</p></div></div>
-  </div></section>
+  </div>
+      <div class="jai-strip"><div class="jai-strip-head"><div class="jai-strip-eyebrow">This tool vs JAI, same task</div><div class="jai-strip-title">This drafts the document. JAI knows your jurisdiction's rules.</div></div><div class="jai-strip-body"><div class="contrast-row"><div class="contrast-dim">Rules</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>General best-practice structure</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Your jurisdiction's thresholds and mandatory clauses</div></div><div class="contrast-row"><div class="contrast-dim">Routing</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>A draft to circulate</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Sent down the right approval path automatically</div></div><div class="contrast-row"><div class="contrast-dim">Audit</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>You file it</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Logged with a full, traceable decision trail</div></div></div><div class="jai-strip-foot"><span>JAI does this across your whole platform, continuously.</span><a class="btn-jai-mini" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI <span class="arr">&#8594;</span></a></div></div>
+      </div></section>
 </div>
+
 <div id="page-shouldcost" class="subpage">
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">&#8592; Back to all tools</a>
@@ -1021,7 +1282,9 @@ Quoted price: [price — say whether it's per-unit or total]
 What you know about it: [materials, volume, complexity]
 
 Estimate the cost split across materials, labour, overhead, logistics, and supplier margin (as % and value). State your assumptions clearly. Then tell me the implied negotiation headroom and the one question that would test whether it's real.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Give the item and the quote — those two are enough to start.</li><li>Ask it to show its assumptions so you can push on the ones that look soft.</li><li>Open the negotiation with the margin question it hands you.</li></ol><p class="recipe-foot">The output you get depends on your data and which assistant you use, so treat the first answer as a draft to refine — not a finished deliverable. That back-and-forth is the skill worth building.</p></div></div>
-  </div></section>
+  </div>
+      <div class="jai-strip"><div class="jai-strip-head"><div class="jai-strip-eyebrow">This tool vs JAI, same task</div><div class="jai-strip-title">This estimates a baseline. JAI prices against your real history.</div></div><div class="jai-strip-body"><div class="contrast-row"><div class="contrast-dim">Cost model</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Generic category benchmarks</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Your paid prices, indexed to commodity and FX moves</div></div><div class="contrast-row"><div class="contrast-dim">Granularity</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>One blended breakdown</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Per part, per supplier, per plant</div></div><div class="contrast-row"><div class="contrast-dim">Negotiation</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>A headroom estimate</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Target prices fed straight into the sourcing event</div></div></div><div class="jai-strip-foot"><span>JAI does this across your whole platform, continuously.</span><a class="btn-jai-mini" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI <span class="arr">&#8594;</span></a></div></div>
+      </div></section>
 </div>
 
 <div id="page-bidcompare" class="subpage">
@@ -1044,7 +1307,9 @@ Bids (one per line — include price, lead time, and quality signals like certif
 [paste your bids]
 
 Score each on price, lead time, and quality. Use these weights: price 45%, lead time 25%, quality 30% (change them if I tell you to). Show each bid's score with a one-line reason, then recommend a winner in plain language and name the strongest runner-up.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>At least two bids, one per line, with price and a quality signal each.</li><li>Change the weights to match what you actually care about for this category.</li><li>Ask “what would have to change for the runner-up to win?” to pressure-test the call.</li></ol><p class="recipe-foot">The output you get depends on your data and which assistant you use, so treat the first answer as a draft to refine — not a finished deliverable. That back-and-forth is the skill worth building.</p></div></div>
-  </div></section>
+  </div>
+      <div class="jai-strip"><div class="jai-strip-head"><div class="jai-strip-eyebrow">This tool vs JAI, same task</div><div class="jai-strip-title">This scores what you paste. JAI runs the whole event end to end.</div></div><div class="jai-strip-body"><div class="contrast-row"><div class="contrast-dim">Inputs</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>The bids you paste here</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Bids captured straight from your sourcing event</div></div><div class="contrast-row"><div class="contrast-dim">Weights</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Sensible defaults you can reason about</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Tuned to your category's real priorities</div></div><div class="contrast-row"><div class="contrast-dim">Compliance</div><div class="contrast-item claude"><span class="cc-head claude-head">This demo</span>Not checked</div><div class="contrast-item jai-col"><span class="cc-head jai-head">JAI</span>Mandatory clauses and certifications verified automatically</div></div></div><div class="jai-strip-foot"><span>JAI does this across your whole platform, continuously.</span><a class="btn-jai-mini" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI <span class="arr">&#8594;</span></a></div></div>
+      </div></section>
 </div>
 
 <div id="page-readiness" class="subpage">
@@ -1885,6 +2150,77 @@ var CAP_PILLARS=[
       { page:'myths', icon:'chat', title:'AI Reality Check', sub:'An honest look at what AI can and can\u2019t do for procurement — no hype either way.' },
     ]},
 ];
+
+/* ===== PROMPT LIBRARY DIAL ===== */
+var LIB_GROUPS=[
+  {id:'sourcing', name:'Sourcing & buying', sub:'Run events, compare bids, justify awards', color:'#D22428',
+   tools:[
+     {page:'rfp', icon:'scale', title:'RFP Builder', does:'Turns a one-line need into a scope of work, weighted criteria, and the questions to ask suppliers.', prompt:'a sourcing lead, your category and constraints, "draft an RFP for this", a clear structured outline.'},
+     {page:'shouldcost', icon:'coins', title:'Should-Cost Estimator', does:'Breaks a quoted price into its likely cost parts, so you can see where the negotiation room sits.', prompt:'a cost analyst, what you are buying and the quote, "estimate the should-cost", a labelled breakdown.'},
+     {page:'bidcompare', icon:'trophy', title:'Bid Comparison', does:'Scores competing bids on price, lead time, and quality, and names a clear, defensible winner.', prompt:'an evaluator, the bids and your priorities, "score and rank these", a table with a recommendation.'},
+     {page:'solesource', icon:'doc', title:'Sole-Source Justifier', does:'Drafts a single-source justification in the order an auditor actually reads it.', prompt:'a compliance writer, why only one supplier fits, "draft the justification", audit-ready sections.'},
+   ]},
+  {id:'suppliers', name:'Suppliers & contracts', sub:'Read suppliers, contracts, and the messages between you', color:'#2f6f80',
+   tools:[
+     {page:'supplier', icon:'search', title:'Supplier Risk Scanner', does:'Shows where your supplier base is over-concentrated, and where to find backups.', prompt:'a risk analyst, your supplier list and region, "find the concentration risk", flagged gaps and alternatives.'},
+     {page:'contract', icon:'doc', title:'Contract Clause Analyser', does:'Catches auto-renewals, price-rise rights, and one-sided terms before you sign.', prompt:'a contracts reviewer, the clause text, "flag the traps", a list of risks ranked by severity.'},
+     {page:'tender', icon:'doc', title:'Tender Summariser', does:'Pulls the price, the commitments, and the missing pieces out of a long proposal.', prompt:'an evaluator, the proposal text, "summarise the key terms", short sections plus questions to ask.'},
+     {page:'email', icon:'mail', title:'Supplier Message Drafter', does:'Writes a clear, professional supplier message in the tone the situation needs.', prompt:'a buyer, the situation and outcome you want, "draft the message", a ready-to-send note.'},
+   ]},
+  {id:'spend', name:'Spend & invoices', sub:'See your spend clearly and catch what leaks', color:'#52607a',
+   tools:[
+     {page:'invoice', icon:'alert', title:'Invoice Exception Detector', does:'Flags duplicates, missing POs, and over-billing before they get paid.', prompt:'an AP reviewer, the invoice lines, "find the exceptions", a list of issues with what to do next.'},
+     {page:'classifier', icon:'blocks', title:'Spend Classifier', does:'Sorts messy purchase lines into clean categories and surfaces off-contract spend.', prompt:'a spend analyst, your purchase lines, "categorise these", clean groups with off-contract called out.'},
+     {page:'diagnostic', icon:'gauge', title:'Spend Diagnostic', does:'Puts a rough, clearly labelled number on where AI could save you time and money.', prompt:'an advisor, where your process stands today, "show me the gaps", a scored, honest read.'},
+     {page:'approval', icon:'route', title:'Approval Path Checker', does:'Checks who needs to approve a purchase and what paperwork it will need.', prompt:'a policy guide, the purchase details, "map the approval path", the steps and forms in order.'},
+   ]},
+];
+var libActive=0;
+function libColors(){return LIB_GROUPS.map(function(g){return g.color;});}
+function renderLibDial(){
+  var dial=document.getElementById('lib-dial');if(!dial)return;
+  var n=LIB_GROUPS.length, gap=0.045, R=106, cx=130, cy=130, sw=28;
+  var seg=(2*Math.PI/n);
+  var paths='';
+  for(var i=0;i<n;i++){
+    var a0=i*seg+gap/2, a1=(i+1)*seg-gap/2;
+    var x0=cx+R*Math.cos(a0), y0=cy+R*Math.sin(a0);
+    var x1=cx+R*Math.cos(a1), y1=cy+R*Math.sin(a1);
+    var large=(a1-a0)>Math.PI?1:0;
+    var col=LIB_GROUPS[i].color;
+    var op=(i===libActive)?1:0.32;
+    paths+='<path class="dial-seg" data-i="'+i+'" d="M'+x0.toFixed(2)+' '+y0.toFixed(2)+' A'+R+' '+R+' 0 '+large+' 1 '+x1.toFixed(2)+' '+y1.toFixed(2)+'" fill="none" stroke="'+col+'" stroke-width="'+sw+'" stroke-linecap="butt" style="opacity:'+op+'"></path>';
+  }
+  var g=LIB_GROUPS[libActive];
+  dial.innerHTML='<svg viewBox="0 0 260 260">'+paths+'</svg>'+
+    '<div class="dial-center"><div class="dial-center-count">'+g.tools.length+'</div><div class="dial-center-label">'+g.name+'</div></div>';
+  dial.querySelectorAll('.dial-seg').forEach(function(p){p.addEventListener('click',function(){selectLib(+this.getAttribute('data-i'));});});
+}
+function renderLibLegend(){
+  var leg=document.getElementById('lib-legend');if(!leg)return;
+  leg.innerHTML=LIB_GROUPS.map(function(g,i){
+    return '<button class="dial-legend-btn'+(i===libActive?' on':'')+'" onclick="selectLib('+i+')">'+
+      '<span class="dial-legend-dot" style="background:'+g.color+'"></span>'+
+      '<span><span class="dial-legend-name">'+g.name+'</span><span class="dial-legend-sub">'+g.sub+'</span></span>'+
+      '<span class="dial-legend-n">'+g.tools.length+'</span></button>';
+  }).join('');
+}
+function renderLibPanel(){
+  var panel=document.getElementById('lib-panel');if(!panel)return;
+  var g=LIB_GROUPS[libActive];
+  var cards=g.tools.map(function(t){
+    return '<div class="lib-card" style="--lc:'+g.color+'" onclick="go(\''+t.page+'\')">'+
+      '<div class="lib-card-icon">'+ICONS[t.icon]+'</div>'+
+      '<div class="lib-card-title">'+t.title+'</div>'+
+      '<div class="lib-card-does">'+t.does+'</div>'+
+      '<div class="lib-card-prompt"><b>How to prompt:</b> '+t.prompt+'</div>'+
+      '<div class="lib-card-cta">Open tool <span class="arr">&#8594;</span></div></div>';
+  }).join('');
+  panel.innerHTML='<div class="lib-panel-head"><h3>'+g.name+'</h3><p>'+g.sub+'. Open any tool to run it now, or copy its prompt and use it in your own AI assistant.</p></div><div class="lib-cards">'+cards+'</div>';
+}
+function selectLib(i){libActive=i;renderLibDial();renderLibLegend();renderLibPanel();}
+function renderLibrary(){renderLibDial();renderLibLegend();renderLibPanel();}
+
 var capActive=0;
 function buildCapRail(){
   var rail=document.getElementById('cap-rail');if(!rail)return;rail.innerHTML='';
@@ -1933,9 +2269,9 @@ var GROUP_TINT={
 };
 
 var STARTS=[
-  {n:"01",page:"prompt",title:"Learn the one skill that matters",body:"Every tool here is just a prompt underneath. This shows you the simple shape of a good one — who the AI should be, what it needs to know, the one thing to do, and how to lay the answer out. Five minutes, and the rest of the page clicks into place."},
-  {n:"02",page:"myths",title:"Get an honest reality check",body:"What AI genuinely does for procurement, and what it doesn’t. No hype, no doom — just a straight answer to the question everyone actually has the first time: can I trust this?"},
-  {n:"03",page:"readiness",title:"Find your first win",body:"A two-minute read that points to the one place AI would save you the most time this month. You don’t have to boil the ocean — just start there."}
+  {n:"01",page:"prompt",title:"Learn how to ask",body:"Every tool here is a prompt underneath. This shows you the shape of a good one: who the AI should be, what it needs to know, the task, and how you want the answer. About five minutes."},
+  {n:"02",page:"myths",title:"Know what to trust",body:"A straight answer on what AI does well for procurement and where it falls short. No hype, no scare stories. Just the honest version, so you know when to rely on it."},
+  {n:"03",page:"readiness",title:"Find your first win",body:"A two-minute read that points to the one place AI would save you the most time this month. Start there before you try to do everything at once."}
 ];
 function renderStartHere(){
   var g=document.getElementById("start-grid");if(!g)return;
@@ -2279,7 +2615,7 @@ function routeSandbox(){
   res.innerHTML=html;res.classList.add('show');
 }
 
-buildPB();renderPB();buildMyths();calcDiag();calcReadiness();initObservers();renderStartHere();renderDirectory();renderReading();
+buildPB();renderPB();buildMyths();calcDiag();calcReadiness();initObservers();renderStartHere();renderLibrary();renderReading();
 </script>
 </body>
 </html>
