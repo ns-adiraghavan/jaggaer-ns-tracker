@@ -1,0 +1,1837 @@
+<!-- uploaded by jason at 2026-06-17T05:18:30.524Z -->
+<!-- piece: EU AI Act: The Complete Guide -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU AI Act: The Complete Guide for 2026 | JAGGAER</title>
+<meta name="description" content="The world's first AI regulation explained: risk tiers, fines, compliance timeline, GDPR overlap, and what US companies must do now.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   JAGGAER DESIGN TOKENS v2.0
+   ============================================================ */
+:root {
+  --color-ink:        #0B0D12;
+  --color-ink-2:      #3a3f4a;
+  --color-ink-3:      #6a7180;
+  --color-red:        #D22428;
+  --color-grey:       #3F434F;
+  --color-light-grey: #dce0e8;
+  --color-cream:      #eef0f3;
+  --color-light-blue: #E9EFF4;
+  --color-white:      #ffffff;
+  --color-navy:       #1B3A5C;
+  --color-teal:       #4D8194;
+  --jai-a:            #5300CE;
+  --jai-b:            #E22B83;
+  --jai-gradient:     linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+
+  --ink:        var(--color-ink);
+  --body:       var(--color-ink-2);
+  --muted:      var(--color-ink-3);
+  --accent:     var(--color-red);
+  --accent-bg:  #FDF2F2;
+  --border:     var(--color-light-grey);
+  --bg:         var(--color-white);
+  --surface:    var(--color-cream);
+
+  --font-base:            Inter, system-ui, -apple-system, sans-serif;
+  --font-size-xs:         0.75rem;
+  --font-size-sm:         0.875rem;
+  --font-size-base:       0.875rem;
+  --font-size-lg:         1.125rem;
+  --font-size-h5:         clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:         clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:         clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:         clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:         clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading:  400;
+  --line-height-base:     1.6;
+  --line-height-heading:  1.1;
+
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+
+  --container-width:   1240px;
+  --container-narrow:  1024px;
+  --container-wide:    1800px;
+  --container-padding: clamp(1rem, 3vw, 2rem);
+  --column-gap:        1.5rem;
+  --border-radius:     1rem;
+  --border-radius-sm:  0.5rem;
+  --border-color:      #dce0e8;
+  --border-rule:       1px solid var(--border-color);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-base);
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--body);
+  line-height: var(--line-height-base);
+  font-size: var(--font-size-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   OUTER LAYOUT
+   ============================================================ */
+.outer-wrap {
+  display: flex;
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  align-items: flex-start;
+  gap: 0;
+}
+.page {
+  flex: 1;
+  min-width: 0;
+  max-width: var(--container-narrow);
+  padding: 0 var(--container-padding) var(--space-2xl);
+}
+@media (max-width: 1100px) { .expert-sidebar { display: none; } }
+@media (max-width: 900px)  { .outer-wrap { display: block; } .toc-sidebar { display: none; } }
+
+/* ============================================================
+   TOC SIDEBAR (LEFT)
+   ============================================================ */
+.toc-sidebar {
+  width: 210px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 30px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  padding: 0 16px 24px 20px;
+  scrollbar-width: thin;
+}
+.toc-sidebar::-webkit-scrollbar { width: 3px; }
+.toc-sidebar::-webkit-scrollbar-thumb { background: var(--border); }
+.toc-head {
+  background: var(--color-cream);
+  padding: 10px 14px;
+  margin-bottom: 4px;
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}
+.toc-head-lbl {
+  font-size: 0.59375rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+}
+.toc-nav {
+  border: var(--border-rule);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+  overflow: hidden;
+}
+.toc-nav a {
+  display: block;
+  padding: 8px 12px;
+  font-size: 0.71875rem;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.4;
+  border: none;
+  border-bottom: var(--border-rule);
+  transition: color 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.toc-nav a:last-child { border-bottom: none; }
+.toc-nav a:hover { color: var(--ink); background: var(--surface); }
+.toc-nav a.toc-active {
+  color: var(--color-red);
+  font-weight: 600;
+  background: var(--accent-bg);
+  border-left: 2px solid var(--color-red);
+}
+
+/* ============================================================
+   EXPERT SIDEBAR (RIGHT)
+   ============================================================ */
+.expert-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 30px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  padding: 0 20px 24px 16px;
+  scrollbar-width: thin;
+}
+.expert-sidebar::-webkit-scrollbar { width: 3px; }
+.expert-sidebar::-webkit-scrollbar-thumb { background: var(--border); }
+.exp-head {
+  background: var(--color-cream);
+  padding: 10px 14px;
+  margin-bottom: 4px;
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}
+.exp-head-lbl {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  display: block;
+  line-height: 1.4;
+}
+.exp-list {
+  border: var(--border-rule);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+  overflow: hidden;
+}
+.exp-item {
+  padding: 14px 14px;
+  border-bottom: var(--border-rule);
+}
+.exp-item:last-child { border-bottom: none; }
+.exp-source {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  display: block;
+  margin-bottom: 6px;
+}
+.exp-stat {
+  font-size: var(--font-size-xs);
+  color: var(--body);
+  line-height: 1.55;
+  margin: 0 0 8px;
+  font-weight: 400;
+}
+.exp-stat strong {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 0.8125rem;
+}
+.exp-link {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.exp-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.a-header {
+  border-top: 3px solid var(--color-red);
+  padding-top: var(--space-l);
+  margin-bottom: var(--space-m);
+}
+.a-meta {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: var(--space-s);
+}
+
+/* ============================================================
+   HEADINGS
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-base);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #0B0D12;
+}
+/* FIX 2: H1 bold */
+h1 { font-size: clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem); max-width: 700px; letter-spacing: -0.01em; font-weight: 800; }
+h2 { font-size: clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem); margin: var(--space-2xl) 0 var(--space-m); padding-bottom: var(--space-s); border-bottom: var(--border-rule); }
+h3 { font-size: clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem); margin: var(--space-xl) 0 var(--space-s); }
+h4 { font-size: clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem); margin: var(--space-m) 0 var(--space-xs); }
+h5 { font-size: clamp(1rem, 0.95rem + 0.23vw, 1.13rem); }
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4D8194;
+}
+
+/* ============================================================
+   ARTICLE META BAR
+   ============================================================ */
+.article-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  margin-top: var(--space-s);
+  padding: var(--space-xs) 14px;
+  background: var(--surface);
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  flex-wrap: wrap;
+}
+.amb-item {
+  font-size: 0.71875rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.amb-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.amb-sep { color: var(--border); font-size: 14px; line-height: 1; }
+.clock-icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  color: var(--muted);
+}
+
+/* ============================================================
+   BODY TEXT & LINKS
+   ============================================================ */
+p {
+  margin-bottom: var(--space-m);
+  color: var(--body);
+  line-height: var(--line-height-base);
+}
+.intro {
+  font-size: 1rem;
+  line-height: 1.75;
+  margin: var(--space-l) 0 0;
+}
+a {
+  color: var(--color-red);
+  text-decoration: none;
+  border-bottom: 1px solid #F0B0B4;
+  transition: border-color 0.2s ease;
+}
+a:hover { border-color: var(--color-red); }
+
+/* ============================================================
+   SECTION DIVIDER
+   ============================================================ */
+.sdiv {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: var(--space-2xl) 0 0;
+}
+.sdiv hr { flex: 1; border: none; border-top: var(--border-rule); }
+.sdiv span {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   CALLOUTS
+   ============================================================ */
+.co-dk {
+  background: var(--color-cream);
+  padding: var(--space-m) 24px;
+  margin: var(--space-l) 0;
+  border-left: 3px solid var(--border);
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+.co-dk .lbl {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: 8px;
+}
+.co-dk p { font-size: 0.8125rem; color: var(--body); margin: 0; line-height: 1.7; font-weight: 300; }
+.co-dk p strong { color: var(--ink); font-weight: 600; }
+
+.co-st {
+  background: var(--color-light-blue);
+  border-left: 3px solid var(--color-teal);
+  padding: 18px 22px;
+  margin: var(--space-l) 0;
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+.co-st .lbl {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: 6px;
+}
+.co-st p { font-size: 0.8125rem; color: var(--color-navy); margin: 0; line-height: 1.65; }
+
+/* ============================================================
+   TABLES — agency guidelines: all borders, rounded container
+   ============================================================ */
+.tbl-wrap {
+  border: 1.5px solid #b0b7c3;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin: var(--space-l) 0;
+}
+table, .tbl {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.9375rem;
+  margin: 0;
+}
+th, .tbl th {
+  background: #eef0f3;
+  color: var(--ink);
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid #9aa3b0;
+  border-right: 1.5px solid #b0b7c3;
+}
+th:last-child, .tbl th:last-child { border-right: none; }
+td, .tbl td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #c8cdd7;
+  border-right: 1px solid #c8cdd7;
+  color: #3a3f4a;
+  vertical-align: top;
+  text-align: left;
+}
+td:last-child, .tbl td:last-child { border-right: none; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--surface); }
+
+/* FIX 9: smaller font in overlap table */
+.tbl-sm td, .tbl-sm th { font-size: 0.71875rem; padding: 0.75rem 1rem; }
+
+/* Badge */
+.bk {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.bk-ok  { background: #e5eeeb; color: #558156; }
+.bk-am  { background: #FEF3C7; color: #78350F; }
+.bk-rd  { background: #fff3f3; color: var(--color-red); }
+.bk-bl  { background: #E9EFF4; color: #1B3A5C; }
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  background: #fff;
+  border: 1px solid #dce0e8;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin: var(--space-l) 0;
+}
+.stat-item {
+  padding: 1.5rem 2rem;
+  border-right: 1px solid #dce0e8;
+}
+.stat-item:last-child { border-right: none; }
+.stat-number {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #0B0D12;
+  margin-bottom: 6px;
+}
+.stat-number.gradient {
+  background: linear-gradient(90deg, #5300ce, #e22b83);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-label { font-size: var(--font-size-xs); color: var(--muted); font-weight: 400; line-height: 1.5; }
+
+/* ============================================================
+   CTA BLOCK — horizontal: label + body (flex:1) | button (right)
+   ============================================================ */
+.jag-cta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  border: var(--border-rule);
+  border-left: 3px solid var(--color-red);
+  background: var(--surface);
+  padding: var(--space-s) var(--space-m);
+  margin: var(--space-l) 0;
+  border-radius: var(--border-radius-sm);
+}
+/* CTA variant with JAI gradient left border */
+.jag-cta.jai-cta {
+  border-left: 3px solid var(--jai-a);
+}
+.jag-cta-label {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  background: var(--accent-bg);
+  padding: 3px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 2px;
+  border-radius: 9999px;
+}
+/* JAI gradient label */
+.jag-cta-label.jai-label {
+  background: linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  color: #fff;
+}
+.jag-cta-body { flex: 1; min-width: 0; }
+.jag-cta-head { font-size: 0.8125rem; font-weight: 600; color: var(--ink); margin: 0 0 4px; line-height: 1.4; }
+.jag-cta-sub { font-size: 0.75rem; color: var(--muted); margin: 0; line-height: 1.5; }
+.jag-cta-btn { flex-shrink: 0; }
+@media (max-width: 580px) {
+  .jag-cta { flex-direction: column; align-items: flex-start; gap: var(--space-s); }
+  .jag-cta-btn { align-self: flex-start; }
+}
+
+/* BUTTON SYSTEM */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: var(--font-base);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.btn-primary { background: #D22428; color: #fff; border-color: #D22428; }
+.btn-primary:hover { background: #3F434F; border-color: #3F434F; }
+/* FIX 4 & 8: JAI gradient button */
+.btn-jai { background: linear-gradient(90deg, #5300ce, #e22b83); color: #fff; border: none; }
+.btn-jai:hover { opacity: 0.88; }
+
+/* ============================================================
+   RISK TIER TABS
+   ============================================================ */
+.risk-tabs-wrap {
+  margin: var(--space-l) 0;
+  border: 1.5px solid #b0b7c3;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+.risk-tab-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1.5px solid #b0b7c3;
+}
+.risk-tab-btn {
+  padding: 12px 10px;
+  font-family: var(--font-base);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-right: 1px solid #b0b7c3;
+  background: var(--surface);
+  color: var(--muted);
+  transition: background 0.2s, color 0.2s;
+  line-height: 1.3;
+}
+.risk-tab-btn:last-child { border-right: none; }
+.risk-tab-btn:hover { background: #fff; color: var(--ink); }
+.risk-tab-btn.rt-active-unacceptable { background: #fff3f3; color: var(--color-red); border-bottom: 3px solid var(--color-red); }
+.risk-tab-btn.rt-active-high         { background: #FEF3C7; color: #92400e; border-bottom: 3px solid #D97706; }
+.risk-tab-btn.rt-active-limited      { background: #E9EFF4; color: var(--color-navy); border-bottom: 3px solid var(--color-navy); }
+.risk-tab-btn.rt-active-minimal      { background: #e5eeeb; color: #2d5a30; border-bottom: 3px solid #558156; }
+.risk-tab-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.risk-tab-panel {
+  display: none;
+  padding: 24px 28px;
+  background: #fff;
+}
+.risk-tab-panel.rt-visible { display: block; }
+.rtp-def {
+  font-size: 0.875rem;
+  color: var(--body);
+  line-height: 1.65;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: var(--border-rule);
+}
+.rtp-eyebrow {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.rtp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+@media (max-width: 580px) { .rtp-grid { grid-template-columns: 1fr; } }
+.rtp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  background: var(--surface);
+  font-size: 0.71875rem;
+  color: var(--body);
+  line-height: 1.45;
+}
+.rtp-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.risk-tab-btn.ct-active-risk { background: #E9EFF4; color: var(--color-navy); border-bottom: 3px solid var(--color-teal); }
+.rtp-dot-high         { background: #D97706; }
+.rtp-dot-limited      { background: var(--color-navy); }
+.rtp-dot-minimal      { background: #558156; }
+.rtp-note {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-left: 3px solid var(--border);
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+  font-size: 0.71875rem;
+  color: var(--muted);
+  font-style: italic;
+}
+/* keep old classes inert */
+.risk-tiers, .risk-card, .risk-card-hd, .risk-card-def,
+.risk-card-body, .risk-badge, .risk-note,
+.risk-items, .risk-item, .risk-dot { display: none; }
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+.timeline-wrap { margin: var(--space-l) 0; position: relative; }
+.timeline-track {
+  position: relative;
+  padding: 8px 0 8px 32px;
+}
+.timeline-track::before {
+  content: '';
+  position: absolute;
+  left: 10px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.tl-item { position: relative; display: flex; gap: 0; }
+.tl-item + .tl-item .tl-card { margin-top: 8px; }
+.tl-dot-wrap {
+  position: absolute;
+  left: -26px;
+  top: 20px;
+}
+.tl-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px var(--border);
+}
+.tl-dot-active { background: var(--color-red); box-shadow: 0 0 0 2px var(--color-red); }
+.tl-dot-past   { background: var(--color-teal); box-shadow: 0 0 0 2px var(--color-teal); }
+.tl-dot-future { background: #dce0e8; }
+.tl-card {
+  flex: 1;
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  background: #fff;
+}
+.tl-card-hd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-bottom: var(--border-rule);
+}
+.tl-date { font-size: 0.6875rem; font-weight: 700; color: var(--ink); white-space: nowrap; }
+.tl-status {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+.tl-status-done  { background: #e5eeeb; color: #558156; }
+.tl-status-now   { background: var(--accent-bg); color: var(--color-red); }
+.tl-status-ahead { background: #E9EFF4; color: var(--color-navy); }
+.tl-card-body { padding: 10px 14px; }
+.tl-card-body ul { list-style: none; padding: 0; margin: 0; }
+.tl-card-body ul li {
+  font-size: 0.75rem;
+  color: var(--body);
+  line-height: 1.55;
+  padding: 3px 0;
+  border-bottom: 1px solid #f3f4f6;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.tl-card-body ul li:last-child { border-bottom: none; }
+.tl-card-body ul li::before { content: '→'; font-size: 0.6rem; color: var(--muted); flex-shrink: 0; margin-top: 3px; }
+.tl-card-body p { font-size: 0.75rem; color: var(--body); margin: 0; line-height: 1.55; }
+
+/* ============================================================
+   FINES GRID
+   ============================================================ */
+.fines-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin: var(--space-l) 0;
+}
+.fine-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  border: 1.5px solid #b0b7c3;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  background: #fff;
+  font-size: 0.75rem;
+}
+.fine-row.fine-header {
+  background: var(--surface);
+  font-weight: 700;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.fine-cell {
+  padding: 10px 14px;
+  border-right: 1px solid #c8cdd7;
+  color: var(--body);
+  line-height: 1.5;
+  text-align: left;
+  vertical-align: middle;
+}
+.fine-cell:last-child { border-right: none; }
+.fine-amt {
+  font-weight: 700;
+  color: var(--color-red);
+}
+
+/* ============================================================
+   GDPR COMPARISON GRID
+   ============================================================ */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: var(--space-l) 0;
+}
+@media (max-width: 580px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-card {
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+.compare-hd {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.compare-hd-gdpr { background: #E9EFF4; }
+.compare-hd-ai   { background: var(--accent-bg); }
+.compare-hd-title { font-size: 0.75rem; font-weight: 700; color: var(--ink); }
+.compare-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+.compare-badge-gdpr { background: var(--color-navy); color: #fff; }
+.compare-badge-ai   { background: var(--color-red); color: #fff; }
+.compare-body { padding: 12px 16px; background: #fff; }
+.compare-body p { font-size: 0.75rem; color: var(--body); margin: 0; line-height: 1.6; }
+
+/* ============================================================
+   PROHIBITED PRACTICES VISUAL LIST
+   ============================================================ */
+.prohibited-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: var(--space-m) 0;
+}
+@media (max-width: 580px) { .prohibited-list { grid-template-columns: 1fr; } }
+.proh-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: var(--border-rule);
+  border-left: 3px solid var(--color-teal);
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+  background: #fff;
+}
+.proh-icon { font-size: 0.875rem; flex-shrink: 0; margin-top: 1px; }
+.proh-text { font-size: 0.71875rem; color: var(--body); line-height: 1.45; }
+
+/* ============================================================
+   EXEMPTIONS
+   ============================================================ */
+.exemptions-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin: var(--space-l) 0;
+}
+@media (max-width: 580px) { .exemptions-row { grid-template-columns: 1fr 1fr; } }
+.exempt-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  background: #fff;
+  font-size: 0.71875rem;
+  color: var(--body);
+}
+.exempt-dot { width: 8px; height: 8px; border-radius: 50%; background: #558156; flex-shrink: 0; }
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-rows { display: flex; flex-direction: column; gap: 8px; margin: var(--space-l) 0; }
+.faq-item { border: var(--border-rule); border-radius: var(--border-radius-sm); overflow: hidden; }
+.faq-summary {
+  padding: 1.1rem 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  font-size: var(--font-size-xs);
+  color: var(--ink);
+  gap: 16px;
+  user-select: none;
+}
+.faq-summary::-webkit-details-marker { display: none; }
+.faq-chevron {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--muted);
+  transition: transform 0.3s ease;
+}
+details[open] .faq-chevron { transform: rotate(45deg); }
+.faq-body {
+  padding: 0 1.25rem 1.1rem;
+  color: #3a3f4a;
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+  font-weight: 300;
+}
+:root { interpolate-size: allow-keywords; }
+details { height: auto; overflow: hidden; transition: height 0.3s ease; }
+details:not([open]) { height: 3.5rem; }
+
+/* ============================================================
+   US COMPANIES CHECKLIST
+   ============================================================ */
+.us-checklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin: var(--space-l) 0;
+}
+@media (max-width: 580px) { .us-checklist { grid-template-columns: 1fr; } }
+.us-check-item {
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  padding: 14px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.us-check-num { font-size: 1.25rem; font-weight: 800; color: var(--color-red); line-height: 1; }
+.us-check-text { font-size: 0.71875rem; color: var(--body); line-height: 1.45; }
+/* ============================================================
+   NEXT STEPS GRID
+   ============================================================ */
+.next-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: var(--space-l) 0;
+}
+@media (max-width: 600px) { .next-steps-grid { grid-template-columns: 1fr; } }
+.ns-card {
+  border: 1.5px solid #b0b7c3;
+  border-radius: var(--border-radius-sm);
+  padding: 18px 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow 0.2s ease;
+}
+.ns-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+.ns-tag {
+  font-size: 0.575rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  align-self: flex-start;
+}
+.ns-tag-applicability { background: #E9EFF4; color: var(--color-navy); }
+.ns-tag-risk          { background: #fff3f3; color: var(--color-red); }
+.ns-tag-fines         { background: #FEF3C7; color: #92400e; }
+.ns-tag-gpai          { background: #f0ebff; color: #5300CE; }
+.ns-tag-deadlines     { background: #e5eeeb; color: #2d5a30; }
+.ns-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.4;
+  margin: 0;
+}
+.ns-desc {
+  font-size: 0.71875rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+  flex: 1;
+}
+.ns-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.71875rem;
+  font-weight: 600;
+  color: var(--color-red);
+  text-decoration: none;
+  border-bottom: 1px solid #F0B0B4;
+  align-self: flex-start;
+  margin-top: 4px;
+  transition: border-color 0.2s ease;
+}
+.ns-btn:hover { border-color: var(--color-red); }
+
+/* ============================================================
+   COMPLIANCE OBLIGATIONS CARDS
+   ============================================================ */
+.compliance-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: var(--space-l) 0;
+}
+@media (max-width: 600px) { .compliance-grid { grid-template-columns: 1fr; } }
+.co-card {
+  border: 1.5px solid #b0b7c3;
+  border-radius: var(--border-radius-sm);
+  padding: 18px 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow 0.2s ease;
+}
+.co-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+.co-card-tag {
+  font-size: 0.575rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  align-self: flex-start;
+  background: #E9EFF4;
+  color: var(--color-navy);
+}
+.co-card-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.4;
+  margin: 0;
+}
+.co-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.co-card-list li {
+  font-size: 0.71875rem;
+  color: var(--body);
+  line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+}
+.co-card-list li::before {
+  content: '→';
+  font-size: 0.6rem;
+  color: var(--muted);
+  position: absolute;
+  left: 0;
+  top: 3px;
+}
+</style>
+</head>
+<body>
+<div class="outer-wrap">
+
+<!-- ===================== TOC SIDEBAR (LEFT) ===================== -->
+<aside class="toc-sidebar" id="tocSidebar">
+  <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+  <nav class="toc-nav" id="tocNav">
+    <a href="#what-is">What is the EU AI Act? What is its Scope in 2026?</a>
+    <a href="#risk-categories">The 4 Risk Categories</a>
+    <a href="#compliance-obligations">Compliance Obligations</a>
+    <a href="#fines">Fines &amp; Penalties</a>
+    <a href="#timeline">Timeline Through 2026</a>
+    <a href="#gdpr">EU AI Act vs GDPR</a>
+    <a href="#us-companies">US Companies in 2026</a>
+    <a href="#faq">Frequently Asked Questions</a>
+    <a href="#next-steps">Next Steps</a>
+  </nav>
+</aside>
+
+<!-- ===================== ARTICLE ===================== -->
+<main class="page">
+
+<header class="a-header">
+  <div class="a-meta">AI Regulation &middot; Compliance &middot; Procurement</div>
+  <!-- FIX 2: bold via font-weight:800 in CSS -->
+  <h1>EU AI Act: The Complete Guide for 2026</h1>
+  <!-- ARTICLE META BAR -->
+  <div class="article-meta-bar">
+    <span class="amb-item">
+      <svg class="clock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      3&ndash;4 minute read
+    </span>
+    <span class="amb-sep">|</span>
+    <span class="amb-item"><span class="amb-label">Updated</span> June 2026</span>
+  </div>
+</header>
+
+<p class="intro">Artificial intelligence is now regulated in the European Union. The EU AI Act is the first comprehensive AI law, with eight categories of AI systems already banned since February 2025. It applies to organisations that build, deploy, import, or distribute AI systems reaching EU users, regardless of physical presence in the European Union. This guide explains the four risk tiers, the fines, the deadlines, and what compliance actually involves.</p>
+
+<div class="stats-bar" style="margin-top:var(--space-m);">
+  <div class="stat-item">
+    <div class="stat-number">€35M</div>
+    <div class="stat-label">Maximum fine for banned AI practices or 7% global turnover, whichever is higher</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number gradient">4</div>
+    <div class="stat-label">Risk tiers governing all AI systems operating in or reaching the EU market</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">Aug 2026</div>
+    <div class="stat-label">Applicability of transparency obligations for providers and deployers of generative AI systems</div>
+  </div>
+</div>
+
+<!-- FIX 1: Key Takeaways removed -->
+
+<!-- ===================== SECTION 1 ===================== -->
+<div class="sdiv"><hr><span>What it Is and Who it Covers</span><hr></div>
+<h2 id="what-is">1. What is the EU AI Act? What is its Scope in 2026?</h2>
+
+<h3>EU AI Act Summary</h3>
+<p>The EU AI Act is the world's first regulation governing the development and use of artificial intelligence in the European Union. It is also called the Artificial Intelligence Act. It establishes a risk-based AI classification system, applying different rules to AI systems according to the 4 types of risk they pose. The act bans certain unacceptable risk AI use cases and implements strict governance, risk management and transparency requirements for others. The regulation has extraterritorial reach. Any non-EU company is in scope if its AI systems or outputs involve EU users.</p>
+
+<h3>Who does the EU AI Act apply to?</h3>
+
+<div class="prohibited-list">
+  <div class="proh-item">
+    <div class="proh-icon">🏢</div>
+    <div class="proh-text"><strong>Providers:</strong> Organizations or people developing or placing an AI system or general-purpose AI (GPAI) models on the EU market, irrespective of where they are located</div>
+  </div>
+  <div class="proh-item">
+    <div class="proh-icon">🖥️</div>
+    <div class="proh-text"><strong>Deployers:</strong> Organizations or people using AI systems in the EU in a professional capacity</div>
+  </div>
+  <div class="proh-item">
+    <div class="proh-icon">📦</div>
+    <div class="proh-text"><strong>Importers</strong> of AI systems</div>
+  </div>
+  <div class="proh-item">
+    <div class="proh-icon">🔄</div>
+    <div class="proh-text"><strong>Distributors</strong> of AI systems</div>
+  </div>
+</div>
+
+<h3>Key Exemptions: The regulation does not apply to AI systems used and developed for:</h3>
+
+<div class="exemptions-row">
+  <div class="exempt-item"><div class="exempt-dot"></div> Military, Defence, or National Security</div>
+  <div class="exempt-item"><div class="exempt-dot"></div> Scientific Research &amp; Development</div>
+  <div class="exempt-item"><div class="exempt-dot"></div> Personal and Non-Professional Use</div>
+  <div class="exempt-item"><div class="exempt-dot"></div> Free and Open-Source Systems</div>
+</div>
+
+<!-- FIX 3: heading changed to "Does the EU AI Act apply to US companies?" -->
+<div class="co-st">
+  <div class="lbl">Does the EU AI Act apply to US companies?</div>
+  <p style="font-size:0.875rem;">Yes. The EU AI Act has extraterritorial reach. A physical presence in EU does not matter. It governs the EU market and any non-EU companies, including US companies whose AI systems or outputs touch EU users is in scope.</p>
+  <p style="margin-top:8px;font-size:0.875rem;color:var(--color-navy);line-height:1.6;"><span style="display:inline-block;font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;background:var(--color-teal);color:#fff;padding:2px 7px;border-radius:9999px;margin-right:6px;vertical-align:middle;">Example</span>A US employer uses an AI tool to recruit or assess candidates in the EU. It is potentially covered, even without an EU legal entity.</p>
+</div>
+
+<!-- CTA 1 -->
+<div class="jag-cta jai-cta">
+  <span class="jag-cta-label jai-label">JAI</span>
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">JAI is a secure AI built for Source-to-Pay and procurement</p>
+    <p class="jag-cta-sub">JAI is a Source-to-Pay AI which combines ISO 42001-certified governance with GDPR-aligned EU data residency.</p>
+  </div>
+  <a href="https://www.jaggaer.com/demo" class="btn btn-jai jag-cta-btn">Book a Demo and explore JAI's AI governance &rarr;</a>
+</div>
+
+<!-- ===================== SECTION 2 ===================== -->
+<div class="sdiv"><hr><span>Risk Classification</span><hr></div>
+<h2 id="risk-categories">2. The 4 Risk Categories</h2>
+
+<p>These are 4 defined risk categories for AI systems under the act as per <a href="https://artificialintelligenceact.eu/article/5/" target="_blank" rel="noopener">EU Artificial Intelligence Act</a>. Not sure which tier your system falls into? Our complete guide to EU AI Act risk levels walks through each one with real examples. Each tier determines the compliance obligations that apply.</p>
+
+<div class="risk-tabs-wrap">
+
+  <!-- Tab buttons -->
+  <div class="risk-tab-row">
+    <button class="risk-tab-btn rt-active-unacceptable" onclick="switchRiskTab('unacceptable')" id="rtab-unacceptable">
+      <span class="risk-tab-dot" style="background:var(--color-red);"></span>Unacceptable Risk
+    </button>
+    <button class="risk-tab-btn" onclick="switchRiskTab('high')" id="rtab-high">
+      <span class="risk-tab-dot" style="background:#D97706;"></span>High Risk
+    </button>
+    <button class="risk-tab-btn" onclick="switchRiskTab('limited')" id="rtab-limited">
+      <span class="risk-tab-dot" style="background:var(--color-navy);"></span>Limited Risk
+    </button>
+    <button class="risk-tab-btn" onclick="switchRiskTab('minimal')" id="rtab-minimal">
+      <span class="risk-tab-dot" style="background:#558156;"></span>Minimal Risk
+    </button>
+  </div>
+
+  <!-- Unacceptable Risk Panel -->
+  <div class="risk-tab-panel rt-visible" id="rpanel-unacceptable">
+    <p class="rtp-def">AI systems which are considered as a threat to health, safety, livelihood, freedom, equality, dignity and rights of people are banned.</p>
+    <div class="rtp-eyebrow">Article 5 bans 8 practices &mdash; in force 2 February 2025</div>
+    <div class="rtp-grid">
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-unacceptable"></span>AI systems using manipulative and deceptive techniques and affect the ability to make informed decisions</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-unacceptable"></span>AI systems exploiting vulnerabilities related to age, disability or a social or economic situation</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-unacceptable"></span>Social scoring that leads to unfair treatment of certain people or groups in social contexts</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-unacceptable"></span>AI systems predicting capability of committing criminal offence based on personality traits and characteristics</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-unacceptable"></span>AI systems that expand and create facial recognition databases through CCTV and internet scraping</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-unacceptable"></span>AI systems assessing emotions in workplace or educational institutions</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-unacceptable"></span>Biometric Categorization Systems to conclude a person's race, political opinions, trade union membership, religious or philosophical beliefs, sex life</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-unacceptable"></span>Real Time biometric identification systems in public spaces for law enforcement</div>
+    </div>
+  </div>
+
+  <!-- High Risk Panel -->
+  <div class="risk-tab-panel" id="rpanel-high">
+    <p class="rtp-def">AI systems which can pose risks to safety, health and fundamental rights. Certain high risk AI use cases are:</p>
+    <div class="rtp-eyebrow">High-risk obligations enforceable from 2 August 2026</div>
+    <div class="rtp-grid">
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-high"></span>AI in Law Enforcement: Example &ndash; Evaluating the reliability of evidence</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-high"></span>AI in Migration and Border Control Management: Example &ndash; Automated examination of visa applications</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-high"></span>AI in Educational Institutions: Example &ndash; Automated scoring in exams</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-high"></span>AI systems used for remote biometric identification, emotion recognition and biometric categorisation</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-high"></span>AI tools for employment and management of workers: Example &ndash; CV shortlisting software for recruitment</div>
+    </div>
+    <div class="rtp-note">Using AI to screen candidates? Check the EU AI Act requirements for HR and recruitment tools first.</div>
+  </div>
+
+  <!-- Limited Risk Panel -->
+  <div class="risk-tab-panel" id="rpanel-limited">
+    <p class="rtp-def">These are risks which have transparency obligations regarding the use of AI. The regulation has introduced disclosure requirements on activities with limited risk to ensure humans are well-informed. Some examples are:</p>
+    <div class="rtp-eyebrow">Transparency obligations apply from August 2026</div>
+    <div class="rtp-grid">
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-limited"></span>Transparency about AI generated content</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-limited"></span>Transparency related to AI systems like Chatbots</div>
+    </div>
+    <div class="rtp-note">The transparency obligations under the act will apply from August 2026.</div>
+  </div>
+
+  <!-- Minimal Risk Panel -->
+  <div class="risk-tab-panel" id="rpanel-minimal">
+    <p class="rtp-def">AI systems which do not fall under any of the 3 categories above. There are no specific rules for this category and majority of AI systems in the EU are under this category. Some examples are:</p>
+    <div class="rtp-eyebrow">No specific compliance rules apply</div>
+    <div class="rtp-grid">
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-minimal"></span>AI used by email providers to flag spam e-mails</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-minimal"></span>AI driven video games</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-minimal"></span>AI used for inventory management and supply chain optimization</div>
+      <div class="rtp-item"><span class="rtp-dot rtp-dot-minimal"></span>Predictive Maintenance Systems</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- keep old card HTML hidden but present -->
+<div class="risk-tiers" style="display:none;">
+  <div class="risk-card"><div class="risk-card-hd risk-card-hd-unacceptable"><span class="risk-badge risk-badge-unacceptable">Unacceptable Risk</span></div>
+    <div class="risk-card-def">AI systems which are considered as a threat to health, safety, livelihood, freedom, equality, dignity and rights of people are banned.</div>
+    <div class="risk-card-body"><p style="font-size:0.625rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink);margin-bottom:6px;">Article 5 bans 8 practices &mdash; in force 2 Feb 2025</p>
+      <ul class="rc-unacceptable">
+        <li>AI systems using manipulative and deceptive techniques and affect the ability to make informed decisions</li>
+        <li>AI systems exploiting vulnerabilities related to age, disability or a social or economic situation</li>
+        <li>Social scoring that leads to unfair treatment of certain people or groups in social contexts</li>
+        <li>AI systems predicting capability of committing criminal offence based on personality traits and characteristics</li>
+        <li>AI systems that expand and create facial recognition databases through CCTV and internet scraping</li>
+        <li>AI systems assessing emotions in workplace or educational institutions</li>
+        <li>Biometric Categorization Systems to conclude a person's race, political opinions, trade union membership, religious or philosophical beliefs, sex life</li>
+        <li>Real Time biometric identification systems in public spaces for law enforcement</li>
+      </ul>
+    </div>
+  </div>
+  <div class="risk-card"><div class="risk-card-hd risk-card-hd-high"><span class="risk-badge risk-badge-high">High Risk</span></div>
+    <div class="risk-card-def">AI systems which can pose risks to safety, health and fundamental rights. Certain high risk AI use cases are:</div>
+    <div class="risk-card-body"><ul class="rc-high">
+      <li>AI in Law Enforcement: Example &ndash; Evaluating the reliability of evidence</li>
+      <li>AI in Migration and Border Control Management: Example &ndash; Automated examination of visa applications</li>
+      <li>AI in Educational Institutions: Example &ndash; Automated scoring in exams</li>
+      <li>AI systems used for remote biometric identification, emotion recognition and biometric categorisation</li>
+      <li>AI tools for employment and management of workers: Example &ndash; CV shortlisting software for recruitment</li>
+    </ul></div>
+    <div class="risk-note">Using AI to screen candidates? Check the EU AI Act requirements for HR and recruitment tools first.</div>
+  </div>
+  <div class="risk-card"><div class="risk-card-hd risk-card-hd-limited"><span class="risk-badge risk-badge-limited">Limited Risk</span></div>
+    <div class="risk-card-def">These are risks which have transparency obligations regarding the use of AI. The regulation has introduced disclosure requirements on activities with limited risk to ensure humans are well-informed. Some examples are:</div>
+    <div class="risk-card-body"><ul class="rc-limited"><li>Transparency about AI generated content</li><li>Transparency related to AI systems like Chatbots</li></ul></div>
+    <div class="risk-note">The transparency obligations under the act will apply from August 2026.</div>
+  </div>
+  <div class="risk-card"><div class="risk-card-hd risk-card-hd-minimal"><span class="risk-badge risk-badge-minimal">Minimal Risk</span></div>
+    <div class="risk-card-def">AI systems which do not fall under any of the 3 categories above. There are no specific rules for this category and majority of AI systems in the EU are under this category. Some examples are:</div>
+    <div class="risk-card-body"><ul class="rc-minimal"><li>AI used by email providers to flag spam e-mails</li><li>AI driven video games</li><li>AI used for inventory management and supply chain optimization</li><li>Predictive Maintenance Systems</li></ul></div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 2B: COMPLIANCE OBLIGATIONS ===================== -->
+<div class="sdiv"><hr><span>High-Risk Obligations</span><hr></div>
+<h2 id="compliance-obligations">Compliance Obligations</h2>
+
+<p>High-risk AI systems have the most detailed compliance obligations under the act. Organizations deploying high-risk AI systems must comply with the following obligations:</p>
+
+<div class="risk-tabs-wrap">
+
+  <!-- Tab buttons -->
+  <div class="risk-tab-row" style="grid-template-columns: repeat(4, 1fr);">
+    <button class="risk-tab-btn ct-active-risk" onclick="switchComplianceTab('risk')" id="ctab-risk">
+      <span class="risk-tab-dot" style="background:var(--color-teal);"></span>Risk Management System
+    </button>
+    <button class="risk-tab-btn" onclick="switchComplianceTab('data')" id="ctab-data">
+      <span class="risk-tab-dot" style="background:var(--color-teal);"></span>Data Governance and Quality
+    </button>
+    <button class="risk-tab-btn" onclick="switchComplianceTab('docs')" id="ctab-docs">
+      <span class="risk-tab-dot" style="background:var(--color-teal);"></span>Technical Documentation
+    </button>
+    <button class="risk-tab-btn" onclick="switchComplianceTab('logging')" id="ctab-logging">
+      <span class="risk-tab-dot" style="background:var(--color-teal);"></span>Record Keeping and Logging
+    </button>
+  </div>
+  <div class="risk-tab-row" style="grid-template-columns: repeat(4, 1fr); border-top: none;">
+    <button class="risk-tab-btn" onclick="switchComplianceTab('transparency')" id="ctab-transparency">
+      <span class="risk-tab-dot" style="background:var(--color-teal);"></span>Transparency
+    </button>
+    <button class="risk-tab-btn" onclick="switchComplianceTab('oversight')" id="ctab-oversight">
+      <span class="risk-tab-dot" style="background:var(--color-teal);"></span>Human Oversight
+    </button>
+    <button class="risk-tab-btn" onclick="switchComplianceTab('cybersec')" id="ctab-cybersec">
+      <span class="risk-tab-dot" style="background:var(--color-teal);"></span>Accuracy and Cybersecurity
+    </button>
+    <button class="risk-tab-btn" onclick="switchComplianceTab('conformity')" id="ctab-conformity">
+      <span class="risk-tab-dot" style="background:var(--color-teal);"></span>Conformity Assessment and Registration
+    </button>
+  </div>
+
+  <!-- Risk Management Panel -->
+  <div class="risk-tab-panel rt-visible" id="cpanel-risk">
+    <p class="rtp-def">Providers must maintain a continuous, iterative risk management system across the full AI lifecycle.</p>
+    <div class="rtp-eyebrow">Key obligations</div>
+    <div class="rtp-grid">
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Maintain a continuous risk management system throughout the AI lifecycle</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Identify and analyse predictable risks, including risks to fundamental rights</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Adopt risk reduction measures and maintain audit trails</div>
+    </div>
+  </div>
+
+  <!-- Data Governance Panel -->
+  <div class="risk-tab-panel" id="cpanel-data">
+    <p class="rtp-def">Training, validation, and testing datasets must be relevant, representative, and free from errors.</p>
+    <div class="rtp-eyebrow">Key obligations</div>
+    <div class="rtp-grid">
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Make sure that training, validation, and testing datasets are relevant and representative</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Address potential biases across race, ethnicity, gender, age, and disability in the dataset</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Maintain data provenance documentation</div>
+    </div>
+  </div>
+
+  <!-- Technical Documentation Panel -->
+  <div class="risk-tab-panel" id="cpanel-docs">
+    <p class="rtp-def">Providers must prepare and keep current comprehensive documentation before placing the system on the market.</p>
+    <div class="rtp-eyebrow">Key obligations</div>
+    <div class="rtp-grid">
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Prepare documentation covering AI system design, development process, dataset characteristics, model architecture, purpose, and performance metrics</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Keep documentation updated throughout the AI system lifecycle</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Documentation should be available to authorities upon request</div>
+    </div>
+  </div>
+
+  <!-- Logging Panel -->
+  <div class="risk-tab-panel" id="cpanel-logging">
+    <p class="rtp-def">High-risk AI systems must automatically log events throughout the lifecycle to enable traceability and monitoring.</p>
+    <div class="rtp-eyebrow">Key obligations</div>
+    <div class="rtp-grid">
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Enable automatic logging of events throughout the lifecycle of the AI system</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Traceability and detection of anomalies should be ensured</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Retain logs for at least six months</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Protect logs against tampering and unauthorised access</div>
+    </div>
+  </div>
+
+  <!-- Transparency Panel -->
+  <div class="risk-tab-panel" id="cpanel-transparency">
+    <p class="rtp-def">AI systems must be sufficiently transparent for users to interpret outputs and use them appropriately.</p>
+    <div class="rtp-eyebrow">Key obligations</div>
+    <div class="rtp-grid">
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Design systems should be transparent</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Clear instructions related to purpose, limitations, accuracy levels should be provided</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Inform users about risky circumstances related to health, safety or rights</div>
+    </div>
+  </div>
+
+  <!-- Human Oversight Panel -->
+  <div class="risk-tab-panel" id="cpanel-oversight">
+    <p class="rtp-def">High-risk AI systems must be designed so natural persons can effectively oversee them during operation.</p>
+    <div class="rtp-eyebrow">Key obligations</div>
+    <div class="rtp-grid">
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Design systems to enable human oversight</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Human overseers should understand system capabilities, limitations and remain aware about automation bias</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Enable intervention or system halt at any point during operation</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Individuals with appropriate training and competence should be assigned for oversight</div>
+    </div>
+  </div>
+
+  <!-- Cybersecurity Panel -->
+  <div class="risk-tab-panel" id="cpanel-cybersec">
+    <p class="rtp-def">Systems must achieve appropriate levels of accuracy, robustness, and cybersecurity throughout the lifecycle.</p>
+    <div class="rtp-eyebrow">Key obligations</div>
+    <div class="rtp-grid">
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Achieve appropriate accuracy and robustness levels</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Implement protections against adversarial attacks and data poisoning</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Ensure AI systems are resilient against errors, faults and attempts by third parties to alter performance</div>
+    </div>
+  </div>
+
+  <!-- Conformity Assessment Panel -->
+  <div class="risk-tab-panel" id="cpanel-conformity">
+    <p class="rtp-def">Providers must undergo conformity assessment and register their system in the EU database before market placement.</p>
+    <div class="rtp-eyebrow">Key obligations</div>
+    <div class="rtp-grid">
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Go through conformity assessment procedures under the EU AI Act requirements</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Obtain CE marking and EU declaration before placing the system on the market</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>High risk category systems require third-party conformity assessments</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Other high-risk systems may use internal conformity assessment</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Register high-risk AI systems in the EU database before putting them on the market</div>
+      <div class="rtp-item"><span class="rtp-dot" style="background:var(--color-teal);margin-top:5px;flex-shrink:0;"></span>Provide detailed information and update registration information when changes occur</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== SECTION 3 ===================== -->
+<div class="sdiv"><hr><span>Enforcement</span><hr></div>
+<h2 id="fines">3. Fines and Penalties</h2>
+
+<p>The EU AI Act fines and penalties for various violations as per <a href="https://artificialintelligenceact.eu/chapter/12/" target="_blank" rel="noopener">EU Artificial Intelligence Act</a> are listed below. Want to know if you are exposed? Run through our EU AI Act compliance and fines checklist.</p>
+
+<div class="fines-grid">
+  <div class="fine-row fine-header">
+    <div class="fine-cell">Violation</div>
+    <div class="fine-cell">Who it applies to</div>
+    <div class="fine-cell">Maximum fine</div>
+  </div>
+  <div class="fine-row">
+    <div class="fine-cell">Prohibited AI practices (Article 5)</div>
+    <div class="fine-cell">Companies / operators</div>
+    <div class="fine-cell"><span class="fine-amt">€35M or 7%</span> of global annual turnover, whichever is higher</div>
+  </div>
+  <div class="fine-row">
+    <div class="fine-cell">Other obligation breaches (providers, deployers, importers, distributors, authorised reps, notified bodies, transparency)</div>
+    <div class="fine-cell">Companies / operators</div>
+    <div class="fine-cell"><span class="fine-amt">€15M or 3%</span> of global annual turnover, whichever is higher</div>
+  </div>
+  <div class="fine-row">
+    <div class="fine-cell">Incorrect, incomplete, or misleading information to authorities</div>
+    <div class="fine-cell">Companies / operators</div>
+    <div class="fine-cell"><span class="fine-amt">€7.5M or 1%</span> of global annual turnover, whichever is higher</div>
+  </div>
+  <div class="fine-row">
+    <div class="fine-cell">Any breach (Article 5 or other)</div>
+    <div class="fine-cell">SMEs and startups</div>
+    <div class="fine-cell">The lower of the percentage or fixed amount</div>
+  </div>
+  <div class="fine-row">
+    <div class="fine-cell">GPAI model provider violations (Article 101)</div>
+    <div class="fine-cell">General-purpose AI model providers</div>
+    <div class="fine-cell"><span class="fine-amt">€15M or 3%</span> of global annual turnover, whichever is higher</div>
+  </div>
+  <div class="fine-row">
+    <div class="fine-cell">Prohibited AI practices (Article 5)</div>
+    <div class="fine-cell">EU institutions, bodies, agencies</div>
+    <div class="fine-cell"><span class="fine-amt">€1.5M</span></div>
+  </div>
+  <div class="fine-row">
+    <div class="fine-cell">Other breaches</div>
+    <div class="fine-cell">EU institutions, bodies, agencies</div>
+    <div class="fine-cell"><span class="fine-amt">€750,000</span></div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 4 ===================== -->
+<div class="sdiv"><hr><span>Compliance Deadlines</span><hr></div>
+<h2 id="timeline">4. EU AI Act Timeline: Key Dates Through 2026 and Beyond</h2>
+
+<p>Deadlines are arriving fast. The EU AI Act effective date was 1 August 2024, with obligations rolling out in phases through 2027 as per <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai#1720699867912-1" target="_blank" rel="noopener">European Commission AI Act</a>. Map your obligations against the full compliance timeline so nothing catches you off guard.</p>
+
+<div class="timeline-wrap">
+  <div class="timeline-track">
+
+    <div class="tl-item">
+      <div class="tl-dot-wrap"><div class="tl-dot tl-dot-past"></div></div>
+      <div class="tl-card">
+        <div class="tl-card-hd">
+          <span class="tl-date">1st August 2024</span>
+          <span class="tl-status tl-status-done">&#10003; In Force</span>
+        </div>
+        <div class="tl-card-body"><p>The EU AI Act came into force.</p></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot-wrap"><div class="tl-dot tl-dot-past"></div></div>
+      <div class="tl-card" style="margin-top:8px;">
+        <div class="tl-card-hd">
+          <span class="tl-date">2nd February 2025</span>
+          <span class="tl-status tl-status-done">&#10003; Active</span>
+        </div>
+        <div class="tl-card-body">
+          <ul>
+            <li>Prohibitions on certain AI systems and regulatory requirements came into effect</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot-wrap"><div class="tl-dot tl-dot-past"></div></div>
+      <div class="tl-card" style="margin-top:8px;">
+        <div class="tl-card-hd">
+          <span class="tl-date">2nd August 2025</span>
+          <span class="tl-status tl-status-done">&#10003; Active</span>
+        </div>
+        <div class="tl-card-body">
+          <ul>
+            <li>Rules for general-purpose AI (GPAI) models, governance, confidentiality and penalties came into effect</li>
+          </ul>
+          <p style="font-size:0.71875rem;color:var(--muted);margin:6px 0 0;padding-left:2px;">EU AI Act obligations for general-purpose AI models</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot-wrap"><div class="tl-dot tl-dot-active"></div></div>
+      <div class="tl-card" style="margin-top:8px; border-color:var(--color-red);">
+        <div class="tl-card-hd" style="background:var(--accent-bg);">
+          <span class="tl-date" style="color:var(--color-red);">2nd August 2026</span>
+          <span class="tl-status tl-status-now">&#8599; Approaching</span>
+        </div>
+        <div class="tl-card-body">
+          <ul>
+            <li>Remaining rules under the act including high-risk AI system obligations and transparency rules will come into effect</li>
+            <li>Member States should have established at least one AI regulatory sandbox at national level</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot-wrap"><div class="tl-dot tl-dot-future"></div></div>
+      <div class="tl-card" style="margin-top:8px;">
+        <div class="tl-card-hd">
+          <span class="tl-date">2nd August 2027</span>
+          <span class="tl-status tl-status-ahead">Upcoming</span>
+        </div>
+        <div class="tl-card-body">
+          <ul>
+            <li>Rules for AI systems that are products or safety components of products regulated under Article 6(1) of act will apply</li>
+            <li>Providers of GPAI models that were placed on the market before 2 August 2025 must comply with rules for GPAI models by this date</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<p style="font-size:0.71875rem;color:var(--muted);margin-top:8px;"><strong>This regulatory timeline will be updated with any new key dates announced by official European Union bodies.</strong></p>
+
+<!-- CTA 2 -->
+<div class="jag-cta jai-cta">
+  <span class="jag-cta-label">JAGGAER</span>
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">When the deadlines hit, your procurement AI must hold up: JAI is built to.</p>
+    <p class="jag-cta-sub">JAGGAER's AI is embedded across sourcing, contracts, and supplier management in one Source-to-Pay platform.</p>
+  </div>
+  <a href="https://www.jaggaer.com/demo" class="btn btn-jai jag-cta-btn">See how JAI works in Source-to-Pay &rarr;</a>
+</div>
+
+<!-- ===================== SECTION 5 ===================== -->
+<div class="sdiv"><hr><span>Regulatory Interaction</span><hr></div>
+<h2 id="gdpr">5. EU AI Act vs. GDPR: How They Interact?</h2>
+
+<p>GDPR and the EU AI Act are complementary, not competing. Both take a risk-based approach, but they are built on different objectives.</p>
+
+<div class="compare-grid">
+  <div class="compare-card">
+    <div class="compare-hd compare-hd-gdpr">
+      <span class="compare-badge compare-badge-gdpr">GDPR</span>
+      <span class="compare-hd-title">Data &amp; Privacy</span>
+    </div>
+    <div class="compare-body">
+      <p>GDPR focuses on protecting personal data and individual privacy across the EU. The act applies to any organisation collecting and/or processing personal data related to EU citizens, regardless of where the organisation is based.</p>
+    </div>
+  </div>
+  <div class="compare-card">
+    <div class="compare-hd compare-hd-ai">
+      <span class="compare-badge compare-badge-ai">EU AI Act</span>
+      <span class="compare-hd-title">AI Systems</span>
+    </div>
+    <div class="compare-body">
+      <p>EU AI Act regulates the development and deployment of AI systems. The act addresses the design, use and governance of AI technologies by introducing a risk-based framework.</p>
+    </div>
+  </div>
+</div>
+
+<h3>Where they overlap?</h3>
+
+<!-- FIX 9: exact original content, tbl-sm for smaller font, tbl-wrap for rounded borders -->
+<div class="tbl-wrap">
+<table class="tbl tbl-sm">
+  <thead>
+    <tr>
+      <th style="width:18%">Theme</th>
+      <th>GDPR</th>
+      <th>EU AI Act</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Fundamental Rights &amp; Data Protection Impact assessment</strong></td>
+      <td>A data protection impact assessment for high-risk processing (Article 35)</td>
+      <td>A fundamental rights impact assessment before the first deployment (Article 27)</td>
+    </tr>
+    <tr>
+      <td><strong>Transparency to people</strong></td>
+      <td>Informing data subjects about collection and use of personal data and automated decision making (Article 13, 14, 15(1)(h))</td>
+      <td>Deployers should inform people using high risk AI systems (Article 26(11))</td>
+    </tr>
+    <tr>
+      <td><strong>Human oversight</strong></td>
+      <td>Data subjects have the right not to be subject to automated decisions (Article 22)</td>
+      <td>High-risk systems designed and developed for human oversight (Article 14)</td>
+    </tr>
+    <tr>
+      <td><strong>Traceability</strong></td>
+      <td>Controllers and Processors required to maintain records of processing activities (Article 30)</td>
+      <td>Providers of high-risk AI systems to maintain technical documentation and automatic logging (Article 11,12, 26(6))</td>
+    </tr>
+    <tr>
+      <td><strong>Security</strong></td>
+      <td>Controllers and Processors to take technical and organizational measures to ensure security (Article 32)</td>
+      <td>Providers must ensure robustness, accuracy, and cybersecurity of high-risk AI systems (Article 15(5))</td>
+    </tr>
+    <tr>
+      <td><strong>Special-category data</strong></td>
+      <td>Processing personal data is prohibited unless an exception applies (Article 9)</td>
+      <td>Processing personal data permitted only where strictly necessary for bias monitoring, detection and correction in high-risk AI (Art. 10(5))</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ===================== SECTION 6 ===================== -->
+<div class="sdiv"><hr><span>US Company Obligations</span><hr></div>
+<h2 id="us-companies">6. What do US Companies Need to Know in 2026?</h2>
+
+<p>The act has extraterritorial reach. U.S. companies providing AI systems to users in the European Union are in the scope of the act. The physical presence of the US company does not matter. See how the act affects US companies in practice. Non-compliance can trigger fines up to &euro;35 million or 7% of global annual turnover.</p>
+
+<p>For US companies, the main ways the EU AI Act would apply to them is if they:</p>
+
+<div class="us-checklist">
+  <div class="us-check-item">
+    <div class="us-check-num">01</div>
+    <div class="us-check-text">Provide AI systems or General-Purpose AI models in the EU, irrespective of a physical presence in EU</div>
+  </div>
+  <div class="us-check-item">
+    <div class="us-check-num">02</div>
+    <div class="us-check-text">Deploy AI systems from a location within the EU</div>
+  </div>
+  <div class="us-check-item">
+    <div class="us-check-num">03</div>
+    <div class="us-check-text">Import or distribute AI systems within the EU</div>
+  </div>
+</div>
+
+<!-- CTA 3 -->
+<div class="jag-cta">
+  <span class="jag-cta-label">JAGGAER</span>
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">How agentic AI works in procurement once it's compliant</p>
+    <p class="jag-cta-sub">A JAGGAER guide on how agentic AI operates across procurement workflows</p>
+  </div>
+  <a href="https://www.jaggaer.com/download/ebook-guide/agentic-ai-in-procurement-hype-to-roi" class="btn btn-primary jag-cta-btn">Download the E-Book &rarr;</a>
+</div>
+
+<!-- ===================== SECTION 7: FAQ ===================== -->
+<div class="sdiv"><hr><span>People Also Ask</span><hr></div>
+<h2 id="faq">7. Frequently Asked Questions</h2>
+
+<div class="faq-rows">
+  <details class="faq-item">
+    <summary class="faq-summary">What is the EU AI Act?<span class="faq-chevron">+</span></summary>
+    <div class="faq-body">The EU AI Act is the world's first law regulating development and use of artificial intelligence. It governs AI systems used in the European Union according to four risk tiers.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">When does the EU AI Act come into force?<span class="faq-chevron">+</span></summary>
+    <div class="faq-body">The EU AI Act entered into force on 1 August 2024. Its rules apply in phases, and most obligations will take effect on 2 August 2026.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">Who does the EU AI Act apply to?<span class="faq-chevron">+</span></summary>
+    <div class="faq-body">The EU AI Act applies to providers, deployers, importers, and distributors of AI systems, including companies based outside the EU when their AI system's output is used within the Union.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">Does the EU AI Act apply to US companies?<span class="faq-chevron">+</span></summary>
+    <div class="faq-body">Yes. The EU AI Act applies to US companies that place AI systems on the EU market, or whose AI outputs are used in the EU.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">What AI systems are banned under the EU AI Act?<span class="faq-chevron">+</span></summary>
+    <div class="faq-body">The EU AI Act bans AI posing unacceptable risk, including social scoring, manipulative techniques, untargeted facial-image scraping, emotion recognition in workplaces and schools, and most real-time public biometric identification.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">What are high-risk AI systems under the EU AI Act?<span class="faq-chevron">+</span></summary>
+    <div class="faq-body">EU AI Act high risk AI systems are those used in sensitive areas like employment, education, essential services, law enforcement, migration, and critical infrastructure.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">What are the fines for non-compliance with the EU AI Act?<span class="faq-chevron">+</span></summary>
+    <div class="faq-body">The EU AI Act imposes fines up to 35 million euros or 7% of global turnover for banned practices, and up to 15 million euros or 3% for other violations.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">How is the EU AI Act different from GDPR?<span class="faq-chevron">+</span></summary>
+    <div class="faq-body">GDPR governs personal data and privacy, while the EU AI Act regulates AI systems by risk level.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">What is a general-purpose AI model under the EU AI Act?<span class="faq-chevron">+</span></summary>
+    <div class="faq-body">A general-purpose AI model under the EU AI Act is an AI model capable of performing many distinct tasks and being integrated into multiple downstream systems.</div>
+  </details>
+  <details class="faq-item">
+    <summary class="faq-summary">Is ChatGPT / GPT-5 covered by the EU AI Act?<span class="faq-chevron">+</span></summary>
+    <div class="faq-body">Yes, ChatGPT and models like GPT-5 are general-purpose AI models under the EU AI Act. The most capable models are classed as GPAI with systemic risk, triggering extra obligations.</div>
+  </details>
+</div>
+
+<!-- ===================== NEXT STEPS ===================== -->
+<div class="sdiv"><hr><span>Go Deeper</span><hr></div>
+<h2 id="next-steps">Next Steps</h2>
+
+<p>This guide covers the EU AI Act end to end. The five articles below go deeper on the topics that matter most to your situation. Whether you are assessing applicability, mapping risk, calculating exposure, or preparing for a specific deadline, each of the areas have a dedicated guide with the detail this overview cannot fit.</p>
+
+<div class="next-steps-grid">
+
+  <div class="ns-card">
+    <span class="ns-tag ns-tag-applicability">Applicability</span>
+    <p class="ns-title">Does the EU AI Act Apply to Your Company? A Guide for Non-EU Businesses</p>
+    <p class="ns-desc">Find out whether the act applies to your company, what triggers compliance obligations, and what you need to do next.</p>
+    <a href="#" class="ns-btn">Read More &rarr;</a>
+  </div>
+
+  <div class="ns-card">
+    <span class="ns-tag ns-tag-risk">Risk Classification</span>
+    <p class="ns-title">EU AI Act Risk Categories: The 4 Tiers Explained</p>
+    <p class="ns-desc">Learn what each risk tier means and which obligations apply to each level.</p>
+    <a href="#" class="ns-btn">Read More &rarr;</a>
+  </div>
+
+  <div class="ns-card">
+    <span class="ns-tag ns-tag-fines">Fines &amp; Penalties</span>
+    <p class="ns-title">EU AI Act Fines and Penalties: What Non-Compliance Will Cost You</p>
+    <p class="ns-desc">Learn which violations trigger which penalties and how enforcement works.</p>
+    <a href="#" class="ns-btn">Read More &rarr;</a>
+  </div>
+
+  <div class="ns-card">
+    <span class="ns-tag ns-tag-gpai">GPAI Models</span>
+    <p class="ns-title">EU AI Act Rules for General-Purpose AI: What GPAI Providers Need to Know</p>
+    <p class="ns-desc">Learn what qualifies as a GPAI model, which obligations apply, and what systemic risk means for your organisation.</p>
+    <a href="#" class="ns-btn">Read More &rarr;</a>
+  </div>
+
+  <div class="ns-card">
+    <span class="ns-tag ns-tag-deadlines">Deadlines</span>
+    <p class="ns-title">EU AI Act Compliance Deadlines: Key Dates and Obligations</p>
+    <p class="ns-desc">The EU AI Act applies in phases. This guide covers every key compliance deadline with dates and what each means.</p>
+    <a href="#" class="ns-btn">Read More &rarr;</a>
+  </div>
+
+</div>
+
+</main>
+
+<!-- ===================== EXPERT SIDEBAR (RIGHT) ===================== -->
+<aside class="expert-sidebar">
+  <div class="exp-head"><span class="exp-head-lbl">What Are the Experts Saying</span></div>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <span class="exp-source">Deloitte, 2024</span>
+      <p class="exp-stat">Only <strong>18% of European business leaders</strong> are highly prepared for GenAI risk and governance.</p>
+      <a href="https://www.deloitte.com/us/en/insights/deloitte-insights-magazine/issue-33/ai-regulation-clarity-boosts-preparedness-for-eu-ai-act.html" class="exp-link" target="_blank" rel="noopener">View Report &rarr;</a>
+    </div>
+
+    <div class="exp-item">
+      <span class="exp-source">Cloud Security Alliance, March 2026</span>
+      <p class="exp-stat">Over <strong>50% of organizations</strong> still lack systematic AI inventories and technical standards, making compliance harder.</p>
+      <a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-eu-ai-act-high-risk-compliance-deadline-20/" class="exp-link" target="_blank" rel="noopener">View Research Note &rarr;</a>
+    </div>
+
+    <div class="exp-item">
+      <span class="exp-source">Gartner, 2024</span>
+      <p class="exp-stat">By 2026, <strong>half of governments worldwide</strong> will require responsible AI practices and stronger data privacy compliance.</p>
+      <a href="https://www.gartner.com/en/newsroom/press-releases/2024-02-29-ai-regulations-to-drive-responsible-ai-initiatives" class="exp-link" target="_blank" rel="noopener">View Forecast &rarr;</a>
+    </div>
+
+  </div>
+</aside>
+
+</div><!-- end outer-wrap -->
+
+<script>
+(function() {
+  const sections = document.querySelectorAll('h2[id]');
+  const links    = document.querySelectorAll('#tocNav a');
+  if (!sections.length || !links.length) return;
+  function onScroll() {
+    let current = '';
+    sections.forEach(function(s) {
+      if (s.getBoundingClientRect().top <= 120) current = s.id;
+    });
+    links.forEach(function(a) {
+      a.classList.toggle('toc-active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+function switchRiskTab(tier) {
+  var tiers = ['unacceptable', 'high', 'limited', 'minimal'];
+  var activeClasses = {
+    unacceptable: 'rt-active-unacceptable',
+    high:         'rt-active-high',
+    limited:      'rt-active-limited',
+    minimal:      'rt-active-minimal'
+  };
+  tiers.forEach(function(t) {
+    var btn   = document.getElementById('rtab-' + t);
+    var panel = document.getElementById('rpanel-' + t);
+    if (t === tier) {
+      btn.classList.add(activeClasses[t]);
+      panel.classList.add('rt-visible');
+    } else {
+      btn.classList.remove(activeClasses[t]);
+      panel.classList.remove('rt-visible');
+    }
+  });
+}
+function switchComplianceTab(tab) {
+  var tabs = ['risk','data','docs','logging','transparency','oversight','cybersec','conformity'];
+  tabs.forEach(function(t) {
+    var btn   = document.getElementById('ctab-' + t);
+    var panel = document.getElementById('cpanel-' + t);
+    if (t === tab) {
+      btn.classList.add('ct-active-risk');
+      panel.classList.add('rt-visible');
+    } else {
+      btn.classList.remove('ct-active-risk');
+      panel.classList.remove('rt-visible');
+    }
+  });
+}
+</script>
+</body>
+</html>
