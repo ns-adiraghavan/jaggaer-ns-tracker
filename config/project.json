@@ -591,8 +591,8 @@
               "title": "EU AI Act: The Complete Guide",
               "format": "Blog/Article",
               "assignee": "null",
-              "status": "stage-nq11b",
-              "revision_count": 0,
+              "status": "brief-uploaded",
+              "revision_count": 1,
               "primary_keyword": "EU AI Act",
               "secondary_keyword": "EU AI Act Compliance High Risk",
               "intent": "informational",
@@ -600,7 +600,13 @@
               "schedule_week": 2,
               "content_type": "msv",
               "phase": 1,
-              "funnel": "NA"
+              "funnel": "NA",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-06-17T05:18:32.558Z",
+              "last_upload_by": "jason",
+              "last_updated": "2026-06-17T05:18:32.558Z",
+              "last_updated_by": "jason"
             },
             {
               "id": "p-ps1-2",
