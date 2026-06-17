@@ -594,7 +594,7 @@
               "title": "EU AI Act: The Complete Guide",
               "format": "Blog/Article",
               "assignee": "null",
-              "status": "marketing-review",
+              "status": "robert-review",
               "revision_count": 1,
               "primary_keyword": "EU AI Act",
               "secondary_keyword": "EU AI Act Compliance High Risk",
@@ -608,8 +608,8 @@
               "return_to_stage": null,
               "last_upload": "2026-06-17T05:18:32.558Z",
               "last_upload_by": "jason",
-              "last_updated": "2026-06-17T05:18:32.558Z",
-              "last_updated_by": "jason"
+              "last_updated": "2026-06-17T14:08:21.753Z",
+              "last_updated_by": "m-ny8dy"
             },
             {
               "id": "p-ps1-2",
@@ -1196,6 +1196,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-06-17T14:08:10.897Z",
+        "stage": "marketing-review"
+      }
+    ],
+    "p-ps1-1": [
+      {
+        "id": "fb-vnj298",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-06-17T14:08:21.752Z",
         "stage": "marketing-review"
       }
     ]
