@@ -641,7 +641,14 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "writing"
+              "status": "marketing-review",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-06-19T09:58:14.652Z",
+              "last_upload_by": "m-5jitd",
+              "last_updated": "2026-06-19T09:58:14.652Z",
+              "last_updated_by": "m-5jitd"
             },
             {
               "id": "piece-ps1-eu-ai-4-ok33",
