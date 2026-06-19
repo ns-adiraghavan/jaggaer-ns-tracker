@@ -616,8 +616,8 @@
               "title": "EU AI Act Rules for General-Purpose AI: What GPAI Providers Need to Know",
               "format": "Blog/Article",
               "assignee": "null",
-              "status": "writing",
-              "revision_count": 0,
+              "status": "marketing-review",
+              "revision_count": 1,
               "primary_keyword": "EU AI Act GPAI",
               "secondary_keyword": "EU AI Act transparency requirements",
               "intent": "informational",
@@ -625,7 +625,13 @@
               "schedule_week": 2,
               "content_type": "msv",
               "phase": 2,
-              "funnel": "NA"
+              "funnel": "NA",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-06-19T10:07:46.870Z",
+              "last_upload_by": "m-e10nz",
+              "last_updated": "2026-06-19T10:07:46.870Z",
+              "last_updated_by": "m-e10nz"
             },
             {
               "id": "piece-ps1-eu-ai-3-0dyk",
