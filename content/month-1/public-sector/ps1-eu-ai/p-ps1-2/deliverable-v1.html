@@ -1,0 +1,2408 @@
+<!-- uploaded by m-e10nz at 2026-06-19T09:58:47.674Z -->
+<!-- piece: EU AI Act Rules for General-Purpose AI: What GPAI Providers Need to Know -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU AI Act GPAI Rules: What Providers Need to Know</title>
+<meta name="description" content="The EU AI Act imposes specific rules on GPAI model providers. Learn the two-tier framework, systemic risk threshold, and watermarking requirements.">
+<link rel="canonical" href="https://www.jaggaer.com/eu-ai-act-general-purpose-ai">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   JAGGAER DESIGN TOKENS v2.0
+   ============================================================ */
+:root {
+  --color-ink:        #0B0D12;
+  --color-ink-2:      #3a3f4a;
+  --color-ink-3:      #6a7180;
+  --color-red:        #D22428;
+  --color-grey:       #3F434F;
+  --color-light-grey: #dce0e8;
+  --color-cream:      #eef0f3;
+  --color-light-blue: #E9EFF4;
+  --color-white:      #ffffff;
+  --color-navy:       #1B3A5C;
+  --color-teal:       #4D8194;
+  --jai-a:            #5300CE;
+  --jai-b:            #E22B83;
+  --jai-gradient:     linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+
+  --ink:        var(--color-ink);
+  --body:       var(--color-ink-2);
+  --muted:      var(--color-ink-3);
+  --accent:     var(--color-red);
+  --accent-bg:  #FDF2F2;
+  --border:     var(--color-light-grey);
+  --bg:         var(--color-white);
+  --surface:    var(--color-cream);
+
+  --font-base:            Inter, system-ui, -apple-system, sans-serif;
+  --font-size-xs:         0.75rem;
+  --font-size-sm:         0.875rem;
+  --font-size-base:       0.875rem;
+  --font-size-lg:         1.125rem;
+
+  --font-weight-heading:  400;
+  --line-height-base:     1.6;
+  --line-height-heading:  1.1;
+
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+
+  --container-width:   1240px;
+  --container-narrow:  1024px;
+  --container-wide:    1800px;
+  --container-padding: clamp(1rem, 3vw, 2rem);
+  --column-gap:        1.5rem;
+  --border-radius:     1rem;
+  --border-radius-sm:  0.5rem;
+  --border-color:      #dce0e8;
+  --border-rule:       1px solid var(--border-color);
+
+  /* Typography scale tokens (per agency design guidelines) */
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-display: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-base);
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--body);
+  line-height: var(--line-height-base);
+  font-size: var(--font-size-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   OUTER LAYOUT
+   ============================================================ */
+.outer-wrap {
+  display: flex;
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  align-items: flex-start;
+  gap: 0;
+}
+.page {
+  flex: 1;
+  min-width: 0;
+  max-width: var(--container-narrow);
+  padding: 0 var(--container-padding) var(--space-2xl);
+}
+@media (max-width: 1100px) { .expert-sidebar { display: none; } }
+@media (max-width: 900px)  { .outer-wrap { display: block; } .toc-sidebar { display: none; } }
+
+/* ============================================================
+   TOC SIDEBAR (LEFT)
+   ============================================================ */
+.toc-sidebar {
+  width: 210px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 30px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  padding: 0 16px 24px 20px;
+  scrollbar-width: thin;
+}
+.toc-sidebar::-webkit-scrollbar { width: 3px; }
+.toc-sidebar::-webkit-scrollbar-thumb { background: var(--border); }
+.toc-head {
+  background: var(--color-cream);
+  padding: 10px 14px;
+  margin-bottom: 4px;
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}
+.toc-head-lbl {
+  font-size: 0.59375rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-red);
+}
+.toc-nav {
+  border: var(--border-rule);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+  overflow: hidden;
+}
+.toc-nav a {
+  display: block;
+  padding: 8px 12px;
+  font-size: 0.71875rem;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.4;
+  border: none;
+  border-bottom: var(--border-rule);
+  transition: color 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+.toc-nav a:last-child { border-bottom: none; }
+.toc-nav a:hover { color: var(--ink); background: var(--surface); }
+.toc-nav a.toc-active {
+  color: var(--color-red);
+  font-weight: 600;
+  background: var(--accent-bg);
+  border-left: 2px solid var(--color-red);
+}
+
+/* ============================================================
+   EXPERT SIDEBAR (RIGHT)
+   ============================================================ */
+.expert-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 30px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  padding: 0 20px 24px 16px;
+  scrollbar-width: thin;
+}
+.expert-sidebar::-webkit-scrollbar { width: 3px; }
+.expert-sidebar::-webkit-scrollbar-thumb { background: var(--border); }
+.exp-head {
+  background: var(--color-cream);
+  padding: 10px 14px;
+  margin-bottom: 4px;
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}
+.exp-head-lbl {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  display: block;
+  line-height: 1.4;
+}
+.exp-list {
+  border: var(--border-rule);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+  overflow: hidden;
+}
+.exp-item {
+  padding: 14px 14px;
+  border-bottom: var(--border-rule);
+}
+.exp-item:last-child { border-bottom: none; }
+.exp-source {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  display: block;
+  margin-bottom: 6px;
+}
+.exp-stat {
+  font-size: var(--font-size-xs);
+  color: var(--body);
+  line-height: 1.55;
+  margin: 0 0 8px;
+  font-weight: 400;
+}
+.exp-stat strong {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 0.8125rem;
+}
+.exp-link {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.exp-link:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.a-header {
+  border-top: 3px solid var(--color-red);
+  padding-top: var(--space-l);
+  margin-bottom: var(--space-m);
+}
+.a-meta {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: var(--space-s);
+}
+/* Eyebrow label — per agency design guidelines §Typography */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+/* ============================================================
+   HEADINGS
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-base);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #0B0D12;
+}
+h1 { font-size: clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem); max-width: 700px; letter-spacing: -0.01em; font-weight: 800; }
+h2 { font-size: clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem); margin: var(--space-2xl) 0 var(--space-m); padding-bottom: var(--space-s); border-bottom: var(--border-rule); }
+h3 { font-size: clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem); margin: var(--space-xl) 0 var(--space-s); }
+h4 { font-size: clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem); margin: var(--space-m) 0 var(--space-xs); }
+h5 { font-size: clamp(1rem, 0.95rem + 0.23vw, 1.13rem); }
+
+/* ============================================================
+   ARTICLE META BAR
+   ============================================================ */
+.article-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  margin-top: var(--space-s);
+  padding: var(--space-xs) 14px;
+  background: var(--surface);
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  flex-wrap: wrap;
+}
+.amb-item {
+  font-size: 0.71875rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.amb-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.amb-sep { color: var(--border); font-size: 14px; line-height: 1; }
+.clock-icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  color: var(--muted);
+}
+
+/* ============================================================
+   BODY TEXT & LINKS
+   ============================================================ */
+p {
+  margin-bottom: var(--space-m);
+  color: var(--body);
+  line-height: var(--line-height-base);
+}
+.intro {
+  font-size: var(--font-size-base);
+  line-height: 1.75;
+  margin: var(--space-l) 0 0;
+}
+a {
+  color: var(--color-navy);
+  text-decoration: none;
+  border-bottom: 1px solid #a8bad0;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+a:hover { color: var(--color-navy); border-color: var(--color-navy); }
+
+/* ============================================================
+   SECTION DIVIDER
+   ============================================================ */
+.sdiv {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: var(--space-2xl) 0 0;
+}
+.sdiv hr { flex: 1; border: none; border-top: var(--border-rule); }
+.sdiv span {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   CALLOUTS
+   ============================================================ */
+.co-dk {
+  background: var(--color-cream);
+  padding: var(--space-m) 24px;
+  margin: var(--space-l) 0;
+  border-left: 3px solid var(--border);
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+.co-dk .lbl {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: 8px;
+}
+.co-dk p { font-size: 0.8125rem; color: var(--body); margin: 0; line-height: 1.7; font-weight: 300; }
+.co-dk p strong { color: var(--ink); font-weight: 600; }
+
+.co-st {
+  background: var(--color-light-blue);
+  border-left: 3px solid var(--color-teal);
+  padding: 18px 22px;
+  margin: var(--space-l) 0;
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+.co-st .lbl {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin-bottom: 6px;
+}
+.co-st p { font-size: 0.8125rem; color: var(--color-navy); margin: 0; line-height: 1.65; }
+
+/* ============================================================
+   KEY FACTS TABLE
+   ============================================================ */
+.tbl-wrap {
+  border: 1.5px solid #b0b7c3;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin: var(--space-l) 0;
+}
+table, .tbl {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.9375rem;
+  margin: 0;
+}
+th, .tbl th {
+  background: #eef0f3;
+  color: var(--ink);
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid #9aa3b0;
+  border-right: 1.5px solid #b0b7c3;
+}
+th:last-child, .tbl th:last-child { border-right: none; }
+td, .tbl td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #ebedf0;
+  border-right: 1px solid #ebedf0;
+  color: #3a3f4a;
+  vertical-align: top;
+  text-align: left;
+}
+td:last-child, .tbl td:last-child { border-right: none; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--surface); }
+.tbl-sm td, .tbl-sm th { font-size: 0.71875rem; padding: 0.75rem 1rem; }
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  background: #fff;
+  border: 1px solid #dce0e8;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin: var(--space-l) 0;
+}
+.stat-item {
+  padding: 1.5rem 2rem;
+  border-right: 1px solid #dce0e8;
+}
+.stat-item:last-child { border-right: none; }
+.stat-number {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: #0B0D12;
+  margin-bottom: 6px;
+}
+.stat-number.gradient {
+  background: linear-gradient(90deg, #5300ce, #e22b83);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-label { font-size: var(--font-size-xs); color: var(--muted); font-weight: 400; line-height: 1.5; }
+
+/* ============================================================
+   CTA BLOCK
+   ============================================================ */
+.jag-cta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  border: var(--border-rule);
+  border-left: 3px solid var(--color-red);
+  background: var(--surface);
+  padding: var(--space-s) var(--space-m);
+  margin: var(--space-l) 0;
+  border-radius: var(--border-radius-sm);
+}
+.jag-cta.jai-cta { border-left: 3px solid var(--jai-a); }
+.jag-cta-label {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  background: var(--accent-bg);
+  padding: 3px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 2px;
+  border-radius: 9999px;
+}
+.jag-cta-label.jai-label {
+  background: linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  color: #fff;
+}
+.jag-cta-body { flex: 1; min-width: 0; }
+.jag-cta-head { font-size: 0.8125rem; font-weight: 600; color: var(--ink); margin: 0 0 4px; line-height: 1.4; }
+.jag-cta-sub { font-size: 0.75rem; color: var(--muted); margin: 0; line-height: 1.5; }
+.jag-cta-btn { flex-shrink: 0; }
+@media (max-width: 580px) {
+  .jag-cta { flex-direction: column; align-items: flex-start; gap: var(--space-s); }
+  .jag-cta-btn { align-self: flex-start; }
+}
+
+/* BUTTON SYSTEM */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.5rem;
+  padding-right: 1.25rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid transparent;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: var(--font-base);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.btn-primary { background: #D22428; color: #fff; border-color: #D22428; }
+.btn-primary:hover { background: #3F434F; border-color: #3F434F; }
+.btn-jai { background: linear-gradient(90deg, #5300ce, #e22b83); color: #fff; border: none; }
+.btn-jai:hover { opacity: 0.88; }
+
+/* Staccato triad */
+.staccato {
+  font-size: 0.9375rem;
+  color: var(--ink);
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: var(--space-xs);
+}
+.staccato strong {
+  font-weight: 700;
+  color: var(--color-red);
+}
+
+/* ============================================================
+   PRACTICAL STEPS: STEP CARD GRID
+   ============================================================ */
+.ps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: var(--space-l) 0 var(--space-s);
+}
+@media (max-width: 620px) { .ps-grid { grid-template-columns: 1fr; } }
+
+.ps-card {
+  background: #fff;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.ps-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--color-teal);
+}
+.ps-card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ps-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-red);
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ps-tag {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+.ps-tag-scope  { background: #e5f0ea; color: #2d5a30; }
+.ps-tag-risk   { background: #fff3f3; color: var(--color-red); }
+.ps-tag-doc    { background: #E9EFF4; color: var(--color-navy); }
+.ps-tag-data   { background: #fff8e5; color: #78580F; }
+.ps-tag-mark   { background: #edf3ff; color: #1e3a8a; }
+.ps-tag-cop    { background: #f3eeff; color: #5300CE; }
+.ps-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.35;
+}
+.ps-body {
+  font-size: 0.71875rem;
+  color: var(--body);
+  line-height: 1.55;
+}
+.ps-body a { color: var(--color-navy); text-decoration: underline; }
+
+/* Fines callout below grid */
+.ps-fines-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #fff8e5;
+  border: 1.5px solid #f5d77a;
+  border-radius: var(--border-radius-sm);
+  padding: 12px 16px;
+  margin-bottom: var(--space-m);
+  font-size: 0.75rem;
+  color: var(--body);
+  line-height: 1.5;
+}
+.ps-fines-icon {
+  font-size: 1rem;
+  color: #78580F;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.ps-fines-body a {
+  color: var(--color-navy);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-rows { display: flex; flex-direction: column; gap: 8px; margin: var(--space-l) 0; }
+.faq-item { border: var(--border-rule); border-radius: var(--border-radius-sm); overflow: hidden; }
+.faq-summary {
+  padding: 1.25rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  font-size: var(--font-size-xs);
+  color: var(--ink);
+  gap: 16px;
+  user-select: none;
+}
+.faq-summary::-webkit-details-marker { display: none; }
+.faq-chevron {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--muted);
+  transition: transform 0.3s ease;
+}
+details[open] .faq-chevron { transform: rotate(45deg); }
+.faq-body {
+  padding: 0 1.5rem 1.25rem;
+  color: #3a3f4a;
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+  font-weight: 300;
+}
+:root { interpolate-size: allow-keywords; }
+details { height: auto; overflow: hidden; transition: height 0.3s ease; }
+details:not([open]) { height: 3.75rem; }
+
+/* ============================================================
+   NEXT STEPS GRID
+   ============================================================ */
+.next-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: var(--space-l) 0;
+}
+@media (max-width: 600px) { .next-steps-grid { grid-template-columns: 1fr; } }
+.ns-card {
+  border: 1.5px solid #b0b7c3;
+  border-radius: var(--border-radius);
+  padding: 18px 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow 0.2s ease;
+}
+.ns-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+.ns-tag {
+  font-size: 0.575rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  align-self: flex-start;
+}
+.ns-tag-gpai      { background: #E9EFF4; color: #1B3A5C; }
+.ns-tag-risk      { background: #fff3f3; color: var(--color-red); }
+.ns-tag-fines     { background: #FEF3C7; color: #92400e; }
+.ns-tag-deadlines { background: #e5eeeb; color: #2d5a30; }
+.ns-title { font-size: 0.8125rem; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0; }
+.ns-desc  { font-size: 0.71875rem; color: var(--muted); line-height: 1.55; margin: 0; flex: 1; }
+.ns-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.71875rem;
+  font-weight: 600;
+  color: var(--color-red);
+  text-decoration: none;
+  border-bottom: 1px solid #F0B0B4;
+  align-self: flex-start;
+  margin-top: 4px;
+  transition: border-color 0.2s ease;
+}
+.ns-btn:hover { border-color: var(--color-red); }
+
+/* ============================================================
+   BADGE
+   ============================================================ */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.badge-green { background: #e5eeeb; color: #558156; }
+.badge-amber { background: #FEF3C7; color: #78350F; }
+.badge-red   { background: #fff3f3; color: var(--color-red); }
+.badge-blue  { background: #E9EFF4; color: #1B3A5C; }
+
+/* ============================================================
+   FINE ROWS (reused for Key Facts)
+   ============================================================ */
+.fines-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin: var(--space-l) 0; }
+.fine-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  border: 1.5px solid #b0b7c3;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  background: #fff;
+  font-size: 0.75rem;
+}
+.fine-row.fine-header {
+  background: var(--surface);
+  font-weight: 700;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.fine-cell {
+  padding: 10px 14px;
+  border-right: 1px solid #ebedf0;
+  color: var(--body);
+  line-height: 1.5;
+  text-align: left;
+  vertical-align: middle;
+}
+.fine-cell:last-child { border-right: none; }
+.fine-amt { font-weight: 700; color: var(--color-red); }
+
+/* Two-tier table */
+.tier-table-wrap {
+  border: 1.5px solid #b0b7c3;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  margin: var(--space-l) 0;
+}
+.tier-table-wrap table {
+  table-layout: fixed;
+  font-size: 0.8125rem;
+}
+.tier-table-wrap th { font-size: 0.71875rem; }
+.tier-table-wrap td { font-size: 0.75rem; vertical-align: top; }
+.tier-table-wrap td ul { padding-left: 1.1em; margin: 0; }
+.tier-table-wrap td ul li { margin-bottom: 4px; color: var(--body); line-height: 1.5; }
+
+/* ============================================================
+   PUBLISH DATE (visually subtle, Google-readable)
+   ============================================================ */
+.publish-date {
+  font-size: 0.6875rem;
+  color: var(--muted);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.publish-date time { color: var(--color-ink-2); font-weight: 500; }
+
+/* ============================================================
+   QUICK-STATS GRID
+   ============================================================ */
+.qs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+  margin: var(--space-l) 0;
+}
+.qs-item {
+  border: var(--border-rule);
+  border-radius: var(--border-radius-sm);
+  padding: 14px 16px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.qs-val {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1;
+}
+.qs-val.red { color: var(--color-red); }
+.qs-lbl { font-size: 0.6875rem; color: var(--muted); line-height: 1.4; }
+.qs-src { font-size: 0.5625rem; color: var(--color-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+
+/* ============================================================
+   KEY FACTS CARD GRID
+   ============================================================ */
+.kf-section {
+  margin: var(--space-l) 0;
+}
+.kf-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.kf-eyebrow {
+  font-size: 0.59375rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  white-space: nowrap;
+}
+.kf-subtitle {
+  font-size: 0.6875rem;
+  color: var(--muted);
+}
+.kf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+}
+.kf-card {
+  border-radius: var(--border-radius);
+  padding: 14px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+.kf-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.kf-val {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.kf-label {
+  font-size: 0.6875rem;
+  color: var(--body);
+  line-height: 1.45;
+  flex: 1;
+}
+.kf-src {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 6px;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  align-self: flex-start;
+}
+/* Card colour variants */
+.kf-card-date   { background: #f0f7ff; border-color: #c8ddf4; }
+.kf-card-date   .kf-val { color: var(--color-navy); }
+.kf-card-date   .kf-src { background: #ddeaf8; color: var(--color-navy); }
+.kf-card-warn   { background: var(--accent-bg); border-color: #f5c0c1; }
+.kf-card-warn   .kf-val { color: var(--color-red); }
+.kf-card-warn   .kf-src { background: #fde4e4; color: var(--color-red); }
+.kf-card-compute { background: #fff5f5; border-color: #f5c0c1; }
+.kf-card-compute .kf-val { color: var(--color-red); }
+.kf-card-compute .kf-src { background: #fde4e4; color: var(--color-red); }
+.kf-card-fine   { background: #fffaf0; border-color: #f5e0b0; }
+.kf-card-fine   .kf-val { color: #92400e; }
+.kf-card-fine   .kf-src { background: #fef3c7; color: #92400e; }
+.kf-card-neutral { background: var(--surface); border-color: var(--border); }
+.kf-card-neutral .kf-val { color: var(--ink); }
+.kf-card-neutral .kf-src { background: var(--color-light-grey); color: var(--muted); }
+.kf-sources {
+  font-size: 0.6875rem;
+  color: var(--muted);
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   SCOPE EXCLUSIONS: SPLIT PANEL
+   ============================================================ */
+.excl-section {
+  margin: var(--space-l) 0;
+}
+.excl-header {
+  margin-bottom: 12px;
+}
+.excl-eyebrow {
+  font-size: 0.59375rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  display: block;
+  margin-bottom: 4px;
+}
+.excl-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.excl-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 600px) { .excl-grid { grid-template-columns: 1fr; } }
+.excl-card {
+  border-radius: var(--border-radius);
+  border: 1.5px solid var(--border);
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.excl-card-rnd { border-top: 3px solid var(--color-teal); }
+.excl-card-oss { border-top: 3px solid var(--color-navy); }
+.excl-card-top {
+  padding: 14px 16px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.excl-badge {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.excl-badge-rnd { background: #e0f4f1; color: var(--color-teal); }
+.excl-badge-oss { background: #E9EFF4; color: var(--color-navy); }
+.excl-card-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.excl-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0 16px;
+}
+.excl-body {
+  padding: 12px 16px;
+  flex: 1;
+}
+.excl-body p {
+  font-size: 0.75rem;
+  color: var(--body);
+  margin: 0 0 10px;
+  line-height: 1.55;
+}
+.excl-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border-radius: var(--border-radius-sm);
+  padding: 8px 12px;
+  margin-top: 4px;
+}
+.excl-trigger-lbl {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.excl-trigger-val {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-teal);
+}
+.excl-caveat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+.excl-caveat-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.71875rem;
+  color: var(--body);
+  line-height: 1.45;
+}
+.excl-caveat-icon {
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.excl-icon-warn { color: #D97706; }
+.excl-icon-red  { color: var(--color-red); }
+.excl-status {
+  padding: 8px 16px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border-top: var(--border-rule);
+}
+.excl-status-clear   { background: #f0faf8; color: #2d7a6b; }
+.excl-status-partial { background: #fffaf0; color: #78350F; }
+.excl-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.excl-dot-green { background: #558156; }
+.excl-dot-amber { background: #D97706; }
+
+/* ============================================================
+   ARTICLE 50 MILESTONE TIMELINE
+   ============================================================ */
+.a50-section {
+  margin: var(--space-l) 0;
+  border: 1.5px solid var(--border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+.a50-header {
+  background: var(--surface);
+  padding: 10px 18px;
+  border-bottom: var(--border-rule);
+}
+.a50-eyebrow {
+  font-size: 0.59375rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+}
+.a50-track {
+  padding: 20px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.a50-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.a50-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 20px;
+  padding-top: 4px;
+}
+.a50-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.a50-dot-teal  { background: var(--color-teal);  box-shadow: 0 0 0 2px var(--color-teal); }
+.a50-dot-red   { background: var(--color-red);   box-shadow: 0 0 0 2px var(--color-red); }
+.a50-dot-navy  { background: var(--color-navy);  box-shadow: 0 0 0 2px var(--color-navy); }
+.a50-line {
+  width: 2px;
+  flex: 1;
+  min-height: 20px;
+  background: var(--border);
+  margin: 4px 0;
+}
+.a50-line-last { display: none; }
+.a50-card {
+  flex: 1;
+  border: var(--border-rule);
+  border-radius: var(--border-radius);
+  padding: 12px 14px;
+  background: #fff;
+  margin-bottom: 12px;
+}
+.a50-card-now {
+  border-color: var(--color-red);
+  background: var(--accent-bg);
+}
+.a50-date {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.a50-card-now .a50-date { color: var(--color-red); }
+.a50-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 5px;
+}
+.a50-desc {
+  font-size: 0.71875rem;
+  color: var(--body);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.a50-tag {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  display: inline-block;
+}
+.a50-tag-done  { background: #e0f4f1; color: var(--color-teal); }
+.a50-tag-now   { background: var(--accent-bg); color: var(--color-red); border: 1px solid #f5c0c1; }
+.a50-tag-ahead { background: var(--color-light-blue); color: var(--color-navy); }
+.a50-standards {
+  display: flex;
+  gap: 0;
+  border-top: var(--border-rule);
+  background: var(--surface);
+}
+.a50-std-item {
+  flex: 1;
+  padding: 10px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.a50-std-sep {
+  width: 1px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+.a50-std-lbl {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.a50-std-val {
+  font-size: 0.71875rem;
+  color: var(--body);
+  line-height: 1.45;
+}
+@media (max-width: 580px) {
+  .a50-standards { flex-direction: column; }
+  .a50-std-sep { width: 100%; height: 1px; }
+  .kf-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+/* ============================================================
+   STANDARD OBLIGATIONS: 4-CARD GRID
+   ============================================================ */
+.ob-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: var(--space-l) 0;
+}
+@media (max-width: 620px) { .ob-grid { grid-template-columns: 1fr; } }
+.ob-card {
+  border: 1.5px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: 16px 18px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.ob-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--color-teal);
+}
+.ob-num {
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--color-teal);
+}
+.ob-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.ob-ref {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 2px 7px;
+  background: var(--surface);
+  border-radius: 9999px;
+  align-self: flex-start;
+  margin-bottom: 4px;
+}
+.ob-list {
+  padding-left: 1em;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.ob-list li {
+  font-size: 0.71875rem;
+  color: var(--body);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   TRANSPARENCY: 3-CARD GRID WITH CHAIN
+   ============================================================ */
+.trans-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: var(--space-l) 0;
+}
+@media (max-width: 620px) { .trans-grid { grid-template-columns: 1fr; } }
+.trans-card {
+  border: 1.5px solid var(--border);
+  border-radius: var(--border-radius);
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.trans-card-chain {
+  grid-column: 1 / -1;
+}
+.trans-card-hd {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: var(--border-rule);
+}
+.trans-hd-mark { background: #f0f7ff; }
+.trans-hd-deep { background: #fff5f5; }
+.trans-hd-chain { background: var(--surface); }
+.trans-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+.trans-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.trans-ref {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.trans-list {
+  padding: 12px 16px 8px 2rem;
+  margin: 0;
+  flex: 1;
+}
+.trans-list li {
+  font-size: 0.71875rem;
+  color: var(--body);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+.trans-note {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 6px 16px 10px;
+  border-top: var(--border-rule);
+}
+.trans-chain {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 14px 16px;
+}
+.trans-chain-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 14px;
+  border-radius: var(--border-radius-sm);
+}
+.trans-chain-provider { background: #f0f7ff; border: 1.5px solid #c8ddf4; }
+.trans-chain-deployer { background: var(--accent-bg); border: 1.5px solid #f5c0c1; }
+.trans-chain-lbl {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.trans-chain-duty {
+  font-size: 0.75rem;
+  color: var(--body);
+  line-height: 1.45;
+  font-weight: 500;
+}
+.trans-chain-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 1.25rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   CODE OF PRACTICE: SIGNATORY COMPARISON
+   ============================================================ */
+.cop-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: var(--space-l) 0;
+}
+@media (max-width: 580px) { .cop-compare { grid-template-columns: 1fr; } }
+.cop-col {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+}
+.cop-col-sign   { border-top: 3px solid #558156; }
+.cop-col-nosign { border-top: 3px solid #D97706; }
+.cop-col-hd {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border-bottom: var(--border-rule);
+}
+.cop-badge {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+.cop-badge-sign   { background: #e5eeeb; color: #2d5a30; }
+.cop-badge-nosign { background: #FEF3C7; color: #78350F; }
+.cop-col-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.cop-list {
+  list-style: none;
+  padding: 12px 14px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  background: #fff;
+}
+.cop-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.71875rem;
+  color: var(--body);
+  line-height: 1.45;
+}
+.cop-check { font-size: 0.875rem; flex-shrink: 0; }
+.cop-check-green { color: #558156; }
+.cop-check-red   { color: #D97706; }
+.cop-action {
+  padding: 8px 14px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--muted);
+  border-top: var(--border-rule);
+  background: var(--surface);
+}
+
+/* ============================================================
+   OPEN-SOURCE: LIMITS PANEL
+   ============================================================ */
+.oss-limits {
+  border: 1.5px solid var(--border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin: var(--space-l) 0;
+}
+.oss-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border-bottom: var(--border-rule);
+  background: #fff;
+}
+.oss-row:last-child { border-bottom: none; }
+.oss-num {
+  width: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--color-red);
+  background: var(--accent-bg);
+  border-right: var(--border-rule);
+}
+.oss-content {
+  flex: 1;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.oss-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.oss-desc {
+  font-size: 0.71875rem;
+  color: var(--body);
+  line-height: 1.5;
+}
+.oss-ref {
+  width: 100px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  border-left: var(--border-rule);
+  background: var(--surface);
+  text-align: center;
+  padding: 8px;
+}
+
+/* ============================================================
+   WHAT CHANGED IN 2026: UPDATE PANEL
+   ============================================================ */
+.upd-panel {
+  border: 1.5px solid var(--border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin: var(--space-l) 0;
+}
+.upd-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border-bottom: var(--border-rule);
+  background: #fff;
+}
+.upd-row-last { border-bottom: none; }
+.upd-date-col {
+  width: 120px;
+  flex-shrink: 0;
+  padding: 16px 14px;
+  background: var(--surface);
+  border-right: var(--border-rule);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+@media (max-width: 580px) {
+  .upd-row { flex-direction: column; }
+  .upd-date-col { width: 100%; border-right: none; border-bottom: var(--border-rule); flex-direction: row; align-items: center; }
+  .oss-ref { width: 70px; }
+}
+.upd-date {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.upd-tag {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+.upd-tag-provisional { background: var(--accent-bg); color: var(--color-red); }
+.upd-tag-clarified   { background: #E9EFF4; color: var(--color-navy); }
+.upd-content {
+  flex: 1;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.upd-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.upd-body {
+  font-size: 0.75rem;
+  color: var(--body);
+  line-height: 1.55;
+  flex: 1;
+}
+.upd-src {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  text-decoration: none;
+  border-bottom: 1px solid #a8bad0;
+  letter-spacing: 0.04em;
+  align-self: flex-start;
+  margin-top: 4px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.upd-src:hover { color: var(--color-navy); border-color: var(--color-navy); }
+
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "EU AI Act Rules for General-Purpose AI: What GPAI Providers Need to Know",
+      "description": "The EU AI Act imposes specific rules on GPAI model providers. Learn the two-tier framework, systemic risk threshold, and watermarking requirements.",
+      "datePublished": "2026-06-16",
+      "dateModified": "2026-06-16",
+      "author": {
+        "@type": "Organization",
+        "name": "JAGGAER"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "JAGGAER",
+        "url": "https://www.jaggaer.com"
+      },
+      "url": "https://www.jaggaer.com/eu-ai-act-general-purpose-ai",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.jaggaer.com/eu-ai-act-general-purpose-ai"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a general-purpose AI model under the EU AI Act?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Article 3(63) defines a GPAI model as an AI model that displays significant generality and is capable of competently performing a wide range of distinct tasks, integrable into a variety of downstream systems or applications (Regulation (EU) 2024/1689). The Commission's July 2025 Guidelines set 10²³ FLOPs plus language, text-to-image, or text-to-video generation as an indicative classification criterion. The definition attaches to the model, not the downstream application."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the EU AI Act apply to LLMs and foundation models?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Recital 99 of Regulation (EU) 2024/1689 explicitly cites large generative AI models as a typical example of a GPAI model. LLMs and multimodal foundation models meeting the Article 3(63) definition are subject to Chapter V GPAI obligations from 2 August 2025."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is systemic risk under the EU AI Act?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Article 3(65) defines systemic risk as risks of large-scale harm from the most advanced models at any given time, or models with equivalent impact. The European Commission's GPAI Q&A (2025) cites lowered barriers to chemical or biological weapons development as an example of how such risks can manifest."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the 10²⁵ FLOP threshold for systemic risk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Article 51(1)(a) and (2) establishes that a GPAI model is presumed to pose systemic risk when cumulative training compute exceeds 10²⁵ FLOPs, measured across the full training run (not inference). Training at this threshold currently costs tens of millions of euros, per <a href="https://digital-strategy.ec.europa.eu/en/faqs/general-purpose-ai-models-ai-act-questions-answers" target="_blank" rel="noopener">Epoch AI (2024)</a> data cited by <a href="https://digital-strategy.ec.europa.eu/en/faqs/general-purpose-ai-models-ai-act-questions-answers" target="_blank" rel="noopener">the European Commission</a>. The designation is a rebuttable presumption: providers may submit benchmark evidence against it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When did GPAI obligations come into force?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GPAI obligations under Articles 51 to 56 applied from 2 August 2025 for new models. Commission enforcement powers (fines, information requests, model recalls) activate 2 August 2026. Models on the EU market before 2 August 2025 have until 2 August 2027 to comply under Article 111(3)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documentation does a GPAI model provider need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Article 53 requires four elements: technical documentation per Annex XI (covering architecture, training data, energy consumption, capabilities, and limitations); downstream deployer information per Annex XII; a copyright compliance policy under Directive (EU) 2019/790; and a public training data summary using the AI Office's mandatory July 2025 template. Documentation must be version-specific and retained for 10 years per the Code of Practice (Chapter 1, July 2025)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the EU AI Act require watermarking of AI-generated content?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Article 50 requires AI-generated text, images, audio, and video to be machine-detectable as AI-produced, effective 2 August 2026. The December 2025 draft Transparency Code mandates a multi-layered approach combining C2PA metadata embedding with additional active marking, as no single technique meets the robustness standard."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the EU AI Act deepfake labelling requirements?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Article 50(4) requires deployers using AI to create deepfakes to label outputs as artificially created and disclose their AI origin. Deepfakes are defined under Article 3(60) as AI-created content resembling real persons, places, or events that would appear authentic. The exception covers law enforcement use and evidently artistic works where labelling would hamper display or enjoyment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do open-source GPAI models have reduced obligations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Article 53(2) removes technical documentation and downstream deployer information requirements for open-source GPAI models with publicly available weights, architecture, and usage terms. Copyright compliance policy and training data summary obligations still apply. If an open-source model later meets the Article 51(2) systemic risk threshold, the exemption falls away entirely."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the EU AI Act Code of Practice for GPAI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The GPAI Code of Practice, published on 10 July 2025 and endorsed by the European Commission and AI Board, is a voluntary tool for demonstrating compliance with the AI Act. Compliance with the Code creates a presumption of conformity with Articles 53 and 55, with full enforceability from 2 August 2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the GPAI framework apply to GPT-4, Claude, or Gemini?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The European Commission's GPAI Q&A (2025) states that GPAI models with systemic risk are currently developed by a handful of companies. Providers of frontier models are responsible for their own training compute assessment and Commission notification under Article 52(1) if the 10²⁵ FLOP threshold is met or foreseen. The Commission maintains an updated public list of designated systemic risk GPAI models."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="outer-wrap">
+
+<!-- ===================== TOC SIDEBAR (LEFT) ===================== -->
+<aside class="toc-sidebar" id="tocSidebar">
+  <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+  <nav class="toc-nav" id="tocNav">
+    <a href="#gpai-definition">What is a general-purpose AI model?</a>
+    <a href="#two-tier">The two-tier GPAI framework</a>
+    <a href="#standard-obligations">Standard GPAI obligations</a>
+    <a href="#systemic-risk">Systemic risk</a>
+    <a href="#transparency">Transparency and watermarking</a>
+    <a href="#code-of-practice">The GPAI Code of Practice</a>
+    <a href="#open-source">Open-source GPAI models</a>
+    <a href="#practical-steps">Practical steps for GPAI providers</a>
+    <a href="#2026-updates">What changed in 2026</a>
+    <a href="#faq">FAQ</a>
+    <a href="#next-steps">Next steps</a>
+  </nav>
+</aside>
+
+<!-- ===================== ARTICLE ===================== -->
+<main class="page">
+
+<header class="a-header">
+  <div class="a-meta">AI Regulation &middot; GPAI Compliance &middot; Transparency</div>
+  <h1>EU AI Act Rules for General-Purpose AI: What GPAI Providers Need to Know in 2026</h1>
+
+  <!-- ARTICLE META BAR -->
+  <div class="article-meta-bar">
+    <span class="amb-item">
+      <svg class="clock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      5&ndash;7 minute read
+    </span>
+    <span class="amb-sep">|</span>
+    <span class="amb-item"><span class="amb-label">Updated</span> June 2026</span>
+  </div>
+
+  <!-- Machine-readable publish date for Google (visually hidden) -->
+  <span style="display:none;" itemprop="datePublished" content="2026-06-16">2026-06-16</span>
+  <span style="display:none;" itemprop="dateModified" content="2026-06-16">2026-06-16</span>
+</header>
+
+<p class="intro">The EU AI Act creates a dedicated compliance framework for EU AI Act general-purpose AI (GPAI) model providers, and it applies to you regardless of whether your model is also classified as high-risk. If your organisation builds, fine-tunes, or releases a GPAI model in the EU market, two sets of obligations apply. The baseline tier is under <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 53</a>. The stricter systemic risk tier, under <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 55</a>, covers the most advanced models.</p>
+
+<p style="margin-top: var(--space-m);">This article covers both tiers and the systemic risk threshold. It also covers <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 50</a> watermarking, deepfake labelling, and the practical steps your team needs before enforcement powers activate on 2 August 2026. For the <a href="https://www.jaggaer.com/eu-ai-act">complete guide to the EU AI Act</a>, see the JAGGAER pillar page.</p>
+
+
+
+<!-- KEY FACTS TABLE -->
+
+
+<!-- ===================== SECTION 1 ===================== -->
+<div class="sdiv"><hr><span>Scope &amp; Definition</span><hr></div>
+<h2 id="gpai-definition">What is a general-purpose AI model under the EU AI Act?</h2>
+
+<p>A GPAI model, as defined in <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 3(63)</a>, processes large amounts of training data, covers a wide range of tasks, and integrates into downstream systems. The key distinction: the obligation attaches to the model itself (weights, architecture, artefacts), not to the downstream application. Indicative scope threshold: training compute above 10<sup>23</sup> FLOPs plus language, image, or video output (<a href="https://digital-strategy.ec.europa.eu/en/library/guidelines-scope-obligations-providers-general-purpose-ai-models-under-ai-act" target="_blank" rel="noopener">EC Guidelines, July 2025</a>). For a broader explanation, see <a href="https://www.jaggaer.com/eu-ai-act-explained">what the EU AI Act is and how it works</a>.</p>
+
+<!-- TWO EXCLUSIONS: SPLIT-PANEL VISUAL -->
+<div class="excl-section">
+  <div class="excl-header">
+    <span class="excl-eyebrow">Two categories excluded from Chapter V</span>
+  </div>
+  <div class="excl-grid">
+
+    <div class="excl-card excl-card-rnd">
+      <div class="excl-card-top">
+        <div class="excl-badge excl-badge-rnd">R&amp;D</div>
+        <div class="excl-card-title">Research &amp; Development Models</div>
+      </div>
+      <div class="excl-divider"></div>
+      <div class="excl-body">
+        <p>Models not yet placed on the EU market do not trigger Chapter V obligations.</p>
+        <div class="excl-trigger">
+          <span class="excl-trigger-lbl">Obligations trigger at</span>
+          <span class="excl-trigger-val">Point of EU market release</span>
+        </div>
+      </div>
+      <div class="excl-status excl-status-clear">
+        <span class="excl-dot excl-dot-green"></span> Excluded until market release
+      </div>
+    </div>
+
+    <div class="excl-card excl-card-oss">
+      <div class="excl-card-top">
+        <div class="excl-badge excl-badge-oss">Open Source</div>
+        <div class="excl-card-title">Open-Source Models (with caveats)</div>
+      </div>
+      <div class="excl-divider"></div>
+      <div class="excl-body">
+        <p><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 53(2)</a> reduces (but does not eliminate) obligations for models with publicly available weights, architecture, and usage terms.</p>
+        <div class="excl-caveat-list">
+          <div class="excl-caveat-item">
+            <span class="excl-caveat-icon excl-icon-warn">&#9888;</span>
+            <span>Copyright compliance obligations still apply</span>
+          </div>
+          <div class="excl-caveat-item">
+            <span class="excl-caveat-icon excl-icon-warn">&#9888;</span>
+            <span>Training data summary obligations still apply</span>
+          </div>
+          <div class="excl-caveat-item">
+            <span class="excl-caveat-icon excl-icon-red">&#9888;</span>
+            <span>Exemption falls away entirely if the model later meets the systemic risk threshold</span>
+          </div>
+        </div>
+      </div>
+      <div class="excl-status excl-status-partial">
+        <span class="excl-dot excl-dot-amber"></span> Partial exemption - see dedicated section below
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA 1: After GPAI definition - contextual to scope/compliance planning -->
+<div class="jag-cta jai-cta">
+  <span class="jag-cta-label jai-label">JAI</span>
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">JAGGAER's AI assistant JAI operates across sourcing, contracts, and supplier management</p>
+    <p class="jag-cta-sub">JAI generates model-level documentation, audit logs, and compliance records across Source-to-Pay workflows.</p>
+  </div>
+  <a href="https://www.jaggaer.com/demo" class="btn btn-jai jag-cta-btn">See how JAI documents AI usage &rarr;</a>
+</div>
+
+<!-- ===================== SECTION 2 ===================== -->
+<div class="sdiv"><hr><span>Framework Structure</span><hr></div>
+<h2 id="two-tier">The two-tier GPAI framework</h2>
+
+<p>Every GPAI provider faces two sets of obligations. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 53</a> covers the baseline; it applies to all providers. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 55</a> adds stricter requirements if your model's training compute crosses 10<sup>25</sup> FLOPs (the systemic risk threshold under Art. 51(2)). To understand where your model sits in the broader classification system, see <a href="https://www.jaggaer.com/eu-ai-act-risk-categories">EU AI Act risk categories explained</a>.</p>
+
+<div class="tier-table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:50%">Standard GPAI: All Providers (Art. 53)</th>
+        <th style="width:50%">Systemic Risk: Additional Obligations (Art. 55)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <ul>
+            <li>Technical documentation per Annex XI</li>
+            <li>Downstream deployer information per Annex XII</li>
+            <li>Copyright compliance policy (Dir. (EU) 2019/790)</li>
+            <li>Public training data summary (AI Office mandatory template)</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>Model evaluations including adversarial testing</li>
+            <li>Systemic risk assessment and mitigation</li>
+            <li>Serious incident reporting to the EU AI Office</li>
+            <li>Adequate cybersecurity for model weights and infrastructure</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<!-- ===================== SECTION 3 ===================== -->
+<div class="sdiv"><hr><span>Baseline Obligations</span><hr></div>
+<h2 id="standard-obligations">Standard GPAI obligations: what all providers must do</h2>
+
+<p>As an EU AI Act general-purpose AI provider, you face four baseline obligations under <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 53</a>, effective 2 August 2025.</p>
+
+<div class="ob-grid">
+
+  <div class="ob-card">
+    <div class="ob-num">01</div>
+    <div class="ob-title">Technical documentation</div>
+    <div class="ob-ref"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Art. 53 &amp; Annex XI</a></div>
+    <ul class="ob-list">
+      <li>Architecture, training data, energy consumption, capabilities/limitations</li>
+      <li>Version-specific; retained 10 years (Code of Practice, Ch. 1)</li>
+    </ul>
+  </div>
+
+  <div class="ob-card">
+    <div class="ob-num">02</div>
+    <div class="ob-title">Training data transparency</div>
+    <div class="ob-ref"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Art. 53(1)(d)</a></div>
+    <ul class="ob-list">
+      <li>Sources, pre-processing, and copyright compliance</li>
+      <li>Mandatory AI Office template (<a href="https://digital-strategy.ec.europa.eu/en/library/guidelines-scope-obligations-providers-general-purpose-ai-models-under-ai-act" target="_blank" rel="noopener">July 2025</a>). No substitutes.</li>
+    </ul>
+  </div>
+
+  <div class="ob-card">
+    <div class="ob-num">03</div>
+    <div class="ob-title">Downstream deployer information</div>
+    <div class="ob-ref"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Art. 53 &amp; Annex XII</a></div>
+    <ul class="ob-list">
+      <li>Enable deployers to meet their own EU AI Act obligations</li>
+      <li>14-day response window; public contact details required</li>
+    </ul>
+  </div>
+
+  <div class="ob-card">
+    <div class="ob-num">04</div>
+    <div class="ob-title">EU copyright law compliance</div>
+    <div class="ob-ref"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Art. 53(1)(c) &amp; Dir. (EU) 2019/790</a></div>
+    <ul class="ob-list">
+      <li>Applies regardless of licence or data source type</li>
+      <li>Comply with text and data mining opt-out (Dir. (EU) 2019/790)</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- CTA 2: After standard obligations - contextual to documentation and supplier/contract workflows -->
+<div class="jag-cta">
+  <span class="jag-cta-label">JAGGAER</span>
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">JAGGAER's contract management module stores, versions, and retrieves supplier and AI-related documentation</p>
+    <p class="jag-cta-sub">JAGGAER CLM tracks contract versions, data-sharing clauses, and third-party AI provider terms.</p>
+  </div>
+  <a href="https://www.jaggaer.com/solutions/contract-lifecycle-management" class="btn btn-primary jag-cta-btn">Explore JAGGAER CLM &rarr;</a>
+</div>
+
+<!-- ===================== SECTION 4 ===================== -->
+<div class="sdiv"><hr><span>Systemic Risk</span><hr></div>
+<h2 id="systemic-risk">Systemic risk: what it means and who it applies to</h2>
+
+<p>Your model carries EU AI Act systemic risk if its cumulative training compute exceeds 10<sup>25</sup> FLOPs. FLOPs (floating-point operations) are the standard measure of AI training scale. Measurement covers the training run only, not inference. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 51(2)</a> sets this threshold and creates a rebuttable presumption.</p>
+
+<p style="margin-top: var(--space-m);">Training at this scale costs tens of millions of euros (<a href="https://digital-strategy.ec.europa.eu/en/faqs/general-purpose-ai-models-ai-act-questions-answers" target="_blank" rel="noopener">Epoch AI, 2024</a>, cited by <a href="https://digital-strategy.ec.europa.eu/en/faqs/general-purpose-ai-models-ai-act-questions-answers" target="_blank" rel="noopener">EC</a>). Frontier LLMs and multimodal foundation models are most likely to exceed it (<a href="https://digital-strategy.ec.europa.eu/en/faqs/general-purpose-ai-models-ai-act-questions-answers" target="_blank" rel="noopener">EC GPAI Q&A, 2025</a>). If your model meets or will meet the threshold, <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 52(1)</a> requires you to notify the Commission within two weeks. You may submit benchmark or scaling law evidence to contest the designation. Obligations remain in force during any review.</p>
+
+<p>The Scientific Panel may also designate models below 10<sup>25</sup> FLOPs based on reach or capability. Once designated, <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 55</a> adds four obligations on top of the <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 53</a> baseline:</p>
+<p class="staccato"><strong>Test your model. Report every incident. Lock down the weights.</strong> Plus energy disclosure. The four requirements are:</p>
+
+<div class="qs-grid">
+  <div class="qs-item">
+    <div class="qs-val red" style="font-size:1.1rem;font-weight:700;">Adversarial testing</div>
+    <div class="qs-lbl">Model evaluations and red-teaming before and after release</div>
+    <div class="qs-src"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Art. 55(1)(a)</a></div>
+  </div>
+  <div class="qs-item">
+    <div class="qs-val red" style="font-size:1.1rem;font-weight:700;">Incident reporting</div>
+    <div class="qs-lbl">Report serious incidents to the EU AI Office without undue delay</div>
+    <div class="qs-src"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Art. 55(1)(c)</a></div>
+  </div>
+  <div class="qs-item">
+    <div class="qs-val red" style="font-size:1.1rem;font-weight:700;">Cybersecurity</div>
+    <div class="qs-lbl">Protect model weights, infrastructure, and access controls</div>
+    <div class="qs-src"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Art. 55(1)(d)</a></div>
+  </div>
+  <div class="qs-item">
+    <div class="qs-val red" style="font-size:1.1rem;font-weight:700;">Energy reporting</div>
+    <div class="qs-lbl">Disclose training energy consumption (and inference where feasible)</div>
+    <div class="qs-src"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Art. 55(1)(b)</a></div>
+  </div>
+</div>
+
+
+
+<!-- ===================== SECTION 5 ===================== -->
+<div class="sdiv"><hr><span><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 50</a></span><hr></div>
+<h2 id="transparency">Transparency and watermarking obligations</h2>
+
+<p>From 2 August 2026, you must ensure all AI-generated content is machine-detectable as AI-produced (<a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 50, Reg. (EU) 2024/1689</a>). These EU AI Act transparency requirements under <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 50</a> apply to both GPAI providers and deploying organisations. Systems already on the market by 2 August 2026 have a grace period until 2 December 2026.</p>
+
+<div class="trans-grid">
+
+  <div class="trans-card">
+    <div class="trans-card-hd trans-hd-mark">
+      <span class="trans-icon">&#128737;</span>
+      <div>
+        <div class="trans-title">EU AI Act watermarking provenance requirements</div>
+        <div class="trans-ref">Art. 50 &amp; draft Transparency Code, Dec 2025</div>
+      </div>
+    </div>
+    <ul class="trans-list">
+      <li><strong>C2PA metadata embedding</strong> is the baseline; combine with additional active watermarking</li>
+      <li>No single technique meets the robustness standard</li>
+      <li>GPAI providers must enable marking at the model or API layer</li>
+    </ul>
+    
+  </div>
+
+  <div class="trans-card">
+    <div class="trans-card-hd trans-hd-deep">
+      <span class="trans-icon">&#128247;</span>
+      <div>
+        <div class="trans-title">Deepfake labelling</div>
+        <div class="trans-ref">Art. 50(4) &amp; Art. 3(60)</div>
+      </div>
+    </div>
+    <ul class="trans-list">
+      <li>AI-generated content resembling real persons, places, or events that could appear authentic</li>
+      <li>Label as artificially created; disclose AI origin. Interim: <strong>"AI" Common Icon</strong>, localised per member state</li>
+    </ul>
+    
+  </div>
+
+</div>
+
+<!-- ARTICLE 50 TIMELINE: MILESTONE TRACK -->
+<div class="a50-section">
+  <div class="a50-header">
+    <span class="a50-eyebrow"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 50</a> Compliance Timeline: 2026</span>
+  </div>
+  <div class="a50-track">
+
+    <div class="a50-item a50-item-past">
+      <div class="a50-node">
+        <div class="a50-dot a50-dot-teal"></div>
+        <div class="a50-line"></div>
+      </div>
+      <div class="a50-card">
+        <div class="a50-date">Dec 2025</div>
+        <div class="a50-title">Draft Transparency Code published</div>
+        <div class="a50-desc">Multi-layered watermarking approach proposed. C2PA metadata embedding identified as baseline standard. Common "AI" icon proposed as interim label.</div>
+        <div class="a50-tag a50-tag-done">Published</div>
+      </div>
+    </div>
+
+    <div class="a50-item a50-item-now">
+      <div class="a50-node">
+        <div class="a50-dot a50-dot-red"></div>
+        <div class="a50-line"></div>
+      </div>
+      <div class="a50-card a50-card-now">
+        <div class="a50-date">2 August 2026</div>
+        <div class="a50-title"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 50</a> obligations take effect</div>
+        <div class="a50-desc">All AI-generated text, images, audio, and video must be machine-detectable as AI-produced. Deepfake labelling requirements come into force for all deployers.</div>
+        <div class="a50-tag a50-tag-now">Approaching</div>
+      </div>
+    </div>
+
+    <div class="a50-item a50-item-ahead">
+      <div class="a50-node">
+        <div class="a50-dot a50-dot-navy"></div>
+        <div class="a50-line a50-line-last"></div>
+      </div>
+      <div class="a50-card">
+        <div class="a50-date">2 December 2026</div>
+        <div class="a50-title">Article 50 compliance deadline: existing systems</div>
+        <div class="a50-desc">If your generative AI system was on the EU market before 2 August 2026, Article 50 content marking must be in place by this date. After 2 December 2026, no further exemptions apply. Source: EU Council Digital Omnibus provisional agreement, May 7, 2026.</div>
+        <div class="a50-tag a50-tag-ahead">Upcoming</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="a50-standards">
+    <div class="a50-std-item">
+      <span class="a50-std-lbl">Technical standard</span>
+      <span class="a50-std-val">C2PA metadata embedding + active watermarking (multi-layered)</span>
+    </div>
+    <div class="a50-std-sep"></div>
+    <div class="a50-std-item">
+      <span class="a50-std-lbl">Proposed interim label</span>
+      <span class="a50-std-val">Visual "AI" icon, localised per member state (e.g. "KI" in Germany, "IA" in France)</span>
+    </div>
+  </div>
+</div>
+
+<!-- CTA 3: After transparency/watermarking - contextual to AI content governance and audit -->
+<div class="jag-cta jai-cta">
+  <span class="jag-cta-label jai-label">JAI</span>
+  <div class="jag-cta-body">
+    <p class="jag-cta-head">JAI generates and flags AI-produced procurement content within the JAGGAER platform</p>
+    <p class="jag-cta-sub">JAI labels and logs every AI-generated sourcing document, RFx output, and contract summary.</p>
+  </div>
+  <a href="https://www.jaggaer.com/demo" class="btn btn-jai jag-cta-btn">See JAI's content transparency controls &rarr;</a>
+</div>
+
+<!-- ===================== SECTION 6 ===================== -->
+<div class="sdiv"><hr><span>Safe Harbour</span><hr></div>
+<h2 id="code-of-practice">The GPAI Code of Practice</h2>
+
+<p><a href="https://digital-strategy.ec.europa.eu/en/policies/contents-code-gpai" target="_blank" rel="noopener">Published 10 July 2025</a>, coordinated by the EU AI Office with input from AI developers, civil society organisations, and national authorities. The EC and AI Board confirmed it as an adequate compliance tool, a safe harbour for GPAI obligations. Three chapters: Transparency and Copyright (all providers); Safety and Security (systemic risk models only).</p>
+
+<div class="cop-compare">
+  <div class="cop-col cop-col-sign">
+    <div class="cop-col-hd">
+      <span class="cop-badge cop-badge-sign">Signatory</span>
+      <span class="cop-col-title">Sign the Code</span>
+    </div>
+    <ul class="cop-list">
+      <li><span class="cop-check cop-check-green">&#10003;</span> Presumption of conformity with Arts. 53 &amp; 55</li>
+      <li><span class="cop-check cop-check-green">&#10003;</span> Reduced admin burden and greater legal certainty</li>
+    </ul>
+
+  </div>
+  <div class="cop-col cop-col-nosign">
+    <div class="cop-col-hd">
+      <span class="cop-badge cop-badge-nosign">Non-signatory</span>
+      <span class="cop-col-title">Demonstrate compliance separately</span>
+    </div>
+    <ul class="cop-list">
+      <li><span class="cop-check cop-check-red">&#9888;</span> Must carry out gap analysis and report to the AI Office</li>
+      <li><span class="cop-check cop-check-red">&#9888;</span> Higher evidentiary burden; more frequent enforcement scrutiny</li>
+    </ul>
+
+  </div>
+</div>
+
+<!-- ===================== SECTION 7 ===================== -->
+<div class="sdiv"><hr><span>Open-Source Exemption</span><hr></div>
+<h2 id="open-source">Open-source GPAI models: reduced obligations?</h2>
+
+<p>If you release your GPAI model under an open-source licence with publicly available weights, architecture, and usage terms, two key obligations fall away. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 53(2)</a> removes the technical documentation and downstream deployer information requirements. Three hard limits still apply.</p>
+
+<div class="oss-limits">
+  <div class="oss-row">
+    <div class="oss-num">1</div>
+    <div class="oss-content">
+      <div class="oss-title">Does not apply to systemic risk models</div>
+      <div class="oss-desc">A model above 10<sup>25</sup> FLOPs carries full <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 55</a> obligations regardless of licence.</div>
+    </div>
+    <div class="oss-ref"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Art. 51(2)</a></div>
+  </div>
+  <div class="oss-row">
+    <div class="oss-num">2</div>
+    <div class="oss-content">
+      <div class="oss-title">Copyright and training data obligations still apply</div>
+      <div class="oss-desc">Art. 53(1)(c) and (d) apply to all GPAI models regardless of licence or data source.</div>
+    </div>
+    <div class="oss-ref"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Art. 53(1)(c)(d)</a></div>
+  </div>
+  <div class="oss-row">
+    <div class="oss-num">3</div>
+    <div class="oss-content">
+      <div class="oss-title">Requires genuine openness</div>
+      <div class="oss-desc">Models behind registration walls or access controls are unlikely to qualify.</div>
+    </div>
+    <div class="oss-ref"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Art. 53(2)</a></div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 8 ===================== -->
+<div class="sdiv"><hr><span>Action Items</span><hr></div>
+<h2 id="practical-steps">Practical steps for GPAI providers</h2>
+
+<p>Your priority actions before Commission enforcement powers activate on 2 August 2026:</p>
+
+<div class="ps-grid">
+
+  <div class="ps-card">
+    <div class="ps-card-top">
+      <span class="ps-num">1</span>
+      <span class="ps-tag ps-tag-scope">GPAI Scope</span>
+    </div>
+    <div class="ps-title">Determine whether your model qualifies as GPAI</div>
+    <div class="ps-body">Training compute &gt;10<sup>23</sup> FLOPs plus language, image, or video output? If yes, Chapter V applies from EU market release (<a href="https://digital-strategy.ec.europa.eu/en/library/guidelines-scope-obligations-providers-general-purpose-ai-models-under-ai-act" target="_blank" rel="noopener">EC Guidelines, July 2025</a>).</div>
+  </div>
+
+  <div class="ps-card">
+    <div class="ps-card-top">
+      <span class="ps-num">2</span>
+      <span class="ps-tag ps-tag-risk">Systemic Risk</span>
+    </div>
+    <div class="ps-title">Assess whether your training compute crosses 10<sup>25</sup> FLOPs</div>
+    <div class="ps-body">If it meets or will meet the threshold, notify the Commission within two weeks per <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 52(1)</a> with supporting evidence.</div>
+  </div>
+
+  <div class="ps-card">
+    <div class="ps-card-top">
+      <span class="ps-num">3</span>
+      <span class="ps-tag ps-tag-doc">Documentation</span>
+    </div>
+    <div class="ps-title">Prepare your Annex XI technical documentation before release</div>
+    <div class="ps-body">Cover architecture, training data, energy consumption, and capability limitations. Version-specific; 10-year retention.</div>
+  </div>
+
+  <div class="ps-card">
+    <div class="ps-card-top">
+      <span class="ps-num">4</span>
+      <span class="ps-tag ps-tag-data">Data Summary</span>
+    </div>
+    <div class="ps-title">Establish your training data transparency summary</div>
+    <div class="ps-body">The <a href="https://digital-strategy.ec.europa.eu/en/library/guidelines-scope-obligations-providers-general-purpose-ai-models-under-ai-act" target="_blank" rel="noopener">AI Office July 2025 template</a> is non-optional. Cover data sources, pre-processing methods, and copyright compliance position.</div>
+  </div>
+
+  <div class="ps-card">
+    <div class="ps-card-top">
+      <span class="ps-num">5</span>
+      <span class="ps-tag ps-tag-mark">Content Marking</span>
+    </div>
+    <div class="ps-title">Implement machine-detectable content marking before 2 August 2026</div>
+    <div class="ps-body">Build <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 50</a> C2PA metadata embedding plus active watermarking into your model or API layer. Grace period to 2 December 2026 for systems already on the market.</div>
+  </div>
+
+  <div class="ps-card">
+    <div class="ps-card-top">
+      <span class="ps-num">6</span>
+      <span class="ps-tag ps-tag-cop">Code of Practice</span>
+    </div>
+    <div class="ps-title">Engage with the Code of Practice process</div>
+    <div class="ps-body">Sign the Code to gain a presumption of conformity with <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Articles 53 and 55</a>. Non-signatories must submit a gap analysis and compliance report to the AI Office.</div>
+  </div>
+
+</div>
+
+<div class="ps-fines-callout">
+  <span class="ps-fines-icon">&#9888;</span>
+  <div class="ps-fines-body">
+    <strong>Penalty exposure:</strong> See <a href="https://www.jaggaer.com/eu-ai-act-fines">EU AI Act fines for GPAI non-compliance</a> and <a href="https://www.jaggaer.com/eu-ai-act-compliance-deadlines">EU AI Act compliance deadlines</a> for the full 2025–2027 obligation arc.
+  </div>
+</div>
+
+<!-- ===================== SECTION 9 ===================== -->
+<div class="sdiv"><hr><span>2026 Updates</span><hr></div>
+<h2 id="2026-updates">What changed in 2026: EU AI Act GPAI updates</h2>
+
+<div class="upd-panel">
+
+  <div class="upd-row">
+    <div class="upd-date-col">
+      <div class="upd-date">7 May 2026</div>
+      <div class="upd-tag upd-tag-provisional">Provisional agreement</div>
+    </div>
+    <div class="upd-content">
+      <div class="upd-title">Digital Omnibus: GPAI obligations unaffected</div>
+      <div class="upd-body">Annex III high-risk obligations postponed to 2 December 2027. GPAI Chapter V unaffected. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 50</a> takes effect 2 August 2026 (grace period to 2 December 2026 for systems already on the market).</div>
+      <a href="https://www.consilium.europa.eu/en/press/press-releases/2026/05/07/artificial-intelligence-council-and-parliament-agree-to-simplify-and-streamline-rules/" class="upd-src" target="_blank" rel="noopener">EU Council press release, May 7, 2026 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="upd-row upd-row-last">
+    <div class="upd-date-col">
+      <div class="upd-date">H1 2026</div>
+      <div class="upd-tag upd-tag-clarified">Clarified</div>
+    </div>
+    <div class="upd-content">
+      <div class="upd-title">AI Office gets exclusive GPAI supervisory competence</div>
+      <div class="upd-body">AI Office has exclusive competence where model and system share the same provider. Carve-outs: law enforcement, border management, judicial authorities, financial institutions. Reg. (EU) 2024/1689 governs until Official Journal publication.</div>
+      <a href="https://www.consilium.europa.eu/en/press/press-releases/2026/05/07/artificial-intelligence-council-and-parliament-agree-to-simplify-and-streamline-rules/" class="upd-src" target="_blank" rel="noopener">EU Council press release, May 7, 2026 &rarr;</a>
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- ===================== FAQ ===================== -->
+<div class="sdiv"><hr><span>Frequently Asked Questions</span><hr></div>
+<h2 id="faq">FAQ</h2>
+
+<div class="faq-rows">
+
+  <details class="faq-item">
+    <summary class="faq-summary">What is a general-purpose AI model under the EU AI Act? <span class="faq-chevron">+</span></summary>
+    <div class="faq-body">Under <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 3(63)</a> of Regulation (EU) 2024/1689, a GPAI model processes large amounts of training data, covers a wide range of tasks, and integrates into downstream systems. The obligation attaches to the model, not the application. Indicative threshold: above 10<sup>23</sup> FLOPs plus language, image, or video output (<a href="https://digital-strategy.ec.europa.eu/en/library/guidelines-scope-obligations-providers-general-purpose-ai-models-under-ai-act" target="_blank" rel="noopener">EC Guidelines, 2025</a>).</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">Does the EU AI Act apply to LLMs and foundation models? <span class="faq-chevron">+</span></summary>
+    <div class="faq-body">Yes. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Recital 99</a> cites large language models as a typical GPAI example. EU AI Act foundation models (LLMs and multimodal systems under Article 3(63)) are subject to <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Chapter V GPAI obligations</a> from 2 August 2025.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">What is systemic risk under the EU AI Act? <span class="faq-chevron">+</span></summary>
+    <div class="faq-body">EU AI Act systemic risk is the potential for large-scale harm from the most advanced GPAI models. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 51(2)</a> presumes your model carries it if training compute exceeds 10<sup>25</sup> FLOPs. The Commission may also designate models independently via the Scientific Panel.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">When did GPAI obligations come into force? <span class="faq-chevron">+</span></summary>
+    <div class="faq-body">New models on the EU market: GPAI obligations from 2 August 2025 (<a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Articles 51–56</a>). Enforcement powers activate 2 August 2026. Models already on the market before 2 August 2025 have until 2 August 2027 to comply (<a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Art. 111(3)</a>).</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">What documentation does a GPAI model provider need? <span class="faq-chevron">+</span></summary>
+    <div class="faq-body">Four things under <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 53</a>: technical documentation (Annex XI) and deployer information (Annex XII). Also: a copyright compliance policy under Directive (EU) 2019/790 and a training data summary using the AI Office mandatory template.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">Does the EU AI Act require watermarking of AI-generated content? <span class="faq-chevron">+</span></summary>
+    <div class="faq-body">Yes. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 50</a> requires all AI-generated content to be machine-detectable as AI-produced from 2 August 2026. The Transparency Code mandates C2PA metadata embedding combined with active marking.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">What are the EU AI Act deepfake labelling requirements? <span class="faq-chevron">+</span></summary>
+    <div class="faq-body">Deployers must label AI-created deepfakes as artificially made and disclose their AI origin (<a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 50(4)</a>), regardless of medium. Exceptions cover law enforcement use and evidently artistic works.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">What is the 10&#178;&#8309; FLOP threshold for systemic risk? <span class="faq-chevron">+</span></summary>
+    <div class="faq-body"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 51(1)(a) and (2)</a> sets the threshold at 10<sup>25</sup> FLOPs, the training compute level above which your GPAI model carries systemic risk. Measurement covers the full training run, not inference. The designation is rebuttable: submit benchmark or scaling law evidence to contest it.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">Do open-source GPAI models have reduced obligations? <span class="faq-chevron">+</span></summary>
+    <div class="faq-body">Yes, but only partially. <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 53(2)</a> removes technical documentation and deployer information requirements for open-source models with publicly available weights and usage terms. Copyright compliance and the training data summary still apply.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">What is the EU AI Act Code of Practice for GPAI? <span class="faq-chevron">+</span></summary>
+    <div class="faq-body">The EU AI Office <a href="https://digital-strategy.ec.europa.eu/en/policies/contents-code-gpai" target="_blank" rel="noopener">published the EU AI Act GPAI Code of Practice on 10 July 2025</a>; the EC and AI Board endorsed it as an adequate compliance tool. Signing creates a presumption of conformity with <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Articles 53 and 55</a> from 2 August 2026. Non-signatories must report their compliance approach to the AI Office.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary class="faq-summary">Does the GPAI framework apply to GPT-4, Claude, or Gemini? <span class="faq-chevron">+</span></summary>
+    <div class="faq-body">Yes, if their training compute exceeds 10<sup>25</sup> FLOPs. Providers of GPT-4, Claude, Gemini, or comparable models must notify the Commission under <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 52(1)</a> and fulfil <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener">Article 55</a> EU AI Act systemic risk obligations.</div>
+  </details>
+
+</div>
+
+<!-- ===================== NEXT STEPS ===================== -->
+<div class="sdiv"><hr><span>Further Reading</span><hr></div>
+<h2 id="next-steps">Next steps</h2>
+
+
+
+<div class="next-steps-grid">
+  <div class="ns-card">
+    <span class="ns-tag ns-tag-gpai">Complete Guide</span>
+    <p class="ns-title">EU AI Act: The Complete Guide for 2026</p>
+    <a href="https://www.jaggaer.com/eu-ai-act" class="ns-btn">Read More &rarr;</a>
+  </div>
+  <div class="ns-card">
+    <span class="ns-tag ns-tag-risk">Risk Classification</span>
+    <p class="ns-title">EU AI Act Risk Categories Explained</p>
+    <a href="https://www.jaggaer.com/eu-ai-act-risk-categories" class="ns-btn">Read More &rarr;</a>
+  </div>
+  <div class="ns-card">
+    <span class="ns-tag ns-tag-deadlines">Deadlines</span>
+    <p class="ns-title">EU AI Act Compliance Deadlines: Key Dates</p>
+    <a href="https://www.jaggaer.com/eu-ai-act-compliance-deadlines" class="ns-btn">Read More &rarr;</a>
+  </div>
+  <div class="ns-card">
+    <span class="ns-tag ns-tag-fines">Fines &amp; Penalties</span>
+    <p class="ns-title">EU AI Act Fines for GPAI Non-Compliance</p>
+    <a href="https://www.jaggaer.com/eu-ai-act-fines" class="ns-btn">Read More &rarr;</a>
+  </div>
+</div>
+
+</main>
+
+<!-- ===================== EXPERT SIDEBAR (RIGHT) ===================== -->
+<aside class="expert-sidebar">
+  <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <span class="exp-source">EUR-Lex &middot; Aug 2024</span>
+      <p class="exp-stat"><strong>&euro;10M+</strong> is the estimated cost of training a model at the 10<sup>25</sup> FLOP systemic risk threshold (Art. 51(2)). Only a handful of frontier providers currently operate at this scale.</p>
+      <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" class="exp-link" target="_blank" rel="noopener">View Regulation &rarr;</a>
+    </div>
+
+    <div class="exp-item">
+      <span class="exp-source">Art. 99(3) &middot; Reg. (EU) 2024/1689</span>
+      <p class="exp-stat"><strong>&euro;15M or 3%</strong> of global annual turnover is the maximum fine for failing to meet GPAI obligations under the EU AI Act, whichever is higher.</p>
+      <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" class="exp-link" target="_blank" rel="noopener">View Regulation &rarr;</a>
+    </div>
+
+    <div class="exp-item">
+      <span class="exp-source">Art. 99(4) &middot; Reg. (EU) 2024/1689</span>
+      <p class="exp-stat"><strong>&euro;7.5M or 1%</strong> of global annual turnover is the maximum fine for providing incorrect, incomplete, or misleading information to authorities.</p>
+      <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" class="exp-link" target="_blank" rel="noopener">View Regulation &rarr;</a>
+    </div>
+
+  </div>
+</aside>
+
+</div><!-- end outer-wrap -->
+
+<script>
+(function() {
+  var sections = document.querySelectorAll('h2[id]');
+  var links    = document.querySelectorAll('#tocNav a');
+  if (!sections.length || !links.length) return;
+  function onScroll() {
+    var current = '';
+    sections.forEach(function(s) {
+      if (s.getBoundingClientRect().top <= 120) current = s.id;
+    });
+    links.forEach(function(a) {
+      a.classList.toggle('toc-active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
