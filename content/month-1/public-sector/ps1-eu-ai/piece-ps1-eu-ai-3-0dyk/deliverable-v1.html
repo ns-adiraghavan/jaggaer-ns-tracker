@@ -1,0 +1,1042 @@
+<!-- uploaded by m-5jitd at 2026-06-19T09:58:13.004Z -->
+<!-- piece: Does the EU AI Act Apply to Your Company? A Guide for Non-EU Businesses -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU AI Act: Does It Apply to Non-EU Companies?</title>
+<meta name="description" content="The EU AI Act has extra-territorial reach. Find out whether it applies to your company, what triggers compliance obligations, and what you need to do next.">
+<link rel="canonical" href="https://www.jaggaer.com/eu-ai-act-non-eu-companies">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Does the EU AI Act Apply to Your Company? A Guide for Non-EU Businesses","description":"The EU AI Act has extra-territorial reach. Find out whether it applies to your company, what triggers compliance obligations, and what you need to do next.","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"datePublished":"2026-06-17","author":{"@type":"Organization","name":"JAGGAER"}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Who does the EU AI Act apply to?","acceptedAnswer":{"@type":"Answer","text":"The EU AI Act applies to any provider or deployer whose AI system output is used within the EU, regardless of where the company is registered or where its servers are located. Both providers and deployers are in scope and both carry compliance obligations."}},{"@type":"Question","name":"Does the EU AI Act apply to US companies?","acceptedAnswer":{"@type":"Answer","text":"Yes. US EU AI Act obligations apply to any company whose AI product or service reaches EU users. This includes SaaS platforms, AI APIs, consumer apps, and enterprise software deployed at EU client sites."}},{"@type":"Question","name":"Does the EU AI Act apply to the UK?","acceptedAnswer":{"@type":"Answer","text":"Yes. Post-Brexit, the UK is treated as a third country under the Act. The same extra-territorial logic applies. If your output reaches EU users, you are in scope regardless of what UK regulation requires."}},{"@type":"Question","name":"What triggers EU AI Act applicability for a non-EU business?","acceptedAnswer":{"@type":"Answer","text":"The trigger is use, not location. If your AI system is used by people in the EU, or if its output affects EU users, the Act applies. Where your company is incorporated is irrelevant."}},{"@type":"Question","name":"What is a provider under the EU AI Act?","acceptedAnswer":{"@type":"Answer","text":"A provider, defined under Article 3(3), is any entity that develops an AI system and places it on the market under its own name. Providers carry the heaviest compliance obligations under the Act."}},{"@type":"Question","name":"What is a deployer under the EU AI Act?","acceptedAnswer":{"@type":"Answer","text":"A deployer, defined under Article 3(4), is any entity that uses an AI system in a professional context. Deployers are bound by operational logging and human oversight obligations under Article 26."}},{"@type":"Question","name":"Does the EU AI Act apply to SaaS companies?","acceptedAnswer":{"@type":"Answer","text":"Yes, if EU users interact with the platform. A SaaS product used by an employee or job candidate in the EU triggers Article 2(1)(a) and (c), regardless of where the software is hosted or the company is based."}},{"@type":"Question","name":"What happens if a non-EU company does not comply with the EU AI Act?","acceptedAnswer":{"@type":"Answer","text":"Article 99 sets three penalty tiers. Deploying a prohibited system carries fines of up to €35 million or 7% of worldwide annual turnover. Core high-risk violations carry up to €15 million or 3%. Supplying false or misleading documentation carries up to €7.5 million or 1% of worldwide annual turnover."}},{"@type":"Question","name":"How does the EU AI Act compare to US AI regulation?","acceptedAnswer":{"@type":"Answer","text":"The US does not have a single federal AI law equivalent to the EU AI Act. The US approach is currently sector-led and largely voluntary at the federal level, making the EU Act significantly more prescriptive for companies operating across both markets."}},{"@type":"Question","name":"Is the EU AI Act influencing AI regulation in other countries?","acceptedAnswer":{"@type":"Answer","text":"Yes. This is the Brussels Effect in practice. Companies building to EU standards adopt those standards globally. Canada, Singapore, and Australia are all actively aligning their frameworks with EU requirements."}}]}
+</script>
+
+<style>
+:root {
+ --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading: 400;
+  --line-height-base:  1.6;
+  --line-height-heading: 1.1;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-base);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);}
+h1{font-size:var(--font-size-h1);}
+h2{font-size:var(--font-size-h2);}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink);font-weight:700;}
+.stat{font-weight:700;color:var(--color-red);}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+/* Badges */
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-red{background:#fde7e7;color:#D22428;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.section-eyebrow{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+/* Progress Bar */
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);}
+.article-header h1{font-size:var(--font-size-h1);font-weight:400;line-height:var(--line-height-heading);color:var(--color-ink);max-width:700px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-size:.625rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+/* TOC Sidebar */
+.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--color-cream);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-red);display:block;}
+.toc-nav{display:flex;flex-direction:column;border:var(--border);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:var(--border);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--color-ink);background:var(--color-light-blue);}
+.toc-link.active{color:var(--color-teal);font-weight:600;background:var(--color-light-blue);border-left:2px solid var(--color-teal);}
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--color-cream);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-red);display:block;line-height:1.3;}
+.exp-list{border:var(--border);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:var(--border);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-teal);display:block;margin-bottom:.3rem;}
+.exp-num{font-size:1.15rem;font-weight:700;color:var(--color-ink);line-height:1;display:block;margin-bottom:.15rem;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.68rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink);font-size:.68rem;}
+.exp-link{font-size:.62rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.expert-sidebar{display:none;}}
+/* Article Body */
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:400;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-size:var(--font-size-h5);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.05em;}
+/* CTA Cards */
+.jag-cta{display:flex;align-items:center;gap:var(--space-m);border:var(--border);border-left:3px solid var(--color-red);background:var(--color-cream);padding:var(--space-s) var(--space-m);margin:var(--space-l) 0;border-radius:var(--border-radius);transition:box-shadow .2s;}
+.jag-cta:hover{box-shadow:0 8px 32px rgba(11,13,18,.08);}
+.jag-cta-label{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--color-teal);background:var(--color-light-blue);padding:.15rem var(--space-s);border-radius:9999px;white-space:nowrap;margin-bottom:var(--space-2xs);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .15rem;line-height:1.35;}
+.jag-cta-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.5;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:1rem;font-weight:600;color:var(--color-white);background:var(--color-red);padding:.5rem 1.25rem;text-decoration:none;border:1px solid var(--color-red);white-space:nowrap;text-align:center;line-height:1.35;flex-shrink:0;min-width:140px;border-radius:var(--border-radius-sm);transition:background .2s,border-color .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);border-color:var(--color-grey);color:var(--color-white);}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:flex-start;}}
+/* Visual Break */
+.visual-break{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-m) 0;}
+.visual-break.vb-single{display:flex;align-items:center;gap:var(--space-m);}
+.vb-single-num{font-size:2.25rem;font-weight:800;color:var(--color-red);line-height:1;flex-shrink:0;}
+.vb-single-body{flex:1;min-width:0;}
+.visual-break-kicker{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-teal);margin-bottom:.2rem;display:block;}
+.vb-single-desc{font-size:.8125rem;color:var(--color-ink-2);line-height:1.45;margin:0;}
+@media(max-width:768px){.visual-break.vb-single{flex-direction:column;align-items:flex-start;gap:var(--space-s);}}
+/* Stat Metrics */
+.stat-metrics{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.stat-metrics-kicker{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);display:block;}
+.stat-metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.stat-metric{padding:var(--space-m);text-align:center;background:var(--color-white);}
+.stat-metric:first-child{border-radius:var(--border-radius-sm) 0 0 var(--border-radius-sm);}
+.stat-metric:last-child{border-radius:0 var(--border-radius-sm) var(--border-radius-sm) 0;}
+.stat-num{font-size:clamp(1.3rem,2vw,1.7rem);font-weight:800;color:var(--color-red);display:block;line-height:1;margin-bottom:.3rem;}
+.stat-label{font-size:.7rem;font-weight:600;color:var(--color-ink);display:block;line-height:1.3;margin-bottom:.2rem;}
+.stat-sub{font-size:.62rem;color:var(--color-ink-3);display:block;font-style:italic;}
+@media(max-width:600px){.stat-metrics-grid{grid-template-columns:1fr;}.stat-metric:first-child,.stat-metric:last-child{border-radius:0;}}
+/* Role Cards */
+.roles-wrap{margin:var(--space-m) 0 var(--space-l);}
+.roles-kicker{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);display:block;margin-bottom:var(--space-s);}
+.roles-grid{display:grid;grid-template-columns:1fr 1fr;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;gap:0;}
+.role-card{display:flex;align-items:stretch;border-right:var(--border);border-bottom:var(--border);}
+.role-card:nth-child(even){border-right:none;}
+.role-card:last-child,.role-card:nth-last-child(2):nth-child(odd){border-bottom:none;}
+.role-card-accent{width:4px;flex-shrink:0;}
+.rc-provider .role-card-accent{background:var(--color-red);}
+.rc-deployer .role-card-accent{background:var(--color-navy);}
+.role-card-body{flex:1;min-width:0;padding:var(--space-m);background:var(--color-white);}
+.role-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-xs);margin-bottom:var(--space-xs);flex-wrap:wrap;}
+.role-name{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);line-height:1.2;}
+.role-obligation{font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.15rem .5rem;border-radius:9999px;white-space:nowrap;flex-shrink:0;}
+.ro-heaviest{background:#fde7e7;color:var(--color-red);}
+.ro-moderate{background:#e5eaf0;color:var(--color-navy);}
+.role-def{font-size:.8rem;color:var(--color-ink-2);line-height:1.5;margin-bottom:var(--space-xs);}
+.role-note{font-size:.75rem;color:var(--color-ink-3);line-height:1.45;margin-bottom:var(--space-xs);background:var(--color-cream);padding:.4rem .65rem;border-radius:.25rem;border-left:2px solid var(--color-light-grey);}
+.role-note strong{color:var(--color-ink-2);font-weight:600;}
+.role-ref{display:inline-block;font-size:.62rem;font-weight:600;letter-spacing:.03em;border-bottom:none;}
+@media(max-width:640px){.roles-grid{grid-template-columns:1fr;}.role-card{border-right:none;}}
+/* Role Change Callout */
+.role-change{background:var(--color-light-blue);border-left:3px solid var(--color-navy);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.role-change-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-xs);}
+.role-change p{font-size:var(--font-size-sm);color:var(--color-ink-2);margin:0;line-height:1.6;}
+/* ── Applicability Test Widget ── */
+.at-widget{width:100%;margin:var(--space-m) 0 var(--space-l);}
+.at-header{background:var(--color-navy);border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;padding:1.1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.at-header-left{}
+.at-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7aacbc;display:block;margin-bottom:.2rem;}
+.at-title{font-size:1rem;font-weight:700;color:#fff;line-height:1.2;}
+.at-subtitle{font-size:.72rem;color:#a0b8c8;margin-top:.2rem;}
+.at-progress{display:flex;gap:4px;align-items:center;flex-shrink:0;}
+.at-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18);transition:background .3s,transform .3s;}
+.at-dot.done{background:#2e7d4f;transform:scale(1.1);}
+.at-dot.active{background:#fff;transform:scale(1.2);}
+.at-body{background:var(--color-white);border:var(--border);border-top:none;}
+.at-card{padding:1.1rem 1.25rem;border-bottom:var(--border);position:relative;transition:background .2s;}
+.at-card:last-child{border-bottom:none;}
+.at-card.locked{opacity:.38;pointer-events:none;filter:grayscale(.4);}
+.at-card.ans-yes{background:#f8fffa;}
+.at-card.ans-no{background:#fff8f8;}
+.at-card-top{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:.7rem;}
+.at-num{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem;line-height:1;background:var(--color-light-blue);color:var(--color-navy);transition:background .3s,color .3s;}
+.at-num.active{background:var(--color-navy);color:#fff;}
+.at-num.done{background:#2e7d4f;color:#fff;}
+.at-num.no{background:var(--color-red);color:#fff;}
+.at-text{flex:1;min-width:0;}
+.at-qlabel{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-teal);display:block;margin-bottom:.15rem;}
+.at-question{font-size:.875rem;font-weight:700;color:var(--color-ink);line-height:1.3;}
+.at-desc{font-size:.775rem;color:var(--color-ink-3);line-height:1.5;margin-top:.25rem;}
+.at-check{position:absolute;top:.9rem;right:1.1rem;width:20px;height:20px;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;}
+.at-check-y{background:#e4f4ea;color:#2e7d4f;}
+.at-check-n{background:#fde7e7;color:var(--color-red);}
+.ans-yes .at-check-y{display:flex;}
+.ans-no  .at-check-n{display:flex;}
+.at-controls{display:flex;gap:.4rem;flex-wrap:wrap;}
+.at-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.4rem .9rem;font-family:var(--font-base);font-size:.8rem;font-weight:600;border-radius:var(--border-radius-sm);cursor:pointer;border:2px solid transparent;transition:background .15s,border-color .15s,color .15s,transform .1s;outline:none;line-height:1;}
+.at-btn:focus-visible{outline:2px solid var(--color-teal);outline-offset:2px;}
+.at-btn:active{transform:scale(.97);}
+.at-yes{background:#e4f4ea;color:#2e7d4f;border-color:#b8e2ca;}
+.at-yes:hover,.at-yes.sel{background:#2e7d4f;color:#fff;border-color:#2e7d4f;}
+.at-no{background:#fde7e7;color:var(--color-red);border-color:#f5c0c0;}
+.at-no:hover,.at-no.sel{background:var(--color-red);color:#fff;border-color:var(--color-red);}
+.at-exit{display:none;margin-top:.65rem;background:#e4f4ea;border-left:3px solid #2e7d4f;border-radius:var(--border-radius-sm);padding:.55rem .75rem;font-size:.775rem;color:#2e7d4f;font-weight:600;line-height:1.4;}
+.at-exit.show{display:block;}
+.at-tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:.7rem;}
+.at-tier{display:flex;flex-direction:column;gap:.2rem;padding:.6rem .7rem;background:var(--color-cream);border:2px solid var(--color-border);border-radius:var(--border-radius-sm);cursor:pointer;text-align:left;font-family:var(--font-base);transition:border-color .15s,background .15s;outline:none;}
+.at-tier:hover{border-color:var(--color-teal);background:var(--color-light-blue);}
+.at-tier.sel{border-color:var(--color-navy);background:var(--color-light-blue);}
+.at-tier-name{font-size:.8rem;font-weight:700;color:var(--color-ink);}
+.at-tier-tag{font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.12rem .35rem;border-radius:9999px;display:inline-block;margin:.1rem 0;}
+.ttag-banned{background:#fde7e7;color:var(--color-red);}
+.ttag-high{background:#E9EFF4;color:var(--color-navy);}
+.ttag-limited{background:#fff4e0;color:#9a6200;}
+.ttag-minimal{background:#e4f4ea;color:#2e7d4f;}
+.at-tier-desc{font-size:.7rem;color:var(--color-ink-3);line-height:1.4;}
+.at-result{border-top:var(--border);border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);overflow:hidden;display:none;}
+.at-result.show{display:block;}
+.at-result-inner{padding:1.1rem 1.25rem;}
+.at-result-scope{background:#fff8f8;border-top:3px solid var(--color-red);}
+.at-result-out{background:#e4f4ea;border-top:3px solid #2e7d4f;}
+.at-result-lbl{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:.35rem;}
+.at-result-scope .at-result-lbl{color:var(--color-red);}
+.at-result-out  .at-result-lbl{color:#2e7d4f;}
+.at-result-heading{font-size:.95rem;font-weight:800;color:var(--color-ink);margin-bottom:.45rem;line-height:1.25;}
+.at-result-text{font-size:.8rem;color:var(--color-ink-2);line-height:1.6;}
+.at-result-box{margin-top:.75rem;background:var(--color-light-blue);border:var(--border);border-left:3px solid var(--color-navy);border-radius:var(--border-radius-sm);padding:.65rem .85rem;}
+.at-result-box-lbl{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-navy);display:block;margin-bottom:.25rem;}
+.at-result-box-text{font-size:.775rem;color:var(--color-ink-2);line-height:1.5;}
+.at-footer{background:var(--color-cream);border:var(--border);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);padding:.55rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.at-footer-note{font-size:.68rem;color:var(--color-ink-3);}
+.at-reset{font-family:var(--font-base);font-size:.72rem;font-weight:600;color:var(--color-teal);background:none;border:none;cursor:pointer;padding:.2rem 0;text-decoration:underline;text-underline-offset:2px;transition:color .15s;}
+.at-reset:hover{color:var(--color-navy);}
+@media(max-width:480px){.at-tier-grid{grid-template-columns:1fr;}.at-controls{flex-direction:column;}.at-btn{justify-content:center;}}
+/* Market Grid */
+.market-grid{display:grid;grid-template-columns:1fr 1fr;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;margin:var(--space-m) 0 var(--space-l);}
+.market-card{display:flex;gap:var(--space-s);align-items:flex-start;padding:var(--space-m);background:var(--color-white);border-right:var(--border);border-bottom:var(--border);}
+.market-card:nth-child(even){border-right:none;}
+.market-card:nth-last-child(-n+2){border-bottom:none;}
+.market-dot{width:8px;height:8px;border-radius:50%;margin-top:.3rem;flex-shrink:0;}
+.md-saas{background:var(--color-red);}
+.md-api{background:var(--color-navy);}
+.md-consumer{background:var(--color-teal);}
+.md-enterprise{background:#7aacbc;}
+.market-card-content{flex:1;min-width:0;}
+.market-tag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--color-ink-3);display:block;margin-bottom:var(--space-2xs);}
+.market-rule{font-size:.8rem;color:var(--color-ink-2);line-height:1.5;margin:0;}
+@media(max-width:580px){.market-grid{grid-template-columns:1fr;}.market-card{border-right:none;}.market-card:nth-last-child(-n+2){border-bottom:var(--border);}.market-card:last-child{border-bottom:none;}}
+/* Framework Note */
+.framework-note{background:var(--color-light-blue);border-left:3px solid var(--color-navy);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.framework-note-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-xs);}
+.framework-note p{font-size:var(--font-size-sm);color:var(--color-ink-2);margin:0;line-height:1.6;}
+/* Country Cards */
+.country-list{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0 var(--space-l);}
+.country-card{display:flex;align-items:stretch;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;}
+.country-accent{width:4px;flex-shrink:0;}
+.cc-sg{background:var(--color-red);}
+.cc-au{background:var(--color-navy);}
+.cc-ca{background:var(--color-teal);}
+.country-body{flex:1;padding:var(--space-s) var(--space-m);background:var(--color-white);display:flex;gap:var(--space-m);align-items:flex-start;}
+.country-name{font-weight:700;color:var(--color-ink);font-size:var(--font-size-sm);white-space:nowrap;min-width:90px;flex-shrink:0;padding-top:.1rem;}
+.country-desc{font-size:.8125rem;color:var(--color-ink-2);line-height:1.5;margin:0;}
+/* Brussels Effect */
+.brussels-callout{background:var(--color-cream);border:var(--border);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.brussels-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.brussels-callout p{font-size:var(--font-size-sm);color:var(--color-ink-2);margin:0;line-height:1.6;}
+/* Obligations Steps */
+.obligations-list{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0 var(--space-l);}
+.obl-item{display:flex;align-items:stretch;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;}
+.obl-accent{width:4px;flex-shrink:0;background:var(--color-teal);}
+.obl-body{flex:1;padding:var(--space-s) var(--space-m);background:var(--color-white);}
+.obl-step{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--color-teal);margin-bottom:var(--space-2xs);display:block;}
+.obl-title{font-weight:700;color:var(--color-ink);font-size:var(--font-size-sm);margin-bottom:var(--space-xs);}
+.obl-desc{font-size:.8125rem;color:var(--color-ink-2);line-height:1.5;margin:0;}
+/* Penalty Grid */
+.penalty-wrap{margin:var(--space-m) 0 var(--space-l);}
+.penalty-kicker-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--space-s);margin-bottom:var(--space-m);}
+.penalty-kicker{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);}
+.penalty-note{font-size:.7rem;color:var(--color-ink-3);font-style:italic;}
+.penalty-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;}
+.penalty-card{background:var(--color-white);padding:var(--space-m) var(--space-s) var(--space-s);display:flex;flex-direction:column;gap:0;position:relative;transition:background .15s;}
+.penalty-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.penalty-card.pc-1::before{background:#D22428;}
+.penalty-card.pc-2::before{background:#1B3A5C;}
+.penalty-card.pc-3::before{background:var(--color-teal);}
+.penalty-card:hover{background:var(--color-cream);}
+.penalty-card-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--color-ink-3);margin-bottom:var(--space-s);line-height:1.35;min-height:2.4em;}
+.penalty-num-row{display:flex;align-items:baseline;gap:.3rem;flex-wrap:wrap;margin-bottom:.2rem;}
+.penalty-euro{font-size:clamp(1.3rem,2.2vw,1.7rem);font-weight:800;line-height:1;color:var(--color-red);}
+.penalty-or{font-size:.65rem;font-weight:600;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.06em;}
+.penalty-pct{font-size:clamp(1.3rem,2.2vw,1.7rem);font-weight:800;line-height:1;color:var(--color-ink);}
+.penalty-pct-label{font-size:.65rem;color:var(--color-ink-3);margin-bottom:var(--space-s);line-height:1.35;}
+.penalty-rule{font-size:.65rem;font-weight:700;color:var(--color-teal);text-transform:uppercase;letter-spacing:.05em;border-top:var(--border);padding-top:var(--space-xs);margin-top:auto;}
+@media(max-width:580px){.penalty-grid{grid-template-columns:1fr;}}
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;border-top:var(--border);background:var(--color-white);}
+details{height:auto;overflow:hidden;transition:height .3s ease;}
+details:not([open]){height:3.75rem;}
+/* Next Steps */
+.nextsteps-grid{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0;}
+.nextstep-card{display:flex;align-items:center;gap:var(--space-m);border:var(--border);border-left:3px solid var(--color-teal);background:var(--color-cream);padding:var(--space-s) var(--space-m);border-radius:var(--border-radius);transition:box-shadow .2s;}
+.nextstep-card:hover{box-shadow:0 4px 18px rgba(11,13,18,.08);}
+.nextstep-label{font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--color-teal);display:block;margin-bottom:var(--space-2xs);}
+.nextstep-body{flex:1;min-width:0;}
+.nextstep-title{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .15rem;line-height:1.35;}
+.nextstep-desc{font-size:.8rem;color:var(--color-ink-3);margin:0;line-height:1.4;}
+.nextstep-arrow{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;}
+/* Cost vs Consequence Infographic */
+.cvsc-infographic{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-s);margin:var(--space-l) 0;}
+.cvsc-panel{border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;}
+.cvsc-panel-header{padding:.55rem var(--space-m);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;}
+.cvsc-header-cost{background:var(--color-navy);color:#a8c4d8;}
+.cvsc-header-defiance{background:var(--color-red);color:#f5b0b2;}
+.cvsc-panel-body{padding:var(--space-m);background:var(--color-white);}
+.cvsc-metric{display:flex;align-items:flex-start;gap:var(--space-s);padding:var(--space-s) 0;border-bottom:var(--border);}
+.cvsc-metric:last-child{border-bottom:none;}
+.cvsc-num{font-size:1.35rem;font-weight:800;color:var(--color-red);line-height:1;min-width:90px;flex-shrink:0;}
+.cvsc-num.navy{color:var(--color-navy);}
+.cvsc-label{font-size:.75rem;font-weight:700;color:var(--color-ink);line-height:1.2;margin-bottom:.2rem;}
+.cvsc-source{font-size:.65rem;color:var(--color-ink-3);line-height:1.4;}
+.cvsc-bar-item{margin-bottom:var(--space-s);}
+.cvsc-bar-item:last-child{margin-bottom:0;}
+.cvsc-bar-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.3rem;}
+.cvsc-bar-label{font-size:.72rem;font-weight:700;color:var(--color-ink);}
+.cvsc-bar-fine{font-size:.72rem;font-weight:800;color:var(--color-red);}
+.cvsc-bar-track{height:8px;background:var(--color-cream);border-radius:9999px;overflow:hidden;}
+.cvsc-bar-fill{height:100%;border-radius:9999px;}
+.cvsc-fill-1{background:var(--color-red);width:100%;}
+.cvsc-fill-2{background:var(--color-navy);width:65%;}
+.cvsc-fill-3{background:var(--color-teal);width:35%;}
+.cvsc-bar-sub{font-size:.65rem;color:var(--color-ink-3);margin-top:.25rem;line-height:1.4;}
+@media(max-width:640px){.cvsc-infographic{grid-template-columns:1fr;}}
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+ <!-- TOC SIDEBAR -->
+ <aside class="toc-sidebar" aria-label="Table of Contents">
+  <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+  <nav class="toc-nav" aria-label="Article sections">
+   <a class="toc-link" href="#s1">Extra-Territorial Scope</a>
+   <a class="toc-link" href="#s2">Applicability Test</a>
+   <a class="toc-link" href="#s3">US Companies</a>
+   <a class="toc-link" href="#s4">UK Companies</a>
+   <a class="toc-link" href="#s5">Other Markets</a>
+   <a class="toc-link" href="#s6">Obligations</a>
+   <a class="toc-link" href="#s7">FAQ</a>
+   <a class="toc-link" href="#s8">Next Steps</a>
+  </nav>
+ </aside>
+
+ <!-- ARTICLE -->
+ <article>
+
+  <header class="article-header">
+   <div class="article-header-inner">
+    <span class="article-label">Compliance &amp; Regulation</span>
+    <div class="article-badges">
+     <span class="badge badge-blue">EU AI Act</span>
+     <span class="badge badge-blue">Non-EU Companies</span>
+     <span class="badge badge-red">2026 Guide</span>
+    </div>
+    <h1>Does the EU AI Act Apply to Your Company? A 2026 Guide for Non-EU Businesses</h1>
+    <div class="article-meta">
+     <span class="meta-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      10 min read
+          </span>
+     <span class="meta-sep" aria-hidden="true">|</span>
+     <span class="meta-item"><span class="meta-label">Published</span><time datetime="2026-06-17">June 2026</time></span>
+
+    </div>
+   </div>
+  </header>
+
+  <!-- INTRO -->
+  <p><strong>Yes. The EU AI Act can apply to your company even if you are headquartered outside the EU.</strong></p>
+  <p>Any provider or deployer whose AI system output reaches EU users is in scope, regardless of where they are based. The EU AI Act applies the same obligations to non-EU companies as to EU-based ones. Risk classification, technical documentation, and fines of up to &euro;35 million for non-compliance.</p>
+  <p>If your system is used by people in the EU, or if its output affects EU users, you are in scope. A US SaaS platform, a UK-based AI API, an Australian consumer app available in France: all of them fall within scope. The Act does not stop at borders. Article 2 of Regulation (EU) 2024/1689 covers both providers and deployers regardless of where they are established.</p>
+  <p>This article walks you through a practical applicability test and a breakdown of what the Act means for companies in the US, UK, and other major markets. Start with our <a href="/eu-ai-act">complete guide to the EU AI Act</a> if you need the full regulatory picture first.</p>
+
+  <hr class="section-divider">
+
+  <!-- S1: EXTRA-TERRITORIAL SCOPE -->
+  <span class="section-eyebrow">Article 2 · Scope</span>
+  <h2 id="s1">Understand the Extra-Territorial Scope</h2>
+  <p>Who does the EU AI Act apply to? Any provider or deployer whose AI output reaches EU users regardless of where they are registered. Article 2(1)(c) is where that begins. Where servers sit does not matter.</p>
+
+  <div class="roles-wrap" role="figure" aria-label="Provider and Deployer definitions">
+   <span class="roles-kicker">Two roles. Both in scope.</span>
+   <div class="roles-grid">
+    <div class="role-card rc-provider">
+     <div class="role-card-accent"></div>
+     <div class="role-card-body">
+      <div class="role-card-top">
+       <span class="role-name">Provider</span>
+       <span class="role-obligation ro-heaviest">Heaviest obligations</span>
+      </div>
+      <p class="role-def">Any entity that develops an AI system and puts it on the market under its own name. Build it, ship it, own the output.</p>
+      <p class="role-note"><strong>Statutory basis</strong> Article 3(3), EUR-Lex, Regulation (EU) 2024/1689</p>
+      <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" target="_blank" rel="noopener" class="role-ref" style="color:var(--color-teal);">Article 3(3) &rarr;</a>
+     </div>
+    </div>
+    <div class="role-card rc-deployer">
+     <div class="role-card-accent"></div>
+     <div class="role-card-body">
+      <div class="role-card-top">
+       <span class="role-name">Deployer</span>
+       <span class="role-obligation ro-moderate">Moderate obligations</span>
+      </div>
+      <p class="role-def">Any entity that uses an AI system in a professional context. You did not build it, but you integrated it. Article 26 binds you to logging and human oversight.</p>
+      <p class="role-note"><strong>Statutory basis</strong> Article 3(4), EUR-Lex, Regulation (EU) 2024/1689</p>
+      <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" target="_blank" rel="noopener" class="role-ref" style="color:var(--color-teal);">Article 3(4) &rarr;</a>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="role-change">
+   <span class="role-change-label">Watch. Role Reclassification</span>
+   <p>Article 25(1) means your role can change. A distributor or deployer that makes a significant modification to a system is legally reclassified as a provider and takes on the full compliance burden that comes with it.</p>
+  </div>
+
+  <p><strong>Both roles. One rule. If the output reaches EU users, you are in scope.</strong> For a full breakdown of how the regulation is structured, read our guide on <a href="/eu-ai-act-foundations">what the EU AI Act is and how it works</a>.</p>
+  <p>EU AI Act scope is defined by output, not origin. Article 2 asks where your system’s results land, not where your company is registered. The same obligations apply equally to US, UK, and every other third-country business.</p>
+
+  <div class="jag-cta">
+   <div class="jag-cta-body">
+    <span class="jag-cta-label">JAGGAER</span>
+    <p class="jag-cta-head">See how JAI handles procurement decisions every recommendation cited to source</p>
+    <p class="jag-cta-sub">Every output logged. Humans accountable at every step.</p>
+   </div>
+   <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo</a>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- S2: APPLICABILITY TEST -->
+  <span class="section-eyebrow">Applicability Test</span>
+  <h2 id="s2">Run the Four-Question Applicability Test</h2>
+  <p>When does the EU AI Act apply? EU AI Act applicability turns on four questions. Answer them and you know exactly where you stand.</p>
+  <div class="at-widget" role="region" aria-label="EU AI Act applicability test">
+   <div class="at-header">
+    <div class="at-header-left">
+     <span class="at-eyebrow">EU AI Act, Article 2</span>
+     <div class="at-title">Does the Act Apply to Your Business?</div>
+     <div class="at-subtitle">Answer four questions. Know where you stand.</div>
+    </div>
+    <div class="at-progress" aria-label="Progress" role="progressbar">
+     <div class="at-dot active" id="atpd1"></div>
+     <div class="at-dot" id="atpd2"></div>
+     <div class="at-dot" id="atpd3"></div>
+     <div class="at-dot" id="atpd4"></div>
+    </div>
+   </div>
+   <div class="at-body">
+    <!-- Q1 -->
+    <div class="at-card" id="atq1">
+     <div class="at-check at-check-y">&#10003;</div>
+     <div class="at-check at-check-n">&#10007;</div>
+     <div class="at-card-top">
+      <div class="at-num active" id="atqn1">1</div>
+      <div class="at-text">
+       <span class="at-qlabel">Question 1 of 4</span>
+       <div class="at-question">Do you develop or deploy an AI system?</div>
+       <div class="at-desc">If you build AI systems and bring them to market, you are a provider (Article 3(3)). If you use an AI system in a professional context, you are a deployer (Article 3(4)).</div>
+      </div>
+     </div>
+     <div class="at-controls">
+      <button class="at-btn at-yes" onclick="atAnswer(1,true)">&#10003;&nbsp; Yes</button>
+      <button class="at-btn at-no"  onclick="atAnswer(1,false)">&#10007;&nbsp; No</button>
+     </div>
+     <div class="at-exit" id="atexit1">You are not a provider or deployer. The Act does not apply to your organisation in this context.</div>
+    </div>
+    <!-- Q2 -->
+    <div class="at-card locked" id="atq2">
+     <div class="at-check at-check-y">&#10003;</div>
+     <div class="at-check at-check-n">&#10007;</div>
+     <div class="at-card-top">
+      <div class="at-num" id="atqn2">2</div>
+      <div class="at-text">
+       <span class="at-qlabel">Question 2 of 4</span>
+       <div class="at-question">Is it used by people in the EU, or does it affect people in the EU?</div>
+       <div class="at-desc">One EU user on your platform is enough. No EU office, EU contract, or EU customer base required. Article 2(1)(c) covers third-country providers whose outputs reach EU users.</div>
+      </div>
+     </div>
+     <div class="at-controls">
+      <button class="at-btn at-yes" onclick="atAnswer(2,true)">&#10003;&nbsp; Yes</button>
+      <button class="at-btn at-no"  onclick="atAnswer(2,false)">&#10007;&nbsp; No</button>
+     </div>
+     <div class="at-exit" id="atexit2">Your system does not reach EU users. The Act does not apply to your current deployment.</div>
+    </div>
+    <!-- Q3 -->
+    <div class="at-card locked" id="atq3">
+     <div class="at-check at-check-y">&#10003;</div>
+     <div class="at-check at-check-n">&#10007;</div>
+     <div class="at-card-top">
+      <div class="at-num" id="atqn3">3</div>
+      <div class="at-text">
+       <span class="at-qlabel">Question 3 of 4</span>
+       <div class="at-question">Is your system in scope?</div>
+       <div class="at-desc">The Act excludes military applications, systems used solely for national security, and pure scientific research. If your system falls outside these, it is in scope.</div>
+      </div>
+     </div>
+     <div class="at-controls">
+      <button class="at-btn at-yes" onclick="atAnswer(3,true)">&#10003;&nbsp; Yes, it is in scope</button>
+      <button class="at-btn at-no"  onclick="atAnswer(3,false)">&#10007;&nbsp; No, it is excluded</button>
+     </div>
+     <div class="at-exit" id="atexit3">Your system falls within an excluded category. The Act does not apply. Document that exclusion clearly.</div>
+    </div>
+    <!-- Q4 -->
+    <div class="at-card locked" id="atq4">
+     <div class="at-card-top">
+      <div class="at-num" id="atqn4">4</div>
+      <div class="at-text">
+       <span class="at-qlabel">Question 4 of 4</span>
+       <div class="at-question">What risk tier does your system fall into?</div>
+       <div class="at-desc">Your tier determines your compliance obligations. Select the closest match.</div>
+      </div>
+     </div>
+     <div class="at-tier-grid">
+      <button class="at-tier" onclick="atTier('banned')" id="attier-banned">
+       <span class="at-tier-name">Unacceptable Risk</span>
+       <span class="at-tier-tag ttag-banned">Banned outright</span>
+       <span class="at-tier-desc">Social scoring, biometric surveillance, emotion recognition at work</span>
+      </button>
+      <button class="at-tier" onclick="atTier('high')" id="attier-high">
+       <span class="at-tier-name">High Risk</span>
+       <span class="at-tier-tag ttag-high">Full obligations</span>
+       <span class="at-tier-desc">Recruitment, credit scoring, biometrics, critical infrastructure</span>
+      </button>
+      <button class="at-tier" onclick="atTier('limited')" id="attier-limited">
+       <span class="at-tier-name">Limited Risk</span>
+       <span class="at-tier-tag ttag-limited">Transparency rules</span>
+       <span class="at-tier-desc">Chatbots, deepfakes, AI-generated content</span>
+      </button>
+      <button class="at-tier" onclick="atTier('minimal')" id="attier-minimal">
+       <span class="at-tier-name">Minimal Risk</span>
+       <span class="at-tier-tag ttag-minimal">No mandates</span>
+       <span class="at-tier-desc">Spam filters, recommendation engines, AI-enabled games</span>
+      </button>
+     </div>
+    </div>
+   </div>
+   <div class="at-result" id="at-result"><div class="at-result-inner" id="at-result-inner"></div></div>
+   <div class="at-footer">
+    <span class="at-footer-note">Based on Regulation (EU) 2024/1689, Article 2 &amp; Annex III. Not legal advice</span>
+    <button class="at-reset" onclick="atReset()">&#8635; Reset test</button>
+   </div>
+  </div>
+
+  <p>The test above maps EU AI Act scope to your specific deployment type.</p>
+
+  <hr class="section-divider">
+
+  <!-- S3: US COMPANIES -->
+  <span class="section-eyebrow">US Market</span>
+  <h2 id="s3">What This Means for US Companies</h2>
+  <p>The EU AI Act impact on businesses headquartered in the US is not hypothetical. It is already running on an active enforcement timeline.</p>
+  <p>US EU AI Act obligations are identical to those facing any other non-EU business. If your AI product or service reaches EU users, you are in scope. No EU subsidiary required. No EU-registered customers required. One EU user is enough.</p>
+
+  <div class="market-grid" role="figure" aria-label="US company examples and triggers">
+   <div class="market-card">
+    <div class="market-dot md-saas"></div>
+    <div class="market-card-content">
+     <span class="market-tag">B2B SaaS Platforms</span>
+     <p class="market-rule">HR screening tools, CRM software, recruitment platforms. The moment an employee or job candidate inside the EU interacts with your system, Article 2(1)(a) and (c) pulls you in scope.</p>
+    </div>
+   </div>
+   <div class="market-card">
+    <div class="market-dot md-api"></div>
+    <div class="market-card-content">
+     <span class="market-tag">AI APIs</span>
+     <p class="market-rule">Credit scoring engines, LLM integrations. Recital 22 closes the remote processing loophole. If an EU-based developer calls your US-hosted API and the output flows back to EU end-users, the Act covers you.</p>
+    </div>
+   </div>
+   <div class="market-card">
+    <div class="market-dot md-consumer"></div>
+    <div class="market-card-content">
+     <span class="market-tag">Consumer Apps</span>
+     <p class="market-rule">AI image generators, fitness apps, productivity tools. A user in France downloading your app triggers Article 3(3). The Act applies whether your product is paid or free.</p>
+    </div>
+   </div>
+   <div class="market-card">
+    <div class="market-dot md-enterprise"></div>
+    <div class="market-card-content">
+     <span class="market-tag">Enterprise Software</span>
+     <p class="market-rule">A US company deploying its own AI at an Italian branch office is a deployer under Article 2(1)(b) and Article 3(4). Location of deployment is what counts.</p>
+    </div>
+   </div>
+  </div>
+
+  <p>For US companies, the first practical question is straightforward: which tools in your stack actually reach EU users?</p>
+
+  <div class="jag-cta">
+   <div class="jag-cta-body">
+    <span class="jag-cta-label">JAGGAER</span>
+    <p class="jag-cta-head">See how JAGGAER runs source-to-pay for enterprise procurement teams</p>
+    <p class="jag-cta-sub">Sourcing, contracts, suppliers, and spend one platform, no integration tax.</p>
+   </div>
+   <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo</a>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- S4: UK COMPANIES -->
+  <span class="section-eyebrow">UK Market</span>
+  <h2 id="s4">What This Means for UK Companies</h2>
+  <p>Does the EU AI Act apply to the UK? Yes with no special carve-outs and no transitional exemptions. Post-Brexit, the UK is a third country under the Act. Article 2(1)(c) treats UK businesses the same as US or Australian ones. If your output reaches EU users, you are in scope.</p>
+  <p>The UK runs a completely different framework at home. The <a href="https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach/white-paper" target="_blank" rel="noopener">DSIT pro-innovation white paper</a> is principles-based and sector-led. No horizontal risk classifications. No centralized AI regulator. Existing bodies, the HSE, Ofgem, and the ICO, each apply the framework within their own remit. The UK also leans on regulatory sandboxes over outright bans, creating space for testing that the EU does not offer.</p>
+
+  <p>How does the EU AI Act affect companies operating from the UK? The same way it affects any non-EU business the trigger is whether your output reaches EU users, not where your office is.</p>
+
+  <div class="framework-note">
+   <span class="framework-note-label">Two Frameworks. Two Tracks.</span>
+   <p>That difference does not reduce EU exposure. A UK recruitment platform, proctoring tool, or automated grading system crossing into the single market triggers Annex III high-risk obligations under the EU Act. This applies regardless of what the UK requires domestically. Compliance with one framework does not satisfy the other.</p>
+  </div>
+
+  <p><strong>Two frameworks. Two compliance tracks. Neither cancels the other.</strong></p>
+
+  <hr class="section-divider">
+
+  <!-- S5: OTHER MARKETS -->
+  <span class="section-eyebrow">Global Reach</span>
+  <h2 id="s5">What This Means for Companies in Other Markets</h2>
+  <p>The Act&rsquo;s reach extends beyond the US and UK. Under international law, the EU AI Act operates as an extra-territorial regulation, the only framework of its kind with binding reach beyond its home borders. Any company whose AI output reaches EU users is in scope, regardless of where it was built.</p>
+
+  <div class="country-list" role="list" aria-label="Market-by-market breakdown">
+   <div class="country-card" role="listitem">
+    <div class="country-accent cc-sg"></div>
+    <div class="country-body">
+     <span class="country-name">Singapore</span>
+     <p class="country-desc">Operates a voluntary governance framework through the IMDA. Flexible domestically, but a Singaporean SaaS product serving European clients must meet EU standards as its binding legal baseline.</p>
+    </div>
+   </div>
+   <div class="country-card" role="listitem">
+    <div class="country-accent cc-au"></div>
+    <div class="country-body">
+     <span class="country-name">Australia</span>
+     <p class="country-desc">Relies on existing legislation and sector-led oversight rather than a standalone AI law. Australian exporters navigate local privacy obligations and EU technical documentation requirements simultaneously.</p>
+    </div>
+   </div>
+   <div class="country-card" role="listitem">
+    <div class="country-accent cc-ca"></div>
+    <div class="country-body">
+     <span class="country-name">Canada</span>
+     <p class="country-desc">Working directly with European regulators through the Canada&ndash;EU Digital Partnership Council to keep its AI products eligible for European markets.</p>
+    </div>
+   </div>
+  </div>
+
+  <div class="brussels-callout">
+   <span class="brussels-label">The Brussels Effect</span>
+   <p>EU AI Act influence on global standards is already visible. This is the Brussels Effect in practice. Companies building to EU standards adopt those standards globally. The EU AI Act regulates where your product operates, not where your company is incorporated.</p>
+  </div>
+
+  <div class="jag-cta">
+   <div class="jag-cta-body">
+    <span class="jag-cta-label">JAGGAER</span>
+    <p class="jag-cta-head">See how JAGGAER manages procurement across global supplier networks</p>
+    <p class="jag-cta-sub">13M+ suppliers. $2.9T in annual spend managed. Configured for your operating footprint.</p>
+   </div>
+   <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo</a>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- S6: OBLIGATIONS -->
+  <span class="section-eyebrow">Obligations &amp; Cost</span>
+  <h2 id="s6">What Obligations Follow If It Applies to You in 2026</h2>
+  <p>Your obligations depend on your risk tier. Prohibited system bans took effect in February 2025 and the enforcement window is already open. The Act demands architectural changes to how AI systems are designed, documented, and tested before going into service, not a legal sign-off and not a one-time exercise. EU AI Act compliance challenges for companies outside the EU centre on four areas: risk classification, technical documentation, conformity assessment, and database registration. The higher the tier, the heavier the load.</p>
+
+  <div class="cvsc-infographic" role="figure" aria-label="Cost vs. Consequence compliance costs against Article 99 penalties">
+   <div class="cvsc-panel">
+    <div class="cvsc-panel-header cvsc-header-cost">High-Risk Operational Cost Realities &middot; Per System</div>
+    <div class="cvsc-panel-body">
+     <div class="cvsc-metric">
+      <div class="cvsc-num">&euro;320K&ndash;<br>&euro;600K</div>
+      <div>
+       <div class="cvsc-label">Upfront pre-market setup</div>
+       <div class="cvsc-source">Engineering, documentation, and legal costs before EU deployment. European Parliament, Q E-001210/2026.</div>
+      </div>
+     </div>
+     <div class="cvsc-metric">
+      <div class="cvsc-num">&euro;150K</div>
+      <div>
+       <div class="cvsc-label">Annual maintenance cost</div>
+       <div class="cvsc-source">Ongoing logging, monitoring, and bias audits per system, per year. The Parliament Magazine.</div>
+      </div>
+     </div>
+     <div class="cvsc-metric">
+      <div class="cvsc-num navy">+17%</div>
+      <div>
+       <div class="cvsc-label">Added overhead on core AI spending</div>
+       <div class="cvsc-source">Compliance premium on core AI compute and R&amp;D. European Commission / CEPS.</div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="cvsc-panel">
+    <div class="cvsc-panel-header cvsc-header-defiance">Article 99 Non-Compliance Penalties</div>
+    <div class="cvsc-panel-body">
+     <div class="cvsc-bar-item">
+      <div class="cvsc-bar-top">
+       <div class="cvsc-bar-label">Prohibited System Deployment</div>
+       <div class="cvsc-bar-fine">&euro;35M or 7%</div>
+      </div>
+      <div class="cvsc-bar-track"><div class="cvsc-bar-fill cvsc-fill-1"></div></div>
+      <div class="cvsc-bar-sub">Social scoring, biometric scraping, subliminal manipulation Article 99(3)</div>
+     </div>
+     <div class="cvsc-bar-item">
+      <div class="cvsc-bar-top">
+       <div class="cvsc-bar-label">Core High-Risk Violations</div>
+       <div class="cvsc-bar-fine">&euro;15M or 3%</div>
+      </div>
+      <div class="cvsc-bar-track"><div class="cvsc-bar-fill cvsc-fill-2"></div></div>
+      <div class="cvsc-bar-sub">Missing conformity assessments, unlogged high-risk data Article 99(4)</div>
+     </div>
+     <div class="cvsc-bar-item">
+      <div class="cvsc-bar-top">
+       <div class="cvsc-bar-label">False or Misleading Documentation</div>
+       <div class="cvsc-bar-fine">&euro;7.5M or 1%</div>
+      </div>
+      <div class="cvsc-bar-track"><div class="cvsc-bar-fill cvsc-fill-3"></div></div>
+      <div class="cvsc-bar-sub">Falsified technical files, hidden data lineages Article 99(5)</div>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="obligations-list" role="list" aria-label="Four compliance obligations">
+   <div class="obl-item" role="listitem">
+    <div class="obl-accent"></div>
+    <div class="obl-body">
+     <span class="obl-step">Step 01</span>
+     <p class="obl-title">Identify your risk tier.</p>
+     <p class="obl-desc">Everything starts here. Your tier determines what follows. For a full breakdown of where your system sits, read our guide on <a href="/eu-ai-act-risk-categories">EU AI Act risk categories explained</a>.</p>
+    </div>
+   </div>
+   <div class="obl-item" role="listitem">
+    <div class="obl-accent"></div>
+    <div class="obl-body">
+     <span class="obl-step">Step 02</span>
+     <p class="obl-title">Compile technical documentation.</p>
+     <p class="obl-desc">High-risk systems cannot operate as a black box. Article 11 and Annex IV require providers to document architectural design, algorithmic logic, training data, risk management evaluations, and ongoing accuracy metrics before placing a product into service. See the full <a href="/eu-ai-act-fines-compliance">EU AI Act fines and compliance checklist</a> for the documentation requirements by tier.</p>
+    </div>
+   </div>
+   <div class="obl-item" role="listitem">
+    <div class="obl-accent"></div>
+    <div class="obl-body">
+     <span class="obl-step">Step 03</span>
+     <p class="obl-title">Determine if a conformity assessment applies.</p>
+     <p class="obl-desc">Article 43 requires high-risk systems to pass a conformity assessment. Most software providers can run this internally. Systems embedded in regulated physical hardware require an external EU Notified Body.</p>
+    </div>
+   </div>
+   <div class="obl-item" role="listitem">
+    <div class="obl-accent"></div>
+    <div class="obl-body">
+     <span class="obl-step">Step 04</span>
+     <p class="obl-title">Register in the EU database.</p>
+     <p class="obl-desc">Article 49 blocks market entry until your system is publicly logged in the European Commission&rsquo;s centralized database. No exceptions for third-country providers. Check the <a href="/eu-ai-act-timeline">EU AI Act compliance deadlines</a> to confirm when registration obligations apply to your system type.</p>
+    </div>
+   </div>
+  </div>
+
+  <div class="penalty-wrap" role="figure" aria-label="Article 99 penalty tiers">
+   <div class="penalty-kicker-bar">
+    <span class="penalty-kicker">Article 99, Three-Tier Penalty Structure</span>
+    <span class="penalty-note">Maximum fines. Based on global annual turnover, whichever is higher.</span>
+   </div>
+   <div class="penalty-grid">
+    <div class="penalty-card pc-1">
+     <div class="penalty-card-label">Prohibited System Deployments<br>(e.g. social scoring, biometric scraping)</div>
+     <div class="penalty-num-row">
+      <span class="penalty-euro">&euro;35M</span>
+      <span class="penalty-or">or</span>
+      <span class="penalty-pct">7%</span>
+     </div>
+     <div class="penalty-pct-label">of worldwide annual turnover</div>
+     <div class="penalty-rule">Article 99(3)</div>
+    </div>
+    <div class="penalty-card pc-2">
+     <div class="penalty-card-label">Core High-Risk Violations<br>(e.g. missing conformity assessments, unlogged data)</div>
+     <div class="penalty-num-row">
+      <span class="penalty-euro">&euro;15M</span>
+      <span class="penalty-or">or</span>
+      <span class="penalty-pct">3%</span>
+     </div>
+     <div class="penalty-pct-label">of worldwide annual turnover</div>
+     <div class="penalty-rule">Article 99(4)</div>
+    </div>
+    <div class="penalty-card pc-3">
+     <div class="penalty-card-label">Misleading or False Documentation<br>(e.g. falsified technical files)</div>
+     <div class="penalty-num-row">
+      <span class="penalty-euro">&euro;7.5M</span>
+      <span class="penalty-or">or</span>
+      <span class="penalty-pct">1%</span>
+     </div>
+     <div class="penalty-pct-label">of worldwide annual turnover</div>
+     <div class="penalty-rule">Article 99(5)</div>
+    </div>
+   </div>
+  </div>
+
+  <div class="jag-cta">
+   <div class="jag-cta-body">
+    <span class="jag-cta-label">JAGGAER</span>
+    <p class="jag-cta-head">See how JAGGAER documents procurement decisions across the full source-to-pay cycle</p>
+    <p class="jag-cta-sub">Every transaction logged. Every supplier interaction traceable. No black box.</p>
+   </div>
+   <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo</a>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- S7: FAQ -->
+  <span class="section-eyebrow">Quick Reference</span>
+  <h2 id="s7">Frequently Asked Questions</h2>
+
+  <details class="faq-item"><summary>Who does the EU AI Act apply to?<span class="faq-icon">+</span></summary><div class="faq-body">The EU AI Act applies to any provider or deployer whose AI system output is used within the EU, regardless of where the company is registered or where its servers are located. Both providers and deployers are in scope and both carry compliance obligations.</div></details>
+  <details class="faq-item"><summary>Does the EU AI Act apply to US companies?<span class="faq-icon">+</span></summary><div class="faq-body">Yes. US EU AI Act obligations apply to any company whose AI product or service reaches EU users. This includes SaaS platforms, AI APIs, consumer apps, and enterprise software deployed at EU client sites.</div></details>
+  <details class="faq-item"><summary>Does the EU AI Act apply to the UK?<span class="faq-icon">+</span></summary><div class="faq-body">Yes. Post-Brexit, the UK is treated as a third country under the Act. The same extra-territorial logic applies. If your output reaches EU users, you are in scope regardless of what UK regulation requires.</div></details>
+  <details class="faq-item"><summary>What triggers EU AI Act applicability for a non-EU business?<span class="faq-icon">+</span></summary><div class="faq-body">The trigger is use, not location. If your AI system is used by people in the EU, or if its output affects EU users, the Act applies. Where your company is incorporated is irrelevant.</div></details>
+  <details class="faq-item"><summary>What is a provider under the EU AI Act?<span class="faq-icon">+</span></summary><div class="faq-body">A provider, defined under Article 3(3), is any entity that develops an AI system and places it on the market under its own name. Providers carry the heaviest compliance obligations under the Act.</div></details>
+  <details class="faq-item"><summary>What is a deployer under the EU AI Act?<span class="faq-icon">+</span></summary><div class="faq-body">A deployer, defined under Article 3(4), is any entity that uses an AI system in a professional context. Deployers are bound by operational logging and human oversight obligations under Article 26.</div></details>
+  <details class="faq-item"><summary>Does the EU AI Act apply to SaaS companies?<span class="faq-icon">+</span></summary><div class="faq-body">Yes, if EU users interact with the platform. A SaaS product used by an employee or job candidate in the EU triggers Article 2(1)(a) and (c), regardless of where the software is hosted or the company is based.</div></details>
+  <details class="faq-item"><summary>What happens if a non-EU company does not comply with the EU AI Act?<span class="faq-icon">+</span></summary><div class="faq-body">Article 99 sets three penalty tiers. Deploying a prohibited system carries fines of up to &euro;35 million or 7% of worldwide annual turnover. Core high-risk violations, including missing conformity assessments and unlogged data, carry up to &euro;15 million or 3%. Supplying false or misleading documentation carries up to &euro;7.5 million or 1% of worldwide annual turnover. Market access to the EU can also be blocked.</div></details>
+  <details class="faq-item"><summary>How does the EU AI Act compare to US AI regulation?<span class="faq-icon">+</span></summary><div class="faq-body">The US does not have a single federal AI law equivalent to the EU AI Act. The US approach is currently sector-led and largely voluntary at the federal level, making the EU Act significantly more prescriptive for companies operating across both markets.</div></details>
+  <details class="faq-item"><summary>What is the EU AI Act impact on startups?<span class="faq-icon">+</span></summary><div class="faq-body">EU AI Act impact on startups can be disproportionately heavy. The cost baseline of &euro;320,000&ndash;&euro;600,000 per high-risk system makes compliance a significant burden for early-stage companies. Startups should prioritise risk tier identification before building at scale. If your system falls into high-risk categories such as recruitment or credit scoring, compliance costs need to be built into your product roadmap from day one.</div></details>
+  <details class="faq-item"><summary>Is the EU AI Act influencing AI regulation in other countries?<span class="faq-icon">+</span></summary><div class="faq-body">Yes. This is the Brussels Effect in practice. EU AI Act influence on global standards extends beyond direct compliance. Companies building to EU standards adopt those standards globally, and Canada, Singapore, and Australia are all actively aligning their domestic frameworks with EU requirements.</div></details>
+
+  <hr class="section-divider">
+
+  <!-- S8: NEXT STEPS -->
+  <span class="section-eyebrow">Continue Reading</span>
+  <h2 id="s8">Next Steps</h2>
+  <p>Now you know whether the Act applies to your business. The next question is what it requires. These guides take you through each step.</p>
+
+  <div class="nextsteps-grid">
+   <a href="/eu-ai-act" class="nextstep-card" style="text-decoration:none;">
+    <div class="nextstep-body">
+     <span class="nextstep-label">Start Here</span>
+     <p class="nextstep-title">Complete guide to the EU AI Act</p>
+     <p class="nextstep-desc">The full regulatory picture. What the Act is, how it works, and what it covers.</p>
+    </div>
+    <span class="nextstep-arrow">&rarr;</span>
+   </a>
+   <a href="/eu-ai-act-risk-categories" class="nextstep-card" style="text-decoration:none;">
+    <div class="nextstep-body">
+     <span class="nextstep-label">Classification</span>
+     <p class="nextstep-title">EU AI Act risk categories explained</p>
+     <p class="nextstep-desc">Identify which tier your system falls into and what that requires.</p>
+    </div>
+    <span class="nextstep-arrow">&rarr;</span>
+   </a>
+   <a href="/eu-ai-act-fines-compliance" class="nextstep-card" style="text-decoration:none;">
+    <div class="nextstep-body">
+     <span class="nextstep-label">Compliance</span>
+     <p class="nextstep-title">EU AI Act fines and compliance checklist</p>
+     <p class="nextstep-desc">Penalties broken down, deadlines mapped, and a step-by-step checklist for non-EU providers.</p>
+    </div>
+    <span class="nextstep-arrow">&rarr;</span>
+   </a>
+  </div>
+
+ </article>
+
+ <!-- EXPERT SIDEBAR -->
+ <aside class="expert-sidebar" aria-label="What the Experts Are Saying" itemscope itemtype="https://schema.org/ItemList">
+  <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+  <div class="exp-list">
+   <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><meta itemprop="position" content="1">
+    <cite class="exp-source">European Parliament &middot; 2026</cite>
+    <span class="exp-num red">&euro;320K&ndash;600K</span>
+    <p class="exp-stat">Estimated upfront compliance cost for a single high-risk AI system, per European Parliament written answer Q E-001210/2026.</p>
+    <a class="exp-link" href="https://www.europarl.europa.eu/doceo/document/E-10-2026-001210_EN.html" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+   </div>
+
+
+
+
+   <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><meta itemprop="position" content="2">
+    <cite class="exp-source">EU Commission &middot; 2021</cite>
+    <span class="exp-num red">5&ndash;15%</span>
+    <p class="exp-stat">Share of active AI systems that fall strictly into the High-Risk category (Annex III), facing the full pre-market compliance load.</p>
+    <a class="exp-link" href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:52021SC0084" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+   </div>
+   <div class="exp-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><meta itemprop="position" content="3">
+    <cite class="exp-source">European Parliament &middot; 2026</cite>
+    <span class="exp-num red">&euro;150K</span>
+    <p class="exp-stat">Estimated annual maintenance cost per high-risk system: logging, monitoring, and bias audits.</p>
+    <a class="exp-link" href="https://www.europarl.europa.eu/doceo/document/E-10-2026-001210_EN.html" target="_blank" rel="noopener" itemprop="url">View source &rarr;</a>
+   </div>
+  </div>
+ </aside>
+
+</div><!-- /page-wrapper -->
+
+<script>
+(function(){
+ // Progress bar
+  var bar = document.getElementById('progress-bar');
+  if(bar){
+    window.addEventListener('scroll', function(){
+      var scrollTop = window.scrollY || document.documentElement.scrollTop;
+      var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+   bar.style.width = Math.min(pct, 100) + '%';
+    }, {passive: true});
+  }
+  // TOC active state
+  var ids = ['s1','s2','s3','s4','s5','s6','s7','s8'];
+  var sections = ids.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var links = document.querySelectorAll('.toc-nav .toc-link');
+  if(!links.length || !sections.length) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var id = e.target.id;
+        links.forEach(function(l){ l.classList.toggle('active', l.getAttribute('href') === '#' + id); });
+      }
+    });
+  }, { rootMargin: '-60px 0px -70% 0px', threshold: 0 });
+  sections.forEach(function(s){ obs.observe(s); });
+})();
+
+// Applicability Test Widget (global scope, required for onclick)
+var atTierData = {
+  banned:  { lbl:'Unacceptable Risk, System Prohibited',  head:'Your system is banned under Article 5.', text:'Deploying this system in the EU is a legal infringement from day one. Unacceptable risk systems cannot be placed on the EU market or put into service under any circumstances. Immediate legal review is required before any EU deployment.', box:'Prohibited deployment carries fines of up to &euro;35 million or 7% of worldwide annual turnover under Article 99(3). No remediation path exists for systems in this category.', cls:'at-result-scope' },
+  high:    { lbl:'In Scope, High Risk',  head:'The Act applies. You carry the full compliance load.', text:'High-risk systems must clear six pre-market requirements before EU deployment. Risk management system, data governance, technical documentation, logging, transparency to deployers, and human oversight. Conformity assessment under Article 43 applies.', box:'Upfront compliance costs range from &euro;320,000 to &euro;600,000 per system (European Parliament, 2026). Non-compliance carries fines of up to &euro;15 million or 3% of worldwide annual turnover under Article 99(4).', cls:'at-result-scope' },
+  limited: { lbl:'In Scope, Limited Risk', head:'The Act applies. Transparency obligations only.', text:'Limited risk systems must comply with Article 50 transparency requirements. If your system interacts with humans, it must be clearly identified as AI. AI-generated content must be labelled. No conformity assessment required.', box:'Failure to disclose AI interaction carries fines of up to &euro;7.5 million or 1% of worldwide annual turnover under Article 99(5).', cls:'at-result-scope' },
+  minimal: { lbl:'In Scope, Minimal Risk', head:'The Act applies. No mandatory requirements for your tier.', text:'Minimal risk systems face no mandatory compliance obligations under the Act. You are encouraged to adopt voluntary codes of conduct. Your system is still subject to other applicable EU law including GDPR.', box:'No mandatory requirements. Monitor for reclassification if your system is updated, expanded, or repurposed. A significant modification can change your risk tier.', cls:'at-result-scope' }
+};
+function atAnswer(n, yes) {
+  var card = document.getElementById('atq'+n);
+  var num  = document.getElementById('atqn'+n);
+  var exit = document.getElementById('atexit'+n);
+  card.querySelectorAll('.at-btn').forEach(function(b){b.classList.remove('sel');});
+  if(yes) {
+    card.querySelector('.at-yes').classList.add('sel');
+    card.classList.remove('ans-no'); card.classList.add('ans-yes');
+    num.className='at-num done'; if(exit) exit.classList.remove('show');
+    atDot(n,'done');
+    if(n<4) atUnlock(n+1); else atShowResult('high');
+  } else {
+    card.querySelector('.at-no').classList.add('sel');
+    card.classList.remove('ans-yes'); card.classList.add('ans-no');
+    num.className='at-num no'; if(exit) exit.classList.add('show');
+    atDot(n,'no'); atLockFrom(n+1);
+    document.getElementById('at-result').classList.remove('show');
+  }
+}
+function atTier(key) {
+  document.querySelectorAll('.at-tier').forEach(function(b){b.classList.remove('sel');});
+  document.getElementById('attier-'+key).classList.add('sel');
+  var card=document.getElementById('atq4'); var num=document.getElementById('atqn4');
+  card.classList.remove('ans-no'); card.classList.add('ans-yes');
+  num.className='at-num done'; atDot(4,'done'); atShowResult(key);
+}
+function atUnlock(n) {
+  var card=document.getElementById('atq'+n); if(!card) return;
+  card.classList.remove('locked');
+  var num=document.getElementById('atqn'+n);
+  if(num && !num.classList.contains('done')) num.className='at-num active';
+  atDot(n,'active');
+  document.getElementById('at-result').classList.remove('show');
+}
+function atLockFrom(n) {
+  for(var i=n;i<=4;i++) {
+    var card=document.getElementById('atq'+i); if(!card) continue;
+    card.classList.add('locked'); card.classList.remove('ans-yes','ans-no');
+    var num=document.getElementById('atqn'+i); if(num) num.className='at-num';
+    var exit=document.getElementById('atexit'+i); if(exit) exit.classList.remove('show');
+    card.querySelectorAll('.at-btn,.at-tier').forEach(function(b){b.classList.remove('sel');});
+    atDot(i,'inactive');
+  }
+}
+function atShowResult(key) {
+  var d=atTierData[key]; if(!d) return;
+  var panel=document.getElementById('at-result'); var inner=document.getElementById('at-result-inner');
+  inner.className='at-result-inner '+d.cls;
+  inner.innerHTML='<span class="at-result-lbl">'+d.lbl+'</span><div class="at-result-heading">'+d.head+'</div><div class="at-result-text">'+d.text+'</div><div class="at-result-box"><span class="at-result-box-lbl">Financial Exposure</span><div class="at-result-box-text">'+d.box+'</div></div>';
+ panel.classList.add('show');
+  setTimeout(function(){panel.scrollIntoView({behavior:'smooth',block:'nearest'});},100);
+}
+function atDot(n,s) {
+  var d=document.getElementById('atpd'+n); if(!d) return;
+  d.classList.remove('done','active');
+  if(s==='done') d.classList.add('done'); else if(s==='active') d.classList.add('active');
+}
+function atReset() {
+  for(var i=1;i<=4;i++) {
+    var card=document.getElementById('atq'+i); if(!card) continue;
+    card.classList.remove('ans-yes','ans-no');
+    if(i===1) card.classList.remove('locked'); else card.classList.add('locked');
+    card.querySelectorAll('.at-btn,.at-tier').forEach(function(b){b.classList.remove('sel');});
+    var num=document.getElementById('atqn'+i);
+    if(num) num.className=i===1?'at-num active':'at-num';
+    var exit=document.getElementById('atexit'+i); if(exit) exit.classList.remove('show');
+    atDot(i,i===1?'active':'inactive');
+  }
+  document.getElementById('at-result').classList.remove('show');
+}
+</script>
+</body>
+</html>
