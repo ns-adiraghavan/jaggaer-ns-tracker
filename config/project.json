@@ -687,7 +687,14 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "writing"
+              "status": "marketing-review",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-06-19T10:02:25.118Z",
+              "last_upload_by": "manager",
+              "last_updated": "2026-06-19T10:02:25.118Z",
+              "last_updated_by": "manager"
             },
             {
               "id": "piece-ps1-eu-ai-6-97dx",
