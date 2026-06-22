@@ -481,19 +481,51 @@ details.faq-item{overflow:hidden}
 .dir-hint a:hover{border-bottom-color:var(--red)}
 @media (max-width:760px){.tool-grid{grid-template-columns:1fr}.tool-group-desc{display:none}}
 
-/* ===== START HERE (orientation path for AI newcomers) ===== */
-.start-section{position:relative}
-.start-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.25rem}
-.start-card{position:relative;background:var(--white);border:var(--border);border-radius:var(--radius);padding:1.7rem 1.6rem 1.45rem;display:flex;flex-direction:column;cursor:pointer;transition:box-shadow .22s,transform .22s,border-color .22s;overflow:hidden}
-.start-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .25s}
-.start-card:hover{box-shadow:0 14px 36px rgba(11,13,18,.09);transform:translateY(-3px);border-color:#e7caca}
-.start-card:hover::before{transform:scaleX(1)}
-.start-num{font-family:'Poppins',sans-serif;font-size:1.75rem;font-weight:800;color:var(--red);line-height:1;margin-bottom:.7rem;letter-spacing:-.02em}
-.start-card-title{font-size:1.06rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:.55rem}
-.start-card-body{font-size:.85rem;color:var(--ink-2);line-height:1.62;flex:1;margin-bottom:1.05rem}
-.start-card-cta{font-size:.8rem;font-weight:700;color:var(--red);display:flex;align-items:center;gap:6px;transition:gap .2s}
-.start-card:hover .start-card-cta{gap:10px}
-@media (max-width:760px){.start-grid{grid-template-columns:1fr}}
+/* ===== FOUR STEPS TO YOUR FIRST WIN (steps 1-3 + step 4, one journey) ===== */
+.fs-title{font-size:var(--fs-h2);font-weight:400;line-height:1.15;color:var(--ink);margin-bottom:1rem}
+.fs-title strong{font-weight:700}
+.fs-lede{font-size:1rem;color:var(--ink-3);line-height:1.7;max-width:620px;margin-bottom:2.25rem}
+.fs-pillars-label{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.7rem}
+.fs-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-bottom:2rem}
+.fs-pillar{text-align:left;background:var(--white);border:var(--border);border-radius:var(--radius-sm);padding:.85rem 1rem;cursor:pointer;font-family:Inter,sans-serif;transition:border-color .2s,background .2s;display:flex;flex-direction:column;gap:4px}
+.fs-pillar:hover{border-color:#e7caca}
+.fs-pillar.on{background:var(--red);border-color:var(--red)}
+.fs-pillar-name{font-size:.9rem;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:7px}
+.fs-pillar.on .fs-pillar-name{color:#fff}
+.fs-pillar-dot{width:7px;height:7px;border-radius:2px;background:var(--red);flex-shrink:0}
+.fs-pillar.on .fs-pillar-dot{background:#fff}
+.fs-pillar-sub{font-size:.74rem;color:var(--ink-3);line-height:1.45}
+.fs-pillar.on .fs-pillar-sub{color:rgba(255,255,255,.82)}
+.fs-steps{display:flex;flex-direction:column;gap:.85rem}
+.fs-step{position:relative;background:var(--white);border:var(--border);border-radius:var(--radius);padding:1.4rem 1.6rem;display:grid;grid-template-columns:auto 1fr auto;gap:1.15rem;align-items:start}
+.fs-step.is-open{cursor:pointer;transition:box-shadow .2s,border-color .2s}
+.fs-step.is-open:hover{box-shadow:0 10px 28px rgba(11,13,18,.07);border-color:#e7caca}
+.fs-badge{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--red);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:.82rem;font-weight:700;color:var(--red);flex-shrink:0}
+.fs-step-main{min-width:0}
+.fs-step-title{font-size:1.02rem;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:9px;margin-bottom:.4rem}
+.fs-step-title svg{width:17px;height:17px;stroke:var(--red);fill:none;stroke-width:1.7;flex-shrink:0}
+.fs-step-body{font-size:.85rem;color:var(--ink-2);line-height:1.6;max-width:600px}
+.fs-step-tag{margin-top:.7rem;font-size:.76rem;font-weight:600;color:var(--red);display:inline-flex;align-items:center;gap:6px}
+.fs-open{font-size:.8rem;font-weight:700;color:var(--red);display:flex;align-items:center;gap:6px;white-space:nowrap;transition:gap .2s}
+.fs-step.is-open:hover .fs-open{gap:10px}
+.fs-step-4{display:block;background:rgba(210,36,40,.035);border-color:#f0d3d3;padding:1.5rem 1.6rem 1.6rem}
+.fs-step4-head{display:grid;grid-template-columns:auto 1fr;gap:1.15rem;align-items:start;margin-bottom:1.3rem}
+.fs-step4-title{font-size:1.02rem;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:9px;margin-bottom:.4rem;flex-wrap:wrap}
+.fs-step4-title svg{width:17px;height:17px;stroke:var(--red);fill:none;stroke-width:1.7;flex-shrink:0}
+.fs-step4-pill{font-size:.6rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#fff;background:var(--red);padding:3px 9px;border-radius:999px}
+.fs-step4-body{font-size:.85rem;color:var(--ink-2);line-height:1.6;max-width:660px}
+.fs-tools{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.fs-tool{background:var(--white);border:var(--border);border-radius:var(--radius-sm);padding:1.3rem 1.4rem;cursor:pointer;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s,border-color .2s}
+.fs-tool:hover{box-shadow:0 10px 26px rgba(11,13,18,.08);transform:translateY(-2px);border-color:#e7caca}
+.fs-tool-icon{width:22px;height:22px;margin-bottom:.6rem;color:var(--red)}
+.fs-tool-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.fs-tool-title{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:.35rem}
+.fs-tool-does{font-size:.82rem;color:var(--ink-2);line-height:1.55;margin-bottom:.9rem}
+.fs-tool-prompt{font-size:.78rem;color:var(--ink-3);line-height:1.55;padding-top:.85rem;border-top:var(--border);margin-bottom:.9rem}
+.fs-tool-prompt b{color:var(--ink-2);font-weight:700}
+.fs-tool-cta{font-size:.78rem;font-weight:700;color:var(--red);display:flex;align-items:center;gap:6px;transition:gap .2s;margin-top:auto}
+.fs-tool:hover .fs-tool-cta{gap:10px}
+@media (max-width:760px){.fs-pillars{grid-template-columns:1fr}.fs-tools{grid-template-columns:1fr}.fs-step{grid-template-columns:auto 1fr;gap:.9rem}.fs-open{grid-column:2/3;justify-self:start;margin-top:.3rem}.fs-step4-head{grid-template-columns:1fr}}
 
 /* ============ ADDED: brand-consistent CTA + JAI surfaces ============ */
 
@@ -751,13 +783,6 @@ details.faq-item{overflow:hidden}
 @media (max-width:760px){.ts-cards{grid-template-columns:1fr}}
 
 
-/* ===== SUBTLE INLINE JAI NUDGE (replaces the big jai-strip comparison box) ===== */
-.jai-inline{display:flex;align-items:center;gap:.7rem;margin-top:1rem;padding:.65rem .85rem;background:linear-gradient(135deg,rgba(122,31,176,.05),rgba(214,36,139,.05));border:1px solid rgba(122,31,176,.14);border-radius:var(--radius-sm);font-size:.78rem;color:var(--ink-2);line-height:1.5}
-.jai-inline-mark{font-weight:800;font-size:.66rem;letter-spacing:.03em;background:var(--jai-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;flex-shrink:0}
-.jai-inline-text{flex:1;min-width:0}
-.jai-inline-link{color:var(--red);font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:opacity .15s}
-.jai-inline-link:hover{opacity:.7}
-@media (max-width:560px){.jai-inline{flex-wrap:wrap;gap:.4rem}}
 
 </style>
 </head>
@@ -807,7 +832,7 @@ details.faq-item{overflow:hidden}
           </div>
         </div>
       </div>
-      <p class="gap-foot">The gap between wanting to use AI and actually using it is where most teams sit right now. This page is built to help you cross it.</p>
+      <p class="gap-foot">Most teams sit in the gap between wanting AI and using it. This page is built to help you cross it.</p>
     </div>
   </section>
 
@@ -823,13 +848,15 @@ details.faq-item{overflow:hidden}
     </div>
   </section>
 
-  <!-- FOLLOW THESE 3 STEPS FIRST (the three ways to start) -->
-  <section class="section start-section" id="start-here">
+  <!-- FOUR STEPS TO YOUR FIRST WIN (steps 1-3 open the sub-pages; step 4 follows the chosen pillar) -->
+  <section class="section fs-section" id="start-here">
     <div class="section-inner">
       <span class="eyebrow">Start here</span>
-      <h2 class="section-heading">Follow these <strong>3 steps first.</strong></h2>
-      <p class="section-sub">Ten minutes, in order: how to ask AI for what you want, what it does and does not do well, and where it would help your team first.</p>
-      <div class="start-grid" id="start-grid"></div>
+      <h2 class="fs-title">Four steps to your <strong>first win with AI.</strong></h2>
+      <p class="fs-lede">You do not need to know much about AI to begin. Work down the first three. They take about ten minutes. Then pick the kind of work you do and open the tools built for it.</p>
+      <div class="fs-pillars-label">Step 4 &middot; Pick your work</div>
+      <div class="fs-pillars" id="fs-pillars"></div>
+      <div class="fs-steps" id="fs-steps"></div>
     </div>
   </section>
 
@@ -927,7 +954,6 @@ details.faq-item{overflow:hidden}
         <button class="run-btn" id="sup-btn" onclick="runSupplier()"><span class="spinner"></span><span class="btn-label">Scan for risk →</span></button>
         <div class="pg-thinking" id="sup-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Mapping geographic concentration…</div></div>
         <div class="output-area" id="sup-output"></div>
-        <div class="jai-inline" id="sup-output-jai" style="display:none"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">On your live data, JAI watches your whole supplier base continuously, not just the list you paste.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
       </div>
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">This is close to what the tool above does. Paste it into Claude, ChatGPT, or Copilot, drop your own supplier list in, and you'll get a comparable risk read.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a supply-chain risk analyst. I'll give you a list of suppliers, each with a country and the category they supply.
@@ -963,7 +989,6 @@ Format: a one-line priority first, then "Risks" as a short list, then "Alternati
         <button class="run-btn" id="clause-btn" onclick="runClause()"><span class="spinner"></span><span class="btn-label">Annotate clause →</span></button>
         <div class="pg-thinking" id="clause-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Reading clause structure…</div></div>
         <div class="output-area" id="clause-output"></div>
-        <div class="jai-inline" id="clause-output-jai" style="display:none"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">JAI reads your entire contract portfolio and flags renewals before the window closes.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
       </div>
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">The tool flags risky clause language. Here's the prompt that does the same thing in any AI assistant.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a commercial contracts analyst. Read the clause(s) below and surface anything I should be careful about before signing.
@@ -999,7 +1024,6 @@ Then give me: the single change you'd negotiate first, and one question to ask t
         <button class="run-btn" id="rfp-btn" onclick="runRFP()"><span class="spinner"></span><span class="btn-label">Generate RFP structure →</span></button>
         <div class="pg-thinking" id="rfp-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Structuring scope and criteria…</div></div>
         <div class="output-area" id="rfp-output"></div>
-        <div class="jai-inline" id="rfp-output-jai" style="display:none"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">JAI runs the full sourcing event, tuned to your category history and approved vendors.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
       </div>
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Turn a rough need into a structured RFP. This prompt produces the same scope-and-criteria shape the tool does.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a procurement category manager turning a rough need into a structured RFP.
@@ -1033,7 +1057,6 @@ Keep it practical and ready to drop into a document.</pre><button class="recipe-
         <button class="run-btn" id="inv-btn" onclick="runInvoice()"><span class="spinner"></span><span class="btn-label">Detect exceptions →</span></button>
         <div class="pg-thinking" id="inv-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Checking against exception rules…</div></div>
         <div class="output-area" id="inv-output"></div>
-        <div class="jai-inline" id="inv-output-jai" style="display:none"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">JAI checks 100% of AP inbound automatically, against your own rules and thresholds.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
       </div>
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Spotting invoice exceptions is pattern-matching AI is good at. This prompt reproduces what the tool checks.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are an accounts-payable reviewer. Below are invoice lines in the format: invoice ID | vendor | amount | note.
@@ -1071,7 +1094,6 @@ Return:
         <button class="run-btn" id="pb-run-btn" onclick="runPrompt()" style="display:none"><span class="spinner"></span><span class="btn-label">Run this prompt →</span></button>
         <div class="pg-thinking" id="pb-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Running your prompt…</div></div>
         <div class="output-area" id="pb-output"></div>
-        <div class="jai-inline" id="pb-output-jai" style="display:none"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">JAI runs prompts like this on your own data, and picks the right model for each task.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
       </div>
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The pattern behind every tool here</div></div><div class="recipe-body"><div class="recipe-intro">This is the pattern the other tools are built on. Almost any procurement task fits this shape:</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a [role — e.g. contracts analyst, category manager, AP reviewer].
@@ -1150,8 +1172,7 @@ Format: [exactly how you want the answer — a numbered list, a table with these
             <div class="diag-line"><span class="diag-line-k">Maverick spend addressable</span><span class="diag-line-v" id="d-maverick">$0</span></div>
             <div class="diag-line"><span class="diag-line-k">AP leakage recoverable</span><span class="diag-line-v" id="d-leakage">$0</span></div>
             <div class="diag-line"><span class="diag-line-k">Opportunity as % of spend</span><span class="diag-line-v" id="d-payback">-</span></div>
-            <div class="jai-inline" style="margin-top:1rem"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">JAI models this from your actual ledger, category by category, and tracks it live.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
-            <div class="diag-note">A rough, illustrative estimate to spark a conversation — not a forecast. Real numbers depend on your category mix and where you’re starting from. Want one grounded in your own data? Ask an AI assistant using the prompt below.</div>
+            <div class="diag-note">A rough, directional estimate, not a forecast. Real numbers depend on your category mix and where you start. For one grounded in your own data, use the prompt below.</div>
           </div>
         </div>
       </div>
@@ -1184,7 +1205,6 @@ Give me a rough, clearly-labelled estimate of where AI or automation could save 
         <button class="run-btn" id="appr-btn" onclick="runApproval()"><span class="spinner"></span><span class="btn-label">Check approval path →</span></button>
         <div class="pg-thinking" id="appr-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Checking thresholds and policy…</div></div>
         <div class="output-area" id="appr-output"></div>
-        <div class="jai-inline" id="appr-output-jai" style="display:none"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">JAI enforces your real approval matrix in the platform, in real time.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
       </div>
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Here is how to answer a routine “can I buy this?” question with AI.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a procurement policy assistant. Here's a purchase I want to make: [describe it, including the amount and whether it's already on an active contract].
@@ -1224,7 +1244,6 @@ If anything depends on our own internal thresholds, say so and tell me exactly w
         <button class="run-btn" id="email-btn" onclick="runEmail()"><span class="spinner"></span><span class="btn-label">Draft the message →</span></button>
         <div class="pg-thinking" id="email-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Drafting in the right tone…</div></div>
         <div class="output-area" id="email-output"></div>
-        <div class="jai-inline" id="email-output-jai" style="display:none"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">JAI drafts from the live PO, contract terms, and SLA history, not just what you type.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
       </div>
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Drafting the awkward supplier email is exactly the kind of task to hand to AI. This prompt does it.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are helping me write a professional message to a supplier.
@@ -1255,7 +1274,6 @@ Write a short, clear message: a subject line, a tight body that states the issue
         <button class="run-btn" id="cls-btn" onclick="runClassifier()"><span class="spinner"></span><span class="btn-label">Classify spend →</span></button>
         <div class="pg-thinking" id="cls-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Sorting into categories…</div></div>
         <div class="output-area" id="cls-output"></div>
-        <div class="jai-inline" id="cls-output-jai" style="display:none"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">JAI keeps all your spend classified continuously as new lines arrive.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
       </div>
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Tidying messy spend lines into categories is quick work for AI. Here's the prompt the tool is built on.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a spend analyst. Sort these purchase lines into clean spend categories.
@@ -1287,7 +1305,6 @@ Return a simple table (line, category, flag), then one line on which categories 
         <button class="run-btn" id="tnd-btn" onclick="runTender()"><span class="spinner"></span><span class="btn-label">Summarise proposal →</span></button>
         <div class="pg-thinking" id="tnd-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Extracting key terms…</div></div>
         <div class="output-area" id="tnd-output"></div>
-        <div class="jai-inline" id="tnd-output-jai" style="display:none"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">JAI compares every response side by side, scored against your own criteria.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
       </div>
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Reading a long proposal for the few facts that matter is a great use of AI. This prompt extracts them.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are evaluating supplier proposals. Read the proposal below and pull out only the decision-useful facts.
@@ -1319,7 +1336,6 @@ Format as short sections — Price, Commitments, Certifications, Watch-outs — 
         <button class="run-btn" id="ss-btn" onclick="runSoleSource()"><span class="spinner"></span><span class="btn-label">Draft justification →</span></button>
         <div class="pg-thinking" id="ss-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Structuring the justification…</div></div>
         <div class="output-area" id="ss-output"></div>
-        <div class="jai-inline" id="ss-output-jai" style="display:none"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">JAI drafts to your jurisdiction's rules and keeps the full audit trail.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
       </div>
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">A sole-source justification has a standard shape. Hand AI the reason and it drafts the rest.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a procurement compliance writer. Help me draft a sole-source (single-source) justification.
@@ -1349,7 +1365,6 @@ Write it in plain, defensible language an auditor would accept, and leave clear 
       <div class="pg-stage-head"><div class="pg-dot"></div><div class="pg-stage-title">Should-cost estimator</div></div>
       <div class="pg-stage-body">
         <div class="pg-label">What are you sourcing, and what's the quoted price?</div><div class="persona-bar"><span class="persona-label">Customer type</span><button class="persona-btn" data-v="mfg" onclick="setPersona('sc','mfg',this)"><span class="pdot"></span>Manufacturing</button><button class="persona-btn" data-v="edu" onclick="setPersona('sc','edu',this)"><span class="pdot"></span>Higher Education</button><button class="persona-btn" data-v="gov" onclick="setPersona('sc','gov',this)"><span class="pdot"></span>Public Sector</button></div><div class="persona-hint" id="sc-hint"></div><textarea class="pg-textarea" id="sc-input" placeholder="e.g. CNC-machined aluminium bracket, 5,000 units, quoted at $42 per unit."></textarea><button class="run-btn" id="sc-btn" onclick="runShouldCost()"><span class="spinner"></span><span class="btn-label">Build should-cost &#8594;</span></button><div class="pg-thinking" id="sc-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Decomposing the cost stack...</div></div><div class="output-area" id="sc-output"></div>
-        <div class="jai-inline" id="sc-output-jai" style="display:none"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">JAI prices against your real purchase history, category by category.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
       </div>
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">A should-cost gives you a number to negotiate against. AI can build a rough one from a short description.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a cost engineer. Build a "should-cost" for something I'm buying so I can negotiate from a number, not a feeling.
@@ -1375,7 +1390,6 @@ Estimate the cost split across materials, labour, overhead, logistics, and suppl
       <div class="pg-stage-head"><div class="pg-dot"></div><div class="pg-stage-title">Bid comparison &amp; award optimiser</div></div>
       <div class="pg-stage-body">
         <div class="pg-label">Paste your bids (one per line: supplier, price, lead time, note)</div><div class="persona-bar"><span class="persona-label">Customer type</span><button class="persona-btn" data-v="mfg" onclick="setPersona('bc','mfg',this)"><span class="pdot"></span>Manufacturing</button><button class="persona-btn" data-v="edu" onclick="setPersona('bc','edu',this)"><span class="pdot"></span>Higher Education</button><button class="persona-btn" data-v="gov" onclick="setPersona('bc','gov',this)"><span class="pdot"></span>Public Sector</button></div><div class="persona-hint" id="bc-hint"></div><textarea class="pg-textarea" id="bc-input" placeholder="Supplier A | $1.20M | 14-day lead | IATF 16949, 99.2% OTD&#10;Supplier B | $1.05M | 30-day lead | ISO 9001, 96% OTD, tooling extra&#10;Supplier C | $1.32M | 10-day lead | IATF 16949, 99.6% OTD, local"></textarea><button class="run-btn" id="bc-btn" onclick="runBidCompare()"><span class="spinner"></span><span class="btn-label">Score the bids &#8594;</span></button><div class="pg-thinking" id="bc-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Normalising and scoring bids...</div></div><div class="output-area" id="bc-output"></div>
-        <div class="jai-inline" id="bc-output-jai" style="display:none"><span class="jai-inline-mark">✦ JAI</span><span class="jai-inline-text">JAI runs the whole event end to end, from scoring to award.</span><a class="jai-inline-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See how →</a></div>
       </div>
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Scoring bids on more than price is the kind of structured judgement AI supports well. Here's the prompt.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are running a bid evaluation. Compare these bids and recommend one.
@@ -2379,21 +2393,62 @@ var GROUP_TINT={
   start:{stroke:'#b05e00',soft:'#fbf0e2',grad:'#b05e00'}
 };
 
-var STARTS=[
-  {n:"01",page:"prompt",title:"Learn how to ask",body:"Every tool here is a prompt underneath. See the shape of a good one: who the AI should be, what it needs to know, the task, and the format you want back. About five minutes."},
-  {n:"02",page:"myths",title:"Know what to trust",body:"What AI does well for procurement and where it falls short, so you know when to rely on it and when not to."},
-  {n:"03",page:"readiness",title:"Find your first win",body:"A two-minute read that points to the one place AI would save you the most time this month. Start there before you try to do everything at once."}
+var FS_STEPS=[
+  {n:'01',page:'prompt',title:'Learn how to ask',
+   icon:'<svg viewBox="0 0 24 24"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M18 14l.7 2L21 16.7l-2.3.7L18 20l-.7-2.3L15 16.7l2.3-.7z"/></svg>',
+   body:'Every tool here is a prompt underneath. This shows you the shape of a good one: who the AI should be, what it needs to know, the task, and how you want the answer. About five minutes.',
+   tag:'Hands-on, prompting basics'},
+  {n:'02',page:'myths',title:'Know what to trust',
+   icon:'<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.4-3 7.7-7 9-4-1.3-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>',
+   body:'A straight answer on what AI does well for procurement and where it falls short. No hype, no fear, just the honest version, so you know when to rely on it.',
+   tag:'An honest reality check'},
+  {n:'03',page:'readiness',title:'Find your first win',
+   icon:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>',
+   body:'A two-minute read that points to the one place AI would save you the most time this month. Start there before you try to do everything at once.',
+   tag:'Where to start'}
 ];
-function renderStartHere(){
-  var g=document.getElementById("start-grid");if(!g)return;
-  g.innerHTML=STARTS.map(function(x){
-    return '<div class="start-card" onclick="go(\''+x.page+'\')">'+
-      '<div class="start-num">'+x.n+'</div>'+
-      '<div class="start-card-title">'+x.title+'</div>'+
-      '<div class="start-card-body">'+x.body+'</div>'+
-      '<div class="start-card-cta">Start →</div></div>';
-  }).join("");
+var FS_STEP4_ICON='<svg viewBox="0 0 24 24"><path d="M4 6h11M4 12h16M4 18h9"/><circle cx="19" cy="6" r="1.4"/><circle cx="15" cy="18" r="1.4"/></svg>';
+var fsPillar='sourcing';
+function fsPillarData(id){return LIB_GROUPS.filter(function(g){return g.id===id;})[0];}
+function renderFourSteps(){
+  var pillars=document.getElementById('fs-pillars'),steps=document.getElementById('fs-steps');
+  if(!pillars||!steps)return;
+  pillars.innerHTML=LIB_GROUPS.map(function(g){
+    return '<button class="fs-pillar'+(g.id===fsPillar?' on':'')+'" onclick="selectFsPillar(\''+g.id+'\')">'+
+      '<span class="fs-pillar-name"><span class="fs-pillar-dot"></span>'+g.name+'</span>'+
+      '<span class="fs-pillar-sub">'+g.sub+'</span></button>';
+  }).join('');
+  var rows=FS_STEPS.map(function(x){
+    return '<div class="fs-step is-open" onclick="go(\''+x.page+'\')">'+
+      '<div class="fs-badge">'+x.n+'</div>'+
+      '<div class="fs-step-main">'+
+        '<div class="fs-step-title">'+x.icon+x.title+'</div>'+
+        '<div class="fs-step-body">'+x.body+'</div>'+
+        '<div class="fs-step-tag">→ '+x.tag+'</div>'+
+      '</div>'+
+      '<div class="fs-open">Open <span class="arr">→</span></div></div>';
+  }).join('');
+  var g=fsPillarData(fsPillar);
+  var cards=g.tools.map(function(t){
+    return '<div class="fs-tool" onclick="go(\''+t.page+'\')">'+
+      '<div class="fs-tool-icon">'+(ICONS[t.icon]||'')+'</div>'+
+      '<div class="fs-tool-title">'+t.title+'</div>'+
+      '<div class="fs-tool-does">'+t.does+'</div>'+
+      '<div class="fs-tool-prompt"><b>How to prompt:</b> '+t.prompt+'</div>'+
+      '<div class="fs-tool-cta">Open tool <span class="arr">→</span></div></div>';
+  }).join('');
+  var step4='<div class="fs-step fs-step-4">'+
+    '<div class="fs-step4-head">'+
+      '<div class="fs-badge">04</div>'+
+      '<div class="fs-step-main">'+
+        '<div class="fs-step4-title">'+FS_STEP4_ICON+'Run it on your own work<span class="fs-step4-pill">'+g.name+'</span></div>'+
+        '<div class="fs-step4-body">'+g.tools.length+' ready-made prompts for '+g.name.toLowerCase()+'. '+g.sub+'. Open any tool to run it on an example or on text you paste.</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="fs-tools">'+cards+'</div></div>';
+  steps.innerHTML=rows+step4;
 }
+function selectFsPillar(id){fsPillar=id;renderFourSteps();}
 
 function renderDirectory(){
   var wrap=document.getElementById('tool-directory');if(!wrap)return;
@@ -2732,8 +2787,9 @@ var STEP_FLOW=[
   {page:'prompt',kicker:'Step 1',name:'Learn to ask'},
   {page:'myths',kicker:'Step 2',name:'What to trust'},
   {page:'readiness',kicker:'Step 3',name:'Your first win'},
-  {page:'whatnext',kicker:'Step 4',name:'What next'}
+  {page:'home',kicker:'Step 4',name:'Run it',jump:true}
 ];
+function goJourney(){go('home');setTimeout(function(){var r=document.getElementById('start-here');if(r)r.scrollIntoView({behavior:'smooth'});},80);}
 function renderStepBars(){
   document.querySelectorAll('.step-bar').forEach(function(bar){
     var current=bar.getAttribute('data-step');
@@ -2743,7 +2799,8 @@ function renderStepBars(){
       if(s.page===current)cls+=' on';
       else if(i<curIdx)cls+=' done';
       var sep=i<STEP_FLOW.length-1?'<span class="step-sep">\u203a</span>':'';
-      return '<button class="'+cls+'" onclick="go(\''+s.page+'\')">'+
+      var click=s.jump?'goJourney()':"go('"+s.page+"')";
+      return '<button class="'+cls+'" onclick="'+click+'">'+
         '<span class="step-dot"><span class="step-n">'+(i+1)+'</span></span>'+
         '<span class="step-meta"><span class="step-kicker">'+s.kicker+'</span>'+
         '<span class="step-name">'+s.name+'</span></span></button>'+sep;
@@ -2890,22 +2947,8 @@ function animateGapDots(el){
 
 buildGapDots();renderStepBars();
 
-/* Reveal the subtle JAI nudge whenever a tool's output is shown (and hide on reset). */
-function wireJaiInline(){
-  var ids=['sup-output', 'clause-output', 'rfp-output', 'inv-output', 'appr-output', 'email-output', 'cls-output', 'tnd-output', 'ss-output', 'sc-output', 'bc-output', 'pb-output'];
-  ids.forEach(function(id){
-    var out=document.getElementById(id);
-    var note=document.getElementById(id+'-jai');
-    if(!out||!note)return;
-    var sync=function(){note.style.display=out.classList.contains('visible')?'flex':'none';};
-    new MutationObserver(sync).observe(out,{attributes:true,attributeFilter:['class']});
-    sync();
-  });
-}
-wireJaiInline();
 
-
-buildPB();renderPB();buildMyths();calcDiag();calcReadiness();initObservers();renderStartHere();renderLibrary();renderReading();
+buildPB();renderPB();buildMyths();calcDiag();calcReadiness();initObservers();renderFourSteps();renderLibrary();renderReading();
 </script>
 </body>
 </html>
