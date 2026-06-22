@@ -230,7 +230,7 @@ function App() {
           />
         )}
         {view === "jai-demo" && <JAIDemoPanel onBack={() => setView("tracker")} />}
-        {view === "ai-playground" && <AIPlaygroundPanel onBack={() => setView("tracker")} />}
+        {view === "ai-playground" && <AIPlaygroundPanel onBack={() => setView("tracker")} project={project} setProject={setProject} currentUser={currentUser} />}
         {view === "style-guide" && <StyleGuidePanel project={project} adminMode={adminMode} />}
         {view === "admin" && adminMode && (
           <AdminPanel project={project} setProject={setProject} adminTarget={adminTarget} setAdminTarget={setAdminTarget} />
@@ -351,96 +351,465 @@ function JAIDemoPanel({ onBack }) {
 }
 
 
-function AIPlaygroundPanel({ onBack }) {
+function AIPlaygroundPanel({ onBack, project, setProject, currentUser }) {
+  const { useState: useStateAP, useEffect: useEffectAP, useRef: useRefAP } = React;
+  const [commentMode, setCommentMode] = useStateAP(false);
+  const [draft, setDraft] = useStateAP(null); // { x, y, text }
+  const [activePin, setActivePin] = useStateAP(null); // comment id being viewed
+  const [showResolved, setShowResolved] = useStateAP(false);
+  const overlayRef = useRefAP(null);
+  const inputRef = useRefAP(null);
+
+  const comments = (project && project.playground_comments) || [];
+  const activeComments = comments.filter(c => !c.resolved);
+  const resolvedComments = comments.filter(c => c.resolved);
+
+  const postComment = (text) => {
+    if (!draft || !text.trim()) return;
+    const next = {
+      id: "pc-" + Date.now(),
+      x: draft.x,
+      y: draft.y,
+      author_id: currentUser ? currentUser.id : "unknown",
+      author_name: currentUser ? currentUser.name : "Team",
+      text: text.trim(),
+      timestamp: new Date().toISOString(),
+      resolved: false,
+    };
+    setProject(p => ({ ...p, playground_comments: [...(p.playground_comments || []), next] }));
+    setDraft(null);
+    setCommentMode(false);
+  };
+
+  const resolveComment = (id) => {
+    setProject(p => ({
+      ...p,
+      playground_comments: (p.playground_comments || []).map(c =>
+        c.id === id ? { ...c, resolved: true } : c
+      ),
+    }));
+    setActivePin(null);
+  };
+
+  const deleteComment = (id) => {
+    setProject(p => ({
+      ...p,
+      playground_comments: (p.playground_comments || []).filter(c => c.id !== id),
+    }));
+    setActivePin(null);
+  };
+
+  const handleOverlayClick = (e) => {
+    if (!commentMode) return;
+    // If clicking on an existing pin, ignore (handled by pin onClick)
+    if (e.target !== e.currentTarget) return;
+    const rect = overlayRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setDraft({ x, y, text: "" });
+    setActivePin(null);
+  };
+
+  // Focus textarea when draft appears
+  useEffectAP(() => {
+    if (draft && inputRef.current) {
+      const t = setTimeout(() => inputRef.current && inputRef.current.focus(), 40);
+      return () => clearTimeout(t);
+    }
+  }, [!!draft]);
+
+  // Escape key handling
+  useEffectAP(() => {
+    const onKey = (e) => {
+      if (e.key !== "Escape") return;
+      if (draft) { setDraft(null); return; }
+      if (activePin) { setActivePin(null); return; }
+      if (commentMode) setCommentMode(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [draft, activePin, commentMode]);
+
+  // Close popover on outside click
+  useEffectAP(() => {
+    if (!activePin) return;
+    const onDown = (e) => {
+      if (!e.target.closest("[data-pin]") && !e.target.closest("[data-popover]")) {
+        setActivePin(null);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [activePin]);
+
+  const btnBase = {
+    display: "flex", alignItems: "center", gap: "6px",
+    background: "none", border: "1px solid #e0dbd4", borderRadius: "3px",
+    padding: "5px 12px", fontFamily: "Noto Sans, sans-serif",
+    fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.06em",
+    textTransform: "uppercase", color: "#444", cursor: "pointer",
+    transition: "border-color 0.15s, background 0.15s",
+  };
+
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      height: "calc(100vh - 36px)",
-      overflow: "hidden",
-    }}>
+    <div style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 36px)", overflow: "hidden" }}>
+
+      {/* ── Top chrome bar ─────────────────────────────────────────────── */}
       <div style={{
-        flexShrink: 0,
-        display: "flex",
-        alignItems: "center",
-        gap: "12px",
-        padding: "10px 20px",
-        background: "#fff",
-        borderBottom: "1px solid #e8e3da",
+        flexShrink: 0, display: "flex", alignItems: "center", gap: "10px",
+        padding: "8px 16px", background: "#fff", borderBottom: "1px solid #e8e3da",
       }}>
         <button
           onClick={onBack}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "6px",
-            background: "none",
-            border: "1px solid #e0dbd4",
-            borderRadius: "3px",
-            padding: "5px 12px",
-            fontFamily: "Noto Sans, sans-serif",
-            fontSize: "0.72rem",
-            fontWeight: 600,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-            color: "#444",
-            cursor: "pointer",
-            transition: "border-color 0.15s, background 0.15s",
-          }}
+          style={{ ...btnBase, fontSize: "0.72rem" }}
           onMouseEnter={e => { e.currentTarget.style.background = "#f5f2ec"; e.currentTarget.style.borderColor = "#c8c0b4"; }}
           onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.borderColor = "#e0dbd4"; }}
         >
-          ← Back to Tracker
+          ← Back
         </button>
+
         <div style={{ width: "1px", height: "16px", background: "#e0dbd4" }} />
+
         <span style={{
-          fontFamily: "Noto Sans, sans-serif",
-          fontSize: "0.68rem",
-          fontWeight: 700,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          color: "#888",
+          fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem",
+          fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888",
         }}>
-          AI Playground — Hands-On AI for Procurement
+          AI Playground
         </span>
-        <a
-          href="/ai"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            marginLeft: "auto",
-            display: "flex",
-            alignItems: "center",
-            gap: "5px",
-            background: "none",
-            border: "1px solid #e0dbd4",
-            borderRadius: "3px",
-            padding: "5px 12px",
-            fontFamily: "Noto Sans, sans-serif",
-            fontSize: "0.68rem",
-            fontWeight: 600,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-            color: "#444",
-            textDecoration: "none",
-            transition: "border-color 0.15s, background 0.15s",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.background = "#f5f2ec"; e.currentTarget.style.borderColor = "#c8c0b4"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.borderColor = "#e0dbd4"; }}
-        >
-          ↗ Open full page
-        </a>
+
+        {/* ── Comment controls ─── */}
+        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "8px" }}>
+
+          {/* Resolved toggle — only when there are resolved comments */}
+          {resolvedComments.length > 0 && (
+            <button
+              onClick={() => setShowResolved(v => !v)}
+              style={{
+                ...btnBase,
+                color: showResolved ? "#5300CE" : "#888",
+                borderColor: showResolved ? "#5300CE" : "#e0dbd4",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = "#f5f2ec"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "none"; }}
+              title="Toggle resolved comments"
+            >
+              {showResolved ? "Hide resolved" : `${resolvedComments.length} resolved`}
+            </button>
+          )}
+
+          {/* Active comment count pill */}
+          {activeComments.length > 0 && (
+            <div style={{
+              background: "#5300CE", color: "#fff", borderRadius: "12px",
+              padding: "2px 10px", fontFamily: "Noto Sans, sans-serif",
+              fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.04em",
+              userSelect: "none",
+            }}>
+              {activeComments.length} comment{activeComments.length !== 1 ? "s" : ""}
+            </div>
+          )}
+
+          {/* Comment mode toggle */}
+          <button
+            onClick={() => { setCommentMode(m => !m); setDraft(null); setActivePin(null); }}
+            style={{
+              ...btnBase,
+              background: commentMode ? "#5300CE" : "none",
+              color: commentMode ? "#fff" : "#5300CE",
+              border: `1px solid ${commentMode ? "#5300CE" : "#c8a8f0"}`,
+            }}
+            onMouseEnter={e => {
+              if (!commentMode) { e.currentTarget.style.background = "#f3edfc"; }
+            }}
+            onMouseLeave={e => {
+              if (!commentMode) { e.currentTarget.style.background = "none"; }
+            }}
+          >
+            {commentMode ? "✕ Cancel" : "＋ Comment"}
+          </button>
+
+          <div style={{ width: "1px", height: "16px", background: "#e0dbd4" }} />
+
+          <a
+            href="/ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ ...btnBase, textDecoration: "none" }}
+            onMouseEnter={e => { e.currentTarget.style.background = "#f5f2ec"; e.currentTarget.style.borderColor = "#c8c0b4"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.borderColor = "#e0dbd4"; }}
+          >
+            ↗ Open full page
+          </a>
+        </div>
       </div>
-      <iframe
-        src="ai-playground.html"
-        style={{
-          flex: 1,
-          width: "100%",
-          border: "none",
-          display: "block",
-        }}
-        title="AI Playground"
-      />
+
+      {/* ── Comment mode instruction banner ───────────────────────────── */}
+      {commentMode && (
+        <div style={{
+          flexShrink: 0, background: "#5300CE", color: "rgba(255,255,255,0.92)",
+          padding: "5px 16px", fontFamily: "Noto Sans, sans-serif",
+          fontSize: "0.7rem", letterSpacing: "0.04em",
+          display: "flex", alignItems: "center", justifyContent: "center", gap: "16px",
+        }}>
+          <span>Click anywhere on the page to drop a comment pin</span>
+          <span style={{ opacity: 0.6 }}>·</span>
+          <span style={{ opacity: 0.7 }}>Esc to cancel</span>
+        </div>
+      )}
+
+      {/* ── iframe + overlay container ─────────────────────────────────── */}
+      <div
+        ref={overlayRef}
+        style={{ flex: 1, position: "relative", overflow: "hidden" }}
+        onClick={commentMode ? handleOverlayClick : undefined}
+      >
+        {/* iframe */}
+        <iframe
+          src="ai-playground.html"
+          style={{
+            position: "absolute", inset: 0,
+            width: "100%", height: "100%",
+            border: "none", display: "block",
+            // Don't block pointer events on iframe in browse mode
+            pointerEvents: commentMode ? "none" : "auto",
+          }}
+          title="AI Playground"
+        />
+
+        {/* Invisible capture layer in comment mode (sits over the iframe) */}
+        {commentMode && (
+          <div style={{
+            position: "absolute", inset: 0,
+            cursor: "crosshair", background: "rgba(83,0,206,0.04)",
+            zIndex: 10,
+          }} />
+        )}
+
+        {/* ── Comment pins (always rendered) ─────────────────────────── */}
+        {[...activeComments, ...(showResolved ? resolvedComments : [])].map((c, i) => {
+          const isResolved = c.resolved;
+          const isActive = activePin === c.id;
+          const pinIndex = activeComments.indexOf(c); // number only active ones
+          const pinLabel = isResolved ? "✓" : (pinIndex + 1);
+
+          // Determine popover direction — flip left if pin is in right 40% of area
+          const flipLeft = c.x > 60;
+
+          return (
+            <div
+              key={c.id}
+              data-pin={c.id}
+              style={{
+                position: "absolute",
+                left: `${c.x}%`,
+                top: `${c.y}%`,
+                transform: "translate(-50%, -50%)",
+                zIndex: commentMode ? 5 : 20,
+                pointerEvents: commentMode ? "none" : "auto",
+              }}
+            >
+              {/* Pin circle */}
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (!commentMode) setActivePin(isActive ? null : c.id);
+                }}
+                style={{
+                  width: 26, height: 26, borderRadius: "50%",
+                  background: isResolved ? "#aaa" : "#5300CE",
+                  color: "#fff",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: isResolved ? "0.55rem" : "0.65rem", fontWeight: 700,
+                  boxShadow: isActive ? "0 0 0 3px rgba(83,0,206,0.3), 0 2px 10px rgba(0,0,0,0.25)" : "0 2px 8px rgba(0,0,0,0.25)",
+                  border: isActive ? "2px solid #E22B83" : "2px solid #fff",
+                  cursor: commentMode ? "crosshair" : "pointer",
+                  transition: "box-shadow 0.15s, border-color 0.15s",
+                  userSelect: "none",
+                }}
+              >
+                {pinLabel}
+              </div>
+
+              {/* Popover */}
+              {isActive && (
+                <div
+                  data-popover="true"
+                  style={{
+                    position: "absolute",
+                    ...(flipLeft
+                      ? { right: "34px", top: "-8px" }
+                      : { left: "34px", top: "-8px" }),
+                    background: "#fff",
+                    border: "1px solid #e0dbd4",
+                    borderLeft: isResolved ? "3px solid #aaa" : "3px solid #5300CE",
+                    borderRadius: "4px",
+                    padding: "12px 14px",
+                    minWidth: "220px", maxWidth: "280px",
+                    boxShadow: "0 4px 24px rgba(0,0,0,0.14)",
+                    zIndex: 30,
+                  }}
+                  onClick={e => e.stopPropagation()}
+                >
+                  <div style={{
+                    fontFamily: "Noto Sans, sans-serif", fontSize: "0.66rem",
+                    fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
+                    color: isResolved ? "#888" : "#5300CE", marginBottom: "6px",
+                    display: "flex", justifyContent: "space-between", alignItems: "center",
+                  }}>
+                    <span>{c.author_name}</span>
+                    {isResolved && <span style={{ color: "#aaa", fontWeight: 400 }}>resolved</span>}
+                  </div>
+                  <div style={{
+                    fontFamily: "Noto Sans, sans-serif", fontSize: "0.8rem",
+                    color: "#222", lineHeight: 1.55, marginBottom: "10px",
+                    opacity: isResolved ? 0.6 : 1,
+                  }}>
+                    {c.text}
+                  </div>
+                  <div style={{
+                    fontFamily: "Noto Sans, sans-serif", fontSize: "0.64rem",
+                    color: "#bbb", marginBottom: "10px",
+                  }}>
+                    {new Date(c.timestamp).toLocaleDateString("en-GB", {
+                      day: "numeric", month: "short", year: "numeric",
+                      hour: "2-digit", minute: "2-digit",
+                    })}
+                  </div>
+                  <div style={{ display: "flex", gap: "6px" }}>
+                    {!isResolved && (
+                      <button
+                        onClick={(e) => { e.stopPropagation(); resolveComment(c.id); }}
+                        style={{
+                          background: "none", border: "1px solid #e0dbd4",
+                          borderRadius: "2px", padding: "3px 10px",
+                          fontFamily: "Noto Sans, sans-serif", fontSize: "0.64rem",
+                          fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase",
+                          color: "#666", cursor: "pointer",
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.borderColor = "#5300CE"; e.currentTarget.style.color = "#5300CE"; }}
+                        onMouseLeave={e => { e.currentTarget.style.borderColor = "#e0dbd4"; e.currentTarget.style.color = "#666"; }}
+                      >
+                        Resolve
+                      </button>
+                    )}
+                    <button
+                      onClick={(e) => { e.stopPropagation(); deleteComment(c.id); }}
+                      style={{
+                        background: "none", border: "1px solid #e0dbd4",
+                        borderRadius: "2px", padding: "3px 10px",
+                        fontFamily: "Noto Sans, sans-serif", fontSize: "0.64rem",
+                        fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase",
+                        color: "#c8401a", cursor: "pointer",
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.borderColor = "#c8401a"; }}
+                      onMouseLeave={e => { e.currentTarget.style.borderColor = "#e0dbd4"; }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+        {/* ── Draft pin + input form ──────────────────────────────────── */}
+        {draft && (
+          <div
+            style={{
+              position: "absolute",
+              left: `${draft.x}%`,
+              top: `${draft.y}%`,
+              transform: "translate(-50%, -50%)",
+              zIndex: 40,
+              pointerEvents: "auto",
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Draft pin */}
+            <div style={{
+              width: 26, height: 26, borderRadius: "50%",
+              background: "#E22B83", color: "#fff",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "0.75rem", fontWeight: 700,
+              boxShadow: "0 0 0 3px rgba(226,43,131,0.25), 0 2px 10px rgba(0,0,0,0.25)",
+              border: "2px solid #fff",
+              userSelect: "none",
+            }}>
+              +
+            </div>
+
+            {/* Input card */}
+            <div style={{
+              position: "absolute",
+              ...(draft.x > 60
+                ? { right: "34px", top: "-8px" }
+                : { left: "34px", top: "-8px" }),
+              background: "#fff",
+              border: "1px solid #e0dbd4", borderLeft: "3px solid #E22B83",
+              borderRadius: "4px", padding: "12px 14px",
+              minWidth: "240px",
+              boxShadow: "0 4px 24px rgba(0,0,0,0.14)",
+              zIndex: 50,
+            }}>
+              <div style={{
+                fontFamily: "Noto Sans, sans-serif", fontSize: "0.66rem",
+                fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
+                color: "#E22B83", marginBottom: "8px",
+              }}>
+                {currentUser ? currentUser.name : "Comment"}
+              </div>
+              <textarea
+                ref={inputRef}
+                value={draft.text}
+                onChange={e => setDraft(d => ({ ...d, text: e.target.value }))}
+                onKeyDown={e => {
+                  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); postComment(draft.text); }
+                  if (e.key === "Escape") { setDraft(null); }
+                }}
+                placeholder="Leave a comment…"
+                rows={3}
+                style={{
+                  width: "100%", border: "1px solid #e0dbd4",
+                  borderRadius: "2px", padding: "6px 8px",
+                  fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem",
+                  color: "#111", resize: "none",
+                  boxSizing: "border-box", outline: "none",
+                  lineHeight: 1.5,
+                }}
+              />
+              <div style={{ display: "flex", gap: "6px", marginTop: "8px", justifyContent: "flex-end" }}>
+                <button
+                  onClick={() => setDraft(null)}
+                  style={{
+                    background: "none", border: "1px solid #e0dbd4",
+                    borderRadius: "2px", padding: "4px 10px",
+                    fontFamily: "Noto Sans, sans-serif", fontSize: "0.64rem",
+                    fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase",
+                    color: "#888", cursor: "pointer",
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => postComment(draft.text)}
+                  disabled={!draft.text.trim()}
+                  style={{
+                    background: draft.text.trim() ? "#5300CE" : "#ddd",
+                    border: "none", borderRadius: "2px", padding: "4px 14px",
+                    fontFamily: "Noto Sans, sans-serif", fontSize: "0.64rem",
+                    fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
+                    color: "#fff", cursor: draft.text.trim() ? "pointer" : "default",
+                    transition: "background 0.15s",
+                  }}
+                >
+                  Post
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
