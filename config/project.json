@@ -411,7 +411,14 @@
               "last_updated": "2026-06-11T07:03:37.634Z",
               "last_updated_by": "m-e10nz",
               "deliverable_ext": "html",
-              "return_to_stage": null
+              "return_to_stage": null,
+              "publishing": {
+                "published_by": "Alex",
+                "launch_date": "2026-06-23",
+                "live_url": "https://www.jaggaer.com/blog/why-supply-chain-visibility-breaks-down-beyond-tier-1-in-2026",
+                "performance_data": "",
+                "updated_at": "2026-06-23T10:11:13.479Z"
+              }
             },
             {
               "id": "p-dm2-2",
