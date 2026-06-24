@@ -3,7 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hands-On AI for Procurement — JAGGAER</title>
+<title>AI in Procurement: A Hands-On Guide | JAGGAER</title>
+<meta name="description" content="Try AI on real source-to-pay tasks, contract review, bid comparison, spend analysis, supplier risk. Thirteen tools you can run in your browser. Learn how to prompt and where AI fits across procurement.">
+<link rel="canonical" href="https://jaggaer-ns-tracker.vercel.app/ai">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JAGGAER">
+<meta property="og:title" content="AI in Procurement: A Hands-On Guide | JAGGAER">
+<meta property="og:description" content="Try AI on the procurement work you already do. Learn to prompt, see what AI does well and where it falls short, and find your first useful win, before meeting JAI, the AI built into JAGGAER's source-to-pay platform.">
+<meta property="og:url" content="https://jaggaer-ns-tracker.vercel.app/ai">
+<meta property="og:image" content="https://www.jaggaer.com/wp-content/uploads/JAI-Header.jpg">
+<meta property="og:image:width" content="1080">
+<meta property="og:image:height" content="607">
+<meta property="og:image:alt" content="JAGGAER Hands-On AI for Procurement">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI in Procurement: A Hands-On Guide | JAGGAER">
+<meta name="twitter:description" content="Try AI on real source-to-pay tasks. Thirteen tools, no signup. Learn how to prompt and where AI fits your team.">
+<meta name="twitter:image" content="https://www.jaggaer.com/wp-content/uploads/JAI-Header.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -116,6 +132,8 @@ body{font-family:Inter,system-ui,sans-serif;font-size:.875rem;line-height:1.6;co
 .sub-hero-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.875rem;display:inline-flex;align-items:center;gap:8px;color:var(--green)}
 .sub-hero h1{font-size:clamp(2.07rem,4vw,2.8rem);font-weight:400;line-height:1.12;color:var(--ink);margin-bottom:1rem;max-width:680px}
 .sub-hero h1 strong{font-weight:700}
+.sub-hero h2.shh{font-size:clamp(2.07rem,4vw,2.8rem);font-weight:400;line-height:1.12;color:var(--ink);margin-bottom:1rem;max-width:680px}
+.sub-hero h2.shh strong{font-weight:700}
 .sub-hero-sub{font-size:1rem;color:var(--ink-3);line-height:1.7;max-width:600px}
 .playground{padding:clamp(2rem,4vw,3rem) 2rem}
 .playground-inner{max-width:1180px;margin:0 auto}
@@ -226,6 +244,37 @@ mark.annot{cursor:pointer;padding:1px 2px;border-radius:2px;transition:backgroun
 .pb-pre{font-family:'Courier New',monospace;font-size:.82rem;line-height:1.75;white-space:pre-wrap;margin:0;color:var(--ink)}
 .pb-pre.empty{color:var(--ink-3)}
 .pb-note{margin-top:14px;padding-top:12px;border-top:var(--border);font-size:.74rem;color:var(--ink-3);line-height:1.6}
+/* ===== STEP 1 two-column iterative builder ===== */
+.pb2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
+.pb2-build-head,.pb2-rail-head{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.9rem}
+.pb2-rail{position:sticky;top:1rem}
+.pb-grid{display:flex;flex-direction:column;gap:.8rem;margin-bottom:0}
+.pb-block{border:var(--border);border-left:3px solid var(--bc,var(--red));border-radius:var(--radius-sm);padding:.9rem 1rem;background:var(--bc-soft,var(--white));transition:box-shadow .2s}
+.pb-block.active{box-shadow:0 6px 22px rgba(11,13,18,.07)}
+.pb-block-label{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bc,var(--ink-3));margin-bottom:.55rem;display:flex;align-items:center;gap:7px}
+.pb-block-num{width:17px;height:17px;border-radius:50%;background:var(--bc,var(--red));color:#fff;font-size:.6rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif}
+.pb-block.done .pb-block-num::after{content:'\2713'}
+.pb-block.done .pb-block-num{font-size:.66rem}
+.pb-opts{display:flex;flex-direction:column;gap:5px}
+.pb-opt{text-align:left;padding:7px 12px;font-size:.76rem;background:var(--white);border:var(--border);border-radius:var(--radius-sm);cursor:pointer;color:var(--ink-2);transition:all .12s;font-family:Inter,sans-serif}
+.pb-opt:hover{border-color:var(--bc,#f0c8c8)}
+.pb-opt.sel{background:var(--bc,var(--ink));border-color:var(--bc,var(--ink));color:#fff;font-weight:600}
+/* per-move tints (S2P palette; purple reserved for JAI) */
+.pb-block.b-role{--bc:#D22428;--bc-soft:#fdf4f4}
+.pb-block.b-context{--bc:#3f7a8c;--bc-soft:#f1f6f7}
+.pb-block.b-task{--bc:#1e6fa8;--bc-soft:#eff5fa}
+.pb-block.b-format{--bc:#b07d1e;--bc-soft:#fbf6ec}
+/* moves rail explanations */
+.pb-move{border:var(--border);border-radius:var(--radius-sm);padding:.7rem .9rem;margin-bottom:.6rem;background:var(--white);opacity:.55;transition:opacity .2s,border-color .2s,box-shadow .2s}
+.pb-move.on{opacity:1;border-color:var(--mc);box-shadow:0 4px 16px rgba(11,13,18,.06)}
+.pb-move.done{opacity:1}
+.pb-move-top{display:flex;align-items:center;gap:8px;margin-bottom:.3rem}
+.pb-move-dot{width:9px;height:9px;border-radius:50%;background:var(--mc);flex-shrink:0}
+.pb-move-name{font-size:.78rem;font-weight:700;color:var(--ink)}
+.pb-move-state{margin-left:auto;font-size:.62rem;font-weight:700;color:var(--mc)}
+.pb-move-why{font-size:.78rem;color:var(--ink-2);line-height:1.55}
+.pb-move.b-role{--mc:#D22428}.pb-move.b-context{--mc:#3f7a8c}.pb-move.b-task{--mc:#1e6fa8}.pb-move.b-format{--mc:#b07d1e}
+@media (max-width:820px){.pb2{grid-template-columns:1fr}.pb2-rail{position:static}}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:translateY(0)}
 .faq-section{background:var(--white)}
@@ -497,6 +546,7 @@ details.faq-item{overflow:hidden}
 .fs-pillar-sub{font-size:.74rem;color:var(--ink-3);line-height:1.45}
 .fs-pillar.on .fs-pillar-sub{color:rgba(255,255,255,.82)}
 .fs-steps{display:flex;flex-direction:column;gap:.85rem}
+.fs-browse{margin-top:2.5rem;padding-top:2rem;border-top:var(--border)}
 .fs-step{position:relative;background:var(--white);border:var(--border);border-radius:var(--radius);padding:1.4rem 1.6rem;display:grid;grid-template-columns:auto 1fr auto;gap:1.15rem;align-items:start}
 .fs-step.is-open{cursor:pointer;transition:box-shadow .2s,border-color .2s}
 .fs-step.is-open:hover{box-shadow:0 10px 28px rgba(11,13,18,.07);border-color:#e7caca}
@@ -534,7 +584,7 @@ details.faq-item{overflow:hidden}
 .hero-sub{max-width:680px}
 .stat-cell{padding:1.5rem clamp(1rem,3vw,2rem)}
 
-/* (proof-strip + shift-band CSS removed — replaced by .gap-section) */
+/* (proof-strip + shift-band CSS removed, replaced by .gap-section) */
 
 /* JAI gradient CTA band (the "think about AI" + "get specific" calls) */
 .jai-cta{background:var(--ink);background:radial-gradient(ellipse 70% 80% at 30% 50%,rgba(122,31,176,.22) 0%,transparent 65%),var(--ink);padding:clamp(2.25rem,5vw,3.5rem) clamp(1rem,3vw,2rem)}
@@ -547,8 +597,52 @@ details.faq-item{overflow:hidden}
 .btn-jai-grad .arr{transition:transform .2s}
 .btn-jai-grad:hover .arr{transform:translateX(4px)}
 @media (max-width:680px){.jai-cta-inner{grid-template-columns:1fr}}
+/* Step 3 handoff + Step 4 custom report + JAI vs comparison */
+.rd-next{margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.12)}
+.rd-next a{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:700;color:#fff;background:var(--jai-grad);padding:.6rem 1.1rem;border-radius:.5rem;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .2s;box-shadow:0 6px 18px rgba(122,31,176,.4)}
+.rd-next a:hover{transform:translateY(-1px)}
+.wn-lib{margin-top:2.25rem;padding-top:2rem;border-top:var(--border)}
+.wn-lib-head{margin-bottom:.5rem}
+.wn-lib-title{font-size:clamp(1.3rem,2.6vw,1.7rem);font-weight:400;color:var(--ink);line-height:1.18;margin:.4rem 0 .5rem;letter-spacing:-.01em}
+.wn-lib-title strong{font-weight:700}
+.wn-lib-sub{font-size:.9rem;color:var(--ink-3);line-height:1.6;max-width:600px}
+.wn-rec-ink{color:var(--red);font-weight:700}
+.lib-card.rec{border-color:var(--red);box-shadow:0 0 0 1px var(--red)}
+.lib-card.rec::before{transform:scaleY(1);background:var(--red)}
+.lib-card.rec:hover{border-color:var(--red);box-shadow:0 0 0 1px var(--red),0 10px 26px rgba(210,36,40,.12)}
+.lib-card-rec{position:absolute;top:.7rem;right:.7rem;font-size:.55rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#fff;background:var(--red);padding:3px 8px;border-radius:999px}
+.wn-report{margin-top:0;margin-bottom:1.75rem;background:linear-gradient(135deg,#faf7ff,#fff4fa);border:1px solid rgba(122,31,176,.18);border-radius:var(--radius);padding:1.4rem 1.6rem}
+.wn-report-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;width:fit-content;margin-bottom:.5rem}
+.wn-report-title{font-size:1.05rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:.7rem}
+.wn-report-body{font-size:.88rem;color:var(--ink-2);line-height:1.65}
+.wn-report-list{list-style:none;margin:.8rem 0 0;display:flex;flex-direction:column;gap:.6rem}
+.wn-report-list li{display:flex;gap:9px;font-size:.85rem;color:var(--ink-2);line-height:1.55}
+.wn-report-list li .wr-dot{width:7px;height:7px;border-radius:50%;background:var(--jai-a);margin-top:7px;flex-shrink:0}
+.wn-report-list li b{color:var(--ink);font-weight:700}
+.vs{margin-top:2rem;background:var(--ink);background:radial-gradient(ellipse 80% 90% at 78% 0%,rgba(122,31,176,.24) 0%,transparent 60%),var(--ink);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.vs-head{padding:1.4rem 1.6rem 1rem}
+.vs-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;width:fit-content}
+.vs-title{font-size:1.25rem;font-weight:700;color:#fff;line-height:1.25;margin:.4rem 0 .4rem;letter-spacing:-.01em}
+.vs-title em{font-style:normal;background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.vs-sub{font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.6;max-width:640px}
+.vs-table{padding:.5rem 1.6rem 0}
+.vs-colhead{display:grid;grid-template-columns:128px 1fr 1fr;gap:1.1rem;padding:.5rem 0 .7rem}
+.vs-colhead>div{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.vs-ch-dim{}
+.vs-ch.claude{color:rgba(255,255,255,.5);padding-left:14px}
+.vs-ch.jai{padding-left:16px}
+.vs-ch.jai span{background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.vs-ch small{display:block;font-size:.58rem;font-weight:600;letter-spacing:.04em;text-transform:none;color:rgba(255,255,255,.4);margin-top:2px}
+.vs-row{display:grid;grid-template-columns:128px 1fr 1fr;gap:1.1rem;padding:.85rem 0;border-top:1px solid rgba(255,255,255,.08);align-items:stretch}
+.vs-dim{font-size:.7rem;font-weight:700;color:rgba(255,255,255,.62);align-self:center;line-height:1.35}
+.vs-cell{font-size:.8rem;line-height:1.45;padding-left:14px;position:relative;display:flex;align-items:center}
+.vs-cell.claude{color:rgba(255,255,255,.66);border-left:1px solid rgba(255,255,255,.14)}
+.vs-cell.jai{color:#fff;border-left:2px solid transparent;border-image:var(--jai-grad) 1}
+.vs-foot{padding:1.1rem 1.6rem;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between;gap:1.2rem;flex-wrap:wrap}
+.vs-foot span{font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.55;max-width:560px}
+@media (max-width:760px){.vs-colhead,.vs-row{grid-template-columns:1fr}.vs-cell{border-left:none;padding-left:0}.vs-cell.jai{border-image:none;border-left:2px solid var(--jai-a);padding-left:10px}.vs-dim{color:#fff}}
 
-/* JAI comparison strip (per-tool, dark + purple) — spacing tightened */
+/* JAI comparison strip (per-tool, dark + purple), spacing tightened */
 .jai-strip{margin-top:1.5rem;background:var(--ink);background:radial-gradient(ellipse 80% 100% at 75% 0%,rgba(122,31,176,.2) 0%,transparent 60%),var(--ink);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
 .jai-strip-head{padding:.95rem 1.4rem;border-bottom:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:3px}
 .jai-strip-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;width:fit-content}
@@ -759,7 +853,7 @@ details.faq-item{overflow:hidden}
 .wn-cta-copy p{font-size:.9rem;color:rgba(255,255,255,.72);line-height:1.6;max-width:520px}
 @media (max-width:760px){.wn-grid{grid-template-columns:1fr}.wn-cta{grid-template-columns:1fr}}
 
-/* ===== KEEP EXPLORING — rebuilt as tool-cards (matches home directory) ===== */
+/* ===== KEEP EXPLORING, rebuilt as tool-cards (matches home directory) ===== */
 .tool-switcher{margin-top:2.5rem;padding-top:1.75rem;border-top:var(--border);background:none;border-radius:0}
 .tool-switcher::before{display:none}
 .tool-switcher-head{margin-bottom:1.1rem}
@@ -782,7 +876,59 @@ details.faq-item{overflow:hidden}
 .ts-allcta a:hover{color:var(--red);border-bottom-color:var(--red)}
 @media (max-width:760px){.ts-cards{grid-template-columns:1fr}}
 
+/* ===== ADDED: output header "this is AI output" treatment (red box) ===== */
+.out-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:1rem}
+.out-head .output-label{margin-bottom:0;color:var(--red);background:rgba(210,36,40,.08);border-left:3px solid var(--red);border-radius:0 5px 5px 0;padding:6px 12px 6px 11px}
+.out-head .output-label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0}
 
+/* ===== ADDED: prompt boxes -> dark ink "terminal" (consistent, never grey) ===== */
+.recipe-prompt{background:var(--ink);border:1px solid #20232b;color:#e7eaf1;border-radius:var(--radius-sm);padding:1.05rem 1.15rem;font-family:'Courier New',monospace;font-size:.78rem;line-height:1.7;white-space:pre-wrap;margin:0}
+.pb-output{background:var(--ink);border:1px solid #20232b;border-radius:var(--radius-sm);padding:1.25rem 1.5rem}
+.pb-output-label{color:#f4a6cf}
+.pb-pre{color:#e7eaf1}
+.pb-pre.empty{color:#7a8090}
+.pb-copy{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#e7eaf1}
+.pb-copy:hover{background:rgba(255,255,255,.16)}
+
+/* ===== ADDED: step page layout - STEP 1 output spans full width below both columns ===== */
+.pb-run-wrap{margin-top:1.5rem}
+.pb2{align-items:stretch}
+.pb2-rail{align-self:start}
+
+/* ===== ADDED: clean "next step" link at the bottom of step pages ===== */
+.step-next{margin-top:1.6rem;padding-top:1.35rem;border-top:var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.step-next-label{font-size:.78rem;color:var(--ink-3)}
+.step-next a{display:inline-flex;align-items:center;gap:7px;font-size:.84rem;font-weight:700;color:var(--red);cursor:pointer;text-decoration:none;transition:gap .2s}
+.step-next a:hover{gap:11px}
+.step-next a .arr{transition:transform .2s}
+
+/* ===== ADDED: Step 4 "Your fit" - bold lead block ===== */
+.wn-report.lead{margin:0 0 1.75rem;padding:1.9rem 2rem;border-width:1.5px}
+.wn-report.lead .wn-report-eyebrow{font-size:.64rem;margin-bottom:.7rem}
+.wn-report.lead .wn-report-title{font-size:clamp(1.35rem,3vw,1.7rem);font-weight:800;line-height:1.22;letter-spacing:-.01em;margin-bottom:.9rem}
+.wn-report.lead .wn-report-body{font-size:.92rem}
+.wn-report.lead .wn-report-list li{font-size:.88rem}
+.wn-summary.tight{margin-bottom:1.25rem}
+
+/* ===== ADDED: Step 2 "Where AI helps most" richer result ===== */
+.ms-wrap{margin-top:1.5rem;border:1px solid rgba(83,0,206,.16);border-radius:var(--radius);overflow:hidden;background:linear-gradient(135deg,#faf7ff,#fff4fa)}
+.ms-top{display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:center;padding:1.4rem 1.6rem;border-bottom:1px solid rgba(83,0,206,.12)}
+.ms-dial{position:relative;width:74px;height:74px;flex-shrink:0}
+.ms-dial svg{transform:rotate(-90deg)}
+.ms-dial-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:800;font-size:1.2rem;color:var(--ink)}
+.ms-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.3rem}
+.ms-verdict{font-size:1.02rem;font-weight:700;color:var(--ink);line-height:1.35}
+.ms-body{padding:1.3rem 1.6rem}
+.ms-sub{font-size:.86rem;color:var(--ink-2);line-height:1.6;margin-bottom:1rem}
+.ms-picks{display:flex;flex-direction:column;gap:.7rem}
+.ms-pick{display:grid;grid-template-columns:auto 1fr auto;gap:.85rem;align-items:center;background:var(--white);border:var(--border);border-radius:var(--radius-sm);padding:.8rem 1rem;cursor:pointer;transition:border-color .18s,box-shadow .18s,transform .18s}
+.ms-pick:hover{border-color:#cdb6ee;box-shadow:0 8px 22px rgba(83,0,206,.08);transform:translateY(-1px)}
+.ms-pick-ic{width:30px;height:30px;border-radius:8px;background:#f3eefb;display:flex;align-items:center;justify-content:center;color:var(--jai-a)}
+.ms-pick-ic svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7}
+.ms-pick-tt{font-size:.88rem;font-weight:700;color:var(--ink)}
+.ms-pick-ds{font-size:.76rem;color:var(--ink-3);line-height:1.4;margin-top:1px}
+.ms-pick-go{font-size:.72rem;font-weight:700;color:var(--red);white-space:nowrap}
+@media (max-width:560px){.ms-top{grid-template-columns:1fr;text-align:center;justify-items:center}.ms-pick{grid-template-columns:auto 1fr}.ms-pick-go{display:none}}
 
 </style>
 </head>
@@ -793,7 +939,7 @@ details.faq-item{overflow:hidden}
   <div class="nav-links">
     <a onclick="go('home')">Overview</a>
     <a onclick="go('home');setTimeout(function(){var r=document.getElementById('start-here');if(r)r.scrollIntoView({behavior:'smooth'});},80)">Start here</a>
-    <a onclick="go('home');setTimeout(function(){var r=document.getElementById('library');if(r)r.scrollIntoView({behavior:'smooth'});},80)">Prompt library</a>
+    <a onclick="go('whatnext')">Tools &amp; prompts</a>
     <a onclick="go('home');setTimeout(function(){var r=document.getElementById('jai');if(r)r.scrollIntoView({behavior:'smooth'});},80)">JAI</a>
   </div>
   <a class="nav-cta" href="https://www.jaggaer.com/book-a-demo" target="_blank">Book a demo</a>
@@ -802,9 +948,9 @@ details.faq-item{overflow:hidden}
 <div id="page-home" class="subpage active">
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-eyebrow" style="color:var(--green)"><span class="pg-dot" style="position:relative;display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:6px"></span>The AI-driven procurement shift</div>
-      <h1>Transform your procurement<br><strong>function for an <span class="text-grad">AI-driven world.</span></strong></h1>
-      <p class="hero-sub">AI can take on a lot of the routine work in procurement: reading a contract, comparing bids, chasing a late supplier. The tools below let you try that on tasks you already recognise, using examples or text you paste.</p>
+      <div class="hero-eyebrow" style="color:var(--green)"><span class="pg-dot" style="position:relative;display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:6px"></span>A hands-on guide to AI for source-to-pay</div>
+      <h1>AI for procurement, on the work you <span class="text-grad">already do.</span></h1>
+      <p class="hero-sub">Thirteen tools that let you try AI on real procurement tasks: reading a contract, comparing bids, sorting messy spend. Run them on the built-in examples or paste your own text. No setup, no signup, no demo wall.</p>
     </div>
   </section>
 
@@ -812,15 +958,15 @@ details.faq-item{overflow:hidden}
   <section class="gap-section" id="gap">
     <div class="gap-inner">
       <div class="gap-head">
-        <span class="eyebrow">The state of play</span>
-        <h2 class="section-heading">Most teams <strong>want AI.</strong><br>Far fewer are <strong>actually using it.</strong></h2>
+        <span class="eyebrow">Where the market is</span>
+        <h2 class="section-heading">Most teams <strong>want AI in procurement.</strong><br>Far fewer are <strong>actually using it.</strong></h2>
       </div>
       <div class="gap-viz">
         <div class="gap-dots" id="gap-dots"></div>
         <div class="gap-legend">
           <div class="gap-leg-row">
             <span class="gap-swatch want"></span>
-            <div class="gap-leg-text"><span class="gap-num">80%</span><span class="gap-cap">plan to deploy generative AI within three years</span></div>
+            <div class="gap-leg-text"><span class="gap-num">80%</span><span class="gap-cap">plan to deploy generative AI in procurement within three years</span></div>
           </div>
           <div class="gap-leg-row">
             <span class="gap-swatch doing"></span>
@@ -832,7 +978,7 @@ details.faq-item{overflow:hidden}
           </div>
         </div>
       </div>
-      <p class="gap-foot">Most teams sit in the gap between wanting AI and using it. This page is built to help you cross it.</p>
+      <p class="gap-foot">Most teams sit between wanting AI and using it. This page is a way to close that gap.</p>
     </div>
   </section>
 
@@ -841,8 +987,8 @@ details.faq-item{overflow:hidden}
     <div class="jai-cta-inner">
       <div class="jai-cta-copy">
         <span class="eyebrow eyebrow-jai">Talk it through</span>
-        <h2>Not sure where AI fits your team?</h2>
-        <p>Book a short call with JAGGAER. We will look at where AI could help your procurement work first, and what is worth leaving for later.</p>
+        <h2>Want help finding where AI fits your team?</h2>
+        <p>Book a short call. We'll look at where AI would help your procurement work first, and what to leave for later.</p>
       </div>
       <a class="btn-jai-grad" href="https://www.jaggaer.com/book-a-demo" target="_blank">Book a call <span class="arr">&#8594;</span></a>
     </div>
@@ -852,34 +998,16 @@ details.faq-item{overflow:hidden}
   <section class="section fs-section" id="start-here">
     <div class="section-inner">
       <span class="eyebrow">Start here</span>
-      <h2 class="fs-title">Four steps to your <strong>first win with AI.</strong></h2>
-      <p class="fs-lede">You do not need to know much about AI to begin. Work down the first three. They take about ten minutes. Then pick the kind of work you do and open the tools built for it.</p>
-      <div class="fs-pillars-label">Step 4 &middot; Pick your work</div>
-      <div class="fs-pillars" id="fs-pillars"></div>
+      <h2 class="fs-title">Four steps to your <strong>first useful prompt.</strong></h2>
+      <p class="fs-lede">No technical background needed. The first three steps take about ten minutes and cover how to prompt, what AI can and can't do for procurement, and where your own team stands today. The fourth step opens the full tool library, with recommendations based on what you tried.</p>
       <div class="fs-steps" id="fs-steps"></div>
-    </div>
-  </section>
-
-  <!-- PROMPT LIBRARY: dial / wheel -->
-  <section class="section lib-section" id="library">
-    <div class="section-inner">
-      <span class="eyebrow">A prompt library for S2P</span>
-      <h2 class="section-heading">Pick the kind of work,<br><strong>then run it on <span class="text-grad">your own task.</span></strong></h2>
-      <p class="section-sub">Ready-made prompts, grouped by the kind of work. Turn the dial to a group, open a tool, and run it on an example or on text you paste. Copy any prompt to reuse it.</p>
-    </div>
-    <div class="lib-wrap">
-      <div class="lib-dial">
-        <div class="dial" id="lib-dial"></div>
-        <div class="dial-legend" id="lib-legend"></div>
-      </div>
-      <div class="lib-panel" id="lib-panel"></div>
     </div>
   </section>
 
   <!-- CTA 2 / JAI showcase: get specific about JAI (dark + abridged) -->
   <section class="section jai-section" id="jai">
     <div class="jai-lede">
-      <h2>Want AI that solves all your<br><strong>procurement business problems?</strong></h2>
+      <h2>Want AI that works on your <strong>real procurement data?</strong></h2>
     </div>
     <div class="jai-split">
       <div class="jai-mock">
@@ -910,10 +1038,10 @@ details.faq-item{overflow:hidden}
       </div>
       <div class="jai-copy">
         <span class="eyebrow eyebrow-jai">JAGGAER's AI, JAI</span>
-        <h3>Meet your S2P concierge</h3>
-        <p>The tools on this page show you the shape of the work. JAI does it for real. It sits inside your platform, reads your live procurement data, and is trained on your policies. <strong>You ask a question, it answers from your own numbers</strong>, and it picks the right model for each task.</p>
+        <h3>Procurement AI that runs inside your platform</h3>
+        <p>The tools on this page show you the shape of the work, run on examples. JAI is the same kind of AI, but inside JAGGAER's source-to-pay platform, reading your live contracts, your real supplier data, your actual spend. <strong>You ask a question, it answers from your own numbers,</strong> and it picks the right model for each task.</p>
         <div class="jai-impact" style="margin-top:1.5rem">
-          <div class="jai-impact-head">Impact JAI has created</div>
+          <div class="jai-impact-head">Impact JAI has delivered</div>
           <div class="jai-impact-grid">
             <div><div class="jai-impact-num">75%</div><div class="jai-impact-label">Fewer support tickets</div></div>
             <div><div class="jai-impact-num">40+</div><div class="jai-impact-label">Workflows accelerated</div></div>
@@ -928,9 +1056,9 @@ details.faq-item{overflow:hidden}
   <!-- Further reading (lightweight, ties to the content series) -->
   <section class="section reading-section" id="reading">
     <div class="section-inner">
-      <span class="eyebrow">Keep learning</span>
-      <h2 class="section-heading">Want to go <strong>deeper?</strong></h2>
-      <p class="section-sub">A short series on using AI for source-to-pay, written to be practical rather than technical. More to come.</p>
+      <span class="eyebrow">Reading</span>
+      <h2 class="section-heading">More on <strong>AI for source-to-pay.</strong></h2>
+      <p class="section-sub">Short pieces on using AI in procurement, written to be practical rather than abstract. More to come.</p>
       <div class="reading-grid" id="reading-grid"></div>
       <p class="reading-note" id="reading-note"></p>
     </div>
@@ -941,8 +1069,8 @@ details.faq-item{overflow:hidden}
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">← Back to all tools</a>
     <div class="sub-hero-eyebrow"><span class="text-grad">Hands-on · Supplier risk</span></div>
-    <h1>Your next disruption is<br><strong>already <span class="text-grad">in your supplier list.</span></strong></h1>
-    <p class="sub-hero-sub">Paste a supplier list, category, country, role. Claude flags geographic concentration risk and recommends alternative sourcing geographies with named vendors.</p>
+    <h2 class="shh">AI supplier risk analysis.</h2>
+    <p class="sub-hero-sub">Paste a supplier list with countries and categories. The model flags geographic concentration risk and suggests alternative sourcing regions, with named vendors where it can.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -956,7 +1084,7 @@ details.faq-item{overflow:hidden}
         <div class="output-area" id="sup-output"></div>
       </div>
     </div>
-    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">This is close to what the tool above does. Paste it into Claude, ChatGPT, or Copilot, drop your own supplier list in, and you'll get a comparable risk read.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a supply-chain risk analyst. I'll give you a list of suppliers, each with a country and the category they supply.
+    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Spotting concentration risk across a supplier list is a good fit for AI. The prompt below does what the tool above does, paste it into any assistant with your own data.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a supply-chain risk analyst. I'll give you a list of suppliers, each with a country and the category they supply.
 
 Suppliers:
 [paste one per line, e.g. "Acme Corp, Taiwan, Semiconductors"]
@@ -964,10 +1092,10 @@ Suppliers:
 Do this:
 1. Group the suppliers by country and by category.
 2. Flag every country where I rely on two or more suppliers, and any single country that covers a category I can't lose. For each, name the specific risk in one sentence (geopolitical, tariff, logistics, single-event).
-3. Give an overall priority — High, Moderate, or Low — with a one-line reason.
+3. Give an overall priority, High, Moderate, or Low, with a one-line reason.
 4. For each concentration, suggest 2–3 alternative sourcing regions and name a few real example suppliers in each, with a short rationale.
 
-Format: a one-line priority first, then "Risks" as a short list, then "Alternatives" as a short list.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Country and category are the two fields that matter — include both, even roughly.</li><li>Add your own definition of a critical category (“can't run the line without it”) so it weighs the right things.</li><li>Follow up with “which of these would take longest to qualify a backup for?” to get a sequencing plan.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+Format: a one-line priority first, then "Risks" as a short list, then "Alternatives" as a short list.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Country and category are the two fields that matter, include both, even roughly.</li><li>Add your own definition of a critical category (“can't run the line without it”) so it weighs the right things.</li><li>Follow up with “which of these would take longest to qualify a backup for?” to get a sequencing plan.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
       </div></section>
 </div>
@@ -976,8 +1104,8 @@ Format: a one-line priority first, then "Risks" as a short list, then "Alternati
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">← Back to all tools</a>
     <div class="sub-hero-eyebrow"><span class="text-grad">Hands-on · Contracts</span></div>
-    <h1>The risk is in the clause.<br><strong>See it <span class="text-grad">before you sign.</span></strong></h1>
-    <p class="sub-hero-sub">Risk flags highlighted inline. Renewal traps, pricing rights, and risky obligations called out exactly where they appear in the text.</p>
+    <h2 class="shh">AI contract review.</h2>
+    <p class="sub-hero-sub">Paste contract clauses. The model highlights auto-renewals, price-escalation rights, and one-sided obligations, inline where they sit in the text.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -991,7 +1119,7 @@ Format: a one-line priority first, then "Risks" as a short list, then "Alternati
         <div class="output-area" id="clause-output"></div>
       </div>
     </div>
-    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">The tool flags risky clause language. Here's the prompt that does the same thing in any AI assistant.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a commercial contracts analyst. Read the clause(s) below and surface anything I should be careful about before signing.
+    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Reading contracts for risky language is a clean AI task. This prompt does the same thing in any assistant.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a commercial contracts analyst. Read the clause(s) below and surface anything I should be careful about before signing.
 
 Clause:
 [paste the clause text]
@@ -1002,7 +1130,7 @@ For each issue you find:
 - Rate it High / Medium / Low risk.
 - Explain the practical consequence in one plain sentence.
 
-Then give me: the single change you'd negotiate first, and one question to ask the supplier. List the issues highest-risk first.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Paste real clause text (strip anything you can't share).</li><li>Tell it your risk appetite — a startup and a regulated buyer should flag different things.</li><li>Ask it to redline the riskiest clause in your favour so you have a starting position.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+Then give me: the single change you'd negotiate first, and one question to ask the supplier. List the issues highest-risk first.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Paste real clause text (strip anything you can't share).</li><li>Tell it your risk appetite, a startup and a regulated buyer should flag different things.</li><li>Ask it to redline the riskiest clause in your favour so you have a starting position.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
       </div></section>
 </div>
@@ -1011,8 +1139,8 @@ Then give me: the single change you'd negotiate first, and one question to ask t
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">← Back to all tools</a>
     <div class="sub-hero-eyebrow"><span class="text-grad">Hands-on · Sourcing</span></div>
-    <h1>From a sentence<br><strong>to a <span class="text-grad">sourcing-ready RFP.</span></strong></h1>
-    <p class="sub-hero-sub">Scope of work, weighted evaluation criteria, and supplier questions, generated from a plain-language brief.</p>
+    <h2 class="shh">Draft an RFP from a one-line brief.</h2>
+    <p class="sub-hero-sub">Describe what you need in plain English. The model returns a scope of work, weighted evaluation criteria, and supplier questions, structured for an actual sourcing event.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -1026,16 +1154,16 @@ Then give me: the single change you'd negotiate first, and one question to ask t
         <div class="output-area" id="rfp-output"></div>
       </div>
     </div>
-    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Turn a rough need into a structured RFP. This prompt produces the same scope-and-criteria shape the tool does.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a procurement category manager turning a rough need into a structured RFP.
+    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Turning a rough need into a structured RFP is a common AI use case in procurement. This prompt produces the same scope-and-criteria shape the tool does.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a procurement category manager turning a rough need into a structured RFP.
 
-What I'm buying: [1–3 sentences — include volume, must-have integrations, compliance needs, and timeline]
+What I'm buying: [1–3 sentences, include volume, must-have integrations, compliance needs, and timeline]
 
 Produce:
-1. A scope of work — 5–7 bullet points.
+1. A scope of work, 5–7 bullet points.
 2. Five weighted evaluation criteria that total 100%. Weight them to match my priorities and give a one-line reason for each weight.
 3. Five sharp supplier questions that would actually separate a strong bid from a weak one.
 
-Keep it practical and ready to drop into a document.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>One or two honest sentences is enough — you don't need a formal brief.</li><li>State your #1 priority (cost, speed, or compliance) so the weights reflect reality.</li><li>Once it's close, ask it to expand the outline into a full RFP document.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+Keep it practical and ready to drop into a document.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>One or two honest sentences is enough, you don't need a formal brief.</li><li>State your top priority (cost, speed, or compliance) so the weights reflect reality.</li><li>Once it's close, ask it to expand the outline into a full RFP document.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
       </div></section>
 </div>
@@ -1044,8 +1172,8 @@ Keep it practical and ready to drop into a document.</pre><button class="recipe-
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">← Back to all tools</a>
     <div class="sub-hero-eyebrow"><span class="text-grad">Hands-on · Invoices</span></div>
-    <h1>Every invoice batch<br><strong>is <span class="text-grad">leaking somewhere.</span></strong></h1>
-    <p class="sub-hero-sub">Duplicates, missing POs, expired contracts, over-billing, flagged automatically with the dollars at risk and the action to take.</p>
+    <h2 class="shh">Find invoice exceptions before they get paid.</h2>
+    <p class="sub-hero-sub">Paste invoice lines. The model flags duplicates, missing POs, expired contracts, and over-billing, with the dollars at risk and a recommended action on each.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -1059,7 +1187,7 @@ Keep it practical and ready to drop into a document.</pre><button class="recipe-
         <div class="output-area" id="inv-output"></div>
       </div>
     </div>
-    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Spotting invoice exceptions is pattern-matching AI is good at. This prompt reproduces what the tool checks.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are an accounts-payable reviewer. Below are invoice lines in the format: invoice ID | vendor | amount | note.
+    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Catching invoice exceptions is pattern-matching, which AI handles well. This prompt reproduces what the tool checks.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are an accounts-payable reviewer. Below are invoice lines in the format: invoice ID | vendor | amount | note.
 
 Lines:
 [paste your lines]
@@ -1069,7 +1197,7 @@ Check each line for: duplicates (same vendor and amount), missing PO, expired or
 Return:
 - A one-line summary: how many reviewed, how many flagged, total $ at risk.
 - For each exception: the line, the issue type, why it's flagged, and the action to take (hold, escalate, query the vendor).
-- The count of clean lines at the end.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Keep the pipe format (vendor and amount are what duplicate-detection needs).</li><li>Set your own tolerance — “flag anything over 5% above the PO”.</li><li>Ask it to sort exceptions by dollars at risk so you work the biggest first.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+- The count of clean lines at the end.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Keep the pipe format (vendor and amount are what duplicate-detection needs).</li><li>Set your own tolerance, “flag anything over 5% above the PO”.</li><li>Ask it to sort exceptions by dollars at risk so you work the biggest first.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
       </div></section>
 </div>
@@ -1078,33 +1206,35 @@ Return:
   <section class="sub-hero"><div class="sub-hero-inner">
     <div class="step-bar" data-step="prompt"></div>
     <div class="sub-hero-eyebrow"><span class="text-grad">Step 1 · Learn how to ask</span></div>
-    <h1>Good answers start<br><strong>with a <span class="text-grad">good question.</span></strong></h1>
-    <p class="sub-hero-sub">Role, context, task, format, the four moves behind every good procurement prompt. Click to assemble one and watch it build live.</p>
+    <h2 class="shh">How to prompt AI for procurement work.</h2>
+    <p class="sub-hero-sub">Every useful procurement prompt has four parts: role, context, task, and format. Pick each one below and watch the prompt build, with a short note on why each part matters.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
       <div class="pg-stage-head"><div class="pg-dot"></div><div class="pg-stage-title">Procurement prompt builder</div></div>
       <div class="pg-stage-body">
-        <div class="pb-grid" id="pb-grid"></div>
-        <div class="pb-output">
-          <div class="pb-output-head"><div class="pb-output-label" id="pb-count">Assembled prompt, 0/4 blocks</div><button class="pb-copy" onclick="copyPrompt()" id="pb-copy">Copy</button></div>
-          <pre class="pb-pre empty" id="pb-pre">Select one option per block to build your prompt…</pre>
-          <div class="pb-note" id="pb-note" style="display:none">This is the anatomy of a good prompt — role, context, task, format. Use those same four blocks in any AI chat and you'll get far sharper answers. Copy it and try it on a real task.</div>
+        <div class="pb2">
+          <div class="pb2-build">
+            <div class="pb2-build-head">Build it one move at a time</div>
+            <div class="pb-grid" id="pb-grid"></div>
+          </div>
+          <div class="pb2-rail">
+            <div class="pb2-rail-head">Why each move matters</div>
+            <div id="pb-moves"></div>
+            <div class="pb-output">
+              <div class="pb-output-head"><div class="pb-output-label" id="pb-count">Your prompt so far: 0 of 4</div><button class="pb-copy" onclick="copyPrompt()" id="pb-copy">Copy</button></div>
+              <pre class="pb-pre empty" id="pb-pre">Pick an option on the left to start building.</pre>
+            </div>
+          </div>
         </div>
-        <button class="run-btn" id="pb-run-btn" onclick="runPrompt()" style="display:none"><span class="spinner"></span><span class="btn-label">Run this prompt →</span></button>
-        <div class="pg-thinking" id="pb-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Running your prompt…</div></div>
-        <div class="output-area" id="pb-output"></div>
+        <div class="pb-run-wrap">
+          <button class="run-btn" id="pb-run-btn" onclick="runPrompt()" style="display:none"><span class="spinner"></span><span class="btn-label">Run this prompt →</span></button>
+          <div class="pg-thinking" id="pb-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Running your prompt…</div></div>
+          <div class="output-area" id="pb-output"></div>
+        </div>
       </div>
     </div>
-    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The pattern behind every tool here</div></div><div class="recipe-body"><div class="recipe-intro">This is the pattern the other tools are built on. Almost any procurement task fits this shape:</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a [role — e.g. contracts analyst, category manager, AP reviewer].
-
-Context: [the things the AI can't guess — your industry, the constraint you're under, what you're trying to achieve].
-
-Task: [the one specific thing you want done].
-
-Format: [exactly how you want the answer — a numbered list, a table with these columns, under 200 words, highest-risk first].
-
-[then paste your data underneath]</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>The role sets the level of expertise you get back — be specific, not “an assistant”.</li><li>Context is where most prompts fail. Give it the facts it can't infer from the question.</li><li>Naming the format is what turns a wall of text into something you can actually use.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+    <div class="step-next"><span class="step-next-label">Step 1 of 4</span><a onclick="go('myths')">Next: Step 2 · Know what to trust <span class="arr">&#8594;</span></a></div>
   </div></section>
 </div>
 
@@ -1112,21 +1242,18 @@ Format: [exactly how you want the answer — a numbered list, a table with these
   <section class="sub-hero"><div class="sub-hero-inner">
     <div class="step-bar" data-step="myths"></div>
     <div class="sub-hero-eyebrow"><span class="text-grad">Step 2 · Know what to trust</span></div>
-    <h1>What AI can — and can't —<br><strong>do for <span class="text-grad">procurement.</span></strong></h1>
-    <p class="sub-hero-sub">Six things people get wrong about AI in procurement, in both directions. Rate how much each one sounds like you, and get a few things to try.</p>
+    <h2 class="shh">What AI can do for procurement, and what it can't.</h2>
+    <p class="sub-hero-sub">Six common beliefs about AI in procurement, sorted into true, partly true, and false. Rate how much each one sounds like your own thinking. By the end you'll have a clearer view of which work to give AI first.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
       <div class="pg-stage-head"><div class="pg-dot"></div><div class="pg-stage-title">Procurement myth check</div></div>
       <div class="pg-stage-body">
         <div id="myth-grid" style="display:flex;flex-direction:column;gap:1rem"></div>
-        <div id="myth-score-area" style="display:none;margin-top:1.5rem;padding:1.25rem;background:linear-gradient(135deg,#f8f4ff,#fff4fa);border:1px solid rgba(83,0,206,.15);border-radius:.5rem">
-          <div style="font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.5rem">Your exposure score</div>
-          <div id="myth-score-val" style="font-size:2.5rem;font-weight:800;line-height:1;margin-bottom:6px"></div>
-          <div id="myth-score-label" style="font-size:.85rem;color:var(--ink-2);line-height:1.6"></div>
-        </div>
+        <div id="myth-score-area" style="display:none"></div>
       </div>
     </div>
+    <div class="step-next"><span class="step-next-label">Step 2 of 4</span><a onclick="go('readiness')">Next: Step 3 · Find your first win <span class="arr">&#8594;</span></a></div>
   </div></section>
 </div>
 
@@ -1134,8 +1261,8 @@ Format: [exactly how you want the answer — a numbered list, a table with these
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">← Back to all tools</a>
     <div class="sub-hero-eyebrow"><span class="text-grad">Hands-on · Spend &amp; savings</span></div>
-    <h1>Put a number on<br><strong>the <span class="text-grad">status quo.</span></strong></h1>
-    <p class="sub-hero-sub">Set three numbers about your operation. See the annual savings, hours returned, and risk exposure an intelligent platform could address, recalculated live as you move the sliders.</p>
+    <h2 class="shh">A rough number on what AI could save you.</h2>
+    <p class="sub-hero-sub">Set three sliders about your operation: annual spend, off-contract leakage, and manual approval hours. See a directional estimate of where an intelligent platform could move the numbers, recalculated live.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -1177,13 +1304,13 @@ Format: [exactly how you want the answer — a numbered list, a table with these
         </div>
       </div>
     </div>
-    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">The slider tool gives a directional estimate. For one tuned to your real operation, ask an AI like this.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a procurement transformation advisor. Here's my operation:
+    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">The slider gives a directional estimate. For one tuned to your real operation, ask any AI assistant like this.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a procurement transformation advisor. Here's my operation:
 - Annual managed spend: $[X]M
 - Procurement team size: [N]
 - Sourcing events per year: [E]
 - How we work today: [spreadsheets / ERP / a procurement platform]
 
-Give me a rough, clearly-labelled estimate of where AI or automation could save money or time, broken into: sourcing savings, off-contract (maverick) spend recovery, and invoice leakage. Show the assumption (as a %) behind each number, total it, and say plainly that it's directional, not a business case. Be conservative.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Use real numbers, even rough ones — the estimate is only as good as the inputs.</li><li>Ask it to show every assumption so you can challenge the ones that look generous.</li><li>Treat the total as a hypothesis to test, not a promise to bank.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+Give me a rough, clearly-labelled estimate of where AI or automation could save money or time, broken into: sourcing savings, off-contract (maverick) spend recovery, and invoice leakage. Show the assumption (as a %) behind each number, total it, and say plainly that it's directional, not a business case. Be conservative.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Use real numbers, even rough ones, the estimate is only as good as the inputs.</li><li>Ask it to show every assumption so you can challenge the ones that look generous.</li><li>Treat the total as a hypothesis to test, not a promise to bank.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
       </div></section>
 </div>
@@ -1192,8 +1319,8 @@ Give me a rough, clearly-labelled estimate of where AI or automation could save 
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">← Back to all tools</a>
     <div class="sub-hero-eyebrow"><span class="text-grad">Hands-on · Policy &amp; approvals</span></div>
-    <h1>"Can I just buy this?"<br><strong>The question that <span class="text-grad">floods every help desk.</span></strong></h1>
-    <p class="sub-hero-sub">Describe a purchase in plain language and get a likely policy verdict, the approval chain, and the forms you would probably need.</p>
+    <h2 class="shh">Check who needs to approve a purchase.</h2>
+    <p class="sub-hero-sub">Describe a purchase in plain language. The model returns a likely policy verdict, the approval chain, and the forms you'll probably need.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -1207,14 +1334,14 @@ Give me a rough, clearly-labelled estimate of where AI or automation could save 
         <div class="output-area" id="appr-output"></div>
       </div>
     </div>
-    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Here is how to answer a routine “can I buy this?” question with AI.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a procurement policy assistant. Here's a purchase I want to make: [describe it, including the amount and whether it's already on an active contract].
+    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Answering routine “can I just buy this?” questions is a good first AI use case for any procurement team. Here's how to do it without a tool.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a procurement policy assistant. Here's a purchase I want to make: [describe it, including the amount and whether it's already on an active contract].
 
 Based on typical procurement policy, tell me:
 1. The likely approval tier and who signs off, step by step.
 2. Any flags (no contract, single-source, over a competitive-bid threshold) and what each one triggers.
 3. The forms or documents I'd probably need.
 
-If anything depends on our own internal thresholds, say so and tell me exactly what to check. Keep it to a short, ordered answer.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Always include the amount — it drives the whole approval path.</li><li>Paste your real thresholds and it stops guessing and gets specific.</li><li>Add “we're public sector” or “this is grant-funded” and watch the rules change.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+If anything depends on our own internal thresholds, say so and tell me exactly what to check. Keep it to a short, ordered answer.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Always include the amount, it drives the whole approval path.</li><li>Paste your real thresholds and it stops guessing and gets specific.</li><li>Add “we're public sector” or “this is grant-funded” and watch the rules change.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
       </div></section>
 </div>
@@ -1223,8 +1350,8 @@ If anything depends on our own internal thresholds, say so and tell me exactly w
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">← Back to all tools</a>
     <div class="sub-hero-eyebrow"><span class="text-grad">Hands-on · Supplier comms</span></div>
-    <h1>The email you've been<br><strong>putting off <span class="text-grad">writing.</span></strong></h1>
-    <p class="sub-hero-sub">Describe an awkward supplier situation, a late delivery, a price push-back, a missed SLA. Get a firm, professional message back in the right tone, ready to send.</p>
+    <h2 class="shh">Draft a difficult supplier email.</h2>
+    <p class="sub-hero-sub">Describe the situation, a late delivery, a price pushback, a missed SLA. The model returns a clear, professionally worded message in the tone you choose.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -1246,13 +1373,13 @@ If anything depends on our own internal thresholds, say so and tell me exactly w
         <div class="output-area" id="email-output"></div>
       </div>
     </div>
-    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Drafting the awkward supplier email is exactly the kind of task to hand to AI. This prompt does it.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are helping me write a professional message to a supplier.
+    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Drafting the awkward supplier email is exactly the kind of task to give AI. This prompt does it.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are helping me write a professional message to a supplier.
 
-Situation: [describe it honestly — what's happened, the history, what you need].
+Situation: [describe it honestly, what's happened, the history, what you need].
 Tone I want: [firm / warm / formal].
 Outcome I need: [the specific thing you want them to do, by when].
 
-Write a short, clear message: a subject line, a tight body that states the issue and the ask, and a professional close. Don't over-apologise or pad it. Then give me one alternative opening line.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>The awkward details are what make it land — put them in.</li><li>Switch the tone word and the whole message re-shapes around it.</li><li>Ask for a firmer and a softer version, then pick the opening you'd actually send.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+Write a short, clear message: a subject line, a tight body that states the issue and the ask, and a professional close. Don't over-apologise or pad it. Then give me one alternative opening line.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>The awkward details are what make it land, put them in.</li><li>Switch the tone word and the whole message re-shapes around it.</li><li>Ask for a firmer and a softer version, then pick the opening you'd actually send.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
       </div></section>
 </div>
@@ -1261,8 +1388,8 @@ Write a short, clear message: a subject line, a tight body that states the issue
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">← Back to all tools</a>
     <div class="sub-hero-eyebrow"><span class="text-grad">Hands-on · Spend data</span></div>
-    <h1>Spend you can't see<br><strong>is spend you <span class="text-grad">can't manage.</span></strong></h1>
-    <p class="sub-hero-sub">Paste uncategorised purchase lines. Get them sorted into clean spend categories, with an off-contract flag on each.</p>
+    <h2 class="shh">AI spend classification.</h2>
+    <p class="sub-hero-sub">Paste uncategorised purchase lines. The model returns them grouped into clean spend categories, with an off-contract flag on each.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -1281,9 +1408,9 @@ Write a short, clear message: a subject line, a tight body that states the issue
 Lines:
 [paste one per line]
 
-Use these categories: [your category list — or ask it to propose a sensible set]. For each line give: the category, and an "off-contract / unclear" flag if it has no PO, no contract, or is ambiguous.
+Use these categories: [your category list, or ask it to propose a sensible set]. For each line give: the category, and an "off-contract / unclear" flag if it has no PO, no contract, or is ambiguous.
 
-Return a simple table (line, category, flag), then one line on which categories hold the most flagged spend.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Paste a messy export — the rougher it is, the better the test.</li><li>Give it your own category list so the output matches how you already report.</li><li>Ask which category to clean up first to recover the most off-contract spend.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+Return a simple table (line, category, flag), then one line on which categories hold the most flagged spend.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Paste a messy export, the rougher it is, the better the test.</li><li>Give it your own category list so the output matches how you already report.</li><li>Ask which category to clean up first to recover the most off-contract spend.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
       </div></section>
 </div>
@@ -1292,8 +1419,8 @@ Return a simple table (line, category, flag), then one line on which categories 
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">← Back to all tools</a>
     <div class="sub-hero-eyebrow"><span class="text-grad">Hands-on · Proposals</span></div>
-    <h1>Forty pages of proposal.<br><strong>The five things <span class="text-grad">that matter.</span></strong></h1>
-    <p class="sub-hero-sub">Paste a supplier proposal or tender response. Get the pricing, commitments, risks, and gaps pulled out into a short summary.</p>
+    <h2 class="shh">Pull the key facts from a long proposal.</h2>
+    <p class="sub-hero-sub">Paste a supplier proposal or tender response. The model extracts pricing, commitments, certifications, and gaps into a short summary you can scan in a minute.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -1307,14 +1434,14 @@ Return a simple table (line, category, flag), then one line on which categories 
         <div class="output-area" id="tnd-output"></div>
       </div>
     </div>
-    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Reading a long proposal for the few facts that matter is a great use of AI. This prompt extracts them.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are evaluating supplier proposals. Read the proposal below and pull out only the decision-useful facts.
+    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Reading a long proposal for the few facts that matter is a good use of AI. This prompt extracts them.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are evaluating supplier proposals. Read the proposal below and pull out only the decision-useful facts.
 
 Proposal:
 [paste the text]
 
 Extract: headline price (and what's included versus extra), key commitments (SLAs, timelines, integrations), certifications, and anything vague, missing, or conditional I should question before shortlisting.
 
-Format as short sections — Price, Commitments, Certifications, Watch-outs — then end with the three questions you'd ask this supplier.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Paste the proposal text, even if it's several pages.</li><li>Run two proposals together and ask for a side-by-side comparison table.</li><li>“What's the catch?” reliably surfaces conditions buried in the fine print.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+Format as short sections, Price, Commitments, Certifications, Watch-outs, then end with the three questions you'd ask this supplier.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Paste the proposal text, even if it's several pages.</li><li>Run two proposals together and ask for a side-by-side comparison table.</li><li>“What's the catch?” reliably surfaces conditions buried in the fine print.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
       </div></section>
 </div>
@@ -1323,8 +1450,8 @@ Format as short sections — Price, Commitments, Certifications, Watch-outs — 
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">← Back to all tools</a>
     <div class="sub-hero-eyebrow"><span class="text-grad">Hands-on · Compliance</span></div>
-    <h1>The justification<br><strong>that <span class="text-grad">passes audit.</span></strong></h1>
-    <p class="sub-hero-sub">Need to award without competition? Describe why. Get a structured sole-source justification drafted to the points an auditor checks.</p>
+    <h2 class="shh">Draft a sole-source justification.</h2>
+    <p class="sub-hero-sub">Describe why a single supplier is the only option. The model returns a structured justification written to the points an auditor checks first.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -1340,7 +1467,7 @@ Format as short sections — Price, Commitments, Certifications, Watch-outs — 
     </div>
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">A sole-source justification has a standard shape. Hand AI the reason and it drafts the rest.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a procurement compliance writer. Help me draft a sole-source (single-source) justification.
 
-Why we want to award without competition: [the real reason — proprietary, compatibility with existing systems, time-critical, only qualified source].
+Why we want to award without competition: [the real reason, proprietary, compatibility with existing systems, time-critical, only qualified source].
 
 Draft it with these sections:
 1. Statement of need.
@@ -1348,7 +1475,7 @@ Draft it with these sections:
 3. Why alternatives were considered and rejected.
 4. How we'll confirm the price is fair and reasonable.
 
-Write it in plain, defensible language an auditor would accept, and leave clear [brackets] wherever I need to add specifics.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Give the genuine reason in plain words first — the structure follows from it.</li><li>Fill the [brackets] with your specifics and numbers before it goes anywhere.</li><li>Read it back as if you were the auditor: does every claim actually hold up?</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+Write it in plain, defensible language an auditor would accept, and leave clear [brackets] wherever I need to add specifics.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Give the genuine reason in plain words first, the structure follows from it.</li><li>Fill the [brackets] with your specifics and numbers before it goes anywhere.</li><li>Read it back as if you were the auditor: does every claim actually hold up?</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
       </div></section>
 </div>
@@ -1357,8 +1484,8 @@ Write it in plain, defensible language an auditor would accept, and leave clear 
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">&#8592; Back to all tools</a>
     <div class="sub-hero-eyebrow"><span class="text-grad">Hands-on · Cost &amp; negotiation</span></div>
-    <h1>Know the cost<br><strong>before you <span class="text-grad">read the quote.</span></strong></h1>
-    <p class="sub-hero-sub">Describe what you're buying and the price on the table. Get a should-cost breakdown, materials through to supplier margin, and the negotiation headroom it implies.</p>
+    <h2 class="shh">Estimate what something should cost.</h2>
+    <p class="sub-hero-sub">Describe what you're buying and the quoted price. The model returns a should-cost breakdown, materials, labour, overhead, margin, and the negotiation room it implies.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -1370,10 +1497,10 @@ Write it in plain, defensible language an auditor would accept, and leave clear 
     <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">A should-cost gives you a number to negotiate against. AI can build a rough one from a short description.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are a cost engineer. Build a "should-cost" for something I'm buying so I can negotiate from a number, not a feeling.
 
 Item: [what it is]
-Quoted price: [price — say whether it's per-unit or total]
+Quoted price: [price, say whether it's per-unit or total]
 What you know about it: [materials, volume, complexity]
 
-Estimate the cost split across materials, labour, overhead, logistics, and supplier margin (as % and value). State your assumptions clearly. Then tell me the implied negotiation headroom and the one question that would test whether it's real.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Give the item and the quote — those two are enough to start.</li><li>Ask it to show its assumptions so you can push on the ones that look soft.</li><li>Open the negotiation with the margin question it hands you.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+Estimate the cost split across materials, labour, overhead, logistics, and supplier margin (as % and value). State your assumptions clearly. Then tell me the implied negotiation headroom and the one question that would test whether it's real.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Give the item and the quote, those two are enough to start.</li><li>Ask it to show its assumptions so you can push on the ones that look soft.</li><li>Open the negotiation with the margin question it hands you.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
       </div></section>
 </div>
@@ -1382,8 +1509,8 @@ Estimate the cost split across materials, labour, overhead, logistics, and suppl
   <section class="sub-hero"><div class="sub-hero-inner">
     <a class="back-link" onclick="go('home')">&#8592; Back to all tools</a>
     <div class="sub-hero-eyebrow"><span class="text-grad">Hands-on · Awarding</span></div>
-    <h1>Three bids in.<br><strong><span class="text-grad">One defensible award out.</span></strong></h1>
-    <p class="sub-hero-sub">Paste the bids you've received. Claude normalises them, scores price, lead time, and quality on weighted criteria, and recommends the award with a rationale you can defend.</p>
+    <h2 class="shh">Score bids on more than just price.</h2>
+    <p class="sub-hero-sub">Paste the bids you've received. The model normalises them, scores price, lead time, and quality against weighted criteria, and recommends an award with the reasoning attached.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -1392,12 +1519,12 @@ Estimate the cost split across materials, labour, overhead, logistics, and suppl
         <div class="pg-label">Paste your bids (one per line: supplier, price, lead time, note)</div><div class="persona-bar"><span class="persona-label">Customer type</span><button class="persona-btn" data-v="mfg" onclick="setPersona('bc','mfg',this)"><span class="pdot"></span>Manufacturing</button><button class="persona-btn" data-v="edu" onclick="setPersona('bc','edu',this)"><span class="pdot"></span>Higher Education</button><button class="persona-btn" data-v="gov" onclick="setPersona('bc','gov',this)"><span class="pdot"></span>Public Sector</button></div><div class="persona-hint" id="bc-hint"></div><textarea class="pg-textarea" id="bc-input" placeholder="Supplier A | $1.20M | 14-day lead | IATF 16949, 99.2% OTD&#10;Supplier B | $1.05M | 30-day lead | ISO 9001, 96% OTD, tooling extra&#10;Supplier C | $1.32M | 10-day lead | IATF 16949, 99.6% OTD, local"></textarea><button class="run-btn" id="bc-btn" onclick="runBidCompare()"><span class="spinner"></span><span class="btn-label">Score the bids &#8594;</span></button><div class="pg-thinking" id="bc-think"><div class="pg-thinking-dots"><span></span><span></span><span></span></div><div class="pg-thinking-text" style="margin-top:10px">Normalising and scoring bids...</div></div><div class="output-area" id="bc-output"></div>
       </div>
     </div>
-    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Scoring bids on more than price is the kind of structured judgement AI supports well. Here's the prompt.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are running a bid evaluation. Compare these bids and recommend one.
+    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">Scoring bids on more than price is the kind of structured judgement AI handles well. Here's the prompt.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are running a bid evaluation. Compare these bids and recommend one.
 
-Bids (one per line — include price, lead time, and quality signals like certifications or on-time-delivery %):
+Bids (one per line, include price, lead time, and quality signals like certifications or on-time-delivery %):
 [paste your bids]
 
-Score each on price, lead time, and quality. Use these weights: price 45%, lead time 25%, quality 30% (change them if I tell you to). Show each bid's score with a one-line reason, then recommend a winner in plain language and name the strongest runner-up.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>At least two bids, one per line, with price and a quality signal each.</li><li>Change the weights to match what you actually care about for this category.</li><li>Ask “what would have to change for the runner-up to win?” to pressure-test the call.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
+Score each on price, lead time, and quality. Use these weights: price 45%, lead time 25%, quality 30% (change them if I tell you to). Show each bid's score with a one-line reason, then recommend a winner in plain language and name the strongest runner-up.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>At least two bids, one per line, with price and a quality signal each.</li><li>Change the weights to match what you actually care about for this category.</li><li>Ask “what would have to change for the runner-up to win?” to pressure-test the call.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
       </div></section>
 </div>
@@ -1406,8 +1533,8 @@ Score each on price, lead time, and quality. Use these weights: price 45%, lead 
   <section class="sub-hero"><div class="sub-hero-inner">
     <div class="step-bar" data-step="readiness"></div>
     <div class="sub-hero-eyebrow"><span class="text-grad">Step 3 · Find your first win</span></div>
-    <h1>Where would AI<br><strong>help you <span class="text-grad">first?</span></strong></h1>
-    <p class="sub-hero-sub">See where AI would help your team first, and what is fine to leave for later. Set the dials to match your situation; the result updates as you go.</p>
+    <h2 class="shh">Where AI would help your team first.</h2>
+    <p class="sub-hero-sub">Set five dials to match your current state: visibility, automation, supplier data, compliance, adoption. The result is an honest read of where to start with AI, and what to leave for later.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
@@ -1428,19 +1555,11 @@ Score each on price, lead time, and quality. Use these weights: price 45%, lead 
             <div class="rd-band" id="rd-band"></div>
             <div class="rd-meter"><div class="rd-meter-fill" id="rd-meter"></div></div>
             <div id="rd-gaps"></div>
-            <div class="rd-start" id="rd-start"></div>
+            <div class="rd-next" id="rd-next"></div>
           </div>
         </div>
       </div>
     </div>
-    <div class="recipe"><div class="recipe-head"><div class="recipe-eyebrow">Make this yourself</div><div class="recipe-title">The prompt behind this tool</div></div><div class="recipe-body"><div class="recipe-intro">If you'd rather just talk it through, this prompt gives you the same honest, where-to-start read.</div><div class="recipe-label">Paste this into any AI assistant (Claude, ChatGPT, Copilot…)</div><pre class="recipe-prompt">You are an AI adoption advisor for procurement. Here's where my team is:
-- Spend visibility: [low / medium / high]
-- Process automation (intake, approvals, POs): [low / medium / high]
-- Supplier intelligence: [low / medium / high]
-- Compliance and audit trail: [low / medium / high]
-- Current AI use: [none / some / lots]
-
-Tell me honestly: where would AI give me the biggest, easiest win first? Give me a single first step I could take this month, and what to leave for later. Don't recommend a big transformation programme.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Be candid about the gaps — a flattering self-assessment gets you flattering, useless advice.</li><li>Ask for a 90-day, one-tool starting plan rather than a roadmap.</li><li>Then actually try the tool it points you to, on something real.</li></ol><p class="recipe-foot">The output depends on your data and which assistant you use, so treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div></section>
 </div>
 
@@ -1448,19 +1567,47 @@ Tell me honestly: where would AI give me the biggest, easiest win first? Give me
   <section class="sub-hero"><div class="sub-hero-inner">
     <div class="step-bar" data-step="whatnext"></div>
     <div class="sub-hero-eyebrow"><span class="text-grad">Step 4 · Keep going</span></div>
-    <h1>You have the basics.<br><strong>Here is where to <span class="text-grad">point them.</span></strong></h1>
-    <p class="sub-hero-sub">Based on what you tried in the first three steps, these are the tools most worth your next ten minutes. Each one runs right here, on an example or on text you paste.</p>
+    <h2 class="shh">Your suggested <strong>next ten minutes.</strong></h2>
+    <p class="sub-hero-sub">Based on what you tried in the first three steps, these are the tools most relevant to your situation. Each one runs here, on an example or on text you paste.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
-    <div class="wn-summary" id="wn-summary"></div>
-    <div class="wn-grid" id="wn-grid"></div>
-    <div class="wn-cta">
-      <div class="wn-cta-copy">
-        <span class="eyebrow eyebrow-jai">When you are ready for the real thing</span>
-        <h3>These tools show the shape of the work. JAI does it on your data.</h3>
-        <p>Everything here runs on examples in your browser. JAI sits inside your platform, reads your live procurement data, and is trained on your policies.</p>
+    <div class="vs">
+      <div class="vs-head">
+        <span class="vs-eyebrow">The honest comparison</span>
+        <h2 class="vs-title">What you tried here, and what <em>JAI</em> adds.</h2>
+        <p class="vs-sub">The tools on this page run on text you paste. JAI is the same kind of AI, but it runs inside JAGGAER, reading your live data, your policies, your real supplier base. The shape of the work is the same. The numbers it works on are yours.</p>
       </div>
-      <a class="btn-jai-grad" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a>
+      <div class="vs-table">
+        <div class="vs-colhead">
+          <div class="vs-ch-dim"></div>
+          <div class="vs-ch claude"><span>On your own</span><small>Claude, ChatGPT and the like</small></div>
+          <div class="vs-ch jai"><span>With JAI</span><small>JAGGAER's AI for S2P</small></div>
+        </div>
+        <div class="vs-row"><div class="vs-dim">What it knows</div><div class="vs-cell claude">General knowledge, plus whatever you paste in each time.</div><div class="vs-cell jai">Your live spend, suppliers, contracts and policies, already in front of it.</div></div>
+        <div class="vs-row"><div class="vs-dim">Where it works</div><div class="vs-cell claude">A separate chat window you copy text in and out of.</div><div class="vs-cell jai">Inside JAGGAER One, in the workflow you already use.</div></div>
+        <div class="vs-row"><div class="vs-dim">Can you trust it</div><div class="vs-cell claude">A confident draft that you check yourself.</div><div class="vs-cell jai">Every answer cited to your own source document, with a full audit trail.</div></div>
+        <div class="vs-row"><div class="vs-dim">Your data</div><div class="vs-cell claude">You decide, each time, what is safe to paste.</div><div class="vs-cell jai">Stays in your region, mirrors your permissions, and never trains a model.</div></div>
+        <div class="vs-row"><div class="vs-dim">Getting started</div><div class="vs-cell claude">Copy a prompt and go, today.</div><div class="vs-cell jai">Switched on by your team. No training needed to use it.</div></div>
+      </div>
+      <div class="vs-foot">
+        <span>JAI runs on leading models, including Claude, and picks the right one for each task. So this is not Claude versus JAI. It is the same intelligence, grounded in your world.</span>
+        <a class="btn-jai-grad" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a>
+      </div>
+    </div>
+    <div class="wn-report" id="wn-report"></div>
+    <div class="wn-lib">
+      <div class="wn-lib-head">
+        <span class="eyebrow">The prompt library</span>
+        <h2 class="wn-lib-title">Every prompt, <strong>by the work you do.</strong></h2>
+        <p class="wn-lib-sub">Turn the dial to a type of work and open any tool. The ones marked <span class="wn-rec-ink">Start here</span> are your recommended starting points, based on what you've tried.</p>
+      </div>
+      <div class="lib-wrap">
+        <div class="lib-dial">
+          <div class="dial" id="lib-dial"></div>
+          <div class="dial-legend" id="lib-legend"></div>
+        </div>
+        <div class="lib-panel" id="lib-panel"></div>
+      </div>
     </div>
   </div></section>
 </div>
@@ -1505,6 +1652,7 @@ function renderSwitcher(current){
   if(existing)existing.remove();
   var lk=capLookup();
   var curCap=(lk[current]||{}).cap;
+  if(curCap==='start')return; // no keep-exploring on the learning steps
   // siblings: same capability pillar only (the other three tools next door)
   var siblings=TOOL_REGISTRY.filter(function(t){return t.page!==current && (lk[t.page]||{}).cap===curCap;});
   if(!siblings.length)return;
@@ -1530,17 +1678,31 @@ function renderSwitcher(current){
       '<div class="tool-switcher-sub">The other tools that live next door in this part of source-to-pay.</div>'+
     '</div>'+
     '<div class="ts-cards">'+cards+'</div>'+
-    '<div class="ts-allcta"><a onclick="go(\'home\')">\u2190 Back to all 15 tools</a></div>';
+    '<div class="ts-allcta"><a onclick="goBack()">'+(lastNonToolPage==='whatnext'?'\u2190 Back to your Step 4 results':'\u2190 Back to the four steps')+'</a></div>';
   inner.appendChild(sw);
 }
+var TOOL_PAGES={supplier:1,contract:1,tender:1,email:1,rfp:1,shouldcost:1,bidcompare:1,solesource:1,invoice:1,classifier:1,diagnostic:1,approval:1};
+var lastNonToolPage='home';
 function go(page){
+  var curEl=document.querySelector('.subpage.active');
+  var cur=curEl?curEl.id.replace('page-',''):'home';
+  if(!TOOL_PAGES[cur])lastNonToolPage=cur; // remember where we entered a tool from
   document.querySelectorAll('.subpage').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+page).classList.add('active');
   window.scrollTo(0,0);
   location.hash = page==='home'?'':'/'+page;
   if(page!=='home')renderSwitcher(page);
   if(page==='whatnext'&&typeof buildWhatNext==='function')buildWhatNext();
+  if(TOOL_PAGES[page]){
+    var bl=document.querySelector('#page-'+page+' .back-link');
+    if(bl){bl.setAttribute('onclick','goBack()');bl.textContent=(lastNonToolPage==='whatnext'?'\u2190 Back to your Step 4 results':'\u2190 Back to the four steps');}
+  }
   if(typeof initObservers==='function')setTimeout(initObservers,50);
+}
+function goBack(){
+  var dest=(lastNonToolPage&&lastNonToolPage!=='home'&&document.getElementById('page-'+lastNonToolPage))?lastNonToolPage:'home';
+  go(dest);
+  if(dest==='home')setTimeout(function(){var r=document.getElementById('start-here');if(r)r.scrollIntoView({behavior:'smooth'});},90);
 }
 window.addEventListener('hashchange',function(){var h=location.hash.replace('#/','')||'home';if(document.getElementById('page-'+h))go(h);});
 (function(){var h=location.hash.replace('#/','');if(h&&document.getElementById('page-'+h))go(h);})();
@@ -1630,7 +1792,7 @@ function vbadge(tool){
 function vnote(tool){
   var v=toolPersona[tool];if(!v)return '';
   var m=VERTICAL_META[v];
-  return 'Showing a <strong>'+m.label+'</strong> view — the same approach applies to '+m.knows+'.';
+  return 'Showing a <strong>'+m.label+'</strong> view, the same approach applies to '+m.knows+'.';
 }
 function runBtn(id,loading,label){var b=document.getElementById(id);b.classList.toggle('loading',loading);b.disabled=loading;b.querySelector('.btn-label').textContent=label;}
 function think(id,show){document.getElementById(id).classList.toggle('show',show);}
@@ -1686,7 +1848,7 @@ function runSupplier(){
         priority='Add supplier lines with a country and category (e.g. "Supplier A, Taiwan, Semiconductors") to get a concentration analysis.';
       }
     }
-    var html='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:1rem"><div class="output-label" style="margin-bottom:0">Risk analysis</div>'+vbadge('sup')+'</div><div class="output-summary"><strong>Priority: </strong>'+priority+'</div>';
+    var html='<div class="out-head"><div class="output-label">Risk analysis</div>'+vbadge('sup')+'</div><div class="output-summary"><strong>Priority: </strong>'+priority+'</div>';
     if(flags.length){html+='<div class="output-section-label" style="color:#dc2626">Risk flags identified</div>'+flags.map(function(f){return '<div class="risk-flag">'+f+'</div>';}).join('');}
     if(alts.length){html+='<div class="output-section-label">Alternative supplier recommendations</div>'+alts.map(function(a){return '<div class="alt-card"><div class="alt-header"><span class="alt-cat">'+a.category+'</span><span class="alt-region">'+a.region+'</span></div><div class="alt-rationale">'+a.rationale+'</div><div class="alt-suppliers">'+a.vendors.map(function(v){return '<span class="alt-sup">'+v+'</span>';}).join('')+'</div></div>';}).join('');}
     html+='<button class="reset-link" onclick="resetOut(\'sup-output\')">← Scan another list</button>';
@@ -1729,7 +1891,7 @@ function runClause(){
     var riskCount=clean.filter(function(f){return f.risk==='high';}).length;
     var summary=clean.length?(clean.length+' item'+(clean.length>1?'s':'')+' flagged'+(riskCount?', '+riskCount+' high-risk':'')+'. '+(riskCount?'Review the high-risk items before signing.':'No high-risk items, but confirm the flagged terms align with your policy.')):'No standard risk patterns detected. This may be benign boilerplate, or paste a clause with renewal, pricing, liability, or indemnity language to see the analyser work.';
     var RISKBG={high:'#fee2e2',medium:'#fef3c7',low:'#dcfce7'},RISKCOL={high:'#b91c1c',medium:'#92400e',low:'#15803d'};
-    var o='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:1rem"><div class="output-label" style="margin-bottom:0">Annotated clause</div>'+vbadge('clause')+'</div><div class="output-summary"><strong>Summary: </strong>'+summary+'</div>';
+    var o='<div class="out-head"><div class="output-label">Annotated clause</div>'+vbadge('clause')+'</div><div class="output-summary"><strong>Summary: </strong>'+summary+'</div>';
     if(clean.length){
       o+='<div class="annot-grid"><div class="annot-clause"><p>'+html+'</p></div><div><div class="output-section-label" style="margin-top:0">Flags · click to expand</div><div class="annot-flags">';
       o+=clean.map(function(f,i){return '<div class="flag-card" id="flag-'+i+'" style="border-left-color:'+f.color+'" onclick="toggleFlag('+i+')"><div class="fc-top"><span class="fc-label" style="color:'+f.color+'">'+f.label+'</span><span class="fc-risk" style="color:'+RISKCOL[f.risk]+';background:'+RISKBG[f.risk]+'">'+f.risk+'</span></div><div class="fc-explain">'+f.explain+'</div></div>';}).join('');
@@ -1778,7 +1940,7 @@ function runRFP(){
       hasGDPR?'How do you handle multi-jurisdiction compliance and data residency within a single instance?':'How is customer data secured, segregated, and access-controlled?',
       'What is your typical time-to-value for a deployment of this scope?'
     ];
-    var o='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:1rem"><div class="output-label" style="margin-bottom:0">RFP structure</div>'+vbadge('rfp')+'</div><div class="rfp-title-bar">Request for Proposal: '+subjectTitle+'</div>';
+    var o='<div class="out-head"><div class="output-label">RFP structure</div>'+vbadge('rfp')+'</div><div class="rfp-title-bar">Request for Proposal: '+subjectTitle+'</div>';
     o+='<div class="output-summary">Drafted from your brief. Weightings reflect the priorities Claude inferred'+(hasGDPR?', note compliance is weighted up given the data-residency requirement':'')+'.</div>';
     o+='<div class="output-section-label">Scope of work</div><div class="output-items">'+scope.map(function(s){return '<div class="output-item">'+s+'</div>';}).join('')+'</div>';
     o+='<div class="output-section-label">Evaluation criteria</div>'+criteria.map(function(c){return '<div class="eval-row"><div class="eval-weight">'+c.w+'</div><div><div class="eval-name">'+c.n+'</div><div class="eval-desc">'+c.d+'</div></div></div>';}).join('');
@@ -1818,7 +1980,7 @@ function runInvoice(){
       if(type)exceptions.push({id:id,vendor:vendor,type:type,desc:desc,amt:risk});else clean++;
     });
     var totalRisk=exceptions.reduce(function(s,e){return s+e.amt;},0);
-    var o='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:1rem"><div class="output-label" style="margin-bottom:0">Exception analysis</div>'+vbadge('inv')+'</div>';
+    var o='<div class="out-head"><div class="output-label">Exception analysis</div>'+vbadge('inv')+'</div>';
     o+='<div class="inv-summary"><div class="inv-stat"><div class="inv-stat-num" style="color:var(--ink)">'+lines.length+'</div><div class="inv-stat-label">Reviewed</div></div><div class="inv-stat"><div class="inv-stat-num" style="color:#b91c1c">'+exceptions.length+'</div><div class="inv-stat-label">Exceptions</div></div><div class="inv-stat"><div class="inv-stat-num" style="color:#15803d">'+clean+'</div><div class="inv-stat-label">Passed clean</div></div><div class="inv-stat"><div class="inv-stat-num text-grad">$'+totalRisk.toLocaleString()+'</div><div class="inv-stat-label">At risk</div></div></div>';
     if(exceptions.length){
       o+='<div class="output-section-label" style="color:#b91c1c">Exceptions requiring action</div>';
@@ -1840,23 +2002,36 @@ var PB_BLOCKS={
 };
 var PB_LABELS={role:'Role',context:'Context',task:'Task',format:'Output format'};
 var pbSel={role:'',context:'',task:'',format:''};
+var PB_ORDER=['role','context','task','format'];
+var PB_WHY={
+  role:'Tell the AI who to be. A "contracts analyst" answers with more depth than a plain assistant. This sets the level of expertise you get back.',
+  context:"Give it the facts it cannot guess: your industry, the rule you work under, what you are trying to achieve. This is where most prompts fall short.",
+  task:'Say the one thing you want done, and be specific. "Find the auto-renewal terms" works better than "review this contract".',
+  format:'Say how you want the answer back: a table, a numbered list, or under 200 words. This turns a wall of text into something you can act on.'
+};
 function buildPB(){
   var grid=document.getElementById('pb-grid');if(!grid)return;grid.innerHTML='';
-  Object.keys(PB_BLOCKS).forEach(function(block){
+  PB_ORDER.forEach(function(block,i){
     var opts=PB_BLOCKS[block];
-    var el=document.createElement('div');el.className='pb-block';
-    el.innerHTML='<div class="pb-block-label">'+PB_LABELS[block]+'</div><div class="pb-opts">'+opts.map(function(o){return '<button class="pb-opt" data-block="'+block+'" data-opt="'+o.replace(/"/g,'&quot;')+'" onclick="pickPB(\''+block+'\',this)">'+o+'</button>';}).join('')+'</div>';
+    var el=document.createElement('div');el.className='pb-block b-'+block;el.id='pb-block-'+block;
+    el.innerHTML='<div class="pb-block-label"><span class="pb-block-num">'+(i+1)+'</span>'+PB_LABELS[block]+'</div><div class="pb-opts">'+opts.map(function(o){return '<button class="pb-opt" data-block="'+block+'" data-opt="'+o.replace(/"/g,'&quot;')+'" onclick="pickPB(\''+block+'\',this)">'+o+'</button>';}).join('')+'</div>';
     grid.appendChild(el);
   });
+  var moves=document.getElementById('pb-moves');if(moves){
+    moves.innerHTML=PB_ORDER.map(function(block){
+      return '<div class="pb-move b-'+block+'" id="pb-move-'+block+'"><div class="pb-move-top"><span class="pb-move-dot"></span><span class="pb-move-name">'+PB_LABELS[block]+'</span><span class="pb-move-state" id="pb-move-state-'+block+'"></span></div><div class="pb-move-why">'+PB_WHY[block]+'</div></div>';
+    }).join('');
+  }
+  renderPB();
 }
 function pickPB(block,btn){
   var cur=btn.getAttribute('data-opt');
   pbSel[block]=pbSel[block]===cur?'':cur;
   var sibs=btn.parentElement.querySelectorAll('.pb-opt');
   for(var i=0;i<sibs.length;i++){sibs[i].classList.toggle('sel',sibs[i].getAttribute('data-opt')===pbSel[block]&&pbSel[block]!=='');}
-  renderPB();
+  renderPB(block);
 }
-function renderPB(){
+function renderPB(activeBlock){
   var bits=[];
   if(pbSel.role)bits.push('You are a '+pbSel.role+'.');
   if(pbSel.context)bits.push('Context: '+pbSel.context+'.');
@@ -1864,21 +2039,31 @@ function renderPB(){
   if(pbSel.format)bits.push(pbSel.format+'.');
   var a=bits.join(' ');
   var n=[pbSel.role,pbSel.context,pbSel.task,pbSel.format].filter(Boolean).length;
-  document.getElementById('pb-count').textContent='Assembled prompt, '+n+'/4 blocks';
+  document.getElementById('pb-count').textContent='Your prompt so far: '+n+' of 4';
   var pre=document.getElementById('pb-pre');
-  pre.textContent=a||'Select one option per block to build your prompt…';
+  pre.textContent=a||'Pick an option on the left to start building.';
   pre.classList.toggle('empty',!a);
-  document.getElementById('pb-note').style.display=a?'block':'none';
-  // reveal Run when the prompt has a task (the part that produces output)
+  // decide which move to spotlight: the one just picked, else the next empty
+  var spotlight=activeBlock;
+  if(!spotlight){for(var k=0;k<PB_ORDER.length;k++){if(!pbSel[PB_ORDER[k]]){spotlight=PB_ORDER[k];break;}}}
+  PB_ORDER.forEach(function(block){
+    var filled=!!pbSel[block];
+    var mv=document.getElementById('pb-move-'+block);
+    var bl=document.getElementById('pb-block-'+block);
+    var st=document.getElementById('pb-move-state-'+block);
+    if(mv){mv.classList.toggle('on',block===spotlight);mv.classList.toggle('done',filled&&block!==spotlight);}
+    if(bl){bl.classList.toggle('active',block===spotlight);bl.classList.toggle('done',filled);}
+    if(st)st.textContent=filled?'\u2713 set':(block===spotlight?'\u2192 your turn':'');
+  });
   var runBtnEl=document.getElementById('pb-run-btn');
   if(runBtnEl)runBtnEl.style.display=pbSel.task?'inline-flex':'none';
 }
 
 /* ===== FURTHER READING (swap in real posts: edit the READING array) ===== */
 var READING=[
-  {kicker:'Getting started', title:'How to Install Claude: A Step-by-Step Guide for Procurement Professionals', desc:'A plain walk-through of getting Claude set up and ready for real S2P work — no IT project required.', url:''},
-  {kicker:'Getting started', title:'What Are .md Files in Claude — and Why S2P Teams Can\u2019t Skip This Step', desc:'Why a simple Markdown file is the trick to giving Claude the context it needs about your processes.', url:''},
-  {kicker:'Getting started', title:'AI in S2P: What Claude Actually Delivers for Procurement in 2026', desc:'A grounded look at what Claude genuinely does — and doesn\u2019t — for procurement teams this year.', url:''}
+  {kicker:'Getting started', title:'How to Install Claude: A Step-by-Step Guide for Procurement Professionals', desc:'A plain walk-through of getting Claude set up and ready for real S2P work, no IT project required.', url:''},
+  {kicker:'Getting started', title:'What Are .md Files in Claude, and Why S2P Teams Can\u2019t Skip This Step', desc:'Why a simple Markdown file is the trick to giving Claude the context it needs about your processes.', url:''},
+  {kicker:'Getting started', title:'AI in S2P: What Claude Actually Delivers for Procurement in 2026', desc:'A grounded look at what Claude genuinely does, and doesn\u2019t, for procurement teams this year.', url:''}
 ];
 function renderReading(){
   var grid=document.getElementById('reading-grid');if(!grid)return;
@@ -1914,7 +2099,7 @@ var PB_RESPONSES={
   },
   'draft a scope of work and evaluation criteria':{
     list:['Scope: deliver the stated solution across all sites, integrate with the current ERP, and onboard users within the timeline.','Evaluation, Functional fit (30%): coverage of stated requirements and integration depth.','Evaluation, TCO over 3 years (25%): licensing, implementation, and support.','Evaluation, Security & compliance (20%), Implementation approach (15%), Vendor stability (10%).'],
-    note:'Weightings here are a sensible default — in a real prompt, tell the AI your category\u2019s priorities and it will adjust them.'
+    note:'Weightings here are a sensible default, in a real prompt, tell the AI your category\u2019s priorities and it will adjust them.'
   },
   'classify invoice exceptions and recommend actions':{
     list:['Duplicate: same vendor and amount as a prior invoice, hold and confirm before paying.','No PO on file: maverick spend, escalate to the budget holder for a retroactive PO or rejection.','Over-billed vs PO: invoice exceeds the approved amount beyond tolerance, pay the PO amount only, query the variance.','Expired contract: services billed outside agreed terms, do not pay until the contract status is resolved.'],
@@ -1950,14 +2135,23 @@ function runPrompt(){
 
 /* MYTHS */
 var MYTHS=[
-  {lvl:"partly",v:"Half true",myth:"AI just makes things up, so I can't trust it for procurement.",reality:"It can be confidently wrong, which is exactly why you keep the sign-off. But for structuring a brief, summarising a proposal, or spotting terms worth checking, it is fast and reliable enough to save real time. Treat it as a sharp first-drafter, not an oracle.",jai:"Paste a clause into the Contract Clause Analyser and check its flags against your own read."},
-  {lvl:"false",v:"Busted",myth:"You have to be technical to get value from it.",reality:"If you can write a clear email, you can write a clear prompt. The skill is describing what you want precisely, not writing code.",jai:"The Four-Part Prompt tool shows the whole pattern in about a minute."},
-  {lvl:"fair",v:"Fair, with care",myth:"Our data is far too sensitive to put anywhere near AI.",reality:"Sensible caution. Start with example or anonymised data, use the tools your organisation has approved, and check policy before anything sensitive. Most of the value shows up well before you would ever paste a real contract.",jai:"Every tool here runs on examples, in your browser, and sends nothing anywhere."},
-  {lvl:"false",v:"Busted",myth:"It only works for simple, generic tasks.",reality:"Generic prompts get generic answers. Give it your context, your categories, and your constraints, and the output gets specific fast. That is the difference between a toy and a tool.",jai:"Load a Manufacturing or Public Sector example on any tool and watch it change."},
-  {lvl:"partly",v:"Mostly false",myth:"This is hype, it won't change my actual day.",reality:"It will not run your function. But the hour you lose summarising a tender or drafting a chaser email? That specific kind of work is what it is genuinely good at.",jai:"Try the Tender Summariser or Supplier Message Drafter on a task you have been putting off."},
-  {lvl:"false",v:"Busted",myth:"Better to wait until the tools have matured.",reality:"The tools will keep changing. The skill that compounds, knowing how to ask well, you can build now, for free, on tasks you already do every week.",jai:"Pick the tool that matches your most repetitive task and start there."},
+  {lvl:"partly",v:"Half true",myth:"AI just makes things up, so I can't trust it.",reality:"It can sound sure of itself and still be wrong, which is why a person signs off. But for drafting a brief, summarising a long proposal, or flagging terms worth a closer look, it is fast and dependable enough to save real time. Use it as a quick first draft, then check it.",jai:"Paste a clause into the Contract Clause Analyser and check its flags against your own read."},
+  {lvl:"false",v:"Not true",myth:"You have to be technical to get anything out of it.",reality:"If you can write a clear email, you can write a clear instruction. The skill is saying plainly what you want, not writing code. That is the whole of Step 1.",jai:"The prompt builder in Step 1 shows the four-part pattern in about a minute."},
+  {lvl:"fair",v:"Fair, with care",myth:"Our data is far too sensitive to put near AI.",reality:"A sensible worry. Start with example or made-up data, use only the tools your organisation has approved, and check policy before anything real. Most of the value shows up well before you would ever paste a live contract.",jai:"Every tool here runs on examples in your browser and sends nothing anywhere."},
+  {lvl:"false",v:"Not true",myth:"It only works for simple, generic tasks.",reality:"Generic questions get generic answers. Give it your category, your numbers, and your constraints and the answer gets specific quickly. That is the difference between a toy and a tool you would actually use.",jai:"Load a Manufacturing or Public Sector example on any tool and watch the answer change."},
+  {lvl:"partly",v:"Mostly false",myth:"It is all hype and won't change my actual day.",reality:"It will not run your function for you. But the hour you lose summarising a tender or drafting a chaser email is exactly the kind of task it is good at. Win back those hours first.",jai:"Try the Tender Summariser or Supplier Message Drafter on a task you have been putting off."},
+  {lvl:"false",v:"Not true",myth:"Better to wait until the tools have settled down.",reality:"The tools will keep changing. The skill that lasts, knowing how to ask well, you can build now, for free, on the work you already do every week. Waiting just delays the easy wins.",jai:"Pick the tool that matches your most repetitive task and start there."},
 ];
 var mythRatings={};
+// each myth maps to a concrete tool to try first, in MYTHS order
+var MYTH_PICK=[
+  {page:'contract',icon:'doc',title:'Contract Clause Analyser',why:'See exactly where AI is reliable: check its flags against your own read.'},
+  {page:'prompt',icon:'blocks',title:'The Four-Part Prompt',why:'No technical skill needed. A good prompt is just a clear instruction.'},
+  {page:'classifier',icon:'blocks',title:'Spend Classifier',why:'Runs on example data in your browser. Nothing you paste leaves the page.'},
+  {page:'supplier',icon:'search',title:'Supplier Risk Scanner',why:'Give it your real categories and the answer gets specific fast.'},
+  {page:'tender',icon:'doc',title:'Tender Summariser',why:'Win back the hour you lose reading a long proposal.'},
+  {page:'approval',icon:'route',title:'Approval Path Checker',why:'Start on a repetitive task today. The skill that lasts is asking well.'}
+];
 function buildMyths(){
   var grid=document.getElementById('myth-grid');if(!grid)return;grid.innerHTML='';
   var CHECK='<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>';
@@ -1969,7 +2163,6 @@ function buildMyths(){
     el.innerHTML='<div class="myth-inner">'+
       '<div class="myth-top">'+
         '<div class="myth-num">'+(mi+1<10?'0':'')+(mi+1)+'</div>'+
-        '<div class="myth-stamp">'+m.v+'</div>'+
       '</div>'+
       '<div class="myth-label">The myth</div>'+
       '<div class="myth-q">'+m.myth+'</div>'+
@@ -1989,15 +2182,34 @@ function rateMyth(mi,val,btn){
   for(var i=0;i<btns.length;i++){
     btns[i].classList.toggle('on',parseInt(btns[i].getAttribute('data-v'),10)===val);
   }
-  var r=[];for(var k in mythRatings){if(mythRatings[k]!==null)r.push(mythRatings[k]);}
-  if(r.length>=2){
-    var avg=r.reduce(function(a,b){return a+b;},0)/r.length;
-    var pct=Math.round((avg-1)/4*100);
-    document.getElementById('myth-score-area').style.display='block';
-    var v=document.getElementById('myth-score-val');
-    v.className='text-grad';v.style.cssText='font-size:2.5rem;font-weight:800;line-height:1;margin-bottom:6px';v.textContent=pct+'% to gain';
-    document.getElementById('myth-score-label').textContent=pct>=60?'A lot of these sound like you — which means a lot of easy upside. Pick the one that stings most and try its tool.':pct>=35?'A few of these ring true. That is normal. Start with the one you nodded hardest at.':'You are already past most of the hesitation. Try a tool on a harder, real case to keep sharpening.';
-  }
+  var rated=[];for(var k in mythRatings){if(mythRatings[k]!==null)rated.push({i:+k,v:mythRatings[k]});}
+  if(rated.length<2)return;
+  var avg=rated.reduce(function(a,b){return a+b.v;},0)/rated.length;
+  var pct=Math.round((avg-1)/4*100);
+  var verdict=pct>=60?'Plenty to win back':pct>=35?'A few quick wins are waiting':'You are already ahead';
+  var sub=pct>=60?'Several of these still sound like you, which is good news: it means there is easy time to reclaim. Here is where to point AI first, based on what rang true.':pct>=35?'A few of these ring true, which is completely normal. Start with the work below and the rest tends to fall into place.':'You are past most of the hesitation. The picks below are the fastest way to turn that into a real first win.';
+  // pick the myths that sounded most like them (rating >=3), strongest first; fall back to top-rated
+  var picks=rated.filter(function(x){return x.v>=3;}).sort(function(a,b){return b.v-a.v||a.i-b.i;});
+  if(picks.length<2)picks=rated.slice().sort(function(a,b){return b.v-a.v||a.i-b.i;});
+  var seen={},chosen=[];
+  for(var pi=0;pi<picks.length && chosen.length<3;pi++){var pk=MYTH_PICK[picks[pi].i];if(pk&&!seen[pk.page]){seen[pk.page]=1;chosen.push(pk);}}
+  var R=30,Cc=2*Math.PI*R,off=Cc*(1-pct/100);
+  var dial='<div class="ms-dial"><svg width="74" height="74" viewBox="0 0 74 74">'+
+    '<circle cx="37" cy="37" r="30" fill="none" stroke="#ece6f6" stroke-width="7"/>'+
+    '<circle cx="37" cy="37" r="30" fill="none" stroke="url(#msg)" stroke-width="7" stroke-linecap="round" stroke-dasharray="'+Cc.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/>'+
+    '<defs><linearGradient id="msg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5300CE"/><stop offset="1" stop-color="#E22B83"/></linearGradient></defs></svg>'+
+    '<div class="ms-dial-num">'+pct+'%</div></div>';
+  var cards=chosen.map(function(c){
+    return '<div class="ms-pick" onclick="go(\''+c.page+'\')">'+
+      '<div class="ms-pick-ic">'+(ICONS[c.icon]||'')+'</div>'+
+      '<div><div class="ms-pick-tt">'+c.title+'</div><div class="ms-pick-ds">'+c.why+'</div></div>'+
+      '<div class="ms-pick-go">Try it &#8594;</div></div>';
+  }).join('');
+  var area=document.getElementById('myth-score-area');
+  area.style.display='block';
+  area.innerHTML='<div class="ms-wrap">'+
+    '<div class="ms-top">'+dial+'<div><div class="ms-eyebrow">Where AI can help you most</div><div class="ms-verdict">'+verdict+'</div></div></div>'+
+    '<div class="ms-body"><p class="ms-sub">'+sub+'</p><div class="ms-picks">'+cards+'</div></div></div>';
 }
 
 /* SPEND DIAGNOSTIC */
@@ -2156,7 +2368,7 @@ function runApproval(){
     if(pv==='gov'&&amt>=25000){flags.push({t:'Competitive-bid threshold',d:'In public sector this value typically sits above the open-tender threshold. A sole-source award here must carry a documented justification and survive audit.'});}
     else if(pv==='edu'){flags.push({t:'Grant & catalogue rules',d:'If this is grant-funded, allowable-cost and pre-award approval rules apply on top of the standard path. Check the catalogue first, preferred-supplier pricing may already be in place.'});}
     else if(pv==='mfg'&&amt>=25000){flags.push({t:'Supplier qualification',d:'For direct-line equipment, expect a supplier-qualification check (PPAP/APQP or equivalent) before the PO can be released.'});}
-    var o='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:1rem"><div class="output-label" style="margin-bottom:0">Approval path</div>'+vbadge('appr')+'</div>';
+    var o='<div class="out-head"><div class="output-label">Approval path</div>'+vbadge('appr')+'</div>';
     o+='<div class="output-summary"><strong>'+tier+(amt?' · ~$'+amt.toLocaleString():'')+'</strong><br>'+verdict+'</div>';
     o+='<div class="output-section-label">Approval chain</div><div class="output-items">'+chain.map(function(s,i){return '<div class="output-item">'+(i+1)+'. '+s+'</div>';}).join('')+'</div>';
     if(flags.length){o+='<div class="output-section-label" style="color:#b05e00">Policy notes</div>';o+=flags.map(function(f){return '<div class="risk-flag" style="background:#fffbf0;border-color:#f5d9a8;border-left-color:#b05e00;color:#7a4a00"><strong>'+f.t+'.</strong> '+f.d+'</div>';}).join('');}
@@ -2214,7 +2426,7 @@ function runEmail(){
     var closes={firm:"Thanks in advance for the quick turnaround.\n\nBest regards,",warm:"Really appreciate your help on this.\n\nWarm regards,",formal:"We look forward to your prompt response.\n\nYours faithfully,"};
     var subject=subjects[kind],body=bodies[kind][emailTone],close=closes[emailTone];
     var full=greet+"\n\n"+body+"\n\n"+close+"\n[Your name]";
-    var o='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:1rem"><div class="output-label" style="margin-bottom:0">Drafted message</div>'+vbadge('email')+'</div>';
+    var o='<div class="out-head"><div class="output-label">Drafted message</div>'+vbadge('email')+'</div>';
     o+='<div style="background:var(--cream);border:var(--border);border-radius:.5rem;overflow:hidden">';
     o+='<div style="padding:.75rem 1rem;border-bottom:var(--border);font-size:.78rem;color:var(--ink-3)"><strong style="color:var(--ink)">Subject:</strong> '+subject+'</div>';
     o+='<div style="padding:1.1rem 1.25rem;white-space:pre-wrap;font-size:.85rem;line-height:1.7;color:var(--ink-2)">'+full.replace(/</g,'&lt;')+'</div></div>';
@@ -2247,38 +2459,38 @@ var ICONS={
   scale:'<svg viewBox="0 0 24 24"><path d="M12 3v18M5 7h14"/><path d="M5 7l-3 6h6zM19 7l-3 6h6z"/></svg>',
 };
 var CAP_PILLARS=[
-  { id:'sourcing', name:'Sourcing & buying', desc:'Running events, comparing bids, and justifying awards.',
+  { id:'sourcing', name:'Sourcing & buying', desc:'Running events, comparing bids, awarding work.',
     tools:[
       { page:'rfp', icon:'scale', title:'RFP Builder', sub:'Turn a one-line need into a scope of work, weighted criteria, and supplier questions.' },
       { page:'shouldcost', icon:'coins', title:'Should-Cost Estimator', sub:'Estimate what something should cost, so you know where the negotiation room is.' },
-      { page:'bidcompare', icon:'trophy', title:'Bid Comparison', sub:'Score competing bids on price, lead time, and quality, and see a clear, defensible winner.' },
-      { page:'solesource', icon:'doc', title:'Sole-Source Justifier', sub:'Draft a single-source justification structured the way an auditor reads it.' },
+      { page:'bidcompare', icon:'trophy', title:'Bid Comparison', sub:'Score competing bids on price, lead time, and quality, with a defensible winner.' },
+      { page:'solesource', icon:'doc', title:'Sole-Source Justifier', sub:'Draft a sole-source justification in the order an auditor reads it.' },
     ]},
-  { id:'suppliers', name:'Suppliers & contracts', desc:'Understanding suppliers, contracts, and the messages between you.',
+  { id:'suppliers', name:'Suppliers & contracts', desc:'Reading suppliers, contracts, and the messages between you.',
     tools:[
-      { page:'supplier', icon:'search', title:'Supplier Risk Scanner', sub:'Spot where your supplier base is over-concentrated, and where to find backups.' },
+      { page:'supplier', icon:'search', title:'Supplier Risk Scanner', sub:'Find where your supplier base is over-concentrated, and where to look for backups.' },
       { page:'contract', icon:'doc', title:'Contract Clause Analyser', sub:'Catch auto-renewals, price-rise rights, and one-sided terms before you sign.' },
       { page:'tender', icon:'doc', title:'Tender Summariser', sub:'Pull the price, the commitments, and the missing pieces out of a long proposal.' },
       { page:'email', icon:'mail', title:'Supplier Message Drafter', sub:'Get a clear, professional supplier message in the tone the situation needs.' },
     ]},
-  { id:'spend', name:'Spend & invoices', desc:'Seeing your spend clearly and catching what quietly leaks.',
+  { id:'spend', name:'Spend & invoices', desc:'Seeing your spend clearly and catching what leaks.',
     tools:[
       { page:'invoice', icon:'alert', title:'Invoice Exception Detector', sub:'Flag duplicates, missing POs, and over-billing before they get paid.' },
       { page:'classifier', icon:'blocks', title:'Spend Classifier', sub:'Sort messy purchase lines into clean categories and surface off-contract spend.' },
       { page:'diagnostic', icon:'gauge', title:'Spend Diagnostic', sub:'Put a rough, clearly-labelled number on where AI could save you time and money.' },
-      { page:'approval', icon:'route', title:'Approval Path Checker', sub:'Check who needs to approve a purchase and what paperwork it will need.' },
+      { page:'approval', icon:'route', title:'Approval Path Checker', sub:'Check who needs to approve a purchase and what paperwork it needs.' },
     ]},
-  { id:'start', name:'Getting started with AI', desc:'New to this? The basics, and an honest reality check.',
+  { id:'start', name:'Getting started with AI', desc:'The basics, plus an honest reality check.',
     tools:[
       { page:'prompt', icon:'blocks', title:'The Four-Part Prompt', sub:'Learn the simple prompt structure that makes every other tool on this page work.' },
-      { page:'readiness', icon:'compass', title:'Where to Start', sub:'A two-minute read on where AI would help your team first, and what to leave for later.' },
-      { page:'myths', icon:'chat', title:'AI Reality Check', sub:'An honest look at what AI can and can\u2019t do for procurement — no hype either way.' },
+      { page:'readiness', icon:'compass', title:'Where to Start', sub:'A short read on where AI would help your team first, and what to leave for later.' },
+      { page:'myths', icon:'chat', title:'AI Reality Check', sub:'An honest look at what AI can and can\u2019t do for procurement, with no hype either way.' },
     ]},
 ];
 
 /* ===== PROMPT LIBRARY DIAL ===== */
 var LIB_GROUPS=[
-  {id:'sourcing', name:'Sourcing & buying', sub:'Run events, compare bids, justify awards', color:'#D22428',
+  {id:'sourcing', name:'Sourcing & buying', sub:'Run events, compare bids, award work', color:'#D22428',
    tools:[
      {page:'rfp', icon:'scale', title:'RFP Builder', does:'Turns a one-line need into a scope of work, weighted criteria, and the questions to ask suppliers.', prompt:'a sourcing lead, your category and constraints, "draft an RFP for this", a clear structured outline.'},
      {page:'shouldcost', icon:'coins', title:'Should-Cost Estimator', does:'Breaks a quoted price into its likely cost parts, so you can see where the negotiation room sits.', prompt:'a cost analyst, what you are buying and the quote, "estimate the should-cost", a labelled breakdown.'},
@@ -2333,8 +2545,11 @@ function renderLibLegend(){
 function renderLibPanel(){
   var panel=document.getElementById('lib-panel');if(!panel)return;
   var g=LIB_GROUPS[libActive];
+  var rec=(typeof WN_REC!=='undefined')?WN_REC:{};
   var cards=g.tools.map(function(t){
-    return '<div class="lib-card" style="--lc:'+g.color+'" onclick="go(\''+t.page+'\')">'+
+    var isRec=!!rec[t.page];
+    return '<div class="lib-card'+(isRec?' rec':'')+'" style="--lc:'+g.color+'" onclick="go(\''+t.page+'\')">'+
+      (isRec?'<div class="lib-card-rec">Start here</div>':'')+
       '<div class="lib-card-icon">'+ICONS[t.icon]+'</div>'+
       '<div class="lib-card-title">'+t.title+'</div>'+
       '<div class="lib-card-does">'+t.does+'</div>'+
@@ -2405,48 +2620,53 @@ var FS_STEPS=[
   {n:'03',page:'readiness',title:'Find your first win',
    icon:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>',
    body:'A two-minute read that points to the one place AI would save you the most time this month. Start there before you try to do everything at once.',
-   tag:'Where to start'}
+   tag:'Where to start'},
+  {n:'04',page:'whatnext',title:'See where you fit',
+   icon:'<svg viewBox="0 0 24 24"><path d="M4 6h11M4 12h16M4 18h9"/><circle cx="19" cy="6" r="1.4"/><circle cx="15" cy="18" r="1.4"/></svg>',
+   body:'A short, personalised read on where AI would help your team most, and how JAI does the same work on your live data. Built from your first three steps.',
+   tag:'Your AI fit, and a look at JAI'}
 ];
 var FS_STEP4_ICON='<svg viewBox="0 0 24 24"><path d="M4 6h11M4 12h16M4 18h9"/><circle cx="19" cy="6" r="1.4"/><circle cx="15" cy="18" r="1.4"/></svg>';
 var fsPillar='sourcing';
 function fsPillarData(id){return LIB_GROUPS.filter(function(g){return g.id===id;})[0];}
 function renderFourSteps(){
-  var pillars=document.getElementById('fs-pillars'),steps=document.getElementById('fs-steps');
-  if(!pillars||!steps)return;
-  pillars.innerHTML=LIB_GROUPS.map(function(g){
+  var steps=document.getElementById('fs-steps');
+  if(!steps)return;
+  // Step 4 work-area selector (controls the embedded tool grid below)
+  var pillars=LIB_GROUPS.map(function(g){
     return '<button class="fs-pillar'+(g.id===fsPillar?' on':'')+'" onclick="selectFsPillar(\''+g.id+'\')">'+
       '<span class="fs-pillar-name"><span class="fs-pillar-dot"></span>'+g.name+'</span>'+
       '<span class="fs-pillar-sub">'+g.sub+'</span></button>';
   }).join('');
-  var rows=FS_STEPS.map(function(x){
+  // Steps 01-03: entry points into the guided flow
+  var stepCards=FS_STEPS.slice(0,3).map(function(x){
     return '<div class="fs-step is-open" onclick="go(\''+x.page+'\')">'+
       '<div class="fs-badge">'+x.n+'</div>'+
       '<div class="fs-step-main">'+
         '<div class="fs-step-title">'+x.icon+x.title+'</div>'+
         '<div class="fs-step-body">'+x.body+'</div>'+
-        '<div class="fs-step-tag">→ '+x.tag+'</div>'+
+        '<div class="fs-step-tag">\u2192 '+x.tag+'</div>'+
       '</div>'+
-      '<div class="fs-open">Open <span class="arr">→</span></div></div>';
+      '<div class="fs-open">Open <span class="arr">\u2192</span></div></div>';
   }).join('');
-  var g=fsPillarData(fsPillar);
-  var cards=g.tools.map(function(t){
+  // Step 04: run it on your own work, tools for the selected work area
+  var g=fsPillarData(fsPillar)||LIB_GROUPS[0];
+  var tools=g.tools.map(function(t){
     return '<div class="fs-tool" onclick="go(\''+t.page+'\')">'+
       '<div class="fs-tool-icon">'+(ICONS[t.icon]||'')+'</div>'+
       '<div class="fs-tool-title">'+t.title+'</div>'+
       '<div class="fs-tool-does">'+t.does+'</div>'+
       '<div class="fs-tool-prompt"><b>How to prompt:</b> '+t.prompt+'</div>'+
-      '<div class="fs-tool-cta">Open tool <span class="arr">→</span></div></div>';
+      '<div class="fs-tool-cta">Open tool <span class="arr">\u2192</span></div></div>';
   }).join('');
   var step4='<div class="fs-step fs-step-4">'+
     '<div class="fs-step4-head">'+
       '<div class="fs-badge">04</div>'+
-      '<div class="fs-step-main">'+
-        '<div class="fs-step4-title">'+FS_STEP4_ICON+'Run it on your own work<span class="fs-step4-pill">'+g.name+'</span></div>'+
-        '<div class="fs-step4-body">'+g.tools.length+' ready-made prompts for '+g.name.toLowerCase()+'. '+g.sub+'. Open any tool to run it on an example or on text you paste.</div>'+
-      '</div>'+
+      '<div><div class="fs-step4-title">'+FS_STEP4_ICON+'Run it on your own work <span class="fs-step4-pill">'+g.name+'</span></div>'+
+      '<div class="fs-step4-body">Four ready-made prompts for '+g.name.toLowerCase()+'. Open any one to run it on a built-in example or on text you paste. You can jump straight in, no need to finish the first three steps first.</div></div>'+
     '</div>'+
-    '<div class="fs-tools">'+cards+'</div></div>';
-  steps.innerHTML=rows+step4;
+    '<div class="fs-tools">'+tools+'</div></div>';
+  steps.innerHTML='<div class="fs-pillars-label">Step 4: pick your work</div><div class="fs-pillars">'+pillars+'</div>'+stepCards+step4;
 }
 function selectFsPillar(id){fsPillar=id;renderFourSteps();}
 
@@ -2498,7 +2718,7 @@ function runClassifier(){
     });
     var cats={};rows.forEach(function(r){cats[r.cat]=(cats[r.cat]||0)+1;});
     var catCount=Object.keys(cats).length;
-    var o='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:1rem"><div class="output-label" style="margin-bottom:0">Classified spend</div>'+vbadge('cls')+'</div>';
+    var o='<div class="out-head"><div class="output-label">Classified spend</div>'+vbadge('cls')+'</div>';
     o+='<div class="output-summary"><strong>'+lines.length+' lines \u2192 '+catCount+' categories'+(offCount?', '+offCount+' flagged off-contract or unclear':'')+'.</strong> Clean categorisation is what turns a pile of transactions into a spend cube you can actually analyse.</div>';
     o+=rows.map(function(r){return '<div class="exc-card" style="border-left-color:'+r.color+'"><div class="exc-top"><span class="exc-vendor" style="font-weight:500">'+escapeHtml(r.line)+'</span><span class="exc-type" style="color:'+r.color+';background:'+r.color+'18;margin-left:auto">'+r.cat+'</span>'+(r.off?'<span class="exc-type" style="color:#b05e00;background:#fef3c7">off-contract?</span>':'')+'</div></div>';}).join('');
     o+='<button class="reset-link" onclick="resetOut(\'cls-output\')">\u2190 Classify another batch</button>';
@@ -2532,7 +2752,7 @@ function runTender(){
     if(/data residency|eu data/i.test(lc)&&/only|enterprise tier|additional/i.test(lc))gaps.push('Data residency may be gated to a higher tier, check if it meets your compliance need at the quoted price.');
     if(/reference.{0,20}(on request|available)/i.test(lc))gaps.push('References offered \u201Con request\u201D rather than provided, ask for them before shortlisting.');
     if(!pricing.length)pricing.push('No explicit price found, request a clear, all-in figure.');
-    var o='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:1rem"><div class="output-label" style="margin-bottom:0">Proposal summary</div>'+vbadge('tnd')+'</div>';
+    var o='<div class="out-head"><div class="output-label">Proposal summary</div>'+vbadge('tnd')+'</div>';
     o+='<div class="output-summary"><strong>Extracted the signal from the proposal.</strong> Start your evaluation here, then read the full document only where it matters.</div>';
     o+='<div class="output-section-label">Pricing</div><div class="output-items">'+pricing.map(function(x){return '<div class="output-item">'+escapeHtml(x)+'</div>';}).join('')+'</div>';
     if(commitments.length)o+='<div class="output-section-label">Commitments</div><div class="output-items">'+commitments.map(function(x){return '<div class="output-item">'+escapeHtml(x)+'</div>';}).join('')+'</div>';
@@ -2562,7 +2782,7 @@ function runSoleSource(){
       {h:'Why alternatives were not pursued',b:/re-validat|retrain|parallel|duplicate|switching/.test(lc)?'Alternatives were considered but rejected: switching would require re-validation, retraining, or duplicate integration cost that outweighs any competitive benefit.':'No alternative supplier can meet the stated requirement without significant added cost, delay, or operational risk.'},
       {h:'Price reasonableness',b:'Pricing will be verified against the vendor\u2019s published rates, prior purchase history, and any available benchmark to confirm it is fair and reasonable.'},
     ];
-    var o='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:1rem"><div class="output-label" style="margin-bottom:0">Sole-source justification, draft</div>'+vbadge('ss')+'</div>';
+    var o='<div class="out-head"><div class="output-label">Sole-source justification, draft</div>'+vbadge('ss')+'</div>';
     o+='<div class="output-summary"><strong>Basis identified: '+basis+'.</strong> Structured to the points an auditor checks. Review, add your specifics, and route for approval.</div>';
     o+=sections.map(function(s){return '<div class="output-section-label">'+s.h+'</div><div class="output-summary" style="background:var(--cream);border-left-color:var(--ink-3);border-color:var(--light-grey)">'+escapeHtml(s.b)+'</div>';}).join('');
     var ssv=toolPersona['ss'];
@@ -2604,7 +2824,7 @@ function runShouldCost(){
     var qty=qtyM?parseFloat(qtyM[1].replace(/,/g,'')):0;
     var basis=per?'per unit':'total';
     var price=unit;
-    var o='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:1rem"><div class="output-label" style="margin-bottom:0">Should-cost breakdown</div>'+vbadge('sc')+'</div>';
+    var o='<div class="out-head"><div class="output-label">Should-cost breakdown</div>'+vbadge('sc')+'</div>';
     o+='<div class="output-summary"><strong>'+model.name+'.</strong> Here is how a defensible cost typically stacks up for this category. The terracotta band is the supplier\u2019s margin, which is where your negotiation lives.</div>';
     // stacked bar
     var order=['Materials','Labour','Overhead','Logistics','Margin'];
@@ -2668,7 +2888,7 @@ function runBidCompare(){
     bids.forEach(function(b,i){b.np=pN[i];b.nl=lN[i];b.nq=qN[i];b.total=Math.round(b.np*BC_W.price+b.nl*BC_W.lead+b.nq*BC_W.quality);});
     var ranked=bids.slice().sort(function(a,b){return b.total-a.total;});
     var win=ranked[0];
-    var o='<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:1rem"><div class="output-label" style="margin-bottom:0">Weighted scorecard</div>'+vbadge('bc')+'</div>';
+    var o='<div class="out-head"><div class="output-label">Weighted scorecard</div>'+vbadge('bc')+'</div>';
     var why=[];
     if(win.np>=Math.max(win.nl,win.nq))why.push('the strongest price position');
     if(win.nq>=70)why.push('a credible quality and compliance profile');
@@ -2679,7 +2899,7 @@ function runBidCompare(){
       function bar(k,v){return '<div class="bc-bar-row"><span class="bc-bar-k">'+k+'</span><span class="bc-bar-track"><span class="bc-bar-fill" data-w="'+v+'"></span></span><span class="bc-bar-v">'+v+'</span></div>';}
       return '<div class="bc-card'+(w?' win':'')+'"><div class="bc-top"><span class="bc-rank">'+(i+1)+'</span><span class="bc-name">'+escapeHtml(b.name)+'</span>'+(w?'<span class="bc-win-badge">Recommended</span>':'')+'<span class="bc-score">'+b.total+'</span></div><div class="bc-bars">'+bar('Price',b.np)+bar('Lead time',b.nl)+bar('Quality',b.nq)+'</div></div>';
     }).join('');
-    o+='<div class="risk-flag" style="background:#f7f2ff;border-color:#e0d4f7;border-left-color:var(--red);color:var(--ink-2);margin-top:1rem">Scores are normalised across the bids you pasted. Adjust the weights to your category and the ranking can shift — which is exactly the judgement call you would make yourself.</div>';
+    o+='<div class="risk-flag" style="background:#f7f2ff;border-color:#e0d4f7;border-left-color:var(--red);color:var(--ink-2);margin-top:1rem">Scores are normalised across the bids you pasted. Adjust the weights to your category and the ranking can shift, which is exactly the judgement call you would make yourself.</div>';
     o+='<button class="reset-link" onclick="resetOut(\'bc-output\')">\u2190 Compare another set</button>';
     out.innerHTML=o;out.classList.add('visible');
     requestAnimationFrame(function(){setTimeout(function(){out.querySelectorAll('.bc-bar-fill').forEach(function(f){f.style.width=f.getAttribute('data-w')+'%';});},30);});
@@ -2689,11 +2909,11 @@ function runBidCompare(){
 /* ===== AI READINESS SCORECARD ===== */
 var rdState={visibility:1,automation:0,supplier:0,compliance:1,adoption:0};
 var RD_META={
-  visibility:{label:'Spend visibility',tool:'classifier',toolLabel:'Spend Classifier',jai:'Try the Spend Classifier above to see messy lines turned into clean categories.'},
-  automation:{label:'Process automation',tool:'approval',toolLabel:'Approval Path Checker',jai:'Try the Approval Path Checker above to see a purchase walked through the policy.'},
-  supplier:{label:'Supplier intelligence',tool:'supplier',toolLabel:'Supplier Risk Scanner',jai:'Try the Supplier Risk Scanner above to spot concentration risk in a list.'},
-  compliance:{label:'Compliance and audit',tool:'contract',toolLabel:'Contract Clause Analyser',jai:'Try the Contract Clause Analyser above to catch risky terms before you sign.'},
-  adoption:{label:'AI adoption',tool:'prompt',toolLabel:'Prompt Builder',jai:'Try the Prompt Builder above to learn the four-part prompt behind all of this.'}
+  visibility:{label:'Spend visibility',inline:'spend visibility',tool:'classifier',toolLabel:'Spend Classifier',jai:'Try the Spend Classifier above to see messy lines turned into clean categories.'},
+  automation:{label:'Process automation',inline:'process automation',tool:'approval',toolLabel:'Approval Path Checker',jai:'Try the Approval Path Checker above to see a purchase walked through the policy.'},
+  supplier:{label:'Supplier intelligence',inline:'supplier intelligence',tool:'supplier',toolLabel:'Supplier Risk Scanner',jai:'Try the Supplier Risk Scanner above to spot concentration risk in a list.'},
+  compliance:{label:'Compliance and audit',inline:'compliance and audit',tool:'contract',toolLabel:'Contract Clause Analyser',jai:'Try the Contract Clause Analyser above to catch risky terms before you sign.'},
+  adoption:{label:'AI adoption',inline:'AI adoption',tool:'prompt',toolLabel:'Prompt Builder',jai:'Try the Prompt Builder above to learn the four-part prompt behind all of this.'}
 };
 function setRd(dim,val,btn){
   rdState[dim]=val;
@@ -2701,6 +2921,13 @@ function setRd(dim,val,btn){
   for(var i=0;i<btns.length;i++)btns[i].classList.toggle('on',btns[i]===btn);
   calcReadiness();
 }
+var JAI_FIT={
+  visibility:'reads your live spend and shows where it concentrates, in plain English, with no report request',
+  automation:'walks a purchase through your own approval policy inside the platform, so the right path happens the first time',
+  supplier:'surfaces supplier risk and over-reliance across your base from live data, not a static list',
+  compliance:'cites the exact policy behind every answer and logs each step, which is what an audit needs',
+  adoption:'lives inside the platform your team already uses, so there is nothing new for anyone to learn'
+};
 function calcReadiness(){
   if(!document.getElementById('rd-score'))return;
   var keys=Object.keys(rdState);
@@ -2708,14 +2935,15 @@ function calcReadiness(){
   var score=Math.round(sum/(keys.length*2)*100);
   document.getElementById('rd-score').innerHTML=score+'<span>/100</span>';
   document.getElementById('rd-meter').style.width=score+'%';
-  var band=score>=70?'Strong footing. You are well placed to push AI further across the team.':score>=40?'Getting there. The foundations exist; a few targeted tries will close the gaps.':'Early days — which is good news, because the biggest wins are also the easiest to start.';
+  var band=score>=70?'Strong footing. You are well placed to put AI to work across the team.':score>=40?'Getting there. The foundations exist, and a few targeted tries will close the gaps.':'Early days, which is good news: the biggest wins are also the easiest ones to start.';
   document.getElementById('rd-band').textContent=band;
+  var rn=document.getElementById('rd-next');
+  if(rn)rn.innerHTML='<a onclick="go(\'whatnext\')">See how your answers map to JAI <span class="arr">\u2192</span></a>';
   // gaps: dimensions scored below 2, lowest first
   var gaps=keys.filter(function(k){return rdState[k]<2;}).sort(function(a,b){return rdState[a]-rdState[b];});
   var gapsEl=document.getElementById('rd-gaps');
   if(!gaps.length){
-    gapsEl.innerHTML='<div class="rd-gap"><div class="rd-gap-top"><span>No major gaps</span></div><div class="rd-gap-jai">You are in good shape across the board. From here it is about scale and consistency — try the tools above on harder, real-world cases.</div></div>';
-    document.getElementById('rd-start').innerHTML='<b>Where to start:</b> you have room to go broad. <span class="sb-link" onclick="go(\'diagnostic\')">Run the Spend Diagnostic</span> to put a rough number on the upside.';
+    gapsEl.innerHTML='<div class="rd-gap"><div class="rd-gap-top"><span>No major gaps</span></div><div class="rd-gap-jai">You are in good shape across the board. From here it is about scale and consistency, try the tools above on harder, real-world cases.</div></div>';
     return;
   }
   gapsEl.innerHTML=gaps.slice(0,3).map(function(k){
@@ -2723,8 +2951,6 @@ function calcReadiness(){
     var tag=sev?'<span class="rd-gap-tag" style="background:#3a1418;color:#ff8a8a">Biggest gap</span>':'<span class="rd-gap-tag" style="background:#3a2c10;color:#e8b766">Room to grow</span>';
     return '<div class="rd-gap"><div class="rd-gap-top"><span>'+m.label+'</span>'+tag+'</div><div class="rd-gap-jai">'+m.jai+'</div></div>';
   }).join('');
-  var top=gaps[0];var tm=RD_META[top];
-  document.getElementById('rd-start').innerHTML='<b>Start here:</b> your lowest area is <b>'+tm.label.toLowerCase()+'</b>. Try the <span class="sb-link" onclick="go(\''+tm.tool+'\')">'+tm.toolLabel+'</span> above to see how AI could help with it.';
 }
 
 /* ===== SANDBOX ROUTER (entry experience) ===== */
@@ -2787,7 +3013,7 @@ var STEP_FLOW=[
   {page:'prompt',kicker:'Step 1',name:'Learn to ask'},
   {page:'myths',kicker:'Step 2',name:'What to trust'},
   {page:'readiness',kicker:'Step 3',name:'Your first win'},
-  {page:'home',kicker:'Step 4',name:'Run it',jump:true}
+  {page:'whatnext',kicker:'Step 4',name:'See your fit'}
 ];
 function goJourney(){go('home');setTimeout(function(){var r=document.getElementById('start-here');if(r)r.scrollIntoView({behavior:'smooth'});},80);}
 function renderStepBars(){
@@ -2816,7 +3042,7 @@ function renderStepBars(){
   });
 }
 
-/* ===== STEP 4 — WHAT NEXT: recommend tools from the first three steps ===== */
+/* ===== STEP 4, WHAT NEXT: recommend tools from the first three steps ===== */
 // Map prompt-builder task choices to the tool that does that job.
 var PB_TASK_TOOL={
   'identify all auto-renewal and exit terms':'contract',
@@ -2835,8 +3061,7 @@ function toolMetaLookup(){
   var m={};CAP_PILLARS.forEach(function(p){p.tools.forEach(function(t){m[t.page]={title:t.title,sub:t.sub,icon:t.icon,cap:p.id};});});return m;
 }
 function buildWhatNext(){
-  var grid=document.getElementById('wn-grid');if(!grid)return;
-  var summary=document.getElementById('wn-summary');
+  if(!document.getElementById('lib-dial'))return;
   var meta=toolMetaLookup();
   var score={};Object.keys(meta).forEach(function(k){score[k]=0;});
   var reasons={};Object.keys(meta).forEach(function(k){reasons[k]=[];});
@@ -2898,34 +3123,36 @@ function buildWhatNext(){
     top=['classifier','contract','supplier','rfp'];
   }
 
-  // --- Summary line ---
-  var parts=[];
-  if(did.prompt)parts.push('the prompt you built');
-  if(did.myths)parts.push('the myths that sounded like you');
-  if(did.readiness)parts.push('your readiness gaps');
-  if(parts.length){
-    var joined=parts.length===1?parts[0]:parts.slice(0,-1).join(', ')+' and '+parts[parts.length-1];
-    summary.innerHTML='<strong>Picked for you.</strong> These suggestions come from '+joined+'. Open any one to run it now. The more of the first three steps you complete, the sharper these get.';
-  }else{
-    summary.innerHTML='<strong>A good place to start.</strong> You skipped ahead, so here is a solid starter set across sourcing, suppliers, and spend. Go back through steps 1\u20133 and these will retune to what you actually need.';
+  // --- Custom JAI-fit report (from Step 3 readiness) ---
+  var rep=document.getElementById('wn-report');
+  if(rep){
+    var rkeys=Object.keys(rdState);
+    var rgaps=rkeys.filter(function(k){return rdState[k]<2;}).sort(function(a,b){return rdState[a]-rdState[b];});
+    var rdTouched2=!(rdState.visibility===1&&rdState.automation===0&&rdState.supplier===0&&rdState.compliance===1&&rdState.adoption===0);
+    if(rdTouched2 && rgaps.length){
+      var picks=rgaps.slice(0,3);
+      var items=picks.map(function(k){
+        return '<li><span class="wr-dot"></span><span><b>'+RD_META[k].label+'.</b> JAI '+JAI_FIT[k]+'.</span></li>';
+      }).join('');
+      var lead=picks.length>1?(RD_META[picks[0]].inline+' and '+RD_META[picks[1]].inline):RD_META[picks[0]].inline;
+      rep.style.display='block';
+      rep.className='wn-report lead';
+      rep.innerHTML='<div class="wn-report-eyebrow">Your fit, from Step 3</div>'+
+        '<div class="wn-report-title">You flagged '+lead+' as your weak spots. That is exactly where JAI earns its keep.</div>'+
+        '<div class="wn-report-body">The prompt library below lets you try this kind of work by hand. Here is what changes when the same intelligence runs on your real data and policies:</div>'+
+        '<ul class="wn-report-list">'+items+'</ul>';
+    } else {
+      rep.style.display='none';
+    }
   }
 
-  // --- Cards ---
-  grid.innerHTML=top.map(function(pg,i){
-    var m=meta[pg];if(!m)return '';
-    var icon=ICONS[m.icon]||'';
-    var why;
-    if(reasons[pg] && reasons[pg].length && score[pg]>0){
-      why='Suggested because of '+reasons[pg][0]+'.';
-    }else{
-      why=m.sub;
-    }
-    return '<div class="wn-card" onclick="go(\''+pg+'\')">'+
-      '<div class="wn-card-top"><div class="wn-card-icon">'+icon+'</div></div>'+
-      '<div class="wn-card-title">'+m.title+'</div>'+
-      '<div class="wn-card-why">'+why+'</div>'+
-      '<div class="wn-card-cta">Open tool <span class="arr">\u2192</span></div></div>';
-  }).join('');
+  // --- Prompt library dial: highlight recommended, open the most relevant group ---
+  window.WN_REC={};top.forEach(function(p){WN_REC[p]=true;});
+  for(var gi=0;gi<LIB_GROUPS.length;gi++){
+    var hit=LIB_GROUPS[gi].tools.some(function(t){return t.page===top[0];});
+    if(hit){libActive=gi;break;}
+  }
+  if(typeof renderLibrary==='function')renderLibrary();
 }
 
 /* ===== THE GAP: one nested grid. 36 doing (dark) sit inside 80 who want it (light); rest grey. ===== */
@@ -2948,7 +3175,7 @@ function animateGapDots(el){
 buildGapDots();renderStepBars();
 
 
-buildPB();renderPB();buildMyths();calcDiag();calcReadiness();initObservers();renderFourSteps();renderLibrary();renderReading();
+buildPB();renderPB();buildMyths();calcDiag();calcReadiness();initObservers();renderFourSteps();renderReading();
 </script>
 </body>
 </html>
