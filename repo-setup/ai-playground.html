@@ -591,7 +591,7 @@ details.faq-item{overflow:hidden}
 .jai-cta-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center}
 .jai-cta-copy .eyebrow-jai{color:rgba(255,255,255,.6);margin-bottom:.5rem;background:none;-webkit-text-fill-color:rgba(255,255,255,.6)}
 .jai-cta-copy h2{font-size:var(--fs-h3);font-weight:700;color:#fff;line-height:1.2;margin-bottom:.5rem;letter-spacing:-.01em}
-.jai-cta-copy p{font-size:.95rem;color:rgba(255,255,255,.78);line-height:1.6;max-width:560px}
+.jai-cta-copy p{font-size:.95rem;color:rgba(255,255,255,.92);line-height:1.6;max-width:560px}
 .btn-jai-grad{background:var(--jai-grad);color:#fff;border:none;font-family:Inter,sans-serif;font-size:.9rem;font-weight:700;padding:.85rem 1.6rem;border-radius:.65rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;transition:transform .15s,box-shadow .2s;box-shadow:0 8px 24px rgba(122,31,176,.35)}
 .btn-jai-grad:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(122,31,176,.5)}
 .btn-jai-grad .arr{transition:transform .2s}
@@ -624,22 +624,22 @@ details.faq-item{overflow:hidden}
 .vs-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;width:fit-content}
 .vs-title{font-size:1.25rem;font-weight:700;color:#fff;line-height:1.25;margin:.4rem 0 .4rem;letter-spacing:-.01em}
 .vs-title em{font-style:normal;background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.vs-sub{font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.6;max-width:640px}
+.vs-sub{font-size:.88rem;color:rgba(255,255,255,.9);line-height:1.6;max-width:640px}
 .vs-table{padding:.5rem 1.6rem 0}
 .vs-colhead{display:grid;grid-template-columns:128px 1fr 1fr;gap:1.1rem;padding:.5rem 0 .7rem}
 .vs-colhead>div{font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .vs-ch-dim{}
-.vs-ch.claude{color:rgba(255,255,255,.5);padding-left:14px}
+.vs-ch.claude{color:rgba(255,255,255,.72);padding-left:14px}
 .vs-ch.jai{padding-left:16px}
 .vs-ch.jai span{background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.vs-ch small{display:block;font-size:.58rem;font-weight:600;letter-spacing:.04em;text-transform:none;color:rgba(255,255,255,.4);margin-top:2px}
+.vs-ch small{display:block;font-size:.58rem;font-weight:600;letter-spacing:.04em;text-transform:none;color:rgba(255,255,255,.62);margin-top:2px}
 .vs-row{display:grid;grid-template-columns:128px 1fr 1fr;gap:1.1rem;padding:.85rem 0;border-top:1px solid rgba(255,255,255,.08);align-items:stretch}
-.vs-dim{font-size:.7rem;font-weight:700;color:rgba(255,255,255,.62);align-self:center;line-height:1.35}
+.vs-dim{font-size:.7rem;font-weight:700;color:rgba(255,255,255,.85);align-self:center;line-height:1.35}
 .vs-cell{font-size:.8rem;line-height:1.45;padding-left:14px;position:relative;display:flex;align-items:center}
-.vs-cell.claude{color:rgba(255,255,255,.66);border-left:1px solid rgba(255,255,255,.14)}
+.vs-cell.claude{color:rgba(255,255,255,.88);border-left:1px solid rgba(255,255,255,.14)}
 .vs-cell.jai{color:#fff;border-left:2px solid transparent;border-image:var(--jai-grad) 1}
 .vs-foot{padding:1.1rem 1.6rem;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between;gap:1.2rem;flex-wrap:wrap}
-.vs-foot span{font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.55;max-width:560px}
+.vs-foot span{font-size:.8rem;color:rgba(255,255,255,.9);line-height:1.55;max-width:560px}
 @media (max-width:760px){.vs-colhead,.vs-row{grid-template-columns:1fr}.vs-cell{border-left:none;padding-left:0}.vs-cell.jai{border-image:none;border-left:2px solid var(--jai-a);padding-left:10px}.vs-dim{color:#fff}}
 
 /* JAI comparison strip (per-tool, dark + purple), spacing tightened */
@@ -662,6 +662,7 @@ details.faq-item{overflow:hidden}
 .jai-strip-foot span{font-size:.8rem;color:rgba(255,255,255,.82)}
 .btn-jai-mini{background:var(--jai-grad);color:#fff;border:none;font-family:Inter,sans-serif;font-size:.78rem;font-weight:700;padding:.55rem 1.1rem;border-radius:.5rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:opacity .2s}
 .btn-jai-mini:hover{opacity:.9}
+.jai-foot-wrap{padding:0 2rem clamp(2rem,4vw,3rem)}.jai-foot{max-width:1180px;margin:0 auto;background:var(--ink);background:radial-gradient(ellipse 70% 130% at 82% 0%,rgba(122,31,176,.22) 0%,transparent 60%),var(--ink);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:1.15rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.4rem;flex-wrap:wrap}.jai-foot-main{display:flex;flex-direction:column;gap:5px;flex:1;min-width:260px}.jai-foot-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;width:fit-content}.jai-foot-text{font-size:.86rem;color:#fff;line-height:1.55}.jai-foot-text em{font-style:normal;background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.jai-foot-link{flex-shrink:0;font-size:.8rem;font-weight:700;color:#fff;background:var(--jai-grad);padding:.6rem 1.15rem;border-radius:.5rem;text-decoration:none;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:transform .15s,box-shadow .2s;box-shadow:0 6px 18px rgba(122,31,176,.32)}.jai-foot-link:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(122,31,176,.45)}.jai-foot-link .arr{transition:transform .2s}.jai-foot-link:hover .arr{transform:translateX(3px)}@media(max-width:600px){.jai-foot{flex-direction:column;align-items:flex-start}.jai-foot-link{width:100%;justify-content:center}}
 @media (max-width:680px){.contrast-row{grid-template-columns:1fr;gap:.5rem}}
 
 /* ===== PROMPT LIBRARY: dial / wheel selector ===== */
@@ -773,13 +774,13 @@ details.faq-item{overflow:hidden}
 .jai-section .jai-lede h2 strong{color:#fff}
 .jai-lede{margin-bottom:1.75rem}
 .jai-copy h3{color:#fff}
-.jai-copy p{color:rgba(255,255,255,.72)}
+.jai-copy p{color:rgba(255,255,255,.9)}
 .jai-copy p strong{color:#fff}
 .jai-copy .eyebrow-jai{background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .jai-impact{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
-.jai-impact-head{color:rgba(255,255,255,.65)}
+.jai-impact-head{color:rgba(255,255,255,.82)}
 .jai-impact-num{color:#fff}
-.jai-impact-label{color:rgba(255,255,255,.82)}
+.jai-impact-label{color:rgba(255,255,255,.92)}
 .jai-section{padding-top:clamp(2.5rem,5vw,3.5rem);padding-bottom:clamp(2.5rem,5vw,3.5rem)}
 .jai-split{align-items:center}
 
@@ -1063,6 +1064,7 @@ details.faq-item{overflow:hidden}
       <p class="reading-note" id="reading-note"></p>
     </div>
   </section>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI is built into JAGGAER’s source-to-pay platform. It reads your live contracts, suppliers, and spend, and answers from your actual data.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
 </div>
 
 <div id="page-supplier" class="subpage">
@@ -1097,6 +1099,7 @@ Do this:
 
 Format: a one-line priority first, then "Risks" as a short list, then "Alternatives" as a short list.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Country and category are the two fields that matter, include both, even roughly.</li><li>Add your own definition of a critical category (“can't run the line without it”) so it weighs the right things.</li><li>Follow up with “which of these would take longest to qualify a backup for?” to get a sequencing plan.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">Supplier concentration risk is one of the first things teams put in front of JAI, because it watches your live base continuously, not just when you think to check.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
       </div></section>
 </div>
 
@@ -1132,6 +1135,7 @@ For each issue you find:
 
 Then give me: the single change you'd negotiate first, and one question to ask the supplier. List the issues highest-risk first.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Paste real clause text (strip anything you can't share).</li><li>Tell it your risk appetite, a startup and a regulated buyer should flag different things.</li><li>Ask it to redline the riskiest clause in your favour so you have a starting position.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI reads your real contracts inside JAGGAER, flagging the same kind of terms, cited back to the exact clause. Every flag comes with an audit trail.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
       </div></section>
 </div>
 
@@ -1165,6 +1169,7 @@ Produce:
 
 Keep it practical and ready to drop into a document.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>One or two honest sentences is enough, you don't need a formal brief.</li><li>State your top priority (cost, speed, or compliance) so the weights reflect reality.</li><li>Once it's close, ask it to expand the outline into a full RFP document.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI can shape sourcing events inside JAGGAER using your own category history, your past RFPs, and your supplier base.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
       </div></section>
 </div>
 
@@ -1199,6 +1204,7 @@ Return:
 - For each exception: the line, the issue type, why it's flagged, and the action to take (hold, escalate, query the vendor).
 - The count of clean lines at the end.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Keep the pipe format (vendor and amount are what duplicate-detection needs).</li><li>Set your own tolerance, “flag anything over 5% above the PO”.</li><li>Ask it to sort exceptions by dollars at risk so you work the biggest first.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI checks your live invoice feed inside JAGGAER for the same exceptions, before payment runs. It keeps watching each cycle, not just when asked.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
       </div></section>
 </div>
 
@@ -1235,6 +1241,7 @@ Return:
       </div>
     </div>
     <div class="step-next"><span class="step-next-label">Step 1 of 4</span><a onclick="go('myths')">Next: Step 2 · Know what to trust <span class="arr">&#8594;</span></a></div>
+<section class="jai-foot-wrap"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">The same prompting logic works inside JAI, except it already has your data in front of it. You ask the question; it reads your contracts, suppliers, and spend to answer.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
   </div></section>
 </div>
 
@@ -1254,6 +1261,7 @@ Return:
       </div>
     </div>
     <div class="step-next"><span class="step-next-label">Step 2 of 4</span><a onclick="go('readiness')">Next: Step 3 · Find your first win <span class="arr">&#8594;</span></a></div>
+<section class="jai-foot-wrap"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI handles the tasks that are genuinely a good fit for AI, inside JAGGAER, on your real procurement data. The less promising tasks stay with your team.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
   </div></section>
 </div>
 
@@ -1312,6 +1320,7 @@ Return:
 
 Give me a rough, clearly-labelled estimate of where AI or automation could save money or time, broken into: sourcing savings, off-contract (maverick) spend recovery, and invoice leakage. Show the assumption (as a %) behind each number, total it, and say plainly that it's directional, not a business case. Be conservative.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Use real numbers, even rough ones, the estimate is only as good as the inputs.</li><li>Ask it to show every assumption so you can challenge the ones that look generous.</li><li>Treat the total as a hypothesis to test, not a promise to bank.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI works from your real spend and process data inside JAGGAER. The gaps it surfaces are based on what your team actually does, not a set of assumptions.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
       </div></section>
 </div>
 
@@ -1343,6 +1352,7 @@ Based on typical procurement policy, tell me:
 
 If anything depends on our own internal thresholds, say so and tell me exactly what to check. Keep it to a short, ordered answer.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Always include the amount, it drives the whole approval path.</li><li>Paste your real thresholds and it stops guessing and gets specific.</li><li>Add “we're public sector” or “this is grant-funded” and watch the rules change.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI answers routine approval questions inside JAGGAER from your actual policy. The answer changes when your policy does.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
       </div></section>
 </div>
 
@@ -1381,6 +1391,7 @@ Outcome I need: [the specific thing you want them to do, by when].
 
 Write a short, clear message: a subject line, a tight body that states the issue and the ask, and a professional close. Don't over-apologise or pad it. Then give me one alternative opening line.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>The awkward details are what make it land, put them in.</li><li>Switch the tone word and the whole message re-shapes around it.</li><li>Ask for a firmer and a softer version, then pick the opening you'd actually send.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI drafts supplier communications inside JAGGAER with your contract terms and correspondence history already in view.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
       </div></section>
 </div>
 
@@ -1412,6 +1423,7 @@ Use these categories: [your category list, or ask it to propose a sensible set].
 
 Return a simple table (line, category, flag), then one line on which categories hold the most flagged spend.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Paste a messy export, the rougher it is, the better the test.</li><li>Give it your own category list so the output matches how you already report.</li><li>Ask which category to clean up first to recover the most off-contract spend.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI classifies your live spend inside JAGGAER continuously, keeping off-contract spend visible rather than catching it in a periodic review.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
       </div></section>
 </div>
 
@@ -1443,6 +1455,7 @@ Extract: headline price (and what's included versus extra), key commitments (SLA
 
 Format as short sections, Price, Commitments, Certifications, Watch-outs, then end with the three questions you'd ask this supplier.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Paste the proposal text, even if it's several pages.</li><li>Run two proposals together and ask for a side-by-side comparison table.</li><li>“What's the catch?” reliably surfaces conditions buried in the fine print.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI pulls the key terms from incoming proposals inside JAGGAER, ready to compare side by side, without reading through each one in full.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
       </div></section>
 </div>
 
@@ -1477,6 +1490,7 @@ Draft it with these sections:
 
 Write it in plain, defensible language an auditor would accept, and leave clear [brackets] wherever I need to add specifics.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Give the genuine reason in plain words first, the structure follows from it.</li><li>Fill the [brackets] with your specifics and numbers before it goes anywhere.</li><li>Read it back as if you were the auditor: does every claim actually hold up?</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI builds justifications inside JAGGAER against the compliance rules that apply to your organisation, not a generic audit template.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
       </div></section>
 </div>
 
@@ -1502,6 +1516,7 @@ What you know about it: [materials, volume, complexity]
 
 Estimate the cost split across materials, labour, overhead, logistics, and supplier margin (as % and value). State your assumptions clearly. Then tell me the implied negotiation headroom and the one question that would test whether it's real.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>Give the item and the quote, those two are enough to start.</li><li>Ask it to show its assumptions so you can push on the ones that look soft.</li><li>Open the negotiation with the margin question it hands you.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI builds should-cost estimates inside JAGGAER from your category history and past quotes, giving you a number grounded in your own spend.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
       </div></section>
 </div>
 
@@ -1526,6 +1541,7 @@ Bids (one per line, include price, lead time, and quality signals like certifica
 
 Score each on price, lead time, and quality. Use these weights: price 45%, lead time 25%, quality 30% (change them if I tell you to). Show each bid's score with a one-line reason, then recommend a winner in plain language and name the strongest runner-up.</pre><button class="recipe-copy" onclick="copyRecipe(this)">Copy prompt</button><div class="recipe-steps-label">Then make it yours</div><ol class="recipe-steps"><li>At least two bids, one per line, with price and a quality signal each.</li><li>Change the weights to match what you actually care about for this category.</li><li>Ask “what would have to change for the runner-up to win?” to pressure-test the call.</li></ol><p class="recipe-foot">The output depends on your inputs and which assistant you use. Treat the first answer as a draft to refine, not a finished deliverable.</p></div></div>
   </div>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI scores competing bids inside JAGGAER against the criteria your team has set, with a full audit trail of how it reached the recommendation.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
       </div></section>
 </div>
 
@@ -1560,6 +1576,7 @@ Score each on price, lead time, and quality. Use these weights: price 45%, lead 
         </div>
       </div>
     </div>
+<section class="jai-foot-wrap"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI works on your actual spend, supplier records, and policies inside JAGGAER. Where your team has gaps, it fills in with live data rather than estimates.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
   </div></section>
 </div>
 
@@ -1609,6 +1626,7 @@ Score each on price, lead time, and quality. Use these weights: price 45%, lead 
         <div class="lib-panel" id="lib-panel"></div>
       </div>
     </div>
+<section class="jai-foot-wrap"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI brings the same AI capability inside JAGGAER, grounded in your own data and policies. The work looks the same; the numbers are yours.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
   </div></section>
 </div>
 
@@ -3080,24 +3098,23 @@ function buildWhatNext(){
   }
 
   // --- Signal 2: readiness gaps (Step 3) ---
-  // rdState: lower = bigger gap. Map each dim to its tool.
-  var rdTouched=false;
-  Object.keys(rdState).forEach(function(dim){
-    if(rdState[dim]<2 && RD_META[dim]){
-      rdTouched=true;
-      var tool=RD_META[dim].tool;
-      var weight=rdState[dim]===0?4:2;
-      score[tool]+=weight;
-      reasons[tool].push((rdState[dim]===0?'your biggest readiness gap':'a readiness gap you flagged')+', '+RD_META[dim].label.toLowerCase());
-    }
-  });
-  // We can't know for sure they visited readiness vs defaults; treat as visited only if not all-default.
+  // Only fold readiness in if the person actually moved the dials.
   var rdDefault=(rdState.visibility===1&&rdState.automation===0&&rdState.supplier===0&&rdState.compliance===1&&rdState.adoption===0);
-  if(!rdDefault)did.readiness=true;
+  if(!rdDefault){
+    did.readiness=true;
+    Object.keys(rdState).forEach(function(dim){
+      if(rdState[dim]<2 && RD_META[dim]){
+        var tool=RD_META[dim].tool;
+        var weight=rdState[dim]===0?4:2;
+        score[tool]+=weight;
+        reasons[tool].push((rdState[dim]===0?'your biggest readiness gap':'a readiness gap you flagged')+', '+RD_META[dim].label.toLowerCase());
+      }
+    });
+  }
 
   // --- Signal 3: myths (Step 2) ---
   // Each rated myth maps to a tool via MYTH_TOOL; higher "sounds like me" = stronger nudge.
-  var MYTH_TOOL=['contract','email','classifier','supplier','tender','approval'];
+  var MYTH_TOOL=['contract','prompt','classifier','supplier','tender','approval'];
   var anyMyth=false;
   Object.keys(mythRatings).forEach(function(mi){
     var v=mythRatings[mi];
