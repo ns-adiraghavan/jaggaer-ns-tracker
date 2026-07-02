@@ -591,7 +591,18 @@
           "sequence": 9,
           "intent": "informational",
           "anchor_piece": "",
-          "pieces": []
+          "pieces": [
+            {
+              "id": "piece-nzs3ob",
+              "title": "New piece",
+              "format": "Article",
+              "assignee": "jason",
+              "status": "stage-nq11b",
+              "primary_keyword": "",
+              "geography": "all",
+              "revision_count": 0
+            }
+          ]
         }
       ]
     },
