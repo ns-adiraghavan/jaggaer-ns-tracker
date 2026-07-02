@@ -990,6 +990,26 @@
               ],
               "last_updated": "2026-07-02T07:15:52.096Z",
               "last_updated_by": "manager"
+            },
+            {
+              "id": "piece-jjmo5z",
+              "title": "Gartner_AI in procurement",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "writing",
+              "content_type": "ad-hoc",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-07-02T10:49:23.470Z",
+                  "by": "manager"
+                }
+              ],
+              "last_updated": "2026-07-02T10:49:23.477Z",
+              "last_updated_by": "manager"
             }
           ]
         }
