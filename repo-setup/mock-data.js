@@ -44,6 +44,13 @@ window.MOCK_PROJECT = {
       "description": "Vertical content written explicitly for one sector. Lower search volume but high sales enablement value. Used by SDR team in outreach.",
       "weight": 0.25,
       "pieces_est": 8
+    },
+    {
+      "id": "ad-hoc",
+      "label": "Ad-Hoc Articles",
+      "description": "Expedited articles outside the planned 30+ piece programme. Chahat or Jason logs a topic, NS uploads the finished HTML, any Jaggaer reviewer approves or sends it back. Skips Abhishek/Orlagh/Robert/CTA review.",
+      "weight": null,
+      "pieces_est": null
     }
   ],
   "pillars": [

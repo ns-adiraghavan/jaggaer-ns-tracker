@@ -17,6 +17,18 @@ const PILLAR_ACCENT = {
   "higher-education":        "#6C3483",
 };
 
+// ─── Content-type display lookup — single source of truth for label/colour ────
+// across TrackerHeader, ContentTypeNav (sidebar.jsx) and AdminOverview (admin.jsx).
+// "ad-hoc" pieces are expedited/as-needed, NOT part of the weighted 30+ piece
+// programme split, so their weight is intentionally null (no % shown).
+const CT_DISPLAY = {
+  "msv":                { label: "MSV-Driven",        color: "#1a6a3a", bg: "#eaf4ee", border: "#b8dfc8" },
+  "ai-in-s2p":          { label: "AI in S2P (Claude)", color: "#1e4fa8", bg: "#eaf0fb", border: "#bad0f0" },
+  "industry-specific":  { label: "Industry-Specific",  color: "#784212", bg: "#fef3e8", border: "#f0d4a8" },
+  "ad-hoc":             { label: "Ad-Hoc Articles",    color: "#c8401a", bg: "#fdeee8", border: "#f0bba8" },
+};
+window.CT_DISPLAY = CT_DISPLAY;
+
 // ─── Workflow stages — read from project.workflow_stages if present, else use defaults ──
 // Each stage: { id, label, color, bg, actor }
 // actor: "jaggaer" | "ns" | "person:<id>" — controls who sees the action button
@@ -33,6 +45,20 @@ const DEFAULT_WORKFLOW_STAGES = [
   { id: "editors",          label: "CTA Check",                     color: "#b05e00",             bg: "#fdf0e0",             actor: "jaggaer" },
   { id: "approved",         label: "Approved",                      color: "#1e7a45",             bg: "#e6f5ec",             actor: null },
 ];
+
+// Ad-Hoc Articles run a short two-stage chain instead of the full pipeline above:
+// writing (NS uploads) → ad-hoc-review (any Jaggaer user) → approved.
+// Kept OUT of the main DEFAULT_WORKFLOW_STAGES array so it never shifts indices
+// for the standard pieces — UploadPanel/ReviewPanel branch on content_type
+// === "ad-hoc" to route into this stage explicitly rather than walking stageOrder.
+const ADHOC_REVIEW_STAGE = {
+  id: "ad-hoc-review", label: "Ad-Hoc Review (Jaggaer)", color: "#c8401a", bg: "#fdeee8", actor: "jaggaer",
+};
+function getAdHocReviewStage(project) {
+  const stages = getWorkflowStages(project);
+  return stages.find(s => s.id === "ad-hoc-review") || ADHOC_REVIEW_STAGE;
+}
+function isAdHoc(piece) { return piece && piece.content_type === "ad-hoc"; }
 
 function getWorkflowStages(project) {
   return (project && project.workflow_stages && project.workflow_stages.length)
@@ -57,9 +83,11 @@ let IN_MOTION_STATUSES = DEFAULT_WORKFLOW_STAGES.filter(s => s.id !== "not-start
 
 function syncWorkflowGlobals(project) {
   const stages = getWorkflowStages(project);
-  STATUS_META = buildStatusMeta(stages);
-  STATUS_ORDER = stages.map(s => s.id);
-  IN_MOTION_STATUSES = stages.filter(s => s.id !== "not-started" && s.id !== "approved").map(s => s.id);
+  const hasAdHoc = stages.some(s => s.id === "ad-hoc-review");
+  const stagesWithAdHoc = hasAdHoc ? stages : [...stages, getAdHocReviewStage(project)];
+  STATUS_META = buildStatusMeta(stagesWithAdHoc);
+  STATUS_ORDER = stagesWithAdHoc.map(s => s.id);
+  IN_MOTION_STATUSES = stagesWithAdHoc.filter(s => s.id !== "not-started" && s.id !== "approved").map(s => s.id);
 }
 window.NS_syncWorkflow = syncWorkflowGlobals;
 
@@ -85,7 +113,7 @@ function actorIsJaggaerSide(actor, project) {
 // Returns { isTurn, mode, awaitsJaggaer } for a piece given the current user.
 function pieceTurnFor(piece, user, project) {
   const stages = getWorkflowStages(project);
-  const st = stages.find(s => s.id === piece.status);
+  const st = piece.status === "ad-hoc-review" ? getAdHocReviewStage(project) : stages.find(s => s.id === piece.status);
   if (!st || piece.status === "approved" || piece.status === "not-started") {
     return { isTurn: false, mode: "history", awaitsJaggaer: false };
   }
@@ -133,6 +161,36 @@ function readDeliverableFile(file) {
       reader.readAsText(file);
     }
   });
+}
+
+// ─── Stage-history log ────────────────────────────────────────────────────────
+// Every status transition (upload, approve, send-back, question) appends a
+// { stage, ts, by } entry here, going forward only. Existing pieces are seeded
+// with a single synthetic entry (ts: null) on first read so the Weekly Report
+// has at least one data point — see ensureSeededHistory().
+// Timestamps are stored UTC (consistent with last_updated/feedback ts elsewhere)
+// and converted to EST only at display time via formatEST().
+function appendStatusHistory(piece, stage, by) {
+  const prevHistory = Array.isArray(piece.status_history) ? piece.status_history : [];
+  return [...prevHistory, { stage, ts: new Date().toISOString(), by: by || null }];
+}
+
+// Used wherever a piece is first rendered without a status_history — backfills
+// one entry showing the CURRENT stage with ts: null (intentionally blank; we
+// don't know when it actually entered that stage, only that it's there now).
+function ensureSeededHistory(piece) {
+  if (Array.isArray(piece.status_history) && piece.status_history.length) return piece.status_history;
+  return [{ stage: piece.status, ts: null, by: piece.last_updated_by || piece.last_upload_by || null }];
+}
+
+// Displays a UTC ISO timestamp as US Eastern time. Returns "—" for null/blank
+// (used for seeded history entries where we don't know the real date).
+function formatEST(isoString, opts) {
+  if (!isoString) return "—";
+  const d = new Date(isoString);
+  if (isNaN(d.getTime())) return "—";
+  const base = { timeZone: "America/New_York", month: "short", day: "numeric" };
+  return d.toLocaleString("en-US", { ...base, ...(opts || {}) });
 }
 
 // ─── Force-download helper — raw.githubusercontent serves HTML inline; fetch → blob forces save ──
@@ -540,8 +598,9 @@ function InlineCell({ value, type, options, onSave, children, className }) {
 // ─── Activity Bar — recent uploads/feedback, phase-filtered ─────────────────
 function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveFilter, currentUser }) {
   const PANEL = { fontFamily: "Noto Sans, sans-serif" };
-  const stages = (project.workflow_stages && project.workflow_stages.length)
+  const baseStages = (project.workflow_stages && project.workflow_stages.length)
     ? project.workflow_stages : DEFAULT_WORKFLOW_STAGES;
+  const stages = baseStages.some(s => s.id === "ad-hoc-review") ? baseStages : [...baseStages, getAdHocReviewStage(project)];
   const stageMeta = {};
   stages.forEach(s => { stageMeta[s.id] = s; });
 
@@ -756,6 +815,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
   const [openPiece, setOpenPiece] = useStateTR(null);
   const [activeFilter, setActiveFilter] = useStateTR(null);
   const [searchQuery, setSearchQuery] = useStateTR("");
+  const [showAdHocModal, setShowAdHocModal] = useStateTR(false);
 
   // Apply search filter on top of pillar/cluster/content-type filters
   const sq = searchQuery.trim().toLowerCase();
@@ -797,6 +857,45 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
     });
   }
 
+  // Ad-Hoc Articles need a pillar/cluster home to reuse all the existing piece
+  // machinery (file paths, upload/review panels, preview, feedback). Rather than
+  // building a parallel data structure, we auto-create one dedicated pillar with
+  // a single catch-all cluster the first time anyone adds an ad-hoc piece.
+  // Returns the new piece id.
+  function addAdHocPiece(title, currentUser) {
+    let newPieceId = null;
+    setProject(prev => {
+      const next = JSON.parse(JSON.stringify(prev));
+      let pillar = next.pillars.find(p => p.id === "ad-hoc-articles");
+      if (!pillar) {
+        pillar = { id: "ad-hoc-articles", label: "Ad-Hoc Articles", sequence: next.pillars.length + 1, clusters: [] };
+        next.pillars.push(pillar);
+      }
+      let cluster = pillar.clusters.find(c => c.id === "c-ad-hoc");
+      if (!cluster) {
+        cluster = { id: "c-ad-hoc", label: "Ad-Hoc Articles", sequence: 1, intent: "expedited", anchor_piece: "", month_id: next.active_month, pieces: [] };
+        pillar.clusters.push(cluster);
+      }
+      newPieceId = "piece-" + Math.random().toString(36).slice(2, 8);
+      cluster.pieces.push({
+        id: newPieceId,
+        title: title.trim() || "Untitled ad-hoc article",
+        format: "Ad-Hoc Article",
+        assignee: currentUser?.id || "",
+        status: "writing", // NS uploads directly — no brief/SME-review gate for ad-hoc
+        content_type: "ad-hoc",
+        revision_count: 0,
+        primary_keyword: "",
+        geography: "all",
+        status_history: [{ stage: "writing", ts: new Date().toISOString(), by: currentUser?.id || null }],
+        last_updated: new Date().toISOString(),
+        last_updated_by: currentUser?.id || null,
+      });
+      return next;
+    });
+    return newPieceId;
+  }
+
   function deletePiece(clusterId, pieceId) {
     setProject(prev => {
       const next = JSON.parse(JSON.stringify(prev));
@@ -833,7 +932,18 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         viewMode={viewMode} setViewMode={setViewMode}
         currentUser={currentUser} onOpenPiece={setOpenPiece}
         searchQuery={searchQuery} setSearchQuery={setSearchQuery}
+        onAddAdHoc={() => setShowAdHocModal(true)}
       />
+      {showAdHocModal && (
+        <AdHocCreateModal
+          onClose={() => setShowAdHocModal(false)}
+          onCreate={(title) => {
+            const newId = addAdHocPiece(title, currentUser);
+            setShowAdHocModal(false);
+            if (newId) setOpenPiece({ clusterId: "c-ad-hoc", pieceId: newId, mode: "upload" });
+          }}
+        />
+      )}
       {activeTab === "tracker" && (
         <>
           <FilterBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} activeFilter={activeFilter} setActiveFilter={setActiveFilter} currentUser={currentUser} />
@@ -1038,8 +1148,63 @@ function NotificationBell({ project, currentUser, onOpenPiece }) {
   );
 }
 
+// ─── Ad-Hoc Article creation modal ─────────────────────────────────────────────
+// Deliberately minimal: just a topic/title. No keywords, schedule_week, or brief
+// scaffolding — ad-hoc pieces skip straight to "writing" status so NS can upload
+// the finished HTML immediately. Open to any NS user, not gated by adminMode.
+function AdHocCreateModal({ onClose, onCreate }) {
+  const [title, setTitle] = useStateTR("");
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  return (
+    <div
+      style={{ position: "fixed", inset: 0, background: "rgba(17,24,32,0.45)", zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center" }}
+      onClick={onClose}
+    >
+      <div
+        style={{ background: "#fff", borderRadius: "5px", padding: "24px", width: "420px", maxWidth: "90vw", boxShadow: "0 12px 40px rgba(0,0,0,0.25)" }}
+        onClick={e => e.stopPropagation()}
+      >
+        <div style={{ ...FONT, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#c8401a", marginBottom: "6px" }}>
+          New Ad-Hoc Article
+        </div>
+        <p style={{ ...FONT, fontSize: "0.78rem", color: "#666", marginTop: 0, marginBottom: "16px", lineHeight: 1.5 }}>
+          Expedited content outside the planned calendar. Drop a topic, then upload the finished HTML — any Jaggaer reviewer can approve or send it back, no Abhishek/Orlagh/Robert/CTA gates.
+        </p>
+        <input
+          autoFocus
+          type="text"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          placeholder="Article topic / working title"
+          onKeyDown={e => { if (e.key === "Enter" && title.trim()) onCreate(title); }}
+          style={{
+            ...FONT, fontSize: "0.85rem", width: "100%",
+            border: "1px solid #e8e3da", borderRadius: "3px",
+            padding: "9px 12px", outline: "none", boxSizing: "border-box",
+          }}
+        />
+        <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", marginTop: "18px" }}>
+          <button onClick={onClose} style={{ ...FONT, fontSize: "0.78rem", fontWeight: 600, color: "#888", background: "none", border: "none", cursor: "pointer", padding: "8px 10px" }}>
+            Cancel
+          </button>
+          <button
+            onClick={() => title.trim() && onCreate(title)}
+            disabled={!title.trim()}
+            style={{
+              ...FONT, fontSize: "0.78rem", fontWeight: 700,
+              color: "#fff", background: title.trim() ? "#c8401a" : "#e0d8cc",
+              border: "none", borderRadius: "3px",
+              padding: "9px 18px", cursor: title.trim() ? "pointer" : "default",
+            }}
+          >Create →</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Header ───────────────────────────────────────────────────────────────────
-function TrackerHeader({ project, stats, activeCluster, setActiveCluster, activeTab, setActiveTab, viewMode, setViewMode, currentUser, onOpenPiece, searchQuery, setSearchQuery }) {
+function TrackerHeader({ project, stats, activeCluster, setActiveCluster, activeTab, setActiveTab, viewMode, setViewMode, currentUser, onOpenPiece, searchQuery, setSearchQuery, onAddAdHoc }) {
   const totalPieces = project.pillars.reduce((n, p) => n + p.clusters.reduce((m, c) => m + c.pieces.length, 0), 0);
   const clusterStats = window.computeStats(project).byCluster;
   const readyClusters = Object.values(clusterStats).filter(c => c.ready).length;
@@ -1056,19 +1221,16 @@ function TrackerHeader({ project, stats, activeCluster, setActiveCluster, active
           {project.content_type_split && project.content_type_split.length > 0 && (
             <div style={{ display: "flex", gap: "8px", marginTop: "6px", flexWrap: "wrap", alignItems: "center" }}>
               {project.content_type_split.map(ct => {
-                const shortLabel = ct.id === "msv" ? "MSV-Driven" : ct.id === "ai-in-s2p" ? "AI in S2P (Claude)" : "Industry-Specific";
-                const color = ct.id === "msv" ? "#1a6a3a" : ct.id === "ai-in-s2p" ? "#1e4fa8" : "#784212";
-                const bg    = ct.id === "msv" ? "#eaf4ee" : ct.id === "ai-in-s2p" ? "#eaf0fb" : "#fef3e8";
-                const bdr   = ct.id === "msv" ? "#b8dfc8" : ct.id === "ai-in-s2p" ? "#bad0f0" : "#f0d4a8";
+                const meta = CT_DISPLAY[ct.id] || CT_DISPLAY["industry-specific"];
                 return (
                   <span key={ct.id} title={ct.description} style={{
                     fontFamily: "Noto Sans, sans-serif",
                     fontSize: "0.67rem", fontWeight: 700,
                     letterSpacing: "0.05em", textTransform: "uppercase",
-                    color, background: bg, border: `1px solid ${bdr}`,
+                    color: meta.color, background: meta.bg, border: `1px solid ${meta.border}`,
                     padding: "3px 10px", borderRadius: "2px", cursor: "default",
                   }}>
-                    {Math.round(ct.weight * 100)}% {shortLabel}
+                    {typeof ct.weight === "number" ? `${Math.round(ct.weight * 100)}% ` : ""}{meta.label}
                     {ct.pieces_est && <span style={{ opacity: 0.65, fontWeight: 400 }}> · ~{ct.pieces_est}</span>}
                   </span>
                 );
@@ -1134,6 +1296,21 @@ function TrackerHeader({ project, stats, activeCluster, setActiveCluster, active
                 >✕</button>
               )}
             </div>
+          )}
+          {activeTab === "tracker" && currentUser?.org === "ns" && onAddAdHoc && (
+            <button
+              onClick={onAddAdHoc}
+              style={{
+                fontFamily: "Noto Sans, sans-serif",
+                fontSize: "0.72rem", fontWeight: 700,
+                letterSpacing: "0.03em",
+                color: "#fff", background: "#c8401a",
+                border: "none", borderRadius: "3px",
+                padding: "7px 14px", cursor: "pointer",
+                whiteSpace: "nowrap",
+              }}
+              title="Log an expedited article outside the planned content calendar"
+            >+ Ad-Hoc Article</button>
           )}
           {activeTab === "tracker" && (
             <div className="ns-view-toggle">
@@ -1493,11 +1670,12 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
   const nsMembers = project.team.ns.map(m => ({ value: m.id, label: m.name }));
 
   const stages = getWorkflowStages(project);
-  const stageMeta = buildStatusMeta(stages);
+  const stageMeta = buildStatusMeta(stages.some(s => s.id === "ad-hoc-review") ? stages : [...stages, getAdHocReviewStage(project)]);
   const stageOrder = stages.map(s => s.id);
   const currentStageIdx = stageOrder.indexOf(piece.status);
-  const currentStage = stages.find(s => s.id === piece.status);
-  const nextStage = stages[currentStageIdx + 1] || null;
+  const isAdHocReviewStage = piece.status === "ad-hoc-review";
+  const currentStage = isAdHocReviewStage ? getAdHocReviewStage(project) : stages.find(s => s.id === piece.status);
+  const nextStage = isAdHocReviewStage ? null : (stages[currentStageIdx + 1] || null);
 
   function actorMatches(actor) {
     if (!actor) return false;
@@ -1522,7 +1700,10 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
     if (!actorMatches(actor)) return null;
     // Label logic
     if (piece.status === "not-started") return { label: "Upload Brief", mode: "brief" };
-    if (hasActorType(actor, "ns") || isNS) return { label: nextStage ? `Submit → ${nextStage.label}` : "Submit", mode: "upload" };
+    if (hasActorType(actor, "ns") || isNS) {
+      const displayNext = (isAdHoc(piece) && piece.status === "writing") ? getAdHocReviewStage(project) : nextStage;
+      return { label: displayNext ? `Submit → ${displayNext.label}` : "Submit", mode: "upload" };
+    }
     // Named person or Jaggaer reviewer
     return { label: "Review", mode: "review" };
   }
@@ -1926,11 +2107,14 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   const isJG = currentUser.org === "jaggaer";
 
   const stages = getWorkflowStages(project);
-  const stageMeta = buildStatusMeta(stages);
+  const stageMeta = buildStatusMeta(stages.some(s => s.id === "ad-hoc-review") ? stages : [...stages, getAdHocReviewStage(project)]);
   const stageOrder = stages.map(s => s.id);
   const currentStageIdx = stageOrder.indexOf(piece.status);
-  const currentStage = stages.find(s => s.id === piece.status);
-  const nextStage = stages[currentStageIdx + 1] || null;
+  const isAdHocReviewStage = piece.status === "ad-hoc-review";
+  const currentStage = isAdHocReviewStage ? getAdHocReviewStage(project) : stages.find(s => s.id === piece.status);
+  const nextStage = isAdHocReviewStage ? null : (stages[currentStageIdx + 1] || null);
+  // For ad-hoc pieces still writing, the real next stage is Ad-Hoc Review, not the standard chain's marketing-review.
+  const displayNextStage = (isAdHoc(piece) && piece.status === "writing") ? getAdHocReviewStage(project) : nextStage;
 
   function actorMatches(actor) {
     if (!actor) return false;
@@ -1956,13 +2140,15 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   const canReview = isCurrentActor && !isNS && piece.status !== "not-started" && piece.status !== "approved";
   // canReplace is now redundant (canUpload covers it), kept as false to avoid stale tab
   const canReplace = false;
-  const hasDeliverable = currentStageIdx > stageOrder.indexOf("brief-uploaded");
+  // Ad-Hoc pieces in ad-hoc-review have an uploaded deliverable by definition (writing → ad-hoc-review only
+  // happens after upload), so hasDeliverable can't use stageOrder.indexOf (which returns -1 for this stage).
+  const hasDeliverable = isAdHocReviewStage || currentStageIdx > stageOrder.indexOf("brief-uploaded");
 
   return (
     <div className={`ns-piece-drawer${mode === "preview" || mode === "annotate" ? " is-preview" : ""}`}>
       <div className="ns-drawer-tabs">
         {canBrief && <button className={`ns-drawer-tab is-primary-tab ${mode==="brief"?"is-active":""}`} onClick={() => setMode("brief")}>Upload Brief</button>}
-        {canUpload && <button className={`ns-drawer-tab is-primary-tab ${mode==="upload"?"is-active":""}`} onClick={() => setMode("upload")}>{nextStage ? `Submit → ${nextStage.label}` : "Submit"}</button>}
+        {canUpload && <button className={`ns-drawer-tab is-primary-tab ${mode==="upload"?"is-active":""}`} onClick={() => setMode("upload")}>{displayNextStage ? `Submit → ${displayNextStage.label}` : "Submit"}</button>}
         {canReplace && <button className={`ns-drawer-tab ${mode==="replace"?"is-active":""}`} onClick={() => setMode("replace")} title="Replace your draft before it enters review">↩ Replace Draft</button>}
         {canReview && <button className={`ns-drawer-tab is-primary-tab ${mode==="review"?"is-active":""}`} onClick={() => setMode("review")}>Review</button>}
         {hasDeliverable && <button className={`ns-drawer-tab ${mode==="annotate"?"is-active":""}`} onClick={() => setMode("annotate")}>Preview & Comment</button>}
@@ -2195,6 +2381,8 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
   const currentIdx = stageOrder.indexOf(piece.status);
   const nextStage = workflowStages[currentIdx + 1] || null;
   const nextRev = (piece.revision_count || 0) + 1;
+  // Ad-Hoc Articles skip the standard chain: writing → ad-hoc-review directly.
+  const adHocNext = isAdHoc(piece) && piece.status === "writing" ? getAdHocReviewStage(project) : null;
 
   async function handleFile(file) {
     setStage("uploading"); setFilename(file.name); setBytes(file.size);
@@ -2208,9 +2396,11 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
     }
     // If a reviewer sent this back and stored return_to_stage, jump straight back
     // to them instead of climbing the full chain from the next stage.
+    // Ad-Hoc Articles run a separate short chain: writing → ad-hoc-review → approved,
+    // bypassing the standard marketing-review/robert-review/editors gates entirely.
     const newStatus = piece.return_to_stage
       ? piece.return_to_stage
-      : (nextStage ? nextStage.id : piece.status);
+      : (adHocNext ? adHocNext.id : (nextStage ? nextStage.id : piece.status));
     updatePiece(cluster.id, piece.id, {
       status: newStatus,
       revision_count: nextRev,
@@ -2220,6 +2410,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
       last_upload_by: currentUser.id,
       last_updated: new Date().toISOString(),
       last_updated_by: currentUser.id,
+      status_history: appendStatusHistory(piece, newStatus, currentUser.id),
     });
     setStage("done");
   }
@@ -2247,7 +2438,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
             <div className="ns-drop-rule is-done"></div>
             <div className="ns-drop-title">Committed ✓</div>
             <div className="ns-drop-sub">{filename} · deliverable-v{nextRev}.{filename ? filename.split('.').pop().toLowerCase() : "html"}</div>
-            <div className="ns-drop-path">Status → <strong>{piece.return_to_stage ? (workflowStages.find(s => s.id === piece.return_to_stage)?.label || piece.return_to_stage) : (nextStage?.label || "submitted")}</strong>{!piece.return_to_stage && nextStage ? ` · ${nextStage.actor === "ns" ? "NS" : (typeof nextStage.actor === "string" && nextStage.actor.startsWith("person:")) ? nextStage.actor.slice(7) : "Jaggaer"} is cued.` : (piece.return_to_stage ? " · returning to reviewer." : "")}</div>
+            <div className="ns-drop-path">Status → <strong>{piece.return_to_stage ? (workflowStages.find(s => s.id === piece.return_to_stage)?.label || piece.return_to_stage) : ((adHocNext || nextStage)?.label || "submitted")}</strong>{!piece.return_to_stage && (adHocNext || nextStage) ? ` · ${(adHocNext || nextStage).actor === "ns" ? "NS" : (typeof (adHocNext || nextStage).actor === "string" && (adHocNext || nextStage).actor.startsWith("person:")) ? (adHocNext || nextStage).actor.slice(7) : "Jaggaer"} is cued.` : (piece.return_to_stage ? " · returning to reviewer." : "")}</div>
           </>)}
           {stage === "error" && (<>
             <div className="ns-drop-rule" style={{background:"#c8401a"}}></div>
@@ -2285,14 +2476,18 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
 
   const workflowStages = stages || getWorkflowStages(project);
   const stageOrder = workflowStages.map(s => s.id);
+  const isAdHocReviewStage = piece.status === "ad-hoc-review";
   const currentIdx = stageOrder.indexOf(piece.status);
-  const currentStage = workflowStages[currentIdx];
-  const nextStage = workflowStages[currentIdx + 1] || null;
+  const currentStage = isAdHocReviewStage ? getAdHocReviewStage(project) : workflowStages[currentIdx];
+  const nextStage = isAdHocReviewStage ? null : (workflowStages[currentIdx + 1] || null);
   // "Send back" goes to the nearest NS-actor stage before current.
   // Return-to-sender: after NS fixes and re-uploads, the piece jumps back to
   // THIS reviewer's stage (not restarting from Abhishek/Orlagh).
-  const sendBackStage = [...workflowStages].slice(0, currentIdx).reverse().find(s => s.actor === "ns") || workflowStages[0];
-  const isLastStage = nextStage?.id === "approved" || !nextStage;
+  // Ad-Hoc Articles only ever send back to "writing" — there's no chain to walk.
+  const sendBackStage = isAdHocReviewStage
+    ? { id: "writing" }
+    : ([...workflowStages].slice(0, currentIdx).reverse().find(s => s.actor === "ns") || workflowStages[0]);
+  const isLastStage = isAdHocReviewStage ? true : (nextStage?.id === "approved" || !nextStage);
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
   async function submit() {
@@ -2301,7 +2496,7 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
     let newStatus = piece.status;
     let extraFields = {};
     if (verdict === "approved") {
-      newStatus = nextStage ? nextStage.id : "approved";
+      newStatus = isAdHocReviewStage ? "approved" : (nextStage ? nextStage.id : "approved");
       extraFields = { return_to_stage: null }; // clear any pending return
     } else if (verdict === "needs-revision") {
       newStatus = sendBackStage.id;
@@ -2321,6 +2516,7 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
       status: newStatus,
       last_updated: new Date().toISOString(),
       last_updated_by: currentUser.id,
+      status_history: appendStatusHistory(piece, newStatus, currentUser.id),
       ...extraFields,
     });
     // Fire approval notification when piece reaches final "approved" status
@@ -2446,17 +2642,64 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
 // ─── Notes history ────────────────────────────────────────────────────────────
 function NotesHistory({ piece, project }) {
   const feedback = (project.feedback || {})[piece.id] || [];
-  if (!feedback.length) return (
-    <div className="ns-history-empty">
-      <div className="ns-eyebrow ns-eyebrow-dark">No Notes Yet</div>
-      <div className="ns-history-empty-text">Feedback will appear here as an attributed thread.</div>
-    </div>
-  );
+  const history = ensureSeededHistory(piece);
   return (
     <div>
-      <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:12}}>Review Thread</div>
-      <div className="ns-history-list">
-        {feedback.map((f, i) => <FeedbackCard key={f.id} entry={f} project={project} ordinal={i+1} />)}
+      <StageHistoryTimeline piece={piece} project={project} history={history} />
+      {!feedback.length ? (
+        <div className="ns-history-empty">
+          <div className="ns-eyebrow ns-eyebrow-dark">No Notes Yet</div>
+          <div className="ns-history-empty-text">Feedback will appear here as an attributed thread.</div>
+        </div>
+      ) : (
+        <div>
+          <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:12, marginTop: 20}}>Review Thread</div>
+          <div className="ns-history-list">
+            {feedback.map((f, i) => <FeedbackCard key={f.id} entry={f} project={project} ordinal={i+1} />)}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Stage-history timeline — shows every status transition this piece has gone
+// through, with EST timestamps where known. Seeded entries (pieces that were
+// already mid-pipeline when this feature shipped) show the current stage with
+// no timestamp, per design: we don't backfill dates we don't actually have.
+function StageHistoryTimeline({ piece, project, history }) {
+  const stages = getWorkflowStages(project);
+  const adHocStage = getAdHocReviewStage(project);
+  const all = [...(project.team?.ns || []), ...(project.team?.jaggaer || [])];
+  function stageLabel(id) {
+    if (id === "ad-hoc-review") return adHocStage.label;
+    return stages.find(s => s.id === id)?.label || id;
+  }
+  function memberName(id) {
+    if (!id) return "—";
+    const m = all.find(x => x.id === id);
+    return m ? m.name.split(" ")[0] : id;
+  }
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  return (
+    <div>
+      <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>Stage History</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+        {history.map((h, i) => (
+          <div key={i} style={{
+            display: "flex", alignItems: "baseline", gap: "10px",
+            padding: "7px 10px", background: i === history.length - 1 ? "#fdf8f3" : "transparent",
+            borderRadius: "3px", borderLeft: `2px solid ${i === history.length - 1 ? "#c8401a" : "#e8e3da"}`,
+          }}>
+            <span style={{ ...FONT, fontSize: "0.78rem", fontWeight: 600, color: "#1a2535", minWidth: "170px" }}>
+              {stageLabel(h.stage)}
+            </span>
+            <span style={{ ...FONT, fontSize: "0.72rem", color: "#999" }}>
+              {h.ts ? `${formatEST(h.ts, { hour: "2-digit", minute: "2-digit" })} EST` : "date not logged (pre-tracking)"}
+              {h.by ? ` · ${memberName(h.by)}` : ""}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -2466,8 +2709,7 @@ function FeedbackCard({ entry, project, ordinal }) {
   const all = [...project.team.ns, ...project.team.jaggaer];
   const author = all.find(a => a.id === entry.author) || { name: entry.author, org: "ns", role: "" };
   const v = VERDICT_META[entry.verdict] || { label: entry.verdict, glyph: "•" };
-  const date = new Date(entry.ts);
-  const dateStr = date.toLocaleDateString("en-GB", { day:"numeric", month:"short" }) + " · " + date.toLocaleTimeString("en-GB", { hour:"2-digit", minute:"2-digit" });
+  const dateStr = formatEST(entry.ts, { hour: "2-digit", minute: "2-digit" }) + " EST";
   return (
     <article className={`ns-fb-card ns-fb-${entry.verdict}`}>
       <header className="ns-fb-head">

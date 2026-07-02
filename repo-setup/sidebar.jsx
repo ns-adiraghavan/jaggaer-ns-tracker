@@ -23,7 +23,7 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
 
   // Content-type stats — count pieces by content_type field
   const ctStats = React.useMemo(() => {
-    const out = { 'msv': { total: 0, approved: 0 }, 'ai-in-s2p': { total: 0, approved: 0 }, 'industry-specific': { total: 0, approved: 0 } };
+    const out = { 'msv': { total: 0, approved: 0 }, 'ai-in-s2p': { total: 0, approved: 0 }, 'industry-specific': { total: 0, approved: 0 }, 'ad-hoc': { total: 0, approved: 0 } };
     for (const p of project.pillars) {
       for (const c of p.clusters) {
         for (const piece of c.pieces) {
@@ -153,6 +153,12 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
         <div className="ns-sidebar-divider"></div>
 
         <NavSection
+          label="Weekly Report"
+          active={view === "weekly-report"}
+          onClick={() => setView("weekly-report")}
+          rightMeta="cycle"
+        />
+        <NavSection
           label="AI Playground"
           active={view === "ai-playground"}
           onClick={() => setView("ai-playground")}
@@ -274,16 +280,26 @@ function PillarNav({ pillar, sequence, pillarStats, clusterStats, expanded, acti
 
 
 function ContentTypeNav({ project, ctStats, setView, setActivePillar, setActiveCluster, activeContentType, setActiveContentType }) {
-  const CT_META = {
-    'msv':               { label: 'MSV-Driven',        color: '#1a6a3a', bg: '#eaf4ee', border: '#b8dfc8', desc: 'Broad · High search volume' },
-    'ai-in-s2p':         { label: 'AI in S2P (Claude)', color: '#1e4fa8', bg: '#eaf0fb', border: '#bad0f0', desc: 'Claude-focused · JAI traffic' },
-    'industry-specific': { label: 'Industry-Specific',  color: '#784212', bg: '#fef3e8', border: '#f0d4a8', desc: 'Vertical · Sales enablement' },
+  const CT_DESC = {
+    'msv': 'Broad · High search volume',
+    'ai-in-s2p': 'Claude-focused · JAI traffic',
+    'industry-specific': 'Vertical · Sales enablement',
+    'ad-hoc': 'Expedited · Any Jaggaer reviewer',
   };
+  const SHARED_CT = (window.CT_DISPLAY) || {
+    'msv':               { label: 'MSV-Driven',        color: '#1a6a3a', bg: '#eaf4ee', border: '#b8dfc8' },
+    'ai-in-s2p':         { label: 'AI in S2P (Claude)', color: '#1e4fa8', bg: '#eaf0fb', border: '#bad0f0' },
+    'industry-specific': { label: 'Industry-Specific',  color: '#784212', bg: '#fef3e8', border: '#f0d4a8' },
+    'ad-hoc':            { label: 'Ad-Hoc Articles',    color: '#c8401a', bg: '#fdeee8', border: '#f0bba8' },
+  };
+  const CT_META = Object.fromEntries(
+    Object.entries(SHARED_CT).map(([id, meta]) => [id, { ...meta, desc: CT_DESC[id] || '' }])
+  );
 
   const [expanded, setExpanded] = React.useState({});
 
   // Group pieces by content_type, with pillar + cluster context
-  const byType = { 'msv': [], 'ai-in-s2p': [], 'industry-specific': [] };
+  const byType = { 'msv': [], 'ai-in-s2p': [], 'industry-specific': [], 'ad-hoc': [] };
   for (const pillar of project.pillars) {
     for (const cluster of pillar.clusters) {
       for (const piece of cluster.pieces) {
