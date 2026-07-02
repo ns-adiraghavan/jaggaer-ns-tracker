@@ -584,6 +584,14 @@
               "funnel": "BOFU"
             }
           ]
+        },
+        {
+          "id": "c-yad8u",
+          "label": "New Cluster",
+          "sequence": 9,
+          "intent": "informational",
+          "anchor_piece": "",
+          "pieces": []
         }
       ]
     },
