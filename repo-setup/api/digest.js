@@ -88,7 +88,7 @@ export default async function handler(req, res) {
     const project = await fetchGitHub("config/project.json");
 
     // 2. Read workflow stages — fall back to hardcoded defaults if none in project
-    const stages = (project.workflow_stages && project.workflow_stages.length)
+    const baseStages = (project.workflow_stages && project.workflow_stages.length)
       ? project.workflow_stages
       : [
           { id: "not-started",      actor: "jaggaer" },
@@ -99,6 +99,12 @@ export default async function handler(req, res) {
           { id: "editors",          actor: "jaggaer" },
           { id: "approved",         actor: null },
         ];
+    // Ad-Hoc Articles run a separate short chain (writing → ad-hoc-review → approved)
+    // that lives outside project.workflow_stages — always append it here so the
+    // digest correctly buckets ad-hoc pieces sitting in review.
+    const stages = baseStages.some(s => s.id === "ad-hoc-review")
+      ? baseStages
+      : [...baseStages, { id: "ad-hoc-review", label: "Ad-Hoc Review (Jaggaer)", actor: "jaggaer" }];
 
     const { nsUploadStages, reviewStages, sendbackStages } = categoriseStages(stages);
     const stageLabel = Object.fromEntries(stages.map(s => [s.id, s.label || s.id]));
