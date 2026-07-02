@@ -2,19 +2,19 @@
   "months": [
     {
       "id": "month-1",
-      "label": "Month 1 · May–Jun 2026",
+      "label": "Month 1 \u00b7 May\u2013Jun 2026",
       "active": true,
       "start_date": "2026-05-21"
     },
     {
       "id": "month-2",
-      "label": "Month 2 · Jun–Jul 2026",
+      "label": "Month 2 \u00b7 Jun\u2013Jul 2026",
       "active": false,
       "start_date": "2026-06-18"
     },
     {
       "id": "month-3",
-      "label": "Month 3 · Jul–Aug 2026",
+      "label": "Month 3 \u00b7 Jul\u2013Aug 2026",
       "active": false,
       "start_date": "2026-07-16"
     }
@@ -41,6 +41,13 @@
       "description": "Vertical content written explicitly for one sector. Lower search volume but high sales enablement value. Used by SDR team in outreach.",
       "weight": 0.25,
       "pieces_est": 8
+    },
+    {
+      "id": "ad-hoc",
+      "label": "Ad-Hoc Articles",
+      "description": "Expedited articles outside the planned 30+ piece programme. Chahat or Jason logs a topic, NS uploads the finished HTML, any Jaggaer reviewer approves or sends it back. Skips Abhishek/Orlagh/Robert/CTA review.",
+      "weight": null,
+      "pieces_est": null
     }
   ],
   "pillars": [
@@ -87,7 +94,7 @@
             },
             {
               "id": "p-c1-2",
-              "title": "What Are .md Files in Claude — and Why S2P Teams Can't Skip This Step",
+              "title": "What Are .md Files in Claude \u2014 and Why S2P Teams Can't Skip This Step",
               "format": "Educational Page",
               "assignee": "jason",
               "status": "robert-review",
@@ -111,7 +118,7 @@
             },
             {
               "id": "p-c1-3",
-              "title": "AI in S2P: What Claude Actually Delivers for Procurement in 2026 — Beyond the Hype",
+              "title": "AI in S2P: What Claude Actually Delivers for Procurement in 2026 \u2014 Beyond the Hype",
               "format": "FAQ Article",
               "assignee": "m-5jitd",
               "status": "robert-review",
@@ -242,7 +249,7 @@
             },
             {
               "id": "p-c3-3",
-              "title": "3 S2P Tasks You Can Do in Claude Right Now — With Prompts and Outputs",
+              "title": "3 S2P Tasks You Can Do in Claude Right Now \u2014 With Prompts and Outputs",
               "format": "How-to Guide",
               "assignee": "null",
               "status": "stage-nq11b",
@@ -292,7 +299,7 @@
             },
             {
               "id": "p-c4-2",
-              "title": "Claude for S2P: Watch How It Works — Curated Videos and Original Jaggaer Webinars",
+              "title": "Claude for S2P: Watch How It Works \u2014 Curated Videos and Original Jaggaer Webinars",
               "format": "Webinar / Video Page",
               "assignee": "null",
               "status": "stage-nq11b",
@@ -403,7 +410,7 @@
               "schedule_week": 3,
               "funnel": "TOFU",
               "url": "/supply-chain-visibility-beyond-tier-1",
-              "notes": "NEW — not previously in tracker | Words: 1,200–1,800",
+              "notes": "NEW \u2014 not previously in tracker | Words: 1,200\u20131,800",
               "content_type": "msv",
               "phase": 1,
               "last_upload": "2026-06-11T07:03:37.634Z",
@@ -434,7 +441,7 @@
               "schedule_week": 3,
               "funnel": "TOFU",
               "url": "/blog/supplier-financial-risk-signals-procurement",
-              "notes": "NEW — not previously in tracker | Words: 2,000–2,500",
+              "notes": "NEW \u2014 not previously in tracker | Words: 2,000\u20132,500",
               "content_type": "msv",
               "last_upload": "2026-06-11T06:58:23.691Z",
               "last_upload_by": "jason",
@@ -458,7 +465,7 @@
               "schedule_week": 3,
               "funnel": "MOFU",
               "url": "/predictive-supplier-risk-management",
-              "notes": "UPDATED — title refined, keyword updated | Words: 1,200–1,500",
+              "notes": "UPDATED \u2014 title refined, keyword updated | Words: 1,200\u20131,500",
               "content_type": "industry-specific",
               "last_upload": "2026-06-11T06:05:31.259Z",
               "last_upload_by": "m-5jitd",
@@ -481,7 +488,7 @@
               "schedule_week": 3,
               "funnel": "BOFU",
               "url": "/tier-2-supplier-bankruptcy-supply-chain-risk",
-              "notes": "UPDATED — title refined, keywords updated | Words: 2,500–4,000",
+              "notes": "UPDATED \u2014 title refined, keywords updated | Words: 2,500\u20134,000",
               "content_type": "industry-specific",
               "phase": 2,
               "last_upload": "2026-06-09T12:36:01.023Z",
@@ -583,7 +590,7 @@
     {
       "id": "public-sector",
       "label": "Public Sector",
-      "subtitle": "UK · FR · ES",
+      "subtitle": "UK \u00b7 FR \u00b7 ES",
       "weight": null,
       "geography": "UK / FR / ES",
       "clusters": [
@@ -832,7 +839,7 @@
     {
       "id": "higher-education",
       "label": "Higher Education",
-      "subtitle": "US · EU · UK",
+      "subtitle": "US \u00b7 EU \u00b7 UK",
       "weight": null,
       "geography": "US / EU / UK",
       "clusters": [
@@ -1047,7 +1054,7 @@
         "body": "change to: Unfortunately, most disruptions don't come from Tier 1 suppliers.",
         "ts": "2026-06-02T13:16:45.683Z",
         "annotation": true,
-        "section": "¶54 — \"Most procurement teams have full visibil…\""
+        "section": "\u00b654 \u2014 \"Most procurement teams have full visibil\u2026\""
       },
       {
         "id": "ann-dhiagg",
@@ -1056,7 +1063,7 @@
         "body": "change first sentence to: \"This kind of failure is why supply chain visibility beyond Tier 1 is critical.\"",
         "ts": "2026-06-02T13:41:45.902Z",
         "annotation": true,
-        "section": "¶54 — \"That is what supply chain visibility bey…\""
+        "section": "\u00b654 \u2014 \"That is what supply chain visibility bey\u2026\""
       },
       {
         "id": "ann-fw8k18",
@@ -1065,7 +1072,7 @@
         "body": "Change the CTA above to promote this eBook: https://www.jaggaer.com/download/ebook-guide/agile-supply-chain",
         "ts": "2026-06-10T13:25:42.557Z",
         "annotation": true,
-        "section": "¶38 — \"Where Risk Actually Lives in the Supply …\"",
+        "section": "\u00b638 \u2014 \"Where Risk Actually Lives in the Supply \u2026\"",
         "revision": 4
       },
       {
@@ -1075,7 +1082,7 @@
         "body": "Change the CTA above to a demo CTA",
         "ts": "2026-06-10T13:27:16.763Z",
         "annotation": true,
-        "section": "¶40 — \"The Cost of Invisible Supply Chain Risk …\"",
+        "section": "\u00b640 \u2014 \"The Cost of Invisible Supply Chain Risk \u2026\"",
         "revision": 4
       },
       {
@@ -1085,7 +1092,7 @@
         "body": "change the CTA above to promote this whitepaper: https://www.jaggaer.com/download/whitepaper/supplier-risk-vendor-onboarding-trustpair",
         "ts": "2026-06-10T13:28:51.556Z",
         "annotation": true,
-        "section": "¶42 — \"What True Multi-Tier Visibility Requires…\"",
+        "section": "\u00b642 \u2014 \"What True Multi-Tier Visibility Requires\u2026\"",
         "revision": 4
       },
       {
@@ -1095,7 +1102,7 @@
         "body": "Drop cta above, we have the demo CTA right after it",
         "ts": "2026-06-10T13:29:09.317Z",
         "annotation": true,
-        "section": "¶28 — \"The organizations that navigated 2025's …\"",
+        "section": "\u00b628 \u2014 \"The organizations that navigated 2025's \u2026\"",
         "revision": 4
       },
       {
@@ -1113,7 +1120,7 @@
         "body": "I found a better assets, please use this one instead of the eBook I previously suggested: https://www.jaggaer.com/wp-content/uploads/Seven-Strategies-to-Cut-Costs-Reduce-Risk-and-Drive-Margin-Expansion_CFO.pdf",
         "ts": "2026-06-10T13:52:48.962Z",
         "annotation": true,
-        "section": "¶38 — \"Where Risk Actually Lives in the Supply …\"",
+        "section": "\u00b638 \u2014 \"Where Risk Actually Lives in the Supply \u2026\"",
         "revision": 4
       }
     ],
@@ -1133,7 +1140,7 @@
         "body": "Change CTA block to promote https://www.jaggaer.com/download/whitepaper/supplier-risk-vendor-onboarding-trustpair",
         "ts": "2026-06-10T13:32:26.338Z",
         "annotation": true,
-        "section": "¶8 — \"Supplier Risk Oversight…\"",
+        "section": "\u00b68 \u2014 \"Supplier Risk Oversight\u2026\"",
         "revision": 3
       },
       {
@@ -1143,7 +1150,7 @@
         "body": "Change to a demo cta",
         "ts": "2026-06-10T13:34:05.438Z",
         "annotation": true,
-        "section": "¶20 — \"Get a 360° Supplier Snapshot…\"",
+        "section": "\u00b620 \u2014 \"Get a 360\u00b0 Supplier Snapshot\u2026\"",
         "revision": 3
       },
       {
@@ -1153,7 +1160,7 @@
         "body": "change cta to promote https://www.jaggaer.com/download/ebook-guide/agile-supply-chain",
         "ts": "2026-06-10T13:34:48.627Z",
         "annotation": true,
-        "section": "¶30 — \"Monitor Financial Signals…\"",
+        "section": "\u00b630 \u2014 \"Monitor Financial Signals\u2026\"",
         "revision": 3
       },
       {
@@ -1181,7 +1188,7 @@
         "body": "change cta to promote https://www.jaggaer.com/download/whitepaper/supplier-risk-vendor-onboarding-trustpair",
         "ts": "2026-06-10T13:45:16.301Z",
         "annotation": true,
-        "section": "¶22 — \"End-To-End Risk Management…\"",
+        "section": "\u00b622 \u2014 \"End-To-End Risk Management\u2026\"",
         "revision": 4
       },
       {
@@ -1191,7 +1198,7 @@
         "body": "Change cta to promote https://www.jaggaer.com/download/ebook-guide/agile-supply-chain",
         "ts": "2026-06-10T13:51:02.225Z",
         "annotation": true,
-        "section": "¶3 — \"Close the Reactive Gap…\"",
+        "section": "\u00b63 \u2014 \"Close the Reactive Gap\u2026\"",
         "revision": 4
       },
       {
@@ -1267,7 +1274,7 @@
   "build_with_claude": [
     {
       "name": "contract-analyser",
-      "description": "Drag-drop MSA → Claude returns redline summary + risk flags.",
+      "description": "Drag-drop MSA \u2192 Claude returns redline summary + risk flags.",
       "status": "Live",
       "updated": "2026-05-14",
       "path": "build-with-claude/contract-analyser"
@@ -1367,7 +1374,7 @@
     {
       "week": 4,
       "label": "Week 4",
-      "goal": "Convert audiences built in weeks 1–3 to platform evaluation intent",
+      "goal": "Convert audiences built in weeks 1\u20133 to platform evaluation intent",
       "slots": [
         {
           "pillar": "ai-in-s2p",
