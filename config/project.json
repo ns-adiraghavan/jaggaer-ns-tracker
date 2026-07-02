@@ -601,6 +601,16 @@
               "primary_keyword": "",
               "geography": "all",
               "revision_count": 0
+            },
+            {
+              "id": "piece-5itubl",
+              "title": "New piece",
+              "format": "Article",
+              "assignee": "jason",
+              "status": "stage-nq11b",
+              "primary_keyword": "",
+              "geography": "all",
+              "revision_count": 0
             }
           ]
         }
