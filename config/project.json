@@ -996,9 +996,9 @@
               "title": "Gartner_AI in procurement",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "writing",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
-              "revision_count": 0,
+              "revision_count": 1,
               "primary_keyword": "",
               "geography": "all",
               "status_history": [
@@ -1006,10 +1006,19 @@
                   "stage": "writing",
                   "ts": "2026-07-02T10:49:23.470Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-07-02T10:49:33.506Z",
+                  "by": "manager"
                 }
               ],
-              "last_updated": "2026-07-02T10:49:23.477Z",
-              "last_updated_by": "manager"
+              "last_updated": "2026-07-02T10:49:33.506Z",
+              "last_updated_by": "manager",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-07-02T10:49:33.506Z",
+              "last_upload_by": "manager"
             }
           ]
         }
