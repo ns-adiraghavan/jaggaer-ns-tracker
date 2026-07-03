@@ -645,7 +645,21 @@
               "assignee": "m-e10nz",
               "notes": "",
               "url": "",
-              "status": "writing"
+              "status": "marketing-review",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-07-03T12:20:14.687Z",
+              "last_upload_by": "m-e10nz",
+              "last_updated": "2026-07-03T12:20:14.687Z",
+              "last_updated_by": "m-e10nz",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-07-03T12:20:14.688Z",
+                  "by": "m-e10nz"
+                }
+              ]
             },
             {
               "id": "piece-c-yad8u-7-5rl6",
