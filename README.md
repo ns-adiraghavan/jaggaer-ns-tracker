@@ -36,7 +36,7 @@ Browser (React via Babel CDN — no build step)
     │               └── GitHub Contents API
     │                       └── config/project.json  ← single source of truth
     │
-    ├── Claude conversation rail (inactive — API key pending)
+    ├── Claude conversation rail
     │       └── /api/anthropic.js  (Vercel serverless)
     │               └── Anthropic API  /v1/messages
     │
@@ -44,6 +44,8 @@ Browser (React via Babel CDN — no build step)
 ```
 
 **Key principle:** GitHub is the database. No separate backend, no database, no server-side state. Every read and write goes through the GitHub Contents API via a Vercel proxy that injects the PAT from environment variables. The browser never holds a credential.
+
+**Body parser limit:** `api/github.js` sets `bodyParser.sizeLimit = "10mb"` to support PDF deliverable uploads.
 
 ---
 
@@ -60,24 +62,23 @@ Browser (React via Babel CDN — no build step)
 │       └── {pillar-id}/
 │           └── {cluster-id}/
 │               └── {piece-id}/
-│                   └── deliverable-v{n}.html   ← uploaded content files
+│                   ├── brief-v{n}.{ext}           ← Jaggaer-uploaded briefs
+│                   └── deliverable-v{n}.{ext}     ← NS-uploaded content files
 │
 ├── repo-setup/                   ← Vercel serves this folder as the app root
 │   ├── index.html
 │   ├── styles.css
 │   ├── mock-data.js
-│   ├── api.js
+│   ├── api.js                    ← dead weight (root-level copy) — only api/ versions are served
 │   ├── entry.jsx
 │   ├── sidebar.jsx
 │   ├── tracker.jsx
-│   ├── claude-rail.jsx           ← exists but not wired in (API key pending)
-│   ├── sample-artifacts.jsx      ← Sample Artifacts tab
-│   ├── jai-demo.html             ← JAI interactive demo (standalone, no login at /demo)
 │   ├── admin.jsx
 │   ├── app.jsx
+│   ├── ai-playground.html        ← AI Playground microsite (standalone, 4-step journey + 13 tools)
 │   ├── vercel.json               ← must live here (Vercel root dir = repo-setup/)
 │   ├── api/
-│   │   ├── github.js             ← Vercel serverless proxy
+│   │   ├── github.js             ← Vercel serverless proxy (10mb body limit)
 │   │   ├── anthropic.js          ← Vercel serverless proxy
 │   │   ├── digest.js             ← Daily digest email (Vercel Cron)
 │   │   └── notify.js             ← Send to Editors email
@@ -87,7 +88,9 @@ Browser (React via Babel CDN — no build step)
 └── README.md
 ```
 
-> **Removed:** `bwc.jsx` and the `/build-with-claude/` directory are no longer part of the active app and can be deleted from the repo.
+> **Removed:** `bwc.jsx`, `/build-with-claude/`, `jai-demo.html`, `claude-rail.jsx`, and `sample-artifacts.jsx` are no longer part of the active app. The `/demo` route previously served by `jai-demo.html` is now replaced by the AI Playground at `/ai`.
+
+> **Dead weight:** Root-level `api.js`, `digest.js`, and `notify.js` are duplicates that Vercel ignores. Only the `api/` directory versions are served. Do not update the root-level copies.
 
 > **Note on vercel.json:** Because Vercel's root directory is set to `repo-setup/`, `vercel.json` must live inside `repo-setup/` — not the repo root. The repo-root copy (if it still exists) is ignored by Vercel.
 
@@ -109,7 +112,8 @@ Everything the app renders derives from `config/project.json`. Adding pillars, c
   "feedback": {},
   "schedule": [...],
   "workflow_stages": [...],
-  "notifications": { "digest_to": [...], "editors_to": [...] }
+  "notifications": { "digest_to": [...], "editors_to": [...] },
+  "playground_comments": [...]
 }
 ```
 
@@ -188,8 +192,15 @@ Valid `id` values: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`.
   "funnel": "MOFU",
   "url": "/predictive-supplier-risk-management",
   "notes": "Words: 1,200–1,500",
+  "deliverable_ext": "html",
   "last_upload": "2026-05-22T13:58:08.804Z",
-  "last_upload_by": "manager"
+  "last_upload_by": "manager",
+  "last_updated": "2026-05-22T13:58:08.804Z",
+  "last_updated_by": "manager",
+  "status_history": [
+    { "stage": "writing", "ts": "2026-05-22T13:58:08.804Z", "by": "manager" }
+  ],
+  "brief_files": ["brief-v1.pdf"]
 }
 ```
 
@@ -200,6 +211,11 @@ Valid `id` values: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`.
 | `phase` | `1` (informational) or `2` (commercial) |
 | `funnel` | `TOFU` / `MOFU` / `BOFU` |
 | `revision_count` | Increments on each NS submit |
+| `deliverable_ext` | Set on upload. Enables PDF/docx round-trip. Defaults to `"html"`. |
+| `status_history` | Append-only log of `{ stage, ts, by }`. UTC stored, US Eastern displayed. |
+| `brief_files` | Array of uploaded brief filenames. Set by `BriefUploadPanel`. |
+
+**Ad-Hoc Articles** are a separate content type that lives outside the main cluster/pillar hierarchy. They use a simplified two-stage review flow (`ad-hoc-review` stage) that bypasses `project.workflow_stages`. The `ad-hoc-review` stage is intentionally not listed in `workflow_stages` to avoid shifting stage indices. Every component that resolves stages needs an explicit patch for this stage.
 
 ### team
 
@@ -229,13 +245,33 @@ Written at runtime by the app:
       "verdict": "question",
       "body": "Is the tier-3 data sourced or illustrative?",
       "ts": "2026-05-14T08:50:00Z",
-      "stage": "marketing-review"
+      "stage": "marketing-review",
+      "revision": 1
     }
   ]
 }
 ```
 
 Valid verdicts: `"approved"`, `"needs-revision"`, `"question"`.
+
+The `revision` field on feedback entries enables version-aware inline comments — comments are grouped by the deliverable version they were left on; stale comments (from prior versions) appear collapsed under a "Previous versions" disclosure.
+
+### playground_comments
+
+Stored at `project.playground_comments[]`. Each entry is a pin placed on the AI Playground microsite by a reviewer:
+
+```json
+{
+  "id": "pc-1",
+  "author": "anna",
+  "body": "Step 2 copy needs shortening.",
+  "ts": "2026-06-01T10:00:00Z",
+  "resolved": false,
+  "page": "step-2"
+}
+```
+
+Managed via the `AIPlaygroundPanel` toggle-based commenting system inside the tracker.
 
 ### workflow_stages
 
@@ -251,9 +287,11 @@ Defines the full production funnel. Fully configurable — edit here or via **Ad
 }
 ```
 
-`actor` values: `"ns"` (any NS member), `"jaggaer"` (any Jaggaer member), `"person:{id}"` (named individual), `null` (terminal — approved state).
+`actor` values: `"ns"` (any NS member), `"jaggaer"` (any Jaggaer member), `"person:{id}"` (named individual), `null` (terminal — approved state). Actor can also be an array, e.g. `["person:abhishek", "person:m-ny8dy"]`, when multiple named reviewers share a stage.
 
 The app derives all role-based permissions from this config at runtime. Changing the actor for a stage immediately changes who sees the action button in the drawer.
+
+**SHA management:** `saveProject` always fetches a fresh SHA before PUT. On 409 conflict it retries with the refreshed SHA. Never pass a stale SHA — it causes cascading 409 failures.
 
 ---
 
@@ -264,17 +302,21 @@ The production funnel is fully configurable via `project.workflow_stages`. Curre
 | Stage | Actor | Meaning |
 |---|---|---|
 | `not-started` | Jaggaer | Brief not yet uploaded |
-| `brief-uploaded` | NS | Jaggaer has uploaded the brief; NS to begin writing |
-| `abhishek-review` | person: abhishek | Internal NS review before writing |
+| `stage-nq11b` | person: m-ny8dy | SME topic confirmation before brief |
+| `brief-uploaded` | NS + Jaggaer | Brief uploaded; NS begins writing |
 | `writing` | NS | NS submits draft to next reviewer |
-| `robert-review` | person: robert | Robert's SME review |
-| `marketing-review` | Jaggaer | Jaggaer marketing review |
-| `editors` | Jaggaer | Final editorial review |
+| `marketing-review` | person: abhishek + person: m-ny8dy | Abhishek and Orlagh review |
+| `robert-review` | person: m-9toiv | Robert's SME review |
+| `editors` | Jaggaer | CTA check / final editorial |
 | `approved` | — | Terminal state |
 
-**To change the funnel:** Edit stages in **Admin → Workflow** (drag to reorder, rename, change actor). Saves to `project.workflow_stages`. The digest email, role permissions, and drawer actions all update automatically.
+**Ad-Hoc Articles** use `ad-hoc-review` (simplified two-stage: NS submit → Jaggaer review → approved). This stage deliberately lives outside `project.workflow_stages`.
+
+**To change the funnel:** Edit stages in **Admin → Workflow** (drag to reorder, rename, change actor). Saves to `project.workflow_stages`. The digest email, role permissions, drawer actions, and FilterBar all update automatically — all stage resolution reads `project.workflow_stages` at runtime; nothing is hardcoded.
 
 A cluster is **publish-ready** when every piece reaches `approved`.
+
+**Return-to-sender:** When a reviewer selects "Needs Revision", the piece returns to the last NS-actor stage (not necessarily `writing`), preserving the correct return point regardless of workflow configuration.
 
 ---
 
@@ -295,6 +337,8 @@ Three types that cut across all four industry pillars:
 | Path 1 | Low-interest. Prefers ready-made solution (JAI). |
 | Path 2 | Medium-interest. Has friction (IT permissions, setup). |
 | Path 3 | Superuser. Will install, go deep, possibly fork the repo. |
+
+**Ad-Hoc Articles** are a fourth content category for one-off pieces not belonging to any cluster or pillar. They have a simplified two-stage review and appear in a dedicated section of the tracker.
 
 ---
 
@@ -337,8 +381,9 @@ All GitHub and Anthropic API calls. Calls `/api/github` and `/api/anthropic` (Ve
 
 Key functions:
 - `fetchProject()` — GET `config/project.json`, returns parsed JSON + SHA
-- `saveProject(data, sha)` — PUT `config/project.json` base64-encoded
-- `uploadPieceDeliverable(piece, clusterId, pillarId, monthId, contents, userId)` — PUT versioned deliverable to content folder
+- `saveProject(data, sha)` — PUT `config/project.json` base64-encoded; fetches fresh SHA on 409 and retries
+- `uploadPieceDeliverable(piece, clusterId, pillarId, monthId, payload, userId)` — PUT versioned deliverable to content folder; `payload` is `{ ext, name, binary, b64? text? }` from `readDeliverableFile()`
+- `uploadPieceBrief(piece, clusterId, pillarId, monthId, payload, userId)` — PUT versioned brief to content folder
 - `callClaude(messages, systemPrompt)` — POST to `/api/anthropic`
 
 ### entry.jsx
@@ -351,11 +396,11 @@ Left navigation. **By Pillar / By Type toggle:**
 - **By Pillar** (default): P01–P04 industry pillar nav with expandable cluster list
 - **By Type**: MSV-Driven / AI in S2P / Industry-Specific — lists every piece with status dot and click-through
 
-Nav sections: Tracker, Sample Artifacts, JAI Demo, Style Guide, Admin (admin mode only).
+Nav sections: Tracker, AI Playground, Admin (admin mode only).
 
 ### tracker.jsx
 
-Main content area. Two tabs:
+Main content area. Three tabs:
 
 **Content Tracker** — two view modes:
 - *Cards view*: cluster cards with coloured headers, progress arcs, piece rows
@@ -363,84 +408,20 @@ Main content area. Two tabs:
 
 **Publishing Sequence** — reads `project.schedule`. Week-by-week cluster readiness and goal statements.
 
+**Weekly Progress** — phase-aware progress view. Shows Phase 1 vs Phase 2 completion, recent activity, and per-stage piece counts. Includes the FilterBar which reads `project.workflow_stages` dynamically — no hardcoded stage IDs.
+
 **Key components:**
 
-- `DrawerOverlay` — full modal overlay on piece click. Tabs: Upload / Replace Draft / Review / Preview & Comment / Notes / Details / Edit (admin) / Delete (admin)
-- `UploadPanel` — NS submits a file and advances to the next workflow stage. Versioned: each submit creates `deliverable-v{n}.html`
-- `ReplaceDraftPanel` — NS replaces their current draft *without* advancing the workflow. Status unchanged; no version increment
-- `ReviewPanel` — unified review for any non-NS stage. Verdicts: Approved (advances) / Needs Revision (sends back to last NS stage) / Question (status unchanged, note logged)
-- `PreviewPanel` — renders uploaded HTML deliverables in a sandboxed iframe. Injects paragraph-number gutter (`¶1`, `¶2`…) for easy reference
-- `AnnotatePanel` — Preview with inline comment sidebar. Click any `¶` number to auto-populate the section reference field
-
-### claude-rail.jsx
-
-Claude conversation rail. **Not wired into the app** — Anthropic API key pending. When the key is available:
-
-1. Add `ANTHROPIC_API_KEY` to Vercel env
-2. Update model in `api/anthropic.js` from `claude-haiku-4-5` to `claude-sonnet-4-6`
-3. Add `<script type="text/babel" src="claude-rail.jsx"></script>` to `index.html`
-4. Add `<ClaudeRail project={project} currentUser={currentUser} />` to `app.jsx`
-
-### sample-artifacts.jsx
-
-Sample Artifacts tab — external-facing content hub showcasing Jaggaer OS / JAI. Index landing with numbered article cards. Article 01 (Agent Builder live demos), Article 02 (Prompting 101), Articles 03–05 as coming-soon placeholders.
-
-### jai-demo.html — JAI Interactive Demo
-
-Self-contained, single-file (~2,170 lines) interactive demo of JAI and AI-in-procurement tooling. No API key required. No build step. Accessible two ways:
-
-- **In the tracker:** via the JAI Demo nav entry in the sidebar, renders in an iframe with a tracker back bar above it. Login required (normal tracker session).
-- **Direct URL (no login):** `https://jaggaer-ns-tracker.vercel.app/demo`, served by a `vercel.json` rewrite rule pointing `/demo` directly at `jai-demo.html`. No React, no session check, no login gate.
-
-#### What the demo contains
-
-Fifteen interactive tools organised into four capability groups mirroring the live JAI page structure:
-
-| Capability Group | Tools |
-|---|---|
-| Conversation Window | Approval Path Checker, Supplier Message Drafter, Sole-Source Justifier, Prompt Builder |
-| Deep Research | Supplier Risk Scanner, Contract Clause Analyser, Invoice Exception Detector, Spend Classifier, Tender Summariser, Spend Diagnostic |
-| Guided Sourcing | RFP Builder, Should-Cost Estimator, Bid Comparison & Award |
-| Know where you stand | Procurement Myth Check, AI Readiness Scorecard |
-
-Every tool is input-aware, parsing real user input (supplier geographies, clause text, invoice line items, approval thresholds, cost-stack decomposition, bid normalisation, maturity scoring) and producing genuinely responsive output. A customer-type lens (Manufacturing / Higher Education / Public Sector) is available on applicable tools, loading vertical-specific examples and tagging results accordingly.
-
-Each tool carries a contrast strip comparing the generic demo output to what JAI does with live organisational data, making the demo-to-product mapping explicit.
-
-#### Entry experience
-
-A sandbox intent box sits above the capability console on the home page. Visitors can type what they are trying to do (e.g. "check my supplier risk" or "compare bids") and get keyword-routed to the matching tool, or choose from quick-start chips. The full capability list remains below for those who prefer to browse.
-
-#### Tool switcher
-
-Every tool page carries a "Keep exploring" rail at the foot: capability-coloured dots, a capability tag per pill, siblings-first ordering (tools in the same capability group appear first), and a Surprise Me dice button for random discovery.
-
-#### Design system
-
-Implements the JAGGAER v2.0 web design guidelines. Key tokens:
-
-| Token | Value |
-|---|---|
-| Primary typeface | Inter (300-800) from Google Fonts, the single approved UI typeface |
-| Stats / numbers typeface | Poppins (600-900), matching jaggaer.com (WordPress/Elementor). Used on hero counters, how-section numbers, diagnostic outputs, scorecard results |
-| Heading weight | 400 (light), differentiating word emphasised |
-| JAI gradient | 90 deg #5300CE to #E22B83, AI-branded contexts only |
-| CTA red | #D22428, primary CTAs and JAGGAER wordmark only |
-| Accent green | #4D8194, eyebrows and section labels |
-
-#### CTA section
-
-Two-column layout matching the real jaggaer.com site: left-side "Talk to an expert. See JAI live." copy with a "See how JAI powers:" feature list, right-side dark "Request a Demo" card (name, company, role, email, country, challenge textarea) linking to jaggaer.com/book-a-demo.
-
-#### Suggested talking points
-
-- Lead with a tool, open Supplier Risk Scanner or Approval Path Checker and let them type their own example
-- Point at the contrast strip: *"That's the generic version. Here's what JAI does with your real data"*
-- Walk through the sourcing suite: RFP Builder, then Should-Cost Estimator, then Bid Comparison, three tools that show a sourcing event end-to-end
-- Try the AI Readiness Scorecard, it surfaces gaps and links to the tool that addresses each one
-- Use the hinge line: *"One question replaces your help desk and your analyst"*
-- Close on the Spend Diagnostic, it puts a number on the status quo and leads naturally into *"let's model your real numbers"*
-- Diagnostic figures are directional estimates from published benchmarks, *"directional; a specialist models your real numbers"* is the honest and stronger position
+- `DrawerOverlay` — full modal overlay on piece click. Tabs: Upload / Replace Draft / Brief (admin, Jaggaer) / Review / Preview & Comment / History / Notes / Details / Edit (admin) / Delete (admin)
+- `UploadPanel` — NS submits a file and advances to the next workflow stage. Versioned: each submit creates `deliverable-v{n}.{ext}`. Supports HTML, PDF, DOCX, MD. Binary types (PDF, DOCX) are committed as raw base64. Gates `updatePiece()` behind upload success check.
+- `ReplaceDraftPanel` — NS replaces their current draft *without* advancing the workflow. Status unchanged; no version increment. Use to fix errors before a reviewer sees the piece.
+- `BriefUploadPanel` — Jaggaer uploads a brief (PDF, DOCX, MD, HTML). Stored at `content/{month}/{pillar}/{cluster}/{piece}/brief-v{n}.{ext}`. Gates `updatePiece()` behind upload success check. Advances status to `brief-uploaded`.
+- `ReviewPanel` — unified review for any non-NS stage. Verdicts: Approved (advances to next stage) / Needs Revision (return-to-sender, back to last NS stage) / Question (status unchanged, note logged)
+- `PreviewPanel` — renders uploaded HTML deliverables in a sandboxed iframe. Injects paragraph-number gutter (`¶1`, `¶2`…) for easy reference. Non-HTML types (PDF) rendered in a native viewer or download link.
+- `AnnotatePanel` — Preview with inline comment sidebar. Click any `¶` number to auto-populate the section reference field. Comments carry `revision` field — stale comments from prior versions appear collapsed.
+- `HistoryPanel` — per-piece stage-history log. Reads `piece.status_history[]`. Timestamps stored UTC, displayed in US Eastern.
+- `CsvSyncPanel` (in Admin) — download current topics as CSV; upload an edited CSV to update piece metadata in bulk. New pieces can be added via CSV (blank `id`, valid `cluster` name). Status, revision count, and feedback are never overwritten by CSV sync.
+- `AIPlaygroundPanel` — embeds `ai-playground.html` in an iframe with a toggle-based commenting system. Reviewer pins stored in `project.playground_comments[]`.
 
 ### admin.jsx
 
@@ -450,18 +431,19 @@ Config editor for admin users. Tabs:
 - **Team** — add team members
 - **Workflow** — drag to reorder stages, rename, set actor per stage. Saves to `project.workflow_stages`
 - **Notifications** — manage digest and editors email recipients, send test digest
+- **CSV Sync** — bulk-edit piece metadata via CSV round-trip
 
 ### app.jsx
 
-Root component. Hydrates from GitHub on load, falls back to `MOCK_PROJECT` on error. Debounced auto-save (1.5s) on any project state change.
+Root component. Hydrates from GitHub on load, falls back to `MOCK_PROJECT` on error. Debounced auto-save (1.5s) on any project state change. Calls `syncWorkflowGlobals(project)` after hydration to keep `STATUS_META`, `STATUS_ORDER`, and `IN_MOTION_STATUSES` in sync with the live workflow config.
 
 ### api/github.js
 
-Vercel serverless. Reads `GITHUB_TOKEN` and `GITHUB_REPO` from `process.env`. Proxies GET and PUT to GitHub Contents API.
+Vercel serverless. Reads `GITHUB_TOKEN` and `GITHUB_REPO` from `process.env`. Proxies GET and PUT to GitHub Contents API. Body parser limit raised to `10mb` to support PDF uploads.
 
 ### api/anthropic.js
 
-Vercel serverless. Reads `ANTHROPIC_API_KEY` from `process.env`. Proxies POST to Anthropic `/v1/messages`.
+Vercel serverless. Reads `ANTHROPIC_API_KEY` from `process.env`. Proxies POST to Anthropic `/v1/messages`. Active — API key is live.
 
 ### api/digest.js
 
@@ -470,6 +452,58 @@ Daily digest email. Triggered by Vercel Cron at 12:30 UTC (6pm IST). Only sends 
 ### api/notify.js
 
 "Send to Editors" email for fully-approved clusters. Triggered by the **Send to Editors →** button on cluster cards (admin mode). Reads recipient list from `project.notifications.editors_to`.
+
+### ai-playground.html — AI Playground
+
+Self-contained, single-file interactive microsite for S2P procurement professionals. No API key required (fully static, all responses are pre-scripted). No build step. Accessible two ways:
+
+- **In the tracker:** via the AI Playground nav entry in the sidebar, rendered via `AIPlaygroundPanel` with toggle-based commenting overlay. Login required (normal tracker session).
+- **Direct URL (no login):** `https://jaggaer-ns-tracker.vercel.app/ai`, served by a `vercel.json` rewrite rule pointing `/ai` directly at `ai-playground.html`.
+
+#### Journey structure
+
+A four-step guided experience followed by 13 interactive tool pages:
+
+| Step | Description |
+|---|---|
+| Step 1 — Prompt Builder | User builds a real S2P prompt using a guided wizard |
+| Step 2 — Myth Check | Debunks procurement AI myths with interactive pick-and-reveal |
+| Step 3 — AI Readiness | Maturity scorecard with dial and dimension breakdown |
+| Step 4 — What Next | Chat-style recommendations based on readiness score |
+
+#### Interactive tools (13)
+
+Organized into four capability groups:
+
+| Capability Group | Tools |
+|---|---|
+| Conversation Window | Approval Path Checker, Supplier Message Drafter, Sole-Source Justifier, Prompt Builder |
+| Deep Research | Supplier Risk Scanner, Contract Clause Analyser, Invoice Exception Detector, Spend Classifier, Tender Summariser, Spend Diagnostic |
+| Guided Sourcing | RFP Builder, Should-Cost Estimator, Bid Comparison & Award |
+| Know where you stand | Procurement Myth Check, AI Readiness Scorecard |
+
+Every tool is input-aware, parsing real user input and producing genuinely responsive output. A customer-type lens (Manufacturing / Higher Education / Public Sector) is available on applicable tools. Each tool carries a contrast strip comparing demo output to what JAI does with live organisational data.
+
+#### Design system
+
+Implements the JAGGAER v2.0 web design guidelines. Key tokens:
+
+| Token | Value |
+|---|---|
+| Primary typeface | Inter (300–800) from Google Fonts |
+| Stats / numbers typeface | Poppins (600–900), matching jaggaer.com |
+| JAI gradient | 90deg `#5300CE` to `#E22B83` (AI-branded contexts only) |
+| CTA red | `#D22428` (primary CTAs and JAGGAER wordmark only) |
+| Dark ink | `#0B0D12` (full-bleed JAI zone backgrounds) |
+
+**Design rules:**
+- Purple/gradient reserved exclusively for JAI moments; red is the primary S2P accent
+- "Full bleed" JAI zones use `width:100vw; left:50%; transform:translateX(-50%)`; no `max-width`, `border-radius`, or `margin:auto`
+- JAI footers state what JAI does on real data without acknowledging the demo context
+- No marketing verbs (transform, unlock, leverage); no em-dashes; lead with what something does
+- JAI referenced only in designated zones; JAGGAER product name not used in non-JAI sections
+
+**Copy source of truth:** `ai-playground.html` itself. No separate `copy.md` in repo.
 
 ---
 
@@ -482,9 +516,9 @@ Daily digest email. Triggered by Vercel Cron at 12:30 UTC (6pm IST). Only sends 
 5. Add environment variables (see §9)
 6. Deploy
 
-Vercel auto-detects `api/*.js` files as serverless functions. The Cron job and the `/demo` rewrite are both configured in `vercel.json` — which **must live inside `repo-setup/`**, not the repo root.
+Vercel auto-detects `api/*.js` files as serverless functions. The Cron job, the `/ai` rewrite, and any other routes are all configured in `vercel.json` — which **must live inside `repo-setup/`**, not the repo root.
 
-The `/demo` route (`https://jaggaer-ns-tracker.vercel.app/demo`) is served by a Vercel rewrite pointing directly to `jai-demo.html`. No login required, no React, no session.
+The `/ai` route (`https://jaggaer-ns-tracker.vercel.app/ai`) is served by a Vercel rewrite pointing directly to `ai-playground.html`. No login required, no React, no session.
 
 ---
 
@@ -494,7 +528,7 @@ The `/demo` route (`https://jaggaer-ns-tracker.vercel.app/demo`) is served by a 
 |---|---|
 | `GITHUB_TOKEN` | Classic PAT, full repo scope. Never in code. |
 | `GITHUB_REPO` | `ns-adiraghavan/jaggaer-ns-tracker` |
-| `ANTHROPIC_API_KEY` | Pending. Leave unset until purchased. |
+| `ANTHROPIC_API_KEY` | Live. Required for Claude conversation rail. |
 | `MAILEROO_API_KEY` | Email delivery. Get from Maileroo dashboard. |
 | `APP_URL` | Clean production URL used in digest email CTA. Optional — falls back to hardcoded value. |
 | `DIGEST_TO` | Fallback recipient list. Manage via **Admin → Notifications** — that takes priority. |
@@ -504,7 +538,7 @@ The `/demo` route (`https://jaggaer-ns-tracker.vercel.app/demo`) is served by a 
 
 ## 10. Email Notifications
 
-Two email flows, both via Maileroo.
+Two email flows, both via Maileroo (`X-Sending-Key` auth header). Recipient addresses must be passed as structured `{ address, display_name }` objects — not flat strings.
 
 ### Setup
 
@@ -571,4 +605,4 @@ Write-Host "Done" -ForegroundColor Green
 
 ---
 
-*Last updated: June 2026, v3.5. Changes from v3.4: JAI interactive demo expanded from 12 to 15 tools (added Should-Cost Estimator, Bid Comparison & Award, AI Readiness Scorecard). Sandbox entry experience added. Tool switcher redesigned. Stats font corrected to Poppins. Talk to an expert CTA rebuilt to match real site. All em-dashes removed from demo file.*
+*Last updated: July 2026, v3.6. Changes from v3.5: `jai-demo.html` replaced by `ai-playground.html` (4-step guided journey + 13 tools, `/ai` route). Ad-Hoc Articles content type added (two-stage review, outside main workflow). Per-piece stage-history log (`status_history[]`). Return-to-sender workflow. Version-aware inline comments (`revision` field on feedback). `BriefUploadPanel` for Jaggaer brief uploads. `ReplaceDraftPanel` for NS draft replacement. Weekly Progress tab. CSV import with new-piece insertion. `AIPlaygroundPanel` with `playground_comments[]`. Maileroo migrated to `X-Sending-Key` auth + structured address objects. GitHub body parser limit raised to 10mb. `ANTHROPIC_API_KEY` now live. Removed `sample-artifacts.jsx`, `claude-rail.jsx`, `jai-demo.html`, `bwc.jsx`.*
