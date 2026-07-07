@@ -1,71 +1,47 @@
 // Performance panel — landing page metrics per approved piece.
 //
+// Default view: all approved pieces as cards, empty-metric state until a sheet
+// is connected. Card click opens a drawer — if no sheet yet, the drawer shows
+// the connection prompt inline. Once connected, the drawer shows metrics.
+//
 // Data flow:
-//   1. Sheet URL lives in project.performance.sheet_url (admin-editable via a
-//      compact setup card the first time or when Jason sends a new sheet).
-//   2. /api/performance?url=... fetches the CSV, returns { headers, rows,
-//      url_col, trend_col, fetched_at }.
-//   3. Rows are joined to approved pieces by URL — we normalise both sides
-//      (strip protocol/host/trailing slash) so a slug like "/blog/foo" from the
-//      sheet matches "https://www.jaggaer.com/blog/foo" from publishing.live_url.
-//   4. Anything unmatched (rows without a piece, or approved pieces without a
-//      row) is collapsed at the bottom rather than dropped.
-//
-// Layout is visual-first: each approved piece with data becomes a card
-// showing the first numeric column as its hero metric, secondary metrics in a
-// compact strip, and a trend arrow when the sheet provides one. Full metric
-// list lives in a slide-in drawer.
-//
-// Columns are entirely sheet-driven — Jason is still finalising the metric
-// template, so nothing about column names is hardcoded.
+//   1. Sheet URL lives in project.performance.sheet_url.
+//   2. /api/performance?url=... fetches CSV → { headers, rows, url_col, trend_col }.
+//   3. Rows joined to approved pieces by URL (normalised both sides).
+//   4. Unmatched rows surfaced via filter chip; never silently dropped.
 
-const { useState: usePerfState, useEffect: usePerfEffect, useMemo: usePerfMemo, useRef: usePerfRef } = React;
+const { useState: usePerfState, useEffect: usePerfEffect, useMemo: usePerfMemo } = React;
 
 // ─── Utilities ──────────────────────────────────────────────────────────────
 
-// Normalise a URL / slug for join-key comparison.
-// "https://www.jaggaer.com/blog/foo/" → "/blog/foo"
-// "/blog/foo"                          → "/blog/foo"
-// "blog/foo"                           → "/blog/foo"
 function normUrl(raw) {
   if (!raw) return null;
   let s = String(raw).trim().toLowerCase();
   if (!s) return null;
-  // Strip protocol + host
   s = s.replace(/^https?:\/\/[^/]+/, "");
-  // Strip trailing slash (but keep root "/")
   if (s.length > 1 && s.endsWith("/")) s = s.slice(0, -1);
-  // Ensure leading slash if it's a path-like fragment
   if (s && !s.startsWith("/") && !s.startsWith("http")) s = "/" + s;
   return s || null;
 }
 
-// Which columns hold numeric data (ignoring the URL column)? First numeric
-// column becomes the hero metric on each card; the next 2-3 fill the strip.
 function classifyColumns(headers, rows, urlCol, trendCol) {
-  const numeric = [];
-  const text = [];
+  const numeric = [], text = [];
   for (const h of headers) {
-    if (h === urlCol) continue;
-    if (h === trendCol) continue;
-    // Sample the first 5 non-empty values in this column.
+    if (h === urlCol || h === trendCol) continue;
     const sample = rows.slice(0, 5).map(r => r[h]).filter(v => v !== "" && v != null);
-    const numericHit = sample.filter(v => typeof v === "number").length;
-    if (numericHit >= Math.ceil(sample.length / 2) && sample.length > 0) numeric.push(h);
+    const hits = sample.filter(v => typeof v === "number").length;
+    if (hits >= Math.ceil(sample.length / 2) && sample.length > 0) numeric.push(h);
     else text.push(h);
   }
   return { numeric, text };
 }
 
-// Format a number for hero display — 1,248 not 1248.
 function formatNum(v) {
   if (typeof v !== "number") return v == null || v === "" ? "—" : String(v);
   if (Math.abs(v) >= 1000) return v.toLocaleString("en-US");
   return String(v);
 }
 
-// Trend cell rendering — sheet convention is expected to be "▲ 14%", "▼ 5%",
-// "—". We colour up/down but pass the string through as-is.
 function parseTrend(v) {
   if (v == null || v === "" || v === "—") return { dir: "flat", label: "—" };
   const s = String(v);
@@ -74,45 +50,41 @@ function parseTrend(v) {
   return { dir: "flat", label: s };
 }
 
-// Small helper — the two hero displays live in tracker.jsx, borrow the same
-// EST formatter it exports.
 function fmtSyncTime(iso) {
   if (!iso) return "never";
-  try {
-    return formatEST(iso, { hour: "2-digit", minute: "2-digit" }) + " EST";
-  } catch { return iso; }
+  try { return formatEST(iso, { hour: "2-digit", minute: "2-digit" }) + " EST"; }
+  catch { return iso; }
 }
 
 // ─── Root panel ─────────────────────────────────────────────────────────────
-function PerformancePanel({ project, setProject, currentUser, adminMode }) {
+function PerformancePanel({ project, setProject, currentUser }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const sheetUrl = project.performance?.sheet_url || "";
 
-  const [status, setStatus] = usePerfState(sheetUrl ? "idle" : "no-url"); // idle | loading | ok | error | no-url
-  const [error, setError] = usePerfState(null);
-  const [data, setData] = usePerfState(null); // { headers, rows, url_col, trend_col, fetched_at }
-  const [filter, setFilter] = usePerfState("all"); // all | matched | unmatched-rows | missing-data
+  const [sheetStatus, setSheetStatus] = usePerfState(sheetUrl ? "idle" : "no-url");
+  const [sheetError, setSheetError] = usePerfState(null);
+  const [data, setData] = usePerfState(null);
   const [selected, setSelected] = usePerfState(null); // piece.id of open drawer
-  const [showSetup, setShowSetup] = usePerfState(!sheetUrl);
-  const [sortBy, setSortBy] = usePerfState(null); // header name to sort desc by
+  const [sortBy, setSortBy] = usePerfState(null);
+  const [showUnmatched, setShowUnmatched] = usePerfState(false);
 
-  // ── Fetch on mount / URL change ────────────────────────────────────────
+  // ── Fetch when sheetUrl is set ─────────────────────────────────────────
   usePerfEffect(() => {
-    if (!sheetUrl) { setStatus("no-url"); return; }
+    if (!sheetUrl) { setSheetStatus("no-url"); return; }
     let cancelled = false;
-    setStatus("loading"); setError(null);
+    setSheetStatus("loading"); setSheetError(null);
     fetch(`/api/performance?url=${encodeURIComponent(sheetUrl)}`)
       .then(r => r.json().then(j => ({ ok: r.ok, body: j })))
       .then(({ ok, body }) => {
         if (cancelled) return;
-        if (!ok) { setStatus("error"); setError(body.error || "Fetch failed"); return; }
-        setData(body); setStatus("ok");
+        if (!ok) { setSheetStatus("error"); setSheetError(body.error || "Fetch failed"); return; }
+        setData(body); setSheetStatus("ok");
       })
-      .catch(e => { if (!cancelled) { setStatus("error"); setError(e.message); } });
+      .catch(e => { if (!cancelled) { setSheetStatus("error"); setSheetError(e.message); } });
     return () => { cancelled = true; };
   }, [sheetUrl]);
 
-  // ── Approved pieces (join target) ──────────────────────────────────────
+  // ── All approved pieces — always the spine of the view ─────────────────
   const approvedPieces = usePerfMemo(() => {
     const out = [];
     for (const pillar of project.pillars || []) {
@@ -129,37 +101,29 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
 
   // ── Join sheet rows to approved pieces ─────────────────────────────────
   const joined = usePerfMemo(() => {
-    if (!data || !data.rows.length) return { matched: [], unmatchedRows: [], missingData: approvedPieces };
-
+    if (!data || !data.rows.length) {
+      return { byPieceId: {}, unmatchedRows: [] };
+    }
     const urlCol = data.url_col;
     const rowByKey = new Map();
     const unmatchedRows = [];
-
     for (const row of data.rows) {
       const key = normUrl(row[urlCol]);
       if (!key) { unmatchedRows.push(row); continue; }
       if (!rowByKey.has(key)) rowByKey.set(key, row);
     }
-
-    const matched = [];
-    const missingData = [];
+    const byPieceId = {};
     const usedKeys = new Set();
-
     for (const p of approvedPieces) {
       if (p.urlKey && rowByKey.has(p.urlKey)) {
-        matched.push({ ...p, row: rowByKey.get(p.urlKey) });
+        byPieceId[p.piece.id] = rowByKey.get(p.urlKey);
         usedKeys.add(p.urlKey);
-      } else {
-        missingData.push(p);
       }
     }
-
-    // Rows whose URL didn't hit any approved piece → unmatched.
-    const unmatched = [];
     for (const [key, row] of rowByKey.entries()) {
-      if (!usedKeys.has(key)) unmatched.push(row);
+      if (!usedKeys.has(key)) unmatchedRows.push(row);
     }
-    return { matched, unmatchedRows: [...unmatched, ...unmatchedRows], missingData };
+    return { byPieceId, unmatchedRows };
   }, [data, approvedPieces]);
 
   // ── Column classification ──────────────────────────────────────────────
@@ -171,56 +135,65 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
   const heroMetric = cols.numeric[0] || null;
   const stripMetrics = cols.numeric.slice(1, 4);
 
-  // ── KPI strip — totals across matched pieces ───────────────────────────
-  // Only include columns that actually contained numeric data — text-shaped
-  // columns like "2m 48s" would otherwise show as "Total: 0 across 0 pieces".
+  // ── KPI strip — totals across matched pieces only ──────────────────────
   const kpis = usePerfMemo(() => {
-    if (!joined.matched.length) return null;
+    if (!data) return null;
     const totals = {};
     for (const m of cols.numeric.slice(0, 4)) {
       let sum = 0, count = 0;
-      for (const j of joined.matched) {
-        const v = j.row[m];
+      for (const p of approvedPieces) {
+        const row = joined.byPieceId[p.piece.id];
+        if (!row) continue;
+        const v = row[m];
         if (typeof v === "number") { sum += v; count++; }
       }
       if (count > 0) totals[m] = { sum, count };
     }
-    return totals;
-  }, [joined, cols]);
+    return Object.keys(totals).length > 0 ? totals : null;
+  }, [data, joined, cols, approvedPieces]);
 
-  // ── Filter + sort visible cards ────────────────────────────────────────
-  const visibleCards = usePerfMemo(() => {
-    let list = joined.matched;
-    if (sortBy) {
-      list = [...list].sort((a, b) => {
-        const va = a.row[sortBy], vb = b.row[sortBy];
-        if (typeof va === "number" && typeof vb === "number") return vb - va;
-        return String(vb || "").localeCompare(String(va || ""));
-      });
-    } else if (heroMetric) {
-      // Default sort: hero metric descending.
-      list = [...list].sort((a, b) => {
-        const va = a.row[heroMetric], vb = b.row[heroMetric];
-        if (typeof va === "number" && typeof vb === "number") return vb - va;
-        return 0;
-      });
-    }
-    return list;
-  }, [joined, sortBy, heroMetric]);
+  // ── Sorted card list ───────────────────────────────────────────────────
+  const sortedPieces = usePerfMemo(() => {
+    if (!heroMetric || !data) return approvedPieces;
+    const metric = sortBy || heroMetric;
+    return [...approvedPieces].sort((a, b) => {
+      const ra = joined.byPieceId[a.piece.id];
+      const rb = joined.byPieceId[b.piece.id];
+      const va = ra ? ra[metric] : null;
+      const vb = rb ? rb[metric] : null;
+      // Pieces with data sort before those without
+      if (va == null && vb == null) return 0;
+      if (va == null) return 1;
+      if (vb == null) return -1;
+      if (typeof va === "number" && typeof vb === "number") return vb - va;
+      return 0;
+    });
+  }, [approvedPieces, joined, sortBy, heroMetric, data]);
 
-  // ── Save sheet URL to project.json ─────────────────────────────────────
+  // ── Save sheet URL ─────────────────────────────────────────────────────
   function saveSheetUrl(newUrl) {
     setProject(p => ({
       ...p,
       performance: { ...(p.performance || {}), sheet_url: newUrl, last_configured_by: currentUser?.id, last_configured_at: new Date().toISOString() },
     }));
-    setShowSetup(false);
   }
 
-  const selectedPiece = selected ? joined.matched.find(m => m.piece.id === selected) : null;
+  function doRefresh() {
+    if (!sheetUrl) return;
+    setSheetStatus("loading");
+    fetch(`/api/performance?url=${encodeURIComponent(sheetUrl)}`)
+      .then(r => r.json())
+      .then(j => { setData(j); setSheetStatus("ok"); })
+      .catch(e => { setSheetStatus("error"); setSheetError(e.message); });
+  }
+
+  const selectedEntry = selected ? approvedPieces.find(p => p.piece.id === selected) : null;
+  const selectedRow = selected ? joined.byPieceId[selected] : null;
+  const matchedCount = Object.keys(joined.byPieceId).length;
 
   return (
     <main className="ns-tracker" style={{ padding: "28px 32px", maxWidth: "1240px" }}>
+
       {/* ── Header ─────────────────────────────────────────────────────── */}
       <header style={{ marginBottom: "24px", display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: "20px", flexWrap: "wrap" }}>
         <div>
@@ -231,92 +204,44 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
             How the pieces we shipped are doing.
           </h1>
           <p style={{ ...FONT, fontSize: "0.8rem", color: "#888", marginTop: "8px", maxWidth: "640px", lineHeight: 1.5 }}>
-            Metrics pulled from Jaggaer's Google Analytics sheet and joined to approved pieces by URL. Column set follows the sheet — Jason iterates the template there, this view adapts.
+            {approvedPieces.length} approved {approvedPieces.length === 1 ? "piece" : "pieces"}.
+            {data ? ` ${matchedCount} matched to sheet data.` : " Click any card to connect Google Analytics data."}
           </p>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          {sheetUrl && (
-            <>
-              <div style={{ ...FONT, fontSize: "0.7rem", color: "#999" }}>
-                {status === "loading" && "Syncing…"}
-                {status === "ok" && data && <>Synced {fmtSyncTime(data.fetched_at)}</>}
-                {status === "error" && <span style={{ color: "#c8401a" }}>Sync failed</span>}
-              </div>
-              <button
-                onClick={() => { setStatus("loading"); fetch(`/api/performance?url=${encodeURIComponent(sheetUrl)}`).then(r => r.json()).then(j => { setData(j); setStatus("ok"); }).catch(e => { setStatus("error"); setError(e.message); }); }}
-                style={{
-                  ...FONT, fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase",
-                  padding: "6px 12px", border: "1px solid #d7d1c8", background: "#fff", color: "#444",
-                  borderRadius: "3px", cursor: "pointer",
-                }}
-                title="Re-fetch sheet"
-              >
-                ↻ Refresh
-              </button>
-              <button
-                onClick={() => setShowSetup(true)}
-                style={{
-                  ...FONT, fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase",
-                  padding: "6px 12px", border: "1px solid #d7d1c8", background: "#fff", color: "#444",
-                  borderRadius: "3px", cursor: "pointer",
-                }}
-                title="Change sheet URL"
-              >
-                Sheet
-              </button>
-            </>
-          )}
-        </div>
+        {/* Controls — only visible once sheet is connected */}
+        {sheetUrl && (
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div style={{ ...FONT, fontSize: "0.7rem", color: "#999" }}>
+              {sheetStatus === "loading" && "Syncing…"}
+              {sheetStatus === "ok" && data && <>Synced {fmtSyncTime(data.fetched_at)}</>}
+              {sheetStatus === "error" && <span style={{ color: "#c8401a" }}>Sync failed</span>}
+            </div>
+            <button onClick={doRefresh} style={{
+              ...FONT, fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase",
+              padding: "6px 12px", border: "1px solid #d7d1c8", background: "#fff", color: "#444", borderRadius: "3px", cursor: "pointer",
+            }}>↻ Refresh</button>
+          </div>
+        )}
       </header>
 
-      {/* ── Setup card (first-run or change sheet URL) ─────────────────── */}
-      {showSetup && (
-        <SetupCard
-          currentUrl={sheetUrl}
-          onSave={saveSheetUrl}
-          onCancel={() => setShowSetup(false)}
-          canCancel={!!sheetUrl}
-        />
-      )}
-
-      {/* ── Loading / error / no-url states ─────────────────────────────── */}
-      {status === "no-url" && !showSetup && (
-        <EmptyState
-          title="No sheet connected yet."
-          body="Ask Jason for the shared Google Analytics sheet, then paste the URL to start pulling metrics."
-          cta="Connect sheet"
-          onCta={() => setShowSetup(true)}
-        />
-      )}
-
-      {status === "loading" && (
-        <div style={{ ...FONT, padding: "40px", textAlign: "center", color: "#aaa", fontSize: "0.8rem" }}>
-          Fetching sheet…
-        </div>
-      )}
-
-      {status === "error" && (
+      {/* ── Sync error banner ────────────────────────────────────────────── */}
+      {sheetStatus === "error" && (
         <div style={{
-          ...FONT, padding: "20px 24px", background: "#fff", border: "1px solid #f0d0c0", borderLeft: "3px solid #c8401a",
-          borderRadius: "3px", marginBottom: "20px",
+          ...FONT, padding: "12px 16px", background: "#fff", border: "1px solid #f0d0c0",
+          borderLeft: "3px solid #c8401a", borderRadius: "3px", marginBottom: "20px",
+          fontSize: "0.78rem", color: "#333", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "16px",
         }}>
-          <div style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#c8401a", marginBottom: "6px" }}>
-            Sync error
-          </div>
-          <div style={{ fontSize: "0.82rem", color: "#333", lineHeight: 1.5 }}>{error}</div>
-          <div style={{ fontSize: "0.72rem", color: "#888", marginTop: "8px" }}>
-            Confirm the sheet is shared "anyone with the link can view", or paste a fresh URL below.
-          </div>
-          <button onClick={() => setShowSetup(true)} style={{
-            marginTop: "12px", ...FONT, fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase",
-            padding: "6px 12px", border: "1px solid #d7d1c8", background: "#faf8f4", color: "#444", borderRadius: "3px", cursor: "pointer",
-          }}>Update sheet URL</button>
+          <span>Sheet sync failed — {sheetError}. Check the sheet is shared "anyone with the link can view".</span>
+          <button onClick={() => setSelected("__setup__")} style={{
+            ...FONT, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
+            padding: "5px 10px", border: "1px solid #d7d1c8", background: "#faf8f4", color: "#444", borderRadius: "3px", cursor: "pointer", whiteSpace: "nowrap",
+          }}>Update URL</button>
         </div>
       )}
 
-      {/* ── KPI strip ────────────────────────────────────────────────────── */}
-      {status === "ok" && kpis && Object.keys(kpis).length > 0 && (
+      {/* ── KPI strip — visible only once data is loaded ─────────────────── */}
+      {kpis && (
         <div style={{ display: "grid", gridTemplateColumns: `repeat(${Math.min(4, Object.keys(kpis).length)}, 1fr)`, gap: "12px", marginBottom: "24px" }}>
           {Object.keys(kpis).map(m => (
             <div key={m} style={{
@@ -326,7 +251,7 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
               <div style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888" }}>
                 Total {m}
               </div>
-              <div style={{ ...FONT, fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 600, color: "#1a2535", marginTop: "4px", lineHeight: 1 }}>
+              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 600, color: "#1a2535", marginTop: "4px", lineHeight: 1 }}>
                 {formatNum(kpis[m].sum)}
               </div>
               <div style={{ ...FONT, fontSize: "0.68rem", color: "#aaa", marginTop: "4px" }}>
@@ -337,20 +262,11 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
         </div>
       )}
 
-      {/* ── Filter / sort chips ──────────────────────────────────────────── */}
-      {status === "ok" && joined.matched.length > 0 && (
-        <div style={{ display: "flex", gap: "16px", marginBottom: "18px", alignItems: "center", flexWrap: "wrap" }}>
-          <div style={{ display: "flex", gap: "6px" }}>
-            <FilterChip active={filter === "all"} onClick={() => setFilter("all")} label="Live pieces" count={joined.matched.length} />
-            {joined.missingData.length > 0 && (
-              <FilterChip active={filter === "missing-data"} onClick={() => setFilter("missing-data")} label="No data yet" count={joined.missingData.length} />
-            )}
-            {joined.unmatchedRows.length > 0 && (
-              <FilterChip active={filter === "unmatched-rows"} onClick={() => setFilter("unmatched-rows")} label="Unmatched rows" count={joined.unmatchedRows.length} />
-            )}
-          </div>
-          {cols.numeric.length > 0 && filter === "all" && (
-            <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "8px" }}>
+      {/* ── Sort + unmatched controls — only once data is loaded ─────────── */}
+      {data && (
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px", flexWrap: "wrap" }}>
+          {cols.numeric.length > 1 && (
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <span style={{ ...FONT, fontSize: "0.68rem", color: "#999", letterSpacing: "0.04em", textTransform: "uppercase", fontWeight: 600 }}>Sort by</span>
               <select
                 value={sortBy || heroMetric || ""}
@@ -361,48 +277,83 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
               </select>
             </div>
           )}
+          {joined.unmatchedRows.length > 0 && (
+            <button
+              onClick={() => setShowUnmatched(v => !v)}
+              style={{
+                ...FONT, fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.02em",
+                padding: "5px 10px", borderRadius: "3px", cursor: "pointer", marginLeft: "auto",
+                border: showUnmatched ? "1px solid #1a2f4e" : "1px solid #d7d1c8",
+                background: showUnmatched ? "#e8f2fa" : "#fff",
+                color: showUnmatched ? "#1a2f4e" : "#666",
+              }}
+            >
+              {joined.unmatchedRows.length} unmatched sheet {joined.unmatchedRows.length === 1 ? "row" : "rows"} {showUnmatched ? "▲" : "▼"}
+            </button>
+          )}
         </div>
       )}
 
-      {/* ── Main content: cards / missing / unmatched ────────────────────── */}
-      {status === "ok" && filter === "all" && (
-        joined.matched.length === 0 ? (
-          <EmptyState
-            title="Sheet loaded, but no rows match approved pieces yet."
-            body="The sheet columns look fine — we just couldn't find any of its URLs among your approved pieces. Check the URL column matches piece publishing.live_url values, or approve a piece with a live URL that's in the sheet."
-          />
-        ) : (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "14px" }}>
-            {visibleCards.map(j => (
+      {/* ── Unmatched rows (collapsed by default) ────────────────────────── */}
+      {showUnmatched && joined.unmatchedRows.length > 0 && (
+        <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px", marginBottom: "20px" }}>
+          <div style={{ padding: "10px 16px", borderBottom: "1px solid #e8e3da", background: "#faf8f4", ...FONT, fontSize: "0.72rem", color: "#666" }}>
+            Sheet rows whose URL didn't match any approved piece.
+          </div>
+          {joined.unmatchedRows.map((row, i) => (
+            <div key={i} style={{
+              display: "flex", justifyContent: "space-between", alignItems: "center",
+              padding: "10px 16px", borderBottom: "1px solid #f0ede6", gap: "12px",
+            }}>
+              <code style={{ ...FONT, fontSize: "0.72rem", color: "#333", background: "#f5f2ec", padding: "3px 7px", borderRadius: "2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", flex: 1, minWidth: 0 }}>
+                {String(row[data.url_col] ?? "(no url)")}
+              </code>
+              {heroMetric && (
+                <span style={{ ...FONT, fontSize: "0.76rem", fontWeight: 600, color: "#666", flexShrink: 0 }}>
+                  {heroMetric}: {formatNum(row[heroMetric])}
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* ── Cards — always rendered for every approved piece ─────────────── */}
+      {approvedPieces.length === 0 ? (
+        <div style={{ ...FONT, padding: "40px", textAlign: "center", color: "#aaa", fontSize: "0.82rem" }}>
+          No approved pieces yet. Pieces move here once they're approved in the tracker.
+        </div>
+      ) : (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "14px" }}>
+          {sortedPieces.map(({ piece, cluster, pillar }) => {
+            const row = joined.byPieceId[piece.id] || null;
+            return (
               <PieceCard
-                key={j.piece.id}
-                piece={j.piece} cluster={j.cluster} pillar={j.pillar}
-                row={j.row}
+                key={piece.id}
+                piece={piece} cluster={cluster} pillar={pillar}
+                row={row}
                 heroMetric={heroMetric}
                 stripMetrics={stripMetrics}
-                trendCol={data.trend_col}
-                onClick={() => setSelected(j.piece.id)}
+                trendCol={data?.trend_col || null}
+                hasSheet={!!sheetUrl}
+                onClick={() => setSelected(piece.id)}
               />
-            ))}
-          </div>
-        )
+            );
+          })}
+        </div>
       )}
 
-      {status === "ok" && filter === "missing-data" && (
-        <MissingDataList items={joined.missingData} />
-      )}
-
-      {status === "ok" && filter === "unmatched-rows" && (
-        <UnmatchedRowsList rows={joined.unmatchedRows} urlCol={data.url_col} heroMetric={heroMetric} />
-      )}
-
-      {/* ── Detail drawer ────────────────────────────────────────────────── */}
-      {selectedPiece && (
-        <DetailDrawer
-          match={selectedPiece}
-          headers={data.headers}
-          urlCol={data.url_col}
-          trendCol={data.trend_col}
+      {/* ── Drawer ───────────────────────────────────────────────────────── */}
+      {(selected && selected !== "__setup__" && selectedEntry) && (
+        <PieceDrawer
+          entry={selectedEntry}
+          row={selectedRow}
+          headers={data?.headers || null}
+          urlCol={data?.url_col || null}
+          trendCol={data?.trend_col || null}
+          hasSheet={!!sheetUrl}
+          sheetStatus={sheetStatus}
+          onConnectSheet={saveSheetUrl}
           onClose={() => setSelected(null)}
         />
       )}
@@ -410,81 +361,30 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
   );
 }
 
-// ─── Setup card ─────────────────────────────────────────────────────────────
-function SetupCard({ currentUrl, onSave, onCancel, canCancel }) {
-  const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  const [draft, setDraft] = usePerfState(currentUrl || "");
-  return (
-    <div style={{
-      background: "#fff", border: "1px solid #e8e3da", borderLeft: "3px solid #1a2f4e",
-      padding: "20px 24px", borderRadius: "3px", marginBottom: "20px",
-    }}>
-      <div style={{ ...FONT, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#1a2f4e", marginBottom: "8px" }}>
-        {currentUrl ? "Change sheet" : "Connect Google Analytics sheet"}
-      </div>
-      <div style={{ ...FONT, fontSize: "0.78rem", color: "#666", marginBottom: "12px", lineHeight: 1.5 }}>
-        Paste the share URL from Jason's sheet. Sheet must be shared "anyone with the link can view".
-      </div>
-      <input
-        type="text"
-        value={draft}
-        onChange={e => setDraft(e.target.value)}
-        placeholder="https://docs.google.com/spreadsheets/d/.../edit?usp=sharing"
-        style={{
-          ...FONT, width: "100%", padding: "9px 12px", border: "1px solid #d7d1c8",
-          borderRadius: "3px", fontSize: "0.78rem", color: "#333", marginBottom: "12px",
-        }}
-      />
-      <div style={{ display: "flex", gap: "8px" }}>
-        <button
-          onClick={() => draft.trim() && onSave(draft.trim())}
-          disabled={!draft.trim()}
-          style={{
-            ...FONT, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
-            padding: "8px 16px", border: "none", background: draft.trim() ? "#1a2f4e" : "#c8c0b4",
-            color: "#fff", borderRadius: "3px", cursor: draft.trim() ? "pointer" : "not-allowed",
-          }}
-        >
-          Save & Sync
-        </button>
-        {canCancel && (
-          <button
-            onClick={onCancel}
-            style={{
-              ...FONT, fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase",
-              padding: "8px 16px", border: "1px solid #d7d1c8", background: "#fff", color: "#666",
-              borderRadius: "3px", cursor: "pointer",
-            }}
-          >
-            Cancel
-          </button>
-        )}
-      </div>
-    </div>
-  );
-}
-
 // ─── Piece card ─────────────────────────────────────────────────────────────
-function PieceCard({ piece, cluster, pillar, row, heroMetric, stripMetrics, trendCol, onClick }) {
+// row is null when no sheet data matched this piece.
+function PieceCard({ piece, cluster, pillar, row, heroMetric, stripMetrics, trendCol, hasSheet, onClick }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  const heroValue = heroMetric ? row[heroMetric] : null;
-  const trend = trendCol ? parseTrend(row[trendCol]) : null;
-
+  const hasData = !!row;
+  const heroValue = hasData && heroMetric ? row[heroMetric] : null;
+  const trend = hasData && trendCol ? parseTrend(row[trendCol]) : null;
   const trendColor = trend?.dir === "up" ? "#1e7a45" : trend?.dir === "down" ? "#c8401a" : "#999";
-  const trendBg = trend?.dir === "up" ? "#e6f5ec" : trend?.dir === "down" ? "#fbe8e2" : "#f0ede6";
+  const trendBg   = trend?.dir === "up" ? "#e6f5ec"  : trend?.dir === "down" ? "#fbe8e2"  : "#f0ede6";
 
   return (
     <div
       onClick={onClick}
       style={{
         background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px",
-        padding: "16px 18px 14px", cursor: "pointer", transition: "border-color 0.15s, box-shadow 0.15s",
-        display: "flex", flexDirection: "column", minHeight: "170px",
+        padding: "16px 18px 14px", cursor: "pointer",
+        transition: "border-color 0.15s, box-shadow 0.15s",
+        display: "flex", flexDirection: "column", minHeight: "160px",
+        opacity: hasData ? 1 : 0.72,
       }}
-      onMouseEnter={e => { e.currentTarget.style.borderColor = "#1a2f4e"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(26,47,78,0.08)"; }}
-      onMouseLeave={e => { e.currentTarget.style.borderColor = "#e8e3da"; e.currentTarget.style.boxShadow = "none"; }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor = "#1a2f4e"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(26,47,78,0.08)"; e.currentTarget.style.opacity = "1"; }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor = "#e8e3da"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.opacity = hasData ? "1" : "0.72"; }}
     >
-      {/* Header — title + pillar/cluster + trend badge */}
+      {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "10px", marginBottom: "10px" }}>
         <div style={{ minWidth: 0, flex: 1 }}>
           <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#999", marginBottom: "3px" }}>
@@ -494,39 +394,39 @@ function PieceCard({ piece, cluster, pillar, row, heroMetric, stripMetrics, tren
             {piece.title}
           </div>
         </div>
-        {trend && (
+        {trend && trend.dir !== "flat" && (
           <span style={{
             ...FONT, fontSize: "0.68rem", fontWeight: 700, padding: "3px 8px", borderRadius: "2px",
             color: trendColor, background: trendBg, whiteSpace: "nowrap", flexShrink: 0,
-          }}>
-            {trend.label}
-          </span>
+          }}>{trend.label}</span>
         )}
       </div>
 
-      {/* Hero metric */}
-      {heroMetric && (
-        <div style={{ marginTop: "auto", marginBottom: "10px" }}>
-          <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888" }}>
-            {heroMetric}
+      {/* Hero metric or no-data prompt */}
+      <div style={{ marginTop: "auto" }}>
+        {hasData && heroMetric ? (
+          <>
+            <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", marginBottom: "2px" }}>
+              {heroMetric}
+            </div>
+            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "2.2rem", fontWeight: 600, color: "#1a2535", lineHeight: 1 }}>
+              {formatNum(heroValue)}
+            </div>
+          </>
+        ) : (
+          <div style={{ ...FONT, fontSize: "0.72rem", color: "#bbb" }}>
+            {hasSheet ? "No data matched" : "Click to add data →"}
           </div>
-          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "2.2rem", fontWeight: 600, color: "#1a2535", lineHeight: 1, marginTop: "2px" }}>
-            {formatNum(heroValue)}
-          </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Secondary metrics strip */}
-      {stripMetrics.length > 0 && (
-        <div style={{ display: "flex", gap: "14px", borderTop: "1px solid #f0ede6", paddingTop: "10px" }}>
+      {hasData && stripMetrics.length > 0 && (
+        <div style={{ display: "flex", gap: "14px", borderTop: "1px solid #f0ede6", paddingTop: "10px", marginTop: "10px" }}>
           {stripMetrics.map(m => (
             <div key={m} style={{ minWidth: 0 }}>
-              <div style={{ ...FONT, fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>
-                {m}
-              </div>
-              <div style={{ ...FONT, fontSize: "0.82rem", fontWeight: 600, color: "#333", marginTop: "1px" }}>
-                {formatNum(row[m])}
-              </div>
+              <div style={{ ...FONT, fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>{m}</div>
+              <div style={{ ...FONT, fontSize: "0.82rem", fontWeight: 600, color: "#333", marginTop: "1px" }}>{formatNum(row[m])}</div>
             </div>
           ))}
         </div>
@@ -535,170 +435,130 @@ function PieceCard({ piece, cluster, pillar, row, heroMetric, stripMetrics, tren
   );
 }
 
-// ─── Detail drawer ──────────────────────────────────────────────────────────
-function DetailDrawer({ match, headers, urlCol, trendCol, onClose }) {
+// ─── Piece drawer ────────────────────────────────────────────────────────────
+// Shows metrics when sheet data is available; shows the sheet connection form
+// when it isn't (either no sheet URL, or no matching row for this piece).
+function PieceDrawer({ entry, row, headers, urlCol, trendCol, hasSheet, sheetStatus, onConnectSheet, onClose }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  const { piece, cluster, pillar, row } = match;
-  const liveUrl = piece.publishing?.live_url;
+  const { piece, cluster, pillar } = entry;
+  const liveUrl = piece.publishing?.live_url || piece.url;
+  const [draft, setDraft] = usePerfState("");
+
+  function handleSave() {
+    if (draft.trim()) { onConnectSheet(draft.trim()); }
+  }
 
   return (
     <>
-      <div
-        onClick={onClose}
-        style={{ position: "fixed", inset: 0, background: "rgba(15,25,35,0.35)", zIndex: 100, animation: "fadeIn 0.15s ease-out" }}
-      />
+      <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(15,25,35,0.35)", zIndex: 100 }} />
       <div style={{
         position: "fixed", right: 0, top: 0, bottom: 0, width: "min(440px, 90vw)",
         background: "#fff", boxShadow: "-4px 0 20px rgba(0,0,0,0.15)", zIndex: 101,
         overflowY: "auto", padding: "24px 28px",
       }}>
+        {/* Title */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "18px", gap: "10px" }}>
           <div>
             <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#c8401a", marginBottom: "4px" }}>
               {pillar.label} · {cluster.label}
             </div>
-            <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.15rem", color: "#1a2535", margin: 0, lineHeight: 1.3 }}>
+            <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.1rem", color: "#1a2535", margin: 0, lineHeight: 1.3 }}>
               {piece.title}
             </h3>
           </div>
-          <button
-            onClick={onClose}
-            style={{ ...FONT, fontSize: "1.2rem", color: "#888", background: "none", border: "none", cursor: "pointer", padding: "0 4px" }}
-            aria-label="Close"
-          >
-            ×
-          </button>
+          <button onClick={onClose} style={{ ...FONT, fontSize: "1.2rem", color: "#888", background: "none", border: "none", cursor: "pointer", padding: "0 4px" }} aria-label="Close">×</button>
         </div>
 
-        {/* All metrics */}
-        <div style={{ borderTop: "1px solid #e8e3da", marginTop: "8px" }}>
-          {headers.filter(h => h !== urlCol).map(h => (
-            <div key={h} style={{
-              display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "12px",
-              padding: "10px 0", borderBottom: "1px solid #f0ede6",
-            }}>
-              <span style={{ ...FONT, fontSize: "0.74rem", color: "#666" }}>{h}</span>
-              <span style={{ ...FONT, fontSize: "0.86rem", fontWeight: 600, color: "#1a2535" }}>
-                {h === trendCol ? parseTrend(row[h]).label : formatNum(row[h])}
-              </span>
-            </div>
-          ))}
-        </div>
-
+        {/* Live URL */}
         {liveUrl && (
-          <a
-            href={liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "block", textAlign: "center", marginTop: "20px",
-              ...FONT, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
-              padding: "10px 16px", background: "#1a2f4e", color: "#fff", borderRadius: "3px", textDecoration: "none",
-            }}
-          >
-            Open landing page ↗
+          <a href={liveUrl} target="_blank" rel="noopener noreferrer" style={{
+            display: "flex", alignItems: "center", gap: "6px", marginBottom: "18px",
+            ...FONT, fontSize: "0.7rem", color: "#1a2f4e", textDecoration: "none",
+            padding: "7px 10px", background: "#f0ede6", borderRadius: "3px",
+            overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
+          }}>
+            <span style={{ opacity: 0.5 }}>↗</span>
+            <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{liveUrl}</span>
           </a>
+        )}
+
+        {/* Metrics — if row data exists */}
+        {row && headers && (
+          <div style={{ borderTop: "1px solid #e8e3da" }}>
+            {headers.filter(h => h !== urlCol).map(h => (
+              <div key={h} style={{
+                display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "12px",
+                padding: "10px 0", borderBottom: "1px solid #f0ede6",
+              }}>
+                <span style={{ ...FONT, fontSize: "0.74rem", color: "#666" }}>{h}</span>
+                <span style={{ ...FONT, fontSize: "0.86rem", fontWeight: 600, color: "#1a2535" }}>
+                  {h === trendCol ? parseTrend(row[h]).label : formatNum(row[h])}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* No data — sheet connection prompt */}
+        {!row && (
+          <div style={{ borderTop: "1px solid #e8e3da", paddingTop: "20px" }}>
+            <div style={{ ...FONT, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1a2f4e", marginBottom: "8px" }}>
+              {hasSheet ? "No data matched for this piece" : "Connect Google Analytics sheet"}
+            </div>
+            <div style={{ ...FONT, fontSize: "0.78rem", color: "#666", marginBottom: "14px", lineHeight: 1.5 }}>
+              {hasSheet
+                ? "The sheet loaded but no row matched this piece's URL. Ask Jason to add a row for this page, or check the URL column lines up."
+                : "Paste the share URL from Jason's sheet. Sheet must be shared \"anyone with the link can view\" — metrics will appear across all cards once connected."}
+            </div>
+            {!hasSheet && (
+              <>
+                <input
+                  type="text"
+                  value={draft}
+                  onChange={e => setDraft(e.target.value)}
+                  placeholder="https://docs.google.com/spreadsheets/d/.../edit?usp=sharing"
+                  style={{
+                    ...FONT, width: "100%", padding: "9px 12px", border: "1px solid #d7d1c8",
+                    borderRadius: "3px", fontSize: "0.76rem", color: "#333", marginBottom: "10px",
+                  }}
+                  onKeyDown={e => e.key === "Enter" && handleSave()}
+                />
+                <button
+                  onClick={handleSave}
+                  disabled={!draft.trim()}
+                  style={{
+                    ...FONT, width: "100%", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
+                    padding: "10px 16px", border: "none", borderRadius: "3px", cursor: draft.trim() ? "pointer" : "not-allowed",
+                    background: draft.trim() ? "#1a2f4e" : "#c8c0b4", color: "#fff",
+                  }}
+                >
+                  Save & Sync
+                </button>
+              </>
+            )}
+            {hasSheet && sheetStatus === "error" && (
+              <>
+                <input
+                  type="text"
+                  value={draft}
+                  onChange={e => setDraft(e.target.value)}
+                  placeholder="Paste a new share URL to retry"
+                  style={{
+                    ...FONT, width: "100%", padding: "9px 12px", border: "1px solid #f0d0c0",
+                    borderRadius: "3px", fontSize: "0.76rem", color: "#333", marginBottom: "10px",
+                  }}
+                />
+                <button onClick={handleSave} disabled={!draft.trim()} style={{
+                  ...FONT, width: "100%", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
+                  padding: "10px 16px", border: "none", borderRadius: "3px", cursor: draft.trim() ? "pointer" : "not-allowed",
+                  background: draft.trim() ? "#1a2f4e" : "#c8c0b4", color: "#fff",
+                }}>Update & Retry</button>
+              </>
+            )}
+          </div>
         )}
       </div>
     </>
-  );
-}
-
-// ─── Filter chip ────────────────────────────────────────────────────────────
-function FilterChip({ active, onClick, label, count }) {
-  const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  return (
-    <button
-      onClick={onClick}
-      style={{
-        ...FONT, fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.02em",
-        padding: "6px 12px", borderRadius: "3px", cursor: "pointer",
-        border: active ? "1px solid #1a2f4e" : "1px solid #d7d1c8",
-        background: active ? "#e8f2fa" : "#fff",
-        color: active ? "#1a2f4e" : "#666",
-      }}
-    >
-      {label} <span style={{ opacity: 0.6, marginLeft: "4px", fontWeight: 500 }}>· {count}</span>
-    </button>
-  );
-}
-
-// ─── Missing data (approved pieces without sheet row) ───────────────────────
-function MissingDataList({ items }) {
-  const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  if (items.length === 0) {
-    return <EmptyState title="Every approved piece has performance data." body="" />;
-  }
-  return (
-    <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px" }}>
-      <div style={{ padding: "12px 16px", borderBottom: "1px solid #e8e3da", background: "#faf8f4", ...FONT, fontSize: "0.72rem", color: "#666" }}>
-        Approved pieces that aren't in the sheet yet. Ask Jason to add rows for these URLs.
-      </div>
-      {items.map(({ piece, cluster, pillar, urlKey }) => (
-        <div key={piece.id} style={{
-          display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px",
-          borderBottom: "1px solid #f0ede6", gap: "12px",
-        }}>
-          <div style={{ minWidth: 0, flex: 1 }}>
-            <div style={{ ...FONT, fontSize: "0.82rem", fontWeight: 600, color: "#1a2535", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{piece.title}</div>
-            <div style={{ ...FONT, fontSize: "0.7rem", color: "#999", marginTop: "2px" }}>{pillar.label} · {cluster.label}</div>
-          </div>
-          <code style={{ ...FONT, fontSize: "0.7rem", color: "#888", background: "#f5f2ec", padding: "3px 6px", borderRadius: "2px" }}>
-            {urlKey || "no url set"}
-          </code>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-// ─── Unmatched sheet rows ───────────────────────────────────────────────────
-function UnmatchedRowsList({ rows, urlCol, heroMetric }) {
-  const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  if (rows.length === 0) return null;
-  return (
-    <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px" }}>
-      <div style={{ padding: "12px 16px", borderBottom: "1px solid #e8e3da", background: "#faf8f4", ...FONT, fontSize: "0.72rem", color: "#666" }}>
-        Sheet rows whose URL doesn't match any approved piece. Either the piece isn't approved yet, or the URLs don't line up.
-      </div>
-      {rows.map((row, i) => (
-        <div key={i} style={{
-          display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px",
-          borderBottom: "1px solid #f0ede6", gap: "12px",
-        }}>
-          <code style={{ ...FONT, fontSize: "0.74rem", color: "#333", background: "#f5f2ec", padding: "4px 8px", borderRadius: "2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", flex: 1, minWidth: 0 }}>
-            {String(row[urlCol] ?? "(no url)")}
-          </code>
-          {heroMetric && (
-            <div style={{ ...FONT, fontSize: "0.78rem", fontWeight: 600, color: "#666", flexShrink: 0 }}>
-              {heroMetric}: {formatNum(row[heroMetric])}
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-// ─── Generic empty state ────────────────────────────────────────────────────
-function EmptyState({ title, body, cta, onCta }) {
-  const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  return (
-    <div style={{
-      background: "#fff", border: "1px dashed #d7d1c8", borderRadius: "3px",
-      padding: "40px 32px", textAlign: "center",
-    }}>
-      <div style={{ ...FONT, fontSize: "0.9rem", fontWeight: 600, color: "#1a2535", marginBottom: "6px" }}>{title}</div>
-      {body && <div style={{ ...FONT, fontSize: "0.78rem", color: "#888", maxWidth: "480px", margin: "0 auto", lineHeight: 1.5 }}>{body}</div>}
-      {cta && (
-        <button onClick={onCta} style={{
-          marginTop: "18px", ...FONT, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
-          padding: "8px 16px", background: "#1a2f4e", color: "#fff", border: "none", borderRadius: "3px", cursor: "pointer",
-        }}>
-          {cta}
-        </button>
-      )}
-    </div>
   );
 }
 
