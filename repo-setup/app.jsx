@@ -231,6 +231,7 @@ function App() {
         )}
         {view === "jai-demo" && <JAIDemoPanel onBack={() => setView("tracker")} />}
         {view === "weekly-report" && <WeeklyReportPanel project={project} currentUser={currentUser} />}
+        {view === "performance" && <PerformancePanel project={project} setProject={setProject} currentUser={currentUser} adminMode={adminMode} />}
         {view === "ai-playground" && <AIPlaygroundPanel onBack={() => setView("tracker")} project={project} setProject={setProject} currentUser={currentUser} />}
         {view === "style-guide" && <StyleGuidePanel project={project} adminMode={adminMode} />}
         {view === "admin" && adminMode && (

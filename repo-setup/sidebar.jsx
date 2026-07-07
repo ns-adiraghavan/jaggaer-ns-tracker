@@ -159,6 +159,12 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           rightMeta="cycle"
         />
         <NavSection
+          label="Performance"
+          active={view === "performance"}
+          onClick={() => setView("performance")}
+          rightMeta="GA4"
+        />
+        <NavSection
           label="AI Playground"
           active={view === "ai-playground"}
           onClick={() => setView("ai-playground")}
