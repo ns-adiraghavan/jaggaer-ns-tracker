@@ -112,7 +112,9 @@ function WeeklyReportPanel({ project, currentUser }) {
     const pendingAtJaggaer = [];
     const pendingAtNS = [];
     for (const { piece, cluster, pillar } of items) {
-      if (piece.status === "approved" || piece.status === "not-started") continue;
+      // SME Review (stage-nq11b) has its own dedicated tab — exclude from
+      // both Pending at Jaggaer and Pending at NS to avoid double-counting.
+      if (piece.status === "approved" || piece.status === "not-started" || piece.status === "stage-nq11b") continue;
       const stage = piece.status === "ad-hoc-review" ? getAdHocReviewStage(project) : stages.find(s => s.id === piece.status);
       if (!stage) continue;
       const actors = Array.isArray(stage.actor) ? stage.actor : (stage.actor ? [stage.actor] : []);
