@@ -1,0 +1,869 @@
+<!-- uploaded by jason at 2026-07-08T10:47:39.186Z -->
+<!-- piece: How Source-to-Pay Improves Supply Chain Performance -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Source-to-Pay Improves Supply Chain Performance in 2026 | JAGGAER</title>
+<meta name="description" content="A connected source-to-pay process closes the gaps that slow supply chains down. Here's how S2P drives measurable performance gains.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/source-to-pay-supply-chain-performance">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"How Source-to-Pay Improves Supply Chain Performance: A 2026 Guide","description":"A connected source-to-pay process closes the gaps that slow supply chains down. Here's how S2P drives measurable performance gains.","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"datePublished":"2026-07-07","dateModified":"2026-07-07","author":{"@type":"Organization","name":"JAGGAER"}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is source-to-pay in supply chain management?","acceptedAnswer":{"@type":"Answer","text":"Source-to-pay (S2P) is the end-to-end procurement process that connects sourcing suppliers, negotiating contracts, purchasing goods, and paying invoices within one integrated workflow, linking strategy to spend."}},{"@type":"Question","name":"How does source-to-pay improve procurement efficiency?","acceptedAnswer":{"@type":"Answer","text":"Source-to-pay improves efficiency by automating the entire requisition-to-payment cycle, removing manual handoffs between systems so purchase orders, approvals, and invoice matching happen automatically rather than through repeated manual intervention."}},{"@type":"Question","name":"What is the difference between procure-to-pay and source-to-pay?","acceptedAnswer":{"@type":"Answer","text":"Procure-to-pay covers the downstream buying cycle, from requisition to payment. Source-to-pay is broader, adding the upstream strategic sourcing stages of spend analysis, supplier selection, and contract negotiation."}},{"@type":"Question","name":"How does S2P reduce supply chain risk?","acceptedAnswer":{"@type":"Answer","text":"Source-to-pay reduces risk by embedding compliance controls into every transaction and giving real-time visibility into spend and supplier performance, so threats surface before they disrupt supply."}},{"@type":"Question","name":"What are the stages of the source-to-pay process?","acceptedAnswer":{"@type":"Answer","text":"The source-to-pay process runs through spend analysis, strategic sourcing, contract management, supplier management, requisitioning, purchase orders, goods receipt, invoicing, and payment, covering both upstream sourcing and downstream functions."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading: 400;
+  --line-height-base:  1.6;
+  --line-height-heading: 1.1;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-base);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);}
+h1{font-size:var(--font-size-h1);}
+h2{font-size:var(--font-size-h2);}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.stat{font-weight:700;color:var(--color-red);}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Badges */
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.section-eyebrow{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+
+/* Progress bar */
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);}
+.article-header h1{font-size:var(--font-size-h1);font-weight:400;line-height:var(--line-height-heading);color:var(--color-ink);max-width:760px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-size:.625rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+.article-meta time{border:none;}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-size:1.15rem;font-weight:700;color:var(--color-ink);line-height:1;display:block;margin-bottom:.15rem;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.68rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:.68rem;}
+.exp-link{font-size:.62rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.expert-sidebar{display:none;}}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:400;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-size:var(--font-size-h5);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+
+/* Key Takeaways box */
+.key-facts{background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.kf-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-s);}
+.key-facts ul{margin-bottom:0;list-style:disc;padding-left:1.4rem;}
+.key-facts li{font-size:.8125rem;line-height:1.6;margin-bottom:.5rem;}
+.key-facts li:last-child{margin-bottom:0;}
+.kf-hl{font-weight:700;color:var(--color-teal);}
+
+/* Stat metrics block */
+.stat-metrics{background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-m) 0;}
+.stat-metrics-kicker{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);margin-bottom:var(--space-m);display:block;}
+.stat-metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.stat-metric{padding:var(--space-s);text-align:center;background:var(--color-white);}
+.stat-metric:first-child{border-radius:var(--border-radius-sm) 0 0 var(--border-radius-sm);}
+.stat-metric:last-child{border-radius:0 var(--border-radius-sm) var(--border-radius-sm) 0;}
+.stat-num{font-size:clamp(1.1rem,1.7vw,1.4rem);font-weight:800;color:var(--color-red);display:block;line-height:1;margin-bottom:.3rem;}
+.stat-label{font-size:.7rem;font-weight:600;color:var(--color-ink);display:block;line-height:1.3;margin-bottom:.2rem;}
+.stat-sub{font-size:.62rem;color:var(--color-ink-3);display:block;font-style:italic;}
+
+/* Hook stat - intro figure */
+.hook-stat{display:flex;align-items:center;gap:var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:0 0 var(--space-m);}
+.hook-stat-num{font-size:clamp(1.25rem,2.2vw,1.6rem);font-weight:800;color:var(--jai-a);line-height:1;letter-spacing:-.01em;flex-shrink:0;}
+.hook-stat-body{min-width:0;}
+.hook-stat-lead{font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);line-height:1.35;margin:0 0 .15rem;}
+.hook-stat-sub{font-size:var(--font-size-xs);color:var(--color-ink-3);margin:0;line-height:1.45;}
+@media(max-width:580px){.hook-stat{flex-direction:column;align-items:flex-start;gap:var(--space-xs);}}
+@media(max-width:600px){.stat-metrics-grid{grid-template-columns:repeat(2,1fr);}.stat-metric:first-child,.stat-metric:last-child{border-radius:0;}.stat-metric:nth-child(2){border-radius:0;}}
+
+/* Callout note */
+.callout-note{background:var(--color-light-blue);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-m) 0;}
+.callout-note-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-xs);}
+.callout-note p{font-size:var(--font-size-sm);color:var(--color-ink-2);margin:0;line-height:1.6;}
+.callout-note.callout-purple{background:var(--purple-tint);border-left-color:var(--jai-a);}
+.callout-note.callout-purple .callout-note-label{color:var(--jai-a);}
+
+/* Big stat band - single dominant figure */
+.stat-band{display:flex;align-items:center;gap:var(--space-l);background:var(--color-navy);border-radius:var(--border-radius);padding:var(--space-l) var(--space-xl);margin:var(--space-l) 0;}
+.stat-band-num{font-size:clamp(2.5rem,5vw,3.6rem);font-weight:800;color:#fff;line-height:.95;letter-spacing:-.02em;flex-shrink:0;}
+.stat-band-body{min-width:0;}
+.stat-band-lead{font-size:var(--font-size-lg);font-weight:600;color:#fff;line-height:1.3;margin:0 0 .25rem;}
+.stat-band-sub{font-size:var(--font-size-xs);color:#c6d2df;margin:0;line-height:1.5;letter-spacing:.02em;text-transform:uppercase;font-weight:700;}
+/* Subtle grey stat callout - uses core grey palette per guidelines */
+.stat-subtle{display:flex;align-items:center;gap:var(--space-m);background:var(--color-cream);border:1px solid var(--color-light-grey);border-left:3px solid var(--color-grey);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-m) 0;}
+.stat-subtle-num{font-size:clamp(1.25rem,2.2vw,1.6rem);font-weight:800;color:var(--color-grey);line-height:1;flex-shrink:0;}
+.stat-subtle-body{min-width:0;}
+.stat-subtle-lead{font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);line-height:1.35;margin:0 0 .15rem;}
+.stat-subtle-sub{font-size:var(--font-size-xs);color:var(--color-ink-3);margin:0;line-height:1.45;letter-spacing:.02em;text-transform:uppercase;font-weight:700;}
+@media(max-width:580px){.stat-subtle{flex-direction:column;align-items:flex-start;gap:var(--space-xs);}}
+/* Small source caption under viz blocks */
+.viz-src-line{font-size:.62rem;color:var(--color-ink-3);font-style:italic;margin:calc(var(--space-m) * -0.5) 0 var(--space-m);text-align:right;}
+.viz-src-line a{font-size:.62rem;color:var(--color-teal);border-bottom:1px solid #4D819440;}
+@media(max-width:580px){.stat-band{flex-direction:column;align-items:flex-start;gap:var(--space-s);padding:var(--space-l);}}
+
+/* Dual stat split */
+.stat-split{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:var(--space-m) 0;border-radius:var(--border-radius-sm);overflow:hidden;border:1px solid var(--purple-soft);}
+.stat-split-cell{background:var(--purple-tint);padding:var(--space-m) var(--space-l);}
+.stat-split-cell:nth-child(2){background:var(--purple-tint-3);}
+.stat-split-num{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--jai-a);line-height:1;display:block;margin-bottom:.35rem;}
+.stat-split-txt{font-size:var(--font-size-xs);color:var(--color-ink-2);line-height:1.45;display:block;}
+@media(max-width:520px){.stat-split{grid-template-columns:1fr;}}
+
+/* Data table */
+.data-table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.data-table{width:100%;border-collapse:collapse;font-size:.8125rem;min-width:480px;}
+.data-table th{padding:.85rem 1.25rem;background:var(--color-cream);color:var(--color-ink);font-weight:700;text-align:left;border-bottom:1px solid #C2C2C7;font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;}
+.data-table td{padding:.85rem 1.25rem;border-bottom:var(--border);vertical-align:top;line-height:1.5;color:var(--color-ink-2);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table td:first-child{font-weight:700;color:var(--color-ink);background:#fafbfc;white-space:nowrap;}
+
+/* VIZ 1: Horizontal bar comparison */
+.bar-compare{margin:var(--space-m) 0;border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);}
+.bar-compare-kicker{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink-3);margin-bottom:var(--space-m);display:block;}
+.bar-row{margin-bottom:var(--space-m);}
+.bar-row:last-child{margin-bottom:0;}
+.bar-row-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.35rem;}
+.bar-row-label{font-size:.8125rem;color:var(--color-ink-2);font-weight:600;max-width:78%;line-height:1.35;}
+.bar-row-val{font-size:1.1rem;font-weight:800;color:var(--jai-a);line-height:1;flex-shrink:0;}
+.bar-track{height:9px;background:var(--color-cream);border-radius:9999px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:9999px;background:var(--jai-gradient);}
+.bar-src{font-size:.62rem;color:var(--color-ink-3);font-style:italic;margin-top:.3rem;display:block;}
+
+/* VIZ 2: Dual dials (SVG donuts) */
+.dial-pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-m);margin:var(--space-m) 0;}
+.dial-card{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s);text-align:center;background:var(--color-white);}
+.dial-svg{width:84px;height:84px;margin:0 auto var(--space-xs);display:block;}
+.dial-track{fill:none;stroke:var(--color-cream);stroke-width:8;}
+.dial-prog{fill:none;stroke-width:8;stroke-linecap:round;transform:rotate(-90deg);transform-origin:center;}
+.dial-prog.g{stroke:url(#gGrad);}
+.dial-prog.r{stroke:var(--color-red);}
+.dial-center{font-size:1.1rem;font-weight:800;fill:var(--color-ink);}
+.dial-graphic{position:relative;display:inline-flex;justify-content:center;}
+.dial-center-html{position:absolute;top:0;left:0;right:0;bottom:var(--space-xs);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;color:var(--color-ink);}
+.dial-center-html.g{color:var(--jai-a);}
+.dial-center-html.r{color:var(--color-red);}
+.dial-cap{font-size:.72rem;color:var(--color-ink-2);line-height:1.4;font-weight:600;}
+.dial-src{font-size:.6rem;color:var(--color-ink-3);font-style:italic;margin-top:.3rem;display:block;}
+@media(max-width:520px){.dial-pair{grid-template-columns:1fr;}}
+
+/* VIZ 3: Alert ribbon (red, thin) */
+.alert-ribbon{display:flex;align-items:center;gap:var(--space-m);background:#fdf3f3;border:1px solid #f2c9ca;border-left:4px solid var(--color-red);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-m) 0;}
+.alert-ribbon-icon{flex-shrink:0;color:var(--color-red);width:22px;height:22px;}
+.alert-ribbon-num{font-size:clamp(1.15rem,2vw,1.45rem);font-weight:800;color:var(--color-red);line-height:1;flex-shrink:0;}
+.alert-ribbon-txt{font-size:.8125rem;color:var(--color-ink-2);line-height:1.45;margin:0;}
+.alert-ribbon-txt strong{color:var(--color-ink);}
+@media(max-width:520px){.alert-ribbon{flex-wrap:wrap;}}
+
+/* VIZ 4: Tier stack diagram */
+.tier-stack{margin:var(--space-m) 0;border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);}
+.tier-stack-kicker{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink-3);margin-bottom:var(--space-s);display:block;}
+.tier-layer{display:flex;align-items:center;gap:var(--space-m);padding:.6rem var(--space-m);border-radius:var(--border-radius-sm);margin-bottom:4px;font-size:.8rem;}
+.tier-layer:last-of-type{margin-bottom:0;}
+.tier-visible{background:var(--color-light-blue);border:1px solid #cfe0ec;}
+.tier-hidden{background:#f7f4fc;border:1px dashed var(--purple-soft);}
+.tier-tag{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:.15rem .5rem;border-radius:9999px;flex-shrink:0;white-space:nowrap;}
+.tier-tag.vis{background:var(--color-navy);color:#fff;}
+.tier-tag.hid{background:var(--jai-a);color:#fff;}
+.tier-desc{color:var(--color-ink-2);line-height:1.4;flex:1;}
+.tier-pct{font-size:.95rem;font-weight:800;flex-shrink:0;}
+.tier-pct.vis{color:var(--color-navy);}
+.tier-pct.hid{color:var(--jai-a);}
+.tier-foot{font-size:.68rem;color:var(--color-ink-3);margin-top:var(--space-s);line-height:1.5;}
+.tier-foot strong{color:var(--color-red);font-weight:800;}
+
+/* VIZ 5: Progress rings pair (inline) */
+.ring-row{display:flex;gap:var(--space-l);align-items:center;flex-wrap:wrap;margin:var(--space-m) 0;padding:var(--space-s) var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);background:linear-gradient(180deg,var(--purple-tint-3),var(--color-white));}
+.ring-unit{display:flex;align-items:center;gap:var(--space-l);flex:1;min-width:0;}
+.ring-svg{width:60px;height:60px;flex-shrink:0;}
+.ring-track{fill:none;stroke:var(--color-light-grey);stroke-width:7;}
+.ring-prog{fill:none;stroke:var(--jai-a);stroke-width:7;stroke-linecap:round;transform:rotate(-90deg);transform-origin:center;}
+.ring-mid{font-size:.85rem;font-weight:800;fill:var(--jai-a);}
+.ring-graphic{position:relative;display:inline-flex;flex-shrink:0;}
+.ring-center-html{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800;color:var(--jai-a);}
+.ring-txt{font-size:var(--font-size-sm);color:var(--color-ink-2);line-height:1.5;flex:1;min-width:0;}
+.ring-txt strong{color:var(--color-ink);}
+.ring-div{width:1px;align-self:stretch;background:var(--color-light-grey);}
+@media(max-width:560px){.ring-div{display:none;}.ring-row{gap:var(--space-m);}}
+
+/* VIZ: Dot-grid / waffle (100 cells, N filled) */
+.waffle-fig{display:flex;gap:var(--space-l);align-items:center;flex-wrap:wrap;margin:var(--space-m) 0;padding:var(--space-s) var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);background:var(--purple-tint-3);}
+.waffle-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;width:140px;flex-shrink:0;}
+.waffle-cell{aspect-ratio:1;border-radius:2px;background:var(--color-light-grey);}
+.waffle-cell.on{background:var(--jai-a);}
+.waffle-body{flex:1;min-width:180px;}
+.waffle-num{font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:800;color:var(--jai-a);line-height:1;display:block;margin-bottom:.3rem;}
+.waffle-txt{font-size:var(--font-size-sm);color:var(--color-ink-2);line-height:1.5;display:block;margin-bottom:.35rem;}
+.waffle-txt strong{color:var(--color-ink);}
+.waffle-src{font-size:var(--font-size-xs);color:var(--color-ink-3);font-style:italic;}
+@media(max-width:520px){.waffle-grid{width:100%;}}
+
+/* VIZ: Segmented meter bar (two labeled segments) */
+.meter-fig{margin:var(--space-m) 0;padding:var(--space-s) var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);background:var(--color-white);}
+.meter-kicker{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-s);display:block;}
+.meter-bar{display:flex;height:2.1rem;border-radius:var(--border-radius-sm);overflow:hidden;margin-bottom:var(--space-s);}
+.meter-seg{display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:#fff;white-space:nowrap;}
+.meter-seg.correct{background:var(--color-ink-2);}
+.meter-seg.drift{background:var(--color-red);}
+.meter-legend{display:flex;gap:var(--space-l);flex-wrap:wrap;font-size:var(--font-size-xs);color:var(--color-ink-2);line-height:1.4;}
+.meter-legend span{display:flex;align-items:center;gap:.4rem;}
+.meter-dot{width:11px;height:11px;border-radius:2px;flex-shrink:0;}
+.meter-dot.correct{background:var(--color-ink-2);}
+.meter-dot.drift{background:var(--color-red);}
+
+/* VIZ 6: Pull-quote figure (big single number, editorial) */
+.figure-pull{position:relative;margin:var(--space-s) 0;padding:var(--space-2xs) 0 var(--space-2xs) var(--space-m);border-left:2px solid;border-image:var(--jai-gradient) 1;}
+.figure-pull-num{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;line-height:.9;letter-spacing:-.02em;background:var(--jai-gradient);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:block;margin-bottom:var(--space-2xs);}
+.figure-pull-txt{font-size:var(--font-size-sm);color:var(--color-ink);line-height:1.4;font-weight:400;max-width:30rem;}
+.figure-pull-src{font-size:.62rem;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-top:.3rem;display:block;}
+
+/* CTA block - core red theme (non-JAI, external/general per color rules) */
+.jag-cta{display:flex;align-items:center;gap:var(--space-m);border:1px solid transparent;background:linear-gradient(#fff,#fff) padding-box, linear-gradient(90deg,#5300CE,#E22B83) border-box;border-radius:var(--border-radius);padding:var(--space-s) var(--space-m);margin:var(--space-l) 0;transition:box-shadow .2s;position:relative;overflow:hidden;}
+.jag-cta::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,#5300ce0d 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.jag-cta:hover{box-shadow:0 8px 32px rgba(83,0,206,.12);}
+.jag-cta-label{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.15rem var(--space-s);border-radius:9999px;white-space:nowrap;margin-bottom:var(--space-2xs);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .15rem;line-height:1.35;}
+.jag-cta-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.5;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:.875rem;font-weight:600;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.5rem 1.25rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;min-width:140px;border-radius:var(--border-radius-sm);transition:opacity .2s;}
+.jag-cta-btn:hover{opacity:.88;color:#fff;border-bottom:none;}
+.jag-cta--red{background:var(--color-white);border:1px solid var(--color-red);}
+.jag-cta--red::before{background:radial-gradient(circle,#d224280d 0%,transparent 70%);}
+.jag-cta--red .jag-cta-label{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn:hover{background:var(--color-grey);opacity:1;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:flex-start;max-width:100%;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;border-top:var(--border);background:var(--color-white);}
+details{height:auto;overflow:hidden;transition:height .3s ease;}
+details.faq-item:not([open]){height:3.25rem;}
+
+/* Closing line */
+.closing-line{color:var(--color-ink-3);font-size:var(--font-size-sm);line-height:1.6;font-weight:400;font-style:italic;margin:var(--space-m) 0 0;padding-top:var(--space-s);border-top:1px solid var(--color-border);}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+/* ============================================================
+   VISUAL ELEMENT SIZE REDUCTION - make viz breaks more subtle
+   ============================================================ */
+/* tighter vertical rhythm around all viz blocks */
+.hook-stat,.figure-pull,.stat-split,.bar-compare,.dial-pair,.stat-metrics,.stat-subtle,.waffle-fig,.callout-note,.key-facts,.ring-row,.alert-ribbon,.tier-stack{margin-top:var(--space-s);margin-bottom:var(--space-s);}
+
+/* hook stat - smaller number + padding */
+.hook-stat{padding:var(--space-xs) var(--space-s);gap:var(--space-s);}
+.hook-stat-num{font-size:clamp(1.05rem,1.7vw,1.3rem);}
+.hook-stat-lead{font-size:var(--font-size-xs);}
+.hook-stat-sub{font-size:.68rem;}
+
+/* figure pull - smaller number */
+.figure-pull-num{font-size:clamp(1.25rem,2.2vw,1.6rem);}
+.figure-pull-txt{font-size:var(--font-size-xs);}
+
+/* stat split - smaller numbers + padding */
+.stat-split-cell{padding:var(--space-s) var(--space-m);}
+.stat-split-num{font-size:clamp(1.3rem,2.4vw,1.75rem);}
+
+/* bar compare - shorter bars + smaller values */
+.bar-compare{padding:var(--space-xs) var(--space-s);}
+.bar-row{margin-bottom:var(--space-s);}
+.bar-row-val{font-size:.95rem;}
+.bar-track{height:7px;}
+
+/* dial pair - smaller dials */
+.dial-svg{width:66px;height:66px;}
+.dial-center-html{font-size:.9rem;}
+.dial-card{padding:var(--space-xs);}
+.dial-cap{font-size:.68rem;}
+
+/* stat metrics grid - smaller numbers + padding */
+.stat-metrics{padding:var(--space-xs) var(--space-s);}
+.stat-metrics-kicker{margin-bottom:var(--space-s);}
+.stat-metric{padding:var(--space-xs);}
+.stat-num{font-size:clamp(1rem,1.5vw,1.25rem);}
+.stat-label{font-size:.66rem;}
+.stat-sub{font-size:.58rem;}
+
+/* subtle grey stat - smaller number */
+.stat-subtle{padding:var(--space-xs) var(--space-s);gap:var(--space-s);}
+.stat-subtle-num{font-size:clamp(1.05rem,1.7vw,1.3rem);}
+.stat-subtle-lead{font-size:var(--font-size-xs);}
+.stat-subtle-sub{font-size:.68rem;}
+
+/* waffle - smaller grid + number */
+.waffle-fig{padding:var(--space-xs) var(--space-s);gap:var(--space-m);}
+.waffle-grid{width:112px;gap:2px;}
+.waffle-num{font-size:clamp(1.1rem,2vw,1.4rem);}
+.waffle-txt{font-size:var(--font-size-xs);}
+
+/* key facts + callouts - tighter padding */
+.key-facts{padding:var(--space-s) var(--space-m);}
+.key-facts li{font-size:.78rem;}
+.callout-note{padding:var(--space-xs) var(--space-m);}
+.callout-note p{font-size:var(--font-size-xs);}
+</style></head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Source-to-Pay Actually Covers</a>
+      <a class="toc-link" href="#s2">Where Performance Breaks Down</a>
+      <a class="toc-link" href="#s3">How a Connected S2P Improves Performance</a>
+      <a class="toc-link" href="#s4">S2P and Supply Chain Resilience</a>
+      <a class="toc-link" href="#s5">What to Look for in a Solution</a>
+      <a class="toc-link" href="#s6">Measuring the Performance Gains</a>
+      <a class="toc-link" href="#s7">Frequently Asked Questions</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <span class="article-label">Source-to-Pay &amp; Supply Chain</span>
+        <div class="article-badges">
+          <span class="badge badge-blue">Source-to-Pay</span>
+          <span class="badge badge-blue">Supply Chain Performance</span>
+        </div>
+        <h1 style="font-weight:700;">How Source-to-Pay Improves Supply Chain Performance: A 2026 Guide</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            4&ndash;5 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><time datetime="2026-07-07">Published: July 2026</time></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <p>A connected source-to-pay process improves supply chain performance management system by linking every stage in one system. Fragmented procurement and supply chain management creates blind spots, delays, and off contract spend that hurts performance. Source-to-pay closes this gap.</p>
+
+    <p>This article explains what source-to-pay covers and where performance breaks down without it. It shows how a connected process speeds cycle times, sharpens supplier decisions, and increases disruption resilience. It also covers what to look for in an S2P solution and how to measure the gains. Strong supply chain performance management starts with a connected process, through a source-to-pay solution.</p>
+
+    <h2>Key Takeaways</h2>
+
+    <div class="key-facts">
+      <ul>
+        <li>Siloed operations and fragmented systems are the primary barrier for <span class="kf-hl">57%</span> of the chief procurement officers, limiting value across procurement and supply chain management.</li>
+        <li>Absence of source-to-pay systems leads to maverick spend and organizations losing <span class="kf-hl">10% to 20%</span> of their savings.</li>
+        <li>Source-to-Pay solutions automate and standardize processes, thus reducing manual errors and reducing the requisition to order cycle time to <span class="kf-hl">5 hours</span>, compared to an average of 48 hours.</li>
+        <li>A connected S2P process strengthens supply chain performance management. It breaks down data silos, improves compliance, reduces disruption risk, and helps procurement make faster, smarter decisions with greater cost control.</li>
+        <li>Real-time analytics and supplier visibility helps procurement detect risks early and respond faster to disruptions, thus improving supply chain resilience.</li>
+      </ul>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S1 -->
+    <span class="section-eyebrow">IBM &middot; Ivalua 2026</span>
+    <h2 id="s1">What Source-to-Pay Actually Covers</h2>
+
+    <h3>From sourcing and contracting to invoicing and payment</h3>
+
+    <p>Source-to-pay covers the entire procurement process. It integrates supplier sourcing and contract negotiation through purchasing, invoicing and payment. It connects all the stages that organizations run separately. The process is split into two halves. Source-to-contract is the upstream function and covers spend analysis, supplier selection, and negotiating contract terms. Procure-to-pay is the downstream function and covers purchase orders, goods receipt and invoice matching. Invoice matching aligns the purchase order, receipt, and invoice before the payment. Nowadays, the integration of AI in S2P allows reading invoices in any format and perform multi-way matching resulting in touchless rates of 70-90%. Thus, source-to-pay is a connected chain which is working end-to-end.</p>
+
+    <div class="hook-stat">
+      <span class="hook-stat-num">70&ndash;90%</span>
+      <div class="hook-stat-body">
+        <p class="hook-stat-lead">touchless invoice rates now reported where AI reads any invoice format and runs multi-way matching automatically.</p>
+        <p class="hook-stat-sub">AI-enabled source-to-pay, 2026</p>
+      </div>
+    </div>
+
+    <h3>Why fragmented systems break this chain</h3>
+
+    <p>Fragmented systems break the chain because data stops flowing between the stages. All the processes including sourcing, contracting, purchasing and payment are disintegrated and run separately. According to <a href="https://www.deloitte.com/us/en/about/press-room/2025-chief-procurement-officer-survey.html" target="_blank" rel="noopener">Deloitte&rsquo;s 2025 CPO survey</a>, isolated operation was the key barrier cited by 57% of the CPOs preventing value delivery.</p>
+
+    <p>The damage keeps on compounding as you move downstream. The disintegration leads to degradation of the master data and bad data feeds into every sourcing and payment decision. The process of strategic spending falls apart. This underlines the importance of supply chain performance management built on connected, reliable data.</p>
+
+    <div class="callout-note callout-purple">
+      <span class="callout-note-label">Key Stat</span>
+      <p>Only 63.9% of the Chief Procurement Officers reported that their master data is accurate, complete and current. <a href="https://www.ivalua.com/blog/ardent-partners-2025-state-of-source-to-pay-digitization-key-insights-for-cpos/" target="_blank" rel="noopener" style="font-size:.68rem;">Ivalua, 2026</a></p>
+    </div>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">JAGGAER One: Source-to-Pay Platform with AI embedded at every step</p>
+        <p class="jag-cta-sub">JAGGAER One is an intelligent source-to-pay platform covering all upstream and downstream functions like spend analytics, strategic sourcing, invoice and payment management.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/source-to-pay" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo and Explore JAGGAER One</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S2 -->
+    <span class="section-eyebrow">Ivalua &middot; Kaplan Group 2025</span>
+    <h2 id="s2">Where Supply Chain Performance Breaks Down Without Source-to-Pay</h2>
+
+    <h3>Maverick spends and disconnected purchasing</h3>
+
+    <p>The absence of a source-to-pay system leads to off-contract purchasing. Maverick spend is buying outside the negotiated contracts and approved suppliers. This usually happens due to an outdated and inefficient procurement software or lack of employee familiarity with compliant procurement policies and procedures. According to <a href="https://www.ivalua.com/blog/maverick-spending/" target="_blank" rel="noopener">Ivalua</a>, organizations lose 10 to 20% of their savings due to maverick spend. Disconnected purchasing negatively affects every deal secured by procurement and the damage is way bigger than the cost. It leads to fragmented spending and weakens the negotiating powers of suppliers. It breaks contract compliance and also reduces visibility of overall spend.</p>
+
+    <div class="figure-pull">
+      <span class="figure-pull-num">10&ndash;20%</span>
+      <span class="figure-pull-txt">of savings lost to maverick spend when buying happens outside negotiated contracts and approved suppliers.</span>
+      <span class="figure-pull-src"><a href="https://www.ivalua.com/blog/maverick-spending/" target="_blank" rel="noopener">Ivalua</a></span>
+    </div>
+
+    <h3>Delayed payments and strained supplier relationships</h3>
+
+    <p>Without a connected S2P system, procedures like invoice processing are performed manually across disconnected systems. The approval bottlenecks, data mismatches and error-prone processes lead to delayed payments. These late payments carry indirect costs and lead to strained supplier relationships. According to <a href="https://www.kaplancollectionagency.com/business-advice/54-statistics-on-the-b2b-payment-delays/" target="_blank" rel="noopener">Kaplan Group</a>, 26% of business decision makers ended a buyer or supplier relationship due to delayed payments. The scale is huge. Around 86% of businesses reported that up to 30% of their monthly sales are overdue. These strained partnerships usually tighten contract terms, raise prices or deprioritize orders.</p>
+
+    <div class="stat-split">
+      <div class="stat-split-cell">
+        <span class="stat-split-num">26%</span>
+        <span class="stat-split-txt">of business decision makers ended a buyer or supplier relationship due to delayed payments.<br><em><a href="https://www.kaplancollectionagency.com/business-advice/54-statistics-on-the-b2b-payment-delays/" target="_blank" rel="noopener">Kaplan Group, 2025</a></em></span>
+      </div>
+      <div class="stat-split-cell">
+        <span class="stat-split-num">86%</span>
+        <span class="stat-split-txt">of businesses reported up to 30% of their monthly sales are overdue.<br><em><a href="https://www.creditsafe.com/us/en/resources/research/cost-of-late-payments.html" target="_blank" rel="noopener">Creditsafe, 2025</a></em></span>
+      </div>
+    </div>
+
+    <h3>Lack of visibility into supplier performance data</h3>
+
+    <p>Supplier performance data remains scattered and disintegrated when an efficient S2P platform doesn&rsquo;t optimize the supply chain lifecycle. Data including delivery quality, on-time delivery rates, innovation contribution and risk scores is present in separate systems and spreadsheets due to siloed operations. Issues like defect rates, lead time variability and late shipments are noticed late. This puts production cycles at risk. This leads to reactive procurement and supply chain management, and decisions are not made on the basis of data, but instinct. The mismanagement of supplier performance data leads to supply risks surfacing too late.</p>
+
+    <hr class="section-divider">
+
+    <!-- S3 -->
+    <span class="section-eyebrow">APQC &middot; Deloitte 2025</span>
+    <h2 id="s3">How a Connected Source-to-Pay Process Improves Performance in 2026</h2>
+
+    <p>A connected source-to-pay process drives the digital transformation in supply chain performance management. It turns disconnected steps into a continuous and data-driven process.</p>
+
+    <h3>Faster cycle times from requisition to payment</h3>
+
+    <p>Automating and standardizing processes through a source-to-pay system reduces time and effort required to complete tasks. It speeds up the procurement cycle as human errors are minimized and ensures compliance. Tasks like creating purchase orders, matching invoices and processing payments are automated and three-way matching runs automatically at the invoice stage.</p>
+
+    <div class="bar-compare">
+      <span class="bar-compare-kicker">Requisition-to-order cycle time</span>
+      <div class="bar-row">
+        <div class="bar-row-top">
+          <span class="bar-row-label">Top performers</span>
+          <span class="bar-row-val">5 hrs</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:10%;"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-row-top">
+          <span class="bar-row-label">Businesses with siloed procurement processes</span>
+          <span class="bar-row-val">48 hrs</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div>
+      </div>
+      <span class="bar-src"><a href="https://www.esker.com/blog/source-pay/6-top-procurement-performance-metrics-driving-cost-savings-efficiency/" target="_blank" rel="noopener">Esker</a></span>
+    </div>
+
+    <div class="stat-split">
+      <div class="stat-split-cell">
+        <span class="stat-split-num">3.1 days</span>
+        <span class="stat-split-txt">invoice processing time for teams with effective procure-to-pay systems, at a 49.2% touchless and automation rate.</span>
+      </div>
+      <div class="stat-split-cell">
+        <span class="stat-split-num">14.6 days</span>
+        <span class="stat-split-txt">invoice processing time for teams running on manual operations.</span>
+      </div>
+    </div>
+    <p class="viz-src-line"><a href="https://zip.com/blog/procure-to-pay-process" target="_blank" rel="noopener">Zip, 2026</a></p>
+
+    <p>Thus, a connected source-to-pay process increases operational efficiency and keep the supply chain moving without any costly delays.</p>
+
+    <h3>Better supplier data feeding better decisions</h3>
+
+    <p>Centralized operations through a connected S2P process eliminates data silos. It bridges the gap between upstream and downstream supply chain functions. Unified spend visibility and data-driven procurement and supply chain management strategies lower costs and improve supplier relationships. Digital transformation of supply chain management relies on digital tools like GenAI and LLMs. CPOs deploying them have achieved cost saving targets 96% of the time, compared to 80% for other companies. The availability of data surfaces risks earlier and help in driving strategic decisions.</p>
+
+    <div class="dial-pair">
+      <div class="dial-card">
+        <div class="dial-graphic">
+          <svg class="dial-svg" viewBox="0 0 100 100" aria-hidden="true">
+            <defs><linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#5300CE"/><stop offset="100%" stop-color="#E22B83"/></linearGradient></defs>
+            <circle class="dial-track" cx="50" cy="50" r="42"/>
+            <circle class="dial-prog g" cx="50" cy="50" r="42" stroke-dasharray="263.9" stroke-dashoffset="10.6"/>
+          </svg>
+          <span class="dial-center-html g">96%</span>
+        </div>
+        <p class="dial-cap">Cost-savings target achievement for CPOs deploying GenAI and LLMs.</p>
+      </div>
+      <div class="dial-card">
+        <div class="dial-graphic">
+          <svg class="dial-svg" viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="dial-track" cx="50" cy="50" r="42"/>
+            <circle class="dial-prog r" cx="50" cy="50" r="42" stroke-dasharray="263.9" stroke-dashoffset="52.8"/>
+          </svg>
+          <span class="dial-center-html r">80%</span>
+        </div>
+        <p class="dial-cap">Cost-savings target achievement for other companies.</p>
+      </div>
+    </div>
+    <p class="viz-src-line"><a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" target="_blank" rel="noopener">Deloitte, 2025</a></p>
+
+    <h3>Reduced risk through built-in compliance and controls</h3>
+
+    <p>A connected S2P process transforms disconnected tasks into a single, transparent and auditable system. It builds compliance checks in the workflow and policy checks run before purchase orders are issued. Source-to-Pay processes connect sourcing directly to purchasing and ensures alignment with legal, ethical regulations and risk management practices. Embedded controls close the gaps at every step, which reduces manual workload, increases audit readiness, and improves savings. Using AI for compliance check and invoice matching reduces spending by 5% to 15%. Ivalua&rsquo;s pilot programs for AI in procurement also reflected 4% to 10% cost savings with 96% accuracy.</p>
+
+    <div class="stat-metrics">
+      <span class="stat-metrics-kicker">AI in compliance and invoice matching</span>
+      <div class="stat-metrics-grid">
+        <div class="stat-metric">
+          <span class="stat-num">5&ndash;15%</span>
+          <span class="stat-label">Reduction in spending</span>
+          <span class="stat-sub">AI compliance checks &amp; matching</span>
+        </div>
+        <div class="stat-metric">
+          <span class="stat-num">4&ndash;10%</span>
+          <span class="stat-label">Cost savings</span>
+          <span class="stat-sub">Ivalua AI pilot programs</span>
+        </div>
+        <div class="stat-metric">
+          <span class="stat-num">96%</span>
+          <span class="stat-label">Accuracy</span>
+          <span class="stat-sub">Ivalua AI pilot programs</span>
+        </div>
+        <div class="stat-metric">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Auditable</span>
+          <span class="stat-sub">Single transparent system</span>
+        </div>
+      </div>
+    </div>
+    <p class="viz-src-line"><a href="https://procright.com/blog/ai-tools-for-supplier-risk-assessment" target="_blank" rel="noopener">Procright</a> &middot; Ivalua AI pilot programs</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">JAGGAER One&rsquo;s Embedded AI capabilities</p>
+        <p class="jag-cta-sub">JAGGAER Advise applies machine learning and analytics across sourcing, supplier selection, and contract management.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/intelligence" class="jag-cta-btn" target="_blank" rel="noopener">Explore Embedded Intelligence and AI Solutions</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S4 -->
+    <span class="section-eyebrow">Deloitte 2025 &middot; Esker 2026</span>
+    <h2 id="s4">The Link Between Source-to-Pay and Supply Chain Resilience in 2026</h2>
+
+    <h3>Real-time spend and supplier visibility</h3>
+
+    <p>A unified source-to-pay platform provides real-time visibility into spend and suppliers. It provides live insights into inventory, shipment status and supplier performance, enabling teams to detect disruptions before they affect revenue. Advanced platforms can calculate supplier&rsquo;s residual risk, allowing procurement to identify alternative suppliers. Thus, procurement and supply chain management leaders analyse supplier exposure and concentration without waiting for annual and monthly reports. The visibility then turns into resilience towards predicted disruptions. S2P systems are effective for risk mitigation and <a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" target="_blank" rel="noopener">64% of CPOs</a> refer to greater visibility as an effective risk strategy.</p>
+
+    <div class="figure-pull">
+      <span class="figure-pull-num">64%</span>
+      <span class="figure-pull-txt">of CPOs refer to greater visibility as an effective risk strategy for mitigating supply chain disruption.</span>
+      <span class="figure-pull-src"><a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" target="_blank" rel="noopener">Deloitte, 2025</a></span>
+    </div>
+
+    <h3>Faster response when disruption hits</h3>
+
+    <p>The disruption response times go down as manual bottlenecks are replaced by automated supplier onboarding, real-time risk monitoring and predictive risk management. S2P helps in compressing the execution delays into integrated and data-driven workflows. Real-time monitoring of financial signals like credit rating downgrades, delayed sub-supplier payments and operating margins help in predictive risk management. Automated workflows and monitoring are a baseline requirement now and <a href="https://tradeverifyd.com/resources/supply-chain-statistics" target="_blank" rel="noopener">Tradeverifyd&rsquo;s</a> research shows 72% of supply chain executives state them as mandatory to manage modern disruptions.</p>
+
+    <div class="stat-subtle">
+      <span class="stat-subtle-num">72%</span>
+      <div class="stat-subtle-body">
+        <p class="stat-subtle-lead">of supply chain executives state automated workflows and monitoring as mandatory to manage modern disruptions.</p>
+        <p class="stat-subtle-sub">A baseline requirement in 2026</p>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S5 -->
+    <span class="section-eyebrow">Buyer&rsquo;s guide &middot; McKinsey</span>
+    <h2 id="s5">What to Look for in a Source-to-Pay Solution in 2026</h2>
+
+    <h3>Integration with existing supply chain systems</h3>
+
+    <p>The first thing to check for in an S2P solution is if it integrates your existing systems and workflow. It must connect to your ERP, finance, inventory and supplier systems. Seamless connectivity prevents data silos and eliminates manual entry, enabling automation across workflow. However, integration is where most procurement technologies struggle. In fact, 67% of firms, as per <a href="https://tradeverifyd.com/resources/supply-chain-executive-industry-trends" target="_blank" rel="noopener">Tradeverifyd</a>, reported seamless data integration as the primary barrier to procurement success. Thus, handling real-time data, APIs and prebuilt connectors is crucial for S2P solutions.</p>
+
+    <div class="waffle-fig">
+      <div class="waffle-grid" id="waffle67" aria-hidden="true"></div>
+      <div class="waffle-body">
+        <span class="waffle-num">67%</span>
+        <span class="waffle-txt">of firms reported <strong>seamless data integration</strong> as the primary barrier to procurement success.</span>
+        <span class="waffle-src">Integration is where most procurement technologies struggle. <a href="https://tradeverifyd.com/resources/supply-chain-executive-industry-trends" target="_blank" rel="noopener">Tradeverifyd</a></span>
+      </div>
+    </div>
+
+    <h3>Reporting and analytics capability</h3>
+
+    <p>A source-to-pay platform should be capable of consolidating fragmented data into actionable insights. Real time analytics provide end-to-end visibility across procurement and supply chain management. It helps optimize spending, evaluate supplier performance, and limit maverick spend. Strong S2P solutions help in forecasting supplier risk and flag invoices which are likely to miss terms. Organizations deploying AI driven procurement analytics can accelerate processes and have 20% savings potential, according to <a href="https://www.mckinsey.com/capabilities/operations/our-insights/transforming-procurement-functions-for-an-ai-driven-world" target="_blank" rel="noopener">McKinsey</a>. Thus, ensure that customizable dashboards, spend analytics, risk metrics and real-time process monitoring surface inside daily workflows.</p>
+
+    <div class="figure-pull">
+      <span class="figure-pull-num">20%</span>
+      <span class="figure-pull-txt">savings potential for organizations deploying AI-driven procurement analytics to accelerate processes.</span>
+      <span class="figure-pull-src"><a href="https://www.mckinsey.com/capabilities/operations/our-insights/transforming-procurement-functions-for-an-ai-driven-world" target="_blank" rel="noopener">McKinsey</a></span>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S6 -->
+    <span class="section-eyebrow">The Hackett Group</span>
+    <h2 id="s6">Measuring the Performance Gains</h2>
+
+    <p>Effective supply chain performance management starts with measurement. To accurately measure whether a source-to-pay solution worked, organizations must compare real-time data against a historical baseline. Process efficiency, spend control, supplier value and financial return are the four core pillars which frame these gains. Efficiency is easiest to see, in shorter cycle times and higher invoice processing rates. Control comes down to spend under management, which now averages a record 71%. Supplier value takes longer to read, but shows in fewer disruptions and steadier performance. Then there is return on investment, the number leadership actually cares about. Digital World Class procurement teams deliver 2.6 times greater ROI at 19% lower cost, with 31% fewer staff as per <a href="https://www.thehackettgroup.com/the-hackett-group-digital-world-class-procurement-teams-achieve-2-6x-higher-roi/" target="_blank" rel="noopener">Hackett Group</a>. Track all of it through live dashboards instead of annual reviews. A clear baseline helps these numbers demonstrate the real business impact of an S2P investment.</p>
+
+    <div class="stat-metrics">
+      <span class="stat-metrics-kicker">Digital World Class procurement teams</span>
+      <div class="stat-metrics-grid">
+        <div class="stat-metric">
+          <span class="stat-num">2.6x</span>
+          <span class="stat-label">Greater ROI</span>
+          <span class="stat-sub">vs. peer teams</span>
+        </div>
+        <div class="stat-metric">
+          <span class="stat-num">19%</span>
+          <span class="stat-label">Lower cost</span>
+          <span class="stat-sub">as % of spend</span>
+        </div>
+        <div class="stat-metric">
+          <span class="stat-num">31%</span>
+          <span class="stat-label">Fewer staff</span>
+          <span class="stat-sub">full-time employees</span>
+        </div>
+        <div class="stat-metric">
+          <span class="stat-num">71%</span>
+          <span class="stat-label">Spend under management</span>
+          <span class="stat-sub">a record average</span>
+        </div>
+      </div>
+    </div>
+    <p class="viz-src-line"><a href="https://www.thehackettgroup.com/the-hackett-group-digital-world-class-procurement-teams-achieve-2-6x-higher-roi/" target="_blank" rel="noopener">The Hackett Group, 2025</a> &middot; <a href="https://www.ivalua.com/blog/ardent-partners-2025-state-of-source-to-pay-digitization-key-insights-for-cpos/" target="_blank" rel="noopener">Ivalua</a></p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">JAGGAER&rsquo;s Financial Return Calculator</p>
+        <p class="jag-cta-sub">The Source-to-Pay ROI calculator calculates the projected financial return of moving to a connected S2P process.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/tool/s2p-calculator" class="jag-cta-btn" target="_blank" rel="noopener">Explore JAGGAER&rsquo;s ROI Calculator</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S7: FAQ -->
+    <span class="section-eyebrow">Frequently Asked Questions</span>
+    <h2 id="s7">Frequently asked questions</h2>
+
+    <details class="faq-item">
+      <summary>What is source-to-pay in supply chain management? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Source-to-pay (S2P) is the end-to-end procurement process that connects sourcing suppliers, negotiating contracts, purchasing goods, and paying invoices within one integrated workflow, linking strategy to spend.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How does source-to-pay improve procurement efficiency? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Source-to-pay improves efficiency by automating the entire requisition-to-payment cycle, removing manual handoffs between systems so purchase orders, approvals, and invoice matching happen automatically rather than through repeated manual intervention.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the difference between procure-to-pay and source-to-pay? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Procure-to-pay covers the downstream buying cycle, from requisition to payment. Source-to-pay is broader, adding the upstream strategic sourcing stages of spend analysis, supplier selection, and contract negotiation.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How does S2P reduce supply chain risk? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Source-to-pay reduces risk by embedding compliance controls into every transaction and giving real-time visibility into spend and supplier performance, so threats surface before they disrupt supply.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What are the stages of the source-to-pay process? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">The source-to-pay process runs through spend analysis, strategic sourcing, contract management, supplier management, requisitioning, purchase orders, goods receipt, invoicing, and payment, covering both upstream sourcing and downstream functions.</div>
+    </details>
+
+  </article>
+
+  <!-- EXPERT SIDEBAR -->
+  <aside class="expert-sidebar" aria-label="Data at a glance">
+    <div class="exp-head"><span class="exp-head-lbl">What are the Experts Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">Deloitte &middot; 2025</span>
+        <span class="exp-num red">57%</span>
+        <p class="exp-stat">Cite <strong>siloed operations</strong> as the key barrier preventing value delivery.</p>
+        <a href="https://www.deloitte.com/us/en/about/press-room/2025-chief-procurement-officer-survey.html" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Ivalua 2026</span>
+        <span class="exp-num red">10&ndash;20%</span>
+        <p class="exp-stat">Of savings <strong>lost to maverick spend</strong> and off-contract buying.</p>
+        <a href="https://www.ivalua.com/blog/maverick-spending/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Kaplan Group &middot; 2025</span>
+        <span class="exp-num red">26%</span>
+        <p class="exp-stat">Ended a supplier relationship due to <strong>delayed payments</strong>.</p>
+        <a href="https://www.kaplancollectionagency.com/business-advice/54-statistics-on-the-b2b-payment-delays/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Esker 2025</span>
+        <span class="exp-num red">5 hrs</span>
+        <p class="exp-stat">Requisition-to-order cycle for <strong>top performers</strong> vs. 48 hours siloed.</p>
+        <a href="https://www.esker.com/blog/source-pay/6-top-procurement-performance-metrics-driving-cost-savings-efficiency/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Deloitte &middot; 2025</span>
+        <span class="exp-num red">96%</span>
+        <p class="exp-stat">Cost-savings target hit rate for CPOs deploying <strong>GenAI and LLMs</strong>.</p>
+        <a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Tradeverifyd &middot; 2026</span>
+        <span class="exp-num red">72%</span>
+        <p class="exp-stat">Say <strong>automated workflows</strong> are mandatory to manage disruptions.</p>
+        <a href="https://tradeverifyd.com/resources/supply-chain-statistics" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">The Hackett Group &middot; 2025</span>
+        <span class="exp-num red">2.6x</span>
+        <p class="exp-stat">Greater ROI for <strong>Digital World Class</strong> procurement teams.</p>
+        <a href="https://www.thehackettgroup.com/the-hackett-group-digital-world-class-procurement-teams-achieve-2-6x-higher-roi/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id], article .article-header');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+
+// Build 100-cell waffle grid, 67 filled
+(function(){
+  const g = document.getElementById('waffle67');
+  if(!g) return;
+  for(let i=0;i<100;i++){
+    const c = document.createElement('span');
+    c.className = 'waffle-cell' + (i < 67 ? ' on' : '');
+    g.appendChild(c);
+  }
+})();
+</script>
+
+</body>
+</html>
