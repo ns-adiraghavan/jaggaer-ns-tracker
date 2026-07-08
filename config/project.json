@@ -702,7 +702,21 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "writing"
+              "status": "marketing-review",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-07-08T10:47:40.686Z",
+              "last_upload_by": "jason",
+              "last_updated": "2026-07-08T10:47:40.686Z",
+              "last_updated_by": "jason",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-07-08T10:47:40.686Z",
+                  "by": "jason"
+                }
+              ]
             },
             {
               "id": "piece-c-yad8u-8-spc7",
