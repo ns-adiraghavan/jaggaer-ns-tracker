@@ -718,7 +718,21 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "writing"
+              "status": "marketing-review",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-07-08T10:42:47.606Z",
+              "last_upload_by": "m-5jitd",
+              "last_updated": "2026-07-08T10:42:47.606Z",
+              "last_updated_by": "m-5jitd",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-07-08T10:42:47.606Z",
+                  "by": "m-5jitd"
+                }
+              ]
             },
             {
               "id": "piece-c-yad8u-9-mtfa",
