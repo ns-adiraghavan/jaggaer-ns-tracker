@@ -328,7 +328,7 @@ function PerformancePanel({ project, setProject, currentUser }) {
           {sortedPieces.map(({ piece, cluster, pillar }) => {
             const row = joined.byPieceId[piece.id] || null;
             return (
-              <PieceCard
+              <PerfPieceCard
                 key={piece.id}
                 piece={piece} cluster={cluster} pillar={pillar}
                 row={row}
@@ -345,7 +345,7 @@ function PerformancePanel({ project, setProject, currentUser }) {
 
       {/* ── Drawer ───────────────────────────────────────────────────────── */}
       {(selected && selected !== "__setup__" && selectedEntry) && (
-        <PieceDrawer
+        <PerfPieceDrawer
           entry={selectedEntry}
           row={selectedRow}
           headers={data?.headers || null}
@@ -363,7 +363,7 @@ function PerformancePanel({ project, setProject, currentUser }) {
 
 // ─── Piece card ─────────────────────────────────────────────────────────────
 // row is null when no sheet data matched this piece.
-function PieceCard({ piece, cluster, pillar, row, heroMetric, stripMetrics, trendCol, hasSheet, onClick }) {
+function PerfPieceCard({ piece, cluster, pillar, row, heroMetric, stripMetrics, trendCol, hasSheet, onClick }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const hasData = !!row;
   const heroValue = hasData && heroMetric ? row[heroMetric] : null;
@@ -438,7 +438,7 @@ function PieceCard({ piece, cluster, pillar, row, heroMetric, stripMetrics, tren
 // ─── Piece drawer ────────────────────────────────────────────────────────────
 // Shows metrics when sheet data is available; shows the sheet connection form
 // when it isn't (either no sheet URL, or no matching row for this piece).
-function PieceDrawer({ entry, row, headers, urlCol, trendCol, hasSheet, sheetStatus, onConnectSheet, onClose }) {
+function PerfPieceDrawer({ entry, row, headers, urlCol, trendCol, hasSheet, sheetStatus, onConnectSheet, onClose }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const { piece, cluster, pillar } = entry;
   const liveUrl = piece.publishing?.live_url || piece.url;
