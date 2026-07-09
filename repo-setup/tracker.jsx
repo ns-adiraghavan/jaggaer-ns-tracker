@@ -59,6 +59,14 @@ function getAdHocReviewStage(project) {
   return stages.find(s => s.id === "ad-hoc-review") || ADHOC_REVIEW_STAGE;
 }
 function isAdHoc(piece) { return piece && piece.content_type === "ad-hoc"; }
+// White-paper deliverables require BOTH a PDF and an HTML companion file.
+// Formats that trigger dual-upload mode:
+const WP_FORMATS = ["Whitepaper", "Whitepaper (gated)", "eBook / Guide"];
+function isWhitePaper(piece) { return piece && WP_FORMATS.includes(piece.format); }
+// Path helpers for a given rev + ext
+function wpDeliverablePath(piece, pillar, cluster, month, rev, ext) {
+  return `content/${month}/${pillar}/${cluster}/${piece.id}/deliverable-v${rev}.${ext}`;
+}
 
 function getWorkflowStages(project) {
   return (project && project.workflow_stages && project.workflow_stages.length)
@@ -1971,14 +1979,27 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
   const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
   const monthId = project.active_month || "month-1";
   const rev = piece.revision_count || 1;
-  // Fetch via /api/github proxy (authenticated) — raw.githubusercontent.com fails on private repos
-  const githubPath = `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/${deliverableFileName(piece)}`;
-  const githubTreeUrl = `https://github.com/${REPO}/tree/main/${githubPath}`;
+  const isWP = isWhitePaper(piece) && piece.wp_has_html;
 
+  // activeSlot: "pdf" | "html" — only relevant for whitepapers with both files
+  const [activeSlot, setActiveSlot] = useStateTR("pdf");
   const [srcdoc, setSrcdoc] = useStateTR(null);
   const [kind, setKind] = useStateTR("html");
   const [loading, setLoading] = useStateTR(true);
   const [error, setError] = useStateTR(null);
+
+  // For WP pieces, build path dynamically from active slot; else use primary deliverable
+  function githubPathFor(slot) {
+    if (isWP) return `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${rev}.${slot}`;
+    return `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/${deliverableFileName(piece)}`;
+  }
+  const githubPath = isWP ? githubPathFor(activeSlot) : githubPathFor("primary");
+  const githubTreeUrl = `https://github.com/${REPO}/tree/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}`;
+
+  // Synthetic piece-like object for deliverableBlobFromGithub when in HTML slot
+  const pieceLike = isWP && activeSlot === "html"
+    ? { ...piece, deliverable_ext: "html" }
+    : piece;
 
   React.useEffect(() => {
     let cancelled = false;
@@ -1988,7 +2009,7 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then(data => {
         if (cancelled) return;
-        const { url, kind: k } = deliverableBlobFromGithub(data, piece);
+        const { url, kind: k } = deliverableBlobFromGithub(data, pieceLike);
         objectUrl = url;
         setKind(k);
         setSrcdoc(objectUrl);
@@ -2006,6 +2027,7 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
   }, [githubPath]);
 
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const activeExt = isWP ? activeSlot : deliverableExt(piece);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
@@ -2016,9 +2038,23 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
         background: "#f0f7ff", borderBottom: "1px solid #c5ddef",
         flexShrink: 0,
       }}>
-        <div style={{ flex: 1 }}>
+        {/* WP toggle */}
+        {isWP && (
+          <div style={{ display: "flex", gap: "4px", flexShrink: 0 }}>
+            {["pdf", "html"].map(slot => (
+              <button key={slot} onClick={() => setActiveSlot(slot)} style={{
+                ...FONT, fontSize: "0.68rem", fontWeight: 700, padding: "4px 10px", borderRadius: "3px",
+                border: "1px solid #c5ddef", cursor: "pointer", textTransform: "uppercase",
+                background: activeSlot === slot ? "#1a3a52" : "#fff",
+                color: activeSlot === slot ? "#fff" : "#6b8fa8",
+                transition: "all 0.12s",
+              }}>{slot}</button>
+            ))}
+          </div>
+        )}
+        <div style={{ flex: 1, minWidth: 0 }}>
           <span style={{ ...FONT, fontSize: "0.72rem", fontWeight: 600, color: "#1a3a52" }}>
-            {deliverableFileName(piece)}
+            {isWP ? `deliverable-v${rev}.${activeSlot}` : deliverableFileName(piece)}
           </span>
           {piece.last_upload && (
             <span style={{ ...FONT, fontSize: "0.68rem", color: "#6b8fa8", marginLeft: "10px" }}>
@@ -2035,11 +2071,10 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
         <button
           onClick={() => {
             if (srcdoc) {
-              // srcdoc holds the blob URL — fetch it to get raw HTML for download
               fetch(srcdoc).then(r => r.blob()).then(blob => {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement("a");
-                a.href = url; a.download = `${piece.id}-v${rev}.${deliverableExt(piece)}`;
+                a.href = url; a.download = `${piece.id}-v${rev}.${activeExt}`;
                 a.click(); setTimeout(() => URL.revokeObjectURL(url), 5000);
               });
             }
@@ -2048,7 +2083,7 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
             ...FONT, fontSize: "0.7rem", fontWeight: 600,
             color: "#1e6fa8", background: "#fff",
             border: "1px solid #c5ddef", padding: "5px 12px", borderRadius: "3px", cursor: "pointer",
-          }}>↓ Download</button>
+          }}>↓ Download {activeExt.toUpperCase()}</button>
         <a href={githubTreeUrl}
           target="_blank" rel="noopener noreferrer"
           style={{
@@ -2083,7 +2118,7 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
             position: "absolute", inset: 0, display: "flex", flexDirection: "column",
             alignItems: "center", justifyContent: "center", gap: "10px", background: "#faf8f4",
           }}>
-            <div style={{ ...FONT, fontSize: "0.82rem", color: "#555" }}>Inline preview isn't available for .{deliverableExt(piece)} files.</div>
+            <div style={{ ...FONT, fontSize: "0.82rem", color: "#555" }}>Inline preview isn't available for .{activeExt} files.</div>
             <div style={{ ...FONT, fontSize: "0.72rem", color: "#888" }}>Use the Download button above to open it.</div>
           </div>
         )}
@@ -2162,7 +2197,9 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
       </div>
       <div className="ns-drawer-body" style={(mode === "preview" || mode === "annotate") ? { padding: 0, overflow: "hidden" } : {}}>
         {mode === "brief" && canBrief && <BriefUploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} />}
-        {mode === "upload" && canUpload && <UploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} />}
+        {mode === "upload" && canUpload && (isWhitePaper(piece)
+          ? <WhitepaperUploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} />
+          : <UploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} />)}
         {mode === "replace" && canReplace && <ReplaceDraftPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} onDone={() => setMode("details")} />}
         {mode === "review" && canReview && <ReviewPanel piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} stages={stages} stageMeta={stageMeta} onDone={() => setMode("history")} />}
         {mode === "preview" && hasDeliverable && <PreviewPanel piece={piece} cluster={cluster} pillar={pillar} project={project} />}
@@ -2462,6 +2499,192 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
     </div>
   );
 }
+// ─── WhitepaperUploadPanel — dual PDF + HTML upload for whitepapers/eBooks ───
+// Shows two independent drop zones. Each file can be uploaded independently.
+// Submit becomes active once at least the PDF is attached (HTML optional but encouraged).
+// Both use the same revision number; the piece advances to next stage on submit.
+function WhitepaperUploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece, stages }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const workflowStages = stages || getWorkflowStages(project);
+  const stageOrder = workflowStages.map(s => s.id);
+  const currentIdx = stageOrder.indexOf(piece.status);
+  const nextStage = workflowStages[currentIdx + 1] || null;
+  const nextRev = (piece.revision_count || 0) + 1;
+
+  // Per-file state: idle | uploading | done | error
+  const [pdfState, setPdfState] = useStateTR("idle");
+  const [pdfName, setPdfName] = useStateTR(null);
+  const [pdfError, setPdfError] = useStateTR(null);
+  const [pdfDragging, setPdfDragging] = useStateTR(false);
+
+  const [htmlState, setHtmlState] = useStateTR("idle");
+  const [htmlName, setHtmlName] = useStateTR(null);
+  const [htmlError, setHtmlError] = useStateTR(null);
+  const [htmlDragging, setHtmlDragging] = useStateTR(false);
+
+  const [submitting, setSubmitting] = useStateTR(false);
+  const [submitted, setSubmitted] = useStateTR(false);
+
+  const pdfRef = useRefTR(null);
+  const htmlRef = useRefTR(null);
+
+  const pdfReady = pdfState === "done";
+  const htmlReady = htmlState === "done";
+  const canSubmit = pdfReady && !submitting && !submitted;
+
+  async function handlePdf(file) {
+    if (!file || pdfState === "uploading") return;
+    setPdfState("uploading"); setPdfName(file.name); setPdfError(null);
+    const payload = await readDeliverableFile(file);
+    const result = await window.NS_API.uploadWhitepaperFile(
+      piece, cluster.id, pillar.id, project.active_month, payload, "pdf", currentUser.id
+    );
+    if (!result.ok) { setPdfState("error"); setPdfError(result.error || "Upload failed"); return; }
+    setPdfState("done");
+  }
+
+  async function handleHtml(file) {
+    if (!file || htmlState === "uploading") return;
+    setHtmlState("uploading"); setHtmlName(file.name); setHtmlError(null);
+    const payload = await readDeliverableFile(file);
+    const result = await window.NS_API.uploadWhitepaperFile(
+      piece, cluster.id, pillar.id, project.active_month, payload, "html", currentUser.id
+    );
+    if (!result.ok) { setHtmlState("error"); setHtmlError(result.error || "Upload failed"); return; }
+    setHtmlState("done");
+  }
+
+  async function handleSubmit() {
+    if (!canSubmit) return;
+    setSubmitting(true);
+    const newStatus = piece.return_to_stage
+      ? piece.return_to_stage
+      : (nextStage ? nextStage.id : piece.status);
+    updatePiece(cluster.id, piece.id, {
+      status: newStatus,
+      revision_count: nextRev,
+      deliverable_ext: "pdf",            // primary = pdf
+      wp_has_html: htmlReady,            // flag: companion HTML also present
+      return_to_stage: null,
+      last_upload: new Date().toISOString(),
+      last_upload_by: currentUser.id,
+      last_updated: new Date().toISOString(),
+      last_updated_by: currentUser.id,
+      status_history: appendStatusHistory(piece, newStatus, currentUser.id),
+    });
+    setSubmitting(false);
+    setSubmitted(true);
+  }
+
+  function DropZone({ label, sub, state, name, error, dragging, onDrop, onDragOver, onDragLeave, onClick, accept, inputRef, onFile }) {
+    const borderColor = state === "done" ? "#1e7a45" : state === "error" ? "#c8401a" : dragging ? "#c8401a" : "#d4cfc8";
+    const bg = state === "done" ? "#f0faf5" : dragging ? "#fff8f5" : "#faf8f4";
+    return (
+      <div
+        style={{ border: `1.5px dashed ${borderColor}`, borderRadius: "4px", padding: "14px 16px", background: bg, cursor: state === "uploading" ? "default" : "pointer", transition: "all 0.15s", textAlign: "center" }}
+        onDragOver={onDragOver} onDragLeave={onDragLeave} onDrop={onDrop} onClick={onClick}
+      >
+        {state === "idle" && (
+          <>
+            <div style={{ ...FONT, fontSize: "0.75rem", fontWeight: 700, color: "#1a2535", marginBottom: "3px" }}>{label}</div>
+            <div style={{ ...FONT, fontSize: "0.68rem", color: "#9b948c" }}>{sub}</div>
+          </>
+        )}
+        {state === "uploading" && (
+          <div style={{ ...FONT, fontSize: "0.75rem", color: "#1a2535", fontWeight: 500 }}>Uploading {name}…</div>
+        )}
+        {state === "done" && (
+          <div style={{ ...FONT, fontSize: "0.75rem", color: "#1e7a45", fontWeight: 600 }}>
+            ✓ {name}
+            <span
+              style={{ marginLeft: "10px", color: "#1e6fa8", fontWeight: 400, fontSize: "0.68rem", textDecoration: "underline", cursor: "pointer" }}
+              onClick={e => { e.stopPropagation(); state === "done" && onClick(); }}
+            >replace</span>
+          </div>
+        )}
+        {state === "error" && (
+          <div style={{ ...FONT, fontSize: "0.75rem", color: "#c8401a", fontWeight: 500 }}>
+            ✕ {error}
+            <span style={{ marginLeft: "8px", color: "#1e6fa8", fontSize: "0.68rem", textDecoration: "underline", cursor: "pointer" }} onClick={e => { e.stopPropagation(); onClick(); }}>retry</span>
+          </div>
+        )}
+        <input ref={inputRef} type="file" accept={accept} hidden onChange={e => e.target.files?.[0] && onFile(e.target.files[0])} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="ns-upload">
+      <div className="ns-upload-l">
+        {/* PDF zone */}
+        <div style={{ marginBottom: "10px" }}>
+          <div style={{ ...FONT, fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#b05e00", marginBottom: "6px" }}>
+            PDF <span style={{ color: "#c8401a" }}>*</span> required
+          </div>
+          <DropZone
+            label="Drop PDF here" sub="click to choose · .pdf"
+            state={pdfState} name={pdfName} error={pdfError} dragging={pdfDragging}
+            onDragOver={e => { e.preventDefault(); setPdfDragging(true); }}
+            onDragLeave={() => setPdfDragging(false)}
+            onDrop={e => { e.preventDefault(); setPdfDragging(false); const f = e.dataTransfer.files?.[0]; if(f) handlePdf(f); }}
+            onClick={() => pdfState !== "uploading" && pdfRef.current?.click()}
+            accept=".pdf" inputRef={pdfRef} onFile={handlePdf}
+          />
+        </div>
+
+        {/* HTML zone */}
+        <div style={{ marginBottom: "14px" }}>
+          <div style={{ ...FONT, fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#6b6560", marginBottom: "6px" }}>
+            HTML companion <span style={{ color: "#9b948c", fontWeight: 400 }}>optional</span>
+          </div>
+          <DropZone
+            label="Drop HTML page here" sub="click to choose · .html"
+            state={htmlState} name={htmlName} error={htmlError} dragging={htmlDragging}
+            onDragOver={e => { e.preventDefault(); setHtmlDragging(true); }}
+            onDragLeave={() => setHtmlDragging(false)}
+            onDrop={e => { e.preventDefault(); setHtmlDragging(false); const f = e.dataTransfer.files?.[0]; if(f) handleHtml(f); }}
+            onClick={() => htmlState !== "uploading" && htmlRef.current?.click()}
+            accept=".html,.htm" inputRef={htmlRef} onFile={handleHtml}
+          />
+        </div>
+
+        {/* Submit button */}
+        <button
+          onClick={handleSubmit}
+          disabled={!canSubmit || submitted}
+          style={{
+            ...FONT, width: "100%", padding: "10px 0", borderRadius: "4px",
+            fontSize: "0.78rem", fontWeight: 700, cursor: canSubmit && !submitted ? "pointer" : "default",
+            background: submitted ? "#1e7a45" : canSubmit ? "#c8401a" : "#e0dbd5",
+            color: canSubmit || submitted ? "#fff" : "#9b948c",
+            border: "none", transition: "background 0.15s",
+          }}
+        >
+          {submitted
+            ? `✓ Submitted → ${(nextStage?.label || "next stage")}`
+            : submitting
+              ? "Submitting…"
+              : !pdfReady
+                ? "Upload PDF to submit"
+                : `Submit → ${nextStage?.label || "next stage"}`}
+        </button>
+      </div>
+
+      <div className="ns-upload-r">
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>Whitepaper deliverables</div>
+        <ul className="ns-upload-rules">
+          <li>Upload the <strong>PDF</strong> first — this is the gated download file. It's required before submitting.</li>
+          <li>Upload the <strong>HTML page</strong> if available — this is the landing/teaser page reviewers can preview inline.</li>
+          <li>Both files are stored at the same revision number. Reviewers can toggle between them in the preview.</li>
+          {(piece.return_to_stage || nextStage) && (
+            <li>Submitting moves status to <strong>{piece.return_to_stage ? (workflowStages.find(s=>s.id===piece.return_to_stage)?.label||piece.return_to_stage) : nextStage.label}</strong>.</li>
+          )}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 // ─── Review Panel — unified for all non-NS review stages ─────────────────────
 // Handles any stage where actor is "jaggaer" or "person:<id>".
 // On "approved" → advances to next workflow stage.
@@ -3143,6 +3366,11 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
   const repoViewUrl = hasDeliverable
     ? `https://github.com/${REPO}/tree/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}`
     : null;
+  // Whitepaper companion HTML URL
+  const isWPDetails = isWhitePaper(piece) && piece.wp_has_html;
+  const wpHtmlUrl = isWPDetails
+    ? `https://raw.githubusercontent.com/${REPO}/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${piece.revision_count||1}.html`
+    : null;
 
   return (
     <div className="ns-details">
@@ -3191,7 +3419,9 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
         }}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem", fontWeight: 600, color: "#1a3a52" }}>
-              {deliverableFileName(piece)}
+              {isWPDetails
+                ? `deliverable-v${piece.revision_count||1}.pdf + .html`
+                : deliverableFileName(piece)}
             </div>
             <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#6b8fa8", marginTop: "2px" }}>
               {piece.revision_count > 1 ? `v${piece.revision_count} · ` : ""}
@@ -3217,6 +3447,27 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
           >
             ↓ Download {deliverableExt(piece).toUpperCase()}
           </button>
+          {isWPDetails && wpHtmlUrl && (
+            <button
+              onClick={() => forceDownload(wpHtmlUrl, `${piece.id}-v${piece.revision_count||1}.html`)}
+              style={{
+                fontFamily: "Noto Sans, sans-serif",
+                fontSize: "0.72rem", fontWeight: 600,
+                color: "#5a3d9e",
+                background: "#fff",
+                border: "1px solid #dccce8",
+                padding: "6px 14px",
+                borderRadius: "3px",
+                cursor: "pointer",
+                whiteSpace: "nowrap",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = "#f5eef8"}
+              onMouseLeave={e => e.currentTarget.style.background = "#fff"}
+            >
+              ↓ Download HTML
+            </button>
+          )}
           <a
             href={repoViewUrl}
             target="_blank"
@@ -3582,7 +3833,14 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
   const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
   const monthId = project.active_month || "month-1";
   const rev = piece.revision_count || 1;
-  const githubPath = `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/${deliverableFileName(piece)}`;
+  const isWP_AP = isWhitePaper(piece) && piece.wp_has_html;
+  const [activeSlot_AP, setActiveSlot_AP] = useStateTR("pdf");
+  function githubPathForAP(slot) {
+    if (isWP_AP) return `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${rev}.${slot}`;
+    return `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/${deliverableFileName(piece)}`;
+  }
+  const githubPath = isWP_AP ? githubPathForAP(activeSlot_AP) : githubPathForAP("primary");
+  const pieceLike_AP = isWP_AP && activeSlot_AP === "html" ? { ...piece, deliverable_ext: "html" } : piece;
 
   const [srcdoc, setSrcdoc] = useStateTR(null);
   const [kind, setKind] = useStateTR("html");
@@ -3644,7 +3902,7 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then(data => {
         if (cancelled) return;
-        const { url, kind: k } = deliverableBlobFromGithub(data, piece);
+        const { url, kind: k } = deliverableBlobFromGithub(data, pieceLike_AP);
         setKind(k);
         setSrcdoc(url);
         setLoading(false);
@@ -3677,9 +3935,21 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
       {/* iframe left */}
       <div style={{ flex: 1, minWidth: 0, position: "relative", borderRight: "1px solid #e8e3da" }}>
         {/* top bar */}
-        <div style={{ display:"flex", alignItems:"center", gap:"12px", padding:"8px 16px", background:"#f0f7ff", borderBottom:"1px solid #c5ddef", flexShrink:0 }}>
+        <div style={{ display:"flex", alignItems:"center", gap:"8px", padding:"8px 16px", background:"#f0f7ff", borderBottom:"1px solid #c5ddef", flexShrink:0 }}>
+          {isWP_AP && (
+            <div style={{ display:"flex", gap:"4px", flexShrink:0 }}>
+              {["pdf","html"].map(slot => (
+                <button key={slot} onClick={() => setActiveSlot_AP(slot)} style={{
+                  fontFamily:"Noto Sans,sans-serif", fontSize:"0.65rem", fontWeight:700, padding:"3px 8px", borderRadius:"3px",
+                  border:"1px solid #c5ddef", cursor:"pointer", textTransform:"uppercase",
+                  background: activeSlot_AP===slot ? "#1a3a52" : "#fff",
+                  color: activeSlot_AP===slot ? "#fff" : "#6b8fa8", transition:"all 0.12s",
+                }}>{slot}</button>
+              ))}
+            </div>
+          )}
           <span style={{ ...FONT, fontSize:"0.72rem", fontWeight:600, color:"#1a3a52" }}>
-            {deliverableFileName(piece)}
+            {isWP_AP ? `deliverable-v${rev}.${activeSlot_AP}` : deliverableFileName(piece)}
           </span>
           <span style={{ ...FONT, fontSize:"0.68rem", color:"#6b8fa8" }}>
             {kind === "html"
@@ -3703,7 +3973,7 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
           )}
           {srcdoc && kind === "other" && (
             <div style={{ position:"absolute", inset:0, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"8px", background:"#faf8f4" }}>
-              <span style={{ ...FONT, fontSize:"0.82rem", color:"#555" }}>Inline preview isn't available for .{deliverableExt(piece)} files.</span>
+              <span style={{ ...FONT, fontSize:"0.82rem", color:"#555" }}>Inline preview isn't available for .{isWP_AP ? activeSlot_AP : deliverableExt(piece)} files.</span>
               <span style={{ ...FONT, fontSize:"0.72rem", color:"#888" }}>Comments here are saved to the Notes thread.</span>
             </div>
           )}
