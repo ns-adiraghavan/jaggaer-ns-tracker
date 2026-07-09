@@ -1749,5 +1749,10 @@
       "bg": "#e6f5ec",
       "actor": null
     }
-  ]
+  ],
+  "performance": {
+    "sheet_url": "https://docs.google.com/spreadsheets/d/1NZCmbrhBE4crw1h0CHqEPpEWlEavTkwWhWsFHJZJQzc/edit?usp=sharing",
+    "last_configured_by": "anna",
+    "last_configured_at": "2026-07-09T18:47:47.404Z"
+  }
 }
