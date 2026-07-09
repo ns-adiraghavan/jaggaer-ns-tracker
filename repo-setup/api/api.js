@@ -177,6 +177,33 @@ window.NS_API = (function () {
     }
   }
 
+  // White-paper dual-upload: upload PDF or HTML companion file explicitly by ext.
+  // Path: content/{month}/{pillar}/{cluster}/{piece.id}/deliverable-v{rev}.{ext}
+  // ext must be "pdf" or "html". Does NOT bump revision_count — caller manages that.
+  async function uploadWhitepaperFile(piece, cluster, pillar, month, file, ext, author) {
+    const nextRev = (piece.revision_count || 0) + 1;
+    const d = normaliseDeliverable(file);
+    // Force the ext to the caller-specified value (pdf vs html) regardless of file.name
+    const forcedExt = ext.replace(/^\./, "").toLowerCase();
+    const path = `content/${month}/${pillar}/${cluster}/${piece.id}/deliverable-v${nextRev}.${forcedExt}`;
+    try {
+      const sha = await fetchSha(path);
+      let result;
+      if (d.binary && d.b64) {
+        result = await githubPutRaw(path, d.b64, `upload ${piece.id} v${nextRev} (${forcedExt})`, sha);
+      } else {
+        const contentString =
+          `<!-- uploaded by ${author} at ${new Date().toISOString()} -->\n` +
+          `<!-- piece: ${piece.title} -->\n` + (d.text || "");
+        result = await githubPutFile(path, contentString, `upload ${piece.id} v${nextRev} (${forcedExt})`, sha);
+      }
+      return { ok: true, path, ext: forcedExt, mock: !!result.mock };
+    } catch (e) {
+      console.warn("[NS_API] WP upload failed:", e.message);
+      return { ok: false, path, error: e.message };
+    }
+  }
+
   async function replaceDeliverable(piece, cluster, pillar, month, file, author) {
     const rev = piece.revision_count || 1;
     const d = normaliseDeliverable(file);
@@ -275,6 +302,7 @@ window.NS_API = (function () {
     loadProject,
     saveProject,
     uploadPieceDeliverable,
+    uploadWhitepaperFile,
     replaceDeliverable,
     uploadBriefFile,
     listBuildWithClaude,
