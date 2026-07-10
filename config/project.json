@@ -1214,7 +1214,14 @@
                 }
               ],
               "last_updated": "2026-07-02T07:15:52.096Z",
-              "last_updated_by": "manager"
+              "last_updated_by": "manager",
+              "publishing": {
+                "published_by": "Alex",
+                "launch_date": "2026-06-23",
+                "live_url": "https://www.jaggaer.com/blog/claude-fable-5-for-source-to-pay",
+                "performance_data": "",
+                "updated_at": "2026-07-10T13:47:31.794Z"
+              }
             },
             {
               "id": "piece-jjmo5z",
