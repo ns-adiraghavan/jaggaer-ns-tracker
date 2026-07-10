@@ -479,7 +479,14 @@
               "last_updated": "2026-06-11T06:05:31.259Z",
               "last_updated_by": "m-5jitd",
               "phase": 2,
-              "deliverable_ext": "html"
+              "deliverable_ext": "html",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-06-23",
+                "live_url": "https://www.jaggaer.com/blog/how-procurement-is-moving-from-reactive-to-predictive-risk-management-in-2026",
+                "performance_data": "",
+                "updated_at": "2026-07-10T13:47:08.644Z"
+              }
             },
             {
               "id": "p-dm2-4",
