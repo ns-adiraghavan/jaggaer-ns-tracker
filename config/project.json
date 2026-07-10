@@ -449,7 +449,14 @@
               "last_updated_by": "jason",
               "phase": 1,
               "deliverable_ext": "html",
-              "return_to_stage": null
+              "return_to_stage": null,
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-06-23",
+                "live_url": "https://www.jaggaer.com/blog/supplier-financial-risk-signals-procurement-should-monitor-in-2026",
+                "performance_data": "",
+                "updated_at": "2026-07-10T13:46:29.472Z"
+              }
             },
             {
               "id": "p-dm2-3",
