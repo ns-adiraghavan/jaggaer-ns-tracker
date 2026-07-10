@@ -130,10 +130,13 @@ window.NS_API = (function () {
       const content = new TextDecoder("utf-8").decode(
         Uint8Array.from(raw, c => c.charCodeAt(0))
       );
-      return { project: JSON.parse(content), source: "github", sha: meta.sha };
+      const project = JSON.parse(content);
+      if (!Array.isArray(project.playground_comments)) project.playground_comments = [];
+      return { project, source: "github", sha: meta.sha };
     } catch (e) {
       console.warn("[NS_API] GitHub load failed, using mock data:", e.message);
       const project = JSON.parse(JSON.stringify(window.MOCK_PROJECT));
+      if (!Array.isArray(project.playground_comments)) project.playground_comments = [];
       return { project, source: "mock", sha: null, error: e.message };
     }
   }
@@ -173,33 +176,6 @@ window.NS_API = (function () {
       return { ok: true, path, ext: d.ext, mock: !!result.mock };
     } catch (e) {
       console.warn("[NS_API] Upload failed:", e.message);
-      return { ok: false, path, error: e.message };
-    }
-  }
-
-  // White-paper dual-upload: upload PDF or HTML companion file explicitly by ext.
-  // Path: content/{month}/{pillar}/{cluster}/{piece.id}/deliverable-v{rev}.{ext}
-  // ext must be "pdf" or "html". Does NOT bump revision_count — caller manages that.
-  async function uploadWhitepaperFile(piece, cluster, pillar, month, file, ext, author) {
-    const nextRev = (piece.revision_count || 0) + 1;
-    const d = normaliseDeliverable(file);
-    // Force the ext to the caller-specified value (pdf vs html) regardless of file.name
-    const forcedExt = ext.replace(/^\./, "").toLowerCase();
-    const path = `content/${month}/${pillar}/${cluster}/${piece.id}/deliverable-v${nextRev}.${forcedExt}`;
-    try {
-      const sha = await fetchSha(path);
-      let result;
-      if (d.binary && d.b64) {
-        result = await githubPutRaw(path, d.b64, `upload ${piece.id} v${nextRev} (${forcedExt})`, sha);
-      } else {
-        const contentString =
-          `<!-- uploaded by ${author} at ${new Date().toISOString()} -->\n` +
-          `<!-- piece: ${piece.title} -->\n` + (d.text || "");
-        result = await githubPutFile(path, contentString, `upload ${piece.id} v${nextRev} (${forcedExt})`, sha);
-      }
-      return { ok: true, path, ext: forcedExt, mock: !!result.mock };
-    } catch (e) {
-      console.warn("[NS_API] WP upload failed:", e.message);
       return { ok: false, path, error: e.message };
     }
   }
@@ -302,7 +278,6 @@ window.NS_API = (function () {
     loadProject,
     saveProject,
     uploadPieceDeliverable,
-    uploadWhitepaperFile,
     replaceDeliverable,
     uploadBriefFile,
     listBuildWithClaude,
