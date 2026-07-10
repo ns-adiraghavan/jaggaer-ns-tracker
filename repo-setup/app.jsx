@@ -232,7 +232,7 @@ function App() {
         {view === "jai-demo" && <JAIDemoPanel onBack={() => setView("tracker")} />}
         {view === "weekly-report" && <WeeklyReportPanel project={project} currentUser={currentUser} />}
         {view === "performance" && <PerformancePanel project={project} setProject={setProject} currentUser={currentUser} adminMode={adminMode} />}
-        {view === "ai-playground" && <AIPlaygroundPanel onBack={() => setView("tracker")} project={project} setProject={setProject} currentUser={currentUser} />}
+        {view === "ai-playground" && <AIPlaygroundPanel onBack={() => setView("tracker")} project={project} setProject={setProject} currentUser={currentUser} saveState={saveState} />}
         {view === "style-guide" && <StyleGuidePanel project={project} adminMode={adminMode} />}
         {view === "admin" && adminMode && (
           <AdminPanel project={project} setProject={setProject} adminTarget={adminTarget} setAdminTarget={setAdminTarget} />
@@ -353,7 +353,7 @@ function JAIDemoPanel({ onBack }) {
 }
 
 
-function AIPlaygroundPanel({ onBack, project, setProject, currentUser }) {
+function AIPlaygroundPanel({ onBack, project, setProject, currentUser, saveState }) {
   const { useState: useStateAP, useEffect: useEffectAP, useRef: useRefAP } = React;
   const [commentMode, setCommentMode] = useStateAP(false);
   const [draft, setDraft] = useStateAP(null); // { x, y, text }
@@ -542,6 +542,29 @@ function AIPlaygroundPanel({ onBack, project, setProject, currentUser }) {
           >
             ↗ Open full page
           </a>
+
+          {/* ── Inline save indicator — visible here because SaveToast is behind the iframe ── */}
+          {saveState && (() => {
+            const cfg = {
+              saving: { text: "Saving\u2026",            color: "#c08227", bg: "#fffbeb" },
+              saved:  { text: "Saved \u2713",            color: "#1e7a45", bg: "#f0faf4" },
+              error:  { text: "Save failed \u2014 retry", color: "#c8401a", bg: "#fff5f5" },
+            }[saveState] || null;
+            if (!cfg) return null;
+            return (
+              <span style={{
+                fontFamily: "Noto Sans, sans-serif", fontSize: "0.68rem",
+                fontWeight: 600, letterSpacing: "0.04em",
+                color: cfg.color, background: cfg.bg,
+                border: `1px solid ${cfg.color}`,
+                borderRadius: "3px", padding: "3px 10px",
+                transition: "opacity 0.3s",
+                pointerEvents: "none",
+              }}>
+                {cfg.text}
+              </span>
+            );
+          })()}
         </div>
       </div>
 

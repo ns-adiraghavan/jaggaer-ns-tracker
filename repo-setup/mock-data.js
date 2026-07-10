@@ -785,6 +785,7 @@ window.MOCK_PROJECT = {
     ]
   },
   "feedback": {},
+  "playground_comments": [],
   "build_with_claude": [
     {
       "name": "contract-analyser",
