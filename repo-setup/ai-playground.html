@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI in Procurement: A Hands-On Guide | JAGGAER</title>
-<meta name="description" content="Try AI on real source-to-pay tasks, contract review, bid comparison, spend analysis, supplier risk. Thirteen tools you can run in your browser. Learn how to prompt and where AI fits across procurement.">
+<meta name="description" content="A four-step hands-on guide to AI for procurement. Build a prompt, check what to trust, find your first win, then see JAI run the same work on your live data.">
 <link rel="canonical" href="https://jaggaer-ns-tracker.vercel.app/ai">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:type" content="website">
@@ -18,12 +18,12 @@
 <meta property="og:image:alt" content="JAGGAER Hands-On AI for Procurement">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AI in Procurement: A Hands-On Guide | JAGGAER">
-<meta name="twitter:description" content="Try AI on real source-to-pay tasks. Thirteen tools, no signup. Learn how to prompt and where AI fits your team.">
+<meta name="twitter:description" content="A four-step guide to AI for procurement. Learn to prompt, find your first win, and see JAI on your live data.">
 <meta name="twitter:image" content="https://www.jaggaer.com/wp-content/uploads/JAI-Header.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#0B0D12;--ink-2:#3a3f4a;--ink-3:#454b54;--red:#D22428;--grey:#3F434F;--green:#4D8194;--light-grey:#dce0e8;--cream:#eef0f3;--light-blue:#E9EFF4;--white:#fff;--jai-a:#7A1FB0;--jai-b:#D6248B;--jai-grad:linear-gradient(100deg,#7A1FB0,#D6248B);--jai-ink:#0B0D12;--jai-surface:#E1CFF1;--jai-surface-2:#D3B9EA;--jai-surface-border:#C9AEE4;--jai-surface-ink:#2A1B45;--jai-surface-muted:#5B4C7A;--jai-footer-bg:#E1CFF1;--jai-footer-border:#C9AEE4;--jai-accent:#7A1FB0;--jai-accent-2:#D6248B;--jai-on-accent:#fff;--space-2xs:0.44rem;--space-xs:0.67rem;--space-s:clamp(0.75rem,0.68rem + 0.37vw,1rem);--space-m:clamp(1rem,0.85rem + 0.74vw,1.5rem);--space-l:clamp(1.5rem,1.28rem + 1.11vw,2.25rem);--space-xl:clamp(2rem,1.59rem + 2.04vw,3.38rem);--space-2xl:clamp(3rem,2.39rem + 3.05vw,5.06rem);--fs-h1:clamp(2.07rem,calc(1.8rem + 1.12vw),2.4rem);--fs-h2:clamp(1.73rem,1.56rem + 0.85vw,2.2rem);--fs-h3:clamp(1.44rem,1.32rem + 0.58vw,1.76rem);--fs-display:clamp(1.75rem,4vw,2.75rem);--container-width:1240px;--container-padding:clamp(1rem,3vw,2rem);--radius:1rem;--radius-sm:.5rem;--border:1px solid #dce0e8;interpolate-size:allow-keywords}
+:root{--ink:#0B0D12;--ink-2:#3a3f4a;--ink-3:#454b54;--red:#D22428;--grey:#3F434F;--green:#4D8194;--light-grey:#dce0e8;--cream:#eef0f3;--light-blue:#E9EFF4;--white:#fff;--jai-a:#7A1FB0;--jai-b:#D6248B;--jai-grad:linear-gradient(100deg,#7A1FB0,#D6248B);--jai-ink:#0B0D12;--jai-surface:#E1CFF1;--jai-surface-2:#D3B9EA;--jai-surface-border:#C9AEE4;--jai-surface-ink:#2A1B45;--jai-surface-muted:#5B4C7A;--jai-footer-bg:linear-gradient(135deg,#E8DDF7 0%,#D8C8EF 50%,#E2D5F5 100%);--jai-footer-border:#C9AEE4;--jai-surf-grad:linear-gradient(135deg,#EDE5FA 0%,#DDD0F5 50%,#E8D8F8 100%);--jai-accent:#7A1FB0;--jai-accent-2:#D6248B;--jai-on-accent:#fff;--space-2xs:0.44rem;--space-xs:0.67rem;--space-s:clamp(0.75rem,0.68rem + 0.37vw,1rem);--space-m:clamp(1rem,0.85rem + 0.74vw,1.5rem);--space-l:clamp(1.5rem,1.28rem + 1.11vw,2.25rem);--space-xl:clamp(2rem,1.59rem + 2.04vw,3.38rem);--space-2xl:clamp(3rem,2.39rem + 3.05vw,5.06rem);--fs-h1:clamp(2.07rem,calc(1.8rem + 1.12vw),2.4rem);--fs-h2:clamp(1.73rem,1.56rem + 0.85vw,2.2rem);--fs-h3:clamp(1.44rem,1.32rem + 0.58vw,1.76rem);--fs-display:clamp(1.75rem,4vw,2.75rem);--container-width:1240px;--container-padding:clamp(1rem,3vw,2rem);--radius:1rem;--radius-sm:.5rem;--border:1px solid #dce0e8;interpolate-size:allow-keywords}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:Inter,system-ui,sans-serif;font-size:.875rem;line-height:1.6;color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased}
@@ -50,14 +50,14 @@ body{font-family:Inter,system-ui,sans-serif;font-size:.875rem;line-height:1.6;co
 .btn-jai:hover{opacity:.88}
 .btn-outline-dark{background:transparent;color:var(--ink-2);border:var(--border);font-size:.875rem;font-weight:500;padding:.65rem 1.5rem;border-radius:var(--radius-sm);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;transition:all .2s}
 .btn-outline-dark:hover{background:var(--cream);color:var(--ink);border-color:var(--ink-3)}
-.hero{background:linear-gradient(180deg,#eef0f3 0%,#fff 100%);padding:clamp(3.5rem,7vw,6rem) 2rem clamp(3rem,5vw,4.5rem);position:relative;overflow:hidden;border-bottom:var(--border)}
+.hero{background:var(--white);padding:clamp(2.5rem,5vw,4rem) 2rem clamp(2rem,3.5vw,3rem);position:relative;overflow:hidden;border-bottom:var(--border)}
 .hero::before{display:none}
 .hero::after{display:none}
 .hero-inner{margin:0 auto;position:relative;z-index:1;max-width:720px}
-.hero-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.25rem;display:inline-flex;align-items:center;gap:8px}
+.hero-eyebrow{color:var(--green)!important;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.25rem;display:inline-flex;align-items:center;gap:8px}
 .hero h1{font-size:clamp(2.4rem,4.5vw,3.2rem);font-weight:400;line-height:1.1;color:var(--ink);margin-bottom:1.5rem}
 .hero h1 strong{font-weight:700;display:block}
-.hero-sub{font-size:1.05rem;color:var(--ink-3);line-height:1.7;margin-bottom:2rem;max-width:560px}
+.hero-sub{font-size:1.05rem;color:var(--ink-2);line-height:1.7;margin-bottom:2rem;max-width:560px}
 .hero-actions{display:flex;gap:.875rem;flex-wrap:wrap}
 .stats-strip{border-bottom:var(--border);display:grid;grid-template-columns:repeat(4,1fr);background:var(--white)}
 .stat-cell{padding:1.6rem 2rem;border-right:var(--border)}
@@ -137,8 +137,8 @@ body{font-family:Inter,system-ui,sans-serif;font-size:.875rem;line-height:1.6;co
 .sub-hero-sub{font-size:1rem;color:var(--ink-3);line-height:1.7;max-width:600px}
 .playground{padding:clamp(2rem,4vw,3rem) 2rem}
 .playground-inner{max-width:1180px;margin:0 auto}
-.pg-stage{background:var(--white);border:2px solid #e4ddf2;border-radius:var(--radius);overflow:hidden;box-shadow:0 8px 40px rgba(83,0,206,.06)}
-.pg-stage-head{padding:1.25rem 1.75rem;background:linear-gradient(90deg,#faf7ff,#fff5fa);border-bottom:var(--border);display:flex;align-items:center;gap:11px}
+.pg-stage{background:var(--white);border:2px solid var(--light-grey);border-radius:var(--radius);overflow:hidden;box-shadow:0 8px 40px rgba(11,13,18,.06)}
+.pg-stage-head{padding:1.25rem 1.75rem;background:var(--cream);border-bottom:var(--border);display:flex;align-items:center;gap:11px}
 .pg-dot{width:9px;height:9px;border-radius:50%;background:var(--red);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.7)}}
 .pg-stage-title{font-size:1.35rem;font-weight:700;color:var(--ink);letter-spacing:-.01em}
@@ -296,11 +296,11 @@ details.faq-item{overflow:hidden}
 .diag-field label{display:flex;justify-content:space-between;align-items:baseline;font-size:.8rem;font-weight:600;color:var(--ink);margin-bottom:.6rem}
 .diag-field label .val{font-size:.95rem;font-weight:800;color:var(--red)}
 .diag-slider{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:999px;background:var(--light-grey);outline:none}
-.diag-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--red);cursor:pointer;border:3px solid #fff;box-shadow:0 1px 6px rgba(83,0,206,.4)}
+.diag-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--red);cursor:pointer;border:3px solid #fff;box-shadow:0 1px 6px rgba(210,36,40,.35)}
 .diag-slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--red);cursor:pointer;border:3px solid #fff}
 .diag-seg{display:flex;gap:6px;flex-wrap:wrap}
 .diag-seg button{flex:1;min-width:70px;padding:8px 10px;font-size:.76rem;font-weight:600;font-family:Inter,sans-serif;background:var(--cream);border:var(--border);border-radius:var(--radius-sm);color:var(--ink-2);cursor:pointer;transition:all .15s}
-.diag-seg button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.diag-seg button.on{background:#b05e00;color:#fff;border-color:#b05e00}
 .diag-result{background:var(--cream);border:var(--border);border-radius:var(--radius);padding:1.75rem;position:sticky;top:80px;overflow:hidden}
 .diag-result::before{display:none}
 .diag-result-label{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.5rem;position:relative}
@@ -316,16 +316,18 @@ details.faq-item{overflow:hidden}
 .myth-card:hover{box-shadow:0 8px 24px rgba(11,13,18,.07)}
 .myth-c-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.9rem}
 .myth-c-q{font-size:.98rem;font-weight:700;color:var(--ink);line-height:1.4;flex:1}
-.myth-c-tag{flex-shrink:0;font-size:.58rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--red);background:#fbeaea;border:1px solid #f3cfcf;border-radius:999px;padding:3px 9px;white-space:nowrap}
-.myth-c-real{font-size:.82rem;color:var(--ink-2);line-height:1.55;margin:.5rem 0 .15rem}
-.myth-c-real b{color:var(--ink);font-weight:700}
+/* tag pill removed */
+.myth-c-real{font-size:.82rem;color:var(--ink-2);line-height:1.55;margin:.6rem 0 .15rem;background:#fdf8f0;border-left:2px solid #e9c893;border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:.65rem .8rem;display:none;opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
+.myth-c-real.visible{display:block}
+.myth-c-real.shown{opacity:1;transform:translateY(0)}
+.myth-c-real b{color:#b05e00;font-weight:700}
 .myth-c-try{font-size:.76rem;color:var(--ink-2);line-height:1.5;margin-top:.35rem}
 .myth-c-try b{color:var(--red);font-weight:700}
 .myth-c-rate{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:.7rem;padding-top:.7rem;border-top:var(--border)}
 .myth-c-rate-lbl{font-size:.68rem;font-weight:700;color:var(--ink-2);margin-right:2px}
 .myth-rate-btn{width:30px;height:30px;border-radius:7px;border:1.5px solid var(--light-grey);background:var(--white);cursor:pointer;font-size:.76rem;font-weight:700;color:var(--ink-3);font-family:Inter,sans-serif;transition:all .13s}
-.myth-rate-btn:hover{border-color:var(--red);color:var(--red)}
-.myth-rate-btn.on{background:var(--red);color:#fff;border-color:var(--red)}
+.myth-rate-btn:hover{border-color:#b05e00;color:#b05e00}
+.myth-rate-btn.on{background:#b05e00;color:#fff;border-color:#b05e00}
 .myth-rate-hint{font-size:.66rem;color:var(--ink-3);margin-left:4px}
 .tool-switcher{margin-top:2rem;padding-top:1.5rem;border-top:var(--border)}
 .tool-switcher-label{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.875rem}
@@ -448,7 +450,7 @@ details.faq-item{overflow:hidden}
 .rd-dims{display:flex;flex-direction:column;gap:1rem}
 .rd-dim label{display:flex;justify-content:space-between;align-items:baseline;font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:.55rem}
 .rd-dim label span.hint{font-size:.7rem;font-weight:400;color:var(--ink-3)}
-.rd-result{background:var(--cream);border:var(--border);border-radius:var(--radius);padding:1.4rem 1.35rem;position:sticky;top:80px;overflow:hidden}
+.rd-result{background:linear-gradient(145deg,#EDE5FA 0%,#DDD0F5 40%,#E4D5F8 70%,#F0E8FC 100%);border:1px solid var(--jai-surface-border);border-radius:var(--radius);padding:1.4rem 1.35rem;position:sticky;top:80px;overflow:hidden}
 .rd-result::before{display:none}
 .rd-result-label{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.4rem;position:relative}
 .rd-score{font-size:clamp(2.4rem,5vw,3rem);font-weight:800;line-height:1;color:var(--red);position:relative}
@@ -571,7 +573,7 @@ details.faq-item{overflow:hidden}
 /* ============ ADDED: brand-consistent CTA + JAI surfaces ============ */
 
 /* Equal side margins everywhere: unify section + hero + strips to one rhythm */
-.hero-inner{max-width:1180px}
+.hero-inner{max-width:1180px}.hero .text-grad{font-weight:700}
 .hero-sub{max-width:680px}
 .stat-cell{padding:1.5rem clamp(1rem,3vw,2rem)}
 
@@ -760,7 +762,7 @@ details.faq-item{overflow:hidden}
 @media (max-width:820px){.jai-split{grid-template-columns:1fr;gap:2rem}.jm-bubble{max-width:88%}}
 
 /* JAI showcase = dark ink surface (brand marker for JAI) + abridged height */
-.jai-section{background:var(--jai-surface)}
+.jai-section{background:linear-gradient(160deg,#E1CFF1 0%,#D5C2EC 35%,#DCCFF4 70%,#E4D8F7 100%)}
 .jai-section .jai-lede h2{color:var(--jai-surface-ink)}
 .jai-section .jai-lede h2 strong{color:var(--jai-surface-ink)}
 .jai-lede{margin-bottom:1.75rem}
@@ -776,7 +778,7 @@ details.faq-item{overflow:hidden}
 .jai-split{align-items:center}
 
 /* ===== THE GAP: dot visual (replaces proof strip + shift band) ===== */
-.gap-section{border-bottom:var(--border);background:var(--white);padding:clamp(2.5rem,5vw,4rem) 2rem}
+.gap-section{border-bottom:var(--border);background:var(--white);padding:clamp(1.5rem,3vw,2.5rem) 2rem clamp(2rem,4vw,3.5rem)}
 .gap-inner{max-width:1180px;margin:0 auto}
 .gap-head{max-width:640px}
 .gap-viz{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:clamp(1.75rem,5vw,4rem);margin:clamp(1.75rem,4vw,2.75rem) auto 1.5rem;max-width:920px}
@@ -797,6 +799,58 @@ details.faq-item{overflow:hidden}
 .gap-cap{font-size:.84rem;color:var(--ink-3);line-height:1.45}
 .gap-cap-muted{margin-top:2px}
 .gap-foot{font-size:.95rem;color:var(--ink-2);line-height:1.65;max-width:680px;font-weight:500;border-top:var(--border);padding-top:1.4rem;margin-top:.5rem}
+.gap-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem;max-width:860px}
+.gap-card{border-radius:var(--radius);padding:2rem 2rem 1.5rem;position:relative;overflow:hidden}
+.gap-card-want{background:linear-gradient(135deg,#fdf0f0,#ffe8e8);border:1px solid #f9c8c8}
+.gap-card-doing{background:linear-gradient(135deg,var(--red),#b91c1c);border:1px solid #9a1515}
+.gap-card-num{font-family:'Poppins',sans-serif;font-size:clamp(2.8rem,6vw,4rem);font-weight:800;line-height:1;letter-spacing:-.03em;color:#c0282c;margin-bottom:.5rem}
+.gap-card-num.doing{color:#fff}
+.gap-card-label{font-size:.92rem;font-weight:600;color:#6b1e21;line-height:1.4;margin-bottom:.4rem}
+.gap-card-doing .gap-card-label{color:rgba(255,255,255,.9)}
+.gap-card-sub{font-size:.8rem;color:#9a4446;line-height:1.5;margin-bottom:1.2rem}
+.gap-card-doing .gap-card-sub{color:rgba(255,255,255,.7)}
+.gap-card-bar{height:5px;background:rgba(0,0,0,.1);border-radius:999px;overflow:hidden}
+.gap-card-doing .gap-card-bar{background:rgba(255,255,255,.25)}
+.gap-card-fill{height:100%;border-radius:999px;width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.want-fill{background:var(--red)}
+.doing-fill{background:#fff}
+/* Waffle dot chart — single-source 88/36 split */
+.gap-waffle-wrap{display:flex;gap:clamp(2rem,5vw,4rem);align-items:center;flex-wrap:wrap;margin-top:2.25rem;max-width:900px}
+.gap-waffle{display:grid;grid-template-columns:repeat(10,1fr);gap:clamp(5px,1vw,8px);width:clamp(220px,32vw,360px);flex-shrink:0}
+.gw-dot{aspect-ratio:1;border-radius:50%;transform:scale(.45);opacity:0;transition:transform .4s cubic-bezier(.2,.7,.3,1),opacity .4s}
+.gw-dot.show{transform:scale(1);opacity:1}
+.gw-dot.scaled{background:var(--red)}
+.gw-dot.pilot{background:#f3aaac}
+.gw-dot.none{background:var(--light-grey)}
+.gap-waffle-legend{display:flex;flex-direction:column;gap:1.5rem;flex:1;min-width:220px}
+.gwl-row{display:flex;align-items:flex-start;gap:.9rem}
+.gwl-swatch{width:14px;height:14px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.gwl-swatch.scaled{background:var(--red)}
+.gwl-swatch.pilot{background:#f3aaac}
+.gwl-swatch.none{background:var(--light-grey)}
+.gwl-content{display:flex;flex-direction:column;gap:2px}
+.gwl-num{font-family:'Poppins',sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;line-height:1;letter-spacing:-.02em}
+.gwl-num.scaled{color:var(--red)}
+.gwl-num.pilot{color:#c97b7d}
+.gwl-num.none{color:#b0b8c4}
+.gwl-label{font-size:.82rem;font-weight:600;color:var(--ink);line-height:1.35;margin-top:.1rem}
+.gwl-sub{font-size:.72rem;color:var(--ink-3);line-height:1.45;margin-top:.2rem}
+.gap-source{font-size:.65rem;color:var(--ink-3);margin-top:1.75rem;padding-top:1rem;border-top:var(--border);max-width:860px;display:flex;align-items:center;gap:6px}
+.gap-source::before{content:'Source';font-weight:700;color:var(--ink-3);margin-right:2px}
+/* Two-source stat layout — kept for fallback reference, unused */
+.gap-two-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem;max-width:860px}
+.gap-stat-block{border:var(--border);border-radius:var(--radius);padding:1.6rem 1.75rem;background:var(--white);position:relative;overflow:hidden}
+.gap-stat-block.doing{border-left:4px solid var(--red);background:linear-gradient(135deg,#fff9f9,#fff5f5)}
+.gap-stat-block.want{border-left:4px solid #f3aaac;background:linear-gradient(135deg,#fffafa,var(--white))}
+.gap-stat-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.65rem}
+.gap-stat-num{font-family:'Poppins',sans-serif;font-size:clamp(2.8rem,6vw,3.8rem);font-weight:800;line-height:1;letter-spacing:-.03em;margin-bottom:.5rem}
+.gap-stat-block.doing .gap-stat-num{color:var(--red)}
+.gap-stat-block.want .gap-stat-num{color:#c97b7d}
+.gap-stat-label{font-size:.9rem;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:.4rem}
+.gap-stat-sub{font-size:.78rem;color:var(--ink-3);line-height:1.5;margin-bottom:.9rem}
+.gap-stat-source{font-size:.65rem;color:var(--ink-3);border-top:var(--border);padding-top:.65rem;display:flex;align-items:center;gap:5px}
+.gap-stat-source::before{content:'';width:12px;height:1px;background:var(--light-grey);flex-shrink:0}
+@media(max-width:640px){.gap-waffle-wrap{gap:1.5rem}.gap-waffle{width:100%;max-width:280px}.gap-two-stats{grid-template-columns:1fr}}
 @media (max-width:680px){.gap-viz{grid-template-columns:1fr;gap:1.75rem}.gap-dots{width:100%;max-width:340px}}
 
 /* ===== STEP PROGRESS BAR (Coursera-style; sub-page header) ===== */
@@ -920,6 +974,8 @@ details.faq-item{overflow:hidden}
 /* jai col bubbles */
 .cmp-col.jai .cmp-bubble.you{background:#fff;border:1px solid var(--jai-surface-border);color:var(--jai-surface-ink);border-radius:12px 12px 3px 12px;margin-left:auto;max-width:88%}
 .cmp-col.jai .cmp-bubble.ai{background:var(--jai-surface-2);border:1px solid var(--jai-surface-border);color:var(--jai-surface-ink);border-radius:12px 12px 12px 3px;max-width:95%}
+/* jai column panel: pronounced gradient */
+.cmp-col.jai{background:linear-gradient(155deg,#F2ECF9 0%,#E6D8F5 35%,#DDD0F5 65%,#E9DFF8 100%)}
 .cmp-effort{margin-top:.5rem;padding:.7rem .9rem;border-top:1px dashed #d9dbe0;font-size:.74rem;line-height:1.5;color:var(--ink-2);opacity:0;transition:opacity .45s ease}
 .cmp-effort.show{opacity:1}
 .cmp-col.jai .cmp-effort{border-top-color:var(--jai-surface-border);color:var(--jai-surface-muted)}
@@ -944,6 +1000,7 @@ details.faq-item{overflow:hidden}
 .risk-ok{color:#15803d;font-weight:600}
 .jai-artifact-foot{margin-top:.5rem;font-size:.68rem;color:var(--jai-surface-muted);display:flex;align-items:center;gap:5px}
 .jai-artifact-foot::before{content:'↳';color:var(--jai-accent)}
+.jai-artifact-body{margin-bottom:.4rem}
 
 /* ===== FIX 8: Step 4 hero copy ===== */
 
@@ -956,8 +1013,8 @@ details.faq-item{overflow:hidden}
 .wn-summary.tight{margin-bottom:1.25rem}
 
 /* ===== ADDED: Step 2 "Where AI helps most" richer result ===== */
-.ms-wrap{margin-top:1.5rem;border:1px solid rgba(83,0,206,.16);border-radius:var(--radius);overflow:hidden;background:linear-gradient(135deg,#faf7ff,#fff4fa)}
-.ms-top{display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:center;padding:1.4rem 1.6rem;border-bottom:1px solid rgba(83,0,206,.12)}
+.ms-wrap{margin-top:1.5rem;border:1px solid var(--light-grey);border-left:3px solid var(--red);border-radius:var(--radius);overflow:hidden;background:var(--white)}
+.ms-top{display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:center;padding:1.4rem 1.6rem;border-bottom:var(--border);background:var(--cream)}
 .ms-dial{position:relative;width:74px;height:74px;flex-shrink:0}
 .ms-dial svg{transform:rotate(-90deg)}
 .ms-dial-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:800;font-size:1.2rem;color:var(--ink)}
@@ -967,8 +1024,8 @@ details.faq-item{overflow:hidden}
 .ms-sub{font-size:.86rem;color:var(--ink-2);line-height:1.6;margin-bottom:1rem}
 .ms-picks{display:flex;flex-direction:column;gap:.7rem}
 .ms-pick{display:grid;grid-template-columns:auto 1fr auto;gap:.85rem;align-items:center;background:var(--white);border:var(--border);border-radius:var(--radius-sm);padding:.8rem 1rem;cursor:pointer;transition:border-color .18s,box-shadow .18s,transform .18s}
-.ms-pick:hover{border-color:#cdb6ee;box-shadow:0 8px 22px rgba(83,0,206,.08);transform:translateY(-1px)}
-.ms-pick-ic{width:30px;height:30px;border-radius:8px;background:#f3eefb;display:flex;align-items:center;justify-content:center;color:var(--jai-a)}
+.ms-pick:hover{border-color:#f0c8c8;box-shadow:0 8px 22px rgba(210,36,40,.08);transform:translateY(-1px)}
+.ms-pick-ic{width:30px;height:30px;border-radius:8px;background:#fbeaea;display:flex;align-items:center;justify-content:center;color:var(--red)}
 .ms-pick-ic svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7}
 .ms-pick-tt{font-size:.88rem;font-weight:700;color:var(--ink)}
 .ms-pick-ds{font-size:.76rem;color:var(--ink-3);line-height:1.4;margin-top:1px}
@@ -1008,10 +1065,15 @@ details.faq-item{overflow:hidden}
 .jr-title strong{font-weight:700}
 .jr-sub{font-size:.9rem;color:var(--ink-2);line-height:1.6;max-width:640px}
 .jr-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:1.1rem}
-.jr-step{border:var(--border);border-left:3px solid var(--red);border-radius:var(--radius-sm);padding:.85rem 1rem;background:var(--white)}
-.jr-step-k{font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:3px}
-.jr-step-t{font-size:.86rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:3px}
-.jr-step-v{font-size:.76rem;color:var(--ink-2);line-height:1.45}
+.jr-step{border:1px solid rgba(210,36,40,.25);border-radius:var(--radius-sm);padding:.85rem 1rem;background:var(--red)}
+.jr-step-k{font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:3px}
+.jr-step-t{font-size:.86rem;font-weight:700;color:#fff;line-height:1.3;margin-bottom:3px}
+.jr-step-v{font-size:.76rem;color:rgba(255,255,255,.78);line-height:1.45}
+/* Step 2 box: inverted — white with red text */
+.jr-step:nth-child(2){background:var(--white);border-color:var(--red)}
+.jr-step:nth-child(2) .jr-step-k{color:var(--red);opacity:.7}
+.jr-step:nth-child(2) .jr-step-t{color:var(--ink)}
+.jr-step:nth-child(2) .jr-step-v{color:var(--ink-2)}
 @media(max-width:680px){.jr-steps{grid-template-columns:1fr}}
 
 /* ===== STEP 4: your answers summary ===== */
@@ -1034,7 +1096,7 @@ details.faq-item{overflow:hidden}
 @media(max-width:760px){.wn-summary-grid{grid-template-columns:1fr}.wn-sum-col+.wn-sum-col{border-left:none;border-top:var(--border)}}
 
 /* ===== Purple CTA breaks ===== */
-.jai-break{max-width:1180px;margin:1.75rem auto;background:var(--jai-surface);border:1px solid var(--jai-surface-border);border-radius:var(--radius);padding:1.4rem 1.6rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.jai-break{max-width:1180px;margin:1.75rem auto;background:linear-gradient(135deg,#EDE5FA 0%,#DDD0F5 55%,#E4D8F8 100%);border:1px solid var(--jai-surface-border);border-radius:var(--radius);padding:1.4rem 1.6rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
 .jai-break-main{flex:1;min-width:280px}
 .jai-break-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--jai-a);margin-bottom:.4rem}
 .jai-break-title{font-size:1.05rem;font-weight:700;color:var(--jai-surface-ink);line-height:1.3;margin-bottom:.35rem}
@@ -1045,12 +1107,12 @@ details.faq-item{overflow:hidden}
 
 /* ===== Step 3: Your fit panel ===== */
 .rd-fit{margin-top:1.3rem;padding-top:1.2rem;border-top:var(--border)}
-.rd-fit-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;width:fit-content;margin-bottom:.5rem}
+.rd-fit-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--red);width:fit-content;margin-bottom:.5rem}
 .rd-fit-lead{font-size:.92rem;font-weight:700;color:var(--ink);line-height:1.4;margin-bottom:.7rem}
 .rd-fit-body{font-size:.82rem;color:var(--ink-2);line-height:1.6;margin-bottom:.7rem}
 .rd-fit-list{list-style:none;margin:0;display:flex;flex-direction:column;gap:.6rem}
 .rd-fit-list li{display:flex;gap:9px;font-size:.82rem;color:var(--ink-2);line-height:1.5}
-.rd-fit-list li .wr-dot{width:7px;height:7px;border-radius:50%;background:var(--jai-a);margin-top:6px;flex-shrink:0}
+.rd-fit-list li .wr-dot{width:7px;height:7px;border-radius:50%;background:#b05e00;margin-top:6px;flex-shrink:0}
 .rd-fit-list li b{color:var(--ink);font-weight:700}
 .rd-fit-tag{display:inline-block;font-size:.56rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;margin-left:6px;vertical-align:middle}
 .rd-fit-tag.big{background:#fbeaea;color:var(--red)}
@@ -1060,7 +1122,7 @@ details.faq-item{overflow:hidden}
 /* ===== Step 2: takeaway notes ===== */
 .ms-notes{display:flex;flex-direction:column;gap:.7rem}
 .ms-note{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:start;background:var(--white);border:var(--border);border-radius:var(--radius-sm);padding:.9rem 1.05rem}
-.ms-note-ic{width:30px;height:30px;border-radius:8px;background:#f3eefb;display:flex;align-items:center;justify-content:center;color:var(--jai-a);flex-shrink:0}
+.ms-note-ic{width:30px;height:30px;border-radius:8px;background:#fbeaea;display:flex;align-items:center;justify-content:center;color:var(--red);flex-shrink:0}
 .ms-note-ic svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8}
 .ms-note-tt{font-size:.88rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:2px}
 .ms-note-ds{font-size:.8rem;color:var(--ink-2);line-height:1.55}
@@ -1070,13 +1132,13 @@ details.faq-item{overflow:hidden}
 .pb2-rail .pb-output{margin-top:0}
 .pb-output-wrap .pb-output{max-width:100%;background:#fff;border:1px solid #f0c8c8;border-left:3px solid var(--red);border-radius:var(--radius-sm);padding:1.25rem 1.5rem}
 .po-wrap{margin-top:1.5rem}
-.po-ic{width:52px;height:52px;border-radius:14px;background:#fff;border:1px solid rgba(83,0,206,.16);display:flex;align-items:center;justify-content:center;color:var(--jai-a);flex-shrink:0}
+.po-ic{width:52px;height:52px;border-radius:14px;background:#fbeaea;border:1px solid #f0c8c8;display:flex;align-items:center;justify-content:center;color:var(--red);flex-shrink:0}
 .po-ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7}
 .po-body{display:flex;flex-direction:column;gap:.6rem}
 .po-body .output-items{display:flex;flex-direction:column;gap:.6rem}
 .po-body .output-item{background:var(--white);border:var(--border);border-radius:var(--radius-sm);padding:.8rem 1rem;font-size:.82rem;color:var(--ink-2);line-height:1.55}
-.po-read{margin-top:1rem;background:var(--white);border:var(--border);border-left:3px solid var(--jai-a);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:.9rem 1.1rem}
-.po-read-lbl{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--jai-a);margin-bottom:.35rem}
+.po-read{margin-top:1rem;background:var(--cream);border:var(--border);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:.9rem 1.1rem}
+.po-read-lbl{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.35rem}
 .po-read-tx{font-size:.84rem;color:var(--ink-2);line-height:1.6}
 .po-wrap .reset-link{margin-top:1rem}
 
@@ -1102,7 +1164,7 @@ details.faq-item{overflow:hidden}
 .cmp-cols{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:var(--border);align-items:stretch}
 .cmp-col{padding:1.15rem 1.3rem 1.2rem;display:flex;flex-direction:column;position:relative}
 .cmp-col.gen{background:#f7f8fa;border-right:var(--border)}
-.cmp-col.jai{background:#E1CFF1}
+.cmp-col.jai{background:linear-gradient(160deg,#EDE5FA,#E0D0F5)}
 .cmp-col-head{display:flex;align-items:center;gap:9px;margin-bottom:.9rem}
 .cmp-col-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .cmp-col.gen .cmp-col-dot{background:#9aa0ac}
@@ -1182,12 +1244,122 @@ details.faq-item{overflow:hidden}
 @media(max-width:820px){.cmp-lead{grid-template-columns:1fr}.cmp-lead-stats{grid-template-columns:repeat(2,1fr)}}
 
 /* ===== Step 4: Below the chat, closing point (before vs-table) ===== */
-.cmp-takeaway{max-width:1180px;margin:2rem auto 0;padding:1.5rem 1.75rem;background:#EDE5FA;border:1px solid #D2B9EA;border-radius:var(--radius);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap}
+.cmp-takeaway{max-width:1180px;margin:2rem auto 0;padding:1.5rem 1.75rem;background:linear-gradient(145deg,#E9E0F8 0%,#DDD0F5 40%,#E4D8F9 100%);border:1px solid #D2B9EA;border-radius:var(--radius);display:flex;align-items:flex-start;gap:1.25rem;flex-wrap:wrap}
 .cmp-takeaway-eyebrow{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--jai-a);flex-shrink:0}
 .cmp-takeaway-body{flex:1;min-width:280px;font-size:.9rem;color:var(--jai-ink);line-height:1.65}
 .cmp-takeaway-body b{font-weight:700}
 
 
+
+
+/* ============================= v4 feedback ============================= */
+.box-intro{background:linear-gradient(130deg,#F0EAF9 0%,#E6D8F5 55%,#EDE5FA 100%);border:1px solid var(--jai-surface-border);border-radius:var(--radius-sm);padding:.85rem 1.05rem;font-size:.88rem;line-height:1.6;color:var(--jai-surface-ink);margin-bottom:1.35rem}
+.box-intro b{color:var(--jai-surface-ink);font-weight:700}
+/* larger step tracker (top + bottom) */
+.step-bar{padding:8px;max-width:1020px}
+.step-node{padding:14px 22px;gap:14px}
+.step-dot{width:34px;height:34px;font-size:.9rem}
+.step-kicker{font-size:.62rem}
+.step-name{font-size:.92rem;font-weight:700}
+.step-node.on{box-shadow:0 8px 22px rgba(210,36,40,.26)}
+.step-node.on .step-dot{transform:scale(1.06)}
+.step-node.next{background:#fff;box-shadow:inset 0 0 0 1.5px var(--red)}
+.step-node.next .step-kicker,.step-node.next .step-name{color:var(--red)}
+.step-node.next .step-dot{border-color:var(--red);color:var(--red);background:#fff}
+.step-bar-bottom .step-node{padding:13px 18px}
+@media(max-width:680px){.step-node{padding:10px 12px}.step-dot{width:28px;height:28px}}
+/* step 1 chat-style output */
+.pbchat{display:flex;flex-direction:column;gap:.85rem}
+.pbchat-row{display:flex;gap:.65rem}
+.pbchat-row.you{justify-content:flex-end}
+.pbchat-b{border-radius:14px;padding:.8rem 1rem;font-size:.85rem;line-height:1.6;max-width:82%}
+.pbchat-b.you{background:var(--red);color:#fff;border-radius:14px 14px 4px 14px;font-family:'Courier New',monospace;font-size:.8rem;line-height:1.65;white-space:pre-wrap}
+.pbchat-b.ai{background:#fff;border:1px solid #eceef2;border-radius:14px 14px 14px 4px;color:var(--ink);flex:1}
+.pbchat-ava{width:30px;height:30px;border-radius:8px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;letter-spacing:.05em;flex-shrink:0}
+.pbchat-tag{font-size:.62rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-bottom:.6rem}
+.pbchat-reset{margin-top:.2rem}
+.po-ol{margin:0;padding-left:1.25rem;display:flex;flex-direction:column;gap:.5rem}
+.po-ol li{font-size:.83rem;line-height:1.55;color:var(--ink-2);padding-left:.2rem}
+.po-ol li::marker{color:var(--red);font-weight:700}
+.po-table{border:var(--border);border-radius:var(--radius-sm);overflow:hidden}
+.po-tr{display:grid;grid-template-columns:170px 1fr;border-bottom:1px solid var(--light-grey)}
+.po-tr:last-child{border-bottom:none}
+.po-tk{padding:9px 12px;background:var(--cream);font-size:.75rem;font-weight:600;color:var(--ink)}
+.po-tv{padding:9px 12px;font-size:.8rem;color:var(--ink-2);line-height:1.5}
+.po-json{font-family:'Courier New',monospace;font-size:.76rem;line-height:1.6;white-space:pre-wrap;color:#334;background:#0b0d12;color:#d6e2ea;border-radius:var(--radius-sm);padding:1rem;margin:0;overflow-x:auto}
+.po-brief{font-size:.9rem;line-height:1.75;color:var(--ink-2);margin:0 0 .6rem}
+.po-read{margin-top:.9rem;background:var(--cream);border-radius:var(--radius-sm);padding:.7rem .85rem}
+.po-read-lbl{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:.25rem}
+.po-read-tx{font-size:.8rem;line-height:1.55;color:var(--ink-2)}
+@media(max-width:560px){.po-tr{grid-template-columns:1fr}.pbchat-b{max-width:92%}}
+/* step 2 two-column + compact */
+.myth-grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.myth-grid2 .myth-card{padding:.9rem 1.05rem}
+.myth-grid2 .myth-c-real{font-size:.79rem;line-height:1.55}
+@media(max-width:820px){.myth-grid2{grid-template-columns:1fr}}
+/* step 3 clean slate + actions */
+.rd-clean{background:linear-gradient(140deg,#E4D5F7 0%,#EDE5FA 45%,#DDD0F5 100%)}
+.rd-clean-lead{font-size:.95rem;font-weight:600;color:var(--ink);line-height:1.5;margin-bottom:.6rem}
+.rd-clean-body{font-size:.85rem;color:var(--ink-2);line-height:1.65;margin-bottom:.9rem}
+.rd-clean-hint{font-size:.82rem;color:var(--ink-3);line-height:1.55;border-top:1px dashed var(--light-grey);padding-top:.75rem}
+.rd-clean-hint b{color:var(--red)}
+.rd-actions{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;margin-top:1.4rem;padding-top:1.2rem;border-top:var(--border)}
+.rd-submit{margin:0}
+.rd-map{font-size:.85rem;font-weight:700;color:#fff;cursor:pointer;display:inline-flex;align-items:center;gap:9px;background:var(--jai-grad);padding:.55rem 1.1rem;border-radius:var(--radius-sm);text-decoration:none;margin-left:auto;transition:opacity .2s}.rd-map:hover{opacity:.88}
+
+.rd-grid{align-items:stretch}
+.rd-dims{justify-content:space-between}
+/* step 4 bigger comparison chat (unclamp the fixed-height column) */
+.cmp-cols .cmp-col{height:auto;overflow:visible}
+.cmp-cols .cmp-chat{height:520px;flex:0 0 auto}
+@media(max-width:820px){.cmp-cols .cmp-chat{height:460px}}
+/* JAI working state */
+.cmp-bubble.jai-working{background:#fff;border:1px solid #E1D4F4;max-width:96%}
+.jaiw-head{display:flex;align-items:center;gap:8px;font-size:.78rem;font-weight:700;color:#2A1B45;margin-bottom:.55rem}
+.jaiw-spin{width:13px;height:13px;border-radius:50%;border:2px solid #E1D4F4;border-top-color:var(--jai-a);animation:jaiwspin .8s linear infinite;flex-shrink:0}
+@keyframes jaiwspin{to{transform:rotate(360deg)}}
+.jaiw-list{display:flex;flex-direction:column;gap:.4rem}
+.jaiw-item{display:flex;align-items:center;gap:8px;font-size:.75rem;color:#8578a0;line-height:1.4;opacity:0;transform:translateY(4px);animation:jaiwin .3s forwards}
+@keyframes jaiwin{to{opacity:1;transform:none}}
+.jaiw-item.active{color:#2A1B45;font-weight:600}
+.jaiw-item.done{color:#5B4C7A}
+.jaiw-tick{width:14px;height:14px;border-radius:50%;border:1.5px solid #cdbde8;flex-shrink:0;position:relative}
+.jaiw-item.active .jaiw-tick{border-color:var(--jai-a)}
+.jaiw-item.done .jaiw-tick{background:var(--jai-a);border-color:var(--jai-a)}
+.jaiw-item.done .jaiw-tick::after{content:'\2713';position:absolute;inset:0;color:#fff;font-size:.62rem;display:flex;align-items:center;justify-content:center}
+/* JAI donut rings (edu) */
+.jai-rings{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:.35rem}
+.jai-ring{position:relative;width:72px;text-align:center}
+.jai-ring svg{display:block}
+.jai-ring-num{position:absolute;top:20px;left:0;right:0;font-size:.72rem;font-weight:800;color:#2A1B45}
+.jai-ring-lbl{font-size:.6rem;color:#5B4C7A;margin-top:2px;line-height:1.2;font-weight:600}
+/* THE POINT — one large purple box (point + comparison table + embedded CTA) */
+.point-box{max-width:1180px;margin:2rem auto 0;background:linear-gradient(160deg,#EDE5FA,#F3ECFB);border:1px solid #D2B9EA;border-radius:var(--radius);padding:2rem 2rem 0;overflow:hidden}
+.point-eyebrow{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--jai-a)}
+.point-title{font-size:var(--fs-h3);font-weight:400;line-height:1.2;color:#1e1330;margin:.5rem 0 .8rem}
+.point-title strong{font-weight:800}
+.point-lead{font-size:.95rem;line-height:1.7;color:#43385c;max-width:760px;margin-bottom:1.5rem}
+.point-table{background:rgba(255,255,255,.55);border:1px solid #D2B9EA;border-radius:var(--radius-sm);overflow:hidden}
+.pt-colhead,.pt-row{display:grid;grid-template-columns:1.1fr 1.4fr 1.4fr}
+.pt-colhead{background:rgba(255,255,255,.7);border-bottom:1px solid #D2B9EA}
+.pt-dim{padding:.7rem .9rem}
+.pt-ch{padding:.7rem .9rem;font-size:.72rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase}
+.pt-ch.ai{color:#6b6480}
+.pt-ch.jai{color:var(--jai-a);background:rgba(122,31,176,.06)}
+.pt-row{border-bottom:1px solid #e4d8f2}
+.pt-row:last-child{border-bottom:none}
+.pt-rd{padding:.75rem .9rem;font-size:.8rem;font-weight:700;color:#2A1B45}
+.pt-c{padding:.75rem .9rem;font-size:.8rem;line-height:1.5;color:#514764}
+.pt-c.jai{color:#2A1B45;background:rgba(122,31,176,.05)}
+.point-foot{margin:0 -2rem;margin-top:1.75rem;padding:1.4rem 2rem;background:rgba(122,31,176,.09);border-top:1px solid #D2B9EA;display:flex;align-items:center;justify-content:space-between;gap:1.25rem;flex-wrap:wrap}
+.point-foot-copy{font-size:.9rem;line-height:1.6;color:#2A1B45;max-width:560px}
+.point-foot-copy b{font-weight:800}
+.point-foot-actions{display:flex;gap:.7rem;flex-wrap:wrap}
+@media(max-width:760px){.pt-colhead,.pt-row{grid-template-columns:1fr}.pt-ch.ai::before{content:'On its own: '}.pt-ch.jai::before{content:'With JAI: '}.point-box{padding:1.5rem 1.25rem 0}.point-foot{margin:1.5rem -1.25rem 0;padding:1.25rem}}
+/* reading -> case studies: purple accent */
+.reading-section .reading-card::after{background:var(--jai-a)}
+.reading-section .reading-kicker{color:var(--jai-a)}
+.reading-section .reading-cta{color:var(--jai-a)}
 
 </style>
 </head>
@@ -1209,39 +1381,50 @@ details.faq-item{overflow:hidden}
     <div class="hero-inner">
       <div class="hero-eyebrow" style="color:var(--green)"><span class="pg-dot" style="position:relative;display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);margin-right:6px"></span>A hands-on guide to AI for source-to-pay</div>
       <h1>AI for procurement, on the work you <span class="text-grad">already do.</span></h1>
-      <p class="hero-sub">Thirteen tools that let you try AI on real procurement tasks: reading a contract, comparing bids, sorting messy spend. Run them on the built-in examples or paste your own text. No setup, no signup, no demo wall.</p>
+      <p class="hero-sub">A four-step, hands-on guide to AI for procurement. Build a prompt, check what you can trust, find your first win, and see how the same work runs inside JAI on your live data. No setup, no signup, no demo wall.</p>
     </div>
   </section>
 
-  <!-- THE GAP: single nested dot visual (intent vs adoption) -->
+  <!-- THE GAP: two-stat cards side by side -->
   <section class="gap-section" id="gap">
     <div class="gap-inner">
       <div class="gap-head">
         <span class="eyebrow">Where the market is</span>
-        <h2 class="section-heading">Most teams <strong>want AI in procurement.</strong><br>Far fewer are <strong>actually using it.</strong></h2>
+        <h2 class="section-heading">Most teams <strong>are experimenting with AI.</strong> Far fewer have made it <strong>actually work.</strong></h2>
       </div>
-      <div class="gap-viz">
-        <div class="gap-dots" id="gap-dots"></div>
-        <div class="gap-legend">
-          <div class="gap-leg-row">
-            <span class="gap-swatch want"></span>
-            <div class="gap-leg-text"><span class="gap-num">80%</span><span class="gap-cap">plan to deploy generative AI in procurement within three years</span></div>
+      <div class="gap-waffle-wrap">
+        <div class="gap-waffle" id="gap-waffle"></div>
+        <div class="gap-waffle-legend">
+          <div class="gwl-row">
+            <div class="gwl-swatch scaled"></div>
+            <div class="gwl-content">
+              <div class="gwl-num scaled">~36%</div>
+              <div class="gwl-label">have moved beyond pilots to meaningful, scaled AI</div>
+              <div class="gwl-sub">Real workflows changed. Real time saved.</div>
+            </div>
           </div>
-          <div class="gap-leg-row">
-            <span class="gap-swatch doing"></span>
-            <div class="gap-leg-text"><span class="gap-num gap-num-alt">36%</span><span class="gap-cap">have a meaningful implementation running today</span></div>
+          <div class="gwl-row">
+            <div class="gwl-swatch pilot"></div>
+            <div class="gwl-content">
+              <div class="gwl-num pilot">~52%</div>
+              <div class="gwl-label">are still experimenting or stuck in pilot mode</div>
+              <div class="gwl-sub">Trying, but not yet through the gap.</div>
+            </div>
           </div>
-          <div class="gap-leg-row">
-            <span class="gap-swatch none"></span>
-            <div class="gap-leg-text"><span class="gap-cap gap-cap-muted">have no near-term plans</span></div>
+          <div class="gwl-row">
+            <div class="gwl-swatch none"></div>
+            <div class="gwl-content">
+              <div class="gwl-num none">12%</div>
+              <div class="gwl-label">haven't started yet</div>
+            </div>
           </div>
         </div>
       </div>
-      <p class="gap-foot">Most teams sit between wanting AI and using it. This page is a way to close that gap.</p>
+      <div class="gap-source">McKinsey, State of AI 2025 — 88% of organizations use AI in at least one function; only about a third have genuinely scaled it across functions.</div>
     </div>
   </section>
 
-  <!-- CTA 1: think about AI (JAI gradient way) -->
+  <!-- CTA 1:  <!-- CTA 1: think about AI (JAI gradient way) -->
   <section class="jai-cta">
     <div class="jai-cta-inner">
       <div class="jai-cta-copy">
@@ -1257,8 +1440,8 @@ details.faq-item{overflow:hidden}
   <section class="section fs-section" id="start-here">
     <div class="section-inner">
       <span class="eyebrow">Start here</span>
-      <h2 class="fs-title">Four steps to your <strong>first useful prompt.</strong></h2>
-      <p class="fs-lede">No technical background needed. The first three steps take about ten minutes and cover how to prompt, what AI can and can't do for procurement, and where your own team stands today. The fourth step shows where AI fits your team, and how JAI does the same work on your live data.</p>
+      <h2 class="fs-title">Try AI on the work <strong>you already do.</strong></h2>
+      <p class="fs-lede">Three short steps that show you how AI thinks, where it earns trust, and where it needs you to stay in the loop — then a fourth that puts the same work on your real data inside JAI.</p>
       <div class="fs-steps" id="fs-steps"></div>
     </div>
   </section>
@@ -1312,7 +1495,19 @@ details.faq-item{overflow:hidden}
     </div>
   </section>
 
-  <!-- Prompt library (dial by work type; relocated from Step 4) -->
+  <!-- Further reading (lightweight, ties to the content series) -->
+  <section class="section reading-section" id="reading">
+    <div class="section-inner">
+      <span class="eyebrow">Case studies</span>
+      <h2 class="section-heading">JAI, <strong>across three teams.</strong></h2>
+      <p class="section-sub">Short looks at how JAI helps in three very different procurement worlds, each on its own live data.</p>
+      <div class="reading-grid" id="reading-grid"></div>
+      <p class="reading-note" id="reading-note"></p>
+    </div>
+  </section>
+<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI is built into JAGGAER’s source-to-pay platform. It reads your live contracts, suppliers, and spend, and answers from your actual data.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
+
+  <!-- Prompt library (dial by work type; only shown on home page) -->
   <section class="section lib-section" id="library">
     <div class="section-inner">
       <span class="eyebrow">The prompt library</span>
@@ -1328,19 +1523,9 @@ details.faq-item{overflow:hidden}
     </div>
   </section>
   <section class="jai-foot-wrap"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">Every prompt here has a match inside JAI, running on your live contracts, suppliers, and spend rather than on text you paste.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
-
-  <!-- Further reading (lightweight, ties to the content series) -->
-  <section class="section reading-section" id="reading">
-    <div class="section-inner">
-      <span class="eyebrow">Reading</span>
-      <h2 class="section-heading">More on <strong>AI for source-to-pay.</strong></h2>
-      <p class="section-sub">Short pieces on using AI in procurement, written to be practical rather than abstract. More to come.</p>
-      <div class="reading-grid" id="reading-grid"></div>
-      <p class="reading-note" id="reading-note"></p>
-    </div>
-  </section>
-<section class="jai-foot-wrap" style="margin-top:1.5rem"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI is built into JAGGAER’s source-to-pay platform. It reads your live contracts, suppliers, and spend, and answers from your actual data.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
 </div>
+
+
 
 <div id="page-supplier" class="subpage">
   <section class="sub-hero"><div class="sub-hero-inner">
@@ -1488,13 +1673,13 @@ Return:
     <div class="step-bar" data-step="prompt"></div>
     <div class="sub-hero-eyebrow"><span class="text-grad">Step 1 · Learn how to ask</span></div>
     <h2 class="shh">How to prompt AI for procurement work.</h2>
-    <p class="sub-hero-sub">Every useful procurement prompt has four parts: role, context, task, and format. Pick each one below and watch the prompt build, with a short note on why each part matters.</p>
+    <p class="sub-hero-sub">Good prompts have four parts. Build one below and watch it take shape.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
       <div class="pg-stage-head"><div class="pg-dot"></div><div class="pg-stage-title">Procurement prompt builder</div></div>
       <div class="pg-stage-body">
-        <div class="pb2">
+        <div class="box-intro">Every useful prompt has four parts: <b>role, context, task and format</b>. Pick each one below and watch the prompt assemble, with a short note on why the part matters. When it is complete, run it to see the kind of answer it returns.</div><div class="pb2">
           <div class="pb2-build">
             <div class="pb2-build-head">Build it one move at a time</div>
             <div class="pb-grid" id="pb-grid"></div>
@@ -1517,7 +1702,6 @@ Return:
         </div>
       </div>
     </div>
-    <div class="step-next"><span class="step-next-label">Step 1 of 4</span><a onclick="go('myths')">Next: Step 2 · Know what to trust <span class="arr">&#8594;</span></a></div>
     <div class="step-bar step-bar-bottom" data-step="prompt"></div>
 <section class="jai-foot-wrap"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">The same prompting logic works inside JAI, except it already has your data in front of it. You ask the question; it reads your contracts, suppliers, and spend to answer.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
   </div></section>
@@ -1528,17 +1712,16 @@ Return:
     <div class="step-bar" data-step="myths"></div>
     <div class="sub-hero-eyebrow"><span class="text-grad">Step 2 · Know what to trust</span></div>
     <h2 class="shh">What AI can do for procurement, and what it can't.</h2>
-    <p class="sub-hero-sub">Six common beliefs about AI in procurement, sorted into true, partly true, and false. Rate how much each one sounds like your own thinking. By the end you'll have a clearer view of which work to give AI first.</p>
+    <p class="sub-hero-sub">Six common beliefs about AI, sorted into true, partly true, and false.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
       <div class="pg-stage-head"><div class="pg-dot"></div><div class="pg-stage-title">Procurement myth check</div></div>
       <div class="pg-stage-body">
-        <div id="myth-grid" style="display:flex;flex-direction:column;gap:1rem"></div>
+        <div class="box-intro">Below are six beliefs we hear often about AI in procurement. Rate how much each one <b>sounds like your own thinking</b>, from one to five. Once a few are rated, you will see the belief holding your team back most, and how to reframe it.</div><div id="myth-grid" class="myth-grid2"></div>
         <div id="myth-score-area" style="display:none"></div>
       </div>
     </div>
-    <div class="step-next"><span class="step-next-label">Step 2 of 4</span><a onclick="go('readiness')">Next: Step 3 · Find your first win <span class="arr">&#8594;</span></a></div>
     <div class="step-bar step-bar-bottom" data-step="myths"></div>
 <section class="jai-foot-wrap"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI handles the tasks that are genuinely a good fit for AI, inside JAGGAER, on your real procurement data. The less promising tasks stay with your team.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
   </div></section>
@@ -1829,13 +2012,14 @@ Score each on price, lead time, and quality. Use these weights: price 45%, lead 
     <div class="step-bar" data-step="readiness"></div>
     <div class="sub-hero-eyebrow"><span class="text-grad">Step 3 · Find your first win</span></div>
     <h2 class="shh">Where AI would help your team first.</h2>
-    <p class="sub-hero-sub">Set five dials to match your current state: visibility, automation, supplier data, compliance, adoption. The result is an honest read of where to start with AI, and what to leave for later.</p>
+    <p class="sub-hero-sub">Rate five dimensions and get an honest read on where AI helps your team first.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="pg-stage">
       <div class="pg-stage-head"><div class="pg-dot"></div><div class="pg-stage-title">Where AI helps first</div></div>
       <div class="pg-stage-body">
-        <div class="pg-label">Rate your team on each dimension. The score updates live.</div>
+        <div class="pg-label">Set each dial to match your team, then submit to see where AI helps first.</div>
+        <div class="box-intro">Set each dial to where your team honestly sits today. There are no wrong answers, a lower score simply shows where AI has the most obvious first job. When you are ready, submit to see your score and <b>where to start</b>.</div>
         <div class="rd-grid">
           <div class="rd-dims">
             <div class="rd-dim"><label>Spend visibility <span class="hint">Can you see all spend, cleanly categorised?</span></label><div class="diag-seg" id="rd-visibility"><button onclick="setRd('visibility',0,this)">Low</button><button class="on" onclick="setRd('visibility',1,this)">Medium</button><button onclick="setRd('visibility',2,this)">High</button></div></div>
@@ -1844,18 +2028,13 @@ Score each on price, lead time, and quality. Use these weights: price 45%, lead 
           <div class="rd-dim"><label>Compliance and audit <span class="hint">Policy enforcement and traceability</span></label><div class="diag-seg" id="rd-compliance"><button onclick="setRd('compliance',0,this)">Low</button><button class="on" onclick="setRd('compliance',1,this)">Medium</button><button onclick="setRd('compliance',2,this)">High</button></div></div>
           <div class="rd-dim"><label>AI adoption <span class="hint">Is your team already using AI day to day?</span></label><div class="diag-seg" id="rd-adoption"><button class="on" onclick="setRd('adoption',0,this)">Low</button><button onclick="setRd('adoption',1,this)">Medium</button><button onclick="setRd('adoption',2,this)">High</button></div></div>
           </div>
-          <div class="rd-result">
-            <div class="rd-result-label">Readiness score</div>
-            <div class="rd-score" id="rd-score">0<span>/100</span></div>
-            <div class="rd-band" id="rd-band"></div>
-            <div class="rd-meter"><div class="rd-meter-fill" id="rd-meter"></div></div>
-            <div class="rd-fit" id="rd-fit"></div>
-            <div class="rd-next" id="rd-next"></div>
-          </div>
+          <div class="rd-result" id="rd-result"></div>
+        </div>
+        <div class="rd-actions" id="rd-actions">
+          <button class="run-btn rd-submit" id="rd-submit" onclick="submitReadiness()"><span class="btn-label">See your readiness &#8594;</span></button>
         </div>
       </div>
     </div>
-    <div class="step-next"><span class="step-next-label">Step 3 of 4</span><a onclick="go('whatnext')">Next: Step 4 &middot; See where you fit <span class="arr">&#8594;</span></a></div>
 <div class="step-bar step-bar-bottom" data-step="readiness"></div>
 <section class="jai-foot-wrap"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI works on your actual spend, supplier records, and policies inside JAGGAER. Where your team has gaps, it fills in with live data rather than estimates.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
   </div></section>
@@ -1865,8 +2044,8 @@ Score each on price, lead time, and quality. Use these weights: price 45%, lead 
   <section class="sub-hero"><div class="sub-hero-inner">
     <div class="step-bar" data-step="whatnext"></div>
     <div class="sub-hero-eyebrow"><span class="text-grad">Step 4 · Where your team starts</span></div>
-    <h2 class="shh">The work you just did <strong>is how your team starts with AI.</strong></h2>
-    <p class="sub-hero-sub">Framing the ask, judging what to trust, spotting your gaps. That is what any good AI answer takes, and you can start doing it this week on the work you already have. Below is your own read-out, then the same brief handed to a generic AI and to JAI.</p>
+    <h2 class="shh">So how should <strong>your team start with AI?</strong></h2>
+    <p class="sub-hero-sub">You already did the hard part. Here is what it took, and how much of it JAI does for you.</p>
   </div></section>
   <section class="playground"><div class="playground-inner">
     <div class="jr" id="wn-journey"></div>
@@ -1874,20 +2053,7 @@ Score each on price, lead time, and quality. Use these weights: price 45%, lead 
     <!-- Your answers, summarised -->
     <div class="wn-summary" id="wn-summary"></div>
 
-    <!-- Purple break: CTA -->
-    <div class="jai-break">
-      <div class="jai-break-main">
-        <div class="jai-break-eyebrow">JAI, inside JAGGAER</div>
-        <div class="jai-break-title">The same steps run on your live spend, suppliers and policies.</div>
-        <div class="jai-break-body">Nothing to paste, nothing to re-supply. JAI reads what is already in the platform and cites every figure back to its source.</div>
-      </div>
-      <div class="jai-break-actions">
-        <a class="btn-jai-grad" href="https://www.jaggaer.com/book-a-demo" target="_blank">Book a demo <span class="arr">&#8594;</span></a>
-        <a class="btn-jai-ghost" href="https://www.jaggaer.com/jai" target="_blank">Go to the JAI page <span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
-    <!-- ==================== ANIMATED CHAT COMPARISON ==================== -->
+    <!-- ==================== ANIMATED CHAT COMPARISON    <!-- ==================== ANIMATED CHAT COMPARISON ==================== -->
     <div class="cmp">
       <div class="cmp-head">
         <span class="cmp-eyebrow">Watch it happen</span>
@@ -1930,60 +2096,31 @@ Score each on price, lead time, and quality. Use these weights: price 45%, lead 
       </div>
       <div class="cmp-foot">
         <div class="cmp-foot-copy">
-          <b>The AI thinking is identical.</b> Both sides run on frontier models, and JAI uses Claude for a lot of this. The difference is <em>what the AI already knows about your organisation</em>. On the left, nothing. On the right, everything already in JAGGAER: your suppliers, your spend, your policies, your approval rules, your region rules.
+          <b>The thinking is identical.</b> Both sides run on frontier models. What differs is <em>what the AI already knows</em>. On the left, nothing. On the right, everything already in JAGGAER.
         </div>
         <a class="btn-jai-grad" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a>
       </div>
     </div>
 
-    <div class="cmp-takeaway">
-      <span class="cmp-takeaway-eyebrow">The point</span>
-      <div class="cmp-takeaway-body">The AI thinking on both sides is the same. What changes is <b>who does the setup</b>. On the left, you spend the time framing, uploading, verifying. On the right, JAI already has your suppliers, spend, contracts, and policies in front of it. The whole loop, once, rather than once per question.</div>
-    </div>
-
-    <!-- Purple break: CTA -->
-    <div class="jai-break">
-      <div class="jai-break-main">
-        <div class="jai-break-eyebrow">Next step</div>
-        <div class="jai-break-title">See this run on your own supplier base.</div>
-        <div class="jai-break-body">A demo uses your categories and your thresholds. The answer you get is the answer your team would act on.</div>
+    <div class="point-box">
+      <span class="point-eyebrow">The point</span>
+      <h2 class="point-title">Same intelligence. <strong>Far less work to get an answer you can trust.</strong></h2>
+      <p class="point-lead">On both sides the AI reasons the same way. What changes is what it already knows, and who has to assemble it. On your own you gather, paste, define the rules and verify every figure, on every question. With JAI, your suppliers, spend, contracts and policies are already in front of it, and every figure is cited back to its source.</p>
+      <div class="point-table">
+        <div class="pt-colhead"><div class="pt-dim"></div><div class="pt-ch ai">The AI on its own</div><div class="pt-ch jai">With JAI</div></div>
+        <div class="pt-row"><div class="pt-rd">What it knows</div><div class="pt-c">General knowledge, plus whatever you paste in each time. It forgets between sessions.</div><div class="pt-c jai">Your live spend, suppliers, contracts and policies, in front of it on every question.</div></div>
+        <div class="pt-row"><div class="pt-rd">Who does the setup</div><div class="pt-c">You do, on every question: gather, paste, define the rules, re-explain.</div><div class="pt-c jai">Done once, at connection. Your thresholds and policies are read straight from the platform.</div></div>
+        <div class="pt-row"><div class="pt-rd">Can you trust it</div><div class="pt-c">A confident draft you check yourself, line by line.</div><div class="pt-c jai">Every answer cited to your own source, with a full audit trail behind it.</div></div>
+        <div class="pt-row"><div class="pt-rd">Your data</div><div class="pt-c">You decide, each time, what is safe to paste.</div><div class="pt-c jai">Stays in your region, mirrors your permissions, and never trains a model.</div></div>
       </div>
-      <div class="jai-break-actions">
-        <a class="btn-jai-grad" href="https://www.jaggaer.com/book-a-demo" target="_blank">Book a demo <span class="arr">&#8594;</span></a>
-        <a class="btn-jai-ghost" href="https://www.jaggaer.com/jai" target="_blank">Go to the JAI page <span class="arr">&#8594;</span></a>
-      </div>
-    </div>
-
-    <!-- ==================== STATIC DIMENSIONAL COMPARISON ==================== -->
-    <div class="vs" id="vs-honest">
-      <div class="vs-head">
-        <span class="vs-eyebrow">The honest comparison</span>
-        <h2 class="vs-title">What you tried here, and what <em>JAI</em> adds.</h2>
-        <p class="vs-sub">The tools on this page run on text you paste, in your browser. JAI is the same kind of AI, running inside JAGGAER, reading your live data, your policies, your real supplier base. The shape of the work does not change. What changes is who assembles the context, who checks the figures, and whether the answer can be traced back to a source when someone asks. Below is the difference, dimension by dimension.</p>
-        <div class="vs-note" id="vs-note"></div>
-      </div>
-      <div class="vs-table">
-        <div class="vs-colhead">
-          <div class="vs-ch-dim"></div>
-          <div class="vs-ch claude"><span>With a generic LLM</span><small>Claude, ChatGPT and the like</small></div>
-          <div class="vs-ch jai"><span>With JAI</span><small>JAGGAER's AI for S2P</small></div>
+      <div class="point-foot">
+        <div class="point-foot-copy"><b>See this run on your own supplier base.</b> A demo uses your categories and your thresholds, so the answer you get is the one your team would act on.</div>
+        <div class="point-foot-actions">
+          <a class="btn-jai-grad" href="https://www.jaggaer.com/book-a-demo" target="_blank">Book a demo <span class="arr">&#8594;</span></a>
+          <a class="btn-jai-ghost" href="https://www.jaggaer.com/solutions/jai" target="_blank">Go to the JAI page <span class="arr">&#8594;</span></a>
         </div>
-        <div class="vs-row"><div class="vs-dim">What it knows</div><div class="vs-cell claude">General knowledge, plus whatever you paste in each time. It forgets between sessions.</div><div class="vs-cell jai">Your live spend, suppliers, contracts and policies, already in front of it on every question.</div></div>
-        <div class="vs-row"><div class="vs-dim">Where it works</div><div class="vs-cell claude">A separate chat window you copy text in and out of.</div><div class="vs-cell jai">Inside JAGGAER One, in the workflow your team already uses.</div></div>
-        <div class="vs-row"><div class="vs-dim">Can you trust it</div><div class="vs-cell claude">A confident draft that you check yourself, line by line.</div><div class="vs-cell jai">Every answer cited to your own source document, with a full audit trail behind it.</div></div>
-        <div class="vs-row"><div class="vs-dim">Your data</div><div class="vs-cell claude">You decide, each time, what is safe to paste.</div><div class="vs-cell jai">Stays in your region, mirrors your permissions, and never trains a model.</div></div>
-        <div class="vs-row"><div class="vs-dim">Who does the setup</div><div class="vs-cell claude">You do, on every question: gather, paste, define the rules, re-explain.</div><div class="vs-cell jai">Done once, at connection. Thresholds and policies are read from the platform.</div></div>
-        <div class="vs-row"><div class="vs-dim">Getting started</div><div class="vs-cell claude">Copy a prompt and go, today, at no cost.</div><div class="vs-cell jai">Switched on by your team. No training needed to use it.</div></div>
-      </div>
-      <div class="vs-foot">
-        <span>JAI runs on leading models, including Claude, and picks the right one for each task. So this is not Claude versus JAI. It is the same intelligence, grounded in your world.</span>
-        <a class="btn-jai-grad" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a>
       </div>
     </div>
-
-    <div class="wn-report" id="wn-report"></div>
-    <div class="step-bar step-bar-bottom" data-step="whatnext"></div>
-<section class="jai-foot-wrap"><div class="jai-foot"><div class="jai-foot-main"><div class="jai-foot-eyebrow">The same idea, on your data</div><div class="jai-foot-text">JAI brings the same AI capability inside JAGGAER, grounded in your own data and policies. The work looks the same; the numbers are yours.</div></div><a class="jai-foot-link" href="https://www.jaggaer.com/book-a-demo" target="_blank">See JAI on your data <span class="arr">&#8594;</span></a></div></section>
   </div></section>
 </div>
 
@@ -2378,10 +2515,10 @@ function runInvoice(){
 
 /* PROMPT BUILDER */
 var PB_BLOCKS={
-  role:['procurement contracts analyst','supply chain risk specialist','senior procurement manager','AP exception reviewer'],
-  context:['I work at a discrete manufacturer','I lead sourcing for a pharma company with strict compliance needs','I manage indirect spend for a university','I am a CPO at a public sector body'],
-  task:['identify all auto-renewal and exit terms','flag geographic concentration risks by category','draft a scope of work and evaluation criteria','classify invoice exceptions and recommend actions'],
-  format:['Return as a numbered list','Return as a table','Return as JSON','Return in under 200 words']
+  role:['procurement contracts analyst','supply-chain risk specialist','category manager for indirect spend','senior AP exceptions reviewer'],
+  context:['a discrete manufacturer with a multi-region supplier base','regulated pharma sourcing, where every decision has to be auditable','indirect and framework spend for a large university','a public-sector body held to SME and transparency targets'],
+  task:['find every auto-renewal, escalation and exit clause, and flag the traps','map single-region concentration by category and name qualified backups','draft a scope of work with weighted evaluation criteria','triage invoice exceptions by type and recommend an action for each'],
+  format:['as a numbered list, most urgent first','as a table, one row per finding','as JSON I can pass to another system','as a short brief, under 150 words']
 };
 var PB_LABELS={role:'Role',context:'Context',task:'Task',format:'Output format'};
 var pbSel={role:'',context:'',task:'',format:''};
@@ -2419,7 +2556,7 @@ function renderPB(activeBlock){
   if(pbSel.role)bits.push('You are a '+pbSel.role+'.');
   if(pbSel.context)bits.push('Context: '+pbSel.context+'.');
   if(pbSel.task)bits.push('Task: '+pbSel.task+'.');
-  if(pbSel.format)bits.push(pbSel.format+'.');
+  if(pbSel.format)bits.push('Return the answer '+pbSel.format+'.');
   var a=bits.join(' ');
   var n=[pbSel.role,pbSel.context,pbSel.task,pbSel.format].filter(Boolean).length;
   document.getElementById('pb-count').textContent='Your prompt so far: '+n+' of 4';
@@ -2436,7 +2573,7 @@ function renderPB(activeBlock){
     var st=document.getElementById('pb-move-state-'+block);
     if(mv){mv.classList.toggle('on',block===spotlight);mv.classList.toggle('done',filled&&block!==spotlight);}
     if(bl){bl.classList.toggle('active',block===spotlight);bl.classList.toggle('done',filled);}
-    if(st)st.textContent=filled?'\u2713 set':(block===spotlight?'\u2192 your turn':'');
+    if(st)st.textContent=(!filled&&block===spotlight)?'\u2192 your turn':'';
   });
   var runBtnEl=document.getElementById('pb-run-btn');
   if(runBtnEl)runBtnEl.style.display=pbSel.task?'inline-flex':'none';
@@ -2445,9 +2582,9 @@ function renderPB(activeBlock){
 
 /* ===== FURTHER READING (swap in real posts: edit the READING array) ===== */
 var READING=[
-  {kicker:'Getting started', title:'How to Install Claude: A Step-by-Step Guide for Procurement Professionals', desc:'A plain walk-through of getting Claude set up and ready for real S2P work, no IT project required.', url:''},
-  {kicker:'Getting started', title:'What Are .md Files in Claude, and Why S2P Teams Can\u2019t Skip This Step', desc:'Why a simple Markdown file is the trick to giving Claude the context it needs about your processes.', url:''},
-  {kicker:'Getting started', title:'AI in S2P: What Claude Actually Delivers for Procurement in 2026', desc:'A grounded look at what Claude genuinely does, and doesn\u2019t, for procurement teams this year.', url:''}
+  {kicker:'Manufacturing', title:'Cutting single-region exposure at a global manufacturer', desc:'How a CPO used JAI to surface over-concentrated categories against their own threshold and pull qualified backups from the approved-supplier master, without exporting a thing.', url:'https://www.jaggaer.com/solutions/jai'},
+  {kicker:'Higher Education', title:'Untangling framework spend at a large university', desc:'How a procurement team used JAI to classify fragmented departmental spend and spot where a single framework supplier had quietly become a dependency.', url:'https://www.jaggaer.com/solutions/jai'},
+  {kicker:'Public Sector', title:'Meeting SME targets at a government agency', desc:'How a public-sector lead used JAI to read the live contract register, track SME participation against target, and flag which concentrated contracts renew this quarter.', url:'https://www.jaggaer.com/solutions/jai'}
 ];
 function renderReading(){
   var grid=document.getElementById('reading-grid');if(!grid)return;
@@ -2473,19 +2610,19 @@ function copyPrompt(){
 }
 // task-aware canned responses (hardcoded; no API)
 var PB_RESPONSES={
-  'identify all auto-renewal and exit terms':{
+  'find every auto-renewal, escalation and exit clause, and flag the traps':{
     list:['Auto-renewal: the agreement renews for successive 12-month terms automatically.','Notice window: non-renewal notice must be given no less than 90 days before term end.','Price adjustment: licensor may raise pricing at renewal with 60 days\u2019 notice.','Exit: no early-termination-for-convenience clause found, you are committed for the full term once renewed.'],
     note:'Two high-risk items: the auto-renewal paired with a 90-day notice window means a missed date locks in another year at a price the vendor can raise.'
   },
-  'flag geographic concentration risks by category':{
+  'map single-region concentration by category and name qualified backups':{
     list:['Semiconductors, 100% Taiwan. Single-event exposure; qualify a South Korea or Japan source.','Rare earth materials, 100% China. Subject to export controls; Australia/Canada are the credible alternatives.','Precision machining, single Germany source. Lower risk, but no non-EU fallback.','Overall: two of three critical categories sit in single high-risk geographies.'],
     note:'The compounding risk is that semiconductors and rare earths could both be disrupted by unrelated events in the same quarter.'
   },
-  'draft a scope of work and evaluation criteria':{
+  'draft a scope of work with weighted evaluation criteria':{
     list:['Scope: deliver the stated solution across all sites, integrate with the current ERP, and onboard users within the timeline.','Evaluation, Functional fit (30%): coverage of stated requirements and integration depth.','Evaluation, TCO over 3 years (25%): licensing, implementation, and support.','Evaluation, Security & compliance (20%), Implementation approach (15%), Vendor stability (10%).'],
     note:'Weightings here are a sensible default, in a real prompt, tell the AI your category\u2019s priorities and it will adjust them.'
   },
-  'classify invoice exceptions and recommend actions':{
+  'triage invoice exceptions by type and recommend an action for each':{
     list:['Duplicate: same vendor and amount as a prior invoice, hold and confirm before paying.','No PO on file: maverick spend, escalate to the budget holder for a retroactive PO or rejection.','Over-billed vs PO: invoice exceeds the approved amount beyond tolerance, pay the PO amount only, query the variance.','Expired contract: services billed outside agreed terms, do not pay until the contract status is resolved.'],
     note:'Across a real batch, duplicates and over-billing are usually where the recoverable dollars concentrate.'
   }
@@ -2497,26 +2634,29 @@ function runPrompt(){
   setTimeout(function(){
     think('pb-think',false);runBtn('pb-run-btn',false,'Run this prompt →');
     var resp=PB_RESPONSES[pbSel.task]||{list:['(Select a task to see a sample response.)'],note:''};
-    var asTable=pbSel.format==='Return as a table';
-    var asJSON=pbSel.format==='Return as JSON';
+    var fmt=pbSel.format;
+    var promptText=document.getElementById('pb-pre').textContent;
     var bodyHtml;
-    if(asJSON){
-      var obj={role:pbSel.role,task:pbSel.task,findings:resp.list};
-      bodyHtml='<pre style="font-family:\'Courier New\',monospace;font-size:.78rem;line-height:1.65;white-space:pre-wrap;color:var(--ink-2);background:var(--cream);border:var(--border);border-radius:var(--radius-sm);padding:1rem;margin:0">'+escapeHtml(JSON.stringify(obj,null,2))+'</pre>';
-    } else if(asTable){
-      bodyHtml='<div style="border:var(--border);border-radius:var(--radius-sm);overflow:hidden">'+resp.list.map(function(it,i){var parts=it.split(/:\s/);var k=parts.length>1?parts.shift():('Item '+(i+1));var v=parts.join(': ');return '<div style="display:grid;grid-template-columns:160px 1fr;gap:0;border-bottom:'+(i<resp.list.length-1?'1px solid var(--light-grey)':'none')+'"><div style="padding:9px 12px;background:var(--cream);font-size:.76rem;font-weight:600;color:var(--ink)">'+escapeHtml(k)+'</div><div style="padding:9px 12px;font-size:.8rem;color:var(--ink-2);line-height:1.5">'+escapeHtml(v)+'</div></div>';}).join('')+'</div>';
+    if(fmt==='as JSON I can pass to another system'){
+      var obj={role:pbSel.role,context:pbSel.context,task:pbSel.task,findings:resp.list};
+      bodyHtml='<pre class="po-json">'+escapeHtml(JSON.stringify(obj,null,2))+'</pre>';
+    } else if(fmt==='as a table, one row per finding'){
+      bodyHtml='<div class="po-table">'+resp.list.map(function(it,i){var parts=it.split(/:\s/);var k=parts.length>1?parts.shift():('Item '+(i+1));var v=parts.join(': ');return '<div class="po-tr"><div class="po-tk">'+escapeHtml(k)+'</div><div class="po-tv">'+escapeHtml(v)+'</div></div>';}).join('')+'</div>';
+    } else if(fmt==='as a short brief, under 150 words'){
+      var brief=resp.list.map(function(it){return it.replace(/^[^:]+:\s*/,'');}).join(' ');
+      bodyHtml='<p class="po-brief">'+escapeHtml(brief)+'</p>'+(resp.note?'<p class="po-brief">'+escapeHtml(resp.note)+'</p>':'');
     } else {
-      bodyHtml='<div class="output-items">'+resp.list.map(function(it){return '<div class="output-item">'+escapeHtml(it)+'</div>';}).join('')+'</div>';
+      bodyHtml='<ol class="po-ol">'+resp.list.map(function(it){return '<li>'+escapeHtml(it)+'</li>';}).join('')+'</ol>';
     }
-    var o='<div class="ms-wrap po-wrap">'+
-      '<div class="ms-top"><div class="po-ic">'+(ICONS['chat']||'')+'</div>'+
-      '<div><div class="ms-eyebrow">Sample response</div><div class="ms-verdict">This is what your prompt returns.</div></div></div>'+
-      '<div class="ms-body">'+
-      '<p class="ms-sub">An illustrative answer to the prompt you just built. Paste the same prompt into an AI assistant with your own data and the numbers become yours.</p>'+
-      '<div class="po-body">'+bodyHtml+'</div>'+
-      (resp.note?('<div class="po-read"><div class="po-read-lbl">Reading</div><div class="po-read-tx">'+escapeHtml(resp.note)+'</div></div>'):'')+
-      '<button class="reset-link" onclick="resetOut(\'pb-output\')">\u2190 Clear response</button>'+
-      '</div></div>';
+    var readingHtml=(resp.note && fmt!=='as a short brief, under 150 words')?('<div class="po-read"><div class="po-read-lbl">Worth noticing</div><div class="po-read-tx">'+escapeHtml(resp.note)+'</div></div>'):'';
+    var o='<div class="pbchat">'+
+      '<div class="pbchat-row you"><div class="pbchat-b you">'+escapeHtml(promptText)+'</div></div>'+
+      '<div class="pbchat-row ai"><div class="pbchat-ava">AI</div><div class="pbchat-b ai">'+
+        '<div class="pbchat-tag">Illustrative answer \u00b7 your own data would replace these numbers</div>'+
+        bodyHtml+readingHtml+
+      '</div></div>'+
+      '<div class="pbchat-reset"><button class="reset-link" onclick="resetOut(\'pb-output\')">\u2190 Clear and try another format</button></div>'+
+      '</div>';
     out.innerHTML=o;out.classList.add('visible');
   },1100);
 }
@@ -2553,9 +2693,8 @@ function buildMyths(){
     var rateBtns=[1,2,3,4,5].map(function(n){return '<button class="myth-rate-btn" data-v="'+n+'" onclick="rateMyth('+mi+','+n+',this)">'+n+'</button>';}).join('');
     el.innerHTML='<div class="myth-c-top">'+
         '<div class="myth-c-q">'+m.myth+'</div>'+
-        '<div class="myth-c-tag">'+m.v+'</div>'+
       '</div>'+
-      '<div class="myth-c-real"><b>The reality:</b> '+m.reality+'</div>'+
+      '<div class="myth-c-real" id="myth-real-'+mi+'"><b>The reality:</b> '+m.reality+'</div>'+
       '<div class="myth-c-rate" id="myth-rate-'+mi+'"><span class="myth-c-rate-lbl">Sounds like you?</span>'+rateBtns+'<span class="myth-rate-hint">1 = not me \u00B7 5 = that\u2019s me</span></div>';
     grid.appendChild(el);
   });
@@ -2566,33 +2705,42 @@ function rateMyth(mi,val,btn){
   for(var i=0;i<btns.length;i++){
     btns[i].classList.toggle('on',parseInt(btns[i].getAttribute('data-v'),10)===val);
   }
+  // Reveal the reality block for this myth on first rating
+  var realEl=document.getElementById('myth-real-'+mi);
+  if(realEl&&!realEl.classList.contains('visible')){
+    realEl.classList.add('visible');
+    // slight delay so display:block settles before opacity transition
+    setTimeout(function(){realEl.classList.add('shown');},20);
+  }
   var rated=[];for(var k in mythRatings){if(mythRatings[k]!==null)rated.push({i:+k,v:mythRatings[k]});}
   if(rated.length<2)return;
   var avg=rated.reduce(function(a,b){return a+b.v;},0)/rated.length;
   var pct=Math.round((avg-1)/4*100);
-  var verdict=pct>=60?'Plenty to win back':pct>=35?'A few quick wins are waiting':'You are already ahead';
-  var sub=pct>=60?'Several of these still sound like you, which is good news: it means there is easy time to reclaim. Here is where to point AI first, based on what rang true.':pct>=35?'A few of these ring true, which is completely normal. Start with the work below and the rest tends to fall into place.':'You are past most of the hesitation. The picks below are the fastest way to turn that into a real first win.';
-  // pick the myths that sounded most like them (rating >=3), strongest first; fall back to top-rated
+  // largest challenge = the belief rated most like them (ties -> earliest)
+  var top=rated.slice().sort(function(a,b){return b.v-a.v||a.i-b.i;})[0];
+  var challengeTitle=MYTH_TAKEAWAY[top.i].tt;
+  var challengeMyth=MYTHS[top.i].myth;
+  var challengeReality=MYTHS[top.i].reality;
   var picks=rated.filter(function(x){return x.v>=3;}).sort(function(a,b){return b.v-a.v||a.i-b.i;});
   if(picks.length<2)picks=rated.slice().sort(function(a,b){return b.v-a.v||a.i-b.i;});
   var seen={},chosen=[];
   for(var pi=0;pi<picks.length && chosen.length<3;pi++){var pk=MYTH_TAKEAWAY[picks[pi].i];if(pk&&!seen[pk.tt]){seen[pk.tt]=1;chosen.push(pk);}}
   var R=30,Cc=2*Math.PI*R,off=Cc*(1-pct/100);
   var dial='<div class="ms-dial"><svg width="74" height="74" viewBox="0 0 74 74">'+
-    '<circle cx="37" cy="37" r="30" fill="none" stroke="#ece6f6" stroke-width="7"/>'+
+    '<circle cx="37" cy="37" r="30" fill="none" stroke="#e8eaee" stroke-width="7"/>'+
     '<circle cx="37" cy="37" r="30" fill="none" stroke="url(#msg)" stroke-width="7" stroke-linecap="round" stroke-dasharray="'+Cc.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/>'+
-    '<defs><linearGradient id="msg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5300CE"/><stop offset="1" stop-color="#E22B83"/></linearGradient></defs></svg>'+
+    '<defs><linearGradient id="msg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D22428"/><stop offset="1" stop-color="#F0662E"/></linearGradient></defs></svg>'+
     '<div class="ms-dial-num">'+pct+'%</div></div>';
   var notes=chosen.map(function(c){
     return '<div class="ms-note">'+
       '<div class="ms-note-ic">'+(ICONS[c.icon]||'')+'</div>'+
       '<div><div class="ms-note-tt">'+c.tt+'</div><div class="ms-note-ds">'+c.ds+'</div></div></div>';
   }).join('');
-  var subContent=pct>=60?'Several of these still sound like you, which is completely normal. Here is how to think about the ones that rang true, before you touch a single tool.':pct>=35?'A few of these ring true, which is normal. Hold on to these ideas as you go, and the rest tends to fall into place.':'You are past most of the hesitation. Keep these framings in mind and Step 3 will point you to where to start.';
+  var subContent='The belief holding you back most: <b>\u201c'+challengeMyth+'\u201d</b> '+challengeReality+' Here is how to reframe that, alongside the other beliefs that rang true, before you touch a single tool.';
   var area=document.getElementById('myth-score-area');
   area.style.display='block';
   area.innerHTML='<div class="ms-wrap">'+
-    '<div class="ms-top">'+dial+'<div><div class="ms-eyebrow">What to take from this</div><div class="ms-verdict">'+verdict+'</div></div></div>'+
+    '<div class="ms-top">'+dial+'<div><div class="ms-eyebrow">Your biggest challenge</div><div class="ms-verdict">'+challengeTitle+'</div></div></div>'+
     '<div class="ms-body"><p class="ms-sub">'+subContent+'</p><div class="ms-notes">'+notes+'</div></div></div>';
 }
 
@@ -2676,6 +2824,7 @@ function initObservers(){
     document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in');});
     document.querySelectorAll('[data-count]').forEach(animateCount);
     document.querySelectorAll('.gap-dots').forEach(animateGapDots);
+    var gw=document.getElementById('gap-waffle');if(gw)animateWaffle(gw);
     return;
   }
   var io=new IntersectionObserver(function(entries){
@@ -2683,12 +2832,14 @@ function initObservers(){
       if(en.isIntersecting){
         if(en.target.classList.contains('reveal'))en.target.classList.add('in');
         if(en.target.hasAttribute('data-count'))animateCount(en.target);
-        if(en.target.classList.contains('gap-dots'))animateGapDots(en.target);
+        if(en.target.classList.contains('gap-dots'))animateGapDots(en.target); if(en.target.classList.contains('gap-card-fill')){en.target.style.width=en.target.getAttribute('data-w')+'%';}
+        if(en.target.id==='gap-waffle')animateWaffle(en.target);
         io.unobserve(en.target);
       }
     });
   },{threshold:.25});
-  document.querySelectorAll('.reveal,[data-count],.gap-dots').forEach(function(e){io.observe(e);});
+  document.querySelectorAll('.reveal,[data-count],.gap-dots,.gap-card-fill').forEach(function(e){io.observe(e);});
+  var gw=document.getElementById('gap-waffle');if(gw)io.observe(gw);
 }
 
 /* APPROVAL PATH CHECKER */
@@ -3281,6 +3432,7 @@ function runBidCompare(){
 
 /* ===== AI READINESS SCORECARD ===== */
 var rdState={visibility:1,automation:0,supplier:0,compliance:1,adoption:0};
+var rdSubmitted=false;
 var RD_META={
   visibility:{label:'Spend visibility',inline:'spend visibility',tool:'classifier',toolLabel:'Spend Classifier',jai:'Try the Spend Classifier above to see messy lines turned into clean categories.'},
   automation:{label:'Process automation',inline:'process automation',tool:'approval',toolLabel:'Approval Path Checker',jai:'Try the Approval Path Checker above to see a purchase walked through the policy.'},
@@ -3292,8 +3444,17 @@ function setRd(dim,val,btn){
   rdState[dim]=val;
   var seg=btn.parentElement;var btns=seg.querySelectorAll('button');
   for(var i=0;i<btns.length;i++)btns[i].classList.toggle('on',btns[i]===btn);
-  calcReadiness();
+  if(rdSubmitted)calcReadiness();
 }
+function renderRdCleanSlate(){
+  var el=document.getElementById('rd-result');if(!el)return;
+  el.className='rd-result rd-clean';
+  el.innerHTML='<div class="rd-result-label">What this measures</div>'+
+    '<div class="rd-clean-lead">Your readiness score reads how much groundwork is already in place for AI to be useful, across visibility, automation, supplier data, compliance and adoption.</div>'+
+    '<div class="rd-clean-body">A lower score is not a problem, it is a map. It points to the gaps where AI has the most obvious first job, so you start where the time savings are largest rather than trying to do everything at once.</div>'+
+    '<div class="rd-clean-hint">Set the five dials, then press <b>See your readiness</b> for your score and where to start.</div>';
+}
+function submitReadiness(){ rdSubmitted=true; calcReadiness(); if(typeof renderStepBars==="function")renderStepBars(); var el=document.getElementById("rd-result"); if(el)el.scrollIntoView({behavior:"smooth",block:"nearest"}); }
 var JAI_FIT={
   visibility:'reads your live spend and shows where it concentrates, in plain English, with no report request',
   automation:'walks a purchase through your own approval policy inside the platform, so the right path happens the first time',
@@ -3302,23 +3463,18 @@ var JAI_FIT={
   adoption:'lives inside the platform your team already uses, so there is nothing new for anyone to learn'
 };
 function calcReadiness(){
-  if(!document.getElementById('rd-score'))return;
+  var el=document.getElementById('rd-result');if(!el)return;
+  if(!rdSubmitted){renderRdCleanSlate();return;}
   var keys=Object.keys(rdState);
   var sum=keys.reduce(function(a,k){return a+rdState[k];},0);
   var score=Math.round(sum/(keys.length*2)*100);
-  document.getElementById('rd-score').innerHTML=score+'<span>/100</span>';
-  document.getElementById('rd-meter').style.width=score+'%';
   var band=score>=70?'Strong footing. You are well placed to put AI to work across the team.':score>=40?'Getting there. The foundations exist, and a few targeted tries will close the gaps.':'Early days, which is good news: the biggest wins are also the easiest ones to start.';
-  document.getElementById('rd-band').textContent=band;
-  var rn=document.getElementById('rd-next');
-  if(rn)rn.innerHTML='<a onclick="go(\'whatnext\')">See how your answers map to JAI <span class="arr">\u2192</span></a>';
   var gaps=keys.filter(function(k){return rdState[k]<2;}).sort(function(a,b){return rdState[a]-rdState[b];});
-  var fit=document.getElementById('rd-fit');
-  if(!fit)return;
+  var fitHtml;
   if(!gaps.length){
-    fit.innerHTML='<div class="rd-fit-eyebrow">Your fit</div>'+
+    fitHtml='<div class="rd-fit-eyebrow">Where JAI earns its keep</div>'+
       '<div class="rd-fit-lead">No major gaps, which is a strong place to be.</div>'+
-      '<div class="rd-fit-body">From here it is about scale and consistency. JAI keeps this running on your live data continuously, rather than in one-off checks.</div>';
+      '<div class="rd-fit-body">From here it is about scale. JAI runs the same checks continuously on your live data, so the picture stays current without anyone rebuilding it each time.</div>';
   } else {
     var picks=gaps.slice(0,3);
     var lead=picks.length>1?(RD_META[picks[0]].inline+' and '+RD_META[picks[1]].inline):RD_META[picks[0]].inline;
@@ -3327,11 +3483,20 @@ function calcReadiness(){
       var tag=sev?'<span class="rd-fit-tag big">Biggest gap</span>':'<span class="rd-fit-tag grow">Room to grow</span>';
       return '<li><span class="wr-dot"></span><span><b>'+RD_META[k].label+'</b>'+tag+'<br>JAI '+JAI_FIT[k]+'.</span></li>';
     }).join('');
-    fit.innerHTML='<div class="rd-fit-eyebrow">Your fit</div>'+
-      '<div class="rd-fit-lead">You flagged '+lead+' as weak spots. That is exactly where JAI earns its keep.</div>'+
+    fitHtml='<div class="rd-fit-eyebrow">Where JAI earns its keep</div>'+
+      '<div class="rd-fit-lead">You flagged '+lead+' as your weak spots. That is exactly where JAI earns its keep.</div>'+
       '<div class="rd-fit-body">Here is what changes when the same intelligence runs on your real data and policies:</div>'+
       '<ul class="rd-fit-list">'+items+'</ul>';
   }
+  el.className='rd-result'; el.style.background='linear-gradient(140deg,#EDE5FA,#F0E8FC)';
+  el.innerHTML='<div class="rd-result-label">Readiness score</div>'+
+    '<div class="rd-score" id="rd-score">'+score+'<span>/100</span></div>'+
+    '<div class="rd-band" id="rd-band">'+band+'</div>'+
+    '<div class="rd-meter"><div class="rd-meter-fill" id="rd-meter" style="width:'+score+'%"></div></div>'+
+    '<div class="rd-fit" id="rd-fit">'+fitHtml+'</div>';
+  var act=document.getElementById('rd-actions');
+  if(act){act.innerHTML='<button class="run-btn rd-submit" id="rd-submit" onclick="submitReadiness()"><span class="btn-label">Update readiness &#8594;</span></button>'+
+    '<a class="rd-map" onclick="go(\'whatnext\')">See how your answers map to JAI <span class="arr">\u2192</span></a>';}
 }
 
 /* ===== SANDBOX ROUTER (entry experience) ===== */
@@ -3400,8 +3565,8 @@ function goJourney(){go('home');setTimeout(function(){var r=document.getElementB
 function trunc(t,n){t=String(t);return t.length>n?t.slice(0,n-1)+'\u2026':t;}
 function stepAnswer(page){
   if(page==='prompt'){ if(pbSel.task)return trunc(pbSel.task,46); var n=[pbSel.role,pbSel.context,pbSel.task,pbSel.format].filter(Boolean).length; return n?n+' of 4 set':''; }
-  if(page==='myths'){ var n=0; for(var k in mythRatings){if(mythRatings[k]!==null&&mythRatings[k]!==undefined)n++;} return n?n+' of 6 rated':''; }
-  if(page==='readiness'){ var keys=Object.keys(rdState); var sum=keys.reduce(function(a,k){return a+rdState[k];},0); var def=(rdState.visibility===1&&rdState.automation===0&&rdState.supplier===0&&rdState.compliance===1&&rdState.adoption===0); return def?'':Math.round(sum/(keys.length*2)*100)+'/100'; }
+  if(page==='myths'){ var rr=[]; for(var k in mythRatings){if(mythRatings[k]!==null&&mythRatings[k]!==undefined)rr.push({i:+k,v:mythRatings[k]});} if(!rr.length)return ''; rr.sort(function(a,b){return b.v-a.v||a.i-b.i;}); return trunc(MYTH_TAKEAWAY[rr[0].i].tt,46); }
+  if(page==='readiness'){ if(!rdSubmitted)return ''; var keys=Object.keys(rdState); var sum=keys.reduce(function(a,k){return a+rdState[k];},0); return Math.round(sum/(keys.length*2)*100)+'/100'; }
   return '';
 }
 function dismissStepHint(btn){STEP_HINT_DISMISSED=true;var h=btn.parentElement;if(h)h.parentElement.removeChild(h);}
@@ -3414,6 +3579,7 @@ function renderStepBars(){
       var cls='step-node';
       if(s.page===current)cls+=' on';
       else if(i<curIdx)cls+=' done';
+      else if(i===curIdx+1)cls+=' next';
       var sep=i<STEP_FLOW.length-1?'<span class="step-sep">\u203a</span>':'';
       var ans='';
       if(isBottom && (i<curIdx || s.page===current)){var a=stepAnswer(s.page); if(a)ans='<span class="step-ans">'+a+'</span>';}
@@ -3443,17 +3609,17 @@ function renderStepBars(){
 /* ===== STEP 4, WHAT NEXT: recommend tools from the first three steps ===== */
 // Map prompt-builder task choices to the tool that does that job.
 var PB_TASK_TOOL={
-  'identify all auto-renewal and exit terms':'contract',
-  'flag geographic concentration risks by category':'supplier',
-  'draft a scope of work and evaluation criteria':'rfp',
-  'classify invoice exceptions and recommend actions':'invoice'
+  'find every auto-renewal, escalation and exit clause, and flag the traps':'contract',
+  'map single-region concentration by category and name qualified backups':'supplier',
+  'draft a scope of work with weighted evaluation criteria':'rfp',
+  'triage invoice exceptions by type and recommend an action for each':'invoice'
 };
 // Map prompt-builder context to a pillar bias.
 var PB_CTX_PILLAR={
-  'I work at a discrete manufacturer':'suppliers',
-  'I lead sourcing for a pharma company with strict compliance needs':'sourcing',
-  'I manage indirect spend for a university':'spend',
-  'I am a CPO at a public sector body':'sourcing'
+  'a discrete manufacturer with a multi-region supplier base':'suppliers',
+  'regulated pharma sourcing, where every decision has to be auditable':'sourcing',
+  'indirect and framework spend for a large university':'spend',
+  'a public-sector body held to SME and transparency targets':'sourcing'
 };
 function toolMetaLookup(){
   var m={};CAP_PILLARS.forEach(function(p){p.tools.forEach(function(t){m[t.page]={title:t.title,sub:t.sub,icon:t.icon,cap:p.id};});});return m;
@@ -3465,7 +3631,7 @@ function computeWnRecs(){
   var did={prompt:false,myths:false,readiness:false};
   if(pbSel.task && PB_TASK_TOOL[pbSel.task]){did.prompt=true;var pt=PB_TASK_TOOL[pbSel.task];score[pt]+=5;}
   if(pbSel.context && PB_CTX_PILLAR[pbSel.context]){did.prompt=true;var pbias=PB_CTX_PILLAR[pbSel.context];Object.keys(meta).forEach(function(k){if(meta[k].cap===pbias)score[k]+=1;});}
-  var rdDefault=(rdState.visibility===1&&rdState.automation===0&&rdState.supplier===0&&rdState.compliance===1&&rdState.adoption===0);
+  var rdDefault=!rdSubmitted;
   if(!rdDefault){did.readiness=true;Object.keys(rdState).forEach(function(dim){if(rdState[dim]<2 && RD_META[dim]){var tool=RD_META[dim].tool;score[tool]+=(rdState[dim]===0?4:2);}});}
   var MYTH_TOOL=['contract','prompt','classifier','supplier','tender','approval'];
   var anyMyth=false;
@@ -3485,15 +3651,18 @@ function journeyHTML(){
   var did=window.WN_DID||{};
   var s1=pbSel.task?('Built a prompt to '+pbSel.task):'Learned the four-part prompt';
   var mn=0;for(var k in mythRatings){if(mythRatings[k]!==null&&mythRatings[k]!==undefined)mn++;}
-  var s2=mn?(mn+' of 6 beliefs rated against your own thinking'):'Reviewed what AI can and cannot be trusted with';
+  var s2=mn?('Rated '+mn+' of 6 beliefs against your own thinking'):'Reviewed what AI can and cannot be trusted with';
   var keys=Object.keys(rdState),sum=keys.reduce(function(a,x){return a+rdState[x];},0);
-  var rdDef=(rdState.visibility===1&&rdState.automation===0&&rdState.supplier===0&&rdState.compliance===1&&rdState.adoption===0);
-  var s3=rdDef?'Set your readiness dials':('Scored your readiness at '+Math.round(sum/(keys.length*2)*100)+' of 100');
+  var s3=!rdSubmitted?'Set your readiness dials':('Scored your readiness at '+Math.round(sum/(keys.length*2)*100)+' of 100');
   function row(k,t,v){return '<div class="jr-step"><div class="jr-step-k">'+k+'</div><div class="jr-step-t">'+t+'</div><div class="jr-step-v">'+v+'</div></div>';}
   return '<div class="jr-head"><span class="eyebrow">What you just did</span>'+
     '<h3 class="jr-title">Three steps of <strong>real AI thinking.</strong></h3>'+
-    '<p class="jr-sub">You framed the ask, judged what to trust, and found your gaps. That is the work good AI needs. Here is what it took by hand:</p></div>'+
-    '<div class="jr-steps">'+row('Step 1','Learned to ask',s1)+row('Step 2','Knew what to trust',s2)+row('Step 3','Found your first win',s3)+'</div>';
+    '<p class="jr-sub">Good AI answers are not magic. They come from three moves you just made by hand: framing the request precisely, deciding what you can trust, and finding the gap where the work actually is. Done manually, each move costs time and judgement every single time you ask.</p></div>'+
+    '<div class="jr-steps">'+
+      row('Step 1','Framed the ask','<b>'+s1+'.</b> Role, context and the exact task, spelled out. That is the difference between a vague answer and one you can use.')+
+      row('Step 2','Judged what to trust','<b>'+s2+'.</b> You separated what AI is genuinely reliable for from what still needs a person to sign off.')+
+      row('Step 3','Found the first win','<b>'+s3+'.</b> You located where the groundwork is thinnest, which is exactly where AI saves the most time first.')+
+    '</div>';
 }
 function buildWhatNext(){
   computeWnRecs();
@@ -3517,16 +3686,16 @@ function buildWhatNext(){
   }
   renderWnSummary();
   renderVsNote();
-  setTimeout(function(){playCmp();},150);
+  setTimeout(function(){playCmp();},200);
   if(typeof renderLibrary==='function'&&document.getElementById('lib-dial'))renderLibrary();
 }
 
 /* ===== STEP 4: summary of your answers + industry takeaway ===== */
 var PB_CTX_INDUSTRY={
-  'I work at a discrete manufacturer':{name:'discrete manufacturing',persona:'mfg',take:'In discrete manufacturing the first real win is almost always supplier concentration. Sub-tier exposure sits in spreadsheets nobody reconciles, and a single-region category is invisible until the region stops shipping. Point AI at the supplier master before you point it at anything else.'},
-  'I lead sourcing for a pharma company with strict compliance needs':{name:'regulated sourcing',persona:'mfg',take:'In a regulated environment the constraint is not capability, it is traceability. An answer you cannot cite is an answer you cannot use. Start on tasks where the source document is right there: clause review, tender summaries, justification drafts.'},
-  'I manage indirect spend for a university':{name:'higher education',persona:'edu',take:'In higher education, spend arrives through frameworks and departments, so the picture is fragmented before anyone analyses it. The fastest win is classification: get every line into a clean category, then over-reliance on a single framework supplier becomes obvious.'},
-  'I am a CPO at a public sector body':{name:'public sector',persona:'gov',take:'In the public sector the answer has to survive scrutiny. Concentration, SME participation and renewal windows all live in different systems. AI is most useful where it can assemble that view and show its working, rather than where it has to guess.'}
+  'a discrete manufacturer with a multi-region supplier base':{name:'discrete manufacturing',persona:'mfg',take:'In discrete manufacturing the first real win is almost always supplier concentration. Sub-tier exposure sits in spreadsheets nobody reconciles, and a single-region category is invisible until the region stops shipping. Point AI at the supplier master before you point it at anything else.'},
+  'regulated pharma sourcing, where every decision has to be auditable':{name:'regulated sourcing',persona:'mfg',take:'In a regulated environment the constraint is not capability, it is traceability. An answer you cannot cite is an answer you cannot use. Start on tasks where the source document is right there: clause review, tender summaries, justification drafts.'},
+  'indirect and framework spend for a large university':{name:'higher education',persona:'edu',take:'In higher education, spend arrives through frameworks and departments, so the picture is fragmented before anyone analyses it. The fastest win is classification: get every line into a clean category, then over-reliance on a single framework supplier becomes obvious.'},
+  'a public-sector body held to SME and transparency targets':{name:'public sector',persona:'gov',take:'In the public sector the answer has to survive scrutiny. Concentration, SME participation and renewal windows all live in different systems. AI is most useful where it can assemble that view and show its working, rather than where it has to guess.'}
 };
 var GENERIC_TAKE='Across procurement the pattern is the same: the tasks worth handing to AI are the repetitive ones with a document or a dataset attached. Summarising, classifying, drafting, flagging. Judgement stays with your team.';
 function renderWnSummary(){
@@ -3545,7 +3714,7 @@ function renderWnSummary(){
   } else { s2='You have not rated the six beliefs yet. Step 2 sorts what AI can and cannot be trusted with.'; }
   // Step 3
   var keys=Object.keys(rdState),rsum=keys.reduce(function(a,x){return a+rdState[x];},0);
-  var rdDef=(rdState.visibility===1&&rdState.automation===0&&rdState.supplier===0&&rdState.compliance===1&&rdState.adoption===0);
+  var rdDef=!rdSubmitted;
   var s3;
   if(!rdDef){
     var score=Math.round(rsum/(keys.length*2)*100);
@@ -3585,12 +3754,11 @@ function renderVsNote(){
   if(!ind&&rdDef){n.innerHTML='';return;}
   var bits=[];
   if(ind)bits.push('You are reading this as <b>'+ind.name+'</b>.');
-  if(!rdDef&&gaps.length)bits.push('You flagged <b>'+RD_META[gaps[0]].inline+'</b> as your weakest dimension, which is the row below where the two columns diverge most.');
   n.innerHTML=bits.join(' ');
 }
 
-/* ===== THE GAP: one nested grid. 36 doing (dark) sit inside 80 who want it (light); rest grey. ===== */
-var GAP_DOING=36, GAP_WANT=80; // want includes doing
+/* ===== THE GAP: waffle dot chart — McKinsey 2025. 36 scaled (dark red), 52 pilot (light pink), 12 none (grey) ===== */
+var GAP_SCALED=36, GAP_EXPERIMENTING=88; // 88 total using AI; 36 scaled; 52 in pilot/experiment
 function buildGapDots(){
   var el=document.getElementById('gap-dots');if(!el)return;
   var frag='';
@@ -3601,8 +3769,29 @@ function animateGapDots(el){
   if(el._done)return;el._done=true;
   var dots=el.querySelectorAll('.gap-dot');
   for(var i=0;i<dots.length;i++){
-    var cls = i<GAP_DOING ? 'doing' : (i<GAP_WANT ? 'want' : null);
+    var cls = i<GAP_SCALED ? 'doing' : (i<GAP_EXPERIMENTING ? 'want' : null);
     (function(d,c,delay){setTimeout(function(){d.classList.add('shown');if(c)d.classList.add(c);},delay);})(dots[i], cls, i*10);
+  }
+}
+function buildWaffleChart(){
+  var el=document.getElementById('gap-waffle');if(!el)return;
+  var frag='';
+  for(var i=0;i<100;i++){
+    var cls=i<GAP_SCALED?'scaled':(i<GAP_EXPERIMENTING?'pilot':'none');
+    frag+='<div class="gw-dot '+cls+'" data-i="'+i+'"></div>';
+  }
+  el.innerHTML=frag;
+}
+function animateWaffle(el){
+  if(el._done)return;el._done=true;
+  var dots=el.querySelectorAll('.gw-dot');
+  // Animate in columns (top-to-bottom per column) for a more striking visual cascade
+  var cols=10, rows=10;
+  for(var col=0;col<cols;col++){
+    for(var row=0;row<rows;row++){
+      var idx=row*cols+col;
+      (function(d,delay){setTimeout(function(){if(d)d.classList.add('show');},delay);})(dots[idx], col*60+row*18+80);
+    }
   }
 }
 
@@ -3622,6 +3811,7 @@ var CMP_PERSONAS={
       {ai:'Got it. Based on what you\'ve pasted, three categories look concentrated. But I\'d flag two caveats: I can\'t verify these figures against a source, and I don\'t know your qualification criteria for a "backup" supplier. You\'ll want to check each recommendation against your own records before acting.'},
       {sys:'~22 min in, and the answer still depends on data and rules you have to feed it every time.'}
     ],
+    jaiDetail:'<p style="font-size:.78rem;line-height:1.6;color:#5B4C7A;margin:.4rem 0 .6rem">Three of your top spend categories sit above your 60% single-region threshold. APAC accounts for the majority of exposure. Your approved-supplier master shows qualified alternatives in Eastern Europe and Latin America for stamped components, and two approved sea-freight partners in Turkey and India. Raw materials in EU sits just below threshold — watch it next quarter.</p>',
     jaiAnswer:'Across your live spend, three categories sit above your 60% single-region threshold. Here\'s the picture, with qualified backups pulled from your own approved-supplier master:',
     artifactRows:[
       {cat:'Stamped components',region:'APAC',share:74,status:'high',backups:'3 approved suppliers · EE + LATAM'},
@@ -3643,6 +3833,7 @@ var CMP_PERSONAS={
       {ai:'Understood. Based on what you\'ve pasted, two categories look concentrated on one supplier. But I can\'t check current framework status or exit clauses &mdash; you\'ll need to verify each figure and the contract dates against your records.'},
       {sys:'~20 min in, and the answer still can\'t confirm which frameworks are actually live.'}
     ],
+    jaiDetail:'<p style="font-size:.78rem;line-height:1.6;color:#5B4C7A;margin:.4rem 0 .6rem">Two framework categories exceed your 70% single-supplier threshold. Lab consumables have reached 82% — the highest reliance in your portfolio. Two alternative framework suppliers are available and pre-approved for both categories. Catering is well distributed and within policy. Framework renewal dates for the two flagged categories are both in the next 18 months.</p>',
     jaiAnswer:'Across your live framework portfolio, two categories exceed your 70% single-supplier threshold. Here\'s the view, with alternatives already on your approved frameworks:',
     artifactRows:[
       {cat:'Lab consumables',region:'Supplier A · 82%',share:82,status:'high',backups:'2 framework suppliers ready'},
@@ -3664,6 +3855,7 @@ var CMP_PERSONAS={
       {ai:'Got it. Based on what you\'ve pasted, three categories look concentrated, and SME share is below target in two of them. Caveat: I can\'t verify these figures, and I don\'t know which contracts are up for renewal &mdash; you\'ll want to check that separately.'},
       {sys:'~25 min in, and the answer still can\'t tell you which contracts are actually renewing this quarter.'}
     ],
+    jaiDetail:'<p style="font-size:.78rem;line-height:1.6;color:#5B4C7A;margin:.4rem 0 .6rem">Three categories exceed your concentration threshold. SME participation sits at 19% across the flagged categories, against your 33% target. Professional services and ICT infrastructure both renew within the next two quarters — the renewal window is the right moment to introduce alternative suppliers. Facilities management is distributed and within policy.</p>',
     jaiAnswer:'Across your live contract register, three categories exceed your concentration threshold, and SME share sits below the 33% target in two of them. Here\'s the picture, with renewal windows already flagged:',
     artifactRows:[
       {cat:'Professional services',region:'1 supplier · 71%',share:71,status:'high',backups:'2 SME options · renews Q2'},
@@ -3703,30 +3895,40 @@ function replaceTyping(container,cls,html){
   return addBubble(container,cls,html);
 }
 function buildJaiArtifact(persona){
-  var rows=persona.artifactRows.map(function(r){
-    var statusHtml=r.status==='high'?'<span class="risk-high">Above threshold</span>':'<span class="risk-ok">Within policy</span>';
-    return '<tr><td>'+r.cat+'</td><td>'+r.region+'</td><td>'+statusHtml+'</td></tr>';
-  }).join('');
-  var chart=persona.artifactRows.map(function(r){
-    return '<div class="jai-chart-row"><span class="jai-chart-lbl">'+r.cat.split(' · ')[0]+'</span>'+
-      '<div class="jai-chart-track"><div class="jai-chart-fill '+(r.status==='high'?'risk':'ok')+'" data-w="'+r.share+'"></div></div>'+
-      '<span class="jai-chart-v">'+r.share+'%</span></div>';
-  }).join('');
+  var p=cmpPersona;
   var backups=persona.artifactRows.filter(function(r){return r.status==='high';}).map(function(r){
     return '<b>'+r.cat.split(' · ')[0]+':</b> '+r.backups;
   }).join(' &nbsp;·&nbsp; ');
-  return '<div class="jai-artifact">'+
-    '<div class="jai-artifact-head">Live concentration analysis · '+persona.artifactRows.length+' categories · cited to source</div>'+
-    '<table>'+
-    '<tr><th>Category</th><th>Concentration</th><th>Status</th></tr>'+
-    rows+
-    '</table>'+
-    '<div class="jai-chart">'+
-    '<div class="jai-chart-title">Share of category spend</div>'+
-    chart+
-    '</div>'+
-    '<div class="jai-artifact-foot">Backup options: '+backups+'</div>'+
-    '</div>';
+  var head='<div class="jai-artifact-head">Live analysis · '+persona.artifactRows.length+' categories · cited to source</div>';
+  var commentary='<div class="jai-artifact-body">'+persona.jaiDetail+'</div>';
+  var foot='<div class="jai-artifact-foot">Backup options: '+backups+'</div>';
+  var mid='';
+  if(p==='mfg'){
+    mid=commentary+'<div class="jai-chart"><div class="jai-chart-title">Share of category spend vs your 60% threshold</div>'+
+      persona.artifactRows.map(function(r){
+        return '<div class="jai-chart-row"><span class="jai-chart-lbl">'+r.cat.split(' · ')[0]+'</span>'+
+          '<div class="jai-chart-track"><div class="jai-chart-fill '+(r.status==='high'?'risk':'ok')+'" data-w="'+r.share+'"></div></div>'+
+          '<span class="jai-chart-v">'+r.share+'%</span></div>';
+      }).join('')+'</div>';
+  } else if(p==='gov'){
+    mid=commentary;
+    var rows=persona.artifactRows.map(function(r){
+      var statusHtml=r.status==='high'?'<span class="risk-high">Above threshold</span>':'<span class="risk-ok">Within policy</span>';
+      return '<tr><td>'+r.cat+'</td><td>'+r.region+'</td><td>'+statusHtml+'</td></tr>';
+    }).join('');
+    mid+=('<table><tr><th>Category</th><th>Concentration</th><th>Status</th></tr>'+rows+'</table>');
+  } else {
+    var rings=persona.artifactRows.map(function(r){
+      var C=2*Math.PI*26, off=C*(1-r.share/100);
+      var col=r.status==='high'?'#dc2626':'#7A1FB0';
+      return '<div class="jai-ring"><svg width="72" height="72" viewBox="0 0 72 72">'+
+        '<circle cx="36" cy="36" r="26" fill="none" stroke="#eee6f7" stroke-width="8"></circle>'+
+        '<circle cx="36" cy="36" r="26" fill="none" stroke="'+col+'" stroke-width="8" stroke-linecap="round" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+C.toFixed(1)+'" data-off="'+off.toFixed(1)+'" transform="rotate(-90 36 36)"></circle>'+
+        '</svg><div class="jai-ring-num">'+r.share+'%</div><div class="jai-ring-lbl">'+r.cat.split(' · ')[0]+'</div></div>';
+    }).join('');
+    mid=commentary+'<div class="jai-chart-title" style="margin-bottom:.5rem">Single-supplier reliance by category</div><div class="jai-rings">'+rings+'</div>';
+  }
+  return '<div class="jai-artifact">'+head+mid+foot+'</div>';
 }
 function playCmp(){
   clearCmpTimers();
@@ -3741,57 +3943,75 @@ function playCmp(){
   if(genEff)genEff.classList.remove('show');
   if(jaiEff)jaiEff.classList.remove('show');
 
-  // ============== LEFT: generic LLM — iterative, painful ==============
+  // ============== LEFT: generic LLM — stretched to 10-15s total ==============
   var t=0;
   var TYPING_DOTS='<div class="typing-dots"><span></span><span></span><span></span></div>';
-  // 1. AI opens by asking for the data
-  t+=350;
-  cmpTimers.push(setTimeout(function(){
-    addBubble(genChat,'you','I work at '+persona.orgContext+'. '+persona.ask);
-  },t));
-  t+=700;
-  cmpTimers.push(setTimeout(function(){addBubble(genChat,'typing',TYPING_DOTS);},t));
-  t+=1200;
-  // 2. Walk through the persona.followups sequence
+  var TARGET_GEN=13000; // aim for ~13s total (10-15s range)
+  // collect all steps, compute natural duration, then scale timings
+  var genSteps=[];
+  genSteps.push({type:'you',text:'I work at '+persona.orgContext+'. '+persona.ask,delay:350});
+  genSteps.push({type:'typingStart',delay:700});
+  var naturalT=350+700+1200;
   persona.followups.forEach(function(step,i){
     if(step.ai){
-      cmpTimers.push(setTimeout(function(){replaceTyping(genChat,'ai',step.ai);},t));
-      t+=step.ai.length*11+900;
+      genSteps.push({type:'ai',text:step.ai,delay:naturalT+1200-naturalT});
+      var incr=step.ai.length*11+900;
+      naturalT+=incr;
     } else if(step.you){
-      cmpTimers.push(setTimeout(function(){addBubble(genChat,'you',step.you);},t));
-      t+=600;
-      // if next step is an ai bubble, show typing indicator
+      genSteps.push({type:'you',text:step.you,delay:naturalT});
+      naturalT+=600;
       var nxt=persona.followups[i+1];
-      if(nxt && nxt.ai){
-        cmpTimers.push(setTimeout(function(){addBubble(genChat,'typing',TYPING_DOTS);},t));
-        t+=900;
+      if(nxt&&nxt.ai){naturalT+=900;}
+    } else if(step.sys){
+      genSteps.push({type:'sys',text:step.sys,delay:naturalT});
+      naturalT+=1000;
+    }
+  });
+  // scale all delays so total ~= TARGET_GEN
+  var scale=TARGET_GEN/Math.max(naturalT,1);
+  var accT=0;
+  accT+=Math.round(350*scale);
+  cmpTimers.push(setTimeout(function(){
+    addBubble(genChat,'you','I work at '+persona.orgContext+'. '+persona.ask);
+  },accT));
+  accT+=Math.round(700*scale);
+  cmpTimers.push(setTimeout(function(){addBubble(genChat,'typing',TYPING_DOTS);},accT));
+  accT+=Math.round(1200*scale);
+  persona.followups.forEach(function(step,i){
+    if(step.ai){
+      (function(tt,st){cmpTimers.push(setTimeout(function(){replaceTyping(genChat,'ai',st);},tt));})(accT,step.ai);
+      accT+=Math.round((step.ai.length*11+900)*scale);
+    } else if(step.you){
+      (function(tt,st){cmpTimers.push(setTimeout(function(){addBubble(genChat,'you',st);},tt));})(accT,step.you);
+      accT+=Math.round(600*scale);
+      var nxt=persona.followups[i+1];
+      if(nxt&&nxt.ai){
+        (function(tt){cmpTimers.push(setTimeout(function(){addBubble(genChat,'typing',TYPING_DOTS);},tt));})(accT);
+        accT+=Math.round(900*scale);
       }
     } else if(step.sys){
-      cmpTimers.push(setTimeout(function(){addBubble(genChat,'sys',step.sys);},t));
-      t+=1000;
+      (function(tt,st){cmpTimers.push(setTimeout(function(){addBubble(genChat,'sys',st);},tt));})(accT,step.sys);
+      accT+=Math.round(1000*scale);
     }
   });
   // show gen effort tallies
-  cmpTimers.push(setTimeout(function(){if(genEff)genEff.classList.add('show');},t+500));
+  cmpTimers.push(setTimeout(function(){if(genEff)genEff.classList.add('show');},accT+500));
 
-  // ============== RIGHT: JAI — one turn, immediate artifact ==============
+  // ============== RIGHT: JAI — answer appears immediately, checklist runs for 12s ==============
   var jt=0;
   jt+=350;
+  cmpTimers.push(setTimeout(function(){ addBubble(jaiChat,'you',persona.ask); },jt));
+  jt+=700;
+  // Immediately show the full answer
   cmpTimers.push(setTimeout(function(){
-    addBubble(jaiChat,'you',persona.ask);
-  },jt));
-  jt+=600;
-  cmpTimers.push(setTimeout(function(){addBubble(jaiChat,'typing',TYPING_DOTS);},jt));
-  jt+=1500;
-  cmpTimers.push(setTimeout(function(){
-    var bubble=replaceTyping(jaiChat,'ai',persona.jaiAnswer+buildJaiArtifact(persona));
-    // animate bar chart fills
+    var bubble=addBubble(jaiChat,'ai',persona.jaiAnswer+buildJaiArtifact(persona));
     setTimeout(function(){
-      var fills=bubble.querySelectorAll('.jai-chart-fill');
-      fills.forEach(function(f){f.style.width=f.getAttribute('data-w')+'%';});
+      bubble.querySelectorAll('.jai-chart-fill').forEach(function(f){f.style.width=f.getAttribute('data-w')+'%';});
+      bubble.querySelectorAll('.jai-ring circle[data-off]').forEach(function(c){c.style.transition='stroke-dashoffset 1s cubic-bezier(.2,.7,.2,1)';c.style.strokeDashoffset=c.getAttribute('data-off');});
+      jaiChat.scrollTop=jaiChat.scrollHeight;
     },200);
   },jt));
-  jt+=1500;
+  jt+=300;
   cmpTimers.push(setTimeout(function(){if(jaiEff)jaiEff.classList.add('show');},jt));
 }
 
@@ -3823,7 +4043,7 @@ function alignPBRows(){
 window.addEventListener('resize',alignPBRows);
 setTimeout(alignPBRows,200);
 
-buildGapDots();renderStepBars();
+buildGapDots();buildWaffleChart();renderStepBars();
 
 
 buildPB();renderPB();buildMyths();calcDiag();calcReadiness();initObservers();renderFourSteps();renderReading();computeWnRecs();if(document.getElementById('lib-dial'))renderLibrary();
