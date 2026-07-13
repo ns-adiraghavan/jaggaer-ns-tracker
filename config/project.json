@@ -1106,14 +1106,21 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "marketing-review",
+              "status": "robert-review",
               "revision_count": 1,
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-06-19T10:02:25.118Z",
               "last_upload_by": "manager",
-              "last_updated": "2026-06-19T10:02:25.118Z",
-              "last_updated_by": "manager"
+              "last_updated": "2026-07-13T11:13:40.162Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "robert-review",
+                  "ts": "2026-07-13T11:13:40.162Z",
+                  "by": "m-ny8dy"
+                }
+              ]
             },
             {
               "id": "piece-ps1-eu-ai-6-97dx",
@@ -1919,6 +1926,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:13:31.511Z",
+        "stage": "marketing-review"
+      }
+    ],
+    "piece-ps1-eu-ai-5-aj5b": [
+      {
+        "id": "fb-0x9aiq",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:13:40.161Z",
         "stage": "marketing-review"
       }
     ]
