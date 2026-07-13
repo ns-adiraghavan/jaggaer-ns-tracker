@@ -257,7 +257,7 @@
               "title": "How to Use Claude to Auto-Generate an RFP from Your Sourcing Brief",
               "format": "MD File / Tutorial",
               "assignee": "null",
-              "status": "stage-nq11b",
+              "status": "brief-uploaded",
               "revision_count": 1,
               "primary_keyword": "use Claude generate RFP procurement",
               "secondary_keyword": "Claude RFP autogeneration sourcing tutorial",
@@ -274,8 +274,16 @@
               "deliverable_ext": "md",
               "last_upload": "2026-06-09T12:57:28.251Z",
               "last_upload_by": "manager",
-              "last_updated": "2026-06-09T12:57:28.251Z",
-              "last_updated_by": "manager"
+              "last_updated": "2026-07-13T11:11:22.219Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-13T11:11:22.219Z",
+                  "by": "m-ny8dy"
+                }
+              ],
+              "return_to_stage": null
             },
             {
               "id": "p-c3-3",
@@ -1799,6 +1807,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:10:35.648Z",
+        "stage": "stage-nq11b"
+      }
+    ],
+    "p-c3-2": [
+      {
+        "id": "fb-p9ennr",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:11:22.218Z",
         "stage": "stage-nq11b"
       }
     ]
