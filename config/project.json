@@ -187,7 +187,7 @@
               "title": "What Happens When You Ask Claude to Audit Your Supplier Contracts",
               "format": "Problem-Solution",
               "assignee": "null",
-              "status": "stage-nq11b",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "Claude supplier contract audit S2P results",
               "secondary_keyword": "AI contract review procurement outcomes",
@@ -199,7 +199,17 @@
               ],
               "content_type": "ai-in-s2p",
               "phase": 2,
-              "funnel": "MOFU"
+              "funnel": "MOFU",
+              "last_updated": "2026-07-13T11:06:45.405Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-13T11:06:45.405Z",
+                  "by": "m-ny8dy"
+                }
+              ],
+              "return_to_stage": null
             }
           ]
         },
@@ -1599,6 +1609,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:06:31.973Z",
+        "stage": "stage-nq11b"
+      }
+    ],
+    "p-c2-2": [
+      {
+        "id": "fb-9sk40t",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:06:45.404Z",
         "stage": "stage-nq11b"
       }
     ]
