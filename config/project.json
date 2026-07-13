@@ -322,7 +322,7 @@
               "title": "The Jaggaer S2P Claude Prompt Library: 20 Fundamental Queries Every Procurement Pro Needs",
               "format": "By the Numbers",
               "assignee": "null",
-              "status": "stage-nq11b",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "S2P Claude prompt library procurement fundamental",
               "secondary_keyword": "Jaggaer GitHub S2P prompts Claude",
@@ -335,7 +335,17 @@
               ],
               "content_type": "ai-in-s2p",
               "phase": 2,
-              "funnel": "MOFU"
+              "funnel": "MOFU",
+              "last_updated": "2026-07-13T11:08:45.484Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-13T11:08:45.484Z",
+                  "by": "m-ny8dy"
+                }
+              ],
+              "return_to_stage": null
             },
             {
               "id": "p-c4-2",
@@ -1679,6 +1689,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:08:23.818Z",
+        "stage": "stage-nq11b"
+      }
+    ],
+    "p-c4-1": [
+      {
+        "id": "fb-z9eckl",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:08:45.483Z",
         "stage": "stage-nq11b"
       }
     ]
