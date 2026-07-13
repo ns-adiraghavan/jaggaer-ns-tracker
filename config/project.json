@@ -727,7 +727,7 @@
               "title": "Before You Sign That Procurement Platform Contract: A CPO Checklist for H2 2026",
               "format": "eBook / Guide",
               "assignee": "null",
-              "status": "stage-nq11b",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "manufacturing CPO procurement platform guide",
               "secondary_keyword": "S2P platform evaluation manufacturing",
@@ -736,7 +736,17 @@
               "schedule_week": 4,
               "content_type": "industry-specific",
               "phase": 2,
-              "funnel": "BOFU"
+              "funnel": "BOFU",
+              "last_updated": "2026-07-13T11:12:17.999Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-13T11:12:17.999Z",
+                  "by": "m-ny8dy"
+                }
+              ],
+              "return_to_stage": null
             }
           ]
         },
@@ -1837,6 +1847,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:12:04.348Z",
+        "stage": "stage-nq11b"
+      }
+    ],
+    "p-dm4-2": [
+      {
+        "id": "fb-5mujg3",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:12:17.998Z",
         "stage": "stage-nq11b"
       }
     ]
