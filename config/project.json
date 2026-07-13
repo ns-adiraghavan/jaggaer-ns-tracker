@@ -762,7 +762,7 @@
               "title": "Why Procurement Is the Backbone of Modern Supply Chains",
               "format": "Article",
               "assignee": "jason",
-              "status": "marketing-review",
+              "status": "robert-review",
               "primary_keyword": "",
               "geography": "all",
               "revision_count": 1,
@@ -770,13 +770,18 @@
               "return_to_stage": null,
               "last_upload": "2026-07-03T12:19:56.090Z",
               "last_upload_by": "jason",
-              "last_updated": "2026-07-03T12:19:56.090Z",
-              "last_updated_by": "jason",
+              "last_updated": "2026-07-13T11:15:30.027Z",
+              "last_updated_by": "m-ny8dy",
               "status_history": [
                 {
                   "stage": "marketing-review",
                   "ts": "2026-07-03T12:19:56.090Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "robert-review",
+                  "ts": "2026-07-13T11:15:30.027Z",
+                  "by": "m-ny8dy"
                 }
               ]
             },
@@ -2085,6 +2090,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:15:18.175Z",
+        "stage": "marketing-review"
+      }
+    ],
+    "piece-nzs3ob": [
+      {
+        "id": "fb-7wvuoa",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:15:30.026Z",
         "stage": "marketing-review"
       }
     ]
