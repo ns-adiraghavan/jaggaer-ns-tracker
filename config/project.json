@@ -282,7 +282,7 @@
               "title": "3 S2P Tasks You Can Do in Claude Right Now — With Prompts and Outputs",
               "format": "How-to Guide",
               "assignee": "null",
-              "status": "stage-nq11b",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "Claude S2P tasks procurement prompts guide",
               "secondary_keyword": "AI sourcing contracts supplier procurement",
@@ -294,7 +294,17 @@
               ],
               "content_type": "ai-in-s2p",
               "phase": 1,
-              "funnel": "TOFU"
+              "funnel": "TOFU",
+              "last_updated": "2026-07-13T11:08:23.819Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-13T11:08:23.819Z",
+                  "by": "m-ny8dy"
+                }
+              ],
+              "return_to_stage": null
             }
           ]
         },
@@ -1659,6 +1669,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:07:38.326Z",
+        "stage": "stage-nq11b"
+      }
+    ],
+    "p-c3-3": [
+      {
+        "id": "fb-ogxhcm",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:08:23.818Z",
         "stage": "stage-nq11b"
       }
     ]
