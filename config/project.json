@@ -1218,7 +1218,7 @@
               "title": "E-Invoicing Is Live in France & Spain. Is Your AP Stack Compliant?",
               "format": "Quick-take Blog",
               "assignee": "null",
-              "status": "stage-nq11b",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "e-invoicing compliance France Spain 2026",
               "secondary_keyword": "AP automation government e-invoicing mandate",
@@ -1227,7 +1227,17 @@
               "schedule_week": 2,
               "content_type": "msv",
               "phase": 1,
-              "funnel": "TOFU"
+              "funnel": "TOFU",
+              "last_updated": "2026-07-13T11:16:37.492Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-13T11:16:37.492Z",
+                  "by": "m-ny8dy"
+                }
+              ],
+              "return_to_stage": null
             },
             {
               "id": "p-ps2-2",
@@ -2131,6 +2141,16 @@
         "body": "(no note)",
         "ts": "2026-07-13T11:16:09.690Z",
         "stage": "marketing-review"
+      }
+    ],
+    "p-ps2-1": [
+      {
+        "id": "fb-bhx82k",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:16:37.491Z",
+        "stage": "stage-nq11b"
       }
     ]
   },
