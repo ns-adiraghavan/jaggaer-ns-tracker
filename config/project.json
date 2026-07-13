@@ -1286,7 +1286,7 @@
               "title": "R1 University Procurement Governance Is Broken. The 2026 CFO & CPO Playbook to Fix It",
               "format": "Whitepaper",
               "assignee": "null",
-              "status": "stage-nq11b",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "R1 university maverick spend CFO CPO playbook",
               "secondary_keyword": "higher education procurement governance",
@@ -1295,7 +1295,17 @@
               "schedule_week": 3,
               "content_type": "industry-specific",
               "phase": 2,
-              "funnel": "BOFU"
+              "funnel": "BOFU",
+              "last_updated": "2026-07-13T11:14:40.258Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-13T11:14:40.258Z",
+                  "by": "m-ny8dy"
+                }
+              ],
+              "return_to_stage": null
             }
           ]
         },
@@ -2013,6 +2023,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:14:27.090Z",
+        "stage": "stage-nq11b"
+      }
+    ],
+    "p-he1-2": [
+      {
+        "id": "fb-83eat6",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:14:40.258Z",
         "stage": "stage-nq11b"
       }
     ]
