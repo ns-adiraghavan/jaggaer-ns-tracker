@@ -1244,7 +1244,7 @@
               "title": "Government Contract Leakage: 5 Numbers France, Spain & UK Cannot Ignore in 2026",
               "format": "Data Snapshot",
               "assignee": "null",
-              "status": "stage-nq11b",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "government contract leakage data 2026",
               "secondary_keyword": "off-contract spend public sector UK France Spain",
@@ -1253,7 +1253,17 @@
               "schedule_week": 2,
               "content_type": "msv",
               "phase": 1,
-              "funnel": "TOFU"
+              "funnel": "TOFU",
+              "last_updated": "2026-07-13T11:16:50.593Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-13T11:16:50.593Z",
+                  "by": "m-ny8dy"
+                }
+              ],
+              "return_to_stage": null
             }
           ]
         },
@@ -2150,6 +2160,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:16:37.491Z",
+        "stage": "stage-nq11b"
+      }
+    ],
+    "p-ps2-2": [
+      {
+        "id": "fb-lhaso4",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:16:50.592Z",
         "stage": "stage-nq11b"
       }
     ]
