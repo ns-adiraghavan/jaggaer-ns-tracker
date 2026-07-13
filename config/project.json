@@ -1329,7 +1329,7 @@
               "title": "Grant Procurement Compliance in 2026: The Checklist Most NSF, NIH & Horizon Europe Teams Miss",
               "format": "Checklist",
               "assignee": "null",
-              "status": "stage-nq11b",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "grant procurement compliance checklist NSF NIH Horizon Europe",
               "secondary_keyword": "federal grant compliance university",
@@ -1338,7 +1338,17 @@
               "schedule_week": 3,
               "content_type": "industry-specific",
               "phase": 2,
-              "funnel": "BOFU"
+              "funnel": "BOFU",
+              "last_updated": "2026-07-13T11:14:14.892Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-13T11:14:14.892Z",
+                  "by": "m-ny8dy"
+                }
+              ],
+              "return_to_stage": null
             }
           ]
         },
@@ -1973,6 +1983,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:14:04.574Z",
+        "stage": "stage-nq11b"
+      }
+    ],
+    "p-he2-2": [
+      {
+        "id": "fb-eupj01",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:14:14.891Z",
         "stage": "stage-nq11b"
       }
     ]
