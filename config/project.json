@@ -352,7 +352,7 @@
               "title": "Claude for S2P: Watch How It Works — Curated Videos and Original Jaggaer Webinars",
               "format": "Webinar / Video Page",
               "assignee": "null",
-              "status": "stage-nq11b",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "Claude S2P procurement webinar tutorial video",
               "secondary_keyword": "AI S2P procurement how-to video guide",
@@ -365,7 +365,17 @@
               ],
               "content_type": "ai-in-s2p",
               "phase": 1,
-              "funnel": "TOFU"
+              "funnel": "TOFU",
+              "last_updated": "2026-07-13T11:09:01.900Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-13T11:09:01.900Z",
+                  "by": "m-ny8dy"
+                }
+              ],
+              "return_to_stage": null
             }
           ]
         }
@@ -1699,6 +1709,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:08:45.483Z",
+        "stage": "stage-nq11b"
+      }
+    ],
+    "p-c4-2": [
+      {
+        "id": "fb-vx1315",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:09:01.900Z",
         "stage": "stage-nq11b"
       }
     ]
