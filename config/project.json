@@ -570,7 +570,7 @@
               "title": "Most Procurement Platforms Are Missing Critical Mineral Risk in the Auto Supply Chain. What to Watch in H2 2026",
               "format": "Quick-take Blog",
               "assignee": "null",
-              "status": "stage-nq11b",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "critical minerals automotive procurement",
               "secondary_keyword": "rare earth supply chain risk 2026",
@@ -579,7 +579,17 @@
               "schedule_week": 3,
               "content_type": "msv",
               "phase": 1,
-              "funnel": "TOFU"
+              "funnel": "TOFU",
+              "last_updated": "2026-07-13T11:07:38.327Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-13T11:07:38.327Z",
+                  "by": "m-ny8dy"
+                }
+              ],
+              "return_to_stage": null
             },
             {
               "id": "p-dm3-2",
@@ -1639,6 +1649,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:06:57.954Z",
+        "stage": "stage-nq11b"
+      }
+    ],
+    "p-dm3-1": [
+      {
+        "id": "fb-xkucmm",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:07:38.326Z",
         "stage": "stage-nq11b"
       }
     ]
