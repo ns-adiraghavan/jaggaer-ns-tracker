@@ -402,7 +402,7 @@
               "title": "US Tariffs in H2 2026: Why Your Direct Procurement Numbers Need Recalculating",
               "format": "Quick-take Blog",
               "assignee": "null",
-              "status": "stage-nq11b",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "tariff impact direct procurement 2026",
               "secondary_keyword": "US tariff supply chain manufacturing",
@@ -411,7 +411,17 @@
               "schedule_week": 1,
               "content_type": "msv",
               "phase": 1,
-              "funnel": "TOFU"
+              "funnel": "TOFU",
+              "last_updated": "2026-07-13T11:10:22.597Z",
+              "last_updated_by": "m-ny8dy",
+              "status_history": [
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-13T11:10:22.597Z",
+                  "by": "m-ny8dy"
+                }
+              ],
+              "return_to_stage": null
             },
             {
               "id": "p-dm1-2",
@@ -1759,6 +1769,16 @@
         "verdict": "approved",
         "body": "(no note)",
         "ts": "2026-07-13T11:10:10.731Z",
+        "stage": "stage-nq11b"
+      }
+    ],
+    "p-dm1-1": [
+      {
+        "id": "fb-qxkn5m",
+        "author": "m-ny8dy",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-07-13T11:10:22.597Z",
         "stage": "stage-nq11b"
       }
     ]
