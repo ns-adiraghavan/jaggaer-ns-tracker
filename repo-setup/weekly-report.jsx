@@ -1,4 +1,4 @@
-// Weekly Report — two stacked sections:
+// Status Report — two stacked sections:
 //   1. "Took live this week / Plan to take live next week" — derived from
 //      piece.status_history (or last_updated fallback for older entries).
 //   2. "Cycle tracking" — who's end things are pending at within Jaggaer right
@@ -15,15 +15,15 @@
 // behind expand toggles — Jason's feedback was that brief-stage stuff shouldn't
 // dominate the page.
 
-const { useMemo: useMemoWR, useState: useStateWR } = React;
+const { useMemo: useMemoWR, useState: useStateWR, useRef: useRefWR } = React;
 
 const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
-// Stages that sit strictly after Abhishek+Orlagh review in the standard chain —
-// a piece sitting here has cleared the first content-quality gate and is one or
-// two reviewer actions away from approved. Ad-hoc-review is included because
-// ad-hoc pieces clear their (only) content gate the moment they land there.
-const POST_MARKETING_REVIEW_STAGES = new Set(["robert-review", "editors", "ad-hoc-review"]);
+// Pieces genuinely queued to go live next: sitting at CTA check (the last gate
+// before approved) or ad-hoc review (the only gate ad-hoc pieces have). Robert
+// review was dropped from this set in July 2026 — a piece at Robert review still
+// has a full reviewer pass ahead of it, so listing it here overstated the queue.
+const PLAN_NEXT_STAGES = new Set(["editors", "ad-hoc-review"]);
 
 function allPieces(project) {
   const out = [];
@@ -80,6 +80,26 @@ function WeeklyReportPanel({ project, currentUser }) {
   const [briefsOpen, setBriefsOpen] = useStateWR(false);
   const [logOpen, setLogOpen] = useStateWR(false);
 
+  // Pending-at buckets are now stacked and collapsible too (July 2026) — side
+  // by side they truncated badly, and most weeks you only want to open one.
+  // Jaggaer opens by default: it's the bucket that needs chasing.
+  const [jgOpen, setJgOpen] = useStateWR(true);
+  const [nsOpen, setNsOpen] = useStateWR(false);
+
+  // KPI tiles scroll to their section. Opening a collapsed target first, then
+  // scrolling, is intentional — scrolling to a collapsed header is useless.
+  const refTookLive = useRefWR(null);
+  const refPlanNext = useRefWR(null);
+  const refJaggaer = useRefWR(null);
+  const refNS = useRefWR(null);
+
+  function scrollTo(ref) {
+    // rAF so the scroll runs after any expand-triggered re-layout.
+    requestAnimationFrame(() => {
+      ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
   const data = useMemoWR(() => {
     const items = allPieces(project);
 
@@ -92,12 +112,11 @@ function WeeklyReportPanel({ project, currentUser }) {
       return { piece, cluster, pillar, ts: entered ? entered.ts : piece.last_updated, approvedBy: entered ? entered.by : piece.last_updated_by };
     }).sort((a, b) => new Date(b.ts || 0) - new Date(a.ts || 0));
 
-    // ── Plan to take live next week ──────────────────────────────────────
-    // Pieces that have cleared Abhishek+Orlagh (marketing-review) and are now
-    // sitting at robert-review, editors (CTA check), or ad-hoc-review — one or
-    // two steps from approved.
+    // ── Plan to take live next ───────────────────────────────────────────
+    // Pieces sitting at CTA check (editors) or ad-hoc review — the last gate
+    // before approved. One reviewer action away from live.
     const planNextWeek = items.filter(({ piece }) =>
-      POST_MARKETING_REVIEW_STAGES.has(piece.status)
+      PLAN_NEXT_STAGES.has(piece.status)
     ).map(({ piece, cluster, pillar }) => {
       const entered = lastEnteredStage(piece, piece.status);
       return { piece, cluster, pillar, enteredTs: entered ? entered.ts : null, enteredBy: entered ? entered.by : null };
@@ -174,7 +193,7 @@ function WeeklyReportPanel({ project, currentUser }) {
     <main className="ns-tracker" style={{ padding: "28px 32px", maxWidth: "1100px" }}>
       <header style={{ marginBottom: "22px" }}>
         <div style={{ ...FONT, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#c8401a", marginBottom: "6px" }}>
-          Weekly Report
+          Status Report
         </div>
         <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", color: "#1a2535", margin: 0 }}>
           Took live, planned, and where things are stalled.
@@ -186,13 +205,18 @@ function WeeklyReportPanel({ project, currentUser }) {
 
       {/* ── KPI strip — this week's shape at a glance ─────────────────── */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px", marginBottom: "26px" }}>
-        <KpiTile label="Took live" count={data.tookLive.length} accent="#1e7a45" sub="total to date" />
-        <KpiTile label="Planned next" count={data.planNextWeek.length} accent="#1e6fa8" sub="past marketing review" />
-        <KpiTile label="At Jaggaer" count={data.pendingAtJaggaer.length} accent="#c8401a" sub="awaiting review" />
-        <KpiTile label="At NS" count={data.pendingAtNS.length} accent="#6c3483" sub="awaiting action" />
+        <KpiTile label="Took live" count={data.tookLive.length} accent="#1e7a45" sub="total to date"
+          onClick={() => scrollTo(refTookLive)} />
+        <KpiTile label="Planned next" count={data.planNextWeek.length} accent="#1e6fa8" sub="at CTA / ad-hoc review"
+          onClick={() => scrollTo(refPlanNext)} />
+        <KpiTile label="At Jaggaer" count={data.pendingAtJaggaer.length} accent="#c8401a" sub="awaiting review"
+          onClick={() => { setJgOpen(true); scrollTo(refJaggaer); }} />
+        <KpiTile label="At NS" count={data.pendingAtNS.length} accent="#6c3483" sub="awaiting action"
+          onClick={() => { setNsOpen(true); scrollTo(refNS); }} />
       </div>
 
       {/* ── Took live — the hero section ──────────────────────────────── */}
+      <div ref={refTookLive} style={{ scrollMarginTop: "16px" }} />
       <SectionHeader accent="#1e7a45" eyebrow="Took Live — Total to Date" count={data.tookLive.length} />
       {data.tookLive.length === 0 ? (
         <EmptyCard text="No pieces approved yet." />
@@ -211,10 +235,11 @@ function WeeklyReportPanel({ project, currentUser }) {
       )}
 
       {/* ── Planned next — tighter row layout ─────────────────────────── */}
-      <SectionHeader accent="#1e6fa8" eyebrow="Plan to Take Live Next Week" count={data.planNextWeek.length}
-        subtitle="Past Abhishek + Orlagh review — sitting at CTA check, Robert review, or Ad-Hoc review." />
+      <div ref={refPlanNext} style={{ scrollMarginTop: "16px" }} />
+      <SectionHeader accent="#1e6fa8" eyebrow="Plan to Take Live Next" count={data.planNextWeek.length}
+        subtitle="Sitting at CTA check or Ad-Hoc review — the last gate before approved." />
       {data.planNextWeek.length === 0 ? (
-        <EmptyCard text="No pieces currently past marketing review." />
+        <EmptyCard text="Nothing at CTA check or Ad-Hoc review right now." />
       ) : (
         <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px", marginBottom: "36px" }}>
           {data.planNextWeek.map(({ piece, cluster, pillar, enteredTs }) => (
@@ -239,27 +264,44 @@ function WeeklyReportPanel({ project, currentUser }) {
         </h2>
       </header>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "24px" }}>
-        <CycleColumn
-          title="Pending at Jaggaer" accent="#c8401a"
-          empty="Nothing waiting on Jaggaer right now."
-          rows={data.pendingAtJaggaer.map(({ piece, cluster, pillar, stageId, sinceTs, reviewerNames }) => ({
-            id: piece.id, title: piece.title, sub: `${pillar.label} · ${cluster.label}`,
-            badge: stageLabel(stageId), badgeColor: STATUS_META[stageId]?.color,
-            right: sinceTs ? `since ${formatEST(sinceTs)}` : "date not logged",
-            rightSub: reviewerNames.length ? reviewerNames.join(", ") : null,
-          }))}
-        />
-        <CycleColumn
-          title="Pending at NS" accent="#1e6fa8"
-          empty="Nothing waiting on NS right now."
-          rows={data.pendingAtNS.map(({ piece, cluster, pillar, stageId, sinceTs }) => ({
-            id: piece.id, title: piece.title, sub: `${pillar.label} · ${cluster.label}`,
-            badge: stageLabel(stageId), badgeColor: STATUS_META[stageId]?.color,
-            right: sinceTs ? `since ${formatEST(sinceTs)}` : "date not logged",
-          }))}
-        />
-      </div>
+      {/* Stacked, not side by side — full-width rows stop the titles truncating,
+          and each bucket collapses independently. */}
+      <div ref={refJaggaer} style={{ scrollMarginTop: "16px" }} />
+      <CollapsibleSection
+        accent="#c8401a"
+        eyebrow="Pending at Jaggaer"
+        count={data.pendingAtJaggaer.length}
+        subtitle="Waiting on a Jaggaer reviewer to act. Oldest-waiting first."
+        emptyText="Nothing waiting on Jaggaer right now."
+        open={jgOpen} setOpen={setJgOpen}
+      >
+        {data.pendingAtJaggaer.map(({ piece, cluster, pillar, stageId, sinceTs, reviewerNames }) => (
+          <ReportRow key={piece.id} compact
+            title={piece.title} sub={`${pillar.label} · ${cluster.label}`}
+            badge={stageLabel(stageId)} badgeColor={STATUS_META[stageId]?.color}
+            right={sinceTs ? `since ${formatEST(sinceTs)}` : "date not logged"}
+            rightSub={reviewerNames.length ? reviewerNames.join(", ") : null}
+          />
+        ))}
+      </CollapsibleSection>
+
+      <div ref={refNS} style={{ scrollMarginTop: "16px" }} />
+      <CollapsibleSection
+        accent="#1e6fa8"
+        eyebrow="Pending at NS"
+        count={data.pendingAtNS.length}
+        subtitle="Waiting on NS to write, revise, or upload. Oldest-waiting first."
+        emptyText="Nothing waiting on NS right now."
+        open={nsOpen} setOpen={setNsOpen}
+      >
+        {data.pendingAtNS.map(({ piece, cluster, pillar, stageId, sinceTs }) => (
+          <ReportRow key={piece.id} compact
+            title={piece.title} sub={`${pillar.label} · ${cluster.label}`}
+            badge={stageLabel(stageId)} badgeColor={STATUS_META[stageId]?.color}
+            right={sinceTs ? `since ${formatEST(sinceTs)}` : "date not logged"}
+          />
+        ))}
+      </CollapsibleSection>
 
       {/* ── Collapsed: SEO briefs outstanding ─────────────────────────── */}
       <CollapsibleSection
@@ -308,13 +350,24 @@ function WeeklyReportPanel({ project, currentUser }) {
 }
 
 // ─── KPI tile ───────────────────────────────────────────────────────────────
-function KpiTile({ label, count, accent, sub }) {
+function KpiTile({ label, count, accent, sub, onClick }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const [hover, setHover] = useStateWR(false);
   return (
-    <div style={{
-      background: "#fff", border: "1px solid #e8e3da", borderLeft: `3px solid ${accent}`,
-      padding: "12px 14px", borderRadius: "3px",
-    }}>
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{
+        textAlign: "left", width: "100%", font: "inherit",
+        background: "#fff", border: "1px solid #e8e3da", borderLeft: `3px solid ${accent}`,
+        padding: "12px 14px", borderRadius: "3px",
+        cursor: onClick ? "pointer" : "default",
+        borderColor: hover && onClick ? accent : "#e8e3da",
+        borderLeftColor: accent,
+        boxShadow: hover && onClick ? "0 2px 10px rgba(26,47,78,0.08)" : "none",
+        transition: "border-color 0.15s, box-shadow 0.15s",
+      }}>
       <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: accent }}>
         {label}
       </div>
@@ -322,7 +375,7 @@ function KpiTile({ label, count, accent, sub }) {
         {count}
       </div>
       <div style={{ ...FONT, fontSize: "0.66rem", color: "#999", marginTop: "3px" }}>{sub}</div>
-    </div>
+    </button>
   );
 }
 
@@ -395,30 +448,6 @@ function LivePieceCard({ piece, cluster, pillar, ts, approvedBy, getMember, perf
             </a>
           )}
         </div>
-      </div>
-    </div>
-  );
-}
-
-// ─── Cycle column ───────────────────────────────────────────────────────────
-function CycleColumn({ title, accent, rows, empty }) {
-  const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  return (
-    <div>
-      <div style={{ display: "flex", alignItems: "baseline", gap: "8px", borderLeft: `3px solid ${accent}`, paddingLeft: "10px", marginBottom: "6px" }}>
-        <span style={{ ...FONT, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: accent }}>{title}</span>
-        <span style={{ ...FONT, fontSize: "0.72rem", color: "#aaa" }}>· {rows.length}</span>
-      </div>
-      <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px" }}>
-        {rows.length === 0 ? (
-          <div style={{ ...FONT, fontSize: "0.76rem", color: "#aaa", padding: "16px 14px" }}>{empty}</div>
-        ) : rows.map(r => (
-          <ReportRow key={r.id} compact
-            title={r.title} sub={r.sub}
-            badge={r.badge} badgeColor={r.badgeColor}
-            right={r.right} rightSub={r.rightSub}
-          />
-        ))}
       </div>
     </div>
   );

@@ -153,7 +153,7 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
         <div className="ns-sidebar-divider"></div>
 
         <NavSection
-          label="Weekly Report"
+          label="Status Report"
           active={view === "weekly-report"}
           onClick={() => setView("weekly-report")}
           rightMeta="cycle"

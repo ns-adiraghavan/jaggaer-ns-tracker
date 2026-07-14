@@ -27,6 +27,17 @@ function perfSlug(url) {
   return parts.length ? parts[parts.length - 1] : null;
 }
 
+// Release date = when the piece last entered "approved". Seeded history entries
+// carry ts: null (we never backfilled dates we didn't have), so those fall back
+// to last_updated and, failing that, sort last.
+function perfReleaseTs(piece) {
+  const history = piece.status_history || [];
+  for (let i = history.length - 1; i >= 0; i--) {
+    if (history[i].stage === "approved" && history[i].ts) return history[i].ts;
+  }
+  return piece.last_updated || null;
+}
+
 function perfNum(v) {
   if (typeof v !== "number" || !Number.isFinite(v)) return "—";
   return Math.round(v).toLocaleString("en-US");
@@ -84,7 +95,8 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const canUpload = currentUser?.org === "jaggaer" || !!adminMode;
 
-  const [selected, setSelected] = usePerfState(null);   // url_key of open drawer
+  const [sortBy, setSortBy] = usePerfState("impressions"); // "impressions" | "release"
+  const [selected, setSelected] = usePerfState(null);   // url_key of open modal
   const [busyKey, setBusyKey] = usePerfState(null);     // url_key currently uploading
   const [error, setError] = usePerfState(null);         // { key, message }
 
@@ -104,16 +116,29 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
         }
       }
     }
-    out.sort((a, b) => {
-      const da = perfData[a.key], db = perfData[b.key];
-      if (da && !db) return -1;
-      if (!da && db) return 1;
-      if (da && db) return (db.summary?.impressions || 0) - (da.summary?.impressions || 0);
-      return 0;
-    });
+    if (sortBy === "release") {
+      // Newest release first. Pieces with no logged approval date sort last —
+      // they're the pre-tracking ones and we can't honestly place them.
+      out.sort((a, b) => {
+        const ta = perfReleaseTs(a.piece), tb = perfReleaseTs(b.piece);
+        if (!ta && !tb) return 0;
+        if (!ta) return 1;
+        if (!tb) return -1;
+        return new Date(tb) - new Date(ta);
+      });
+    } else {
+      // Impressions desc; pieces with no data uploaded yet sink to the bottom.
+      out.sort((a, b) => {
+        const da = perfData[a.key], db = perfData[b.key];
+        if (da && !db) return -1;
+        if (!da && db) return 1;
+        if (da && db) return (db.summary?.impressions || 0) - (da.summary?.impressions || 0);
+        return 0;
+      });
+    }
     out.approvedNoUrl = approvedNoUrl;
     return out;
-  }, [project, perfData]);
+  }, [project, perfData, sortBy]);
 
   const approvedNoUrl = published.approvedNoUrl || 0;
   const withData = published.filter(p => perfData[p.key]);
@@ -250,6 +275,35 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
         </div>
       )}
 
+      {/* ── Sort toggle ──────────────────────────────────────────────────── */}
+      {published.length > 0 && (
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "10px", marginBottom: "12px" }}>
+          <span style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#aaa" }}>
+            Sort by
+          </span>
+          <div style={{ display: "flex", border: "1px solid #e8e3da", borderRadius: "3px", overflow: "hidden", background: "#fff" }}>
+            {[["impressions", "Impressions"], ["release", "Release date"]].map(([id, label]) => {
+              const on = sortBy === id;
+              return (
+                <button
+                  key={id}
+                  onClick={() => setSortBy(id)}
+                  style={{
+                    ...FONT, fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.03em",
+                    padding: "6px 12px", border: "none", cursor: "pointer",
+                    background: on ? "#1a2f4e" : "#fff",
+                    color: on ? "#fff" : "#888",
+                    transition: "background 0.15s, color 0.15s",
+                  }}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* ── Cards ────────────────────────────────────────────────────────── */}
       {published.length === 0 ? (
         <div style={{ ...FONT, padding: "40px", textAlign: "center", color: "#aaa", fontSize: "0.82rem" }}>
@@ -261,6 +315,7 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
             <PerfPieceCard
               key={entry.key}
               entry={entry}
+              sortBy={sortBy}
               record={perfData[entry.key] || null}
               canUpload={canUpload}
               busy={busyKey === entry.key}
@@ -273,9 +328,9 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
         </div>
       )}
 
-      {/* ── Drawer ───────────────────────────────────────────────────────── */}
+      {/* ── Modal ────────────────────────────────────────────────────────── */}
       {selectedEntry && perfData[selectedEntry.key] && (
-        <PerfPieceDrawer
+        <PerfPieceModal
           entry={selectedEntry}
           record={perfData[selectedEntry.key]}
           canUpload={canUpload}
@@ -353,10 +408,11 @@ function PerfDropzone({ busy, onUpload, compact, label }) {
 }
 
 // ─── Piece card ─────────────────────────────────────────────────────────────
-function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen, onDismissError }) {
+function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen, onDismissError, sortBy }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const { piece, pillar } = entry;
   const s = record ? (record.summary || {}) : null;
+  const releaseTs = perfReleaseTs(piece);
 
   return (
     <div
@@ -378,6 +434,11 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
         <div style={{ ...FONT, fontSize: "0.86rem", fontWeight: 600, color: "#1a2535", lineHeight: 1.35, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
           {piece.title}
         </div>
+        {sortBy === "release" && (
+          <div style={{ ...FONT, fontSize: "0.66rem", color: "#1e7a45", fontWeight: 600, marginTop: "4px" }}>
+            {releaseTs ? `Released ${perfUploadedAt(releaseTs)}` : "Release date not logged"}
+          </div>
+        )}
       </div>
 
       {record ? (
@@ -520,21 +581,36 @@ function PerfDimTable({ title, rows, field, limit }) {
   );
 }
 
-// ─── Piece drawer ───────────────────────────────────────────────────────────
-function PerfPieceDrawer({ entry, record, canUpload, busy, error, onUpload, onClear, onClose }) {
+// ─── Piece modal ────────────────────────────────────────────────────────────
+// Centered dialog rather than a right-hand drawer (July 2026): the drawer was
+// too narrow for the query table, which is the thing people actually open this
+// for. Scroll lives on the inner body so the header stays put.
+function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onClear, onClose }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const { piece, cluster, pillar, url } = entry;
   const s = record.summary || {};
   const [confirmClear, setConfirmClear] = usePerfState(false);
 
   return (
-    <>
-      <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(15,25,35,0.35)", zIndex: 100 }} />
-      <div style={{
-        position: "fixed", right: 0, top: 0, bottom: 0, width: "min(480px, 92vw)",
-        background: "#fff", boxShadow: "-4px 0 20px rgba(0,0,0,0.15)", zIndex: 101,
-        overflowY: "auto", padding: "24px 28px 40px",
-      }}>
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 100,
+        background: "rgba(15,25,35,0.42)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        padding: "32px 20px",
+      }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          background: "#fff", borderRadius: "4px",
+          boxShadow: "0 12px 48px rgba(0,0,0,0.24)",
+          width: "min(720px, 100%)", maxHeight: "100%",
+          display: "flex", flexDirection: "column", overflow: "hidden",
+        }}
+      >
+      <div style={{ overflowY: "auto", padding: "24px 28px 32px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px", gap: "10px" }}>
           <div>
             <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#c8401a", marginBottom: "4px" }}>
@@ -604,7 +680,8 @@ function PerfPieceDrawer({ entry, record, canUpload, busy, error, onUpload, onCl
           )}
         </div>
       </div>
-    </>
+      </div>
+    </div>
   );
 }
 
