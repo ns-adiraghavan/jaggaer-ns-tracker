@@ -83,18 +83,14 @@ function WeeklyReportPanel({ project, currentUser }) {
   const data = useMemoWR(() => {
     const items = allPieces(project);
 
-    // ── Took live this week ──────────────────────────────────────────────
-    // Prefer the logged status_history entry into "approved"; fall back to
-    // last_updated for pieces approved before history-tracking existed.
-    const tookLive = items.filter(({ piece }) => {
-      if (piece.status !== "approved") return false;
-      const entered = lastEnteredStage(piece, "approved");
-      if (entered) return withinLastWeek(entered.ts);
-      return withinLastWeek(piece.last_updated);
-    }).map(({ piece, cluster, pillar }) => {
+    // ── Took live — total to date ────────────────────────────────────────
+    // All approved pieces, newest first. No 7-day window — this is cumulative
+    // progress, not a rolling snapshot.
+    const tookLive = items.filter(({ piece }) => piece.status === "approved")
+    .map(({ piece, cluster, pillar }) => {
       const entered = lastEnteredStage(piece, "approved");
       return { piece, cluster, pillar, ts: entered ? entered.ts : piece.last_updated, approvedBy: entered ? entered.by : piece.last_updated_by };
-    }).sort((a, b) => new Date(b.ts) - new Date(a.ts));
+    }).sort((a, b) => new Date(b.ts || 0) - new Date(a.ts || 0));
 
     // ── Plan to take live next week ──────────────────────────────────────
     // Pieces that have cleared Abhishek+Orlagh (marketing-review) and are now
@@ -127,8 +123,10 @@ function WeeklyReportPanel({ project, currentUser }) {
         sinceTs: entered ? entered.ts : null,
         reviewerNames: actors.filter(a => typeof a === "string" && a.startsWith("person:")).map(a => getMember(a.slice(7))?.name).filter(Boolean),
       };
-      if (isJGTurn) pendingAtJaggaer.push(row);
-      else if (isNSTurn) pendingAtNS.push(row);
+      // When both orgs are listed (e.g. brief-uploaded), NS takes priority —
+      // the ball is in NS's court to start writing.
+      if (isNSTurn) pendingAtNS.push(row);
+      else if (isJGTurn) pendingAtJaggaer.push(row);
     }
     // Oldest-waiting first within each bucket — surfaces stalls.
     const byAge = (a, b) => {
@@ -188,16 +186,16 @@ function WeeklyReportPanel({ project, currentUser }) {
 
       {/* ── KPI strip — this week's shape at a glance ─────────────────── */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px", marginBottom: "26px" }}>
-        <KpiTile label="Took live" count={data.tookLive.length} accent="#1e7a45" sub="last 7 days" />
+        <KpiTile label="Took live" count={data.tookLive.length} accent="#1e7a45" sub="total to date" />
         <KpiTile label="Planned next" count={data.planNextWeek.length} accent="#1e6fa8" sub="past marketing review" />
         <KpiTile label="At Jaggaer" count={data.pendingAtJaggaer.length} accent="#c8401a" sub="awaiting review" />
         <KpiTile label="At NS" count={data.pendingAtNS.length} accent="#6c3483" sub="awaiting action" />
       </div>
 
       {/* ── Took live — the hero section ──────────────────────────────── */}
-      <SectionHeader accent="#1e7a45" eyebrow="Took Live This Week" count={data.tookLive.length} />
+      <SectionHeader accent="#1e7a45" eyebrow="Took Live — Total to Date" count={data.tookLive.length} />
       {data.tookLive.length === 0 ? (
-        <EmptyCard text="Nothing moved to Approved in the last 7 days." />
+        <EmptyCard text="No pieces approved yet." />
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "12px", marginBottom: "28px" }}>
           {data.tookLive.map(({ piece, cluster, pillar, ts, approvedBy }) => (
