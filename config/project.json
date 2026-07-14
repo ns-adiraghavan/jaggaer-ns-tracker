@@ -4499,6 +4499,927 @@
           "position": 8
         }
       ]
+    },
+    "how-procurement-is-moving-from-reactive-to-predictive-risk-management-in-2026": {
+      "url": "https://www.jaggaer.com/blog/how-procurement-is-moving-from-reactive-to-predictive-risk-management-in-2026",
+      "uploaded_at": "2026-07-14T09:46:24.966Z",
+      "uploaded_by": "manager",
+      "filename": "https___www.jaggaer.com_blog_how-procurement-is-moving-from-reactive-to-predictive-risk-management-in-2026.xlsx",
+      "date_range": {
+        "start": "2026-04-08",
+        "end": "2026-07-07",
+        "label": "Last 3 months"
+      },
+      "summary": {
+        "clicks": 4,
+        "impressions": 2559,
+        "ctr": 0.0016,
+        "avg_position": 5.04
+      },
+      "timeseries": [
+        {
+          "date": "2026-04-08",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-09",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-10",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-11",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-12",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-13",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-14",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-15",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-16",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-17",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-18",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-19",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-20",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-21",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-22",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-23",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-24",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-25",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-26",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-27",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-28",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-29",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-30",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-01",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-02",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-03",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-04",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-05",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-06",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-07",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-08",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-09",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-10",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-11",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-12",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-13",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-14",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-15",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-16",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-17",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-18",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-19",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-20",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-21",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-22",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-23",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-24",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-25",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-26",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-27",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-28",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-29",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-30",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-31",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-01",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-02",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-03",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-04",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-05",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-06",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-07",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-08",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-09",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-10",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-11",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-12",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-13",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-14",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-15",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-16",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-17",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-18",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-19",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-20",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-21",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-22",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-23",
+          "clicks": 0,
+          "impressions": 34,
+          "ctr": 0,
+          "position": 4.6
+        },
+        {
+          "date": "2026-06-24",
+          "clicks": 0,
+          "impressions": 104,
+          "ctr": 0,
+          "position": 4.6
+        },
+        {
+          "date": "2026-06-25",
+          "clicks": 1,
+          "impressions": 118,
+          "ctr": 0.0085,
+          "position": 4.5
+        },
+        {
+          "date": "2026-06-26",
+          "clicks": 0,
+          "impressions": 125,
+          "ctr": 0,
+          "position": 5.2
+        },
+        {
+          "date": "2026-06-27",
+          "clicks": 1,
+          "impressions": 202,
+          "ctr": 0.005,
+          "position": 4.6
+        },
+        {
+          "date": "2026-06-28",
+          "clicks": 1,
+          "impressions": 194,
+          "ctr": 0.0052,
+          "position": 4.6
+        },
+        {
+          "date": "2026-06-29",
+          "clicks": 0,
+          "impressions": 250,
+          "ctr": 0,
+          "position": 5.4
+        },
+        {
+          "date": "2026-06-30",
+          "clicks": 0,
+          "impressions": 284,
+          "ctr": 0,
+          "position": 5.9
+        },
+        {
+          "date": "2026-07-01",
+          "clicks": 0,
+          "impressions": 155,
+          "ctr": 0,
+          "position": 4.3
+        },
+        {
+          "date": "2026-07-02",
+          "clicks": 0,
+          "impressions": 137,
+          "ctr": 0,
+          "position": 4.8
+        },
+        {
+          "date": "2026-07-03",
+          "clicks": 0,
+          "impressions": 191,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "date": "2026-07-04",
+          "clicks": 0,
+          "impressions": 187,
+          "ctr": 0,
+          "position": 5.1
+        },
+        {
+          "date": "2026-07-05",
+          "clicks": 0,
+          "impressions": 158,
+          "ctr": 0,
+          "position": 4.7
+        },
+        {
+          "date": "2026-07-06",
+          "clicks": 0,
+          "impressions": 209,
+          "ctr": 0,
+          "position": 5.1
+        },
+        {
+          "date": "2026-07-07",
+          "clicks": 1,
+          "impressions": 211,
+          "ctr": 0.0047,
+          "position": 5.7
+        }
+      ],
+      "top_queries": [
+        {
+          "query": "evaluate the procurement & spend management company jaggaer on supply chain \nrisk management",
+          "clicks": 0,
+          "impressions": 22,
+          "ctr": 0,
+          "position": 2.77
+        },
+        {
+          "query": "manufacturing supplier risk index 2026",
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "query": "reuter stokes supplier risk score financial stability 2026",
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 3
+        },
+        {
+          "query": "adiabatix supplier risk score financial stability 2026",
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "query": "arabelle solutions supplier risk score financial stability 2026",
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 9
+        },
+        {
+          "query": "chemetics supplier risk assessment operational performance 2025 2026",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 2.33
+        },
+        {
+          "query": "supplier risk trends for procurement teams",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 3.33
+        },
+        {
+          "query": "supplier tree mapping supplier scorecard supplier rationalization risk \ntracking supply risk ranking predictive procurement",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 4.33
+        },
+        {
+          "query": "balke durr supplier risk score financial stability 2026",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 4.67
+        },
+        {
+          "query": "supplier risk monitor 2025/2026",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 12
+        },
+        {
+          "query": "which supplier relationship management platforms reduce quality escalations \nthrough early warning systems involving supplier relationship management \n(srm)?",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "query": "does jaggaer offer supply chain visibility and risk insights through \nanalytics dashboards across the entire organization?",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "query": "how do i assess supplier network risk for my business?",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "query": "i am a 45-54, 35-44, or 25-34 year old purchasing manager, operations \nmanager, procurement specialist, sourcing coordinator, or procurement \nanalyst in the agriculture, automotive, consumer goods, education, energy, \nfinance, food & beverage, government, healthcare, media, nonprofit, pharma, \nprofessional services, transportation, telecom, technology, retail, or real \nestate industry. my job seniority is at the senior or manager level. i work \nat a company with 10k+ employees or 1k-10k employees. my main motivations: \nimplementing and improving procurement processes and policies. setting up \ncompliant approval workflows and spending controls. generating accurate \nreporting and analytics for leadership. streamlining purchase order and \ninvoice processing. onboarding users and managing procurement system \nadoption. maintaining catalog accuracy and preferred supplier lists. my \nmain pain points: manual, time-consuming processes for po and invoice \nmanagement. difficulty enforcing purchasing policies across departments. \nlack of integration between procurement tools and finance systems. poor \nuser adoption of approved procurement channels. inconsistent data quality \nmaking reporting unreliable. tedious reconciliation and exception handling \nworkflows. what are common supply chain risks and how do i mitigate them?",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "query": "quels sont les principaux indicateurs d'alerte précoce pour les risques \nliés au réseau de fournisseurs ?",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "query": "what are some ai-powered procurement platforms that can help streamline \nsupplier management and offer robust analytics?",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "query": "where can i reduce supplier risk while maintaining consistent supply?",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "query": "i'm looking for e-procurement platforms that offer strong data governance \nfeatures, including audit trails and user access controls",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 3
+        },
+        {
+          "query": "\"predictive procurement resilience\" supplier tree mapping scorecard \nrationalization",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "query": "i am a 35-44 or 45-54 year old procurement, head of supply chain \noperations, or procurement manager. i work at a company with 1-249 \nemployees, 250-1k employees, 1k-10k employees, or 10k+ employees. my main \nmotivations: procurement aims to secure the best value from vendors, ensure \ncompliant purchasing, reduce risk, and move quickly without sacrificing \ncontrols. motivated by visibility into spend, strong vendor relationships, \npredictable timelines, and standardized contracting. my main pain points: \nsiloed data across erp, warehouse management systems, and transportation \nmanagement systems slows decisions. limited visibility into supplier \ncontracts and performance. supply chain disruptions raise delays and costs. \nvalue leakage from poor invoice validation and misaligned services. long, \nlegal-dependent contract creation cycles. hard to negotiate favorable \npricing. no standardized supplier governance. contract ai tools that \npredict renewal likelihood?",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 6
+        },
+        {
+          "query": "welche procurement tools bieten funktionen für lieferkettenresilienz und \nrisikomanagement",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 6
+        },
+        {
+          "query": "signalstage.events",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 58
+        }
+      ],
+      "countries": [
+        {
+          "country": "United States",
+          "clicks": 0,
+          "impressions": 49,
+          "ctr": 0,
+          "position": 3.84
+        },
+        {
+          "country": "United Kingdom",
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 2.5
+        },
+        {
+          "country": "Philippines",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "country": "Germany",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 6
+        },
+        {
+          "country": "France",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 2
+        },
+        {
+          "country": "Vietnam",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 12.5
+        },
+        {
+          "country": "Canada",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "country": "Hong Kong",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "country": "Malaysia",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "country": "Italy",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 3
+        },
+        {
+          "country": "Brazil",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "country": "Russia",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "country": "India",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 58
+        }
+      ],
+      "devices": [
+        {
+          "device": "Desktop",
+          "clicks": 0,
+          "impressions": 67,
+          "ctr": 0,
+          "position": 4.25
+        },
+        {
+          "device": "Mobile",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 12
+        }
+      ]
     }
   }
 }
