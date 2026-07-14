@@ -3557,6 +3557,948 @@
           "position": 44.1
         }
       ]
+    },
+    "supplier-financial-risk-signals-procurement-should-monitor-in-2026": {
+      "url": "https://www.jaggaer.com/blog/supplier-financial-risk-signals-procurement-should-monitor-in-2026",
+      "uploaded_at": "2026-07-14T09:46:09.542Z",
+      "uploaded_by": "manager",
+      "filename": "https___www.jaggaer.com_blog_supplier-financial-risk-signals-procurement-should-monitor-in-2026.xlsx",
+      "date_range": {
+        "start": "2026-04-08",
+        "end": "2026-07-07",
+        "label": "Last 3 months"
+      },
+      "summary": {
+        "clicks": 2,
+        "impressions": 1525,
+        "ctr": 0.0013,
+        "avg_position": 5.8
+      },
+      "timeseries": [
+        {
+          "date": "2026-04-08",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-09",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-10",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-11",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-12",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-13",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-14",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-15",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-16",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-17",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-18",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-19",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-20",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-21",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-22",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-23",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-24",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-25",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-26",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-27",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-28",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-29",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-04-30",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-01",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-02",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-03",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-04",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-05",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-06",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-07",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-08",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-09",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-10",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-11",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-12",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-13",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-14",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-15",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-16",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-17",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-18",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-19",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-20",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-21",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-22",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-23",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-24",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-25",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-26",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-27",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-28",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-29",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-30",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-05-31",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-01",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-02",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-03",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-04",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-05",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-06",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-07",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-08",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-09",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-10",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-11",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-12",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-13",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-14",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-15",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-16",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-17",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-18",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-19",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-20",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-21",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-22",
+          "clicks": 0,
+          "impressions": 0,
+          "ctr": 0,
+          "position": 0
+        },
+        {
+          "date": "2026-06-23",
+          "clicks": 0,
+          "impressions": 554,
+          "ctr": 0,
+          "position": 5.4
+        },
+        {
+          "date": "2026-06-24",
+          "clicks": 0,
+          "impressions": 280,
+          "ctr": 0,
+          "position": 4.7
+        },
+        {
+          "date": "2026-06-25",
+          "clicks": 0,
+          "impressions": 57,
+          "ctr": 0,
+          "position": 4.7
+        },
+        {
+          "date": "2026-06-26",
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 12.2
+        },
+        {
+          "date": "2026-06-27",
+          "clicks": 0,
+          "impressions": 13,
+          "ctr": 0,
+          "position": 16.5
+        },
+        {
+          "date": "2026-06-28",
+          "clicks": 0,
+          "impressions": 17,
+          "ctr": 0,
+          "position": 14.4
+        },
+        {
+          "date": "2026-06-29",
+          "clicks": 0,
+          "impressions": 36,
+          "ctr": 0,
+          "position": 8.4
+        },
+        {
+          "date": "2026-06-30",
+          "clicks": 0,
+          "impressions": 31,
+          "ctr": 0,
+          "position": 6.5
+        },
+        {
+          "date": "2026-07-01",
+          "clicks": 0,
+          "impressions": 19,
+          "ctr": 0,
+          "position": 12.4
+        },
+        {
+          "date": "2026-07-02",
+          "clicks": 0,
+          "impressions": 23,
+          "ctr": 0,
+          "position": 7.3
+        },
+        {
+          "date": "2026-07-03",
+          "clicks": 0,
+          "impressions": 18,
+          "ctr": 0,
+          "position": 5.4
+        },
+        {
+          "date": "2026-07-04",
+          "clicks": 0,
+          "impressions": 15,
+          "ctr": 0,
+          "position": 4.5
+        },
+        {
+          "date": "2026-07-05",
+          "clicks": 0,
+          "impressions": 118,
+          "ctr": 0,
+          "position": 5.1
+        },
+        {
+          "date": "2026-07-06",
+          "clicks": 1,
+          "impressions": 160,
+          "ctr": 0.0062,
+          "position": 5.3
+        },
+        {
+          "date": "2026-07-07",
+          "clicks": 1,
+          "impressions": 178,
+          "ctr": 0.0056,
+          "position": 6.9
+        }
+      ],
+      "top_queries": [
+        {
+          "query": "recent it supply chain disruptions insurance industry -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
+          "clicks": 0,
+          "impressions": 19,
+          "ctr": 0,
+          "position": 2.21
+        },
+        {
+          "query": "what early warning indicators does rapidratings provide for procurement \nteams managing critical single-source suppliers?",
+          "clicks": 0,
+          "impressions": 19,
+          "ctr": 0,
+          "position": 2.79
+        },
+        {
+          "query": "recent financial services supply chain disruptions insurance \n-site:reddit.com -site:fandom.com -site:wikipedia.org -site:quora.com \n-site:medium.com -site:twitter.com -site:x.com -site:facebook.com \n-site:tiktok.com -site:youtube.com",
+          "clicks": 0,
+          "impressions": 12,
+          "ctr": 0,
+          "position": 1.92
+        },
+        {
+          "query": "recent it sector supply chain disruptions insurance companies \n-site:reddit.com -site:fandom.com -site:wikipedia.org -site:quora.com \n-site:medium.com -site:twitter.com -site:x.com -site:facebook.com \n-site:tiktok.com -site:youtube.com",
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": 0,
+          "position": 2.27
+        },
+        {
+          "query": "procurement signals vendor management italy",
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": 0,
+          "position": 2.36
+        },
+        {
+          "query": "can rapidratings analyze supplier financial statements to predict the \nlikelihood of disruption or default over 12 months?",
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": 0,
+          "position": 7.55
+        },
+        {
+          "query": "supplier.ai financial distress 2025-2026",
+          "clicks": 0,
+          "impressions": 9,
+          "ctr": 0,
+          "position": 1.11
+        },
+        {
+          "query": "how do i monitor supplier network financial stability?",
+          "clicks": 0,
+          "impressions": 9,
+          "ctr": 0,
+          "position": 5.33
+        },
+        {
+          "query": "supplier financial risk",
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 3.83
+        },
+        {
+          "query": "balke durr supplier risk score financial stability 2026",
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 1.4
+        },
+        {
+          "query": "supplier financial risk assessment",
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "query": "reuter stokes supplier risk score financial stability 2026",
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 1.25
+        },
+        {
+          "query": "adiabatix supplier risk score financial stability 2026",
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 1.5
+        },
+        {
+          "query": "recent supply chain disruptions financial services insurance \n-site:reddit.com -site:fandom.com -site:wikipedia.org -site:quora.com \n-site:medium.com -site:twitter.com -site:x.com -site:facebook.com \n-site:tiktok.com -site:youtube.com",
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 2
+        },
+        {
+          "query": "how do i spot risky suppliers faster",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 1.33
+        },
+        {
+          "query": "telecom industry supply chain disruptions june 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 3.33
+        },
+        {
+          "query": "it sector supply chain disruptions telecom companies june 2026 \n-site:reddit.com -site:fandom.com -site:wikipedia.org -site:quora.com \n-site:medium.com -site:twitter.com -site:x.com -site:facebook.com \n-site:tiktok.com -site:youtube.com",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "query": "us auto inventory levels days supply june 2026 after:2026-06-23",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "query": "supplier financial health",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 20.33
+        },
+        {
+          "query": "supplier financial health assessment",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 28.33
+        },
+        {
+          "query": "evaluate the procurement & spend management company jaggaer on supply chain \nrisk management",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "query": "everstream analytics security breach",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 2
+        },
+        {
+          "query": "how does the procurement team assess the financial stability and long-term \nviability of a fingerprinting service provider",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 4.5
+        },
+        {
+          "query": "amtentum supplier risk score financial stability 2026",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 6.5
+        },
+        {
+          "query": "moody's s&p fitch us sovereign rating action june 2026",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 7.5
+        }
+      ],
+      "countries": [
+        {
+          "country": "United States",
+          "clicks": 0,
+          "impressions": 133,
+          "ctr": 0,
+          "position": 5.02
+        },
+        {
+          "country": "Canada",
+          "clicks": 0,
+          "impressions": 20,
+          "ctr": 0,
+          "position": 3.2
+        },
+        {
+          "country": "United Kingdom",
+          "clicks": 0,
+          "impressions": 18,
+          "ctr": 0,
+          "position": 5.17
+        },
+        {
+          "country": "Germany",
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "country": "Italy",
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 10
+        },
+        {
+          "country": "Brazil",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 1.5
+        },
+        {
+          "country": "Vietnam",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "country": "India",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "country": "Mexico",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "country": "Poland",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "country": "Peru",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "country": "Singapore",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "country": "Guatemala",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 6
+        }
+      ],
+      "devices": [
+        {
+          "device": "Desktop",
+          "clicks": 0,
+          "impressions": 192,
+          "ctr": 0,
+          "position": 4.79
+        },
+        {
+          "device": "Mobile",
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 8
+        }
+      ]
     }
   }
 }
