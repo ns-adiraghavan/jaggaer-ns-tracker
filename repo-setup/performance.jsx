@@ -1,359 +1,288 @@
-// Performance panel — landing page metrics per approved piece.
+// Performance panel — Search Console metrics per published piece.
 //
-// Default view: all approved pieces as cards, empty-metric state until a sheet
-// is connected. Card click opens a drawer — if no sheet yet, the drawer shows
-// the connection prompt inline. Once connected, the drawer shows metrics.
+// Ingestion is file upload, not a live sheet pull. Jason exports a GSC report
+// filtered to one page, drops the .xlsx on that piece's card, and the parsed
+// result is written to project.json.
 //
 // Data flow:
-//   1. Sheet URL lives in project.performance.sheet_url.
-//   2. /api/performance?url=... fetches CSV → { headers, rows, url_col, trend_col }.
-//   3. Rows joined to approved pieces by URL (normalised both sides).
-//   4. Unmatched rows surfaced via filter chip; never silently dropped.
+//   1. Card dropzone → base64 → POST /api/perf-xlsx.
+//   2. Response keyed by the URL slug from the export's Pages sheet.
+//   3. Stored at project.performanceData[url_key]; joined back to pieces via
+//      piece.publishing.live_url. Slug mismatch is surfaced, never swallowed.
+//
+// Jaggaer users upload. NS users read.
 
-const { useState: usePerfState, useEffect: usePerfEffect, useMemo: usePerfMemo } = React;
+const { useState: usePerfState, useMemo: usePerfMemo, useRef: usePerfRef } = React;
 
 // ─── Utilities ──────────────────────────────────────────────────────────────
 
-function normUrl(raw) {
-  if (!raw) return null;
-  let s = String(raw).trim().toLowerCase();
-  if (!s) return null;
+// Same slug rule as api/perf-xlsx.js — last non-empty path segment, lowercased.
+function perfSlug(url) {
+  if (!url) return null;
+  let s = String(url).trim().toLowerCase();
   s = s.replace(/^https?:\/\/[^/]+/, "");
-  if (s.length > 1 && s.endsWith("/")) s = s.slice(0, -1);
-  if (s && !s.startsWith("/") && !s.startsWith("http")) s = "/" + s;
-  return s || null;
+  s = s.replace(/[?#].*$/, "");
+  s = s.replace(/\/+$/, "");
+  const parts = s.split("/").filter(Boolean);
+  return parts.length ? parts[parts.length - 1] : null;
 }
 
-function classifyColumns(headers, rows, urlCol, trendCol) {
-  const numeric = [], text = [];
-  for (const h of headers) {
-    if (h === urlCol || h === trendCol) continue;
-    const sample = rows.slice(0, 5).map(r => r[h]).filter(v => v !== "" && v != null);
-    const hits = sample.filter(v => typeof v === "number").length;
-    if (hits >= Math.ceil(sample.length / 2) && sample.length > 0) numeric.push(h);
-    else text.push(h);
-  }
-  return { numeric, text };
+function perfNum(v) {
+  if (typeof v !== "number" || !Number.isFinite(v)) return "—";
+  return Math.round(v).toLocaleString("en-US");
 }
 
-function formatNum(v) {
-  if (typeof v !== "number") return v == null || v === "" ? "—" : String(v);
-  if (Math.abs(v) >= 1000) return v.toLocaleString("en-US");
-  return String(v);
+function perfPct(v) {
+  if (typeof v !== "number" || !Number.isFinite(v)) return "—";
+  return (v * 100).toFixed(2) + "%";
 }
 
-function parseTrend(v) {
-  if (v == null || v === "" || v === "—") return { dir: "flat", label: "—" };
-  const s = String(v);
-  if (/[▲↑+]/.test(s) || (typeof v === "number" && v > 0)) return { dir: "up", label: s };
-  if (/[▼↓\-−]/.test(s) || (typeof v === "number" && v < 0)) return { dir: "down", label: s };
-  return { dir: "flat", label: s };
+function perfPos(v) {
+  if (typeof v !== "number" || !Number.isFinite(v) || v === 0) return "—";
+  return v.toFixed(1);
 }
 
-function fmtSyncTime(iso) {
-  if (!iso) return "never";
-  try { return formatEST(iso, { hour: "2-digit", minute: "2-digit" }) + " EST"; }
-  catch { return iso; }
+function perfDate(iso) {
+  if (!iso) return "—";
+  const [y, m, d] = String(iso).split("-");
+  const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return `${MON[Number(m) - 1]} ${Number(d)}`;
+}
+
+function perfUploadedAt(iso) {
+  if (!iso) return "";
+  try { return formatEST(iso); } catch { return String(iso).slice(0, 10); }
+}
+
+function perfFileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(String(r.result).split(",")[1]);
+    r.onerror = () => reject(new Error("Could not read the file"));
+    r.readAsDataURL(file);
+  });
+}
+
+// ─── Sparkline ──────────────────────────────────────────────────────────────
+function PerfSparkline({ series, w = 240, h = 34, color = "#c8401a" }) {
+  if (!series || series.length < 2) return null;
+  const vals = series.map(p => p.impressions);
+  const max = Math.max(...vals, 1);
+  const stepX = w / (series.length - 1);
+  const pts = vals.map((v, i) => [i * stepX, h - (v / max) * (h - 3) - 1]);
+  const line = pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+  return (
+    <svg width="100%" height={h} viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" style={{ display: "block" }}>
+      <polygon points={`0,${h} ${line} ${w},${h}`} fill={color} opacity="0.08" />
+      <polyline points={line} fill="none" stroke={color} strokeWidth="1.4" strokeLinejoin="round" strokeLinecap="round" />
+    </svg>
+  );
 }
 
 // ─── Root panel ─────────────────────────────────────────────────────────────
-function PerformancePanel({ project, setProject, currentUser }) {
+function PerformancePanel({ project, setProject, currentUser, adminMode }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  const sheetUrl = project.performance?.sheet_url || "";
+  const canUpload = currentUser?.org === "jaggaer" || !!adminMode;
 
-  const [sheetStatus, setSheetStatus] = usePerfState(sheetUrl ? "idle" : "no-url");
-  const [sheetError, setSheetError] = usePerfState(null);
-  const [data, setData] = usePerfState(null);
-  const [selected, setSelected] = usePerfState(null); // piece.id of open drawer
-  const [sortBy, setSortBy] = usePerfState(null);
-  const [showUnmatched, setShowUnmatched] = usePerfState(false);
+  const [selected, setSelected] = usePerfState(null);   // url_key of open drawer
+  const [busyKey, setBusyKey] = usePerfState(null);     // url_key currently uploading
+  const [error, setError] = usePerfState(null);         // { key, message }
 
-  // ── Fetch when sheetUrl is set ─────────────────────────────────────────
-  usePerfEffect(() => {
-    if (!sheetUrl) { setSheetStatus("no-url"); return; }
-    let cancelled = false;
-    setSheetStatus("loading"); setSheetError(null);
-    fetch(`/api/performance?url=${encodeURIComponent(sheetUrl)}`)
-      .then(r => r.json().then(j => ({ ok: r.ok, body: j })))
-      .then(({ ok, body }) => {
-        if (cancelled) return;
-        if (!ok) { setSheetStatus("error"); setSheetError(body.error || "Fetch failed"); return; }
-        setData(body); setSheetStatus("ok");
-      })
-      .catch(e => { if (!cancelled) { setSheetStatus("error"); setSheetError(e.message); } });
-    return () => { cancelled = true; };
-  }, [sheetUrl]);
+  const perfData = project.performanceData || {};
 
-  // ── All approved pieces — always the spine of the view ─────────────────
-  const approvedPieces = usePerfMemo(() => {
+  // ── Published pieces — approved and carrying a live URL ────────────────
+  const published = usePerfMemo(() => {
     const out = [];
+    let approvedNoUrl = 0;
     for (const pillar of project.pillars || []) {
       for (const cluster of pillar.clusters || []) {
         for (const piece of cluster.pieces || []) {
           if (piece.status !== "approved") continue;
           const url = piece.publishing?.live_url || piece.url || null;
-          out.push({ piece, cluster, pillar, urlKey: normUrl(url) });
+          if (!url) { approvedNoUrl++; continue; }
+          out.push({ piece, cluster, pillar, url, key: perfSlug(url) });
         }
       }
     }
-    return out;
-  }, [project]);
-
-  // ── Join sheet rows to approved pieces ─────────────────────────────────
-  const joined = usePerfMemo(() => {
-    if (!data || !data.rows.length) {
-      return { byPieceId: {}, unmatchedRows: [] };
-    }
-    const urlCol = data.url_col;
-    const rowByKey = new Map();
-    const unmatchedRows = [];
-    for (const row of data.rows) {
-      const key = normUrl(row[urlCol]);
-      if (!key) { unmatchedRows.push(row); continue; }
-      if (!rowByKey.has(key)) rowByKey.set(key, row);
-    }
-    const byPieceId = {};
-    const usedKeys = new Set();
-    for (const p of approvedPieces) {
-      if (p.urlKey && rowByKey.has(p.urlKey)) {
-        byPieceId[p.piece.id] = rowByKey.get(p.urlKey);
-        usedKeys.add(p.urlKey);
-      }
-    }
-    for (const [key, row] of rowByKey.entries()) {
-      if (!usedKeys.has(key)) unmatchedRows.push(row);
-    }
-    return { byPieceId, unmatchedRows };
-  }, [data, approvedPieces]);
-
-  // ── Column classification ──────────────────────────────────────────────
-  const cols = usePerfMemo(() => {
-    if (!data) return { numeric: [], text: [] };
-    return classifyColumns(data.headers, data.rows, data.url_col, data.trend_col);
-  }, [data]);
-
-  const heroMetric = cols.numeric[0] || null;
-  const stripMetrics = cols.numeric.slice(1, 4);
-
-  // ── KPI strip — totals across matched pieces only ──────────────────────
-  const kpis = usePerfMemo(() => {
-    if (!data) return null;
-    const totals = {};
-    for (const m of cols.numeric.slice(0, 4)) {
-      let sum = 0, count = 0;
-      for (const p of approvedPieces) {
-        const row = joined.byPieceId[p.piece.id];
-        if (!row) continue;
-        const v = row[m];
-        if (typeof v === "number") { sum += v; count++; }
-      }
-      if (count > 0) totals[m] = { sum, count };
-    }
-    return Object.keys(totals).length > 0 ? totals : null;
-  }, [data, joined, cols, approvedPieces]);
-
-  // ── Sorted card list ───────────────────────────────────────────────────
-  const sortedPieces = usePerfMemo(() => {
-    if (!heroMetric || !data) return approvedPieces;
-    const metric = sortBy || heroMetric;
-    return [...approvedPieces].sort((a, b) => {
-      const ra = joined.byPieceId[a.piece.id];
-      const rb = joined.byPieceId[b.piece.id];
-      const va = ra ? ra[metric] : null;
-      const vb = rb ? rb[metric] : null;
-      // Pieces with data sort before those without
-      if (va == null && vb == null) return 0;
-      if (va == null) return 1;
-      if (vb == null) return -1;
-      if (typeof va === "number" && typeof vb === "number") return vb - va;
+    out.sort((a, b) => {
+      const da = perfData[a.key], db = perfData[b.key];
+      if (da && !db) return -1;
+      if (!da && db) return 1;
+      if (da && db) return (db.summary?.impressions || 0) - (da.summary?.impressions || 0);
       return 0;
     });
-  }, [approvedPieces, joined, sortBy, heroMetric, data]);
+    out.approvedNoUrl = approvedNoUrl;
+    return out;
+  }, [project, perfData]);
 
-  // ── Save sheet URL ─────────────────────────────────────────────────────
-  function saveSheetUrl(newUrl) {
-    setProject(p => ({
-      ...p,
-      performance: { ...(p.performance || {}), sheet_url: newUrl, last_configured_by: currentUser?.id, last_configured_at: new Date().toISOString() },
-    }));
+  const approvedNoUrl = published.approvedNoUrl || 0;
+  const withData = published.filter(p => perfData[p.key]);
+
+  // ── Records whose slug matches no published piece ──────────────────────
+  const orphans = usePerfMemo(() => {
+    const known = new Set(published.map(p => p.key));
+    return Object.keys(perfData).filter(k => !known.has(k));
+  }, [perfData, published]);
+
+  // ── KPI strip — totals across pieces that have data ────────────────────
+  const kpis = usePerfMemo(() => {
+    if (!withData.length) return null;
+    let clicks = 0, impressions = 0, weighted = 0;
+    let best = null, mostImpr = null;
+    for (const p of withData) {
+      const s = perfData[p.key].summary || {};
+      clicks += s.clicks || 0;
+      impressions += s.impressions || 0;
+      weighted += (s.avg_position || 0) * (s.impressions || 0);
+      if (s.avg_position > 0 && (!best || s.avg_position < best.pos)) best = { pos: s.avg_position, title: p.piece.title };
+      if (!mostImpr || (s.impressions || 0) > mostImpr.impr) mostImpr = { impr: s.impressions || 0, title: p.piece.title };
+    }
+    return {
+      clicks,
+      impressions,
+      ctr: impressions > 0 ? clicks / impressions : 0,
+      avgPosition: impressions > 0 ? weighted / impressions : 0,
+      best,
+      mostImpr,
+      pieces: withData.length,
+    };
+  }, [withData, perfData]);
+
+  // ── Upload ─────────────────────────────────────────────────────────────
+  async function handleUpload(entry, file) {
+    if (!file) return;
+    if (!/\.xlsx$/i.test(file.name)) {
+      setError({ key: entry.key, message: "That isn't an .xlsx. Export the report from Search Console as Excel." });
+      return;
+    }
+    setError(null);
+    setBusyKey(entry.key);
+    try {
+      const content = await perfFileToBase64(file);
+      const r = await fetch("/api/perf-xlsx", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content, filename: file.name }),
+      });
+      const body = await r.json();
+      if (!r.ok) throw new Error(body.error || `Parse failed (${r.status})`);
+
+      if (body.url_key !== entry.key) {
+        throw new Error(
+          `This export is for ${body.url}, which doesn't match this piece's live URL (${entry.url}). Re-export with the right page filter, or fix the live URL on the piece.`
+        );
+      }
+
+      const record = {
+        url: body.url,
+        uploaded_at: new Date().toISOString(),
+        uploaded_by: currentUser?.id || null,
+        filename: body.filename || file.name,
+        date_range: body.date_range,
+        summary: body.summary,
+        timeseries: body.timeseries,
+        top_queries: body.top_queries,
+        countries: body.countries,
+        devices: body.devices,
+      };
+
+      setProject(p => ({
+        ...p,
+        performanceData: { ...(p.performanceData || {}), [body.url_key]: record },
+      }));
+    } catch (e) {
+      setError({ key: entry.key, message: e.message });
+    } finally {
+      setBusyKey(null);
+    }
   }
 
-  function doRefresh() {
-    if (!sheetUrl) return;
-    setSheetStatus("loading");
-    fetch(`/api/performance?url=${encodeURIComponent(sheetUrl)}`)
-      .then(r => r.json())
-      .then(j => { setData(j); setSheetStatus("ok"); })
-      .catch(e => { setSheetStatus("error"); setSheetError(e.message); });
+  function clearRecord(key) {
+    setProject(p => {
+      const next = { ...(p.performanceData || {}) };
+      delete next[key];
+      return { ...p, performanceData: next };
+    });
+    setSelected(null);
   }
 
-  const selectedEntry = selected ? approvedPieces.find(p => p.piece.id === selected) : null;
-  const selectedRow = selected ? joined.byPieceId[selected] : null;
-  const matchedCount = Object.keys(joined.byPieceId).length;
+  const selectedEntry = selected ? published.find(p => p.key === selected) : null;
 
   return (
     <main className="ns-tracker" style={{ padding: "28px 32px", maxWidth: "1240px" }}>
 
       {/* ── Header ─────────────────────────────────────────────────────── */}
-      <header style={{ marginBottom: "24px", display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: "20px", flexWrap: "wrap" }}>
-        <div>
-          <div style={{ ...FONT, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#c8401a", marginBottom: "6px" }}>
-            Landing Page Performance
-          </div>
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", color: "#1a2535", margin: 0 }}>
-            How the pieces we shipped are doing.
-          </h1>
-          <p style={{ ...FONT, fontSize: "0.8rem", color: "#888", marginTop: "8px", maxWidth: "640px", lineHeight: 1.5 }}>
-            {approvedPieces.length} approved {approvedPieces.length === 1 ? "piece" : "pieces"}.
-            {data ? ` ${matchedCount} matched to sheet data.` : " Click any card to connect Google Analytics data."}
-          </p>
+      <header style={{ marginBottom: "24px" }}>
+        <div style={{ ...FONT, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#c8401a", marginBottom: "6px" }}>
+          Search Performance
         </div>
-
-        {/* Controls — only visible once sheet is connected */}
-        {sheetUrl && (
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <div style={{ ...FONT, fontSize: "0.7rem", color: "#999" }}>
-              {sheetStatus === "loading" && "Syncing…"}
-              {sheetStatus === "ok" && data && <>Synced {fmtSyncTime(data.fetched_at)}</>}
-              {sheetStatus === "error" && <span style={{ color: "#c8401a" }}>Sync failed</span>}
-            </div>
-            <button onClick={doRefresh} style={{
-              ...FONT, fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase",
-              padding: "6px 12px", border: "1px solid #d7d1c8", background: "#fff", color: "#444", borderRadius: "3px", cursor: "pointer",
-            }}>↻ Refresh</button>
-          </div>
-        )}
+        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", color: "#1a2535", margin: 0 }}>
+          How the pieces we shipped are doing.
+        </h1>
+        <p style={{ ...FONT, fontSize: "0.8rem", color: "#888", marginTop: "8px", maxWidth: "680px", lineHeight: 1.5 }}>
+          {published.length} live {published.length === 1 ? "piece" : "pieces"}, {withData.length} with Search Console data.
+          {canUpload
+            ? " Export a report from Search Console with a single page filter applied, then drop the .xlsx on that piece's card."
+            : " Jaggaer uploads the Search Console exports; these cards are read-only for NS."}
+          {approvedNoUrl > 0 && ` ${approvedNoUrl} approved ${approvedNoUrl === 1 ? "piece has" : "pieces have"} no live URL yet.`}
+        </p>
       </header>
 
-      {/* ── Sync error banner ────────────────────────────────────────────── */}
-      {sheetStatus === "error" && (
+      {/* ── KPI strip ────────────────────────────────────────────────────── */}
+      {kpis && (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "24px" }}>
+          <PerfKpi label="Total clicks" value={perfNum(kpis.clicks)} sub={`across ${kpis.pieces} ${kpis.pieces === 1 ? "piece" : "pieces"}`} />
+          <PerfKpi label="Total impressions" value={perfNum(kpis.impressions)} sub={kpis.mostImpr ? `top: ${kpis.mostImpr.title}` : ""} />
+          <PerfKpi label="Blended CTR" value={perfPct(kpis.ctr)} sub="clicks ÷ impressions" />
+          <PerfKpi label="Avg position" value={perfPos(kpis.avgPosition)} sub={kpis.best ? `best: ${perfPos(kpis.best.pos)}` : ""} />
+        </div>
+      )}
+
+      {/* ── Orphan records ───────────────────────────────────────────────── */}
+      {orphans.length > 0 && (
         <div style={{
           ...FONT, padding: "12px 16px", background: "#fff", border: "1px solid #f0d0c0",
-          borderLeft: "3px solid #c8401a", borderRadius: "3px", marginBottom: "20px",
-          fontSize: "0.78rem", color: "#333", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "16px",
+          borderLeft: "3px solid #c8401a", borderRadius: "3px", marginBottom: "20px", fontSize: "0.78rem", color: "#333",
         }}>
-          <span>Sheet sync failed — {sheetError}. Check the sheet is shared "anyone with the link can view".</span>
-          <button onClick={() => setSelected("__setup__")} style={{
-            ...FONT, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
-            padding: "5px 10px", border: "1px solid #d7d1c8", background: "#faf8f4", color: "#444", borderRadius: "3px", cursor: "pointer", whiteSpace: "nowrap",
-          }}>Update URL</button>
+          {orphans.length} uploaded {orphans.length === 1 ? "export doesn't" : "exports don't"} match any live piece URL:{" "}
+          {orphans.map(k => <code key={k} style={{ background: "#f5f2ec", padding: "2px 6px", borderRadius: "2px", marginRight: "6px" }}>{k}</code>)}
+          {" "}The piece's live URL probably changed after upload.
         </div>
       )}
 
-      {/* ── KPI strip — visible only once data is loaded ─────────────────── */}
-      {kpis && (
-        <div style={{ display: "grid", gridTemplateColumns: `repeat(${Math.min(4, Object.keys(kpis).length)}, 1fr)`, gap: "12px", marginBottom: "24px" }}>
-          {Object.keys(kpis).map(m => (
-            <div key={m} style={{
-              background: "#fff", border: "1px solid #e8e3da", borderLeft: "3px solid #1a2f4e",
-              padding: "14px 16px", borderRadius: "3px",
-            }}>
-              <div style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888" }}>
-                Total {m}
-              </div>
-              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 600, color: "#1a2535", marginTop: "4px", lineHeight: 1 }}>
-                {formatNum(kpis[m].sum)}
-              </div>
-              <div style={{ ...FONT, fontSize: "0.68rem", color: "#aaa", marginTop: "4px" }}>
-                across {kpis[m].count} {kpis[m].count === 1 ? "piece" : "pieces"}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* ── Sort + unmatched controls — only once data is loaded ─────────── */}
-      {data && (
-        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "18px", flexWrap: "wrap" }}>
-          {cols.numeric.length > 1 && (
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <span style={{ ...FONT, fontSize: "0.68rem", color: "#999", letterSpacing: "0.04em", textTransform: "uppercase", fontWeight: 600 }}>Sort by</span>
-              <select
-                value={sortBy || heroMetric || ""}
-                onChange={e => setSortBy(e.target.value)}
-                style={{ ...FONT, fontSize: "0.72rem", padding: "5px 8px", border: "1px solid #d7d1c8", background: "#fff", borderRadius: "3px", color: "#333" }}
-              >
-                {cols.numeric.map(m => <option key={m} value={m}>{m}</option>)}
-              </select>
-            </div>
-          )}
-          {joined.unmatchedRows.length > 0 && (
-            <button
-              onClick={() => setShowUnmatched(v => !v)}
-              style={{
-                ...FONT, fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.02em",
-                padding: "5px 10px", borderRadius: "3px", cursor: "pointer", marginLeft: "auto",
-                border: showUnmatched ? "1px solid #1a2f4e" : "1px solid #d7d1c8",
-                background: showUnmatched ? "#e8f2fa" : "#fff",
-                color: showUnmatched ? "#1a2f4e" : "#666",
-              }}
-            >
-              {joined.unmatchedRows.length} unmatched sheet {joined.unmatchedRows.length === 1 ? "row" : "rows"} {showUnmatched ? "▲" : "▼"}
-            </button>
-          )}
-        </div>
-      )}
-
-      {/* ── Unmatched rows (collapsed by default) ────────────────────────── */}
-      {showUnmatched && joined.unmatchedRows.length > 0 && (
-        <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px", marginBottom: "20px" }}>
-          <div style={{ padding: "10px 16px", borderBottom: "1px solid #e8e3da", background: "#faf8f4", ...FONT, fontSize: "0.72rem", color: "#666" }}>
-            Sheet rows whose URL didn't match any approved piece.
-          </div>
-          {joined.unmatchedRows.map((row, i) => (
-            <div key={i} style={{
-              display: "flex", justifyContent: "space-between", alignItems: "center",
-              padding: "10px 16px", borderBottom: "1px solid #f0ede6", gap: "12px",
-            }}>
-              <code style={{ ...FONT, fontSize: "0.72rem", color: "#333", background: "#f5f2ec", padding: "3px 7px", borderRadius: "2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", flex: 1, minWidth: 0 }}>
-                {String(row[data.url_col] ?? "(no url)")}
-              </code>
-              {heroMetric && (
-                <span style={{ ...FONT, fontSize: "0.76rem", fontWeight: 600, color: "#666", flexShrink: 0 }}>
-                  {heroMetric}: {formatNum(row[heroMetric])}
-                </span>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* ── Cards — always rendered for every approved piece ─────────────── */}
-      {approvedPieces.length === 0 ? (
+      {/* ── Cards ────────────────────────────────────────────────────────── */}
+      {published.length === 0 ? (
         <div style={{ ...FONT, padding: "40px", textAlign: "center", color: "#aaa", fontSize: "0.82rem" }}>
-          No approved pieces yet. Pieces move here once they're approved in the tracker.
+          No live pieces yet. Cards appear here once a piece is approved and has a live URL.
         </div>
       ) : (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "14px" }}>
-          {sortedPieces.map(({ piece, cluster, pillar }) => {
-            const row = joined.byPieceId[piece.id] || null;
-            return (
-              <PerfPieceCard
-                key={piece.id}
-                piece={piece} cluster={cluster} pillar={pillar}
-                row={row}
-                heroMetric={heroMetric}
-                stripMetrics={stripMetrics}
-                trendCol={data?.trend_col || null}
-                hasSheet={!!sheetUrl}
-                onClick={() => setSelected(piece.id)}
-              />
-            );
-          })}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "14px" }}>
+          {published.map(entry => (
+            <PerfPieceCard
+              key={entry.key}
+              entry={entry}
+              record={perfData[entry.key] || null}
+              canUpload={canUpload}
+              busy={busyKey === entry.key}
+              error={error && error.key === entry.key ? error.message : null}
+              onUpload={file => handleUpload(entry, file)}
+              onOpen={() => setSelected(entry.key)}
+              onDismissError={() => setError(null)}
+            />
+          ))}
         </div>
       )}
 
       {/* ── Drawer ───────────────────────────────────────────────────────── */}
-      {(selected && selected !== "__setup__" && selectedEntry) && (
+      {selectedEntry && perfData[selectedEntry.key] && (
         <PerfPieceDrawer
           entry={selectedEntry}
-          row={selectedRow}
-          headers={data?.headers || null}
-          urlCol={data?.url_col || null}
-          trendCol={data?.trend_col || null}
-          hasSheet={!!sheetUrl}
-          sheetStatus={sheetStatus}
-          onConnectSheet={saveSheetUrl}
+          record={perfData[selectedEntry.key]}
+          canUpload={canUpload}
+          busy={busyKey === selectedEntry.key}
+          error={error && error.key === selectedEntry.key ? error.message : null}
+          onUpload={file => handleUpload(selectedEntry, file)}
+          onClear={() => clearRecord(selectedEntry.key)}
           onClose={() => setSelected(null)}
         />
       )}
@@ -361,103 +290,252 @@ function PerformancePanel({ project, setProject, currentUser }) {
   );
 }
 
-// ─── Piece card ─────────────────────────────────────────────────────────────
-// row is null when no sheet data matched this piece.
-function PerfPieceCard({ piece, cluster, pillar, row, heroMetric, stripMetrics, trendCol, hasSheet, onClick }) {
+// ─── KPI tile ───────────────────────────────────────────────────────────────
+function PerfKpi({ label, value, sub }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  const hasData = !!row;
-  const heroValue = hasData && heroMetric ? row[heroMetric] : null;
-  const trend = hasData && trendCol ? parseTrend(row[trendCol]) : null;
-  const trendColor = trend?.dir === "up" ? "#1e7a45" : trend?.dir === "down" ? "#c8401a" : "#999";
-  const trendBg   = trend?.dir === "up" ? "#e6f5ec"  : trend?.dir === "down" ? "#fbe8e2"  : "#f0ede6";
-
   return (
-    <div
-      onClick={onClick}
-      style={{
-        background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px",
-        padding: "16px 18px 14px", cursor: "pointer",
-        transition: "border-color 0.15s, box-shadow 0.15s",
-        display: "flex", flexDirection: "column", minHeight: "160px",
-        opacity: hasData ? 1 : 0.72,
-      }}
-      onMouseEnter={e => { e.currentTarget.style.borderColor = "#1a2f4e"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(26,47,78,0.08)"; e.currentTarget.style.opacity = "1"; }}
-      onMouseLeave={e => { e.currentTarget.style.borderColor = "#e8e3da"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.opacity = hasData ? "1" : "0.72"; }}
-    >
-      {/* Header */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "10px", marginBottom: "10px" }}>
-        <div style={{ minWidth: 0, flex: 1 }}>
-          <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#999", marginBottom: "3px" }}>
-            {pillar.label}
-          </div>
-          <div style={{ ...FONT, fontSize: "0.86rem", fontWeight: 600, color: "#1a2535", lineHeight: 1.35, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-            {piece.title}
-          </div>
-        </div>
-        {trend && trend.dir !== "flat" && (
-          <span style={{
-            ...FONT, fontSize: "0.68rem", fontWeight: 700, padding: "3px 8px", borderRadius: "2px",
-            color: trendColor, background: trendBg, whiteSpace: "nowrap", flexShrink: 0,
-          }}>{trend.label}</span>
-        )}
+    <div style={{ background: "#fff", border: "1px solid #e8e3da", borderLeft: "3px solid #1a2f4e", padding: "14px 16px", borderRadius: "3px" }}>
+      <div style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888" }}>
+        {label}
       </div>
-
-      {/* Hero metric or no-data prompt */}
-      <div style={{ marginTop: "auto" }}>
-        {hasData && heroMetric ? (
-          <>
-            <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", marginBottom: "2px" }}>
-              {heroMetric}
-            </div>
-            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "2.2rem", fontWeight: 600, color: "#1a2535", lineHeight: 1 }}>
-              {formatNum(heroValue)}
-            </div>
-          </>
-        ) : (
-          <div style={{ ...FONT, fontSize: "0.72rem", color: "#bbb" }}>
-            {hasSheet ? "No data matched" : "Click to add data →"}
-          </div>
-        )}
+      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 600, color: "#1a2535", marginTop: "4px", lineHeight: 1 }}>
+        {value}
       </div>
-
-      {/* Secondary metrics strip */}
-      {hasData && stripMetrics.length > 0 && (
-        <div style={{ display: "flex", gap: "14px", borderTop: "1px solid #f0ede6", paddingTop: "10px", marginTop: "10px" }}>
-          {stripMetrics.map(m => (
-            <div key={m} style={{ minWidth: 0 }}>
-              <div style={{ ...FONT, fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>{m}</div>
-              <div style={{ ...FONT, fontSize: "0.82rem", fontWeight: 600, color: "#333", marginTop: "1px" }}>{formatNum(row[m])}</div>
-            </div>
-          ))}
+      {sub && (
+        <div style={{ ...FONT, fontSize: "0.66rem", color: "#aaa", marginTop: "5px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          {sub}
         </div>
       )}
     </div>
   );
 }
 
-// ─── Piece drawer ────────────────────────────────────────────────────────────
-// Shows metrics when sheet data is available; shows the sheet connection form
-// when it isn't (either no sheet URL, or no matching row for this piece).
-function PerfPieceDrawer({ entry, row, headers, urlCol, trendCol, hasSheet, sheetStatus, onConnectSheet, onClose }) {
+// ─── Dropzone ───────────────────────────────────────────────────────────────
+function PerfDropzone({ busy, onUpload, compact, label }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  const { piece, cluster, pillar } = entry;
-  const liveUrl = piece.publishing?.live_url || piece.url;
-  const [draft, setDraft] = usePerfState("");
+  const inputRef = usePerfRef(null);
+  const [over, setOver] = usePerfState(false);
 
-  function handleSave() {
-    if (draft.trim()) { onConnectSheet(draft.trim()); }
+  return (
+    <div
+      onClick={e => { e.stopPropagation(); if (!busy) inputRef.current?.click(); }}
+      onDragOver={e => { e.preventDefault(); e.stopPropagation(); setOver(true); }}
+      onDragLeave={e => { e.preventDefault(); setOver(false); }}
+      onDrop={e => {
+        e.preventDefault(); e.stopPropagation(); setOver(false);
+        const f = e.dataTransfer.files && e.dataTransfer.files[0];
+        if (f && !busy) onUpload(f);
+      }}
+      style={{
+        ...FONT, fontSize: compact ? "0.7rem" : "0.74rem", textAlign: "center",
+        padding: compact ? "8px 10px" : "16px 12px",
+        border: `1px dashed ${over ? "#c8401a" : "#d7d1c8"}`,
+        background: over ? "#fdf3ef" : "#faf8f4",
+        color: busy ? "#aaa" : over ? "#c8401a" : "#888",
+        borderRadius: "3px", cursor: busy ? "wait" : "pointer",
+        transition: "border-color 0.15s, background 0.15s",
+      }}
+    >
+      <input
+        ref={inputRef}
+        type="file"
+        accept=".xlsx"
+        style={{ display: "none" }}
+        onChange={e => {
+          const f = e.target.files && e.target.files[0];
+          e.target.value = "";
+          if (f) onUpload(f);
+        }}
+      />
+      {busy ? "Parsing…" : (label || "Drop Search Console .xlsx, or click to browse")}
+    </div>
+  );
+}
+
+// ─── Piece card ─────────────────────────────────────────────────────────────
+function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen, onDismissError }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const { piece, pillar } = entry;
+  const s = record ? (record.summary || {}) : null;
+
+  return (
+    <div
+      onClick={record ? onOpen : undefined}
+      style={{
+        background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px",
+        padding: "16px 18px 14px", cursor: record ? "pointer" : "default",
+        display: "flex", flexDirection: "column", gap: "10px", minHeight: "170px",
+        transition: "border-color 0.15s, box-shadow 0.15s",
+      }}
+      onMouseEnter={e => { if (record) { e.currentTarget.style.borderColor = "#1a2f4e"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(26,47,78,0.08)"; } }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor = "#e8e3da"; e.currentTarget.style.boxShadow = "none"; }}
+    >
+      {/* Header */}
+      <div>
+        <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#999", marginBottom: "3px" }}>
+          {pillar.label}
+        </div>
+        <div style={{ ...FONT, fontSize: "0.86rem", fontWeight: 600, color: "#1a2535", lineHeight: 1.35, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+          {piece.title}
+        </div>
+      </div>
+
+      {record ? (
+        <>
+          <div style={{ marginTop: "auto" }}>
+            <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", marginBottom: "2px" }}>
+              Impressions
+            </div>
+            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "2.1rem", fontWeight: 600, color: "#1a2535", lineHeight: 1 }}>
+              {perfNum(s.impressions)}
+            </div>
+          </div>
+          <PerfSparkline series={record.timeseries} />
+
+          <div style={{ display: "flex", gap: "16px", borderTop: "1px solid #f0ede6", paddingTop: "10px" }}>
+            {[["Clicks", perfNum(s.clicks)], ["CTR", perfPct(s.ctr)], ["Avg position", perfPos(s.avg_position)]].map(([k, v]) => (
+              <div key={k}>
+                <div style={{ ...FONT, fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>{k}</div>
+                <div style={{ ...FONT, fontSize: "0.82rem", fontWeight: 600, color: "#333", marginTop: "1px" }}>{v}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ ...FONT, fontSize: "0.64rem", color: "#bbb" }}>
+            {record.date_range && record.date_range.start
+              ? `${perfDate(record.date_range.start)} – ${perfDate(record.date_range.end)}`
+              : "Range unknown"}
+            {record.uploaded_at && ` · uploaded ${perfUploadedAt(record.uploaded_at)}`}
+          </div>
+        </>
+      ) : (
+        <div style={{ marginTop: "auto" }}>
+          {canUpload ? (
+            <PerfDropzone busy={busy} onUpload={onUpload} />
+          ) : (
+            <div style={{ ...FONT, fontSize: "0.72rem", color: "#bbb", padding: "16px 0" }}>
+              No Search Console data uploaded yet.
+            </div>
+          )}
+        </div>
+      )}
+
+      {error && (
+        <div
+          onClick={e => { e.stopPropagation(); onDismissError(); }}
+          style={{
+            ...FONT, fontSize: "0.7rem", color: "#c8401a", background: "#fbe8e2",
+            border: "1px solid #f0d0c0", borderRadius: "3px", padding: "8px 10px", lineHeight: 1.4, cursor: "pointer",
+          }}
+        >
+          {error}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Time-series chart ──────────────────────────────────────────────────────
+function PerfChart({ series }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  if (!series || series.length < 2) {
+    return <div style={{ ...FONT, fontSize: "0.74rem", color: "#bbb", padding: "12px 0" }}>Not enough days to chart.</div>;
   }
+  // Impressions carry the shape; clicks are counted in single digits, so a
+  // second axis would exaggerate them. Clicks are marked as dots on the curve
+  // instead — one dot per day that earned at least one click.
+  const H = 110, PAD = 4;
+  const maxI = Math.max(...series.map(p => p.impressions), 1);
+  const stepX = 100 / (series.length - 1);   // percent, so the SVG stretches
+  const px = i => PAD + i * stepX;
+  const py = v => H - (v / maxI) * (H - 12) - 2;
+
+  const impLine = series.map((p, i) => `${px(i).toFixed(2)},${py(p.impressions).toFixed(1)}`).join(" ");
+  const clickDays = series.map((p, i) => ({ ...p, i })).filter(p => p.clicks > 0);
+
+  return (
+    <div>
+      <svg width="100%" height={H} viewBox={`0 0 ${100 + PAD * 2} ${H}`} preserveAspectRatio="none" style={{ display: "block", overflow: "visible" }}>
+        <polygon points={`${PAD},${H} ${impLine} ${PAD + 100},${H}`} fill="#c8401a" opacity="0.07" />
+        <polyline points={impLine} fill="none" stroke="#c8401a" strokeWidth="0.6" vectorEffect="non-scaling-stroke" strokeLinejoin="round" />
+        {clickDays.map(p => (
+          <line
+            key={p.i}
+            x1={px(p.i)} x2={px(p.i)}
+            y1={py(p.impressions) - 4} y2={py(p.impressions) + 4}
+            stroke="#1a2f4e" strokeWidth="1.6" vectorEffect="non-scaling-stroke"
+          >
+            <title>{`${p.date} · ${p.clicks} click${p.clicks === 1 ? "" : "s"} · ${p.impressions} impressions`}</title>
+          </line>
+        ))}
+      </svg>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "6px" }}>
+        <span style={{ ...FONT, fontSize: "0.64rem", color: "#aaa" }}>{perfDate(series[0].date)}</span>
+        <div style={{ display: "flex", gap: "12px" }}>
+          <span style={{ ...FONT, fontSize: "0.64rem", color: "#c8401a", fontWeight: 600 }}>Impressions</span>
+          <span style={{ ...FONT, fontSize: "0.64rem", color: "#1a2f4e", fontWeight: 600 }}>Days with clicks</span>
+        </div>
+        <span style={{ ...FONT, fontSize: "0.64rem", color: "#aaa" }}>{perfDate(series[series.length - 1].date)}</span>
+      </div>
+    </div>
+  );
+}
+
+// ─── Dimension table ────────────────────────────────────────────────────────
+function PerfDimTable({ title, rows, field, limit }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  if (!rows || !rows.length) return null;
+  const shown = limit ? rows.slice(0, limit) : rows;
+  const max = Math.max(...shown.map(r => r.impressions), 1);
+  const GRID = "1fr 46px 62px 44px";
+
+  return (
+    <div style={{ marginTop: "22px" }}>
+      <div style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1a2f4e", marginBottom: "8px" }}>
+        {title}
+      </div>
+      <div style={{ borderTop: "1px solid #e8e3da" }}>
+        <div style={{ display: "grid", gridTemplateColumns: GRID, gap: "8px", padding: "6px 0", borderBottom: "1px solid #f0ede6" }}>
+          {["", "Clicks", "Impr.", "Pos."].map((h, i) => (
+            <span key={i} style={{ ...FONT, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#bbb", textAlign: i === 0 ? "left" : "right" }}>{h}</span>
+          ))}
+        </div>
+        {shown.map((r, i) => (
+          <div key={i} style={{ position: "relative", borderBottom: "1px solid #f5f2ec" }}>
+            <div style={{
+              position: "absolute", left: 0, top: 0, bottom: 0,
+              width: `${(r.impressions / max) * 100}%`, background: "#c8401a", opacity: 0.05,
+            }} />
+            <div style={{ position: "relative", display: "grid", gridTemplateColumns: GRID, gap: "8px", padding: "8px 0", alignItems: "baseline" }}>
+              <span style={{ ...FONT, fontSize: "0.74rem", color: "#333", lineHeight: 1.35 }}>
+                {String(r[field] || "").replace(/\s+/g, " ")}
+              </span>
+              <span style={{ ...FONT, fontSize: "0.74rem", color: r.clicks > 0 ? "#1a2535" : "#ccc", fontWeight: 600, textAlign: "right" }}>{r.clicks}</span>
+              <span style={{ ...FONT, fontSize: "0.74rem", color: "#666", textAlign: "right" }}>{perfNum(r.impressions)}</span>
+              <span style={{ ...FONT, fontSize: "0.74rem", color: "#888", textAlign: "right" }}>{perfPos(r.position)}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── Piece drawer ───────────────────────────────────────────────────────────
+function PerfPieceDrawer({ entry, record, canUpload, busy, error, onUpload, onClear, onClose }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const { piece, cluster, pillar, url } = entry;
+  const s = record.summary || {};
+  const [confirmClear, setConfirmClear] = usePerfState(false);
 
   return (
     <>
       <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(15,25,35,0.35)", zIndex: 100 }} />
       <div style={{
-        position: "fixed", right: 0, top: 0, bottom: 0, width: "min(440px, 90vw)",
+        position: "fixed", right: 0, top: 0, bottom: 0, width: "min(480px, 92vw)",
         background: "#fff", boxShadow: "-4px 0 20px rgba(0,0,0,0.15)", zIndex: 101,
-        overflowY: "auto", padding: "24px 28px",
+        overflowY: "auto", padding: "24px 28px 40px",
       }}>
-        {/* Title */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "18px", gap: "10px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "16px", gap: "10px" }}>
           <div>
             <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#c8401a", marginBottom: "4px" }}>
               {pillar.label} · {cluster.label}
@@ -469,97 +547,67 @@ function PerfPieceDrawer({ entry, row, headers, urlCol, trendCol, hasSheet, shee
           <button onClick={onClose} style={{ ...FONT, fontSize: "1.2rem", color: "#888", background: "none", border: "none", cursor: "pointer", padding: "0 4px" }} aria-label="Close">×</button>
         </div>
 
-        {/* Live URL */}
-        {liveUrl && (
-          <a href={liveUrl} target="_blank" rel="noopener noreferrer" style={{
-            display: "flex", alignItems: "center", gap: "6px", marginBottom: "18px",
-            ...FONT, fontSize: "0.7rem", color: "#1a2f4e", textDecoration: "none",
-            padding: "7px 10px", background: "#f0ede6", borderRadius: "3px",
-            overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
-          }}>
-            <span style={{ opacity: 0.5 }}>↗</span>
-            <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{liveUrl}</span>
-          </a>
-        )}
+        <a href={url} target="_blank" rel="noopener noreferrer" style={{
+          display: "flex", alignItems: "center", gap: "6px", marginBottom: "16px",
+          ...FONT, fontSize: "0.7rem", color: "#1a2f4e", textDecoration: "none",
+          padding: "7px 10px", background: "#f0ede6", borderRadius: "3px",
+          overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
+        }}>
+          <span style={{ opacity: 0.5 }}>↗</span>
+          <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{url}</span>
+        </a>
 
-        {/* Metrics — if row data exists */}
-        {row && headers && (
-          <div style={{ borderTop: "1px solid #e8e3da" }}>
-            {headers.filter(h => h !== urlCol).map(h => (
-              <div key={h} style={{
-                display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "12px",
-                padding: "10px 0", borderBottom: "1px solid #f0ede6",
-              }}>
-                <span style={{ ...FONT, fontSize: "0.74rem", color: "#666" }}>{h}</span>
-                <span style={{ ...FONT, fontSize: "0.86rem", fontWeight: 600, color: "#1a2535" }}>
-                  {h === trendCol ? parseTrend(row[h]).label : formatNum(row[h])}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "8px", marginBottom: "18px" }}>
+          {[["Clicks", perfNum(s.clicks)], ["Impressions", perfNum(s.impressions)], ["CTR", perfPct(s.ctr)], ["Position", perfPos(s.avg_position)]].map(([k, v]) => (
+            <div key={k} style={{ background: "#faf8f4", border: "1px solid #f0ede6", borderRadius: "3px", padding: "9px 10px" }}>
+              <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>{k}</div>
+              <div style={{ ...FONT, fontSize: "0.95rem", fontWeight: 700, color: "#1a2535", marginTop: "2px" }}>{v}</div>
+            </div>
+          ))}
+        </div>
 
-        {/* No data — sheet connection prompt */}
-        {!row && (
-          <div style={{ borderTop: "1px solid #e8e3da", paddingTop: "20px" }}>
-            <div style={{ ...FONT, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1a2f4e", marginBottom: "8px" }}>
-              {hasSheet ? "No data matched for this piece" : "Connect Google Analytics sheet"}
-            </div>
-            <div style={{ ...FONT, fontSize: "0.78rem", color: "#666", marginBottom: "14px", lineHeight: 1.5 }}>
-              {hasSheet
-                ? "The sheet loaded but no row matched this piece's URL. Ask Jason to add a row for this page, or check the URL column lines up."
-                : "Paste the share URL from Jason's sheet. Sheet must be shared \"anyone with the link can view\" — metrics will appear across all cards once connected."}
-            </div>
-            {!hasSheet && (
-              <>
-                <input
-                  type="text"
-                  value={draft}
-                  onChange={e => setDraft(e.target.value)}
-                  placeholder="https://docs.google.com/spreadsheets/d/.../edit?usp=sharing"
-                  style={{
-                    ...FONT, width: "100%", padding: "9px 12px", border: "1px solid #d7d1c8",
-                    borderRadius: "3px", fontSize: "0.76rem", color: "#333", marginBottom: "10px",
-                  }}
-                  onKeyDown={e => e.key === "Enter" && handleSave()}
-                />
-                <button
-                  onClick={handleSave}
-                  disabled={!draft.trim()}
-                  style={{
-                    ...FONT, width: "100%", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
-                    padding: "10px 16px", border: "none", borderRadius: "3px", cursor: draft.trim() ? "pointer" : "not-allowed",
-                    background: draft.trim() ? "#1a2f4e" : "#c8c0b4", color: "#fff",
-                  }}
-                >
-                  Save & Sync
-                </button>
-              </>
-            )}
-            {hasSheet && sheetStatus === "error" && (
-              <>
-                <input
-                  type="text"
-                  value={draft}
-                  onChange={e => setDraft(e.target.value)}
-                  placeholder="Paste a new share URL to retry"
-                  style={{
-                    ...FONT, width: "100%", padding: "9px 12px", border: "1px solid #f0d0c0",
-                    borderRadius: "3px", fontSize: "0.76rem", color: "#333", marginBottom: "10px",
-                  }}
-                />
-                <button onClick={handleSave} disabled={!draft.trim()} style={{
-                  ...FONT, width: "100%", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase",
-                  padding: "10px 16px", border: "none", borderRadius: "3px", cursor: draft.trim() ? "pointer" : "not-allowed",
-                  background: draft.trim() ? "#1a2f4e" : "#c8c0b4", color: "#fff",
-                }}>Update & Retry</button>
-              </>
-            )}
+        <div style={{ ...FONT, fontSize: "0.68rem", color: "#aaa", marginBottom: "10px" }}>
+          {(record.date_range && record.date_range.label) || "Date range"}
+          {record.date_range && record.date_range.start && ` · ${perfDate(record.date_range.start)} – ${perfDate(record.date_range.end)}`}
+        </div>
+
+        <PerfChart series={record.timeseries} />
+
+        <PerfDimTable title="Top queries" rows={record.top_queries} field="query" limit={10} />
+        <PerfDimTable title="Countries" rows={record.countries} field="country" limit={8} />
+        <PerfDimTable title="Devices" rows={record.devices} field="device" />
+
+        <div style={{ marginTop: "26px", borderTop: "1px solid #e8e3da", paddingTop: "16px" }}>
+          <div style={{ ...FONT, fontSize: "0.66rem", color: "#aaa", marginBottom: "8px" }}>
+            {record.filename && <>Source: <code style={{ background: "#f5f2ec", padding: "2px 5px", borderRadius: "2px" }}>{record.filename}</code> · </>}
+            uploaded {perfUploadedAt(record.uploaded_at)}
           </div>
-        )}
+          {canUpload && (
+            <>
+              <PerfDropzone busy={busy} onUpload={onUpload} compact label="Replace with a newer export" />
+              {error && (
+                <div style={{ ...FONT, fontSize: "0.7rem", color: "#c8401a", background: "#fbe8e2", border: "1px solid #f0d0c0", borderRadius: "3px", padding: "8px 10px", marginTop: "8px", lineHeight: 1.4 }}>
+                  {error}
+                </div>
+              )}
+              <button
+                onClick={() => { if (confirmClear) onClear(); else setConfirmClear(true); }}
+                style={{
+                  ...FONT, marginTop: "8px", fontSize: "0.66rem", fontWeight: 600, letterSpacing: "0.04em",
+                  padding: "6px 10px", border: "1px solid #e8e3da", background: "#fff",
+                  color: confirmClear ? "#c8401a" : "#999", borderRadius: "3px", cursor: "pointer",
+                }}
+              >
+                {confirmClear ? "Click again to remove this data" : "Remove data"}
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </>
   );
 }
 
 window.PerformancePanel = PerformancePanel;
+// Shared with the weekly report so live cards can show impressions.
+window.NS_perfSlug = perfSlug;

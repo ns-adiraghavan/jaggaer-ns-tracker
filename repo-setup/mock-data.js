@@ -2,6 +2,7 @@
 // fetch fails. Kept in sync with config/project.json — update both together.
 // Mirrors the full project.json schema including schedule and interlink_map.
 window.MOCK_PROJECT = {
+  "performanceData": {},
   "months": [
     {
       "id": "month-1",

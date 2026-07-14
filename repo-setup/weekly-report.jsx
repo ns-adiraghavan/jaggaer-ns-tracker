@@ -206,6 +206,7 @@ function WeeklyReportPanel({ project, currentUser }) {
               piece={piece} cluster={cluster} pillar={pillar}
               ts={ts} approvedBy={approvedBy}
               getMember={getMember}
+              perfData={project.performanceData || {}}
             />
           ))}
         </div>
@@ -348,12 +349,18 @@ function SectionHeader({ accent, eyebrow, count, subtitle }) {
 }
 
 // ─── Live-piece card — the actual "we shipped this" moment ──────────────────
-function LivePieceCard({ piece, cluster, pillar, ts, approvedBy, getMember }) {
+function LivePieceCard({ piece, cluster, pillar, ts, approvedBy, getMember, perfData }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const dateStr = ts ? formatEST(ts) : "date not logged";
   const timeStr = ts ? formatEST(ts, { hour: "2-digit", minute: "2-digit" }) : "";
   const approver = approvedBy ? getMember(approvedBy)?.name : null;
   const liveUrl = piece.publishing?.live_url;
+
+  // Search Console numbers, if Jaggaer has uploaded an export for this URL.
+  const slugFn = window.NS_perfSlug;
+  const perfKey = liveUrl && slugFn ? slugFn(liveUrl) : null;
+  const perf = perfKey && perfData ? perfData[perfKey] : null;
+  const impressions = perf?.summary?.impressions;
 
   return (
     <div style={{
@@ -377,12 +384,19 @@ function LivePieceCard({ piece, cluster, pillar, ts, approvedBy, getMember }) {
             </div>
           )}
         </div>
-        {liveUrl && (
-          <a href={liveUrl} target="_blank" rel="noopener noreferrer"
-            style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#1a2f4e", textDecoration: "none", whiteSpace: "nowrap" }}>
-            Open ↗
-          </a>
-        )}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
+          {typeof impressions === "number" && impressions > 0 && (
+            <span style={{ ...FONT, fontSize: "0.66rem", fontWeight: 600, color: "#666", background: "#f5f2ec", padding: "3px 7px", borderRadius: "2px", whiteSpace: "nowrap" }}>
+              {Math.round(impressions).toLocaleString("en-US")} impr.
+            </span>
+          )}
+          {liveUrl && (
+            <a href={liveUrl} target="_blank" rel="noopener noreferrer"
+              style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#1a2f4e", textDecoration: "none", whiteSpace: "nowrap" }}>
+              Open ↗
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );
