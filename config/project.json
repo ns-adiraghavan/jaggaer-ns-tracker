@@ -2349,7 +2349,10 @@
     {
       "id": "stage-nq11b",
       "label": "SME Review (Confirmation of topics)",
-      "actor": "person:m-ny8dy",
+      "actor": [
+        "person:m-ny8dy",
+        "person:m-pifrn"
+      ],
       "color": "#0e6655",
       "bg": "#e8f5f0"
     },
