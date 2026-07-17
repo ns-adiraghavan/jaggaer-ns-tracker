@@ -74,6 +74,35 @@ function perfFileToBase64(file) {
   });
 }
 
+// ─── Performance computation helpers ────────────────────────────────────────
+
+// Trailing-3-month window: from 90 days ago (or go-live date, whichever is later)
+// to today. Returns filtered timeseries rows.
+function perfTrailing3Month(timeseries, releaseTs) {
+  if (!timeseries || !timeseries.length) return [];
+  const now = Date.now();
+  const ninetyDaysAgo = now - 90 * 24 * 60 * 60 * 1000;
+  const releaseMs = releaseTs ? new Date(releaseTs).getTime() : 0;
+  const windowStart = Math.max(ninetyDaysAgo, releaseMs);
+  return timeseries.filter(p => {
+    const t = new Date(p.date).getTime();
+    return t >= windowStart && t <= now;
+  });
+}
+
+// Sum impressions and clicks over a timeseries window.
+function perfWindowTotals(window) {
+  let impressions = 0, clicks = 0, weighted = 0;
+  for (const p of window) {
+    impressions += p.impressions || 0;
+    clicks += p.clicks || 0;
+    weighted += (p.impressions || 0) * (p.position || 0);
+  }
+  const avgMonthly = window.length ? (impressions / (window.length / 30)) : 0;
+  const weightedAvgPos = impressions > 0 ? weighted / impressions : 0;
+  return { impressions, clicks, avgMonthly, weightedAvgPos };
+}
+
 // ─── Sparkline ──────────────────────────────────────────────────────────────
 function PerfSparkline({ series, w = 240, h = 34, color = "#c8401a" }) {
   if (!series || series.length < 2) return null;
@@ -149,22 +178,28 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
     return Object.keys(perfData).filter(k => !known.has(k));
   }, [perfData, published]);
 
-  // ── KPI strip — totals across pieces that have data ────────────────────
+  // ── KPI strip — totals across pieces that have data (trailing 3 months) ──
   const kpis = usePerfMemo(() => {
     if (!withData.length) return null;
-    let clicks = 0, impressions = 0, weighted = 0;
+    let clicks = 0, impressions = 0, avgMonthlySum = 0, weighted = 0;
     let best = null, mostImpr = null;
     for (const p of withData) {
-      const s = perfData[p.key].summary || {};
-      clicks += s.clicks || 0;
-      impressions += s.impressions || 0;
-      weighted += (s.avg_position || 0) * (s.impressions || 0);
+      const record = perfData[p.key];
+      const releaseTs = perfReleaseTs(p.piece);
+      const window = perfTrailing3Month(record.timeseries, releaseTs);
+      const totals = window.length ? perfWindowTotals(window) : { impressions: 0, clicks: 0, avgMonthly: 0, weightedAvgPos: 0 };
+      clicks += totals.clicks;
+      impressions += totals.impressions;
+      avgMonthlySum += totals.avgMonthly;
+      weighted += totals.weightedAvgPos * totals.impressions;
+      const s = record.summary || {};
       if (s.avg_position > 0 && (!best || s.avg_position < best.pos)) best = { pos: s.avg_position, title: p.piece.title };
-      if (!mostImpr || (s.impressions || 0) > mostImpr.impr) mostImpr = { impr: s.impressions || 0, title: p.piece.title };
+      if (!mostImpr || totals.impressions > (mostImpr.impr || 0)) mostImpr = { impr: totals.impressions, title: p.piece.title };
     }
     return {
       clicks,
       impressions,
+      avgMonthly: withData.length ? avgMonthlySum / withData.length : 0,
       ctr: impressions > 0 ? clicks / impressions : 0,
       avgPosition: impressions > 0 ? weighted / impressions : 0,
       best,
@@ -256,10 +291,10 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
       {/* ── KPI strip ────────────────────────────────────────────────────── */}
       {kpis && (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "24px" }}>
-          <PerfKpi label="Total clicks" value={perfNum(kpis.clicks)} sub={`across ${kpis.pieces} ${kpis.pieces === 1 ? "piece" : "pieces"}`} />
-          <PerfKpi label="Total impressions" value={perfNum(kpis.impressions)} sub={kpis.mostImpr ? `top: ${kpis.mostImpr.title}` : ""} />
-          <PerfKpi label="Blended CTR" value={perfPct(kpis.ctr)} sub="clicks ÷ impressions" />
-          <PerfKpi label="Avg position" value={perfPos(kpis.avgPosition)} sub={kpis.best ? `best: ${perfPos(kpis.best.pos)}` : ""} />
+          <PerfKpi label="Clicks (trailing 3mo)" value={perfNum(kpis.clicks)} sub={`across ${kpis.pieces} ${kpis.pieces === 1 ? "piece" : "pieces"}`} />
+          <PerfKpi label="Impressions (trailing 3mo)" value={perfNum(kpis.impressions)} sub={kpis.mostImpr ? `top: ${kpis.mostImpr.title}` : ""} />
+          <PerfKpi label="Avg monthly impressions" value={perfNum(kpis.avgMonthly)} sub="trailing 3-month avg" />
+          <PerfKpi label="Avg position (weighted)" value={perfPos(kpis.avgPosition)} sub={kpis.best ? `best: ${perfPos(kpis.best.pos)}` : ""} />
         </div>
       )}
 
@@ -413,6 +448,10 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
   const { piece, pillar } = entry;
   const s = record ? (record.summary || {}) : null;
   const releaseTs = perfReleaseTs(piece);
+  // Trailing-3-month window metrics (computed upfront to avoid IIFE in JSX)
+  const cardWin = record ? perfTrailing3Month(record.timeseries, releaseTs) : [];
+  const cardWt = cardWin.length ? perfWindowTotals(cardWin) : { impressions: 0, clicks: 0, avgMonthly: 0, weightedAvgPos: 0 };
+  const cardKw = piece.primary_keyword || null;
 
   return (
     <div
@@ -445,22 +484,30 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
         <>
           <div style={{ marginTop: "auto" }}>
             <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", marginBottom: "2px" }}>
-              Impressions
+              Impressions · trailing 3 months
             </div>
             <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "2.1rem", fontWeight: 600, color: "#1a2535", lineHeight: 1 }}>
-              {perfNum(s.impressions)}
+              {perfNum(cardWt.impressions)}
+            </div>
+            <div style={{ ...FONT, fontSize: "0.66rem", color: "#aaa", marginTop: "3px" }}>
+              avg {perfNum(cardWt.avgMonthly)} / month
             </div>
           </div>
-          <PerfSparkline series={record.timeseries} />
+          <PerfSparkline series={cardWin.length >= 2 ? cardWin : record.timeseries} />
 
           <div style={{ display: "flex", gap: "16px", borderTop: "1px solid #f0ede6", paddingTop: "10px" }}>
-            {[["Clicks", perfNum(s.clicks)], ["CTR", perfPct(s.ctr)], ["Avg position", perfPos(s.avg_position)]].map(([k, v]) => (
+            {[["Clicks", perfNum(cardWt.clicks)], ["CTR", perfPct(cardWt.clicks && cardWt.impressions ? cardWt.clicks / cardWt.impressions : 0)], ["Avg position", perfPos(cardWt.weightedAvgPos)]].map(([k, v]) => (
               <div key={k}>
                 <div style={{ ...FONT, fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>{k}</div>
                 <div style={{ ...FONT, fontSize: "0.82rem", fontWeight: 600, color: "#333", marginTop: "1px" }}>{v}</div>
               </div>
             ))}
           </div>
+          {cardKw && (
+            <div style={{ ...FONT, fontSize: "0.66rem", color: "#555", background: "#f5f2ec", padding: "4px 8px", borderRadius: "2px" }}>
+              <span style={{ color: "#aaa", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", fontSize: "0.58rem" }}>Target keyword · </span>{cardKw}
+            </div>
+          )}
           <div style={{ ...FONT, fontSize: "0.64rem", color: "#bbb" }}>
             {record.date_range && record.date_range.start
               ? `${perfDate(record.date_range.start)} – ${perfDate(record.date_range.end)}`
@@ -590,6 +637,11 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
   const { piece, cluster, pillar, url } = entry;
   const s = record.summary || {};
   const [confirmClear, setConfirmClear] = usePerfState(false);
+  // Trailing-3-month metrics for modal display
+  const modalRelTs = perfReleaseTs(piece);
+  const modalWin = perfTrailing3Month(record.timeseries, modalRelTs);
+  const modalWt = modalWin.length ? perfWindowTotals(modalWin) : { impressions: 0, clicks: 0, avgMonthly: 0, weightedAvgPos: 0 };
+  const modalKw = piece.primary_keyword || null;
 
   return (
     <div
@@ -633,14 +685,26 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
           <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{url}</span>
         </a>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "8px", marginBottom: "18px" }}>
-          {[["Clicks", perfNum(s.clicks)], ["Impressions", perfNum(s.impressions)], ["CTR", perfPct(s.ctr)], ["Position", perfPos(s.avg_position)]].map(([k, v]) => (
+        <>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "8px", marginBottom: "10px" }}>
+          {[
+            ["Clicks (3mo)", perfNum(modalWt.clicks)],
+            ["Impressions (3mo)", perfNum(modalWt.impressions)],
+            ["Avg monthly", perfNum(modalWt.avgMonthly)],
+            ["Avg position (wtd)", modalWt.weightedAvgPos > 0 ? perfPos(modalWt.weightedAvgPos) : "—"],
+          ].map(([k, v]) => (
             <div key={k} style={{ background: "#faf8f4", border: "1px solid #f0ede6", borderRadius: "3px", padding: "9px 10px" }}>
               <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>{k}</div>
               <div style={{ ...FONT, fontSize: "0.95rem", fontWeight: 700, color: "#1a2535", marginTop: "2px" }}>{v}</div>
             </div>
           ))}
         </div>
+        {modalKw && (
+          <div style={{ ...FONT, fontSize: "0.7rem", color: "#444", background: "#f5f2ec", padding: "6px 10px", borderRadius: "3px", marginBottom: "10px" }}>
+            <span style={{ color: "#aaa", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", fontSize: "0.6rem" }}>Target keyword </span>{modalKw}
+          </div>
+        )}
+        </>
 
         <div style={{ ...FONT, fontSize: "0.68rem", color: "#aaa", marginBottom: "10px" }}>
           {(record.date_range && record.date_range.label) || "Date range"}

@@ -112,6 +112,10 @@ function WeeklyReportPanel({ project, currentUser }) {
       return { piece, cluster, pillar, ts: entered ? entered.ts : piece.last_updated, approvedBy: entered ? entered.by : piece.last_updated_by };
     }).sort((a, b) => new Date(b.ts || 0) - new Date(a.ts || 0));
 
+    // ── Published last week ──────────────────────────────────────────────
+    // Approved pieces whose approval timestamp falls within the last 7 days.
+    const publishedLastWeek = tookLive.filter(({ ts }) => withinLastWeek(ts));
+
     // ── Plan to take live next ───────────────────────────────────────────
     // Pieces sitting at CTA check (editors) or ad-hoc review — the last gate
     // before approved. One reviewer action away from live.
@@ -186,7 +190,7 @@ function WeeklyReportPanel({ project, currentUser }) {
     }
     uploadLog.sort((a, b) => new Date(b.ts) - new Date(a.ts));
 
-    return { tookLive, planNextWeek, pendingAtJaggaer, pendingAtNS, briefsOutstanding, uploadLog };
+    return { tookLive, publishedLastWeek, planNextWeek, pendingAtJaggaer, pendingAtNS, briefsOutstanding, uploadLog };
   }, [project]);
 
   return (
@@ -204,20 +208,22 @@ function WeeklyReportPanel({ project, currentUser }) {
       </header>
 
       {/* ── KPI strip — this week's shape at a glance ─────────────────── */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px", marginBottom: "26px" }}>
-        <KpiTile label="Took live" count={data.tookLive.length} accent="#1e7a45" sub="total to date"
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "10px", marginBottom: "26px" }}>
+        <KpiTile label="Published to date" count={data.tookLive.length} accent="#1e7a45" sub="total to date"
           onClick={() => scrollTo(refTookLive)} />
-        <KpiTile label="Planned next" count={data.planNextWeek.length} accent="#1e6fa8" sub="at CTA / ad-hoc review"
+        <KpiTile label="Published last week" count={data.publishedLastWeek.length} accent="#0e6655" sub="last 7 days"
+          onClick={() => scrollTo(refTookLive)} />
+        <KpiTile label="To publish this week" count={data.planNextWeek.length} accent="#1e6fa8" sub="at CTA / ad-hoc review"
           onClick={() => scrollTo(refPlanNext)} />
-        <KpiTile label="At Jaggaer" count={data.pendingAtJaggaer.length} accent="#c8401a" sub="awaiting review"
+        <KpiTile label="Awaiting JAGGAER review" count={data.pendingAtJaggaer.length} accent="#c8401a" sub="awaiting review"
           onClick={() => { setJgOpen(true); scrollTo(refJaggaer); }} />
-        <KpiTile label="At NS" count={data.pendingAtNS.length} accent="#6c3483" sub="awaiting action"
+        <KpiTile label="Awaiting Netscribes" count={data.pendingAtNS.length} accent="#6c3483" sub="awaiting action"
           onClick={() => { setNsOpen(true); scrollTo(refNS); }} />
       </div>
 
       {/* ── Took live — the hero section ──────────────────────────────── */}
       <div ref={refTookLive} style={{ scrollMarginTop: "16px" }} />
-      <SectionHeader accent="#1e7a45" eyebrow="Took Live — Total to Date" count={data.tookLive.length} />
+      <SectionHeader accent="#1e7a45" eyebrow="Published to date" count={data.tookLive.length} />
       {data.tookLive.length === 0 ? (
         <EmptyCard text="No pieces approved yet." />
       ) : (
@@ -236,8 +242,8 @@ function WeeklyReportPanel({ project, currentUser }) {
 
       {/* ── Planned next — tighter row layout ─────────────────────────── */}
       <div ref={refPlanNext} style={{ scrollMarginTop: "16px" }} />
-      <SectionHeader accent="#1e6fa8" eyebrow="Plan to Take Live Next" count={data.planNextWeek.length}
-        subtitle="Sitting at CTA check or Ad-Hoc review — the last gate before approved." />
+      <SectionHeader accent="#1e6fa8" eyebrow="To publish this week" count={data.planNextWeek.length}
+        subtitle="Sitting at CTA check or Ad-Hoc review — the last gate before published." />
       {data.planNextWeek.length === 0 ? (
         <EmptyCard text="Nothing at CTA check or Ad-Hoc review right now." />
       ) : (
@@ -269,7 +275,7 @@ function WeeklyReportPanel({ project, currentUser }) {
       <div ref={refJaggaer} style={{ scrollMarginTop: "16px" }} />
       <CollapsibleSection
         accent="#c8401a"
-        eyebrow="Pending at Jaggaer"
+        eyebrow="Awaiting JAGGAER review"
         count={data.pendingAtJaggaer.length}
         subtitle="Waiting on a Jaggaer reviewer to act. Oldest-waiting first."
         emptyText="Nothing waiting on Jaggaer right now."
@@ -288,7 +294,7 @@ function WeeklyReportPanel({ project, currentUser }) {
       <div ref={refNS} style={{ scrollMarginTop: "16px" }} />
       <CollapsibleSection
         accent="#1e6fa8"
-        eyebrow="Pending at NS"
+        eyebrow="Awaiting Netscribes"
         count={data.pendingAtNS.length}
         subtitle="Waiting on NS to write, revise, or upload. Oldest-waiting first."
         emptyText="Nothing waiting on NS right now."

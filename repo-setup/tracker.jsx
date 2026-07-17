@@ -41,7 +41,7 @@ const DEFAULT_WORKFLOW_STAGES = [
   { id: "brief-uploaded",   label: "Brief Uploaded",                color: "#0e6655",             bg: "#e8f5f0",             actor: ["ns", "jaggaer"] },
   { id: "writing",          label: "Writing",                       color: "#1e6fa8",             bg: "#e8f2fa",             actor: "ns" },
   { id: "marketing-review", label: "Abhishek and Orlagh Review",    color: "#6c3483",             bg: "#f5eef8",             actor: ["person:abhishek", "person:m-ny8dy"] },
-  { id: "robert-review",    label: "Robert Review",                 color: "#7d6608",             bg: "#fefde8",             actor: "person:m-9toiv" },
+  { id: "ed-review",         label: "Ed Content Review",             color: "#7d6608",             bg: "#fefde8",             actor: "person:m-ed01" },
   { id: "editors",          label: "CTA Check",                     color: "#b05e00",             bg: "#fdf0e0",             actor: "jaggaer" },
   { id: "approved",         label: "Approved",                      color: "#1e7a45",             bg: "#e6f5ec",             actor: null },
 ];
@@ -1176,7 +1176,7 @@ function AdHocCreateModal({ onClose, onCreate }) {
           New Ad-Hoc Article
         </div>
         <p style={{ ...FONT, fontSize: "0.78rem", color: "#666", marginTop: 0, marginBottom: "16px", lineHeight: 1.5 }}>
-          Expedited content outside the planned calendar. Drop a topic, then upload the finished HTML — any Jaggaer reviewer can approve or send it back, no Abhishek/Orlagh/Robert/CTA gates.
+          Expedited content outside the planned calendar. Drop a topic, then upload the finished HTML — any Jaggaer reviewer can approve or send it back, no Abhishek/Vizna/Ed/CTA gates.
         </p>
         <input
           autoFocus
@@ -1719,7 +1719,7 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
 
   // "Awaits" highlight: piece is waiting on Jaggaer org (any stage where actor includes jaggaer, excluding not-started)
   const awaitsJaggaer = isJG && currentStage && hasActorType(currentStage.actor, "jaggaer") && piece.status !== "not-started";
-  // Observer: Indy/Anna can always open and view, even when it's Robert's or NS's turn
+  // Observer: Indy/Anna can always open and view, even when it's Ed's or NS's turn
   const isObserver = isJG && !actorMatches(currentStage?.actor);
 
   return (
@@ -2434,7 +2434,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
     // If a reviewer sent this back and stored return_to_stage, jump straight back
     // to them instead of climbing the full chain from the next stage.
     // Ad-Hoc Articles run a separate short chain: writing → ad-hoc-review → approved,
-    // bypassing the standard marketing-review/robert-review/editors gates entirely.
+    // bypassing the standard marketing-review/ed-review/editors gates entirely.
     const newStatus = piece.return_to_stage
       ? piece.return_to_stage
       : (adHocNext ? adHocNext.id : (nextStage ? nextStage.id : piece.status));
@@ -3819,8 +3819,8 @@ function BriefUploadPanel({ piece, cluster, pillar, project, currentUser, update
         <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>What happens next</div>
         <ul className="ns-upload-rules">
           <li>Status moves to <strong>Brief Uploaded</strong>. NS writers are notified.</li>
-          <li>NS writes the article and uploads it. It goes to Robert for content review.</li>
-          <li>After Robert and marketing sign off, it comes back to you for final approval.</li>
+          <li>NS writes the article and uploads it. It goes to Ed for content review.</li>
+          <li>After Ed and marketing sign off, it comes back to you for final approval.</li>
         </ul>
       </div>
     </div>
