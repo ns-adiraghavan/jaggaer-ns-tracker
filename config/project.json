@@ -140,6 +140,22 @@
               "last_updated": "2026-06-17T14:08:10.898Z",
               "last_updated_by": "m-ny8dy",
               "return_to_stage": null
+            },
+            {
+              "id": "piece-c1-getting-started-4-4tzj",
+              "title": "The Ultimate Guide to AI-Powered Source-to-Pay (S2P) Transformation",
+              "format": "Whitepaper",
+              "content_type": "ai-in-s2p",
+              "phase": 1,
+              "primary_keyword": "AI in source to pay",
+              "secondary_keyword": "AI in source to pay",
+              "intent": "informational",
+              "funnel": "TOFU",
+              "geography": "all",
+              "assignee": "null",
+              "notes": "",
+              "url": "",
+              "status": "not-started"
             }
           ]
         },
