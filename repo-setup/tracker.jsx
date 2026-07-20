@@ -2074,7 +2074,8 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
               fetch(srcdoc).then(r => r.blob()).then(blob => {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement("a");
-                a.href = url; a.download = `${piece.id}-v${rev}.${activeExt}`;
+                const safeTitle = (piece.title || piece.id).replace(/[^a-z0-9 _-]/gi, " ").trim().replace(/\s+/g, "-").slice(0, 60);
+                a.href = url; a.download = `${safeTitle}-v${rev}.${activeExt}`;
                 a.click(); setTimeout(() => URL.revokeObjectURL(url), 5000);
               });
             }
@@ -3842,7 +3843,27 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
   const monthId = project.active_month || "month-1";
   const rev = piece.revision_count || 1;
   const isWP_AP = isWhitePaper(piece) && piece.wp_has_html;
+  const canAddHtmlCompanion = isWhitePaper(piece) && !piece.wp_has_html && currentUser?.org === "ns";
   const [activeSlot_AP, setActiveSlot_AP] = useStateTR("pdf");
+  const [htmlCompState, setHtmlCompState] = useStateTR("idle"); // idle | uploading | done | error
+  const [htmlCompError, setHtmlCompError] = useStateTR(null);
+  const htmlCompRef = useRefTR(null);
+
+  async function handleHtmlCompanion(file) {
+    if (!file || htmlCompState === "uploading") return;
+    setHtmlCompState("uploading"); setHtmlCompError(null);
+    try {
+      const payload = await readDeliverableFile(file);
+      const result = await window.NS_API.uploadWhitepaperFile(
+        piece, cluster.id, pillar.id, project.active_month, payload, "html", currentUser.id
+      );
+      if (!result.ok) { setHtmlCompState("error"); setHtmlCompError(result.error || "Upload failed"); return; }
+      updatePiece(cluster.id, piece.id, { wp_has_html: true, last_updated: new Date().toISOString(), last_updated_by: currentUser.id });
+      setHtmlCompState("done");
+    } catch (e) {
+      setHtmlCompState("error"); setHtmlCompError(e.message || "Upload failed");
+    }
+  }
   function githubPathForAP(slot) {
     if (isWP_AP) return `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${rev}.${slot}`;
     return `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/${deliverableFileName(piece)}`;
@@ -3959,13 +3980,30 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
           <span style={{ ...FONT, fontSize:"0.72rem", fontWeight:600, color:"#1a3a52" }}>
             {isWP_AP ? `deliverable-v${rev}.${activeSlot_AP}` : deliverableFileName(piece)}
           </span>
-          <span style={{ ...FONT, fontSize:"0.68rem", color:"#6b8fa8" }}>
+          <span style={{ ...FONT, fontSize:"0.68rem", color:"#6b8fa8", flex: 1 }}>
             {kind === "html"
               ? "— Click anywhere on a paragraph to pin a comment there →"
               : kind === "pdf"
                 ? "— PDF preview · inline pins are available on HTML deliverables"
                 : "— Preview not available for this file type"}
           </span>
+          {canAddHtmlCompanion && (
+            <>
+              <input ref={htmlCompRef} type="file" accept=".html,.htm" hidden onChange={e => e.target.files?.[0] && handleHtmlCompanion(e.target.files[0])} />
+              <button
+                onClick={() => htmlCompState !== "uploading" && htmlCompRef.current?.click()}
+                style={{
+                  ...FONT, flexShrink:0, fontSize:"0.66rem", fontWeight:700, padding:"4px 10px", borderRadius:"3px", cursor: htmlCompState === "uploading" ? "wait" : "pointer",
+                  border:"1px solid #c5ddef",
+                  background: htmlCompState === "done" ? "#e6f5ec" : htmlCompState === "error" ? "#fdeee8" : "#fff",
+                  color: htmlCompState === "done" ? "#1e7a45" : htmlCompState === "error" ? "#c8401a" : "#1a3a52",
+                  transition:"all 0.12s", whiteSpace:"nowrap",
+                }}
+              >
+                {htmlCompState === "uploading" ? "Uploading…" : htmlCompState === "done" ? "✓ HTML added" : htmlCompState === "error" ? `✕ ${htmlCompError}` : "+ Add HTML companion"}
+              </button>
+            </>
+          )}
         </div>
         <div style={{ position:"absolute", top:"41px", bottom:0, left:0, right:0, background:"#fff" }}>
           {loading && (
