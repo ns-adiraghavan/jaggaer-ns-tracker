@@ -1,13 +1,11 @@
 # Jaggaer × Netscribes — Content Intelligence Tracker
 ### Technical Reference
 
----
+A collaborative content delivery and review platform for the Jaggaer × Netscribes content intelligence engagement. It replaces a shared spreadsheet and is the single interface for content delivery, client review, feedback, and approval.
 
-## What this is
+It is **not** an internal NS workflow tool. NS coordinates writing however it likes; this app activates when a piece is ready for client eyes.
 
-A collaborative content delivery and review platform for the Jaggaer × Netscribes content intelligence engagement. It replaces a shared spreadsheet and serves as the single interface for content delivery, client review, feedback, and approval.
-
-It is not an internal NS workflow tool. NS coordinates however they want. This app activates when a piece is ready for client eyes.
+Deployed at **`jaggaer-ns-tracker.vercel.app`**. Repo: **`ns-adiraghavan/jaggaer-ns-tracker`**.
 
 ---
 
@@ -20,32 +18,40 @@ It is not an internal NS workflow tool. NS coordinates however they want. This a
 5. [Content Type Model](#5-content-type-model)
 6. [Publishing Sequence](#6-publishing-sequence)
 7. [File-by-File Reference](#7-file-by-file-reference)
-8. [Deployment (Vercel)](#8-deployment-vercel)
-9. [Environment Variables](#9-environment-variables)
-10. [Email Notifications](#10-email-notifications)
+8. [AI Playground](#8-ai-playground)
+9. [Build & Local Development](#9-build--local-development)
+10. [Deployment (Vercel)](#10-deployment-vercel)
+11. [Environment Variables](#11-environment-variables)
+12. [Email Notifications](#12-email-notifications)
+13. [Maintenance Playbook](#13-maintenance-playbook)
+14. [Common Tasks — Recipes](#14-common-tasks--recipes)
 
 ---
 
 ## 1. Architecture Overview
 
 ```
-Browser (React via Babel CDN — no build step)
+Browser (React 18 via Babel Standalone CDN — no build step)
     │
     ├── Reads/writes project state
-    │       └── /api/github.js  (Vercel serverless)
-    │               └── GitHub Contents API
-    │                       └── config/project.json  ← single source of truth
+    │       └── /api/github.js   (Vercel serverless)  → GitHub Contents API
+    │               └── config/project.json           ← single source of truth
     │
     ├── Claude conversation rail
-    │       └── /api/anthropic.js  (Vercel serverless)
-    │               └── Anthropic API  /v1/messages
+    │       └── /api/anthropic.js (Vercel serverless)  → Anthropic /v1/messages
+    │
+    ├── Search Console ingestion
+    │       └── /api/perf-xlsx.js (Vercel serverless)  → SheetJS parse of GSC .xlsx
+    │
+    ├── Style-guide rendering
+    │       └── /api/docx-render.js (Vercel serverless) → mammoth docx→HTML
     │
     └── Static assets served from /repo-setup/
 ```
 
-**Key principle:** GitHub is the database. No separate backend, no database, no server-side state. Every read and write goes through the GitHub Contents API via a Vercel proxy that injects the PAT from environment variables. The browser never holds a credential.
+**Key principle:** GitHub is the database. No separate backend, no database, no server-side session state. Every read and write goes through a Vercel serverless proxy that injects secrets from environment variables — the browser never holds a credential, and never calls GitHub or Anthropic directly.
 
-**Body parser limit:** `api/github.js` sets `bodyParser.sizeLimit = "10mb"` to support PDF deliverable uploads.
+The proxy architecture (browser → `/api/*` → external API) is intentional. **Do not** revert any component to direct browser-to-API calls.
 
 ---
 
@@ -54,45 +60,63 @@ Browser (React via Babel CDN — no build step)
 ```
 /
 ├── config/
-│   ├── project.json              ← ALL app state lives here
-│   └── digest-state.json         ← last-sent timestamp + piece states for digest dedup
+│   ├── project.json          ← ALL app state lives here (single source of truth)
+│   ├── digest-state.json     ← last-sent timestamp + piece states for digest dedup
+│   └── style-guide.docx      ← rendered in-app via api/docx-render.js
 │
 ├── content/
 │   └── month-1/
-│       └── {pillar-id}/
-│           └── {cluster-id}/
-│               └── {piece-id}/
-│                   ├── brief-v{n}.{ext}           ← Jaggaer-uploaded briefs
-│                   └── deliverable-v{n}.{ext}     ← NS-uploaded content files
+│       └── {pillar-id}/{cluster-id}/{piece-id}/
+│           ├── brief-v{n}.{ext}         ← Jaggaer-uploaded briefs
+│           └── deliverable-v{n}.{ext}   ← NS-uploaded content files
 │
-├── repo-setup/                   ← Vercel serves this folder as the app root
-│   ├── index.html
-│   ├── styles.css
-│   ├── mock-data.js
-│   ├── api.js                    ← dead weight (root-level copy) — only api/ versions are served
-│   ├── entry.jsx
-│   ├── sidebar.jsx
-│   ├── tracker.jsx
-│   ├── admin.jsx
-│   ├── app.jsx
-│   ├── ai-playground.html        ← AI Playground microsite (standalone, 4-step journey + 13 tools)
-│   ├── vercel.json               ← must live here (Vercel root dir = repo-setup/)
-│   ├── api/
-│   │   ├── github.js             ← Vercel serverless proxy (10mb body limit)
-│   │   ├── anthropic.js          ← Vercel serverless proxy
-│   │   ├── digest.js             ← Daily digest email (Vercel Cron)
-│   │   └── notify.js             ← Send to Editors email
+├── repo-setup/               ← Vercel serves THIS folder as the app root
+│   │
+│   │  ── Loaded by index.html, in dependency order ──
+│   ├── index.html            ← app shell; lists the script load order
+│   ├── styles.css            ← design system / CSS variables
+│   ├── mock-data.js          ← MOCK_PROJECT fallback when GitHub hydration fails
+│   ├── api.js                ← browser-side GitHub/Anthropic helper (calls /api/* proxies)
+│   ├── entry.jsx             ← name-selector screen
+│   ├── sidebar.jsx           ← left nav (By Pillar / By Type)
+│   ├── tracker.jsx           ← main tracker, drawer, review panels, CSV sync
+│   ├── weekly-report.jsx     ← Status Report tab
+│   ├── performance.jsx       ← Search Performance tab
+│   ├── admin.jsx             ← admin config editor
+│   ├── sample-artifacts.jsx  ← S2P sample-article showcase panel
+│   ├── style-guide.jsx       ← in-app style-guide viewer/uploader
+│   ├── app.jsx               ← root component; hydration + debounced auto-save
+│   │
+│   │  ── Static / standalone ──
+│   ├── ai-playground.html    ← AI Playground microsite (standalone; /ai route)
 │   ├── jaggaer-logo.png
-│   └── netscribes-logo.png
+│   ├── netscribes-logo.png
+│   │
+│   │  ── Serverless functions (Vercel auto-detects api/*.js) ──
+│   ├── api/
+│   │   ├── github.js         ← GitHub Contents API proxy (10 MB body limit)
+│   │   ├── anthropic.js      ← Anthropic /v1/messages proxy
+│   │   ├── perf-xlsx.js      ← GSC .xlsx parser (SheetJS)
+│   │   ├── docx-render.js    ← style-guide docx→HTML (mammoth)
+│   │   ├── digest.js         ← daily digest email (Vercel Cron)
+│   │   ├── notify.js         ← "Send to Editors" email
+│   │   └── api.js            ← shared serverless helpers
+│   │
+│   ├── vercel.json           ← crons + rewrites; MUST live here (see below)
+│   ├── package.json          ← dev deps (Babel CLI) + serverless deps (xlsx, mammoth)
+│   └── setup.sh              ← one-time GitHub repo initialiser
 │
 └── README.md
 ```
 
-> **Removed:** `bwc.jsx`, `/build-with-claude/`, `jai-demo.html`, `claude-rail.jsx`, and `sample-artifacts.jsx` are no longer part of the active app. The `/demo` route previously served by `jai-demo.html` is now replaced by the AI Playground at `/ai`.
+### Two structural rules that bite if forgotten
 
-> **Dead weight:** Root-level `api.js`, `digest.js`, and `notify.js` are duplicates that Vercel ignores. Only the `api/` directory versions are served. Do not update the root-level copies.
+- **`vercel.json` must live inside `repo-setup/`.** Vercel's Root Directory is set to `repo-setup/`, so a copy at the repo root is ignored. This governs the Cron schedule and the `/ai` + `/demo` rewrites.
+- **Serverless code lives only in `repo-setup/api/`.** Vercel only treats `api/*.js` as functions. `repo-setup/digest.js` and `repo-setup/notify.js` are **stale root-level duplicates** left over from an earlier layout — they are never executed. Edit the `api/` versions only; the root copies are dead weight and safe to delete.
 
-> **Note on vercel.json:** Because Vercel's root directory is set to `repo-setup/`, `vercel.json` must live inside `repo-setup/` — not the repo root. The repo-root copy (if it still exists) is ignored by Vercel.
+### Present but not loaded (legacy)
+
+`agent-builder.jsx`, `bwc.jsx`, `claude-rail.jsx`, and `jai-demo.html` are still in the repo but are **not** referenced by `index.html` and are not part of the running app. `jai-demo.html` is still reachable via the `/demo` rewrite in `vercel.json`; the live demo experience is now the AI Playground at `/ai`. These files can be removed in a cleanup pass — verify nothing imports them first.
 
 ---
 
@@ -112,6 +136,7 @@ Everything the app renders derives from `config/project.json`. Adding pillars, c
   "feedback": {},
   "schedule": [...],
   "workflow_stages": [...],
+  "performanceData": {},
   "notifications": { "digest_to": [...], "editors_to": [...] },
   "playground_comments": [...]
 }
@@ -120,31 +145,18 @@ Everything the app renders derives from `config/project.json`. Adding pillars, c
 ### months
 
 ```json
-{
-  "id": "month-1",
-  "label": "Month 1 · May–Jun 2026",
-  "active": true,
-  "start_date": "2026-05-21"
-}
+{ "id": "month-1", "label": "Month 1 · May–Jun 2026", "active": true, "start_date": "2026-05-21" }
 ```
 
 ### content_type_split
 
-The three-type model that overlays the four industry pillars.
+The three-type model that overlays the four industry pillars. Valid `id`: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`.
 
 ```json
-{
-  "id": "msv",
-  "label": "MSV-driven",
-  "description": "...",
-  "weight": 0.50,
-  "pieces_est": 15
-}
+{ "id": "msv", "label": "MSV-driven", "description": "...", "weight": 0.50, "pieces_est": 15 }
 ```
 
-Valid `id` values: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`.
-
-### pillars
+### pillars → clusters → pieces
 
 ```json
 {
@@ -152,28 +164,24 @@ Valid `id` values: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`.
   "label": "Discrete Manufacturing",
   "subtitle": "US & Germany",
   "geography": "US / DE",
-  "clusters": [...]
+  "clusters": [
+    {
+      "id": "dm1-tariffs",
+      "label": "Tariff & Trade Disruption",
+      "sequence": 3,
+      "intent": "informational",
+      "anchor_piece": "p-dm1-2",
+      "month_id": "month-1",
+      "publish_week": 1,
+      "pieces": [ ... ]
+    }
+  ]
 }
 ```
 
-### clusters
+`sequence` is the global cross-pillar publishing order. `anchor_piece` must match a piece `id` inside `pieces`. `intent` is `"informational"` or `"commercial"`.
 
-```json
-{
-  "id": "dm1-tariffs",
-  "label": "Tariff & Trade Disruption",
-  "sequence": 3,
-  "intent": "informational",
-  "anchor_piece": "p-dm1-2",
-  "month_id": "month-1",
-  "publish_week": 1,
-  "pieces": [...]
-}
-```
-
-`sequence` is the global cross-pillar publishing order. `anchor_piece` must match the `id` of one piece in `pieces`. `intent` is `"informational"` or `"commercial"`.
-
-### pieces
+### piece fields
 
 ```json
 {
@@ -193,8 +201,7 @@ Valid `id` values: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`.
   "url": "/predictive-supplier-risk-management",
   "notes": "Words: 1,200–1,500",
   "deliverable_ext": "html",
-  "last_upload": "2026-05-22T13:58:08.804Z",
-  "last_upload_by": "manager",
+  "publishing": { "live_url": "https://www.jaggaer.com/blog/..." },
   "last_updated": "2026-05-22T13:58:08.804Z",
   "last_updated_by": "manager",
   "status_history": [
@@ -206,123 +213,120 @@ Valid `id` values: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`.
 
 | Field | Notes |
 |---|---|
-| `status` | Must match a stage `id` in `workflow_stages` |
+| `status` | Must match a stage `id` in `workflow_stages` (or `ad-hoc-review`) |
 | `content_type` | `msv` / `ai-in-s2p` / `industry-specific` |
 | `phase` | `1` (informational) or `2` (commercial) |
 | `funnel` | `TOFU` / `MOFU` / `BOFU` |
+| `primary_keyword` | Target keyword; shown next to position in Search Performance |
 | `revision_count` | Increments on each NS submit |
-| `deliverable_ext` | Set on upload. Enables PDF/docx round-trip. Defaults to `"html"`. |
-| `status_history` | Append-only log of `{ stage, ts, by }`. UTC stored, US Eastern displayed. |
-| `brief_files` | Array of uploaded brief filenames. Set by `BriefUploadPanel`. |
-
-**Ad-Hoc Articles** are a separate content type that lives outside the main cluster/pillar hierarchy. They use a simplified two-stage review flow (`ad-hoc-review` stage) that bypasses `project.workflow_stages`. The `ad-hoc-review` stage is intentionally not listed in `workflow_stages` to avoid shifting stage indices. Every component that resolves stages needs an explicit patch for this stage.
+| `deliverable_ext` | Set on upload; enables PDF/DOCX round-trip. Defaults to `"html"` |
+| `publishing.live_url` | Live URL; joins the piece to its Search Console `performanceData` record via URL slug |
+| `status_history` | Append-only log of `{ stage, ts, by }`. Stored UTC, displayed US Eastern. Seeded pre-tracking entries carry `ts: null` and are never backfilled |
+| `brief_files` | Array of uploaded brief filenames; set by `BriefUploadPanel` |
 
 ### team
 
 ```json
 {
-  "ns": [
-    { "id": "manager", "name": "Chahat K", "role": "NS Manager", "org": "ns", "admin": true }
-  ],
-  "jaggaer": [
-    { "id": "jason", "name": "Jason R", "role": "Marketing", "org": "jaggaer", "admin": true }
-  ]
+  "ns":      [ { "id": "manager", "name": "Chahat K", "role": "NS Manager", "org": "ns", "admin": true } ],
+  "jaggaer": [ { "id": "anna",    "name": "Jason R",  "role": "Marketing",  "org": "jaggaer", "admin": true } ]
 }
 ```
 
-`"admin": true` unlocks admin mode for that user. Both orgs can have admin users.
+`"admin": true` unlocks admin mode for that user. Both orgs can have admin users. A stage `actor` of `"person:{id}"` must match a `team` member `id`.
 
-### feedback
-
-Written at runtime by the app:
+### feedback (written at runtime)
 
 ```json
 {
   "p-dm2-2": [
-    {
-      "id": "fb-9",
-      "author": "indy",
-      "verdict": "question",
+    { "id": "fb-9", "author": "indy", "verdict": "question",
       "body": "Is the tier-3 data sourced or illustrative?",
-      "ts": "2026-05-14T08:50:00Z",
-      "stage": "marketing-review",
-      "revision": 1
-    }
+      "ts": "2026-05-14T08:50:00Z", "stage": "marketing-review", "revision": 1 }
   ]
 }
 ```
 
-Valid verdicts: `"approved"`, `"needs-revision"`, `"question"`.
+Valid verdicts: `"approved"`, `"needs-revision"`, `"question"`. The `revision` field groups inline comments by the deliverable version they were left on; comments from prior versions collapse under a "Previous versions" disclosure.
 
-The `revision` field on feedback entries enables version-aware inline comments — comments are grouped by the deliverable version they were left on; stale comments (from prior versions) appear collapsed under a "Previous versions" disclosure.
+### performanceData (written at runtime)
 
-### playground_comments
-
-Stored at `project.playground_comments[]`. Each entry is a pin placed on the AI Playground microsite by a reviewer:
+Keyed by URL slug (last non-empty path segment of `publishing.live_url`, lowercased). Each record is one parsed GSC export:
 
 ```json
 {
-  "id": "pc-1",
-  "author": "anna",
-  "body": "Step 2 copy needs shortening.",
-  "ts": "2026-06-01T10:00:00Z",
-  "resolved": false,
-  "page": "step-2"
+  "predictive-supplier-risk-management": {
+    "url": "https://www.jaggaer.com/blog/predictive-supplier-risk-management",
+    "uploaded_at": "2026-07-10T09:00:00Z",
+    "uploaded_by": "anna",
+    "filename": "gsc-export.xlsx",
+    "date_range": { "start": "2026-05-22", "end": "2026-07-10", "label": "..." },
+    "summary": { "clicks": 0, "impressions": 0, "ctr": 0, "avg_position": 0 },
+    "timeseries": [ { "date": "2026-05-22", "clicks": 0, "impressions": 0, "position": 0 } ],
+    "top_queries": [...], "countries": [...], "devices": [...]
+  }
 }
 ```
 
-Managed via the `AIPlaygroundPanel` toggle-based commenting system inside the tracker.
+Slug mismatches between an upload and a piece's `live_url` are surfaced to the user, never silently written.
+
+### playground_comments (written at runtime)
+
+Reviewer pins placed on the AI Playground microsite from inside the tracker:
+
+```json
+{ "id": "pc-1", "author": "anna", "body": "Step 2 copy needs shortening.",
+  "ts": "2026-06-01T10:00:00Z", "resolved": false, "page": "step-2" }
+```
 
 ### workflow_stages
 
-Defines the full production funnel. Fully configurable — edit here or via **Admin → Workflow**. No code changes needed.
+Defines the production funnel. Fully configurable — edit here or via **Admin → Workflow**, no code changes.
 
 ```json
-{
-  "id": "robert-review",
-  "label": "Robert Review",
-  "color": "#7d6608",
-  "bg": "#fefde8",
-  "actor": "person:m-9toiv"
-}
+{ "id": "ed-review", "label": "Ed Content Review", "color": "#7d6608", "bg": "#fefde8", "actor": "person:m-ed01" }
 ```
 
-`actor` values: `"ns"` (any NS member), `"jaggaer"` (any Jaggaer member), `"person:{id}"` (named individual), `null` (terminal — approved state). Actor can also be an array, e.g. `["person:abhishek", "person:m-ny8dy"]`, when multiple named reviewers share a stage.
+`actor` values: `"ns"` (any NS member), `"jaggaer"` (any Jaggaer member), `"person:{id}"` (named individual), `null` (terminal). `actor` may also be an **array** when several named reviewers share a stage, e.g. `["person:abhishek", "person:m-ny8dy", "person:m-pifrn"]`.
 
-The app derives all role-based permissions from this config at runtime. Changing the actor for a stage immediately changes who sees the action button in the drawer.
+The app derives all role-based permissions from this config at runtime. Change a stage's actor and the action button in the drawer immediately moves to the new owner.
 
-**SHA management:** `saveProject` always fetches a fresh SHA before PUT. On 409 conflict it retries with the refreshed SHA. Never pass a stale SHA — it causes cascading 409 failures.
+> **Stage IDs are also mirrored as fallback defaults in `tracker.jsx`** (`STATUS_META` / `DEFAULT_WORKFLOW_STAGES`). When you rename or re-ID a stage in `project.json`, update the matching entry in `tracker.jsx` too, or the fallback (used before hydration, and by colour lookups) will be stale.
 
 ---
 
 ## 4. Workflow Stages
 
-The production funnel is fully configurable via `project.workflow_stages`. Current live stages:
+Current live funnel (from `project.workflow_stages`):
 
-| Stage | Actor | Meaning |
+| Stage `id` | Actor | Meaning |
 |---|---|---|
 | `not-started` | Jaggaer | Brief not yet uploaded |
-| `stage-nq11b` | person: m-ny8dy | SME topic confirmation before brief |
+| `stage-nq11b` | person: m-ny8dy, m-pifrn | SME topic confirmation before brief |
 | `brief-uploaded` | NS + Jaggaer | Brief uploaded; NS begins writing |
 | `writing` | NS | NS submits draft to next reviewer |
-| `marketing-review` | person: abhishek + person: m-ny8dy | Abhishek and Orlagh review |
-| `robert-review` | person: m-9toiv | Robert's SME review |
-| `editors` | Jaggaer | CTA check / final editorial |
+| `marketing-review` | person: abhishek, m-ny8dy, m-pifrn | SEO / marketing review |
+| `ed-review` | person: m-ed01 (Ed) | JAGGAER content review |
+| `editors` | person: m-pznem (Alex), m-izu4e (Jovana) | CTA check / final editorial |
 | `approved` | — | Terminal state |
 
-**Ad-Hoc Articles** use `ad-hoc-review` (simplified two-stage: NS submit → Jaggaer review → approved). This stage deliberately lives outside `project.workflow_stages`.
+**Current review chain:** NS upload → SEO review (Vizna / Abhishek) → **Ed content review** → Alex CTA check → live.
 
-**To change the funnel:** Edit stages in **Admin → Workflow** (drag to reorder, rename, change actor). Saves to `project.workflow_stages`. The digest email, role permissions, drawer actions, and FilterBar all update automatically — all stage resolution reads `project.workflow_stages` at runtime; nothing is hardcoded.
+> As of July 2026 content moved from Robert's team to Jason's team; **Ed** replaced Robert as the JAGGAER content reviewer (`robert-review` → `ed-review`). The SEO-stage reviewer swap (Orlagh → Vizna) is still provisional pending confirmation with Jason.
 
-A cluster is **publish-ready** when every piece reaches `approved`.
+**Ad-Hoc Articles** use a separate `ad-hoc-review` stage (simplified two-stage: NS submit → Jaggaer review → approved). This stage deliberately lives **outside** `project.workflow_stages` so it doesn't shift the indices of the main funnel — every component that resolves stages carries an explicit patch for it (`getAdHocReviewStage`).
 
-**Return-to-sender:** When a reviewer selects "Needs Revision", the piece returns to the last NS-actor stage (not necessarily `writing`), preserving the correct return point regardless of workflow configuration.
+**To change the funnel:** use **Admin → Workflow** (drag to reorder, rename, change actor). The digest email, role permissions, drawer actions, and FilterBar all read `project.workflow_stages` at runtime and update automatically.
+
+**Publish-ready:** a cluster is publish-ready when every piece reaches `approved`.
+
+**Return-to-sender:** selecting "Needs Revision" returns a piece to the *last NS-actor stage* (not necessarily `writing`), preserving the correct return point regardless of funnel shape.
 
 ---
 
 ## 5. Content Type Model
 
-Three types that cut across all four industry pillars:
+Three types cut across all four industry pillars:
 
 | Type | ID | Description |
 |---|---|---|
@@ -334,275 +338,318 @@ Three types that cut across all four industry pillars:
 
 | Path | Description |
 |---|---|
-| Path 1 | Low-interest. Prefers ready-made solution (JAI). |
+| Path 1 | Low-interest. Prefers a ready-made solution (JAI). |
 | Path 2 | Medium-interest. Has friction (IT permissions, setup). |
 | Path 3 | Superuser. Will install, go deep, possibly fork the repo. |
 
-**Ad-Hoc Articles** are a fourth content category for one-off pieces not belonging to any cluster or pillar. They have a simplified two-stage review and appear in a dedicated section of the tracker.
+**Ad-Hoc Articles** are a fourth category for one-off pieces outside any cluster or pillar, with a simplified two-stage review and a dedicated tracker section.
 
 ---
 
 ## 6. Publishing Sequence
 
-Four-week sequence for Month 1. Driven by `project.schedule` — edit there to change order.
+Four-week sequence for Month 1, driven by `project.schedule` — edit there to change order.
 
 | Week | Goal | Clusters |
 |---|---|---|
 | **Week 1** | Capture Claude + S2P and tariff search traffic | AI in S2P C1 · DM C1: Tariff & Trade |
 | **Week 2** | Convert Path 2 users; rank before EU AI Act peaks | AI in S2P C2+C3 · PS C1+C2: EU AI Act + E-Invoicing |
-| **Week 3** | Build authority on supply chain risk and HE governance | DM C2+C3 · HE C1+C2 |
-| **Week 4** | Convert audiences to platform evaluation intent | AI in S2P C4 · DM C4 · PS C3 · HE C3 |
+| **Week 3** | Build authority on supply-chain risk and HE governance | DM C2+C3 · HE C1+C2 |
+| **Week 4** | Convert audiences to platform-evaluation intent | AI in S2P C4 · DM C4 · PS C3 · HE C3 |
 
 ---
 
 ## 7. File-by-File Reference
 
 ### index.html
-
-App shell. Loads all `.jsx` files as Babel-transpiled scripts in dependency order. No build step. Contains:
+App shell. Loads React 18 + Babel Standalone from CDN, then each `.jsx` file as a Babel-transpiled `<script type="text/babel">` in dependency order (see the tree in §2). No build step. Sets:
 
 ```js
 window.__CONFIG__ = { GITHUB_REPO: "ns-adiraghavan/jaggaer-ns-tracker" };
-// Token is NOT here — injected server-side by Vercel
+// Token is NOT here — injected server-side by the Vercel proxy.
 ```
 
 ### styles.css
-
-Full design system. Key CSS variables:
+Design system. Key CSS variables:
 
 ```css
---paper: #f0ede6        /* warm off-white page background */
---accent: #c8401a       /* burnt orange — Jaggaer brand */
+--paper:  #f0ede6;   /* warm off-white page background */
+--accent: #c8401a;   /* burnt orange — Jaggaer brand */
 ```
 
-### api.js
+### mock-data.js
+`MOCK_PROJECT` — the fallback project used when GitHub hydration fails, so the UI still renders locally without secrets.
 
-All GitHub and Anthropic API calls. Calls `/api/github` and `/api/anthropic` (Vercel proxy routes). **Never calls external APIs directly from the browser — do not revert this.**
+### api.js (browser helper)
+All GitHub and Anthropic calls from the browser, routed through the `/api/github` and `/api/anthropic` proxies. **Never calls external APIs directly.** Key functions:
 
-Key functions:
-- `fetchProject()` — GET `config/project.json`, returns parsed JSON + SHA
-- `saveProject(data, sha)` — PUT `config/project.json` base64-encoded; fetches fresh SHA on 409 and retries
-- `uploadPieceDeliverable(piece, clusterId, pillarId, monthId, payload, userId)` — PUT versioned deliverable to content folder; `payload` is `{ ext, name, binary, b64? text? }` from `readDeliverableFile()`
-- `uploadPieceBrief(piece, clusterId, pillarId, monthId, payload, userId)` — PUT versioned brief to content folder
-- `callClaude(messages, systemPrompt)` — POST to `/api/anthropic`
+- `fetchProject()` — GET `config/project.json`; returns parsed JSON + SHA.
+- `saveProject(data, sha)` — PUT `config/project.json`, base64-encoded. Always fetches a **fresh SHA** before writing and retries once on 409. Never pass a stale SHA.
+- `uploadPieceDeliverable(...)` / `uploadPieceBrief(...)` — PUT versioned files into the `content/` tree. Binary types (PDF, DOCX) committed as raw base64.
+- `callClaude(messages, systemPrompt)` — POST to `/api/anthropic`.
 
 ### entry.jsx
-
-Name selector screen. Renders all team members from `project.team.ns` and `project.team.jaggaer`. No password — identification for feedback attribution only.
+Name selector. Renders all `team.ns` + `team.jaggaer` members. No password — identity is for feedback attribution only. Exposes `window.NameSelector`.
 
 ### sidebar.jsx
-
-Left navigation. **By Pillar / By Type toggle:**
-- **By Pillar** (default): P01–P04 industry pillar nav with expandable cluster list
-- **By Type**: MSV-Driven / AI in S2P / Industry-Specific — lists every piece with status dot and click-through
-
-Nav sections: Tracker, AI Playground, Admin (admin mode only).
+Left nav with a **By Pillar / By Type** toggle. By Pillar: P01–P04 with expandable clusters. By Type: MSV / AI in S2P / Industry-specific with per-piece status dots. Exposes `window.Sidebar`, `window.computeStats`.
 
 ### tracker.jsx
+The largest module. Main content area + all review machinery. Exposes `window.Tracker`, `window.CT_DISPLAY`, `window.NS_syncWorkflow`, `window.CsvSyncPanel`, `window.projectToCsv`. Holds the `STATUS_META` / `DEFAULT_WORKFLOW_STAGES` fallback stage definitions.
 
-Main content area. Three tabs:
+Key components: `DrawerOverlay` (piece modal with Upload / Replace Draft / Brief / Review / Preview & Comment / History / Notes / Details / Edit / Delete tabs), `UploadPanel`, `ReplaceDraftPanel`, `BriefUploadPanel`, `ReviewPanel`, `PreviewPanel` (sandboxed iframe with `¶`-numbered gutter), `AnnotatePanel`, `HistoryPanel`, `CsvSyncPanel`, `AIPlaygroundPanel`.
 
-**Content Tracker** — two view modes:
-- *Cards view*: cluster cards with coloured headers, progress arcs, piece rows
-- *Table view*: continuous table. Columns: #, Title, Content Type, Assignee, Primary Keyword, Secondary Keyword, Intent, User Path, Status
+Upload and brief panels gate `updatePiece()` behind an explicit `result.ok` success check, showing a red retry state on failure.
 
-**Publishing Sequence** — reads `project.schedule`. Week-by-week cluster readiness and goal statements.
+### weekly-report.jsx
+**Status Report** tab. Exposes `window.WeeklyReportPanel`. KPI strip: Published to date · Published last week · To publish this week · Awaiting JAGGAER review · Awaiting Netscribes. Below it: collapsible "Awaiting JAGGAER review" / "Awaiting Netscribes" buckets (oldest-waiting first), SEO briefs outstanding, and an upload/brief log. Uses `withinLastWeek()` for the 7-day window and `lastEnteredStage()` for per-stage timestamps.
 
-**Weekly Progress** — phase-aware progress view. Shows Phase 1 vs Phase 2 completion, recent activity, and per-stage piece counts. Includes the FilterBar which reads `project.workflow_stages` dynamically — no hardcoded stage IDs.
+### performance.jsx
+**Search Performance** tab. Exposes `window.PerformancePanel` and `window.NS_perfSlug` (shared with the Status Report so live cards can show impressions). Jaggaer users (or Admin mode) upload a GSC `.xlsx` per piece; NS reads.
 
-**Key components:**
+Metrics are computed from each piece's `timeseries`, windowed to **trailing three months starting at the article go-live date** (`perfReleaseTs`):
+- `perfTrailing3Month()` — filters the timeseries to `max(90 days ago, go-live) … today`.
+- `perfWindowTotals()` — returns trailing-3-month impressions, clicks, **average monthly impressions**, and **impression-weighted average position**.
 
-- `DrawerOverlay` — full modal overlay on piece click. Tabs: Upload / Replace Draft / Brief (admin, Jaggaer) / Review / Preview & Comment / History / Notes / Details / Edit (admin) / Delete (admin)
-- `UploadPanel` — NS submits a file and advances to the next workflow stage. Versioned: each submit creates `deliverable-v{n}.{ext}`. Supports HTML, PDF, DOCX, MD. Binary types (PDF, DOCX) are committed as raw base64. Gates `updatePiece()` behind upload success check.
-- `ReplaceDraftPanel` — NS replaces their current draft *without* advancing the workflow. Status unchanged; no version increment. Use to fix errors before a reviewer sees the piece.
-- `BriefUploadPanel` — Jaggaer uploads a brief (PDF, DOCX, MD, HTML). Stored at `content/{month}/{pillar}/{cluster}/{piece}/brief-v{n}.{ext}`. Gates `updatePiece()` behind upload success check. Advances status to `brief-uploaded`.
-- `ReviewPanel` — unified review for any non-NS stage. Verdicts: Approved (advances to next stage) / Needs Revision (return-to-sender, back to last NS stage) / Question (status unchanged, note logged)
-- `PreviewPanel` — renders uploaded HTML deliverables in a sandboxed iframe. Injects paragraph-number gutter (`¶1`, `¶2`…) for easy reference. Non-HTML types (PDF) rendered in a native viewer or download link.
-- `AnnotatePanel` — Preview with inline comment sidebar. Click any `¶` number to auto-populate the section reference field. Comments carry `revision` field — stale comments from prior versions appear collapsed.
-- `HistoryPanel` — per-piece stage-history log. Reads `piece.status_history[]`. Timestamps stored UTC, displayed in US Eastern.
-- `CsvSyncPanel` (in Admin) — download current topics as CSV; upload an edited CSV to update piece metadata in bulk. New pieces can be added via CSV (blank `id`, valid `cluster` name). Status, revision count, and feedback are never overwritten by CSV sync.
-- `AIPlaygroundPanel` — embeds `ai-playground.html` in an iframe with a toggle-based commenting system. Reviewer pins stored in `project.playground_comments[]`.
+Cards and the modal show trailing-3-month impressions, avg monthly impressions, weighted avg position, and the piece's **target keyword** (`primary_keyword`) alongside position for context.
 
 ### admin.jsx
+Config editor for admin users: Pillars & Clusters, Pieces, Team, **Workflow** (drag-reorder / rename / set actor), Notifications (recipients + test digest), CSV Sync. Exposes `window.AdminPanel`.
 
-Config editor for admin users. Tabs:
-- **Pillars & Clusters** — add/edit pillars and clusters
-- **Pieces** — add/edit pieces
-- **Team** — add team members
-- **Workflow** — drag to reorder stages, rename, set actor per stage. Saves to `project.workflow_stages`
-- **Notifications** — manage digest and editors email recipients, send test digest
-- **CSV Sync** — bulk-edit piece metadata via CSV round-trip
+### sample-artifacts.jsx
+S2P sample-article showcase panel. Exposes `window.SampleArtifactsPanel`.
+
+### style-guide.jsx
+In-app style-guide viewer + admin uploader. Renders `config/style-guide.docx` by calling `/api/docx-render` (mammoth on the server) and displaying the HTML in a styled iframe.
 
 ### app.jsx
-
-Root component. Hydrates from GitHub on load, falls back to `MOCK_PROJECT` on error. Debounced auto-save (1.5s) on any project state change. Calls `syncWorkflowGlobals(project)` after hydration to keep `STATUS_META`, `STATUS_ORDER`, and `IN_MOTION_STATUSES` in sync with the live workflow config.
+Root component. Hydrates from GitHub on load, falls back to `MOCK_PROJECT` on error, debounced auto-save (1.5 s) on any state change. Calls `syncWorkflowGlobals(project)` after hydration to keep `STATUS_META`, `STATUS_ORDER`, and `IN_MOTION_STATUSES` aligned with the live workflow config.
 
 ### api/github.js
-
-Vercel serverless. Reads `GITHUB_TOKEN` and `GITHUB_REPO` from `process.env`. Proxies GET and PUT to GitHub Contents API. Body parser limit raised to `10mb` to support PDF uploads.
+GitHub Contents API proxy. Reads `GITHUB_TOKEN` + `GITHUB_REPO` from `process.env`. Body-parser limit raised to **10 MB** for PDF deliverable uploads.
 
 ### api/anthropic.js
+Anthropic `/v1/messages` proxy. Reads `ANTHROPIC_API_KEY`. Live.
 
-Vercel serverless. Reads `ANTHROPIC_API_KEY` from `process.env`. Proxies POST to Anthropic `/v1/messages`. Active — API key is live.
+### api/perf-xlsx.js
+Parses a GSC `.xlsx` export (SheetJS). Input `{ filename, content }` (base64); output `{ url, url_key, date_range, summary, timeseries, top_queries, countries, devices }`. Keyed by URL slug.
+
+### api/docx-render.js
+`GET /api/docx-render?path=config/style-guide.docx`. Fetches the file from GitHub raw, runs mammoth (docx→HTML), returns HTML for the style-guide viewer.
 
 ### api/digest.js
-
-Daily digest email. Triggered by Vercel Cron at 12:30 UTC (6pm IST). Only sends if there has been activity since the last digest. Reads `project.workflow_stages` to categorise stages dynamically — no hardcoded status names. Stores last-sent state in `config/digest-state.json`.
+Daily digest email. Vercel Cron at 12:30 UTC (6 pm IST). Only sends on days with activity. Reads `project.workflow_stages` to categorise stages dynamically. Stores last-sent state in `config/digest-state.json`.
 
 ### api/notify.js
+"Send to Editors" email for fully-approved clusters. Triggered by the **Send to Editors →** button (admin). Reads `project.notifications.editors_to`.
 
-"Send to Editors" email for fully-approved clusters. Triggered by the **Send to Editors →** button on cluster cards (admin mode). Reads recipient list from `project.notifications.editors_to`.
-
-### ai-playground.html — AI Playground
-
-Self-contained, single-file interactive microsite for S2P procurement professionals. No API key required (fully static, all responses are pre-scripted). No build step. Accessible two ways:
-
-- **In the tracker:** via the AI Playground nav entry in the sidebar, rendered via `AIPlaygroundPanel` with toggle-based commenting overlay. Login required (normal tracker session).
-- **Direct URL (no login):** `https://jaggaer-ns-tracker.vercel.app/ai`, served by a `vercel.json` rewrite rule pointing `/ai` directly at `ai-playground.html`.
-
-#### Journey structure
-
-A four-step guided experience followed by 13 interactive tool pages:
-
-| Step | Description |
-|---|---|
-| Step 1 — Prompt Builder | User builds a real S2P prompt using a guided wizard |
-| Step 2 — Myth Check | Debunks procurement AI myths with interactive pick-and-reveal |
-| Step 3 — AI Readiness | Maturity scorecard with dial and dimension breakdown |
-| Step 4 — What Next | Chat-style recommendations based on readiness score |
-
-#### Interactive tools (13)
-
-Organized into four capability groups:
-
-| Capability Group | Tools |
-|---|---|
-| Conversation Window | Approval Path Checker, Supplier Message Drafter, Sole-Source Justifier, Prompt Builder |
-| Deep Research | Supplier Risk Scanner, Contract Clause Analyser, Invoice Exception Detector, Spend Classifier, Tender Summariser, Spend Diagnostic |
-| Guided Sourcing | RFP Builder, Should-Cost Estimator, Bid Comparison & Award |
-| Know where you stand | Procurement Myth Check, AI Readiness Scorecard |
-
-Every tool is input-aware, parsing real user input and producing genuinely responsive output. A customer-type lens (Manufacturing / Higher Education / Public Sector) is available on applicable tools. Each tool carries a contrast strip comparing demo output to what JAI does with live organisational data.
-
-#### Design system
-
-Implements the JAGGAER v2.0 web design guidelines. Key tokens:
-
-| Token | Value |
-|---|---|
-| Primary typeface | Inter (300–800) from Google Fonts |
-| Stats / numbers typeface | Poppins (600–900), matching jaggaer.com |
-| JAI gradient | 90deg `#5300CE` to `#E22B83` (AI-branded contexts only) |
-| CTA red | `#D22428` (primary CTAs and JAGGAER wordmark only) |
-| Dark ink | `#0B0D12` (full-bleed JAI zone backgrounds) |
-
-**Design rules:**
-- Purple/gradient reserved exclusively for JAI moments; red is the primary S2P accent
-- "Full bleed" JAI zones use `width:100vw; left:50%; transform:translateX(-50%)`; no `max-width`, `border-radius`, or `margin:auto`
-- JAI footers state what JAI does on real data without acknowledging the demo context
-- No marketing verbs (transform, unlock, leverage); no em-dashes; lead with what something does
-- JAI referenced only in designated zones; JAGGAER product name not used in non-JAI sections
-
-**Copy source of truth:** `ai-playground.html` itself. No separate `copy.md` in repo.
+### api/api.js
+Shared serverless helpers used by the functions above.
 
 ---
 
-## 8. Deployment (Vercel)
+## 8. AI Playground
 
-1. Push repo to GitHub at `ns-adiraghavan/jaggaer-ns-tracker`
-2. Import into Vercel
-3. Set **Root Directory** to `repo-setup`
-4. Set **Framework** to `Other` (no build step)
-5. Add environment variables (see §9)
-6. Deploy
+Self-contained, single-file interactive microsite for S2P procurement professionals (`ai-playground.html`). Fully static — no API key, no React, no build step. All responses are pre-scripted but input-aware. Two entry points:
 
-Vercel auto-detects `api/*.js` files as serverless functions. The Cron job, the `/ai` rewrite, and any other routes are all configured in `vercel.json` — which **must live inside `repo-setup/`**, not the repo root.
+- **In the tracker:** AI Playground nav entry → rendered via `AIPlaygroundPanel` with a toggle-based commenting overlay (pins stored in `project.playground_comments[]`). Requires a tracker session.
+- **Direct URL (no login):** `https://jaggaer-ns-tracker.vercel.app/ai`, served by the `/ai` rewrite in `vercel.json`.
 
-The `/ai` route (`https://jaggaer-ns-tracker.vercel.app/ai`) is served by a Vercel rewrite pointing directly to `ai-playground.html`. No login required, no React, no session.
+**Journey:** a four-step guided experience (Prompt Builder → Myth Check → AI Readiness scorecard → What Next) followed by 13 interactive tool pages grouped into four capability groups (Conversation Window, Deep Research, Guided Sourcing, Know where you stand). Each tool parses real user input, offers a Manufacturing / Higher Education / Public Sector lens where applicable, and carries a contrast strip comparing demo output to what JAI does with live organisational data.
+
+**Design system (JAGGAER v2.0):** Inter (300–800) for body, Poppins (600–900) for stats. JAI gradient `90deg #5300CE → #E22B83` (AI-branded contexts only); CTA red `#D22428` (primary CTAs and the JAGGAER wordmark only); dark ink `#0B0D12` (full-bleed JAI-zone backgrounds); JAI purple surface `#E1CFF1`; amber `#C77700` (user-controlled inputs / gap indicators).
+
+**Copy & design rules:**
+- Purple / gradient reserved exclusively for JAI moments; red is the primary S2P accent; amber for user-controlled inputs.
+- "Full bleed" JAI zones use `width:100vw; left:50%; transform:translateX(-50%)` — no `max-width`, `border-radius`, `margin:auto`.
+- No marketing verbs (transform, unlock, leverage); no em-dashes; no self-referential framing. Lead with what something does; plain declarative sentences.
+- JAI referenced only in designated zones; the JAGGAER product name is not used in non-JAI sections.
+
+**Copy source of truth:** `ai-playground.html` itself. There is no separate `copy.md`.
 
 ---
 
-## 9. Environment Variables
+## 9. Build & Local Development
+
+There is **no bundler and no build step for the browser app** — `index.html` transpiles JSX in the browser via Babel Standalone. `package.json` exists for two reasons only: (1) dev-time JSX **validation** via Babel CLI, and (2) the serverless runtime dependencies `xlsx` and `mammoth`, which Vercel installs for the functions in `api/`.
+
+```json
+{
+  "dependencies":    { "mammoth": "^1.8.0", "xlsx": "^0.18.5" },
+  "devDependencies": { "@babel/cli": "…", "@babel/core": "…", "@babel/preset-react": "…" }
+}
+```
+
+### Run it locally
+
+Because the browser app has no build step, any static server works — but the `/api/*` routes only exist under Vercel. Use the Vercel CLI so the serverless functions and rewrites are available:
+
+```bash
+cd repo-setup
+npm install
+npx vercel dev        # serves the app + api/* locally on http://localhost:3000
+```
+
+You'll need the environment variables from §11 in a local `.env` (or a linked Vercel project) for the proxies to work. Without them the app still renders — it falls back to `MOCK_PROJECT` — but reads/writes to GitHub, Claude, and GSC parsing will fail.
+
+A plain static server (`npx serve .`) is fine for pure UI work that doesn't touch `/api/*`.
+
+### Validate JSX before every commit
+
+JSX is **not** valid plain JS, so `node --check` cannot parse it and will report false errors. Always validate with the Babel CLI + the React preset:
+
+```bash
+cd repo-setup
+for f in *.jsx; do
+  npx babel --presets @babel/preset-react "$f" --out-file /dev/null \
+    && echo "$f OK" || echo "$f FAILED"
+done
+```
+
+For the serverless functions and other plain-JS files, `node --check api/*.js` is correct.
+
+### Validate rendered output
+
+After any non-trivial UI change, load the app in a headless browser and confirm it mounts without console errors before shipping. A minimal Playwright check:
+
+```bash
+npx playwright install chromium
+node -e "
+const { chromium } = require('playwright');
+(async () => {
+  const b = await chromium.launch();
+  const p = await b.newPage();
+  p.on('console', m => m.type() === 'error' && console.log('CONSOLE ERROR:', m.text()));
+  await p.goto('http://localhost:3000');
+  await p.waitForTimeout(2500);
+  await b.close();
+})();
+"
+```
+
+---
+
+## 10. Deployment (Vercel)
+
+1. Push to GitHub at `ns-adiraghavan/jaggaer-ns-tracker`.
+2. Import into Vercel.
+3. Set **Root Directory** to `repo-setup`.
+4. Set **Framework Preset** to **Other** (no build step).
+5. Add the environment variables from §11.
+6. Deploy.
+
+Vercel auto-detects `api/*.js` as serverless functions. The Cron job and the `/ai` + `/demo` rewrites are configured in `vercel.json`, which **must live inside `repo-setup/`** (the Root Directory), not at the repo root.
+
+---
+
+## 11. Environment Variables
 
 | Variable | Notes |
 |---|---|
-| `GITHUB_TOKEN` | Classic PAT, full repo scope. Never in code. |
+| `GITHUB_TOKEN` | Classic PAT, full `repo` scope. **Never in code.** Injected by `api/github.js`. |
 | `GITHUB_REPO` | `ns-adiraghavan/jaggaer-ns-tracker` |
-| `ANTHROPIC_API_KEY` | Live. Required for Claude conversation rail. |
-| `MAILEROO_API_KEY` | Email delivery. Get from Maileroo dashboard. |
-| `APP_URL` | Clean production URL used in digest email CTA. Optional — falls back to hardcoded value. |
-| `DIGEST_TO` | Fallback recipient list. Manage via **Admin → Notifications** — that takes priority. |
-| `DIGEST_FROM` | Leave unset. Defaults to Maileroo shared domain. Only set if using a verified custom domain. |
+| `ANTHROPIC_API_KEY` | Live. Required for the Claude conversation rail. |
+| `MAILEROO_API_KEY` | Email delivery. From the Maileroo dashboard. |
+| `APP_URL` | Clean production URL used in the digest-email CTA. Optional; falls back to a hardcoded value. |
+| `DIGEST_TO` / `EDITORS_TO` | Fallback recipient lists. **Admin → Notifications takes priority** over these. |
+| `DIGEST_FROM` | Leave unset — defaults to the Maileroo shared domain. Only set with a verified custom domain. |
 
 ---
 
-## 10. Email Notifications
+## 12. Email Notifications
 
-Two email flows, both via Maileroo (`X-Sending-Key` auth header). Recipient addresses must be passed as structured `{ address, display_name }` objects — not flat strings.
+Two flows, both via Maileroo. Auth header is **`X-Sending-Key`**; recipients must be passed as structured `{ address, display_name }` objects, **not** flat strings.
 
 ### Setup
-
-1. Sign up at maileroo.com
-2. Get `MAILEROO_API_KEY` from the dashboard
-3. Add to Vercel environment variables
-4. Set recipients via **Admin → Notifications** in the app
-5. Deploy
+1. Sign up at maileroo.com, get `MAILEROO_API_KEY`.
+2. Add it to Vercel env vars.
+3. Set recipients via **Admin → Notifications**.
+4. Deploy.
 
 ### Flow 1 — Daily Digest (`api/digest.js`)
+Runs at 6 pm IST via Vercel Cron (in `vercel.json`). Only sends on days with activity. Sections (each shown only if non-empty): **Needs your review**, **Sent back for revision**, **Approved today**, **Feedback added**. Recipients from `project.notifications.digest_to`, falling back to `DIGEST_TO`.
 
-Runs at 6pm IST via Vercel Cron (configured in `vercel.json`). **Only sends on days with activity.**
-
-Email sections (each only appears if non-empty):
-- **Needs your review** — pieces NS submitted today, with who's turn it is next
-- **Sent back for revision** — pieces kicked back to NS
-- **Approved today**
-- **Feedback added** — new notes with clean verdict labels
-
-Recipients: `project.notifications.digest_to` (managed via Admin panel). Falls back to `DIGEST_TO` env var.
-
-**Manual trigger / test:**
+Manual trigger / test:
 ```bash
 curl -X POST https://jaggaer-ns-tracker.vercel.app/api/digest \
-  -H "Content-Type: application/json" \
-  -d '{"force": true}'
+  -H "Content-Type: application/json" -d '{"force": true}'
 ```
-Or use **Send Test Digest** in Admin → Notifications.
-
-**After any schema migration** — force-trigger once to reset `digest-state.json` with current piece statuses.
+Or **Send Test Digest** in Admin → Notifications. **After any schema migration**, force-trigger once to reset `digest-state.json` with current piece statuses.
 
 ### Flow 2 — Send to Editors (`api/notify.js`)
-
-Triggered by **Send to Editors →** on fully-approved cluster cards (admin only). Sends a formatted email listing all approved pieces with title, format, and direct GitHub file link.
-
-Recipients: `project.notifications.editors_to` (Admin panel). Falls back to `EDITORS_TO` env var.
+Triggered by **Send to Editors →** on fully-approved cluster cards (admin). Emails all approved pieces with title, format, and a direct GitHub file link. Recipients from `project.notifications.editors_to`, falling back to `EDITORS_TO`.
 
 ### Recipient priority
-
 ```
-project.json → project.notifications.digest_to / editors_to   (wins)
-    ↓  if empty
-Vercel env vars → DIGEST_TO / EDITORS_TO                       (fallback)
+project.notifications.digest_to / editors_to   (wins)
+        ↓ if empty
+DIGEST_TO / EDITORS_TO env vars                (fallback)
 ```
 
 ---
 
-## How to push a project.json update via PowerShell
+## 13. Maintenance Playbook
+
+**Working principles that keep this codebase stable:**
+
+1. **Read the real file state before editing.** This repo drifts (stale duplicates, legacy files, fallback copies of the workflow config). Assumptions about what a file contains cause regressions — open it and confirm the exact lines first.
+2. **Edit large HTML/JSX with guarded string replacement, not `sed`/`awk`.** Braces and JSX confuse line-based tools. Use Python string replacement with an assertion that the target substring exists **exactly once** before replacing:
+   ```python
+   assert src.count(old) == 1, "target not unique or missing"
+   src = src.replace(old, new)
+   ```
+3. **Watch for global-scope naming collisions.** The unbundled script-tag architecture puts every top-level `const`/`function` in one shared global scope. Two files declaring the same identifier crash the app (this happened before with `PieceDrawer` / `PerfPieceDrawer`). Every component and helper name must be unique **across all loaded `.jsx` files**. When adding a helper, prefix it per-module (e.g. `perfSlug`, `useMemoWR`).
+4. **Keep the two copies of the workflow config in sync.** `config/project.json` is the source of truth; `tracker.jsx` (`STATUS_META` / `DEFAULT_WORKFLOW_STAGES`) is the pre-hydration fallback. Rename a stage in one, rename it in the other.
+5. **Never hardcode stage IDs in new UI.** Resolve stages through `project.workflow_stages` at runtime, and patch `ad-hoc-review` explicitly via `getAdHocReviewStage()` — it is intentionally not in `workflow_stages`.
+6. **GitHub Contents API needs a fresh SHA on every PUT.** Fetch the current SHA immediately before writing; a missing SHA → 422, a stale SHA → 409. `saveProject` already refreshes and retries once — don't reintroduce a cached SHA.
+7. **Validate before delivering:** Babel CLI on every touched `.jsx`, `node --check` on plain JS, then a headless render check. Deliver working files, not inline diffs.
+8. **Don't revert the proxy architecture.** Browser → `/api/*` → external API is deliberate; direct browser calls would leak credentials.
+
+**Security note — rotate the committed token.** `repo-setup/setup.sh` contains a **hardcoded GitHub PAT in plaintext**. Anyone with repo read access can use it. Rotate that token in GitHub → Settings → Developer settings → Personal access tokens, replace it with an environment lookup (`TOKEN="${GITHUB_TOKEN}"`) in `setup.sh`, and treat the old token as compromised. This is unrelated to the runtime `GITHUB_TOKEN` env var, which is injected server-side and is safe.
+
+**Housekeeping backlog (safe to action in a cleanup pass):**
+- Delete stale root-level serverless duplicates `repo-setup/digest.js` and `repo-setup/notify.js` (the live versions are in `api/`).
+- Remove unloaded legacy files `agent-builder.jsx`, `bwc.jsx`, `claude-rail.jsx`, and — once `/demo` is retired — `jai-demo.html` and its `vercel.json` rewrite. Confirm nothing references them first.
+- Backfill missing `status_history` timestamps where known; leave genuinely-unknown ones as `ts: null` rather than guessing.
+
+---
+
+## 14. Common Tasks — Recipes
+
+### Add a piece / cluster / pillar
+Edit `config/project.json` (or use **Admin → Pieces / Pillars & Clusters**). New `status` must match a `workflow_stages` id. No code change.
+
+### Add a workflow stage or change a reviewer
+**Admin → Workflow**, or edit `project.workflow_stages`. If you rename or re-ID a stage, mirror it in `tracker.jsx` (`STATUS_META` / `DEFAULT_WORKFLOW_STAGES`) and update any pieces whose `status` referenced the old id.
+
+### Add a team member / reviewer
+Add to `team.ns` or `team.jaggaer` with a unique `id`. Reference them in a stage as `"person:{id}"`. Set `"admin": true` to grant admin mode.
+
+### Upload Search Console data
+Jaggaer user (or Admin mode) drops a per-page GSC `.xlsx` on the piece's card in the Search Performance tab. The slug from the export must match the piece's `publishing.live_url`; a mismatch is reported, not swallowed.
+
+### Push a project.json update by hand (PowerShell)
 
 ```powershell
-$TOKEN = "<your-github-token>"
-$REPO = "ns-adiraghavan/jaggaer-ns-tracker"
-$BASE = "https://api.github.com/repos/$REPO/contents"
+$TOKEN   = $env:GITHUB_TOKEN          # do NOT paste a literal token
+$REPO    = "ns-adiraghavan/jaggaer-ns-tracker"
+$BASE    = "https://api.github.com/repos/$REPO/contents"
 $HEADERS = @{ Authorization = "Bearer $TOKEN"; Accept = "application/vnd.github+json" }
 
 $existing = Invoke-RestMethod "$BASE/config/project.json" -Headers $HEADERS
-$sha = $existing.sha
-$content = Get-Content "config\project.json" -Raw
-$encoded = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($content))
-$body = @{ message = "update: description here"; content = $encoded; sha = $sha } | ConvertTo-Json
+$sha      = $existing.sha
+$content  = Get-Content "config\project.json" -Raw
+$encoded  = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($content))
+$body     = @{ message = "update: description here"; content = $encoded; sha = $sha } | ConvertTo-Json
 Invoke-RestMethod "$BASE/config/project.json" -Method Put -Headers $HEADERS -Body $body -ContentType "application/json" | Out-Null
 Write-Host "Done" -ForegroundColor Green
 ```
 
+The fresh-SHA-before-PUT pattern is mandatory (see §13.6).
+
+### After a schema migration
+Force-trigger the digest once (§12) so `digest-state.json` reseeds with current statuses and the next real digest doesn't misreport.
+
 ---
 
-*Last updated: July 2026, v3.6. Changes from v3.5: `jai-demo.html` replaced by `ai-playground.html` (4-step guided journey + 13 tools, `/ai` route). Ad-Hoc Articles content type added (two-stage review, outside main workflow). Per-piece stage-history log (`status_history[]`). Return-to-sender workflow. Version-aware inline comments (`revision` field on feedback). `BriefUploadPanel` for Jaggaer brief uploads. `ReplaceDraftPanel` for NS draft replacement. Weekly Progress tab. CSV import with new-piece insertion. `AIPlaygroundPanel` with `playground_comments[]`. Maileroo migrated to `X-Sending-Key` auth + structured address objects. GitHub body parser limit raised to 10mb. `ANTHROPIC_API_KEY` now live. Removed `sample-artifacts.jsx`, `claude-rail.jsx`, `jai-demo.html`, `bwc.jsx`.*
+*Last updated: July 2026, v3.7. Changes from v3.6: reconciled file tree with actual repo (documented `weekly-report.jsx`, `performance.jsx`, `style-guide.jsx`, `sample-artifacts.jsx`, and the `api/perf-xlsx.js` / `docx-render.js` / `api.js` functions; corrected the inaccurate "removed files" list — those files are unloaded, not deleted). Workflow reviewer `robert-review` → `ed-review` (Ed). Search Performance now trailing-3-month impressions + avg monthly + weighted position + target keyword. Status Report KPI relabelling. Added detailed Build & Local Development, Maintenance Playbook, and Common Tasks sections. Flagged the plaintext token in `setup.sh` for rotation. Removed repeated notes (vercel.json location, SHA management, dead-weight files now stated once).*
