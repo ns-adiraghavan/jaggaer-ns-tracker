@@ -503,9 +503,21 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
               </div>
             ))}
           </div>
-          {cardKw && (
-            <div style={{ ...FONT, fontSize: "0.66rem", color: "#555", background: "#f5f2ec", padding: "4px 8px", borderRadius: "2px" }}>
-              <span style={{ color: "#aaa", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", fontSize: "0.58rem" }}>Target keyword · </span>{cardKw}
+          {/* Target keyword vs. top actual query — two columns so both are visible at once */}
+          {(cardKw || (record.top_queries && record.top_queries.length > 0)) && (
+            <div style={{ display: "grid", gridTemplateColumns: cardKw && record.top_queries?.length ? "1fr 1fr" : "1fr", gap: "6px" }}>
+              {cardKw && (
+                <div style={{ ...FONT, fontSize: "0.66rem", color: "#555", background: "#f5f2ec", padding: "4px 8px", borderRadius: "2px" }}>
+                  <div style={{ color: "#aaa", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", fontSize: "0.56rem", marginBottom: "2px" }}>Target keyword</div>
+                  {cardKw}
+                </div>
+              )}
+              {record.top_queries && record.top_queries[0] && (
+                <div style={{ ...FONT, fontSize: "0.66rem", color: "#2a5a35", background: "#eef7f1", padding: "4px 8px", borderRadius: "2px", border: "1px solid #c8e8d4" }}>
+                  <div style={{ color: "#1e7a45", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", fontSize: "0.56rem", marginBottom: "2px" }}>Top query (GSC)</div>
+                  {record.top_queries[0].query}
+                </div>
+              )}
             </div>
           )}
           <div style={{ ...FONT, fontSize: "0.64rem", color: "#bbb" }}>
@@ -699,9 +711,25 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
             </div>
           ))}
         </div>
-        {modalKw && (
-          <div style={{ ...FONT, fontSize: "0.7rem", color: "#444", background: "#f5f2ec", padding: "6px 10px", borderRadius: "3px", marginBottom: "10px" }}>
-            <span style={{ color: "#aaa", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.07em", fontSize: "0.6rem" }}>Target keyword </span>{modalKw}
+        {/* Target keyword vs. top actual query — two columns so the comparison is immediate */}
+        {(modalKw || (record.top_queries && record.top_queries.length > 0)) && (
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "10px" }}>
+            <div style={{ background: "#f5f2ec", border: "1px solid #e0dbd4", borderRadius: "3px", padding: "8px 10px" }}>
+              <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "#aaa", marginBottom: "4px" }}>
+                Target keyword (brief)
+              </div>
+              <div style={{ ...FONT, fontSize: "0.82rem", color: "#1a2535", fontWeight: 500 }}>
+                {modalKw || "—"}
+              </div>
+            </div>
+            <div style={{ background: "#eef7f1", border: "1px solid #c8e8d4", borderRadius: "3px", padding: "8px 10px" }}>
+              <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "#1e7a45", marginBottom: "4px" }}>
+                Top query driving impressions (GSC)
+              </div>
+              <div style={{ ...FONT, fontSize: "0.82rem", color: "#1a2535", fontWeight: 500 }}>
+                {record.top_queries?.[0]?.query || "—"}
+              </div>
+            </div>
           </div>
         )}
         </>

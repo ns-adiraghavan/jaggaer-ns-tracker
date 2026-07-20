@@ -199,6 +199,32 @@ window.NS_API = (function () {
     }
   }
 
+  // Whitepaper dual-upload: PDF (required) + HTML companion (optional).
+  // slot is "pdf" or "html" — used directly as the file extension so both land
+  // at the same revision path: deliverable-v{nextRev}.pdf / deliverable-v{nextRev}.html.
+  async function uploadWhitepaperFile(piece, clusterId, pillarId, month, payload, slot, author) {
+    const nextRev = (piece.revision_count || 0) + 1;
+    const d = normaliseDeliverable(payload);
+    const ext = slot === "html" ? "html" : "pdf";
+    const path = `content/${month}/${pillarId}/${clusterId}/${piece.id}/deliverable-v${nextRev}.${ext}`;
+    try {
+      const sha = await fetchSha(path);
+      let result;
+      if (ext === "pdf" || (d.binary && d.b64)) {
+        result = await githubPutRaw(path, d.b64, `upload ${piece.id} v${nextRev} (${ext})`, sha);
+      } else {
+        const contentString =
+          `<!-- uploaded by ${author} at ${new Date().toISOString()} -->\n` +
+          `<!-- piece: ${piece.title} -->\n` + (d.text || "");
+        result = await githubPutFile(path, contentString, `upload ${piece.id} v${nextRev} (${ext})`, sha);
+      }
+      return { ok: true, path, ext, mock: !!result.mock };
+    } catch (e) {
+      console.warn("[NS_API] Whitepaper upload failed:", e.message);
+      return { ok: false, path, error: e.message };
+    }
+  }
+
   // Brief / keyword attachments (Jaggaer). Reads the File here and commits the
   // raw bytes (base64) so PDFs/DOCX round-trip intact.
   async function uploadBriefFile(piece, cluster, pillar, month, file, author) {
@@ -276,6 +302,7 @@ window.NS_API = (function () {
     saveProject,
     uploadPieceDeliverable,
     replaceDeliverable,
+    uploadWhitepaperFile,
     uploadBriefFile,
     listBuildWithClaude,
     askClaude,

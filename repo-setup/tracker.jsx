@@ -2535,23 +2535,31 @@ function WhitepaperUploadPanel({ piece, cluster, pillar, project, currentUser, u
   async function handlePdf(file) {
     if (!file || pdfState === "uploading") return;
     setPdfState("uploading"); setPdfName(file.name); setPdfError(null);
-    const payload = await readDeliverableFile(file);
-    const result = await window.NS_API.uploadWhitepaperFile(
-      piece, cluster.id, pillar.id, project.active_month, payload, "pdf", currentUser.id
-    );
-    if (!result.ok) { setPdfState("error"); setPdfError(result.error || "Upload failed"); return; }
-    setPdfState("done");
+    try {
+      const payload = await readDeliverableFile(file);
+      const result = await window.NS_API.uploadWhitepaperFile(
+        piece, cluster.id, pillar.id, project.active_month, payload, "pdf", currentUser.id
+      );
+      if (!result.ok) { setPdfState("error"); setPdfError(result.error || "Upload failed"); return; }
+      setPdfState("done");
+    } catch (e) {
+      setPdfState("error"); setPdfError(e.message || "Upload failed");
+    }
   }
 
   async function handleHtml(file) {
     if (!file || htmlState === "uploading") return;
     setHtmlState("uploading"); setHtmlName(file.name); setHtmlError(null);
-    const payload = await readDeliverableFile(file);
-    const result = await window.NS_API.uploadWhitepaperFile(
-      piece, cluster.id, pillar.id, project.active_month, payload, "html", currentUser.id
-    );
-    if (!result.ok) { setHtmlState("error"); setHtmlError(result.error || "Upload failed"); return; }
-    setHtmlState("done");
+    try {
+      const payload = await readDeliverableFile(file);
+      const result = await window.NS_API.uploadWhitepaperFile(
+        piece, cluster.id, pillar.id, project.active_month, payload, "html", currentUser.id
+      );
+      if (!result.ok) { setHtmlState("error"); setHtmlError(result.error || "Upload failed"); return; }
+      setHtmlState("done");
+    } catch (e) {
+      setHtmlState("error"); setHtmlError(e.message || "Upload failed");
+    }
   }
 
   async function handleSubmit() {
