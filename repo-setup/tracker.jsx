@@ -1950,7 +1950,7 @@ function ScaledFrame({ src, title, pdf, iframeRef, onLoad }) {
       <iframe
         ref={iframeRef}
         src={src}
-        sandbox="allow-same-origin allow-scripts"
+        {...(!pdf && { sandbox: "allow-same-origin allow-scripts" })}
         title={title}
         onLoad={onLoad}
         style={{ border: "none", display: "block", ...frameStyle }}
