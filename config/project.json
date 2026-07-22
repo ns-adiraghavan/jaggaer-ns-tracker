@@ -2,19 +2,19 @@
   "months": [
     {
       "id": "month-1",
-      "label": "Month 1 · May–Jun 2026",
+      "label": "Month 1 \u00b7 May\u2013Jun 2026",
       "active": true,
       "start_date": "2026-05-21"
     },
     {
       "id": "month-2",
-      "label": "Month 2 · Jun–Jul 2026",
+      "label": "Month 2 \u00b7 Jun\u2013Jul 2026",
       "active": false,
       "start_date": "2026-06-18"
     },
     {
       "id": "month-3",
-      "label": "Month 3 · Jul–Aug 2026",
+      "label": "Month 3 \u00b7 Jul\u2013Aug 2026",
       "active": false,
       "start_date": "2026-07-16"
     }
@@ -94,7 +94,7 @@
             },
             {
               "id": "p-c1-2",
-              "title": "What Are .md Files in Claude — and Why S2P Teams Can't Skip This Step",
+              "title": "What Are .md Files in Claude \u2014 and Why S2P Teams Can't Skip This Step",
               "format": "Educational Page",
               "assignee": "jason",
               "status": "ed-review",
@@ -118,7 +118,7 @@
             },
             {
               "id": "p-c1-3",
-              "title": "AI in S2P: What Claude Actually Delivers for Procurement in 2026 — Beyond the Hype",
+              "title": "AI in S2P: What Claude Actually Delivers for Procurement in 2026 \u2014 Beyond the Hype",
               "format": "FAQ Article",
               "assignee": "m-5jitd",
               "status": "ed-review",
@@ -318,7 +318,7 @@
             },
             {
               "id": "p-c3-3",
-              "title": "3 S2P Tasks You Can Do in Claude Right Now — With Prompts and Outputs",
+              "title": "3 S2P Tasks You Can Do in Claude Right Now \u2014 With Prompts and Outputs",
               "format": "How-to Guide",
               "assignee": "null",
               "status": "brief-uploaded",
@@ -388,7 +388,7 @@
             },
             {
               "id": "p-c4-2",
-              "title": "Claude for S2P: Watch How It Works — Curated Videos and Original Jaggaer Webinars",
+              "title": "Claude for S2P: Watch How It Works \u2014 Curated Videos and Original Jaggaer Webinars",
               "format": "Webinar / Video Page",
               "assignee": "null",
               "status": "brief-uploaded",
@@ -539,7 +539,7 @@
               "schedule_week": 3,
               "funnel": "TOFU",
               "url": "/supply-chain-visibility-beyond-tier-1",
-              "notes": "NEW — not previously in tracker | Words: 1,200–1,800",
+              "notes": "NEW \u2014 not previously in tracker | Words: 1,200\u20131,800",
               "content_type": "msv",
               "phase": 1,
               "last_upload": "2026-06-11T07:03:37.634Z",
@@ -570,7 +570,7 @@
               "schedule_week": 3,
               "funnel": "TOFU",
               "url": "/blog/supplier-financial-risk-signals-procurement",
-              "notes": "NEW — not previously in tracker | Words: 2,000–2,500",
+              "notes": "NEW \u2014 not previously in tracker | Words: 2,000\u20132,500",
               "content_type": "msv",
               "last_upload": "2026-06-11T06:58:23.691Z",
               "last_upload_by": "jason",
@@ -601,7 +601,7 @@
               "schedule_week": 3,
               "funnel": "MOFU",
               "url": "/predictive-supplier-risk-management",
-              "notes": "UPDATED — title refined, keyword updated | Words: 1,200–1,500",
+              "notes": "UPDATED \u2014 title refined, keyword updated | Words: 1,200\u20131,500",
               "content_type": "industry-specific",
               "last_upload": "2026-06-11T06:05:31.259Z",
               "last_upload_by": "m-5jitd",
@@ -631,7 +631,7 @@
               "schedule_week": 3,
               "funnel": "BOFU",
               "url": "/tier-2-supplier-bankruptcy-supply-chain-risk",
-              "notes": "UPDATED — title refined, keywords updated | Words: 2,500–4,000",
+              "notes": "UPDATED \u2014 title refined, keywords updated | Words: 2,500\u20134,000",
               "content_type": "industry-specific",
               "phase": 2,
               "last_upload": "2026-07-03T13:06:25.540Z",
@@ -1033,7 +1033,7 @@
     {
       "id": "public-sector",
       "label": "Public Sector",
-      "subtitle": "UK · FR · ES",
+      "subtitle": "UK \u00b7 FR \u00b7 ES",
       "weight": null,
       "geography": "UK / FR / ES",
       "clusters": [
@@ -1330,7 +1330,7 @@
     {
       "id": "higher-education",
       "label": "Higher Education",
-      "subtitle": "US · EU · UK",
+      "subtitle": "US \u00b7 EU \u00b7 UK",
       "weight": null,
       "geography": "US / EU / UK",
       "clusters": [
@@ -1704,7 +1704,7 @@
         "body": "change to: Unfortunately, most disruptions don't come from Tier 1 suppliers.",
         "ts": "2026-06-02T13:16:45.683Z",
         "annotation": true,
-        "section": "¶54 — \"Most procurement teams have full visibil…\""
+        "section": "\u00b654 \u2014 \"Most procurement teams have full visibil\u2026\""
       },
       {
         "id": "ann-dhiagg",
@@ -1713,7 +1713,7 @@
         "body": "change first sentence to: \"This kind of failure is why supply chain visibility beyond Tier 1 is critical.\"",
         "ts": "2026-06-02T13:41:45.902Z",
         "annotation": true,
-        "section": "¶54 — \"That is what supply chain visibility bey…\""
+        "section": "\u00b654 \u2014 \"That is what supply chain visibility bey\u2026\""
       },
       {
         "id": "ann-fw8k18",
@@ -1722,7 +1722,7 @@
         "body": "Change the CTA above to promote this eBook: https://www.jaggaer.com/download/ebook-guide/agile-supply-chain",
         "ts": "2026-06-10T13:25:42.557Z",
         "annotation": true,
-        "section": "¶38 — \"Where Risk Actually Lives in the Supply …\"",
+        "section": "\u00b638 \u2014 \"Where Risk Actually Lives in the Supply \u2026\"",
         "revision": 4
       },
       {
@@ -1732,7 +1732,7 @@
         "body": "Change the CTA above to a demo CTA",
         "ts": "2026-06-10T13:27:16.763Z",
         "annotation": true,
-        "section": "¶40 — \"The Cost of Invisible Supply Chain Risk …\"",
+        "section": "\u00b640 \u2014 \"The Cost of Invisible Supply Chain Risk \u2026\"",
         "revision": 4
       },
       {
@@ -1742,7 +1742,7 @@
         "body": "change the CTA above to promote this whitepaper: https://www.jaggaer.com/download/whitepaper/supplier-risk-vendor-onboarding-trustpair",
         "ts": "2026-06-10T13:28:51.556Z",
         "annotation": true,
-        "section": "¶42 — \"What True Multi-Tier Visibility Requires…\"",
+        "section": "\u00b642 \u2014 \"What True Multi-Tier Visibility Requires\u2026\"",
         "revision": 4
       },
       {
@@ -1752,7 +1752,7 @@
         "body": "Drop cta above, we have the demo CTA right after it",
         "ts": "2026-06-10T13:29:09.317Z",
         "annotation": true,
-        "section": "¶28 — \"The organizations that navigated 2025's …\"",
+        "section": "\u00b628 \u2014 \"The organizations that navigated 2025's \u2026\"",
         "revision": 4
       },
       {
@@ -1770,7 +1770,7 @@
         "body": "I found a better assets, please use this one instead of the eBook I previously suggested: https://www.jaggaer.com/wp-content/uploads/Seven-Strategies-to-Cut-Costs-Reduce-Risk-and-Drive-Margin-Expansion_CFO.pdf",
         "ts": "2026-06-10T13:52:48.962Z",
         "annotation": true,
-        "section": "¶38 — \"Where Risk Actually Lives in the Supply …\"",
+        "section": "\u00b638 \u2014 \"Where Risk Actually Lives in the Supply \u2026\"",
         "revision": 4
       }
     ],
@@ -1790,7 +1790,7 @@
         "body": "Change CTA block to promote https://www.jaggaer.com/download/whitepaper/supplier-risk-vendor-onboarding-trustpair",
         "ts": "2026-06-10T13:32:26.338Z",
         "annotation": true,
-        "section": "¶8 — \"Supplier Risk Oversight…\"",
+        "section": "\u00b68 \u2014 \"Supplier Risk Oversight\u2026\"",
         "revision": 3
       },
       {
@@ -1800,7 +1800,7 @@
         "body": "Change to a demo cta",
         "ts": "2026-06-10T13:34:05.438Z",
         "annotation": true,
-        "section": "¶20 — \"Get a 360° Supplier Snapshot…\"",
+        "section": "\u00b620 \u2014 \"Get a 360\u00b0 Supplier Snapshot\u2026\"",
         "revision": 3
       },
       {
@@ -1810,7 +1810,7 @@
         "body": "change cta to promote https://www.jaggaer.com/download/ebook-guide/agile-supply-chain",
         "ts": "2026-06-10T13:34:48.627Z",
         "annotation": true,
-        "section": "¶30 — \"Monitor Financial Signals…\"",
+        "section": "\u00b630 \u2014 \"Monitor Financial Signals\u2026\"",
         "revision": 3
       },
       {
@@ -1838,7 +1838,7 @@
         "body": "change cta to promote https://www.jaggaer.com/download/whitepaper/supplier-risk-vendor-onboarding-trustpair",
         "ts": "2026-06-10T13:45:16.301Z",
         "annotation": true,
-        "section": "¶22 — \"End-To-End Risk Management…\"",
+        "section": "\u00b622 \u2014 \"End-To-End Risk Management\u2026\"",
         "revision": 4
       },
       {
@@ -1848,7 +1848,7 @@
         "body": "Change cta to promote https://www.jaggaer.com/download/ebook-guide/agile-supply-chain",
         "ts": "2026-06-10T13:51:02.225Z",
         "annotation": true,
-        "section": "¶3 — \"Close the Reactive Gap…\"",
+        "section": "\u00b63 \u2014 \"Close the Reactive Gap\u2026\"",
         "revision": 4
       },
       {
@@ -2244,7 +2244,7 @@
   "build_with_claude": [
     {
       "name": "contract-analyser",
-      "description": "Drag-drop MSA → Claude returns redline summary + risk flags.",
+      "description": "Drag-drop MSA \u2192 Claude returns redline summary + risk flags.",
       "status": "Live",
       "updated": "2026-05-14",
       "path": "build-with-claude/contract-analyser"
@@ -2344,7 +2344,7 @@
     {
       "week": 4,
       "label": "Week 4",
-      "goal": "Convert audiences built in weeks 1–3 to platform evaluation intent",
+      "goal": "Convert audiences built in weeks 1\u20133 to platform evaluation intent",
       "slots": [
         {
           "pillar": "ai-in-s2p",
@@ -2430,4286 +2430,3942 @@
       "actor": "person:m-ed01"
     },
     {
-      "id": "editors",
-      "label": "CTA Check",
-      "color": "#b05e00",
-      "bg": "#fdf0e0",
-      "actor": [
-        "person:m-pznem",
-        "person:m-izu4e"
-      ]
-    },
-    {
       "id": "approved",
       "label": "Approved",
       "color": "#1e7a45",
       "bg": "#e6f5ec",
       "actor": null
+    },
+    {
+      "id": "live",
+      "label": "Live",
+      "color": "#0d5c8a",
+      "bg": "#e6f2fa",
+      "actor": [
+        "ns",
+        "jaggaer"
+      ]
     }
   ],
   "performanceData": {
     "why-supply-chain-visibility-breaks-down-beyond-tier-1-in-2026": {
       "url": "https://www.jaggaer.com/blog/why-supply-chain-visibility-breaks-down-beyond-tier-1-in-2026",
-      "uploaded_at": "2026-07-14T07:35:44.196Z",
-      "uploaded_by": "manager",
-      "filename": "https___www.jaggaer.com_blog_why-supply-chain-visibility-breaks-down-beyond-tier-1-in-2026.xlsx",
-      "date_range": {
-        "start": "2026-04-08",
-        "end": "2026-07-07",
-        "label": "Last 3 months"
-      },
-      "summary": {
-        "clicks": 9,
-        "impressions": 7231,
-        "ctr": 0.0012,
-        "avg_position": 8.81
-      },
-      "timeseries": [
-        {
-          "date": "2026-04-08",
+      "daily": {
+        "2026-04-08": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-09",
+        "2026-04-09": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-10",
+        "2026-04-10": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-11",
+        "2026-04-11": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-12",
+        "2026-04-12": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-13",
+        "2026-04-13": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-14",
+        "2026-04-14": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-15",
+        "2026-04-15": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-16",
+        "2026-04-16": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-17",
+        "2026-04-17": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-18",
+        "2026-04-18": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-19",
+        "2026-04-19": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-20",
+        "2026-04-20": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-21",
+        "2026-04-21": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-22",
+        "2026-04-22": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-23",
+        "2026-04-23": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-24",
+        "2026-04-24": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-25",
+        "2026-04-25": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-26",
+        "2026-04-26": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-27",
+        "2026-04-27": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-28",
+        "2026-04-28": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-29",
+        "2026-04-29": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-30",
+        "2026-04-30": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-01",
+        "2026-05-01": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-02",
+        "2026-05-02": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-03",
+        "2026-05-03": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-04",
+        "2026-05-04": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-05",
+        "2026-05-05": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-06",
+        "2026-05-06": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-07",
+        "2026-05-07": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-08",
+        "2026-05-08": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-09",
+        "2026-05-09": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-10",
+        "2026-05-10": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-11",
+        "2026-05-11": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-12",
+        "2026-05-12": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-13",
+        "2026-05-13": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-14",
+        "2026-05-14": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-15",
+        "2026-05-15": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-16",
+        "2026-05-16": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-17",
+        "2026-05-17": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-18",
+        "2026-05-18": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-19",
+        "2026-05-19": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-20",
+        "2026-05-20": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-21",
+        "2026-05-21": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-22",
+        "2026-05-22": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-23",
+        "2026-05-23": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-24",
+        "2026-05-24": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-25",
+        "2026-05-25": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-26",
+        "2026-05-26": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-27",
+        "2026-05-27": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-28",
+        "2026-05-28": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-29",
+        "2026-05-29": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-30",
+        "2026-05-30": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-31",
+        "2026-05-31": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-01",
+        "2026-06-01": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-02",
+        "2026-06-02": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-03",
+        "2026-06-03": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-04",
+        "2026-06-04": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-05",
+        "2026-06-05": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-06",
+        "2026-06-06": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-07",
+        "2026-06-07": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-08",
+        "2026-06-08": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-09",
+        "2026-06-09": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-10",
+        "2026-06-10": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-11",
+        "2026-06-11": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-12",
+        "2026-06-12": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-13",
+        "2026-06-13": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-14",
+        "2026-06-14": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-15",
+        "2026-06-15": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-16",
+        "2026-06-16": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-17",
+        "2026-06-17": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-18",
+        "2026-06-18": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-19",
+        "2026-06-19": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-20",
+        "2026-06-20": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-21",
+        "2026-06-21": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-22",
+        "2026-06-22": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-23",
+        "2026-06-23": {
           "clicks": 0,
           "impressions": 420,
           "ctr": 0,
           "position": 5.6
         },
-        {
-          "date": "2026-06-24",
+        "2026-06-24": {
           "clicks": 0,
           "impressions": 481,
           "ctr": 0,
           "position": 7
         },
-        {
-          "date": "2026-06-25",
+        "2026-06-25": {
           "clicks": 2,
           "impressions": 407,
           "ctr": 0.0049,
           "position": 10.5
         },
-        {
-          "date": "2026-06-26",
+        "2026-06-26": {
           "clicks": 0,
           "impressions": 704,
           "ctr": 0,
           "position": 7.9
         },
-        {
-          "date": "2026-06-27",
+        "2026-06-27": {
           "clicks": 0,
           "impressions": 615,
           "ctr": 0,
           "position": 9.1
         },
-        {
-          "date": "2026-06-28",
+        "2026-06-28": {
           "clicks": 0,
           "impressions": 667,
           "ctr": 0,
           "position": 8.8
         },
-        {
-          "date": "2026-06-29",
+        "2026-06-29": {
           "clicks": 1,
           "impressions": 687,
           "ctr": 0.0015,
           "position": 7.1
         },
-        {
-          "date": "2026-06-30",
+        "2026-06-30": {
           "clicks": 2,
           "impressions": 420,
           "ctr": 0.0048,
           "position": 12.4
         },
-        {
-          "date": "2026-07-01",
+        "2026-07-01": {
           "clicks": 0,
           "impressions": 539,
           "ctr": 0,
           "position": 8
         },
-        {
-          "date": "2026-07-02",
+        "2026-07-02": {
           "clicks": 2,
           "impressions": 353,
           "ctr": 0.0057,
           "position": 10.8
         },
-        {
-          "date": "2026-07-03",
+        "2026-07-03": {
           "clicks": 1,
           "impressions": 607,
           "ctr": 0.0016,
           "position": 7.9
         },
-        {
-          "date": "2026-07-04",
+        "2026-07-04": {
           "clicks": 0,
           "impressions": 540,
           "ctr": 0,
           "position": 8.5
         },
-        {
-          "date": "2026-07-05",
+        "2026-07-05": {
           "clicks": 0,
           "impressions": 268,
           "ctr": 0,
           "position": 11.3
         },
-        {
-          "date": "2026-07-06",
+        "2026-07-06": {
           "clicks": 1,
           "impressions": 252,
           "ctr": 0.004,
           "position": 11.5
         },
-        {
-          "date": "2026-07-07",
+        "2026-07-07": {
           "clicks": 0,
           "impressions": 271,
           "ctr": 0,
           "position": 11.2
         }
-      ],
-      "top_queries": [
-        {
-          "query": "multi tier supply chain visibility",
-          "clicks": 0,
-          "impressions": 628,
-          "ctr": 0,
-          "position": 42.48
-        },
-        {
-          "query": "how can companies improve multi-tier supply chain visibility in complex \nglobal sourcing structures?",
-          "clicks": 0,
-          "impressions": 42,
-          "ctr": 0,
-          "position": 9.88
-        },
-        {
-          "query": "companies visibility into sub-tier suppliers",
-          "clicks": 0,
-          "impressions": 34,
-          "ctr": 0,
-          "position": 3.32
-        },
-        {
-          "query": "manufacturing sector supply chain disruptions june 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
-          "clicks": 0,
-          "impressions": 30,
-          "ctr": 0,
-          "position": 4.43
-        },
-        {
-          "query": "sub-tier supplier visibility",
-          "clicks": 0,
-          "impressions": 27,
-          "ctr": 0,
-          "position": 5.37
-        },
-        {
-          "query": "it sector supply chain disruptions june 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
-          "clicks": 0,
-          "impressions": 22,
-          "ctr": 0,
-          "position": 1.77
-        },
-        {
-          "query": "energy utilities sector supply chain disruptions june 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
-          "clicks": 0,
-          "impressions": 20,
-          "ctr": 0,
-          "position": 2.85
-        },
-        {
-          "query": "recent manufacturing supply chain disruptions 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
-          "clicks": 0,
-          "impressions": 14,
-          "ctr": 0,
-          "position": 6.07
-        },
-        {
-          "query": "sub-tier visibility",
-          "clicks": 0,
-          "impressions": 14,
-          "ctr": 0,
-          "position": 7.5
-        },
-        {
-          "query": "does jaggaer offer supply chain visibility and risk insights through \nanalytics dashboards across the entire organization?",
-          "clicks": 0,
-          "impressions": 14,
-          "ctr": 0,
-          "position": 7.79
-        },
-        {
-          "query": "multi-tier visibility aerospace supply chains",
-          "clicks": 0,
-          "impressions": 14,
-          "ctr": 0,
-          "position": 7.79
-        },
-        {
-          "query": "sub-tier risk alert",
-          "clicks": 0,
-          "impressions": 12,
-          "ctr": 0,
-          "position": 5.25
-        },
-        {
-          "query": "procurement technology news june 2026 site:reuters.com | site:bloomberg.com \n| site:ft.com | site:wsj.com | site:businesswire.com | site:prnewswire.com \n| site:globenewswire.com | site:spendmatters.com | site:procurementmag.com \n| site:supplychaindive.com | site:supplychainbrain.com | \nsite:crunchbase.com | site:techcrunch.com | site:sap.com | site:oracle.com \n| site:coupa.com | site:ivalua.com | site:gep.com | site:jaggaer.com | \nsite:icertis.com",
-          "clicks": 0,
-          "impressions": 12,
-          "ctr": 0,
-          "position": 6.58
-        },
-        {
-          "query": "\"supply chain visibility\" -site:reddit.com -site:twitter.com -site:x.com \n-site:wykop.pl -site:tripadvisor.com -site:youtube.com -site:yelp.com \n-site:booking.com -site:facebook.com -site:instagram.com -site:tiktok.com",
-          "clicks": 0,
-          "impressions": 9,
-          "ctr": 0,
-          "position": 1.11
-        },
-        {
-          "query": "company single customer concentration risk 2026 crisis problem risk",
-          "clicks": 0,
-          "impressions": 9,
-          "ctr": 0,
-          "position": 4.67
-        },
-        {
-          "query": "bouygues supply chain resilience sub-tier supplier mapping 2025 2026",
-          "clicks": 0,
-          "impressions": 8,
-          "ctr": 0,
-          "position": 1.25
-        },
-        {
-          "query": "tier 2 supplier margins 2026",
-          "clicks": 0,
-          "impressions": 8,
-          "ctr": 0,
-          "position": 4.25
-        },
-        {
-          "query": "how does supply chain management inside erp handle multi-tier supplier \nvisibility and risk?",
-          "clicks": 0,
-          "impressions": 7,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "query": "supply chain disruptions 2026",
-          "clicks": 0,
-          "impressions": 7,
-          "ctr": 0,
-          "position": 1.57
-        },
-        {
-          "query": "supply chains shocks with thin slack and poor shared visibility should \nproduce more unilateral 2026",
-          "clicks": 0,
-          "impressions": 7,
-          "ctr": 0,
-          "position": 5.29
-        },
-        {
-          "query": "alfa laval supply chain resilience sub-tier suppliers 2025 2026",
-          "clicks": 0,
-          "impressions": 6,
-          "ctr": 0,
-          "position": 1.83
-        },
-        {
-          "query": "jaggaer",
-          "clicks": 0,
-          "impressions": 6,
-          "ctr": 0,
-          "position": 3.33
-        },
-        {
-          "query": "supplier visibility",
-          "clicks": 0,
-          "impressions": 6,
-          "ctr": 0,
-          "position": 40.5
-        },
-        {
-          "query": "what are the challenges of multi-tier supply chain mapping?",
-          "clicks": 0,
-          "impressions": 5,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "query": "multi-tier supplier buy american compliance visibility",
-          "clicks": 0,
-          "impressions": 5,
-          "ctr": 0,
-          "position": 7.6
-        }
-      ],
-      "countries": [
-        {
-          "country": "United States",
-          "clicks": 0,
-          "impressions": 399,
-          "ctr": 0,
-          "position": 9.78
-        },
-        {
-          "country": "United Kingdom",
-          "clicks": 0,
-          "impressions": 42,
-          "ctr": 0,
-          "position": 33.74
-        },
-        {
-          "country": "Germany",
-          "clicks": 0,
-          "impressions": 35,
-          "ctr": 0,
-          "position": 34.8
-        },
-        {
-          "country": "Canada",
-          "clicks": 0,
-          "impressions": 34,
-          "ctr": 0,
-          "position": 14.65
-        },
-        {
-          "country": "Japan",
-          "clicks": 0,
-          "impressions": 31,
-          "ctr": 0,
-          "position": 41.55
-        },
-        {
-          "country": "Belgium",
-          "clicks": 0,
-          "impressions": 30,
-          "ctr": 0,
-          "position": 43.9
-        },
-        {
-          "country": "Netherlands",
-          "clicks": 0,
-          "impressions": 30,
-          "ctr": 0,
-          "position": 44.7
-        },
-        {
-          "country": "Czechia",
-          "clicks": 0,
-          "impressions": 29,
-          "ctr": 0,
-          "position": 41
-        },
-        {
-          "country": "Spain",
-          "clicks": 0,
-          "impressions": 29,
-          "ctr": 0,
-          "position": 41.62
-        },
-        {
-          "country": "Ireland",
-          "clicks": 0,
-          "impressions": 29,
-          "ctr": 0,
-          "position": 42.1
-        },
-        {
-          "country": "Sweden",
-          "clicks": 0,
-          "impressions": 29,
-          "ctr": 0,
-          "position": 47.31
-        },
-        {
-          "country": "Norway",
-          "clicks": 0,
-          "impressions": 28,
-          "ctr": 0,
-          "position": 45.11
-        },
-        {
-          "country": "Finland",
-          "clicks": 0,
-          "impressions": 28,
-          "ctr": 0,
-          "position": 45.61
-        },
-        {
-          "country": "Austria",
-          "clicks": 0,
-          "impressions": 27,
-          "ctr": 0,
-          "position": 45.93
-        },
-        {
-          "country": "Switzerland",
-          "clicks": 0,
-          "impressions": 26,
-          "ctr": 0,
-          "position": 42.19
-        },
-        {
-          "country": "Denmark",
-          "clicks": 0,
-          "impressions": 23,
-          "ctr": 0,
-          "position": 47.52
-        },
-        {
-          "country": "Brazil",
-          "clicks": 0,
-          "impressions": 22,
-          "ctr": 0,
-          "position": 37.45
-        },
-        {
-          "country": "Malaysia",
-          "clicks": 0,
-          "impressions": 22,
-          "ctr": 0,
-          "position": 52
-        },
-        {
-          "country": "India",
-          "clicks": 0,
-          "impressions": 20,
-          "ctr": 0,
-          "position": 28.45
-        },
-        {
-          "country": "Oman",
-          "clicks": 0,
-          "impressions": 18,
-          "ctr": 0,
-          "position": 32.33
-        },
-        {
-          "country": "Australia",
-          "clicks": 0,
-          "impressions": 16,
-          "ctr": 0,
-          "position": 43.62
-        },
-        {
-          "country": "United Arab Emirates",
-          "clicks": 0,
-          "impressions": 16,
-          "ctr": 0,
-          "position": 44.56
-        },
-        {
-          "country": "Indonesia",
-          "clicks": 0,
-          "impressions": 15,
-          "ctr": 0,
-          "position": 37.93
-        },
-        {
-          "country": "New Zealand",
-          "clicks": 0,
-          "impressions": 14,
-          "ctr": 0,
-          "position": 38.93
-        },
-        {
-          "country": "Hong Kong",
-          "clicks": 0,
-          "impressions": 14,
-          "ctr": 0,
-          "position": 43.57
-        },
-        {
-          "country": "Mexico",
-          "clicks": 0,
-          "impressions": 13,
-          "ctr": 0,
-          "position": 43.77
-        },
-        {
-          "country": "Qatar",
-          "clicks": 0,
-          "impressions": 12,
-          "ctr": 0,
-          "position": 39.92
-        },
-        {
-          "country": "Singapore",
-          "clicks": 0,
-          "impressions": 8,
-          "ctr": 0,
-          "position": 38.88
-        },
-        {
-          "country": "Saudi Arabia",
-          "clicks": 0,
-          "impressions": 8,
-          "ctr": 0,
-          "position": 43.12
-        },
-        {
-          "country": "Italy",
-          "clicks": 0,
-          "impressions": 7,
-          "ctr": 0,
-          "position": 2.86
-        },
-        {
-          "country": "Argentina",
-          "clicks": 0,
-          "impressions": 6,
-          "ctr": 0,
-          "position": 5.33
-        },
-        {
-          "country": "Philippines",
-          "clicks": 0,
-          "impressions": 4,
-          "ctr": 0,
-          "position": 34.5
-        },
-        {
-          "country": "Vietnam",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 5.67
-        },
-        {
-          "country": "France",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 30.67
-        },
-        {
-          "country": "Israel",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 11
-        },
-        {
-          "country": "China",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 24.5
-        },
-        {
-          "country": "Bahrain",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "country": "Ghana",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "country": "Venezuela",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "country": "Paraguay",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 2
-        },
-        {
-          "country": "Bolivia",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 4
-        },
-        {
-          "country": "Hungary",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 6
-        },
-        {
-          "country": "Lithuania",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 7
-        }
-      ],
-      "devices": [
-        {
-          "device": "Desktop",
-          "clicks": 0,
-          "impressions": 806,
-          "ctr": 0,
-          "position": 22.53
-        },
-        {
-          "device": "Mobile",
-          "clicks": 0,
-          "impressions": 275,
-          "ctr": 0,
-          "position": 44.1
+      },
+      "snapshots": [
+        {
+          "snapshot_date": "2026-07-07",
+          "uploaded_at": "2026-07-14T07:35:44.196Z",
+          "uploaded_by": "manager",
+          "filename": "https___www.jaggaer.com_blog_why-supply-chain-visibility-breaks-down-beyond-tier-1-in-2026.xlsx",
+          "date_range": {
+            "start": "2026-04-08",
+            "end": "2026-07-07",
+            "label": "Last 3 months"
+          },
+          "summary": {
+            "clicks": 9,
+            "impressions": 7231,
+            "ctr": 0.0012,
+            "avg_position": 8.81
+          },
+          "top_queries": [
+            {
+              "query": "multi tier supply chain visibility",
+              "clicks": 0,
+              "impressions": 628,
+              "ctr": 0,
+              "position": 42.48
+            },
+            {
+              "query": "how can companies improve multi-tier supply chain visibility in complex \nglobal sourcing structures?",
+              "clicks": 0,
+              "impressions": 42,
+              "ctr": 0,
+              "position": 9.88
+            },
+            {
+              "query": "companies visibility into sub-tier suppliers",
+              "clicks": 0,
+              "impressions": 34,
+              "ctr": 0,
+              "position": 3.32
+            },
+            {
+              "query": "manufacturing sector supply chain disruptions june 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
+              "clicks": 0,
+              "impressions": 30,
+              "ctr": 0,
+              "position": 4.43
+            },
+            {
+              "query": "sub-tier supplier visibility",
+              "clicks": 0,
+              "impressions": 27,
+              "ctr": 0,
+              "position": 5.37
+            },
+            {
+              "query": "it sector supply chain disruptions june 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
+              "clicks": 0,
+              "impressions": 22,
+              "ctr": 0,
+              "position": 1.77
+            },
+            {
+              "query": "energy utilities sector supply chain disruptions june 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
+              "clicks": 0,
+              "impressions": 20,
+              "ctr": 0,
+              "position": 2.85
+            },
+            {
+              "query": "recent manufacturing supply chain disruptions 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
+              "clicks": 0,
+              "impressions": 14,
+              "ctr": 0,
+              "position": 6.07
+            },
+            {
+              "query": "sub-tier visibility",
+              "clicks": 0,
+              "impressions": 14,
+              "ctr": 0,
+              "position": 7.5
+            },
+            {
+              "query": "does jaggaer offer supply chain visibility and risk insights through \nanalytics dashboards across the entire organization?",
+              "clicks": 0,
+              "impressions": 14,
+              "ctr": 0,
+              "position": 7.79
+            },
+            {
+              "query": "multi-tier visibility aerospace supply chains",
+              "clicks": 0,
+              "impressions": 14,
+              "ctr": 0,
+              "position": 7.79
+            },
+            {
+              "query": "sub-tier risk alert",
+              "clicks": 0,
+              "impressions": 12,
+              "ctr": 0,
+              "position": 5.25
+            },
+            {
+              "query": "procurement technology news june 2026 site:reuters.com | site:bloomberg.com \n| site:ft.com | site:wsj.com | site:businesswire.com | site:prnewswire.com \n| site:globenewswire.com | site:spendmatters.com | site:procurementmag.com \n| site:supplychaindive.com | site:supplychainbrain.com | \nsite:crunchbase.com | site:techcrunch.com | site:sap.com | site:oracle.com \n| site:coupa.com | site:ivalua.com | site:gep.com | site:jaggaer.com | \nsite:icertis.com",
+              "clicks": 0,
+              "impressions": 12,
+              "ctr": 0,
+              "position": 6.58
+            },
+            {
+              "query": "\"supply chain visibility\" -site:reddit.com -site:twitter.com -site:x.com \n-site:wykop.pl -site:tripadvisor.com -site:youtube.com -site:yelp.com \n-site:booking.com -site:facebook.com -site:instagram.com -site:tiktok.com",
+              "clicks": 0,
+              "impressions": 9,
+              "ctr": 0,
+              "position": 1.11
+            },
+            {
+              "query": "company single customer concentration risk 2026 crisis problem risk",
+              "clicks": 0,
+              "impressions": 9,
+              "ctr": 0,
+              "position": 4.67
+            },
+            {
+              "query": "bouygues supply chain resilience sub-tier supplier mapping 2025 2026",
+              "clicks": 0,
+              "impressions": 8,
+              "ctr": 0,
+              "position": 1.25
+            },
+            {
+              "query": "tier 2 supplier margins 2026",
+              "clicks": 0,
+              "impressions": 8,
+              "ctr": 0,
+              "position": 4.25
+            },
+            {
+              "query": "how does supply chain management inside erp handle multi-tier supplier \nvisibility and risk?",
+              "clicks": 0,
+              "impressions": 7,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "query": "supply chain disruptions 2026",
+              "clicks": 0,
+              "impressions": 7,
+              "ctr": 0,
+              "position": 1.57
+            },
+            {
+              "query": "supply chains shocks with thin slack and poor shared visibility should \nproduce more unilateral 2026",
+              "clicks": 0,
+              "impressions": 7,
+              "ctr": 0,
+              "position": 5.29
+            },
+            {
+              "query": "alfa laval supply chain resilience sub-tier suppliers 2025 2026",
+              "clicks": 0,
+              "impressions": 6,
+              "ctr": 0,
+              "position": 1.83
+            },
+            {
+              "query": "jaggaer",
+              "clicks": 0,
+              "impressions": 6,
+              "ctr": 0,
+              "position": 3.33
+            },
+            {
+              "query": "supplier visibility",
+              "clicks": 0,
+              "impressions": 6,
+              "ctr": 0,
+              "position": 40.5
+            },
+            {
+              "query": "what are the challenges of multi-tier supply chain mapping?",
+              "clicks": 0,
+              "impressions": 5,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "query": "multi-tier supplier buy american compliance visibility",
+              "clicks": 0,
+              "impressions": 5,
+              "ctr": 0,
+              "position": 7.6
+            }
+          ],
+          "countries": [
+            {
+              "country": "United States",
+              "clicks": 0,
+              "impressions": 399,
+              "ctr": 0,
+              "position": 9.78
+            },
+            {
+              "country": "United Kingdom",
+              "clicks": 0,
+              "impressions": 42,
+              "ctr": 0,
+              "position": 33.74
+            },
+            {
+              "country": "Germany",
+              "clicks": 0,
+              "impressions": 35,
+              "ctr": 0,
+              "position": 34.8
+            },
+            {
+              "country": "Canada",
+              "clicks": 0,
+              "impressions": 34,
+              "ctr": 0,
+              "position": 14.65
+            },
+            {
+              "country": "Japan",
+              "clicks": 0,
+              "impressions": 31,
+              "ctr": 0,
+              "position": 41.55
+            },
+            {
+              "country": "Belgium",
+              "clicks": 0,
+              "impressions": 30,
+              "ctr": 0,
+              "position": 43.9
+            },
+            {
+              "country": "Netherlands",
+              "clicks": 0,
+              "impressions": 30,
+              "ctr": 0,
+              "position": 44.7
+            },
+            {
+              "country": "Czechia",
+              "clicks": 0,
+              "impressions": 29,
+              "ctr": 0,
+              "position": 41
+            },
+            {
+              "country": "Spain",
+              "clicks": 0,
+              "impressions": 29,
+              "ctr": 0,
+              "position": 41.62
+            },
+            {
+              "country": "Ireland",
+              "clicks": 0,
+              "impressions": 29,
+              "ctr": 0,
+              "position": 42.1
+            },
+            {
+              "country": "Sweden",
+              "clicks": 0,
+              "impressions": 29,
+              "ctr": 0,
+              "position": 47.31
+            },
+            {
+              "country": "Norway",
+              "clicks": 0,
+              "impressions": 28,
+              "ctr": 0,
+              "position": 45.11
+            },
+            {
+              "country": "Finland",
+              "clicks": 0,
+              "impressions": 28,
+              "ctr": 0,
+              "position": 45.61
+            },
+            {
+              "country": "Austria",
+              "clicks": 0,
+              "impressions": 27,
+              "ctr": 0,
+              "position": 45.93
+            },
+            {
+              "country": "Switzerland",
+              "clicks": 0,
+              "impressions": 26,
+              "ctr": 0,
+              "position": 42.19
+            },
+            {
+              "country": "Denmark",
+              "clicks": 0,
+              "impressions": 23,
+              "ctr": 0,
+              "position": 47.52
+            },
+            {
+              "country": "Brazil",
+              "clicks": 0,
+              "impressions": 22,
+              "ctr": 0,
+              "position": 37.45
+            },
+            {
+              "country": "Malaysia",
+              "clicks": 0,
+              "impressions": 22,
+              "ctr": 0,
+              "position": 52
+            },
+            {
+              "country": "India",
+              "clicks": 0,
+              "impressions": 20,
+              "ctr": 0,
+              "position": 28.45
+            },
+            {
+              "country": "Oman",
+              "clicks": 0,
+              "impressions": 18,
+              "ctr": 0,
+              "position": 32.33
+            },
+            {
+              "country": "Australia",
+              "clicks": 0,
+              "impressions": 16,
+              "ctr": 0,
+              "position": 43.62
+            },
+            {
+              "country": "United Arab Emirates",
+              "clicks": 0,
+              "impressions": 16,
+              "ctr": 0,
+              "position": 44.56
+            },
+            {
+              "country": "Indonesia",
+              "clicks": 0,
+              "impressions": 15,
+              "ctr": 0,
+              "position": 37.93
+            },
+            {
+              "country": "New Zealand",
+              "clicks": 0,
+              "impressions": 14,
+              "ctr": 0,
+              "position": 38.93
+            },
+            {
+              "country": "Hong Kong",
+              "clicks": 0,
+              "impressions": 14,
+              "ctr": 0,
+              "position": 43.57
+            },
+            {
+              "country": "Mexico",
+              "clicks": 0,
+              "impressions": 13,
+              "ctr": 0,
+              "position": 43.77
+            },
+            {
+              "country": "Qatar",
+              "clicks": 0,
+              "impressions": 12,
+              "ctr": 0,
+              "position": 39.92
+            },
+            {
+              "country": "Singapore",
+              "clicks": 0,
+              "impressions": 8,
+              "ctr": 0,
+              "position": 38.88
+            },
+            {
+              "country": "Saudi Arabia",
+              "clicks": 0,
+              "impressions": 8,
+              "ctr": 0,
+              "position": 43.12
+            },
+            {
+              "country": "Italy",
+              "clicks": 0,
+              "impressions": 7,
+              "ctr": 0,
+              "position": 2.86
+            },
+            {
+              "country": "Argentina",
+              "clicks": 0,
+              "impressions": 6,
+              "ctr": 0,
+              "position": 5.33
+            },
+            {
+              "country": "Philippines",
+              "clicks": 0,
+              "impressions": 4,
+              "ctr": 0,
+              "position": 34.5
+            },
+            {
+              "country": "Vietnam",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 5.67
+            },
+            {
+              "country": "France",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 30.67
+            },
+            {
+              "country": "Israel",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 11
+            },
+            {
+              "country": "China",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 24.5
+            },
+            {
+              "country": "Bahrain",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Ghana",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Venezuela",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Paraguay",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 2
+            },
+            {
+              "country": "Bolivia",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 4
+            },
+            {
+              "country": "Hungary",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 6
+            },
+            {
+              "country": "Lithuania",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 7
+            }
+          ],
+          "devices": [
+            {
+              "device": "Desktop",
+              "clicks": 0,
+              "impressions": 806,
+              "ctr": 0,
+              "position": 22.53
+            },
+            {
+              "device": "Mobile",
+              "clicks": 0,
+              "impressions": 275,
+              "ctr": 0,
+              "position": 44.1
+            }
+          ]
         }
       ]
     },
     "supplier-financial-risk-signals-procurement-should-monitor-in-2026": {
       "url": "https://www.jaggaer.com/blog/supplier-financial-risk-signals-procurement-should-monitor-in-2026",
-      "uploaded_at": "2026-07-14T09:46:09.542Z",
-      "uploaded_by": "manager",
-      "filename": "https___www.jaggaer.com_blog_supplier-financial-risk-signals-procurement-should-monitor-in-2026.xlsx",
-      "date_range": {
-        "start": "2026-04-08",
-        "end": "2026-07-07",
-        "label": "Last 3 months"
-      },
-      "summary": {
-        "clicks": 2,
-        "impressions": 1525,
-        "ctr": 0.0013,
-        "avg_position": 5.8
-      },
-      "timeseries": [
-        {
-          "date": "2026-04-08",
+      "daily": {
+        "2026-04-08": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-09",
+        "2026-04-09": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-10",
+        "2026-04-10": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-11",
+        "2026-04-11": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-12",
+        "2026-04-12": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-13",
+        "2026-04-13": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-14",
+        "2026-04-14": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-15",
+        "2026-04-15": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-16",
+        "2026-04-16": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-17",
+        "2026-04-17": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-18",
+        "2026-04-18": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-19",
+        "2026-04-19": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-20",
+        "2026-04-20": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-21",
+        "2026-04-21": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-22",
+        "2026-04-22": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-23",
+        "2026-04-23": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-24",
+        "2026-04-24": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-25",
+        "2026-04-25": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-26",
+        "2026-04-26": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-27",
+        "2026-04-27": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-28",
+        "2026-04-28": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-29",
+        "2026-04-29": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-30",
+        "2026-04-30": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-01",
+        "2026-05-01": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-02",
+        "2026-05-02": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-03",
+        "2026-05-03": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-04",
+        "2026-05-04": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-05",
+        "2026-05-05": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-06",
+        "2026-05-06": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-07",
+        "2026-05-07": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-08",
+        "2026-05-08": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-09",
+        "2026-05-09": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-10",
+        "2026-05-10": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-11",
+        "2026-05-11": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-12",
+        "2026-05-12": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-13",
+        "2026-05-13": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-14",
+        "2026-05-14": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-15",
+        "2026-05-15": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-16",
+        "2026-05-16": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-17",
+        "2026-05-17": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-18",
+        "2026-05-18": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-19",
+        "2026-05-19": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-20",
+        "2026-05-20": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-21",
+        "2026-05-21": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-22",
+        "2026-05-22": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-23",
+        "2026-05-23": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-24",
+        "2026-05-24": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-25",
+        "2026-05-25": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-26",
+        "2026-05-26": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-27",
+        "2026-05-27": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-28",
+        "2026-05-28": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-29",
+        "2026-05-29": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-30",
+        "2026-05-30": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-31",
+        "2026-05-31": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-01",
+        "2026-06-01": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-02",
+        "2026-06-02": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-03",
+        "2026-06-03": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-04",
+        "2026-06-04": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-05",
+        "2026-06-05": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-06",
+        "2026-06-06": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-07",
+        "2026-06-07": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-08",
+        "2026-06-08": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-09",
+        "2026-06-09": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-10",
+        "2026-06-10": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-11",
+        "2026-06-11": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-12",
+        "2026-06-12": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-13",
+        "2026-06-13": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-14",
+        "2026-06-14": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-15",
+        "2026-06-15": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-16",
+        "2026-06-16": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-17",
+        "2026-06-17": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-18",
+        "2026-06-18": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-19",
+        "2026-06-19": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-20",
+        "2026-06-20": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-21",
+        "2026-06-21": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-22",
+        "2026-06-22": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-23",
+        "2026-06-23": {
           "clicks": 0,
           "impressions": 554,
           "ctr": 0,
           "position": 5.4
         },
-        {
-          "date": "2026-06-24",
+        "2026-06-24": {
           "clicks": 0,
           "impressions": 280,
           "ctr": 0,
           "position": 4.7
         },
-        {
-          "date": "2026-06-25",
+        "2026-06-25": {
           "clicks": 0,
           "impressions": 57,
           "ctr": 0,
           "position": 4.7
         },
-        {
-          "date": "2026-06-26",
+        "2026-06-26": {
           "clicks": 0,
           "impressions": 6,
           "ctr": 0,
           "position": 12.2
         },
-        {
-          "date": "2026-06-27",
+        "2026-06-27": {
           "clicks": 0,
           "impressions": 13,
           "ctr": 0,
           "position": 16.5
         },
-        {
-          "date": "2026-06-28",
+        "2026-06-28": {
           "clicks": 0,
           "impressions": 17,
           "ctr": 0,
           "position": 14.4
         },
-        {
-          "date": "2026-06-29",
+        "2026-06-29": {
           "clicks": 0,
           "impressions": 36,
           "ctr": 0,
           "position": 8.4
         },
-        {
-          "date": "2026-06-30",
+        "2026-06-30": {
           "clicks": 0,
           "impressions": 31,
           "ctr": 0,
           "position": 6.5
         },
-        {
-          "date": "2026-07-01",
+        "2026-07-01": {
           "clicks": 0,
           "impressions": 19,
           "ctr": 0,
           "position": 12.4
         },
-        {
-          "date": "2026-07-02",
+        "2026-07-02": {
           "clicks": 0,
           "impressions": 23,
           "ctr": 0,
           "position": 7.3
         },
-        {
-          "date": "2026-07-03",
+        "2026-07-03": {
           "clicks": 0,
           "impressions": 18,
           "ctr": 0,
           "position": 5.4
         },
-        {
-          "date": "2026-07-04",
+        "2026-07-04": {
           "clicks": 0,
           "impressions": 15,
           "ctr": 0,
           "position": 4.5
         },
-        {
-          "date": "2026-07-05",
+        "2026-07-05": {
           "clicks": 0,
           "impressions": 118,
           "ctr": 0,
           "position": 5.1
         },
-        {
-          "date": "2026-07-06",
+        "2026-07-06": {
           "clicks": 1,
           "impressions": 160,
           "ctr": 0.0062,
           "position": 5.3
         },
-        {
-          "date": "2026-07-07",
+        "2026-07-07": {
           "clicks": 1,
           "impressions": 178,
           "ctr": 0.0056,
           "position": 6.9
         }
-      ],
-      "top_queries": [
+      },
+      "snapshots": [
         {
-          "query": "recent it supply chain disruptions insurance industry -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
-          "clicks": 0,
-          "impressions": 19,
-          "ctr": 0,
-          "position": 2.21
-        },
-        {
-          "query": "what early warning indicators does rapidratings provide for procurement \nteams managing critical single-source suppliers?",
-          "clicks": 0,
-          "impressions": 19,
-          "ctr": 0,
-          "position": 2.79
-        },
-        {
-          "query": "recent financial services supply chain disruptions insurance \n-site:reddit.com -site:fandom.com -site:wikipedia.org -site:quora.com \n-site:medium.com -site:twitter.com -site:x.com -site:facebook.com \n-site:tiktok.com -site:youtube.com",
-          "clicks": 0,
-          "impressions": 12,
-          "ctr": 0,
-          "position": 1.92
-        },
-        {
-          "query": "recent it sector supply chain disruptions insurance companies \n-site:reddit.com -site:fandom.com -site:wikipedia.org -site:quora.com \n-site:medium.com -site:twitter.com -site:x.com -site:facebook.com \n-site:tiktok.com -site:youtube.com",
-          "clicks": 0,
-          "impressions": 11,
-          "ctr": 0,
-          "position": 2.27
-        },
-        {
-          "query": "procurement signals vendor management italy",
-          "clicks": 0,
-          "impressions": 11,
-          "ctr": 0,
-          "position": 2.36
-        },
-        {
-          "query": "can rapidratings analyze supplier financial statements to predict the \nlikelihood of disruption or default over 12 months?",
-          "clicks": 0,
-          "impressions": 11,
-          "ctr": 0,
-          "position": 7.55
-        },
-        {
-          "query": "supplier.ai financial distress 2025-2026",
-          "clicks": 0,
-          "impressions": 9,
-          "ctr": 0,
-          "position": 1.11
-        },
-        {
-          "query": "how do i monitor supplier network financial stability?",
-          "clicks": 0,
-          "impressions": 9,
-          "ctr": 0,
-          "position": 5.33
-        },
-        {
-          "query": "supplier financial risk",
-          "clicks": 0,
-          "impressions": 6,
-          "ctr": 0,
-          "position": 3.83
-        },
-        {
-          "query": "balke durr supplier risk score financial stability 2026",
-          "clicks": 0,
-          "impressions": 5,
-          "ctr": 0,
-          "position": 1.4
-        },
-        {
-          "query": "supplier financial risk assessment",
-          "clicks": 0,
-          "impressions": 5,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "query": "reuter stokes supplier risk score financial stability 2026",
-          "clicks": 0,
-          "impressions": 4,
-          "ctr": 0,
-          "position": 1.25
-        },
-        {
-          "query": "adiabatix supplier risk score financial stability 2026",
-          "clicks": 0,
-          "impressions": 4,
-          "ctr": 0,
-          "position": 1.5
-        },
-        {
-          "query": "recent supply chain disruptions financial services insurance \n-site:reddit.com -site:fandom.com -site:wikipedia.org -site:quora.com \n-site:medium.com -site:twitter.com -site:x.com -site:facebook.com \n-site:tiktok.com -site:youtube.com",
-          "clicks": 0,
-          "impressions": 4,
-          "ctr": 0,
-          "position": 2
-        },
-        {
-          "query": "how do i spot risky suppliers faster",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 1.33
-        },
-        {
-          "query": "telecom industry supply chain disruptions june 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 3.33
-        },
-        {
-          "query": "it sector supply chain disruptions telecom companies june 2026 \n-site:reddit.com -site:fandom.com -site:wikipedia.org -site:quora.com \n-site:medium.com -site:twitter.com -site:x.com -site:facebook.com \n-site:tiktok.com -site:youtube.com",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 4
-        },
-        {
-          "query": "us auto inventory levels days supply june 2026 after:2026-06-23",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "query": "supplier financial health",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 20.33
-        },
-        {
-          "query": "supplier financial health assessment",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 28.33
-        },
-        {
-          "query": "evaluate the procurement & spend management company jaggaer on supply chain \nrisk management",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "query": "everstream analytics security breach",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 2
-        },
-        {
-          "query": "how does the procurement team assess the financial stability and long-term \nviability of a fingerprinting service provider",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 4.5
-        },
-        {
-          "query": "amtentum supplier risk score financial stability 2026",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 6.5
-        },
-        {
-          "query": "moody's s&p fitch us sovereign rating action june 2026",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 7.5
-        }
-      ],
-      "countries": [
-        {
-          "country": "United States",
-          "clicks": 0,
-          "impressions": 133,
-          "ctr": 0,
-          "position": 5.02
-        },
-        {
-          "country": "Canada",
-          "clicks": 0,
-          "impressions": 20,
-          "ctr": 0,
-          "position": 3.2
-        },
-        {
-          "country": "United Kingdom",
-          "clicks": 0,
-          "impressions": 18,
-          "ctr": 0,
-          "position": 5.17
-        },
-        {
-          "country": "Germany",
-          "clicks": 0,
-          "impressions": 11,
-          "ctr": 0,
-          "position": 5
-        },
-        {
-          "country": "Italy",
-          "clicks": 0,
-          "impressions": 5,
-          "ctr": 0,
-          "position": 10
-        },
-        {
-          "country": "Brazil",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 1.5
-        },
-        {
-          "country": "Vietnam",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 4
-        },
-        {
-          "country": "India",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "country": "Mexico",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "country": "Poland",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "country": "Peru",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 5
-        },
-        {
-          "country": "Singapore",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 5
-        },
-        {
-          "country": "Guatemala",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 6
-        }
-      ],
-      "devices": [
-        {
-          "device": "Desktop",
-          "clicks": 0,
-          "impressions": 192,
-          "ctr": 0,
-          "position": 4.79
-        },
-        {
-          "device": "Mobile",
-          "clicks": 0,
-          "impressions": 5,
-          "ctr": 0,
-          "position": 8
+          "snapshot_date": "2026-07-07",
+          "uploaded_at": "2026-07-14T09:46:09.542Z",
+          "uploaded_by": "manager",
+          "filename": "https___www.jaggaer.com_blog_supplier-financial-risk-signals-procurement-should-monitor-in-2026.xlsx",
+          "date_range": {
+            "start": "2026-04-08",
+            "end": "2026-07-07",
+            "label": "Last 3 months"
+          },
+          "summary": {
+            "clicks": 2,
+            "impressions": 1525,
+            "ctr": 0.0013,
+            "avg_position": 5.8
+          },
+          "top_queries": [
+            {
+              "query": "recent it supply chain disruptions insurance industry -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
+              "clicks": 0,
+              "impressions": 19,
+              "ctr": 0,
+              "position": 2.21
+            },
+            {
+              "query": "what early warning indicators does rapidratings provide for procurement \nteams managing critical single-source suppliers?",
+              "clicks": 0,
+              "impressions": 19,
+              "ctr": 0,
+              "position": 2.79
+            },
+            {
+              "query": "recent financial services supply chain disruptions insurance \n-site:reddit.com -site:fandom.com -site:wikipedia.org -site:quora.com \n-site:medium.com -site:twitter.com -site:x.com -site:facebook.com \n-site:tiktok.com -site:youtube.com",
+              "clicks": 0,
+              "impressions": 12,
+              "ctr": 0,
+              "position": 1.92
+            },
+            {
+              "query": "recent it sector supply chain disruptions insurance companies \n-site:reddit.com -site:fandom.com -site:wikipedia.org -site:quora.com \n-site:medium.com -site:twitter.com -site:x.com -site:facebook.com \n-site:tiktok.com -site:youtube.com",
+              "clicks": 0,
+              "impressions": 11,
+              "ctr": 0,
+              "position": 2.27
+            },
+            {
+              "query": "procurement signals vendor management italy",
+              "clicks": 0,
+              "impressions": 11,
+              "ctr": 0,
+              "position": 2.36
+            },
+            {
+              "query": "can rapidratings analyze supplier financial statements to predict the \nlikelihood of disruption or default over 12 months?",
+              "clicks": 0,
+              "impressions": 11,
+              "ctr": 0,
+              "position": 7.55
+            },
+            {
+              "query": "supplier.ai financial distress 2025-2026",
+              "clicks": 0,
+              "impressions": 9,
+              "ctr": 0,
+              "position": 1.11
+            },
+            {
+              "query": "how do i monitor supplier network financial stability?",
+              "clicks": 0,
+              "impressions": 9,
+              "ctr": 0,
+              "position": 5.33
+            },
+            {
+              "query": "supplier financial risk",
+              "clicks": 0,
+              "impressions": 6,
+              "ctr": 0,
+              "position": 3.83
+            },
+            {
+              "query": "balke durr supplier risk score financial stability 2026",
+              "clicks": 0,
+              "impressions": 5,
+              "ctr": 0,
+              "position": 1.4
+            },
+            {
+              "query": "supplier financial risk assessment",
+              "clicks": 0,
+              "impressions": 5,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "query": "reuter stokes supplier risk score financial stability 2026",
+              "clicks": 0,
+              "impressions": 4,
+              "ctr": 0,
+              "position": 1.25
+            },
+            {
+              "query": "adiabatix supplier risk score financial stability 2026",
+              "clicks": 0,
+              "impressions": 4,
+              "ctr": 0,
+              "position": 1.5
+            },
+            {
+              "query": "recent supply chain disruptions financial services insurance \n-site:reddit.com -site:fandom.com -site:wikipedia.org -site:quora.com \n-site:medium.com -site:twitter.com -site:x.com -site:facebook.com \n-site:tiktok.com -site:youtube.com",
+              "clicks": 0,
+              "impressions": 4,
+              "ctr": 0,
+              "position": 2
+            },
+            {
+              "query": "how do i spot risky suppliers faster",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 1.33
+            },
+            {
+              "query": "telecom industry supply chain disruptions june 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 3.33
+            },
+            {
+              "query": "it sector supply chain disruptions telecom companies june 2026 \n-site:reddit.com -site:fandom.com -site:wikipedia.org -site:quora.com \n-site:medium.com -site:twitter.com -site:x.com -site:facebook.com \n-site:tiktok.com -site:youtube.com",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 4
+            },
+            {
+              "query": "us auto inventory levels days supply june 2026 after:2026-06-23",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "query": "supplier financial health",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 20.33
+            },
+            {
+              "query": "supplier financial health assessment",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 28.33
+            },
+            {
+              "query": "evaluate the procurement & spend management company jaggaer on supply chain \nrisk management",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "query": "everstream analytics security breach",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 2
+            },
+            {
+              "query": "how does the procurement team assess the financial stability and long-term \nviability of a fingerprinting service provider",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 4.5
+            },
+            {
+              "query": "amtentum supplier risk score financial stability 2026",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 6.5
+            },
+            {
+              "query": "moody's s&p fitch us sovereign rating action june 2026",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 7.5
+            }
+          ],
+          "countries": [
+            {
+              "country": "United States",
+              "clicks": 0,
+              "impressions": 133,
+              "ctr": 0,
+              "position": 5.02
+            },
+            {
+              "country": "Canada",
+              "clicks": 0,
+              "impressions": 20,
+              "ctr": 0,
+              "position": 3.2
+            },
+            {
+              "country": "United Kingdom",
+              "clicks": 0,
+              "impressions": 18,
+              "ctr": 0,
+              "position": 5.17
+            },
+            {
+              "country": "Germany",
+              "clicks": 0,
+              "impressions": 11,
+              "ctr": 0,
+              "position": 5
+            },
+            {
+              "country": "Italy",
+              "clicks": 0,
+              "impressions": 5,
+              "ctr": 0,
+              "position": 10
+            },
+            {
+              "country": "Brazil",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 1.5
+            },
+            {
+              "country": "Vietnam",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 4
+            },
+            {
+              "country": "India",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Mexico",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Poland",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Peru",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 5
+            },
+            {
+              "country": "Singapore",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 5
+            },
+            {
+              "country": "Guatemala",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 6
+            }
+          ],
+          "devices": [
+            {
+              "device": "Desktop",
+              "clicks": 0,
+              "impressions": 192,
+              "ctr": 0,
+              "position": 4.79
+            },
+            {
+              "device": "Mobile",
+              "clicks": 0,
+              "impressions": 5,
+              "ctr": 0,
+              "position": 8
+            }
+          ]
         }
       ]
     },
     "how-procurement-is-moving-from-reactive-to-predictive-risk-management-in-2026": {
       "url": "https://www.jaggaer.com/blog/how-procurement-is-moving-from-reactive-to-predictive-risk-management-in-2026",
-      "uploaded_at": "2026-07-14T09:46:24.966Z",
-      "uploaded_by": "manager",
-      "filename": "https___www.jaggaer.com_blog_how-procurement-is-moving-from-reactive-to-predictive-risk-management-in-2026.xlsx",
-      "date_range": {
-        "start": "2026-04-08",
-        "end": "2026-07-07",
-        "label": "Last 3 months"
-      },
-      "summary": {
-        "clicks": 4,
-        "impressions": 2559,
-        "ctr": 0.0016,
-        "avg_position": 5.04
-      },
-      "timeseries": [
-        {
-          "date": "2026-04-08",
+      "daily": {
+        "2026-04-08": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-09",
+        "2026-04-09": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-10",
+        "2026-04-10": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-11",
+        "2026-04-11": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-12",
+        "2026-04-12": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-13",
+        "2026-04-13": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-14",
+        "2026-04-14": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-15",
+        "2026-04-15": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-16",
+        "2026-04-16": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-17",
+        "2026-04-17": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-18",
+        "2026-04-18": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-19",
+        "2026-04-19": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-20",
+        "2026-04-20": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-21",
+        "2026-04-21": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-22",
+        "2026-04-22": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-23",
+        "2026-04-23": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-24",
+        "2026-04-24": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-25",
+        "2026-04-25": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-26",
+        "2026-04-26": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-27",
+        "2026-04-27": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-28",
+        "2026-04-28": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-29",
+        "2026-04-29": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-30",
+        "2026-04-30": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-01",
+        "2026-05-01": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-02",
+        "2026-05-02": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-03",
+        "2026-05-03": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-04",
+        "2026-05-04": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-05",
+        "2026-05-05": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-06",
+        "2026-05-06": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-07",
+        "2026-05-07": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-08",
+        "2026-05-08": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-09",
+        "2026-05-09": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-10",
+        "2026-05-10": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-11",
+        "2026-05-11": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-12",
+        "2026-05-12": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-13",
+        "2026-05-13": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-14",
+        "2026-05-14": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-15",
+        "2026-05-15": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-16",
+        "2026-05-16": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-17",
+        "2026-05-17": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-18",
+        "2026-05-18": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-19",
+        "2026-05-19": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-20",
+        "2026-05-20": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-21",
+        "2026-05-21": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-22",
+        "2026-05-22": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-23",
+        "2026-05-23": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-24",
+        "2026-05-24": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-25",
+        "2026-05-25": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-26",
+        "2026-05-26": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-27",
+        "2026-05-27": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-28",
+        "2026-05-28": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-29",
+        "2026-05-29": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-30",
+        "2026-05-30": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-31",
+        "2026-05-31": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-01",
+        "2026-06-01": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-02",
+        "2026-06-02": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-03",
+        "2026-06-03": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-04",
+        "2026-06-04": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-05",
+        "2026-06-05": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-06",
+        "2026-06-06": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-07",
+        "2026-06-07": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-08",
+        "2026-06-08": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-09",
+        "2026-06-09": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-10",
+        "2026-06-10": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-11",
+        "2026-06-11": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-12",
+        "2026-06-12": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-13",
+        "2026-06-13": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-14",
+        "2026-06-14": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-15",
+        "2026-06-15": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-16",
+        "2026-06-16": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-17",
+        "2026-06-17": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-18",
+        "2026-06-18": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-19",
+        "2026-06-19": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-20",
+        "2026-06-20": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-21",
+        "2026-06-21": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-22",
+        "2026-06-22": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-23",
+        "2026-06-23": {
           "clicks": 0,
           "impressions": 34,
           "ctr": 0,
           "position": 4.6
         },
-        {
-          "date": "2026-06-24",
+        "2026-06-24": {
           "clicks": 0,
           "impressions": 104,
           "ctr": 0,
           "position": 4.6
         },
-        {
-          "date": "2026-06-25",
+        "2026-06-25": {
           "clicks": 1,
           "impressions": 118,
           "ctr": 0.0085,
           "position": 4.5
         },
-        {
-          "date": "2026-06-26",
+        "2026-06-26": {
           "clicks": 0,
           "impressions": 125,
           "ctr": 0,
           "position": 5.2
         },
-        {
-          "date": "2026-06-27",
+        "2026-06-27": {
           "clicks": 1,
           "impressions": 202,
           "ctr": 0.005,
           "position": 4.6
         },
-        {
-          "date": "2026-06-28",
+        "2026-06-28": {
           "clicks": 1,
           "impressions": 194,
           "ctr": 0.0052,
           "position": 4.6
         },
-        {
-          "date": "2026-06-29",
+        "2026-06-29": {
           "clicks": 0,
           "impressions": 250,
           "ctr": 0,
           "position": 5.4
         },
-        {
-          "date": "2026-06-30",
+        "2026-06-30": {
           "clicks": 0,
           "impressions": 284,
           "ctr": 0,
           "position": 5.9
         },
-        {
-          "date": "2026-07-01",
+        "2026-07-01": {
           "clicks": 0,
           "impressions": 155,
           "ctr": 0,
           "position": 4.3
         },
-        {
-          "date": "2026-07-02",
+        "2026-07-02": {
           "clicks": 0,
           "impressions": 137,
           "ctr": 0,
           "position": 4.8
         },
-        {
-          "date": "2026-07-03",
+        "2026-07-03": {
           "clicks": 0,
           "impressions": 191,
           "ctr": 0,
           "position": 5
         },
-        {
-          "date": "2026-07-04",
+        "2026-07-04": {
           "clicks": 0,
           "impressions": 187,
           "ctr": 0,
           "position": 5.1
         },
-        {
-          "date": "2026-07-05",
+        "2026-07-05": {
           "clicks": 0,
           "impressions": 158,
           "ctr": 0,
           "position": 4.7
         },
-        {
-          "date": "2026-07-06",
+        "2026-07-06": {
           "clicks": 0,
           "impressions": 209,
           "ctr": 0,
           "position": 5.1
         },
-        {
-          "date": "2026-07-07",
+        "2026-07-07": {
           "clicks": 1,
           "impressions": 211,
           "ctr": 0.0047,
           "position": 5.7
         }
-      ],
-      "top_queries": [
+      },
+      "snapshots": [
         {
-          "query": "evaluate the procurement & spend management company jaggaer on supply chain \nrisk management",
-          "clicks": 0,
-          "impressions": 22,
-          "ctr": 0,
-          "position": 2.77
-        },
-        {
-          "query": "manufacturing supplier risk index 2026",
-          "clicks": 0,
-          "impressions": 7,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "query": "reuter stokes supplier risk score financial stability 2026",
-          "clicks": 0,
-          "impressions": 4,
-          "ctr": 0,
-          "position": 3
-        },
-        {
-          "query": "adiabatix supplier risk score financial stability 2026",
-          "clicks": 0,
-          "impressions": 4,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "query": "arabelle solutions supplier risk score financial stability 2026",
-          "clicks": 0,
-          "impressions": 4,
-          "ctr": 0,
-          "position": 9
-        },
-        {
-          "query": "chemetics supplier risk assessment operational performance 2025 2026",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 2.33
-        },
-        {
-          "query": "supplier risk trends for procurement teams",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 3.33
-        },
-        {
-          "query": "supplier tree mapping supplier scorecard supplier rationalization risk \ntracking supply risk ranking predictive procurement",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 4.33
-        },
-        {
-          "query": "balke durr supplier risk score financial stability 2026",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 4.67
-        },
-        {
-          "query": "supplier risk monitor 2025/2026",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 12
-        },
-        {
-          "query": "which supplier relationship management platforms reduce quality escalations \nthrough early warning systems involving supplier relationship management \n(srm)?",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "query": "does jaggaer offer supply chain visibility and risk insights through \nanalytics dashboards across the entire organization?",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 4
-        },
-        {
-          "query": "how do i assess supplier network risk for my business?",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "query": "i am a 45-54, 35-44, or 25-34 year old purchasing manager, operations \nmanager, procurement specialist, sourcing coordinator, or procurement \nanalyst in the agriculture, automotive, consumer goods, education, energy, \nfinance, food & beverage, government, healthcare, media, nonprofit, pharma, \nprofessional services, transportation, telecom, technology, retail, or real \nestate industry. my job seniority is at the senior or manager level. i work \nat a company with 10k+ employees or 1k-10k employees. my main motivations: \nimplementing and improving procurement processes and policies. setting up \ncompliant approval workflows and spending controls. generating accurate \nreporting and analytics for leadership. streamlining purchase order and \ninvoice processing. onboarding users and managing procurement system \nadoption. maintaining catalog accuracy and preferred supplier lists. my \nmain pain points: manual, time-consuming processes for po and invoice \nmanagement. difficulty enforcing purchasing policies across departments. \nlack of integration between procurement tools and finance systems. poor \nuser adoption of approved procurement channels. inconsistent data quality \nmaking reporting unreliable. tedious reconciliation and exception handling \nworkflows. what are common supply chain risks and how do i mitigate them?",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "query": "quels sont les principaux indicateurs d'alerte précoce pour les risques \nliés au réseau de fournisseurs ?",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "query": "what are some ai-powered procurement platforms that can help streamline \nsupplier management and offer robust analytics?",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "query": "where can i reduce supplier risk while maintaining consistent supply?",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "query": "i'm looking for e-procurement platforms that offer strong data governance \nfeatures, including audit trails and user access controls",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 3
-        },
-        {
-          "query": "\"predictive procurement resilience\" supplier tree mapping scorecard \nrationalization",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 5
-        },
-        {
-          "query": "i am a 35-44 or 45-54 year old procurement, head of supply chain \noperations, or procurement manager. i work at a company with 1-249 \nemployees, 250-1k employees, 1k-10k employees, or 10k+ employees. my main \nmotivations: procurement aims to secure the best value from vendors, ensure \ncompliant purchasing, reduce risk, and move quickly without sacrificing \ncontrols. motivated by visibility into spend, strong vendor relationships, \npredictable timelines, and standardized contracting. my main pain points: \nsiloed data across erp, warehouse management systems, and transportation \nmanagement systems slows decisions. limited visibility into supplier \ncontracts and performance. supply chain disruptions raise delays and costs. \nvalue leakage from poor invoice validation and misaligned services. long, \nlegal-dependent contract creation cycles. hard to negotiate favorable \npricing. no standardized supplier governance. contract ai tools that \npredict renewal likelihood?",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 6
-        },
-        {
-          "query": "welche procurement tools bieten funktionen für lieferkettenresilienz und \nrisikomanagement",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 6
-        },
-        {
-          "query": "signalstage.events",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 58
-        }
-      ],
-      "countries": [
-        {
-          "country": "United States",
-          "clicks": 0,
-          "impressions": 49,
-          "ctr": 0,
-          "position": 3.84
-        },
-        {
-          "country": "United Kingdom",
-          "clicks": 0,
-          "impressions": 4,
-          "ctr": 0,
-          "position": 2.5
-        },
-        {
-          "country": "Philippines",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "country": "Germany",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 6
-        },
-        {
-          "country": "France",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 2
-        },
-        {
-          "country": "Vietnam",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 12.5
-        },
-        {
-          "country": "Canada",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "country": "Hong Kong",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "country": "Malaysia",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 1
-        },
-        {
-          "country": "Italy",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 3
-        },
-        {
-          "country": "Brazil",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 4
-        },
-        {
-          "country": "Russia",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 5
-        },
-        {
-          "country": "India",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 58
-        }
-      ],
-      "devices": [
-        {
-          "device": "Desktop",
-          "clicks": 0,
-          "impressions": 67,
-          "ctr": 0,
-          "position": 4.25
-        },
-        {
-          "device": "Mobile",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 12
+          "snapshot_date": "2026-07-07",
+          "uploaded_at": "2026-07-14T09:46:24.966Z",
+          "uploaded_by": "manager",
+          "filename": "https___www.jaggaer.com_blog_how-procurement-is-moving-from-reactive-to-predictive-risk-management-in-2026.xlsx",
+          "date_range": {
+            "start": "2026-04-08",
+            "end": "2026-07-07",
+            "label": "Last 3 months"
+          },
+          "summary": {
+            "clicks": 4,
+            "impressions": 2559,
+            "ctr": 0.0016,
+            "avg_position": 5.04
+          },
+          "top_queries": [
+            {
+              "query": "evaluate the procurement & spend management company jaggaer on supply chain \nrisk management",
+              "clicks": 0,
+              "impressions": 22,
+              "ctr": 0,
+              "position": 2.77
+            },
+            {
+              "query": "manufacturing supplier risk index 2026",
+              "clicks": 0,
+              "impressions": 7,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "query": "reuter stokes supplier risk score financial stability 2026",
+              "clicks": 0,
+              "impressions": 4,
+              "ctr": 0,
+              "position": 3
+            },
+            {
+              "query": "adiabatix supplier risk score financial stability 2026",
+              "clicks": 0,
+              "impressions": 4,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "query": "arabelle solutions supplier risk score financial stability 2026",
+              "clicks": 0,
+              "impressions": 4,
+              "ctr": 0,
+              "position": 9
+            },
+            {
+              "query": "chemetics supplier risk assessment operational performance 2025 2026",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 2.33
+            },
+            {
+              "query": "supplier risk trends for procurement teams",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 3.33
+            },
+            {
+              "query": "supplier tree mapping supplier scorecard supplier rationalization risk \ntracking supply risk ranking predictive procurement",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 4.33
+            },
+            {
+              "query": "balke durr supplier risk score financial stability 2026",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 4.67
+            },
+            {
+              "query": "supplier risk monitor 2025/2026",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 12
+            },
+            {
+              "query": "which supplier relationship management platforms reduce quality escalations \nthrough early warning systems involving supplier relationship management \n(srm)?",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "query": "does jaggaer offer supply chain visibility and risk insights through \nanalytics dashboards across the entire organization?",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 4
+            },
+            {
+              "query": "how do i assess supplier network risk for my business?",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "query": "i am a 45-54, 35-44, or 25-34 year old purchasing manager, operations \nmanager, procurement specialist, sourcing coordinator, or procurement \nanalyst in the agriculture, automotive, consumer goods, education, energy, \nfinance, food & beverage, government, healthcare, media, nonprofit, pharma, \nprofessional services, transportation, telecom, technology, retail, or real \nestate industry. my job seniority is at the senior or manager level. i work \nat a company with 10k+ employees or 1k-10k employees. my main motivations: \nimplementing and improving procurement processes and policies. setting up \ncompliant approval workflows and spending controls. generating accurate \nreporting and analytics for leadership. streamlining purchase order and \ninvoice processing. onboarding users and managing procurement system \nadoption. maintaining catalog accuracy and preferred supplier lists. my \nmain pain points: manual, time-consuming processes for po and invoice \nmanagement. difficulty enforcing purchasing policies across departments. \nlack of integration between procurement tools and finance systems. poor \nuser adoption of approved procurement channels. inconsistent data quality \nmaking reporting unreliable. tedious reconciliation and exception handling \nworkflows. what are common supply chain risks and how do i mitigate them?",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "query": "quels sont les principaux indicateurs d'alerte pr\u00e9coce pour les risques \nli\u00e9s au r\u00e9seau de fournisseurs ?",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "query": "what are some ai-powered procurement platforms that can help streamline \nsupplier management and offer robust analytics?",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "query": "where can i reduce supplier risk while maintaining consistent supply?",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "query": "i'm looking for e-procurement platforms that offer strong data governance \nfeatures, including audit trails and user access controls",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 3
+            },
+            {
+              "query": "\"predictive procurement resilience\" supplier tree mapping scorecard \nrationalization",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 5
+            },
+            {
+              "query": "i am a 35-44 or 45-54 year old procurement, head of supply chain \noperations, or procurement manager. i work at a company with 1-249 \nemployees, 250-1k employees, 1k-10k employees, or 10k+ employees. my main \nmotivations: procurement aims to secure the best value from vendors, ensure \ncompliant purchasing, reduce risk, and move quickly without sacrificing \ncontrols. motivated by visibility into spend, strong vendor relationships, \npredictable timelines, and standardized contracting. my main pain points: \nsiloed data across erp, warehouse management systems, and transportation \nmanagement systems slows decisions. limited visibility into supplier \ncontracts and performance. supply chain disruptions raise delays and costs. \nvalue leakage from poor invoice validation and misaligned services. long, \nlegal-dependent contract creation cycles. hard to negotiate favorable \npricing. no standardized supplier governance. contract ai tools that \npredict renewal likelihood?",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 6
+            },
+            {
+              "query": "welche procurement tools bieten funktionen f\u00fcr lieferkettenresilienz und \nrisikomanagement",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 6
+            },
+            {
+              "query": "signalstage.events",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 58
+            }
+          ],
+          "countries": [
+            {
+              "country": "United States",
+              "clicks": 0,
+              "impressions": 49,
+              "ctr": 0,
+              "position": 3.84
+            },
+            {
+              "country": "United Kingdom",
+              "clicks": 0,
+              "impressions": 4,
+              "ctr": 0,
+              "position": 2.5
+            },
+            {
+              "country": "Philippines",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Germany",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 6
+            },
+            {
+              "country": "France",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 2
+            },
+            {
+              "country": "Vietnam",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 12.5
+            },
+            {
+              "country": "Canada",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Hong Kong",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Malaysia",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Italy",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 3
+            },
+            {
+              "country": "Brazil",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 4
+            },
+            {
+              "country": "Russia",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 5
+            },
+            {
+              "country": "India",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 58
+            }
+          ],
+          "devices": [
+            {
+              "device": "Desktop",
+              "clicks": 0,
+              "impressions": 67,
+              "ctr": 0,
+              "position": 4.25
+            },
+            {
+              "device": "Mobile",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 12
+            }
+          ]
         }
       ]
     },
     "claude-fable-5-for-source-to-pay": {
       "url": "https://www.jaggaer.com/blog/claude-fable-5-for-source-to-pay",
-      "uploaded_at": "2026-07-14T09:46:40.369Z",
-      "uploaded_by": "manager",
-      "filename": "https___www.jaggaer.com_blog_claude-fable-5-for-source-to-pay.xlsx",
-      "date_range": {
-        "start": "2026-04-08",
-        "end": "2026-07-07",
-        "label": "Last 3 months"
-      },
-      "summary": {
-        "clicks": 3,
-        "impressions": 2335,
-        "ctr": 0.0013,
-        "avg_position": 7.64
-      },
-      "timeseries": [
-        {
-          "date": "2026-04-08",
+      "daily": {
+        "2026-04-08": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-09",
+        "2026-04-09": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-10",
+        "2026-04-10": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-11",
+        "2026-04-11": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-12",
+        "2026-04-12": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-13",
+        "2026-04-13": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-14",
+        "2026-04-14": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-15",
+        "2026-04-15": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-16",
+        "2026-04-16": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-17",
+        "2026-04-17": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-18",
+        "2026-04-18": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-19",
+        "2026-04-19": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-20",
+        "2026-04-20": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-21",
+        "2026-04-21": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-22",
+        "2026-04-22": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-23",
+        "2026-04-23": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-24",
+        "2026-04-24": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-25",
+        "2026-04-25": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-26",
+        "2026-04-26": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-27",
+        "2026-04-27": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-28",
+        "2026-04-28": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-29",
+        "2026-04-29": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-04-30",
+        "2026-04-30": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-01",
+        "2026-05-01": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-02",
+        "2026-05-02": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-03",
+        "2026-05-03": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-04",
+        "2026-05-04": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-05",
+        "2026-05-05": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-06",
+        "2026-05-06": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-07",
+        "2026-05-07": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-08",
+        "2026-05-08": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-09",
+        "2026-05-09": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-10",
+        "2026-05-10": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-11",
+        "2026-05-11": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-12",
+        "2026-05-12": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-13",
+        "2026-05-13": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-14",
+        "2026-05-14": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-15",
+        "2026-05-15": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-16",
+        "2026-05-16": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-17",
+        "2026-05-17": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-18",
+        "2026-05-18": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-19",
+        "2026-05-19": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-20",
+        "2026-05-20": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-21",
+        "2026-05-21": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-22",
+        "2026-05-22": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-23",
+        "2026-05-23": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-24",
+        "2026-05-24": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-25",
+        "2026-05-25": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-26",
+        "2026-05-26": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-27",
+        "2026-05-27": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-28",
+        "2026-05-28": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-29",
+        "2026-05-29": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-30",
+        "2026-05-30": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-05-31",
+        "2026-05-31": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-01",
+        "2026-06-01": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-02",
+        "2026-06-02": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-03",
+        "2026-06-03": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-04",
+        "2026-06-04": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-05",
+        "2026-06-05": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-06",
+        "2026-06-06": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-07",
+        "2026-06-07": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-08",
+        "2026-06-08": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-09",
+        "2026-06-09": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-10",
+        "2026-06-10": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-11",
+        "2026-06-11": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-12",
+        "2026-06-12": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-13",
+        "2026-06-13": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-14",
+        "2026-06-14": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-15",
+        "2026-06-15": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-16",
+        "2026-06-16": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-17",
+        "2026-06-17": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-18",
+        "2026-06-18": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-19",
+        "2026-06-19": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-20",
+        "2026-06-20": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-21",
+        "2026-06-21": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-22",
+        "2026-06-22": {
           "clicks": 0,
           "impressions": 0,
           "ctr": 0,
           "position": 0
         },
-        {
-          "date": "2026-06-23",
+        "2026-06-23": {
           "clicks": 0,
           "impressions": 548,
           "ctr": 0,
           "position": 7.2
         },
-        {
-          "date": "2026-06-24",
+        "2026-06-24": {
           "clicks": 0,
           "impressions": 269,
           "ctr": 0,
           "position": 7.8
         },
-        {
-          "date": "2026-06-25",
+        "2026-06-25": {
           "clicks": 0,
           "impressions": 86,
           "ctr": 0,
           "position": 6.4
         },
-        {
-          "date": "2026-06-26",
+        "2026-06-26": {
           "clicks": 0,
           "impressions": 295,
           "ctr": 0,
           "position": 6.4
         },
-        {
-          "date": "2026-06-27",
+        "2026-06-27": {
           "clicks": 0,
           "impressions": 97,
           "ctr": 0,
           "position": 8.4
         },
-        {
-          "date": "2026-06-28",
+        "2026-06-28": {
           "clicks": 2,
           "impressions": 65,
           "ctr": 0.0308,
           "position": 15.2
         },
-        {
-          "date": "2026-06-29",
+        "2026-06-29": {
           "clicks": 0,
           "impressions": 86,
           "ctr": 0,
           "position": 15.3
         },
-        {
-          "date": "2026-06-30",
+        "2026-06-30": {
           "clicks": 0,
           "impressions": 96,
           "ctr": 0,
           "position": 8.2
         },
-        {
-          "date": "2026-07-01",
+        "2026-07-01": {
           "clicks": 0,
           "impressions": 193,
           "ctr": 0,
           "position": 6.8
         },
-        {
-          "date": "2026-07-02",
+        "2026-07-02": {
           "clicks": 0,
           "impressions": 193,
           "ctr": 0,
           "position": 6.8
         },
-        {
-          "date": "2026-07-03",
+        "2026-07-03": {
           "clicks": 0,
           "impressions": 112,
           "ctr": 0,
           "position": 6.6
         },
-        {
-          "date": "2026-07-04",
+        "2026-07-04": {
           "clicks": 0,
           "impressions": 121,
           "ctr": 0,
           "position": 6.7
         },
-        {
-          "date": "2026-07-05",
+        "2026-07-05": {
           "clicks": 1,
           "impressions": 54,
           "ctr": 0.0185,
           "position": 7
         },
-        {
-          "date": "2026-07-06",
+        "2026-07-06": {
           "clicks": 0,
           "impressions": 68,
           "ctr": 0,
           "position": 7.6
         },
-        {
-          "date": "2026-07-07",
+        "2026-07-07": {
           "clicks": 0,
           "impressions": 52,
           "ctr": 0,
           "position": 7.3
         }
-      ],
-      "top_queries": [
-        {
-          "query": "fable 5",
-          "clicks": 0,
-          "impressions": 109,
-          "ctr": 0,
-          "position": 9.29
-        },
-        {
-          "query": "claude fable 5",
-          "clicks": 0,
-          "impressions": 88,
-          "ctr": 0,
-          "position": 8.07
-        },
-        {
-          "query": "claude fable",
-          "clicks": 0,
-          "impressions": 85,
-          "ctr": 0,
-          "position": 9.58
-        },
-        {
-          "query": "\"dan shipper\"",
-          "clicks": 0,
-          "impressions": 17,
-          "ctr": 0,
-          "position": 2.12
-        },
-        {
-          "query": "\"vals ai\"",
-          "clicks": 0,
-          "impressions": 17,
-          "ctr": 0,
-          "position": 3.76
-        },
-        {
-          "query": "fable claude",
-          "clicks": 0,
-          "impressions": 14,
-          "ctr": 0,
-          "position": 7.93
-        },
-        {
-          "query": "fable5",
-          "clicks": 0,
-          "impressions": 13,
-          "ctr": 0,
-          "position": 14.54
-        },
-        {
-          "query": "fable 5 claude",
-          "clicks": 0,
-          "impressions": 12,
-          "ctr": 0,
-          "position": 5.25
-        },
-        {
-          "query": "claude fable 5 news",
-          "clicks": 0,
-          "impressions": 10,
-          "ctr": 0,
-          "position": 9.2
-        },
-        {
-          "query": "\"claude fable 5\" after:2026-06-20",
-          "clicks": 0,
-          "impressions": 5,
-          "ctr": 0,
-          "position": 7
-        },
-        {
-          "query": "jaggaer",
-          "clicks": 0,
-          "impressions": 5,
-          "ctr": 0,
-          "position": 18
-        },
-        {
-          "query": "site:www.jaggaer.com",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 2
-        },
-        {
-          "query": "apple foundation models",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 52.67
-        },
-        {
-          "query": "claude fable 5 june 23 2026",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 2
-        },
-        {
-          "query": "claude 5",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 5.5
-        },
-        {
-          "query": "\"claude fable 5\" after:2026-06-22",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 6
-        },
-        {
-          "query": "claude news fable",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 6
-        },
-        {
-          "query": "claude ai fable",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 6.5
-        },
-        {
-          "query": "claude fable 5 finance",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 7
-        },
-        {
-          "query": "\"claude-fable-5\" ai model",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 7.5
-        },
-        {
-          "query": "anthropic claude fable 5 news",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 7.5
-        },
-        {
-          "query": "claude fable news",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 7.5
-        },
-        {
-          "query": "claude 5 fable",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "query": "claude fable 5 capabilities",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "query": "leader s2p france",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 8
-        }
-      ],
-      "countries": [
-        {
-          "country": "United States",
-          "clicks": 0,
-          "impressions": 137,
-          "ctr": 0,
-          "position": 8.04
-        },
-        {
-          "country": "Italy",
-          "clicks": 0,
-          "impressions": 49,
-          "ctr": 0,
-          "position": 8.02
-        },
-        {
-          "country": "Germany",
-          "clicks": 0,
-          "impressions": 40,
-          "ctr": 0,
-          "position": 7.85
-        },
-        {
-          "country": "Canada",
-          "clicks": 0,
-          "impressions": 30,
-          "ctr": 0,
-          "position": 5.33
-        },
-        {
-          "country": "France",
-          "clicks": 0,
-          "impressions": 22,
-          "ctr": 0,
-          "position": 8.91
-        },
-        {
-          "country": "Japan",
-          "clicks": 0,
-          "impressions": 16,
-          "ctr": 0,
-          "position": 29.88
-        },
-        {
-          "country": "Netherlands",
-          "clicks": 0,
-          "impressions": 12,
-          "ctr": 0,
-          "position": 10.33
-        },
-        {
-          "country": "Switzerland",
-          "clicks": 0,
-          "impressions": 11,
-          "ctr": 0,
-          "position": 6.91
-        },
-        {
-          "country": "Denmark",
-          "clicks": 0,
-          "impressions": 10,
-          "ctr": 0,
-          "position": 10.6
-        },
-        {
-          "country": "Australia",
-          "clicks": 0,
-          "impressions": 9,
-          "ctr": 0,
-          "position": 6.33
-        },
-        {
-          "country": "United Kingdom",
-          "clicks": 0,
-          "impressions": 9,
-          "ctr": 0,
-          "position": 8.11
-        },
-        {
-          "country": "Poland",
-          "clicks": 0,
-          "impressions": 8,
-          "ctr": 0,
-          "position": 9.38
-        },
-        {
-          "country": "South Korea",
-          "clicks": 0,
-          "impressions": 8,
-          "ctr": 0,
-          "position": 12.5
-        },
-        {
-          "country": "Norway",
-          "clicks": 0,
-          "impressions": 7,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "country": "Israel",
-          "clicks": 0,
-          "impressions": 6,
-          "ctr": 0,
-          "position": 7.5
-        },
-        {
-          "country": "Spain",
-          "clicks": 0,
-          "impressions": 6,
-          "ctr": 0,
-          "position": 9.83
-        },
-        {
-          "country": "Taiwan",
-          "clicks": 0,
-          "impressions": 6,
-          "ctr": 0,
-          "position": 16.17
-        },
-        {
-          "country": "Austria",
-          "clicks": 0,
-          "impressions": 5,
-          "ctr": 0,
-          "position": 8.2
-        },
-        {
-          "country": "Hungary",
-          "clicks": 0,
-          "impressions": 5,
-          "ctr": 0,
-          "position": 8.6
-        },
-        {
-          "country": "Sweden",
-          "clicks": 0,
-          "impressions": 5,
-          "ctr": 0,
-          "position": 8.8
-        },
-        {
-          "country": "Vietnam",
-          "clicks": 1,
-          "impressions": 4,
-          "ctr": 0.25,
-          "position": 3
-        },
-        {
-          "country": "Romania",
-          "clicks": 0,
-          "impressions": 4,
-          "ctr": 0,
-          "position": 8.5
-        },
-        {
-          "country": "Greece",
-          "clicks": 0,
-          "impressions": 4,
-          "ctr": 0,
-          "position": 9.25
-        },
-        {
-          "country": "Czechia",
-          "clicks": 0,
-          "impressions": 4,
-          "ctr": 0,
-          "position": 14.75
-        },
-        {
-          "country": "India",
-          "clicks": 0,
-          "impressions": 4,
-          "ctr": 0,
-          "position": 17.5
-        },
-        {
-          "country": "United Arab Emirates",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 5
-        },
-        {
-          "country": "Bulgaria",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "country": "Portugal",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 8.67
-        },
-        {
-          "country": "Belgium",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 10
-        },
-        {
-          "country": "New Zealand",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 11
-        },
-        {
-          "country": "China",
-          "clicks": 0,
-          "impressions": 3,
-          "ctr": 0,
-          "position": 11.33
-        },
-        {
-          "country": "Ireland",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 7.5
-        },
-        {
-          "country": "Singapore",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 9.5
-        },
-        {
-          "country": "Brazil",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 11.5
-        },
-        {
-          "country": "Colombia",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 12.5
-        },
-        {
-          "country": "Thailand",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 2
-        },
-        {
-          "country": "Slovenia",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 4
-        },
-        {
-          "country": "Bangladesh",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 5
-        },
-        {
-          "country": "Albania",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 6
-        },
-        {
-          "country": "Jamaica",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 6
-        },
-        {
-          "country": "Argentina",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "country": "Estonia",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "country": "Hong Kong",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "country": "Kenya",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "country": "Lebanon",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "country": "Mexico",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "country": "Malta",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "country": "Slovakia",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "country": "Venezuela",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 8
-        },
-        {
-          "country": "Iran",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 9
-        },
-        {
-          "country": "South Africa",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 10
-        },
-        {
-          "country": "Ukraine",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 13
-        },
-        {
-          "country": "Russia",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 14
-        },
-        {
-          "country": "Chile",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 15
-        },
-        {
-          "country": "Turkey",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 15
-        },
-        {
-          "country": "Malaysia",
-          "clicks": 0,
-          "impressions": 1,
-          "ctr": 0,
-          "position": 20
-        }
-      ],
-      "devices": [
-        {
-          "device": "Desktop",
-          "clicks": 0,
-          "impressions": 349,
-          "ctr": 0,
-          "position": 8.77
-        },
-        {
-          "device": "Mobile",
-          "clicks": 1,
-          "impressions": 117,
-          "ctr": 0.0085,
-          "position": 10.32
-        },
-        {
-          "device": "Tablet",
-          "clicks": 0,
-          "impressions": 2,
-          "ctr": 0,
-          "position": 8
+      },
+      "snapshots": [
+        {
+          "snapshot_date": "2026-07-07",
+          "uploaded_at": "2026-07-14T09:46:40.369Z",
+          "uploaded_by": "manager",
+          "filename": "https___www.jaggaer.com_blog_claude-fable-5-for-source-to-pay.xlsx",
+          "date_range": {
+            "start": "2026-04-08",
+            "end": "2026-07-07",
+            "label": "Last 3 months"
+          },
+          "summary": {
+            "clicks": 3,
+            "impressions": 2335,
+            "ctr": 0.0013,
+            "avg_position": 7.64
+          },
+          "top_queries": [
+            {
+              "query": "fable 5",
+              "clicks": 0,
+              "impressions": 109,
+              "ctr": 0,
+              "position": 9.29
+            },
+            {
+              "query": "claude fable 5",
+              "clicks": 0,
+              "impressions": 88,
+              "ctr": 0,
+              "position": 8.07
+            },
+            {
+              "query": "claude fable",
+              "clicks": 0,
+              "impressions": 85,
+              "ctr": 0,
+              "position": 9.58
+            },
+            {
+              "query": "\"dan shipper\"",
+              "clicks": 0,
+              "impressions": 17,
+              "ctr": 0,
+              "position": 2.12
+            },
+            {
+              "query": "\"vals ai\"",
+              "clicks": 0,
+              "impressions": 17,
+              "ctr": 0,
+              "position": 3.76
+            },
+            {
+              "query": "fable claude",
+              "clicks": 0,
+              "impressions": 14,
+              "ctr": 0,
+              "position": 7.93
+            },
+            {
+              "query": "fable5",
+              "clicks": 0,
+              "impressions": 13,
+              "ctr": 0,
+              "position": 14.54
+            },
+            {
+              "query": "fable 5 claude",
+              "clicks": 0,
+              "impressions": 12,
+              "ctr": 0,
+              "position": 5.25
+            },
+            {
+              "query": "claude fable 5 news",
+              "clicks": 0,
+              "impressions": 10,
+              "ctr": 0,
+              "position": 9.2
+            },
+            {
+              "query": "\"claude fable 5\" after:2026-06-20",
+              "clicks": 0,
+              "impressions": 5,
+              "ctr": 0,
+              "position": 7
+            },
+            {
+              "query": "jaggaer",
+              "clicks": 0,
+              "impressions": 5,
+              "ctr": 0,
+              "position": 18
+            },
+            {
+              "query": "site:www.jaggaer.com",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 2
+            },
+            {
+              "query": "apple foundation models",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 52.67
+            },
+            {
+              "query": "claude fable 5 june 23 2026",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 2
+            },
+            {
+              "query": "claude 5",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 5.5
+            },
+            {
+              "query": "\"claude fable 5\" after:2026-06-22",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 6
+            },
+            {
+              "query": "claude news fable",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 6
+            },
+            {
+              "query": "claude ai fable",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 6.5
+            },
+            {
+              "query": "claude fable 5 finance",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 7
+            },
+            {
+              "query": "\"claude-fable-5\" ai model",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 7.5
+            },
+            {
+              "query": "anthropic claude fable 5 news",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 7.5
+            },
+            {
+              "query": "claude fable news",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 7.5
+            },
+            {
+              "query": "claude 5 fable",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "query": "claude fable 5 capabilities",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "query": "leader s2p france",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 8
+            }
+          ],
+          "countries": [
+            {
+              "country": "United States",
+              "clicks": 0,
+              "impressions": 137,
+              "ctr": 0,
+              "position": 8.04
+            },
+            {
+              "country": "Italy",
+              "clicks": 0,
+              "impressions": 49,
+              "ctr": 0,
+              "position": 8.02
+            },
+            {
+              "country": "Germany",
+              "clicks": 0,
+              "impressions": 40,
+              "ctr": 0,
+              "position": 7.85
+            },
+            {
+              "country": "Canada",
+              "clicks": 0,
+              "impressions": 30,
+              "ctr": 0,
+              "position": 5.33
+            },
+            {
+              "country": "France",
+              "clicks": 0,
+              "impressions": 22,
+              "ctr": 0,
+              "position": 8.91
+            },
+            {
+              "country": "Japan",
+              "clicks": 0,
+              "impressions": 16,
+              "ctr": 0,
+              "position": 29.88
+            },
+            {
+              "country": "Netherlands",
+              "clicks": 0,
+              "impressions": 12,
+              "ctr": 0,
+              "position": 10.33
+            },
+            {
+              "country": "Switzerland",
+              "clicks": 0,
+              "impressions": 11,
+              "ctr": 0,
+              "position": 6.91
+            },
+            {
+              "country": "Denmark",
+              "clicks": 0,
+              "impressions": 10,
+              "ctr": 0,
+              "position": 10.6
+            },
+            {
+              "country": "Australia",
+              "clicks": 0,
+              "impressions": 9,
+              "ctr": 0,
+              "position": 6.33
+            },
+            {
+              "country": "United Kingdom",
+              "clicks": 0,
+              "impressions": 9,
+              "ctr": 0,
+              "position": 8.11
+            },
+            {
+              "country": "Poland",
+              "clicks": 0,
+              "impressions": 8,
+              "ctr": 0,
+              "position": 9.38
+            },
+            {
+              "country": "South Korea",
+              "clicks": 0,
+              "impressions": 8,
+              "ctr": 0,
+              "position": 12.5
+            },
+            {
+              "country": "Norway",
+              "clicks": 0,
+              "impressions": 7,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "country": "Israel",
+              "clicks": 0,
+              "impressions": 6,
+              "ctr": 0,
+              "position": 7.5
+            },
+            {
+              "country": "Spain",
+              "clicks": 0,
+              "impressions": 6,
+              "ctr": 0,
+              "position": 9.83
+            },
+            {
+              "country": "Taiwan",
+              "clicks": 0,
+              "impressions": 6,
+              "ctr": 0,
+              "position": 16.17
+            },
+            {
+              "country": "Austria",
+              "clicks": 0,
+              "impressions": 5,
+              "ctr": 0,
+              "position": 8.2
+            },
+            {
+              "country": "Hungary",
+              "clicks": 0,
+              "impressions": 5,
+              "ctr": 0,
+              "position": 8.6
+            },
+            {
+              "country": "Sweden",
+              "clicks": 0,
+              "impressions": 5,
+              "ctr": 0,
+              "position": 8.8
+            },
+            {
+              "country": "Vietnam",
+              "clicks": 1,
+              "impressions": 4,
+              "ctr": 0.25,
+              "position": 3
+            },
+            {
+              "country": "Romania",
+              "clicks": 0,
+              "impressions": 4,
+              "ctr": 0,
+              "position": 8.5
+            },
+            {
+              "country": "Greece",
+              "clicks": 0,
+              "impressions": 4,
+              "ctr": 0,
+              "position": 9.25
+            },
+            {
+              "country": "Czechia",
+              "clicks": 0,
+              "impressions": 4,
+              "ctr": 0,
+              "position": 14.75
+            },
+            {
+              "country": "India",
+              "clicks": 0,
+              "impressions": 4,
+              "ctr": 0,
+              "position": 17.5
+            },
+            {
+              "country": "United Arab Emirates",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 5
+            },
+            {
+              "country": "Bulgaria",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "country": "Portugal",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 8.67
+            },
+            {
+              "country": "Belgium",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 10
+            },
+            {
+              "country": "New Zealand",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 11
+            },
+            {
+              "country": "China",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 11.33
+            },
+            {
+              "country": "Ireland",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 7.5
+            },
+            {
+              "country": "Singapore",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 9.5
+            },
+            {
+              "country": "Brazil",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 11.5
+            },
+            {
+              "country": "Colombia",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 12.5
+            },
+            {
+              "country": "Thailand",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 2
+            },
+            {
+              "country": "Slovenia",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 4
+            },
+            {
+              "country": "Bangladesh",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 5
+            },
+            {
+              "country": "Albania",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 6
+            },
+            {
+              "country": "Jamaica",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 6
+            },
+            {
+              "country": "Argentina",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "country": "Estonia",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "country": "Hong Kong",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "country": "Kenya",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "country": "Lebanon",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "country": "Mexico",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "country": "Malta",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "country": "Slovakia",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "country": "Venezuela",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 8
+            },
+            {
+              "country": "Iran",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 9
+            },
+            {
+              "country": "South Africa",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 10
+            },
+            {
+              "country": "Ukraine",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 13
+            },
+            {
+              "country": "Russia",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 14
+            },
+            {
+              "country": "Chile",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 15
+            },
+            {
+              "country": "Turkey",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 15
+            },
+            {
+              "country": "Malaysia",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 20
+            }
+          ],
+          "devices": [
+            {
+              "device": "Desktop",
+              "clicks": 0,
+              "impressions": 349,
+              "ctr": 0,
+              "position": 8.77
+            },
+            {
+              "device": "Mobile",
+              "clicks": 1,
+              "impressions": 117,
+              "ctr": 0.0085,
+              "position": 10.32
+            },
+            {
+              "device": "Tablet",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 8
+            }
+          ]
         }
       ]
     }
