@@ -3017,6 +3017,78 @@
           "impressions": 271,
           "ctr": 0,
           "position": 11.2
+        },
+        "2026-07-08": {
+          "clicks": 3,
+          "impressions": 237,
+          "ctr": 0.0127,
+          "position": 8.1
+        },
+        "2026-07-09": {
+          "clicks": 0,
+          "impressions": 272,
+          "ctr": 0,
+          "position": 7.5
+        },
+        "2026-07-10": {
+          "clicks": 1,
+          "impressions": 213,
+          "ctr": 0.0047,
+          "position": 9.9
+        },
+        "2026-07-11": {
+          "clicks": 0,
+          "impressions": 162,
+          "ctr": 0,
+          "position": 17.1
+        },
+        "2026-07-12": {
+          "clicks": 0,
+          "impressions": 509,
+          "ctr": 0,
+          "position": 8.7
+        },
+        "2026-07-13": {
+          "clicks": 0,
+          "impressions": 356,
+          "ctr": 0,
+          "position": 9.8
+        },
+        "2026-07-14": {
+          "clicks": 0,
+          "impressions": 203,
+          "ctr": 0,
+          "position": 10.8
+        },
+        "2026-07-15": {
+          "clicks": 1,
+          "impressions": 188,
+          "ctr": 0.0053,
+          "position": 14.2
+        },
+        "2026-07-16": {
+          "clicks": 3,
+          "impressions": 151,
+          "ctr": 0.0199,
+          "position": 17.8
+        },
+        "2026-07-17": {
+          "clicks": 1,
+          "impressions": 100,
+          "ctr": 0.01,
+          "position": 14.8
+        },
+        "2026-07-18": {
+          "clicks": 0,
+          "impressions": 99,
+          "ctr": 0,
+          "position": 18.4
+        },
+        "2026-07-19": {
+          "clicks": 1,
+          "impressions": 98,
+          "ctr": 0.0102,
+          "position": 17.8
         }
       },
       "snapshots": [
@@ -3530,6 +3602,533 @@
               "impressions": 275,
               "ctr": 0,
               "position": 44.1
+            }
+          ]
+        },
+        {
+          "snapshot_date": "2026-07-21",
+          "uploaded_at": "2026-07-22T14:07:50.957Z",
+          "uploaded_by": "manager",
+          "filename": "https___www.jaggaer.com_-Performance-on-Search-2026-07-21.xlsx",
+          "date_range": {
+            "start": "2026-04-20",
+            "end": "2026-07-19",
+            "label": "Last 3 months"
+          },
+          "summary": {
+            "clicks": 19,
+            "impressions": 9819,
+            "ctr": 0.0019,
+            "avg_position": 9.48
+          },
+          "top_queries": [
+            {
+              "query": "multi tier supply chain visibility",
+              "clicks": 0,
+              "impressions": 1021,
+              "ctr": 0,
+              "position": 41.98
+            },
+            {
+              "query": "how can companies improve multi-tier supply chain visibility in complex \nglobal sourcing structures?",
+              "clicks": 0,
+              "impressions": 53,
+              "ctr": 0,
+              "position": 8.74
+            },
+            {
+              "query": "sub-tier supplier visibility",
+              "clicks": 0,
+              "impressions": 49,
+              "ctr": 0,
+              "position": 5.57
+            },
+            {
+              "query": "companies visibility into sub-tier suppliers",
+              "clicks": 0,
+              "impressions": 34,
+              "ctr": 0,
+              "position": 3.32
+            },
+            {
+              "query": "manufacturing sector supply chain disruptions june 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
+              "clicks": 0,
+              "impressions": 30,
+              "ctr": 0,
+              "position": 4.43
+            },
+            {
+              "query": "sub-tier visibility",
+              "clicks": 0,
+              "impressions": 28,
+              "ctr": 0,
+              "position": 7.68
+            },
+            {
+              "query": "does jaggaer offer supply chain visibility and risk insights through \nanalytics dashboards across the entire organization?",
+              "clicks": 0,
+              "impressions": 24,
+              "ctr": 0,
+              "position": 7.08
+            },
+            {
+              "query": "multi-tier visibility aerospace supply chains",
+              "clicks": 0,
+              "impressions": 23,
+              "ctr": 0,
+              "position": 7.61
+            },
+            {
+              "query": "it sector supply chain disruptions june 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
+              "clicks": 0,
+              "impressions": 22,
+              "ctr": 0,
+              "position": 1.77
+            },
+            {
+              "query": "energy utilities sector supply chain disruptions june 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
+              "clicks": 0,
+              "impressions": 20,
+              "ctr": 0,
+              "position": 2.85
+            },
+            {
+              "query": "sub-tier risk alert",
+              "clicks": 0,
+              "impressions": 17,
+              "ctr": 0,
+              "position": 5.35
+            },
+            {
+              "query": "tier 2 supplier margins 2026",
+              "clicks": 0,
+              "impressions": 16,
+              "ctr": 0,
+              "position": 4.25
+            },
+            {
+              "query": "recent manufacturing supply chain disruptions 2026 -site:reddit.com \n-site:fandom.com -site:wikipedia.org -site:quora.com -site:medium.com \n-site:twitter.com -site:x.com -site:facebook.com -site:tiktok.com \n-site:youtube.com",
+              "clicks": 0,
+              "impressions": 14,
+              "ctr": 0,
+              "position": 6.07
+            },
+            {
+              "query": "bouygues supply chain resilience sub-tier supplier mapping 2025 2026",
+              "clicks": 0,
+              "impressions": 12,
+              "ctr": 0,
+              "position": 1.42
+            },
+            {
+              "query": "procurement technology news june 2026 site:reuters.com | site:bloomberg.com \n| site:ft.com | site:wsj.com | site:businesswire.com | site:prnewswire.com \n| site:globenewswire.com | site:spendmatters.com | site:procurementmag.com \n| site:supplychaindive.com | site:supplychainbrain.com | \nsite:crunchbase.com | site:techcrunch.com | site:sap.com | site:oracle.com \n| site:coupa.com | site:ivalua.com | site:gep.com | site:jaggaer.com | \nsite:icertis.com",
+              "clicks": 0,
+              "impressions": 12,
+              "ctr": 0,
+              "position": 6.58
+            },
+            {
+              "query": "multi-tier supplier buy american compliance visibility",
+              "clicks": 0,
+              "impressions": 10,
+              "ctr": 0,
+              "position": 8.9
+            },
+            {
+              "query": "\"supply chain visibility\" -site:reddit.com -site:twitter.com -site:x.com \n-site:wykop.pl -site:tripadvisor.com -site:youtube.com -site:yelp.com \n-site:booking.com -site:facebook.com -site:instagram.com -site:tiktok.com",
+              "clicks": 0,
+              "impressions": 9,
+              "ctr": 0,
+              "position": 1.11
+            },
+            {
+              "query": "how does supply chain management inside erp handle multi-tier supplier \nvisibility and risk?",
+              "clicks": 0,
+              "impressions": 9,
+              "ctr": 0,
+              "position": 1.44
+            },
+            {
+              "query": "alfa laval supply chain resilience sub-tier suppliers 2025 2026",
+              "clicks": 0,
+              "impressions": 9,
+              "ctr": 0,
+              "position": 1.56
+            },
+            {
+              "query": "company single customer concentration risk 2026 crisis problem risk",
+              "clicks": 0,
+              "impressions": 9,
+              "ctr": 0,
+              "position": 4.67
+            },
+            {
+              "query": "visibility into tier 2 and tier 3 suppliers",
+              "clicks": 0,
+              "impressions": 9,
+              "ctr": 0,
+              "position": 10.33
+            },
+            {
+              "query": "data accuracy and reporting compliance in supply chain systems before \ncommitting to a multi-year",
+              "clicks": 0,
+              "impressions": 8,
+              "ctr": 0,
+              "position": 2.5
+            },
+            {
+              "query": "supply chains shocks with thin slack and poor shared visibility should \nproduce more unilateral 2026",
+              "clicks": 0,
+              "impressions": 8,
+              "ctr": 0,
+              "position": 5.38
+            },
+            {
+              "query": "i am a accountant, chief financial officer, chief technology officer, \nfinancial analyst, founder, it manager, or hr manager. my job seniority is \nat the owner, executive, vp, director, manager, or senior level. i work at \na company with 250-1k employees. my main motivations: minimize operational \ncosts and improve financial performance, proactive financial management, \nmitigate risk, simplify and modernize it infrastructure, cybersecurity, \nreduce time spent on hr administrative tasks, boost employee retention, \ndecrease recruiting costs/time., deliver hr experiences, improve employee \nengagement/productivity, transparent pay practices, reduce time spent on \nfinance administrative tasks, drive growth, enhance margins, streamlining \nfinancial processes, actionable insights my main pain points: resource \nconstraints, cost control, revenue growth, failing to meet forecasts. \nrecession, market volatility, inflation, adhering to cross-border \nregulations, siloed systems, fragmented data, costly integrations hinder \nefficiency, reducing employee burnout/turnover., maximizing \nengagement/productivity, complying with a range of labor, benefits, and \ndata privacy regulations, reporting accuracy, audit and compliance \nrequests, proving roi of erp investments, financial efficiency challenges \nin supply chain visibility",
+              "clicks": 0,
+              "impressions": 7,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "query": "supply chain disruptions 2026",
+              "clicks": 0,
+              "impressions": 7,
+              "ctr": 0,
+              "position": 1.57
+            }
+          ],
+          "countries": [
+            {
+              "country": "United States",
+              "clicks": 0,
+              "impressions": 567,
+              "ctr": 0,
+              "position": 10.01
+            },
+            {
+              "country": "United Kingdom",
+              "clicks": 0,
+              "impressions": 82,
+              "ctr": 0,
+              "position": 25.37
+            },
+            {
+              "country": "Germany",
+              "clicks": 0,
+              "impressions": 61,
+              "ctr": 0,
+              "position": 32.56
+            },
+            {
+              "country": "Netherlands",
+              "clicks": 0,
+              "impressions": 54,
+              "ctr": 0,
+              "position": 44.89
+            },
+            {
+              "country": "Japan",
+              "clicks": 0,
+              "impressions": 51,
+              "ctr": 0,
+              "position": 40.94
+            },
+            {
+              "country": "Switzerland",
+              "clicks": 0,
+              "impressions": 50,
+              "ctr": 0,
+              "position": 42.7
+            },
+            {
+              "country": "Canada",
+              "clicks": 0,
+              "impressions": 48,
+              "ctr": 0,
+              "position": 17.17
+            },
+            {
+              "country": "Czechia",
+              "clicks": 0,
+              "impressions": 48,
+              "ctr": 0,
+              "position": 41.77
+            },
+            {
+              "country": "Ireland",
+              "clicks": 0,
+              "impressions": 48,
+              "ctr": 0,
+              "position": 43.5
+            },
+            {
+              "country": "Belgium",
+              "clicks": 0,
+              "impressions": 48,
+              "ctr": 0,
+              "position": 43.69
+            },
+            {
+              "country": "Norway",
+              "clicks": 0,
+              "impressions": 46,
+              "ctr": 0,
+              "position": 45.13
+            },
+            {
+              "country": "Finland",
+              "clicks": 0,
+              "impressions": 46,
+              "ctr": 0,
+              "position": 46.04
+            },
+            {
+              "country": "Spain",
+              "clicks": 0,
+              "impressions": 45,
+              "ctr": 0,
+              "position": 42.04
+            },
+            {
+              "country": "Austria",
+              "clicks": 0,
+              "impressions": 43,
+              "ctr": 0,
+              "position": 46.19
+            },
+            {
+              "country": "Sweden",
+              "clicks": 0,
+              "impressions": 43,
+              "ctr": 0,
+              "position": 47.12
+            },
+            {
+              "country": "Denmark",
+              "clicks": 0,
+              "impressions": 37,
+              "ctr": 0,
+              "position": 46.73
+            },
+            {
+              "country": "Oman",
+              "clicks": 0,
+              "impressions": 30,
+              "ctr": 0,
+              "position": 30.93
+            },
+            {
+              "country": "Brazil",
+              "clicks": 0,
+              "impressions": 30,
+              "ctr": 0,
+              "position": 40
+            },
+            {
+              "country": "India",
+              "clicks": 0,
+              "impressions": 28,
+              "ctr": 0,
+              "position": 30.25
+            },
+            {
+              "country": "Indonesia",
+              "clicks": 0,
+              "impressions": 28,
+              "ctr": 0,
+              "position": 38.14
+            },
+            {
+              "country": "United Arab Emirates",
+              "clicks": 0,
+              "impressions": 28,
+              "ctr": 0,
+              "position": 45.93
+            },
+            {
+              "country": "Malaysia",
+              "clicks": 0,
+              "impressions": 28,
+              "ctr": 0,
+              "position": 51.36
+            },
+            {
+              "country": "Hong Kong",
+              "clicks": 0,
+              "impressions": 26,
+              "ctr": 0,
+              "position": 43.77
+            },
+            {
+              "country": "Australia",
+              "clicks": 0,
+              "impressions": 23,
+              "ctr": 0,
+              "position": 44.26
+            },
+            {
+              "country": "New Zealand",
+              "clicks": 0,
+              "impressions": 21,
+              "ctr": 0,
+              "position": 41.76
+            },
+            {
+              "country": "Mexico",
+              "clicks": 0,
+              "impressions": 18,
+              "ctr": 0,
+              "position": 44.39
+            },
+            {
+              "country": "Qatar",
+              "clicks": 0,
+              "impressions": 17,
+              "ctr": 0,
+              "position": 39.94
+            },
+            {
+              "country": "Saudi Arabia",
+              "clicks": 0,
+              "impressions": 12,
+              "ctr": 0,
+              "position": 39.83
+            },
+            {
+              "country": "Singapore",
+              "clicks": 0,
+              "impressions": 12,
+              "ctr": 0,
+              "position": 41.08
+            },
+            {
+              "country": "Argentina",
+              "clicks": 0,
+              "impressions": 8,
+              "ctr": 0,
+              "position": 5.25
+            },
+            {
+              "country": "Italy",
+              "clicks": 0,
+              "impressions": 7,
+              "ctr": 0,
+              "position": 2.86
+            },
+            {
+              "country": "France",
+              "clicks": 0,
+              "impressions": 7,
+              "ctr": 0,
+              "position": 23.29
+            },
+            {
+              "country": "Philippines",
+              "clicks": 0,
+              "impressions": 5,
+              "ctr": 0,
+              "position": 35.8
+            },
+            {
+              "country": "Vietnam",
+              "clicks": 0,
+              "impressions": 3,
+              "ctr": 0,
+              "position": 5.67
+            },
+            {
+              "country": "Israel",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 11
+            },
+            {
+              "country": "China",
+              "clicks": 0,
+              "impressions": 2,
+              "ctr": 0,
+              "position": 24.5
+            },
+            {
+              "country": "Bahrain",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Ghana",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Venezuela",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 1
+            },
+            {
+              "country": "Paraguay",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 2
+            },
+            {
+              "country": "Bolivia",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 4
+            },
+            {
+              "country": "Hungary",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 6
+            },
+            {
+              "country": "Lithuania",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 7
+            },
+            {
+              "country": "Bangladesh",
+              "clicks": 0,
+              "impressions": 1,
+              "ctr": 0,
+              "position": 10
+            }
+          ],
+          "devices": [
+            {
+              "device": "Desktop",
+              "clicks": 0,
+              "impressions": 1229,
+              "ctr": 0,
+              "position": 23.7
+            },
+            {
+              "device": "Mobile",
+              "clicks": 0,
+              "impressions": 402,
+              "ctr": 0,
+              "position": 43.5
+            },
+            {
+              "device": "Tablet",
+              "clicks": 0,
+              "impressions": 29,
+              "ctr": 0,
+              "position": 47.79
             }
           ]
         }
