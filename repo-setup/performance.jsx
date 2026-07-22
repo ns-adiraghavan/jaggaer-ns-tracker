@@ -74,6 +74,93 @@ function perfFileToBase64(file) {
   });
 }
 
+// ─── Record adapter — normalises both old flat records and new {daily,snapshots} ──
+//
+// Old shape: { url, summary, timeseries, top_queries, countries, devices,
+//              date_range, uploaded_at, uploaded_by, filename }
+// New shape: { url, daily: { "YYYY-MM-DD": {clicks,impressions,ctr,position} },
+//              snapshots: [{ snapshot_date, uploaded_at, summary, top_queries,
+//                            countries, devices, date_range, filename, ... }] }
+//
+// Returns a normalised view: { timeseries, summary, top_queries, countries,
+//   devices, date_range, uploaded_at, filename, latestSnapshot, prevSnapshot }
+function perfRecordView(record) {
+  if (!record) return null;
+
+  // New model
+  if (record.daily && record.snapshots) {
+    const snaps = record.snapshots;
+    const latest = snaps[snaps.length - 1] || {};
+    const prev   = snaps.length >= 2 ? snaps[snaps.length - 2] : null;
+    // Build sorted timeseries from daily dict
+    const timeseries = Object.entries(record.daily)
+      .map(([date, v]) => ({ date, ...v }))
+      .sort((a, b) => a.date.localeCompare(b.date));
+    return {
+      timeseries,
+      summary:        latest.summary       || {},
+      top_queries:    latest.top_queries   || [],
+      countries:      latest.countries     || [],
+      devices:        latest.devices       || [],
+      date_range:     latest.date_range    || {},
+      uploaded_at:    latest.uploaded_at   || null,
+      filename:       latest.filename      || null,
+      latestSnapshot: latest,
+      prevSnapshot:   prev,
+      snapshotCount:  snaps.length,
+    };
+  }
+
+  // Old/flat model — passthrough
+  return {
+    timeseries:     record.timeseries    || [],
+    summary:        record.summary       || {},
+    top_queries:    record.top_queries   || [],
+    countries:      record.countries     || [],
+    devices:        record.devices       || [],
+    date_range:     record.date_range    || {},
+    uploaded_at:    record.uploaded_at   || null,
+    filename:       record.filename      || null,
+    latestSnapshot: null,
+    prevSnapshot:   null,
+    snapshotCount:  1,
+  };
+}
+
+// WoW delta between two snapshots' summaries.
+// Returns { clicks, impressions, ctr, avg_position } with sign, or null if no prev.
+function perfWoW(view) {
+  if (!view || !view.prevSnapshot) return null;
+  const curr = view.summary || {};
+  const prev = view.prevSnapshot.summary || {};
+  return {
+    clicks:       (curr.clicks       || 0) - (prev.clicks       || 0),
+    impressions:  (curr.impressions  || 0) - (prev.impressions  || 0),
+    ctr:          (curr.ctr          || 0) - (prev.ctr          || 0),
+    avg_position: (curr.avg_position || 0) - (prev.avg_position || 0),
+  };
+}
+
+// Format a signed WoW delta for display. position delta is inverted (lower = better).
+function perfDeltaLabel(delta, field) {
+  if (!delta) return null;
+  const v = delta[field];
+  if (v == null || !Number.isFinite(v)) return null;
+  const abs = Math.abs(v);
+  if (abs < 0.5 && field !== "ctr") return null; // suppress noise
+  const sign = v > 0 ? "+" : "−";
+  if (field === "ctr") {
+    const pct = (abs * 100).toFixed(2);
+    if (Number(pct) < 0.01) return null;
+    return { label: `${sign}${pct}%`, up: v > 0 };
+  }
+  if (field === "avg_position") {
+    // Lower position = better, so flip colour signal
+    return { label: `${sign}${abs.toFixed(1)}`, up: v < 0 };
+  }
+  return { label: `${sign}${Math.round(abs).toLocaleString("en-US")}`, up: v > 0 };
+}
+
 // ─── Performance computation helpers ────────────────────────────────────────
 
 // Trailing-3-month window: from 90 days ago (or go-live date, whichever is later)
@@ -184,15 +271,16 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
     let clicks = 0, impressions = 0, avgMonthlySum = 0, weighted = 0;
     let best = null, mostImpr = null;
     for (const p of withData) {
-      const record = perfData[p.key];
+      const view = perfRecordView(perfData[p.key]);
+      if (!view) continue;
       const releaseTs = perfReleaseTs(p.piece);
-      const window = perfTrailing3Month(record.timeseries, releaseTs);
+      const window = perfTrailing3Month(view.timeseries, releaseTs);
       const totals = window.length ? perfWindowTotals(window) : { impressions: 0, clicks: 0, avgMonthly: 0, weightedAvgPos: 0 };
       clicks += totals.clicks;
       impressions += totals.impressions;
       avgMonthlySum += totals.avgMonthly;
       weighted += totals.weightedAvgPos * totals.impressions;
-      const s = record.summary || {};
+      const s = view.summary;
       if (s.avg_position > 0 && (!best || s.avg_position < best.pos)) best = { pos: s.avg_position, title: p.piece.title };
       if (!mostImpr || totals.impressions > (mostImpr.impr || 0)) mostImpr = { impr: totals.impressions, title: p.piece.title };
     }
@@ -233,23 +321,47 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
         );
       }
 
-      const record = {
-        url: body.url,
-        uploaded_at: new Date().toISOString(),
-        uploaded_by: currentUser?.id || null,
-        filename: body.filename || file.name,
-        date_range: body.date_range,
-        summary: body.summary,
-        timeseries: body.timeseries,
-        top_queries: body.top_queries,
-        countries: body.countries,
-        devices: body.devices,
-      };
-
-      setProject(p => ({
-        ...p,
-        performanceData: { ...(p.performanceData || {}), [body.url_key]: record },
-      }));
+      // ── Merge into {daily, snapshots} model ───────────────────────────────
+      // daily: canonical deduped series — later uploads overwrite same-date rows,
+      //        so the series grows forward forever without double-counting.
+      // snapshots: per-upload provenance + dimension data (queries/countries/devices
+      //            are as-of aggregates, so they need to be stored per snapshot).
+      setProject(p => {
+        const existing = (p.performanceData || {})[body.url_key] || {};
+        const mergedDaily = { ...(existing.daily || {}) };
+        for (const row of body.timeseries || []) {
+          if (row.date) {
+            mergedDaily[row.date] = {
+              clicks:      row.clicks      || 0,
+              impressions: row.impressions || 0,
+              ctr:         row.ctr         || 0,
+              position:    row.position    || 0,
+            };
+          }
+        }
+        const newSnapshot = {
+          snapshot_date: body.snapshot_date || body.date_range?.end || new Date().toISOString().slice(0, 10),
+          uploaded_at:   new Date().toISOString(),
+          uploaded_by:   currentUser?.id || null,
+          filename:      body.filename || file.name,
+          date_range:    body.date_range,
+          summary:       body.summary,
+          top_queries:   body.top_queries,
+          countries:     body.countries,
+          devices:       body.devices,
+        };
+        // Sort oldest→newest; cap at 52 entries (one year of weeklies).
+        const snapshots = [...(existing.snapshots || []), newSnapshot]
+          .sort((a, b) => (a.snapshot_date || "").localeCompare(b.snapshot_date || ""))
+          .slice(-52);
+        return {
+          ...p,
+          performanceData: {
+            ...(p.performanceData || {}),
+            [body.url_key]: { url: body.url, daily: mergedDaily, snapshots },
+          },
+        };
+      });
     } catch (e) {
       setError({ key: entry.key, message: e.message });
     } finally {
@@ -446,12 +558,13 @@ function PerfDropzone({ busy, onUpload, compact, label }) {
 function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen, onDismissError, sortBy }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const { piece, pillar } = entry;
-  const s = record ? (record.summary || {}) : null;
+  const view = record ? perfRecordView(record) : null;
   const releaseTs = perfReleaseTs(piece);
   // Trailing-3-month window metrics (computed upfront to avoid IIFE in JSX)
-  const cardWin = record ? perfTrailing3Month(record.timeseries, releaseTs) : [];
+  const cardWin = view ? perfTrailing3Month(view.timeseries, releaseTs) : [];
   const cardWt = cardWin.length ? perfWindowTotals(cardWin) : { impressions: 0, clicks: 0, avgMonthly: 0, weightedAvgPos: 0 };
   const cardKw = piece.primary_keyword || null;
+  const wow = view ? perfWoW(view) : null;
 
   return (
     <div
@@ -480,51 +593,87 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
         )}
       </div>
 
-      {record ? (
+      {view ? (
         <>
-          <div style={{ marginTop: "auto" }}>
-            <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", marginBottom: "2px" }}>
-              Impressions · trailing 3 months
+          {/* ── Hero row: Impressions + Clicks side by side ── */}
+          <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+            <div>
+              <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", marginBottom: "2px" }}>
+                Impressions · 3mo
+              </div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "5px" }}>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", fontWeight: 600, color: "#1a2535", lineHeight: 1 }}>
+                  {perfNum(cardWt.impressions)}
+                </div>
+                {(() => { const d = perfDeltaLabel(wow, "impressions"); return d ? (
+                  <span style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, color: d.up ? "#1e7a45" : "#c8401a" }}>{d.label}</span>
+                ) : null; })()}
+              </div>
+              <div style={{ ...FONT, fontSize: "0.62rem", color: "#aaa", marginTop: "2px" }}>
+                {perfNum(cardWt.avgMonthly)} / mo avg
+              </div>
             </div>
-            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "2.1rem", fontWeight: 600, color: "#1a2535", lineHeight: 1 }}>
-              {perfNum(cardWt.impressions)}
-            </div>
-            <div style={{ ...FONT, fontSize: "0.66rem", color: "#aaa", marginTop: "3px" }}>
-              avg {perfNum(cardWt.avgMonthly)} / month
+            <div>
+              <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", marginBottom: "2px" }}>
+                Clicks · 3mo
+              </div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "5px" }}>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", fontWeight: 600, color: "#1a2f4e", lineHeight: 1 }}>
+                  {perfNum(cardWt.clicks)}
+                </div>
+                {(() => { const d = perfDeltaLabel(wow, "clicks"); return d ? (
+                  <span style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, color: d.up ? "#1e7a45" : "#c8401a" }}>{d.label}</span>
+                ) : null; })()}
+              </div>
+              <div style={{ ...FONT, fontSize: "0.62rem", color: "#aaa", marginTop: "2px" }}>
+                {perfPct(cardWt.clicks && cardWt.impressions ? cardWt.clicks / cardWt.impressions : 0)} CTR
+              </div>
             </div>
           </div>
-          <PerfSparkline series={cardWin.length >= 2 ? cardWin : record.timeseries} />
+          <PerfSparkline series={cardWin.length >= 2 ? cardWin : view.timeseries} />
 
-          <div style={{ display: "flex", gap: "16px", borderTop: "1px solid #f0ede6", paddingTop: "10px" }}>
-            {[["Clicks", perfNum(cardWt.clicks)], ["CTR", perfPct(cardWt.clicks && cardWt.impressions ? cardWt.clicks / cardWt.impressions : 0)], ["Avg position", perfPos(cardWt.weightedAvgPos)]].map(([k, v]) => (
-              <div key={k}>
-                <div style={{ ...FONT, fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>{k}</div>
-                <div style={{ ...FONT, fontSize: "0.82rem", fontWeight: 600, color: "#333", marginTop: "1px" }}>{v}</div>
+          {/* ── Secondary metrics row: CTR | Position | WoW snapshot count ── */}
+          <div style={{ display: "flex", gap: "14px", borderTop: "1px solid #f0ede6", paddingTop: "10px" }}>
+            {[
+              ["CTR", perfPct(cardWt.clicks && cardWt.impressions ? cardWt.clicks / cardWt.impressions : 0), perfDeltaLabel(wow, "ctr")],
+              ["Avg position", perfPos(cardWt.weightedAvgPos), perfDeltaLabel(wow, "avg_position")],
+            ].map(([k, v, delta]) => (
+              <div key={k} style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
+                <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>{k}</div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
+                  <div style={{ ...FONT, fontSize: "0.82rem", fontWeight: 600, color: "#333" }}>{v}</div>
+                  {delta && <span style={{ ...FONT, fontSize: "0.6rem", fontWeight: 700, color: delta.up ? "#1e7a45" : "#c8401a" }}>{delta.label}</span>}
+                </div>
               </div>
             ))}
+            {view.snapshotCount > 1 && (
+              <div style={{ marginLeft: "auto", ...FONT, fontSize: "0.58rem", color: "#bbb", alignSelf: "flex-end", whiteSpace: "nowrap" }}>
+                {view.snapshotCount} uploads
+              </div>
+            )}
           </div>
-          {/* Target keyword vs. top actual query — two columns so both are visible at once */}
-          {(cardKw || (record.top_queries && record.top_queries.length > 0)) && (
-            <div style={{ display: "grid", gridTemplateColumns: cardKw && record.top_queries?.length ? "1fr 1fr" : "1fr", gap: "6px" }}>
+          {/* Target keyword vs. top actual query */}
+          {(cardKw || (view.top_queries && view.top_queries.length > 0)) && (
+            <div style={{ display: "grid", gridTemplateColumns: cardKw && view.top_queries?.length ? "1fr 1fr" : "1fr", gap: "6px" }}>
               {cardKw && (
                 <div style={{ ...FONT, fontSize: "0.66rem", color: "#555", background: "#f5f2ec", padding: "4px 8px", borderRadius: "2px" }}>
                   <div style={{ color: "#aaa", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", fontSize: "0.56rem", marginBottom: "2px" }}>Target keyword</div>
                   {cardKw}
                 </div>
               )}
-              {record.top_queries && record.top_queries[0] && (
+              {view.top_queries && view.top_queries[0] && (
                 <div style={{ ...FONT, fontSize: "0.66rem", color: "#2a5a35", background: "#eef7f1", padding: "4px 8px", borderRadius: "2px", border: "1px solid #c8e8d4" }}>
                   <div style={{ color: "#1e7a45", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", fontSize: "0.56rem", marginBottom: "2px" }}>Top query (GSC)</div>
-                  {record.top_queries[0].query}
+                  {view.top_queries[0].query}
                 </div>
               )}
             </div>
           )}
           <div style={{ ...FONT, fontSize: "0.64rem", color: "#bbb" }}>
-            {record.date_range && record.date_range.start
-              ? `${perfDate(record.date_range.start)} – ${perfDate(record.date_range.end)}`
+            {view.date_range && view.date_range.start
+              ? `${perfDate(view.date_range.start)} – ${perfDate(view.date_range.end)}`
               : "Range unknown"}
-            {record.uploaded_at && ` · uploaded ${perfUploadedAt(record.uploaded_at)}`}
+            {view.uploaded_at && ` · uploaded ${perfUploadedAt(view.uploaded_at)}`}
           </div>
         </>
       ) : (
@@ -647,13 +796,15 @@ function PerfDimTable({ title, rows, field, limit }) {
 function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onClear, onClose }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const { piece, cluster, pillar, url } = entry;
-  const s = record.summary || {};
+  const view = perfRecordView(record);
+  const s = view ? view.summary : {};
   const [confirmClear, setConfirmClear] = usePerfState(false);
   // Trailing-3-month metrics for modal display
   const modalRelTs = perfReleaseTs(piece);
-  const modalWin = perfTrailing3Month(record.timeseries, modalRelTs);
+  const modalWin = view ? perfTrailing3Month(view.timeseries, modalRelTs) : [];
   const modalWt = modalWin.length ? perfWindowTotals(modalWin) : { impressions: 0, clicks: 0, avgMonthly: 0, weightedAvgPos: 0 };
   const modalKw = piece.primary_keyword || null;
+  const modalWow = view ? perfWoW(view) : null;
 
   return (
     <div
@@ -712,7 +863,7 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
           ))}
         </div>
         {/* Target keyword vs. top actual query — two columns so the comparison is immediate */}
-        {(modalKw || (record.top_queries && record.top_queries.length > 0)) && (
+        {(modalKw || (view.top_queries && view.top_queries.length > 0)) && (
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "10px" }}>
             <div style={{ background: "#f5f2ec", border: "1px solid #e0dbd4", borderRadius: "3px", padding: "8px 10px" }}>
               <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "#aaa", marginBottom: "4px" }}>
@@ -727,32 +878,53 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
                 Top query driving impressions (GSC)
               </div>
               <div style={{ ...FONT, fontSize: "0.82rem", color: "#1a2535", fontWeight: 500 }}>
-                {record.top_queries?.[0]?.query || "—"}
+                {view.top_queries?.[0]?.query || "—"}
               </div>
             </div>
           </div>
         )}
+        {/* WoW delta row — only shown when there are 2+ snapshots */}
+        {modalWow && view.snapshotCount >= 2 && (() => {
+          const items = [
+            ["Impressions WoW", perfDeltaLabel(modalWow, "impressions")],
+            ["Clicks WoW",      perfDeltaLabel(modalWow, "clicks")],
+            ["CTR WoW",         perfDeltaLabel(modalWow, "ctr")],
+            ["Position WoW",    perfDeltaLabel(modalWow, "avg_position")],
+          ].filter(([, d]) => d);
+          if (!items.length) return null;
+          return (
+            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", padding: "8px 10px", background: "#f5f8ff", border: "1px solid #d0dbf0", borderRadius: "3px", marginBottom: "10px" }}>
+              <span style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7a8eb0", alignSelf: "center" }}>vs prev upload</span>
+              {items.map(([label, d]) => (
+                <span key={label} style={{ ...FONT, fontSize: "0.74rem", fontWeight: 700, color: d.up ? "#1e7a45" : "#c8401a" }}>
+                  {label.split(" ")[0]}: {d.label}
+                </span>
+              ))}
+            </div>
+          );
+        })()}
         </>
 
         <div style={{ ...FONT, fontSize: "0.68rem", color: "#aaa", marginBottom: "10px" }}>
-          {(record.date_range && record.date_range.label) || "Date range"}
-          {record.date_range && record.date_range.start && ` · ${perfDate(record.date_range.start)} – ${perfDate(record.date_range.end)}`}
+          {(view.date_range && view.date_range.label) || "Date range"}
+          {view.date_range && view.date_range.start && ` · ${perfDate(view.date_range.start)} – ${perfDate(view.date_range.end)}`}
+          {view.snapshotCount > 1 && <span style={{ marginLeft: "8px", color: "#bbb" }}>· {view.snapshotCount} uploads tracked</span>}
         </div>
 
-        <PerfChart series={record.timeseries} />
+        <PerfChart series={view.timeseries} />
 
-        <PerfDimTable title="Top queries" rows={record.top_queries} field="query" limit={10} />
-        <PerfDimTable title="Countries" rows={record.countries} field="country" limit={8} />
-        <PerfDimTable title="Devices" rows={record.devices} field="device" />
+        <PerfDimTable title="Top queries" rows={view.top_queries} field="query" limit={10} />
+        <PerfDimTable title="Countries" rows={view.countries} field="country" limit={8} />
+        <PerfDimTable title="Devices" rows={view.devices} field="device" />
 
         <div style={{ marginTop: "26px", borderTop: "1px solid #e8e3da", paddingTop: "16px" }}>
           <div style={{ ...FONT, fontSize: "0.66rem", color: "#aaa", marginBottom: "8px" }}>
-            {record.filename && <>Source: <code style={{ background: "#f5f2ec", padding: "2px 5px", borderRadius: "2px" }}>{record.filename}</code> · </>}
-            uploaded {perfUploadedAt(record.uploaded_at)}
+            {view.filename && <>Source: <code style={{ background: "#f5f2ec", padding: "2px 5px", borderRadius: "2px" }}>{view.filename}</code> · </>}
+            uploaded {perfUploadedAt(view.uploaded_at)}
           </div>
           {canUpload && (
             <>
-              <PerfDropzone busy={busy} onUpload={onUpload} compact label="Replace with a newer export" />
+              <PerfDropzone busy={busy} onUpload={onUpload} compact label="Upload another export — data is merged, not replaced" />
               {error && (
                 <div style={{ ...FONT, fontSize: "0.7rem", color: "#c8401a", background: "#fbe8e2", border: "1px solid #f0d0c0", borderRadius: "3px", padding: "8px 10px", marginTop: "8px", lineHeight: 1.4 }}>
                   {error}

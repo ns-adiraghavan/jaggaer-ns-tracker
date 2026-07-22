@@ -42,8 +42,8 @@ const DEFAULT_WORKFLOW_STAGES = [
   { id: "writing",          label: "Writing",                       color: "#1e6fa8",             bg: "#e8f2fa",             actor: "ns" },
   { id: "marketing-review", label: "Abhishek and Orlagh Review",    color: "#6c3483",             bg: "#f5eef8",             actor: ["person:abhishek", "person:m-ny8dy"] },
   { id: "ed-review",         label: "Ed Content Review",             color: "#7d6608",             bg: "#fefde8",             actor: "person:m-ed01" },
-  { id: "editors",          label: "CTA Check",                     color: "#b05e00",             bg: "#fdf0e0",             actor: "jaggaer" },
   { id: "approved",         label: "Approved",                      color: "#1e7a45",             bg: "#e6f5ec",             actor: null },
+  { id: "live",             label: "Live",                          color: "#0d5c8a",             bg: "#e6f2fa",             actor: ["ns", "jaggaer"] },
 ];
 
 // Ad-Hoc Articles run a short two-stage chain instead of the full pipeline above:
@@ -87,7 +87,7 @@ function buildStatusMeta(stages) {
 // label/colour everywhere, not just in components that thread `stageMeta` through.
 let STATUS_META = buildStatusMeta(DEFAULT_WORKFLOW_STAGES);
 let STATUS_ORDER = DEFAULT_WORKFLOW_STAGES.map(s => s.id);
-let IN_MOTION_STATUSES = DEFAULT_WORKFLOW_STAGES.filter(s => s.id !== "not-started" && s.id !== "approved").map(s => s.id);
+let IN_MOTION_STATUSES = DEFAULT_WORKFLOW_STAGES.filter(s => s.id !== "not-started" && s.id !== "approved" && s.id !== "live").map(s => s.id);
 
 function syncWorkflowGlobals(project) {
   const stages = getWorkflowStages(project);
@@ -95,7 +95,7 @@ function syncWorkflowGlobals(project) {
   const stagesWithAdHoc = hasAdHoc ? stages : [...stages, getAdHocReviewStage(project)];
   STATUS_META = buildStatusMeta(stagesWithAdHoc);
   STATUS_ORDER = stagesWithAdHoc.map(s => s.id);
-  IN_MOTION_STATUSES = stagesWithAdHoc.filter(s => s.id !== "not-started" && s.id !== "approved").map(s => s.id);
+  IN_MOTION_STATUSES = stagesWithAdHoc.filter(s => s.id !== "not-started" && s.id !== "approved" && s.id !== "live").map(s => s.id);
 }
 window.NS_syncWorkflow = syncWorkflowGlobals;
 
@@ -122,7 +122,7 @@ function actorIsJaggaerSide(actor, project) {
 function pieceTurnFor(piece, user, project) {
   const stages = getWorkflowStages(project);
   const st = piece.status === "ad-hoc-review" ? getAdHocReviewStage(project) : stages.find(s => s.id === piece.status);
-  if (!st || piece.status === "approved" || piece.status === "not-started") {
+  if (!st || piece.status === "approved" || piece.status === "live" || piece.status === "not-started") {
     return { isTurn: false, mode: "history", awaitsJaggaer: false };
   }
   const isTurn = actorMatchesUser(st.actor, user);
@@ -1557,8 +1557,9 @@ function SendToEditorsButton({ cluster, pillar, project }) {
 // ─── Cluster card ─────────────────────────────────────────────────────────────
 function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onAdminEditCluster, stagger, currentWeek }) {
   const total = cluster.pieces.length;
-  const approved = cluster.pieces.filter(p => p.status === "approved").length;
-  const liveInMotion = getWorkflowStages(project).filter(s => s.id !== "not-started" && s.id !== "approved").map(s => s.id);
+  // Both approved and live count as "done" for cluster readiness
+  const approved = cluster.pieces.filter(p => p.status === "approved" || p.status === "live").length;
+  const liveInMotion = getWorkflowStages(project).filter(s => s.id !== "not-started" && s.id !== "approved" && s.id !== "live").map(s => s.id);
   const inMotion = cluster.pieces.filter(p => liveInMotion.includes(p.status)).length;
   const ready = approved === total && total > 0;
   const anchor = cluster.pieces.find(p => p.id === cluster.anchor_piece);
@@ -1703,7 +1704,7 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
   }
 
   function primaryAction() {
-    if (!currentStage || piece.status === "approved") return null;
+    if (!currentStage || piece.status === "approved" || piece.status === "live") return null;
     const actor = currentStage.actor;
     if (!actorMatches(actor)) return null;
     // Label logic
@@ -2172,7 +2173,8 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   const isCurrentActor = currentStage && actorMatches(currentStage.actor);
   const canBrief = isCurrentActor && piece.status === "not-started"; // Jaggaer uploads brief
   // NS (or admin) can upload/reupload at any non-terminal stage, regardless of whose actor turn it is
-  const canUpload = (isNS || adminMode) && piece.status !== "not-started" && piece.status !== "approved";
+  // NS can upload in approved state too — that's how they move a piece to "live".
+  const canUpload = (isNS || adminMode) && piece.status !== "not-started" && piece.status !== "live";
   const canReview = isCurrentActor && !isNS && piece.status !== "not-started" && piece.status !== "approved";
   // canReplace is now redundant (canUpload covers it), kept as false to avoid stale tab
   const canReplace = false;
@@ -2283,16 +2285,16 @@ function EditPiecePanel({ piece, cluster, project, updatePiece, onDone }) {
 // ─── Delete confirm ───────────────────────────────────────────────────────────
 function DeletePiecePanel({ piece, cluster, deletePiece, onClose }) {
   const { useState: useStateDP } = React;
-  const isApproved = piece.status === "approved";
-  const [confirmed, setConfirmed] = useStateDP(false);
+  const isApproved = piece.status === "approved" || piece.status === "live";
+  const isLiveDP = piece.status === "live";
 
   if (isApproved) {
     return (
       <div className="ns-delete-panel">
         <div className="ns-delete-warning">
           <div className="ns-delete-icon">⚠</div>
-          <div className="ns-delete-title">Cannot delete an approved piece</div>
-          <p className="ns-delete-body">This piece has been approved. Deleting it would break the cluster's publish-readiness record. To remove it, first revert the status in Edit, then delete.</p>
+          <div className="ns-delete-title">Cannot delete {isLiveDP ? "a live" : "an approved"} piece</div>
+          <p className="ns-delete-body">This piece {isLiveDP ? "is live on the site" : "has been approved"}. Deleting it would break the cluster's publish-readiness record. To remove it, first revert the status in Edit, then delete.</p>
         </div>
       </div>
     );
@@ -2719,7 +2721,7 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
   const sendBackStage = isAdHocReviewStage
     ? { id: "writing" }
     : ([...workflowStages].slice(0, currentIdx).reverse().find(s => s.actor === "ns") || workflowStages[0]);
-  const isLastStage = isAdHocReviewStage ? true : (nextStage?.id === "approved" || !nextStage);
+  const isLastStage = isAdHocReviewStage ? true : (nextStage?.id === "approved" || nextStage?.id === "live" || !nextStage);
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
   async function submit() {
@@ -2859,8 +2861,8 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
           <div style={{marginTop:16}}>
             <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:8}}>Cluster State</div>
             <div className="ns-feedback-cluster-state">
-              {cluster.pieces.filter(p => p.status==="approved").length} of {cluster.pieces.length} approved.
-              {cluster.pieces.every(p => p.status==="approved" || p.id===piece.id) && verdict==="approved" && (
+              {cluster.pieces.filter(p => p.status==="approved" || p.status==="live").length} of {cluster.pieces.length} approved.
+              {cluster.pieces.every(p => p.status==="approved" || p.status==="live" || p.id===piece.id) && verdict==="approved" && (
                 <div className="ns-feedback-readymsg">Approving this piece marks the cluster <strong>publish-ready</strong>.</div>
               )}
             </div>
@@ -3383,8 +3385,8 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
 
   return (
     <div className="ns-details">
-      {/* ── Publishing Info — top of details, approved pieces only ── */}
-      {piece.status === "approved" && (
+      {/* ── Publishing Info — top of details, approved + live pieces ── */}
+      {(piece.status === "approved" || piece.status === "live") && (
         <PublishingInfoSection
           piece={piece} cluster={cluster} project={project}
           currentUser={currentUser} updatePiece={updatePiece}
@@ -3612,13 +3614,14 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
               cluster.pieces.forEach((piece, idx) => {
                 const isAnchor = piece.id === cluster.anchor_piece;
                 const feedback = (project.feedback || {})[piece.id] || [];
-                const isApproved = piece.status === "approved";
+                const isApproved = piece.status === "approved" || piece.status === "live";
+                const isLive = piece.status === "live";
                 // Whose turn is it — derived from the LIVE workflow actor, not
                 // hardcoded stage ids (which broke when the workflow was reordered).
                 const turn = pieceTurnFor(piece, currentUser, project);
                 const hasAction = turn.isTurn;
                 const awaitsJG = turn.awaitsJaggaer;
-                // Approved/published pieces open straight to Details (Publishing Info).
+                // Approved/live pieces open straight to Details (Publishing Info).
                 const openMode = isApproved ? "details" : (turn.isTurn ? turn.mode : "history");
 
                 rows.push(
@@ -3688,19 +3691,18 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                       <span className="ns-ct-kw-secondary">{piece.secondary_keyword || "—"}</span>
                     </td>
                     <td className="ns-ct-td ns-ct-td-intent">
-                      {isApproved ? (
-                        <span
-                          className="ns-ct-intent-badge"
-                          title={piece.publishing && piece.publishing.live_url ? "Published — view publishing info" : "Approved — add publishing info"}
-                          style={{
-                            background: (piece.publishing && piece.publishing.live_url) ? "#e6f5ec" : "#fde7e0",
-                            color: (piece.publishing && piece.publishing.live_url) ? "#1e7a45" : "#c8401a",
-                            fontWeight: 700,
-                          }}
-                        >
-                          {(piece.publishing && piece.publishing.live_url) ? "● Published" : "Publishing ▸"}
-                        </span>
-                      ) : (
+                      {isApproved ? (() => {
+                        const hasUrl = piece.publishing && piece.publishing.live_url;
+                        const bg    = isLive ? "#e6f2fa" : hasUrl ? "#e6f5ec" : "#fde7e0";
+                        const color = isLive ? "#0d5c8a" : hasUrl ? "#1e7a45" : "#c8401a";
+                        const label = isLive ? "● Live" : hasUrl ? "● Published" : "Approved ▸";
+                        const tip   = isLive ? "Live — view publishing info" : hasUrl ? "Published — view publishing info" : "Approved — ready to upload";
+                        return (
+                          <span className="ns-ct-intent-badge" title={tip} style={{ background: bg, color, fontWeight: 700 }}>
+                            {label}
+                          </span>
+                        );
+                      })() : (
                         <span className={`ns-ct-intent-badge ${cluster.intent}`}>{cluster.intent === "informational" ? "Info" : "Comm"}</span>
                       )}
                     </td>
