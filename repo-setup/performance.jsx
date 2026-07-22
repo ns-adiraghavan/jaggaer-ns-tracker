@@ -31,6 +31,10 @@ function perfSlug(url) {
 // carry ts: null (we never backfilled dates we didn't have), so those fall back
 // to last_updated and, failing that, sort last.
 function perfReleaseTs(piece) {
+  // Prefer the explicitly set publish date — most reliable for backfilled pieces
+  // that have no status_history entries.
+  if (piece.publishing && piece.publishing.launch_date) return piece.publishing.launch_date;
+  // Fall back to when the piece last entered "approved" in the history log.
   const history = piece.status_history || [];
   for (let i = history.length - 1; i >= 0; i--) {
     if (history[i].stage === "approved" && history[i].ts) return history[i].ts;
@@ -595,76 +599,56 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
 
       {view ? (
         <>
-          {/* ── Hero row: Impressions + Clicks side by side ── */}
-          <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
-            <div>
-              <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", marginBottom: "2px" }}>
-                Impressions · 3mo
-              </div>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "5px" }}>
-                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", fontWeight: 600, color: "#1a2535", lineHeight: 1 }}>
-                  {perfNum(cardWt.impressions)}
-                </div>
-                {(() => { const d = perfDeltaLabel(wow, "impressions"); return d ? (
-                  <span style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, color: d.up ? "#1e7a45" : "#c8401a" }}>{d.label}</span>
-                ) : null; })()}
-              </div>
-              <div style={{ ...FONT, fontSize: "0.62rem", color: "#aaa", marginTop: "2px" }}>
-                {perfNum(cardWt.avgMonthly)} / mo avg
-              </div>
-            </div>
-            <div>
-              <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", marginBottom: "2px" }}>
-                Clicks · 3mo
-              </div>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "5px" }}>
-                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", fontWeight: 600, color: "#1a2f4e", lineHeight: 1 }}>
-                  {perfNum(cardWt.clicks)}
-                </div>
-                {(() => { const d = perfDeltaLabel(wow, "clicks"); return d ? (
-                  <span style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, color: d.up ? "#1e7a45" : "#c8401a" }}>{d.label}</span>
-                ) : null; })()}
-              </div>
-              <div style={{ ...FONT, fontSize: "0.62rem", color: "#aaa", marginTop: "2px" }}>
-                {perfPct(cardWt.clicks && cardWt.impressions ? cardWt.clicks / cardWt.impressions : 0)} CTR
-              </div>
-            </div>
-          </div>
-          <PerfSparkline series={cardWin.length >= 2 ? cardWin : view.timeseries} />
-
-          {/* ── Secondary metrics row: CTR | Position | WoW snapshot count ── */}
-          <div style={{ display: "flex", gap: "14px", borderTop: "1px solid #f0ede6", paddingTop: "10px" }}>
+          {/* ── Four equal-weight KPIs in a 2×2 grid ── */}
+          <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 12px" }}>
             {[
-              ["CTR", perfPct(cardWt.clicks && cardWt.impressions ? cardWt.clicks / cardWt.impressions : 0), perfDeltaLabel(wow, "ctr")],
-              ["Avg position", perfPos(cardWt.weightedAvgPos), perfDeltaLabel(wow, "avg_position")],
-            ].map(([k, v, delta]) => (
-              <div key={k} style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
-                <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>{k}</div>
+              { label: "Impressions", value: perfNum(cardWt.impressions), sub: `${perfNum(cardWt.avgMonthly)} / mo`, delta: perfDeltaLabel(wow, "impressions"), color: "#1a2535" },
+              { label: "Clicks",      value: perfNum(cardWt.clicks),      sub: `${perfPct(cardWt.clicks && cardWt.impressions ? cardWt.clicks / cardWt.impressions : 0)} CTR`, delta: perfDeltaLabel(wow, "clicks"), color: "#1a2f4e" },
+              { label: "CTR",         value: perfPct(cardWt.clicks && cardWt.impressions ? cardWt.clicks / cardWt.impressions : 0), sub: null, delta: perfDeltaLabel(wow, "ctr"), color: "#333" },
+              { label: "Avg position",value: perfPos(cardWt.weightedAvgPos), sub: null, delta: perfDeltaLabel(wow, "avg_position"), color: "#333" },
+            ].map(({ label, value, sub, delta, color }) => (
+              <div key={label}>
+                <div style={{ ...FONT, fontSize: "0.56rem", fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: "#aaa", marginBottom: "2px" }}>
+                  {label}
+                </div>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
-                  <div style={{ ...FONT, fontSize: "0.82rem", fontWeight: 600, color: "#333" }}>{v}</div>
+                  <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.35rem", fontWeight: 600, color, lineHeight: 1 }}>
+                    {value}
+                  </div>
                   {delta && <span style={{ ...FONT, fontSize: "0.6rem", fontWeight: 700, color: delta.up ? "#1e7a45" : "#c8401a" }}>{delta.label}</span>}
                 </div>
+                {sub && <div style={{ ...FONT, fontSize: "0.6rem", color: "#bbb", marginTop: "1px" }}>{sub}</div>}
               </div>
             ))}
-            {view.snapshotCount > 1 && (
-              <div style={{ marginLeft: "auto", ...FONT, fontSize: "0.58rem", color: "#bbb", alignSelf: "flex-end", whiteSpace: "nowrap" }}>
-                {view.snapshotCount} uploads
-              </div>
-            )}
           </div>
+          {/* Sparkline — trimmed to go-live date so the dead-flat pre-launch zone is hidden */}
+          <PerfSparkline series={(() => {
+            const src = cardWin.length >= 2 ? cardWin : view.timeseries;
+            // Drop leading days where both clicks and impressions are zero
+            let start = 0;
+            while (start < src.length - 1 && src[start].impressions === 0 && src[start].clicks === 0) start++;
+            return src.slice(start);
+          })()} />
+          {view.snapshotCount > 1 && (
+            <div style={{ ...FONT, fontSize: "0.58rem", color: "#bbb", textAlign: "right", marginTop: "-4px" }}>
+              {view.snapshotCount} uploads tracked
+            </div>
+          )}
           {/* Target keyword vs. top actual query */}
           {(cardKw || (view.top_queries && view.top_queries.length > 0)) && (
             <div style={{ display: "grid", gridTemplateColumns: cardKw && view.top_queries?.length ? "1fr 1fr" : "1fr", gap: "6px" }}>
               {cardKw && (
-                <div style={{ ...FONT, fontSize: "0.66rem", color: "#555", background: "#f5f2ec", padding: "4px 8px", borderRadius: "2px" }}>
+                <div style={{ ...FONT, fontSize: "0.66rem", color: "#555", background: "#f5f2ec", padding: "4px 8px", borderRadius: "2px", minWidth: 0 }}>
                   <div style={{ color: "#aaa", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", fontSize: "0.56rem", marginBottom: "2px" }}>Target keyword</div>
-                  {cardKw}
+                  <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{cardKw}</div>
                 </div>
               )}
               {view.top_queries && view.top_queries[0] && (
-                <div style={{ ...FONT, fontSize: "0.66rem", color: "#2a5a35", background: "#eef7f1", padding: "4px 8px", borderRadius: "2px", border: "1px solid #c8e8d4" }}>
+                <div style={{ ...FONT, fontSize: "0.66rem", color: "#2a5a35", background: "#eef7f1", padding: "4px 8px", borderRadius: "2px", border: "1px solid #c8e8d4", minWidth: 0 }}>
                   <div style={{ color: "#1e7a45", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", fontSize: "0.56rem", marginBottom: "2px" }}>Top query (GSC)</div>
-                  {view.top_queries[0].query}
+                  <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    {String(view.top_queries[0].query || "").replace(/\s+/g, " ").trim()}
+                  </div>
                 </div>
               )}
             </div>
