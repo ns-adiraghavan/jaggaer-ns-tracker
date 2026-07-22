@@ -1,0 +1,751 @@
+<!-- uploaded by m-5jitd at 2026-07-22T11:52:07.881Z -->
+<!-- piece: The Ultimate Guide to AI-Powered Source-to-Pay (S2P) Transformation -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1">
+<title>The Ultimate Guide to AI-Powered Source-to-Pay (S2P) Transformation - JAGGAER</title>
+<meta name="description" content="Discover where AI in source to pay is delivering real procurement value in 2026 — from S2C strategy to P2P automation. Frameworks, filters, and deployment checklists included.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+img{max-width:100%;height:auto;display:block}
+a{text-decoration:none}
+
+/* ===== JAI DESIGN TOKENS ===== */
+:root{
+  --ink:#160040;
+  --ink-2:#3a3f4a;
+  --ink-3:#6a7180;
+  --red:#D22428;
+  --grey:#3F434F;
+  --green:#4D8194;
+  --light-grey:#dce0e8;
+  --cream:#eef0f3;
+  --light-blue:#E9EFF4;
+  --white:#fff;
+  --jai-a:#5300CE;
+  --jai-b:#E22B83;
+  --jai-grad:linear-gradient(90deg,#5300CE 0%,#E22B83 100%);
+  --border:1px solid #dce0e8;
+  --radius:1rem;
+  --radius-sm:.5rem;
+  --container-width:1240px;
+  --container-padding:clamp(1rem,3vw,2rem);
+  --space-xs:0.5rem;
+  --space-s:clamp(0.75rem,0.68rem + 0.37vw,1rem);
+  --space-m:clamp(1rem,0.85rem + 0.74vw,1.5rem);
+  --space-l:clamp(1.5rem,1.28rem + 1.11vw,2.25rem);
+  --space-xl:clamp(2rem,1.59rem + 2.04vw,3.38rem);
+  --fs-base:clamp(0.9rem,0.87rem + 0.18vw,1rem);
+  --fs-sm:0.8125rem;
+  --fs-xs:0.75rem;
+}
+
+body{
+  font-family:Inter,system-ui,sans-serif;
+  font-size:var(--fs-base);
+  line-height:1.65;
+  color:var(--ink-2);
+  background:var(--white);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.text-grad{background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ===== LOGO BAR ===== */
+.logo-bar{
+  position:sticky;top:0;z-index:200;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:var(--border);
+  padding:0 var(--container-padding);
+  display:flex;align-items:center;
+  height:60px;
+}
+.logo-bar-inner{
+  max-width:var(--container-width);
+  margin:0 auto;
+  padding:0 var(--container-padding);
+  height:60px;
+  display:flex;
+  align-items:center;
+}
+.logo-bar-inner img{height:22px;width:auto}
+
+/* ===== HERO — purple JAI style ===== */
+.hero-banner{
+  background:#1d0054;
+  position:relative;
+  overflow:hidden;
+  min-height:300px;
+}
+/* bright purple glow top-right */
+.hero-banner::before{
+  content:'';
+  position:absolute;top:-120px;right:-80px;
+  width:620px;height:620px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(83,0,206,.82) 0%,transparent 65%);
+  pointer-events:none;
+}
+/* magenta glow bottom-left */
+.hero-banner::after{
+  content:'';
+  position:absolute;bottom:-80px;left:10%;
+  width:460px;height:460px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(226,43,131,.52) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-inner{
+  display:grid;
+  grid-template-columns:58% 42%;
+  min-height:300px;
+  align-items:stretch;
+  width:100%;
+  gap:0;
+  position:relative;z-index:1;
+}
+.hero-text-col{
+  padding:3.5rem clamp(2rem,4vw,3rem) 3.5rem calc((100vw - var(--container-width))/2 + clamp(1rem,3vw,2rem));
+  display:flex;flex-direction:column;justify-content:center;
+}
+.hero-eyebrow{
+  font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:1.25rem;display:inline-flex;align-items:center;gap:8px;
+  background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-h1{
+  font-size:clamp(1.9rem,3.2vw,2.6rem);
+  font-weight:400;
+  line-height:1.12;
+  color:#fff;
+  letter-spacing:-.015em;
+  max-width:520px;
+}
+.hero-h1 strong{font-weight:700;display:block}
+
+.hero-img-col{
+  position:relative;overflow:hidden;min-height:300px;
+}
+.hero-img-col img{
+  position:absolute;top:0;left:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  z-index:1;
+  opacity:.7;
+}
+
+/* ===== PAGE LAYOUT ===== */
+.page-outer{
+  max-width:var(--container-width);
+  margin:0 auto;
+  padding:0 var(--container-padding);
+}
+.page-grid{
+  display:grid;
+  grid-template-columns:1fr 500px;
+  gap:clamp(2rem,4vw,3.5rem);
+  padding:var(--space-xl) 0 clamp(3rem,5vw,5rem);
+  align-items:start;
+}
+
+/* ===== CONTENT COLUMN ===== */
+.content-col h2{
+  font-family:Inter,system-ui,sans-serif;
+  font-size:clamp(1.15rem,1.6vw,1.42rem);
+  font-weight:400;
+  line-height:1.2;
+  color:var(--ink);
+  margin:2.75rem 0 .875rem;
+  letter-spacing:-.01em;
+}
+.content-col h2:first-child{margin-top:0}
+.content-col p{font-size:var(--fs-base);line-height:1.7;color:var(--ink-2)}
+.content-col p+p{margin-top:.875rem}
+
+/* Key insights eyebrow */
+.ki-label{
+  font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  margin:2.5rem 0 .875rem;display:block;
+  background:var(--jai-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* KPI list — JAI output-item style */
+.kpi-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.kpi-list li{
+  display:block;
+  padding:10px 14px;
+  background:linear-gradient(135deg,#f8f4ff,#fff4fa);
+  border:1px solid rgba(83,0,206,.1);
+  border-left:3px solid var(--jai-a);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  font-size:var(--fs-base);line-height:1.6;color:var(--ink-2);text-align:left;
+}
+.kpi-list li strong{color:var(--ink);font-weight:700}
+
+.concluding{margin-top:1.5rem;font-size:var(--fs-base);line-height:1.7;color:var(--ink-2)}
+
+/* ===== SIDEBAR FORM ===== */
+.sidebar-form{position:sticky;top:80px}
+.form-box{
+  background:var(--white);
+  border:var(--border);
+  border-radius:var(--radius);
+  box-shadow:0 4px 28px rgba(11,13,18,.08);
+  overflow:hidden;
+}
+/* gradient top bar on form box */
+.form-box::before{
+  content:'';display:block;height:3px;
+  background:var(--jai-grad);
+}
+.form-box-head{padding:1.4rem 1.5rem 1.1rem}
+.form-box-head h3{
+  font-size:1rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:.45rem
+}
+.form-box-head p{font-size:var(--fs-sm);color:var(--ink-3);line-height:1.55}
+.form-box-body{padding:.25rem 1.5rem 1.5rem}
+
+.field{margin-bottom:.875rem}
+.field label{display:block;font-size:.78rem;font-weight:500;color:var(--ink-3);margin-bottom:.3rem}
+.field input,.field select{
+  width:100%;padding:.75rem 1rem;
+  font-family:Inter,system-ui,sans-serif;font-size:var(--fs-sm);
+  color:var(--ink);background:var(--cream);
+  border:var(--border);border-radius:var(--radius-sm);
+  outline:none;appearance:none;-webkit-appearance:none;
+  transition:border-color .15s,box-shadow .15s;height:42px;
+}
+.field input:focus,.field select:focus{
+  border-color:var(--jai-a);box-shadow:0 0 0 3px rgba(83,0,206,.1);
+  background:var(--white);
+}
+.field input::placeholder{color:transparent}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236a7180'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 1rem center;
+  padding-right:2.25rem;color:var(--ink-3);cursor:pointer;
+}
+.field select.sel{color:var(--ink)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.625rem}
+
+/* Submit button — red to match reference */
+.submit-btn{
+  width:100%;
+  padding:.78rem 1.25rem;
+  background:var(--red);
+  color:#fff;border:none;
+  border-radius:var(--radius-sm);
+  font-family:Inter,system-ui,sans-serif;
+  font-size:.875rem;font-weight:600;
+  cursor:pointer;margin-top:.75rem;
+  transition:opacity .2s;
+  letter-spacing:.02em;
+  display:flex;align-items:center;justify-content:center;gap:1rem;
+}
+.submit-btn:hover{background:#b01e22;opacity:1}
+
+.field-checkbox{display:flex;align-items:flex-start;gap:.625rem;margin-top:.75rem}
+.field-checkbox input[type="checkbox"]{
+  width:16px;height:16px;min-width:16px;margin-top:2px;
+  border:var(--border);border-radius:3px;cursor:pointer;accent-color:var(--jai-a);
+}
+.field-checkbox label{font-size:var(--fs-xs);font-weight:400;color:var(--ink-3);line-height:1.55;cursor:pointer}
+.form-note{font-size:.7rem;color:var(--ink-3);line-height:1.55;margin-top:.75rem}
+.form-note a{color:var(--ink-3);text-decoration:underline}
+
+/* ===== GET IN TOUCH — dark JAI section ===== */
+.git-section{
+  background:var(--ink);
+  padding:var(--space-xl) 0;
+  position:relative;overflow:hidden;
+}
+.git-section::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:700px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(83,0,206,.55) 0%,transparent 60%);
+  pointer-events:none;
+}
+.git-inner{
+  max-width:var(--container-width);margin:0 auto;padding:0 var(--container-padding);
+  display:grid;grid-template-columns:1fr 1.8fr;gap:clamp(2rem,4vw,4rem);align-items:start;
+  position:relative;z-index:1;
+}
+.git-left h2{
+  font-size:clamp(1.6rem,2.5vw,2rem);font-weight:400;
+  color:#fff;line-height:1.15;margin-bottom:.75rem;letter-spacing:-.01em;
+}
+.git-left h3{font-size:1rem;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:.5rem}
+.git-left p{font-size:var(--fs-base);color:rgba(255,255,255,.55);line-height:1.65}
+
+.git-form .field{margin-bottom:.625rem}
+.git-form .field-row{gap:.625rem;margin-bottom:0}
+.git-form .field label{display:none}
+.git-form .field input,.git-form .field select{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.16);
+  color:#fff;border-radius:var(--radius-sm);height:42px;
+}
+.git-form .field input::placeholder{color:rgba(255,255,255,.42)}
+.git-form .field input:focus,.git-form .field select:focus{
+  border-color:var(--jai-b);box-shadow:0 0 0 3px rgba(226,43,131,.15);background:rgba(255,255,255,.1);
+}
+.git-form .field select{color:rgba(255,255,255,.5)}
+.git-form .field select.sel{color:#fff}
+.git-form .submit-btn{justify-content:center;background:var(--red)}
+.git-form .submit-btn:hover{background:#b01e22;opacity:1}
+.git-form .form-note{color:rgba(255,255,255,.38)}
+.git-form .form-note a{color:rgba(255,255,255,.5)}
+
+/* ===== FOOTER ===== */
+.site-footer{
+  background:var(--ink);
+  border-top:1px solid rgba(255,255,255,.07);
+  padding:1.75rem 0 2.25rem;
+}
+.footer-inner{max-width:var(--container-width);margin:0 auto;padding:0 var(--container-padding)}
+.footer-copy{font-size:.7rem;color:rgba(255,255,255,.3);line-height:1.6}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1100px){.page-grid{grid-template-columns:1fr 440px}}
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-img-col{display:none}
+  .page-grid{grid-template-columns:1fr}
+  .sidebar-form{position:static}
+  .git-inner{grid-template-columns:1fr;gap:2rem}
+}
+@media(max-width:600px){
+  .field-row{grid-template-columns:1fr}
+  .hero-text-col{padding:2.5rem clamp(1rem,3vw,2rem)}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+</style>
+</head>
+<body>
+
+<!-- LOGO BAR -->
+<div class="logo-bar">
+  <div class="logo-bar-inner">
+    <a href="https://www.jaggaer.com" aria-label="JAGGAER Home">
+      <img src="https://www.jaggaer.com/wp-content/uploads/JAGGAER-Logo-Red.png" alt="JAGGAER">
+    </a>
+  </div>
+</div>
+
+<!-- HERO BANNER -->
+<div class="hero-banner">
+  <div class="hero-inner">
+    <div class="hero-text-col">
+      <span class="hero-eyebrow">White Paper</span>
+      <h1 class="hero-h1">The Ultimate Guide to AI-Powered Source-to-Pay (S2P) Transformation</h1>
+    </div>
+    <div class="hero-img-col">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&fit=crop" alt="AI-powered procurement data visualisation">
+    </div>
+  </div>
+</div>
+
+<!-- PAGE LAYOUT -->
+<div class="page-outer">
+  <div class="page-grid">
+
+    <!-- CONTENT COLUMN -->
+    <div class="content-col">
+
+      <h2><strong>AI in Source-to-Pay Is Running Procurement Operations Now. Most Organisations Are Still Planning for It.</strong></h2>
+      <p>92% of chief procurement officers are assessing or planning GenAI capabilities. Only 37% were piloting or deploying it at the time of the last major survey. That gap between intent and execution is where most organisations currently sit — and where the competitive distance is widening every quarter. AI is no longer sitting on top of procurement workflows as another dashboard. It runs them.</p>
+
+      <h2><strong>Upstream and Downstream: Where AI Separates Leaders from Laggards</strong></h2>
+      <p>AI in source to pay is restructuring both S2C and P2P — not just how fast they run, but how they're structured. In S2C, AI-powered supplier discovery cuts category manager research from days to hours. Contract intelligence tools reduce review time by up to 80% and surface renewal dates automatically. In P2P, AI requisition routing delivers 40–60% reductions in approval cycle times. Three-way matching moves from manual exception handling to automated processing, with only genuine exceptions reaching your team.</p>
+
+      <h2><strong>The Implementation Gap Is Organisational, Not Technical. And It's Closable.</strong></h2>
+      <p>49% of procurement teams piloted GenAI in 2024 — up from 23% the prior year — yet only 4% reached large-scale deployment. The constraint is almost always data readiness, governance design, and adoption architecture, not the AI itself. The whitepaper covers all three: honest audit frameworks for your data estate, governance structures that make AI deployment safe to scale, and adoption approaches that reduce resistance rather than mandate usage.</p>
+
+      <span class="ki-label">Key Insights</span>
+      <ul class="kpi-list">
+        <li><strong>92% of CPOs are planning GenAI capabilities</strong> but only 37% are piloting or deploying — the largest intent-to-execution gap of any enterprise function.</li>
+        <li>Organisations deploying AI contract analysis have reduced <strong>review time by up to 80%</strong>, with renewal dates and penalty triggers surfacing automatically.</li>
+        <li>AI requisition routing delivers <strong>40–60% reductions</strong> in approval cycle times for indirect spend within the first deployment quarter.</li>
+        <li><strong>Only 4% of procurement teams</strong> reached large-scale AI deployment in 2024. Data readiness, governance, and change management are where the other 96% stall.</li>
+      </ul>
+
+      <p class="concluding">The technology is ready for more than most organisations are currently using it for. The constraint is almost always organisational, not technical. This guide covers the full S2P lifecycle — every stage where AI in source to pay is creating measurable separation between leaders and laggards — with deployment frameworks, vendor evaluation filters, and adoption checklists included.</p>
+
+    </div>
+
+    <!-- SIDEBAR FORM -->
+    <div class="sidebar-form">
+      <div class="form-box">
+        <div class="form-box-head">
+          <h3>Download the Whitepaper</h3>
+          <p>Understand where AI in source to pay delivers measurable value, what separates genuine AI capability from marketing language, and how to close the gap between piloting and scaling.</p>
+        </div>
+        <div class="form-box-body">
+          <form action="#" method="post" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="fn">First Name *</label>
+                <input type="text" id="fn" name="first_name" placeholder="" required>
+              </div>
+              <div class="field">
+                <label for="ln">Last Name *</label>
+                <input type="text" id="ln" name="last_name" placeholder="" required>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="co">Company *</label>
+                <input type="text" id="co" name="company" placeholder="" required>
+              </div>
+              <div class="field">
+                <label for="em">Work E-mail *</label>
+                <input type="email" id="em" name="email" placeholder="" required>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="jt">Job Title *</label>
+                <input type="text" id="jt" name="job_title" placeholder="" required>
+              </div>
+              <div class="field">
+                <label for="ph">Phone Number</label>
+                <input type="tel" id="ph" name="phone" placeholder="">
+              </div>
+            </div>
+            <div class="field">
+              <label for="ct">Country *</label>
+              <select id="ct" name="country" required onchange="this.classList.add('sel')">
+                <option value="" disabled selected>-- Select Country --</option>
+                <option>Afghanistan</option>
+                <option>Albania</option>
+                <option>Algeria</option>
+                <option>American Samoa</option>
+                <option>Andorra</option>
+                <option>Angola</option>
+                <option>Anguilla</option>
+                <option>Antarctica</option>
+                <option>Antigua and Barbuda</option>
+                <option>Argentina</option>
+                <option>Armenia</option>
+                <option>Aruba</option>
+                <option>Australia</option>
+                <option>Austria</option>
+                <option>Azerbaijan</option>
+                <option>Bahamas</option>
+                <option>Bahrain</option>
+                <option>Bangladesh</option>
+                <option>Barbados</option>
+                <option>Belarus</option>
+                <option>Belgium</option>
+                <option>Belize</option>
+                <option>Benin</option>
+                <option>Bermuda</option>
+                <option>Bhutan</option>
+                <option>Bosnia and Herzegovina</option>
+                <option>Botswana</option>
+                <option>Brazil</option>
+                <option>British Indian Ocean Territory</option>
+                <option>British Virgin Islands</option>
+                <option>Brunei</option>
+                <option>Bulgaria</option>
+                <option>Burkina Faso</option>
+                <option>Burundi</option>
+                <option>Cambodia</option>
+                <option>Cameroon</option>
+                <option>Canada</option>
+                <option>Cape Verde</option>
+                <option>Cayman Islands</option>
+                <option>Central African Republic</option>
+                <option>Chad</option>
+                <option>Chile</option>
+                <option>China</option>
+                <option>Christmas Island</option>
+                <option>Cocos Island</option>
+                <option>Colombia</option>
+                <option>Comoros</option>
+                <option>Congo</option>
+                <option>Cook Islands</option>
+                <option>Costa Rica</option>
+                <option>Cote d'Ivoire</option>
+                <option>Croatia</option>
+                <option>Cuba</option>
+                <option>Curacao</option>
+                <option>Cyprus</option>
+                <option>Czech Republic</option>
+                <option>Democratic Republic of Congo</option>
+                <option>Denmark</option>
+                <option>Djibouti</option>
+                <option>Dominica</option>
+                <option>Ecuador</option>
+                <option>Egypt</option>
+                <option>El Salvador</option>
+                <option>Equatorial Guinea</option>
+                <option>Eritrea</option>
+                <option>Estonia</option>
+                <option>Ethiopia</option>
+                <option>Falkland Islands</option>
+                <option>Faroe Islands</option>
+                <option>Fiji</option>
+                <option>Finland</option>
+                <option>France</option>
+                <option>French Guiana</option>
+                <option>French Polynesia</option>
+                <option>French Southern Territories</option>
+                <option>Gabon</option>
+                <option>Gambia</option>
+                <option>Georgia</option>
+                <option>Germany</option>
+                <option>Ghana</option>
+                <option>Gibraltar</option>
+                <option>Greece</option>
+                <option>Greenland</option>
+                <option>Grenada</option>
+                <option>Guadeloupe</option>
+                <option>Guam</option>
+                <option>Guatemala</option>
+                <option>Guernsey</option>
+                <option>Guinea</option>
+                <option>Guinea-Bissau</option>
+                <option>Guyana</option>
+                <option>Haiti</option>
+                <option>Honduras</option>
+                <option>Hong Kong</option>
+                <option>Hungary</option>
+                <option>Iceland</option>
+                <option>India</option>
+                <option>Indonesia</option>
+                <option>Iran</option>
+                <option>Iraq</option>
+                <option>Ireland</option>
+                <option>Isle of Man</option>
+                <option>Israel</option>
+                <option>Italy</option>
+                <option>Jamaica</option>
+                <option>Japan</option>
+                <option>Jersey</option>
+                <option>Jordan</option>
+                <option>Kazakhstan</option>
+                <option>Kenya</option>
+                <option>Kiribati</option>
+                <option>Korea</option>
+                <option>Kuwait</option>
+                <option>Kyrgyzstan</option>
+                <option>Laos</option>
+                <option>Latvia</option>
+                <option>Lebanon</option>
+                <option>Lesotho</option>
+                <option>Liberia</option>
+                <option>Libyan Arab Jamahiriya</option>
+                <option>Liechtenstein</option>
+                <option>Lithuania</option>
+                <option>Luxembourg</option>
+                <option>Macao</option>
+                <option>Macedonia</option>
+                <option>Madagascar</option>
+                <option>Malawi</option>
+                <option>Malaysia</option>
+                <option>Maldives</option>
+                <option>Mali</option>
+                <option>Malta</option>
+                <option>Marshall Islands</option>
+                <option>Martinique</option>
+                <option>Mauritania</option>
+                <option>Mauritius</option>
+                <option>Mayotte</option>
+                <option>Mexico</option>
+                <option>Micronesia</option>
+                <option>Moldova</option>
+                <option>Monaco</option>
+                <option>Mongolia</option>
+                <option>Montenegro</option>
+                <option>Montserrat</option>
+                <option>Morocco</option>
+                <option>Mozambique</option>
+                <option>Myanmar</option>
+                <option>Namibia</option>
+                <option>Nauru</option>
+                <option>Nepal</option>
+                <option>Netherlands</option>
+                <option>New Caledonia</option>
+                <option>New Zealand</option>
+                <option>Nicaragua</option>
+                <option>Niger</option>
+                <option>Nigeria</option>
+                <option>Niue</option>
+                <option>Norfolk Islands</option>
+                <option>Northern Mariana Islands</option>
+                <option>North Korea</option>
+                <option>Norway</option>
+                <option>Oman</option>
+                <option>Pakistan</option>
+                <option>Palau</option>
+                <option>Panama</option>
+                <option>Papua New Guinea</option>
+                <option>Paraguay</option>
+                <option>Peru</option>
+                <option>Philippines</option>
+                <option>Pitcairn</option>
+                <option>Poland</option>
+                <option>Portugal</option>
+                <option>Puerto Rico</option>
+                <option>Qatar</option>
+                <option>Reunion</option>
+                <option>Romania</option>
+                <option>Russian Federation</option>
+                <option>Rwanda</option>
+                <option>Saint Barthelemy</option>
+                <option>Saint Helena</option>
+                <option>Saint Kitts and Nevis</option>
+                <option>Saint Lucia</option>
+                <option>Saint Pierre and Miquelon</option>
+                <option>Samoa</option>
+                <option>San Marino</option>
+                <option>Sao Tome and Principe</option>
+                <option>Saudi Arabia</option>
+                <option>Senegal</option>
+                <option>Serbia</option>
+                <option>Seychelles</option>
+                <option>Sierra Leone</option>
+                <option>Singapore</option>
+                <option>Slovakia</option>
+                <option>Slovenia</option>
+                <option>Solomon Islands</option>
+                <option>Somalia</option>
+                <option>South Africa</option>
+                <option>South Korea</option>
+                <option>South Sudan</option>
+                <option>Spain</option>
+                <option>Sri Lanka</option>
+                <option>Sudan</option>
+                <option>Suriname</option>
+                <option>Swaziland</option>
+                <option>Sweden</option>
+                <option>Switzerland</option>
+                <option>Syria</option>
+                <option>Taiwan</option>
+                <option>Tajikistan</option>
+                <option>Tanzania</option>
+                <option>Thailand</option>
+                <option>Timor-Leste</option>
+                <option>Togo</option>
+                <option>Tokelau</option>
+                <option>Tonga</option>
+                <option>Trinidad and Tobago</option>
+                <option>Tunisia</option>
+                <option>Turkey</option>
+                <option>Turkmenistan</option>
+                <option>Turks and Caicos Islands</option>
+                <option>Tuvalu</option>
+                <option>Uganda</option>
+                <option>Ukraine</option>
+                <option>United Arab Emirates</option>
+                <option>United Kingdom</option>
+                <option>United States</option>
+                <option>United States Minor Outlying Islands</option>
+                <option>Uruguay</option>
+                <option>U.S. Virgin Islands</option>
+                <option>Uzbekistan</option>
+                <option>Vanuatu</option>
+                <option>Vatican</option>
+                <option>Venezuela</option>
+                <option>Vietnam</option>
+                <option>Wallis and Futuna</option>
+                <option>Western Sahara</option>
+                <option>Yemen</option>
+                <option>Zambia</option>
+                <option>Zimbabwe</option>
+              </select>
+            </div>
+            <div class="field-checkbox">
+              <input type="checkbox" id="consent" name="consent">
+              <label for="consent">Yes, I would like to stay updated on procurement news and JAGGAER offers. I can decide to stop receiving these communications at any time.</label>
+            </div>
+            <button type="submit" class="submit-btn">Download Now</button>
+            <p class="form-note">* Required field | <a href="https://www.jaggaer.com/privacy-policy">JAGGAER privacy policy</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-grid -->
+</div><!-- /page-outer -->
+
+<!-- GET IN TOUCH -->
+<section class="git-section" aria-labelledby="git-heading">
+  <div class="git-inner">
+    <div class="git-left">
+      <h2 id="git-heading">Get in touch</h2>
+      <h3>Learn More About JAGGAER Solutions</h3>
+      <p>Please complete the form and we will connect with you as soon as possible.</p>
+    </div>
+    <div class="git-form">
+      <form action="#" method="post" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="g-fn">First Name *</label>
+            <input type="text" id="g-fn" name="first_name" placeholder="First Name *" required>
+          </div>
+          <div class="field">
+            <label for="g-ln">Last Name *</label>
+            <input type="text" id="g-ln" name="last_name" placeholder="Last Name *" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="g-co">Company *</label>
+            <input type="text" id="g-co" name="company" placeholder="Company *" required>
+          </div>
+          <div class="field">
+            <label for="g-jt">Job Title *</label>
+            <input type="text" id="g-jt" name="job_title" placeholder="Job Title *" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="g-em">Work E-mail *</label>
+            <input type="email" id="g-em" name="email" placeholder="Work E-mail *" required>
+          </div>
+          <div class="field">
+            <label for="g-ph">Phone Number *</label>
+            <input type="tel" id="g-ph" name="phone" placeholder="Phone Number *" required>
+          </div>
+        </div>
+        <div class="field" style="max-width:50%; padding-right:0.3125rem;">
+          <label for="g-ct">Country *</label>
+          <input type="text" id="g-ct" name="country" placeholder="Country *" required>
+        </div>
+        <div class="field">
+          <label for="g-ref">Referred by a Partner? *</label>
+          <input type="text" id="g-ref" name="referred_by" placeholder="Referred by a Partner? *">
+        </div>
+        <div class="field">
+          <label for="g-msg">What are you looking for? *</label>
+          <input type="text" id="g-msg" name="looking_for" placeholder="What are you looking for? *">
+        </div>
+        <button type="submit" class="submit-btn">Submit your Request</button>
+        <p class="form-note" style="margin-top:0.625rem;">* Required field | <a href="https://www.jaggaer.com/privacy-policy">JAGGAER privacy policy</a></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-copy">&copy; 2026 JAGGAER. All Rights Reserved. | <a href="https://www.jaggaer.com/privacy-policy" style="color:rgba(255,255,255,.4);text-decoration:underline;">Privacy Policy</a> | <a href="https://www.jaggaer.com/legal" style="color:rgba(255,255,255,.4);text-decoration:underline;">Legal</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
