@@ -155,14 +155,14 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "approved",
-              "revision_count": 3,
+              "status": "live",
+              "revision_count": 4,
               "deliverable_ext": "pdf",
-              "wp_has_html": false,
+              "wp_has_html": true,
               "return_to_stage": null,
-              "last_upload": "2026-07-22T12:08:33.697Z",
+              "last_upload": "2026-07-22T12:10:00.058Z",
               "last_upload_by": "m-5jitd",
-              "last_updated": "2026-07-22T12:08:33.697Z",
+              "last_updated": "2026-07-22T12:10:00.058Z",
               "last_updated_by": "m-5jitd",
               "status_history": [
                 {
@@ -178,6 +178,11 @@
                 {
                   "stage": "approved",
                   "ts": "2026-07-22T12:08:33.697Z",
+                  "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-22T12:10:00.058Z",
                   "by": "m-5jitd"
                 }
               ]
