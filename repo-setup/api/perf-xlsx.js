@@ -106,6 +106,18 @@ function dimRows(rows, field) {
     .sort((a, b) => b.impressions - a.impressions);
 }
 
+// ─── Snapshot date — trailing YYYY-MM-DD in filename wins; date_range.end fallback ───
+// Filenames like "https___www_jaggaer_com_-Performance-on-Search-2026-07-21.xlsx"
+// let us date the export without trusting GSC's rolling window edge.
+function extractSnapshotDate(filename, dateRangeEnd) {
+  if (filename) {
+    // Match the last YYYY-MM-DD in the filename string (before the extension)
+    const m = String(filename).match(/(\d{4}-\d{2}-\d{2})(?:\.\w+)?$/);
+    if (m) return m[1];
+  }
+  return dateRangeEnd || null;
+}
+
 // ─── URL → slug key ─────────────────────────────────────────────────────────
 function slugify(url) {
   if (!url) return null;
@@ -220,10 +232,13 @@ export default async function handler(req, res) {
       label: dateFilter ? String(Object.values(dateFilter)[1] || "").trim() : null,
     };
 
+    const snapshot_date = extractSnapshotDate(filename, date_range.end);
+
     return res.status(200).json({
       url,
       url_key,
       filename: filename || null,
+      snapshot_date,
       summary,
       timeseries,
       top_queries: dimRows(queryRows, "query").slice(0, 25),
