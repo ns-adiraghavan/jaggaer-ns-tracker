@@ -90,7 +90,14 @@
               "last_upload_by": "m-e10nz",
               "last_updated": "2026-06-17T14:07:48.780Z",
               "last_updated_by": "m-ny8dy",
-              "return_to_stage": null
+              "return_to_stage": null,
+              "publishing": {
+                "published_by": "Jovana Kotur",
+                "launch_date": "2026-07-22",
+                "live_url": "https://www.jaggaer.com/blog/claude-for-procurement-installation-guide",
+                "performance_data": "",
+                "updated_at": "2026-07-23T07:19:29.811Z"
+              }
             },
             {
               "id": "p-c1-2",
