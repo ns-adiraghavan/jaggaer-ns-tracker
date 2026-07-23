@@ -121,7 +121,14 @@
               "last_upload_by": "jason",
               "last_updated": "2026-06-17T14:08:02.229Z",
               "last_updated_by": "m-ny8dy",
-              "return_to_stage": null
+              "return_to_stage": null,
+              "publishing": {
+                "published_by": "Jovana Kotur",
+                "launch_date": "2026-07-22",
+                "live_url": "https://www.jaggaer.com/blog/what-are-md-files-in-claude-guide-for-s2p",
+                "performance_data": "",
+                "updated_at": "2026-07-23T07:20:41.632Z"
+              }
             },
             {
               "id": "p-c1-3",
