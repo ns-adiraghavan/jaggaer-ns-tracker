@@ -153,7 +153,14 @@
               "last_upload_by": "m-5jitd",
               "last_updated": "2026-06-17T14:08:10.898Z",
               "last_updated_by": "m-ny8dy",
-              "return_to_stage": null
+              "return_to_stage": null,
+              "publishing": {
+                "published_by": "Jovana Kotur",
+                "launch_date": "2026-07-22",
+                "live_url": "https://www.jaggaer.com/blog/what-claude-delivers-for-procurement",
+                "performance_data": "",
+                "updated_at": "2026-07-23T07:22:11.723Z"
+              }
             },
             {
               "id": "piece-c1-getting-started-4-4tzj",
