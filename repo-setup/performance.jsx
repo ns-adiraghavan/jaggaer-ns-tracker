@@ -131,18 +131,30 @@ function perfRecordView(record) {
   };
 }
 
-// WoW delta between two snapshots' summaries.
-// Returns { clicks, impressions, ctr, avg_position } with sign, or null if no prev.
+// Week-over-week deltas from the daily series (calendar Mon–Sun), NOT from a
+// diff of two rolling-window upload summaries. Returns
+// { clicks, impressions, ctr, avg_position, weeks } with sign, or null.
 function perfWoW(view) {
-  if (!view || !view.prevSnapshot) return null;
-  const curr = view.summary || {};
-  const prev = view.prevSnapshot.summary || {};
+  if (!view) return null;
+  const w = perfCalendarWoW(view.timeseries);
+  if (!w || !w.lastWeek) return null;
+  const tw = w.thisWeek, lw = w.lastWeek;
+  const twCtr = tw.impressions ? tw.clicks / tw.impressions : 0;
+  const lwCtr = lw.impressions ? lw.clicks / lw.impressions : 0;
   return {
-    clicks:       (curr.clicks       || 0) - (prev.clicks       || 0),
-    impressions:  (curr.impressions  || 0) - (prev.impressions  || 0),
-    ctr:          (curr.ctr          || 0) - (prev.ctr          || 0),
-    avg_position: (curr.avg_position || 0) - (prev.avg_position || 0),
+    clicks:       w.clicksDelta,
+    impressions:  w.impressionsDelta,
+    ctr:          twCtr - lwCtr,
+    avg_position: (tw.weightedPos || 0) - (lw.weightedPos || 0),
+    weeks:        w,
   };
+}
+
+// Signed percentage, e.g. +18% / −57%. Returns "—" when there's no base.
+function perfSignedPct(v) {
+  if (v == null || !Number.isFinite(v)) return "—";
+  const sign = v > 0 ? "+" : v < 0 ? "−" : "";
+  return `${sign}${Math.abs(v * 100).toFixed(0)}%`;
 }
 
 // Format a signed WoW delta for display. position delta is inverted (lower = better).
@@ -192,6 +204,134 @@ function perfWindowTotals(window) {
   const avgMonthly = window.length ? (impressions / (window.length / 30)) : 0;
   const weightedAvgPos = impressions > 0 ? weighted / impressions : 0;
   return { impressions, clicks, avgMonthly, weightedAvgPos };
+}
+
+// ─── Target-keyword matching ────────────────────────────────────────────────
+// A piece's brief carries a target keyword (primary_keyword). GSC reports the
+// actual search queries, which rarely match word-for-word. We fuzzy-match the
+// target keyword to the piece's queries by meaningful-token overlap, then treat
+// the piece as "ranking for its target keyword" only when that matched query
+// sits on the first page (average position ≤ 10).
+const PERF_KW_STOP = new Set([
+  "the","a","an","and","or","for","to","of","in","on","is","are","was","were",
+  "with","how","what","why","your","you","our","we","do","does","did","that",
+  "this","at","by","as","it","its","from","can","could","should","would","when",
+  "which","who","will","be","been","being","not","but","if","then","than","into",
+  "about","more","most","best","using","use","used","get","getting","vs",
+]);
+
+function perfKwTokens(s) {
+  if (!s) return [];
+  return String(s)
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter(t => t && t.length > 1 && !PERF_KW_STOP.has(t));
+}
+
+// Overlap coefficient |A∩B| / min(|A|,|B|) plus shared-token count.
+function perfKwScore(aTokens, bTokens) {
+  const aSet = new Set(aTokens), bSet = new Set(bTokens);
+  if (!aSet.size || !bSet.size) return { shared: 0, score: 0 };
+  let shared = 0;
+  for (const t of aSet) if (bSet.has(t)) shared++;
+  return { shared, score: shared / Math.min(aSet.size, bSet.size) };
+}
+
+// Best GSC query matching a target keyword, or null. Needs ≥2 shared tokens and
+// overlap ≥ 0.6; closest overlap wins, impressions break ties.
+function perfMatchTarget(targetKw, queries) {
+  const tTok = perfKwTokens(targetKw);
+  if (!tTok.length || !queries || !queries.length) return null;
+  let best = null;
+  for (const q of queries) {
+    const { shared, score } = perfKwScore(tTok, perfKwTokens(q.query));
+    if (shared < 2 || score < 0.6) continue;
+    if (!best || score > best.matchScore ||
+        (score === best.matchScore && (q.impressions || 0) > (best.impressions || 0))) {
+      best = { ...q, matchScore: score, sharedTokens: shared };
+    }
+  }
+  return best;
+}
+
+// A matched target query "ranks" when it's on the first page.
+function perfTargetRanks(match) {
+  return !!match && Number.isFinite(match.position) && match.position > 0 && match.position <= 10;
+}
+
+// ─── Calendar-week (Mon–Sun) week-over-week ─────────────────────────────────
+function perfAddDays(dateStr, n) {
+  const d = new Date(dateStr + "T00:00:00Z");
+  d.setUTCDate(d.getUTCDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+
+// Monday (YYYY-MM-DD) of the ISO week containing dateStr.
+function perfMondayOf(dateStr) {
+  const d = new Date(dateStr + "T00:00:00Z");
+  const dow = d.getUTCDay();               // 0=Sun … 6=Sat
+  return perfAddDays(dateStr, -(dow === 0 ? 6 : dow - 1));
+}
+
+function perfSumRange(timeseries, startStr, endStr) {
+  let impressions = 0, clicks = 0, wpos = 0;
+  for (const p of timeseries) {
+    if (p.date >= startStr && p.date <= endStr) {
+      impressions += p.impressions || 0;
+      clicks      += p.clicks || 0;
+      wpos        += (p.impressions || 0) * (p.position || 0);
+    }
+  }
+  return { impressions, clicks, weightedPos: impressions > 0 ? wpos / impressions : 0 };
+}
+
+// This vs last complete Mon–Sun week. If the latest week is still partial (GSC
+// lag / a mid-week upload), we step back to the last *complete* week so the two
+// windows are always full and comparable. null when there isn't a clean prior week.
+function perfCalendarWoW(timeseries) {
+  if (!timeseries || timeseries.length < 2) return null;
+  const lastDate = timeseries[timeseries.length - 1].date;
+  const firstDate = timeseries[0].date;
+  const mondayOfLast = perfMondayOf(lastDate);
+  const sundayOfLast = perfAddDays(mondayOfLast, 6);
+
+  let thisStart, thisEnd;
+  if (lastDate >= sundayOfLast) { thisStart = mondayOfLast; thisEnd = sundayOfLast; }
+  else { thisStart = perfAddDays(mondayOfLast, -7); thisEnd = perfAddDays(mondayOfLast, -1); }
+
+  const lastStart = perfAddDays(thisStart, -7);
+  const lastEnd   = perfAddDays(thisStart, -1);
+  const thisWk = perfSumRange(timeseries, thisStart, thisEnd);
+  if (lastStart < firstDate) {
+    return { thisWeek: { ...thisWk, start: thisStart, end: thisEnd }, lastWeek: null,
+             impressionsDelta: null, impressionsPct: null, clicksDelta: null };
+  }
+  const lastWk = perfSumRange(timeseries, lastStart, lastEnd);
+  return {
+    thisWeek: { ...thisWk, start: thisStart, end: thisEnd },
+    lastWeek: { ...lastWk, start: lastStart, end: lastEnd },
+    impressionsDelta: thisWk.impressions - lastWk.impressions,
+    impressionsPct:   lastWk.impressions > 0 ? (thisWk.impressions - lastWk.impressions) / lastWk.impressions : null,
+    clicksDelta:      thisWk.clicks - lastWk.clicks,
+  };
+}
+
+// Sum many daily dicts into one timeseries (portfolio-level WoW).
+function perfMergeDaily(dailies) {
+  const acc = {};
+  for (const daily of dailies) {
+    for (const [date, v] of Object.entries(daily || {})) {
+      const a = acc[date] || (acc[date] = { date, impressions: 0, clicks: 0, _pw: 0 });
+      a.impressions += v.impressions || 0;
+      a.clicks      += v.clicks || 0;
+      a._pw         += (v.impressions || 0) * (v.position || 0);
+    }
+  }
+  return Object.values(acc)
+    .map(a => ({ date: a.date, impressions: a.impressions, clicks: a.clicks,
+                 position: a.impressions > 0 ? a._pw / a.impressions : 0 }))
+    .sort((x, y) => x.date.localeCompare(y.date));
 }
 
 // ─── Sparkline ──────────────────────────────────────────────────────────────
@@ -269,11 +409,17 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
     return Object.keys(perfData).filter(k => !known.has(k));
   }, [perfData, published]);
 
-  // ── KPI strip — totals across pieces that have data (trailing 3 months) ──
+  // ── KPI strip — totals across pieces that have data (trailing 3 months),
+  //    target-keyword coverage, portfolio WoW, and breakout keywords. ──
   const kpis = usePerfMemo(() => {
     if (!withData.length) return null;
     let clicks = 0, impressions = 0, avgMonthlySum = 0, weighted = 0;
     let best = null, mostImpr = null;
+    // Target-keyword rollup
+    let tgtImpr = 0, tgtWeighted = 0, tgtMatched = 0, tgtRanked = 0;
+    // Breakout (non-target) queries that rank page-1
+    const breakout = [];
+
     for (const p of withData) {
       const view = perfRecordView(perfData[p.key]);
       if (!view) continue;
@@ -287,7 +433,37 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
       const s = view.summary;
       if (s.avg_position > 0 && (!best || s.avg_position < best.pos)) best = { pos: s.avg_position, title: p.piece.title };
       if (!mostImpr || totals.impressions > (mostImpr.impr || 0)) mostImpr = { impr: totals.impressions, title: p.piece.title };
+
+      // Target keyword: fuzzy-match the brief's primary_keyword to GSC queries.
+      const match = perfMatchTarget(p.piece.primary_keyword, view.top_queries);
+      const matchQ = match ? String(match.query) : null;
+      if (match) {
+        tgtMatched += 1;
+        tgtImpr     += match.impressions || 0;
+        tgtWeighted += (match.impressions || 0) * (match.position || 0);
+        if (perfTargetRanks(match)) tgtRanked += 1;
+      }
+      // Other keywords we do well for: non-target queries on page one.
+      for (const q of view.top_queries || []) {
+        if (matchQ && q.query === matchQ) continue;
+        if (/site:/i.test(q.query || "")) continue; // drop search-operator spam queries
+        if (q.position > 0 && q.position <= 10 && (q.impressions || 0) >= 10) {
+          breakout.push({
+            query: String(q.query || "").replace(/\s+/g, " ").trim(),
+            impressions: q.impressions || 0,
+            clicks: q.clicks || 0,
+            position: q.position,
+            pieceTitle: p.piece.title,
+            pillar: p.pillar.label,
+          });
+        }
+      }
     }
+    breakout.sort((a, b) => b.impressions - a.impressions);
+
+    // Portfolio WoW — sum every piece's daily series, then compare weeks.
+    const portfolioWoW = perfCalendarWoW(perfMergeDaily(withData.map(p => perfData[p.key]?.daily)));
+
     return {
       clicks,
       impressions,
@@ -297,6 +473,14 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
       best,
       mostImpr,
       pieces: withData.length,
+      // Target keyword
+      tgtImpr,
+      tgtAvgPos: tgtImpr > 0 ? tgtWeighted / tgtImpr : 0,
+      tgtMatched,
+      tgtRanked,
+      // WoW + breakout
+      portfolioWoW,
+      breakout,
     };
   }, [withData, perfData]);
 
@@ -398,20 +582,41 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
         <p style={{ ...FONT, fontSize: "0.8rem", color: "#888", marginTop: "8px", maxWidth: "680px", lineHeight: 1.5 }}>
           {published.length} live {published.length === 1 ? "piece" : "pieces"}, {withData.length} with Search Console data.
           {canUpload
-            ? " Export a report from Search Console with a single page filter applied, then drop the .xlsx on that piece's card."
-            : " Jaggaer uploads the Search Console exports; these cards are read-only for NS."}
+            ? " Drop each week's Search Console export (single page filter) on that piece's card every Friday — impressions are compared week over week, calendar Mon–Sun."
+            : " Jaggaer uploads the Search Console exports weekly; these cards are read-only for NS. Growth is shown week over week."}
           {approvedNoUrl > 0 && ` ${approvedNoUrl} approved ${approvedNoUrl === 1 ? "piece has" : "pieces have"} no live URL yet.`}
         </p>
       </header>
 
+      {/* ── WoW impressions banner — this week vs last week (Mon–Sun) ─────── */}
+      {kpis && kpis.portfolioWoW && kpis.portfolioWoW.lastWeek && (
+        <PerfWowBanner wow={kpis.portfolioWoW} />
+      )}
+
       {/* ── KPI strip ────────────────────────────────────────────────────── */}
       {kpis && (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "24px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: "12px", marginBottom: "20px" }}>
+          <PerfKpi label="Impressions (trailing 3mo)" value={perfNum(kpis.impressions)} sub={kpis.mostImpr ? `top: ${kpis.mostImpr.title}` : `across ${kpis.pieces} ${kpis.pieces === 1 ? "piece" : "pieces"}`} />
           <PerfKpi label="Clicks (trailing 3mo)" value={perfNum(kpis.clicks)} sub={`across ${kpis.pieces} ${kpis.pieces === 1 ? "piece" : "pieces"}`} />
-          <PerfKpi label="Impressions (trailing 3mo)" value={perfNum(kpis.impressions)} sub={kpis.mostImpr ? `top: ${kpis.mostImpr.title}` : ""} />
-          <PerfKpi label="Avg monthly impressions" value={perfNum(kpis.avgMonthly)} sub="trailing 3-month avg" />
-          <PerfKpi label="Avg position (weighted)" value={perfPos(kpis.avgPosition)} sub={kpis.best ? `best: ${perfPos(kpis.best.pos)}` : ""} />
+          <PerfKpi label="Avg position (weighted)" value={perfPos(kpis.avgPosition)} sub="impression-weighted" />
+          <PerfKpi
+            label="Target-keyword impressions"
+            value={perfNum(kpis.tgtImpr)}
+            sub={kpis.tgtMatched ? `${kpis.tgtRanked} of ${kpis.tgtMatched} rank page-1 for target` : "no target keyword matched yet"}
+            accent
+          />
+          <PerfKpi
+            label="Avg position on target kw"
+            value={kpis.tgtImpr > 0 ? perfPos(kpis.tgtAvgPos) : "—"}
+            sub="impression-weighted"
+            accent
+          />
         </div>
+      )}
+
+      {/* ── Breakout keywords — non-target queries we rank page-1 for ─────── */}
+      {kpis && kpis.breakout && kpis.breakout.length > 0 && (
+        <PerfBreakoutTable rows={kpis.breakout} limit={12} />
       )}
 
       {/* ── Orphan records ───────────────────────────────────────────────── */}
@@ -497,10 +702,10 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
 }
 
 // ─── KPI tile ───────────────────────────────────────────────────────────────
-function PerfKpi({ label, value, sub }) {
+function PerfKpi({ label, value, sub, accent }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   return (
-    <div style={{ background: "#fff", border: "1px solid #e8e3da", borderLeft: "3px solid #1a2f4e", padding: "14px 16px", borderRadius: "3px" }}>
+    <div style={{ background: "#fff", border: "1px solid #e8e3da", borderLeft: `3px solid ${accent ? "#c8401a" : "#1a2f4e"}`, padding: "14px 16px", borderRadius: "3px" }}>
       <div style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888" }}>
         {label}
       </div>
@@ -512,6 +717,91 @@ function PerfKpi({ label, value, sub }) {
           {sub}
         </div>
       )}
+    </div>
+  );
+}
+
+// ─── WoW impressions banner ───────────────────────────────────────────────
+// The headline for the weekly Friday upload: how impressions moved this
+// (complete) calendar week versus last. Green = up, orange = down.
+function PerfWowBanner({ wow }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const tw = wow.thisWeek, lw = wow.lastWeek;
+  const up = wow.impressionsDelta >= 0;
+  const deltaColor = up ? "#1e7a45" : "#c8401a";
+  const sign = wow.impressionsDelta > 0 ? "+" : wow.impressionsDelta < 0 ? "−" : "";
+  const range = wk => `${perfDate(wk.start)} – ${perfDate(wk.end)}`;
+  return (
+    <div style={{
+      background: "#fff", border: "1px solid #e8e3da", borderLeft: `3px solid ${deltaColor}`,
+      borderRadius: "3px", padding: "16px 20px", marginBottom: "16px",
+      display: "flex", alignItems: "center", justifyContent: "space-between", gap: "20px", flexWrap: "wrap",
+    }}>
+      <div>
+        <div style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888" }}>
+          Impressions · week over week
+        </div>
+        <div style={{ display: "flex", alignItems: "baseline", gap: "12px", marginTop: "5px", flexWrap: "wrap" }}>
+          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", fontWeight: 600, color: "#1a2535", lineHeight: 1 }}>
+            {perfNum(tw.impressions)}
+          </span>
+          <span style={{ ...FONT, fontSize: "0.95rem", fontWeight: 700, color: deltaColor }}>
+            {sign}{perfNum(Math.abs(wow.impressionsDelta))} ({perfSignedPct(wow.impressionsPct)})
+          </span>
+        </div>
+        <div style={{ ...FONT, fontSize: "0.68rem", color: "#aaa", marginTop: "6px" }}>
+          This week {range(tw)} vs last week {range(lw)} · impression-weighted, calendar Mon–Sun
+        </div>
+      </div>
+      <div style={{ display: "flex", gap: "22px" }}>
+        <div style={{ textAlign: "right" }}>
+          <div style={{ ...FONT, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#bbb" }}>This week</div>
+          <div style={{ ...FONT, fontSize: "1.05rem", fontWeight: 700, color: "#1a2535", marginTop: "2px" }}>{perfNum(tw.impressions)}</div>
+        </div>
+        <div style={{ textAlign: "right" }}>
+          <div style={{ ...FONT, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#bbb" }}>Last week</div>
+          <div style={{ ...FONT, fontSize: "1.05rem", fontWeight: 700, color: "#999", marginTop: "2px" }}>{perfNum(lw.impressions)}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Breakout keywords table ──────────────────────────────────────────────
+// "What other keywords did we do well for?" — non-target queries sitting on
+// page one (position ≤ 10), ranked by impressions, tagged with their piece.
+function PerfBreakoutTable({ rows, limit }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  if (!rows || !rows.length) return null;
+  const shown = limit ? rows.slice(0, limit) : rows;
+  const max = Math.max(...shown.map(r => r.impressions), 1);
+  const GRID = "1fr 150px 56px 46px";
+  return (
+    <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px", padding: "16px 20px", marginBottom: "24px" }}>
+      <div style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#c8401a", marginBottom: "3px" }}>
+        Other keywords we're winning
+      </div>
+      <div style={{ ...FONT, fontSize: "0.72rem", color: "#999", marginBottom: "10px" }}>
+        Non-target search queries ranking on page one (position ≤ 10), by impressions.
+      </div>
+      <div style={{ borderTop: "1px solid #e8e3da" }}>
+        <div style={{ display: "grid", gridTemplateColumns: GRID, gap: "8px", padding: "6px 0", borderBottom: "1px solid #f0ede6" }}>
+          {["Query", "Piece", "Impr.", "Pos."].map((h, i) => (
+            <span key={i} style={{ ...FONT, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#bbb", textAlign: i >= 2 ? "right" : "left" }}>{h}</span>
+          ))}
+        </div>
+        {shown.map((r, i) => (
+          <div key={i} style={{ position: "relative", borderBottom: "1px solid #f5f2ec" }}>
+            <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${(r.impressions / max) * 100}%`, background: "#c8401a", opacity: 0.05 }} />
+            <div style={{ position: "relative", display: "grid", gridTemplateColumns: GRID, gap: "8px", padding: "8px 0", alignItems: "baseline" }}>
+              <span style={{ ...FONT, fontSize: "0.76rem", color: "#333", lineHeight: 1.35, overflow: "hidden", textOverflow: "ellipsis" }}>{r.query}</span>
+              <span style={{ ...FONT, fontSize: "0.68rem", color: "#999", lineHeight: 1.35, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{r.pieceTitle}</span>
+              <span style={{ ...FONT, fontSize: "0.76rem", color: "#1a2535", fontWeight: 600, textAlign: "right" }}>{perfNum(r.impressions)}</span>
+              <span style={{ ...FONT, fontSize: "0.76rem", color: "#1e7a45", fontWeight: 600, textAlign: "right" }}>{perfPos(r.position)}</span>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -568,6 +858,8 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
   const cardWin = view ? perfTrailing3Month(view.timeseries, releaseTs) : [];
   const cardWt = cardWin.length ? perfWindowTotals(cardWin) : { impressions: 0, clicks: 0, avgMonthly: 0, weightedAvgPos: 0 };
   const cardKw = piece.primary_keyword || null;
+  const cardMatch = view ? perfMatchTarget(cardKw, view.top_queries) : null;
+  const cardRanks = perfTargetRanks(cardMatch);
   const wow = view ? perfWoW(view) : null;
 
   return (
@@ -641,6 +933,13 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
                 <div style={{ ...FONT, fontSize: "0.66rem", color: "#555", background: "#f5f2ec", padding: "4px 8px", borderRadius: "2px", minWidth: 0 }}>
                   <div style={{ color: "#aaa", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", fontSize: "0.56rem", marginBottom: "2px" }}>Target keyword</div>
                   <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{cardKw}</div>
+                  <div style={{ marginTop: "2px", fontWeight: 600, color: cardMatch ? (cardRanks ? "#1e7a45" : "#c8401a") : "#bbb", fontSize: "0.6rem" }}>
+                    {cardMatch
+                      ? (cardRanks
+                          ? `Ranks #${perfPos(cardMatch.position)} · ${perfNum(cardMatch.impressions)} impr`
+                          : `#${perfPos(cardMatch.position)} · not page 1`)
+                      : "Not ranking yet"}
+                  </div>
                 </div>
               )}
               {view.top_queries && view.top_queries[0] && (
@@ -788,6 +1087,8 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
   const modalWin = view ? perfTrailing3Month(view.timeseries, modalRelTs) : [];
   const modalWt = modalWin.length ? perfWindowTotals(modalWin) : { impressions: 0, clicks: 0, avgMonthly: 0, weightedAvgPos: 0 };
   const modalKw = piece.primary_keyword || null;
+  const modalMatch = view ? perfMatchTarget(modalKw, view.top_queries) : null;
+  const modalRanks = perfTargetRanks(modalMatch);
   const modalWow = view ? perfWoW(view) : null;
 
   return (
@@ -856,6 +1157,20 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
               <div style={{ ...FONT, fontSize: "0.82rem", color: "#1a2535", fontWeight: 500 }}>
                 {modalKw || "—"}
               </div>
+              {modalKw && (
+                <div style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, marginTop: "5px", color: modalMatch ? (modalRanks ? "#1e7a45" : "#c8401a") : "#bbb" }}>
+                  {modalMatch
+                    ? (modalRanks
+                        ? `Ranks #${perfPos(modalMatch.position)} on page 1 · ${perfNum(modalMatch.impressions)} impressions`
+                        : `Best match #${perfPos(modalMatch.position)} · not yet on page 1`)
+                    : "Not ranking for the target keyword yet"}
+                  {modalMatch && (
+                    <div style={{ ...FONT, fontSize: "0.6rem", fontWeight: 400, color: "#999", marginTop: "2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      matched query: "{String(modalMatch.query).replace(/\s+/g, " ").trim()}"
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
             <div style={{ background: "#eef7f1", border: "1px solid #c8e8d4", borderRadius: "3px", padding: "8px 10px" }}>
               <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "#1e7a45", marginBottom: "4px" }}>
@@ -867,23 +1182,27 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
             </div>
           </div>
         )}
-        {/* WoW delta row — only shown when there are 2+ snapshots */}
-        {modalWow && view.snapshotCount >= 2 && (() => {
+        {/* WoW delta row — calendar Mon–Sun, this complete week vs last */}
+        {modalWow && modalWow.weeks && modalWow.weeks.lastWeek && (() => {
           const items = [
-            ["Impressions WoW", perfDeltaLabel(modalWow, "impressions")],
-            ["Clicks WoW",      perfDeltaLabel(modalWow, "clicks")],
-            ["CTR WoW",         perfDeltaLabel(modalWow, "ctr")],
-            ["Position WoW",    perfDeltaLabel(modalWow, "avg_position")],
+            ["Impressions", perfDeltaLabel(modalWow, "impressions")],
+            ["Clicks",      perfDeltaLabel(modalWow, "clicks")],
+            ["CTR",         perfDeltaLabel(modalWow, "ctr")],
+            ["Position",    perfDeltaLabel(modalWow, "avg_position")],
           ].filter(([, d]) => d);
-          if (!items.length) return null;
+          const wk = modalWow.weeks;
           return (
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", padding: "8px 10px", background: "#f5f8ff", border: "1px solid #d0dbf0", borderRadius: "3px", marginBottom: "10px" }}>
-              <span style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7a8eb0", alignSelf: "center" }}>vs prev upload</span>
-              {items.map(([label, d]) => (
-                <span key={label} style={{ ...FONT, fontSize: "0.74rem", fontWeight: 700, color: d.up ? "#1e7a45" : "#c8401a" }}>
-                  {label.split(" ")[0]}: {d.label}
-                </span>
-              ))}
+              <span style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7a8eb0", alignSelf: "center" }}>
+                {`WoW · ${perfDate(wk.thisWeek.start)}–${perfDate(wk.thisWeek.end)} vs ${perfDate(wk.lastWeek.start)}–${perfDate(wk.lastWeek.end)}`}
+              </span>
+              {items.length
+                ? items.map(([label, d]) => (
+                    <span key={label} style={{ ...FONT, fontSize: "0.74rem", fontWeight: 700, color: d.up ? "#1e7a45" : "#c8401a" }}>
+                      {label}: {d.label}
+                    </span>
+                  ))
+                : <span style={{ ...FONT, fontSize: "0.74rem", fontWeight: 600, color: "#7a8eb0" }}>flat vs last week</span>}
             </div>
           );
         })()}
