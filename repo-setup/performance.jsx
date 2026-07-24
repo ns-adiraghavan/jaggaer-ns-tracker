@@ -334,6 +334,37 @@ function perfMergeDaily(dailies) {
     .sort((x, y) => x.date.localeCompare(y.date));
 }
 
+// Impression-weighted average position across the QUERY breakdown:
+//   Σ(query impressions × query position) / Σ(query impressions).
+// This is the honest "where do we rank for the terms we show up for" number —
+// it differs from GSC's page-level position, which is diluted by the long tail
+// of impressions that never surface in the top-query table.
+function perfQueryWeightedPos(view) {
+  const s = view && view.summary;
+  // Prefer the value computed over the FULL query list at ingest — the stored
+  // top_queries is capped at 25, which skews this number high on its own.
+  if (s && s.query_weighted_position > 0 && s.query_position_impressions > 0) {
+    return { pos: s.query_weighted_position, impr: s.query_position_impressions };
+  }
+  // Fallback for records parsed before that field existed (top-25 only).
+  let impr = 0, weighted = 0;
+  for (const q of (view && view.top_queries) || []) {
+    const i = q.impressions || 0, p = q.position || 0;
+    if (i > 0 && p > 0) { impr += i; weighted += i * p; }
+  }
+  return { pos: impr > 0 ? weighted / impr : 0, impr };
+}
+
+// Clip a timeseries so charts open a couple of days BEFORE the piece went live,
+// instead of at whatever date GSC's history happens to start (often months of
+// dead-flat pre-launch zero rows).
+function perfChartSeries(timeseries, releaseTs) {
+  if (!timeseries || !timeseries.length || !releaseTs) return timeseries || [];
+  const start = perfAddDays(String(releaseTs).slice(0, 10), -2);
+  const clipped = timeseries.filter(p => p.date >= start);
+  return clipped.length >= 2 ? clipped : timeseries;
+}
+
 // ─── Sparkline ──────────────────────────────────────────────────────────────
 function PerfSparkline({ series, w = 240, h = 34, color = "#c8401a" }) {
   if (!series || series.length < 2) return null;
@@ -413,7 +444,8 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
   //    target-keyword coverage, portfolio WoW, and breakout keywords. ──
   const kpis = usePerfMemo(() => {
     if (!withData.length) return null;
-    let clicks = 0, impressions = 0, avgMonthlySum = 0, weighted = 0;
+    let clicks = 0, impressions = 0, avgMonthlySum = 0;
+    let qwImpr = 0, qwWeighted = 0;   // query-impression-weighted position accumulators
     let best = null, mostImpr = null;
     // Target-keyword rollup
     let tgtImpr = 0, tgtWeighted = 0, tgtMatched = 0, tgtRanked = 0;
@@ -429,9 +461,11 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
       clicks += totals.clicks;
       impressions += totals.impressions;
       avgMonthlySum += totals.avgMonthly;
-      weighted += totals.weightedAvgPos * totals.impressions;
+      // Weighted position from the query breakdown (not the diluted page-level number).
+      const qwp = perfQueryWeightedPos(view);
+      qwImpr += qwp.impr; qwWeighted += qwp.pos * qwp.impr;
       const s = view.summary;
-      if (s.avg_position > 0 && (!best || s.avg_position < best.pos)) best = { pos: s.avg_position, title: p.piece.title };
+      if (qwp.pos > 0 && (!best || qwp.pos < best.pos)) best = { pos: qwp.pos, title: p.piece.title };
       if (!mostImpr || totals.impressions > (mostImpr.impr || 0)) mostImpr = { impr: totals.impressions, title: p.piece.title };
 
       // Target keyword: fuzzy-match the brief's primary_keyword to GSC queries.
@@ -464,15 +498,44 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
     // Portfolio WoW — sum every piece's daily series, then compare weeks.
     const portfolioWoW = perfCalendarWoW(perfMergeDaily(withData.map(p => perfData[p.key]?.daily)));
 
+    // Per-article WoW breakdown for the stacked bar — each article's impressions
+    // inside the portfolio's this-week / last-week ranges, so the stack sums to
+    // the portfolio total. Colours are assigned by descending 3mo impressions.
+    let wowByArticle = [];
+    if (portfolioWoW && portfolioWoW.lastWeek) {
+      const tw = portfolioWoW.thisWeek, lw = portfolioWoW.lastWeek;
+      const PALETTE = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#4a3aa7", "#e34948"];
+      const ranked = withData
+        .map(p => {
+          const view = perfRecordView(perfData[p.key]);
+          const t3 = perfWindowTotals(perfTrailing3Month(view.timeseries, perfReleaseTs(p.piece)) || []);
+          return { p, view, t3Impr: t3.impressions };
+        })
+        .sort((a, b) => b.t3Impr - a.t3Impr);
+      wowByArticle = ranked.map(({ p, view }, i) => {
+        const thisImpr = perfSumRange(view.timeseries, tw.start, tw.end).impressions;
+        const lastImpr = perfSumRange(view.timeseries, lw.start, lw.end).impressions;
+        return {
+          key: p.key,
+          title: p.piece.title,
+          pillar: p.pillar.label,
+          color: i < PALETTE.length ? PALETTE[i] : "#9a958c",
+          thisImpr, lastImpr,
+          delta: thisImpr - lastImpr,
+        };
+      }).filter(a => a.thisImpr > 0 || a.lastImpr > 0);
+    }
+
     return {
       clicks,
       impressions,
       avgMonthly: withData.length ? avgMonthlySum / withData.length : 0,
       ctr: impressions > 0 ? clicks / impressions : 0,
-      avgPosition: impressions > 0 ? weighted / impressions : 0,
+      avgPosition: qwImpr > 0 ? qwWeighted / qwImpr : 0,
       best,
       mostImpr,
       pieces: withData.length,
+      wowByArticle,
       // Target keyword
       tgtImpr,
       tgtAvgPos: tgtImpr > 0 ? tgtWeighted / tgtImpr : 0,
@@ -588,9 +651,9 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
         </p>
       </header>
 
-      {/* ── WoW impressions banner — this week vs last week (Mon–Sun) ─────── */}
+      {/* ── WoW impressions — headline + stacked bar by article ──────────── */}
       {kpis && kpis.portfolioWoW && kpis.portfolioWoW.lastWeek && (
-        <PerfWowBanner wow={kpis.portfolioWoW} />
+        <PerfWowStacked wow={kpis.portfolioWoW} articles={kpis.wowByArticle} />
       )}
 
       {/* ── KPI strip ────────────────────────────────────────────────────── */}
@@ -598,7 +661,7 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: "12px", marginBottom: "20px" }}>
           <PerfKpi label="Impressions (trailing 3mo)" value={perfNum(kpis.impressions)} sub={kpis.mostImpr ? `top: ${kpis.mostImpr.title}` : `across ${kpis.pieces} ${kpis.pieces === 1 ? "piece" : "pieces"}`} />
           <PerfKpi label="Clicks (trailing 3mo)" value={perfNum(kpis.clicks)} sub={`across ${kpis.pieces} ${kpis.pieces === 1 ? "piece" : "pieces"}`} />
-          <PerfKpi label="Avg position (weighted)" value={perfPos(kpis.avgPosition)} sub="impression-weighted" />
+          <PerfKpi label="Avg position (weighted)" value={perfPos(kpis.avgPosition)} sub="impression-weighted across queries" />
           <PerfKpi
             label="Target-keyword impressions"
             value={perfNum(kpis.tgtImpr)}
@@ -721,47 +784,125 @@ function PerfKpi({ label, value, sub, accent }) {
   );
 }
 
-// ─── WoW impressions banner ───────────────────────────────────────────────
+// ─── WoW impressions — headline + stacked bar by article ──────────────────
 // The headline for the weekly Friday upload: how impressions moved this
-// (complete) calendar week versus last. Green = up, orange = down.
-function PerfWowBanner({ wow }) {
+// (complete) calendar week vs last, and which articles drove the move. The two
+// stacked bars share one scale, so the length gap IS the total change; each
+// segment is one article (2px surface gaps between them), with a labelled legend.
+function PerfStackRow({ label, total, scaleMax, articles, weekField }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const pct = v => `${scaleMax > 0 ? (v / scaleMax) * 100 : 0}%`;
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "78px 1fr 74px", alignItems: "center", gap: "10px" }}>
+      <span style={{ ...FONT, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "#999" }}>{label}</span>
+      <div style={{ position: "relative", height: "22px", background: "#f5f2ec", borderRadius: "2px", display: "flex", gap: "2px", overflow: "hidden" }}>
+        {articles.map(a => a[weekField] > 0 && (
+          <div key={a.key} title={`${a.title} · ${perfNum(a[weekField])} impr`}
+               style={{ width: pct(a[weekField]), background: a.color, minWidth: a[weekField] > 0 ? "2px" : 0 }} />
+        ))}
+      </div>
+      <span style={{ ...FONT, fontSize: "0.78rem", fontWeight: 700, color: "#1a2535", textAlign: "right" }}>{perfNum(total)}</span>
+    </div>
+  );
+}
+
+function PerfWowStacked({ wow, articles }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const tw = wow.thisWeek, lw = wow.lastWeek;
   const up = wow.impressionsDelta >= 0;
   const deltaColor = up ? "#1e7a45" : "#c8401a";
   const sign = wow.impressionsDelta > 0 ? "+" : wow.impressionsDelta < 0 ? "−" : "";
   const range = wk => `${perfDate(wk.start)} – ${perfDate(wk.end)}`;
+  const scaleMax = Math.max(tw.impressions, lw.impressions, 1);
+  const list = (articles || []).filter(a => a.thisImpr > 0 || a.lastImpr > 0);
+
   return (
     <div style={{
       background: "#fff", border: "1px solid #e8e3da", borderLeft: `3px solid ${deltaColor}`,
       borderRadius: "3px", padding: "16px 20px", marginBottom: "16px",
-      display: "flex", alignItems: "center", justifyContent: "space-between", gap: "20px", flexWrap: "wrap",
     }}>
-      <div>
-        <div style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888" }}>
-          Impressions · week over week
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "16px", flexWrap: "wrap" }}>
+        <div>
+          <div style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888" }}>
+            Impressions · week over week
+          </div>
+          <div style={{ display: "flex", alignItems: "baseline", gap: "12px", marginTop: "5px", flexWrap: "wrap" }}>
+            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", fontWeight: 600, color: "#1a2535", lineHeight: 1 }}>
+              {perfNum(tw.impressions)}
+            </span>
+            <span style={{ ...FONT, fontSize: "0.95rem", fontWeight: 700, color: deltaColor }}>
+              {sign}{perfNum(Math.abs(wow.impressionsDelta))} ({perfSignedPct(wow.impressionsPct)})
+            </span>
+          </div>
         </div>
-        <div style={{ display: "flex", alignItems: "baseline", gap: "12px", marginTop: "5px", flexWrap: "wrap" }}>
-          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", fontWeight: 600, color: "#1a2535", lineHeight: 1 }}>
-            {perfNum(tw.impressions)}
-          </span>
-          <span style={{ ...FONT, fontSize: "0.95rem", fontWeight: 700, color: deltaColor }}>
-            {sign}{perfNum(Math.abs(wow.impressionsDelta))} ({perfSignedPct(wow.impressionsPct)})
-          </span>
-        </div>
-        <div style={{ ...FONT, fontSize: "0.68rem", color: "#aaa", marginTop: "6px" }}>
-          This week {range(tw)} vs last week {range(lw)} · impression-weighted, calendar Mon–Sun
+        <div style={{ ...FONT, fontSize: "0.66rem", color: "#aaa", textAlign: "right", lineHeight: 1.5 }}>
+          This week {range(tw)}<br />vs last week {range(lw)} · calendar Mon–Sun
         </div>
       </div>
-      <div style={{ display: "flex", gap: "22px" }}>
-        <div style={{ textAlign: "right" }}>
-          <div style={{ ...FONT, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#bbb" }}>This week</div>
-          <div style={{ ...FONT, fontSize: "1.05rem", fontWeight: 700, color: "#1a2535", marginTop: "2px" }}>{perfNum(tw.impressions)}</div>
+
+      {/* Two stacked bars sharing one scale */}
+      <div style={{ display: "grid", gap: "8px", marginTop: "16px" }}>
+        <PerfStackRow label="This week" total={tw.impressions} scaleMax={scaleMax} articles={list} weekField="thisImpr" />
+        <PerfStackRow label="Last week" total={lw.impressions} scaleMax={scaleMax} articles={list} weekField="lastImpr" />
+      </div>
+
+      {/* Legend — colour → article, with each article's WoW delta */}
+      {list.length > 0 && (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 16px", marginTop: "14px" }}>
+          {list.map(a => {
+            const aUp = a.delta >= 0;
+            return (
+              <div key={a.key} style={{ display: "flex", alignItems: "center", gap: "6px", minWidth: 0, maxWidth: "260px" }}>
+                <span style={{ width: "10px", height: "10px", borderRadius: "2px", background: a.color, flexShrink: 0 }} />
+                <span style={{ ...FONT, fontSize: "0.68rem", color: "#555", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{a.title}</span>
+                <span style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, color: aUp ? "#1e7a45" : "#c8401a", flexShrink: 0 }}>
+                  {a.delta > 0 ? "+" : a.delta < 0 ? "−" : ""}{perfNum(Math.abs(a.delta))}
+                </span>
+              </div>
+            );
+          })}
         </div>
-        <div style={{ textAlign: "right" }}>
-          <div style={{ ...FONT, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#bbb" }}>Last week</div>
-          <div style={{ ...FONT, fontSize: "1.05rem", fontWeight: 700, color: "#999", marginTop: "2px" }}>{perfNum(lw.impressions)}</div>
-        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Weekly impressions bars (article subview) ────────────────────────────
+// One bar per calendar week from ~launch onward; the two most recent complete
+// weeks are highlighted so the WoW move reads at a glance.
+function PerfWeeklyBars({ series }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  if (!series || series.length < 2) return null;
+  // Bucket the (already launch-clipped) daily series into Mon–Sun weeks.
+  const weeks = {};
+  for (const p of series) {
+    const wk = perfMondayOf(p.date);
+    (weeks[wk] || (weeks[wk] = { week: wk, impressions: 0, clicks: 0 })).impressions += p.impressions || 0;
+    weeks[wk].clicks += p.clicks || 0;
+  }
+  const rows = Object.values(weeks).sort((a, b) => a.week.localeCompare(b.week));
+  if (rows.length < 2) return null;
+  const max = Math.max(...rows.map(r => r.impressions), 1);
+  const H = 88;
+  return (
+    <div style={{ marginTop: "22px" }}>
+      <div style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1a2f4e", marginBottom: "8px" }}>
+        Impressions by week
+      </div>
+      <div style={{ display: "flex", alignItems: "flex-end", gap: "3px", height: `${H}px`, borderBottom: "1px solid #e8e3da" }}>
+        {rows.map((r, i) => {
+          const recent = i >= rows.length - 2;          // last two complete weeks
+          const isLast = i === rows.length - 1;
+          return (
+            <div key={r.week} title={`Week of ${perfDate(r.week)} · ${perfNum(r.impressions)} impressions · ${r.clicks} clicks`}
+                 style={{ flex: 1, minWidth: "6px", height: `${Math.max((r.impressions / max) * (H - 4), r.impressions > 0 ? 2 : 0)}px`,
+                          background: isLast ? "#c8401a" : recent ? "#e08a6f" : "#d9d2c7", borderRadius: "2px 2px 0 0" }} />
+          );
+        })}
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", marginTop: "6px" }}>
+        <span style={{ ...FONT, fontSize: "0.62rem", color: "#aaa" }}>Week of {perfDate(rows[0].week)}</span>
+        <span style={{ ...FONT, fontSize: "0.62rem", color: "#c8401a", fontWeight: 600 }}>Week of {perfDate(rows[rows.length - 1].week)}</span>
       </div>
     </div>
   );
@@ -860,6 +1001,7 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
   const cardKw = piece.primary_keyword || null;
   const cardMatch = view ? perfMatchTarget(cardKw, view.top_queries) : null;
   const cardRanks = perfTargetRanks(cardMatch);
+  const cardQwPos = view ? perfQueryWeightedPos(view).pos : 0;
   const wow = view ? perfWoW(view) : null;
 
   return (
@@ -897,7 +1039,7 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
               { label: "Impressions", value: perfNum(cardWt.impressions), sub: `${perfNum(cardWt.avgMonthly)} / mo`, delta: perfDeltaLabel(wow, "impressions"), color: "#1a2535" },
               { label: "Clicks",      value: perfNum(cardWt.clicks),      sub: `${perfPct(cardWt.clicks && cardWt.impressions ? cardWt.clicks / cardWt.impressions : 0)} CTR`, delta: perfDeltaLabel(wow, "clicks"), color: "#1a2f4e" },
               { label: "CTR",         value: perfPct(cardWt.clicks && cardWt.impressions ? cardWt.clicks / cardWt.impressions : 0), sub: null, delta: perfDeltaLabel(wow, "ctr"), color: "#333" },
-              { label: "Avg position",value: perfPos(cardWt.weightedAvgPos), sub: null, delta: perfDeltaLabel(wow, "avg_position"), color: "#333" },
+              { label: "Avg position",value: cardQwPos > 0 ? perfPos(cardQwPos) : "—", sub: null, delta: perfDeltaLabel(wow, "avg_position"), color: "#333" },
             ].map(({ label, value, sub, delta, color }) => (
               <div key={label}>
                 <div style={{ ...FONT, fontSize: "0.56rem", fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: "#aaa", marginBottom: "2px" }}>
@@ -913,14 +1055,8 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
               </div>
             ))}
           </div>
-          {/* Sparkline — trimmed to go-live date so the dead-flat pre-launch zone is hidden */}
-          <PerfSparkline series={(() => {
-            const src = cardWin.length >= 2 ? cardWin : view.timeseries;
-            // Drop leading days where both clicks and impressions are zero
-            let start = 0;
-            while (start < src.length - 1 && src[start].impressions === 0 && src[start].clicks === 0) start++;
-            return src.slice(start);
-          })()} />
+          {/* Sparkline — opens ~2 days before go-live, hiding the dead-flat pre-launch zone */}
+          <PerfSparkline series={perfChartSeries(view.timeseries, releaseTs)} />
           {view.snapshotCount > 1 && (
             <div style={{ ...FONT, fontSize: "0.58rem", color: "#bbb", textAlign: "right", marginTop: "-4px" }}>
               {view.snapshotCount} uploads tracked
@@ -1089,6 +1225,8 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
   const modalKw = piece.primary_keyword || null;
   const modalMatch = view ? perfMatchTarget(modalKw, view.top_queries) : null;
   const modalRanks = perfTargetRanks(modalMatch);
+  const modalQwPos = view ? perfQueryWeightedPos(view).pos : 0;
+  const modalChartSeries = view ? perfChartSeries(view.timeseries, modalRelTs) : [];
   const modalWow = view ? perfWoW(view) : null;
 
   return (
@@ -1139,7 +1277,7 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
             ["Clicks (3mo)", perfNum(modalWt.clicks)],
             ["Impressions (3mo)", perfNum(modalWt.impressions)],
             ["Avg monthly", perfNum(modalWt.avgMonthly)],
-            ["Avg position (wtd)", modalWt.weightedAvgPos > 0 ? perfPos(modalWt.weightedAvgPos) : "—"],
+            ["Avg position (wtd)", modalQwPos > 0 ? perfPos(modalQwPos) : "—"],
           ].map(([k, v]) => (
             <div key={k} style={{ background: "#faf8f4", border: "1px solid #f0ede6", borderRadius: "3px", padding: "9px 10px" }}>
               <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>{k}</div>
@@ -1214,7 +1352,9 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
           {view.snapshotCount > 1 && <span style={{ marginLeft: "8px", color: "#bbb" }}>· {view.snapshotCount} uploads tracked</span>}
         </div>
 
-        <PerfChart series={view.timeseries} />
+        <PerfChart series={modalChartSeries} />
+
+        <PerfWeeklyBars series={modalChartSeries} />
 
         <PerfDimTable title="Top queries" rows={view.top_queries} field="query" limit={10} />
         <PerfDimTable title="Countries" rows={view.countries} field="country" limit={8} />
