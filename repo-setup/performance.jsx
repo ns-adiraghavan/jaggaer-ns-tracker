@@ -390,6 +390,7 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
   const [selected, setSelected] = usePerfState(null);   // url_key of open modal
   const [busyKey, setBusyKey] = usePerfState(null);     // url_key currently uploading
   const [error, setError] = usePerfState(null);         // { key, message }
+  const [showAdmin, setShowAdmin] = usePerfState(false); // admin audit panel
 
   const perfData = project.performanceData || {};
 
@@ -677,11 +678,6 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
         </div>
       )}
 
-      {/* ── Breakout keywords — non-target queries we rank page-1 for ─────── */}
-      {kpis && kpis.breakout && kpis.breakout.length > 0 && (
-        <PerfBreakoutTable rows={kpis.breakout} limit={12} />
-      )}
-
       {/* ── Orphan records ───────────────────────────────────────────────── */}
       {orphans.length > 0 && (
         <div style={{
@@ -694,9 +690,25 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
         </div>
       )}
 
-      {/* ── Sort toggle ──────────────────────────────────────────────────── */}
+      {/* ── Sort toggle + admin toggle ───────────────────────────────────── */}
       {published.length > 0 && (
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: "10px", marginBottom: "12px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px", marginBottom: "12px" }}>
+          {canUpload ? (
+            <button
+              onClick={() => setShowAdmin(v => !v)}
+              style={{
+                ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.08em",
+                textTransform: "uppercase", padding: "6px 10px",
+                border: "1px solid #e8e3da", borderRadius: "3px", cursor: "pointer",
+                background: showAdmin ? "#1a2f4e" : "#fff",
+                color: showAdmin ? "#fff" : "#aaa",
+                transition: "background 0.15s, color 0.15s",
+              }}
+            >
+              {showAdmin ? "▲ Admin" : "▼ Admin"}
+            </button>
+          ) : <span />}
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <span style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#aaa" }}>
             Sort by
           </span>
@@ -720,7 +732,13 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
               );
             })}
           </div>
+          </div>
         </div>
+      )}
+
+      {/* ── Admin panel ───────────────────────────────────────────────────── */}
+      {canUpload && showAdmin && (
+        <PerfAdminPanel perfData={perfData} published={published} />
       )}
 
       {/* ── Cards ────────────────────────────────────────────────────────── */}
@@ -752,6 +770,7 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
         <PerfPieceModal
           entry={selectedEntry}
           record={perfData[selectedEntry.key]}
+          breakout={(kpis && kpis.breakout || []).filter(r => r.pieceTitle === selectedEntry.piece.title)}
           canUpload={canUpload}
           busy={busyKey === selectedEntry.key}
           error={error && error.key === selectedEntry.key ? error.message : null}
@@ -1212,7 +1231,7 @@ function PerfDimTable({ title, rows, field, limit }) {
 // Centered dialog rather than a right-hand drawer (July 2026): the drawer was
 // too narrow for the query table, which is the thing people actually open this
 // for. Scroll lives on the inner body so the header stays put.
-function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onClear, onClose }) {
+function PerfPieceModal({ entry, record, breakout, canUpload, busy, error, onUpload, onClear, onClose }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const { piece, cluster, pillar, url } = entry;
   const view = perfRecordView(record);
@@ -1360,6 +1379,13 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
         <PerfDimTable title="Countries" rows={view.countries} field="country" limit={8} />
         <PerfDimTable title="Devices" rows={view.devices} field="device" />
 
+        {/* ── Other keywords — non-target page-1 queries for this piece ─── */}
+        {breakout && breakout.length > 0 && (
+          <div style={{ marginTop: "22px" }}>
+            <PerfBreakoutTable rows={breakout} />
+          </div>
+        )}
+
         <div style={{ marginTop: "26px", borderTop: "1px solid #e8e3da", paddingTop: "16px" }}>
           <div style={{ ...FONT, fontSize: "0.66rem", color: "#aaa", marginBottom: "8px" }}>
             {view.filename && <>Source: <code style={{ background: "#f5f2ec", padding: "2px 5px", borderRadius: "2px" }}>{view.filename}</code> · </>}
@@ -1388,6 +1414,149 @@ function PerfPieceModal({ entry, record, canUpload, busy, error, onUpload, onCle
         </div>
       </div>
       </div>
+    </div>
+  );
+}
+
+
+// ─── Admin audit panel ──────────────────────────────────────────────────────
+// Visible only to canUpload users via the "Admin" toggle. Shows every piece
+// with GSC data: snapshot history (filename, date-range, upload timestamp) and
+// a duplicate-snapshot warning if the same snapshot_date appears more than once.
+function PerfAdminPanel({ perfData, published }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+
+  // Build audit rows — one entry per piece that has performanceData
+  const rows = published
+    .map(entry => {
+      const rec = perfData[entry.key];
+      if (!rec) return null;
+      const snaps = rec.snapshots || [];
+      // Daily coverage
+      const dates = Object.keys(rec.daily || {}).sort();
+      const dailyRange = dates.length
+        ? `${dates[0]} → ${dates[dates.length - 1]} (${dates.length}d)`
+        : "no daily data";
+      // Duplicate snapshot_dates
+      const snapDateCounts = {};
+      for (const s of snaps) {
+        const d = s.snapshot_date || "unknown";
+        snapDateCounts[d] = (snapDateCounts[d] || 0) + 1;
+      }
+      const dupes = Object.entries(snapDateCounts).filter(([, c]) => c > 1);
+      return { entry, rec, snaps, dailyRange, dupes };
+    })
+    .filter(Boolean);
+
+  if (!rows.length) {
+    return (
+      <div style={{ ...FONT, fontSize: "0.78rem", color: "#aaa", padding: "16px 0 24px", textAlign: "center" }}>
+        No GSC data uploaded yet.
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ marginBottom: "28px", border: "1px solid #d7d1c8", borderRadius: "4px", background: "#faf8f4", overflow: "hidden" }}>
+      {/* Panel header */}
+      <div style={{ padding: "12px 18px", borderBottom: "1px solid #e8e3da", display: "flex", alignItems: "baseline", gap: "12px" }}>
+        <span style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1a2f4e" }}>
+          Upload audit
+        </span>
+        <span style={{ ...FONT, fontSize: "0.68rem", color: "#aaa" }}>
+          {rows.length} {rows.length === 1 ? "piece" : "pieces"} with data · {rows.reduce((s, r) => s + r.snaps.length, 0)} total snapshots
+        </span>
+      </div>
+
+      {/* Table header */}
+      <div style={{
+        display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 80px",
+        gap: "8px", padding: "7px 18px", borderBottom: "1px solid #e8e3da",
+        background: "#f0ede6",
+      }}>
+        {["Piece", "Daily coverage", "Snapshots", "Latest upload", "Dupes?"].map((h, i) => (
+          <span key={i} style={{ ...FONT, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", color: "#999" }}>{h}</span>
+        ))}
+      </div>
+
+      {rows.map(({ entry, snaps, dailyRange, dupes }, ri) => {
+        const latest = snaps.length ? snaps[snaps.length - 1] : null;
+        const hasDupes = dupes.length > 0;
+        return (
+          <div key={entry.key}>
+            {/* Piece row */}
+            <div style={{
+              display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 80px",
+              gap: "8px", padding: "10px 18px",
+              borderBottom: ri < rows.length - 1 || snaps.length > 0 ? "1px solid #edeae4" : "none",
+              background: hasDupes ? "#fff8f5" : "#fff",
+              alignItems: "start",
+            }}>
+              <div>
+                <div style={{ ...FONT, fontSize: "0.76rem", fontWeight: 600, color: "#1a2535", lineHeight: 1.3 }}>
+                  {entry.piece.title}
+                </div>
+                <div style={{ ...FONT, fontSize: "0.62rem", color: "#bbb", marginTop: "2px", fontFamily: "monospace" }}>
+                  {entry.key}
+                </div>
+              </div>
+              <span style={{ ...FONT, fontSize: "0.68rem", color: "#666", fontFamily: "monospace" }}>{dailyRange}</span>
+              <span style={{ ...FONT, fontSize: "0.76rem", color: "#333", fontWeight: 600 }}>{snaps.length}</span>
+              <div>
+                {latest ? (
+                  <>
+                    <div style={{ ...FONT, fontSize: "0.68rem", color: "#555" }}>{perfUploadedAt(latest.uploaded_at)}</div>
+                    {latest.filename && (
+                      <div style={{ ...FONT, fontSize: "0.6rem", color: "#bbb", marginTop: "1px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {latest.filename}
+                      </div>
+                    )}
+                  </>
+                ) : <span style={{ ...FONT, fontSize: "0.68rem", color: "#ccc" }}>—</span>}
+              </div>
+              <span style={{
+                ...FONT, fontSize: "0.66rem", fontWeight: 700,
+                color: hasDupes ? "#c8401a" : "#c5e0cc",
+              }}>
+                {hasDupes ? `${dupes.length} dupe${dupes.length > 1 ? "s" : ""}` : "✓ clean"}
+              </span>
+            </div>
+
+            {/* Snapshot history — collapsed sub-rows */}
+            {snaps.length > 0 && (
+              <div style={{ borderBottom: ri < rows.length - 1 ? "1px solid #edeae4" : "none" }}>
+                {snaps.map((s, si) => {
+                  const isDupe = (snapDateCounts => snapDateCounts[s.snapshot_date || "unknown"] > 1)(
+                    snaps.reduce((acc, x) => { const d = x.snapshot_date || "unknown"; acc[d] = (acc[d] || 0) + 1; return acc; }, {})
+                  );
+                  return (
+                    <div key={si} style={{
+                      display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 80px",
+                      gap: "8px", padding: "5px 18px 5px 32px",
+                      background: isDupe ? "#fff3ef" : "#faf8f4",
+                      borderTop: "1px solid #f0ede6",
+                    }}>
+                      <div style={{ ...FONT, fontSize: "0.63rem", color: "#999", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {s.filename || "unnamed"}
+                      </div>
+                      <div style={{ ...FONT, fontSize: "0.63rem", color: "#999", fontFamily: "monospace" }}>
+                        {s.date_range?.start && s.date_range?.end
+                          ? `${s.date_range.start} → ${s.date_range.end}`
+                          : s.snapshot_date || "—"}
+                      </div>
+                      <div style={{ ...FONT, fontSize: "0.63rem", color: "#bbb" }}>snap {si + 1}</div>
+                      <div style={{ ...FONT, fontSize: "0.63rem", color: "#bbb" }}>{perfUploadedAt(s.uploaded_at)}</div>
+                      <div style={{ ...FONT, fontSize: "0.63rem", fontWeight: 700, color: isDupe ? "#c8401a" : "#bbb" }}>
+                        {isDupe ? "⚠ dupe" : ""}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
