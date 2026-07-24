@@ -1031,7 +1031,14 @@
                   "ts": "2026-07-13T11:13:21.546Z",
                   "by": "m-ny8dy"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana Kotur",
+                "launch_date": "2026-07-23",
+                "live_url": "https://www.jaggaer.com/blog/the-hidden-cost-of-manual-procurement-processes",
+                "performance_data": "",
+                "updated_at": "2026-07-24T10:23:32.490Z"
+              }
             },
             {
               "id": "piece-c-yad8u-10-skqk",
