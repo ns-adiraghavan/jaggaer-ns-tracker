@@ -730,8 +730,8 @@
               "content_type": "msv",
               "phase": 1,
               "funnel": "TOFU",
-              "last_updated": "2026-07-13T11:07:38.327Z",
-              "last_updated_by": "m-ny8dy",
+              "last_updated": "2026-07-25T01:17:08.766Z",
+              "last_updated_by": "m-pifrn",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
@@ -739,7 +739,16 @@
                   "by": "m-ny8dy"
                 }
               ],
-              "return_to_stage": null
+              "return_to_stage": null,
+              "brief_files": [
+                {
+                  "filename": "Brief-2-Critical-Minerals.docx",
+                  "path": "content/month-1/discrete-manufacturing/dm3-minerals/p-dm3-1/brief/Brief-2-Critical-Minerals.docx",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-07-25T01:17:08.766Z"
+                }
+              ],
+              "brief_last_updated": "2026-07-25T01:17:08.766Z"
             },
             {
               "id": "p-dm3-2",
