@@ -1636,7 +1636,7 @@
               "title": "Gartner_AI in procurement",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "revision_count": 1,
               "primary_keyword": "",
@@ -1658,7 +1658,8 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-07-02T10:49:33.506Z",
-              "last_upload_by": "manager"
+              "last_upload_by": "manager",
+              "secondary_keyword": ""
             },
             {
               "id": "piece-si3t6m",
