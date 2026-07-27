@@ -355,6 +355,69 @@ function perfQueryWeightedPos(view) {
   return { pos: impr > 0 ? weighted / impr : 0, impr };
 }
 
+// ─── Branded vs non-branded ─────────────────────────────────────────────────
+// Branded / navigational queries (the ones that name Jaggaer) rank far better
+// than the terms we're actually competing for, so they flatter the average
+// position. We split them out and treat NON-branded as the honest organic
+// number. Keep PERF_BRAND_TERMS in sync with isBranded() in api/perf-xlsx.js.
+const PERF_BRAND_TERMS = ["jaggaer", "jaggear", "jagaer", "jaggar", "jagger"];
+function perfIsBranded(query) {
+  if (!query) return false;
+  const q = String(query).toLowerCase();
+  return PERF_BRAND_TERMS.some(t => q.includes(t));
+}
+
+// Branded/non-branded rollup for one piece. Prefers the aggregates the parser
+// computes over the FULL query list; falls back to the stored top queries for
+// records ingested before the parser knew about branded (so it still works
+// without a re-upload — just over the stored slice).
+function perfBrandedSplit(view) {
+  const s = view && view.summary;
+  if (s && s.branded && s.nonbranded && s.branded.query_count != null) {
+    return { branded: s.branded, nonbranded: s.nonbranded, source: "all" };
+  }
+  const mk = () => ({ impressions: 0, clicks: 0, wImpr: 0, wSum: 0, query_count: 0 });
+  const b = mk(), n = mk();
+  for (const q of (view && view.top_queries) || []) {
+    const branded = q.branded != null ? q.branded : perfIsBranded(q.query);
+    const bucket = branded ? b : n;
+    bucket.impressions += q.impressions || 0;
+    bucket.clicks += q.clicks || 0;
+    bucket.query_count += 1;
+    if ((q.impressions || 0) > 0 && (q.position || 0) > 0) {
+      bucket.wImpr += q.impressions; bucket.wSum += q.impressions * q.position;
+    }
+  }
+  const pack = x => ({
+    impressions: x.impressions, clicks: x.clicks, query_count: x.query_count,
+    weighted_position: x.wImpr > 0 ? x.wSum / x.wImpr : 0,
+    position_impressions: x.wImpr,
+  });
+  return { branded: pack(b), nonbranded: pack(n), source: "top" };
+}
+
+// Sum many per-piece splits into one portfolio split (impression-weighted pos).
+function perfMergeBrandedSplits(splits) {
+  const mk = () => ({ impressions: 0, clicks: 0, wImpr: 0, wSum: 0, query_count: 0 });
+  const b = mk(), n = mk();
+  for (const sp of splits) {
+    for (const [side, acc] of [["branded", b], ["nonbranded", n]]) {
+      const x = sp[side] || {};
+      acc.impressions += x.impressions || 0;
+      acc.clicks += x.clicks || 0;
+      acc.query_count += x.query_count || 0;
+      const den = x.position_impressions || 0;
+      acc.wImpr += den; acc.wSum += (x.weighted_position || 0) * den;
+    }
+  }
+  const pack = x => ({
+    impressions: x.impressions, clicks: x.clicks, query_count: x.query_count,
+    weighted_position: x.wImpr > 0 ? x.wSum / x.wImpr : 0,
+    position_impressions: x.wImpr,
+  });
+  return { branded: pack(b), nonbranded: pack(n) };
+}
+
 // Clip a timeseries so charts open a couple of days BEFORE the piece went live,
 // instead of at whatever date GSC's history happens to start (often months of
 // dead-flat pre-launch zero rows).
@@ -391,6 +454,7 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
   const [busyKey, setBusyKey] = usePerfState(null);     // url_key currently uploading
   const [error, setError] = usePerfState(null);         // { key, message }
   const [showAdmin, setShowAdmin] = usePerfState(false); // admin audit panel
+  const [showMethod, setShowMethod] = usePerfState(false); // "how it's calculated" panel
 
   const perfData = project.performanceData || {};
 
@@ -447,6 +511,7 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
     if (!withData.length) return null;
     let clicks = 0, impressions = 0, avgMonthlySum = 0;
     let qwImpr = 0, qwWeighted = 0;   // query-impression-weighted position accumulators
+    const brandedSplits = [];         // per-piece branded/non-branded rollups
     let best = null, mostImpr = null;
     // Target-keyword rollup
     let tgtImpr = 0, tgtWeighted = 0, tgtMatched = 0, tgtRanked = 0;
@@ -465,6 +530,7 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
       // Weighted position from the query breakdown (not the diluted page-level number).
       const qwp = perfQueryWeightedPos(view);
       qwImpr += qwp.impr; qwWeighted += qwp.pos * qwp.impr;
+      brandedSplits.push(perfBrandedSplit(view));
       const s = view.summary;
       if (qwp.pos > 0 && (!best || qwp.pos < best.pos)) best = { pos: qwp.pos, title: p.piece.title };
       if (!mostImpr || totals.impressions > (mostImpr.impr || 0)) mostImpr = { impr: totals.impressions, title: p.piece.title };
@@ -495,6 +561,9 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
       }
     }
     breakout.sort((a, b) => b.impressions - a.impressions);
+
+    // Portfolio branded / non-branded rollup (impression-weighted position).
+    const brandedPortfolio = perfMergeBrandedSplits(brandedSplits);
 
     // Portfolio WoW — sum every piece's daily series, then compare weeks.
     const portfolioWoW = perfCalendarWoW(perfMergeDaily(withData.map(p => perfData[p.key]?.daily)));
@@ -532,7 +601,9 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
       impressions,
       avgMonthly: withData.length ? avgMonthlySum / withData.length : 0,
       ctr: impressions > 0 ? clicks / impressions : 0,
-      avgPosition: qwImpr > 0 ? qwWeighted / qwImpr : 0,
+      avgPosition: qwImpr > 0 ? qwWeighted / qwImpr : 0,   // all queries (branded + not)
+      branded: brandedPortfolio.branded,
+      nonbranded: brandedPortfolio.nonbranded,
       best,
       mostImpr,
       pieces: withData.length,
@@ -659,23 +730,45 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
 
       {/* ── KPI strip ────────────────────────────────────────────────────── */}
       {kpis && (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: "12px", marginBottom: "20px" }}>
-          <PerfKpi label="Impressions (trailing 3mo)" value={perfNum(kpis.impressions)} sub={kpis.mostImpr ? `top: ${kpis.mostImpr.title}` : `across ${kpis.pieces} ${kpis.pieces === 1 ? "piece" : "pieces"}`} />
-          <PerfKpi label="Clicks (trailing 3mo)" value={perfNum(kpis.clicks)} sub={`across ${kpis.pieces} ${kpis.pieces === 1 ? "piece" : "pieces"}`} />
-          <PerfKpi label="Avg position (weighted)" value={perfPos(kpis.avgPosition)} sub="impression-weighted across queries" />
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: "12px", marginBottom: "12px" }}>
+          <PerfKpi
+            label="Impressions (trailing 3mo)"
+            value={perfNum(kpis.impressions)}
+            sub={kpis.mostImpr ? `top: ${kpis.mostImpr.title}` : `across ${kpis.pieces} ${kpis.pieces === 1 ? "piece" : "pieces"}`}
+            formula="Sum of daily page impressions (Search Console 'Chart' sheet, i.e. every query) over the trailing-3-month window per piece, added across all pieces with data. Not limited to any top-N query list."
+          />
+          <PerfKpi
+            label="Clicks (trailing 3mo)"
+            value={perfNum(kpis.clicks)}
+            sub={`across ${kpis.pieces} ${kpis.pieces === 1 ? "piece" : "pieces"}`}
+            formula="Sum of daily page clicks over the trailing-3-month window, added across all pieces with data."
+          />
+          <PerfKpi
+            label="Avg position — non-branded"
+            value={kpis.nonbranded && kpis.nonbranded.position_impressions > 0 ? perfPos(kpis.nonbranded.weighted_position) : "—"}
+            sub={`organic only · all-query wtd ${perfPos(kpis.avgPosition)}`}
+            formula={"Impression-weighted average position across NON-branded queries only: Σ(impressions × position) ÷ Σ(impressions), excluding any query containing the brand name. Branded/navigational queries rank far better and are split out so this reflects true organic ranking. 'All-query' in the subline includes branded."}
+          />
           <PerfKpi
             label="Target-keyword impressions"
             value={perfNum(kpis.tgtImpr)}
             sub={kpis.tgtMatched ? `${kpis.tgtRanked} of ${kpis.tgtMatched} rank page-1 for target` : "no target keyword matched yet"}
             accent
+            formula="Impressions on the Search Console query fuzzy-matched to each piece's brief target keyword (≥2 shared meaningful tokens, ≥60% token overlap), summed across pieces. 'Page-1' means that matched query's average position ≤ 10."
           />
           <PerfKpi
             label="Avg position on target kw"
             value={kpis.tgtImpr > 0 ? perfPos(kpis.tgtAvgPos) : "—"}
             sub="impression-weighted"
             accent
+            formula="Impression-weighted average position of the matched target-keyword queries: Σ(impr × position) ÷ Σ(impr) across pieces."
           />
         </div>
+      )}
+
+      {/* ── Branded vs non-branded split ─────────────────────────────────── */}
+      {kpis && kpis.nonbranded && (kpis.nonbranded.impressions > 0 || kpis.branded.impressions > 0) && (
+        <PerfBrandedSplit branded={kpis.branded} nonbranded={kpis.nonbranded} allPos={kpis.avgPosition} />
       )}
 
       {/* ── Orphan records ───────────────────────────────────────────────── */}
@@ -693,21 +786,36 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
       {/* ── Sort toggle + admin toggle ───────────────────────────────────── */}
       {published.length > 0 && (
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px", marginBottom: "12px" }}>
-          {canUpload ? (
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            {canUpload && (
+              <button
+                onClick={() => setShowAdmin(v => !v)}
+                style={{
+                  ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.08em",
+                  textTransform: "uppercase", padding: "6px 10px",
+                  border: "1px solid #e8e3da", borderRadius: "3px", cursor: "pointer",
+                  background: showAdmin ? "#1a2f4e" : "#fff",
+                  color: showAdmin ? "#fff" : "#aaa",
+                  transition: "background 0.15s, color 0.15s",
+                }}
+              >
+                {showAdmin ? "▲ Admin" : "▼ Admin"}
+              </button>
+            )}
             <button
-              onClick={() => setShowAdmin(v => !v)}
+              onClick={() => setShowMethod(v => !v)}
               style={{
                 ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.08em",
                 textTransform: "uppercase", padding: "6px 10px",
                 border: "1px solid #e8e3da", borderRadius: "3px", cursor: "pointer",
-                background: showAdmin ? "#1a2f4e" : "#fff",
-                color: showAdmin ? "#fff" : "#aaa",
+                background: showMethod ? "#1a2f4e" : "#fff",
+                color: showMethod ? "#fff" : "#aaa",
                 transition: "background 0.15s, color 0.15s",
               }}
             >
-              {showAdmin ? "▲ Admin" : "▼ Admin"}
+              {showMethod ? "▲ How it's calculated" : "▼ How it's calculated"}
             </button>
-          ) : <span />}
+          </div>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <span style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#aaa" }}>
             Sort by
@@ -735,6 +843,9 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
           </div>
         </div>
       )}
+
+      {/* ── Methodology panel ─────────────────────────────────────────────── */}
+      {showMethod && <PerfMethodology />}
 
       {/* ── Admin panel ───────────────────────────────────────────────────── */}
       {canUpload && showAdmin && (
@@ -784,12 +895,15 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
 }
 
 // ─── KPI tile ───────────────────────────────────────────────────────────────
-function PerfKpi({ label, value, sub, accent }) {
+function PerfKpi({ label, value, sub, accent, formula }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   return (
-    <div style={{ background: "#fff", border: "1px solid #e8e3da", borderLeft: `3px solid ${accent ? "#c8401a" : "#1a2f4e"}`, padding: "14px 16px", borderRadius: "3px" }}>
-      <div style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888" }}>
-        {label}
+    <div title={formula || undefined} style={{ background: "#fff", border: "1px solid #e8e3da", borderLeft: `3px solid ${accent ? "#c8401a" : "#1a2f4e"}`, padding: "14px 16px", borderRadius: "3px" }}>
+      <div style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", display: "flex", alignItems: "center", gap: "5px" }}>
+        <span>{label}</span>
+        {formula && (
+          <span title={formula} style={{ cursor: "help", color: "#c3bdb2", fontWeight: 700, fontSize: "0.7rem", border: "1px solid #d7d1c8", borderRadius: "50%", width: "13px", height: "13px", lineHeight: "12px", textAlign: "center", flexShrink: 0 }}>i</span>
+        )}
       </div>
       <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 600, color: "#1a2535", marginTop: "4px", lineHeight: 1 }}>
         {value}
@@ -799,6 +913,55 @@ function PerfKpi({ label, value, sub, accent }) {
           {sub}
         </div>
       )}
+    </div>
+  );
+}
+
+// ─── Branded vs non-branded split ─────────────────────────────────────────
+// Two rows — non-branded (the terms we're competing for) and branded (queries
+// naming Jaggaer). Shows each group's impressions, share, and impression-weighted
+// average position. Non-branded position is the honest organic number.
+function PerfBrandedSplit({ branded, nonbranded }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const total = (branded.impressions || 0) + (nonbranded.impressions || 0);
+  const share = v => (total > 0 ? (v / total) * 100 : 0);
+  const GRID = "120px 1fr 90px 60px";
+  const rows = [
+    { key: "nonbranded", label: "Non-branded", tint: "#1a2f4e", data: nonbranded },
+    { key: "branded",    label: "Branded",     tint: "#c8401a", data: branded },
+  ];
+  const INFO = "A query is 'branded' when it contains the Jaggaer name (incl. common misspellings and site:jaggaer.com). Branded/navigational searches rank far better than the terms you're competing for, so they flatter the blended average position. Non-branded is the honest organic figure. Weighted position = Σ(impressions × position) ÷ Σ(impressions) within each group.";
+  return (
+    <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px", padding: "14px 18px", marginBottom: "20px" }}>
+      <div style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", display: "flex", alignItems: "center", gap: "6px", marginBottom: "10px" }}>
+        <span>Branded vs non-branded</span>
+        <span title={INFO} style={{ cursor: "help", color: "#c3bdb2", fontWeight: 700, fontSize: "0.7rem", border: "1px solid #d7d1c8", borderRadius: "50%", width: "13px", height: "13px", lineHeight: "12px", textAlign: "center" }}>i</span>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: GRID, gap: "12px", padding: "0 0 5px", borderBottom: "1px solid #f0ede6" }}>
+        {["", "Impressions", "Avg pos.", "Queries"].map((h, i) => (
+          <span key={i} style={{ ...FONT, fontSize: "0.56rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#bbb", textAlign: i >= 2 ? "right" : "left" }}>{h}</span>
+        ))}
+      </div>
+      {rows.map(r => (
+        <div key={r.key} style={{ display: "grid", gridTemplateColumns: GRID, gap: "12px", alignItems: "center", padding: "9px 0", borderBottom: "1px solid #f5f2ec" }}>
+          <span style={{ ...FONT, fontSize: "0.74rem", fontWeight: 700, color: r.tint, display: "flex", alignItems: "center", gap: "6px", minWidth: 0 }}>
+            <span style={{ width: "9px", height: "9px", borderRadius: "2px", background: r.tint, flexShrink: 0 }} />
+            <span style={{ overflow: "hidden", textOverflow: "ellipsis" }}>{r.label}</span>
+          </span>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", minWidth: 0 }}>
+            <div style={{ position: "relative", flex: 1, height: "16px", background: "#f5f2ec", borderRadius: "2px", overflow: "hidden", minWidth: "20px" }}>
+              <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${share(r.data.impressions)}%`, background: r.tint, opacity: 0.85 }} />
+            </div>
+            <span style={{ ...FONT, fontSize: "0.76rem", fontWeight: 700, color: "#1a2535", whiteSpace: "nowrap" }}>
+              {perfNum(r.data.impressions)}<span style={{ color: "#aaa", fontWeight: 600, fontSize: "0.64rem", marginLeft: "4px" }}>{share(r.data.impressions).toFixed(0)}%</span>
+            </span>
+          </div>
+          <span style={{ ...FONT, fontSize: "0.82rem", fontWeight: 700, color: "#1a2535", textAlign: "right" }}>
+            {r.data.position_impressions > 0 ? perfPos(r.data.weighted_position) : "—"}
+          </span>
+          <span style={{ ...FONT, fontSize: "0.74rem", color: "#888", textAlign: "right" }}>{r.data.query_count || 0}</span>
+        </div>
+      ))}
     </div>
   );
 }
@@ -1021,6 +1184,9 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
   const cardMatch = view ? perfMatchTarget(cardKw, view.top_queries) : null;
   const cardRanks = perfTargetRanks(cardMatch);
   const cardQwPos = view ? perfQueryWeightedPos(view).pos : 0;
+  const cardSplit = view ? perfBrandedSplit(view) : null;
+  const cardNonBrandedPos = cardSplit && cardSplit.nonbranded.position_impressions > 0
+    ? cardSplit.nonbranded.weighted_position : cardQwPos;
   const wow = view ? perfWoW(view) : null;
 
   return (
@@ -1058,7 +1224,7 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
               { label: "Impressions", value: perfNum(cardWt.impressions), sub: `${perfNum(cardWt.avgMonthly)} / mo`, delta: perfDeltaLabel(wow, "impressions"), color: "#1a2535" },
               { label: "Clicks",      value: perfNum(cardWt.clicks),      sub: `${perfPct(cardWt.clicks && cardWt.impressions ? cardWt.clicks / cardWt.impressions : 0)} CTR`, delta: perfDeltaLabel(wow, "clicks"), color: "#1a2f4e" },
               { label: "CTR",         value: perfPct(cardWt.clicks && cardWt.impressions ? cardWt.clicks / cardWt.impressions : 0), sub: null, delta: perfDeltaLabel(wow, "ctr"), color: "#333" },
-              { label: "Avg position",value: cardQwPos > 0 ? perfPos(cardQwPos) : "—", sub: null, delta: perfDeltaLabel(wow, "avg_position"), color: "#333" },
+              { label: "Avg position",value: cardNonBrandedPos > 0 ? perfPos(cardNonBrandedPos) : "—", sub: "non-branded", delta: perfDeltaLabel(wow, "avg_position"), color: "#333" },
             ].map(({ label, value, sub, delta, color }) => (
               <div key={label}>
                 <div style={{ ...FONT, fontSize: "0.56rem", fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: "#aaa", marginBottom: "2px" }}>
@@ -1227,6 +1393,57 @@ function PerfDimTable({ title, rows, field, limit }) {
   );
 }
 
+// ─── Query table — top 15 by default, expand to all, branded rows tagged ────
+function PerfQueryTable({ rows }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const [expanded, setExpanded] = usePerfState(false);
+  if (!rows || !rows.length) return null;
+  const DEFAULT = 15;
+  const shown = expanded ? rows : rows.slice(0, DEFAULT);
+  const max = Math.max(...rows.map(r => r.impressions), 1);
+  const GRID = "1fr 46px 62px 44px";
+  const brandedCount = rows.filter(r => (r.branded != null ? r.branded : perfIsBranded(r.query))).length;
+  return (
+    <div style={{ marginTop: "22px" }}>
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "10px", marginBottom: "8px" }}>
+        <div style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1a2f4e" }}>Top queries</div>
+        <div style={{ ...FONT, fontSize: "0.62rem", color: "#aaa" }}>
+          {rows.length} {rows.length === 1 ? "query" : "queries"}{brandedCount > 0 ? ` · ${brandedCount} branded` : ""}
+        </div>
+      </div>
+      <div style={{ borderTop: "1px solid #e8e3da" }}>
+        <div style={{ display: "grid", gridTemplateColumns: GRID, gap: "8px", padding: "6px 0", borderBottom: "1px solid #f0ede6" }}>
+          {["Query", "Clicks", "Impr.", "Pos."].map((h, i) => (
+            <span key={i} style={{ ...FONT, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#bbb", textAlign: i === 0 ? "left" : "right" }}>{h}</span>
+          ))}
+        </div>
+        {shown.map((r, i) => {
+          const branded = r.branded != null ? r.branded : perfIsBranded(r.query);
+          return (
+            <div key={i} style={{ position: "relative", borderBottom: "1px solid #f5f2ec" }}>
+              <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${(r.impressions / max) * 100}%`, background: branded ? "#c8401a" : "#1a2f4e", opacity: 0.05 }} />
+              <div style={{ position: "relative", display: "grid", gridTemplateColumns: GRID, gap: "8px", padding: "8px 0", alignItems: "baseline" }}>
+                <span style={{ ...FONT, fontSize: "0.74rem", color: "#333", lineHeight: 1.35, display: "flex", alignItems: "baseline", gap: "6px", minWidth: 0 }}>
+                  <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{String(r.query || "").replace(/\s+/g, " ")}</span>
+                  {branded && <span style={{ ...FONT, fontSize: "0.52rem", fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", color: "#c8401a", background: "#fbe8e2", border: "1px solid #f0d0c0", borderRadius: "2px", padding: "1px 4px", flexShrink: 0 }}>brand</span>}
+                </span>
+                <span style={{ ...FONT, fontSize: "0.74rem", color: r.clicks > 0 ? "#1a2535" : "#ccc", fontWeight: 600, textAlign: "right" }}>{r.clicks}</span>
+                <span style={{ ...FONT, fontSize: "0.74rem", color: "#666", textAlign: "right" }}>{perfNum(r.impressions)}</span>
+                <span style={{ ...FONT, fontSize: "0.74rem", color: "#888", textAlign: "right" }}>{perfPos(r.position)}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {rows.length > DEFAULT && (
+        <button onClick={() => setExpanded(v => !v)} style={{ ...FONT, marginTop: "8px", fontSize: "0.66rem", fontWeight: 600, letterSpacing: "0.04em", padding: "6px 10px", border: "1px solid #e8e3da", background: "#fff", color: "#1a2f4e", borderRadius: "3px", cursor: "pointer" }}>
+          {expanded ? "Show fewer" : `Show all ${rows.length} queries`}
+        </button>
+      )}
+    </div>
+  );
+}
+
 // ─── Piece modal ────────────────────────────────────────────────────────────
 // Centered dialog rather than a right-hand drawer (July 2026): the drawer was
 // too narrow for the query table, which is the thing people actually open this
@@ -1245,6 +1462,7 @@ function PerfPieceModal({ entry, record, breakout, canUpload, busy, error, onUpl
   const modalMatch = view ? perfMatchTarget(modalKw, view.top_queries) : null;
   const modalRanks = perfTargetRanks(modalMatch);
   const modalQwPos = view ? perfQueryWeightedPos(view).pos : 0;
+  const modalSplit = view ? perfBrandedSplit(view) : null;
   const modalChartSeries = view ? perfChartSeries(view.timeseries, modalRelTs) : [];
   const modalWow = view ? perfWoW(view) : null;
 
@@ -1296,7 +1514,7 @@ function PerfPieceModal({ entry, record, breakout, canUpload, busy, error, onUpl
             ["Clicks (3mo)", perfNum(modalWt.clicks)],
             ["Impressions (3mo)", perfNum(modalWt.impressions)],
             ["Avg monthly", perfNum(modalWt.avgMonthly)],
-            ["Avg position (wtd)", modalQwPos > 0 ? perfPos(modalQwPos) : "—"],
+            ["Avg pos · non-branded", modalSplit && modalSplit.nonbranded.position_impressions > 0 ? perfPos(modalSplit.nonbranded.weighted_position) : (modalQwPos > 0 ? perfPos(modalQwPos) : "—")],
           ].map(([k, v]) => (
             <div key={k} style={{ background: "#faf8f4", border: "1px solid #f0ede6", borderRadius: "3px", padding: "9px 10px" }}>
               <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>{k}</div>
@@ -1375,7 +1593,13 @@ function PerfPieceModal({ entry, record, breakout, canUpload, busy, error, onUpl
 
         <PerfWeeklyBars series={modalChartSeries} />
 
-        <PerfDimTable title="Top queries" rows={view.top_queries} field="query" limit={10} />
+        {modalSplit && (modalSplit.branded.impressions > 0 || modalSplit.nonbranded.impressions > 0) && (
+          <div style={{ marginTop: "22px" }}>
+            <PerfBrandedSplit branded={modalSplit.branded} nonbranded={modalSplit.nonbranded} />
+          </div>
+        )}
+
+        <PerfQueryTable rows={view.top_queries} />
         <PerfDimTable title="Countries" rows={view.countries} field="country" limit={8} />
         <PerfDimTable title="Devices" rows={view.devices} field="device" />
 
@@ -1557,6 +1781,54 @@ function PerfAdminPanel({ perfData, published }) {
           </div>
         );
       })}
+    </div>
+  );
+}
+
+// ─── Methodology panel — "How these numbers are calculated" ─────────────────
+// Read-only reference so anyone (NS or Jaggaer) can see exactly how each metric
+// is derived, plus the branded term list and the two big reading caveats.
+function PerfMethodology() {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const rows = [
+    { name: "Impressions", plain: "How many times the page showed in Search Console — across every query, not a top-N list.", formula: "Σ daily page impressions over the window (GSC ‘Chart’ sheet)." },
+    { name: "Clicks", plain: "Clicks the page earned from search.", formula: "Σ daily page clicks over the window." },
+    { name: "CTR", plain: "Share of impressions that became clicks.", formula: "clicks ÷ impressions." },
+    { name: "Avg position — non-branded", plain: "Where you rank for the terms you're competing for, ignoring searches that already name Jaggaer. This is the headline organic number.", formula: "Σ(impressions × position) ÷ Σ(impressions), over non-branded queries only." },
+    { name: "Avg position — all-query", plain: "Same calculation but including branded/navigational queries (shown in the subline and tooltip).", formula: "Σ(impressions × position) ÷ Σ(impressions), over every query." },
+    { name: "Page-level position (GSC)", plain: "Search Console's own page position. It differs from the weighted number because it isn't dominated by one high-impression term.", formula: "Read directly from the GSC ‘Pages’ row." },
+    { name: "Target-keyword rank", plain: "Whether the piece ranks for its brief's target keyword — we fuzzy-match the target to the actual queries GSC reports.", formula: "≥2 shared meaningful tokens AND ≥60% token overlap; ‘page 1’ = matched query position ≤ 10." },
+    { name: "Week over week", plain: "This complete calendar week (Mon–Sun) vs last, each piece anchored from its publish date.", formula: "Σ impressions in each week → delta and %." },
+    { name: "Trailing 3 months", plain: "The window every headline number uses.", formula: "From max(publish date, 90 days ago) to today." },
+  ];
+  return (
+    <div style={{ marginBottom: "24px", border: "1px solid #d7d1c8", borderRadius: "4px", background: "#faf8f4", overflow: "hidden" }}>
+      <div style={{ padding: "12px 18px", borderBottom: "1px solid #e8e3da" }}>
+        <span style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1a2f4e" }}>How these numbers are calculated</span>
+        <p style={{ ...FONT, fontSize: "0.72rem", color: "#888", margin: "6px 0 0", lineHeight: 1.5 }}>
+          Every figure comes from the Search Console exports you upload — nothing is estimated. Hover the “i” on any tile to see its formula inline.
+        </p>
+      </div>
+      <div>
+        {rows.map((r, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "210px 1fr", gap: "14px", padding: "11px 18px", borderBottom: i < rows.length - 1 ? "1px solid #edeae4" : "none", background: i % 2 ? "#faf8f4" : "#fff" }}>
+            <div style={{ ...FONT, fontSize: "0.74rem", fontWeight: 700, color: "#1a2535" }}>{r.name}</div>
+            <div>
+              <div style={{ ...FONT, fontSize: "0.74rem", color: "#444", lineHeight: 1.5 }}>{r.plain}</div>
+              <div style={{ ...FONT, fontSize: "0.68rem", color: "#8a7f6f", marginTop: "3px", fontFamily: "monospace" }}>{r.formula}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style={{ padding: "12px 18px", borderTop: "1px solid #e8e3da", background: "#fff" }}>
+        <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#999", marginBottom: "5px" }}>Branded terms & caveats</div>
+        <p style={{ ...FONT, fontSize: "0.72rem", color: "#666", margin: "0 0 6px", lineHeight: 1.55 }}>
+          A query is tagged <b>branded</b> if it contains: {PERF_BRAND_TERMS.map(t => <code key={t} style={{ background: "#f5f2ec", padding: "1px 5px", borderRadius: "2px", marginRight: "4px" }}>{t}</code>)} (this also catches <code style={{ background: "#f5f2ec", padding: "1px 5px", borderRadius: "2px" }}>site:jaggaer.com</code>).
+        </p>
+        <p style={{ ...FONT, fontSize: "0.72rem", color: "#666", margin: 0, lineHeight: 1.55 }}>
+          Two things to know when reading week-over-week: Search Console finalises the most recent ~3 days late, so the current week can read low until the next upload; and the portfolio bar only reflects articles whose latest export covers that week — an article with no fresh export shows zero, not a real drop. Weighted position is sensitive to a single high-impression, low-rank query, which is why page-level position is shown alongside it.
+        </p>
+      </div>
     </div>
   );
 }
