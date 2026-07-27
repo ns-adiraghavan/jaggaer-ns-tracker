@@ -1043,14 +1043,11 @@ function PerfDonut({ segments, size = 132, thickness = 22, centerTop, centerMain
 function PerfSummaryCharts({ kpis }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const [open, setOpen] = usePerfState(true);
-  const [wowWeek, setWowWeek] = usePerfState("this");
 
   const wow = kpis.portfolioWoW;
   const haveWow = wow && wow.lastWeek;
-  const articles = kpis.wowByArticle || [];
-  const weekField = wowWeek === "this" ? "thisImpr" : "lastImpr";
-  const wowSegments = articles.map(a => ({ label: a.title, value: a[weekField] || 0, color: a.color })).filter(s => s.value > 0);
-  const wowTotal = wowSegments.reduce((a, s) => a + s.value, 0);
+  const articles = (kpis.wowByArticle || []).filter(a => a.thisImpr > 0 || a.lastImpr > 0);
+  const scaleMax = haveWow ? Math.max(wow.thisWeek.impressions, wow.lastWeek.impressions, 1) : 1;
 
   const nb = kpis.nonbranded || { impressions: 0 };
   const br = kpis.branded || { impressions: 0 };
@@ -1065,9 +1062,24 @@ function PerfSummaryCharts({ kpis }) {
   const pillarSegs = (kpis.imprByPillar || []).map((p, i) => ({ label: p.label, value: p.impressions, color: PILLAR_PALETTE[i % PILLAR_PALETTE.length] }));
   const pillarTotal = pillarSegs.reduce((a, s) => a + s.value, 0);
 
-  const CARD = { background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px", padding: "14px 16px", display: "flex", flexDirection: "column" };
-  const TITLE = { ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: "#888", display: "flex", alignItems: "center", gap: "5px", marginBottom: "10px" };
-  const donutRow = { display: "flex", alignItems: "center", gap: "14px" };
+  const CARD = { background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px", padding: "16px 18px", display: "flex", flexDirection: "column", minHeight: "214px" };
+  const TITLE = { ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: "#888", display: "flex", alignItems: "center", gap: "5px", marginBottom: "14px" };
+  const donutRow = { display: "flex", alignItems: "center", gap: "16px", margin: "auto 0" };
+
+  // Compact segmented bar for the WoW this-vs-last comparison (shared scale).
+  const StackBar = ({ total, weekField }) => (
+    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <span style={{ ...FONT, fontSize: "0.56rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#999", width: "46px", flexShrink: 0 }}>
+        {weekField === "thisImpr" ? "This wk" : "Last wk"}
+      </span>
+      <div style={{ position: "relative", flex: 1, height: "20px", background: "#f5f2ec", borderRadius: "2px", display: "flex", gap: "2px", overflow: "hidden" }}>
+        {articles.map(a => a[weekField] > 0 && (
+          <div key={a.key} title={`${a.title} · ${perfNum(a[weekField])} impr`} style={{ width: `${(a[weekField] / scaleMax) * 100}%`, background: a.color, minWidth: "2px" }} />
+        ))}
+      </div>
+      <span style={{ ...FONT, fontSize: "0.72rem", fontWeight: 700, color: "#1a2535", width: "44px", textAlign: "right", flexShrink: 0 }}>{perfNum(total)}</span>
+    </div>
+  );
 
   const Legend = ({ items, showDelta }) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: 0, flex: 1 }}>
@@ -1090,9 +1102,15 @@ function PerfSummaryCharts({ kpis }) {
           {open ? "▼ Summary charts" : "► Summary charts"}
         </button>
         {(kpis.dataThrough || kpis.lastUpload) && (
-          <span style={{ ...FONT, fontSize: "0.66rem", color: "#999" }}>
-            {kpis.dataThrough ? <>Data through <b style={{ color: "#666" }}>{perfDate(kpis.dataThrough)}</b></> : null}
-            {kpis.lastUpload ? ` · last upload ${perfUploadedAt(kpis.lastUpload)}` : ""}
+          <span style={{ ...FONT, fontSize: "0.66rem", color: "#999", display: "inline-flex", alignItems: "center", gap: "5px" }}>
+            <span>
+              {kpis.dataThrough ? <>Data through <b style={{ color: "#666" }}>{perfDate(kpis.dataThrough)}</b></> : null}
+              {kpis.lastUpload ? ` · uploaded ${perfUploadedAt(kpis.lastUpload)}` : ""}
+            </span>
+            <PerfInfo
+              text="Search Console finalises data ~2–3 days late, so an export pulled on the upload date only contains complete days up to a few days earlier. The gap between ‘data through’ and ‘uploaded’ is expected — not missing days. Those days appear (and recent ones may tick up) in the next export."
+              align="right"
+            />
           </span>
         )}
       </div>
@@ -1100,26 +1118,22 @@ function PerfSummaryCharts({ kpis }) {
       {open && (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "14px" }}>
 
-          {/* 1 · WoW impressions by article */}
+          {/* 1 · WoW impressions by article — this vs last, shared scale */}
           <div style={CARD}>
             <div style={TITLE}>
               <span style={{ flex: 1 }}>Impressions by article · WoW</span>
-              <PerfInfo text="Each article's share of impressions in the selected calendar week (Mon–Sun). Toggle this week vs last. Legend shows each article's week-over-week change." align="right" />
+              <PerfInfo text="This complete calendar week (Mon–Sun) vs last, segmented by article on one shared scale — the length gap between the two bars is the change. Legend shows each article's week-over-week delta." align="right" />
             </div>
             {haveWow ? (
               <>
-                <div style={{ display: "flex", border: "1px solid #e8e3da", borderRadius: "3px", overflow: "hidden", width: "fit-content", marginBottom: "12px" }}>
-                  {[["this", `This wk`], ["last", `Last wk`]].map(([id, lbl]) => (
-                    <button key={id} onClick={() => setWowWeek(id)} style={{ ...FONT, fontSize: "0.64rem", fontWeight: 600, padding: "4px 10px", border: "none", cursor: "pointer", background: wowWeek === id ? "#1a2f4e" : "#fff", color: wowWeek === id ? "#fff" : "#888" }}>{lbl}</button>
-                  ))}
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <StackBar total={wow.thisWeek.impressions} weekField="thisImpr" />
+                  <StackBar total={wow.lastWeek.impressions} weekField="lastImpr" />
                 </div>
-                <div style={donutRow}>
-                  <PerfDonut segments={wowSegments} centerTop={wowWeek === "this" ? "This week" : "Last week"} centerMain={perfNum(wowTotal)} centerSub="impressions" />
-                  <Legend items={articles.filter(a => (a.thisImpr > 0 || a.lastImpr > 0)).map(a => ({ label: a.title, color: a.color, value: a[weekField], delta: a.delta }))} showDelta />
-                </div>
-                <div style={{ ...FONT, fontSize: "0.66rem", color: wow.impressionsDelta >= 0 ? "#1e7a45" : "#c8401a", fontWeight: 700, marginTop: "10px" }}>
+                <div style={{ ...FONT, fontSize: "0.72rem", fontWeight: 700, color: wow.impressionsDelta >= 0 ? "#1e7a45" : "#c8401a", margin: "12px 0 12px" }}>
                   {wow.impressionsDelta > 0 ? "+" : wow.impressionsDelta < 0 ? "−" : ""}{perfNum(Math.abs(wow.impressionsDelta))} ({perfSignedPct(wow.impressionsPct)}) vs last week
                 </div>
+                <Legend items={articles.map(a => ({ label: a.title, color: a.color, delta: a.delta }))} showDelta />
               </>
             ) : (
               <div style={{ ...FONT, fontSize: "0.72rem", color: "#bbb", padding: "20px 0" }}>Not enough complete weeks yet.</div>
@@ -1134,7 +1148,7 @@ function PerfSummaryCharts({ kpis }) {
             </div>
             {brTotal > 0 ? (
               <div style={donutRow}>
-                <PerfDonut segments={brandedSegments} centerTop="Non-branded" centerMain={`${nbPct.toFixed(0)}%`} centerSub="of impressions" />
+                <PerfDonut segments={brandedSegments} size={118} thickness={20} centerTop="Non-branded" centerMain={`${nbPct.toFixed(0)}%`} centerSub="of impressions" />
                 <div style={{ display: "flex", flexDirection: "column", gap: "8px", minWidth: 0, flex: 1 }}>
                   {[["Non-branded", nb, "#1a2f4e"], ["Branded", br, "#c8401a"]].map(([lbl, d, col]) => (
                     <div key={lbl} style={{ minWidth: 0 }}>
@@ -1163,7 +1177,7 @@ function PerfSummaryCharts({ kpis }) {
             </div>
             {pillarTotal > 0 ? (
               <div style={donutRow}>
-                <PerfDonut segments={pillarSegs} centerTop="Total" centerMain={perfNum(pillarTotal)} centerSub="trailing 3mo" />
+                <PerfDonut segments={pillarSegs} size={118} thickness={20} centerTop="Total" centerMain={perfNum(pillarTotal)} centerSub="trailing 3mo" />
                 <Legend items={pillarSegs} />
               </div>
             ) : (
