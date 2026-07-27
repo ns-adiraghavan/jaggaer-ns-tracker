@@ -512,6 +512,8 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
     let clicks = 0, impressions = 0, avgMonthlySum = 0;
     let qwImpr = 0, qwWeighted = 0;   // query-impression-weighted position accumulators
     const brandedSplits = [];         // per-piece branded/non-branded rollups
+    const pillarMap = {};             // pillar label -> trailing-3mo impressions
+    let dataThrough = null, lastUpload = null; // freshness signals
     let best = null, mostImpr = null;
     // Target-keyword rollup
     let tgtImpr = 0, tgtWeighted = 0, tgtMatched = 0, tgtRanked = 0;
@@ -531,6 +533,10 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
       const qwp = perfQueryWeightedPos(view);
       qwImpr += qwp.impr; qwWeighted += qwp.pos * qwp.impr;
       brandedSplits.push(perfBrandedSplit(view));
+      pillarMap[p.pillar.label] = (pillarMap[p.pillar.label] || 0) + totals.impressions;
+      const lastDate = view.timeseries.length ? view.timeseries[view.timeseries.length - 1].date : null;
+      if (lastDate && (!dataThrough || lastDate > dataThrough)) dataThrough = lastDate;
+      if (view.uploaded_at && (!lastUpload || view.uploaded_at > lastUpload)) lastUpload = view.uploaded_at;
       const s = view.summary;
       if (qwp.pos > 0 && (!best || qwp.pos < best.pos)) best = { pos: qwp.pos, title: p.piece.title };
       if (!mostImpr || totals.impressions > (mostImpr.impr || 0)) mostImpr = { impr: totals.impressions, title: p.piece.title };
@@ -604,6 +610,11 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
       avgPosition: qwImpr > 0 ? qwWeighted / qwImpr : 0,   // all queries (branded + not)
       branded: brandedPortfolio.branded,
       nonbranded: brandedPortfolio.nonbranded,
+      imprByPillar: Object.entries(pillarMap)
+        .map(([label, impressions]) => ({ label, impressions }))
+        .sort((a, b) => b.impressions - a.impressions),
+      dataThrough,
+      lastUpload,
       best,
       mostImpr,
       pieces: withData.length,
@@ -723,11 +734,6 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
         </p>
       </header>
 
-      {/* ── WoW impressions — headline + stacked bar by article ──────────── */}
-      {kpis && kpis.portfolioWoW && kpis.portfolioWoW.lastWeek && (
-        <PerfWowStacked wow={kpis.portfolioWoW} articles={kpis.wowByArticle} />
-      )}
-
       {/* ── KPI strip ────────────────────────────────────────────────────── */}
       {kpis && (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: "12px", marginBottom: "12px" }}>
@@ -754,6 +760,7 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
             value={perfNum(kpis.tgtImpr)}
             sub={kpis.tgtMatched ? `${kpis.tgtRanked} of ${kpis.tgtMatched} rank page-1 for target` : "no target keyword matched yet"}
             accent
+            infoAlign="right"
             formula="Impressions on the Search Console query fuzzy-matched to each piece's brief target keyword (≥2 shared meaningful tokens, ≥60% token overlap), summed across pieces. 'Page-1' means that matched query's average position ≤ 10."
           />
           <PerfKpi
@@ -761,15 +768,14 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
             value={kpis.tgtImpr > 0 ? perfPos(kpis.tgtAvgPos) : "—"}
             sub="impression-weighted"
             accent
+            infoAlign="right"
             formula="Impression-weighted average position of the matched target-keyword queries: Σ(impr × position) ÷ Σ(impr) across pieces."
           />
         </div>
       )}
 
-      {/* ── Branded vs non-branded split ─────────────────────────────────── */}
-      {kpis && kpis.nonbranded && (kpis.nonbranded.impressions > 0 || kpis.branded.impressions > 0) && (
-        <PerfBrandedSplit branded={kpis.branded} nonbranded={kpis.nonbranded} allPos={kpis.avgPosition} />
-      )}
+      {/* ── Summary charts — collapsible 3-up donuts ─────────────────────── */}
+      {kpis && <PerfSummaryCharts kpis={kpis} />}
 
       {/* ── Orphan records ───────────────────────────────────────────────── */}
       {orphans.length > 0 && (
@@ -895,15 +901,44 @@ function PerformancePanel({ project, setProject, currentUser, adminMode }) {
 }
 
 // ─── KPI tile ───────────────────────────────────────────────────────────────
-function PerfKpi({ label, value, sub, accent, formula }) {
+// Custom hover tooltip — native title was unreliable and gave no styling control.
+// Shows a positioned bubble on hover/focus; align "right" near the row's edge so
+// it doesn't clip off-screen.
+function PerfInfo({ text, align }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const [show, setShow] = usePerfState(false);
+  if (!text) return null;
+  const pos = align === "right"
+    ? { right: 0 }
+    : { left: "50%", transform: "translateX(-50%)" };
+  return (
+    <span
+      style={{ position: "relative", display: "inline-flex", alignItems: "center" }}
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+    >
+      <span style={{ cursor: "help", color: "#b8b1a4", fontWeight: 700, fontSize: "0.7rem", border: "1px solid #d7d1c8", borderRadius: "50%", width: "14px", height: "14px", lineHeight: "12px", textAlign: "center", display: "inline-block", flexShrink: 0 }}>i</span>
+      {show && (
+        <span style={{
+          position: "absolute", top: "20px", ...pos, zIndex: 500, width: "240px",
+          background: "#1a2535", color: "#fff", ...FONT, fontSize: "0.68rem", fontWeight: 400,
+          lineHeight: 1.45, letterSpacing: "normal", textTransform: "none", textAlign: "left",
+          padding: "8px 11px", borderRadius: "4px", boxShadow: "0 6px 20px rgba(0,0,0,0.28)", pointerEvents: "none",
+        }}>
+          {text}
+        </span>
+      )}
+    </span>
+  );
+}
+
+function PerfKpi({ label, value, sub, accent, formula, infoAlign }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   return (
-    <div title={formula || undefined} style={{ background: "#fff", border: "1px solid #e8e3da", borderLeft: `3px solid ${accent ? "#c8401a" : "#1a2f4e"}`, padding: "14px 16px", borderRadius: "3px" }}>
+    <div style={{ position: "relative", background: "#fff", border: "1px solid #e8e3da", borderLeft: `3px solid ${accent ? "#c8401a" : "#1a2f4e"}`, padding: "14px 16px", borderRadius: "3px" }}>
       <div style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", display: "flex", alignItems: "center", gap: "5px" }}>
         <span>{label}</span>
-        {formula && (
-          <span title={formula} style={{ cursor: "help", color: "#c3bdb2", fontWeight: 700, fontSize: "0.7rem", border: "1px solid #d7d1c8", borderRadius: "50%", width: "13px", height: "13px", lineHeight: "12px", textAlign: "center", flexShrink: 0 }}>i</span>
-        )}
+        <PerfInfo text={formula} align={infoAlign} />
       </div>
       <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 600, color: "#1a2535", marginTop: "4px", lineHeight: 1 }}>
         {value}
@@ -935,7 +970,7 @@ function PerfBrandedSplit({ branded, nonbranded }) {
     <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px", padding: "14px 18px", marginBottom: "20px" }}>
       <div style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#888", display: "flex", alignItems: "center", gap: "6px", marginBottom: "10px" }}>
         <span>Branded vs non-branded</span>
-        <span title={INFO} style={{ cursor: "help", color: "#c3bdb2", fontWeight: 700, fontSize: "0.7rem", border: "1px solid #d7d1c8", borderRadius: "50%", width: "13px", height: "13px", lineHeight: "12px", textAlign: "center" }}>i</span>
+        <PerfInfo text={INFO} />
       </div>
       <div style={{ display: "grid", gridTemplateColumns: GRID, gap: "12px", padding: "0 0 5px", borderBottom: "1px solid #f0ede6" }}>
         {["", "Impressions", "Avg pos.", "Queries"].map((h, i) => (
@@ -962,6 +997,182 @@ function PerfBrandedSplit({ branded, nonbranded }) {
           <span style={{ ...FONT, fontSize: "0.74rem", color: "#888", textAlign: "right" }}>{r.data.query_count || 0}</span>
         </div>
       ))}
+    </div>
+  );
+}
+
+// ─── Donut chart ────────────────────────────────────────────────────────────
+// Composition donut: segments = [{ label, value, color }]. Optional centre text.
+function PerfDonut({ segments, size = 132, thickness = 22, centerTop, centerMain, centerSub }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const total = segments.reduce((a, s) => a + (s.value || 0), 0);
+  const r = (size - thickness) / 2;
+  const cx = size / 2, cy = size / 2;
+  const C = 2 * Math.PI * r;
+  let acc = 0;
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ display: "block" }}>
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#f0ede6" strokeWidth={thickness} />
+      {total > 0 && segments.map((s, i) => {
+        const frac = (s.value || 0) / total;
+        const len = frac * C;
+        const node = (
+          <circle key={i} cx={cx} cy={cy} r={r} fill="none" stroke={s.color} strokeWidth={thickness}
+            strokeDasharray={`${len} ${C - len}`} strokeDashoffset={-acc}
+            transform={`rotate(-90 ${cx} ${cy})`}>
+            <title>{`${s.label}: ${perfNum(s.value)} (${(frac * 100).toFixed(0)}%)`}</title>
+          </circle>
+        );
+        acc += len;
+        return node;
+      })}
+      {centerMain != null && (
+        <>
+          {centerTop && <text x={cx} y={cy - 12} textAnchor="middle" style={{ ...FONT, fontSize: "8px", fontWeight: 700, letterSpacing: "0.5px", fill: "#aaa" }}>{String(centerTop).toUpperCase()}</text>}
+          <text x={cx} y={cy + (centerSub ? 3 : 6)} textAnchor="middle" style={{ fontFamily: "'Playfair Display', serif", fontSize: "21px", fontWeight: 600, fill: "#1a2535" }}>{centerMain}</text>
+          {centerSub && <text x={cx} y={cy + 18} textAnchor="middle" style={{ ...FONT, fontSize: "8.5px", fill: "#999" }}>{centerSub}</text>}
+        </>
+      )}
+    </svg>
+  );
+}
+
+// ─── Summary charts — collapsible 3-up donuts below the KPI numbers ─────────
+// (1) WoW impressions by article with a this/last week toggle, (2) branded vs
+// non-branded, (3) impressions by pillar. Replaces the old stacked bar.
+function PerfSummaryCharts({ kpis }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const [open, setOpen] = usePerfState(true);
+  const [wowWeek, setWowWeek] = usePerfState("this");
+
+  const wow = kpis.portfolioWoW;
+  const haveWow = wow && wow.lastWeek;
+  const articles = kpis.wowByArticle || [];
+  const weekField = wowWeek === "this" ? "thisImpr" : "lastImpr";
+  const wowSegments = articles.map(a => ({ label: a.title, value: a[weekField] || 0, color: a.color })).filter(s => s.value > 0);
+  const wowTotal = wowSegments.reduce((a, s) => a + s.value, 0);
+
+  const nb = kpis.nonbranded || { impressions: 0 };
+  const br = kpis.branded || { impressions: 0 };
+  const brandedSegments = [
+    { label: "Non-branded", value: nb.impressions || 0, color: "#1a2f4e" },
+    { label: "Branded", value: br.impressions || 0, color: "#c8401a" },
+  ].filter(s => s.value > 0);
+  const brTotal = (nb.impressions || 0) + (br.impressions || 0);
+  const nbPct = brTotal > 0 ? (nb.impressions / brTotal) * 100 : 0;
+
+  const PILLAR_PALETTE = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#4a3aa7", "#008300", "#e34948"];
+  const pillarSegs = (kpis.imprByPillar || []).map((p, i) => ({ label: p.label, value: p.impressions, color: PILLAR_PALETTE[i % PILLAR_PALETTE.length] }));
+  const pillarTotal = pillarSegs.reduce((a, s) => a + s.value, 0);
+
+  const CARD = { background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px", padding: "14px 16px", display: "flex", flexDirection: "column" };
+  const TITLE = { ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: "#888", display: "flex", alignItems: "center", gap: "5px", marginBottom: "10px" };
+  const donutRow = { display: "flex", alignItems: "center", gap: "14px" };
+
+  const Legend = ({ items, showDelta }) => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "4px", minWidth: 0, flex: 1 }}>
+      {items.map((it, i) => (
+        <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px", minWidth: 0 }}>
+          <span style={{ width: "9px", height: "9px", borderRadius: "2px", background: it.color, flexShrink: 0 }} />
+          <span style={{ ...FONT, fontSize: "0.66rem", color: "#555", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", flex: 1 }}>{it.label}</span>
+          {showDelta && it.delta != null
+            ? <span style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, color: it.delta >= 0 ? "#1e7a45" : "#c8401a", flexShrink: 0 }}>{it.delta > 0 ? "+" : it.delta < 0 ? "−" : ""}{perfNum(Math.abs(it.delta))}</span>
+            : <span style={{ ...FONT, fontSize: "0.64rem", fontWeight: 600, color: "#999", flexShrink: 0 }}>{perfNum(it.value)}</span>}
+        </div>
+      ))}
+    </div>
+  );
+
+  return (
+    <div style={{ marginBottom: "22px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px", marginBottom: open ? "12px" : "4px" }}>
+        <button onClick={() => setOpen(v => !v)} style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", padding: "6px 10px", border: "1px solid #e8e3da", borderRadius: "3px", cursor: "pointer", background: open ? "#1a2f4e" : "#fff", color: open ? "#fff" : "#888" }}>
+          {open ? "▼ Summary charts" : "► Summary charts"}
+        </button>
+        {(kpis.dataThrough || kpis.lastUpload) && (
+          <span style={{ ...FONT, fontSize: "0.66rem", color: "#999" }}>
+            {kpis.dataThrough ? <>Data through <b style={{ color: "#666" }}>{perfDate(kpis.dataThrough)}</b></> : null}
+            {kpis.lastUpload ? ` · last upload ${perfUploadedAt(kpis.lastUpload)}` : ""}
+          </span>
+        )}
+      </div>
+
+      {open && (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "14px" }}>
+
+          {/* 1 · WoW impressions by article */}
+          <div style={CARD}>
+            <div style={TITLE}>
+              <span style={{ flex: 1 }}>Impressions by article · WoW</span>
+              <PerfInfo text="Each article's share of impressions in the selected calendar week (Mon–Sun). Toggle this week vs last. Legend shows each article's week-over-week change." align="right" />
+            </div>
+            {haveWow ? (
+              <>
+                <div style={{ display: "flex", border: "1px solid #e8e3da", borderRadius: "3px", overflow: "hidden", width: "fit-content", marginBottom: "12px" }}>
+                  {[["this", `This wk`], ["last", `Last wk`]].map(([id, lbl]) => (
+                    <button key={id} onClick={() => setWowWeek(id)} style={{ ...FONT, fontSize: "0.64rem", fontWeight: 600, padding: "4px 10px", border: "none", cursor: "pointer", background: wowWeek === id ? "#1a2f4e" : "#fff", color: wowWeek === id ? "#fff" : "#888" }}>{lbl}</button>
+                  ))}
+                </div>
+                <div style={donutRow}>
+                  <PerfDonut segments={wowSegments} centerTop={wowWeek === "this" ? "This week" : "Last week"} centerMain={perfNum(wowTotal)} centerSub="impressions" />
+                  <Legend items={articles.filter(a => (a.thisImpr > 0 || a.lastImpr > 0)).map(a => ({ label: a.title, color: a.color, value: a[weekField], delta: a.delta }))} showDelta />
+                </div>
+                <div style={{ ...FONT, fontSize: "0.66rem", color: wow.impressionsDelta >= 0 ? "#1e7a45" : "#c8401a", fontWeight: 700, marginTop: "10px" }}>
+                  {wow.impressionsDelta > 0 ? "+" : wow.impressionsDelta < 0 ? "−" : ""}{perfNum(Math.abs(wow.impressionsDelta))} ({perfSignedPct(wow.impressionsPct)}) vs last week
+                </div>
+              </>
+            ) : (
+              <div style={{ ...FONT, fontSize: "0.72rem", color: "#bbb", padding: "20px 0" }}>Not enough complete weeks yet.</div>
+            )}
+          </div>
+
+          {/* 2 · Branded vs non-branded */}
+          <div style={CARD}>
+            <div style={TITLE}>
+              <span style={{ flex: 1 }}>Branded vs non-branded</span>
+              <PerfInfo text="Share of impressions from queries that name Jaggaer (branded/navigational) vs everything else. Non-branded is the organic demand you're earning. Avg position for each group is impression-weighted." align="right" />
+            </div>
+            {brTotal > 0 ? (
+              <div style={donutRow}>
+                <PerfDonut segments={brandedSegments} centerTop="Non-branded" centerMain={`${nbPct.toFixed(0)}%`} centerSub="of impressions" />
+                <div style={{ display: "flex", flexDirection: "column", gap: "8px", minWidth: 0, flex: 1 }}>
+                  {[["Non-branded", nb, "#1a2f4e"], ["Branded", br, "#c8401a"]].map(([lbl, d, col]) => (
+                    <div key={lbl} style={{ minWidth: 0 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                        <span style={{ width: "9px", height: "9px", borderRadius: "2px", background: col, flexShrink: 0 }} />
+                        <span style={{ ...FONT, fontSize: "0.66rem", color: "#555", flex: 1 }}>{lbl}</span>
+                        <span style={{ ...FONT, fontSize: "0.64rem", fontWeight: 700, color: "#1a2535" }}>{perfNum(d.impressions || 0)}</span>
+                      </div>
+                      <div style={{ ...FONT, fontSize: "0.6rem", color: "#999", marginLeft: "15px" }}>
+                        avg pos {d.position_impressions > 0 ? perfPos(d.weighted_position) : "—"} · {d.query_count || 0} queries
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div style={{ ...FONT, fontSize: "0.72rem", color: "#bbb", padding: "20px 0" }}>No query data yet.</div>
+            )}
+          </div>
+
+          {/* 3 · Impressions by pillar */}
+          <div style={CARD}>
+            <div style={TITLE}>
+              <span style={{ flex: 1 }}>Impressions by pillar</span>
+              <PerfInfo text="Trailing-3-month impressions grouped by content pillar — which themes are pulling the most search demand across all live pieces." align="right" />
+            </div>
+            {pillarTotal > 0 ? (
+              <div style={donutRow}>
+                <PerfDonut segments={pillarSegs} centerTop="Total" centerMain={perfNum(pillarTotal)} centerSub="trailing 3mo" />
+                <Legend items={pillarSegs} />
+              </div>
+            ) : (
+              <div style={{ ...FONT, fontSize: "0.72rem", color: "#bbb", padding: "20px 0" }}>No pillar data yet.</div>
+            )}
+          </div>
+
+        </div>
+      )}
     </div>
   );
 }
@@ -1052,7 +1263,7 @@ function PerfWowStacked({ wow, articles }) {
 // ─── Weekly impressions bars (article subview) ────────────────────────────
 // One bar per calendar week from ~launch onward; the two most recent complete
 // weeks are highlighted so the WoW move reads at a glance.
-function PerfWeeklyBars({ series }) {
+function PerfWeeklyBars({ series, uploads }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   if (!series || series.length < 2) return null;
   // Bucket the (already launch-clipped) daily series into Mon–Sun weeks.
@@ -1066,10 +1277,20 @@ function PerfWeeklyBars({ series }) {
   if (rows.length < 2) return null;
   const max = Math.max(...rows.map(r => r.impressions), 1);
   const H = 88;
+  // Which weeks contain an upload? Marker sits under that week's bar.
+  const uploadWeeks = new Set((uploads || []).filter(Boolean).map(d => perfMondayOf(String(d).slice(0, 10))));
+  const anyUpload = rows.some(r => uploadWeeks.has(r.week));
   return (
     <div style={{ marginTop: "22px" }}>
-      <div style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1a2f4e", marginBottom: "8px" }}>
-        Impressions by week
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: "8px" }}>
+        <div style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1a2f4e" }}>
+          Impressions by week
+        </div>
+        {anyUpload && (
+          <div style={{ ...FONT, fontSize: "0.6rem", color: "#8a7f6f", display: "flex", alignItems: "center", gap: "4px" }}>
+            <span style={{ color: "#1a2f4e" }}>▲</span> export uploaded
+          </div>
+        )}
       </div>
       <div style={{ display: "flex", alignItems: "flex-end", gap: "3px", height: `${H}px`, borderBottom: "1px solid #e8e3da" }}>
         {rows.map((r, i) => {
@@ -1082,6 +1303,17 @@ function PerfWeeklyBars({ series }) {
           );
         })}
       </div>
+      {/* Upload markers — carets aligned under the week each export landed in */}
+      {anyUpload && (
+        <div style={{ display: "flex", gap: "3px", marginTop: "2px" }}>
+          {rows.map(r => (
+            <div key={r.week} title={uploadWeeks.has(r.week) ? `Export uploaded — week of ${perfDate(r.week)}` : undefined}
+                 style={{ flex: 1, minWidth: "6px", textAlign: "center", ...FONT, fontSize: "0.62rem", lineHeight: 1, color: "#1a2f4e" }}>
+              {uploadWeeks.has(r.week) ? "▲" : ""}
+            </div>
+          ))}
+        </div>
+      )}
       <div style={{ display: "flex", justifyContent: "space-between", marginTop: "6px" }}>
         <span style={{ ...FONT, fontSize: "0.62rem", color: "#aaa" }}>Week of {perfDate(rows[0].week)}</span>
         <span style={{ ...FONT, fontSize: "0.62rem", color: "#c8401a", fontWeight: 600 }}>Week of {perfDate(rows[rows.length - 1].week)}</span>
@@ -1481,7 +1713,7 @@ function PerfPieceModal({ entry, record, breakout, canUpload, busy, error, onUpl
         style={{
           background: "#fff", borderRadius: "4px",
           boxShadow: "0 12px 48px rgba(0,0,0,0.24)",
-          width: "min(720px, 100%)", maxHeight: "100%",
+          width: "min(940px, 100%)", maxHeight: "100%",
           display: "flex", flexDirection: "column", overflow: "hidden",
         }}
       >
@@ -1511,13 +1743,16 @@ function PerfPieceModal({ entry, record, breakout, canUpload, busy, error, onUpl
         <>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "8px", marginBottom: "10px" }}>
           {[
-            ["Clicks (3mo)", perfNum(modalWt.clicks)],
-            ["Impressions (3mo)", perfNum(modalWt.impressions)],
-            ["Avg monthly", perfNum(modalWt.avgMonthly)],
-            ["Avg pos · non-branded", modalSplit && modalSplit.nonbranded.position_impressions > 0 ? perfPos(modalSplit.nonbranded.weighted_position) : (modalQwPos > 0 ? perfPos(modalQwPos) : "—")],
-          ].map(([k, v]) => (
-            <div key={k} style={{ background: "#faf8f4", border: "1px solid #f0ede6", borderRadius: "3px", padding: "9px 10px" }}>
-              <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>{k}</div>
+            ["Clicks (3mo)", perfNum(modalWt.clicks), "Σ daily page clicks over the trailing-3-month window (from publish date).", false],
+            ["Impressions (3mo)", perfNum(modalWt.impressions), "Σ daily page impressions (every query, GSC ‘Chart’ sheet) over the trailing-3-month window.", false],
+            ["Avg monthly", perfNum(modalWt.avgMonthly), "Impressions in the window ÷ (days in window ÷ 30). A month-normalised run-rate.", false],
+            ["Avg pos · non-branded", modalSplit && modalSplit.nonbranded.position_impressions > 0 ? perfPos(modalSplit.nonbranded.weighted_position) : (modalQwPos > 0 ? perfPos(modalQwPos) : "—"), "Impression-weighted position over non-branded queries only: Σ(impr×pos) ÷ Σ(impr), excluding queries that name Jaggaer.", true],
+          ].map(([k, v, formula, right]) => (
+            <div key={k} style={{ position: "relative", background: "#faf8f4", border: "1px solid #f0ede6", borderRadius: "3px", padding: "9px 10px" }}>
+              <div style={{ ...FONT, fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa", display: "flex", alignItems: "center", gap: "4px" }}>
+                <span>{k}</span>
+                <PerfInfo text={formula} align={right ? "right" : undefined} />
+              </div>
               <div style={{ ...FONT, fontSize: "0.95rem", fontWeight: 700, color: "#1a2535", marginTop: "2px" }}>{v}</div>
             </div>
           ))}
@@ -1591,7 +1826,7 @@ function PerfPieceModal({ entry, record, breakout, canUpload, busy, error, onUpl
 
         <PerfChart series={modalChartSeries} />
 
-        <PerfWeeklyBars series={modalChartSeries} />
+        <PerfWeeklyBars series={modalChartSeries} uploads={(record.snapshots || []).map(s => s.uploaded_at || s.snapshot_date)} />
 
         {modalSplit && (modalSplit.branded.impressions > 0 || modalSplit.nonbranded.impressions > 0) && (
           <div style={{ marginTop: "22px" }}>
