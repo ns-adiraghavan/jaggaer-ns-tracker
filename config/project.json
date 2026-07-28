@@ -1009,7 +1009,14 @@
                   "ts": "2026-07-13T11:13:09.540Z",
                   "by": "m-ny8dy"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-07-23",
+                "live_url": "https://www.jaggaer.com/blog/how-source-to-pay-improves-supply-chain-performance",
+                "performance_data": "",
+                "updated_at": "2026-07-28T10:48:29.579Z"
+              }
             },
             {
               "id": "piece-c-yad8u-8-spc7",
