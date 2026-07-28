@@ -398,8 +398,8 @@
               "deliverable_ext": "md",
               "last_upload": "2026-06-09T12:57:28.251Z",
               "last_upload_by": "manager",
-              "last_updated": "2026-07-13T11:11:22.219Z",
-              "last_updated_by": "m-ny8dy",
+              "last_updated": "2026-07-28T13:23:44.066Z",
+              "last_updated_by": "m-pifrn",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
@@ -407,7 +407,16 @@
                   "by": "m-ny8dy"
                 }
               ],
-              "return_to_stage": null
+              "return_to_stage": null,
+              "brief_files": [
+                {
+                  "filename": "content-brief-claude-rfp-autogeneration (1).pdf",
+                  "path": "content/month-1/ai-in-s2p/c3-suppliers/p-c3-2/brief/content-brief-claude-rfp-autogeneration__1_.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-07-28T13:23:44.066Z"
+                }
+              ],
+              "brief_last_updated": "2026-07-28T13:23:44.066Z"
             },
             {
               "id": "p-c3-3",
