@@ -883,7 +883,14 @@
                   "ts": "2026-07-13T11:15:30.027Z",
                   "by": "m-ny8dy"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-07-23",
+                "live_url": "https://www.jaggaer.com/blog/why-procurement-is-the-backbone-of-supply-chains",
+                "performance_data": "",
+                "updated_at": "2026-07-28T10:45:56.315Z"
+              }
             },
             {
               "id": "piece-c-yad8u-5-j6ps",
