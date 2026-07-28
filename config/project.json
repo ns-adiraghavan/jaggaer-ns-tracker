@@ -334,7 +334,7 @@
               "title": "How to Use Claude to Find Alternative Suppliers by Country or Category",
               "format": "MD File / Tutorial",
               "assignee": "null",
-              "status": "not-started",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "use Claude find alternative suppliers procurement",
               "secondary_keyword": "Claude supplier recommendation S2P",
@@ -348,7 +348,7 @@
               "content_type": "ai-in-s2p",
               "phase": 2,
               "funnel": "MOFU",
-              "last_updated": "2026-07-28T13:01:23.334Z",
+              "last_updated": "2026-07-28T13:05:55.043Z",
               "last_updated_by": "m-pifrn",
               "status_history": [
                 {
@@ -364,9 +364,17 @@
                   "path": "content/month-1/ai-in-s2p/c3-suppliers/p-c3-1/brief/content-brief-claude-alternative-suppliers.pdf",
                   "uploaded_by": "m-pifrn",
                   "uploaded_at": "2026-07-28T13:01:23.334Z"
+                },
+                {
+                  "filename": "content-brief-claude-alternative-suppliers.pdf",
+                  "path": "content/month-1/ai-in-s2p/c3-suppliers/p-c3-1/brief/content-brief-claude-alternative-suppliers.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-07-28T13:05:55.043Z"
                 }
               ],
-              "brief_last_updated": "2026-07-28T13:01:23.334Z"
+              "brief_last_updated": "2026-07-28T13:05:55.043Z",
+              "last_upload": "2026-07-28T13:05:55.043Z",
+              "last_upload_by": "m-pifrn"
             },
             {
               "id": "p-c3-2",
