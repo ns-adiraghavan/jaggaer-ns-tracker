@@ -348,8 +348,8 @@
               "content_type": "ai-in-s2p",
               "phase": 2,
               "funnel": "MOFU",
-              "last_updated": "2026-07-13T11:06:57.955Z",
-              "last_updated_by": "m-ny8dy",
+              "last_updated": "2026-07-28T13:01:23.334Z",
+              "last_updated_by": "m-pifrn",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
@@ -357,7 +357,16 @@
                   "by": "m-ny8dy"
                 }
               ],
-              "return_to_stage": null
+              "return_to_stage": null,
+              "brief_files": [
+                {
+                  "filename": "content-brief-claude-alternative-suppliers.pdf",
+                  "path": "content/month-1/ai-in-s2p/c3-suppliers/p-c3-1/brief/content-brief-claude-alternative-suppliers.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-07-28T13:01:23.334Z"
+                }
+              ],
+              "brief_last_updated": "2026-07-28T13:01:23.334Z"
             },
             {
               "id": "p-c3-2",
