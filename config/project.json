@@ -1717,7 +1717,14 @@
               "return_to_stage": null,
               "last_upload": "2026-07-02T10:49:33.506Z",
               "last_upload_by": "manager",
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-07-24",
+                "live_url": "https://www.jaggaer.com/blog/ai-in-procurement-closing-the-supply-chain-talent-gap",
+                "performance_data": "",
+                "updated_at": "2026-07-28T10:53:43.867Z"
+              }
             },
             {
               "id": "piece-si3t6m",
