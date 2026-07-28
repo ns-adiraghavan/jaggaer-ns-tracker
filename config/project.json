@@ -967,7 +967,14 @@
                   "ts": "2026-07-13T11:15:58.675Z",
                   "by": "m-ny8dy"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-07-23",
+                "live_url": "https://www.jaggaer.com/blog/procurement-vs-supply-chain-management",
+                "performance_data": "",
+                "updated_at": "2026-07-28T10:47:37.495Z"
+              }
             },
             {
               "id": "piece-c-yad8u-7-5rl6",
