@@ -521,7 +521,7 @@
               "title": "Claude for S2P: Watch How It Works — Curated Videos and Original Jaggaer Webinars",
               "format": "Webinar / Video Page",
               "assignee": "null",
-              "status": "not-started",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "Claude S2P procurement webinar tutorial video",
               "secondary_keyword": "AI S2P procurement how-to video guide",
@@ -535,8 +535,8 @@
               "content_type": "ai-in-s2p",
               "phase": 1,
               "funnel": "TOFU",
-              "last_updated": "2026-07-13T11:09:01.900Z",
-              "last_updated_by": "m-ny8dy",
+              "last_updated": "2026-07-28T21:06:57.639Z",
+              "last_updated_by": "m-pifrn",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
@@ -544,7 +544,18 @@
                   "by": "m-ny8dy"
                 }
               ],
-              "return_to_stage": null
+              "return_to_stage": null,
+              "brief_files": [
+                {
+                  "filename": "content-brief-claude-s2p-webinar-video-hub (1).pdf",
+                  "path": "content/month-1/ai-in-s2p/c4-prompt-library/p-c4-2/brief/content-brief-claude-s2p-webinar-video-hub__1_.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-07-28T21:06:57.639Z"
+                }
+              ],
+              "brief_last_updated": "2026-07-28T21:06:57.639Z",
+              "last_upload": "2026-07-28T21:06:57.639Z",
+              "last_upload_by": "m-pifrn"
             }
           ]
         }
