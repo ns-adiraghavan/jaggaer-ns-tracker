@@ -224,7 +224,7 @@
               "title": "Stop Manually Hunting for Risky Clauses. Use Claude to Find Them in Your Contracts",
               "format": "MD File / Tutorial",
               "assignee": "null",
-              "status": "not-started",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "use Claude review procurement contracts expiry risk",
               "secondary_keyword": "Claude contract analysis S2P tutorial",
@@ -238,7 +238,7 @@
               "content_type": "ai-in-s2p",
               "phase": 2,
               "funnel": "MOFU",
-              "last_updated": "2026-07-28T10:20:46.689Z",
+              "last_updated": "2026-07-28T11:09:40.042Z",
               "last_updated_by": "m-pifrn",
               "status_history": [
                 {
@@ -254,9 +254,17 @@
                   "path": "content/month-1/ai-in-s2p/c2-contracts/p-c2-1/brief/content-brief-claude-for-contracts-jaggaer-styled.pdf",
                   "uploaded_by": "m-pifrn",
                   "uploaded_at": "2026-07-28T10:20:46.689Z"
+                },
+                {
+                  "filename": "content-brief-claude-supplier-contract-audit.pdf",
+                  "path": "content/month-1/ai-in-s2p/c2-contracts/p-c2-1/brief/content-brief-claude-supplier-contract-audit.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-07-28T11:09:40.042Z"
                 }
               ],
-              "brief_last_updated": "2026-07-28T10:20:46.689Z"
+              "brief_last_updated": "2026-07-28T11:09:40.042Z",
+              "last_upload": "2026-07-28T11:09:40.042Z",
+              "last_upload_by": "m-pifrn"
             },
             {
               "id": "p-c2-2",
