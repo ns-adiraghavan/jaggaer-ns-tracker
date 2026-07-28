@@ -1220,7 +1220,14 @@
                   "ts": "2026-07-13T11:13:31.512Z",
                   "by": "m-ny8dy"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-07-27",
+                "live_url": "https://www.jaggaer.com/blog/eu-ai-act-rules-for-general-purpose-ai",
+                "performance_data": "",
+                "updated_at": "2026-07-28T10:52:55.691Z"
+              }
             },
             {
               "id": "piece-ps1-eu-ai-3-0dyk",
