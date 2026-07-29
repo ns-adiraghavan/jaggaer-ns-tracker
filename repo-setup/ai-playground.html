@@ -252,9 +252,8 @@ mark.annot{cursor:pointer;padding:1px 2px;border-radius:2px;transition:backgroun
 .pb-block{border:var(--border);border-left:3px solid var(--bc,var(--red));border-radius:var(--radius-sm);padding:.9rem 1rem;background:var(--bc-soft,var(--white));transition:box-shadow .2s}
 .pb-block.active{box-shadow:0 6px 22px rgba(11,13,18,.07)}
 .pb-block-label{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bc,var(--ink-3));margin-bottom:.55rem;display:flex;align-items:center;gap:7px}
-.pb-block-num{width:17px;height:17px;border-radius:50%;background:var(--bc,var(--red));color:#fff;font-size:.6rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif}
-.pb-block.done .pb-block-num::after{content:'\2713'}
-.pb-block.done .pb-block-num{font-size:.66rem}
+.pb-block-num{width:17px;height:17px;border-radius:50%;background:#fff;color:var(--bc,var(--red));border:1.5px solid var(--bc,var(--red));font-size:.6rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;transition:background .15s,color .15s}
+.pb-block.done .pb-block-num{background:var(--bc,var(--red));color:#fff}
 .pb-opts{display:flex;flex-direction:column;gap:5px}
 .pb-opt{text-align:left;padding:7px 12px;font-size:.76rem;background:var(--white);border:var(--border);border-radius:var(--radius-sm);cursor:pointer;color:var(--ink-2);transition:all .12s;font-family:Inter,sans-serif}
 .pb-opt:hover{border-color:var(--bc,#f0c8c8)}
