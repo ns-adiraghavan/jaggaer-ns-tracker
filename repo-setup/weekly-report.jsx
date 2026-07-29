@@ -19,11 +19,17 @@ const { useMemo: useMemoWR, useState: useStateWR, useRef: useRefWR } = React;
 
 const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
-// Pieces genuinely queued to go live next: sitting at CTA check (the last gate
-// before approved) or ad-hoc review (the only gate ad-hoc pieces have). Robert
-// review was dropped from this set in July 2026 — a piece at Robert review still
-// has a full reviewer pass ahead of it, so listing it here overstated the queue.
-const PLAN_NEXT_STAGES = new Set(["editors", "ad-hoc-review"]);
+// Pieces genuinely queued to go live next = whatever the LAST reviewer gate
+// before "approved" is in the LIVE workflow, plus ad-hoc review (the only gate
+// ad-hoc pieces have). This is derived per-render from project.workflow_stages
+// (see planNextStageIds in WeeklyReportPanel) rather than hardcoding a stage id
+// — so when the workflow is reconfigured (e.g. the CTA / "editors" stage is
+// removed, as it was), the report follows automatically instead of going stale.
+//
+// Terminal stages that mean "already published": a piece is counted as live
+// once it reaches "approved" OR the later "live" stage. Both are excluded from
+// the pending-at buckets so a published piece never shows as awaiting anyone.
+const PUBLISHED_STAGES = new Set(["approved", "live"]);
 
 function allPieces(project) {
   const out = [];
@@ -75,6 +81,26 @@ function WeeklyReportPanel({ project, currentUser }) {
     return stages.find(s => s.id === id)?.label || id;
   };
 
+  // ── "To publish this week" = under content leadership review ────────────
+  // Defined by MEANING, not position: a piece is queued to publish once it
+  // reaches content leadership review — the final editorial sign-off before
+  // Approved — which maps to the "ed-review" stage in the live workflow. Ad-hoc
+  // pieces have only their own review gate, so that counts too.
+  //
+  // Fallback: if "ed-review" is ever removed/renamed, fall back to the last
+  // reviewer gate before "approved" so this bucket never silently empties — the
+  // exact failure the old hardcoded "editors"/CTA reference had.
+  const CONTENT_LEADERSHIP_STAGE_ID = "ed-review";
+  const approvedIdx = stages.findIndex(s => s.id === "approved");
+  const lastGateBeforeApproved = approvedIdx > 0 ? stages[approvedIdx - 1] : null;
+  const leadershipStage = stages.find(s => s.id === CONTENT_LEADERSHIP_STAGE_ID) || lastGateBeforeApproved;
+  const adHocReviewStage = getAdHocReviewStage(project);
+  const planNextStageIds = new Set([leadershipStage?.id, "ad-hoc-review"].filter(Boolean));
+  // Human label is the fixed phrase "content leadership review" (with ad-hoc
+  // noted) rather than echoing the stage's raw name, so it reads consistently.
+  const planNextSub  = "under content leadership review";
+  const planNextJoin = "content leadership review or ad-hoc review";
+
   // Collapsed by default — brief-stage / upload-log detail is background noise
   // most weeks. The counts stay visible; the row detail expands on demand.
   const [briefsOpen, setBriefsOpen] = useStateWR(false);
@@ -106,7 +132,7 @@ function WeeklyReportPanel({ project, currentUser }) {
     // ── Took live — total to date ────────────────────────────────────────
     // All approved pieces, newest first. No 7-day window — this is cumulative
     // progress, not a rolling snapshot.
-    const tookLive = items.filter(({ piece }) => piece.status === "approved")
+    const tookLive = items.filter(({ piece }) => PUBLISHED_STAGES.has(piece.status))
     .map(({ piece, cluster, pillar }) => {
       const entered = lastEnteredStage(piece, "approved");
       return { piece, cluster, pillar, ts: entered ? entered.ts : piece.last_updated, approvedBy: entered ? entered.by : piece.last_updated_by };
@@ -117,10 +143,10 @@ function WeeklyReportPanel({ project, currentUser }) {
     const publishedLastWeek = tookLive.filter(({ ts }) => withinLastWeek(ts));
 
     // ── Plan to take live next ───────────────────────────────────────────
-    // Pieces sitting at CTA check (editors) or ad-hoc review — the last gate
-    // before approved. One reviewer action away from live.
+    // Pieces sitting at the last reviewer gate before approved (derived from
+    // the live workflow) or at ad-hoc review. One reviewer action away from live.
     const planNextWeek = items.filter(({ piece }) =>
-      PLAN_NEXT_STAGES.has(piece.status)
+      planNextStageIds.has(piece.status)
     ).map(({ piece, cluster, pillar }) => {
       const entered = lastEnteredStage(piece, piece.status);
       return { piece, cluster, pillar, enteredTs: entered ? entered.ts : null, enteredBy: entered ? entered.by : null };
@@ -133,7 +159,7 @@ function WeeklyReportPanel({ project, currentUser }) {
     for (const { piece, cluster, pillar } of items) {
       // SME Review (stage-nq11b) has its own dedicated tab — exclude from
       // both Pending at Jaggaer and Pending at NS to avoid double-counting.
-      if (piece.status === "approved" || piece.status === "not-started" || piece.status === "stage-nq11b") continue;
+      if (PUBLISHED_STAGES.has(piece.status) || piece.status === "not-started" || piece.status === "stage-nq11b") continue;
       const stage = piece.status === "ad-hoc-review" ? getAdHocReviewStage(project) : stages.find(s => s.id === piece.status);
       if (!stage) continue;
       const actors = Array.isArray(stage.actor) ? stage.actor : (stage.actor ? [stage.actor] : []);
@@ -213,7 +239,7 @@ function WeeklyReportPanel({ project, currentUser }) {
           onClick={() => scrollTo(refTookLive)} />
         <KpiTile label="Published last week" count={data.publishedLastWeek.length} accent="#0e6655" sub="last 7 days"
           onClick={() => scrollTo(refTookLive)} />
-        <KpiTile label="To publish this week" count={data.planNextWeek.length} accent="#1e6fa8" sub="at CTA / ad-hoc review"
+        <KpiTile label="To publish this week" count={data.planNextWeek.length} accent="#1e6fa8" sub={planNextSub}
           onClick={() => scrollTo(refPlanNext)} />
         <KpiTile label="Awaiting JAGGAER review" count={data.pendingAtJaggaer.length} accent="#c8401a" sub="awaiting review"
           onClick={() => { setJgOpen(true); scrollTo(refJaggaer); }} />
@@ -243,9 +269,9 @@ function WeeklyReportPanel({ project, currentUser }) {
       {/* ── Planned next — tighter row layout ─────────────────────────── */}
       <div ref={refPlanNext} style={{ scrollMarginTop: "16px" }} />
       <SectionHeader accent="#1e6fa8" eyebrow="To publish this week" count={data.planNextWeek.length}
-        subtitle="Sitting at CTA check or Ad-Hoc review — the last gate before published." />
+        subtitle={`Under ${planNextJoin} — the final sign-off before published.`} />
       {data.planNextWeek.length === 0 ? (
-        <EmptyCard text="Nothing at CTA check or Ad-Hoc review right now." />
+        <EmptyCard text={`Nothing under ${planNextJoin} right now.`} />
       ) : (
         <div style={{ background: "#fff", border: "1px solid #e8e3da", borderRadius: "3px", marginBottom: "36px" }}>
           {data.planNextWeek.map(({ piece, cluster, pillar, enteredTs }) => (
