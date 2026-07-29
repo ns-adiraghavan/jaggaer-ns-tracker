@@ -176,6 +176,12 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           onClick={() => setView("style-guide")}
           rightMeta="docx"
         />
+        <NavSection
+          label="Content Flow"
+          active={view === "content-flow"}
+          onClick={() => setView("content-flow")}
+          rightMeta="diagram"
+        />
 
         {adminMode && (
           <NavSection

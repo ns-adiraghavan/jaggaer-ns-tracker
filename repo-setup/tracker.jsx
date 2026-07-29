@@ -2984,11 +2984,25 @@ function BriefFilesSection({ piece, cluster, pillar, project, currentUser, updat
       if (!result.ok) throw new Error(result.error || "Upload failed");
       const now = new Date().toISOString();
       const newRecord = { filename: file.name, path: result.path, uploaded_by: currentUser.id, uploaded_at: now };
+      // Uploading a brief here (the always-visible Details widget) must also
+      // advance the piece to "Brief Uploaded" — otherwise the file lands in
+      // GitHub but the status silently stays put. Only bump when the piece is
+      // still AT OR BEFORE the brief stage (not-started / SME review), so we
+      // never knock a piece already in writing/review back to brief-uploaded.
+      // Ad-Hoc pieces skip the brief flow entirely, so they're never bumped.
+      const stageOrder = getWorkflowStages(project).map(s => s.id);
+      const briefIdx = stageOrder.indexOf("brief-uploaded");
+      const curIdx   = stageOrder.indexOf(piece.status);
+      const shouldBump = !isAdHoc(piece) && briefIdx >= 0 && curIdx > -1 && curIdx < briefIdx;
       updatePiece(cluster.id, piece.id, {
         brief_files: [...briefFiles, newRecord],
         brief_last_updated: now,
         last_updated: now,
         last_updated_by: currentUser.id,
+        ...(shouldBump ? {
+          status: "brief-uploaded",
+          status_history: appendStatusHistory(piece, "brief-uploaded", currentUser.id),
+        } : {}),
       });
       setUploadStage("done");
     } catch (e) {
@@ -3788,6 +3802,7 @@ function BriefUploadPanel({ piece, cluster, pillar, project, currentUser, update
     const existing = piece.brief_files || [];
     updatePiece(cluster.id, piece.id, {
       status: "brief-uploaded",
+      status_history: appendStatusHistory(piece, "brief-uploaded", currentUser.id),
       brief_files: [...existing, newFileRecord],
       brief_last_updated: now,
       last_upload: now,

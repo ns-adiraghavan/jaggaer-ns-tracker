@@ -234,6 +234,7 @@ function App() {
         {view === "performance" && <PerformancePanel project={project} setProject={setProject} currentUser={currentUser} adminMode={adminMode} />}
         {view === "ai-playground" && <AIPlaygroundPanel onBack={() => setView("tracker")} project={project} setProject={setProject} currentUser={currentUser} saveState={saveState} />}
         {view === "style-guide" && <StyleGuidePanel project={project} adminMode={adminMode} />}
+        {view === "content-flow" && <ContentFlowPanel project={project} adminMode={adminMode} />}
         {view === "admin" && adminMode && (
           <AdminPanel project={project} setProject={setProject} adminTarget={adminTarget} setAdminTarget={setAdminTarget} />
         )}
