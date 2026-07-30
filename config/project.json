@@ -967,7 +967,7 @@
               "title": "The Hidden Costs in Your Procurement Platform Contract Nobody Talks About",
               "format": "Hot Take",
               "assignee": "null",
-              "status": "not-started",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "hidden costs procurement platform contract",
               "secondary_keyword": "S2P platform true cost manufacturing",
@@ -977,16 +977,32 @@
               "content_type": "industry-specific",
               "phase": 2,
               "funnel": "BOFU",
-              "last_updated": "2026-07-13T11:10:35.649Z",
-              "last_updated_by": "m-ny8dy",
+              "last_updated": "2026-07-30T13:41:00.242Z",
+              "last_updated_by": "m-pifrn",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
                   "ts": "2026-07-13T11:10:35.649Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-30T13:41:00.242Z",
+                  "by": "m-pifrn"
                 }
               ],
-              "return_to_stage": null
+              "return_to_stage": null,
+              "brief_files": [
+                {
+                  "filename": "content-brief-hidden-costs-procurement-contract.pdf",
+                  "path": "content/month-1/discrete-manufacturing/dm4-tco/p-dm4-1/brief/content-brief-hidden-costs-procurement-contract.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-07-30T13:41:00.242Z"
+                }
+              ],
+              "brief_last_updated": "2026-07-30T13:41:00.242Z",
+              "last_upload": "2026-07-30T13:41:00.242Z",
+              "last_upload_by": "m-pifrn"
             },
             {
               "id": "p-dm4-2",
