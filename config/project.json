@@ -977,7 +977,7 @@
               "content_type": "industry-specific",
               "phase": 2,
               "funnel": "BOFU",
-              "last_updated": "2026-07-30T13:41:00.242Z",
+              "last_updated": "2026-07-30T13:53:58.644Z",
               "last_updated_by": "m-pifrn",
               "status_history": [
                 {
@@ -998,9 +998,15 @@
                   "path": "content/month-1/discrete-manufacturing/dm4-tco/p-dm4-1/brief/content-brief-hidden-costs-procurement-contract.pdf",
                   "uploaded_by": "m-pifrn",
                   "uploaded_at": "2026-07-30T13:41:00.242Z"
+                },
+                {
+                  "filename": "Use this brief please - Hidden Costs.pdf",
+                  "path": "content/month-1/discrete-manufacturing/dm4-tco/p-dm4-1/brief/Use_this_brief_please_-_Hidden_Costs.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-07-30T13:53:58.644Z"
                 }
               ],
-              "brief_last_updated": "2026-07-30T13:41:00.242Z",
+              "brief_last_updated": "2026-07-30T13:53:58.644Z",
               "last_upload": "2026-07-30T13:41:00.242Z",
               "last_upload_by": "m-pifrn"
             },
