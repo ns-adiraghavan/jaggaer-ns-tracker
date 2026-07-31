@@ -1928,7 +1928,7 @@
               "title": "From Spreadsheets to Platform: How R1 Universities Are Modernising Procurement",
               "format": "Problem-Solution",
               "assignee": "null",
-              "status": "not-started",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "R1 university procurement platform modernisation",
               "secondary_keyword": "higher education procurement digitization 2026",
@@ -1938,16 +1938,32 @@
               "content_type": "industry-specific",
               "phase": 2,
               "funnel": "MOFU",
-              "last_updated": "2026-07-13T11:14:04.575Z",
-              "last_updated_by": "m-ny8dy",
+              "last_updated": "2026-07-31T09:27:53.686Z",
+              "last_updated_by": "m-pifrn",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
                   "ts": "2026-07-13T11:14:04.575Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-31T09:27:53.686Z",
+                  "by": "m-pifrn"
                 }
               ],
-              "return_to_stage": null
+              "return_to_stage": null,
+              "brief_files": [
+                {
+                  "filename": "jaggaer-content-brief-r1-procurement-platform-modernisation.pdf",
+                  "path": "content/month-1/higher-education/he3-modernisation/p-he3-1/brief/jaggaer-content-brief-r1-procurement-platform-modernisation.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-07-31T09:27:53.686Z"
+                }
+              ],
+              "brief_last_updated": "2026-07-31T09:27:53.686Z",
+              "last_upload": "2026-07-31T09:27:53.686Z",
+              "last_upload_by": "m-pifrn"
             }
           ]
         }
