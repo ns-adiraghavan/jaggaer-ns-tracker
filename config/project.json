@@ -1875,7 +1875,7 @@
               "title": "Grant Procurement Compliance in 2026: The Checklist Most NSF, NIH & Horizon Europe Teams Miss",
               "format": "Checklist",
               "assignee": "null",
-              "status": "not-started",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "grant procurement compliance checklist NSF NIH Horizon Europe",
               "secondary_keyword": "federal grant compliance university",
@@ -1885,16 +1885,32 @@
               "content_type": "industry-specific",
               "phase": 2,
               "funnel": "BOFU",
-              "last_updated": "2026-07-13T11:14:14.892Z",
-              "last_updated_by": "m-ny8dy",
+              "last_updated": "2026-07-31T08:46:00.082Z",
+              "last_updated_by": "m-pifrn",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
                   "ts": "2026-07-13T11:14:14.892Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-31T08:46:00.082Z",
+                  "by": "m-pifrn"
                 }
               ],
-              "return_to_stage": null
+              "return_to_stage": null,
+              "brief_files": [
+                {
+                  "filename": "jaggaer-content-brief-grant-procurement-compliance-checklist (1).pdf",
+                  "path": "content/month-1/higher-education/he2-grants/p-he2-2/brief/jaggaer-content-brief-grant-procurement-compliance-checklist__1_.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-07-31T08:46:00.082Z"
+                }
+              ],
+              "brief_last_updated": "2026-07-31T08:46:00.082Z",
+              "last_upload": "2026-07-31T08:46:00.082Z",
+              "last_upload_by": "m-pifrn"
             }
           ]
         },
