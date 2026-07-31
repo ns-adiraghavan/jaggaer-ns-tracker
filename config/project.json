@@ -1461,7 +1461,14 @@
                   "ts": "2026-07-13T11:15:06.789Z",
                   "by": "m-ny8dy"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-07-28",
+                "live_url": "https://www.jaggaer.com/blog/eu-ai-act-non-eu-companies",
+                "performance_data": "",
+                "updated_at": "2026-07-31T13:49:03.692Z"
+              }
             },
             {
               "id": "piece-ps1-eu-ai-4-ok33",
