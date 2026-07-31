@@ -1528,7 +1528,14 @@
                   "ts": "2026-07-13T11:13:40.162Z",
                   "by": "m-ny8dy"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-07-29",
+                "live_url": "https://www.jaggaer.com/blog/eu-ai-act-fines-penalties",
+                "performance_data": "",
+                "updated_at": "2026-07-31T13:50:14.450Z"
+              }
             },
             {
               "id": "piece-ps1-eu-ai-6-97dx",
