@@ -1987,7 +1987,7 @@
               "title": "Procurement's AI Adoption Gap in 2026 What Closes It",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "ed-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "revision_count": 1,
               "primary_keyword": "",
@@ -2009,7 +2009,8 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-07-13T12:06:25.541Z",
-              "last_upload_by": "manager"
+              "last_upload_by": "manager",
+              "secondary_keyword": ""
             }
           ]
         }
