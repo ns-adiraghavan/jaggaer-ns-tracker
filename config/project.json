@@ -1628,7 +1628,7 @@
               "title": "Government Contract Leakage: 5 Numbers France, Spain & UK Cannot Ignore in 2026",
               "format": "Data Snapshot",
               "assignee": "null",
-              "status": "not-started",
+              "status": "brief-uploaded",
               "revision_count": 0,
               "primary_keyword": "government contract leakage data 2026",
               "secondary_keyword": "off-contract spend public sector UK France Spain",
@@ -1638,16 +1638,32 @@
               "content_type": "msv",
               "phase": 1,
               "funnel": "TOFU",
-              "last_updated": "2026-07-13T11:16:50.593Z",
-              "last_updated_by": "m-ny8dy",
+              "last_updated": "2026-07-31T03:04:23.371Z",
+              "last_updated_by": "m-pifrn",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
                   "ts": "2026-07-13T11:16:50.593Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "brief-uploaded",
+                  "ts": "2026-07-31T03:04:23.371Z",
+                  "by": "m-pifrn"
                 }
               ],
-              "return_to_stage": null
+              "return_to_stage": null,
+              "brief_files": [
+                {
+                  "filename": "jaggaer-content-brief-government-contract-leakage (1).pdf",
+                  "path": "content/month-1/public-sector/ps2-einvoicing/p-ps2-2/brief/jaggaer-content-brief-government-contract-leakage__1_.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-07-31T03:04:23.371Z"
+                }
+              ],
+              "brief_last_updated": "2026-07-31T03:04:23.371Z",
+              "last_upload": "2026-07-31T03:04:23.371Z",
+              "last_upload_by": "m-pifrn"
             }
           ]
         },
