@@ -2107,7 +2107,14 @@
               "return_to_stage": null,
               "last_upload": "2026-07-13T12:06:25.541Z",
               "last_upload_by": "manager",
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-07-28",
+                "live_url": "https://www.jaggaer.com/blog/procurement-ai-adoption-gap-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-03T10:57:30.324Z"
+              }
             }
           ]
         }
