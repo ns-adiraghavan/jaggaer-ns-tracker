@@ -1600,7 +1600,14 @@
                   "ts": "2026-07-13T11:13:55.036Z",
                   "by": "m-ny8dy"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-07-29",
+                "live_url": "https://www.jaggaer.com/blog/eu-ai-act-compliance-deadlines",
+                "performance_data": "",
+                "updated_at": "2026-08-03T10:58:50.591Z"
+              }
             }
           ]
         },
