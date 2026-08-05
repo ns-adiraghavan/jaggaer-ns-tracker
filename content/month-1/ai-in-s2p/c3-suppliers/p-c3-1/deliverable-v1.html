@@ -1,0 +1,533 @@
+<!-- uploaded by m-e10nz at 2026-08-05T06:07:57.934Z -->
+<!-- piece: How to Use Claude to Find Alternative Suppliers by Country or Category -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Alternative Suppliers with Claude: By Country/Category</title>
+<meta name="description" content="Learn how to prompt Claude to surface alternative suppliers filtered by country or category, and what to verify before you act on it.">
+<link rel="canonical" href="https://www.jaggaer.com/claude-alternative-suppliers-country-category">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<!-- PUBLISH DATE PENDING CONFIRMATION: brief specifies "Publishing Week 2" without an exact calendar date. Placeholder date (2026-08-07) used below in schema and article meta, matching the sibling RFP article's convention. Confirm the real publish date before this goes live. -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"How to Use Claude to Find Alternative Suppliers by Country or Category","description":"Learn how to prompt Claude to surface alternative suppliers filtered by country or category, and what to verify before you act on it.","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"datePublished":"2026-08-07","dateModified":"2026-08-07","author":{"@type":"Organization","name":"JAGGAER"}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can Claude actually find real alternative suppliers, or just categories of suppliers?","acceptedAnswer":{"@type":"Answer","text":"Mostly categories and regions. Confirm any specific company name against real supplier data before you use it."}},{"@type":"Question","name":"How do I ask Claude to filter suppliers by country?","acceptedAnswer":{"@type":"Answer","text":"Name the category, the country, and the reason: tariff exposure, lead time, or single-source risk."}},{"@type":"Question","name":"How do I ask Claude to filter suppliers by category?","acceptedAnswer":{"@type":"Answer","text":"Start with the spend category and your goal: backup sourcing, diversification, or cost benchmarking."}},{"@type":"Question","name":"Can I trust supplier details Claude provides, like certifications?","acceptedAnswer":{"@type":"Answer","text":"No. Verify certifications, financial health, and active status against real supplier data first."}},{"@type":"Question","name":"Why would I look for alternative suppliers in the first place?","acceptedAnswer":{"@type":"Answer","text":"Single-source dependency is common and often hidden. 65% of organizations have at least one unflagged point of failure (Marsh, 2026)."}},{"@type":"Question","name":"Does this replace a formal RFI/RFP process?","acceptedAnswer":{"@type":"Answer","text":"No. It speeds up research before an RFI. Formal qualification still runs through your standard process."}},{"@type":"Question","name":"How is this different from JAGGAER's Supplier Network?","acceptedAnswer":{"@type":"Answer","text":"Claude reasons from general data. Supplier Network holds verified, ongoing supplier records. Use both together."}},{"@type":"Question","name":"What should I verify before contacting a Claude-suggested supplier?","acceptedAnswer":{"@type":"Answer","text":"Active status, current certifications, financial health, and ESG standing, before any outreach goes out."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    1rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.stat{font-family:var(--font-display);font-weight:600;color:var(--jai-a);font-variant-numeric:tabular-nums;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Badges */
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-family:var(--font-display);font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.section-eyebrow{display:block;font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+
+/* Progress bar */
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-label{display:block;font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:720px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-family:var(--font-display);font-size:.625rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.08em;}
+
+/* Use Case Table */
+.obl-table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.obl-table{width:100%;border-collapse:collapse;font-size:.8125rem;min-width:580px;}
+.obl-table th{padding:.75rem 1rem;background:var(--jai-a);color:#fff;font-family:var(--font-display);font-weight:600;text-align:left;border-bottom:1px solid #ffffff18;border-right:1px solid #ffffff18;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;}
+.obl-table th:last-child{border-right:none;}
+.obl-table td{padding:.75rem 1rem;border-bottom:var(--border);border-right:var(--border);vertical-align:top;line-height:1.5;color:var(--color-ink-2);}
+.obl-table td:last-child{border-right:none;}
+.obl-table tr:last-child td{border-bottom:none;}
+.obl-table td:first-child{font-weight:700;color:var(--color-ink);background:var(--color-cream);}
+.obl-note{font-size:.72rem;color:var(--color-ink-3);display:block;margin-top:.2rem;font-weight:400;}
+
+/* Modifier for data tables with long-form cell content (vs. short label/takeaway tables) */
+.obl-table--data td:first-child{font-weight:600;color:var(--color-ink-2);background:none;font-size:.8125rem;}
+.obl-table--data td:last-child{color:var(--color-ink-2);font-weight:400;font-size:.8125rem;}
+
+/* Two-column comparison, for lists of uneven length (avoids empty table cells) */
+.compare-cols{display:flex;gap:var(--space-m);margin:var(--space-m) 0 var(--space-l);flex-wrap:wrap;}
+.compare-col{flex:1;min-width:220px;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;}
+.compare-col-head{background:var(--jai-a);color:#fff;padding:.75rem 1rem;font-family:var(--font-display);font-weight:600;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;}
+.compare-col ul{margin:0;padding:1rem 1.25rem;list-style:disc;background:var(--color-cream);height:100%;}
+.compare-col li{font-size:.8125rem;color:var(--color-ink-2);margin-bottom:.5rem;line-height:1.5;}
+.compare-col li:last-child{margin-bottom:0;}
+@media(max-width:580px){.compare-cols{flex-direction:column;}}
+
+/* Prompt-and-output demo card */
+.prompt-demo{border:var(--border);border-radius:var(--border-radius);overflow:hidden;margin:var(--space-m) 0 var(--space-l);}
+.prompt-demo-prompt{background:var(--purple-tint-3);padding:var(--space-m);border-bottom:var(--border);}
+.prompt-demo-label{font-family:var(--font-display);font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.4rem;}
+.prompt-demo-label.output{color:var(--color-teal);}
+.prompt-demo-text{margin:0;font-size:.875rem;color:var(--color-ink);font-style:italic;}
+.prompt-demo-output{padding:var(--space-m);background:var(--color-white);}
+.prompt-demo-output ul{margin:0;padding-left:1.25rem;}
+.prompt-demo-output li{font-size:.8125rem;color:var(--color-ink-2);margin-bottom:.3rem;}
+.prompt-demo-note{margin-top:.5rem;font-size:.72rem;color:var(--color-ink-3);font-style:italic;}
+
+/* Expert Sidebar ("What the Experts Are Saying") */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.6rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--color-ink);line-height:1;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.68rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:.68rem;}
+.exp-link{font-size:.62rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.expert-sidebar{display:none;}}
+
+/* CTA block - JAI gradient theme */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:.95rem;font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:.875rem;font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+.jag-cta--purple{border-color:var(--jai-a);}
+.jag-cta--purple .jag-cta-btn{background:var(--jai-a);}
+.jag-cta--purple .jag-cta-btn:hover{background:var(--color-grey);}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* Next Steps resource cards */
+.next-cards{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-m);margin:var(--space-m) 0 var(--space-l);}
+.next-card{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m);background:var(--color-cream);}
+.next-card-title{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-xs) 0 var(--space-2xs);line-height:1.3;}
+.next-card p{font-size:.8125rem;color:var(--color-ink-2);margin-bottom:var(--space-xs);}
+.next-card-link{font-size:.8125rem;font-weight:600;color:var(--color-ink-2);margin-bottom:0;}
+.next-card-link a{font-weight:600;}
+@media(max-width:580px){.next-cards{grid-template-columns:1fr;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item summary::marker{content:none;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.9375rem;color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+details{height:auto;overflow:hidden;transition:height .3s ease;}
+details:not([open]){height:3.75rem;}
+
+/* Closing notes */
+.abbrev-note{font-size:.75rem;color:var(--color-ink-3);line-height:1.6;margin-top:var(--space-l);}
+.disclaimer-note{font-size:.75rem;color:var(--color-ink-3);line-height:1.6;margin-top:var(--space-s);font-style:italic;}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style></head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">Why Sourcing Teams Need a Faster Way</a>
+      <a class="toc-link" href="#s2">What Claude Can (and Can't) Tell You</a>
+      <a class="toc-link" href="#s3">By Country</a>
+      <a class="toc-link" href="#s4">By Category</a>
+      <a class="toc-link" href="#s5">Verifying What Claude Suggests</a>
+      <a class="toc-link" href="#s6">FAQ</a>
+      <a class="toc-link" href="#s7">Next Steps</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <span class="article-label">AI in Source-to-Pay &middot; Claude for Suppliers &amp; Sourcing</span>
+        <div class="article-badges">
+          <span class="badge badge-blue">Tutorial</span>
+          <span class="badge badge-green">MOFU</span>
+        </div>
+        <h1 style="font-weight:700;">How to Use <strong style="color:#5300CE;">Claude</strong> to Find Alternative Suppliers by Country or Category</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <!-- PUBLISH DATE PLACEHOLDER: brief specifies "Publishing Week 2" without an exact date, confirm before publish -->
+          <span class="meta-item">Published: <time datetime="2026-08">August 2026</time></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <p>Using Claude to find alternative suppliers for procurement means giving it one clear filter at a time. That filter is either a country to add or avoid, or a spend category that needs backup coverage. Claude then returns supplier types, regions, and known players worth researching next, not a verified vendor list. This method supports three goals directly: supplier diversification, risk mitigation, and backup sourcing for single-source categories.</p>
+
+    <p>Manual research can't match that pace, which is why sourcing and category managers use Claude here. Claude does not replace supplier verification. Every suggestion still needs an independent check before it reaches an RFI. This piece sits inside JAGGAER's <a class="link-pending">AI in Source-to-Pay</a> series and covers the country workflow, the category workflow, and the checks to run before any Claude-suggested supplier gets contacted.</p>
+
+    <hr class="section-divider">
+
+    <!-- S1 -->
+    <h2 id="s1">Why Sourcing Teams Need a Faster Way to Find Alternatives in 2026</h2>
+
+    <p>According to <a href="https://www.marsh.com/en/services/business-interruption-supply-chain/insights/supply-chain-risk-resiliency.html" target="_blank" rel="noopener">Marsh's</a> 2026 supply chain risk data, 65% of organizations have at least one critical single point of failure hidden in their upstream supply chain. That kind of gap means one supplier whose failure would stop a production line, and most sourcing teams have not flagged it as a risk in any formal review.</p>
+
+    <p>Manual research cannot close a gap like that. A category manager checking one region by hand can spend days confirming what exists, before ever confirming what qualifies against the company's actual requirements. AI tools for procurement teams to find suppliers faster close that gap, compressing discovery from days to minutes. That's the same underlying need behind searches for ai-driven supply chain analytics tools actionable recommendations 2025: less dashboard, more usable next steps. Claude will not select a winning supplier, it will narrow, in minutes, which categories and regions deserve a closer look.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER explains predictive supplier risk management</p>
+        <p class="jag-cta-desc">See how procurement teams use supplier intelligence, continuous monitoring, and AI to identify hidden supplier risks.</p>
+      </div>
+      <a href="https://www.jaggaer.com/blog/how-procurement-is-moving-from-reactive-to-predictive-risk-management-in-2026" class="jag-cta-btn" target="_blank" rel="noopener">Read the Blog &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S2 -->
+    <h2 id="s2">What Claude Can (and Can't) Tell You About a Supplier</h2>
+
+    <p>Claude reliably identifies supplier categories, regions, and common business models from training data and public text. It does not access a live, audited supplier database. It can generate a supplier recommendation with certification numbers or financial figures that sound precise, but no current record confirms them.</p>
+
+    <div class="obl-table-wrap">
+      <table class="obl-table obl-table--data">
+        <thead>
+          <tr><th>Claude can</th><th>Claude can't</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Identify supplier categories, regions, and typical business models</td><td>Confirm whether a named supplier's certifications are current</td></tr>
+          <tr><td>Hold structure across long contracts and dense RFP packages, up to 1 million tokens in a single pass</td><td>Verify financial health or ESG status</td></tr>
+          <tr><td>Point you toward categories and regions worth researching next</td><td>Replace independent supplier verification before an RFI</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>JAGGAER's own analysis explores <a href="https://www.jaggaer.com/blog/what-claude-delivers-for-procurement" target="_blank" rel="noopener">Claude's known limitations in procurement workflows</a> in more depth. Claude's context window processes up to 1 million tokens in a single pass. <a href="https://claude.com/blog/1m-context-ga" target="_blank" rel="noopener">Anthropic</a> made that capability generally available in March 2026, and it's what makes Claude strong across long contracts and dense RFP packages. <a href="https://www.mckinsey.com/capabilities/operations/our-insights/transforming-procurement-functions-for-an-ai-driven-world" target="_blank" rel="noopener">McKinsey's</a> analysis of AI-driven procurement found the function could become 25 to 40% more efficient (October 2025). Neither finding confirms whether a named supplier's certification is current.</p>
+
+    <p>Treat every Claude-generated supplier recommendation as a research starting point, not a qualified vendor. The category and region suggestions are usually reasonable. The company names attached to them need independent confirmation before they reach an RFI.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See what Claude actually delivers for procurement</p>
+        <p class="jag-cta-desc">Understand where Claude accelerates procurement work, where human judgment is still essential, and how JAI extends AI across Source-to-Pay.</p>
+      </div>
+      <a href="https://www.jaggaer.com/blog/what-claude-delivers-for-procurement" class="jag-cta-btn" target="_blank" rel="noopener">Read the Guide &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S3 -->
+    <h2 id="s3">Step-by-Step: Finding Alternative Suppliers by Country</h2>
+
+    <p>Country-level filtering works best when Claude has the reason behind the constraint, not just the constraint itself.</p>
+
+    <div class="obl-table-wrap">
+      <table class="obl-table obl-table--data">
+        <thead>
+          <tr><th>Step</th><th>What to do</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1. State the category and the country to add or avoid</td><td>Example: "I source packaging materials from a single supplier in [country]. Suggest three other countries or regions with a known manufacturing base for this category."</td></tr>
+          <tr><td>2. Name the driver behind the request</td><td>Tariff exposure, shipping lead time, and single-source risk each point Claude toward different alternatives. A prompt built around recommendations for re-invoicing compliance in global supplier networks surfaces a different shortlist than one built on freight cost alone.</td></tr>
+          <tr><td>3. Ask for trade-offs, not just names</td><td>Compare typical lead times, common certifications, and known regional strengths for each option Claude suggests.</td></tr>
+          <tr><td>4. Ask Claude what it does not know</td><td>Try: "What would you need to verify before I contact any of these regions?" A grounded answer names specifics: export documentation, regional quality standards, current trade terms.</td></tr>
+          <tr><td>5. Treat the output as a research map, not a supplier list</td><td>Country and category identification is where Claude adds the most value. Company names still need JAGGAER-grade verification before outreach starts.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S4 -->
+    <h2 id="s4">Step-by-Step: Finding Alternative Suppliers by Category</h2>
+
+    <p>Category-level filtering starts from the spend area, not the map.</p>
+
+    <div class="obl-table-wrap">
+      <table class="obl-table obl-table--data">
+        <thead>
+          <tr><th>Step</th><th>What to do</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1. Name the category and the goal</td><td>Backup sourcing, diversification, and cost benchmarking each change what Claude should prioritize.</td></tr>
+          <tr><td>2. Ask for supplier types, not names</td><td>Try: "For [spend category], list the common supplier types and business models I should know before I start outreach." This keeps the answer at a level Claude can actually support.</td></tr>
+          <tr><td>3. Layer in diversification criteria when that's the goal</td><td>Teams researching procurement software for diverse suppliers are usually solving two problems at once: finding qualified alternatives and building supplier-base diversity. State both goals in the same prompt.</td></tr>
+          <tr><td>4. Keep platform evaluation separate</td><td>Teams also comparing platforms, the research behind searches like "most recommended ai supplier management software for procurement 2025", should treat that research and Claude's supplier-side suggestions as two separate workstreams.</td></tr>
+          <tr><td>5. Document the exact prompt used, not just the output</td><td>A category manager repeating this search next quarter needs the framing that worked, not a screenshot of one answer.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prompt-demo">
+      <div class="prompt-demo-prompt">
+        <span class="prompt-demo-label">Sample Prompt</span>
+        <p class="prompt-demo-text">"For industrial packaging, list the common supplier types and business models I should know before I start outreach."</p>
+      </div>
+      <div class="prompt-demo-output">
+        <span class="prompt-demo-label output">Illustrative Claude Output</span>
+        <ul>
+          <li>Contract packaging manufacturers</li>
+          <li>Regional co-packers and fillers</li>
+          <li>Direct material converters (film, corrugate, rigid)</li>
+          <li>Sustainable or eco-packaging specialists</li>
+        </ul>
+        <p class="prompt-demo-note">Illustrative supplier categories only, not real companies. Confirm any specific supplier before contact.</p>
+      </div>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER Supplier Network verifies supplier information</p>
+        <p class="jag-cta-desc">Claude can suggest where to look. JAGGAER Supplier Network identifies verified suppliers and provides trusted supplier information.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/supplier-network" class="jag-cta-btn" target="_blank" rel="noopener">Explore Supplier Network &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S5 -->
+    <h2 id="s5">Verifying What Claude Suggests Before You Act</h2>
+
+    <p>An unverified Claude suggestion becomes an unverified vendor the moment nobody checks the specifics behind it. That's the exact gap a research shortlist and a qualified vendor don't share.</p>
+
+    <p>A handful of risk categories close that gap before any Claude-suggested supplier reaches an RFI: operational, financial, and compliance exposure chief among them. <a href="https://www.jaggaer.com/solutions/supplier-network" target="_blank" rel="noopener">JAGGAER's Supplier Network</a> gives buyers access to pre-validated suppliers, automatically enriched supplier records, and document validation capabilities that reduce manual review. <a href="https://www.jaggaer.com/solutions/supplier-intelligence" target="_blank" rel="noopener">JAGGAER Supplier Intelligence</a> continuously monitors supplier financial stability, compliance, ESG performance, and other risk indicators through advanced configurable risk models and real-time scorecards embedded in procurement workflows.</p>
+
+    <div class="compare-cols">
+      <div class="compare-col">
+        <div class="compare-col-head">What Claude Suggests</div>
+        <ul>
+          <li>Categories and regions worth researching</li>
+          <li>Plausible business models and supplier types</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="compare-col-head">What to Verify Against JAGGAER's Data</div>
+        <ul>
+          <li>Active operating status</li>
+          <li>Current certifications</li>
+          <li>Financial health</li>
+          <li>ESG standing</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER Supplier Management combines discovery and verification</p>
+        <p class="jag-cta-desc">Combine AI-assisted discovery with verified supplier data, continuous monitoring, and risk insights across your entire supplier base.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/supplier-management" class="jag-cta-btn" target="_blank" rel="noopener">Explore Supplier Management &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S6: FAQ -->
+    <h2 id="s6">FAQ</h2>
+
+    <details class="faq-item">
+      <summary>Can Claude actually find real alternative suppliers, or just categories of suppliers? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Mostly categories and regions. Confirm any specific company name against real supplier data before you use it.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I ask Claude to filter suppliers by country? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Name the category, the country, and the reason: tariff exposure, lead time, or single-source risk.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I ask Claude to filter suppliers by category? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Start with the spend category and your goal: backup sourcing, diversification, or cost benchmarking.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I trust supplier details Claude provides, like certifications? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">No. Verify certifications, financial health, and active status against real supplier data first.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Why would I look for alternative suppliers in the first place? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Single-source dependency is common and often hidden. 65% of organizations have at least one unflagged point of failure (Marsh, 2026).</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Does this replace a formal RFI/RFP process? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">No. It speeds up research before an RFI. Formal qualification still runs through your standard process.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How is this different from JAGGAER's Supplier Network? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Claude reasons from general data. Supplier Network holds verified, ongoing supplier records. Use both together.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What should I verify before contacting a Claude-suggested supplier? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Active status, current certifications, financial health, and ESG standing, before any outreach goes out.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <!-- S7: Next Steps -->
+    <h2 id="s7">Next steps</h2>
+
+    <p>Run this same method on your own highest-risk category or region, using the workflow above rather than the specific example. For the full picture of how AI fits across sourcing, contracting, and supplier management, see the <a class="link-pending">AI in Source-to-Pay</a> pillar page. For the adjacent workflows this guide doesn't cover, <a class="link-pending">the full Claude for Suppliers &amp; Sourcing guide</a> picks up where this one ends.</p>
+
+    <p class="disclaimer-note">Every Claude-suggested supplier still needs independent verification before qualification or contact.</p>
+
+  </article>
+
+  <!-- EXPERT SIDEBAR -->
+  <aside class="expert-sidebar" aria-label="Data at a glance">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">Marsh &middot; 2026</span>
+        <span class="exp-num red">65%</span>
+        <p class="exp-stat">Of organizations have at least one hidden single point of failure in their upstream supply chain.</p>
+        <a href="https://www.marsh.com/en/services/business-interruption-supply-chain/insights/supply-chain-risk-resiliency.html" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+
+      <div class="exp-item">
+        <span class="exp-source">Anthropic &middot; Mar 2026</span>
+        <span class="exp-num red">1M</span>
+        <p class="exp-stat">Tokens Claude's context window can process in a single pass.</p>
+        <a href="https://claude.com/blog/1m-context-ga" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+
+      <div class="exp-item">
+        <span class="exp-source">McKinsey &middot; Oct 2025</span>
+        <span class="exp-num red">25 to 40%</span>
+        <p class="exp-stat">More efficient, from properly deployed AI-driven procurement processes.</p>
+        <a href="https://www.mckinsey.com/capabilities/operations/our-insights/transforming-procurement-functions-for-an-ai-driven-world" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id], article .article-header');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
