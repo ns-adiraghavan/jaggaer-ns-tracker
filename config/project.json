@@ -334,8 +334,8 @@
               "title": "How to Use Claude to Find Alternative Suppliers by Country or Category",
               "format": "MD File / Tutorial",
               "assignee": "null",
-              "status": "writing",
-              "revision_count": 0,
+              "status": "marketing-review",
+              "revision_count": 1,
               "primary_keyword": "use Claude find alternative suppliers procurement",
               "secondary_keyword": "Claude supplier recommendation S2P",
               "intent": "commercial",
@@ -348,13 +348,18 @@
               "content_type": "ai-in-s2p",
               "phase": 2,
               "funnel": "MOFU",
-              "last_updated": "2026-07-28T13:05:55.043Z",
-              "last_updated_by": "m-pifrn",
+              "last_updated": "2026-08-05T06:07:59.526Z",
+              "last_updated_by": "m-e10nz",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
                   "ts": "2026-07-13T11:06:57.955Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-08-05T06:07:59.526Z",
+                  "by": "m-e10nz"
                 }
               ],
               "return_to_stage": null,
@@ -373,8 +378,9 @@
                 }
               ],
               "brief_last_updated": "2026-07-28T13:05:55.043Z",
-              "last_upload": "2026-07-28T13:05:55.043Z",
-              "last_upload_by": "m-pifrn"
+              "last_upload": "2026-08-05T06:07:59.526Z",
+              "last_upload_by": "m-e10nz",
+              "deliverable_ext": "html"
             },
             {
               "id": "p-c3-2",
