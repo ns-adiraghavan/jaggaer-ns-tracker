@@ -1,0 +1,715 @@
+<!-- uploaded by jason at 2026-08-05T08:12:52.815Z -->
+<!-- piece: Stop Manually Hunting for Risky Clauses. Use Claude to Find Them in Your Contracts -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stop Hunting for Risky Contract Clauses - Claude</title>
+<meta name="description" content="Manual procurement contract risk management doesn't scale. See how Claude finds risky clauses and expiry traps automatically in your contracts.">
+<link rel="canonical" href="https://www.jaggaer.com/claude-contract-risk-review">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Stop Manually Hunting for Risky Clauses in 2026. Use Claude to Find Them in Your Contracts.","description":"Manual procurement contract risk management doesn't scale. See how Claude finds risky clauses and expiry traps automatically in your contracts.","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"datePublished":"2026-08-04","dateModified":"2026-08-04","author":{"@type":"Organization","name":"JAGGAER"}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Claude for Contracts?","acceptedAnswer":{"@type":"Answer","text":"Claude for Contracts refers to using Claude's legal plugins with playbook-based clause review, redlining, and renewal tracking, applied specifically to reviewing and streamlining legal workflows."}},{"@type":"Question","name":"Can I rely on AI to catch risky contract clauses automatically?","acceptedAnswer":{"@type":"Answer","text":"AI is a reliable tool for procurement contract risk management, flagging clause deviations and missing terms automatically. But final risk decisions still require human judgment on complex or unusual contract language."}},{"@type":"Question","name":"Does Claude for Contracts replace legal or procurement review?","acceptedAnswer":{"@type":"Answer","text":"No, Claude for Contracts does not replace legal or procurement review. It supports mitigating risks in procurement contracts by identifying potential issues early. Anthropic states every plugin output is a draft for human review, meant to be verified by a qualified professional before it's relied on."}},{"@type":"Question","name":"Is my contract data secure when Claude reviews it?","acceptedAnswer":{"@type":"Answer","text":"Yes, Claude offers enterprise-grade security features such as encryption, access controls, and audit logging. Anthropic also states that customer data is not used to train its models by default, helping organizations review contracts securely."}},{"@type":"Question","name":"What file formats can Claude for Contracts read?","acceptedAnswer":{"@type":"Answer","text":"Claude can read standard document and text formats including PDF, DOCX, and TXT when reviewing agreements."}},{"@type":"Question","name":"How is this different from using Claude.ai or Claude Cowork directly?","acceptedAnswer":{"@type":"Answer","text":"Claude for Contracts is a specialized legal application layer with pre-built playbook workflows, whereas Claude.ai is a general-purpose chat interface and Claude Cowork is a broader desktop-file automation agent."}},{"@type":"Question","name":"How long does an automated contract review take?","acceptedAnswer":{"@type":"Answer","text":"An automated contract review typically takes a few minutes rather than several hours. The exact time depends on document length and complexity."}},{"@type":"Question","name":"Can it flag contracts approaching expiry or auto-renewal?","acceptedAnswer":{"@type":"Answer","text":"Claude for Contracts flags expirations and auto renewals by processing documents through its specialized /renewal-tracker skill, mapping precise cancel-by notice deadlines into an organized, trackable renewal register file."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading: 400;
+  --line-height-base:  1.6;
+  --line-height-heading: 1.1;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-base);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);}
+h1{font-size:var(--font-size-h1);}
+h2{font-size:var(--font-size-h2);}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+.link-pending{color:var(--color-teal);border-bottom:1px solid #4D819440;}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.stat{font-weight:700;color:var(--color-red);}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.section-eyebrow{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;line-height:var(--line-height-heading);color:var(--color-ink);max-width:760px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-size:.625rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-size:1.15rem;font-weight:700;color:var(--color-ink);line-height:1;display:block;margin-bottom:.15rem;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.68rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:.68rem;}
+.exp-link{font-size:.62rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.expert-sidebar{display:none;}}
+
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:400;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-size:var(--font-size-h5);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.05em;}
+
+.stat-metrics{background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.stat-metrics-kicker{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);margin-bottom:var(--space-m);display:block;}
+.stat-metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.stat-metric{padding:var(--space-m);text-align:center;background:var(--color-white);}
+.stat-metric:first-child{border-radius:var(--border-radius-sm) 0 0 var(--border-radius-sm);}
+.stat-metric:last-child{border-radius:0 var(--border-radius-sm) var(--border-radius-sm) 0;}
+.stat-num{font-size:clamp(1.3rem,2vw,1.7rem);font-weight:800;color:var(--color-red);display:block;line-height:1;margin-bottom:.3rem;}
+.stat-label{font-size:.7rem;font-weight:600;color:var(--color-ink);display:block;line-height:1.3;margin-bottom:.2rem;}
+.stat-sub{font-size:.62rem;color:var(--color-ink-3);display:block;font-style:italic;}
+
+.hook-stat{display:flex;align-items:center;gap:var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:0 0 var(--space-m);}
+.hook-stat-num{font-size:clamp(1.5rem,2.6vw,1.9rem);font-weight:800;color:var(--jai-a);line-height:1;letter-spacing:-.01em;flex-shrink:0;}
+.hook-stat-body{min-width:0;}
+.hook-stat-lead{font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);line-height:1.35;margin:0 0 .15rem;}
+.hook-stat-sub{font-size:var(--font-size-xs);color:var(--color-ink-3);margin:0;line-height:1.45;}
+@media(max-width:580px){.hook-stat{flex-direction:column;align-items:flex-start;gap:var(--space-xs);}}
+@media(max-width:600px){.stat-metrics-grid{grid-template-columns:repeat(2,1fr);}.stat-metric:first-child,.stat-metric:last-child{border-radius:0;}.stat-metric:nth-child(2){border-radius:0;}}
+
+.callout-note{background:var(--color-light-blue);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.callout-note-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-xs);}
+.callout-note p{font-size:var(--font-size-sm);color:var(--color-ink-2);margin:0;line-height:1.6;}
+.callout-note.callout-purple{background:var(--purple-tint);border-left-color:var(--jai-a);}
+.callout-note.callout-purple .callout-note-label{color:var(--jai-a);}
+
+.obl-table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.obl-table{width:100%;border-collapse:collapse;font-size:.8125rem;min-width:580px;}
+.obl-table th{padding:.75rem 1rem;background:var(--jai-a);color:#fff;font-weight:700;text-align:left;border-bottom:1px solid #ffffff18;border-right:1px solid #ffffff18;font-size:.75rem;letter-spacing:.04em;}
+.obl-table th:last-child{border-right:none;}
+.obl-table td{padding:.75rem 1rem;border-bottom:var(--border);border-right:var(--border);vertical-align:top;line-height:1.5;color:var(--color-ink-2);font-size:.8rem;}
+.obl-table td:last-child{border-right:none;}
+.obl-table tr:last-child td{border-bottom:none;}
+.obl-table td:first-child{font-weight:700;color:var(--color-ink);background:var(--color-cream);}
+.obl-note{font-size:.72rem;color:var(--color-ink-3);display:block;margin-top:.4rem;font-weight:400;}
+
+.phase-cards{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0 var(--space-l);}
+.phase-item{display:flex;align-items:stretch;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;}
+.phase-accent{width:4px;flex-shrink:0;}
+.pa-1{background:var(--color-teal);}
+.pa-2{background:var(--color-navy);}
+.pa-3{background:var(--color-grey);}
+.pa-4{background:var(--jai-a);}
+.pa-5{background:var(--color-red);}
+.phase-body{flex:1;padding:var(--space-s) var(--space-m);background:var(--color-white);}
+.phase-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--color-ink-3);display:block;margin-bottom:var(--space-2xs);}
+.phase-title{font-weight:700;color:var(--color-ink);font-size:var(--font-size-sm);margin-bottom:.25rem;}
+.phase-desc{font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;margin:0;}
+
+.key-facts{background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.kf-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-s);}
+.key-facts ul{margin-bottom:0;}
+.key-facts li{font-size:.8125rem;line-height:1.6;}
+
+.jag-cta{display:flex;align-items:center;gap:var(--space-m);border:1px solid transparent;background:linear-gradient(#fff,#fff) padding-box, linear-gradient(90deg,#5300CE,#E22B83) border-box;border-radius:var(--border-radius);padding:var(--space-s) var(--space-m);margin:var(--space-l) 0;transition:box-shadow .2s;position:relative;overflow:hidden;}
+.jag-cta::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,#5300ce0d 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.jag-cta:hover{box-shadow:0 8px 32px rgba(83,0,206,.12);}
+.jag-cta-label{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.15rem var(--space-s);border-radius:9999px;white-space:nowrap;margin-bottom:var(--space-2xs);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .15rem;line-height:1.35;}
+.jag-cta-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.5;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:.875rem;font-weight:600;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.5rem 1.25rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;min-width:140px;border-radius:var(--border-radius-sm);transition:opacity .2s;}
+.jag-cta-btn:hover{opacity:.88;color:#fff;border-bottom:none;}
+.jag-cta--red{background:var(--color-white);border:1px solid var(--color-red);}
+.jag-cta--red .jag-cta-label{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn:hover{background:var(--color-grey);opacity:1;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:flex-start;max-width:100%;}}
+
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;border-top:var(--border);background:var(--color-white);}
+details{height:auto;overflow:hidden;transition:height .3s ease;}
+details:not([open]){height:3.75rem;}
+
+.bullet-list{list-style:disc;padding-left:1.4rem;margin:var(--space-s) 0 var(--space-m);}
+.bullet-list li{font-size:var(--font-size-sm);color:var(--color-ink-2);line-height:1.65;margin-bottom:.4rem;}
+
+.chart-card{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--color-white);}
+.chart-head{margin-bottom:var(--space-m);display:flex;flex-direction:column;gap:.1rem;}
+.chart-title{font-size:.9rem;font-weight:700;color:var(--color-ink);}
+.chart-source{font-size:.65rem;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.05em;}
+.chart-foot{font-size:.72rem;color:var(--color-ink-3);margin-top:var(--space-s);line-height:1.5;font-style:italic;}
+
+.bar-chart{display:flex;flex-direction:column;gap:var(--space-m);}
+.bar-row{display:grid;grid-template-columns:230px 1fr 64px;align-items:center;gap:var(--space-s);}
+.bar-row .bar-label{font-size:.78rem;color:var(--color-ink-2);font-weight:600;line-height:1.3;}
+.bar-track{background:var(--color-cream);border-radius:9999px;height:12px;overflow:hidden;position:relative;}
+.bar-fill{height:100%;border-radius:9999px;display:block;width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1);}
+.bar-value{font-size:.9rem;font-weight:800;text-align:right;color:var(--color-ink);}
+.c-red{background:var(--color-red);} .v-red{color:var(--color-red);}
+.c-purple{background:var(--jai-a);} .v-purple{color:var(--jai-a);}
+.c-teal{background:var(--color-teal);} .v-teal{color:var(--color-teal);}
+.c-navy{background:var(--color-navy);} .v-navy{color:var(--color-navy);}
+.c-grey{background:var(--color-grey);} .v-grey{color:var(--color-grey);}
+@media(max-width:640px){.bar-row{grid-template-columns:1fr;gap:.3rem;}.bar-value{text-align:left;}}
+
+.next-grid{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0 var(--space-l);}
+.next-card{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);flex-wrap:wrap;transition:border-color .2s,box-shadow .2s;}
+.next-card:hover{border-color:var(--jai-a);box-shadow:0 4px 16px rgba(83,0,206,.08);}
+.next-card-title{font-weight:700;color:var(--color-ink);font-size:.85rem;margin-bottom:.2rem;}
+.next-card-desc{font-size:.78rem;color:var(--color-ink-2);line-height:1.5;margin:0;}
+.next-card-link{flex-shrink:0;font-size:.78rem;font-weight:600;color:var(--jai-a);border-bottom:1px solid #5300ce40;white-space:nowrap;}
+.next-card-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Before/after workflow diagram */
+.workflow-compare{display:flex;gap:var(--space-m);align-items:stretch;flex-wrap:wrap;}
+.workflow-col{flex:1;min-width:220px;display:flex;flex-direction:column;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;background:var(--color-white);}
+.workflow-col-head{padding:var(--space-s) var(--space-m);font-weight:700;font-size:.8rem;color:#fff;display:flex;align-items:center;gap:.4rem;}
+.workflow-col-head.wf-before{background:var(--color-grey);}
+.workflow-col-head.wf-after{background:linear-gradient(90deg,#5300CE,#E22B83);}
+.workflow-steps{padding:var(--space-m);display:flex;flex-direction:column;gap:var(--space-s);flex:1;}
+.workflow-step{display:flex;gap:.6rem;align-items:flex-start;font-size:.78rem;color:var(--color-ink-2);line-height:1.5;}
+.workflow-step-num{width:20px;height:20px;border-radius:50%;background:var(--color-cream);color:var(--color-ink-3);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.workflow-time{padding:var(--space-s) var(--space-m);border-top:var(--border);font-size:.85rem;font-weight:800;text-align:center;}
+.workflow-time.wf-time-before{color:var(--color-ink-3);}
+.workflow-time.wf-time-after{color:var(--jai-a);}
+.workflow-arrow{display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--color-ink-3);flex:0 0 auto;}
+@media(max-width:640px){.workflow-arrow{transform:rotate(90deg);}}
+
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">Why Manual Review Doesn't Scale</a>
+      <a class="toc-link" href="#s2">What Claude Actually Catches</a>
+      <a class="toc-link" href="#s3">Step-by-Step Walkthrough</a>
+      <a class="toc-link" href="#s4">What Still Needs a Human</a>
+      <a class="toc-link" href="#s5">JAGGAER vs. Prompting Yourself</a>
+      <a class="toc-link" href="#s6">FAQ</a>
+      <a class="toc-link" href="#s7">Next Steps</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <span class="article-label">AI in S2P · Claude for Contracts</span>
+        <div class="article-badges">
+          <span class="badge badge-blue">Contract Risk Management</span>
+          <span class="badge badge-blue">Claude for Contracts</span>
+        </div>
+        <h1 id="s0">Stop Manually Hunting for Risky Clauses in 2026. Use Claude to Find Them in Your Contracts.</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            4–5 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Published</span><time datetime="2026-08">August 2026</time></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <p>Teams use Claude to review procurement contracts for expiry and risk by checking every clause, deadline, and renewal trap against a live contract register. That is procurement contract risk management running continuously, not once at signing. This is part of the broader move towards <span class="link-pending">AI in Source-to-Pay</span>. This is built for procurement and contract operations managers who own compliance and expiry tracking on a growing contract portfolio. Most already know AI can review contracts. What's missing is a version that works against real, current data instead of a one-time upload.</p>
+
+    <p>This article covers why manual review fails, what Claude actually catches, and a step-by-step walkthrough. It also covers what still needs a human, and how a connected, governed setup differs from prompting Claude yourself. AI contract review for procurement is becoming a practical alternative to manual reviews, helping teams identify risks continuously.</p>
+
+    <hr class="section-divider">
+
+    <!-- S1 -->
+    <span class="section-eyebrow">The Manual Review Problem</span>
+    <h2 id="s1">Why Manually Hunting for Risky Clauses Doesn't Scale</h2>
+
+    <p>Manual procurement contract review doesn't scale because a contract is reviewed once, at signing, and misses everything that follows. The risk keeps on building for years after, until a clause is invoked. Procurement contracts lose 11% of their value after signature, according to a <a href="https://info.worldcc.com/closing-the-procurement-value-gap" target="_blank" rel="noopener">World Commerce &amp; Contracting and Ironclad report</a>. Missed savings, unauthorized changes, and poor renewal planning each account for <a href="https://info.worldcc.com/closing-the-procurement-value-gap" target="_blank" rel="noopener">2–3%</a> of that loss. Problems surface months later, when a supplier invokes a clause nobody remembered, or a contract auto-renews past the cancellation window. By then, the leverage is gone.</p>
+
+    <div class="stat-metrics">
+      <span class="stat-metrics-kicker">Where Contract Value Leaks After Signing</span>
+      <div class="stat-metrics-grid" style="grid-template-columns:repeat(2,1fr);">
+        <div class="stat-metric">
+          <span class="stat-num">11%</span>
+          <span class="stat-label">Total value lost post-signature</span>
+        </div>
+        <div class="stat-metric">
+          <span class="stat-num">2–3%</span>
+          <span class="stat-label">Missed savings</span>
+        </div>
+      </div>
+      <span class="stat-sub">Source: <a href="https://info.worldcc.com/closing-the-procurement-value-gap" target="_blank" rel="noopener" style="color:var(--color-ink-3);border-bottom-color:#6a718060;">World Commerce &amp; Contracting and Ironclad</a></span>
+    </div>
+
+    <p>Procurement teams can't re-read every contract against live supplier performance data on top of daily sourcing work. As contract volume grows, it only gets worse for contract operations teams who are already tracking compliance and expiry dates by hand.</p>
+
+    <p>That's the real gap in procurement contract risk management. Contracts get treated as paperwork instead of ongoing commercial relationships that need continuous review. This is exactly why more teams now use Claude to review procurement contracts for expiry and risk, instead of relying on a once-a-year read.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">JAGGAER One: The Contract Management Software with AI built in</p>
+        <p class="jag-cta-sub">JAGGAER Contracts automates workflows, provides AI-driven contract insights, and delivers up to 20% savings from re-sourcing expiring or auto-renewing contracts.</p>
+      </div>
+      <a href="https://www.jaggaer.com/wp-content/uploads/JAGGAER-Contracts-Product-Brief.pdf" class="jag-cta-btn" target="_blank" rel="noopener">Explore Contract Management</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S2 -->
+    <span class="section-eyebrow">Capability Walkthrough</span>
+    <h2 id="s2">What Claude Actually Catches in a Procurement Contract in 2026</h2>
+
+    <div class="chart-card">
+      <div class="chart-head">
+        <span class="chart-title">Manual Read vs. Claude for Contracts</span>
+        <span class="chart-source">Workflow Comparison</span>
+      </div>
+      <div class="workflow-compare">
+        <div class="workflow-col">
+          <div class="workflow-col-head wf-before">Manual Read</div>
+          <div class="workflow-steps">
+            <div class="workflow-step"><span class="workflow-step-num">1</span><span>Export the contract to a standalone document</span></div>
+            <div class="workflow-step"><span class="workflow-step-num">2</span><span>Read every clause manually against memory of the playbook</span></div>
+            <div class="workflow-step"><span class="workflow-step-num">3</span><span>Log flagged risks and dates in a separate spreadsheet</span></div>
+          </div>
+          <div class="workflow-time wf-time-before">Hours per contract</div>
+        </div>
+        <div class="workflow-arrow" aria-hidden="true">→</div>
+        <div class="workflow-col">
+          <div class="workflow-col-head wf-after">Claude for Contracts</div>
+          <div class="workflow-steps">
+            <div class="workflow-step"><span class="workflow-step-num">1</span><span>Runs directly against your live JAGGAER contract register</span></div>
+            <div class="workflow-step"><span class="workflow-step-num">2</span><span>Checks every clause against your configured playbook automatically</span></div>
+            <div class="workflow-step"><span class="workflow-step-num">3</span><span>Flagged risks land directly in your JAGGAER contract register</span></div>
+          </div>
+          <div class="workflow-time wf-time-after">Minutes per contract</div>
+        </div>
+      </div>
+    </div>
+
+    <p>What Claude actually catches comes down to Anthropic's own legal plugin: playbook-checked clauses, redline suggestions, and risk-tiered flags. Its <strong>/review-contract</strong> command checks a contract clause-by-clause against your organization's configured negotiation playbook. Each clause gets a GREEN, YELLOW, or RED flag, along with a specific redline suggestion where it deviates. A separate <strong>/triage-nda</strong> command sorts incoming Non-Disclosure Agreements into standard approval, counsel review, or full review. A <strong>/vendor-check</strong> command pulls the status of any tracked vendor agreement on demand. None of this requires exporting a document to a separate tool. It is procurement contract risk management running directly inside <a href="https://www.jaggaer.com/solutions/jai" target="_blank" rel="noopener">JAI</a>, JAGGAER's AI layer that embeds Claude's contract capabilities directly into the platform.</p>
+
+    <div class="chart-card">
+      <div class="chart-head">
+        <span class="chart-title">Impact of AI-Assisted Contract Review</span>
+        <span class="chart-source"><a href="https://www.jaggaer.com/solutions/contracts-ai" target="_blank" rel="noopener">JAGGAER</a></span>
+      </div>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <span class="bar-label">Legal team efficiency improvement</span>
+          <div class="bar-track"><span class="bar-fill c-purple" data-w="60"></span></div>
+          <span class="bar-value v-purple">60%</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Increase in contract approval rate</span>
+          <div class="bar-track"><span class="bar-fill c-navy" data-w="50"></span></div>
+          <span class="bar-value v-navy">50%</span>
+        </div>
+      </div>
+      <p class="chart-foot">JAGGAER reports up to these improvements from AI-assisted contract review.</p>
+    </div>
+
+    <p>JAGGAER reports that AI-assisted contract review improves legal team efficiency by up to <a href="https://www.jaggaer.com/solutions/contracts-ai" target="_blank" rel="noopener">60%</a> and increases contract approval by an average of <a href="https://www.jaggaer.com/solutions/contracts-ai" target="_blank" rel="noopener">50%</a>. Those are the practical benefits of AI in procurement contract management. Risk gets caught continuously through playbook-based, clause-level flags instead of a generic AI summary produced once every year.</p>
+
+    <hr class="section-divider">
+
+    <!-- S3 -->
+    <span class="section-eyebrow">Tutorial</span>
+    <h2 id="s3">A Step-by-Step Walkthrough: Finding Risky Clauses and Expiry Traps</h2>
+
+    <p>Here's how teams use Claude to review procurement contracts for expiry, risk and missed clauses in 7 steps from account setup to human sign-off.</p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <div class="phase-accent pa-1"></div>
+        <div class="phase-body">
+          <span class="phase-label">Step 1</span>
+          <p class="phase-title">Set up governance first</p>
+          <p class="phase-desc">Confirm or create an Anthropic Enterprise account before any live contract touches the system. It includes SSO, role-based permissions, audit logs, and configurable retention.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-2"></div>
+        <div class="phase-body">
+          <span class="phase-label">Step 2</span>
+          <p class="phase-title">Install the tools</p>
+          <p class="phase-desc">Install Claude Desktop for macOS or Windows, then add the Claude Legal plugin. This enables /review-contract, /triage-nda, and /vendor-check inside your workflow.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-3"></div>
+        <div class="phase-body">
+          <span class="phase-label">Step 3</span>
+          <p class="phase-title">Confirm the security baseline</p>
+          <p class="phase-desc">Check privacy and access settings on first launch, before uploading any supplier data. Anthropic Enterprise is SOC 2 Type II certified, GDPR compliant, and HIPAA-eligible.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-4"></div>
+        <div class="phase-body">
+          <span class="phase-label">Step 4</span>
+          <p class="phase-title">Review the contract clause-by-clause</p>
+          <p class="phase-desc">Run /review-contract against your organization's configured negotiation playbook. Each clause returns a GREEN, YELLOW, or RED flag, with a redline suggestion wherever it deviates.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-5"></div>
+        <div class="phase-body">
+          <span class="phase-label">Step 5</span>
+          <p class="phase-title">Triage incoming NDAs separately</p>
+          <p class="phase-desc">Run /triage-nda to sort each NDA into standard approval, counsel review, or full review, instead of reviewing every single one manually.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-1"></div>
+        <div class="phase-body">
+          <span class="phase-label">Step 6</span>
+          <p class="phase-title">Check vendor and renewal exposure</p>
+          <p class="phase-desc">Run /vendor-check for the live status of any tracked agreement. Then extract obligations, payment terms, renewal clauses, and liability caps directly from the contract.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-2"></div>
+        <div class="phase-body">
+          <span class="phase-label">Step 7</span>
+          <p class="phase-title">Route every flag to a human</p>
+          <p class="phase-desc">Send YELLOW and RED flags to legal or procurement counsel. A redline suggestion is a starting point for negotiation, not a signed decision.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Think of this walkthrough as a procurement contract review checklist. It runs on Claude's own commands, but the contract register, obligation tracking, and renewal alerts behind it live in <a href="https://www.jaggaer.com/solutions/contracts" target="_blank" rel="noopener">JAGGAER Contract Management</a>.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">JAI uses Claude for Contract Management</p>
+        <p class="jag-cta-sub">JAGGAER's embedded AI platform runs Claude's contract commands against live data, under role-based permissions and audit logs.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/jai" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S4 -->
+    <span class="section-eyebrow">Honest Limitations</span>
+    <h2 id="s4">What It Catches vs. What Still Needs a Human</h2>
+
+    <p>Claude reliably catches the pattern. It automates highlighting a missed deadline, a clause that breaks from your playbook, a risky NDA or other common contract compliance risks in procurement. But deciding what to do about it and how to resolve it still needs a human. Claude can scan a contract register and flag every renewal approaching its cancel-by date automatically. It can also compare a clause against your standard playbook and produce a redline suggestion. But what requires a human is to decide whether that redline is worth pushing for, or whether a flagged risk is one your business should actually accept.</p>
+
+    <div class="callout-note">
+      <span class="callout-note-label">For Example</span>
+      <p>An AI system that's 92% accurate sounds exceptional until you realize that 8% of 10,000 contracts represents 800 missed risks. If those include missed termination clauses, incomplete non-compete language, or compliance gaps, that 8% can cost more than the software saves.</p>
+    </div>
+
+    <p>Anthropic states that every output from the legal plugin should be reviewed by licensed attorneys and not to be used as legal advice or a legal conclusion. The attorney or procurement lead reviewing it is responsible for the final decision. That's the honest split for this workflow: Claude finds the risk and drafts the response, and a person still decides what happens next.</p>
+
+    <hr class="section-divider">
+
+    <!-- S5 -->
+    <span class="section-eyebrow">The Differentiator</span>
+    <h2 id="s5">Using Claude Inside JAGGAER vs. Prompting It Yourself</h2>
+
+    <p>Claude used on its own has no visibility into a company's contracts, suppliers, or ERP systems and it can only work with what the user prompts it to. It cannot open a live contract, check a supplier record, or send an approval without that connection. Inside JAGGAER, Claude connects directly to the contract register through Model Context Protocol, so it works from the current data rather than a copied document.</p>
+
+    <div class="obl-table-wrap">
+      <table class="obl-table">
+        <caption style="caption-side:top;text-align:left;padding:.75rem 1rem;font-size:.9rem;font-weight:700;color:var(--color-ink);background:var(--color-cream);border-bottom:var(--border);">Claude for Contracts vs. DIY AI Contract Review</caption>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Native in JAGGAER</th>
+            <th>Generic Claude Chat</th>
+            <th>Claude Cowork + Custom Prompts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Live contract register access</td>
+            <td>Connected via Model Context Protocol</td>
+            <td>Not connected; requires manual upload</td>
+            <td>Works from copied documents, not live data</td>
+          </tr>
+          <tr>
+            <td>Data protection</td>
+            <td>SOC 2 Type II, SSO, RBAC, audit logs, configurable retention</td>
+            <td>Not equivalent to Enterprise-plan protections</td>
+            <td>Depends on the underlying plan tier</td>
+          </tr>
+          <tr>
+            <td>Governance controls</td>
+            <td>Operates on live data under defined security controls</td>
+            <td>Produces a single answer to a single prompt</td>
+            <td>Broader desktop-file automation, still prompt-driven</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Data protection is the other key difference. Claude's Free and Team plans do not carry the same data protections as the Enterprise plan. Claude Enterprise includes SOC 2 Type II–backed security, Single Sign-On, SCIM provisioning, role-based access control, audit logs, and configurable data retention controls, as outlined in <a href="https://www.anthropic.com/transparency/voluntary-commitments" target="_blank" rel="noopener">Anthropic's data-handling policy.</a> For API deployments, Zero Data Retention is available for eligible customers by request rather than by default.</p>
+
+    <div class="hook-stat">
+      <span class="hook-stat-num">46%</span>
+      <div class="hook-stat-body">
+        <p class="hook-stat-lead">Of companies have a formal AI governance policy in place.</p>
+        <p class="hook-stat-sub">57% cite the skills gap as the primary barrier. <a href="https://www.gartner.com/peer-community/oneminuteinsights/omi-ai-governance-frameworks-responsible-ai-33q" target="_blank" rel="noopener">2025 Gartner research</a></p>
+      </div>
+    </div>
+
+    <p>Only 46% of companies have a formal AI governance policy in place, according to <a href="https://www.gartner.com/peer-community/oneminuteinsights/omi-ai-governance-frameworks-responsible-ai-33q" target="_blank" rel="noopener">2025 Gartner research</a>, and 57% cite the skills gap as the primary barrier. That's one of the clearest benefits of AI in procurement contract management. When used alone, Claude produces a single answer to a single prompt. When used inside JAGGAER, it operates on live data under defined security controls.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">JAGGAER AI</span>
+        <p class="jag-cta-head">Contract Intelligence with JAGGAER AI</p>
+        <p class="jag-cta-sub">JAI extracts key terms, obligations and risk clauses from supplier provided contracts, avoiding manual page-by-page review.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/jai" class="jag-cta-btn" target="_blank" rel="noopener">Explore JAI</a>
+    </div>
+
+    <div class="callout-note callout-purple">
+      <span class="callout-note-label">Disclaimer</span>
+      <p>AI-assisted contract review supports legal and procurement teams. It does not replace legal or procurement counsel review. Every flagged risk should be verified by a qualified professional before any decision is made.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- FAQ -->
+    <span class="section-eyebrow">People Also Ask</span>
+    <h2 id="s6">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>What is Claude for Contracts? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Claude for Contracts refers to using Claude's legal plugins with playbook-based clause review, redlining, and renewal tracking, applied specifically to reviewing and streamlining legal workflows.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I rely on AI to catch risky contract clauses automatically? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">AI is a reliable tool for procurement contract risk management, flagging clause deviations and missing terms automatically. But final risk decisions still require human judgment on complex or unusual contract language.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Does Claude for Contracts replace legal or procurement review? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">No, Claude for Contracts does not replace legal or procurement review. It supports mitigating risks in procurement contracts by identifying potential issues early. Anthropic states every plugin output is a draft for human review, meant to be verified by a qualified professional before it's relied on.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is my contract data secure when Claude reviews it? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Yes, Claude offers enterprise-grade security features such as encryption, access controls, and audit logging. Anthropic also states that customer data is not used to train its models by default, helping organizations review contracts securely.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What file formats can Claude for Contracts read? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Claude can read standard document and text formats including PDF, DOCX, and TXT when reviewing agreements.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How is this different from using Claude.ai or Claude Cowork directly? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Claude for Contracts is a specialized legal application layer with pre-built playbook workflows, whereas Claude.ai is a general-purpose chat interface and Claude Cowork is a broader desktop-file automation agent.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How long does an automated contract review take? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">An automated contract review typically takes a few minutes rather than several hours. The exact time depends on document length and complexity.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can it flag contracts approaching expiry or auto-renewal? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Claude for Contracts flags expirations and auto renewals by processing documents through its specialized /renewal-tracker skill, mapping precise cancel-by notice deadlines into an organized, trackable renewal register file.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <!-- NEXT STEPS -->
+    <span class="section-eyebrow">Keep Going</span>
+    <h2 id="s7">Next Steps</h2>
+
+    <p>Contract risk management doesn't stop at clause review. It extends across sourcing, supplier compliance, and the AI layer running underneath all of it. This is why organizations are investing in the best contract intelligence tools for procurement risk identification in 2025 and 2026.</p>
+
+    <div class="next-grid">
+      <div class="next-card">
+        <div>
+          <p class="next-card-title">JAGGAER's Embedded AI Platform</p>
+          <p class="next-card-desc">JAI is the AI layer running across JAGGAER's contract, sourcing, supplier discovery, contracting, invoicing, payment and supplier workflows, with the governance controls covered in this article.</p>
+        </div>
+        <a href="https://www.jaggaer.com/solutions/jai" class="next-card-link" target="_blank" rel="noopener">Read More →</a>
+      </div>
+      <div class="next-card">
+        <div>
+          <p class="next-card-title">JAGGAER Contract Management</p>
+          <p class="next-card-desc">JAGGAER's CLM platform covers authoring, negotiation, clause libraries, e-signature, and automated renewal and obligation tracking, all in one repository.</p>
+        </div>
+        <a href="https://www.jaggaer.com/solutions/contracts" class="next-card-link" target="_blank" rel="noopener">Read More →</a>
+      </div>
+      <div class="next-card">
+        <div>
+          <p class="next-card-title">Supplier Compliance Tracking</p>
+          <p class="next-card-desc">JAGGAER tracks supplier certifications and compliance data in one place, flags non-compliance automatically, and reports on due diligence for regulators and auditors.</p>
+        </div>
+        <a href="https://www.jaggaer.com/need/supplier-compliance" class="next-card-link" target="_blank" rel="noopener">Read More →</a>
+      </div>
+    </div>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">JAGGAER Contracts AI</p>
+        <p class="jag-cta-sub">A contract processing platform powered by AI and ML that saves 50% of the manual labor cost by automating data extraction.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/contracts-ai" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo</a>
+    </div>
+
+  </article>
+
+  <!-- EXPERT SIDEBAR -->
+  <aside class="expert-sidebar" aria-label="Data at a glance">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">World Commerce &amp; Contracting / Ironclad</span>
+        <span class="exp-num red">11%</span>
+        <p class="exp-stat">Of <strong>procurement contract value</strong> is lost after signature, split across missed savings, unauthorized changes, and poor renewal planning.</p>
+        <a href="https://info.worldcc.com/closing-the-procurement-value-gap" class="exp-link" target="_blank" rel="noopener">View source →</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">JAGGAER</span>
+        <span class="exp-num red">60% / 50%</span>
+        <p class="exp-stat">Improvement in <strong>legal team efficiency</strong> and increase in <strong>contract approval rate</strong> from AI-assisted review.</p>
+        <a href="https://www.jaggaer.com/solutions/contracts-ai" class="exp-link" target="_blank" rel="noopener">View source →</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Gartner · 2025</span>
+        <span class="exp-num red">46%</span>
+        <p class="exp-stat">Of companies have a <strong>formal AI governance policy</strong>; 57% cite the skills gap as the top barrier.</p>
+        <a href="https://www.gartner.com/peer-community/oneminuteinsights/omi-ai-governance-frameworks-responsible-ai-33q" class="exp-link" target="_blank" rel="noopener">View source →</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+
+// Animate bar charts into view
+const animObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    if (el.classList.contains('bar-fill')) el.style.width = el.dataset.w + '%';
+    animObs.unobserve(el);
+  });
+}, { threshold: 0.35 });
+document.querySelectorAll('.bar-fill').forEach(el => animObs.observe(el));
+</script>
+
+</body>
+</html>
