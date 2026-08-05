@@ -224,8 +224,8 @@
               "title": "Stop Manually Hunting for Risky Clauses. Use Claude to Find Them in Your Contracts",
               "format": "MD File / Tutorial",
               "assignee": "null",
-              "status": "writing",
-              "revision_count": 0,
+              "status": "marketing-review",
+              "revision_count": 1,
               "primary_keyword": "use Claude review procurement contracts expiry risk",
               "secondary_keyword": "Claude contract analysis S2P tutorial",
               "intent": "commercial",
@@ -238,13 +238,18 @@
               "content_type": "ai-in-s2p",
               "phase": 2,
               "funnel": "MOFU",
-              "last_updated": "2026-07-28T11:11:04.927Z",
-              "last_updated_by": "m-pifrn",
+              "last_updated": "2026-08-05T08:12:54.736Z",
+              "last_updated_by": "jason",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
                   "ts": "2026-07-13T11:06:31.974Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-08-05T08:12:54.736Z",
+                  "by": "jason"
                 }
               ],
               "return_to_stage": null,
@@ -269,8 +274,9 @@
                 }
               ],
               "brief_last_updated": "2026-07-28T11:11:04.927Z",
-              "last_upload": "2026-07-28T11:09:40.042Z",
-              "last_upload_by": "m-pifrn"
+              "last_upload": "2026-08-05T08:12:54.736Z",
+              "last_upload_by": "jason",
+              "deliverable_ext": "html"
             },
             {
               "id": "p-c2-2",
