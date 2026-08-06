@@ -1,0 +1,483 @@
+<!-- uploaded by m-5jitd at 2026-08-06T08:22:57.396Z -->
+<!-- piece: What Happens When You Ask Claude to Audit Your Supplier Contracts -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Supplier Contract Audit: Real Results</title>
+<meta name="description" content="See what actually happens when Claude audits a real supplier contract: what it catches, what it misses, and the outcomes that follow.">
+<link rel="canonical" href="https://www.jaggaer.com/claude-supplier-contract-audit-results">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"What Happens When You Ask Claude to Audit Your Supplier Contracts","description":"See what actually happens when Claude audits a real supplier contract: what it catches, what it misses, and the outcomes that follow.","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"datePublished":"2026-08","dateModified":"2026-08","author":{"@type":"Organization","name":"JAGGAER"}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What actually happens when you ask Claude to audit a supplier contract?","acceptedAnswer":{"@type":"Answer","text":"Claude reads the full document and returns specific findings, such as flagged clauses, dates, and obligations, rather than a general summary. In the Meridian audit above, that meant three findings in under three minutes, on a contract most teams would have skimmed rather than reread. Legal or procurement still decides what to do with each one."}},{"@type":"Question","name":"What kinds of risks or clauses does Claude reliably catch?","acceptedAnswer":{"@type":"Answer","text":"Renewal deadlines, liability and indemnification asymmetries, and obligations with no assigned owner. These are pattern-based: dates, thresholds, and comparisons against standard clause language. That's also why AI contract review speed hundreds of pages deep still holds up: the reading is fast because the pattern is consistent, not because the document is short."}},{"@type":"Question","name":"What does an AI contract audit miss that a human still needs to catch?","acceptedAnswer":{"@type":"Answer","text":"Context the document doesn't contain. Claude can flag a clause correctly and still miss whether it's actually a problem, because of a side agreement or negotiation history the audit never saw. Jurisdiction-specific enforceability is the other gap. That takes legal tuning, not just document reading."}},{"@type":"Question","name":"Does an AI-audited contract still need legal or procurement sign-off?","acceptedAnswer":{"@type":"Answer","text":"Yes. The audit narrows down which clauses need attention. It doesn't decide whether a flagged term is acceptable, or replace the judgment call that goes with that decision. Every finding in this piece still needed a person to act on it."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    1rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.stat{font-family:var(--font-display);font-weight:600;color:var(--jai-a);font-variant-numeric:tabular-nums;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Badges */
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-family:var(--font-display);font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.section-eyebrow{display:block;font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+
+/* Progress bar */
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-label{display:block;font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:720px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-family:var(--font-display);font-size:.625rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.08em;}
+
+/* Use Case Table */
+.obl-table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.obl-table{width:100%;border-collapse:collapse;font-size:.8125rem;min-width:580px;}
+.obl-table th{padding:.75rem 1rem;background:var(--jai-a);color:#fff;font-family:var(--font-display);font-weight:600;text-align:left;border-bottom:1px solid #ffffff18;border-right:1px solid #ffffff18;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;}
+.obl-table th:last-child{border-right:none;}
+.obl-table td{padding:.75rem 1rem;border-bottom:var(--border);border-right:var(--border);vertical-align:top;line-height:1.5;color:var(--color-ink-2);}
+.obl-table td:last-child{border-right:none;}
+.obl-table tr:last-child td{border-bottom:none;}
+.obl-table td:first-child{font-weight:700;color:var(--color-ink);background:var(--color-cream);}
+.obl-note{font-size:.72rem;color:var(--color-ink-3);display:block;margin-top:.2rem;font-weight:400;}
+
+/* Modifier for data tables with long-form cell content (vs. short label/takeaway tables) */
+.obl-table--data td:first-child{font-weight:600;color:var(--color-ink-2);background:none;font-size:.8125rem;}
+.obl-table--data td:last-child{color:var(--color-ink-2);font-weight:400;font-size:.8125rem;}
+
+/* Expert Sidebar ("What the Experts Are Saying") */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.6rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--color-ink);line-height:1;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.68rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:.68rem;}
+.exp-link{font-size:.62rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.expert-sidebar{display:none;}}
+
+/* CTA block - JAI gradient theme */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:.95rem;font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:.875rem;font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+.jag-cta--purple{border-color:var(--jai-a);}
+.jag-cta--purple .jag-cta-btn{background:var(--jai-a);}
+.jag-cta--purple .jag-cta-btn:hover{background:var(--color-grey);}
+.jag-cta--gradient{border-color:var(--jai-a);}
+.jag-cta--gradient .jag-cta-btn{background:var(--jai-gradient);}
+.jag-cta--gradient .jag-cta-btn:hover{background:var(--color-grey);}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* Next Steps resource cards */
+.next-cards{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-m);margin:var(--space-m) 0 var(--space-l);}
+.next-card{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m);background:var(--color-cream);}
+.next-card-title{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-xs) 0 var(--space-2xs);line-height:1.3;}
+.next-card p{font-size:.8125rem;color:var(--color-ink-2);margin-bottom:var(--space-xs);}
+.next-card-link{font-size:.8125rem;font-weight:600;color:var(--color-ink-2);margin-bottom:0;}
+.next-card-link a{font-weight:600;}
+@media(max-width:580px){.next-cards{grid-template-columns:1fr;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item summary::marker{content:none;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.9375rem;color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+details{height:auto;overflow:hidden;transition:height .3s ease;}
+details:not([open]){height:3.75rem;}
+
+/* Closing notes */
+.abbrev-note{font-size:.75rem;color:var(--color-ink-3);line-height:1.6;margin-top:var(--space-l);}
+.disclaimer-note{font-size:.75rem;color:var(--color-ink-3);line-height:1.6;margin-top:var(--space-s);font-style:italic;}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style></head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">The Problem: Supplier Contracts Sit Unread Until Something Breaks in 2026</a>
+      <a class="toc-link" href="#s2">What We Asked Claude to Do</a>
+      <a class="toc-link" href="#s3">The Results: What Claude Actually Caught</a>
+      <a class="toc-link" href="#s4">What It Missed (and Why That's Fine)</a>
+      <a class="toc-link" href="#s5">From Audit to Action: What Changes for Procurement in 2026</a>
+      <a class="toc-link" href="#s6">Claude for Contracts vs. Generic AI Contract Review in 2026</a>
+      <a class="toc-link" href="#s7">Frequently Asked Questions</a>
+      <a class="toc-link" href="#s8">Next Steps</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <span class="article-label">AI in Source-to-Pay &middot; Claude for Contracts</span>
+        <div class="article-badges">
+          <span class="badge badge-blue">Problem-Solution</span>
+        </div>
+        <h1 style="font-weight:700;">What Happens When You Ask <strong style="color:#5300CE;">Claude</strong> to Audit Your Supplier Contracts</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5&ndash;6 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Published: <time datetime="2026-08">August 2026</time></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <p>When Claude audits a real supplier contract, it flags concrete risks in minutes: missed renewal windows, one-sided liability terms, obligations nobody is tracking. It does not replace legal or procurement judgment. It gives a team a specific list to act on, not a stack of pages to reread.</p>
+
+    <p>We asked Claude to audit a real supplier contract: the kind that sits untouched in procurement's back catalog until a renewal deadline forces someone to open it. Here's exactly what came back.</p>
+
+    <p>This is for procurement and contract-ops teams who have already heard the pitch that AI reviews contracts faster than a person. The real question is different. What does a Claude supplier contract audit actually catch? What does it miss? And is the output something a team would use, or something they'd quietly redo from scratch? We ran one audit, start to finish, and kept both the wins and the gaps.</p>
+
+    <hr class="section-divider">
+
+    <!-- S1 -->
+    <h2 id="s1">The Problem: Supplier Contracts Sit Unread Until Something Breaks in 2026</h2>
+
+    <p>No procurement team has the hours to reread hundreds of active contracts on a rolling basis, so problems only surface after something breaks. Most contracts get read twice: once at signing, and once when the business already has a problem.</p>
+
+    <p>According to <a href="https://www.worldcc.com/Resources/Content-Hub/details/Poor-Contract-Management-Continues-To-Costs-Companies-9-Of-Their-Bottom-Line" target="_blank" rel="noopener">World Commerce &amp; Contracting's contract-management benchmark research</a>, the average organization loses 9.2% of annual revenue to exactly this pattern. The causes are familiar: missed deadlines, unfavorable contract renewals, and terms nobody tracked. A contract renewal window closes without anyone flagging it, and the buyer is locked into another term at the old pricing. A liability clause nobody remembers negotiating becomes the reason a dispute goes badly. The contract approval process moved fast enough to get the deal signed. Nothing moved as fast to keep it monitored afterward.</p>
+
+    <p>This is the same constraint procurement teams are running into in 2026, as more contract work moves through AI-assisted review. Something has to flag which contracts need a second look, and when.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER tracks renewal windows and obligations across your supplier contracts &rarr;</p>
+        <p class="jag-cta-desc">Renewal deadlines and clause obligations stay attached to the contract record, flagged automatically as dates approach.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/contracts" class="jag-cta-btn" target="_blank" rel="noopener">Explore Contract Management &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S2 -->
+    <h2 id="s2">What We Asked Claude to Do</h2>
+
+    <p>The audit ran on a 29-page goods and distribution agreement, and it returned three findings in under three minutes. We set this up to mirror what a procurement analyst does before a renewal decision, not a lab test. The contract itself is a composite from a fictional supplier called Meridian Packaging Solutions, covering pricing, quality specs, and a three-year term with automatic renewal.</p>
+
+    <p>The prompt was simple: review the contract, flag renewal deadlines, one-sided risk terms, and any obligation without a clear owner. We didn't prime it or hint at what to look for.</p>
+
+    <p>This ran inside <a href="https://www.jaggaer.com/solutions/jai" target="_blank" rel="noopener">JAGGAER's embedded AI platform</a>, which pulls contracts directly from the live repository instead of requiring a manual upload. We wanted to see what happens when reviewing a contract is built into the actual workflow, not bolted onto it.</p>
+
+    <p>Enterprise-tier deployments run with controls including SSO, audit logging, and options for zero data retention, per <a href="https://www.anthropic.com/security" target="_blank" rel="noopener">Anthropic's published security commitments</a>. The specifics still depend on how a given platform is configured, so this is worth confirming directly with whoever manages your deployment before sensitive contract data enters any workflow.</p>
+
+    <hr class="section-divider">
+
+    <!-- S3 -->
+    <h2 id="s3">The Results: What Claude Actually Caught</h2>
+
+    <p>The audit took under three minutes and returned three findings worth acting on before the next contract renewal cycle.</p>
+
+    <div class="obl-table-wrap">
+      <table class="obl-table">
+        <thead>
+          <tr><th>Clause / Risk</th><th>What Claude Flagged</th><th>Why It Matters</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Auto-renewal window</td><td>The contract renews automatically for another 12 months unless written notice is given 60 days before the term ends. That window closes in 41 days.</td><td>Miss it, and the buyer is locked into another year at current pricing, with no chance to renegotiate volume discounts already earned.</td></tr>
+          <tr><td>Liability cap asymmetry</td><td>The supplier's liability is capped at one month's fees. The buyer's indemnification obligations to the supplier carry no cap at all.</td><td>A one-sided risk allocation that's easy to miss reading clause by clause, but obvious the moment it's compared side by side against standard terms.</td></tr>
+          <tr><td>Untracked quality SLA</td><td>A 2% defect-rate threshold triggers a credit. No one is named as the owner responsible for tracking that rate.</td><td>The remedy is real money on the table. It only pays off if someone is actually watching the number.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>This is the kind of output that separates advanced contract analytics from a basic keyword search. Claude compared each clause against what a standard agreement should look like, then ranked which ones actually needed a second look.</p>
+
+    <p>That comparison is also how CLM platforms using AI to flag risks and obligations operate at scale. They check indemnification, liability caps, and termination terms against a library of past contracts, not a single reader's memory of what "normal" looks like. This is Claude supplier contract audit S2P results in practice, not theory.</p>
+
+    <div class="jag-cta jag-cta--gradient">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAI shows its reasoning behind every finding it flags &rarr;</p>
+        <p class="jag-cta-desc">Every JAI output is cited to source and logged in a full audit trail, so findings hold up under review.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/jai" class="jag-cta-btn" target="_blank" rel="noopener">Explore JAI &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S4 -->
+    <h2 id="s4">What It Missed (and Why That's Fine)</h2>
+
+    <p>Line up what Claude caught against what it couldn't judge, and a clear pattern shows up: it's reliable at detection, not at context. That's the gap between a fast commercial contract review and a fully trusted one.</p>
+
+    <p>Take the liability cap. Claude caught the asymmetry correctly: one month's fees for the supplier, no cap at all for the buyer. What it couldn't know is that procurement had already accepted that exact term in exchange for a price concession, negotiated in a side letter the tool never saw. The detection was right. Whether it's actually a problem took someone who knew the deal's history.</p>
+
+    <p>The auto-renewal window and the untracked SLA followed the opposite pattern. Claude didn't just catch them, it caught them cleanly, because both are dates and numbers sitting in the text with nothing else to interpret. No history to weigh, no negotiated exception to know about.</p>
+
+    <p>The governing-law clause split the difference. Claude read it as standard boilerplate. It isn't. That clause carries different enforceability under this jurisdiction than under the buyer's home jurisdiction, and catching the difference takes legal tuning a general-purpose commercial contract review doesn't have.</p>
+
+    <p>The dividing line comes down to where the answer lives: inside the document, or outside it. Claude reads every word of the document in front of it. It doesn't know what happened in the room before the document was signed.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER Contract Management routes flagged findings to the right reviewer automatically &rarr;</p>
+        <p class="jag-cta-desc">Alerts route to the obligation owner, with the flagged clause and deadline attached.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/contracts" class="jag-cta-btn" target="_blank" rel="noopener">Explore the Platform &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S5 -->
+    <h2 id="s5">From Audit to Action: What Changes for Procurement in 2026</h2>
+
+    <p>Once procurement has this, they stop rereading the contract and start working a punch list. Three findings, one deadline: renegotiate the renewal notice, close the liability gap, name an SLA owner, all before the 41-day window closes.</p>
+
+    <p>That's the actual shift: procurement now has a specific, dated set of decisions to act on, instead of discovering the problem after the contract renewal has already fired. The next contract approval process moves just as fast, this time with the risk already flagged going in.</p>
+
+    <p>Contract authoring is where that action happens. The team updates the liability clause, names the SLA owner, and resets the renewal notice period, using clause language that's already vetted instead of drafting under time pressure. That's contract authoring working from what the audit found, not from a blank template.</p>
+
+    <h3>AI Contract Review Procurement Outcomes</h3>
+
+    <p>The best practices for automating contract review that hold up in practice center on triage, not full automation. The audit does the reading. The team decides what's worth renegotiating and what's worth accepting. The result: fewer hours spent rereading 29 pages, more time spent on the three decisions that needed a person.</p>
+
+    <p>Findings like these route into <a href="https://www.jaggaer.com/solutions/contracts" target="_blank" rel="noopener">JAGGAER Contract Management</a>, already tied to the specific clause and renewal date. The next audit for this supplier starts from a record, not a blank page.</p>
+
+    <hr class="section-divider">
+
+    <!-- S6 -->
+    <h2 id="s6">Claude for Contracts vs. Generic AI Contract Review in 2026</h2>
+
+    <p>What actually separates this from a generic AI contract review tool is connection, not raw reading ability.</p>
+
+    <div class="obl-table-wrap">
+      <table class="obl-table">
+        <thead>
+          <tr><th>Capability</th><th>Native in JAGGAER</th><th>Generic AI Contract Review Tools</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Contract source</td><td>Pulled directly from the live contract register</td><td>Manually uploaded, one file at a time</td></tr>
+          <tr><td>Renewal tracking</td><td>Runs continuously against every contract in the repository</td><td>Limited to whatever was uploaded for that session</td></tr>
+          <tr><td>Risk benchmarking</td><td>Compared against your own contract history and clause library</td><td>Compared against a generic template, if at all</td></tr>
+          <tr><td>Audit trail</td><td>Every query and finding logged against the contract record</td><td>No persistent record tied to the source document</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The Meridian audit worked because the contract was sitting in a live repository, so the same read that caught three findings once can also watch for them going forward. That's advanced contract analytics doing its job continuously, not a one-time file read. Claude supplier contract audit S2P results depend on that connection holding, not just on the read itself.</p>
+
+    <p>Search for AI contract review advice, and most of what ranks is a category explainer: what it is, who should use it, what to look for in a platform. None of it shows a connection to a live contract register, because none of it is attached to one. That tracks with where the market actually stands. Deloitte's <a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" target="_blank" rel="noopener">2025 Global CPO Survey</a> found that procurement teams who pair AI with skilled talent, what the report calls "Digital Masters," hit or beat cost-avoidance targets 94% of the time, against 75% for teams without that pairing. Connection to the workflow is what separates the two groups. A one-time upload doesn't create that connection. A live contract portfolio needs more than a file drop.</p>
+
+    <p>A generic tool could have caught the same three findings in the Meridian contract. What it couldn't do is flag the auto-renewal window again next quarter, or benchmark the liability cap against the other 200 supplier agreements sitting in the same repository. That's the real question worth asking when evaluating the best contract lifecycle management software for a supplier-heavy portfolio. Does the platform stay connected to the contract after the first read, or does that connection end when the file closes? That's the shape artificial intelligence contract lifecycle management is taking industry-wide: audits that repeat on their own, without someone remembering to run them again.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER connects contract review to your live supplier register &rarr;</p>
+        <p class="jag-cta-desc">Contracts stay linked to the supplier record they belong to, so an audit run once keeps running on its own.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S7: FAQ -->
+    <h2 id="s7">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>What actually happens when you ask Claude to audit a supplier contract? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Claude reads the full document and returns specific findings, such as flagged clauses, dates, and obligations, rather than a general summary. In the Meridian audit above, that meant three findings in under three minutes, on a contract most teams would have skimmed rather than reread. Legal or procurement still decides what to do with each one.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What kinds of risks or clauses does Claude reliably catch? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Renewal deadlines, liability and indemnification asymmetries, and obligations with no assigned owner. These are pattern-based: dates, thresholds, and comparisons against standard clause language. That's also why AI contract review speed hundreds of pages deep still holds up: the reading is fast because the pattern is consistent, not because the document is short.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What does an AI contract audit miss that a human still needs to catch? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Context the document doesn't contain. Claude can flag a clause correctly and still miss whether it's actually a problem, because of a side agreement or negotiation history the audit never saw. Jurisdiction-specific enforceability is the other gap. That takes legal tuning, not just document reading.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Does an AI-audited contract still need legal or procurement sign-off? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Yes. The audit narrows down which clauses need attention. It doesn't decide whether a flagged term is acceptable, or replace the judgment call that goes with that decision. Every finding in this piece still needed a person to act on it.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <!-- S8: Next Steps -->
+    <h2 id="s8">Next Steps</h2>
+
+    <p>This is one Claude supplier contract audit S2P results story. The same approach scales across a full portfolio, one renewal at a time. <a href="https://www.jaggaer.com/solutions/contracts-ai" target="_blank" rel="noopener">The step-by-step walkthrough</a> covers how to set up this kind of clause-by-clause audit against your own contracts, from the first prompt to the findings table.</p>
+
+    <p>Contract audits are one piece of a larger shift. This piece sits inside <a href="https://www.jaggaer.com/" target="_blank" rel="noopener">AI in Source-to-Pay</a>, JAGGAER's broader look at where AI fits across sourcing, contracting, and supplier management.</p>
+
+    <p>And for <a href="https://www.jaggaer.com/blog/what-claude-delivers-for-procurement" target="_blank" rel="noopener">the full picture of what Claude delivers across S2P</a>, our companion piece covers the rest of the procurement lifecycle this audit didn't touch. That includes contract review, RFP drafting, and where it still needs a human.</p>
+
+    <p class="disclaimer-note">Meridian Packaging Solutions and the contract details in this piece are a fictional composite, built for illustration. They don't represent an actual customer engagement. AI-assisted contract review supports legal and procurement judgment rather than replacing it.</p>
+
+  </article>
+
+  <!-- EXPERT SIDEBAR -->
+  <aside class="expert-sidebar" aria-label="Data at a glance">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">World Commerce &amp; Contracting</span>
+        <span class="exp-num red">9.2%</span>
+        <p class="exp-stat">Average organization loses this share of annual revenue to contract mismanagement.</p>
+        <a href="https://www.worldcc.com/Resources/Content-Hub/details/Poor-Contract-Management-Continues-To-Costs-Companies-9-Of-Their-Bottom-Line" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Deloitte Global CPO Survey &middot; 2025</span>
+        <span class="exp-num red">94% vs. 75%</span>
+        <p class="exp-stat">"Digital Masters" procurement orgs hit or beat cost-avoidance targets, vs. teams without AI-and-talent pairing.</p>
+        <a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Gartner &middot; 2028 Projection</span>
+        <span class="exp-num red">80%</span>
+        <p class="exp-stat">Of governments will deploy AI agents to automate routine decision-making by 2028.</p>
+        <a href="https://www.gartner.com/en/newsroom/press-releases/2026-03-17-gartner-predicts-at-least-80-percent-of-governments-will-deploy-ai-agents-to-automate-routine-decision-making-by-2028" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id], article .article-header');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
