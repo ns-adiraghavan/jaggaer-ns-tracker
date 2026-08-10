@@ -2255,7 +2255,7 @@
       },
       {
         "id": "m-ed01",
-        "name": "c",
+        "name": "content reviewer",
         "org": "jaggaer",
         "role": "Content Reviewer",
         "reports_to": "anna"
