@@ -1,0 +1,619 @@
+<!-- uploaded by manager at 2026-08-10T10:35:56.337Z -->
+<!-- piece: What Is Design-to-Pay: Why It Matters More Than Source-to-Pay for Discrete Manufacturers -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Is Design-to-Pay? Why It Beats Source-to-Pay | JAGGAER</title>
+<meta name="description" content="Design-to-Pay engages procurement at the design stage, before Source-to-Pay starts. See why timing matters for discrete manufacturers and direct materials procurement.">
+<link rel="canonical" href="https://www.jaggaer.com/what-is-design-to-pay">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"What Is Design-to-Pay? Why It Matters More Than Source-to-Pay for Discrete Manufacturers","description":"Design-to-Pay engages procurement at the design stage, before Source-to-Pay starts. See why timing matters for discrete manufacturers and direct materials procurement.","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"datePublished":"2026-07-27","dateModified":"2026-08-07","author":{"@type":"Organization","name":"JAGGAER"}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Design-to-Pay?","acceptedAnswer":{"@type":"Answer","text":"Design-to-Pay is a procurement model that begins sourcing at the product design stage and continues through contracting, ordering, and payment."}},{"@type":"Question","name":"What is the difference between Design-to-Pay and Source-to-Pay?","acceptedAnswer":{"@type":"Answer","text":"Source-to-Pay begins once a requirement exists, usually at the RFQ. Design-to-Pay begins earlier, at the design stage, before parts and materials are fixed."}},{"@type":"Question","name":"Why is Source-to-Pay too late for discrete manufacturers?","acceptedAnswer":{"@type":"Answer","text":"Source-to-Pay engages after the design is final. By then, 70 to 80 percent of a product's cost is locked in and cannot be changed."}},{"@type":"Question","name":"What is direct materials procurement?","acceptedAnswer":{"@type":"Answer","text":"Direct materials procurement is the sourcing of raw materials and components that go directly into a finished product, such as metals, plastics, and parts."}},{"@type":"Question","name":"How do I get started with Design-to-Pay?","acceptedAnswer":{"@type":"Answer","text":"Design-to-Pay pilots typically run 90 days: one product line and BOM first, then connecting procurement and engineering, then measuring results before a wider rollout."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading: 400;
+  --line-height-base:  1.6;
+  --line-height-heading: 1.1;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-base);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);}
+h1{font-size:var(--font-size-h1);}
+h2{font-size:var(--font-size-h2);}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.stat{font-weight:700;color:var(--color-red);}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Badges */
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.section-eyebrow{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+
+/* Progress bar */
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);}
+.article-header h1{font-size:var(--font-size-h1);font-weight:400;line-height:var(--line-height-heading);color:var(--color-ink);max-width:720px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-size:.625rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-size:1.15rem;font-weight:700;color:var(--color-ink);line-height:1;display:block;margin-bottom:.15rem;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.68rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:.68rem;}
+.exp-link{font-size:.62rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.expert-sidebar{display:none;}}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:400;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-size:var(--font-size-h5);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.05em;}
+
+/* Stat metrics block */
+.stat-metrics{background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.stat-metrics-kicker{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);margin-bottom:var(--space-m);display:block;}
+.stat-metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.stat-metric{padding:var(--space-m);text-align:center;background:var(--color-white);}
+.stat-metric:first-child{border-radius:var(--border-radius-sm) 0 0 var(--border-radius-sm);}
+.stat-metric:last-child{border-radius:0 var(--border-radius-sm) var(--border-radius-sm) 0;}
+.stat-num{font-size:clamp(1.3rem,2vw,1.7rem);font-weight:800;color:var(--color-red);display:block;line-height:1;margin-bottom:.3rem;}
+.stat-label{font-size:.7rem;font-weight:600;color:var(--color-ink);display:block;line-height:1.3;margin-bottom:.2rem;}
+.stat-sub{font-size:.62rem;color:var(--color-ink-3);display:block;font-style:italic;}
+
+/* Hook stat - intro figure (subtle) */
+.hook-stat{display:flex;align-items:center;gap:var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:0 0 var(--space-m);}
+.hook-stat-num{font-size:clamp(1.5rem,2.6vw,1.9rem);font-weight:800;color:var(--jai-a);line-height:1;letter-spacing:-.01em;flex-shrink:0;}
+.hook-stat-body{min-width:0;}
+.hook-stat-lead{font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);line-height:1.35;margin:0 0 .15rem;}
+.hook-stat-sub{font-size:var(--font-size-xs);color:var(--color-ink-3);margin:0;line-height:1.45;}
+@media(max-width:580px){.hook-stat{flex-direction:column;align-items:flex-start;gap:var(--space-xs);}}
+@media(max-width:600px){.stat-metrics-grid{grid-template-columns:repeat(2,1fr);}.stat-metric:first-child,.stat-metric:last-child{border-radius:0;}.stat-metric:nth-child(2){border-radius:0;}}
+
+/* Callout note */
+.callout-note{background:var(--color-light-blue);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.callout-note-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-xs);}
+.callout-note p{font-size:var(--font-size-sm);color:var(--color-ink-2);margin:0;line-height:1.6;}
+.callout-note p+p{margin-top:var(--space-s);}
+.callout-note.callout-purple{background:var(--purple-tint);border-left-color:var(--jai-a);}
+.callout-note.callout-purple .callout-note-label{color:var(--jai-a);}
+
+/* Callout note - light-blue info block (per guidelines info callout) */
+
+/* Use Case Table */
+.obl-table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.obl-table{width:100%;border-collapse:collapse;font-size:.8125rem;min-width:580px;}
+.obl-table th{padding:.75rem 1rem;font-weight:700;text-align:center;font-size:.8rem;letter-spacing:.02em;border-bottom:1px solid rgba(0,0,0,.08);}
+.obl-table th:first-child{background:#F5D9DA;color:var(--color-red);}
+.obl-table th:last-child{background:#D6E6E9;color:var(--color-teal);}
+.obl-table td{padding:.75rem 1rem;vertical-align:top;line-height:1.5;color:var(--color-ink-2);border-bottom:1px solid rgba(0,0,0,.08);}
+.obl-table tr:last-child td{border-bottom:none;}
+.obl-table td:first-child{background:#FBEAEA;}
+.obl-table td:last-child{background:#E9F1F2;}
+.compare-box{border:2px dashed var(--color-teal);border-radius:var(--border-radius);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--color-white);}
+.compare-box h2{margin-top:0;}
+.compare-box .obl-table-wrap{margin-bottom:var(--space-m);}
+.trust-cards{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-m);margin:var(--space-m) 0 var(--space-l);}
+.trust-card{display:block;border:1px solid var(--color-border);border-radius:var(--border-radius-sm);padding:var(--space-m);text-decoration:none;transition:box-shadow .2s,border-color .2s;}
+.trust-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.08);border-color:var(--color-teal);}
+.trust-card-title{display:block;font-weight:700;color:var(--color-ink);font-size:var(--font-size-sm);margin-bottom:var(--space-2xs);}
+.trust-card-sub{display:block;color:var(--color-ink-3);font-size:.8rem;line-height:1.5;}
+@media(max-width:580px){.trust-cards{grid-template-columns:1fr;}}
+.obl-note{font-size:.72rem;color:var(--color-ink-3);display:block;margin-top:.2rem;font-weight:400;}
+
+/* Criteria / checklist cards */
+.phase-cards{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0 var(--space-l);}
+.phase-item{display:flex;align-items:stretch;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;}
+.phase-accent{width:4px;flex-shrink:0;}
+.pa-1{background:var(--color-teal);}
+.pa-2{background:var(--color-navy);}
+.pa-3{background:var(--color-grey);}
+.pa-4{background:var(--color-ink);}
+.pa-5{background:var(--color-ink-3);}
+.phase-body{flex:1;padding:var(--space-s) var(--space-m);background:var(--color-white);}
+.phase-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--color-ink-3);display:block;margin-bottom:var(--space-2xs);}
+.phase-title{font-weight:700;color:var(--color-ink);font-size:var(--font-size-sm);margin-bottom:.25rem;}
+.phase-desc{font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;margin:0;}
+
+/* Key facts box */
+.key-facts{background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.kf-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-s);}
+.key-facts ul{margin-bottom:0;}
+.key-facts li{font-size:.8125rem;line-height:1.6;}
+
+/* CTA block - JAI gradient theme */
+.jag-cta{display:flex;align-items:center;gap:var(--space-m);border:1px solid transparent;background:linear-gradient(#fff,#fff) padding-box, linear-gradient(90deg,#5300CE,#E22B83) border-box;border-radius:var(--border-radius);padding:var(--space-s) var(--space-m);margin:var(--space-l) 0;transition:box-shadow .2s;position:relative;overflow:hidden;}
+.jag-cta::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,#5300ce0d 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.jag-cta:hover{box-shadow:0 8px 32px rgba(83,0,206,.12);}
+.jag-cta-label{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.15rem var(--space-s);border-radius:9999px;white-space:nowrap;margin-bottom:var(--space-2xs);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .15rem;line-height:1.35;}
+.jag-cta-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.5;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:.875rem;font-weight:600;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.5rem 1.25rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;min-width:140px;border-radius:var(--border-radius-sm);transition:opacity .2s;}
+.jag-cta-btn:hover{opacity:.88;color:#fff;border-bottom:none;}
+.jag-cta--red{background:var(--color-white);border:1px solid var(--color-red);}
+.jag-cta--red .jag-cta-label{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn:hover{background:var(--color-grey);opacity:1;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:flex-start;max-width:100%;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;border-top:var(--border);background:var(--color-white);}
+details{height:auto;overflow:hidden;transition:height .3s ease;}
+details:not([open]){height:3.75rem;}
+
+/* Inline bullet list */
+.bullet-list{list-style:disc;padding-left:1.4rem;margin:var(--space-s) 0 var(--space-m);}
+.bullet-list li{font-size:var(--font-size-sm);color:var(--color-ink-2);line-height:1.65;margin-bottom:.4rem;}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Design-to-Pay Actually Covers</a>
+      <a class="toc-link" href="#s2">Three Workflows That Change</a>
+      <a class="toc-link" href="#s3">Design-to-Pay vs Source-to-Pay</a>
+      <a class="toc-link" href="#s4">Why Source-to-Pay Starts Too Late</a>
+      <a class="toc-link" href="#s5">What to Look for in a Platform</a>
+      <a class="toc-link" href="#s6">How to Get Started</a>
+      <a class="toc-link" href="#s7">Frequently Asked Questions</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <span class="article-label">Design-to-Pay</span>
+        <div class="article-badges">
+          <span class="badge badge-blue">Discrete Manufacturing</span>
+          <span class="badge badge-blue">Direct Materials</span>
+        </div>
+        <h1 style="font-weight:700;">What Is Design-to-Pay: Why It Matters More Than Source-to-Pay for Discrete Manufacturers</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            7–8 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Last Reviewed</span><time datetime="2026-08">August 2026</time></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <div class="callout-note callout-purple">
+      <p><strong>Design-to-Pay is an extension of Source-to-Pay that begins where design decisions are made, not where RFQs are issued.</strong></p>
+      <p>It connects design, cost engineering, sourcing, contracting, and payment into one flow while the BOM is still fluid. <strong>83 percent of engineers</strong> already spend four or more hours a week on procurement tasks before the drawing locks. Design-to-Pay gives that work a structured home. <a href="https://www.fictiv.com/2026-state-of-manufacturing-report" target="_blank" rel="noopener">View the report &rarr;</a></p>
+    </div>
+
+    <p>Design-to-Pay matters more than Source-to-Pay because it engages procurement before design decisions are locked in, not after. Your team lands in design conversations well before an RFQ exists. It runs sourcing, contracting, and payment, and Gartner&rsquo;s <a href="https://www.gartner.com/en/documents/7337530" target="_blank" rel="noopener">Magic Quadrant for Source-to-Pay Suites</a>, published January 21, 2026, backs that up.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Design-to-Pay closes that time gap</p>
+        <p class="jag-cta-sub">JAGGAER gives procurement a seat at the design stage, then carries that through sourcing, contracting, and payment.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S1: Definition -->
+    <span class="section-eyebrow">Target Costing &middot; DFM &middot; Early Supplier Involvement</span>
+    <h2 id="s1">What Design-to-Pay Actually Covers</h2>
+
+    <p>Design-to-Pay describes this connected workflow: an extension of Source-to-Pay that starts where design decisions, not RFQs, first shape cost and manufacturability. It connects design, cost engineering, sourcing, contracting, and payment into one flow while the BOM is still fluid.</p>
+
+    <p>What changed is not the disciplines, it is the connection. Target costing, should-cost modeling, DFM, and early supplier involvement used to run as separate initiatives. Design-to-Pay connects them into a single workflow before the BOM locks.</p>
+
+    <p>A <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/jscm.12221" target="_blank" rel="noopener">peer-reviewed meta-analysis of 11,000+ NPD projects</a> (<a href="https://procurementleaders.com/content/thought-leader-get-early-supplier-involvement-right/" target="_blank" rel="noopener">explained here</a>) found that supplier involvement improves cost and time-to-market outcomes. The effect runs primarily through the extent of delegated design authority, not simply timing. <a href="https://www.kearney.com/documents/291362523/291370692/The+power+of+procurement+to+shape+next-generation+products.pdf" target="_blank" rel="noopener">Kearney&rsquo;s research</a> reinforces this: procurement seated at the &ldquo;ideate&rdquo; stage drove a 15&ndash;20% cost reduction in one collaborative program. Real authority, not early timing, is what moved the number.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">JAGGAER Sourcing</span>
+        <p class="jag-cta-head">Give suppliers a seat while the BOM is still fluid</p>
+        <p class="jag-cta-sub">Structured RFx and quotation markups for design-stage supplier input, not post-release negotiation.</p>
+      </div>
+      <a href="https://www.jaggaer.com/wp-content/uploads/JAGGAER-Sourcing-Product-Brief.pdf" class="jag-cta-btn" target="_blank" rel="noopener">Explore JAGGAER Sourcing</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S2: Three Workflows -->
+    <span class="section-eyebrow">BOM Optimization &middot; Supplier Collaboration &middot; Change Management</span>
+    <h2 id="s2">Three Workflows That Change</h2>
+
+    <p>Design-to-Pay changes three workflows in particular.</p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <div class="phase-accent pa-1"></div>
+        <div class="phase-body">
+          <span class="phase-label">Workflow 1</span>
+          <div class="phase-title">BOM optimization moves upstream</div>
+          <p class="phase-desc">Engineering co-develops parts and alternates with sourcing and suppliers at the design stage. Suppliers get real design input, which removes overengineering and unlocks savings before the BOM locks. Cost targets are set against a live BOM, not a finalized one. That means fewer surprises at RFQ and fewer ECOs downstream.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-2"></div>
+        <div class="phase-body">
+          <span class="phase-label">Workflow 2</span>
+          <div class="phase-title">Supplier collaboration becomes structured</div>
+          <p class="phase-desc">Suppliers exchange drawings and quotation markups during design, not after RFQ release. Bringing suppliers into the design stage early surfaces manufacturing constraints before they reach your build plan. That keeps supplier capacity and lead times aligned, and cuts rework and delays downstream. The result is a build plan that suppliers have already stress-tested, not one handed to them to quote against.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-3"></div>
+        <div class="phase-body">
+          <span class="phase-label">Workflow 3</span>
+          <div class="phase-title">Engineering change management becomes financial</div>
+          <p class="phase-desc">Not just technical. Finance and procurement gain shared visibility into engineering changes at the design stage, before they turn into late-stage change orders. A change caught during design gets resolved as a design decision. The same change caught after RFQ becomes a costly change order, with contracts, schedules, and suppliers all needing to move.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">JAGGAER Sourcing</span>
+        <p class="jag-cta-head">Bring these three workflows into one system</p>
+        <p class="jag-cta-sub">JAGGAER Sourcing connects BOM optimization, supplier collaboration, and change management into a single workflow before the design locks.</p>
+      </div>
+      <a href="https://www.jaggaer.com/wp-content/uploads/JAGGAER-Sourcing-Product-Brief.pdf" class="jag-cta-btn" target="_blank" rel="noopener">Explore JAGGAER Sourcing</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S3: NEW Design-to-Pay vs Source-to-Pay comparison -->
+    <span class="section-eyebrow">Side-by-Side Comparison &middot; Buyer&rsquo;s Guide</span>
+
+    <div class="compare-box">
+      <h2 id="s3">Design-to-Pay vs Source-to-Pay: What Actually Changes</h2>
+
+      <p>The Design-to-Pay vs Source-to-Pay distinction comes down to timing. Once procurement gets a seat at the table, cost outcomes, change-order frequency, and supplier lead times all follow from that single difference.</p>
+
+      <div class="obl-table-wrap">
+        <table class="obl-table">
+          <thead>
+            <tr>
+              <th>Source-to-Pay World</th>
+              <th>Design-to-Pay World</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Procurement joins after design is locked</td>
+              <td>Procurement has a seat at the ideate stage</td>
+            </tr>
+            <tr>
+              <td>Suppliers quoted after RFQ release</td>
+              <td>Suppliers co-develop during design</td>
+            </tr>
+            <tr>
+              <td>Change orders are technical problems</td>
+              <td>Change orders are financial decisions, caught early</td>
+            </tr>
+            <tr>
+              <td>BOM locked before cost modeling starts</td>
+              <td>Should-cost modeling shapes the BOM</td>
+            </tr>
+            <tr>
+              <td>15&ndash;20% cost reduction left on the table</td>
+              <td>15&ndash;20% cost reduction captured at the ideate stage</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Source-to-Pay was built for the world on the left. Design-to-Pay is built for the world on the right.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S4: Why Source-to-Pay is too late (moved down) -->
+    <span class="section-eyebrow">Gartner &middot; Fictiv &amp; MISUMI &middot; 2026</span>
+    <h2 id="s4">Source-to-Pay Starts Too Late for Manufacturing: Here Is Why</h2>
+
+    <p><strong>Source-to-Pay starts too late because engineering has already finalized part geometry, materials, and assembly sequence by the time an RFQ goes out.</strong> Your team can still negotiate on terms. The calls on cost, schedule, and quality were made months earlier, before procurement had a seat.</p>
+
+    <div class="callout-note">
+      <span class="callout-note-label">Key Finding: Fictiv &amp; MISUMI, 2026</span>
+      <p><strong>62 percent of leaders name manufacturing planning as their single biggest supply chain challenge this year.</strong> The same report ties that finding directly to timing. <a href="https://www.fictiv.com/2026-state-of-manufacturing-report" target="_blank" rel="noopener">View the report &rarr;</a></p>
+    </div>
+
+    <p>Late-stage changes make it worse. The later a change happens, the more it costs. That has been true in engineering change management for years, even though the exact multiplier shifts by industry. <strong>For finance teams</strong>, late ECOs don&rsquo;t just delay products. They blow approved budgets when design changes arrive after supplier contracts are already signed.</p>
+
+    <p>Source-to-Pay handles the spend. Design-to-Pay is what touches the design choices that create it.</p>
+
+    <hr class="section-divider">
+
+    <!-- S5: Platform checklist -->
+    <span class="section-eyebrow">Buyer Checklist &middot; Direct Materials &middot; AI</span>
+    <h2 id="s5">What to Look for in a Platform That Supports Design-to-Pay</h2>
+
+    <div class="hook-stat">
+      <span class="hook-stat-num">15&ndash;20%</span>
+      <div class="hook-stat-body">
+        <p class="hook-stat-lead">Procurement seated at the design &ldquo;ideate&rdquo; stage drove a 15&ndash;20% cost reduction in one Kearney-tracked program.</p>
+        <p class="hook-stat-sub">The most commercially significant number in this article, and the reason platform choice at the design stage matters.</p>
+      </div>
+    </div>
+
+    <p>When evaluating Design-to-Pay software, the first filter is native direct materials and BOM support. A platform retrofitted for it later is a different thing entirely. Look for four capabilities:</p>
+
+    <ul class="bullet-list">
+      <li>Native direct materials and Bills of Materials level support</li>
+      <li>Supplier collaboration at the design stage</li>
+      <li>Integration with ERP, PLM and CAD systems</li>
+      <li>Full Source-to-Pay coverage from design through payment</li>
+    </ul>
+
+    <div class="callout-note callout-purple">
+      <span class="callout-note-label">Buyer Note</span>
+      <p>A direct materials procurement platform purpose-built for discrete manufacturers handles multi-level BOM events, design-stage RFx, and PLM integration natively. Many platforms were built for indirect spend and added direct materials later. For discrete manufacturers, that sequence is a poor fit.</p>
+    </div>
+
+    <p>Prioritize platforms with AI built into the workflow, not added on top of it. <a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" target="_blank" rel="noopener">The Hackett Group&rsquo;s 2026 study</a> found <strong>80%</strong> of procurement executives called AI-enabled technology the most transformational trend of the next five years. It also found that <strong>71%</strong> have already adopted generative AI, with <strong>56%</strong> now using agentic AI. <a href="https://www.deloitte.com/us/en/insights/industry/manufacturing-industrial-products/manufacturing-industry-outlook.html" target="_blank" rel="noopener">Deloitte&rsquo;s 2026 Manufacturing Outlook</a> also connects competitiveness to smart manufacturing and investment in agentic AI.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">JAGGAER AI</span>
+        <p class="jag-cta-head">Meet JAI: The AI Expert for Smarter Procurement</p>
+        <p class="jag-cta-sub">JAI brings AI into the Design-to-Pay workflow, from BOM optimization through supplier collaboration to contract review, without adding headcount.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo and Explore JAI</a>
+    </div>
+
+    <div class="trust-cards">
+      <a class="trust-card" href="https://www.gartner.com/en/documents/7337530" target="_blank" rel="noopener">
+        <span class="trust-card-title">Gartner Magic Quadrant</span>
+        <span class="trust-card-sub">Named in the 2026 Magic Quadrant for Source-to-Pay Suites</span>
+      </a>
+      <a class="trust-card" href="https://www.jaggaer.com/press-release/leader-idc-marketscape-ai-enabled-buy-side-clm-suites-2025" target="_blank" rel="noopener">
+        <span class="trust-card-title">IDC Recognition</span>
+        <span class="trust-card-sub">Named a Leader in Buy-Side Contract Lifecycle Management, 2025</span>
+      </a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S6: NEW How to Get Started -->
+    <span class="section-eyebrow">90-Day Roadmap &middot; Implementation</span>
+
+    <div class="compare-box">
+      <h2 id="s6">How to Get Started with Design-to-Pay</h2>
+
+      <p>Every competitor makes the case for why Design-to-Pay matters. Few explain how a company actually makes the shift. Here is what the first 90 days can look like.</p>
+
+      <div class="phase-cards">
+        <div class="phase-item">
+          <div class="phase-accent pa-1"></div>
+          <div class="phase-body">
+            <span class="phase-label">Days 1&ndash;30</span>
+            <div class="phase-title">Pilot on direct materials sourcing</div>
+            <p class="phase-desc">Pick one product line. Run a single BOM-level sourcing event with supplier design input before RFQ release.</p>
+          </div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-accent pa-2"></div>
+          <div class="phase-body">
+            <span class="phase-label">Days 31&ndash;60</span>
+            <div class="phase-title">Connect procurement to engineering</div>
+            <p class="phase-desc">Establish a shared cost model. Procurement joins ECO review meetings as a financial voice, not a transactional one.</p>
+          </div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-accent pa-3"></div>
+          <div class="phase-body">
+            <span class="phase-label">Days 61&ndash;90</span>
+            <div class="phase-title">Measure and expand</div>
+            <p class="phase-desc">Track design-stage savings vs post-lock savings. Present the delta to finance and engineering leadership to justify full rollout.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">JAGGAER Sourcing</span>
+        <p class="jag-cta-head">See what a 90-day Design-to-Pay pilot looks like</p>
+        <p class="jag-cta-sub">Talk to our team about piloting Design-to-Pay on one product line before rolling it out further.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S7: FAQ -->
+    <span class="section-eyebrow">Frequently Asked Questions</span>
+    <h2 id="s7">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>What is Design-to-Pay? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Design-to-Pay is a procurement model that begins sourcing at the product design stage and continues through contracting, ordering, and payment.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the difference between Design-to-Pay and Source-to-Pay? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Source-to-Pay begins once a requirement exists, usually at the RFQ. Design-to-Pay begins earlier, at the design stage, before parts and materials are fixed.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Why is Source-to-Pay too late for discrete manufacturers? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Source-to-Pay engages after the design is final. By then, 70 to 80% of a product&rsquo;s cost is locked in and cannot be changed.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is direct materials procurement? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Direct materials procurement is the sourcing of raw materials and components that go directly into a finished product, such as metals, plastics, and parts.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I get started with Design-to-Pay? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Design-to-Pay pilots typically run 90 days: one product line and BOM first, then connecting procurement and engineering, then measuring results before a wider rollout.</div>
+    </details>
+
+  </article>
+
+  <!-- EXPERT SIDEBAR -->
+  <aside class="expert-sidebar" aria-label="Data at a glance">
+    <div class="exp-head"><span class="exp-head-lbl">What are the Experts Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">Fictiv &amp; MISUMI &middot; 2026 Report</span>
+        <span class="exp-num red">83%</span>
+        <p class="exp-stat">Of engineers now spend <strong>four or more hours a week</strong> on procurement tasks before the drawing locks.</p>
+        <a href="https://www.fictiv.com/2026-state-of-manufacturing-report" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Kearney Research</span>
+        <span class="exp-num red">15&ndash;20%</span>
+        <p class="exp-stat">Cost reduction in one program when procurement held <strong>real design authority</strong> at the ideate stage.</p>
+        <a href="https://www.kearney.com/documents/291362523/291370692/The+power+of+procurement+to+shape+next-generation+products.pdf" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Hackett Group &middot; 2026 Study</span>
+        <span class="exp-num red">80%</span>
+        <p class="exp-stat">Of procurement executives call AI-enabled technology the <strong>most transformational trend</strong> of the next five years.</p>
+        <a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id], article .article-header');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
