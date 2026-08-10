@@ -2169,9 +2169,9 @@
               "title": "What Is Design-to-Pay: Why It Matters More Than Source-to-Pay for Discrete Manufacturers",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "writing",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
-              "revision_count": 2,
+              "revision_count": 3,
               "primary_keyword": "",
               "geography": "all",
               "status_history": [
@@ -2189,13 +2189,18 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-08-10T13:43:12.122Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-08-10T13:47:30.583Z",
+                  "by": "manager"
                 }
               ],
-              "last_updated": "2026-08-10T13:43:12.122Z",
+              "last_updated": "2026-08-10T13:47:30.582Z",
               "last_updated_by": "manager",
               "deliverable_ext": "html",
               "return_to_stage": null,
-              "last_upload": "2026-08-10T13:43:12.122Z",
+              "last_upload": "2026-08-10T13:47:30.582Z",
               "last_upload_by": "manager",
               "secondary_keyword": ""
             }
