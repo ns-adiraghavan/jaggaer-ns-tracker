@@ -2163,6 +2163,26 @@
                 "performance_data": "",
                 "updated_at": "2026-08-03T10:57:30.324Z"
               }
+            },
+            {
+              "id": "piece-cgx6uf",
+              "title": "What Is Design-to-Pay: Why It Matters More Than Source-to-Pay for Discrete Manufacturers",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "writing",
+              "content_type": "ad-hoc",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-10T10:35:49.454Z",
+                  "by": "manager"
+                }
+              ],
+              "last_updated": "2026-08-10T10:35:49.454Z",
+              "last_updated_by": "manager"
             }
           ]
         }
