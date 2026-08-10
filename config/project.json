@@ -2991,7 +2991,7 @@
     },
     {
       "id": "ed-review",
-      "label": "",
+      "label": "Content reviewer",
       "color": "#7d6608",
       "bg": "#fefde8",
       "actor": "person:m-ed01"
