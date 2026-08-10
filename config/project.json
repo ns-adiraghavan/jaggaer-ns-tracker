@@ -665,8 +665,8 @@
               "title": "CBAM & the Carbon Cost of Your Supply Chain: What Procurement Needs to Know Now",
               "format": "FAQ Article",
               "assignee": "null",
-              "status": "writing",
-              "revision_count": 0,
+              "status": "marketing-review",
+              "revision_count": 1,
               "primary_keyword": "CBAM procurement compliance manufacturing",
               "secondary_keyword": "carbon border adjustment supply chain cost",
               "intent": "informational",
@@ -675,8 +675,8 @@
               "content_type": "msv",
               "phase": 1,
               "funnel": "TOFU",
-              "last_updated": "2026-07-30T13:21:59.882Z",
-              "last_updated_by": "m-pifrn",
+              "last_updated": "2026-08-10T08:09:37.332Z",
+              "last_updated_by": "m-5jitd",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
@@ -687,6 +687,11 @@
                   "stage": "brief-uploaded",
                   "ts": "2026-07-30T13:21:59.882Z",
                   "by": "m-pifrn"
+                },
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-08-10T08:09:37.332Z",
+                  "by": "m-5jitd"
                 }
               ],
               "return_to_stage": null,
@@ -705,8 +710,9 @@
                 }
               ],
               "brief_last_updated": "2026-07-30T13:21:59.882Z",
-              "last_upload": "2026-07-30T13:21:59.882Z",
-              "last_upload_by": "m-pifrn"
+              "last_upload": "2026-08-10T08:09:37.332Z",
+              "last_upload_by": "m-5jitd",
+              "deliverable_ext": "html"
             },
             {
               "id": "p-dm1-3",
