@@ -966,8 +966,8 @@
               "title": "Steel, Aluminum & Rare Earth Volatility: A Mid-2026 Reality Check for Procurement Teams",
               "format": "Data Snapshot",
               "assignee": "null",
-              "status": "writing",
-              "revision_count": 0,
+              "status": "marketing-review",
+              "revision_count": 1,
               "primary_keyword": "steel aluminum price volatility procurement 2026",
               "secondary_keyword": "commodity procurement risk data",
               "intent": "informational",
@@ -976,8 +976,8 @@
               "content_type": "msv",
               "phase": 1,
               "funnel": "TOFU",
-              "last_updated": "2026-07-30T13:22:14.500Z",
-              "last_updated_by": "m-pifrn",
+              "last_updated": "2026-08-12T07:31:46.087Z",
+              "last_updated_by": "jason",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
@@ -988,6 +988,11 @@
                   "stage": "brief-uploaded",
                   "ts": "2026-07-30T13:22:14.500Z",
                   "by": "m-pifrn"
+                },
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-08-12T07:31:46.087Z",
+                  "by": "jason"
                 }
               ],
               "return_to_stage": null,
@@ -1000,8 +1005,9 @@
                 }
               ],
               "brief_last_updated": "2026-07-30T13:22:14.500Z",
-              "last_upload": "2026-07-30T13:22:14.500Z",
-              "last_upload_by": "m-pifrn"
+              "last_upload": "2026-08-12T07:31:46.087Z",
+              "last_upload_by": "jason",
+              "deliverable_ext": "html"
             }
           ]
         },
