@@ -187,7 +187,7 @@ function App() {
   }
 
   if (!currentUser) {
-    return <NameSelector project={project} onSelect={m => { writeSession(m); setCurrentUser(m); if (m.admin) setAdminMode(false); }} />;
+    return <NameSelector project={project} loginOrg={loginOrg} onSelect={m => { writeSession(m); setCurrentUser(m); if (m.admin) setAdminMode(false); }} />;
   }
 
   return (
