@@ -725,8 +725,8 @@
               "title": "Nearshoring Doesn't Simplify Procurement. It Multiplies Risk.",
               "format": "Data Snapshot",
               "assignee": "null",
-              "status": "writing",
-              "revision_count": 0,
+              "status": "marketing-review",
+              "revision_count": 1,
               "primary_keyword": "nearshoring procurement complexity 2026",
               "secondary_keyword": "nearshoring supply chain risk data",
               "intent": "informational",
@@ -735,8 +735,8 @@
               "content_type": "msv",
               "phase": 1,
               "funnel": "TOFU",
-              "last_updated": "2026-07-30T13:21:37.666Z",
-              "last_updated_by": "m-pifrn",
+              "last_updated": "2026-08-12T08:07:24.597Z",
+              "last_updated_by": "m-e10nz",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
@@ -747,6 +747,11 @@
                   "stage": "brief-uploaded",
                   "ts": "2026-07-30T13:21:37.666Z",
                   "by": "m-pifrn"
+                },
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-08-12T08:07:24.597Z",
+                  "by": "m-e10nz"
                 }
               ],
               "return_to_stage": null,
@@ -759,8 +764,9 @@
                 }
               ],
               "brief_last_updated": "2026-07-30T13:21:37.666Z",
-              "last_upload": "2026-07-30T13:21:37.666Z",
-              "last_upload_by": "m-pifrn"
+              "last_upload": "2026-08-12T08:07:24.597Z",
+              "last_upload_by": "m-e10nz",
+              "deliverable_ext": "html"
             }
           ]
         },
