@@ -2256,6 +2256,26 @@
               "return_to_stage": null,
               "last_upload": "2026-08-12T14:27:47.835Z",
               "last_upload_by": "manager"
+            },
+            {
+              "id": "piece-ct5t23",
+              "title": "Frontier AI Vs Procurement Native AI",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "writing",
+              "content_type": "ad-hoc",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-12T14:29:05.098Z",
+                  "by": "manager"
+                }
+              ],
+              "last_updated": "2026-08-12T14:29:05.098Z",
+              "last_updated_by": "manager"
             }
           ]
         }
