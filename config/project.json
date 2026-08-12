@@ -2227,6 +2227,26 @@
               "last_upload": "2026-08-10T13:47:30.582Z",
               "last_upload_by": "manager",
               "secondary_keyword": ""
+            },
+            {
+              "id": "piece-3m8n1u",
+              "title": "The AI Procurement Platform Landscape in Q3 2026",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "writing",
+              "content_type": "ad-hoc",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-12T14:27:39.725Z",
+                  "by": "manager"
+                }
+              ],
+              "last_updated": "2026-08-12T14:27:39.730Z",
+              "last_updated_by": "manager"
             }
           ]
         }
