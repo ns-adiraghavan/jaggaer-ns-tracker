@@ -104,6 +104,7 @@ function clearSession() {
 }
 
 function App() {
+  const [loginOrg, setLoginOrg] = useStateApp(() => window.NS_LOGIN ? window.NS_LOGIN.readLoginSession() : null);
   const [project, setProject] = useStateApp(null);
   const [sha, setSha] = useStateApp(null);
   const [source, setSource] = useStateApp(null);
@@ -169,6 +170,13 @@ function App() {
     return () => { clearTimeout(saveTimerRef.current); clearTimeout(toastTimerRef.current); };
   }, [project]);
 
+  // ── Login gate — must pass before anything else is shown ──────────────────
+  if (!loginOrg) {
+    return (
+      <LoginGate onUnlock={org => setLoginOrg(org)} />
+    );
+  }
+
   if (!project) {
     return (
       <div className="ns-loading">
@@ -195,7 +203,7 @@ function App() {
         setView={setView}
         adminMode={adminMode}
         onToggleAdmin={() => setAdminMode(a => !a)}
-        onSignOut={() => { clearSession(); setCurrentUser(null); setAdminMode(false); setView("tracker"); setActivePillar(null); setActiveCluster(null); setActiveContentType(null); }}
+        onSignOut={() => { clearSession(); if (window.NS_LOGIN) window.NS_LOGIN.clearLoginSession(); setLoginOrg(null); setCurrentUser(null); setAdminMode(false); setView("tracker"); setActivePillar(null); setActiveCluster(null); setActiveContentType(null); }}
         activeMonthId={activeMonthId}
         setActiveMonthId={setActiveMonthId}
         activeContentType={activeContentType}
