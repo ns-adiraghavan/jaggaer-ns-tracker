@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Piece · NS × Jaggaer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --surface:  #f0ede6;
+      --ink:      #111820;
+      --ink-2:    rgba(17,24,32,0.78);
+      --ink-3:    rgba(17,24,32,0.52);
+      --ink-4:    rgba(17,24,32,0.30);
+      --accent:   #1a2f4e;
+      --red:      #c8401a;
+      --font-ui:  "Noto Sans", sans-serif;
+      --font-display: "Playfair Display", serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --radius: 4px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: var(--surface); color: var(--ink); font-family: var(--font-ui); }
+
+    /* ── Top bar ── */
+    .pc-topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; gap: 12px;
+      padding: 0 16px; height: 48px;
+      background: #fff; border-bottom: 1px solid #e8e3da;
+    }
+    .pc-topbar-logos { display: flex; align-items: center; gap: 10px; }
+    .pc-topbar-logos img.ns-logo  { height: 22px; width: auto; }
+    .pc-topbar-logos img.jg-logo  { height: 19px; width: auto; }
+    .pc-topbar-logos .sep { font-size: 13px; color: var(--ink-4); }
+    .pc-topbar-crumb {
+      flex: 1; min-width: 0;
+      font-size: 12px; color: var(--ink-3);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .pc-topbar-crumb strong { color: var(--ink); font-weight: 600; }
+    .pc-back {
+      font-size: 12px; font-weight: 600; color: var(--accent);
+      text-decoration: none; letter-spacing: 0.04em;
+      padding: 6px 10px; border-radius: var(--radius);
+      border: 1px solid rgba(26,47,78,0.18);
+      white-space: nowrap;
+    }
+    .pc-back:hover { background: rgba(26,47,78,0.06); }
+
+    /* ── Layout ── */
+    .pc-shell {
+      padding-top: 48px;
+      display: flex; flex-direction: column;
+      height: 100vh; overflow: hidden;
+    }
+    .pc-meta-strip {
+      flex-shrink: 0;
+      padding: 14px 20px 12px;
+      background: #fff; border-bottom: 1px solid #e8e3da;
+    }
+    .pc-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 3vw, 1.45rem);
+      font-weight: 600; letter-spacing: -0.01em;
+      color: var(--ink); margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .pc-meta-row {
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 6px 14px; font-size: 11px; color: var(--ink-3);
+    }
+    .pc-badge {
+      display: inline-flex; align-items: center;
+      padding: 2px 8px; border-radius: 20px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .pc-meta-label { font-weight: 600; color: var(--ink-3); text-transform: uppercase; font-size: 10px; letter-spacing: 0.08em; }
+    .pc-meta-val   { color: var(--ink-2); }
+    .pc-sep        { color: var(--ink-4); }
+
+    /* ── Deliverable area ── */
+    .pc-deliverable {
+      flex: 1; display: flex; flex-direction: column; min-height: 0;
+      background: #fff;
+    }
+    .pc-del-bar {
+      flex-shrink: 0; display: flex; align-items: center; gap: 10px;
+      padding: 8px 20px;
+      background: #f5f8fc; border-bottom: 1px solid #c5ddef;
+      font-size: 11px; color: #1a3a52; font-weight: 600;
+    }
+    .pc-del-bar .pc-del-file { flex: 1; font-family: var(--font-mono); font-size: 10px; color: #4a6a8a; }
+    .pc-del-download {
+      font-size: 11px; font-weight: 600; color: var(--accent);
+      text-decoration: none; padding: 4px 10px;
+      border: 1px solid rgba(26,47,78,0.22); border-radius: var(--radius);
+      cursor: pointer; background: none;
+    }
+    .pc-del-download:hover { background: rgba(26,47,78,0.06); }
+
+    .pc-iframe {
+      flex: 1; border: none; background: #fff;
+      width: 100%; display: block;
+    }
+    .pc-pdf-embed {
+      flex: 1; border: none; background: #fff;
+      width: 100%; display: block;
+    }
+
+    /* ── States ── */
+    .pc-loading, .pc-error, .pc-empty {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px; padding: 40px 24px; text-align: center;
+    }
+    .pc-loading-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent); opacity: 0.7;
+      animation: pc-pulse 1.1s ease-in-out infinite;
+    }
+    @keyframes pc-pulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50%       { opacity: 0.25; transform: scale(0.7); }
+    }
+    .pc-loading span, .pc-error span, .pc-empty span {
+      font-size: 13px; color: var(--ink-3);
+    }
+    .pc-error span { color: var(--red); }
+
+    .pc-no-del {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px; padding: 40px;
+    }
+    .pc-no-del-label { font-size: 13px; color: var(--ink-3); }
+    .pc-no-del-sub   { font-size: 11px; color: var(--ink-4); }
+
+    /* ── docx rendered preview ── */
+    .pc-docx {
+      flex: 1; overflow-y: auto; background: #fff;
+      padding: 32px clamp(16px, 5vw, 64px);
+    }
+    .pc-docx-inner {
+      max-width: 760px; margin: 0 auto;
+      font-size: 15px; line-height: 1.7; color: var(--ink);
+    }
+    .pc-docx-inner h1 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 600; margin: 0 0 14px; line-height: 1.25; }
+    .pc-docx-inner h2 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; margin: 28px 0 10px; }
+    .pc-docx-inner h3 { font-size: 1.05rem; font-weight: 700; margin: 22px 0 8px; }
+    .pc-docx-inner h4 { font-size: 0.95rem; font-weight: 700; margin: 18px 0 6px; color: var(--ink-2); }
+    .pc-docx-inner p  { margin: 0 0 14px; }
+    .pc-docx-inner ul, .pc-docx-inner ol { margin: 0 0 14px 22px; }
+    .pc-docx-inner li { margin-bottom: 6px; }
+    .pc-docx-inner a  { color: var(--accent); }
+    .pc-docx-inner table { border-collapse: collapse; margin: 0 0 16px; width: 100%; font-size: 13px; }
+    .pc-docx-inner td, .pc-docx-inner th { border: 1px solid #d9d3c8; padding: 6px 10px; text-align: left; }
+
+    /* ── PDF fallback (mobile — inline embed doesn't render on iOS/Android) ── */
+    .pc-pdf-fallback {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 14px; padding: 40px 24px; text-align: center;
+    }
+    .pc-pdf-fallback-label { font-size: 13px; color: var(--ink-3); }
+    .pc-open-btn {
+      display: inline-block; background: var(--accent); color: #f5f2ec;
+      border: none; border-radius: var(--radius);
+      padding: 11px 24px; font-family: var(--font-ui);
+      font-size: 13px; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; cursor: pointer; text-decoration: none;
+    }
+    .pc-open-btn:hover { opacity: 0.88; }
+
+    /* ── Auth redirect overlay ── */
+    .pc-auth-overlay {
+      position: fixed; inset: 0; z-index: 999;
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pc-auth-box {
+      text-align: center; padding: 48px 32px; max-width: 380px;
+    }
+    .pc-auth-logos { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 28px; }
+    .pc-auth-logos img.ns-logo { height: 28px; }
+    .pc-auth-logos img.jg-logo { height: 24px; }
+    .pc-auth-logos .sep { font-size: 14px; color: var(--ink-4); }
+    .pc-auth-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--ink); margin-bottom: 10px; }
+    .pc-auth-sub   { font-size: 14px; color: var(--ink-2); line-height: 1.6; margin-bottom: 28px; }
+    .pc-auth-btn   {
+      display: inline-block; background: var(--accent); color: #f5f2ec;
+      border: none; border-radius: var(--radius);
+      padding: 12px 28px; font-family: var(--font-ui);
+      font-size: 13px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; cursor: pointer; text-decoration: none;
+    }
+    .pc-auth-btn:hover { opacity: 0.88; }
+
+    /* ── Mobile tweaks ── */
+    @media (max-width: 600px) {
+      .pc-topbar { padding: 0 12px; }
+      .pc-topbar-logos img.ns-logo { height: 18px; }
+      .pc-topbar-logos img.jg-logo { height: 16px; }
+      .pc-meta-strip { padding: 12px 14px 10px; }
+      .pc-del-bar { padding: 8px 14px; }
+      .pc-no-del { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="root">
+  <div class="pc-auth-overlay" id="loading-splash">
+    <div class="pc-auth-box">
+      <div class="pc-auth-logos">
+        <img src="netscribes-logo.png" alt="Netscribes" class="ns-logo" />
+        <span class="sep">×</span>
+        <img src="jaggaer-logo.png" alt="Jaggaer" class="jg-logo" />
+      </div>
+      <div class="pc-loading-dot" style="margin: 0 auto 12px;"></div>
+      <span style="font-size:13px;color:var(--ink-3)">Loading…</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const LOGIN_KEY = "ns_jaggaer_login";
+  const USER_KEY  = "ns_jaggaer_user";
+  const PIECE_RETURN_KEY = "ns_piece_return";
+
+  // ── Resolve piece ID ────────────────────────────────────────────────────
+  // Order: server-injected → pretty path (/piece/:id) → ?id= query string.
+  // The pretty path is served via a rewrite so location.search is usually
+  // empty; parsing the path keeps it working either way.
+  const params = new URLSearchParams(location.search);
+  let pieceId = window.__PIECE_ID__ || params.get("id");
+  if (!pieceId) {
+    const m = location.pathname.match(/\/piece\/([^\/?#]+)/);
+    if (m) pieceId = decodeURIComponent(m[1]);
+  }
+
+  if (!pieceId) {
+    document.getElementById("root").innerHTML =
+      '<div class="pc-error" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">' +
+      '<span>No piece ID specified.</span>' +
+      '<a href="/" style="font-size:12px;color:var(--accent)">← Back to tracker</a></div>';
+    return;
+  }
+
+  // ── Auth check ──────────────────────────────────────────────────────────
+  const loginOrg = sessionStorage.getItem(LOGIN_KEY);
+  const userJson  = sessionStorage.getItem(USER_KEY);
+
+  if (!loginOrg || !userJson) {
+    // Not logged in — store the piece we wanted and redirect
+    sessionStorage.setItem(PIECE_RETURN_KEY, pieceId);
+    showAuthGate();
+    return;
+  }
+
+  // ── Logged in — fetch and render ────────────────────────────────────────
+  loadPiece(pieceId);
+
+  // ─────────────────────────────────────────────────────────────────────────
+
+  function showAuthGate() {
+    document.getElementById("root").innerHTML =
+      '<div class="pc-auth-overlay">' +
+        '<div class="pc-auth-box">' +
+          '<div class="pc-auth-logos">' +
+            '<img src="netscribes-logo.png" class="ns-logo" alt="Netscribes" />' +
+            '<span class="sep">×</span>' +
+            '<img src="jaggaer-logo.png" class="jg-logo" alt="Jaggaer" />' +
+          '</div>' +
+          '<div class="pc-auth-title">Sign in to view</div>' +
+          '<div class="pc-auth-sub">This piece is part of the NS × Jaggaer workspace.<br>Sign in with your team credentials to continue.</div>' +
+          '<a href="/" class="pc-auth-btn">Sign in →</a>' +
+        '</div>' +
+      '</div>';
+  }
+
+  async function loadPiece(id) {
+    try {
+      // Server-preloaded by /api/piece-page — render with no round-trip.
+      if (window.__PIECE_DATA__) {
+        render(window.__PIECE_DATA__);
+        return;
+      }
+      const res = await fetch(`/api/piece?id=${encodeURIComponent(id)}`);
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || `HTTP ${res.status}`);
+      }
+      const data = await res.json();
+      render(data);
+    } catch (e) {
+      document.getElementById("root").innerHTML =
+        '<div class="pc-shell">' +
+          '<div class="pc-topbar">' +
+            '<div class="pc-topbar-logos">' +
+              '<img src="netscribes-logo.png" class="ns-logo" alt="NS" />' +
+              '<span class="sep">×</span>' +
+              '<img src="jaggaer-logo.png" class="jg-logo" alt="Jaggaer" />' +
+            '</div>' +
+            '<a href="/" class="pc-back">← Tracker</a>' +
+          '</div>' +
+          '<div class="pc-error"><span>Could not load piece: ' + escHtml(e.message) + '</span></div>' +
+        '</div>';
+    }
+  }
+
+  function render({ piece, cluster, pillar, monthId, deliverable, workflow_stages, team }) {
+    // ── Status meta ──
+    // Stages come from project.json via the API — the single source of truth.
+    // No hardcoded fallback list (it drifts as the workflow changes); if the
+    // stage isn't found we render the raw status with a neutral badge.
+    const stages = (workflow_stages && workflow_stages.length) ? workflow_stages : [];
+    const stageMeta = {};
+    stages.forEach(s => { stageMeta[s.id] = s; });
+    const sm = stageMeta[piece.status] || { label: piece.status, color: "var(--ink-3)", bg: "rgba(17,24,32,0.06)" };
+
+    // ── Uploader name ──
+    const allMembers = [...((team && team.ns) || []), ...((team && team.jaggaer) || [])];
+    const uploader = piece.last_upload_by
+      ? (allMembers.find(m => m.id === piece.last_upload_by) || { name: piece.last_upload_by })
+      : null;
+    const uploaderName = uploader ? uploader.name.split(" ")[0] : null;
+
+    // ── Upload date ──
+    const uploadDate = piece.last_upload
+      ? new Date(piece.last_upload).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })
+      : null;
+
+    // ── Breadcrumb: pillar · cluster ──
+    const crumb = pillar.label + ' <span class="pc-sep">›</span> ' + escHtml(cluster.label);
+
+    // ── Meta row pieces ──
+    const metaParts = [];
+    if (piece.format) metaParts.push('<span class="pc-meta-label">Format</span><span class="pc-meta-val">' + escHtml(piece.format) + '</span><span class="pc-sep">·</span>');
+    if (piece.assignee) metaParts.push('<span class="pc-meta-label">Assigned</span><span class="pc-meta-val">' + escHtml(piece.assignee) + '</span><span class="pc-sep">·</span>');
+    if (uploadDate)  metaParts.push('<span class="pc-meta-label">Uploaded</span><span class="pc-meta-val">' + uploadDate + (uploaderName ? ' by ' + escHtml(uploaderName) : '') + '</span><span class="pc-sep">·</span>');
+    if (piece.revision_count) metaParts.push('<span class="pc-meta-label">Version</span><span class="pc-meta-val">v' + piece.revision_count + '</span>');
+    // strip trailing sep
+    const metaHtml = metaParts.join(' ').replace(/<span class="pc-sep">·<\/span>\s*$/, '');
+
+    // ── Deliverable area ──
+    let deliverableHtml = '';
+    if (deliverable) {
+      const ext = deliverable.ext;
+      const isHtml = ["html", "htm"].includes(ext);
+      const isPdf  = ext === "pdf";
+      const delBarId = "pc-del-bar";
+      const contentId = "pc-del-content";
+
+      deliverableHtml =
+        '<div class="pc-deliverable">' +
+          '<div class="pc-del-bar" id="' + delBarId + '">' +
+            '<span class="pc-del-file">' + escHtml(deliverable.filename) + '</span>' +
+            '<button class="pc-del-download" id="pc-dl-btn">↓ Download</button>' +
+          '</div>' +
+          '<div id="' + contentId + '" style="flex:1;display:flex;flex-direction:column;min-height:0;">' +
+            '<div class="pc-loading" style="flex:1"><div class="pc-loading-dot"></div><span>Rendering…</span></div>' +
+          '</div>' +
+        '</div>';
+    } else {
+      deliverableHtml =
+        '<div class="pc-deliverable">' +
+          '<div class="pc-no-del">' +
+            '<span class="pc-no-del-label">No deliverable yet</span>' +
+            '<span class="pc-no-del-sub">This piece hasn\'t been uploaded yet.</span>' +
+          '</div>' +
+        '</div>';
+    }
+
+    document.getElementById("root").innerHTML =
+      '<div class="pc-shell">' +
+        '<div class="pc-topbar">' +
+          '<div class="pc-topbar-logos">' +
+            '<img src="netscribes-logo.png" class="ns-logo" alt="NS" />' +
+            '<span class="sep">×</span>' +
+            '<img src="jaggaer-logo.png" class="jg-logo" alt="Jaggaer" />' +
+          '</div>' +
+          '<div class="pc-topbar-crumb">' + crumb + '</div>' +
+          '<a href="/" class="pc-back">← Tracker</a>' +
+        '</div>' +
+        '<div class="pc-meta-strip">' +
+          '<div class="pc-title">' + escHtml(piece.title || piece.id) + '</div>' +
+          '<div class="pc-meta-row">' +
+            '<span class="pc-badge" style="background:' + sm.bg + ';color:' + sm.color + '">' + escHtml(sm.label) + '</span>' +
+            (metaHtml ? '<span class="pc-sep">·</span>' + metaHtml : '') +
+          '</div>' +
+        '</div>' +
+        deliverableHtml +
+      '</div>';
+
+    // ── Decode and inject deliverable ──
+    if (deliverable) {
+      const ext = deliverable.ext;
+      const isHtml = ["html", "htm"].includes(ext);
+      const isPdf  = ext === "pdf";
+
+      // Decode base64 → bytes
+      const b64 = deliverable.content.replace(/\n/g, "");
+      const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+
+      const mimeMap = {
+        html: "text/html;charset=utf-8",
+        htm:  "text/html;charset=utf-8",
+        pdf:  "application/pdf",
+        docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        doc:  "application/msword",
+      };
+      const mime = mimeMap[ext] || "application/octet-stream";
+      const blob = new Blob([bytes], { type: mime });
+      const blobUrl = URL.createObjectURL(blob);
+
+      // Download button
+      const dlBtn = document.getElementById("pc-dl-btn");
+      if (dlBtn) {
+        dlBtn.addEventListener("click", () => {
+          const a = document.createElement("a");
+          a.href = blobUrl;
+          a.download = deliverable.filename;
+          a.click();
+        });
+      }
+
+      const contentEl = document.getElementById("pc-del-content");
+      if (!contentEl) return;
+
+      const isDocx = ext === "docx" || ext === "doc";
+      const isMobile = window.matchMedia("(max-width: 600px)").matches;
+
+      if (isHtml) {
+        const iframe = document.createElement("iframe");
+        iframe.className = "pc-iframe";
+        iframe.src = blobUrl;
+        iframe.style.flex = "1";
+        // Sandbox: run the deliverable's own scripts but deny same-origin, so
+        // it can't reach this page's sessionStorage (which holds the login).
+        iframe.setAttribute("sandbox", "allow-scripts allow-popups allow-forms allow-downloads");
+        contentEl.innerHTML = "";
+        contentEl.appendChild(iframe);
+      } else if (isPdf) {
+        if (isMobile) {
+          // Inline <embed>/<iframe> PDF doesn't render on iOS Safari or
+          // Android Chrome — offer an explicit open instead.
+          contentEl.innerHTML =
+            '<div class="pc-pdf-fallback">' +
+              '<span class="pc-pdf-fallback-label">PDF preview isn\'t supported on mobile browsers.</span>' +
+              '<button class="pc-open-btn" id="pc-open-pdf">Open PDF</button>' +
+            '</div>';
+          const openBtn = document.getElementById("pc-open-pdf");
+          if (openBtn) openBtn.addEventListener("click", () => window.open(blobUrl, "_blank"));
+        } else {
+          const embed = document.createElement("embed");
+          embed.className = "pc-pdf-embed";
+          embed.src = blobUrl;
+          embed.type = "application/pdf";
+          embed.style.flex = "1";
+          contentEl.innerHTML = "";
+          contentEl.appendChild(embed);
+        }
+      } else if (isDocx && deliverable.path) {
+        // Render docx → HTML server-side via the existing docx-render endpoint.
+        renderDocx(deliverable.path, contentEl, ext);
+      } else {
+        // Truly non-previewable — download prompt.
+        contentEl.innerHTML =
+          '<div class="pc-no-del" style="flex:1">' +
+            '<span class="pc-no-del-label">Preview not available for .' + escHtml(ext) + ' files.</span>' +
+            '<span class="pc-no-del-sub">Use the Download button above to open it.</span>' +
+          '</div>';
+      }
+    }
+  }
+
+  async function renderDocx(path, contentEl, ext) {
+    contentEl.innerHTML =
+      '<div class="pc-loading" style="flex:1"><div class="pc-loading-dot"></div><span>Rendering document…</span></div>';
+    try {
+      const r = await fetch(`/api/docx-render?path=${encodeURIComponent(path)}`);
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const data = await r.json();
+      if (data.error || typeof data.html !== "string") throw new Error(data.error || "No HTML returned");
+      const wrap = document.createElement("div");
+      wrap.className = "pc-docx";
+      const inner = document.createElement("div");
+      inner.className = "pc-docx-inner";
+      inner.innerHTML = data.html; // trusted: our own deliverable, converted by mammoth
+      wrap.appendChild(inner);
+      contentEl.innerHTML = "";
+      contentEl.appendChild(wrap);
+    } catch (e) {
+      contentEl.innerHTML =
+        '<div class="pc-no-del" style="flex:1">' +
+          '<span class="pc-no-del-label">Couldn\'t render this .' + escHtml(ext) + ' file.</span>' +
+          '<span class="pc-no-del-sub">Use the Download button above to open it.</span>' +
+        '</div>';
+    }
+  }
+
+  function escHtml(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+</script>
+</body>
+</html>

@@ -103,6 +103,106 @@ function clearSession() {
   try { sessionStorage.removeItem(SESSION_KEY); } catch {}
 }
 
+
+// ── Mobile bottom tabbar + slide-up nav sheet ─────────────────────────────
+// Rendered inside the shell on ≤768px. The desktop sidebar handles nav on wider screens.
+function MobileNav({ view, setView, currentUser, adminMode, onSignOut, project }) {
+  const [sheetOpen, setSheetOpen] = useStateApp(false);
+
+  const MAIN_TABS = [
+    { id: "tracker",      icon: "📋", label: "Tracker" },
+    { id: "weekly-report",icon: "📅", label: "Weekly" },
+    { id: "performance",  icon: "📈", label: "Stats" },
+    { id: "more",         icon: "☰",  label: "More" },
+  ];
+
+  function handleTab(id) {
+    if (id === "more") { setSheetOpen(s => !s); return; }
+    setView(id);
+    setSheetOpen(false);
+  }
+
+  const SHEET_ITEMS = [
+    { id: "ai-playground",  label: "AI Playground" },
+    { id: "content-flow",   label: "Content Flow" },
+    { id: "style-guide",    label: "Style Guide" },
+    ...(adminMode ? [{ id: "admin", label: "Admin" }] : []),
+  ];
+
+  const activeMonth = (project.months || []).find(m => m.id === project.active_month) || (project.months || [])[0];
+  const monthLabel = activeMonth ? activeMonth.label : "";
+
+  return (
+    <>
+      {/* Bottom tab bar */}
+      <div className="ns-mob-tabbar">
+        {MAIN_TABS.map(t => (
+          <button
+            key={t.id}
+            className={"ns-mob-tab" + (view === t.id || (t.id === "more" && sheetOpen) ? " is-active" : "")}
+            onClick={() => handleTab(t.id)}
+          >
+            <span className="ns-mob-tab-icon">{t.icon}</span>
+            <span>{t.label}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Backdrop + slide-up sheet */}
+      <div
+        className={"ns-mob-nav-backdrop" + (sheetOpen ? " is-open" : "")}
+        onClick={e => { if (e.target === e.currentTarget) setSheetOpen(false); }}
+      >
+        <div className="ns-mob-nav-sheet">
+          {/* User strip */}
+          <div style={{ padding: "20px 20px 12px", borderBottom: "1px solid #e8e3da" }}>
+            <div style={{ fontFamily: "var(--font-display)", fontSize: "17px", fontWeight: 600, color: "var(--ink)" }}>
+              {currentUser.name}
+            </div>
+            <div style={{ fontSize: "11px", color: "var(--ink-3)", marginTop: "3px" }}>
+              {currentUser.role} {monthLabel && <span style={{ color: "var(--ink-4)" }}>· {monthLabel}</span>}
+            </div>
+          </div>
+
+          {/* Sheet nav items */}
+          <div style={{ padding: "8px 0" }}>
+            {SHEET_ITEMS.map(item => (
+              <button
+                key={item.id}
+                onClick={() => { setView(item.id); setSheetOpen(false); }}
+                style={{
+                  width: "100%", textAlign: "left", padding: "14px 20px",
+                  fontSize: "14px", fontWeight: view === item.id ? 600 : 400,
+                  color: view === item.id ? "var(--accent)" : "var(--ink-2)",
+                  background: view === item.id ? "var(--accent-soft)" : "none",
+                  border: "none", cursor: "pointer", display: "block",
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Sign out */}
+          <div style={{ padding: "12px 20px 28px", borderTop: "1px solid #e8e3da" }}>
+            <button
+              onClick={() => { setSheetOpen(false); onSignOut(); }}
+              style={{
+                width: "100%", padding: "12px", border: "1px solid var(--surface-3)",
+                borderRadius: "var(--radius)", background: "var(--surface)",
+                fontSize: "12px", fontWeight: 600, letterSpacing: "0.08em",
+                textTransform: "uppercase", color: "var(--ink-3)", cursor: "pointer",
+              }}
+            >
+              Sign out
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
 function App() {
   const [loginOrg, setLoginOrg] = useStateApp(() => window.NS_LOGIN ? window.NS_LOGIN.readLoginSession() : null);
   const [project, setProject] = useStateApp(null);
@@ -187,7 +287,17 @@ function App() {
   }
 
   if (!currentUser) {
-    return <NameSelector project={project} loginOrg={loginOrg} onSelect={m => { writeSession(m); setCurrentUser(m); if (m.admin) setAdminMode(false); }} />;
+    return <NameSelector project={project} loginOrg={loginOrg} onSelect={m => {
+      writeSession(m);
+      setCurrentUser(m);
+      if (m.admin) setAdminMode(false);
+      // If user arrived via a piece link, redirect back to it after login
+      const returnPiece = sessionStorage.getItem("ns_piece_return");
+      if (returnPiece) {
+        sessionStorage.removeItem("ns_piece_return");
+        window.location.href = `/piece/${encodeURIComponent(returnPiece)}`;
+      }
+    }} />;
   }
 
   return (
@@ -255,6 +365,14 @@ function App() {
         <StatusFooter source={source} project={project} activeMonthId={activeMonthId} />
       </div>
 
+      <MobileNav
+        view={view}
+        setView={setView}
+        currentUser={currentUser}
+        adminMode={adminMode}
+        project={project}
+        onSignOut={() => { clearSession(); if (window.NS_LOGIN) window.NS_LOGIN.clearLoginSession(); setLoginOrg(null); setCurrentUser(null); setAdminMode(false); setView("tracker"); setActivePillar(null); setActiveCluster(null); setActiveContentType(null); }}
+      />
       <SaveToast state={saveState} />
     </div>
   );
