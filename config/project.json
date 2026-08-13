@@ -2285,6 +2285,26 @@
               "return_to_stage": null,
               "last_upload": "2026-08-12T14:29:12.882Z",
               "last_upload_by": "manager"
+            },
+            {
+              "id": "piece-66bmrt",
+              "title": "JAGGAER CEO Andrew Roszko on AI Governance",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "writing",
+              "content_type": "ad-hoc",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-13T13:05:02.547Z",
+                  "by": "manager"
+                }
+              ],
+              "last_updated": "2026-08-13T13:05:02.556Z",
+              "last_updated_by": "manager"
             }
           ]
         }
