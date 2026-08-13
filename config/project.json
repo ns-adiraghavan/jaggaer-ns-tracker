@@ -2320,9 +2320,9 @@
               "title": "10 Myths About Standalone CLM Software Tested Against the 2026 Data_V1_13082026",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "writing",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
-              "revision_count": 0,
+              "revision_count": 1,
               "primary_keyword": "",
               "geography": "all",
               "status_history": [
@@ -2330,10 +2330,19 @@
                   "stage": "writing",
                   "ts": "2026-08-13T14:14:26.218Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-08-13T14:14:39.209Z",
+                  "by": "manager"
                 }
               ],
-              "last_updated": "2026-08-13T14:14:26.219Z",
-              "last_updated_by": "manager"
+              "last_updated": "2026-08-13T14:14:39.209Z",
+              "last_updated_by": "manager",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-08-13T14:14:39.209Z",
+              "last_upload_by": "manager"
             }
           ]
         }
