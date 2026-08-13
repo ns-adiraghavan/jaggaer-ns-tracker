@@ -92,15 +92,18 @@ function SaveToast({ state }) {
 }
 
 // ── Session persistence helpers ───────────────────────────────────────────────
+// localStorage so an authenticated browser stays signed in across tabs (e.g. a
+// piece link opened in a new tab) and across restarts, until explicit sign-out.
+// sessionStorage fallback on read keeps existing sessions valid after deploy.
 const SESSION_KEY = "ns_jaggaer_user";
 function readSession() {
-  try { return JSON.parse(sessionStorage.getItem(SESSION_KEY)); } catch { return null; }
+  try { return JSON.parse(localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY)); } catch { return null; }
 }
 function writeSession(user) {
-  try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(user)); } catch {}
+  try { localStorage.setItem(SESSION_KEY, JSON.stringify(user)); } catch {}
 }
 function clearSession() {
-  try { sessionStorage.removeItem(SESSION_KEY); } catch {}
+  try { localStorage.removeItem(SESSION_KEY); sessionStorage.removeItem(SESSION_KEY); } catch {}
 }
 
 

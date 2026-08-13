@@ -215,9 +215,9 @@
   <div class="pc-auth-overlay" id="loading-splash">
     <div class="pc-auth-box">
       <div class="pc-auth-logos">
-        <img src="netscribes-logo.png" alt="Netscribes" class="ns-logo" />
+        <img src="/netscribes-logo.png" alt="Netscribes" class="ns-logo" />
         <span class="sep">×</span>
-        <img src="jaggaer-logo.png" alt="Jaggaer" class="jg-logo" />
+        <img src="/jaggaer-logo.png" alt="Jaggaer" class="jg-logo" />
       </div>
       <div class="pc-loading-dot" style="margin: 0 auto 12px;"></div>
       <span style="font-size:13px;color:var(--ink-3)">Loading…</span>
@@ -251,8 +251,10 @@
   }
 
   // ── Auth check ──────────────────────────────────────────────────────────
-  const loginOrg = sessionStorage.getItem(LOGIN_KEY);
-  const userJson  = sessionStorage.getItem(USER_KEY);
+  // localStorage is shared across tabs, so a piece link opened while signed in
+  // (popout or pasted) skips the gate. sessionStorage fallback for older sessions.
+  const loginOrg = localStorage.getItem(LOGIN_KEY) || sessionStorage.getItem(LOGIN_KEY);
+  const userJson = localStorage.getItem(USER_KEY) || sessionStorage.getItem(USER_KEY);
 
   if (!loginOrg || !userJson) {
     // Not logged in — store the piece we wanted and redirect
@@ -271,9 +273,9 @@
       '<div class="pc-auth-overlay">' +
         '<div class="pc-auth-box">' +
           '<div class="pc-auth-logos">' +
-            '<img src="netscribes-logo.png" class="ns-logo" alt="Netscribes" />' +
+            '<img src="/netscribes-logo.png" class="ns-logo" alt="Netscribes" />' +
             '<span class="sep">×</span>' +
-            '<img src="jaggaer-logo.png" class="jg-logo" alt="Jaggaer" />' +
+            '<img src="/jaggaer-logo.png" class="jg-logo" alt="Jaggaer" />' +
           '</div>' +
           '<div class="pc-auth-title">Sign in to view</div>' +
           '<div class="pc-auth-sub">This piece is part of the NS × Jaggaer workspace.<br>Sign in with your team credentials to continue.</div>' +
@@ -301,9 +303,9 @@
         '<div class="pc-shell">' +
           '<div class="pc-topbar">' +
             '<div class="pc-topbar-logos">' +
-              '<img src="netscribes-logo.png" class="ns-logo" alt="NS" />' +
+              '<img src="/netscribes-logo.png" class="ns-logo" alt="NS" />' +
               '<span class="sep">×</span>' +
-              '<img src="jaggaer-logo.png" class="jg-logo" alt="Jaggaer" />' +
+              '<img src="/jaggaer-logo.png" class="jg-logo" alt="Jaggaer" />' +
             '</div>' +
             '<a href="/" class="pc-back">← Tracker</a>' +
           '</div>' +
@@ -379,9 +381,9 @@
       '<div class="pc-shell">' +
         '<div class="pc-topbar">' +
           '<div class="pc-topbar-logos">' +
-            '<img src="netscribes-logo.png" class="ns-logo" alt="NS" />' +
+            '<img src="/netscribes-logo.png" class="ns-logo" alt="NS" />' +
             '<span class="sep">×</span>' +
-            '<img src="jaggaer-logo.png" class="jg-logo" alt="Jaggaer" />' +
+            '<img src="/jaggaer-logo.png" class="jg-logo" alt="Jaggaer" />' +
           '</div>' +
           '<div class="pc-topbar-crumb">' + crumb + '</div>' +
           '<a href="/" class="pc-back">← Tracker</a>' +
@@ -440,7 +442,7 @@
         iframe.src = blobUrl;
         iframe.style.flex = "1";
         // Sandbox: run the deliverable's own scripts but deny same-origin, so
-        // it can't reach this page's sessionStorage (which holds the login).
+        // it can't reach this page's storage (which holds the login).
         iframe.setAttribute("sandbox", "allow-scripts allow-popups allow-forms allow-downloads");
         contentEl.innerHTML = "";
         contentEl.appendChild(iframe);

@@ -2030,7 +2030,7 @@ function OpenPieceButton({ pieceId }) {
   return (
     <button
       className="ns-drawer-tab"
-      onClick={() => window.open("/piece/" + pieceId, "_blank", "noopener")}
+      onClick={() => window.open("/piece/" + pieceId, "_blank")}
       title="Open in a new tab"
       style={{ marginLeft: "auto" }}
     >

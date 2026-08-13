@@ -22,13 +22,15 @@ const CREDENTIALS = {
 };
 
 function readLoginSession() {
-  try { return sessionStorage.getItem(LOGIN_SESSION_KEY); } catch { return null; }
+  // localStorage so the login is shared across tabs in the same browser.
+  // sessionStorage fallback keeps any in-flight session valid across deploy.
+  try { return localStorage.getItem(LOGIN_SESSION_KEY) || sessionStorage.getItem(LOGIN_SESSION_KEY); } catch { return null; }
 }
 function writeLoginSession(org) {
-  try { sessionStorage.setItem(LOGIN_SESSION_KEY, org); } catch {}
+  try { localStorage.setItem(LOGIN_SESSION_KEY, org); } catch {}
 }
 function clearLoginSession() {
-  try { sessionStorage.removeItem(LOGIN_SESSION_KEY); } catch {}
+  try { localStorage.removeItem(LOGIN_SESSION_KEY); sessionStorage.removeItem(LOGIN_SESSION_KEY); } catch {}
 }
 
 window.NS_LOGIN = { readLoginSession, writeLoginSession, clearLoginSession };
