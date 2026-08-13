@@ -17,6 +17,18 @@ const PILLAR_ACCENT = {
   "higher-education":        "#6C3483",
 };
 
+// ─── Content-type display lookup — single source of truth for label/colour ────
+// across TrackerHeader, ContentTypeNav (sidebar.jsx) and AdminOverview (admin.jsx).
+// "ad-hoc" pieces are expedited/as-needed, NOT part of the weighted 30+ piece
+// programme split, so their weight is intentionally null (no % shown).
+const CT_DISPLAY = {
+  "msv":                { label: "MSV-Driven",        color: "#1a6a3a", bg: "#eaf4ee", border: "#b8dfc8" },
+  "ai-in-s2p":          { label: "AI in S2P (Claude)", color: "#1e4fa8", bg: "#eaf0fb", border: "#bad0f0" },
+  "industry-specific":  { label: "Industry-Specific",  color: "#784212", bg: "#fef3e8", border: "#f0d4a8" },
+  "ad-hoc":             { label: "Ad-Hoc Articles",    color: "#c8401a", bg: "#fdeee8", border: "#f0bba8" },
+};
+window.CT_DISPLAY = CT_DISPLAY;
+
 // ─── Workflow stages — read from project.workflow_stages if present, else use defaults ──
 // Each stage: { id, label, color, bg, actor }
 // actor: "jaggaer" | "ns" | "person:<id>" — controls who sees the action button
@@ -29,10 +41,32 @@ const DEFAULT_WORKFLOW_STAGES = [
   { id: "brief-uploaded",   label: "Brief Uploaded",                color: "#0e6655",             bg: "#e8f5f0",             actor: ["ns", "jaggaer"] },
   { id: "writing",          label: "Writing",                       color: "#1e6fa8",             bg: "#e8f2fa",             actor: "ns" },
   { id: "marketing-review", label: "Abhishek and Orlagh Review",    color: "#6c3483",             bg: "#f5eef8",             actor: ["person:abhishek", "person:m-ny8dy"] },
-  { id: "robert-review",    label: "Robert Review",                 color: "#7d6608",             bg: "#fefde8",             actor: "person:m-9toiv" },
-  { id: "editors",          label: "CTA Check",                     color: "#b05e00",             bg: "#fdf0e0",             actor: "jaggaer" },
+  { id: "ed-review",         label: "Ed Content Review",             color: "#7d6608",             bg: "#fefde8",             actor: "person:m-ed01" },
   { id: "approved",         label: "Approved",                      color: "#1e7a45",             bg: "#e6f5ec",             actor: null },
+  { id: "live",             label: "Live",                          color: "#0d5c8a",             bg: "#e6f2fa",             actor: ["ns", "jaggaer"] },
 ];
+
+// Ad-Hoc Articles run a short two-stage chain instead of the full pipeline above:
+// writing (NS uploads) → ad-hoc-review (any Jaggaer user) → approved.
+// Kept OUT of the main DEFAULT_WORKFLOW_STAGES array so it never shifts indices
+// for the standard pieces — UploadPanel/ReviewPanel branch on content_type
+// === "ad-hoc" to route into this stage explicitly rather than walking stageOrder.
+const ADHOC_REVIEW_STAGE = {
+  id: "ad-hoc-review", label: "Ad-Hoc Review (Jaggaer)", color: "#c8401a", bg: "#fdeee8", actor: "jaggaer",
+};
+function getAdHocReviewStage(project) {
+  const stages = getWorkflowStages(project);
+  return stages.find(s => s.id === "ad-hoc-review") || ADHOC_REVIEW_STAGE;
+}
+function isAdHoc(piece) { return piece && piece.content_type === "ad-hoc"; }
+// White-paper deliverables require BOTH a PDF and an HTML companion file.
+// Formats that trigger dual-upload mode:
+const WP_FORMATS = ["Whitepaper", "Whitepaper (gated)", "eBook / Guide"];
+function isWhitePaper(piece) { return piece && WP_FORMATS.includes(piece.format); }
+// Path helpers for a given rev + ext
+function wpDeliverablePath(piece, pillar, cluster, month, rev, ext) {
+  return `content/${month}/${pillar}/${cluster}/${piece.id}/deliverable-v${rev}.${ext}`;
+}
 
 function getWorkflowStages(project) {
   return (project && project.workflow_stages && project.workflow_stages.length)
@@ -53,13 +87,15 @@ function buildStatusMeta(stages) {
 // label/colour everywhere, not just in components that thread `stageMeta` through.
 let STATUS_META = buildStatusMeta(DEFAULT_WORKFLOW_STAGES);
 let STATUS_ORDER = DEFAULT_WORKFLOW_STAGES.map(s => s.id);
-let IN_MOTION_STATUSES = DEFAULT_WORKFLOW_STAGES.filter(s => s.id !== "not-started" && s.id !== "approved").map(s => s.id);
+let IN_MOTION_STATUSES = DEFAULT_WORKFLOW_STAGES.filter(s => s.id !== "not-started" && s.id !== "approved" && s.id !== "live").map(s => s.id);
 
 function syncWorkflowGlobals(project) {
   const stages = getWorkflowStages(project);
-  STATUS_META = buildStatusMeta(stages);
-  STATUS_ORDER = stages.map(s => s.id);
-  IN_MOTION_STATUSES = stages.filter(s => s.id !== "not-started" && s.id !== "approved").map(s => s.id);
+  const hasAdHoc = stages.some(s => s.id === "ad-hoc-review");
+  const stagesWithAdHoc = hasAdHoc ? stages : [...stages, getAdHocReviewStage(project)];
+  STATUS_META = buildStatusMeta(stagesWithAdHoc);
+  STATUS_ORDER = stagesWithAdHoc.map(s => s.id);
+  IN_MOTION_STATUSES = stagesWithAdHoc.filter(s => s.id !== "not-started" && s.id !== "approved" && s.id !== "live").map(s => s.id);
 }
 window.NS_syncWorkflow = syncWorkflowGlobals;
 
@@ -85,8 +121,8 @@ function actorIsJaggaerSide(actor, project) {
 // Returns { isTurn, mode, awaitsJaggaer } for a piece given the current user.
 function pieceTurnFor(piece, user, project) {
   const stages = getWorkflowStages(project);
-  const st = stages.find(s => s.id === piece.status);
-  if (!st || piece.status === "approved" || piece.status === "not-started") {
+  const st = piece.status === "ad-hoc-review" ? getAdHocReviewStage(project) : stages.find(s => s.id === piece.status);
+  if (!st || piece.status === "approved" || piece.status === "live" || piece.status === "not-started") {
     return { isTurn: false, mode: "history", awaitsJaggaer: false };
   }
   const isTurn = actorMatchesUser(st.actor, user);
@@ -135,6 +171,36 @@ function readDeliverableFile(file) {
   });
 }
 
+// ─── Stage-history log ────────────────────────────────────────────────────────
+// Every status transition (upload, approve, send-back, question) appends a
+// { stage, ts, by } entry here, going forward only. Existing pieces are seeded
+// with a single synthetic entry (ts: null) on first read so the Weekly Report
+// has at least one data point — see ensureSeededHistory().
+// Timestamps are stored UTC (consistent with last_updated/feedback ts elsewhere)
+// and converted to EST only at display time via formatEST().
+function appendStatusHistory(piece, stage, by) {
+  const prevHistory = Array.isArray(piece.status_history) ? piece.status_history : [];
+  return [...prevHistory, { stage, ts: new Date().toISOString(), by: by || null }];
+}
+
+// Used wherever a piece is first rendered without a status_history — backfills
+// one entry showing the CURRENT stage with ts: null (intentionally blank; we
+// don't know when it actually entered that stage, only that it's there now).
+function ensureSeededHistory(piece) {
+  if (Array.isArray(piece.status_history) && piece.status_history.length) return piece.status_history;
+  return [{ stage: piece.status, ts: null, by: piece.last_updated_by || piece.last_upload_by || null }];
+}
+
+// Displays a UTC ISO timestamp as US Eastern time. Returns "—" for null/blank
+// (used for seeded history entries where we don't know the real date).
+function formatEST(isoString, opts) {
+  if (!isoString) return "—";
+  const d = new Date(isoString);
+  if (isNaN(d.getTime())) return "—";
+  const base = { timeZone: "America/New_York", month: "short", day: "numeric" };
+  return d.toLocaleString("en-US", { ...base, ...(opts || {}) });
+}
+
 // ─── Force-download helper — raw.githubusercontent serves HTML inline; fetch → blob forces save ──
 async function forceDownload(url, filename) {
   try {
@@ -152,26 +218,6 @@ async function forceDownload(url, filename) {
 
 
 // ─── Phase helpers ────────────────────────────────────────────────────────────
-// Phase 1 = informational/TOFU content (builds audience)
-// Phase 2 = commercial/MOFU/BOFU content (converts audience)
-// Publishing sequence is a SEPARATE concept — Jaggaer's recommended publish order
-// for their web team, visible in the Publishing Sequence tab only.
-
-function getPhaseStats(project) {
-  let p1Total = 0, p1Done = 0, p2Total = 0, p2Done = 0;
-  for (const pillar of project.pillars || []) {
-    for (const cluster of pillar.clusters || []) {
-      for (const piece of cluster.pieces || []) {
-        const ph = piece.phase || 1;
-        if (ph === 1) { p1Total++; if (piece.status === "approved") p1Done++; }
-        else          { p2Total++; if (piece.status === "approved") p2Done++; }
-      }
-    }
-  }
-  const p1Complete = p1Total > 0 && p1Done === p1Total;
-  const currentPhase = p1Complete ? 2 : 1;
-  return { p1Total, p1Done, p2Total, p2Done, currentPhase, p1Complete };
-}
 
 // Keep getClusterWeek for Publishing Sequence tab only
 function getClusterWeek(clusterId, schedule) {
@@ -202,17 +248,20 @@ function getPieceTiming() { return null; }
 
 // ─── CSV helpers ───────────────────────────────────────────────────────────────
 const CSV_FIELDS = ["id","title","format","cluster","pillar","content_type","phase",
-  "primary_keyword","secondary_keyword","intent","funnel","geography","assignee","notes","url"];
+  "primary_keyword","secondary_keyword","intent","funnel","geography","assignee","notes","url",
+  "valid_clusters"];
 
 function projectToCsv(project) {
   const rows = [CSV_FIELDS.join(",")];
   for (const pillar of project.pillars || []) {
     for (const cluster of pillar.clusters || []) {
       for (const piece of cluster.pieces || []) {
+        const pillarClusterLabels = (pillar.clusters || []).map(c => c.label).join(" | ");
         const row = CSV_FIELDS.map(f => {
           let val = "";
           if (f === "cluster") val = cluster.label;
           else if (f === "pillar") val = pillar.label;
+          else if (f === "valid_clusters") val = pillarClusterLabels;
           else val = piece[f] !== undefined ? String(piece[f]) : "";
           // Escape commas/quotes
           if (val.includes(",") || val.includes('"') || val.includes("\n")) {
@@ -326,93 +375,6 @@ function csvToProjectUpdates(csvText, project) {
   }
 
   return { newProject, changed };
-}
-
-// ─── Phase Banner ─────────────────────────────────────────────────────────────
-function PhaseBanner({ project }) {
-  const FONT = { fontFamily: "Noto Sans, sans-serif" };
-  const { p1Total, p1Done, p2Total, p2Done, currentPhase, p1Complete } = getPhaseStats(project);
-
-  return (
-    <div style={{
-      display: "flex", alignItems: "stretch", gap: 0,
-      borderBottom: "1.5px solid #e0dbd4", background: "#fff",
-      fontSize: "0.72rem", fontFamily: "Noto Sans, sans-serif",
-    }}>
-      {/* Phase 1 block */}
-      <div style={{
-        flex: 1, padding: "10px 20px", display: "flex", alignItems: "center", gap: "12px",
-        borderRight: "1px solid #e0dbd4",
-        background: currentPhase === 1 ? "#fffbf5" : "#f8fdf9",
-        borderLeft: currentPhase === 1 ? "3px solid #c8401a" : "3px solid #1e7a45",
-      }}>
-        <div style={{ flexShrink: 0 }}>
-          <div style={{ fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
-            color: currentPhase === 1 ? "#c8401a" : "#1e7a45", fontSize: "0.62rem" }}>
-            {currentPhase === 1 ? "▶ Current — " : "✓ Complete — "}Phase 1
-          </div>
-          <div style={{ color: "#888", marginTop: "1px" }}>Informational · Audience-building</div>
-        </div>
-        <div style={{ marginLeft: "auto", textAlign: "right" }}>
-          <div style={{ fontWeight: 700, fontSize: "1rem",
-            color: p1Complete ? "#1e7a45" : "#0f1923" }}>{p1Done}/{p1Total}</div>
-          <div style={{ color: "#aaa" }}>approved</div>
-        </div>
-        {/* mini progress bar */}
-        <div style={{ width: "60px", height: "4px", background: "#e8e3da", borderRadius: "2px", flexShrink: 0 }}>
-          <div style={{ width: `${p1Total ? (p1Done/p1Total)*100 : 0}%`, height: "100%",
-            background: p1Complete ? "#1e7a45" : "#c8401a", borderRadius: "2px", transition: "width 0.3s" }} />
-        </div>
-      </div>
-
-      {/* Phase 2 block */}
-      <div style={{
-        flex: 1, padding: "10px 20px", display: "flex", alignItems: "center", gap: "12px",
-        background: currentPhase === 2 ? "#fffbf5" : "#fafafa",
-        borderLeft: currentPhase === 2 ? "3px solid #c8401a" : "3px solid #e0dbd4",
-        opacity: p1Complete ? 1 : 0.6,
-      }}>
-        <div style={{ flexShrink: 0 }}>
-          <div style={{ fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
-            color: currentPhase === 2 ? "#c8401a" : "#888", fontSize: "0.62rem" }}>
-            {currentPhase === 2 ? "▶ Current — " : (p2Done === p2Total && p2Total > 0 ? "✓ Complete — " : "Upcoming — ")}Phase 2
-          </div>
-          <div style={{ color: "#888", marginTop: "1px" }}>Commercial · Audience-conversion</div>
-        </div>
-        <div style={{ marginLeft: "auto", textAlign: "right" }}>
-          <div style={{ fontWeight: 700, fontSize: "1rem", color: "#0f1923" }}>{p2Done}/{p2Total}</div>
-          <div style={{ color: "#aaa" }}>approved</div>
-        </div>
-        <div style={{ width: "60px", height: "4px", background: "#e8e3da", borderRadius: "2px", flexShrink: 0 }}>
-          <div style={{ width: `${p2Total ? (p2Done/p2Total)*100 : 0}%`, height: "100%",
-            background: "#1e7a45", borderRadius: "2px", transition: "width 0.3s" }} />
-        </div>
-      </div>
-
-      {/* Recent activity count */}
-      {(() => {
-        const recent = [];
-        for (const p of project.pillars || [])
-          for (const c of p.clusters || [])
-            for (const pc of c.pieces || [])
-              if ((pc.last_updated || pc.last_upload) && pc.status !== "not-started") recent.push(pc);
-        recent.sort((a,b) => new Date(b.last_updated||b.last_upload) - new Date(a.last_updated||a.last_upload));
-        const top = recent[0];
-        return top ? (
-          <div style={{ padding: "10px 20px", borderLeft: "1px solid #e0dbd4", flexShrink: 0,
-            display: "flex", flexDirection: "column", justifyContent: "center" }}>
-            <div style={{ fontWeight: 600, color: "#1e6fa8", fontSize: "0.65rem",
-              textTransform: "uppercase", letterSpacing: "0.07em" }}>Latest</div>
-            <div style={{ color: "#444", maxWidth: "180px", overflow: "hidden",
-              textOverflow: "ellipsis", whiteSpace: "nowrap", marginTop: "1px" }}>{top.title}</div>
-            <div style={{ color: "#aaa", marginTop: "1px" }}>
-              {STATUS_META[top.status]?.label || top.status}
-            </div>
-          </div>
-        ) : null;
-      })()}
-    </div>
-  );
 }
 
 // ─── CSV Sync Panel (used in Admin) ──────────────────────────────────────────
@@ -644,8 +606,9 @@ function InlineCell({ value, type, options, onSave, children, className }) {
 // ─── Activity Bar — recent uploads/feedback, phase-filtered ─────────────────
 function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveFilter, currentUser }) {
   const PANEL = { fontFamily: "Noto Sans, sans-serif" };
-  const stages = (project.workflow_stages && project.workflow_stages.length)
+  const baseStages = (project.workflow_stages && project.workflow_stages.length)
     ? project.workflow_stages : DEFAULT_WORKFLOW_STAGES;
+  const stages = baseStages.some(s => s.id === "ad-hoc-review") ? baseStages : [...baseStages, getAdHocReviewStage(project)];
   const stageMeta = {};
   stages.forEach(s => { stageMeta[s.id] = s; });
 
@@ -860,6 +823,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
   const [openPiece, setOpenPiece] = useStateTR(null);
   const [activeFilter, setActiveFilter] = useStateTR(null);
   const [searchQuery, setSearchQuery] = useStateTR("");
+  const [showAdHocModal, setShowAdHocModal] = useStateTR(false);
 
   // Apply search filter on top of pillar/cluster/content-type filters
   const sq = searchQuery.trim().toLowerCase();
@@ -901,6 +865,45 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
     });
   }
 
+  // Ad-Hoc Articles need a pillar/cluster home to reuse all the existing piece
+  // machinery (file paths, upload/review panels, preview, feedback). Rather than
+  // building a parallel data structure, we auto-create one dedicated pillar with
+  // a single catch-all cluster the first time anyone adds an ad-hoc piece.
+  // Returns the new piece id.
+  function addAdHocPiece(title, currentUser) {
+    let newPieceId = null;
+    setProject(prev => {
+      const next = JSON.parse(JSON.stringify(prev));
+      let pillar = next.pillars.find(p => p.id === "ad-hoc-articles");
+      if (!pillar) {
+        pillar = { id: "ad-hoc-articles", label: "Ad-Hoc Articles", sequence: next.pillars.length + 1, clusters: [] };
+        next.pillars.push(pillar);
+      }
+      let cluster = pillar.clusters.find(c => c.id === "c-ad-hoc");
+      if (!cluster) {
+        cluster = { id: "c-ad-hoc", label: "Ad-Hoc Articles", sequence: 1, intent: "expedited", anchor_piece: "", month_id: next.active_month, pieces: [] };
+        pillar.clusters.push(cluster);
+      }
+      newPieceId = "piece-" + Math.random().toString(36).slice(2, 8);
+      cluster.pieces.push({
+        id: newPieceId,
+        title: title.trim() || "Untitled ad-hoc article",
+        format: "Ad-Hoc Article",
+        assignee: currentUser?.id || "",
+        status: "writing", // NS uploads directly — no brief/SME-review gate for ad-hoc
+        content_type: "ad-hoc",
+        revision_count: 0,
+        primary_keyword: "",
+        geography: "all",
+        status_history: [{ stage: "writing", ts: new Date().toISOString(), by: currentUser?.id || null }],
+        last_updated: new Date().toISOString(),
+        last_updated_by: currentUser?.id || null,
+      });
+      return next;
+    });
+    return newPieceId;
+  }
+
   function deletePiece(clusterId, pieceId) {
     setProject(prev => {
       const next = JSON.parse(JSON.stringify(prev));
@@ -937,10 +940,20 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         viewMode={viewMode} setViewMode={setViewMode}
         currentUser={currentUser} onOpenPiece={setOpenPiece}
         searchQuery={searchQuery} setSearchQuery={setSearchQuery}
+        onAddAdHoc={() => setShowAdHocModal(true)}
       />
+      {showAdHocModal && (
+        <AdHocCreateModal
+          onClose={() => setShowAdHocModal(false)}
+          onCreate={(title) => {
+            const newId = addAdHocPiece(title, currentUser);
+            setShowAdHocModal(false);
+            if (newId) setOpenPiece({ clusterId: "c-ad-hoc", pieceId: newId, mode: "upload" });
+          }}
+        />
+      )}
       {activeTab === "tracker" && (
         <>
-          <PhaseBanner project={project} />
           <FilterBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} activeFilter={activeFilter} setActiveFilter={setActiveFilter} currentUser={currentUser} />
         </>
       )}
@@ -1143,8 +1156,63 @@ function NotificationBell({ project, currentUser, onOpenPiece }) {
   );
 }
 
+// ─── Ad-Hoc Article creation modal ─────────────────────────────────────────────
+// Deliberately minimal: just a topic/title. No keywords, schedule_week, or brief
+// scaffolding — ad-hoc pieces skip straight to "writing" status so NS can upload
+// the finished HTML immediately. Open to any NS user, not gated by adminMode.
+function AdHocCreateModal({ onClose, onCreate }) {
+  const [title, setTitle] = useStateTR("");
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  return (
+    <div
+      style={{ position: "fixed", inset: 0, background: "rgba(17,24,32,0.45)", zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center" }}
+      onClick={onClose}
+    >
+      <div
+        style={{ background: "#fff", borderRadius: "5px", padding: "24px", width: "420px", maxWidth: "90vw", boxShadow: "0 12px 40px rgba(0,0,0,0.25)" }}
+        onClick={e => e.stopPropagation()}
+      >
+        <div style={{ ...FONT, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#c8401a", marginBottom: "6px" }}>
+          New Ad-Hoc Article
+        </div>
+        <p style={{ ...FONT, fontSize: "0.78rem", color: "#666", marginTop: 0, marginBottom: "16px", lineHeight: 1.5 }}>
+          Expedited content outside the planned calendar. Drop a topic, then upload the finished HTML — any Jaggaer reviewer can approve or send it back, no Abhishek/Vizna/Ed/CTA gates.
+        </p>
+        <input
+          autoFocus
+          type="text"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+          placeholder="Article topic / working title"
+          onKeyDown={e => { if (e.key === "Enter" && title.trim()) onCreate(title); }}
+          style={{
+            ...FONT, fontSize: "0.85rem", width: "100%",
+            border: "1px solid #e8e3da", borderRadius: "3px",
+            padding: "9px 12px", outline: "none", boxSizing: "border-box",
+          }}
+        />
+        <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", marginTop: "18px" }}>
+          <button onClick={onClose} style={{ ...FONT, fontSize: "0.78rem", fontWeight: 600, color: "#888", background: "none", border: "none", cursor: "pointer", padding: "8px 10px" }}>
+            Cancel
+          </button>
+          <button
+            onClick={() => title.trim() && onCreate(title)}
+            disabled={!title.trim()}
+            style={{
+              ...FONT, fontSize: "0.78rem", fontWeight: 700,
+              color: "#fff", background: title.trim() ? "#c8401a" : "#e0d8cc",
+              border: "none", borderRadius: "3px",
+              padding: "9px 18px", cursor: title.trim() ? "pointer" : "default",
+            }}
+          >Create →</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Header ───────────────────────────────────────────────────────────────────
-function TrackerHeader({ project, stats, activeCluster, setActiveCluster, activeTab, setActiveTab, viewMode, setViewMode, currentUser, onOpenPiece, searchQuery, setSearchQuery }) {
+function TrackerHeader({ project, stats, activeCluster, setActiveCluster, activeTab, setActiveTab, viewMode, setViewMode, currentUser, onOpenPiece, searchQuery, setSearchQuery, onAddAdHoc }) {
   const totalPieces = project.pillars.reduce((n, p) => n + p.clusters.reduce((m, c) => m + c.pieces.length, 0), 0);
   const clusterStats = window.computeStats(project).byCluster;
   const readyClusters = Object.values(clusterStats).filter(c => c.ready).length;
@@ -1161,19 +1229,16 @@ function TrackerHeader({ project, stats, activeCluster, setActiveCluster, active
           {project.content_type_split && project.content_type_split.length > 0 && (
             <div style={{ display: "flex", gap: "8px", marginTop: "6px", flexWrap: "wrap", alignItems: "center" }}>
               {project.content_type_split.map(ct => {
-                const shortLabel = ct.id === "msv" ? "MSV-Driven" : ct.id === "ai-in-s2p" ? "AI in S2P (Claude)" : "Industry-Specific";
-                const color = ct.id === "msv" ? "#1a6a3a" : ct.id === "ai-in-s2p" ? "#1e4fa8" : "#784212";
-                const bg    = ct.id === "msv" ? "#eaf4ee" : ct.id === "ai-in-s2p" ? "#eaf0fb" : "#fef3e8";
-                const bdr   = ct.id === "msv" ? "#b8dfc8" : ct.id === "ai-in-s2p" ? "#bad0f0" : "#f0d4a8";
+                const meta = CT_DISPLAY[ct.id] || CT_DISPLAY["industry-specific"];
                 return (
                   <span key={ct.id} title={ct.description} style={{
                     fontFamily: "Noto Sans, sans-serif",
                     fontSize: "0.67rem", fontWeight: 700,
                     letterSpacing: "0.05em", textTransform: "uppercase",
-                    color, background: bg, border: `1px solid ${bdr}`,
+                    color: meta.color, background: meta.bg, border: `1px solid ${meta.border}`,
                     padding: "3px 10px", borderRadius: "2px", cursor: "default",
                   }}>
-                    {Math.round(ct.weight * 100)}% {shortLabel}
+                    {typeof ct.weight === "number" ? `${Math.round(ct.weight * 100)}% ` : ""}{meta.label}
                     {ct.pieces_est && <span style={{ opacity: 0.65, fontWeight: 400 }}> · ~{ct.pieces_est}</span>}
                   </span>
                 );
@@ -1239,6 +1304,21 @@ function TrackerHeader({ project, stats, activeCluster, setActiveCluster, active
                 >✕</button>
               )}
             </div>
+          )}
+          {activeTab === "tracker" && currentUser?.org === "ns" && onAddAdHoc && (
+            <button
+              onClick={onAddAdHoc}
+              style={{
+                fontFamily: "Noto Sans, sans-serif",
+                fontSize: "0.72rem", fontWeight: 700,
+                letterSpacing: "0.03em",
+                color: "#fff", background: "#c8401a",
+                border: "none", borderRadius: "3px",
+                padding: "7px 14px", cursor: "pointer",
+                whiteSpace: "nowrap",
+              }}
+              title="Log an expedited article outside the planned content calendar"
+            >+ Ad-Hoc Article</button>
           )}
           {activeTab === "tracker" && (
             <div className="ns-view-toggle">
@@ -1477,8 +1557,9 @@ function SendToEditorsButton({ cluster, pillar, project }) {
 // ─── Cluster card ─────────────────────────────────────────────────────────────
 function ClusterCard({ cluster, pillar, project, clusterIndex, openPiece, setOpenPiece, updatePiece, addFeedback, currentUser, adminMode, onAdminEditPiece, onAdminEditCluster, stagger, currentWeek }) {
   const total = cluster.pieces.length;
-  const approved = cluster.pieces.filter(p => p.status === "approved").length;
-  const liveInMotion = getWorkflowStages(project).filter(s => s.id !== "not-started" && s.id !== "approved").map(s => s.id);
+  // Both approved and live count as "done" for cluster readiness
+  const approved = cluster.pieces.filter(p => p.status === "approved" || p.status === "live").length;
+  const liveInMotion = getWorkflowStages(project).filter(s => s.id !== "not-started" && s.id !== "approved" && s.id !== "live").map(s => s.id);
   const inMotion = cluster.pieces.filter(p => liveInMotion.includes(p.status)).length;
   const ready = approved === total && total > 0;
   const anchor = cluster.pieces.find(p => p.id === cluster.anchor_piece);
@@ -1598,11 +1679,12 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
   const nsMembers = project.team.ns.map(m => ({ value: m.id, label: m.name }));
 
   const stages = getWorkflowStages(project);
-  const stageMeta = buildStatusMeta(stages);
+  const stageMeta = buildStatusMeta(stages.some(s => s.id === "ad-hoc-review") ? stages : [...stages, getAdHocReviewStage(project)]);
   const stageOrder = stages.map(s => s.id);
   const currentStageIdx = stageOrder.indexOf(piece.status);
-  const currentStage = stages.find(s => s.id === piece.status);
-  const nextStage = stages[currentStageIdx + 1] || null;
+  const isAdHocReviewStage = piece.status === "ad-hoc-review";
+  const currentStage = isAdHocReviewStage ? getAdHocReviewStage(project) : stages.find(s => s.id === piece.status);
+  const nextStage = isAdHocReviewStage ? null : (stages[currentStageIdx + 1] || null);
 
   function actorMatches(actor) {
     if (!actor) return false;
@@ -1622,12 +1704,15 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
   }
 
   function primaryAction() {
-    if (!currentStage || piece.status === "approved") return null;
+    if (!currentStage || piece.status === "approved" || piece.status === "live") return null;
     const actor = currentStage.actor;
     if (!actorMatches(actor)) return null;
     // Label logic
     if (piece.status === "not-started") return { label: "Upload Brief", mode: "brief" };
-    if (hasActorType(actor, "ns") || isNS) return { label: nextStage ? `Submit → ${nextStage.label}` : "Submit", mode: "upload" };
+    if (hasActorType(actor, "ns") || isNS) {
+      const displayNext = (isAdHoc(piece) && piece.status === "writing") ? getAdHocReviewStage(project) : nextStage;
+      return { label: displayNext ? `Submit → ${displayNext.label}` : "Submit", mode: "upload" };
+    }
     // Named person or Jaggaer reviewer
     return { label: "Review", mode: "review" };
   }
@@ -1635,7 +1720,7 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
 
   // "Awaits" highlight: piece is waiting on Jaggaer org (any stage where actor includes jaggaer, excluding not-started)
   const awaitsJaggaer = isJG && currentStage && hasActorType(currentStage.actor, "jaggaer") && piece.status !== "not-started";
-  // Observer: Indy/Anna can always open and view, even when it's Robert's or NS's turn
+  // Observer: Indy/Anna can always open and view, even when it's Ed's or NS's turn
   const isObserver = isJG && !actorMatches(currentStage?.actor);
 
   return (
@@ -1866,7 +1951,7 @@ function ScaledFrame({ src, title, pdf, iframeRef, onLoad }) {
       <iframe
         ref={iframeRef}
         src={src}
-        sandbox="allow-same-origin allow-scripts"
+        {...(!pdf && { sandbox: "allow-same-origin allow-scripts" })}
         title={title}
         onLoad={onLoad}
         style={{ border: "none", display: "block", ...frameStyle }}
@@ -1895,14 +1980,27 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
   const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
   const monthId = project.active_month || "month-1";
   const rev = piece.revision_count || 1;
-  // Fetch via /api/github proxy (authenticated) — raw.githubusercontent.com fails on private repos
-  const githubPath = `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/${deliverableFileName(piece)}`;
-  const githubTreeUrl = `https://github.com/${REPO}/tree/main/${githubPath}`;
+  const isWP = isWhitePaper(piece) && piece.wp_has_html;
 
+  // activeSlot: "pdf" | "html" — only relevant for whitepapers with both files
+  const [activeSlot, setActiveSlot] = useStateTR("pdf");
   const [srcdoc, setSrcdoc] = useStateTR(null);
   const [kind, setKind] = useStateTR("html");
   const [loading, setLoading] = useStateTR(true);
   const [error, setError] = useStateTR(null);
+
+  // For WP pieces, build path dynamically from active slot; else use primary deliverable
+  function githubPathFor(slot) {
+    if (isWP) return `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${rev}.${slot}`;
+    return `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/${deliverableFileName(piece)}`;
+  }
+  const githubPath = isWP ? githubPathFor(activeSlot) : githubPathFor("primary");
+  const githubTreeUrl = `https://github.com/${REPO}/tree/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}`;
+
+  // Synthetic piece-like object for deliverableBlobFromGithub when in HTML slot
+  const pieceLike = isWP && activeSlot === "html"
+    ? { ...piece, deliverable_ext: "html" }
+    : piece;
 
   React.useEffect(() => {
     let cancelled = false;
@@ -1912,7 +2010,7 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then(data => {
         if (cancelled) return;
-        const { url, kind: k } = deliverableBlobFromGithub(data, piece);
+        const { url, kind: k } = deliverableBlobFromGithub(data, pieceLike);
         objectUrl = url;
         setKind(k);
         setSrcdoc(objectUrl);
@@ -1930,6 +2028,7 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
   }, [githubPath]);
 
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const activeExt = isWP ? activeSlot : deliverableExt(piece);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
@@ -1940,9 +2039,23 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
         background: "#f0f7ff", borderBottom: "1px solid #c5ddef",
         flexShrink: 0,
       }}>
-        <div style={{ flex: 1 }}>
+        {/* WP toggle */}
+        {isWP && (
+          <div style={{ display: "flex", gap: "4px", flexShrink: 0 }}>
+            {["pdf", "html"].map(slot => (
+              <button key={slot} onClick={() => setActiveSlot(slot)} style={{
+                ...FONT, fontSize: "0.68rem", fontWeight: 700, padding: "4px 10px", borderRadius: "3px",
+                border: "1px solid #c5ddef", cursor: "pointer", textTransform: "uppercase",
+                background: activeSlot === slot ? "#1a3a52" : "#fff",
+                color: activeSlot === slot ? "#fff" : "#6b8fa8",
+                transition: "all 0.12s",
+              }}>{slot}</button>
+            ))}
+          </div>
+        )}
+        <div style={{ flex: 1, minWidth: 0 }}>
           <span style={{ ...FONT, fontSize: "0.72rem", fontWeight: 600, color: "#1a3a52" }}>
-            {deliverableFileName(piece)}
+            {isWP ? `deliverable-v${rev}.${activeSlot}` : deliverableFileName(piece)}
           </span>
           {piece.last_upload && (
             <span style={{ ...FONT, fontSize: "0.68rem", color: "#6b8fa8", marginLeft: "10px" }}>
@@ -1959,11 +2072,11 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
         <button
           onClick={() => {
             if (srcdoc) {
-              // srcdoc holds the blob URL — fetch it to get raw HTML for download
               fetch(srcdoc).then(r => r.blob()).then(blob => {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement("a");
-                a.href = url; a.download = `${piece.id}-v${rev}.${deliverableExt(piece)}`;
+                const safeTitle = (piece.title || piece.id).replace(/[^a-z0-9 _-]/gi, " ").trim().replace(/\s+/g, "-").slice(0, 60);
+                a.href = url; a.download = `${safeTitle}-v${rev}.${activeExt}`;
                 a.click(); setTimeout(() => URL.revokeObjectURL(url), 5000);
               });
             }
@@ -1972,7 +2085,7 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
             ...FONT, fontSize: "0.7rem", fontWeight: 600,
             color: "#1e6fa8", background: "#fff",
             border: "1px solid #c5ddef", padding: "5px 12px", borderRadius: "3px", cursor: "pointer",
-          }}>↓ Download</button>
+          }}>↓ Download {activeExt.toUpperCase()}</button>
         <a href={githubTreeUrl}
           target="_blank" rel="noopener noreferrer"
           style={{
@@ -2007,7 +2120,7 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
             position: "absolute", inset: 0, display: "flex", flexDirection: "column",
             alignItems: "center", justifyContent: "center", gap: "10px", background: "#faf8f4",
           }}>
-            <div style={{ ...FONT, fontSize: "0.82rem", color: "#555" }}>Inline preview isn't available for .{deliverableExt(piece)} files.</div>
+            <div style={{ ...FONT, fontSize: "0.82rem", color: "#555" }}>Inline preview isn't available for .{activeExt} files.</div>
             <div style={{ ...FONT, fontSize: "0.72rem", color: "#888" }}>Use the Download button above to open it.</div>
           </div>
         )}
@@ -2024,8 +2137,6 @@ function PreviewPanel({ piece, cluster, pillar, project }) {
   );
 }
 
-// Copy link button
-// Open the piece popout in a new tab
 function OpenPieceButton({ pieceId }) {
   return (
     <button
@@ -2077,11 +2188,14 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   const isJG = currentUser.org === "jaggaer";
 
   const stages = getWorkflowStages(project);
-  const stageMeta = buildStatusMeta(stages);
+  const stageMeta = buildStatusMeta(stages.some(s => s.id === "ad-hoc-review") ? stages : [...stages, getAdHocReviewStage(project)]);
   const stageOrder = stages.map(s => s.id);
   const currentStageIdx = stageOrder.indexOf(piece.status);
-  const currentStage = stages.find(s => s.id === piece.status);
-  const nextStage = stages[currentStageIdx + 1] || null;
+  const isAdHocReviewStage = piece.status === "ad-hoc-review";
+  const currentStage = isAdHocReviewStage ? getAdHocReviewStage(project) : stages.find(s => s.id === piece.status);
+  const nextStage = isAdHocReviewStage ? null : (stages[currentStageIdx + 1] || null);
+  // For ad-hoc pieces still writing, the real next stage is Ad-Hoc Review, not the standard chain's marketing-review.
+  const displayNextStage = (isAdHoc(piece) && piece.status === "writing") ? getAdHocReviewStage(project) : nextStage;
 
   function actorMatches(actor) {
     if (!actor) return false;
@@ -2103,17 +2217,20 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   const isCurrentActor = currentStage && actorMatches(currentStage.actor);
   const canBrief = isCurrentActor && piece.status === "not-started"; // Jaggaer uploads brief
   // NS (or admin) can upload/reupload at any non-terminal stage, regardless of whose actor turn it is
-  const canUpload = (isNS || adminMode) && piece.status !== "not-started" && piece.status !== "approved";
+  // NS can upload in approved state too — that's how they move a piece to "live".
+  const canUpload = (isNS || adminMode) && piece.status !== "not-started" && piece.status !== "live";
   const canReview = isCurrentActor && !isNS && piece.status !== "not-started" && piece.status !== "approved";
   // canReplace is now redundant (canUpload covers it), kept as false to avoid stale tab
   const canReplace = false;
-  const hasDeliverable = currentStageIdx > stageOrder.indexOf("brief-uploaded");
+  // Ad-Hoc pieces in ad-hoc-review have an uploaded deliverable by definition (writing → ad-hoc-review only
+  // happens after upload), so hasDeliverable can't use stageOrder.indexOf (which returns -1 for this stage).
+  const hasDeliverable = isAdHocReviewStage || currentStageIdx > stageOrder.indexOf("brief-uploaded");
 
   return (
     <div className={`ns-piece-drawer${mode === "preview" || mode === "annotate" ? " is-preview" : ""}`}>
       <div className="ns-drawer-tabs">
         {canBrief && <button className={`ns-drawer-tab is-primary-tab ${mode==="brief"?"is-active":""}`} onClick={() => setMode("brief")}>Upload Brief</button>}
-        {canUpload && <button className={`ns-drawer-tab is-primary-tab ${mode==="upload"?"is-active":""}`} onClick={() => setMode("upload")}>{nextStage ? `Submit → ${nextStage.label}` : "Submit"}</button>}
+        {canUpload && <button className={`ns-drawer-tab is-primary-tab ${mode==="upload"?"is-active":""}`} onClick={() => setMode("upload")}>{displayNextStage ? `Submit → ${displayNextStage.label}` : "Submit"}</button>}
         {canReplace && <button className={`ns-drawer-tab ${mode==="replace"?"is-active":""}`} onClick={() => setMode("replace")} title="Replace your draft before it enters review">↩ Replace Draft</button>}
         {canReview && <button className={`ns-drawer-tab is-primary-tab ${mode==="review"?"is-active":""}`} onClick={() => setMode("review")}>Review</button>}
         {hasDeliverable && <button className={`ns-drawer-tab ${mode==="annotate"?"is-active":""}`} onClick={() => setMode("annotate")}>Preview & Comment</button>}
@@ -2129,7 +2246,9 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
       </div>
       <div className="ns-drawer-body" style={(mode === "preview" || mode === "annotate") ? { padding: 0, overflow: "hidden" } : {}}>
         {mode === "brief" && canBrief && <BriefUploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} />}
-        {mode === "upload" && canUpload && <UploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} />}
+        {mode === "upload" && canUpload && (isWhitePaper(piece)
+          ? <WhitepaperUploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} />
+          : <UploadPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} />)}
         {mode === "replace" && canReplace && <ReplaceDraftPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} onDone={() => setMode("details")} />}
         {mode === "review" && canReview && <ReviewPanel piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} stages={stages} stageMeta={stageMeta} onDone={() => setMode("history")} />}
         {mode === "preview" && hasDeliverable && <PreviewPanel piece={piece} cluster={cluster} pillar={pillar} project={project} />}
@@ -2212,16 +2331,16 @@ function EditPiecePanel({ piece, cluster, project, updatePiece, onDone }) {
 // ─── Delete confirm ───────────────────────────────────────────────────────────
 function DeletePiecePanel({ piece, cluster, deletePiece, onClose }) {
   const { useState: useStateDP } = React;
-  const isApproved = piece.status === "approved";
-  const [confirmed, setConfirmed] = useStateDP(false);
+  const isApproved = piece.status === "approved" || piece.status === "live";
+  const isLiveDP = piece.status === "live";
 
   if (isApproved) {
     return (
       <div className="ns-delete-panel">
         <div className="ns-delete-warning">
           <div className="ns-delete-icon">⚠</div>
-          <div className="ns-delete-title">Cannot delete an approved piece</div>
-          <p className="ns-delete-body">This piece has been approved. Deleting it would break the cluster's publish-readiness record. To remove it, first revert the status in Edit, then delete.</p>
+          <div className="ns-delete-title">Cannot delete {isLiveDP ? "a live" : "an approved"} piece</div>
+          <p className="ns-delete-body">This piece {isLiveDP ? "is live on the site" : "has been approved"}. Deleting it would break the cluster's publish-readiness record. To remove it, first revert the status in Edit, then delete.</p>
         </div>
       </div>
     );
@@ -2348,6 +2467,8 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
   const currentIdx = stageOrder.indexOf(piece.status);
   const nextStage = workflowStages[currentIdx + 1] || null;
   const nextRev = (piece.revision_count || 0) + 1;
+  // Ad-Hoc Articles skip the standard chain: writing → ad-hoc-review directly.
+  const adHocNext = isAdHoc(piece) && piece.status === "writing" ? getAdHocReviewStage(project) : null;
 
   async function handleFile(file) {
     setStage("uploading"); setFilename(file.name); setBytes(file.size);
@@ -2359,15 +2480,23 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
       setErrorMsg(result.error || "GitHub commit failed — check console");
       return;
     }
-    const newStatus = nextStage ? nextStage.id : piece.status;
+    // If a reviewer sent this back and stored return_to_stage, jump straight back
+    // to them instead of climbing the full chain from the next stage.
+    // Ad-Hoc Articles run a separate short chain: writing → ad-hoc-review → approved,
+    // bypassing the standard marketing-review/ed-review/editors gates entirely.
+    const newStatus = piece.return_to_stage
+      ? piece.return_to_stage
+      : (adHocNext ? adHocNext.id : (nextStage ? nextStage.id : piece.status));
     updatePiece(cluster.id, piece.id, {
       status: newStatus,
       revision_count: nextRev,
       deliverable_ext: payload.ext,
+      return_to_stage: null, // consumed — clear it
       last_upload: new Date().toISOString(),
       last_upload_by: currentUser.id,
       last_updated: new Date().toISOString(),
       last_updated_by: currentUser.id,
+      status_history: appendStatusHistory(piece, newStatus, currentUser.id),
     });
     setStage("done");
   }
@@ -2395,7 +2524,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
             <div className="ns-drop-rule is-done"></div>
             <div className="ns-drop-title">Committed ✓</div>
             <div className="ns-drop-sub">{filename} · deliverable-v{nextRev}.{filename ? filename.split('.').pop().toLowerCase() : "html"}</div>
-            <div className="ns-drop-path">Status → <strong>{nextStage?.label || "submitted"}</strong>{nextStage ? ` · ${nextStage.actor === "ns" ? "NS" : (typeof nextStage.actor === "string" && nextStage.actor.startsWith("person:")) ? nextStage.actor.slice(7) : "Jaggaer"} is cued.` : ""}</div>
+            <div className="ns-drop-path">Status → <strong>{piece.return_to_stage ? (workflowStages.find(s => s.id === piece.return_to_stage)?.label || piece.return_to_stage) : ((adHocNext || nextStage)?.label || "submitted")}</strong>{!piece.return_to_stage && (adHocNext || nextStage) ? ` · ${(adHocNext || nextStage).actor === "ns" ? "NS" : (typeof (adHocNext || nextStage).actor === "string" && (adHocNext || nextStage).actor.startsWith("person:")) ? (adHocNext || nextStage).actor.slice(7) : "Jaggaer"} is cued.` : (piece.return_to_stage ? " · returning to reviewer." : "")}</div>
           </>)}
           {stage === "error" && (<>
             <div className="ns-drop-rule" style={{background:"#c8401a"}}></div>
@@ -2411,12 +2540,208 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
         <ul className="ns-upload-rules">
           <li>One file per upload. Re-uploads create a new versioned file.</li>
           <li>Versions are preserved — nothing is overwritten.</li>
-          {nextStage && <li>Status moves to <strong>{nextStage.label}</strong>.</li>}
+          {(piece.return_to_stage || nextStage) && (
+            <li>Status moves to <strong>{piece.return_to_stage ? (workflowStages.find(s => s.id === piece.return_to_stage)?.label || piece.return_to_stage) : nextStage.label}</strong>{piece.return_to_stage ? " — returning directly to the reviewer who sent this back." : "."}</li>
+          )}
         </ul>
       </div>
     </div>
   );
 }
+// ─── WhitepaperUploadPanel — dual PDF + HTML upload for whitepapers/eBooks ───
+// Shows two independent drop zones. Each file can be uploaded independently.
+// Submit becomes active once at least the PDF is attached (HTML optional but encouraged).
+// Both use the same revision number; the piece advances to next stage on submit.
+function WhitepaperUploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece, stages }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const workflowStages = stages || getWorkflowStages(project);
+  const stageOrder = workflowStages.map(s => s.id);
+  const currentIdx = stageOrder.indexOf(piece.status);
+  const nextStage = workflowStages[currentIdx + 1] || null;
+  const nextRev = (piece.revision_count || 0) + 1;
+
+  // Per-file state: idle | uploading | done | error
+  const [pdfState, setPdfState] = useStateTR("idle");
+  const [pdfName, setPdfName] = useStateTR(null);
+  const [pdfError, setPdfError] = useStateTR(null);
+  const [pdfDragging, setPdfDragging] = useStateTR(false);
+
+  const [htmlState, setHtmlState] = useStateTR("idle");
+  const [htmlName, setHtmlName] = useStateTR(null);
+  const [htmlError, setHtmlError] = useStateTR(null);
+  const [htmlDragging, setHtmlDragging] = useStateTR(false);
+
+  const [submitting, setSubmitting] = useStateTR(false);
+  const [submitted, setSubmitted] = useStateTR(false);
+
+  const pdfRef = useRefTR(null);
+  const htmlRef = useRefTR(null);
+
+  const pdfReady = pdfState === "done";
+  const htmlReady = htmlState === "done";
+  const canSubmit = pdfReady && !submitting && !submitted;
+
+  async function handlePdf(file) {
+    if (!file || pdfState === "uploading") return;
+    setPdfState("uploading"); setPdfName(file.name); setPdfError(null);
+    try {
+      const payload = await readDeliverableFile(file);
+      const result = await window.NS_API.uploadWhitepaperFile(
+        piece, cluster.id, pillar.id, project.active_month, payload, "pdf", currentUser.id
+      );
+      if (!result.ok) { setPdfState("error"); setPdfError(result.error || "Upload failed"); return; }
+      setPdfState("done");
+    } catch (e) {
+      setPdfState("error"); setPdfError(e.message || "Upload failed");
+    }
+  }
+
+  async function handleHtml(file) {
+    if (!file || htmlState === "uploading") return;
+    setHtmlState("uploading"); setHtmlName(file.name); setHtmlError(null);
+    try {
+      const payload = await readDeliverableFile(file);
+      const result = await window.NS_API.uploadWhitepaperFile(
+        piece, cluster.id, pillar.id, project.active_month, payload, "html", currentUser.id
+      );
+      if (!result.ok) { setHtmlState("error"); setHtmlError(result.error || "Upload failed"); return; }
+      setHtmlState("done");
+    } catch (e) {
+      setHtmlState("error"); setHtmlError(e.message || "Upload failed");
+    }
+  }
+
+  async function handleSubmit() {
+    if (!canSubmit) return;
+    setSubmitting(true);
+    const newStatus = piece.return_to_stage
+      ? piece.return_to_stage
+      : (nextStage ? nextStage.id : piece.status);
+    updatePiece(cluster.id, piece.id, {
+      status: newStatus,
+      revision_count: nextRev,
+      deliverable_ext: "pdf",            // primary = pdf
+      wp_has_html: htmlReady,            // flag: companion HTML also present
+      return_to_stage: null,
+      last_upload: new Date().toISOString(),
+      last_upload_by: currentUser.id,
+      last_updated: new Date().toISOString(),
+      last_updated_by: currentUser.id,
+      status_history: appendStatusHistory(piece, newStatus, currentUser.id),
+    });
+    setSubmitting(false);
+    setSubmitted(true);
+  }
+
+  function DropZone({ label, sub, state, name, error, dragging, onDrop, onDragOver, onDragLeave, onClick, accept, inputRef, onFile }) {
+    const borderColor = state === "done" ? "#1e7a45" : state === "error" ? "#c8401a" : dragging ? "#c8401a" : "#d4cfc8";
+    const bg = state === "done" ? "#f0faf5" : dragging ? "#fff8f5" : "#faf8f4";
+    return (
+      <div
+        style={{ border: `1.5px dashed ${borderColor}`, borderRadius: "4px", padding: "14px 16px", background: bg, cursor: state === "uploading" ? "default" : "pointer", transition: "all 0.15s", textAlign: "center" }}
+        onDragOver={onDragOver} onDragLeave={onDragLeave} onDrop={onDrop} onClick={onClick}
+      >
+        {state === "idle" && (
+          <>
+            <div style={{ ...FONT, fontSize: "0.75rem", fontWeight: 700, color: "#1a2535", marginBottom: "3px" }}>{label}</div>
+            <div style={{ ...FONT, fontSize: "0.68rem", color: "#9b948c" }}>{sub}</div>
+          </>
+        )}
+        {state === "uploading" && (
+          <div style={{ ...FONT, fontSize: "0.75rem", color: "#1a2535", fontWeight: 500 }}>Uploading {name}…</div>
+        )}
+        {state === "done" && (
+          <div style={{ ...FONT, fontSize: "0.75rem", color: "#1e7a45", fontWeight: 600 }}>
+            ✓ {name}
+            <span
+              style={{ marginLeft: "10px", color: "#1e6fa8", fontWeight: 400, fontSize: "0.68rem", textDecoration: "underline", cursor: "pointer" }}
+              onClick={e => { e.stopPropagation(); state === "done" && onClick(); }}
+            >replace</span>
+          </div>
+        )}
+        {state === "error" && (
+          <div style={{ ...FONT, fontSize: "0.75rem", color: "#c8401a", fontWeight: 500 }}>
+            ✕ {error}
+            <span style={{ marginLeft: "8px", color: "#1e6fa8", fontSize: "0.68rem", textDecoration: "underline", cursor: "pointer" }} onClick={e => { e.stopPropagation(); onClick(); }}>retry</span>
+          </div>
+        )}
+        <input ref={inputRef} type="file" accept={accept} hidden onChange={e => e.target.files?.[0] && onFile(e.target.files[0])} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="ns-upload">
+      <div className="ns-upload-l">
+        {/* PDF zone */}
+        <div style={{ marginBottom: "10px" }}>
+          <div style={{ ...FONT, fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#b05e00", marginBottom: "6px" }}>
+            PDF <span style={{ color: "#c8401a" }}>*</span> required
+          </div>
+          <DropZone
+            label="Drop PDF here" sub="click to choose · .pdf"
+            state={pdfState} name={pdfName} error={pdfError} dragging={pdfDragging}
+            onDragOver={e => { e.preventDefault(); setPdfDragging(true); }}
+            onDragLeave={() => setPdfDragging(false)}
+            onDrop={e => { e.preventDefault(); setPdfDragging(false); const f = e.dataTransfer.files?.[0]; if(f) handlePdf(f); }}
+            onClick={() => pdfState !== "uploading" && pdfRef.current?.click()}
+            accept=".pdf" inputRef={pdfRef} onFile={handlePdf}
+          />
+        </div>
+
+        {/* HTML zone */}
+        <div style={{ marginBottom: "14px" }}>
+          <div style={{ ...FONT, fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "#6b6560", marginBottom: "6px" }}>
+            HTML companion <span style={{ color: "#9b948c", fontWeight: 400 }}>optional</span>
+          </div>
+          <DropZone
+            label="Drop HTML page here" sub="click to choose · .html"
+            state={htmlState} name={htmlName} error={htmlError} dragging={htmlDragging}
+            onDragOver={e => { e.preventDefault(); setHtmlDragging(true); }}
+            onDragLeave={() => setHtmlDragging(false)}
+            onDrop={e => { e.preventDefault(); setHtmlDragging(false); const f = e.dataTransfer.files?.[0]; if(f) handleHtml(f); }}
+            onClick={() => htmlState !== "uploading" && htmlRef.current?.click()}
+            accept=".html,.htm" inputRef={htmlRef} onFile={handleHtml}
+          />
+        </div>
+
+        {/* Submit button */}
+        <button
+          onClick={handleSubmit}
+          disabled={!canSubmit || submitted}
+          style={{
+            ...FONT, width: "100%", padding: "10px 0", borderRadius: "4px",
+            fontSize: "0.78rem", fontWeight: 700, cursor: canSubmit && !submitted ? "pointer" : "default",
+            background: submitted ? "#1e7a45" : canSubmit ? "#c8401a" : "#e0dbd5",
+            color: canSubmit || submitted ? "#fff" : "#9b948c",
+            border: "none", transition: "background 0.15s",
+          }}
+        >
+          {submitted
+            ? `✓ Submitted → ${(nextStage?.label || "next stage")}`
+            : submitting
+              ? "Submitting…"
+              : !pdfReady
+                ? "Upload PDF to submit"
+                : `Submit → ${nextStage?.label || "next stage"}`}
+        </button>
+      </div>
+
+      <div className="ns-upload-r">
+        <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>Whitepaper deliverables</div>
+        <ul className="ns-upload-rules">
+          <li>Upload the <strong>PDF</strong> first — this is the gated download file. It's required before submitting.</li>
+          <li>Upload the <strong>HTML page</strong> if available — this is the landing/teaser page reviewers can preview inline.</li>
+          <li>Both files are stored at the same revision number. Reviewers can toggle between them in the preview.</li>
+          {(piece.return_to_stage || nextStage) && (
+            <li>Submitting moves status to <strong>{piece.return_to_stage ? (workflowStages.find(s=>s.id===piece.return_to_stage)?.label||piece.return_to_stage) : nextStage.label}</strong>.</li>
+          )}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 // ─── Review Panel — unified for all non-NS review stages ─────────────────────
 // Handles any stage where actor is "jaggaer" or "person:<id>".
 // On "approved" → advances to next workflow stage.
@@ -2431,20 +2756,33 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
 
   const workflowStages = stages || getWorkflowStages(project);
   const stageOrder = workflowStages.map(s => s.id);
+  const isAdHocReviewStage = piece.status === "ad-hoc-review";
   const currentIdx = stageOrder.indexOf(piece.status);
-  const currentStage = workflowStages[currentIdx];
-  const nextStage = workflowStages[currentIdx + 1] || null;
-  // "Send back" goes to the most recent NS-actor stage before current
-  const sendBackStage = [...workflowStages].slice(0, currentIdx).reverse().find(s => s.actor === "ns") || workflowStages[0];
-  const isLastStage = nextStage?.id === "approved" || !nextStage;
+  const currentStage = isAdHocReviewStage ? getAdHocReviewStage(project) : workflowStages[currentIdx];
+  const nextStage = isAdHocReviewStage ? null : (workflowStages[currentIdx + 1] || null);
+  // "Send back" goes to the nearest NS-actor stage before current.
+  // Return-to-sender: after NS fixes and re-uploads, the piece jumps back to
+  // THIS reviewer's stage (not restarting from Abhishek/Orlagh).
+  // Ad-Hoc Articles only ever send back to "writing" — there's no chain to walk.
+  const sendBackStage = isAdHocReviewStage
+    ? { id: "writing" }
+    : ([...workflowStages].slice(0, currentIdx).reverse().find(s => s.actor === "ns") || workflowStages[0]);
+  const isLastStage = isAdHocReviewStage ? true : (nextStage?.id === "approved" || nextStage?.id === "live" || !nextStage);
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
   async function submit() {
     if (!body.trim() && verdict !== "approved") return;
     setSubmitting(true);
     let newStatus = piece.status;
-    if (verdict === "approved") newStatus = nextStage ? nextStage.id : "approved";
-    else if (verdict === "needs-revision") newStatus = sendBackStage.id;
+    let extraFields = {};
+    if (verdict === "approved") {
+      newStatus = isAdHocReviewStage ? "approved" : (nextStage ? nextStage.id : "approved");
+      extraFields = { return_to_stage: null }; // clear any pending return
+    } else if (verdict === "needs-revision") {
+      newStatus = sendBackStage.id;
+      // Store which stage to return to after NS fixes — skip the chain below this reviewer
+      extraFields = { return_to_stage: piece.status };
+    }
     // "question" keeps current status
     const entry = {
       id: "fb-"+Math.random().toString(36).slice(2,8),
@@ -2458,6 +2796,8 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
       status: newStatus,
       last_updated: new Date().toISOString(),
       last_updated_by: currentUser.id,
+      status_history: appendStatusHistory(piece, newStatus, currentUser.id),
+      ...extraFields,
     });
     // Fire approval notification when piece reaches final "approved" status
     if (newStatus === "approved") {
@@ -2515,18 +2855,60 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
         </div>
       </div>
       <div className="ns-feedback-r">
+        {/* ── Brief files — always shown if briefs have been uploaded ── */}
+        {(piece.brief_files || []).length > 0 && (() => {
+          const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
+          const briefFiles = piece.brief_files || [];
+          const allTeam = [...(project.team?.ns || []), ...(project.team?.jaggaer || [])];
+          return (
+            <div style={{ marginBottom: "18px" }}>
+              <div style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase",
+                color: "#1a2535", marginBottom: "8px", fontFamily: "Noto Sans, sans-serif" }}>
+                Brief & Keywords
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                {briefFiles.map((bf, idx) => {
+                  const ext = bf.filename.split(".").pop().toUpperCase();
+                  const url = `https://raw.githubusercontent.com/${REPO}/main/${bf.path}`;
+                  const uploader = allTeam.find(m => m.id === bf.uploaded_by);
+                  const uploaderName = uploader ? uploader.name.split(" ")[0] : bf.uploaded_by;
+                  return (
+                    <div key={idx} style={{
+                      display: "flex", alignItems: "center", gap: "8px",
+                      padding: "8px 12px",
+                      background: "#faf8f4", border: "1px solid #e8e3da", borderRadius: "3px",
+                      fontFamily: "Noto Sans, sans-serif",
+                    }}>
+                      <span style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.06em",
+                        color: "#c8401a", background: "#fdf0e8", border: "1px solid #f0cfc0",
+                        padding: "1px 5px", borderRadius: "2px", flexShrink: 0 }}>{ext}</span>
+                      <span style={{ flex: 1, minWidth: 0, fontSize: "0.75rem", color: "#333",
+                        overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                        title={bf.filename}>{bf.filename}</span>
+                      <a href={url} target="_blank" rel="noopener noreferrer"
+                        style={{ fontSize: "0.72rem", fontWeight: 600, color: "#1e6fa8",
+                          textDecoration: "none", flexShrink: 0, padding: "3px 8px",
+                          border: "1px solid #c5ddef", borderRadius: "2px", background: "#fff",
+                          whiteSpace: "nowrap" }}>↓ Open</a>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })()}
         <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>Stage</div>
         <ol className="ns-feedback-process">
           <li><strong>Approved</strong> — advances to <em>{nextStage?.label || "complete"}</em>.</li>
-          <li><strong>Needs revision</strong> — sends back to <em>{sendBackStage.label}</em>.</li>
+          <li><strong>Needs revision</strong> — sends to NS (<em>{sendBackStage.label}</em>). When NS re-uploads, it returns directly to <em>{currentStage?.label || "this stage"}</em> — not the full chain.</li>
           <li><strong>Question</strong> — open thread, status unchanged.</li>
         </ol>
         {isLastStage && (
           <div style={{marginTop:16}}>
             <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:8}}>Cluster State</div>
             <div className="ns-feedback-cluster-state">
-              {cluster.pieces.filter(p => p.status==="approved").length} of {cluster.pieces.length} approved.
-              {cluster.pieces.every(p => p.status==="approved" || p.id===piece.id) && verdict==="approved" && (
+              {cluster.pieces.filter(p => p.status==="approved" || p.status==="live").length} of {cluster.pieces.length} approved.
+              {cluster.pieces.every(p => p.status==="approved" || p.status==="live" || p.id===piece.id) && verdict==="approved" && (
                 <div className="ns-feedback-readymsg">Approving this piece marks the cluster <strong>publish-ready</strong>.</div>
               )}
             </div>
@@ -2540,17 +2922,64 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
 // ─── Notes history ────────────────────────────────────────────────────────────
 function NotesHistory({ piece, project }) {
   const feedback = (project.feedback || {})[piece.id] || [];
-  if (!feedback.length) return (
-    <div className="ns-history-empty">
-      <div className="ns-eyebrow ns-eyebrow-dark">No Notes Yet</div>
-      <div className="ns-history-empty-text">Feedback will appear here as an attributed thread.</div>
-    </div>
-  );
+  const history = ensureSeededHistory(piece);
   return (
     <div>
-      <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:12}}>Review Thread</div>
-      <div className="ns-history-list">
-        {feedback.map((f, i) => <FeedbackCard key={f.id} entry={f} project={project} ordinal={i+1} />)}
+      <StageHistoryTimeline piece={piece} project={project} history={history} />
+      {!feedback.length ? (
+        <div className="ns-history-empty">
+          <div className="ns-eyebrow ns-eyebrow-dark">No Notes Yet</div>
+          <div className="ns-history-empty-text">Feedback will appear here as an attributed thread.</div>
+        </div>
+      ) : (
+        <div>
+          <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:12, marginTop: 20}}>Review Thread</div>
+          <div className="ns-history-list">
+            {feedback.map((f, i) => <FeedbackCard key={f.id} entry={f} project={project} ordinal={i+1} />)}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Stage-history timeline — shows every status transition this piece has gone
+// through, with EST timestamps where known. Seeded entries (pieces that were
+// already mid-pipeline when this feature shipped) show the current stage with
+// no timestamp, per design: we don't backfill dates we don't actually have.
+function StageHistoryTimeline({ piece, project, history }) {
+  const stages = getWorkflowStages(project);
+  const adHocStage = getAdHocReviewStage(project);
+  const all = [...(project.team?.ns || []), ...(project.team?.jaggaer || [])];
+  function stageLabel(id) {
+    if (id === "ad-hoc-review") return adHocStage.label;
+    return stages.find(s => s.id === id)?.label || id;
+  }
+  function memberName(id) {
+    if (!id) return "—";
+    const m = all.find(x => x.id === id);
+    return m ? m.name.split(" ")[0] : id;
+  }
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  return (
+    <div>
+      <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>Stage History</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+        {history.map((h, i) => (
+          <div key={i} style={{
+            display: "flex", alignItems: "baseline", gap: "10px",
+            padding: "7px 10px", background: i === history.length - 1 ? "#fdf8f3" : "transparent",
+            borderRadius: "3px", borderLeft: `2px solid ${i === history.length - 1 ? "#c8401a" : "#e8e3da"}`,
+          }}>
+            <span style={{ ...FONT, fontSize: "0.78rem", fontWeight: 600, color: "#1a2535", minWidth: "170px" }}>
+              {stageLabel(h.stage)}
+            </span>
+            <span style={{ ...FONT, fontSize: "0.72rem", color: "#999" }}>
+              {h.ts ? `${formatEST(h.ts, { hour: "2-digit", minute: "2-digit" })} EST` : "date not logged (pre-tracking)"}
+              {h.by ? ` · ${memberName(h.by)}` : ""}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -2560,8 +2989,7 @@ function FeedbackCard({ entry, project, ordinal }) {
   const all = [...project.team.ns, ...project.team.jaggaer];
   const author = all.find(a => a.id === entry.author) || { name: entry.author, org: "ns", role: "" };
   const v = VERDICT_META[entry.verdict] || { label: entry.verdict, glyph: "•" };
-  const date = new Date(entry.ts);
-  const dateStr = date.toLocaleDateString("en-GB", { day:"numeric", month:"short" }) + " · " + date.toLocaleTimeString("en-GB", { hour:"2-digit", minute:"2-digit" });
+  const dateStr = formatEST(entry.ts, { hour: "2-digit", minute: "2-digit" }) + " EST";
   return (
     <article className={`ns-fb-card ns-fb-${entry.verdict}`}>
       <header className="ns-fb-head">
@@ -2995,11 +3423,16 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
   const repoViewUrl = hasDeliverable
     ? `https://github.com/${REPO}/tree/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}`
     : null;
+  // Whitepaper companion HTML URL
+  const isWPDetails = isWhitePaper(piece) && piece.wp_has_html;
+  const wpHtmlUrl = isWPDetails
+    ? `https://raw.githubusercontent.com/${REPO}/main/content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${piece.revision_count||1}.html`
+    : null;
 
   return (
     <div className="ns-details">
-      {/* ── Publishing Info — top of details, approved pieces only ── */}
-      {piece.status === "approved" && (
+      {/* ── Publishing Info — top of details, approved + live pieces ── */}
+      {(piece.status === "approved" || piece.status === "live") && (
         <PublishingInfoSection
           piece={piece} cluster={cluster} project={project}
           currentUser={currentUser} updatePiece={updatePiece}
@@ -3043,7 +3476,9 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
         }}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.78rem", fontWeight: 600, color: "#1a3a52" }}>
-              {deliverableFileName(piece)}
+              {isWPDetails
+                ? `deliverable-v${piece.revision_count||1}.pdf + .html`
+                : deliverableFileName(piece)}
             </div>
             <div style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.7rem", color: "#6b8fa8", marginTop: "2px" }}>
               {piece.revision_count > 1 ? `v${piece.revision_count} · ` : ""}
@@ -3069,6 +3504,27 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
           >
             ↓ Download {deliverableExt(piece).toUpperCase()}
           </button>
+          {isWPDetails && wpHtmlUrl && (
+            <button
+              onClick={() => forceDownload(wpHtmlUrl, `${piece.id}-v${piece.revision_count||1}.html`)}
+              style={{
+                fontFamily: "Noto Sans, sans-serif",
+                fontSize: "0.72rem", fontWeight: 600,
+                color: "#5a3d9e",
+                background: "#fff",
+                border: "1px solid #dccce8",
+                padding: "6px 14px",
+                borderRadius: "3px",
+                cursor: "pointer",
+                whiteSpace: "nowrap",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = "#f5eef8"}
+              onMouseLeave={e => e.currentTarget.style.background = "#fff"}
+            >
+              ↓ Download HTML
+            </button>
+          )}
           <a
             href={repoViewUrl}
             target="_blank"
@@ -3204,13 +3660,14 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
               cluster.pieces.forEach((piece, idx) => {
                 const isAnchor = piece.id === cluster.anchor_piece;
                 const feedback = (project.feedback || {})[piece.id] || [];
-                const isApproved = piece.status === "approved";
+                const isApproved = piece.status === "approved" || piece.status === "live";
+                const isLive = piece.status === "live";
                 // Whose turn is it — derived from the LIVE workflow actor, not
                 // hardcoded stage ids (which broke when the workflow was reordered).
                 const turn = pieceTurnFor(piece, currentUser, project);
                 const hasAction = turn.isTurn;
                 const awaitsJG = turn.awaitsJaggaer;
-                // Approved/published pieces open straight to Details (Publishing Info).
+                // Approved/live pieces open straight to Details (Publishing Info).
                 const openMode = isApproved ? "details" : (turn.isTurn ? turn.mode : "history");
 
                 rows.push(
@@ -3280,19 +3737,18 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                       <span className="ns-ct-kw-secondary">{piece.secondary_keyword || "—"}</span>
                     </td>
                     <td className="ns-ct-td ns-ct-td-intent">
-                      {isApproved ? (
-                        <span
-                          className="ns-ct-intent-badge"
-                          title={piece.publishing && piece.publishing.live_url ? "Published — view publishing info" : "Approved — add publishing info"}
-                          style={{
-                            background: (piece.publishing && piece.publishing.live_url) ? "#e6f5ec" : "#fde7e0",
-                            color: (piece.publishing && piece.publishing.live_url) ? "#1e7a45" : "#c8401a",
-                            fontWeight: 700,
-                          }}
-                        >
-                          {(piece.publishing && piece.publishing.live_url) ? "● Published" : "Publishing ▸"}
-                        </span>
-                      ) : (
+                      {isApproved ? (() => {
+                        const hasUrl = piece.publishing && piece.publishing.live_url;
+                        const bg    = isLive ? "#e6f2fa" : hasUrl ? "#e6f5ec" : "#fde7e0";
+                        const color = isLive ? "#0d5c8a" : hasUrl ? "#1e7a45" : "#c8401a";
+                        const label = isLive ? "● Live" : hasUrl ? "● Published" : "Approved ▸";
+                        const tip   = isLive ? "Live — view publishing info" : hasUrl ? "Published — view publishing info" : "Approved — ready to upload";
+                        return (
+                          <span className="ns-ct-intent-badge" title={tip} style={{ background: bg, color, fontWeight: 700 }}>
+                            {label}
+                          </span>
+                        );
+                      })() : (
                         <span className={`ns-ct-intent-badge ${cluster.intent}`}>{cluster.intent === "informational" ? "Info" : "Comm"}</span>
                       )}
                     </td>
@@ -3420,8 +3876,8 @@ function BriefUploadPanel({ piece, cluster, pillar, project, currentUser, update
         <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>What happens next</div>
         <ul className="ns-upload-rules">
           <li>Status moves to <strong>Brief Uploaded</strong>. NS writers are notified.</li>
-          <li>NS writes the article and uploads it. It goes to Robert for content review.</li>
-          <li>After Robert and marketing sign off, it comes back to you for final approval.</li>
+          <li>NS writes the article and uploads it. It goes to Ed for content review.</li>
+          <li>After Ed and marketing sign off, it comes back to you for final approval.</li>
         </ul>
       </div>
     </div>
@@ -3434,7 +3890,34 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
   const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
   const monthId = project.active_month || "month-1";
   const rev = piece.revision_count || 1;
-  const githubPath = `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/${deliverableFileName(piece)}`;
+  const isWP_AP = isWhitePaper(piece) && piece.wp_has_html;
+  const canAddHtmlCompanion = isWhitePaper(piece) && !piece.wp_has_html && currentUser?.org === "ns";
+  const [activeSlot_AP, setActiveSlot_AP] = useStateTR("pdf");
+  const [htmlCompState, setHtmlCompState] = useStateTR("idle"); // idle | uploading | done | error
+  const [htmlCompError, setHtmlCompError] = useStateTR(null);
+  const htmlCompRef = useRefTR(null);
+
+  async function handleHtmlCompanion(file) {
+    if (!file || htmlCompState === "uploading") return;
+    setHtmlCompState("uploading"); setHtmlCompError(null);
+    try {
+      const payload = await readDeliverableFile(file);
+      const result = await window.NS_API.uploadWhitepaperFile(
+        piece, cluster.id, pillar.id, project.active_month, payload, "html", currentUser.id
+      );
+      if (!result.ok) { setHtmlCompState("error"); setHtmlCompError(result.error || "Upload failed"); return; }
+      updatePiece(cluster.id, piece.id, { wp_has_html: true, last_updated: new Date().toISOString(), last_updated_by: currentUser.id });
+      setHtmlCompState("done");
+    } catch (e) {
+      setHtmlCompState("error"); setHtmlCompError(e.message || "Upload failed");
+    }
+  }
+  function githubPathForAP(slot) {
+    if (isWP_AP) return `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${rev}.${slot}`;
+    return `content/${monthId}/${pillar.id}/${cluster.id}/${piece.id}/${deliverableFileName(piece)}`;
+  }
+  const githubPath = isWP_AP ? githubPathForAP(activeSlot_AP) : githubPathForAP("primary");
+  const pieceLike_AP = isWP_AP && activeSlot_AP === "html" ? { ...piece, deliverable_ext: "html" } : piece;
 
   const [srcdoc, setSrcdoc] = useStateTR(null);
   const [kind, setKind] = useStateTR("html");
@@ -3496,7 +3979,7 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then(data => {
         if (cancelled) return;
-        const { url, kind: k } = deliverableBlobFromGithub(data, piece);
+        const { url, kind: k } = deliverableBlobFromGithub(data, pieceLike_AP);
         setKind(k);
         setSrcdoc(url);
         setLoading(false);
@@ -3529,17 +4012,46 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
       {/* iframe left */}
       <div style={{ flex: 1, minWidth: 0, position: "relative", borderRight: "1px solid #e8e3da" }}>
         {/* top bar */}
-        <div style={{ display:"flex", alignItems:"center", gap:"12px", padding:"8px 16px", background:"#f0f7ff", borderBottom:"1px solid #c5ddef", flexShrink:0 }}>
+        <div style={{ display:"flex", alignItems:"center", gap:"8px", padding:"8px 16px", background:"#f0f7ff", borderBottom:"1px solid #c5ddef", flexShrink:0 }}>
+          {isWP_AP && (
+            <div style={{ display:"flex", gap:"4px", flexShrink:0 }}>
+              {["pdf","html"].map(slot => (
+                <button key={slot} onClick={() => setActiveSlot_AP(slot)} style={{
+                  fontFamily:"Noto Sans,sans-serif", fontSize:"0.65rem", fontWeight:700, padding:"3px 8px", borderRadius:"3px",
+                  border:"1px solid #c5ddef", cursor:"pointer", textTransform:"uppercase",
+                  background: activeSlot_AP===slot ? "#1a3a52" : "#fff",
+                  color: activeSlot_AP===slot ? "#fff" : "#6b8fa8", transition:"all 0.12s",
+                }}>{slot}</button>
+              ))}
+            </div>
+          )}
           <span style={{ ...FONT, fontSize:"0.72rem", fontWeight:600, color:"#1a3a52" }}>
-            {deliverableFileName(piece)}
+            {isWP_AP ? `deliverable-v${rev}.${activeSlot_AP}` : deliverableFileName(piece)}
           </span>
-          <span style={{ ...FONT, fontSize:"0.68rem", color:"#6b8fa8" }}>
+          <span style={{ ...FONT, fontSize:"0.68rem", color:"#6b8fa8", flex: 1 }}>
             {kind === "html"
               ? "— Click anywhere on a paragraph to pin a comment there →"
               : kind === "pdf"
                 ? "— PDF preview · inline pins are available on HTML deliverables"
                 : "— Preview not available for this file type"}
           </span>
+          {canAddHtmlCompanion && (
+            <>
+              <input ref={htmlCompRef} type="file" accept=".html,.htm" hidden onChange={e => e.target.files?.[0] && handleHtmlCompanion(e.target.files[0])} />
+              <button
+                onClick={() => htmlCompState !== "uploading" && htmlCompRef.current?.click()}
+                style={{
+                  ...FONT, flexShrink:0, fontSize:"0.66rem", fontWeight:700, padding:"4px 10px", borderRadius:"3px", cursor: htmlCompState === "uploading" ? "wait" : "pointer",
+                  border:"1px solid #c5ddef",
+                  background: htmlCompState === "done" ? "#e6f5ec" : htmlCompState === "error" ? "#fdeee8" : "#fff",
+                  color: htmlCompState === "done" ? "#1e7a45" : htmlCompState === "error" ? "#c8401a" : "#1a3a52",
+                  transition:"all 0.12s", whiteSpace:"nowrap",
+                }}
+              >
+                {htmlCompState === "uploading" ? "Uploading…" : htmlCompState === "done" ? "✓ HTML added" : htmlCompState === "error" ? `✕ ${htmlCompError}` : "+ Add HTML companion"}
+              </button>
+            </>
+          )}
         </div>
         <div style={{ position:"absolute", top:"41px", bottom:0, left:0, right:0, background:"#fff" }}>
           {loading && (
@@ -3555,7 +4067,7 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
           )}
           {srcdoc && kind === "other" && (
             <div style={{ position:"absolute", inset:0, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"8px", background:"#faf8f4" }}>
-              <span style={{ ...FONT, fontSize:"0.82rem", color:"#555" }}>Inline preview isn't available for .{deliverableExt(piece)} files.</span>
+              <span style={{ ...FONT, fontSize:"0.82rem", color:"#555" }}>Inline preview isn't available for .{isWP_AP ? activeSlot_AP : deliverableExt(piece)} files.</span>
               <span style={{ ...FONT, fontSize:"0.72rem", color:"#888" }}>Comments here are saved to the Notes thread.</span>
             </div>
           )}
