@@ -3117,6 +3117,16 @@
         "annotation": true,
         "section": "¶18 — \"Build the Guardrails into AI From the St…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-heplwv",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "From AI Experimentation to Scalable, Governed Procurement",
+        "ts": "2026-08-17T10:32:08.826Z",
+        "annotation": true,
+        "section": "¶19 — \"From AI Governance to Scalable Procureme…\"",
+        "revision": 2
       }
     ]
   },
