@@ -2291,7 +2291,7 @@
               "title": "JAGGAER CEO Andrew Roszko on AI Governance",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "not-started",
+              "status": "marketing-review",
               "content_type": "ad-hoc",
               "revision_count": 2,
               "primary_keyword": "",
@@ -2318,7 +2318,8 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-08-14T10:39:20.595Z",
-              "last_upload_by": "manager"
+              "last_upload_by": "manager",
+              "secondary_keyword": ""
             },
             {
               "id": "piece-tswxjd",
