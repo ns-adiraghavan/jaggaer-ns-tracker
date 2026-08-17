@@ -3107,6 +3107,16 @@
         "annotation": true,
         "section": "¶17 — \"Governance Should Enable AI, Not Slow It…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-6w8inm",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Agentic AI in Procurement: Guardrails from Day One",
+        "ts": "2026-08-17T10:31:36.471Z",
+        "annotation": true,
+        "section": "¶18 — \"Build the Guardrails into AI From the St…\"",
+        "revision": 2
       }
     ]
   },
