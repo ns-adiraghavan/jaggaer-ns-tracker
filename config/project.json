@@ -3016,6 +3016,18 @@
         "ts": "2026-07-13T11:16:50.592Z",
         "stage": "stage-nq11b"
       }
+    ],
+    "piece-66bmrt": [
+      {
+        "id": "ann-b92wjk",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "URL: /procurement-governance-and-compliance-ai\nMT: Procurement Governance and Compliance in the Age of AI | JAGGAER\nMD: How procurement governance and compliance works in the age of AI - JAGGAER CEO Andrew Roszko in Procurement Magazine on why governance matters from day one.",
+        "ts": "2026-08-17T10:18:08.760Z",
+        "annotation": true,
+        "section": "For URL/MT/MD:",
+        "revision": 2
+      }
     ]
   },
   "build_with_claude": [
