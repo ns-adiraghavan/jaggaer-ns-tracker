@@ -3127,6 +3127,16 @@
         "annotation": true,
         "section": "¶19 — \"From AI Governance to Scalable Procureme…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-a8py2f",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Below this part (above chart) add new H2: What Good Procurement Governance and Compliance Looks Like in Practice",
+        "ts": "2026-08-17T10:39:01.922Z",
+        "annotation": true,
+        "section": "¶1 — \"Procurement Magazine's August 2026 issue…\"",
+        "revision": 2
       }
     ]
   },
