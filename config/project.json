@@ -3167,6 +3167,16 @@
         "annotation": true,
         "section": "¶7 — \"\"AI compliance isn't a brake on innovati…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-vtsx8g",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Currently the ISO 27001, ISO 27017, ISO 27018, and GDPR badges sit at the bottom of the page with no surrounding copy. - change their placement to here",
+        "ts": "2026-08-17T10:49:43.481Z",
+        "annotation": true,
+        "section": "¶9 — \"In practice, that means accounting for s…\"",
+        "revision": 2
       }
     ]
   },
