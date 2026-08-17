@@ -3037,6 +3037,16 @@
         "annotation": true,
         "section": "¶15 — \"Procurement Magazine:  JAGGAER CEO on AI…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-0ey3jz",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Before this part, add a brief explanation: (E.G. - Procurement governance and compliance is the set of policies, controls, and oversight structures that determine how an organisation buys, manages suppliers, and manages risk. As AI becomes embedded in core procurement decisions, getting that governance framework right from day one has become critical.) - or similar, no need to copy word by word, but start with the kw: procurement governance and compliance",
+        "ts": "2026-08-17T10:21:09.164Z",
+        "annotation": true,
+        "section": "¶1 — \"Procurement Magazine's August 2026 issue…\"",
+        "revision": 2
       }
     ]
   },
