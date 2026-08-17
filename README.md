@@ -5,6 +5,8 @@ A collaborative content delivery and review platform for the Jaggaer × Netscrib
 
 It is **not** an internal NS workflow tool. NS coordinates writing however it likes; this app activates when a piece is ready for client eyes.
 
+Access is gated by a two-team login (NS / Jaggaer); post-login the roster and UI are scoped to the signed-in org. Individual pieces have shareable `/piece/:id` links that unfurl in Slack/Teams and open a standalone read-only viewer.
+
 Deployed at **`jaggaer-ns-tracker.vercel.app`**. Repo: **`ns-adiraghavan/jaggaer-ns-tracker`**.
 
 ---
@@ -46,8 +48,15 @@ Browser (React 18 via Babel Standalone CDN — no build step)
     ├── Style-guide rendering
     │       └── /api/docx-render.js (Vercel serverless) → mammoth docx→HTML
     │
+    ├── Shareable piece links   /piece/:id
+    │       └── /api/piece-page.js (Vercel serverless) → piece.html shell
+    │               + OG/Twitter meta + inline piece data
+    │               (JSON fallback: /api/piece.js; shared lookup: api/_lib/piece-lookup.js)
+    │
     └── Static assets served from /repo-setup/
 ```
+
+**Auth is a client-side login gate**, not a server session: `login.jsx` checks two hardcoded team passwords (NS / Jaggaer) and records the org in `localStorage`. There is no server-side authentication — the gate keeps casual visitors out, but is not a security boundary. The GitHub token that can actually write the repo lives only in the serverless env, never in the browser.
 
 **Key principle:** GitHub is the database. No separate backend, no database, no server-side session state. Every read and write goes through a Vercel serverless proxy that injects secrets from environment variables — the browser never holds a credential, and never calls GitHub or Anthropic directly.
 
@@ -62,7 +71,8 @@ The proxy architecture (browser → `/api/*` → external API) is intentional. *
 ├── config/
 │   ├── project.json          ← ALL app state lives here (single source of truth)
 │   ├── digest-state.json     ← last-sent timestamp + piece states for digest dedup
-│   └── style-guide.docx      ← rendered in-app via api/docx-render.js
+│   ├── style-guide.docx      ← rendered in-app via api/docx-render.js
+│   └── content-flow.png      ← workflow diagram, rendered in-app via content-flow.jsx
 │
 ├── content/
 │   └── month-1/
@@ -77,18 +87,21 @@ The proxy architecture (browser → `/api/*` → external API) is intentional. *
 │   ├── styles.css            ← design system / CSS variables
 │   ├── mock-data.js          ← MOCK_PROJECT fallback when GitHub hydration fails
 │   ├── api.js                ← browser-side GitHub/Anthropic helper (calls /api/* proxies)
-│   ├── entry.jsx             ← name-selector screen
+│   ├── login.jsx             ← two-team login gate (loaded first; sets org in localStorage)
+│   ├── entry.jsx             ← name selector (org-scoped, post-login; attribution only)
 │   ├── sidebar.jsx           ← left nav (By Pillar / By Type)
-│   ├── tracker.jsx           ← main tracker, drawer, review panels, CSV sync
+│   ├── tracker.jsx           ← main tracker, drawer, review panels, CSV sync, piece links
 │   ├── weekly-report.jsx     ← Status Report tab
 │   ├── performance.jsx       ← Search Performance tab
 │   ├── admin.jsx             ← admin config editor
 │   ├── sample-artifacts.jsx  ← S2P sample-article showcase panel
-│   ├── style-guide.jsx       ← in-app style-guide viewer/uploader
+│   ├── style-guide.jsx       ← in-app style-guide viewer/uploader (docx)
+│   ├── content-flow.jsx      ← Content Flow diagram viewer/uploader (image)
 │   ├── app.jsx               ← root component; hydration + debounced auto-save
 │   │
 │   │  ── Static / standalone ──
 │   ├── ai-playground.html    ← AI Playground microsite (standalone; /ai route)
+│   ├── piece.html            ← standalone per-piece read-only viewer (/piece/:id)
 │   ├── jaggaer-logo.png
 │   ├── netscribes-logo.png
 │   │
@@ -99,7 +112,11 @@ The proxy architecture (browser → `/api/*` → external API) is intentional. *
 │   │   ├── perf-xlsx.js      ← GSC .xlsx parser (SheetJS)
 │   │   ├── docx-render.js    ← style-guide docx→HTML (mammoth)
 │   │   ├── digest.js         ← daily digest email (Vercel Cron)
-│   │   ├── notify.js         ← "Send to Editors" email
+│   │   ├── notify.js         ← piece-approval / "Send to Editors" email
+│   │   ├── piece-page.js     ← serves piece.html + per-piece OG meta (/piece/:id)
+│   │   ├── piece.js          ← JSON fallback for piece.html
+│   │   ├── _lib/
+│   │   │   └── piece-lookup.js ← shared piece resolver (buildPiecePayload)
 │   │   └── api.js            ← shared serverless helpers
 │   │
 │   ├── vercel.json           ← crons + rewrites; MUST live here (see below)
@@ -112,11 +129,14 @@ The proxy architecture (browser → `/api/*` → external API) is intentional. *
 ### Two structural rules that bite if forgotten
 
 - **`vercel.json` must live inside `repo-setup/`.** Vercel's Root Directory is set to `repo-setup/`, so a copy at the repo root is ignored. This governs the Cron schedule and the `/ai` + `/demo` rewrites.
-- **Serverless code lives only in `repo-setup/api/`.** Vercel only treats `api/*.js` as functions. `repo-setup/digest.js` and `repo-setup/notify.js` are **stale root-level duplicates** left over from an earlier layout — they are never executed. Edit the `api/` versions only; the root copies are dead weight and safe to delete.
+- **Serverless code lives only in `repo-setup/api/`.** Vercel only treats `api/*.js` as functions. `repo-setup/digest.js`, `repo-setup/notify.js`, and `repo-setup/perfxlsx.js` are **stale root-level duplicates** left over from earlier layouts — they are never executed. Edit the `api/` versions only; the root copies are dead weight and safe to delete.
 
-### Present but not loaded (legacy)
+### Stale duplicates and legacy files (present, not loaded)
 
-`agent-builder.jsx`, `bwc.jsx`, `claude-rail.jsx`, and `jai-demo.html` are still in the repo but are **not** referenced by `index.html` and are not part of the running app. `jai-demo.html` is still reachable via the `/demo` rewrite in `vercel.json`; the live demo experience is now the AI Playground at `/ai`. These files can be removed in a cleanup pass — verify nothing imports them first.
+Several files are in the repo but **not** referenced by `index.html`, `vercel.json`, or any `api/` function — leftovers from earlier iterations, safe to remove in a cleanup pass once you confirm nothing imports them:
+
+- **Superseded duplicates** (a hyphenated / relocated version is the live one): `repo-setup/weeklyreport.jsx` → live is `weekly-report.jsx`; `repo-setup/perfxlsx.js` and `repo-setup/api/perfxlsx.js` → live is `api/perf-xlsx.js`; `repo-setup/digest.js` / `repo-setup/notify.js` → live are `api/digest.js` / `api/notify.js`.
+- **Legacy prototypes**: `agent-builder.jsx`, `bwc.jsx`, `claude-rail.jsx`, and `jai-demo.html`. `jai-demo.html` is still reachable via the `/demo` rewrite in `vercel.json`, but the live demo experience is the AI Playground at `/ai`; retire `/demo` and delete `jai-demo.html` together.
 
 ---
 
@@ -137,10 +157,11 @@ Everything the app renders derives from `config/project.json`. Adding pillars, c
   "schedule": [...],
   "workflow_stages": [...],
   "performanceData": {},
-  "notifications": { "digest_to": [...], "editors_to": [...] },
-  "playground_comments": [...]
+  "notifications": { "digest_to": [...], "editors_to": [...], "approved_to": [...] }
 }
 ```
+
+(`playground_comments[]` is written lazily at runtime by the AI Playground commenting overlay and may be absent until the first pin is placed.)
 
 ### months
 
@@ -150,7 +171,7 @@ Everything the app renders derives from `config/project.json`. Adding pillars, c
 
 ### content_type_split
 
-The three-type model that overlays the four industry pillars. Valid `id`: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`.
+The content-type model that overlays the four industry pillars. Valid `id`: `"msv"`, `"ai-in-s2p"`, `"industry-specific"`, `"ad-hoc"`.
 
 ```json
 { "id": "msv", "label": "MSV-driven", "description": "...", "weight": 0.50, "pieces_est": 15 }
@@ -305,14 +326,16 @@ Current live funnel (from `project.workflow_stages`):
 | `stage-nq11b` | person: m-ny8dy, m-pifrn | SME topic confirmation before brief |
 | `brief-uploaded` | NS + Jaggaer | Brief uploaded; NS begins writing |
 | `writing` | NS | NS submits draft to next reviewer |
-| `marketing-review` | person: abhishek, m-ny8dy, m-pifrn | SEO / marketing review |
-| `ed-review` | person: m-ed01 (Ed) | JAGGAER content review |
-| `editors` | person: m-pznem (Alex), m-izu4e (Jovana) | CTA check / final editorial |
-| `approved` | — | Terminal state |
+| `marketing-review` | person: abhishek, m-ny8dy, m-pifrn | SEO / marketing review ("Abhishek and Visnja Review") |
+| `ed-review` | person: m-ed01 | JAGGAER content review |
+| `approved` | — | Approved by JAGGAER; ready to publish |
+| `live` | NS + Jaggaer | Published — the true terminal state |
 
-**Current review chain:** NS upload → SEO review (Vizna / Abhishek) → **Ed content review** → Alex CTA check → live.
+**Current review chain:** NS upload → SEO review (Abhishek / Visnja) → **content review** → `approved` → `live`.
 
-> As of July 2026 content moved from Robert's team to Jason's team; **Ed** replaced Robert as the JAGGAER content reviewer (`robert-review` → `ed-review`). The SEO-stage reviewer swap (Orlagh → Vizna) is still provisional pending confirmation with Jason.
+> **`live` is a distinct post-approval stage.** `approved` means "signed off, not yet published"; `live` means "actually published." This separation drives the Status Report's *Published* vs *To publish* buckets and anchors Search Performance windows to the go-live date. The dedicated `editors` / CTA-check stage was removed from the funnel; CTA/editorial happens within content review now.
+
+> As of mid-2026 content moved from Robert's team to Jason's team; the JAGGAER content reviewer (`m-ed01`) replaced Robert (`robert-review` → `ed-review`), and the SEO stage settled on Abhishek + Visnja. Robert (`m-9toiv`) is still in the `team` roster but is no longer in any stage. **Stale `robert-review` fallback constants remain in `admin.jsx`, `api/digest.js`, and the dead `digest.js` root duplicate** — inert at runtime, flagged for cleanup in §13.
 
 **Ad-Hoc Articles** use a separate `ad-hoc-review` stage (simplified two-stage: NS submit → Jaggaer review → approved). This stage deliberately lives **outside** `project.workflow_stages` so it doesn't shift the indices of the main funnel — every component that resolves stages carries an explicit patch for it (`getAdHocReviewStage`).
 
@@ -333,6 +356,7 @@ Three types cut across all four industry pillars:
 | MSV-driven | `msv` | Broad horizontal, high-search-volume procurement terms |
 | AI in S2P | `ai-in-s2p` | Claude + S2P searches; user journey mapped (Path 1/2/3) |
 | Industry-specific | `industry-specific` | Vertical, sector-explicit; eBooks and whitepapers |
+| Ad-Hoc | `ad-hoc` | One-off pieces outside any cluster/pillar; simplified two-stage review |
 
 **User paths (AI in S2P pillar only):**
 
@@ -362,7 +386,7 @@ Four-week sequence for Month 1, driven by `project.schedule` — edit there to c
 ## 7. File-by-File Reference
 
 ### index.html
-App shell. Loads React 18 + Babel Standalone from CDN, then each `.jsx` file as a Babel-transpiled `<script type="text/babel">` in dependency order (see the tree in §2). No build step. Sets:
+App shell. Loads React 18 + Babel Standalone from CDN plus the Noto Sans / Playfair Display / JetBrains Mono webfonts, then each `.jsx` file as a Babel-transpiled `<script type="text/babel">` in dependency order (see the tree in §2). `login.jsx` loads first so the gate can render before anything else. No build step. Sets:
 
 ```js
 window.__CONFIG__ = { GITHUB_REPO: "ns-adiraghavan/jaggaer-ns-tracker" };
@@ -373,9 +397,15 @@ window.__CONFIG__ = { GITHUB_REPO: "ns-adiraghavan/jaggaer-ns-tracker" };
 Design system. Key CSS variables:
 
 ```css
---paper:  #f0ede6;   /* warm off-white page background */
---accent: #c8401a;   /* burnt orange — Jaggaer brand */
+--paper:        rgba(240,237,230,0.97);  /* warm off-white page background */
+--ink:          #111820;                 /* primary text */
+--accent:       #1a2f4e;                 /* deep navy — primary accent */
+--font-ui:      "Noto Sans", system-ui, sans-serif;
+--font-display: "Playfair Display", Georgia, serif;
+--font-mono:    "JetBrains Mono", ui-monospace, monospace;
 ```
+
+(The tracker's own palette is navy/paper. This is separate from the AI Playground's JAGGAER-branded palette in §8 — don't cross-apply them.)
 
 ### mock-data.js
 `MOCK_PROJECT` — the fallback project used when GitHub hydration fails, so the UI still renders locally without secrets.
@@ -388,8 +418,11 @@ All GitHub and Anthropic calls from the browser, routed through the `/api/github
 - `uploadPieceDeliverable(...)` / `uploadPieceBrief(...)` — PUT versioned files into the `content/` tree. Binary types (PDF, DOCX) committed as raw base64.
 - `callClaude(messages, systemPrompt)` — POST to `/api/anthropic`.
 
+### login.jsx
+Two-team login gate, loaded before everything else. Checks the entered email/password against **two hardcoded team credentials** (one NS, one Jaggaer) and, on success, records the org (`"ns"` / `"jaggaer"`) in `localStorage` under `ns_jaggaer_login` (with a `sessionStorage` fallback on read so in-flight sessions survive a deploy). Exposes `window.LoginGate` and `window.NS_LOGIN` (`readLoginSession` / `writeLoginSession` / `clearLoginSession`). This is a soft gate, not real auth — see the security note in §13. Credentials are per-team, not per-person; individual identity is chosen afterward in `entry.jsx`.
+
 ### entry.jsx
-Name selector. Renders all `team.ns` + `team.jaggaer` members. No password — identity is for feedback attribution only. Exposes `window.NameSelector`.
+Name selector, shown **after** the login gate. Scoped to the signed-in org (`loginOrg`): it renders only that org's roster and logo, so an NS user picks from `team.ns` and a Jaggaer user from `team.jaggaer`. No per-person password — the name is for feedback attribution and admin resolution only. Exposes `window.NameSelector`.
 
 ### sidebar.jsx
 Left nav with a **By Pillar / By Type** toggle. By Pillar: P01–P04 with expandable clusters. By Type: MSV / AI in S2P / Industry-specific with per-piece status dots. Exposes `window.Sidebar`, `window.computeStats`.
@@ -414,7 +447,7 @@ Metrics are computed from each piece's `timeseries`, windowed to **trailing thre
 Cards and the modal show trailing-3-month impressions, avg monthly impressions, weighted avg position, and the piece's **target keyword** (`primary_keyword`) alongside position for context.
 
 ### admin.jsx
-Config editor for admin users: Pillars & Clusters, Pieces, Team, **Workflow** (drag-reorder / rename / set actor), Notifications (recipients + test digest), CSV Sync. Exposes `window.AdminPanel`.
+Config editor for admin users. Tabs: Overview, **Workflow** (drag-reorder / rename / set actor), Pillars & Clusters, Publishing Schedule, Months, Team, Build With Claude, Notifications (digest / approved / editors recipients + test sends), Topic CSV Sync, Raw JSON. Exposes `window.AdminPanel`.
 
 ### sample-artifacts.jsx
 S2P sample-article showcase panel. Exposes `window.SampleArtifactsPanel`.
@@ -422,8 +455,16 @@ S2P sample-article showcase panel. Exposes `window.SampleArtifactsPanel`.
 ### style-guide.jsx
 In-app style-guide viewer + admin uploader. Renders `config/style-guide.docx` by calling `/api/docx-render` (mammoth on the server) and displaying the HTML in a styled iframe.
 
+### content-flow.jsx
+**Content Flow** tab. Mirrors `style-guide.jsx`, but for a single reference **image** — the current workflow/content-flow diagram at the fixed path `config/content-flow.png`. Admins can replace it in place (overwrite via SHA, no orphaned files). On load it sniffs the real image type from magic bytes and builds a `data:` URL, so PNG/JPG/GIF/WEBP/SVG all render regardless of the stored file extension. Exposes `window.ContentFlowPanel`.
+
+### piece.html + shareable piece links
+A piece can be opened at **`/piece/:id`** (drawer buttons: **Open ↗** via `window.open`, **Copy link** via the clipboard API). `vercel.json` rewrites `/piece/:id` → `api/piece-page.js`, which serves the `piece.html` shell with a per-piece `<title>`, Open Graph / Twitter meta (so Slack/Teams/email unfurl the real title, pillar and status), and `window.__PIECE_ID__` / `window.__PIECE_DATA__` injected inline for a zero-round-trip render. `piece.html` is a standalone, read-only viewer (no React bundle): it decodes the deliverable's base64 into a blob URL client-side, and falls back to `GET /api/piece?id=` when it wasn't server-preloaded. Both endpoints share `api/_lib/piece-lookup.js` (`buildPiecePayload`) so lookup and version resolution stay in sync. The viewer is behind the login gate; an unauthenticated visitor is bounced to login and returned to the piece afterward (see `ns_piece_return` in §7 app.jsx).
+
 ### app.jsx
-Root component. Hydrates from GitHub on load, falls back to `MOCK_PROJECT` on error, debounced auto-save (1.5 s) on any state change. Calls `syncWorkflowGlobals(project)` after hydration to keep `STATUS_META`, `STATUS_ORDER`, and `IN_MOTION_STATUSES` aligned with the live workflow config.
+Root component. Renders `LoginGate` until an org is present (`loginOrg` from `window.NS_LOGIN.readLoginSession()`), then `NameSelector`, then the app. Hydrates from GitHub on load, falls back to `MOCK_PROJECT` on error, debounced auto-save (1.5 s) on any state change. Calls `syncWorkflowGlobals(project)` after hydration to keep `STATUS_META`, `STATUS_ORDER`, and `IN_MOTION_STATUSES` aligned with the live workflow config (`IN_MOTION_STATUSES` now excludes `not-started`, `approved`, **and** `live`).
+
+Session (the selected user) is stored in `localStorage` so a piece link opened in a new tab stays signed in; sign-out clears **both** the user session and the login-org session. If an unauthenticated visitor hits a `/piece/:id` link, the target id is stashed in `sessionStorage` as `ns_piece_return` and they're redirected back to the piece after login. Owns the nav view set, which now includes **Content Flow** alongside AI Playground, Style Guide, and (admins) Admin.
 
 ### api/github.js
 GitHub Contents API proxy. Reads `GITHUB_TOKEN` + `GITHUB_REPO` from `process.env`. Body-parser limit raised to **10 MB** for PDF deliverable uploads.
@@ -441,7 +482,16 @@ Parses a GSC `.xlsx` export (SheetJS). Input `{ filename, content }` (base64); o
 Daily digest email. Vercel Cron at 12:30 UTC (6 pm IST). Only sends on days with activity. Reads `project.workflow_stages` to categorise stages dynamically. Stores last-sent state in `config/digest-state.json`.
 
 ### api/notify.js
-"Send to Editors" email for fully-approved clusters. Triggered by the **Send to Editors →** button (admin). Reads `project.notifications.editors_to`.
+Piece-approval email, triggered by the **Send to Editors →** button on fully-approved cluster cards (admin). Sends two templates: a **stakeholder alert** to `project.notifications.approved_to` and an **editors** email (title, format, direct GitHub file link) to `project.notifications.editors_to`. Skips cleanly when neither list is configured.
+
+### api/piece-page.js
+`GET` handler behind the `/piece/:id` rewrite. Fetches the `piece.html` shell from the same deployment and injects per-piece `<title>` + OG/Twitter meta and inline `window.__PIECE_DATA__`. Falls back to redirecting to `/piece.html?id=` if the shell can't be fetched.
+
+### api/piece.js
+`GET /api/piece?id=` — JSON fallback used by `piece.html` when a page wasn't server-preloaded (e.g. hitting `/piece.html?id=` directly). Same payload shape as `piece-page.js`.
+
+### api/_lib/piece-lookup.js
+Shared `buildPiecePayload(id)` used by both piece endpoints: resolves the piece across pillars/clusters, picks the current deliverable version, and returns the payload (including `workflow_stages` for stage-label lookup). Single source of truth so the two endpoints never drift.
 
 ### api/api.js
 Shared serverless helpers used by the functions above.
@@ -538,7 +588,7 @@ const { chromium } = require('playwright');
 5. Add the environment variables from §11.
 6. Deploy.
 
-Vercel auto-detects `api/*.js` as serverless functions. The Cron job and the `/ai` + `/demo` rewrites are configured in `vercel.json`, which **must live inside `repo-setup/`** (the Root Directory), not at the repo root.
+Vercel auto-detects `api/*.js` as serverless functions. The Cron job and the `/ai`, `/demo`, and `/piece/:id` rewrites are configured in `vercel.json`, which **must live inside `repo-setup/`** (the Root Directory), not at the repo root.
 
 ---
 
@@ -553,6 +603,8 @@ Vercel auto-detects `api/*.js` as serverless functions. The Cron job and the `/a
 | `APP_URL` | Clean production URL used in the digest-email CTA. Optional; falls back to a hardcoded value. |
 | `DIGEST_TO` / `EDITORS_TO` | Fallback recipient lists. **Admin → Notifications takes priority** over these. |
 | `DIGEST_FROM` | Leave unset — defaults to the Maileroo shared domain. Only set with a verified custom domain. |
+
+> **Login credentials are not env vars.** The two team passwords live hardcoded in `login.jsx` and ship to the browser. Treat them as a soft gate, not a secret, and change them by editing the file (see the security note in §13). `approved_to` / `editors_to` / `digest_to` recipient lists live in `project.notifications`, not in env.
 
 ---
 
@@ -576,14 +628,14 @@ curl -X POST https://jaggaer-ns-tracker.vercel.app/api/digest \
 ```
 Or **Send Test Digest** in Admin → Notifications. **After any schema migration**, force-trigger once to reset `digest-state.json` with current piece statuses.
 
-### Flow 2 — Send to Editors (`api/notify.js`)
-Triggered by **Send to Editors →** on fully-approved cluster cards (admin). Emails all approved pieces with title, format, and a direct GitHub file link. Recipients from `project.notifications.editors_to`, falling back to `EDITORS_TO`.
+### Flow 2 — Piece approval / Send to Editors (`api/notify.js`)
+Triggered by **Send to Editors →** on fully-approved cluster cards (admin). Sends two templates: a **stakeholder alert** to `project.notifications.approved_to`, and an **editors** email listing every approved piece with title, format, and a direct GitHub file link to `project.notifications.editors_to`. Either half is skipped if its list is empty. The **Send Test** control in Admin → Notifications fires to `approved_to + editors_to` so both templates can be checked at once.
 
 ### Recipient priority
 ```
-project.notifications.digest_to / editors_to   (wins)
+project.notifications.digest_to / editors_to / approved_to   (wins)
         ↓ if empty
-DIGEST_TO / EDITORS_TO env vars                (fallback)
+DIGEST_TO / EDITORS_TO env vars                              (fallback; no env fallback for approved_to)
 ```
 
 ---
@@ -599,17 +651,21 @@ DIGEST_TO / EDITORS_TO env vars                (fallback)
    src = src.replace(old, new)
    ```
 3. **Watch for global-scope naming collisions.** The unbundled script-tag architecture puts every top-level `const`/`function` in one shared global scope. Two files declaring the same identifier crash the app (this happened before with `PieceDrawer` / `PerfPieceDrawer`). Every component and helper name must be unique **across all loaded `.jsx` files**. When adding a helper, prefix it per-module (e.g. `perfSlug`, `useMemoWR`).
-4. **Keep the two copies of the workflow config in sync.** `config/project.json` is the source of truth; `tracker.jsx` (`STATUS_META` / `DEFAULT_WORKFLOW_STAGES`) is the pre-hydration fallback. Rename a stage in one, rename it in the other.
+4. **Keep the two copies of the workflow config in sync.** `config/project.json` is the source of truth; `tracker.jsx` (`STATUS_META` / `DEFAULT_WORKFLOW_STAGES`) is the pre-hydration fallback. Rename a stage in one, rename it in the other. They have already drifted: the live `marketing-review` label is **"Abhishek and Visnja Review"** in `project.json` but still **"Abhishek and Orlagh Review"** in the `tracker.jsx` fallback. Both do carry the new terminal `live` stage — keep it in both, and mirror it into `IN_MOTION_STATUSES` exclusions (it's excluded alongside `not-started` and `approved`).
 5. **Never hardcode stage IDs in new UI.** Resolve stages through `project.workflow_stages` at runtime, and patch `ad-hoc-review` explicitly via `getAdHocReviewStage()` — it is intentionally not in `workflow_stages`.
 6. **GitHub Contents API needs a fresh SHA on every PUT.** Fetch the current SHA immediately before writing; a missing SHA → 422, a stale SHA → 409. `saveProject` already refreshes and retries once — don't reintroduce a cached SHA.
 7. **Validate before delivering:** Babel CLI on every touched `.jsx`, `node --check` on plain JS, then a headless render check. Deliver working files, not inline diffs.
 8. **Don't revert the proxy architecture.** Browser → `/api/*` → external API is deliberate; direct browser calls would leak credentials.
 
-**Security note — rotate the committed token.** `repo-setup/setup.sh` contains a **hardcoded GitHub PAT in plaintext**. Anyone with repo read access can use it. Rotate that token in GitHub → Settings → Developer settings → Personal access tokens, replace it with an environment lookup (`TOKEN="${GITHUB_TOKEN}"`) in `setup.sh`, and treat the old token as compromised. This is unrelated to the runtime `GITHUB_TOKEN` env var, which is injected server-side and is safe.
+**Security note 1 — rotate the committed token.** `repo-setup/setup.sh` contains a **hardcoded GitHub PAT in plaintext**. Anyone with repo read access can use it. Rotate that token in GitHub → Settings → Developer settings → Personal access tokens, replace it with an environment lookup (`TOKEN="${GITHUB_TOKEN}"`) in `setup.sh`, and treat the old token as compromised. This is unrelated to the runtime `GITHUB_TOKEN` env var, which is injected server-side and is safe.
+
+**Security note 2 — the login gate is a soft gate, not auth.** The two team passwords are hardcoded in `login.jsx` and shipped to every browser, so anyone who can read the file (or view source) can see them. This is deliberate — the gate keeps casual visitors out, and the only thing that can actually write the repo is the server-side `GITHUB_TOKEN`, which the browser never holds. Don't put anything genuinely sensitive behind it, and change the passwords by editing `login.jsx` directly.
 
 **Housekeeping backlog (safe to action in a cleanup pass):**
-- Delete stale root-level serverless duplicates `repo-setup/digest.js` and `repo-setup/notify.js` (the live versions are in `api/`).
+- Remove the stale `robert-review` fallback constants in `admin.jsx` (two occurrences), `api/digest.js`, and the dead `digest.js` root duplicate. They're inert at runtime but misleading.
+- Delete stale root-level duplicates `repo-setup/digest.js`, `repo-setup/notify.js`, and `repo-setup/perfxlsx.js`, plus the superseded `repo-setup/weeklyreport.jsx` and `repo-setup/api/perfxlsx.js` (live versions: `api/digest.js`, `api/notify.js`, `api/perf-xlsx.js`, `weekly-report.jsx`).
 - Remove unloaded legacy files `agent-builder.jsx`, `bwc.jsx`, `claude-rail.jsx`, and — once `/demo` is retired — `jai-demo.html` and its `vercel.json` rewrite. Confirm nothing references them first.
+- Reconcile the `tracker.jsx` fallback `marketing-review` label with `project.json` (see playbook #4).
 - Backfill missing `status_history` timestamps where known; leave genuinely-unknown ones as `ts: null` rather than guessing.
 
 ---
@@ -627,6 +683,15 @@ Add to `team.ns` or `team.jaggaer` with a unique `id`. Reference them in a stage
 
 ### Upload Search Console data
 Jaggaer user (or Admin mode) drops a per-page GSC `.xlsx` on the piece's card in the Search Performance tab. The slug from the export must match the piece's `publishing.live_url`; a mismatch is reported, not swallowed.
+
+### Replace the Content Flow diagram
+Admin → **Content Flow** tab → Replace. Overwrites `config/content-flow.png` in place (via SHA). Any image format works — the viewer detects the real type from magic bytes, so the file name/extension doesn't matter.
+
+### Change the login passwords
+Edit the two `CREDENTIALS` entries in `repo-setup/login.jsx` and redeploy. There is no env var or admin UI for this — the passwords are a soft gate that ships to the browser (see §13, Security note 2).
+
+### Get a shareable link to a piece
+Open the piece drawer → **Copy link** (or **Open ↗**). The URL is `/piece/:id`; it unfurls in Slack/Teams with the real title and status, and opens the standalone read-only viewer behind the login gate.
 
 ### Push a project.json update by hand (PowerShell)
 
@@ -652,4 +717,12 @@ Force-trigger the digest once (§12) so `digest-state.json` reseeds with current
 
 ---
 
-*Last updated: July 2026, v3.7. Changes from v3.6: reconciled file tree with actual repo (documented `weekly-report.jsx`, `performance.jsx`, `style-guide.jsx`, `sample-artifacts.jsx`, and the `api/perf-xlsx.js` / `docx-render.js` / `api.js` functions; corrected the inaccurate "removed files" list — those files are unloaded, not deleted). Workflow reviewer `robert-review` → `ed-review` (Ed). Search Performance now trailing-3-month impressions + avg monthly + weighted position + target keyword. Status Report KPI relabelling. Added detailed Build & Local Development, Maintenance Playbook, and Common Tasks sections. Flagged the plaintext token in `setup.sh` for rotation. Removed repeated notes (vercel.json location, SHA management, dead-weight files now stated once).*
+*Last updated: August 2026, v3.8. Changes from v3.7:*
+- *Documented the **login gate** (`login.jsx`, two-team credentials, `localStorage` org, soft-gate security note) and the org-scoped `entry.jsx` — replacing the stale "no password / renders all members" description.*
+- *Documented **shareable piece links**: `/piece/:id` rewrite, `piece.html` viewer, `api/piece-page.js`, `api/piece.js`, `api/_lib/piece-lookup.js`, OG unfurl, and the `ns_piece_return` login round-trip.*
+- *Documented the **Content Flow** tab (`content-flow.jsx`, `config/content-flow.png`).*
+- *Rewrote the **workflow table**: added the terminal `live` stage (approved ≠ published), removed the retired `editors` stage, corrected stage labels; noted the `project.json` ↔ `tracker.jsx` label drift.*
+- *Corrected the **design-system variables** (accent is deep navy `#1a2f4e`, not burnt orange) and added the font stack.*
+- *`content_type_split` now includes `ad-hoc`; `notifications` now includes `approved_to`; `api/notify.js` sends two templates.*
+- *Refreshed the stale-duplicate / legacy inventory (`weeklyreport.jsx`, `perfxlsx.js` ×2) and confirmed the `robert-review` constants still present in `admin.jsx` + `api/digest.js` + root `digest.js`.*
+- *Added a login-credential security note and new recipes (replace Content Flow diagram, change login passwords, get a piece link).*
