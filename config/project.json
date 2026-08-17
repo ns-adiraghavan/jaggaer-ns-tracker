@@ -2053,8 +2053,8 @@
               "title": "From Spreadsheets to Platform: How R1 Universities Are Modernising Procurement",
               "format": "Problem-Solution",
               "assignee": "null",
-              "status": "writing",
-              "revision_count": 0,
+              "status": "marketing-review",
+              "revision_count": 1,
               "primary_keyword": "R1 university procurement platform modernisation",
               "secondary_keyword": "higher education procurement digitization 2026",
               "intent": "commercial",
@@ -2063,8 +2063,8 @@
               "content_type": "industry-specific",
               "phase": 2,
               "funnel": "MOFU",
-              "last_updated": "2026-07-31T09:27:53.686Z",
-              "last_updated_by": "m-pifrn",
+              "last_updated": "2026-08-17T13:08:42.530Z",
+              "last_updated_by": "m-5jitd",
               "status_history": [
                 {
                   "stage": "brief-uploaded",
@@ -2075,6 +2075,11 @@
                   "stage": "brief-uploaded",
                   "ts": "2026-07-31T09:27:53.686Z",
                   "by": "m-pifrn"
+                },
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-08-17T13:08:42.530Z",
+                  "by": "m-5jitd"
                 }
               ],
               "return_to_stage": null,
@@ -2087,8 +2092,9 @@
                 }
               ],
               "brief_last_updated": "2026-07-31T09:27:53.686Z",
-              "last_upload": "2026-07-31T09:27:53.686Z",
-              "last_upload_by": "m-pifrn"
+              "last_upload": "2026-08-17T13:08:42.530Z",
+              "last_upload_by": "m-5jitd",
+              "deliverable_ext": "html"
             }
           ]
         }
