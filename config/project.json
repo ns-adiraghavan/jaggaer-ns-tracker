@@ -3177,6 +3177,16 @@
         "annotation": true,
         "section": "¶9 — \"In practice, that means accounting for s…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-8h6e9n",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Change this part and link to product page The next step is seeing how this works inside JAGGAER's Source-to-Pay platform. - https://www.jaggaer.com/solutions/source-to-pay",
+        "ts": "2026-08-17T11:02:02.338Z",
+        "annotation": true,
+        "section": "¶11 — \"This is the space JAGGAER operates in. I…\"",
+        "revision": 2
       }
     ]
   },
