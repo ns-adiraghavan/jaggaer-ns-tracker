@@ -2305,7 +2305,7 @@
               "title": "JAGGAER CEO Andrew Roszko on AI Governance",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "marketing-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "revision_count": 2,
               "primary_keyword": "",
@@ -2325,12 +2325,17 @@
                   "stage": "not-started",
                   "ts": "2026-08-14T10:39:20.595Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-17T11:03:37.631Z",
+                  "by": "m-pifrn"
                 }
               ],
-              "last_updated": "2026-08-14T10:39:20.595Z",
-              "last_updated_by": "manager",
+              "last_updated": "2026-08-17T11:03:37.631Z",
+              "last_updated_by": "m-pifrn",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "marketing-review",
               "last_upload": "2026-08-14T10:39:20.595Z",
               "last_upload_by": "manager",
               "secondary_keyword": ""
@@ -3187,6 +3192,14 @@
         "annotation": true,
         "section": "¶11 — \"This is the space JAGGAER operates in. I…\"",
         "revision": 2
+      },
+      {
+        "id": "fb-i8x55v",
+        "author": "m-pifrn",
+        "verdict": "needs-revision",
+        "body": "Please make the needed changes - ask me if anything is unclear as I made a mistake while editing, but pointed it out inside",
+        "ts": "2026-08-17T11:03:37.630Z",
+        "stage": "marketing-review"
       }
     ]
   },
