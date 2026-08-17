@@ -3137,6 +3137,16 @@
         "annotation": true,
         "section": "¶1 — \"Procurement Magazine's August 2026 issue…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-n8fyze",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "These are the five checks every organization should run before deploying AI in procurement - and the governance standards each one demands.",
+        "ts": "2026-08-17T10:40:44.482Z",
+        "annotation": true,
+        "section": "Add brief intro under the new H2 :What Good Procurement Governance and Compliance Looks Like in Practice",
+        "revision": 2
       }
     ]
   },
