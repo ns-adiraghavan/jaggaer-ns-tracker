@@ -3097,6 +3097,16 @@
         "annotation": true,
         "section": "¶16 — \"AI Capability Is Not the Same as AI Read…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-tppu7o",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Why Procurement Governance Must be Built in, Not Bolted on",
+        "ts": "2026-08-17T10:31:00.308Z",
+        "annotation": true,
+        "section": "¶17 — \"Governance Should Enable AI, Not Slow It…\"",
+        "revision": 2
       }
     ]
   },
