@@ -3147,6 +3147,16 @@
         "annotation": true,
         "section": "Add brief intro under the new H2 :What Good Procurement Governance and Compliance Looks Like in Practice",
         "revision": 2
+      },
+      {
+        "id": "ann-uj7wih",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "in the purple part of the chart, add one more part above: The JAGGAER Procurement Governance Framework: Five Pillars (all should be in chart in purple) - and change the \"check\" to \"pillar\"",
+        "ts": "2026-08-17T10:41:47.526Z",
+        "annotation": true,
+        "section": "¶20 — \"Readiness before deployment…\"",
+        "revision": 2
       }
     ]
   },
