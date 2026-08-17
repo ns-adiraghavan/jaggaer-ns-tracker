@@ -3087,6 +3087,16 @@
         "annotation": true,
         "section": "I clicked on wrong buttons below - so please disregard the 24,22, and 20 and look at the new ones instead",
         "revision": 2
+      },
+      {
+        "id": "ann-gd02xb",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "AI Readiness vs. AI Capability in Procurement",
+        "ts": "2026-08-17T10:30:11.724Z",
+        "annotation": true,
+        "section": "¶16 — \"AI Capability Is Not the Same as AI Read…\"",
+        "revision": 2
       }
     ]
   },
