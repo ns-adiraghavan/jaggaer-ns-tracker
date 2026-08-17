@@ -1,0 +1,592 @@
+<!-- uploaded by m-5jitd at 2026-08-17T13:08:40.854Z -->
+<!-- piece: From Spreadsheets to Platform: How R1 Universities Are Modernising Procurement -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R1 Procurement Modernisation: 2026 Guide</title>
+<meta name="description" content="How R1 universities are moving from spreadsheets to a unified procurement platform in 2026, and what to expect.">
+<link rel="canonical" href="https://www.jaggaer.com/r1-university-procurement-platform-modernisation">
+<!-- EDITORIAL DECISION, REVERSED 2026-08-17: the 2026-08-16/17 whole-document US-spelling normalization (canonical URL, primary keyword, H1, body copy) is reversed on Ikram's direction. Reverted to the brief's locked British spelling throughout, restoring exact-match compliance with the Section 2 primary keyword ("R1 university procurement platform modernisation," kept exactly as given) without needing Orlagh's sign-off, since this restores rather than deviates from brief-locked text.
+
+FLAG FOR ORLAGH, not resolved by this reversal: the brief itself is not internally consistent on spelling. The Section 3 H2 "What Modernization Actually Requires," the Section 5 whitepaper anchor text "the governance side of R1 procurement modernization," and two of the seven Section 6 FAQ questions are all written in the brief itself with American spelling, while the H1/primary keyword/meta title/URL slug are British. Per Style Guide 4.6, brief-locked headings and anchor text must match the brief exactly - so those specific instances are kept as-written (American) below rather than normalized to British, even though that makes this piece internally mixed. This mix is inherited from the brief, not introduced by this file; worth a decision at the brief level on which spelling those specific strings should actually use, rather than re-litigated per piece. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<!-- PRODUCTION FLAG, not for publish: this file renders the draft at /mnt/user-data/uploads/R1_Procurement_Modernisation_Draft (1).docx, status "Draft - Pending Sign-off," dated 2026-08-12. That draft's own "Editorial Notes & Open Items for Sign-Off" section lists 8 unresolved items; the ones with real business/legal/SEO consequence (not just wording) are flagged at their exact location below with PRODUCTION FLAG comments, same convention as this account's other pieces. datePublished/dateModified in the Article schema below are provisional build-date placeholders, not a confirmed publish date - this piece has not cleared sign-off. -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"From Spreadsheets to Platform: How R1 Universities Are Modernising Procurement in 2026","description":"How R1 universities are moving from spreadsheets to a unified procurement platform in 2026, and what to expect.","datePublished":"2026-08","dateModified":"2026-08-12","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"author":{"@type":"Organization","name":"JAGGAER"}}
+</script>
+
+<!-- EDITORIAL DECISION, confirmed 2026-08-16, UPDATED 2026-08-17: em-dash removal approved. Four instances, not three as originally logged: meta description (comma), "The Problem" H2 (colon), "Proof It Works" H2 (colon), and "Getting Started — What to Evaluate First" (colon) - this fourth one was made during the same pass but never counted in the original note. None of the four now match the brief's Section 3 punctuation verbatim, but this is signed off, not an open item. -->
+
+<!-- EDITORIAL DECISION, confirmed 2026-08-17: FAQ count is now 6 (up from 5) - added an ROI-framework answer (see the FAQ section near the end of this file for the full note).
+
+EDITORIAL DECISION, UPDATED 2026-08-17: FAQ count is now 7. "How long does a procurement platform modernization typically take?" (brief Section 6, kept in the brief's own American spelling) is added back on Ikram's direction, using the same approach as the ROI answer - a factors framework (ERP/system count, department and campus scope, data migration volume) rather than a fabricated duration figure. No source ever cleared Section 8's bar for a specific number (closest was an EDUCAUSE/CampusWorks 2023 ERP readiness study with no duration figure, and a 2007 IBM Center for the Business of Government report citing a secondhand 2003 number - rejected on the same grounds as Ardent Partners/KPMG elsewhere), so this answers the question honestly without inventing one.
+
+FACTUAL CORRECTION, same date: the brief's Section 1 "SERP features to target" lists People Also Ask (i.e., FAQ rich results) as a target for this FAQPage schema. That's no longer accurate for an August 2026 piece - Google's own Search Central documentation confirms FAQ rich results stopped appearing in Google Search on May 7, 2026 (three-phase deprecation: rich results gone May 2026, Search Console FAQ report/Rich Results Test support removed June 2026, Search Console API support removed August 2026). Worth noting FAQ rich results were already restricted to "well-known authoritative government and health websites" since August 2023, so this piece likely wouldn't have qualified even before the full deprecation. Recommendation: keep the FAQPage schema below as-is - Google has stated unused/non-rich-result structured data doesn't hurt Search, and the markup remains crawlable by Bing, Perplexity, and other AI/RAG crawlers, which may help this piece surface in AI-generated answers even without a visible SERP dropdown. Just stop describing this schema internally as a "People Also Ask" play - that's the part that's now wrong, not the schema itself. -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is spreadsheet-based procurement especially risky at large research universities?","acceptedAnswer":{"@type":"Answer","text":"Spreadsheets and email have no audit trail, so a single missed approval or duplicate order is hard to catch until it shows up in a budget review. At R1 scale, that risk multiplies across dozens of departments and every sponsored-research grant subject to federal compliance rules under 2 CFR 200."}},{"@type":"Question","name":"Does modernizing procurement require replacing our existing ERP system?","acceptedAnswer":{"@type":"Answer","text":"No. Platforms like JAGGAER connect to 40+ ERP and finance systems, including Oracle, SAP, Workday, and Microsoft Dynamics, through prebuilt connectors. The ERP stays in place; the procurement layer changes."}},{"@type":"Question","name":"What should an R1 university look for in a procurement platform?","acceptedAnswer":{"@type":"Answer","text":"Look for 5 criteria: spend visibility, supplier management, approval workflows, compliance and audit trails, and AI-assisted sourcing with governance built in. A platform that's strong on one but weak on the others still leaves gaps."}},{"@type":"Question","name":"What role does AI play in modern university procurement platforms?","acceptedAnswer":{"@type":"Answer","text":"According to a 2025 EDUCAUSE QuickPoll, 63% of procurement teams already account for AI products in their processes, or plan to. The top challenge cited was keeping pace with how fast AI tools change, with insufficient AI governance close behind. AI-assisted sourcing should come with a named control: recommendations grounded in policy, cited to source, with a human making the final call."}},{"@type":"Question","name":"What should we evaluate first before starting a modernization project?","acceptedAnswer":{"@type":"Answer","text":"Start with 3 things: what current spend visibility actually looks like department by department, what your ERP integration requirements are, and where departmental buy-in is weakest. Vendor conversations go faster once those three answers are honest ones."}},{"@type":"Question","name":"What is the actual ROI of moving from spreadsheets to a unified platform?","acceptedAnswer":{"@type":"Answer","text":"There is no single ROI percentage that applies across every R1 institution, since it depends on starting spend visibility, adoption, and implementation scope. Calculate it as hard savings plus cost avoidance plus labor capacity released plus compliance value, minus program cost, divided by program cost. Track that against a real baseline: current off-catalog spend, invoice processing time, contract compliance, and staff hours spent on manual transaction work, not a generic industry benchmark."}},{"@type":"Question","name":"How long does a procurement platform modernization typically take?","acceptedAnswer":{"@type":"Answer","text":"There is no fixed timeline, since duration depends on 3 factors: how many ERP and finance systems need to connect, how many departments and campuses are in scope, and how much historical supplier and contract data needs to migrate. A single-campus rollout onto an existing ERP connector is a materially shorter project than a multi-campus effort covering sponsored-research purchasing across dozens of departments. Ask any vendor for a timeline based on your specific ERP, department count, and data migration scope, not a generic industry average."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    1rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.stat{font-family:var(--font-display);font-weight:600;color:var(--jai-a);font-variant-numeric:tabular-nums;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Badges */
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-family:var(--font-display);font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.badge-pending{background:#fdecea;color:var(--color-red);margin-bottom:var(--space-xs);}
+.section-eyebrow{display:block;font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+
+/* Progress bar */
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-label{display:block;font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:720px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-family:var(--font-display);font-size:.625rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.08em;}
+.qa-question{font-weight:700;color:var(--color-ink);margin-bottom:.35rem;}
+.reader-disclaimer{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:0 0 var(--space-m);font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;}
+.freshness-note{font-size:.75rem;color:var(--color-ink-3);}
+.source-line{font-size:.75rem;color:var(--color-ink-3);font-style:italic;margin-top:-.5rem;margin-bottom:var(--space-m);}
+
+/* Primary Visual: five-tile stat grid (Number 1) */
+.leak-stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-s);margin:var(--space-m) 0 var(--space-l);}
+.leak-stat-tile{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-s);text-align:center;}
+.leak-stat-num{display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(1.4rem,1.2rem + 1vw,1.9rem);color:var(--jai-a);font-variant-numeric:tabular-nums;line-height:1.1;margin-bottom:.4rem;}
+.leak-stat-label{display:block;font-size:.75rem;color:var(--color-ink-2);line-height:1.4;}
+.leak-stat-source{display:block;font-size:.65rem;color:var(--color-ink-3);margin-top:.4rem;}
+@media(max-width:768px){.leak-stat-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.leak-stat-grid{grid-template-columns:1fr;}}
+
+/* Secondary Visual: three-row country comparison table (Why This Keeps Happening) */
+.leak-compare-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.leak-compare-table{width:100%;border-collapse:collapse;font-size:.875rem;min-width:600px;}
+.leak-compare-table th{background:var(--purple-tint-2);color:var(--color-ink);font-family:var(--font-display);font-weight:600;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;text-align:left;padding:.65rem var(--space-s);border-bottom:var(--border);}
+.leak-compare-table td{padding:.75rem var(--space-s);border-bottom:var(--border);color:var(--color-ink-2);vertical-align:top;line-height:1.5;}
+.leak-compare-table td strong{color:var(--color-ink);}
+.leak-compare-table tr:last-child td{border-bottom:none;}
+.leak-compare-table td:first-child{font-family:var(--font-display);font-weight:700;color:var(--color-ink);white-space:nowrap;}
+
+/* Expert Sidebar ("What the Experts Are Saying") */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--color-ink);line-height:1;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.68rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:.68rem;}
+.exp-link{font-size:.62rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.expert-sidebar{display:none;}}
+
+/* CTA block - JAI gradient theme */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:.95rem;font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-head a{color:inherit;border-bottom:none;}
+.jag-cta-head a:hover{color:var(--color-red);}
+.jag-cta-desc{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-desc.placeholder{font-style:italic;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:.875rem;font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item summary::marker{content:none;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.9375rem;color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+details{height:auto;overflow:hidden;transition:height .3s ease;}
+details:not([open]){height:3.75rem;}
+
+/* Closing notes */
+.abbrev-note{font-size:.75rem;color:var(--color-ink-3);line-height:1.6;margin-top:var(--space-l);}
+.disclaimer-note{font-size:.75rem;color:var(--color-ink-3);line-height:1.6;margin-top:var(--space-s);font-style:italic;}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}.leak-stat-grid{grid-template-columns:repeat(2,1fr);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+/* --- Piece-specific additions below: Problem-section before/after comparison --- */
+.procure-compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-m);margin:var(--space-m) 0 var(--space-l);}
+.procure-compare-card{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);}
+.procure-compare-card--old{background:var(--color-cream);}
+.procure-compare-card--new{background:var(--purple-tint-3);border-color:var(--purple-soft);}
+.procure-compare-label{display:block;font-family:var(--font-display);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:var(--space-s);}
+.procure-compare-card--old .procure-compare-label{color:var(--color-ink-3);}
+.procure-compare-card--new .procure-compare-label{color:var(--jai-a);}
+.procure-compare-list{list-style:none;padding:0;margin:0;}
+.procure-compare-list li{display:flex;gap:.5rem;align-items:flex-start;font-size:.875rem;color:var(--color-ink-2);line-height:1.5;margin-bottom:.5rem;padding-left:0;}
+.procure-compare-list li:last-child{margin-bottom:0;}
+.procure-compare-icon{flex-shrink:0;line-height:1.4;font-weight:700;}
+.procure-compare-card--old .procure-compare-icon{color:var(--color-ink-3);}
+.procure-compare-card--new .procure-compare-icon{color:var(--jai-a);}
+@media(max-width:768px){.procure-compare-grid{grid-template-columns:1fr;}}
+
+/* Proof-section single stat callout (hook-stat) */
+.hook-stat{display:flex;align-items:center;gap:var(--space-l);background:var(--color-cream);border:var(--border);border-left:4px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-l);margin:var(--space-m) 0 var(--space-l);flex-wrap:wrap;}
+.hook-stat-num{font-family:var(--font-display);font-weight:700;font-size:clamp(2.2rem,1.8rem + 2vw,3rem);color:var(--jai-a);font-variant-numeric:tabular-nums;line-height:1;flex-shrink:0;}
+.hook-stat-body{flex:1;min-width:200px;}
+.hook-stat-label{display:block;font-size:.9375rem;color:var(--color-ink);font-weight:600;line-height:1.4;margin-bottom:.3rem;}
+.hook-stat-source{display:block;font-size:.9rem;font-weight:600;color:var(--color-ink-2);margin-top:.2rem;}
+@media(max-width:480px){.hook-stat{flex-direction:column;align-items:flex-start;}}
+
+/* 5-criteria evaluation list (What to Look For) */
+.criteria-list{padding-left:0;margin:var(--space-m) 0 var(--space-l);list-style:none;}
+.criteria-list li{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin-bottom:var(--space-s);background:var(--color-white);}
+.criteria-list li:last-child{margin-bottom:0;}
+.criteria-list li strong{color:var(--color-ink);font-family:var(--font-display);}
+
+/* Getting-started checklist */
+.checklist{padding-left:0;margin:var(--space-m) 0 var(--space-l);list-style:none;}
+.checklist li{display:flex;gap:.6rem;border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin-bottom:var(--space-s);background:var(--purple-tint-3);border-color:var(--purple-soft);}
+.checklist li:last-child{margin-bottom:0;}
+.checklist-num{flex-shrink:0;font-family:var(--font-display);font-weight:700;color:var(--jai-a);}
+
+</style></head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">The Problem: Why Spreadsheets Break Down at R1 Scale in 2026</a>
+      <!-- SPELLING EXCEPTION: mirrors the brief's own Section 3 H2 text verbatim (American spelling) - see flag at head of file. --><a class="toc-link" href="#s2">What Modernization Actually Requires</a>
+      <a class="toc-link" href="#s3">What to Look for in a Platform</a>
+      <a class="toc-link" href="#s4">Proof It Works: Real R1 Results</a>
+      <a class="toc-link" href="#s5">Getting Started: What to Evaluate First</a>
+      <a class="toc-link" href="#s6">FAQ</a>
+      <a class="toc-link" href="#s7">Next Steps</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <!-- PRODUCTION FLAG, RESOLVED 2026-08-17: "Platform Modernisation & ROI" below no longer needs a separate cluster-wide decision - the 2026-08-16/17 US-spelling normalization that put this label out of step with the rest of the article has been reversed (see head of file), so this label is now consistent with the rest of this piece by default. The broader cluster-naming question is moot for this file specifically, though still worth confirming no sibling piece in the calendar independently normalized to US spelling. -->
+        <span class="article-label">Higher Education &middot; Platform Modernisation &amp; ROI &middot; Problem-Solution</span>
+        <!-- BADGE REMOVED 2026-08-17: sign-off confirmed by production. The article-meta "Draft prepared" line below and the Article schema's datePublished/dateModified (still provisional build-date placeholders, see head of file) were left untouched - removing the badge alone leaves both of those visibly inconsistent with a published piece, flagging rather than silently changing them too. -->
+        <h1>From Spreadsheets to Platform: How R1 Universities Are Modernising Procurement in 2026</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            6&ndash;7 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Draft prepared: <time datetime="2026-08-12">August 12, 2026</time></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- EDITORIAL DECISION, confirmed 2026-08-16: "in 2026" added to H1, overriding the brief's originally locked copy, per style guide Section 5.1. Scope confirmed to extend to H2s as well - see S1 below. Deviation from brief-locked H1 text, logged here for Orlagh's record. -->
+
+    <!-- EDITORIAL DECISION, 2026-08-17, APPLIED AT IKRAM'S EXPLICIT DIRECTION: one load-bearing clause per prose paragraph (including FAQ answers) is now bolded throughout this piece - the single most important line or stat in each paragraph, not just proper nouns/labels. FLAGGED BEFORE APPLYING, not silently done: no Section 4.8 exists in this file's copy of the style guide, and the only documented bolding rule (Section 5.2) is narrower - third-party source names, once, on first mention - which this addition goes well beyond. Applied anyway on direct instruction after that flag was raised and acknowledged. If a documented source for this rule turns up later (e.g., the Indy_Comments spreadsheet), worth reconciling this pass against it; until then, treat this as a client-directed style choice for this piece rather than a documented brief/style-guide requirement. -->
+    <!-- INTRO -->
+    <!-- VOICE AUDIT FIX, applied 2026-08-17: split (was 39 words, over the 30-word hard max) and rewrote "held by institutions that spend" as active ("requires institutions to spend"). Gate 3 + Gate 5 fix, no content change. -->
+    <p>A unified procurement platform can absorb the spreadsheet-and-email chaos most research universities still run on, without tearing out the ERP underneath it. That patchwork breaks down fastest at R1 scale. The <strong><a href="https://carnegieclassifications.acenet.edu/" target="_blank" rel="noopener">Carnegie Classification's</a></strong> Research 1 designation <strong>requires institutions to spend at least $50 million on research and award 70 doctorates a year</strong>, a bar 187 U.S. institutions cleared in 2025.</p>
+
+    <p>That shift is part of a broader wave of higher education procurement digitization in 2026. The best procurement platforms for educational institutions and universities answer one question first: <strong>do they integrate with existing systems, or force a rebuild?</strong></p>
+
+    <p><strong>This piece covers what R1 university procurement platform modernisation actually requires, what to evaluate first, and what two universities' results show about the payoff.</strong> It's part of JAGGAER's wider <a href="PILLAR-URL-TBC">Higher Education pillar page</a> coverage (pending publication), following <a href="https://www.jaggaer.com/blog/from-cost-to-catalyst-the-evolution-of-higher-ed-procurement" target="_blank" rel="noopener">the broader trends reshaping higher-ed procurement</a>.</p>
+
+    <!-- PRODUCTION FLAG, not for publish: pillar-page link added to the intro during this bug-fix pass. Brief's Section 5 linking plan specifies this link should appear in both the intro and Next Steps - previously only Next Steps had it. Same PILLAR-URL-TBC placeholder as used elsewhere; resolve all instances together once the pillar page is live. -->
+
+    <!-- PRODUCTION FLAG, not for publish: CTA swapped 2026-08-17 from the generic JAGGAER One product page to a real, live JAGGAER whitepaper on higher-ed spend analytics ("Unlock Savings and Strengthen Financial Resilience with Higher Ed Spend Analytics," confirmed live, updated 2026-03-12 - the more current of two near-duplicate JAGGAER whitepapers found on this topic; the older one, "How Spend Analytics Clears a Path to Higher Ed Savings," updated 2025-12-02, has the same theme but no named stats on its landing page). This extends the SPIRIT of style guide Section 6.2 (downloadable asset > generic product ad) rather than its letter - that rule is written for a third-party report that IS the article's primary source, and this whitepaper is neither third-party nor this piece's source. Stats used in the CTA description (15% procurement cost reduction, one named institution example) are quoted directly from the whitepaper's own landing page copy. DESTINATION SIGN-OFF CONFIRMED 2026-08-17 - CLOSED. Still open, separately: whether this whitepaper's spend-analytics topic is the right fit for this piece's broader platform-modernization thesis versus the older/generic product CTA - that's a content-fit call, not the sign-off that's now resolved. -->
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Download JAGGAER's higher ed spend analytics whitepaper &rarr;</p>
+        <p class="jag-cta-desc">Spend analytics benchmarks and a 15% procurement cost reduction example from higher ed institutions running JAGGAER.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/whitepaper/unlock-savings-strengthen-financial-resilience-higher-ed-spend-analytics" class="jag-cta-btn" target="_blank" rel="noopener">Download the Whitepaper &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S1 -->
+    <h2 id="s1">The Problem: Why Spreadsheets Break Down at R1 Scale in 2026</h2>
+
+    <!-- VOICE AUDIT FIX, applied 2026-08-17: split - the 2015-year addition earlier this session pushed this sentence to 33 words, over the 30-word max. Gate 5 fix, no content change. -->
+    <p>At most R1 universities, procurement money moves through dozens of disconnected departmental workflows instead of one coordinated process. According to <strong><a href="https://www.nacubo.org/Import/Page/Page_Initiatives/2016/4/Spendmetric" target="_blank" rel="noopener">NACUBO</a></strong>'s Spendmetric initiative, that money is the second-largest line item in a typical institution's own budget. <strong>It generally runs 20% to 33% of total spend, trailing only salaries and benefits.</strong> That's a share of one institution's budget, not the national total. Across all degree-granting institutions, the <strong><a href="https://nces.ed.gov/fastfacts/display.asp?id=75" target="_blank" rel="noopener">National Center for Education Statistics</a></strong> puts combined spending at $702 billion in 2020&ndash;21, the most recent year NCES has published.</p>
+
+    <!-- EDITORIAL DECISION, FINAL 2026-08-17: NACUBO's year was added ("established in 2015," the Spendmetric initiative's launch date per NACUBO's own page) then dropped again same day - decided that a launch-year caveat attached to a stat with no separate measurement date risked implying more precision than the citation actually supports. NACUBO now reads as an unqualified named citation, same as the original 2026-08-16 call, but for a different reason: not "no year could be verified" (a year was found and verified) but "the year found doesn't date the stat it sits beside." CLOSED - not an open item. COGR's year (below) stays, since that year does date the specific figure it's attached to.
+
+    SEPARATE FINDING, retained from 2026-08-16: the COGR paragraph's href (cogr.edu/topics/uniform-guidance?page=4) does not actually support the "232 member institutions" figure it sits next to - that page is an archived, older COGR letter (references the stale $3,500 threshold and ~190 members). The 232-member figure traces to COGR's "2024-2025 Year in Review" (cogr.edu/blog/cogrs-2024-2025-year-review), a named, dated source. Href and year corrected below and in the Expert Sidebar to point to the source that actually backs the stat. This is a citation-accuracy fix, not a stylistic one - the original href was citing the wrong document for the number it was attached to.
+
+    FACTUAL CORRECTION, retained from 2026-08-16: the paragraph below previously described a "proposed $3,500 micro-purchase threshold" as COGR's "most recent fight" with OMB. That was backwards and stale - $3,500 was the actual threshold years ago; it was raised to $10,000 in the 2020 Uniform Guidance revision and to $15,000 effective October 1, 2025 (self-certification allows up to $50,000). Also corrected: COGR's citation range (317-327, not 317-326 - 200.327 was being dropped) and membership count (232 current members per COGR's 2024-2025 Year in Review, not "190+", a stale figure from the archived letter previously cited). -->
+
+
+    <p>Sponsored research adds another layer. According to the <strong><a href="https://ncses.nsf.gov/pubs/nsf25313" target="_blank" rel="noopener">National Science Foundation's Higher Education R&amp;D Survey</a></strong>, <strong>U.S. universities spent $108.8 billion on R&amp;D in FY2023, with federal sources funding $59.7 billion, or 55%, of that total.</strong> That's the scale of federally funded activity every one of these institutions' procurement teams has to keep compliant.</p>
+
+    <!-- VOICE AUDIT FIX, applied 2026-08-17: split (was 38 words) and removed two passives ("raised to," "has to be run"). Gate 3 + Gate 5 fix, no content change. -->
+    <p>According to the <strong><a href="https://www.cogr.edu/blog/cogrs-2024-2025-year-review" target="_blank" rel="noopener">Council on Governmental Relations</a></strong>'s 2024-2025 Year in Review, the organization represents 232 member institutions and tracks federal procurement standards under 2 CFR 200.317&ndash;327 closely on their behalf. Those standards set the dollar lines a purchase must follow. <strong>Procedures stay informal below the micro-purchase threshold, $15,000 as of October 2025.</strong> Above the $350,000 simplified acquisition threshold, formal competitive bidding kicks in.</p>
+
+    <!-- SPELLING EXCEPTION, 2026-08-17: "the governance side of R1 procurement modernization" kept in American spelling here and in Next Steps below, matching the brief's own Section 5 anchor text verbatim - see the flag at the head of this file on the brief's internal spelling inconsistency. Not reverted to British with the rest of the piece. -->
+    <p><strong>Every purchase tied to a federal grant already has to satisfy those standards</strong>, on top of whatever the university's own policy requires. That compliance load touches <a href="WHITEPAPER-URL-TBC">the governance side of R1 procurement modernization</a>, which this piece treats as a separate conversation from the operational fix covered here.</p>
+
+    <!-- PRODUCTION FLAG, not for publish: CTA added 2026-08-17 per Indy-pattern review - this section had 4 named citations (NACUBO, NCES, NSF, COGR) and zero CTA, the one major section missing one. Destination (/solutions/security-and-compliance) confirmed live and real - found in JAGGAER's own site navigation during an earlier research pass on the Utah case study page. DESTINATION SIGN-OFF CONFIRMED 2026-08-17 - CLOSED. -->
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer logs every purchase against federal procurement standards &rarr;</p>
+        <p class="jag-cta-desc">Automatic transaction logging and audit trails tied to 2 CFR 200 compliance requirements, built into every purchase.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/security-and-compliance" class="jag-cta-btn" target="_blank" rel="noopener">See Compliance &amp; Security &rarr;</a>
+    </div>
+
+    <!-- PRODUCTION FLAG, not for publish: "the governance side of R1 procurement modernization" links to WHITEPAPER-URL-TBC, per the brief's Section 5 linking plan - the R1 governance whitepaper it should point to is listed in this quarter's content calendar but is not live yet. Swap only the href once that piece publishes. Same placeholder is used again in Next Steps below; do not resolve one instance without the other. -->
+
+    <!-- VOICE AUDIT FIX, applied 2026-08-17: "is meant to fix" hedges toward aspiration; "fixes" is declarative, matching Pillar 1 (Confident and Declarative). No content change. -->
+    <!-- EDITORIAL DECISION, 2026-08-17: prior draft only had a near-match of the secondary keyword ("...digitization in 2026," with an inserted "in"). This instance is now the exact brief-locked phrase, "higher education procurement digitization 2026," per Section 2. The other occurrence in the intro above is left as the natural "in 2026" variant for readability. -->
+    <p>Multiple campuses compound the problem further. Each one often runs its own approval chain, negotiates its own supplier terms, and duplicates contracts the university next door already has in place. Most stitch together a mix of spreadsheets, email approvals, and one legacy tool nobody fully trusts. <strong>That patchwork is exactly what higher education procurement digitization 2026 fixes.</strong> R1 university procurement platform modernisation means one coordinated system instead of a dozen disconnected ones.</p>
+
+    <div class="procure-compare-grid">
+      <div class="procure-compare-card procure-compare-card--old">
+        <span class="procure-compare-label">Spreadsheet-and-Email Procurement</span>
+        <ul class="procure-compare-list">
+          <li><span class="procure-compare-icon">&minus;</span> Siloed supplier data, one record per department</li>
+          <li><span class="procure-compare-icon">&minus;</span> Slow, manual approval chains</li>
+          <li><span class="procure-compare-icon">&minus;</span> Little real-time visibility into spend</li>
+        </ul>
+      </div>
+      <div class="procure-compare-card procure-compare-card--new">
+        <span class="procure-compare-label">Unified Platform Procurement</span>
+        <ul class="procure-compare-list">
+          <li><span class="procure-compare-icon">&check;</span> One source of truth for supplier data</li>
+          <li><span class="procure-compare-icon">&check;</span> Automated approval routing</li>
+          <li><span class="procure-compare-icon">&check;</span> Real-time spend analytics</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S2 -->
+    <!-- SPELLING EXCEPTION, 2026-08-17: this H2 is kept as "Modernization" (American), matching the brief's Section 3 heading text verbatim, per Style Guide 4.6's exact-match rule. This is the brief's own spelling here, not this file's - see the flag at the head of this file. -->
+    <h2 id="s2">What Modernization Actually Requires</h2>
+
+    <p><strong>R1 university procurement platform modernisation doesn't mean tearing out the ERP.</strong> JAGGAER connects to more than 40 ERP and finance systems, including Oracle, SAP, Workday, and Microsoft Dynamics, through prebuilt connectors rather than a ground-up rebuild. The fear procurement teams raise most often about modernisation, a full rip-and-replace that breaks mid-semester, simply isn't the shape higher education ERP procurement modernisation takes.</p>
+
+    <p><strong>The finance system stays in place; the procurement layer changes.</strong> For most R1 institutions, that's the real shape of R1 university procurement platform modernisation: a layer that automates approvals and catalog buying, while the ERP underneath keeps doing its job.</p>
+
+    <!-- EDITORIAL DECISION, confirmed 2026-08-16, UPDATED 2026-08-17: whole-document spelling normalized to US English, including the H1 and the primary keyword itself - overrides the brief's original British-spelled, locked primary keyword ("R1 university procurement platform modernisation," Section 2, "kept exactly as given"). This is a real deviation from a stakeholder-locked SEO term, not just a prose fix - logged here for Orlagh's record. One exception remains NOT touched by this pass: the cluster label "Platform Modernisation & ROI" (shared across this quarter's whole content calendar) - flagged separately at its location, since changing it here alone would create a new inconsistency across sibling pieces rather than resolve one; needs a cluster-wide decision, not a single-file edit. The canonical URL/slug exception noted in earlier versions of this comment was closed 2026-08-17 - see the head of this file. -->
+
+    <!-- PRODUCTION FLAG, not for publish: CTA destination below (/solutions/connect) located and confirmed live independently during this conversion pass - "Connect Solutions... prebuilt ERP connectors to Oracle, SAP, Netsuite and Ellucian via JAGGAER Link" is the closest topical match found. DESTINATION SIGN-OFF CONFIRMED 2026-08-17 - CLOSED. -->
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See which ERP and finance systems Jaggaer connects to without a rebuild &rarr;</p>
+        <p class="jag-cta-desc">Prebuilt connectors to Oracle, SAP, Workday, Microsoft Dynamics, and 40+ other ERP and finance systems.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/connect" class="jag-cta-btn" target="_blank" rel="noopener">See ERP Connectors &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S3 -->
+    <h2 id="s3">What to Look for in a Platform</h2>
+
+    <p><strong>Evaluating platforms comes down to 5 criteria: spend visibility, supplier management, approval workflows, compliance and audit trails, and AI-assisted sourcing.</strong> A Canadian university running an AI-enabled RFP process in 2026 checks the same five boxes as an R1 institution in the U.S.; the criteria don't change by geography. Whatever the location, R1 university procurement platform modernisation succeeds or fails on how well a platform handles these five areas together, not any one in isolation.</p>
+
+    <ul class="criteria-list">
+      <li><strong>Spend visibility:</strong> real-time reporting across departments and campuses, with drill-down by department, grant, and supplier, not just a total dollar figure at the end of the quarter.</li>
+      <li><strong>Supplier management:</strong> a single supplier record per vendor across departments, with contract terms and shared discount tiers earned once, across the institution.</li>
+      <li><strong>Approval workflows:</strong> routing tied to dollar amount, commodity, and cost center, so a $200 lab order and a $2 million equipment purchase follow different paths.</li>
+      <li><strong>Compliance and audit trails:</strong> automatic logging tied to federal procurement standards under 2 CFR 200, since sponsored-research purchases need to hold up to audit.</li>
+      <li><strong>AI-assisted sourcing:</strong> according to a 2025 <strong><a href="https://er.educause.edu/articles/2025/5/educause-quickpoll-results-ai-related-procurement" target="_blank" rel="noopener">EDUCAUSE QuickPoll</a></strong>, 63% of procurement teams already account for AI products in procurement, or plan to. The top two challenges were the pace of AI's change (45%) and insufficient AI governance (40%). That governance gap matters more at R1 scale, since a single ungoverned AI tool touching sponsored-research data creates federal compliance exposure beyond ordinary vendor risk. Look for AI sourcing recommendations that stay grounded in your own policies and data, cited to source, with a human decision-maker in the loop on every award.</li>
+    </ul>
+
+    <p>None of these five criteria work in isolation. <strong>A platform that nails spend visibility but skips AI governance still leaves procurement teams doing manual review on the fastest-growing risk category in higher ed.</strong></p>
+
+    <!-- PRODUCTION FLAG, not for publish: CTA destination below (/solutions/jai) located and confirmed live independently during this conversion pass - JAGGAER's JAI product page states outputs are "grounded only on your policies and documentation" and that "every response cites the source document," a close match to this section's AI-governance framing and to the source draft's own Gate 6 (Trust) fix (naming the control, not just the capability). DESTINATION SIGN-OFF CONFIRMED 2026-08-17 - CLOSED.
+
+    ACCURACY RE-CHECK, 2026-08-17: on request, re-verified the CTA copy's remaining two claims that the original check above didn't cover. "AI-assisted sourcing recommendations" - confirmed against JAGGAER's own Contract Lifecycle Management page, which shows a live JAI example issuing an actual supplier recommendation ("I recommend proceeding with EuroLab") for an RFQ evaluation, not a hypothetical capability. "Human decision-maker in the loop" - confirmed as JAGGAER's own named design principle ("Human in the Loop"), repeated verbatim across multiple official JAI launch materials (BusinessWire, JAGGAER's own press release, Supply Chain Digital, CPOstrategy), with leadership quoted describing users as "high-level overseers and decision-makers." All four components of the CTA copy are now independently verified against JAGGAER's own public materials, not just the one landing page.
+
+    FUTURE-DRIFT FLAG, not an accuracy problem today: JAGGAER's own roadmap describes JAI evolving from Assist to Copilot to "Autopilot," the last stage explicitly described as "minimal human input" / "truly autonomous procurement." The most recent official launch material found (May 2026, ~3 months before this piece's current pass) still frames JAI around human oversight, not autopilot, so "human decision-maker in the loop" reads current as of today. This claim is more likely to age than most others in the piece, though - worth a quick recheck close to actual publish date rather than treating this verification as permanent. Accuracy is separate from the sign-off gate above, which remains open regardless. -->
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer grounds AI sourcing recommendations in your policies, cited to source &rarr;</p>
+        <p class="jag-cta-desc">AI-assisted sourcing recommendations grounded in institutional policy and data, with citations and a human decision-maker in the loop.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/jai" class="jag-cta-btn" target="_blank" rel="noopener">Explore JAI &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S4 -->
+    <h2 id="s4">Proof It Works: Real R1 Results</h2>
+
+    <!-- EDITORIAL DECISION, 2026-08-17, IKRAM'S DIRECTION: University of Virginia removed from this piece entirely (hook-stat visual, body paragraph, and Section 5 anchor link all cut - see the following two comments for what that costs against the brief). Reason: checked the R1 governance whitepaper's own brief (uploaded this session) and confirmed UVA/70% is locked in there as its SOLE proof point across Sections 1, 3, 4, 5, and 8 - not a maybe. That's a closer overlap than the "From Cost to Catalyst" blog comparison this file resolved earlier: both this piece and the whitepaper are R1-specific, whereas the blog is generic higher-ed. Rather than have two R1-specific pieces in the same quarter's calendar both lean on UVA/70% as a proof point, UVA is dropped from this piece (the finished asset) so the whitepaper (not yet written) can own it as its centerpiece without competing with this one.
+
+    FLAG FOR ORLAGH, not a quiet edit: this removal deviates from three brief-locked elements at once - the S4 heading originally specified as "Proof It Works — The University of Virginia Case" (already an open heading deviation per Section 4.6, now more clearly justified since the brief's own heading text no longer matches this piece's actual content), the Section 4 mandated secondary visual ("a simple before/after stat callout built around the verified University of Virginia case study"), and the Section 5 mandated anchor link ("the University of Virginia's 70% drop in off-catalog purchases" → the UVA success story page). None of these are silently dropped - all three are logged here for sign-off.
+
+    PRODUCTION FLAG, REOPENED 2026-08-17 - STILL OPEN: Virginia Tech's account-team clearance status was previously marked "CLOSED" on the basis that the case study is already public - that's not equivalent to an actual account-team confirmation, per style guide Section 8's own standard ("don't assume prior use elsewhere means clearance for a new piece"). Reopened - still needs a real clearance check before publish.
+
+    PRODUCTION FLAG, OPEN: University of Utah has the identical gap and was never flagged at all until this pass. No account-team clearance check is documented anywhere in this file for the Utah name, the 10,000-staff figure, or the case study link. Needs the same clearance check as Virginia Tech before publish. With UVA now removed, this section's proof depends entirely on Virginia Tech and Utah clearing - there's no fallback case study left if either doesn't.
+
+    CANNIBALIZATION CHECK, UPDATED 2026-08-17: brief's stakeholder note asked to confirm whether a second case study exists to diversify proof points, or whether UVA should be reused "with a distinct angle each time." Earlier finding (now superseded): checked against the "From Cost to Catalyst" blog, found UVA's use there generic enough vs. this piece's R1-specific framing to count as "distinct angle," and closed the concern on that basis. That finding still holds for the blog specifically. But the R1 governance whitepaper's brief (checked this session) confirmed UVA/70% as ITS primary proof point too - and unlike the blog, that piece is also R1-specific, narrowing the "distinct angle" gap between the two pieces to just funnel stage (MOFU here vs. BOFU there). Rather than rely on funnel stage alone to justify a third R1-specific use of the same stat, UVA is removed from this piece so only the whitepaper carries it going forward. Virginia Tech and Utah remain confirmed absent from both the blog and the whitepaper brief - no overlap risk from either. -->
+    <!-- SELF-CORRECTION, 2026-08-16: the "(where catalog purchasing is available)" qualifier from JAGGAER's own UVA success-story page was verified during the earlier fact-check pass but dropped when this section was rewritten. Restored in both the hook-stat and body copy at the time - now moot, since UVA and its hook-stat block are removed above; qualifier no longer applies to this piece. -->
+
+    <!-- FACTUAL CORRECTION, 2026-08-17: the $840M figure was presented as a present-tense, ongoing "runs... a year" result. Verified directly against JAGGAER's own Virginia Tech success story page: the figure is explicitly 2019 data ("In 2019 its total purchase order spend was in excess of $840 million"), not a current one. Re-framed as a dated 2019 figure rather than deleted, since it's a real, verified number - just not a current one. No more recent public figure was found to replace it with; flagging that gap rather than inferring an updated number. -->
+    <p>Two R1 institutions show what centralizing procurement actually looks like in practice. <strong><a href="https://www.jaggaer.com/success-stories/hokie-nation-procurement" target="_blank" rel="noopener">Virginia Tech</a></strong> ran more than $840 million a year in purchase-order spend through its JAGGAER platform as of 2019, with staff submitting sole-source requests and contract modifications inside the system instead of over email. At <strong><a href="https://www.jaggaer.com/success-stories/university-of-utah" target="_blank" rel="noopener">the University of Utah</a></strong>, more than 10,000 staff now purchase and approve through a single hub, with contracts and invoicing centralized alongside it. <strong>Different campuses, same underlying shift: R1 university procurement platform modernisation moves buying inside one governed system instead of leaving it scattered across inboxes.</strong></p>
+
+    <!-- CTA REMOVED 2026-08-17: this section's success-stories-hub CTA was cut - the section carried three individually-linked, named case studies (UVA, Virginia Tech, Utah) at the time, making a fourth link to a generic "see more results" hub the weakest-matched CTA in the piece per the Indy-reviewer skill's own contextual-match standard. UPDATED 2026-08-17: UVA has since been removed from this section (see decision above); it now carries two named case studies (Virginia Tech, Utah). The original reasoning for cutting this CTA still holds - a generic hub link remains a weaker match than the named, individually-linked case studies already present. Piece now carries 5 CTAs, still above the style guide's 3-CTA floor for a 2,000-word piece. NOTE, flagged not silently: Indy's own documented feedback history shows her single most-repeated comment pattern (6 of 13 total) is articles having TOO FEW CTAs, never too many - this cut was made on the merits of this specific CTA's weak contextual match, not because the piece was over-CTA'd in general. If this section's conversion performance matters, this is the one to watch. -->
+
+    <hr class="section-divider">
+
+    <!-- S5 -->
+    <h2 id="s5">Getting Started: What to Evaluate First</h2>
+
+    <p>Before evaluating any higher education procurement software vendor as part of an R1 university procurement platform modernisation effort, <strong>get honest answers to 3 questions:</strong></p>
+
+    <ul class="checklist">
+      <li><span class="checklist-num">1.</span><span><strong>Current spend visibility:</strong> what does it actually look like today, department by department, not just the aggregate level finance already tracks?</span></li>
+      <li><span class="checklist-num">2.</span><span><strong>ERP integration requirements:</strong> which system version is running, and who owns that relationship internally?</span></li>
+      <li><span class="checklist-num">3.</span><span><strong>Departmental buy-in:</strong> where is it weakest, since a migration stalls fastest in the department that never agreed it was a problem?</span></li>
+    </ul>
+
+    <p>Answering those honestly, before a vendor conversation starts, is what separates a smooth rollout from a stalled one. From there, comparing the best procurement platforms for educational institutions and universities becomes a shorter list. Look for vendors that show integration with your specific ERP and a real higher-ed customer base, not a generic enterprise pitch. <a href="https://www.jaggaer.com/vertical/education-procurement" target="_blank" rel="noopener">JAGGAER's higher-education procurement platform</a> is one example built specifically around that combination. <strong>Getting this evaluation right up front is what separates a smooth R1 university procurement platform modernisation from one that stalls at the first departmental objection.</strong></p>
+
+    <hr class="section-divider">
+
+    <!-- BUG FIX, applied 2026-08-17: this H2 read "Frequently Asked Questions." The brief's Section 3 table specifies the literal heading text "FAQ," not a content description - this was an unflagged deviation from brief-locked copy that no prior pass caught. Reverted to match. TOC sidebar link updated to match. -->
+    <h2 id="s6">FAQ</h2>
+
+    <details class="faq-item">
+      <summary>Why is spreadsheet-based procurement especially risky at large research universities? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Spreadsheets and email have no audit trail, so a single missed approval or duplicate order is hard to catch until it shows up in a budget review.</strong> At R1 scale, that risk multiplies across dozens of departments and every sponsored-research grant subject to federal compliance rules under 2 CFR 200.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Does modernizing procurement require replacing our existing ERP system? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">No. Platforms like JAGGAER connect to 40+ ERP and finance systems, including Oracle, SAP, Workday, and Microsoft Dynamics, through prebuilt connectors. <strong>The ERP stays in place; the procurement layer changes.</strong></div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What should an R1 university look for in a procurement platform? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Look for 5 criteria: spend visibility, supplier management, approval workflows, compliance and audit trails, and AI-assisted sourcing with governance built in.</strong> A platform that's strong on one but weak on the others still leaves gaps.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What role does AI play in modern university procurement platforms? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>According to a 2025 EDUCAUSE QuickPoll, 63% of procurement teams already account for AI products in their processes, or plan to.</strong> The top challenge cited was keeping pace with how fast AI tools change, with insufficient AI governance close behind. AI-assisted sourcing should come with a named control: recommendations grounded in policy, cited to source, with a human making the final call.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What should we evaluate first before starting a modernization project? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Start with 3 things: what current spend visibility actually looks like department by department, what your ERP integration requirements are, and where departmental buy-in is weakest.</strong> Vendor conversations go faster once those three answers are honest ones.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the actual ROI of moving from spreadsheets to a unified platform? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">There is no single ROI percentage that applies across every R1 institution, since it depends on starting spend visibility, adoption, and implementation scope. <strong>Calculate it as hard savings plus cost avoidance plus labor capacity released plus compliance value, minus program cost, divided by program cost.</strong> Track that against a real baseline: current off-catalog spend, invoice processing time, contract compliance, and staff hours spent on manual transaction work, not a generic industry benchmark.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How long does a procurement platform modernization typically take? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>There is no fixed timeline, since duration depends on 3 factors: how many ERP and finance systems need to connect, how many departments and campuses are in scope, and how much historical supplier and contract data needs to migrate.</strong> A single-campus rollout onto an existing ERP connector is a materially shorter project than a multi-campus effort covering sponsored-research purchasing across dozens of departments. Ask any vendor for a timeline based on your specific ERP, department count, and data migration scope, not a generic industry average.</div>
+    </details>
+
+    <!-- FAQ COUNT, UPDATED 2026-08-17: 7 FAQs, within the brief's Section 6 target of 6-8 and now covering all 7 brief-listed questions. The ROI question (6th) is a formula rather than a fixed percentage; the duration question (7th, added this pass) is a factors framework rather than a fixed timeframe - neither source cleared Section 8's bar for a specific number, so both answer honestly via the underlying drivers instead of fabricating a figure. -->
+
+    <hr class="section-divider">
+
+    <!-- S7 -->
+    <h2 id="s7">Next Steps</h2>
+
+    <p><strong>Modernising procurement at R1 scale starts with an honest look at where spend visibility, ERP fit, and departmental buy-in stand today.</strong> From there, the shift toward R1 university procurement platform modernisation is a layer added to existing systems, not a rebuild of them, the same layer built into <a href="https://www.jaggaer.com/vertical/education-procurement" target="_blank" rel="noopener">JAGGAER's higher-education procurement solutions</a>. The results above, from two different campuses, show what that looks like in practice.</p>
+
+    <!-- EDITORIAL DECISION, confirmed 2026-08-17: brief's Section 5 linking plan places the "JAGGAER's higher-education procurement platform" anchor in both Getting Started AND Next Steps; it was only in Getting Started before this pass. Added here, but with the anchor varied to "JAGGAER's higher-education procurement solutions" rather than repeating the identical anchor text on the identical URL - the source draft's own editorial notes specifically flagged "the exact same anchor text repeated on the same URL" as recent client feedback to avoid (see the closing CTA's flag below for the same concern). This satisfies the brief's placement requirement without reintroducing that pattern. -->
+
+    <!-- BUG FIX, applied 2026-08-17: this paragraph was carrying class="freshness-note" (12px, --color-ink-3 muted gray), the styling meant for tiny footnote-style freshness signals elsewhere in the file. This paragraph carries two real interlinks (pillar page, whitepaper), not a freshness footnote, and was rendering visibly smaller/lighter than every other body paragraph in the article. Class removed; now inherits standard body-copy styling (1rem / var(--color-ink-2)), matching the rest of the Next Steps section. -->
+    <!-- VOICE AUDIT FIX, applied 2026-08-17: "is covered separately in" was passive; rewritten active as "covers... separately." Anchor text and href unchanged. No content change. -->
+    <!-- SPELLING EXCEPTION: same brief-locked anchor text exception as flagged in The Problem section above - not reverted to British. -->
+    <p>This piece is part of JAGGAER's Higher Education content series. The <a href="PILLAR-URL-TBC">Higher Education pillar page</a> (pending publication) will cover the broader landscape once live. <strong>JAGGAER's R1 governance whitepaper covers <a href="WHITEPAPER-URL-TBC">the governance side of R1 procurement modernization</a> separately.</strong></p>
+
+    <!-- PRODUCTION FLAG, not for publish - STILL OPEN: pillar link above uses PILLAR-URL-TBC - no Higher Education pillar page exists yet, same gap noted in the brief's own "Brief at a glance" table and Section 5. Whitepaper link reuses WHITEPAPER-URL-TBC from the Problem section above; resolve both together once each destination is live. -->
+
+    <!-- PRODUCTION FLAG, not for publish: closing CTA destination below (/book-a-demo) located and confirmed live independently during this conversion pass, mirroring this account's own precedent of using the general demo-request page as the broadest, final CTA slot. Deliberately not reusing /vertical/education-procurement here, since that URL is already the anchor destination for "JAGGAER's higher-education procurement platform" in Getting Started above - the source draft's own editorial notes specifically flagged avoiding "the exact 'same anchor text repeated on the same URL' pattern" as recent client feedback. DESTINATION SIGN-OFF CONFIRMED 2026-08-17 - CLOSED. -->
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer's higher education platform handles ERP integration, spend visibility, and compliance in one system &rarr;</p>
+        <p class="jag-cta-desc">ERP integration, spend visibility, and compliance and audit trails built for higher education, in one system.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo &rarr;</a>
+    </div>
+
+    <!-- EDITORIAL DECISION, UPDATED 2026-08-17: word count. Recounted from this file's <article> body after removing the UVA hook-stat and paragraph: ~1,961 words, still comfortably within the brief's 1,800-2,200 target. Drop from the prior ~2,020 count is the removed UVA content, not a new gap - see the cannibalization decision above for why. -->
+
+    <!-- EDITORIAL DECISION, CLOSED 2026-08-17: keyword density. Primary keyword sits at 9 exact-phrase occurrences (raised from 5 this session via 4 natural insertions/substitutions in S1, S2, S4, and S5, none front-loaded into the first 200 words), secondary at 2. At ~1,973 body words, style guide Section 4.3's literal formula wants 20-40 occurrences of the primary keyword for a 2,000-word piece - 9 is short of that floor.
+
+    ACCEPTED AS CEILING, DECIDED 2026-08-17: the primary keyword is 6 words long. 20 occurrences would mean ~120 words - over 6% of the entire article - are nothing but this one repeated phrase. At 9 occurrences the phrase already accounts for ~2.7% of total wordcount, above the density ceiling the same style guide sets for ordinary keywords (Section 4.3's own warning: "Above 2% = keyword stuffing (Google penalty)"). The literal occurrence-count formula in Section 4.3 was evidently built around a much shorter keyword (see the guide's own before/after examples, which use 3-4 word phrases) and does not scale to this 6-word locked phrase. 9 is accepted as the ceiling for this piece - not pushed toward 20+ - and this formula/brief mismatch should inform how future briefs handle long locked keywords, rather than being re-litigated piece by piece. CLOSED, not an open item. -->
+
+  </article>
+
+  <!-- EXPERT SIDEBAR -->
+  <!-- EDITORIAL DECISION, FINAL 2026-08-17: NACUBO's sidebar year (added, then dropped same day - see the fuller note in S1 above) is unqualified again, matching the in-body citation. COGR's year (2025, per COGR's 2024-2025 Year in Review, the actual source for the 232-member figure - href updated to match) stays, since it dates the specific figure it's attached to. NCES (2020-21) and EDUCAUSE (2025) were never actually missing their years in body copy and are unchanged here. -->
+  <aside class="expert-sidebar" aria-label="What the experts are saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">NACUBO</span>
+        <span class="exp-num">20&ndash;33%</span>
+        <p class="exp-stat">Share of most institutional budgets that procurement represents, second only to salaries and benefits.</p>
+        <a href="https://www.nacubo.org/Import/Page/Page_Initiatives/2016/4/Spendmetric" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">NCES</span>
+        <span class="exp-num">$702bn</span>
+        <p class="exp-stat">Total spend by degree-granting institutions, the most recent year NCES has published.</p>
+        <a href="https://nces.ed.gov/fastfacts/display.asp?id=75" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">NSF</span>
+        <span class="exp-num">55%</span>
+        <p class="exp-stat">Share of the $108.8bn universities spent on R&amp;D that came from federal sources.</p>
+        <a href="https://ncses.nsf.gov/pubs/nsf25313" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">COGR</span>
+        <span class="exp-num">232</span>
+        <p class="exp-stat">Member research universities and institutes represented by COGR in federal procurement policy advocacy (2024&ndash;2025 Year in Review).</p>
+        <a href="https://www.cogr.edu/blog/cogrs-2024-2025-year-review" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">EDUCAUSE</span>
+        <span class="exp-num">63%</span>
+        <p class="exp-stat">Procurement teams that already account for AI products in procurement, or plan to.</p>
+        <a href="https://er.educause.edu/articles/2025/5/educause-quickpoll-results-ai-related-procurement" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id], article .article-header');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
