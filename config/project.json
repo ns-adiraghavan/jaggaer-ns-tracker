@@ -3027,6 +3027,16 @@
         "annotation": true,
         "section": "For URL/MT/MD:",
         "revision": 2
+      },
+      {
+        "id": "ann-73fpg1",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Procurement Governance and Compliance in the Age of AI: JAGGAER CEO Andrew Roszko in Procurement Magazine",
+        "ts": "2026-08-17T10:18:32.912Z",
+        "annotation": true,
+        "section": "¶15 — \"Procurement Magazine:  JAGGAER CEO on AI…\"",
+        "revision": 2
       }
     ]
   },
