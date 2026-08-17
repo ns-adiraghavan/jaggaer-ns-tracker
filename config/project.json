@@ -3057,6 +3057,16 @@
         "annotation": true,
         "section": "¶20 — \"Readiness before deployment…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-z4ji6q",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Agentic AI in Procurement: Guardrails From Day One",
+        "ts": "2026-08-17T10:23:07.772Z",
+        "annotation": true,
+        "section": "¶24 — \"Guardrails in the architecture…\"",
+        "revision": 2
       }
     ]
   },
