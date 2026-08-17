@@ -3047,6 +3047,16 @@
         "annotation": true,
         "section": "¶1 — \"Procurement Magazine's August 2026 issue…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-ip2ptf",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "AI Readiness vs. AI Capability in Procurement",
+        "ts": "2026-08-17T10:21:23.486Z",
+        "annotation": true,
+        "section": "¶20 — \"Readiness before deployment…\"",
+        "revision": 2
       }
     ]
   },
