@@ -3067,6 +3067,16 @@
         "annotation": true,
         "section": "¶24 — \"Guardrails in the architecture…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-ok3xs7",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Why procurement governance must be built in, not bolted on",
+        "ts": "2026-08-17T10:23:23.817Z",
+        "annotation": true,
+        "section": "¶22 — \"Governance timing…\"",
+        "revision": 2
       }
     ]
   },
