@@ -3077,6 +3077,16 @@
         "annotation": true,
         "section": "¶22 — \"Governance timing…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-crpn0d",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "I clicked on wrong buttons below - so please disregard the 24,22, and 20 and look at the new ones instead",
+        "ts": "2026-08-17T10:29:34.286Z",
+        "annotation": true,
+        "section": "I clicked on wrong buttons below - so please disregard the 24,22, and 20 and look at the new ones instead",
+        "revision": 2
       }
     ]
   },
