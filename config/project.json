@@ -3157,6 +3157,16 @@
         "annotation": true,
         "section": "¶20 — \"Readiness before deployment…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-h43hk2",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "<blockquote>\n  <p>\"AI compliance isn't a brake on innovation; it's a governance discipline.\"</p>\n  Andrew Roszko, CEO, JAGGAER\n</blockquote>",
+        "ts": "2026-08-17T10:42:59.528Z",
+        "annotation": true,
+        "section": "¶7 — \"\"AI compliance isn't a brake on innovati…\"",
+        "revision": 2
       }
     ]
   },
