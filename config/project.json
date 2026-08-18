@@ -2325,7 +2325,7 @@
               "assignee": "manager",
               "status": "marketing-review",
               "content_type": "ad-hoc",
-              "revision_count": 2,
+              "revision_count": 3,
               "primary_keyword": "",
               "geography": "all",
               "status_history": [
@@ -2348,14 +2348,19 @@
                   "stage": "writing",
                   "ts": "2026-08-17T11:03:37.631Z",
                   "by": "m-pifrn"
+                },
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-08-18T07:48:48.664Z",
+                  "by": "jason"
                 }
               ],
-              "last_updated": "2026-08-17T11:03:37.631Z",
-              "last_updated_by": "m-pifrn",
+              "last_updated": "2026-08-18T07:48:48.664Z",
+              "last_updated_by": "jason",
               "deliverable_ext": "html",
-              "return_to_stage": "marketing-review",
-              "last_upload": "2026-08-14T10:39:20.595Z",
-              "last_upload_by": "manager",
+              "return_to_stage": null,
+              "last_upload": "2026-08-18T07:48:48.664Z",
+              "last_upload_by": "jason",
               "secondary_keyword": ""
             },
             {
