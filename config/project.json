@@ -176,15 +176,15 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "ed-review",
-              "revision_count": 4,
+              "status": "approved",
+              "revision_count": 5,
               "deliverable_ext": "pdf",
               "wp_has_html": true,
               "return_to_stage": null,
-              "last_upload": "2026-07-22T12:10:00.058Z",
-              "last_upload_by": "m-5jitd",
-              "last_updated": "2026-07-22T12:10:00.058Z",
-              "last_updated_by": "m-5jitd",
+              "last_upload": "2026-08-18T11:38:51.790Z",
+              "last_upload_by": "jason",
+              "last_updated": "2026-08-18T11:38:51.790Z",
+              "last_updated_by": "jason",
               "status_history": [
                 {
                   "stage": "marketing-review",
@@ -205,6 +205,11 @@
                   "stage": "live",
                   "ts": "2026-07-22T12:10:00.058Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-08-18T11:38:51.790Z",
+                  "by": "jason"
                 }
               ]
             }
