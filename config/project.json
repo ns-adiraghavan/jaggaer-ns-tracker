@@ -2756,6 +2756,16 @@
         "annotation": true,
         "section": "¶52 — \"Stop Manually Hunting for Risky Clauses …\"",
         "revision": 1
+      },
+      {
+        "id": "ann-mugt5j",
+        "author": "manager",
+        "verdict": "question",
+        "body": "test",
+        "ts": "2026-08-19T14:05:27.950Z",
+        "annotation": true,
+        "section": "¶1 — \"Teams use Claude to review procurement c…\"",
+        "revision": 1
       }
     ],
     "p-c2-2": [
