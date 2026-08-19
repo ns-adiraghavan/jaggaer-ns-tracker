@@ -2739,6 +2739,16 @@
         "body": "(no note)",
         "ts": "2026-07-13T11:06:31.973Z",
         "stage": "stage-nq11b"
+      },
+      {
+        "id": "ann-r1n2m3",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Test",
+        "ts": "2026-08-19T04:04:46.264Z",
+        "annotation": true,
+        "section": "¶52 — \"Stop Manually Hunting for Risky Clauses …\"",
+        "revision": 1
       }
     ],
     "p-c2-2": [
