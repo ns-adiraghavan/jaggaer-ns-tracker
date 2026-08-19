@@ -3240,6 +3240,18 @@
         "ts": "2026-08-17T11:03:37.630Z",
         "stage": "marketing-review"
       }
+    ],
+    "p-ps3-1": [
+      {
+        "id": "ann-scxfgg",
+        "author": "manager",
+        "verdict": "question",
+        "body": "test",
+        "ts": "2026-08-19T08:47:59.119Z",
+        "annotation": true,
+        "section": "¶37 — \"What Central Government Procurement Lead…\"",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
