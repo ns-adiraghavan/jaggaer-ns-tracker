@@ -2776,6 +2776,16 @@
         "body": "(no note)",
         "ts": "2026-07-13T11:06:45.404Z",
         "stage": "stage-nq11b"
+      },
+      {
+        "id": "ann-wlaaov",
+        "author": "manager",
+        "verdict": "question",
+        "body": "test",
+        "ts": "2026-08-21T09:49:36.746Z",
+        "annotation": true,
+        "section": "test",
+        "revision": 2
       }
     ],
     "p-c3-1": [
