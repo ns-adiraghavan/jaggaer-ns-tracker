@@ -998,7 +998,14 @@
               "brief_last_updated": "2026-07-25T01:17:08.766Z",
               "deliverable_ext": "html",
               "last_upload": "2026-07-29T14:15:48.858Z",
-              "last_upload_by": "m-5jitd"
+              "last_upload_by": "m-5jitd",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-21",
+                "live_url": "https://www.jaggaer.com/blog/critical-mineral-risk-auto-supply-chain-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-21T11:05:07.982Z"
+              }
             },
             {
               "id": "p-dm3-2",
