@@ -462,7 +462,14 @@
                   "uploaded_at": "2026-07-28T13:28:17.150Z"
                 }
               ],
-              "brief_last_updated": "2026-07-28T13:28:17.150Z"
+              "brief_last_updated": "2026-07-28T13:28:17.150Z",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-21",
+                "live_url": "https://www.jaggaer.com/blog/claude-auto-generate-rfp-sourcing-brief",
+                "performance_data": "",
+                "updated_at": "2026-08-21T11:03:10.554Z"
+              }
             },
             {
               "id": "p-c3-3",
