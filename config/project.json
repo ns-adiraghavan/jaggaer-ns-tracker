@@ -683,7 +683,14 @@
               "brief_last_updated": "2026-07-25T01:16:46.377Z",
               "deliverable_ext": "html",
               "last_upload": "2026-07-29T14:52:40.896Z",
-              "last_upload_by": "jason"
+              "last_upload_by": "jason",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-21",
+                "live_url": "https://www.jaggaer.com/blog/us-tariffs-direct-procurement-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-21T11:03:44.583Z"
+              }
             },
             {
               "id": "p-dm1-2",
