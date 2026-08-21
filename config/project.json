@@ -2796,6 +2796,16 @@
         "annotation": true,
         "section": "¶43 — \"What Happens When You Ask Claude to Audi…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-t850qt",
+        "author": "manager",
+        "verdict": "question",
+        "body": "test",
+        "ts": "2026-08-21T09:49:52.658Z",
+        "annotation": true,
+        "section": "¶1 — \"When Claude audits a real supplier contr…\"",
+        "revision": 2
       }
     ],
     "p-c3-1": [
