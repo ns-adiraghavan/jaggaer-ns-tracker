@@ -2686,6 +2686,16 @@
         "body": "(no note)",
         "ts": "2026-06-17T14:07:48.778Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "ann-6wfr0p",
+        "author": "manager",
+        "verdict": "question",
+        "body": "test",
+        "ts": "2026-08-21T09:59:56.500Z",
+        "annotation": true,
+        "section": "¶48 — \"How to Install Claude: A Step-by-Step Gu…\"",
+        "revision": 2
       }
     ],
     "p-c1-2": [
