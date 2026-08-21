@@ -1780,7 +1780,14 @@
               "brief_last_updated": "2026-07-25T01:17:43.607Z",
               "deliverable_ext": "html",
               "last_upload": "2026-07-30T06:47:35.244Z",
-              "last_upload_by": "m-e10nz"
+              "last_upload_by": "m-e10nz",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-21",
+                "live_url": "https://www.jaggaer.com/blog/e-invoicing-compliance-france-spain-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-21T13:09:03.029Z"
+              }
             },
             {
               "id": "p-ps2-2",
