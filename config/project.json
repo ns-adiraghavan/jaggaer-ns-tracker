@@ -792,7 +792,14 @@
               "brief_last_updated": "2026-07-30T13:21:37.666Z",
               "last_upload": "2026-08-12T08:07:24.597Z",
               "last_upload_by": "m-e10nz",
-              "deliverable_ext": "html"
+              "deliverable_ext": "html",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-21",
+                "live_url": "https://www.jaggaer.com/blog/nearshoring-procurement-complexity-risk",
+                "performance_data": "",
+                "updated_at": "2026-08-21T11:04:28.698Z"
+              }
             }
           ]
         },
