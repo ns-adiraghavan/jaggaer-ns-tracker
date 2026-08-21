@@ -3927,6 +3927,7 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
   const [section, setSection] = useStateTR("");
   const [submitting, setSubmitting] = useStateTR(false);
   const [submitted, setSubmitted] = useStateTR(false);
+  const [saveError, setSaveError] = useStateTR(false);
   const [frameReady, setFrameReady] = useStateTR(false);
   const [focusLine, setFocusLine] = useStateTR(null);
   const iframeRef = useRefTR(null);
@@ -3989,8 +3990,8 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
   }, [githubPath]);
 
   async function submitAnnotation() {
-    if (!commentText.trim()) return;
-    setSubmitting(true);
+    if (!commentText.trim() || submitting) return;
+    setSubmitting(true); setSaveError(false);
     const entry = {
       id: "ann-"+Math.random().toString(36).slice(2,8),
       author: currentUser.id,
@@ -4001,10 +4002,23 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
       section: section.trim() || "General",
       revision: currentRev,
     };
-    addFeedback(piece.id, entry);
-    await new Promise(r => setTimeout(r, 300));
-    setCommentText(""); setSection(""); setSubmitting(false); setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 2000);
+    // Confirmed save: wait for the real GitHub result instead of showing an
+    // optimistic checkmark. Falls back to the legacy path if the saver is absent.
+    let r;
+    if (window.NS_saveFeedbackNow) {
+      r = await window.NS_saveFeedbackNow(piece.id, entry);
+    } else {
+      addFeedback(piece.id, entry);
+      r = { ok: true };
+    }
+    setSubmitting(false);
+    if (r && r.ok) {
+      setCommentText(""); setSection(""); setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 2500);
+    } else {
+      // Keep the text so nothing is lost — the reviewer can retry.
+      setSaveError(true);
+    }
   }
 
   return (
@@ -4105,11 +4119,13 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
           <button
             onClick={submitAnnotation}
             disabled={submitting || !commentText.trim()}
-            style={{ ...FONT, marginTop:"8px", width:"100%", padding:"8px", fontSize:"0.78rem", fontWeight:600, background: submitted?"#1e7a45":"#c8401a", color:"#fff", border:"none", borderRadius:"3px", cursor: commentText.trim()?"pointer":"not-allowed", opacity: commentText.trim()?1:0.5, transition:"background 0.2s" }}>
-            {submitted ? "Comment Added ✓" : submitting ? "Adding…" : "Add Comment →"}
+            style={{ ...FONT, marginTop:"8px", width:"100%", padding:"8px", fontSize:"0.78rem", fontWeight:600, background: saveError?"#c8401a":submitted?"#1e7a45":submitting?"#7d6608":"#c8401a", color:"#fff", border:"none", borderRadius:"3px", cursor: (submitting||!commentText.trim())?"not-allowed":"pointer", opacity: commentText.trim()?1:0.5, transition:"background 0.2s" }}>
+            {saveError ? "Not saved — Retry" : submitted ? "Saved to GitHub ✓" : submitting ? "Saving…" : "Add Comment →"}
           </button>
-          <div style={{ ...FONT, fontSize:"0.68rem", color:"#aaa", marginTop:"6px", lineHeight:1.4 }}>
-            Comments are tagged to your name and saved to the Notes thread.
+          <div style={{ ...FONT, fontSize:"0.68rem", color: saveError?"#c8401a":"#aaa", marginTop:"6px", lineHeight:1.4 }}>
+            {saveError
+              ? "That comment did not reach GitHub. Your text is kept above — click Retry."
+              : "Each comment saves to GitHub the moment you add it. Wait for the ✓ before closing."}
           </div>
         </div>
 

@@ -225,6 +225,8 @@ function App() {
   const toastTimerRef = useRefApp(null);
   const firstSaveRef = useRefApp(true);
   const shaRef = useRefApp(null);
+  const projectRef = useRefApp(null);
+  const suppressAutoSaveRef = useRefApp(false);
 
   useEffectApp(() => {
     window.NS_API.loadProject().then(({ project, source, sha, error }) => {
@@ -258,6 +260,7 @@ function App() {
   useEffectApp(() => {
     if (!project) return;
     if (firstSaveRef.current) { firstSaveRef.current = false; return; }
+    if (suppressAutoSaveRef.current) { suppressAutoSaveRef.current = false; return; }
     clearTimeout(saveTimerRef.current);
     clearTimeout(toastTimerRef.current);
     setSaveState("saving");
@@ -272,6 +275,58 @@ function App() {
     }, 800);
     return () => { clearTimeout(saveTimerRef.current); clearTimeout(toastTimerRef.current); };
   }, [project]);
+
+  // Keep a live mirror of project so imperative savers read the latest snapshot.
+  useEffectApp(() => { projectRef.current = project; }, [project]);
+
+  // Immediate, CONFIRMED save for a single comment. The comment panel calls this
+  // instead of relying on the debounced background save, so the reviewer sees a
+  // real GitHub result (saved / not saved) rather than an optimistic checkmark.
+  useEffectApp(() => {
+    window.NS_saveFeedbackNow = async (pieceId, entry) => {
+      const base = projectRef.current;
+      if (!base) return { ok: false, error: "no-project" };
+      const next = JSON.parse(JSON.stringify(base));
+      if (!next.feedback) next.feedback = {};
+      if (!next.feedback[pieceId]) next.feedback[pieceId] = [];
+      next.feedback[pieceId].push(entry);
+      projectRef.current = next;
+      suppressAutoSaveRef.current = true;
+      setProject(next);
+      clearTimeout(saveTimerRef.current);
+      clearTimeout(toastTimerRef.current);
+      setSaveState("saving");
+      const r = await window.NS_API.saveProject(next, shaRef.current, "comment " + pieceId);
+      if (r.ok && r.sha) {
+        shaRef.current = r.sha;
+        setSha(r.sha);
+        if (r.project) {
+          projectRef.current = r.project;
+          suppressAutoSaveRef.current = true;
+          setProject(r.project);
+        }
+      }
+      if (!r.ok) {
+        // Save failed — roll back the optimistic add so a retry does not duplicate it.
+        projectRef.current = base;
+        suppressAutoSaveRef.current = true;
+        setProject(base);
+      }
+      setSaveState(r.ok ? "saved" : "error");
+      toastTimerRef.current = setTimeout(() => setSaveState(null), 3000);
+      return r;
+    };
+    return () => { try { delete window.NS_saveFeedbackNow; } catch (e) {} };
+  }, []);
+
+  // Warn before leaving if a save is still in flight.
+  useEffectApp(() => {
+    const onBeforeUnload = (e) => {
+      if (saveState === "saving") { e.preventDefault(); e.returnValue = ""; }
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () => window.removeEventListener("beforeunload", onBeforeUnload);
+  }, [saveState]);
 
   // ── Login gate — must pass before anything else is shown ──────────────────
   if (!loginOrg) {
