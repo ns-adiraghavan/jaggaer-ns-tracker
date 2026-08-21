@@ -1118,7 +1118,14 @@
               "brief_last_updated": "2026-07-30T13:53:58.644Z",
               "last_upload": "2026-08-18T06:55:09.595Z",
               "last_upload_by": "jason",
-              "deliverable_ext": "html"
+              "deliverable_ext": "html",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-21",
+                "live_url": "https://www.jaggaer.com/blog/hidden-costs-procurement-platform-contract",
+                "performance_data": "",
+                "updated_at": "2026-08-21T11:45:03.596Z"
+              }
             },
             {
               "id": "p-dm4-2",
