@@ -338,7 +338,14 @@
               "brief_last_updated": "2026-07-28T11:11:22.472Z",
               "last_upload": "2026-08-06T08:22:58.834Z",
               "last_upload_by": "m-5jitd",
-              "deliverable_ext": "html"
+              "deliverable_ext": "html",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-21",
+                "live_url": "https://www.jaggaer.com/blog/claude-supplier-contract-audit-results",
+                "performance_data": "",
+                "updated_at": "2026-08-21T11:02:32.746Z"
+              }
             }
           ]
         },
