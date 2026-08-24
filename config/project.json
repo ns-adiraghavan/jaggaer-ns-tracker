@@ -2573,7 +2573,7 @@
               "title": "Frontier AI Vs Procurement Native AI",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "revision_count": 1,
               "primary_keyword": "",
@@ -2588,6 +2588,11 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-08-12T14:29:12.882Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-24T12:13:14.166Z",
+                  "by": "m-izu4e"
                 }
               ],
               "last_updated": "2026-08-12T14:29:12.882Z",
@@ -2597,7 +2602,14 @@
               "last_upload": "2026-08-12T14:29:12.882Z",
               "last_upload_by": "manager",
               "phase": 1,
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-24",
+                "live_url": "https://www.jaggaer.com/blog/frontier-ai-vs-procurement-vendor-ai-s2p-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-24T12:13:14.166Z"
+              }
             },
             {
               "id": "piece-66bmrt",
