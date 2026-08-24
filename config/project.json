@@ -2695,7 +2695,7 @@
               "title": "Best Procurement Software for Manufacturing Teams in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (Listicle)",
@@ -2706,7 +2706,21 @@
               "geography": "all",
               "schedule_week": 1,
               "publish_day": "Mon",
-              "planned_publish_date": "Aug 25, 2026"
+              "planned_publish_date": "Aug 25, 2026",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-08-24T12:02:19.924Z",
+              "last_upload_by": "m-5jitd",
+              "last_updated": "2026-08-24T12:02:19.924Z",
+              "last_updated_by": "m-5jitd",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-08-24T12:02:19.924Z",
+                  "by": "m-5jitd"
+                }
+              ]
             },
             {
               "id": "p2-geo-best-procurement-software-for-higher-education-in-2026-8-pla",
