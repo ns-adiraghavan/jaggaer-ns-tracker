@@ -2674,7 +2674,7 @@
               "title": "10 Myths About Standalone CLM Software Tested Against the 2026 Data_V1_13082026",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "revision_count": 3,
               "primary_keyword": "",
@@ -2699,6 +2699,11 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-08-14T10:35:43.310Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-24T12:14:15.694Z",
+                  "by": "m-izu4e"
                 }
               ],
               "last_updated": "2026-08-14T10:35:43.310Z",
@@ -2708,7 +2713,14 @@
               "last_upload": "2026-08-14T10:35:43.310Z",
               "last_upload_by": "manager",
               "secondary_keyword": "",
-              "phase": 1
+              "phase": 1,
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-24",
+                "live_url": "https://www.jaggaer.com/blog/myths-about-standalone-clm-software",
+                "performance_data": "",
+                "updated_at": "2026-08-24T12:14:15.694Z"
+              }
             }
           ]
         }
