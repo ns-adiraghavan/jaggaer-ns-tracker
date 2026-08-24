@@ -409,37 +409,40 @@ function ContentTypeNav({ project, ctStats, setView, setActivePillar, setActiveC
         const isOpen = expanded[ctId];
         return (
           <div key={ctId} style={{ marginBottom: '2px' }}>
-            <button
-              onClick={() => {
-              setExpanded(e => ({ ...e, [ctId]: !e[ctId] }));
-              // Toggle content type filter on the tracker
-              if (activeContentType === ctId) {
-                setActiveContentType(null);
-                setActivePillar(null);
-                setActiveCluster(null);
-              } else {
-                setActiveContentType(ctId);
-                setActivePillar(null);
-                setActiveCluster(null);
-                setView('tracker');
-              }
-            }}
+            <div
               style={{
-                width: '100%', display: 'flex', alignItems: 'center', gap: '7px',
-                padding: '7px 12px',
+                width: '100%', display: 'flex', alignItems: 'center',
                 background: isOpen ? meta.bg : 'transparent',
-                border: 'none', borderLeft: `3px solid ${isOpen ? meta.color : 'transparent'}`,
-                cursor: 'pointer', textAlign: 'left',
+                borderLeft: `3px solid ${isOpen ? meta.color : 'transparent'}`,
                 transition: 'all 0.15s',
               }}
-              onMouseEnter={e => { if (!isOpen) e.currentTarget.style.background = '#f0ece4'; }}
-              onMouseLeave={e => { if (!isOpen) e.currentTarget.style.background = 'transparent'; }}
             >
-              <div style={{ flex: 1, minWidth: 0 }}>
+              {/* Label area: sets the tracker filter */}
+              <button
+                onClick={() => {
+                  if (activeContentType === ctId) {
+                    setActiveContentType(null);
+                    setActivePillar(null);
+                    setActiveCluster(null);
+                  } else {
+                    setActiveContentType(ctId);
+                    setActivePillar(null);
+                    setActiveCluster(null);
+                    setView('tracker');
+                  }
+                }}
+                style={{
+                  flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
+                  padding: '7px 6px 7px 12px',
+                  background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left',
+                }}
+                onMouseEnter={e => { if (!isOpen) e.currentTarget.closest('div').style.background = '#f0ece4'; }}
+                onMouseLeave={e => { if (!isOpen) e.currentTarget.closest('div').style.background = 'transparent'; }}
+              >
                 <div style={{
                   fontFamily: 'Noto Sans, sans-serif',
                   fontSize: '0.7rem', fontWeight: 700,
-                  color: isOpen ? meta.color : '#555',
+                  color: activeContentType === ctId ? meta.color : '#555',
                   letterSpacing: '0.02em',
                   whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
                 }}>{meta.label}</div>
@@ -447,13 +450,21 @@ function ContentTypeNav({ project, ctStats, setView, setActivePillar, setActiveC
                   fontFamily: 'Noto Sans, sans-serif',
                   fontSize: '0.62rem', color: '#999', marginTop: '1px',
                 }}>{meta.desc}</div>
-              </div>
+              </button>
               <span style={{
                 fontFamily: 'Noto Sans, sans-serif',
                 fontSize: '0.62rem', color: '#999', flexShrink: 0,
               }}>{approvedCount}/{items.length}</span>
-              <span style={{ color: '#bbb', fontSize: '0.65rem', flexShrink: 0 }}>{isOpen ? '▾' : '›'}</span>
-            </button>
+              {/* Chevron: toggles expand independently */}
+              <button
+                onClick={() => setExpanded(e => ({ ...e, [ctId]: !e[ctId] }))}
+                style={{
+                  background: 'transparent', border: 'none', cursor: 'pointer',
+                  padding: '7px 10px', color: '#bbb', fontSize: '0.65rem', flexShrink: 0,
+                }}
+                title={isOpen ? 'Collapse' : 'Expand piece list'}
+              >{isOpen ? '▾' : '›'}</button>
+            </div>
 
             {isOpen && (
               <ul style={{ listStyle: 'none', margin: 0, padding: '0 0 4px 0' }}>

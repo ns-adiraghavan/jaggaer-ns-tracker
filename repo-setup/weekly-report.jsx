@@ -115,17 +115,35 @@ function StatusExportBar({ tookLive }) {
   function downloadCsv() {
     const fromT = from ? new Date(from + "T00:00:00").getTime() : -Infinity;
     const toT = to ? new Date(to + "T23:59:59").getTime() : Infinity;
-    const rows = withUrl.filter(({ ts }) => {
-      const t = ts ? new Date(ts).getTime() : NaN;
-      return !isNaN(t) && t >= fromT && t <= toT;
-    }).sort((a, b) => new Date(b.ts || 0) - new Date(a.ts || 0));
+    // Use launch_date (the actual publish date Jovana records) for filtering.
+    // Fall back to publishing.updated_at then approval ts for older pieces.
+    const rows = withUrl.filter(({ piece, ts }) => {
+      const ld = piece.publishing?.launch_date; // "2026-08-21"
+      const upd = piece.publishing?.updated_at;
+      const raw = ld ? new Date(ld + "T00:00:00").getTime()
+                     : (upd ? new Date(upd).getTime() : (ts ? new Date(ts).getTime() : NaN));
+      return !isNaN(raw) && raw >= fromT && raw <= toT;
+    }).sort((a, b) => {
+      const dateOf = ({ piece, ts }) => {
+        const ld = piece.publishing?.launch_date;
+        const upd = piece.publishing?.updated_at;
+        return ld ? new Date(ld + "T00:00:00").getTime()
+                  : (upd ? new Date(upd).getTime() : new Date(ts || 0).getTime());
+      };
+      return dateOf(b) - dateOf(a);
+    });
     const header = ["Title", "Phase", "Launch date", "URL"];
-    const body = rows.map(({ piece, ts }) => [
-      csvCell(piece.title),
-      "P" + (piece.phase || 1),
-      csvCell(ts ? formatEST(ts) : ""),
-      csvCell(piece.publishing.live_url),
-    ].join(","));
+    const body = rows.map(({ piece, ts }) => {
+      const ld = piece.publishing?.launch_date; // "YYYY-MM-DD"
+      const upd = piece.publishing?.updated_at;
+      const displayDate = ld ? ld : (upd ? formatEST(upd) : (ts ? formatEST(ts) : ""));
+      return [
+        csvCell(piece.title),
+        "P" + (piece.phase || 1),
+        csvCell(displayDate),
+        csvCell(piece.publishing.live_url),
+      ].join(",");
+    });
     const csv = [header.join(","), ...body].join("\n");
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);

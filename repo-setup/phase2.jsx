@@ -64,7 +64,7 @@ function CommentsPanel({ project, currentUser, activePhase, onOpenPiece }) {
   const totalComments = groups.reduce((n, g) => n + g.entries.length, 0);
 
   return (
-    <div style={{ ...P2FONT, padding: "28px 32px 80px", maxWidth: "1000px" }}>
+    <div style={{ ...P2FONT, padding: "28px 32px 80px", maxWidth: "1000px", overflowY: "auto", height: "100%" }}>
       <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", marginBottom: "6px" }}>
         <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", color: "#0f1923", margin: 0 }}>
           Comment history
