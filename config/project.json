@@ -82,7 +82,7 @@
               "title": "How to Install Claude: A Step-by-Step Guide for Procurement Professionals",
               "format": "How-to Guide",
               "assignee": "m-e10nz",
-              "status": "approved",
+              "status": "live",
               "revision_count": 2,
               "primary_keyword": "how to install Claude procurement professional",
               "secondary_keyword": "Claude setup IT permissions S2P guide",
@@ -107,14 +107,21 @@
                 "live_url": "https://www.jaggaer.com/blog/claude-for-procurement-installation-guide",
                 "performance_data": "",
                 "updated_at": "2026-07-23T07:19:29.811Z"
-              }
+              },
+              "status_history": [
+                {
+                  "stage": "live",
+                  "ts": "2026-07-23T07:19:29.811Z",
+                  "by": "Jovana Kotur"
+                }
+              ]
             },
             {
               "id": "p-c1-2",
               "title": "What Are .md Files in Claude — and Why S2P Teams Can't Skip This Step",
               "format": "Educational Page",
               "assignee": "jason",
-              "status": "approved",
+              "status": "live",
               "revision_count": 3,
               "primary_keyword": "Claude basics markdown files S2P procurement",
               "secondary_keyword": "how to use Claude AI procurement basics",
@@ -138,14 +145,21 @@
                 "live_url": "https://www.jaggaer.com/blog/what-are-md-files-in-claude-guide-for-s2p",
                 "performance_data": "",
                 "updated_at": "2026-07-23T07:20:41.632Z"
-              }
+              },
+              "status_history": [
+                {
+                  "stage": "live",
+                  "ts": "2026-07-23T07:20:41.632Z",
+                  "by": "Jovana Kotur"
+                }
+              ]
             },
             {
               "id": "p-c1-3",
               "title": "AI in S2P: What Claude Actually Delivers for Procurement in 2026 — Beyond the Hype",
               "format": "FAQ Article",
               "assignee": "m-5jitd",
-              "status": "approved",
+              "status": "live",
               "revision_count": 2,
               "primary_keyword": "AI S2P Claude use cases FAQ procurement",
               "secondary_keyword": "what to ask Claude S2P procurement FAQ",
@@ -170,7 +184,14 @@
                 "live_url": "https://www.jaggaer.com/blog/what-claude-delivers-for-procurement",
                 "performance_data": "",
                 "updated_at": "2026-07-23T07:22:11.723Z"
-              }
+              },
+              "status_history": [
+                {
+                  "stage": "live",
+                  "ts": "2026-07-23T07:22:11.723Z",
+                  "by": "Jovana Kotur"
+                }
+              ]
             },
             {
               "id": "piece-c1-getting-started-4-4tzj",
@@ -298,7 +319,7 @@
               "title": "What Happens When You Ask Claude to Audit Your Supplier Contracts",
               "format": "Problem-Solution",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 2,
               "primary_keyword": "Claude supplier contract audit S2P results",
               "secondary_keyword": "AI contract review procurement outcomes",
@@ -328,6 +349,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-06T08:22:58.834Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-21T11:02:32.746Z",
+                  "by": "Jovana"
                 }
               ],
               "return_to_stage": null,
@@ -426,7 +452,7 @@
               "title": "How to Use Claude to Auto-Generate an RFP from Your Sourcing Brief",
               "format": "MD File / Tutorial",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 2,
               "primary_keyword": "use Claude generate RFP procurement",
               "secondary_keyword": "Claude RFP autogeneration sourcing tutorial",
@@ -455,6 +481,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-03T05:51:41.405Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-21T11:03:10.554Z",
+                  "by": "Jovana"
                 }
               ],
               "return_to_stage": null,
@@ -658,7 +689,7 @@
               "title": "US Tariffs in H2 2026: Why Your Direct Procurement Numbers Need Recalculating",
               "format": "Quick-take Blog",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "tariff impact direct procurement 2026",
               "secondary_keyword": "US tariff supply chain manufacturing",
@@ -680,6 +711,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-07-29T14:52:40.896Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-21T11:03:44.583Z",
+                  "by": "Jovana"
                 }
               ],
               "return_to_stage": null,
@@ -762,7 +798,7 @@
               "title": "Nearshoring Doesn't Simplify Procurement. It Multiplies Risk.",
               "format": "Data Snapshot",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "nearshoring procurement complexity 2026",
               "secondary_keyword": "nearshoring supply chain risk data",
@@ -789,6 +825,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-12T08:07:24.597Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-21T11:04:28.698Z",
+                  "by": "Jovana"
                 }
               ],
               "return_to_stage": null,
@@ -828,7 +869,7 @@
               "title": "Why Supply Chain Visibility Breaks Down Beyond Tier 1",
               "format": "Thought Leadership",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 5,
               "primary_keyword": "supply chain visibility beyond tier 1",
               "secondary_keyword": "multi-tier supplier visibility challenges",
@@ -852,14 +893,21 @@
                 "live_url": "https://www.jaggaer.com/blog/why-supply-chain-visibility-breaks-down-beyond-tier-1-in-2026",
                 "performance_data": "",
                 "updated_at": "2026-06-23T10:11:13.479Z"
-              }
+              },
+              "status_history": [
+                {
+                  "stage": "live",
+                  "ts": "2026-06-23T10:11:13.479Z",
+                  "by": "Alex"
+                }
+              ]
             },
             {
               "id": "p-dm2-2",
               "title": "Supplier Financial Risk Signals Procurement Should Monitor",
               "format": "Informational Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "revision_count": 4,
               "primary_keyword": "supplier financial risk assessment",
               "secondary_keyword": "supplier risk management",
@@ -883,14 +931,21 @@
                 "live_url": "https://www.jaggaer.com/blog/supplier-financial-risk-signals-procurement-should-monitor-in-2026",
                 "performance_data": "",
                 "updated_at": "2026-07-10T13:46:29.472Z"
-              }
+              },
+              "status_history": [
+                {
+                  "stage": "live",
+                  "ts": "2026-07-10T13:46:29.472Z",
+                  "by": "Jovana"
+                }
+              ]
             },
             {
               "id": "p-dm2-3",
               "title": "From Reactive to Predictive Supplier Risk Management",
               "format": "Strategic Solution Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "revision_count": 5,
               "primary_keyword": "predictive supplier risk management",
               "secondary_keyword": "proactive procurement risk management",
@@ -913,7 +968,14 @@
                 "live_url": "https://www.jaggaer.com/blog/how-procurement-is-moving-from-reactive-to-predictive-risk-management-in-2026",
                 "performance_data": "",
                 "updated_at": "2026-07-10T13:47:08.644Z"
-              }
+              },
+              "status_history": [
+                {
+                  "stage": "live",
+                  "ts": "2026-07-10T13:47:08.644Z",
+                  "by": "Jovana"
+                }
+              ]
             },
             {
               "id": "p-dm2-4",
@@ -973,7 +1035,7 @@
               "title": "Most Procurement Platforms Are Missing Critical Mineral Risk in the Auto Supply Chain. What to Watch in H2 2026",
               "format": "Quick-take Blog",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "critical minerals automotive procurement",
               "secondary_keyword": "rare earth supply chain risk 2026",
@@ -995,6 +1057,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-07-29T14:15:48.858Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-21T11:05:07.982Z",
+                  "by": "Jovana"
                 }
               ],
               "return_to_stage": null,
@@ -1082,7 +1149,7 @@
               "title": "The Hidden Costs in Your Procurement Platform Contract Nobody Talks About",
               "format": "Hot Take",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "hidden costs procurement platform contract",
               "secondary_keyword": "S2P platform true cost manufacturing",
@@ -1109,6 +1176,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-18T06:55:09.595Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-21T11:45:03.596Z",
+                  "by": "Jovana"
                 }
               ],
               "return_to_stage": null,
@@ -1201,7 +1273,7 @@
               "title": "Why Procurement Is the Backbone of Modern Supply Chains",
               "format": "Article",
               "assignee": "jason",
-              "status": "approved",
+              "status": "live",
               "primary_keyword": "",
               "geography": "all",
               "revision_count": 1,
@@ -1221,6 +1293,11 @@
                   "stage": "ed-review",
                   "ts": "2026-07-13T11:15:30.027Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-28T10:45:56.315Z",
+                  "by": "Jovana"
                 }
               ],
               "publishing": {
@@ -1246,7 +1323,7 @@
               "assignee": "m-5jitd",
               "notes": "",
               "url": "",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -1264,6 +1341,11 @@
                   "stage": "ed-review",
                   "ts": "2026-07-13T11:12:57.017Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-28T10:46:46.403Z",
+                  "by": "Jovana"
                 }
               ],
               "publishing": {
@@ -1288,7 +1370,7 @@
               "assignee": "m-e10nz",
               "notes": "",
               "url": "",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -1306,6 +1388,11 @@
                   "stage": "ed-review",
                   "ts": "2026-07-13T11:15:58.675Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-28T10:47:37.495Z",
+                  "by": "Jovana"
                 }
               ],
               "publishing": {
@@ -1330,7 +1417,7 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -1348,6 +1435,11 @@
                   "stage": "ed-review",
                   "ts": "2026-07-13T11:13:09.540Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-28T10:48:29.579Z",
+                  "by": "Jovana"
                 }
               ],
               "publishing": {
@@ -1372,7 +1464,7 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -1390,6 +1482,11 @@
                   "stage": "ed-review",
                   "ts": "2026-07-13T11:15:18.176Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-28T10:50:00.948Z",
+                  "by": "Jovana"
                 }
               ],
               "publishing": {
@@ -1414,7 +1511,7 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -1432,6 +1529,11 @@
                   "stage": "ed-review",
                   "ts": "2026-07-13T11:13:21.546Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-24T10:23:32.490Z",
+                  "by": "Jovana Kotur"
                 }
               ],
               "publishing": {
@@ -1456,7 +1558,7 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -1474,6 +1576,11 @@
                   "stage": "ed-review",
                   "ts": "2026-07-13T11:16:09.691Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-24T10:24:35.378Z",
+                  "by": "Jovana Kotur"
                 }
               ],
               "publishing": {
@@ -1510,7 +1617,7 @@
               "title": "EU AI Act: The Complete Guide",
               "format": "Blog/Article",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "EU AI Act",
               "secondary_keyword": "EU AI Act Compliance High Risk",
@@ -1532,14 +1639,21 @@
                 "live_url": "https://www.jaggaer.com/blog/eu-ai-act-the-complete-guide-for-2026",
                 "performance_data": "",
                 "updated_at": "2026-07-28T10:52:06.087Z"
-              }
+              },
+              "status_history": [
+                {
+                  "stage": "live",
+                  "ts": "2026-07-28T10:52:06.087Z",
+                  "by": "Jovana"
+                }
+              ]
             },
             {
               "id": "p-ps1-2",
               "title": "EU AI Act Rules for General-Purpose AI: What GPAI Providers Need to Know",
               "format": "Blog/Article",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "EU AI Act GPAI",
               "secondary_keyword": "EU AI Act transparency requirements",
@@ -1560,6 +1674,11 @@
                   "stage": "ed-review",
                   "ts": "2026-07-13T11:13:31.512Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-28T10:52:55.691Z",
+                  "by": "Jovana"
                 }
               ],
               "publishing": {
@@ -1584,7 +1703,7 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -1597,6 +1716,11 @@
                   "stage": "ed-review",
                   "ts": "2026-07-13T11:15:06.789Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-31T13:49:03.692Z",
+                  "by": "Jovana"
                 }
               ],
               "publishing": {
@@ -1621,7 +1745,7 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -1635,7 +1759,14 @@
                 "live_url": "https://www.jaggaer.com/blog/what-is-the-eu-ai-act",
                 "performance_data": "",
                 "updated_at": "2026-07-31T13:49:43.539Z"
-              }
+              },
+              "status_history": [
+                {
+                  "stage": "live",
+                  "ts": "2026-07-31T13:49:43.539Z",
+                  "by": "Jovana"
+                }
+              ]
             },
             {
               "id": "piece-ps1-eu-ai-5-aj5b",
@@ -1651,7 +1782,7 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -1664,6 +1795,11 @@
                   "stage": "ed-review",
                   "ts": "2026-07-13T11:13:40.162Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-31T13:50:14.450Z",
+                  "by": "Jovana"
                 }
               ],
               "publishing": {
@@ -1688,7 +1824,7 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -1702,7 +1838,14 @@
                 "live_url": "https://www.jaggaer.com/blog/eu-ai-act-risk-categories",
                 "performance_data": "",
                 "updated_at": "2026-08-03T11:00:41.276Z"
-              }
+              },
+              "status_history": [
+                {
+                  "stage": "live",
+                  "ts": "2026-08-03T11:00:41.276Z",
+                  "by": "Jovana"
+                }
+              ]
             },
             {
               "id": "piece-ps1-eu-ai-7-nyif",
@@ -1718,7 +1861,7 @@
               "assignee": "null",
               "notes": "",
               "url": "",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -1731,6 +1874,11 @@
                   "stage": "ed-review",
                   "ts": "2026-07-13T11:13:55.036Z",
                   "by": "m-ny8dy"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-03T10:58:50.591Z",
+                  "by": "Jovana"
                 }
               ],
               "publishing": {
@@ -1757,7 +1905,7 @@
               "title": "E-Invoicing Is Live in France & Spain. Is Your AP Stack Compliant?",
               "format": "Quick-take Blog",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "e-invoicing compliance France Spain 2026",
               "secondary_keyword": "AP automation government e-invoicing mandate",
@@ -1779,6 +1927,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-07-30T06:47:35.244Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-21T13:09:03.029Z",
+                  "by": "Jovana"
                 }
               ],
               "return_to_stage": null,
@@ -2193,7 +2346,7 @@
               "title": "Fable 5 for Procurement",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "revision_count": 0,
               "primary_keyword": "",
@@ -2203,6 +2356,11 @@
                   "stage": "writing",
                   "ts": "2026-07-02T07:15:52.096Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-10T13:47:31.794Z",
+                  "by": "Alex"
                 }
               ],
               "last_updated": "2026-07-02T07:15:52.096Z",
@@ -2221,7 +2379,7 @@
               "title": "Gartner_AI in procurement",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "revision_count": 1,
               "primary_keyword": "",
@@ -2236,6 +2394,11 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-07-02T10:49:33.506Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-28T10:53:43.867Z",
+                  "by": "Jovana"
                 }
               ],
               "last_updated": "2026-07-02T10:49:33.506Z",
@@ -2259,7 +2422,7 @@
               "title": "Procurement's AI Adoption Gap in 2026 What Closes It",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "revision_count": 1,
               "primary_keyword": "",
@@ -2274,6 +2437,11 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-07-13T12:06:25.541Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-03T10:57:30.324Z",
+                  "by": "Jovana"
                 }
               ],
               "last_updated": "2026-07-13T12:06:25.541Z",
@@ -2297,7 +2465,7 @@
               "title": "What Is Design-to-Pay: Why It Matters More Than Source-to-Pay for Discrete Manufacturers",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "revision_count": 3,
               "primary_keyword": "",
@@ -2322,6 +2490,11 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-08-10T13:47:30.583Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-24T09:48:21.060Z",
+                  "by": "Jovana"
                 }
               ],
               "last_updated": "2026-08-10T13:47:30.582Z",
@@ -2405,7 +2578,7 @@
               "title": "JAGGAER CEO Andrew Roszko on AI Governance",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "revision_count": 3,
               "primary_keyword": "",
@@ -2435,6 +2608,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-18T07:48:48.664Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-19T10:37:33.190Z",
+                  "by": "Jovana"
                 }
               ],
               "last_updated": "2026-08-18T07:48:48.664Z",
@@ -2517,7 +2695,7 @@
               "title": "Best Procurement Software for Manufacturing Teams in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "not-started",
+              "status": "writing",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (Listicle)",
