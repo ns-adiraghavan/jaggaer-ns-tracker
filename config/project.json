@@ -2713,7 +2713,7 @@
               "title": "Best Procurement Software for Higher Education in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (Listicle)",
@@ -2724,7 +2724,21 @@
               "geography": "all",
               "schedule_week": 1,
               "publish_day": "Mon",
-              "planned_publish_date": "Aug 25, 2026"
+              "planned_publish_date": "Aug 25, 2026",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-08-24T12:02:54.743Z",
+              "last_upload_by": "jason",
+              "last_updated": "2026-08-24T12:02:54.743Z",
+              "last_updated_by": "jason",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-08-24T12:02:54.743Z",
+                  "by": "jason"
+                }
+              ]
             },
             {
               "id": "p2-geo-best-procurement-software-for-public-sector-procurement-in-2",
