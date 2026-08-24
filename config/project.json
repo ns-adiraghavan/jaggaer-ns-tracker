@@ -2530,7 +2530,7 @@
               "title": "The AI Procurement Platform Landscape in Q3 2026",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "revision_count": 1,
               "primary_keyword": "",
@@ -2545,6 +2545,11 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-08-12T14:27:47.835Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-24T12:12:28.398Z",
+                  "by": "m-izu4e"
                 }
               ],
               "last_updated": "2026-08-12T14:27:47.835Z",
@@ -2554,7 +2559,14 @@
               "last_upload": "2026-08-12T14:27:47.835Z",
               "last_upload_by": "manager",
               "phase": 1,
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-21",
+                "live_url": "https://www.jaggaer.com/blog/ai-procurement-platform-landscape-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-24T12:12:28.398Z"
+              }
             },
             {
               "id": "piece-ct5t23",
