@@ -4891,6 +4891,18 @@
         "section": "¶37 — \"What Central Government Procurement Lead…\"",
         "revision": 1
       }
+    ],
+    "p2-geo-best-procurement-software-for-public-sector-procurement-in-2": [
+      {
+        "id": "ann-btuyox",
+        "author": "manager",
+        "verdict": "question",
+        "body": "test",
+        "ts": "2026-08-24T14:02:56.086Z",
+        "annotation": true,
+        "section": "¶29 — \"Ivalua provides a configurable Source-to…\"",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
