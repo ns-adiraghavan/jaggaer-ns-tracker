@@ -1960,7 +1960,7 @@
               "title": "Government Contract Leakage: 5 Numbers France, Spain & UK Cannot Ignore in 2026",
               "format": "Data Snapshot",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "government contract leakage data 2026",
               "secondary_keyword": "off-contract spend public sector UK France Spain",
@@ -1987,6 +1987,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-12T08:01:02.883Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-24T12:11:34.055Z",
+                  "by": "m-izu4e"
                 }
               ],
               "return_to_stage": null,
@@ -2001,7 +2006,14 @@
               "brief_last_updated": "2026-07-31T03:04:23.371Z",
               "last_upload": "2026-08-12T08:01:02.883Z",
               "last_upload_by": "m-5jitd",
-              "deliverable_ext": "html"
+              "deliverable_ext": "html",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-21",
+                "live_url": "https://www.jaggaer.com/blog/government-contract-leakage-data-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-24T12:11:34.054Z"
+              }
             }
           ]
         },
