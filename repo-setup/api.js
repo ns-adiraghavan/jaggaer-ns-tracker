@@ -297,9 +297,32 @@ window.NS_API = (function () {
     return "Claude is not available. Add ANTHROPIC_API_KEY to Vercel environment variables.";
   }
 
+  // ── Generic JSON file get/save (used by the Phase 2 reference store) ───────
+  // Kept separate from project.json so large reference tables never bloat the
+  // debounced whole-file project.json autosave.
+  async function getJsonFile(path) {
+    const meta = await githubGetFile(path);
+    const raw = atob(meta.content.replace(/\n/g, ""));
+    const content = new TextDecoder("utf-8").decode(Uint8Array.from(raw, c => c.charCodeAt(0)));
+    return { data: JSON.parse(content), sha: meta.sha };
+  }
+
+  async function saveJsonFile(path, obj, message) {
+    try {
+      const sha = await fetchSha(path); // re-read SHA immediately before writing
+      const result = await githubPutFile(path, JSON.stringify(obj, null, 1), message || ("update " + path), sha);
+      return { ok: true, sha: result.content?.sha };
+    } catch (e) {
+      console.warn("[NS_API] saveJsonFile failed:", e.message);
+      return { ok: false, error: e.message };
+    }
+  }
+
   return {
     loadProject,
     saveProject,
+    getJsonFile,
+    saveJsonFile,
     uploadPieceDeliverable,
     replaceDeliverable,
     uploadWhitepaperFile,
