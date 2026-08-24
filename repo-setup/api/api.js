@@ -138,82 +138,21 @@ window.NS_API = (function () {
     }
   }
 
-  // Read the current remote project.json + its sha with no mock fallback. Used
-  // right before a write so we always PUT against the freshest sha.
-  async function getRemoteProjectAndSha() {
-    const meta = await githubGetFile("config/project.json");
-    const raw = atob(meta.content.replace(/\n/g, ""));
-    const content = new TextDecoder("utf-8").decode(
-      Uint8Array.from(raw, c => c.charCodeAt(0))
-    );
-    return { project: JSON.parse(content), sha: meta.sha };
-  }
-
-  // Union two feedback maps by entry id so no comment is ever dropped when two
-  // people (or two browser tabs) save around the same time. Sorted by ts.
-  function mergeFeedbackMaps(remoteFb, localFb) {
-    const out = {};
-    const pids = new Set([
-      ...Object.keys(remoteFb || {}),
-      ...Object.keys(localFb || {}),
-    ]);
-    pids.forEach(pid => {
-      const seen = new Set();
-      const merged = [];
-      [(remoteFb || {})[pid] || [], (localFb || {})[pid] || []].forEach(arr => {
-        arr.forEach(e => {
-          const id = e && e.id;
-          if (id && seen.has(id)) return;
-          if (id) seen.add(id);
-          merged.push(e);
-        });
-      });
-      merged.sort((a, b) =>
-        String((a && a.ts) || "").localeCompare(String((b && b.ts) || "")));
-      out[pid] = merged;
-    });
-    return out;
-  }
-
-  // Conflict-safe save. Before every write we re-read the live file, union the
-  // feedback map (append-only, id-keyed) so concurrent comments always survive,
-  // and PUT against the current sha. On a sha conflict (409/422) we re-read and
-  // retry. Returns the reconciled project so the caller can adopt it.
   async function saveProject(project, sha, message) {
-    let lastErr;
-    for (let attempt = 0; attempt < 4; attempt++) {
-      try {
-        let putSha = sha;
-        let outgoing = project;
-        try {
-          const remote = await getRemoteProjectAndSha();
-          putSha = remote.sha;
-          outgoing = JSON.parse(JSON.stringify(project));
-          outgoing.feedback = mergeFeedbackMaps(remote.project.feedback, project.feedback);
-        } catch (readErr) {
-          // Couldn't read remote (offline / cold start) — fall back to the sha
-          // we were handed and write local as-is rather than blocking the save.
-          outgoing = project;
-          putSha = sha;
-        }
-        const result = await githubPutFile(
-          "config/project.json",
-          JSON.stringify(outgoing, null, 2),
-          message || "update project.json",
-          putSha
-        );
-        const newSha = result.content?.sha;
-        if (!newSha) throw new Error("no-sha-in-response");
-        return { ok: true, sha: newSha, project: outgoing };
-      } catch (e) {
-        lastErr = e;
-        const conflict = /gh-put-(409|422)/.test(e.message || "");
-        if (!conflict) break;
-        await new Promise(r => setTimeout(r, 250 * (attempt + 1)));
-      }
+    try {
+      const result = await githubPutFile(
+        "config/project.json",
+        JSON.stringify(project, null, 2),
+        message || "update project.json",
+        sha
+      );
+      const newSha = result.content?.sha;
+      if (!newSha) throw new Error("no-sha-in-response");
+      return { ok: true, sha: newSha };
+    } catch (e) {
+      console.warn("[NS_API] GitHub save failed:", e.message);
+      return { ok: false, error: e.message };
     }
-    console.warn("[NS_API] GitHub save failed:", lastErr && lastErr.message);
-    return { ok: false, error: lastErr && lastErr.message };
   }
 
   async function uploadPieceDeliverable(piece, cluster, pillar, month, file, author) {
@@ -358,9 +297,32 @@ window.NS_API = (function () {
     return "Claude is not available. Add ANTHROPIC_API_KEY to Vercel environment variables.";
   }
 
+  // ── Generic JSON file get/save (used by the Phase 2 reference store) ───────
+  // Kept separate from project.json so large reference tables never bloat the
+  // debounced whole-file project.json autosave.
+  async function getJsonFile(path) {
+    const meta = await githubGetFile(path);
+    const raw = atob(meta.content.replace(/\n/g, ""));
+    const content = new TextDecoder("utf-8").decode(Uint8Array.from(raw, c => c.charCodeAt(0)));
+    return { data: JSON.parse(content), sha: meta.sha };
+  }
+
+  async function saveJsonFile(path, obj, message) {
+    try {
+      const sha = await fetchSha(path); // re-read SHA immediately before writing
+      const result = await githubPutFile(path, JSON.stringify(obj, null, 1), message || ("update " + path), sha);
+      return { ok: true, sha: result.content?.sha };
+    } catch (e) {
+      console.warn("[NS_API] saveJsonFile failed:", e.message);
+      return { ok: false, error: e.message };
+    }
+  }
+
   return {
     loadProject,
     saveProject,
+    getJsonFile,
+    saveJsonFile,
     uploadPieceDeliverable,
     replaceDeliverable,
     uploadWhitepaperFile,
