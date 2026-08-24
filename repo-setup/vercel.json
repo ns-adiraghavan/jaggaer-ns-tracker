@@ -17,6 +17,14 @@
     {
       "source": "/piece/:id",
       "destination": "/api/piece-page?id=:id"
+    },
+    {
+      "source": "/tracker",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/tracker/phase2",
+      "destination": "/index.html"
     }
   ]
 }

@@ -445,7 +445,7 @@ function PerfSparkline({ series, w = 240, h = 34, color = "#c8401a" }) {
 }
 
 // ─── Root panel ─────────────────────────────────────────────────────────────
-function PerformancePanel({ project, setProject, currentUser, adminMode }) {
+function PerformancePanel({ project, setProject, currentUser, adminMode, activePhase }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const canUpload = currentUser?.org === "jaggaer" || !!adminMode;
 
@@ -1449,8 +1449,12 @@ function PerfPieceCard({ entry, record, canUpload, busy, error, onUpload, onOpen
     >
       {/* Header */}
       <div>
-        <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#999", marginBottom: "3px" }}>
-          {pillar.label}
+        <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "3px" }}>
+          <span style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#999", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            {pillar.label}
+          </span>
+          {(() => { const p = piece.phase || 1; const c = p === 2 ? { color: "#8a2be2", bg: "#f3ecfb", bd: "#d9c4f0" } : { color: "#1e6fa8", bg: "#eaf2fa", bd: "#bcd8ef" };
+            return <span style={{ ...FONT, fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.05em", color: c.color, background: c.bg, border: "1px solid " + c.bd, padding: "1px 5px", borderRadius: "2px", flexShrink: 0 }}>P{p}</span>; })()}
         </div>
         <div style={{ ...FONT, fontSize: "0.86rem", fontWeight: 600, color: "#1a2535", lineHeight: 1.35, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
           {piece.title}

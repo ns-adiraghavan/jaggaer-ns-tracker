@@ -1,6 +1,6 @@
 // Tracker v7 — phase-aware: Phase 1 / Phase 2 model, CSV sync, content-type sub-views
 
-const { useState: useStateTR, useRef: useRefTR, useMemo: useMemoTR } = React;
+const { useState: useStateTR, useRef: useRefTR, useMemo: useMemoTR, useEffect: useEffectTR } = React;
 
 // Cluster colour palette — directly lifted from spreadsheet fills
 const CLUSTER_PALETTE = [
@@ -26,6 +26,10 @@ const CT_DISPLAY = {
   "ai-in-s2p":          { label: "AI in S2P (Claude)", color: "#1e4fa8", bg: "#eaf0fb", border: "#bad0f0" },
   "industry-specific":  { label: "Industry-Specific",  color: "#784212", bg: "#fef3e8", border: "#f0d4a8" },
   "ad-hoc":             { label: "Ad-Hoc Articles",    color: "#c8401a", bg: "#fdeee8", border: "#f0bba8" },
+  // Phase 2 categories (SEO / GEO / BOFU) — reuse the content_type slot.
+  "seo":                { label: "SEO",                color: "#1a6a3a", bg: "#eaf4ee", border: "#b8dfc8" },
+  "geo":                { label: "GEO",                color: "#1e4fa8", bg: "#eaf0fb", border: "#bad0f0" },
+  "bofu":               { label: "BOFU",               color: "#8a2be2", bg: "#f3ecfb", border: "#d9c4f0" },
 };
 window.CT_DISPLAY = CT_DISPLAY;
 
@@ -793,9 +797,10 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
 
 
 // ─── Tracker root ─────────────────────────────────────────────────────────────
-function Tracker({ project, setProject, currentUser, activePillar, activeCluster, setActiveCluster, adminMode, activeMonthId, activeContentType, onAdminEditPiece, onAdminEditCluster }) {
-  const effectiveMonthId = activeMonthId || project.active_month;
-  const stats = window.computeStats(project, effectiveMonthId);
+function Tracker({ project, setProject, currentUser, activePillar, activeCluster, setActiveCluster, adminMode, activeMonthId, activeContentType, activePhase, onAdminEditPiece, onAdminEditCluster }) {
+  const phase = activePhase || 1;
+  const effectiveMonthId = activeMonthId || window.NS_phaseMonth(project, phase);
+  const stats = window.computeStats(project, effectiveMonthId, phase);
   const currentWeek = 1; // retained for Publishing Sequence tab only — not used for piece timing
 
   // Filter pillars to only clusters belonging to the active month.
@@ -803,13 +808,13 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
   const filteredPillars = project.pillars.map(p => ({
     ...p,
     clusters: p.clusters
-      .filter(c => (c.month_id || project.active_month) === effectiveMonthId)
+      .filter(c => p.id === 'ad-hoc-articles' || (c.month_id || project.active_month) === effectiveMonthId)
       .filter(c => !activeCluster || c.id === activeCluster)
       .map(c => ({
         ...c,
-        pieces: activeContentType
-          ? c.pieces.filter(pc => (pc.content_type || 'msv') === activeContentType)
-          : c.pieces,
+        pieces: c.pieces
+          .filter(pc => (pc.phase || 1) === phase)
+          .filter(pc => !activeContentType || (pc.content_type || 'msv') === activeContentType),
       }))
       .filter(c => c.pieces.length > 0),
   })).filter(p => {
@@ -824,6 +829,19 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
   const [activeFilter, setActiveFilter] = useStateTR(null);
   const [searchQuery, setSearchQuery] = useStateTR("");
   const [showAdHocModal, setShowAdHocModal] = useStateTR(false);
+
+  // Allow other views (e.g. Comments history) to open a piece drawer directly.
+  useEffectTR(() => {
+    window.NS_OPEN_PIECE = (clusterId, pieceId, mode) => setOpenPiece({ clusterId, pieceId, mode: mode || "annotate" });
+    // Deep-link handoff: if another view (Comments) queued a piece to open
+    // before the Tracker mounted, honour it now that we're here.
+    if (window.NS_PENDING_OPEN) {
+      const { clusterId, pieceId, mode } = window.NS_PENDING_OPEN;
+      window.NS_PENDING_OPEN = null;
+      setOpenPiece({ clusterId, pieceId, mode: mode || "annotate" });
+    }
+    return () => { try { delete window.NS_OPEN_PIECE; } catch (e) {} };
+  }, []);
 
   // Apply search filter on top of pillar/cluster/content-type filters
   const sq = searchQuery.trim().toLowerCase();
@@ -892,6 +910,8 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         assignee: currentUser?.id || "",
         status: "writing", // NS uploads directly — no brief/SME-review gate for ad-hoc
         content_type: "ad-hoc",
+        phase: window.NS_ACTIVE_PHASE || 1,
+        schedule_month: window.NS_phaseMonth ? window.NS_phaseMonth(next, window.NS_ACTIVE_PHASE || 1) : next.active_month,
         revision_count: 0,
         primary_keyword: "",
         geography: "all",
@@ -934,7 +954,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
   return (
     <main className="ns-tracker">
       <TrackerHeader
-        project={project} stats={stats}
+        project={project} stats={stats} activePhase={phase}
         activeCluster={activeCluster} setActiveCluster={setActiveCluster}
         activeTab={activeTab} setActiveTab={setActiveTab}
         viewMode={viewMode} setViewMode={setViewMode}
@@ -1212,21 +1232,37 @@ function AdHocCreateModal({ onClose, onCreate }) {
 }
 
 // ─── Header ───────────────────────────────────────────────────────────────────
-function TrackerHeader({ project, stats, activeCluster, setActiveCluster, activeTab, setActiveTab, viewMode, setViewMode, currentUser, onOpenPiece, searchQuery, setSearchQuery, onAddAdHoc }) {
-  const totalPieces = project.pillars.reduce((n, p) => n + p.clusters.reduce((m, c) => m + c.pieces.length, 0), 0);
-  const clusterStats = window.computeStats(project).byCluster;
+function TrackerHeader({ project, stats, activePhase, activeCluster, setActiveCluster, activeTab, setActiveTab, viewMode, setViewMode, currentUser, onOpenPiece, searchQuery, setSearchQuery, onAddAdHoc }) {
+  const phase = activePhase || 1;
+  const phasePillars = window.NS_pillarsForPhase(project, phase);
+  const totalPieces = phasePillars.reduce((n, p) => n + p.clusters.reduce((m, c) => m + c.pieces.filter(pc => (pc.phase || 1) === phase).length, 0), 0);
+  const clusterStats = window.computeStats(project, null, phase).byCluster;
   const readyClusters = Object.values(clusterStats).filter(c => c.ready).length;
   const totalClusters = Object.keys(clusterStats).length;
-  const activeMonth = (project.months || []).find(m => m.id === project.active_month) || (project.months || [])[0];
+  const effMonthId = window.NS_phaseMonth(project, phase);
+  const activeMonth = (project.months || []).find(m => m.id === effMonthId) || (project.months || [])[0];
   const monthLabel = activeMonth ? activeMonth.label : "";
+  const groupNoun = phase === 2 ? "categories" : "pillars";
+  const eyebrow = phase === 2 ? monthLabel : monthLabel;
+
+  // Phase-2 chips: live SEO / GEO / BOFU counts. Phase-1: the weighted split.
+  const p2Chips = ["geo", "seo", "bofu"].map(id => {
+    let total = 0, approved = 0;
+    for (const p of phasePillars) for (const c of p.clusters) for (const pc of c.pieces) {
+      if ((pc.phase || 1) !== phase) continue;
+      if ((pc.content_type || "") !== id) continue;
+      total++; if (pc.status === "approved") approved++;
+    }
+    return { id, total, approved };
+  }).filter(x => x.total > 0 || x.id === "bofu");
 
   return (
     <header className="ns-tracker-head">
       <div className="ns-tracker-head-row">
         <div className="ns-tracker-head-left">
-          <div className="ns-tracker-eyebrow">{monthLabel}</div>
-          <h1 className="ns-tracker-title">{totalPieces} pieces · {project.pillars.length} pillars</h1>
-          {project.content_type_split && project.content_type_split.length > 0 && (
+          <div className="ns-tracker-eyebrow">Phase {phase} · {eyebrow}</div>
+          <h1 className="ns-tracker-title">{totalPieces} pieces · {phasePillars.length} {groupNoun}</h1>
+          {phase === 1 && project.content_type_split && project.content_type_split.length > 0 && (
             <div style={{ display: "flex", gap: "8px", marginTop: "6px", flexWrap: "wrap", alignItems: "center" }}>
               {project.content_type_split.map(ct => {
                 const meta = CT_DISPLAY[ct.id] || CT_DISPLAY["industry-specific"];
@@ -1240,6 +1276,23 @@ function TrackerHeader({ project, stats, activeCluster, setActiveCluster, active
                   }}>
                     {typeof ct.weight === "number" ? `${Math.round(ct.weight * 100)}% ` : ""}{meta.label}
                     {ct.pieces_est && <span style={{ opacity: 0.65, fontWeight: 400 }}> · ~{ct.pieces_est}</span>}
+                  </span>
+                );
+              })}
+            </div>
+          )}
+          {phase === 2 && (
+            <div style={{ display: "flex", gap: "8px", marginTop: "6px", flexWrap: "wrap", alignItems: "center" }}>
+              {p2Chips.map(ch => {
+                const meta = CT_DISPLAY[ch.id];
+                return (
+                  <span key={ch.id} style={{
+                    fontFamily: "Noto Sans, sans-serif", fontSize: "0.67rem", fontWeight: 700,
+                    letterSpacing: "0.05em", textTransform: "uppercase",
+                    color: meta.color, background: meta.bg, border: `1px solid ${meta.border}`,
+                    padding: "3px 10px", borderRadius: "2px", cursor: "default",
+                  }}>
+                    {meta.label}<span style={{ opacity: 0.65, fontWeight: 400 }}> · {ch.approved}/{ch.total}</span>
                   </span>
                 );
               })}

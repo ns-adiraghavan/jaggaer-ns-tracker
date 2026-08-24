@@ -31,6 +31,24 @@ const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 // the pending-at buckets so a published piece never shows as awaiting anyone.
 const PUBLISHED_STAGES = new Set(["approved", "live"]);
 
+// Small P1 / P2 chip — Status Report is shared across phases, so every article
+// is tagged with the phase it belongs to.
+function PhaseTag({ phase }) {
+  const p = phase || 1;
+  const c = p === 2 ? { color: "#8a2be2", bg: "#f3ecfb", bd: "#d9c4f0" } : { color: "#1e6fa8", bg: "#eaf2fa", bd: "#bcd8ef" };
+  return (
+    <span style={{ fontFamily: "Noto Sans, sans-serif", fontSize: "0.58rem", fontWeight: 700,
+      letterSpacing: "0.05em", color: c.color, background: c.bg, border: "1px solid " + c.bd,
+      padding: "1px 6px", borderRadius: "2px", whiteSpace: "nowrap" }}>P{p}</span>
+  );
+}
+
+// CSV-safe field quoting.
+function csvCell(v) {
+  const s = String(v == null ? "" : v);
+  return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+
 function allPieces(project) {
   const out = [];
   for (const pillar of project.pillars || []) {
@@ -72,7 +90,82 @@ function withinLastWeek(isoString) {
   return (Date.now() - t) <= ONE_WEEK_MS && t <= Date.now();
 }
 
-function WeeklyReportPanel({ project, currentUser }) {
+function StatusExportBar({ tookLive }) {
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const [copied, setCopied] = useStateWR(false);
+  const todayISO = new Date().toISOString().slice(0, 10);
+  const monthAgoISO = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+  const [from, setFrom] = useStateWR(monthAgoISO);
+  const [to, setTo] = useStateWR(todayISO);
+
+  // Only published pieces that actually have a live URL are exportable.
+  const withUrl = tookLive.filter(({ piece }) => piece.publishing?.live_url);
+
+  function copyTitlesLinks() {
+    const lines = withUrl.map(({ piece }) => {
+      const ph = (piece.phase || 1);
+      return `${piece.title}\tP${ph}\t${piece.publishing.live_url}`;
+    });
+    const text = lines.join("\n");
+    navigator.clipboard?.writeText(text).then(() => {
+      setCopied(true); setTimeout(() => setCopied(false), 1800);
+    });
+  }
+
+  function downloadCsv() {
+    const fromT = from ? new Date(from + "T00:00:00").getTime() : -Infinity;
+    const toT = to ? new Date(to + "T23:59:59").getTime() : Infinity;
+    const rows = withUrl.filter(({ ts }) => {
+      const t = ts ? new Date(ts).getTime() : NaN;
+      return !isNaN(t) && t >= fromT && t <= toT;
+    }).sort((a, b) => new Date(b.ts || 0) - new Date(a.ts || 0));
+    const header = ["Title", "Phase", "Launch date", "URL"];
+    const body = rows.map(({ piece, ts }) => [
+      csvCell(piece.title),
+      "P" + (piece.phase || 1),
+      csvCell(ts ? formatEST(ts) : ""),
+      csvCell(piece.publishing.live_url),
+    ].join(","));
+    const csv = [header.join(","), ...body].join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = `status-report_${from}_to_${to}.csv`;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  const inputStyle = { ...FONT, fontSize: "0.72rem", color: "#1a2535", border: "1px solid #d8d2c8", borderRadius: "3px", padding: "5px 7px" };
+  const btnStyle = (primary) => ({ ...FONT, fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.03em",
+    cursor: "pointer", borderRadius: "3px", padding: "6px 12px",
+    color: primary ? "#fff" : "#4a453e", background: primary ? "#1a2f4e" : "#fff",
+    border: "1px solid " + (primary ? "#1a2f4e" : "#d8d2c8") });
+
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "10px",
+      background: "#faf8f4", border: "1px solid #e8e3da", borderRadius: "4px",
+      padding: "12px 14px", marginBottom: "22px" }}>
+      <span style={{ ...FONT, fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.06em",
+        textTransform: "uppercase", color: "#999" }}>Export</span>
+      <button onClick={copyTitlesLinks} style={btnStyle(false)} title="Copy published titles + links, tab-separated">
+        {copied ? "✓ Copied" : "Copy titles + links"}
+      </button>
+      <span style={{ width: "1px", height: "22px", background: "#e0dbd4" }} />
+      <label style={{ ...FONT, fontSize: "0.68rem", color: "#888" }}>From</label>
+      <input type="date" value={from} max={to} onChange={e => setFrom(e.target.value)} style={inputStyle} />
+      <label style={{ ...FONT, fontSize: "0.68rem", color: "#888" }}>To</label>
+      <input type="date" value={to} min={from} onChange={e => setTo(e.target.value)} style={inputStyle} />
+      <button onClick={downloadCsv} style={btnStyle(true)} title="Download published pieces in range as CSV">
+        ↓ Download CSV
+      </button>
+      <span style={{ ...FONT, fontSize: "0.66rem", color: "#b0a99e", marginLeft: "auto" }}>
+        {withUrl.length} published with links
+      </span>
+    </div>
+  );
+}
+
+function WeeklyReportPanel({ project, currentUser, activePhase }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
   const getMember = memberLookup(project);
   const stages = getWorkflowStages(project);
@@ -246,6 +339,9 @@ function WeeklyReportPanel({ project, currentUser }) {
         <KpiTile label="Awaiting Netscribes" count={data.pendingAtNS.length} accent="#6c3483" sub="awaiting action"
           onClick={() => { setNsOpen(true); scrollTo(refNS); }} />
       </div>
+
+      {/* ── Export — copy titles+links, or download a date-range CSV ──── */}
+      <StatusExportBar tookLive={data.tookLive} />
 
       {/* ── Took live — the hero section ──────────────────────────────── */}
       <div ref={refTookLive} style={{ scrollMarginTop: "16px" }} />
@@ -450,8 +546,11 @@ function LivePieceCard({ piece, cluster, pillar, ts, approvedBy, getMember, perf
       background: "#fff", border: "1px solid #e8e3da", borderLeft: "3px solid #1e7a45",
       borderRadius: "3px", padding: "14px 16px", display: "flex", flexDirection: "column", gap: "8px",
     }}>
-      <div style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#999" }}>
-        {pillar.label} · {cluster.label}
+      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <span style={{ ...FONT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#999", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          {pillar.label} · {cluster.label}
+        </span>
+        <PhaseTag phase={piece.phase} />
       </div>
       <div style={{ ...FONT, fontSize: "0.9rem", fontWeight: 600, color: "#1a2535", lineHeight: 1.35 }}>
         {piece.title}

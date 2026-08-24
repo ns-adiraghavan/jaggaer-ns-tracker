@@ -214,6 +214,11 @@ function App() {
   const [loadError, setLoadError] = useStateApp(null);
   const [currentUser, setCurrentUser] = useStateApp(readSession);
   const [view, setView] = useStateApp("tracker");
+  const [activePhase, setActivePhaseRaw] = useStateApp(() => {
+    const p = (typeof window !== "undefined" && /\/tracker\/phase2/.test(window.location.pathname)) ? 2 : 1;
+    window.NS_ACTIVE_PHASE = p;
+    return p;
+  });
   const [activePillar, setActivePillar] = useStateApp(null);
   const [activeCluster, setActiveCluster] = useStateApp(null);
   const [adminMode, setAdminMode] = useStateApp(false);
@@ -221,6 +226,21 @@ function App() {
   const [saveState, setSaveState] = useStateApp(null);
   const [activeMonthId, setActiveMonthId] = useStateApp(null);
   const [activeContentType, setActiveContentType] = useStateApp(null);
+  // Switching phase resets the phase-scoped filters and syncs the URL so a
+  // Phase 2 session is shareable/bookmarkable at /tracker/phase2. Status Report,
+  // Performance, Playground etc. are phase-shared and keep their view.
+  function setActivePhase(ph) {
+    window.NS_ACTIVE_PHASE = ph;
+    setActivePhaseRaw(ph);
+    setActivePillar(null);
+    setActiveCluster(null);
+    setActiveContentType(null);
+    setActiveMonthId(null);
+    try {
+      const target = ph === 2 ? "/tracker/phase2" : "/tracker";
+      if (window.location.pathname !== target) window.history.pushState({ phase: ph }, "", target);
+    } catch (e) {}
+  }
   const saveTimerRef = useRefApp(null);
   const toastTimerRef = useRefApp(null);
   const firstSaveRef = useRefApp(true);
@@ -319,6 +339,18 @@ function App() {
     return () => { try { delete window.NS_saveFeedbackNow; } catch (e) {} };
   }, []);
 
+  // Browser back/forward toggles the phase in step with the URL.
+  useEffectApp(() => {
+    const onPop = () => {
+      const ph = /\/tracker\/phase2/.test(window.location.pathname) ? 2 : 1;
+      window.NS_ACTIVE_PHASE = ph;
+      setActivePhaseRaw(ph);
+      setActivePillar(null); setActiveCluster(null); setActiveContentType(null); setActiveMonthId(null);
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
   // Warn before leaving if a save is still in flight.
   useEffectApp(() => {
     const onBeforeUnload = (e) => {
@@ -376,6 +408,8 @@ function App() {
         setActiveMonthId={setActiveMonthId}
         activeContentType={activeContentType}
         setActiveContentType={setActiveContentType}
+        activePhase={activePhase}
+        setActivePhase={setActivePhase}
       />
 
       <div className="ns-main-col">
@@ -401,13 +435,23 @@ function App() {
             adminMode={adminMode}
             activeMonthId={activeMonthId}
             activeContentType={activeContentType}
+            activePhase={activePhase}
             onAdminEditPiece={(clusterId, pieceId) => { setView("admin"); setAdminTarget({ kind: "pieces", clusterId, pieceId }); }}
             onAdminEditCluster={(clusterId) => { setView("admin"); setAdminTarget({ kind: "pillars", clusterId }); }}
           />
         )}
         {view === "jai-demo" && <JAIDemoPanel onBack={() => setView("tracker")} />}
-        {view === "weekly-report" && <WeeklyReportPanel project={project} currentUser={currentUser} />}
-        {view === "performance" && <PerformancePanel project={project} setProject={setProject} currentUser={currentUser} adminMode={adminMode} />}
+        {view === "weekly-report" && <WeeklyReportPanel project={project} currentUser={currentUser} activePhase={activePhase} />}
+        {view === "performance" && <PerformancePanel project={project} setProject={setProject} currentUser={currentUser} adminMode={adminMode} activePhase={activePhase} />}
+        {view === "comments" && <CommentsPanel project={project} currentUser={currentUser} activePhase={activePhase} onOpenPiece={(clusterId, pieceId) => {
+          let ph = 1;
+          for (const pl of project.pillars) for (const c of pl.clusters) if (c.id === clusterId) for (const pc of c.pieces) if (pc.id === pieceId) ph = (pc.phase || 1);
+          window.NS_PENDING_OPEN = { clusterId, pieceId, mode: "annotate" };
+          setActivePhase(ph);
+          setView("tracker");
+        }} />}
+        {view === "phase2-reference" && <Phase2ReferencePanel />}
+        {view === "phase2-sync" && adminMode && <Phase2SyncPanel project={project} setProject={setProject} />}
         {view === "ai-playground" && <AIPlaygroundPanel onBack={() => setView("tracker")} project={project} setProject={setProject} currentUser={currentUser} saveState={saveState} />}
         {view === "style-guide" && <StyleGuidePanel project={project} adminMode={adminMode} />}
         {view === "content-flow" && <ContentFlowPanel project={project} adminMode={adminMode} />}

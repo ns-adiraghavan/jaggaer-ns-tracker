@@ -1,19 +1,45 @@
 // Left sidebar - dark steel. Pillar/cluster nav with stats.
 const { useMemo: useMemoSB } = React;
 
-function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCluster, setActiveCluster, view, setView, onSignOut, onToggleAdmin, adminMode, activeMonthId, setActiveMonthId, activeContentType, setActiveContentType }) {
-  const stats = useMemoSB(() => computeStats(project, activeMonthId), [project, activeMonthId]);
+// The 'active month' depends on the phase: phase 1 uses project.active_month,
+// phase 2 uses project.phase2_active_month. Centralised so stats + views agree.
+function phaseActiveMonth(project, phase) {
+  if ((phase || 1) === 2) return project.phase2_active_month || 'p2-month-1';
+  return project.active_month;
+}
+window.NS_phaseMonth = phaseActiveMonth;
+
+// Pillars visible in a given phase. Content pillars carry a phase tag; the
+// shared ad-hoc pillar (phase null) appears in whichever phase has ad-hoc pieces.
+function pillarsForPhase(project, phase) {
+  return (project.pillars || []).filter(p => {
+    if (p.id === 'ad-hoc-articles')
+      return (p.clusters || []).some(c => (c.pieces || []).some(pc => (pc.phase || 1) === phase));
+    return (p.phase || 1) === phase;
+  });
+}
+window.NS_pillarsForPhase = pillarsForPhase;
+
+function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCluster, setActiveCluster, view, setView, onSignOut, onToggleAdmin, adminMode, activeMonthId, setActiveMonthId, activeContentType, setActiveContentType, activePhase, setActivePhase }) {
+  const phase = activePhase || 1;
+  const phasePillars = useMemoSB(() => pillarsForPhase(project, phase), [project, phase]);
+  const stats = useMemoSB(() => computeStats(project, activeMonthId, phase), [project, activeMonthId, phase]);
   const months = project.months || [];
 
-  // Only show months that have at least one cluster referencing them
+  // Months belonging to the active phase (months carry a phase tag; default 1).
+  const phaseMonths = months.filter(m => (m.phase || 1) === phase);
+  // Only show months that have at least one cluster (of this phase) referencing them
   const populatedMonthIds = new Set();
   for (const p of project.pillars) {
+    if ((p.phase || 1) !== phase && p.id !== 'ad-hoc-articles') continue;
     for (const c of p.clusters) {
+      const hasPhasePiece = (c.pieces || []).some(pc => (pc.phase || 1) === phase);
+      if (!hasPhasePiece) continue;
       if (c.month_id) populatedMonthIds.add(c.month_id);
-      else populatedMonthIds.add(project.active_month); // fallback for untagged clusters
+      else populatedMonthIds.add(project.active_month);
     }
   }
-  const populatedMonths = months.filter(m => populatedMonthIds.has(m.id));
+  const populatedMonths = phaseMonths.filter(m => populatedMonthIds.has(m.id));
 
   const activeMonth = populatedMonths.find(m => m.id === (activeMonthId || project.active_month)) || populatedMonths[0];
   const monthLabel = activeMonth ? activeMonth.label : 'Month 1';
@@ -27,6 +53,7 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
     for (const p of project.pillars) {
       for (const c of p.clusters) {
         for (const piece of c.pieces) {
+          if ((piece.phase || 1) !== phase) continue;
           const ct = piece.content_type || 'msv';
           if (out[ct]) {
             out[ct].total++;
@@ -36,7 +63,7 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
       }
     }
     return out;
-  }, [project]);
+  }, [project, phase]);
 
   return (
     <aside className={`ns-sidebar ${collapsed ? "is-collapsed" : ""}`}>
@@ -59,6 +86,28 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
         </div>
       </div>
       <div className="ns-sidebar-head">
+        {/* ── Phase switch — Phase 1 / Phase 2 ── */}
+        <div className="ns-phase-switch" style={{ margin: '0 0 12px' }}>
+          <div className="ns-eyebrow ns-eyebrow-light">PHASE</div>
+          <div style={{ display: 'flex', gap: '4px', marginTop: '5px' }}>
+            {[1, 2].map(ph => (
+              <button
+                key={ph}
+                onClick={() => setActivePhase && setActivePhase(ph)}
+                title={ph === 1 ? 'Phase 1 · Pillar programme' : 'Phase 2 · SEO / GEO / BOFU calendar'}
+                style={{
+                  flex: 1, padding: '8px 0',
+                  fontFamily: 'Noto Sans, sans-serif', fontSize: '0.74rem', fontWeight: 700,
+                  letterSpacing: '0.04em', cursor: 'pointer', borderRadius: '3px',
+                  border: '1px solid ' + (phase === ph ? '#c8401a' : '#d8d2c8'),
+                  background: phase === ph ? '#c8401a' : '#fff',
+                  color: phase === ph ? '#fff' : '#8a837a',
+                  transition: 'all 0.15s',
+                }}
+              >Phase {ph}</button>
+            ))}
+          </div>
+        </div>
         <div className="ns-sidebar-month">
           <div className="ns-eyebrow ns-eyebrow-light">CURRENT MONTH</div>
           {populatedMonths.length > 1 ? (
@@ -86,67 +135,76 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           rightMeta={`${stats.approved}/${stats.total}`}
         />
 
-        {/* Nav mode toggle — Pillar vs Content Type */}
-        <div style={{
-          display: 'flex', margin: '4px 12px 2px',
-          background: '#f0ece4', borderRadius: '3px', padding: '2px',
-        }}>
-          {[['pillar','By Pillar'],['content-type','By Type']].map(([mode, label]) => (
-            <button
-              key={mode}
-              onClick={() => setNavMode(mode)}
-              style={{
-                flex: 1, padding: '4px 0',
-                fontFamily: 'Noto Sans, sans-serif',
-                fontSize: '0.63rem', fontWeight: 600,
-                letterSpacing: '0.05em', textTransform: 'uppercase',
-                border: 'none', borderRadius: '2px', cursor: 'pointer',
-                background: navMode === mode ? '#fff' : 'transparent',
-                color: navMode === mode ? '#0f1923' : '#888',
-                boxShadow: navMode === mode ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
-                transition: 'all 0.15s',
-              }}
-            >{label}</button>
-          ))}
-        </div>
+        {/* Phase 1 keeps the Pillar / Type toggle. Phase 2 has no pillars —
+            just the SEO / GEO / BOFU categories — so it renders a flat
+            category nav (the phase-2 pillars ARE the categories). */}
+        {phase === 1 && (
+          <div style={{
+            display: 'flex', margin: '4px 12px 2px',
+            background: '#f0ece4', borderRadius: '3px', padding: '2px',
+          }}>
+            {[['pillar','By Pillar'],['content-type','By Type']].map(([mode, label]) => (
+              <button
+                key={mode}
+                onClick={() => setNavMode(mode)}
+                style={{
+                  flex: 1, padding: '4px 0',
+                  fontFamily: 'Noto Sans, sans-serif',
+                  fontSize: '0.63rem', fontWeight: 600,
+                  letterSpacing: '0.05em', textTransform: 'uppercase',
+                  border: 'none', borderRadius: '2px', cursor: 'pointer',
+                  background: navMode === mode ? '#fff' : 'transparent',
+                  color: navMode === mode ? '#0f1923' : '#888',
+                  boxShadow: navMode === mode ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+                  transition: 'all 0.15s',
+                }}
+              >{label}</button>
+            ))}
+          </div>
+        )}
 
-        {navMode === 'pillar' && (
+        {phase === 1 && navMode === 'pillar' && (
           <div className="ns-sidebar-pillars">
-            {project.pillars.map((p, i) => (
+            {phasePillars.map((p, i) => (
               <PillarNav
-                key={p.id}
-                pillar={p}
-                sequence={i + 1}
+                key={p.id} pillar={p} sequence={i + 1}
                 pillarStats={stats.byPillar[p.id]}
                 clusterStats={stats.byCluster}
                 expanded={activePillar === p.id}
                 activeCluster={activeCluster}
-                onPillarClick={() => {
-                  setView("tracker");
-                  setActivePillar(activePillar === p.id ? null : p.id);
-                  setActiveCluster(null);
-                }}
-                onClusterClick={(c) => {
-                  setView("tracker");
-                  setActivePillar(p.id);
-                  setActiveCluster(c.id);
-                }}
+                onPillarClick={() => { setView("tracker"); setActivePillar(activePillar === p.id ? null : p.id); setActiveCluster(null); }}
+                onClusterClick={(c) => { setView("tracker"); setActivePillar(p.id); setActiveCluster(c.id); }}
               />
             ))}
           </div>
         )}
 
-        {navMode === 'content-type' && (
+        {phase === 1 && navMode === 'content-type' && (
           <div className="ns-sidebar-pillars">
             <ContentTypeNav
-              project={project}
-              ctStats={ctStats}
-              setView={setView}
-              setActivePillar={setActivePillar}
-              setActiveCluster={setActiveCluster}
-              activeContentType={activeContentType}
-              setActiveContentType={setActiveContentType}
+              project={project} ctStats={ctStats} setView={setView}
+              setActivePillar={setActivePillar} setActiveCluster={setActiveCluster}
+              activeContentType={activeContentType} setActiveContentType={setActiveContentType}
             />
+          </div>
+        )}
+
+        {phase === 2 && (
+          <div className="ns-sidebar-pillars">
+            <div style={{ padding: '4px 14px 6px', fontFamily: 'Noto Sans, sans-serif', fontSize: '0.6rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#b0a99e' }}>
+              Categories
+            </div>
+            {phasePillars.map((p, i) => (
+              <PillarNav
+                key={p.id} pillar={p} sequence={i + 1}
+                pillarStats={stats.byPillar[p.id] || { approved: 0, total: 0 }}
+                clusterStats={stats.byCluster}
+                expanded={activePillar === p.id}
+                activeCluster={activeCluster}
+                onPillarClick={() => { setView("tracker"); setActivePillar(activePillar === p.id ? null : p.id); setActiveCluster(null); }}
+                onClusterClick={(c) => { setView("tracker"); setActivePillar(p.id); setActiveCluster(c.id); }}
+              />
+            ))}
           </div>
         )}
 
@@ -182,6 +240,28 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           onClick={() => setView("content-flow")}
           rightMeta="diagram"
         />
+        <NavSection
+          label="Comments"
+          active={view === "comments"}
+          onClick={() => setView("comments")}
+          rightMeta="history"
+        />
+        {phase === 2 && (
+          <NavSection
+            label="P2 Reference"
+            active={view === "phase2-reference"}
+            onClick={() => setView("phase2-reference")}
+            rightMeta="keywords"
+          />
+        )}
+        {phase === 2 && adminMode && (
+          <NavSection
+            label="Sync Calendar"
+            active={view === "phase2-sync"}
+            onClick={() => setView("phase2-sync")}
+            rightMeta="xlsx"
+          />
+        )}
 
         {adminMode && (
           <NavSection
@@ -428,8 +508,10 @@ function ContentTypeNav({ project, ctStats, setView, setActivePillar, setActiveC
   );
 }
 
-function computeStats(project, activeMonthId) {
-  const effectiveMonthId = activeMonthId || project.active_month;
+function computeStats(project, activeMonthId, activePhase) {
+  const phase = activePhase || window.NS_ACTIVE_PHASE || 1;
+  const effectiveMonthId = activeMonthId || phaseActiveMonth(project, phase);
+  const inPhase = (pc) => (pc.phase || 1) === phase;
   const byPillar = {};
   const byCluster = {};
   let total = 0, approved = 0, awaiting = 0;
@@ -451,8 +533,9 @@ function computeStats(project, activeMonthId) {
         byCluster[c.id] = { total: 0, approved: 0, ready: false };
         continue;
       }
-      let cT = c.pieces.length, cA = 0;
-      for (const piece of c.pieces) {
+      const phasePieces = c.pieces.filter(inPhase);
+      let cT = phasePieces.length, cA = 0;
+      for (const piece of phasePieces) {
         total++;
         if (piece.status === "approved") { approved++; pA++; cA++; }
         const st = stageById[piece.status];
