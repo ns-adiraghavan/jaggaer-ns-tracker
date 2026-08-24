@@ -2549,7 +2549,7 @@
               "title": "Frontier AI Vs Procurement Native AI",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "marketing-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "revision_count": 1,
               "primary_keyword": "",
@@ -2572,7 +2572,8 @@
               "return_to_stage": null,
               "last_upload": "2026-08-12T14:29:12.882Z",
               "last_upload_by": "manager",
-              "phase": 1
+              "phase": 1,
+              "secondary_keyword": ""
             },
             {
               "id": "piece-66bmrt",
