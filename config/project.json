@@ -2,21 +2,31 @@
   "months": [
     {
       "id": "month-1",
-      "label": "Month 1 · May–Jun 2026",
+      "label": "Month 1 \u00b7 May\u2013Jun 2026",
       "active": true,
-      "start_date": "2026-05-21"
+      "start_date": "2026-05-21",
+      "phase": 1
     },
     {
       "id": "month-2",
-      "label": "Month 2 · Jun–Jul 2026",
+      "label": "Month 2 \u00b7 Jun\u2013Jul 2026",
       "active": false,
-      "start_date": "2026-06-18"
+      "start_date": "2026-06-18",
+      "phase": 1
     },
     {
       "id": "month-3",
-      "label": "Month 3 · Jul–Aug 2026",
+      "label": "Month 3 \u00b7 Jul\u2013Aug 2026",
       "active": false,
-      "start_date": "2026-07-16"
+      "start_date": "2026-07-16",
+      "phase": 1
+    },
+    {
+      "id": "p2-month-1",
+      "label": "Phase 2 \u00b7 Aug\u2013Sep 2026",
+      "active": false,
+      "start_date": "2026-08-25",
+      "phase": 2
     }
   ],
   "active_month": "month-1",
@@ -101,7 +111,7 @@
             },
             {
               "id": "p-c1-2",
-              "title": "What Are .md Files in Claude — and Why S2P Teams Can't Skip This Step",
+              "title": "What Are .md Files in Claude \u2014 and Why S2P Teams Can't Skip This Step",
               "format": "Educational Page",
               "assignee": "jason",
               "status": "approved",
@@ -132,7 +142,7 @@
             },
             {
               "id": "p-c1-3",
-              "title": "AI in S2P: What Claude Actually Delivers for Procurement in 2026 — Beyond the Hype",
+              "title": "AI in S2P: What Claude Actually Delivers for Procurement in 2026 \u2014 Beyond the Hype",
               "format": "FAQ Article",
               "assignee": "m-5jitd",
               "status": "approved",
@@ -241,7 +251,7 @@
                 "Path 3"
               ],
               "content_type": "ai-in-s2p",
-              "phase": 2,
+              "phase": 1,
               "funnel": "MOFU",
               "last_updated": "2026-08-05T08:12:54.736Z",
               "last_updated_by": "jason",
@@ -299,7 +309,7 @@
                 "Path 2"
               ],
               "content_type": "ai-in-s2p",
-              "phase": 2,
+              "phase": 1,
               "funnel": "MOFU",
               "last_updated": "2026-08-06T08:22:58.834Z",
               "last_updated_by": "m-5jitd",
@@ -375,7 +385,7 @@
                 "Path 3"
               ],
               "content_type": "ai-in-s2p",
-              "phase": 2,
+              "phase": 1,
               "funnel": "MOFU",
               "last_updated": "2026-08-05T06:07:59.526Z",
               "last_updated_by": "m-e10nz",
@@ -428,7 +438,7 @@
                 "Path 3"
               ],
               "content_type": "ai-in-s2p",
-              "phase": 2,
+              "phase": 1,
               "funnel": "MOFU",
               "deliverable_ext": "html",
               "last_upload": "2026-08-03T05:51:41.405Z",
@@ -473,7 +483,7 @@
             },
             {
               "id": "p-c3-3",
-              "title": "3 S2P Tasks You Can Do in Claude Right Now — With Prompts and Outputs",
+              "title": "3 S2P Tasks You Can Do in Claude Right Now \u2014 With Prompts and Outputs",
               "format": "How-to Guide",
               "assignee": "null",
               "status": "marketing-review",
@@ -545,7 +555,7 @@
                 "Path 3"
               ],
               "content_type": "ai-in-s2p",
-              "phase": 2,
+              "phase": 1,
               "funnel": "MOFU",
               "last_updated": "2026-08-10T04:45:49.501Z",
               "last_updated_by": "m-e10nz",
@@ -577,7 +587,7 @@
             },
             {
               "id": "p-c4-2",
-              "title": "Claude for S2P: Watch How It Works — Curated Videos and Original Jaggaer Webinars",
+              "title": "Claude for S2P: Watch How It Works \u2014 Curated Videos and Original Jaggaer Webinars",
               "format": "Webinar / Video Page",
               "assignee": "null",
               "status": "marketing-review",
@@ -624,7 +634,8 @@
             }
           ]
         }
-      ]
+      ],
+      "phase": 1
     },
     {
       "id": "discrete-manufacturing",
@@ -826,7 +837,7 @@
               "schedule_week": 3,
               "funnel": "TOFU",
               "url": "/supply-chain-visibility-beyond-tier-1",
-              "notes": "NEW — not previously in tracker | Words: 1,200–1,800",
+              "notes": "NEW \u2014 not previously in tracker | Words: 1,200\u20131,800",
               "content_type": "msv",
               "phase": 1,
               "last_upload": "2026-06-11T07:03:37.634Z",
@@ -857,7 +868,7 @@
               "schedule_week": 3,
               "funnel": "TOFU",
               "url": "/blog/supplier-financial-risk-signals-procurement",
-              "notes": "NEW — not previously in tracker | Words: 2,000–2,500",
+              "notes": "NEW \u2014 not previously in tracker | Words: 2,000\u20132,500",
               "content_type": "msv",
               "last_upload": "2026-06-11T06:58:23.691Z",
               "last_upload_by": "jason",
@@ -888,13 +899,13 @@
               "schedule_week": 3,
               "funnel": "MOFU",
               "url": "/predictive-supplier-risk-management",
-              "notes": "UPDATED — title refined, keyword updated | Words: 1,200–1,500",
+              "notes": "UPDATED \u2014 title refined, keyword updated | Words: 1,200\u20131,500",
               "content_type": "industry-specific",
               "last_upload": "2026-06-11T06:05:31.259Z",
               "last_upload_by": "m-5jitd",
               "last_updated": "2026-06-11T06:05:31.259Z",
               "last_updated_by": "m-5jitd",
-              "phase": 2,
+              "phase": 1,
               "deliverable_ext": "html",
               "publishing": {
                 "published_by": "Jovana",
@@ -918,9 +929,9 @@
               "schedule_week": 3,
               "funnel": "BOFU",
               "url": "/tier-2-supplier-bankruptcy-supply-chain-risk",
-              "notes": "UPDATED — title refined, keywords updated | Words: 2,500–4,000",
+              "notes": "UPDATED \u2014 title refined, keywords updated | Words: 2,500\u20134,000",
               "content_type": "industry-specific",
-              "phase": 2,
+              "phase": 1,
               "last_upload": "2026-07-22T11:47:12.320Z",
               "last_upload_by": "jason",
               "last_updated": "2026-07-22T11:47:12.320Z",
@@ -1079,7 +1090,7 @@
               "geography": "all",
               "schedule_week": 4,
               "content_type": "industry-specific",
-              "phase": 2,
+              "phase": 1,
               "funnel": "BOFU",
               "last_updated": "2026-08-18T06:55:09.595Z",
               "last_updated_by": "jason",
@@ -1140,7 +1151,7 @@
               "geography": "all",
               "schedule_week": 4,
               "content_type": "industry-specific",
-              "phase": 2,
+              "phase": 1,
               "funnel": "BOFU",
               "last_updated": "2026-08-17T06:03:56.874Z",
               "last_updated_by": "m-e10nz",
@@ -1218,7 +1229,8 @@
                 "live_url": "https://www.jaggaer.com/blog/why-procurement-is-the-backbone-of-supply-chains",
                 "performance_data": "",
                 "updated_at": "2026-07-28T10:45:56.315Z"
-              }
+              },
+              "phase": 1
             },
             {
               "id": "piece-c-yad8u-5-j6ps",
@@ -1474,12 +1486,13 @@
             }
           ]
         }
-      ]
+      ],
+      "phase": 1
     },
     {
       "id": "public-sector",
       "label": "Public Sector",
-      "subtitle": "UK · FR · ES",
+      "subtitle": "UK \u00b7 FR \u00b7 ES",
       "weight": null,
       "geography": "UK / FR / ES",
       "clusters": [
@@ -1534,7 +1547,7 @@
               "geography": "eu",
               "schedule_week": 2,
               "content_type": "msv",
-              "phase": 2,
+              "phase": 1,
               "funnel": "NA",
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -1861,7 +1874,7 @@
               "geography": "eu",
               "schedule_week": 4,
               "content_type": "industry-specific",
-              "phase": 2,
+              "phase": 1,
               "funnel": "BOFU",
               "status_history": [
                 {
@@ -1893,12 +1906,13 @@
             }
           ]
         }
-      ]
+      ],
+      "phase": 1
     },
     {
       "id": "higher-education",
       "label": "Higher Education",
-      "subtitle": "US · EU · UK",
+      "subtitle": "US \u00b7 EU \u00b7 UK",
       "weight": null,
       "geography": "US / EU / UK",
       "clusters": [
@@ -1972,7 +1986,7 @@
               "geography": "us",
               "schedule_week": 3,
               "content_type": "industry-specific",
-              "phase": 2,
+              "phase": 1,
               "funnel": "BOFU",
               "last_updated": "2026-07-31T07:23:45.911Z",
               "last_updated_by": "m-pifrn",
@@ -2068,7 +2082,7 @@
               "geography": "all",
               "schedule_week": 3,
               "content_type": "industry-specific",
-              "phase": 2,
+              "phase": 1,
               "funnel": "BOFU",
               "last_updated": "2026-07-31T08:46:00.082Z",
               "last_updated_by": "m-pifrn",
@@ -2121,7 +2135,7 @@
               "geography": "all",
               "schedule_week": 4,
               "content_type": "industry-specific",
-              "phase": 2,
+              "phase": 1,
               "funnel": "MOFU",
               "last_updated": "2026-08-17T13:08:42.530Z",
               "last_updated_by": "m-5jitd",
@@ -2158,7 +2172,8 @@
             }
           ]
         }
-      ]
+      ],
+      "phase": 1
     },
     {
       "id": "ad-hoc-articles",
@@ -2198,7 +2213,8 @@
                 "live_url": "https://www.jaggaer.com/blog/claude-fable-5-for-source-to-pay",
                 "performance_data": "",
                 "updated_at": "2026-07-10T13:47:31.794Z"
-              }
+              },
+              "phase": 1
             },
             {
               "id": "piece-jjmo5z",
@@ -2235,7 +2251,8 @@
                 "live_url": "https://www.jaggaer.com/blog/ai-in-procurement-closing-the-supply-chain-talent-gap",
                 "performance_data": "",
                 "updated_at": "2026-07-28T10:53:43.867Z"
-              }
+              },
+              "phase": 1
             },
             {
               "id": "piece-si3t6m",
@@ -2272,7 +2289,8 @@
                 "live_url": "https://www.jaggaer.com/blog/procurement-ai-adoption-gap-2026",
                 "performance_data": "",
                 "updated_at": "2026-08-03T10:57:30.324Z"
-              }
+              },
+              "phase": 1
             },
             {
               "id": "piece-cgx6uf",
@@ -2312,7 +2330,8 @@
               "return_to_stage": null,
               "last_upload": "2026-08-10T13:47:30.582Z",
               "last_upload_by": "manager",
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "phase": 1
             },
             {
               "id": "piece-3m8n1u",
@@ -2341,7 +2360,8 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-08-12T14:27:47.835Z",
-              "last_upload_by": "manager"
+              "last_upload_by": "manager",
+              "phase": 1
             },
             {
               "id": "piece-ct5t23",
@@ -2370,7 +2390,8 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-08-12T14:29:12.882Z",
-              "last_upload_by": "manager"
+              "last_upload_by": "manager",
+              "phase": 1
             },
             {
               "id": "piece-66bmrt",
@@ -2422,7 +2443,8 @@
                 "live_url": "https://www.jaggaer.com/blog/jaggaer-ceo-andrew-roszko-ai-governance-procurement",
                 "performance_data": "",
                 "updated_at": "2026-08-19T10:37:33.190Z"
-              }
+              },
+              "phase": 1
             },
             {
               "id": "piece-tswxjd",
@@ -2462,11 +2484,1245 @@
               "return_to_stage": null,
               "last_upload": "2026-08-14T10:35:43.310Z",
               "last_upload_by": "manager",
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "phase": 1
+            }
+          ]
+        }
+      ],
+      "phase": null
+    },
+    {
+      "id": "p2-geo",
+      "label": "GEO",
+      "phase": 2,
+      "clusters": [
+        {
+          "id": "p2-geo-w1",
+          "label": "Week 1 \u00b7 Aug 25-29",
+          "sequence": 1,
+          "intent": "scheduled",
+          "anchor_piece": "",
+          "month_id": "p2-month-1",
+          "pieces": [
+            {
+              "id": "p2-geo-best-procurement-software-for-manufacturing-teams-in-2026-8-",
+              "title": "Best Procurement Software for Manufacturing Teams in 2026: 8 Platforms Compared",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (Listicle)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Mon",
+              "planned_publish_date": "Aug 25, 2026"
+            },
+            {
+              "id": "p2-geo-best-procurement-software-for-higher-education-in-2026-8-pla",
+              "title": "Best Procurement Software for Higher Education in 2026: 8 Platforms Compared",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (Listicle)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Mon",
+              "planned_publish_date": "Aug 25, 2026"
+            },
+            {
+              "id": "p2-geo-best-procurement-software-for-public-sector-procurement-in-2",
+              "title": "Best Procurement Software for Public Sector Procurement in 2026: 8 Platforms Compared",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (Listicle)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Mon",
+              "planned_publish_date": "Aug 25, 2026"
+            },
+            {
+              "id": "p2-geo-best-procurement-software-for-enterprise-procurement-teams-i",
+              "title": "Best Procurement Software for Enterprise Procurement Teams in 2026: 8 Platforms Compared",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (Listicle)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Tue",
+              "planned_publish_date": "Aug 26, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-coupa",
+              "title": "Jaggaer Vs Coupa",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Tue",
+              "planned_publish_date": "Aug 26, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-sap-ariba",
+              "title": "Jaggaer Vs Sap Ariba",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Tue",
+              "planned_publish_date": "Aug 26, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-ramp",
+              "title": "Jaggaer Vs Ramp",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Wed",
+              "planned_publish_date": "Aug 27, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-ivalua",
+              "title": "Jaggaer Vs Ivalua",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Wed",
+              "planned_publish_date": "Aug 27, 2026"
+            },
+            {
+              "id": "p2-geo-best-procurement-software-for-government-agencies-in-2026-8-",
+              "title": "Best Procurement Software for Government Agencies in 2026: 8 Platforms Compared",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (Listicle)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Wed",
+              "planned_publish_date": "Aug 27, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-zip",
+              "title": "Jaggaer Vs Zip",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Thu",
+              "planned_publish_date": "Aug 28, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-oracle-procurement-cloud",
+              "title": "Jaggaer Vs Oracle Procurement Cloud",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Thu",
+              "planned_publish_date": "Aug 28, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-precoro",
+              "title": "Jaggaer Vs Precoro",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Thu",
+              "planned_publish_date": "Aug 28, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-spendflo",
+              "title": "Jaggaer Vs Spendflo",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Fri",
+              "planned_publish_date": "Aug 29, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-synertrade",
+              "title": "Jaggaer Vs Synertrade",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Fri",
+              "planned_publish_date": "Aug 29, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-workday-spend-management",
+              "title": "Jaggaer Vs Workday Spend Management",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 1,
+              "publish_day": "Fri",
+              "planned_publish_date": "Aug 29, 2026"
+            }
+          ]
+        },
+        {
+          "id": "p2-geo-w2",
+          "label": "Week 2 \u00b7 Sep 1-5",
+          "sequence": 2,
+          "intent": "scheduled",
+          "anchor_piece": "",
+          "month_id": "p2-month-1",
+          "pieces": [
+            {
+              "id": "p2-geo-jaggaer-vs-basware",
+              "title": "Jaggaer Vs Basware",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Mon",
+              "planned_publish_date": "Sep 01, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-gep-smart",
+              "title": "Jaggaer Vs Gep Smart",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Mon",
+              "planned_publish_date": "Sep 01, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-procurify",
+              "title": "Jaggaer Vs Procurify",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Mon",
+              "planned_publish_date": "Sep 01, 2026"
+            },
+            {
+              "id": "p2-geo-jaggaer-vs-tipalti",
+              "title": "Jaggaer Vs Tipalti",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Tue",
+              "planned_publish_date": "Sep 02, 2026"
+            },
+            {
+              "id": "p2-geo-best-procure-to-pay-software-for-manufacturing-procurement-t",
+              "title": "Best Procure-to-Pay Software for Manufacturing Procurement Teams in 2026: 8 Platforms Compared",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Listicle, Adjacent Vertical)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Wed",
+              "planned_publish_date": "Sep 03, 2026"
+            },
+            {
+              "id": "p2-geo-best-procure-to-pay-software-for-higher-education-in-2026-8-",
+              "title": "Best Procure-to-Pay Software for Higher Education in 2026: 8 Platforms Compared",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Listicle, Adjacent Vertical)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Thu",
+              "planned_publish_date": "Sep 04, 2026"
+            },
+            {
+              "id": "p2-geo-best-procure-to-pay-software-for-public-sector-procurement-i",
+              "title": "Best Procure-to-Pay Software for Public Sector Procurement in 2026: 8 Platforms Compared",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Listicle, Adjacent Vertical)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Thu",
+              "planned_publish_date": "Sep 04, 2026"
+            },
+            {
+              "id": "p2-geo-best-procure-to-pay-software-for-enterprise-procurement-team",
+              "title": "Best Procure-to-Pay Software for Enterprise Procurement Teams in 2026: 8 Platforms Compared",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Listicle, Adjacent Vertical)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Thu",
+              "planned_publish_date": "Sep 04, 2026"
+            },
+            {
+              "id": "p2-geo-tipalti-vs-ramp",
+              "title": "Tipalti Vs Ramp",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Fri",
+              "planned_publish_date": "Sep 05, 2026"
+            },
+            {
+              "id": "p2-geo-sap-ariba-vs-coupa",
+              "title": "Sap Ariba Vs Coupa",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Fri",
+              "planned_publish_date": "Sep 05, 2026"
+            },
+            {
+              "id": "p2-geo-coupa-vs-zip",
+              "title": "Coupa Vs Zip",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Fri",
+              "planned_publish_date": "Sep 05, 2026"
+            }
+          ]
+        },
+        {
+          "id": "p2-geo-w3",
+          "label": "Week 3 \u00b7 Sep 8-12",
+          "sequence": 3,
+          "intent": "scheduled",
+          "anchor_piece": "",
+          "month_id": "p2-month-1",
+          "pieces": [
+            {
+              "id": "p2-geo-jaggaer-vs-zycus",
+              "title": "Jaggaer Vs Zycus",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Mon",
+              "planned_publish_date": "Sep 08, 2026"
+            },
+            {
+              "id": "p2-geo-coupa-vs-tipalti",
+              "title": "Coupa Vs Tipalti",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Tue",
+              "planned_publish_date": "Sep 09, 2026"
+            },
+            {
+              "id": "p2-geo-zip-vs-ramp",
+              "title": "Zip Vs Ramp",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Tue",
+              "planned_publish_date": "Sep 09, 2026"
+            },
+            {
+              "id": "p2-geo-coupa-vs-ramp",
+              "title": "Coupa Vs Ramp",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Tue",
+              "planned_publish_date": "Sep 09, 2026"
+            },
+            {
+              "id": "p2-geo-coupa-vs-ivalua",
+              "title": "Coupa Vs Ivalua",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Tue",
+              "planned_publish_date": "Sep 09, 2026"
+            },
+            {
+              "id": "p2-geo-sap-ariba-vs-ramp",
+              "title": "Sap Ariba Vs Ramp",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Wed",
+              "planned_publish_date": "Sep 10, 2026"
+            },
+            {
+              "id": "p2-geo-basware-vs-ramp",
+              "title": "Basware Vs Ramp",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Wed",
+              "planned_publish_date": "Sep 10, 2026"
+            },
+            {
+              "id": "p2-geo-procurify-vs-ramp",
+              "title": "Procurify Vs Ramp",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Wed",
+              "planned_publish_date": "Sep 10, 2026"
+            },
+            {
+              "id": "p2-geo-ivalua-vs-ramp",
+              "title": "Ivalua Vs Ramp",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Wed",
+              "planned_publish_date": "Sep 10, 2026"
+            },
+            {
+              "id": "p2-geo-procurify-vs-precoro",
+              "title": "Procurify Vs Precoro",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Thu",
+              "planned_publish_date": "Sep 11, 2026"
+            },
+            {
+              "id": "p2-geo-coupa-vs-oracle-procurement-cloud",
+              "title": "Coupa Vs Oracle Procurement Cloud",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Thu",
+              "planned_publish_date": "Sep 11, 2026"
+            },
+            {
+              "id": "p2-geo-coupa-vs-basware",
+              "title": "Coupa Vs Basware",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Thu",
+              "planned_publish_date": "Sep 11, 2026"
+            },
+            {
+              "id": "p2-geo-zycus-vs-ramp",
+              "title": "Zycus Vs Ramp",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Thu",
+              "planned_publish_date": "Sep 11, 2026"
+            },
+            {
+              "id": "p2-geo-gep-smart-vs-ramp",
+              "title": "Gep Smart Vs Ramp",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Fri",
+              "planned_publish_date": "Sep 12, 2026"
+            },
+            {
+              "id": "p2-geo-gep-smart-vs-oracle-procurement-cloud",
+              "title": "Gep Smart Vs Oracle Procurement Cloud",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Fri",
+              "planned_publish_date": "Sep 12, 2026"
+            },
+            {
+              "id": "p2-geo-oracle-procurement-cloud-vs-workday-spend-management",
+              "title": "Oracle Procurement Cloud Vs Workday Spend Management",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Fri",
+              "planned_publish_date": "Sep 12, 2026"
+            }
+          ]
+        },
+        {
+          "id": "p2-geo-w4",
+          "label": "Week 4 \u00b7 Sep 15-19",
+          "sequence": 4,
+          "intent": "scheduled",
+          "anchor_piece": "",
+          "month_id": "p2-month-1",
+          "pieces": [
+            {
+              "id": "p2-geo-gep-smart-vs-tipalti",
+              "title": "Gep Smart Vs Tipalti",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Mon",
+              "planned_publish_date": "Sep 15, 2026"
+            },
+            {
+              "id": "p2-geo-oracle-procurement-cloud-vs-tipalti",
+              "title": "Oracle Procurement Cloud Vs Tipalti",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Mon",
+              "planned_publish_date": "Sep 15, 2026"
+            },
+            {
+              "id": "p2-geo-basware-vs-workday-spend-management",
+              "title": "Basware Vs Workday Spend Management",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Mon",
+              "planned_publish_date": "Sep 15, 2026"
+            },
+            {
+              "id": "p2-geo-gep-smart-vs-zycus",
+              "title": "Gep Smart Vs Zycus",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Tue",
+              "planned_publish_date": "Sep 16, 2026"
+            },
+            {
+              "id": "p2-geo-ivalua-vs-oracle-procurement-cloud",
+              "title": "Ivalua Vs Oracle Procurement Cloud",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 2 (Competitor vs Competitor)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Tue",
+              "planned_publish_date": "Sep 16, 2026"
+            },
+            {
+              "id": "p2-geo-tipalti-alternatives",
+              "title": "Tipalti Alternatives",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 3 (Alternatives)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Tue",
+              "planned_publish_date": "Sep 16, 2026"
+            },
+            {
+              "id": "p2-geo-ramp-alternatives",
+              "title": "Ramp Alternatives",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 3 (Alternatives)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Wed",
+              "planned_publish_date": "Sep 17, 2026"
+            },
+            {
+              "id": "p2-geo-coupa-alternatives",
+              "title": "Coupa Alternatives",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 3 (Alternatives)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Wed",
+              "planned_publish_date": "Sep 17, 2026"
+            },
+            {
+              "id": "p2-geo-zip-alternatives",
+              "title": "Zip Alternatives",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 3 (Alternatives)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Wed",
+              "planned_publish_date": "Sep 17, 2026"
+            },
+            {
+              "id": "p2-geo-procurify-alternatives",
+              "title": "Procurify Alternatives",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 3 (Alternatives)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Thu",
+              "planned_publish_date": "Sep 18, 2026"
+            },
+            {
+              "id": "p2-geo-sap-ariba-alternatives",
+              "title": "Sap Ariba Alternatives",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 3 (Alternatives)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Thu",
+              "planned_publish_date": "Sep 18, 2026"
+            },
+            {
+              "id": "p2-geo-precoro-alternatives",
+              "title": "Precoro Alternatives",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 3 (Alternatives)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Thu",
+              "planned_publish_date": "Sep 18, 2026"
+            },
+            {
+              "id": "p2-geo-zycus-alternatives",
+              "title": "Zycus Alternatives",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 3 (Alternatives)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Fri",
+              "planned_publish_date": "Sep 19, 2026"
+            },
+            {
+              "id": "p2-geo-ivalua-alternatives",
+              "title": "Ivalua Alternatives",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 3 (Alternatives)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Fri",
+              "planned_publish_date": "Sep 19, 2026"
+            },
+            {
+              "id": "p2-geo-basware-alternatives",
+              "title": "Basware Alternatives",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "geo",
+              "phase": 2,
+              "tier": "GEO Tier 3 (Alternatives)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "BOFU",
+              "geography": "all",
+              "schedule_week": 4,
+              "publish_day": "Fri",
+              "planned_publish_date": "Sep 19, 2026"
             }
           ]
         }
       ]
+    },
+    {
+      "id": "p2-seo",
+      "label": "SEO",
+      "phase": 2,
+      "clusters": [
+        {
+          "id": "p2-seo-w2",
+          "label": "Week 2 \u00b7 Sep 1-5",
+          "sequence": 2,
+          "intent": "scheduled",
+          "anchor_piece": "",
+          "month_id": "p2-month-1",
+          "pieces": [
+            {
+              "id": "p2-seo-procure-to-pay-process",
+              "title": "procure to pay process",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "seo",
+              "phase": 2,
+              "tier": "SEO Tier 1 (Quick Win)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "MOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Tue",
+              "planned_publish_date": "Sep 02, 2026"
+            },
+            {
+              "id": "p2-seo-procurement-analytics",
+              "title": "procurement analytics",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "seo",
+              "phase": 2,
+              "tier": "SEO Tier 1 (Quick Win)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "MOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Tue",
+              "planned_publish_date": "Sep 02, 2026"
+            },
+            {
+              "id": "p2-seo-procurement-transformation",
+              "title": "procurement transformation",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "seo",
+              "phase": 2,
+              "tier": "SEO Tier 1 (Quick Win)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "MOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Wed",
+              "planned_publish_date": "Sep 03, 2026"
+            },
+            {
+              "id": "p2-seo-b2b-procurement-platform",
+              "title": "b2b procurement platform",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "seo",
+              "phase": 2,
+              "tier": "SEO Tier 1 (Quick Win)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "MOFU",
+              "geography": "all",
+              "schedule_week": 2,
+              "publish_day": "Wed",
+              "planned_publish_date": "Sep 03, 2026"
+            }
+          ]
+        },
+        {
+          "id": "p2-seo-w3",
+          "label": "Week 3 \u00b7 Sep 8-12",
+          "sequence": 3,
+          "intent": "scheduled",
+          "anchor_piece": "",
+          "month_id": "p2-month-1",
+          "pieces": [
+            {
+              "id": "p2-seo-procurement-outsourcing",
+              "title": "procurement outsourcing",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "seo",
+              "phase": 2,
+              "tier": "SEO Tier 1 (Quick Win)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "MOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Mon",
+              "planned_publish_date": "Sep 08, 2026"
+            },
+            {
+              "id": "p2-seo-cloud-native-procurement-platform",
+              "title": "cloud native procurement platform",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "seo",
+              "phase": 2,
+              "tier": "SEO Tier 1 (Quick Win)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "MOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Mon",
+              "planned_publish_date": "Sep 08, 2026"
+            },
+            {
+              "id": "p2-seo-strategic-procurement",
+              "title": "strategic procurement",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "seo",
+              "phase": 2,
+              "tier": "SEO Tier 1 (Quick Win)",
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "MOFU",
+              "geography": "all",
+              "schedule_week": 3,
+              "publish_day": "Mon",
+              "planned_publish_date": "Sep 08, 2026"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p2-bofu",
+      "label": "BOFU",
+      "phase": 2,
+      "clusters": []
     }
   ],
   "team": {
@@ -2571,7 +3827,7 @@
         "body": "change to: Unfortunately, most disruptions don't come from Tier 1 suppliers.",
         "ts": "2026-06-02T13:16:45.683Z",
         "annotation": true,
-        "section": "¶54 — \"Most procurement teams have full visibil…\""
+        "section": "\u00b654 \u2014 \"Most procurement teams have full visibil\u2026\""
       },
       {
         "id": "ann-dhiagg",
@@ -2580,7 +3836,7 @@
         "body": "change first sentence to: \"This kind of failure is why supply chain visibility beyond Tier 1 is critical.\"",
         "ts": "2026-06-02T13:41:45.902Z",
         "annotation": true,
-        "section": "¶54 — \"That is what supply chain visibility bey…\""
+        "section": "\u00b654 \u2014 \"That is what supply chain visibility bey\u2026\""
       },
       {
         "id": "ann-fw8k18",
@@ -2589,7 +3845,7 @@
         "body": "Change the CTA above to promote this eBook: https://www.jaggaer.com/download/ebook-guide/agile-supply-chain",
         "ts": "2026-06-10T13:25:42.557Z",
         "annotation": true,
-        "section": "¶38 — \"Where Risk Actually Lives in the Supply …\"",
+        "section": "\u00b638 \u2014 \"Where Risk Actually Lives in the Supply \u2026\"",
         "revision": 4
       },
       {
@@ -2599,7 +3855,7 @@
         "body": "Change the CTA above to a demo CTA",
         "ts": "2026-06-10T13:27:16.763Z",
         "annotation": true,
-        "section": "¶40 — \"The Cost of Invisible Supply Chain Risk …\"",
+        "section": "\u00b640 \u2014 \"The Cost of Invisible Supply Chain Risk \u2026\"",
         "revision": 4
       },
       {
@@ -2609,7 +3865,7 @@
         "body": "change the CTA above to promote this whitepaper: https://www.jaggaer.com/download/whitepaper/supplier-risk-vendor-onboarding-trustpair",
         "ts": "2026-06-10T13:28:51.556Z",
         "annotation": true,
-        "section": "¶42 — \"What True Multi-Tier Visibility Requires…\"",
+        "section": "\u00b642 \u2014 \"What True Multi-Tier Visibility Requires\u2026\"",
         "revision": 4
       },
       {
@@ -2619,7 +3875,7 @@
         "body": "Drop cta above, we have the demo CTA right after it",
         "ts": "2026-06-10T13:29:09.317Z",
         "annotation": true,
-        "section": "¶28 — \"The organizations that navigated 2025's …\"",
+        "section": "\u00b628 \u2014 \"The organizations that navigated 2025's \u2026\"",
         "revision": 4
       },
       {
@@ -2637,7 +3893,7 @@
         "body": "I found a better assets, please use this one instead of the eBook I previously suggested: https://www.jaggaer.com/wp-content/uploads/Seven-Strategies-to-Cut-Costs-Reduce-Risk-and-Drive-Margin-Expansion_CFO.pdf",
         "ts": "2026-06-10T13:52:48.962Z",
         "annotation": true,
-        "section": "¶38 — \"Where Risk Actually Lives in the Supply …\"",
+        "section": "\u00b638 \u2014 \"Where Risk Actually Lives in the Supply \u2026\"",
         "revision": 4
       }
     ],
@@ -2657,7 +3913,7 @@
         "body": "Change CTA block to promote https://www.jaggaer.com/download/whitepaper/supplier-risk-vendor-onboarding-trustpair",
         "ts": "2026-06-10T13:32:26.338Z",
         "annotation": true,
-        "section": "¶8 — \"Supplier Risk Oversight…\"",
+        "section": "\u00b68 \u2014 \"Supplier Risk Oversight\u2026\"",
         "revision": 3
       },
       {
@@ -2667,7 +3923,7 @@
         "body": "Change to a demo cta",
         "ts": "2026-06-10T13:34:05.438Z",
         "annotation": true,
-        "section": "¶20 — \"Get a 360° Supplier Snapshot…\"",
+        "section": "\u00b620 \u2014 \"Get a 360\u00b0 Supplier Snapshot\u2026\"",
         "revision": 3
       },
       {
@@ -2677,7 +3933,7 @@
         "body": "change cta to promote https://www.jaggaer.com/download/ebook-guide/agile-supply-chain",
         "ts": "2026-06-10T13:34:48.627Z",
         "annotation": true,
-        "section": "¶30 — \"Monitor Financial Signals…\"",
+        "section": "\u00b630 \u2014 \"Monitor Financial Signals\u2026\"",
         "revision": 3
       },
       {
@@ -2705,7 +3961,7 @@
         "body": "change cta to promote https://www.jaggaer.com/download/whitepaper/supplier-risk-vendor-onboarding-trustpair",
         "ts": "2026-06-10T13:45:16.301Z",
         "annotation": true,
-        "section": "¶22 — \"End-To-End Risk Management…\"",
+        "section": "\u00b622 \u2014 \"End-To-End Risk Management\u2026\"",
         "revision": 4
       },
       {
@@ -2715,7 +3971,7 @@
         "body": "Change cta to promote https://www.jaggaer.com/download/ebook-guide/agile-supply-chain",
         "ts": "2026-06-10T13:51:02.225Z",
         "annotation": true,
-        "section": "¶3 — \"Close the Reactive Gap…\"",
+        "section": "\u00b63 \u2014 \"Close the Reactive Gap\u2026\"",
         "revision": 4
       },
       {
@@ -2743,7 +3999,7 @@
         "body": "test",
         "ts": "2026-08-21T09:59:56.500Z",
         "annotation": true,
-        "section": "¶48 — \"How to Install Claude: A Step-by-Step Gu…\"",
+        "section": "\u00b648 \u2014 \"How to Install Claude: A Step-by-Step Gu\u2026\"",
         "revision": 2
       }
     ],
@@ -2813,7 +4069,7 @@
         "body": "Test",
         "ts": "2026-08-19T04:04:46.264Z",
         "annotation": true,
-        "section": "¶52 — \"Stop Manually Hunting for Risky Clauses …\"",
+        "section": "\u00b652 \u2014 \"Stop Manually Hunting for Risky Clauses \u2026\"",
         "revision": 1
       },
       {
@@ -2823,7 +4079,7 @@
         "body": "test",
         "ts": "2026-08-19T14:05:27.950Z",
         "annotation": true,
-        "section": "¶1 — \"Teams use Claude to review procurement c…\"",
+        "section": "\u00b61 \u2014 \"Teams use Claude to review procurement c\u2026\"",
         "revision": 1
       }
     ],
@@ -2853,7 +4109,7 @@
         "body": "test",
         "ts": "2026-08-21T09:49:41.650Z",
         "annotation": true,
-        "section": "¶43 — \"What Happens When You Ask Claude to Audi…\"",
+        "section": "\u00b643 \u2014 \"What Happens When You Ask Claude to Audi\u2026\"",
         "revision": 2
       },
       {
@@ -2863,7 +4119,7 @@
         "body": "test",
         "ts": "2026-08-21T09:49:52.658Z",
         "annotation": true,
-        "section": "¶1 — \"When Claude audits a real supplier contr…\"",
+        "section": "\u00b61 \u2014 \"When Claude audits a real supplier contr\u2026\"",
         "revision": 2
       }
     ],
@@ -3185,7 +4441,7 @@
         "body": "Procurement Governance and Compliance in the Age of AI: JAGGAER CEO Andrew Roszko in Procurement Magazine",
         "ts": "2026-08-17T10:18:32.912Z",
         "annotation": true,
-        "section": "¶15 — \"Procurement Magazine:  JAGGAER CEO on AI…\"",
+        "section": "\u00b615 \u2014 \"Procurement Magazine:  JAGGAER CEO on AI\u2026\"",
         "revision": 2
       },
       {
@@ -3195,7 +4451,7 @@
         "body": "Before this part, add a brief explanation: (E.G. - Procurement governance and compliance is the set of policies, controls, and oversight structures that determine how an organisation buys, manages suppliers, and manages risk. As AI becomes embedded in core procurement decisions, getting that governance framework right from day one has become critical.) - or similar, no need to copy word by word, but start with the kw: procurement governance and compliance",
         "ts": "2026-08-17T10:21:09.164Z",
         "annotation": true,
-        "section": "¶1 — \"Procurement Magazine's August 2026 issue…\"",
+        "section": "\u00b61 \u2014 \"Procurement Magazine's August 2026 issue\u2026\"",
         "revision": 2
       },
       {
@@ -3205,7 +4461,7 @@
         "body": "AI Readiness vs. AI Capability in Procurement",
         "ts": "2026-08-17T10:21:23.486Z",
         "annotation": true,
-        "section": "¶20 — \"Readiness before deployment…\"",
+        "section": "\u00b620 \u2014 \"Readiness before deployment\u2026\"",
         "revision": 2
       },
       {
@@ -3215,7 +4471,7 @@
         "body": "Agentic AI in Procurement: Guardrails From Day One",
         "ts": "2026-08-17T10:23:07.772Z",
         "annotation": true,
-        "section": "¶24 — \"Guardrails in the architecture…\"",
+        "section": "\u00b624 \u2014 \"Guardrails in the architecture\u2026\"",
         "revision": 2
       },
       {
@@ -3225,7 +4481,7 @@
         "body": "Why procurement governance must be built in, not bolted on",
         "ts": "2026-08-17T10:23:23.817Z",
         "annotation": true,
-        "section": "¶22 — \"Governance timing…\"",
+        "section": "\u00b622 \u2014 \"Governance timing\u2026\"",
         "revision": 2
       },
       {
@@ -3245,7 +4501,7 @@
         "body": "AI Readiness vs. AI Capability in Procurement",
         "ts": "2026-08-17T10:30:11.724Z",
         "annotation": true,
-        "section": "¶16 — \"AI Capability Is Not the Same as AI Read…\"",
+        "section": "\u00b616 \u2014 \"AI Capability Is Not the Same as AI Read\u2026\"",
         "revision": 2
       },
       {
@@ -3255,7 +4511,7 @@
         "body": "Why Procurement Governance Must be Built in, Not Bolted on",
         "ts": "2026-08-17T10:31:00.308Z",
         "annotation": true,
-        "section": "¶17 — \"Governance Should Enable AI, Not Slow It…\"",
+        "section": "\u00b617 \u2014 \"Governance Should Enable AI, Not Slow It\u2026\"",
         "revision": 2
       },
       {
@@ -3265,7 +4521,7 @@
         "body": "Agentic AI in Procurement: Guardrails from Day One",
         "ts": "2026-08-17T10:31:36.471Z",
         "annotation": true,
-        "section": "¶18 — \"Build the Guardrails into AI From the St…\"",
+        "section": "\u00b618 \u2014 \"Build the Guardrails into AI From the St\u2026\"",
         "revision": 2
       },
       {
@@ -3275,7 +4531,7 @@
         "body": "From AI Experimentation to Scalable, Governed Procurement",
         "ts": "2026-08-17T10:32:08.826Z",
         "annotation": true,
-        "section": "¶19 — \"From AI Governance to Scalable Procureme…\"",
+        "section": "\u00b619 \u2014 \"From AI Governance to Scalable Procureme\u2026\"",
         "revision": 2
       },
       {
@@ -3285,7 +4541,7 @@
         "body": "Below this part (above chart) add new H2: What Good Procurement Governance and Compliance Looks Like in Practice",
         "ts": "2026-08-17T10:39:01.922Z",
         "annotation": true,
-        "section": "¶1 — \"Procurement Magazine's August 2026 issue…\"",
+        "section": "\u00b61 \u2014 \"Procurement Magazine's August 2026 issue\u2026\"",
         "revision": 2
       },
       {
@@ -3305,7 +4561,7 @@
         "body": "in the purple part of the chart, add one more part above: The JAGGAER Procurement Governance Framework: Five Pillars (all should be in chart in purple) - and change the \"check\" to \"pillar\"",
         "ts": "2026-08-17T10:41:47.526Z",
         "annotation": true,
-        "section": "¶20 — \"Readiness before deployment…\"",
+        "section": "\u00b620 \u2014 \"Readiness before deployment\u2026\"",
         "revision": 2
       },
       {
@@ -3315,7 +4571,7 @@
         "body": "<blockquote>\n  <p>\"AI compliance isn't a brake on innovation; it's a governance discipline.\"</p>\n  Andrew Roszko, CEO, JAGGAER\n</blockquote>",
         "ts": "2026-08-17T10:42:59.528Z",
         "annotation": true,
-        "section": "¶7 — \"\"AI compliance isn't a brake on innovati…\"",
+        "section": "\u00b67 \u2014 \"\"AI compliance isn't a brake on innovati\u2026\"",
         "revision": 2
       },
       {
@@ -3325,7 +4581,7 @@
         "body": "Currently the ISO 27001, ISO 27017, ISO 27018, and GDPR badges sit at the bottom of the page with no surrounding copy. - change their placement to here",
         "ts": "2026-08-17T10:49:43.481Z",
         "annotation": true,
-        "section": "¶9 — \"In practice, that means accounting for s…\"",
+        "section": "\u00b69 \u2014 \"In practice, that means accounting for s\u2026\"",
         "revision": 2
       },
       {
@@ -3335,7 +4591,7 @@
         "body": "Change this part and link to product page The next step is seeing how this works inside JAGGAER's Source-to-Pay platform. - https://www.jaggaer.com/solutions/source-to-pay",
         "ts": "2026-08-17T11:02:02.338Z",
         "annotation": true,
-        "section": "¶11 — \"This is the space JAGGAER operates in. I…\"",
+        "section": "\u00b611 \u2014 \"This is the space JAGGAER operates in. I\u2026\"",
         "revision": 2
       },
       {
@@ -3355,7 +4611,7 @@
         "body": "test",
         "ts": "2026-08-19T08:47:59.119Z",
         "annotation": true,
-        "section": "¶37 — \"What Central Government Procurement Lead…\"",
+        "section": "\u00b637 \u2014 \"What Central Government Procurement Lead\u2026\"",
         "revision": 1
       }
     ]
@@ -3363,7 +4619,7 @@
   "build_with_claude": [
     {
       "name": "contract-analyser",
-      "description": "Drag-drop MSA → Claude returns redline summary + risk flags.",
+      "description": "Drag-drop MSA \u2192 Claude returns redline summary + risk flags.",
       "status": "Live",
       "updated": "2026-05-14",
       "path": "build-with-claude/contract-analyser"
@@ -3463,7 +4719,7 @@
     {
       "week": 4,
       "label": "Week 4",
-      "goal": "Convert audiences built in weeks 1–3 to platform evaluation intent",
+      "goal": "Convert audiences built in weeks 1\u20133 to platform evaluation intent",
       "slots": [
         {
           "pillar": "ai-in-s2p",
@@ -7419,7 +8675,7 @@
               "position": 1
             },
             {
-              "query": "quels sont les principaux indicateurs d'alerte précoce pour les risques \nliés au réseau de fournisseurs ?",
+              "query": "quels sont les principaux indicateurs d'alerte pr\u00e9coce pour les risques \nli\u00e9s au r\u00e9seau de fournisseurs ?",
               "clicks": 0,
               "impressions": 1,
               "ctr": 0,
@@ -7461,7 +8717,7 @@
               "position": 6
             },
             {
-              "query": "welche procurement tools bieten funktionen für lieferkettenresilienz und \nrisikomanagement",
+              "query": "welche procurement tools bieten funktionen f\u00fcr lieferkettenresilienz und \nrisikomanagement",
               "clicks": 0,
               "impressions": 1,
               "ctr": 0,
@@ -7764,7 +9020,7 @@
               "position": 7
             },
             {
-              "query": "meilleurs outils de gestion du risque fournisseur pour équipes procurement",
+              "query": "meilleurs outils de gestion du risque fournisseur pour \u00e9quipes procurement",
               "clicks": 0,
               "impressions": 5,
               "ctr": 0,
@@ -9884,5 +11140,7 @@
         }
       ]
     }
-  }
+  },
+  "active_phase": 1,
+  "phase2_active_month": "p2-month-1"
 }
