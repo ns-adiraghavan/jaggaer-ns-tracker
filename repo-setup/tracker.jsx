@@ -608,7 +608,7 @@ function InlineCell({ value, type, options, onSave, children, className }) {
 
 
 // ─── Activity Bar — recent uploads/feedback, phase-filtered ─────────────────
-function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveFilter, currentUser }) {
+function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveFilter, currentUser, activePhase }) {
   const PANEL = { fontFamily: "Noto Sans, sans-serif" };
   const baseStages = (project.workflow_stages && project.workflow_stages.length)
     ? project.workflow_stages : DEFAULT_WORKFLOW_STAGES;
@@ -634,9 +634,12 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
   const myActions = [], recent = [];
   const byStage = {};
 
+  const phase = activePhase || 1;
   for (const pillar of project.pillars) {
+    if ((pillar.phase || 1) !== phase) continue; // phase-scoped
     for (const cluster of pillar.clusters) {
       for (const piece of cluster.pieces) {
+        if ((piece.phase || 1) !== phase) continue;
         if (!terminalIds.has(piece.status) && myTurnStageIds.has(piece.status)) {
           myActions.push({ piece, cluster, pillar });
         }
@@ -685,6 +688,8 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
 
   if (chips.length === 0) return null;
 
+  const [collapsed, setCollapsed] = useStateTR(false);
+
   function relTime(iso) {
     if (!iso) return "";
     const diff = Date.now() - new Date(iso).getTime();
@@ -700,10 +705,21 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
     <div style={{ borderBottom: "1px solid #e0dbd4", background: "#faf8f4" }}>
       {/* ── Chip row ── */}
       <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "8px 20px", flexWrap: "wrap" }}>
-        <span style={{ ...PANEL, fontSize: "0.63rem", fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: "#aaa", marginRight: "4px" }}>
-          Actions
-        </span>
-        {chips.map(chip => {
+        {/* Collapse toggle */}
+        <button
+          onClick={() => { setCollapsed(c => !c); if (!collapsed) setActiveFilter(null); }}
+          style={{
+            ...PANEL, fontSize: "0.63rem", fontWeight: 700, letterSpacing: "0.09em",
+            textTransform: "uppercase", color: "#aaa",
+            background: "transparent", border: "none", cursor: "pointer",
+            marginRight: "4px", display: "flex", alignItems: "center", gap: "4px",
+            padding: 0,
+          }}
+          title={collapsed ? "Expand action bar" : "Collapse action bar"}
+        >
+          Actions <span style={{ fontSize: "0.65rem", opacity: 0.7 }}>{collapsed ? "▸" : "▾"}</span>
+        </button>
+        {!collapsed && chips.map(chip => {
           const isActive = activeFilter === chip.id;
           return (
             <button
@@ -721,7 +737,7 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
             >{chip.label}</button>
           );
         })}
-        {activeFilter && (
+        {!collapsed && activeFilter && (
           <button
             onClick={() => setActiveFilter(null)}
             style={{
@@ -734,7 +750,7 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
       </div>
 
       {/* ── Inline expanded list when filter active ── */}
-      {activeFilter && (() => {
+      {!collapsed && activeFilter && (() => {
         const chip = chips.find(c => c.id === activeFilter);
         if (!chip) return null;
         return (
@@ -888,7 +904,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
   // building a parallel data structure, we auto-create one dedicated pillar with
   // a single catch-all cluster the first time anyone adds an ad-hoc piece.
   // Returns the new piece id.
-  function addAdHocPiece(title, currentUser) {
+  function addAdHocPiece(title, currentUser, contentType) {
     let newPieceId = null;
     setProject(prev => {
       const next = JSON.parse(JSON.stringify(prev));
@@ -909,7 +925,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         format: "Ad-Hoc Article",
         assignee: currentUser?.id || "",
         status: "writing", // NS uploads directly — no brief/SME-review gate for ad-hoc
-        content_type: "ad-hoc",
+        content_type: contentType || "ad-hoc",
         phase: window.NS_ACTIVE_PHASE || 1,
         schedule_month: window.NS_phaseMonth ? window.NS_phaseMonth(next, window.NS_ACTIVE_PHASE || 1) : next.active_month,
         revision_count: 0,
@@ -965,8 +981,8 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
       {showAdHocModal && (
         <AdHocCreateModal
           onClose={() => setShowAdHocModal(false)}
-          onCreate={(title) => {
-            const newId = addAdHocPiece(title, currentUser);
+          onCreate={(title, contentType) => {
+            const newId = addAdHocPiece(title, currentUser, contentType);
             setShowAdHocModal(false);
             if (newId) setOpenPiece({ clusterId: "c-ad-hoc", pieceId: newId, mode: "upload" });
           }}
@@ -974,7 +990,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
       )}
       {activeTab === "tracker" && (
         <>
-          <FilterBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} activeFilter={activeFilter} setActiveFilter={setActiveFilter} currentUser={currentUser} />
+          <FilterBar project={project} currentWeek={currentWeek} onOpenPiece={setOpenPiece} activeFilter={activeFilter} setActiveFilter={setActiveFilter} currentUser={currentUser} activePhase={phase} />
         </>
       )}
       {activeTab === "tracker" && viewMode === "cards" && (
@@ -1182,21 +1198,33 @@ function NotificationBell({ project, currentUser, onOpenPiece }) {
 // the finished HTML immediately. Open to any NS user, not gated by adminMode.
 function AdHocCreateModal({ onClose, onCreate }) {
   const [title, setTitle] = useStateTR("");
+  const [category, setCategory] = useStateTR("ad-hoc");
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
+
+  // Category options: always show standard types; Phase 2 types included
+  const CATEGORY_OPTIONS = [
+    { id: "ad-hoc",            label: "Ad-Hoc (no category)",  color: "#c8401a" },
+    { id: "msv",               label: "MSV-Driven",            color: "#1a6a3a" },
+    { id: "ai-in-s2p",         label: "AI in S2P (Claude)",    color: "#1e4fa8" },
+    { id: "industry-specific", label: "Industry-Specific",     color: "#784212" },
+    { id: "geo",               label: "GEO (Phase 2)",         color: "#5a3d9e" },
+    { id: "seo",               label: "SEO (Phase 2)",         color: "#0e6655" },
+  ];
+
   return (
     <div
       style={{ position: "fixed", inset: 0, background: "rgba(17,24,32,0.45)", zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center" }}
       onClick={onClose}
     >
       <div
-        style={{ background: "#fff", borderRadius: "5px", padding: "24px", width: "420px", maxWidth: "90vw", boxShadow: "0 12px 40px rgba(0,0,0,0.25)" }}
+        style={{ background: "#fff", borderRadius: "5px", padding: "24px", width: "460px", maxWidth: "90vw", boxShadow: "0 12px 40px rgba(0,0,0,0.25)" }}
         onClick={e => e.stopPropagation()}
       >
         <div style={{ ...FONT, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#c8401a", marginBottom: "6px" }}>
           New Ad-Hoc Article
         </div>
         <p style={{ ...FONT, fontSize: "0.78rem", color: "#666", marginTop: 0, marginBottom: "16px", lineHeight: 1.5 }}>
-          Expedited content outside the planned calendar. Drop a topic, then upload the finished HTML — any Jaggaer reviewer can approve or send it back, no Abhishek/Vizna/Ed/CTA gates.
+          Expedited content outside the planned calendar. Any Jaggaer reviewer can approve or send back — no standard review gates.
         </p>
         <input
           autoFocus
@@ -1204,19 +1232,41 @@ function AdHocCreateModal({ onClose, onCreate }) {
           value={title}
           onChange={e => setTitle(e.target.value)}
           placeholder="Article topic / working title"
-          onKeyDown={e => { if (e.key === "Enter" && title.trim()) onCreate(title); }}
+          onKeyDown={e => { if (e.key === "Enter" && title.trim()) onCreate(title, category); }}
           style={{
             ...FONT, fontSize: "0.85rem", width: "100%",
             border: "1px solid #e8e3da", borderRadius: "3px",
             padding: "9px 12px", outline: "none", boxSizing: "border-box",
           }}
         />
-        <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", marginTop: "18px" }}>
+        {/* Optional category */}
+        <div style={{ marginTop: "14px" }}>
+          <div style={{ ...FONT, fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#888", marginBottom: "8px" }}>
+            Category <span style={{ fontWeight: 400, textTransform: "none", letterSpacing: 0 }}>(optional)</span>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+            {CATEGORY_OPTIONS.map(opt => (
+              <button
+                key={opt.id}
+                onClick={() => setCategory(opt.id)}
+                style={{
+                  ...FONT, fontSize: "0.7rem", fontWeight: 600,
+                  padding: "4px 10px", borderRadius: "3px", cursor: "pointer",
+                  border: `1px solid ${category === opt.id ? opt.color : "#e0dbd4"}`,
+                  background: category === opt.id ? opt.color + "18" : "transparent",
+                  color: category === opt.id ? opt.color : "#888",
+                  transition: "all 0.12s",
+                }}
+              >{opt.label}</button>
+            ))}
+          </div>
+        </div>
+        <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", marginTop: "20px" }}>
           <button onClick={onClose} style={{ ...FONT, fontSize: "0.78rem", fontWeight: 600, color: "#888", background: "none", border: "none", cursor: "pointer", padding: "8px 10px" }}>
             Cancel
           </button>
           <button
-            onClick={() => title.trim() && onCreate(title)}
+            onClick={() => title.trim() && onCreate(title, category)}
             disabled={!title.trim()}
             style={{
               ...FONT, fontSize: "0.78rem", fontWeight: 700,
@@ -3269,9 +3319,16 @@ function PublishingInfoSection({ piece, cluster, project, currentUser, updatePie
     return e => setForm(f => ({ ...f, [key]: e.target.value }));
   }
   function save() {
-    updatePiece(cluster.id, piece.id, {
-      publishing: { ...pub, ...form, updated_at: new Date().toISOString() },
-    });
+    const updates = { publishing: { ...pub, ...form, updated_at: new Date().toISOString() } };
+    // Auto-promote approved → live when a live_url is added for the first time.
+    if (form.live_url && form.live_url.trim() && piece.status === "approved") {
+      updates.status = "live";
+      updates.status_history = [
+        ...(piece.status_history || []),
+        { stage: "live", ts: new Date().toISOString(), by: currentUser?.id || null },
+      ];
+    }
+    updatePiece(cluster.id, piece.id, updates);
     setSaved(true);
     setTimeout(() => { setSaved(false); setEditing(false); }, 1200);
   }

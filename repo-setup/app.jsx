@@ -258,6 +258,27 @@ function App() {
         if (!stillValid) { clearSession(); setCurrentUser(null); }
       }
       if (window.NS_syncWorkflow) window.NS_syncWorkflow(project);
+      // Retro-migration: promote approved → live for any piece that already has a live_url.
+      // This is safe to run on every load — it only touches pieces with status "approved"
+      // and a non-empty live_url; it is idempotent once they're already "live".
+      (function retroLiveMigration(proj) {
+        let changed = false;
+        for (const pillar of proj.pillars) {
+          for (const cluster of pillar.clusters) {
+            for (const piece of cluster.pieces) {
+              if (piece.status === "approved" && piece.publishing && piece.publishing.live_url) {
+                piece.status = "live";
+                piece.status_history = [
+                  ...(piece.status_history || []),
+                  { stage: "live", ts: piece.publishing.updated_at || new Date().toISOString(), by: piece.publishing.published_by || null },
+                ];
+                changed = true;
+              }
+            }
+          }
+        }
+        return changed;
+      })(project);
       setProject(project);
       setSource(source);
       setSha(sha);
