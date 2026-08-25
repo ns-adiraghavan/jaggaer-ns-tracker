@@ -2727,11 +2727,11 @@
               "title": "How to Evaluate Procurement AI Vendors",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "ad-hoc-review",
+              "status": "not-started",
               "content_type": "ad-hoc",
               "phase": 2,
               "schedule_month": "p2-month-1",
-              "revision_count": 1,
+              "revision_count": 2,
               "primary_keyword": "",
               "geography": "all",
               "status_history": [
@@ -2744,13 +2744,18 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-08-25T12:57:17.406Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "not-started",
+                  "ts": "2026-08-25T16:26:18.578Z",
+                  "by": "manager"
                 }
               ],
-              "last_updated": "2026-08-25T12:57:17.406Z",
+              "last_updated": "2026-08-25T16:26:18.578Z",
               "last_updated_by": "manager",
               "deliverable_ext": "html",
               "return_to_stage": null,
-              "last_upload": "2026-08-25T12:57:17.406Z",
+              "last_upload": "2026-08-25T16:26:18.578Z",
               "last_upload_by": "manager"
             }
           ]
