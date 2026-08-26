@@ -4571,6 +4571,16 @@
         "body": "(no note)",
         "ts": "2026-07-13T11:09:01.900Z",
         "stage": "stage-nq11b"
+      },
+      {
+        "id": "ann-9gq1eh",
+        "author": "anna",
+        "verdict": "question",
+        "body": "Link to Homepage, www.jaggaer.com.",
+        "ts": "2026-08-26T14:20:06.073Z",
+        "annotation": true,
+        "section": "¶2 — \"Want to read the steps first? The full t…\"",
+        "revision": 1
       }
     ],
     "p-dm1-3": [
