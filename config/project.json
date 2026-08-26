@@ -2859,7 +2859,7 @@
               "title": "Best Procurement Software for Higher Education in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (Listicle)",
@@ -2871,12 +2871,12 @@
               "schedule_week": 1,
               "publish_day": "Mon",
               "planned_publish_date": "Aug 25, 2026",
-              "revision_count": 2,
+              "revision_count": 3,
               "deliverable_ext": "html",
               "return_to_stage": null,
-              "last_upload": "2026-08-26T07:10:44.613Z",
+              "last_upload": "2026-08-26T11:55:25.518Z",
               "last_upload_by": "jason",
-              "last_updated": "2026-08-26T07:10:44.613Z",
+              "last_updated": "2026-08-26T11:55:25.518Z",
               "last_updated_by": "jason",
               "status_history": [
                 {
@@ -2887,6 +2887,11 @@
                 {
                   "stage": "ed-review",
                   "ts": "2026-08-26T07:10:44.613Z",
+                  "by": "jason"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-08-26T11:55:25.518Z",
                   "by": "jason"
                 }
               ]
