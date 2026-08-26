@@ -411,7 +411,7 @@
               "title": "How to Use Claude to Find Alternative Suppliers by Country or Category",
               "format": "MD File / Tutorial",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "use Claude find alternative suppliers procurement",
               "secondary_keyword": "Claude supplier recommendation S2P",
@@ -437,6 +437,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-05T06:07:59.526Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-26T12:27:46.810Z",
+                  "by": "m-izu4e"
                 }
               ],
               "return_to_stage": null,
@@ -457,7 +462,14 @@
               "brief_last_updated": "2026-07-28T13:05:55.043Z",
               "last_upload": "2026-08-05T06:07:59.526Z",
               "last_upload_by": "m-e10nz",
-              "deliverable_ext": "html"
+              "deliverable_ext": "html",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-26",
+                "live_url": "https://www.jaggaer.com/blog/claude-alternative-suppliers-country-category",
+                "performance_data": "",
+                "updated_at": "2026-08-26T12:27:46.810Z"
+              }
             },
             {
               "id": "p-c3-2",
