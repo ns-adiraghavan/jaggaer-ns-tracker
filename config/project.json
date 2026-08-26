@@ -2031,7 +2031,7 @@
               "title": "What Central Government Procurement Leaders Actually Want in a Platform for 2026",
               "format": "Q&A Piece",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "central government procurement head platform criteria",
               "secondary_keyword": "government CPO platform requirements 2026",
@@ -2051,6 +2051,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-17T06:32:42.512Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-26T11:43:33.406Z",
+                  "by": "m-izu4e"
                 }
               ],
               "brief_files": [
@@ -2067,7 +2072,14 @@
               "last_updated": "2026-08-17T06:32:42.512Z",
               "last_updated_by": "jason",
               "deliverable_ext": "html",
-              "return_to_stage": null
+              "return_to_stage": null,
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-26",
+                "live_url": "https://www.jaggaer.com/blog/central-government-procurement-platform-criteria-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-26T11:43:33.406Z"
+              }
             }
           ]
         }
