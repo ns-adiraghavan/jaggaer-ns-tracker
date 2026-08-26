@@ -541,7 +541,7 @@
               "title": "3 S2P Tasks You Can Do in Claude Right Now — With Prompts and Outputs",
               "format": "How-to Guide",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "Claude S2P tasks procurement prompts guide",
               "secondary_keyword": "AI sourcing contracts supplier procurement",
@@ -566,6 +566,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-07T06:46:44.319Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-26T15:35:57.252Z",
+                  "by": "m-izu4e"
                 }
               ],
               "return_to_stage": null,
@@ -580,7 +585,14 @@
               "brief_last_updated": "2026-07-28T14:13:58.627Z",
               "last_upload": "2026-08-07T06:46:44.319Z",
               "last_upload_by": "jason",
-              "deliverable_ext": "html"
+              "deliverable_ext": "html",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-26",
+                "live_url": "https://www.jaggaer.com/blog/claude-s2p-tasks-prompts-outputs",
+                "performance_data": "",
+                "updated_at": "2026-08-26T15:35:57.251Z"
+              }
             }
           ]
         },
