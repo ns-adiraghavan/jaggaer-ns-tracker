@@ -2095,7 +2095,7 @@
               "title": "Maverick Spend in US & UK Universities: What the Data Shows in 2026",
               "format": "Data Snapshot",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "maverick spend university data 2026",
               "secondary_keyword": "off-contract spend higher education UK US",
@@ -2122,6 +2122,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-17T12:37:15.178Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-26T11:42:52.920Z",
+                  "by": "m-izu4e"
                 }
               ],
               "return_to_stage": null,
@@ -2136,7 +2141,14 @@
               "brief_last_updated": "2026-07-31T07:08:53.995Z",
               "last_upload": "2026-08-17T12:37:15.177Z",
               "last_upload_by": "m-e10nz",
-              "deliverable_ext": "html"
+              "deliverable_ext": "html",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-26",
+                "live_url": "https://www.jaggaer.com/blog/maverick-spend-university-data-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-26T11:42:52.919Z"
+              }
             },
             {
               "id": "p-he1-2",
