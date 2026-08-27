@@ -5101,6 +5101,16 @@
         "annotation": true,
         "section": "¶21 — \"The right procurement software depends o…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-sybhqp",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Add a few more FAQs:\n1. How long does enterprise procurement software implementation take?\n2. What is the difference between source-to-pay and procure-to-pay software?\n3. Possibly -  How much does enterprise procurement software cost? (but don't discuss actual numbers)",
+        "ts": "2026-08-27T09:59:13.651Z",
+        "annotation": true,
+        "section": "¶31 — \"Frequently Asked Questions…\"",
+        "revision": 1
       }
     ]
   },
