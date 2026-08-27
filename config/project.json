@@ -5091,6 +5091,16 @@
         "annotation": true,
         "section": "¶27 — \"What to Look for in Procurement Software…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-vokawt",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "How to choose the right procurement software for your enterprise\n\nThe right procurement software depends on where your process actually breaks, not on whichever vendor has the loudest AI roadmap. Pinpoint the bottleneck first — sourcing, contracting, invoicing, or payments. That narrows a shortlist to two or three platforms worth a live evaluation.\n\nIf your gap is upstream — supplier selection, RFx management, category strategy, or direct materials — prioritize platforms with deep source-to-pay capability and strong direct spend coverage. These are typically the most complex implementations but deliver the broadest long-term value.\n\nIf your gap is downstream — invoice matching, payment compliance, or e-invoicing across multiple countries — a best-in-class AP platform may solve the problem faster than a full suite replacement.\n\nIf you're mid-ERP migration or running a mixed landscape, an orchestration layer can add intake and approval workflow without replacing existing systems.\n\nBefore shortlisting, confirm:\n\nDirect and indirect spend coverage\nWhether AI features cite their data source and keep a human in the loop\nWhich ERP systems it connects to natively\nImplementation timeline and total cost of ownership\nCustomer support model — vendor-led vs. partner-led",
+        "ts": "2026-08-27T09:57:44.714Z",
+        "annotation": true,
+        "section": "¶21 — \"The right procurement software depends o…\"",
+        "revision": 1
       }
     ]
   },
