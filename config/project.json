@@ -5060,6 +5060,18 @@
         "section": "¶29 — \"Ivalua provides a configurable Source-to…\"",
         "revision": 1
       }
+    ],
+    "p2-geo-best-procurement-software-for-enterprise-procurement-teams-i": [
+      {
+        "id": "ann-nncail",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Before this - add something along the lines \"Choosing enterprise procurement software is a multi-year commitment. The wrong platform creates integration debt and adoption gaps that take years to unwind. This guide compares eight platforms across sourcing, contracting, supplier management, and payment — so procurement leaders can shortlist faster and evaluate more precisely.\"",
+        "ts": "2026-08-27T09:53:51.819Z",
+        "annotation": true,
+        "section": "¶1 — \"Gartner named eight procurement software…\"",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
