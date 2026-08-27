@@ -2974,7 +2974,7 @@
               "title": "Best Procurement Software for Enterprise Procurement Teams in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "marketing-review",
+              "status": "writing",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (Listicle)",
@@ -2988,16 +2988,21 @@
               "planned_publish_date": "Aug 26, 2026",
               "revision_count": 1,
               "deliverable_ext": "htm",
-              "return_to_stage": null,
+              "return_to_stage": "marketing-review",
               "last_upload": "2026-08-25T06:39:12.728Z",
               "last_upload_by": "m-e10nz",
-              "last_updated": "2026-08-25T06:39:12.728Z",
-              "last_updated_by": "m-e10nz",
+              "last_updated": "2026-08-27T09:59:35.182Z",
+              "last_updated_by": "m-pifrn",
               "status_history": [
                 {
                   "stage": "marketing-review",
                   "ts": "2026-08-25T06:39:12.729Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-27T09:59:35.182Z",
+                  "by": "m-pifrn"
                 }
               ]
             },
@@ -5111,6 +5116,14 @@
         "annotation": true,
         "section": "¶31 — \"Frequently Asked Questions…\"",
         "revision": 1
+      },
+      {
+        "id": "fb-2ljhvf",
+        "author": "m-pifrn",
+        "verdict": "needs-revision",
+        "body": "Please go through the comments, fix, and send to Jovana",
+        "ts": "2026-08-27T09:59:35.180Z",
+        "stage": "marketing-review"
       }
     ]
   },
