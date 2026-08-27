@@ -2799,7 +2799,7 @@
               "title": "How to Evaluate Procurement AI Vendors",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "ed-review",
+              "status": "marketing-review",
               "content_type": "ad-hoc",
               "phase": 2,
               "schedule_month": "p2-month-1",
@@ -2833,7 +2833,8 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-08-26T06:14:17.399Z",
-              "last_upload_by": "jason"
+              "last_upload_by": "jason",
+              "secondary_keyword": ""
             }
           ]
         }
