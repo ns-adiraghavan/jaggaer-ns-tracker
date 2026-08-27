@@ -5071,6 +5071,16 @@
         "annotation": true,
         "section": "¶1 — \"Gartner named eight procurement software…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-dpy2tj",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Above this section add a brief H2: What is enterprise procurement software?\nAnswer below - e.g. - Enterprise procurement software automates the full purchasing lifecycle — from sourcing and supplier management through contracting, purchase orders, invoicing, and payment — across large, complex organizations. It centralizes spend visibility, enforces purchasing policy at the point of request, and integrates with ERP systems like SAP and Oracle. Unlike mid-market tools, enterprise platforms handle direct and indirect spend simultaneously across multiple countries and business units.",
+        "ts": "2026-08-27T09:54:49.051Z",
+        "annotation": true,
+        "section": "¶26 — \"Quick Comparison: Eight Enterprise Procu…\"",
+        "revision": 1
       }
     ]
   },
