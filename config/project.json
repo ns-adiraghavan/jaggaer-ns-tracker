@@ -5212,6 +5212,18 @@
         "ts": "2026-08-28T16:57:02.086Z",
         "stage": "marketing-review"
       }
+    ],
+    "p2-geo-jaggaer-vs-coupa": [
+      {
+        "id": "ann-zyg3o3",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Jaggaer Vs Coupa - this is the main keyword - please include it as is",
+        "ts": "2026-08-28T16:58:04.311Z",
+        "annotation": true,
+        "section": "¶27 — \"JAGGAER and Coupa: 2026 Procurement Plat…\"",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
