@@ -2292,7 +2292,7 @@
               "title": "OMB Uniform Guidance 2026: What University Procurement Teams Are Still Getting Wrong",
               "format": "Quick-take Blog",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "OMB Uniform Guidance university procurement 2026",
               "secondary_keyword": "2 CFR 200 federal grant compliance",
@@ -2314,6 +2314,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-07-30T16:03:44.417Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-31T08:27:32.647Z",
+                  "by": "m-izu4e"
                 }
               ],
               "return_to_stage": null,
@@ -2328,7 +2333,14 @@
               "brief_last_updated": "2026-07-24T14:09:29.645Z",
               "deliverable_ext": "html",
               "last_upload": "2026-07-30T16:03:44.417Z",
-              "last_upload_by": "m-5jitd"
+              "last_upload_by": "m-5jitd",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-28",
+                "live_url": "https://www.jaggaer.com/blog/omb-uniform-guidance-university-procurement-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-31T08:27:32.647Z"
+              }
             },
             {
               "id": "p-he2-2",
