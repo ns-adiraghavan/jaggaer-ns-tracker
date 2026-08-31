@@ -3163,7 +3163,7 @@
               "title": "Jaggaer Vs Ramp",
               "format": "Article",
               "assignee": "",
-              "status": "marketing-review",
+              "status": "ed-review",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3175,17 +3175,22 @@
               "schedule_week": 1,
               "publish_day": "Wed",
               "planned_publish_date": "Aug 27, 2026",
-              "revision_count": 1,
+              "revision_count": 2,
               "deliverable_ext": "html",
               "return_to_stage": null,
-              "last_upload": "2026-08-28T11:22:07.400Z",
+              "last_upload": "2026-08-31T12:09:39.090Z",
               "last_upload_by": "m-e10nz",
-              "last_updated": "2026-08-28T11:22:07.400Z",
+              "last_updated": "2026-08-31T12:09:39.090Z",
               "last_updated_by": "m-e10nz",
               "status_history": [
                 {
                   "stage": "marketing-review",
                   "ts": "2026-08-28T11:22:07.400Z",
+                  "by": "m-e10nz"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-08-31T12:09:39.091Z",
                   "by": "m-e10nz"
                 }
               ]
