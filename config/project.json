@@ -3094,7 +3094,7 @@
               "title": "Jaggaer Vs Coupa",
               "format": "Article",
               "assignee": "",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3106,12 +3106,12 @@
               "schedule_week": 1,
               "publish_day": "Tue",
               "planned_publish_date": "Aug 26, 2026",
-              "revision_count": 2,
+              "revision_count": 3,
               "deliverable_ext": "html",
               "return_to_stage": null,
-              "last_upload": "2026-08-31T12:03:22.028Z",
+              "last_upload": "2026-08-31T12:37:59.454Z",
               "last_upload_by": "m-5jitd",
-              "last_updated": "2026-08-31T12:03:22.028Z",
+              "last_updated": "2026-08-31T12:37:59.454Z",
               "last_updated_by": "m-5jitd",
               "status_history": [
                 {
@@ -3122,6 +3122,11 @@
                 {
                   "stage": "ed-review",
                   "ts": "2026-08-31T12:03:22.028Z",
+                  "by": "m-5jitd"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-08-31T12:37:59.455Z",
                   "by": "m-5jitd"
                 }
               ]
