@@ -2424,7 +2424,7 @@
               "title": "From Spreadsheets to Platform: How R1 Universities Are Modernising Procurement",
               "format": "Problem-Solution",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "R1 university procurement platform modernisation",
               "secondary_keyword": "higher education procurement digitization 2026",
@@ -2451,6 +2451,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-17T13:08:42.530Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-31T08:30:00.143Z",
+                  "by": "m-izu4e"
                 }
               ],
               "return_to_stage": null,
@@ -2465,7 +2470,14 @@
               "brief_last_updated": "2026-07-31T09:27:53.686Z",
               "last_upload": "2026-08-17T13:08:42.530Z",
               "last_upload_by": "m-5jitd",
-              "deliverable_ext": "html"
+              "deliverable_ext": "html",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-31",
+                "live_url": "https://www.jaggaer.com/blog/r1-university-procurement-platform-modernization",
+                "performance_data": "",
+                "updated_at": "2026-08-31T08:30:00.143Z"
+              }
             }
           ]
         }
