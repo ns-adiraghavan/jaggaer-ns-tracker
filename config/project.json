@@ -2359,7 +2359,7 @@
               "title": "Grant Procurement Compliance in 2026: The Checklist Most NSF, NIH & Horizon Europe Teams Miss",
               "format": "Checklist",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 0,
               "primary_keyword": "grant procurement compliance checklist NSF NIH Horizon Europe",
               "secondary_keyword": "federal grant compliance university",
@@ -2381,6 +2381,11 @@
                   "stage": "brief-uploaded",
                   "ts": "2026-07-31T08:46:00.082Z",
                   "by": "m-pifrn"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-31T08:29:19.943Z",
+                  "by": "m-izu4e"
                 }
               ],
               "return_to_stage": null,
@@ -2394,7 +2399,14 @@
               ],
               "brief_last_updated": "2026-07-31T08:46:00.082Z",
               "last_upload": "2026-07-31T08:46:00.082Z",
-              "last_upload_by": "m-pifrn"
+              "last_upload_by": "m-pifrn",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-28",
+                "live_url": "https://www.jaggaer.com/blog/grant-procurement-compliance-checklist-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-31T08:29:19.943Z"
+              }
             }
           ]
         },
