@@ -1150,7 +1150,7 @@
               "title": "Steel, Aluminum & Rare Earth Volatility: A Mid-2026 Reality Check for Procurement Teams",
               "format": "Data Snapshot",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "steel aluminum price volatility procurement 2026",
               "secondary_keyword": "commodity procurement risk data",
@@ -1177,6 +1177,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-12T07:31:46.087Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-31T08:26:41.904Z",
+                  "by": "m-izu4e"
                 }
               ],
               "return_to_stage": null,
@@ -1191,7 +1196,14 @@
               "brief_last_updated": "2026-07-30T13:22:14.500Z",
               "last_upload": "2026-08-12T07:31:46.087Z",
               "last_upload_by": "jason",
-              "deliverable_ext": "html"
+              "deliverable_ext": "html",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-28",
+                "live_url": "https://www.jaggaer.com/blog/steel-aluminum-rare-earth-price-volatility-procurement",
+                "performance_data": "",
+                "updated_at": "2026-08-31T08:26:41.903Z"
+              }
             }
           ]
         },
