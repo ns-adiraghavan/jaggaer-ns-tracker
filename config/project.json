@@ -1287,7 +1287,7 @@
               "title": "Before You Sign That Procurement Platform Contract: A CPO Checklist for H2 2026",
               "format": "eBook / Guide",
               "assignee": "null",
-              "status": "approved",
+              "status": "live",
               "revision_count": 1,
               "primary_keyword": "manufacturing CPO procurement platform guide",
               "secondary_keyword": "S2P platform evaluation manufacturing",
@@ -1314,6 +1314,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-17T06:03:56.874Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-31T08:28:22.510Z",
+                  "by": "m-izu4e"
                 }
               ],
               "return_to_stage": null,
@@ -1329,7 +1334,14 @@
               "last_upload": "2026-08-17T06:03:56.874Z",
               "last_upload_by": "m-e10nz",
               "deliverable_ext": "pdf",
-              "wp_has_html": true
+              "wp_has_html": true,
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-28",
+                "live_url": "https://www.jaggaer.com/blog/cpo-procurement-platform-contract-checklist",
+                "performance_data": "",
+                "updated_at": "2026-08-31T08:28:22.510Z"
+              }
             }
           ]
         },
