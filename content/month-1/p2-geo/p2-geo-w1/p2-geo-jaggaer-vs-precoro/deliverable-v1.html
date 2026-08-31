@@ -1,0 +1,728 @@
+<!-- uploaded by m-e10nz at 2026-08-31T13:57:11.414Z -->
+<!-- piece: Jaggaer Vs Precoro -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JAGGAER vs. Precoro: Source-to-Pay vs. P2P Compared</title>
+<meta name="description" content="Compare JAGGAER and Precoro across strategic sourcing, direct and indirect spend, and procure-to-pay to find the right procurement platform.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/jaggaer-vs-precoro">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"JAGGAER vs. Precoro: Comparing Source-to-Pay and Procurement Management","description":"Compare JAGGAER and Precoro across strategic sourcing, direct and indirect spend, and procure-to-pay to find the right procurement platform.","datePublished":"2026-08","dateModified":"2026-08-25","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"author":{"@type":"Person","name":"Jason Rydzewski"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which platform targets enterprise-scale procurement, JAGGAER or Precoro?","acceptedAnswer":{"@type":"Answer","text":"JAGGAER covers direct and indirect spend, multi-entity operations, and Tier 1 ERPs like SAP and Oracle. Precoro targets mid-sized, procure-to-pay-focused teams."}},{"@type":"Question","name":"Does Precoro support strategic sourcing?","acceptedAnswer":{"@type":"Answer","text":"Only at a basic level. Precoro offers RFP creation and bid comparison, not the category management or sourcing optimization in JAGGAER's Source-to-Contract module."}},{"@type":"Question","name":"In a Precoro vs. JAGGAER comparison, which platform integrates with QuickBooks and NetSuite?","acceptedAnswer":{"@type":"Answer","text":"Precoro, primarily. Precoro centers on QuickBooks and NetSuite; JAGGAER also connects to NetSuite, alongside larger ERPs like SAP and Oracle."}},{"@type":"Question","name":"What is the main difference between JAGGAER and Precoro?","acceptedAnswer":{"@type":"Answer","text":"Scope. JAGGAER covers the full source-to-pay lifecycle across direct and indirect spend. Precoro handles procure-to-pay and AP automation for mid-sized teams."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --navy-tint:         #E9EFF4;
+  --teal-tint:         #E4EEF0;
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-sm:      0.875rem;
+  --font-size-base:    0.875rem;
+  --font-size-h5:      clamp(0.9rem, 0.86rem + 0.2vw, 1rem);
+  --font-size-h4:      clamp(1.05rem, 1rem + 0.32vw, 1.22rem);
+  --font-size-h3:      clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --font-size-h2:      clamp(1.5rem, 1.35rem + 0.7vw, 1.85rem);
+  --font-size-h1:      clamp(1.8rem, calc(1.55rem + 0.95vw), 2.1rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+strong{color:var(--color-ink-3);font-weight:700;}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+.article-badges{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:var(--space-m);}
+.article-badge{display:inline-block;font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--color-teal);background:var(--teal-tint);border:1px solid #bcd8dc;border-radius:9999px;padding:.3rem .8rem;}
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-weight:400;text-transform:uppercase;letter-spacing:.03em;color:var(--color-ink);}
+
+.page-wrapper{display:flex;align-items:flex-start;max-width:1140px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+article{flex:1;min-width:0;max-width:880px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:700;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-h3);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+.summary-box{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-left:4px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);}
+.summary-box p{font-size:.9rem;margin-bottom:var(--space-s);}
+.summary-box ul{margin-bottom:var(--space-m);padding-left:1.25rem;}
+.summary-box li{font-size:.9rem;margin-bottom:.4rem;color:var(--color-ink-2);line-height:1.65;}
+.summary-box li:last-child{margin-bottom:0;}
+.source-note{font-size:.75rem;color:var(--color-ink-3);font-style:italic;}
+
+.leak-compare-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.leak-compare-table{width:100%;border-collapse:collapse;font-size:.875rem;min-width:600px;}
+.leak-compare-table th{background:var(--purple-tint-2);color:var(--color-ink);font-family:var(--font-display);font-weight:600;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;text-align:left;padding:.65rem var(--space-s);border-bottom:var(--border);}
+.leak-compare-table td{padding:.75rem var(--space-s);border-bottom:var(--border);color:var(--color-ink-2);vertical-align:top;line-height:1.5;font-size:.875rem;}
+.leak-compare-table td strong{color:var(--color-ink);}
+.leak-compare-table tr:last-child td{border-bottom:none;}
+.leak-compare-table tr{transition:background .15s;}
+.leak-compare-table tr:hover td{background:var(--purple-tint-3);}
+.leak-compare-table tr[data-target]{cursor:pointer;}
+.leak-compare-table tr[data-target]:hover td{background:var(--teal-tint);}
+.leak-compare-table tr[data-target]:hover td:first-child{color:var(--color-teal);}
+.leak-compare-table tr.row-highlight td{background:var(--teal-tint);transition:background .3s;}
+.leak-compare-table td:first-child{font-family:var(--font-display);font-weight:700;color:var(--color-ink);white-space:nowrap;}
+
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:.875rem;color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:1rem;font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-item summary::marker{content:none;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.875rem;color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+
+.tab-row{display:flex;flex-wrap:wrap;gap:.4rem;margin:var(--space-m) 0 var(--space-m);}
+.tab-pill{font-family:var(--font-display);font-size:.8rem;font-weight:600;color:var(--color-ink-2);background:var(--color-white);border:var(--border);border-radius:9999px;padding:.5rem 1.1rem;cursor:pointer;transition:background .15s,color .15s,border-color .15s;}
+.tab-pill:hover{background:var(--color-cream);}
+.diff-tab.is-active{background:var(--color-teal);border-color:var(--color-teal);color:#fff;}
+.tab-panel{display:none;border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);background:var(--color-white);margin-bottom:var(--space-m);}
+.tab-panel.is-active{display:block;}
+.diff-panel{border-left:3px solid var(--color-teal);}
+.tab-panel p{margin-bottom:var(--space-s);}
+.tab-panel p:last-child{margin-bottom:0;}
+.tab-panel .why-matters{font-style:italic;color:var(--color-ink-3);}
+.quotes-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-l);margin:var(--space-m) 0 var(--space-m);}
+.quotes-col h3{margin-top:0;}
+.quotes-col blockquote{margin:0 0 var(--space-m);padding-left:var(--space-m);border-left:3px solid var(--color-teal);}
+.quotes-col blockquote:last-child{margin-bottom:0;}
+.quotes-col blockquote{font-size:.9rem;color:var(--color-ink-2);font-style:italic;line-height:1.5;}
+.quotes-col blockquote cite{display:block;margin-top:.3rem;font-size:.75rem;font-style:normal;color:var(--color-ink-3);}
+@media(max-width:640px){.quotes-grid{grid-template-columns:1fr;}}
+
+.choose-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-m);margin:var(--space-m) 0 var(--space-s);}
+.choose-card{border:var(--border);border-top:3px solid var(--color-teal);border-radius:var(--border-radius-sm);background:var(--color-white);padding:var(--space-m);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;}
+.choose-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(11,13,18,.08);}
+.choose-card:focus-visible{outline:2px solid var(--color-teal);outline-offset:2px;}
+.choose-card.is-selected{background:var(--teal-tint);border-color:var(--color-teal);}
+.choose-card h3{margin:0 0 var(--space-s);font-size:1rem;}
+.choose-card ul{margin-bottom:0;padding-left:1.1rem;}
+.choose-card li{font-size:.875rem;margin-bottom:.4rem;}
+.choose-card li:last-child{margin-bottom:0;}
+.choose-hint{font-size:.75rem;color:var(--color-ink-3);margin:0 0 var(--space-m);}
+
+/* Self-assessment tool */
+.assessment-tool{margin-top:var(--space-m);}
+.rate-question{margin-bottom:var(--space-l);padding-bottom:var(--space-m);border-bottom:var(--border);}
+.rate-question:last-of-type{border-bottom:none;}
+.rate-q-title{margin-bottom:var(--space-xs);font-size:var(--font-size-base);}
+.rate-scale{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.35rem;}
+.rate-btn{width:2.25rem;height:2.25rem;border-radius:9999px;border:var(--border);background:var(--color-white);color:var(--color-ink-2);font-family:var(--font-base);font-weight:600;font-size:.8125rem;cursor:pointer;transition:background .15s,color .15s,border-color .15s;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.rate-btn:hover{border-color:var(--jai-a);color:var(--jai-a);}
+.rate-btn.is-selected{background:var(--jai-a);border-color:var(--jai-a);color:#fff;}
+.rate-scale-labels{display:flex;justify-content:space-between;max-width:27rem;font-size:.75rem;color:var(--color-ink-3);margin-bottom:var(--space-s);}
+.rate-result{font-size:.875rem;font-style:italic;color:var(--color-navy);background:var(--purple-tint-3);border-left:3px solid var(--jai-a);padding:.5rem .75rem;border-radius:4px;min-height:1.2rem;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.rate-result:empty{padding:0;min-height:0;border:none;background:none;}
+.rate-summary{margin-top:var(--space-m);padding:var(--space-m) var(--space-l);background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.rate-summary-score{font-size:1.3rem;font-weight:700;color:var(--color-ink);}
+#print-assessment-btn{margin-top:var(--space-m);cursor:pointer;border:none;font-family:inherit;}
+.assessment-btn-row{display:flex;gap:var(--space-s);flex-wrap:wrap;margin-top:var(--space-m);}
+.assessment-btn-row #print-assessment-btn{margin-top:0;}
+#clear-assessment-btn{margin-top:0;cursor:pointer;font-family:inherit;font-size:1rem;font-weight:700;padding:.65rem 1.4rem;border-radius:8px;background:var(--color-white);color:var(--color-ink-2);border:1px solid var(--color-ink-2);transition:background .2s,color .2s;}
+#clear-assessment-btn:hover{background:var(--color-cream);color:var(--color-ink);}
+@media print{ body.print-assessment-only #clear-assessment-btn{display:none!important;} }
+@media print{
+  body.print-assessment-only #progress-bar,
+  body.print-assessment-only .toc-sidebar,
+  body.print-assessment-only article > *:not(#assessment-section){display:none!important;}
+  body.print-assessment-only #assessment-section{display:block!important;}
+  body.print-assessment-only #print-assessment-btn{display:none!important;}
+  body.print-assessment-only .page-wrapper{padding:0;max-width:100%;}
+  body.print-assessment-only article{max-width:100%;padding:var(--space-m);}
+}
+
+@media(max-width:900px){.choose-grid{grid-template-columns:1fr;}}
+.choose-grid.choose-grid--pair{display:flex;align-items:stretch;grid-template-columns:none;}
+.choose-grid.choose-grid--pair .choose-card{flex:1 1 0;display:flex;flex-direction:column;}
+.choose-grid.choose-grid--pair .choose-card ul{flex:1;}
+@media(max-width:640px){.choose-grid.choose-grid--pair{flex-direction:column;}}
+
+/* Platform Overview infographic (new component, additive only; nothing above this line was altered) */
+.profile-infographic{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-l);margin:var(--space-m) 0 var(--space-l);}
+@media(max-width:768px){.profile-infographic{grid-template-columns:1fr;}}
+.profile-card{border:var(--border);border-radius:var(--border-radius-sm);background:var(--color-white);overflow:hidden;box-shadow:0 4px 16px rgba(11,13,18,.06);}
+.profile-card-head{display:flex;align-items:center;gap:var(--space-s);padding:var(--space-m) var(--space-l);color:#fff;}
+.profile-card--jaggaer .profile-card-head{background:var(--purple-tint-2);}
+.profile-card--jaggaer .profile-card-head h3{color:var(--color-ink);}
+.profile-card--jaggaer .profile-tagline{color:var(--jai-a);}
+.profile-card--jaggaer .profile-avatar{background:var(--jai-a);color:#fff;}
+.profile-card--precoro .profile-card-head{background:linear-gradient(135deg,var(--color-teal),var(--color-navy));}
+.profile-avatar{width:2.75rem;height:2.75rem;border-radius:9999px;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:1.25rem;color:#fff;flex-shrink:0;}
+.profile-card-head h3{margin:0;color:#fff;font-size:1.1rem;}
+.profile-tagline{font-size:.72rem;color:rgba(255,255,255,.9);text-transform:uppercase;letter-spacing:.06em;font-weight:700;}
+.profile-stats{display:flex;flex-wrap:wrap;border-bottom:var(--border);}
+.profile-stat{flex:1 1 50%;display:flex;align-items:flex-start;gap:.5rem;padding:var(--space-s) var(--space-m);border-right:var(--border);border-bottom:1px solid var(--border-color);min-height:5rem;}
+.profile-stat:nth-child(2n){border-right:none;}
+.profile-stat svg{flex-shrink:0;margin-top:.15rem;color:var(--color-teal);}
+.profile-card--jaggaer .profile-stat svg{color:var(--jai-a);}
+.profile-stat-label{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--color-ink-3);font-weight:700;}
+.profile-stat-value{display:block;font-size:.8125rem;color:var(--color-ink);font-weight:600;line-height:1.3;}
+.profile-body{padding:var(--space-m) var(--space-l) var(--space-l);}
+.profile-block{margin-bottom:var(--space-m);}
+.profile-block:last-child{margin-bottom:0;}
+.profile-block-label{display:flex;align-items:center;gap:.4rem;font-family:var(--font-display);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--color-teal);margin-bottom:.4rem;}
+.profile-card--jaggaer .profile-block-label{color:var(--jai-a);}
+.profile-block-label svg{flex-shrink:0;}
+.profile-block p{font-size:.875rem;margin-bottom:0;line-height:1.6;color:var(--color-ink-2);}
+
+/* Interactive "How to Choose" decision tool */
+.decide-tool{margin:var(--space-m) 0 var(--space-l);}
+.decide-q-group{margin-bottom:var(--space-m);}
+.decide-q{margin-bottom:var(--space-xs);font-size:var(--font-size-base);}
+.decide-options{display:flex;flex-wrap:wrap;gap:.5rem;}
+.decide-btn{font-family:var(--font-display);font-size:.85rem;font-weight:600;color:var(--color-ink-2);background:var(--color-white);border:var(--border);border-radius:9999px;padding:.55rem 1.2rem;cursor:pointer;transition:background .15s,color .15s,border-color .15s;}
+.decide-btn:hover{background:var(--color-cream);}
+.decide-btn.is-selected{background:var(--jai-a);border-color:var(--jai-a);color:#fff;}
+.decide-verdict{margin-top:var(--space-m);padding:var(--space-m) var(--space-l);background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-left:4px solid var(--jai-a);border-radius:var(--border-radius-sm);-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.decide-verdict p{margin-bottom:0;font-size:.9rem;}
+#decide-result{color:var(--color-navy);}
+
+@media(max-width:900px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style></head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">At a Glance</a>
+      <a class="toc-link" href="#s2">Platform Overview</a>
+      <a class="toc-link" href="#s3">Key Differences</a>
+      <a class="toc-link" href="#s4">Where Each Fits</a>
+      <a class="toc-link" href="#s5">How to Choose</a>
+      <a class="toc-link" href="#s6">Self-Assessment</a>
+      <a class="toc-link" href="#s7">FAQs</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-badges">
+          <span class="article-badge">Procurement Software</span>
+          <span class="article-badge">Platform Comparison</span>
+        </div>
+        <h1>JAGGAER vs. Precoro: Comparing Source-to-Pay and Procurement Management</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5&ndash;6 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Published</span> <time datetime="2026-08">August 2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Jason Rydzewski</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <p><strong>JAGGAER and Precoro serve different scales of procurement complexity: enterprise source-to-pay (S2P) versus mid-market procure-to-pay (P2P).</strong> JAGGAER unifies strategic sourcing, contract management, direct and indirect spend, and supplier intelligence in one system. Precoro is a procure-to-pay and AP automation platform for mid-sized companies consolidating indirect purchasing. Both are procurement software, but they fit different-sized organizations.</p>
+
+    <div class="summary-box">
+      <p><strong>Key takeaways:</strong></p>
+      <ul>
+        <li>This guide compares JAGGAER and Precoro on sourcing depth, direct spend, ERP integrations, and pricing to match your procurement complexity.</li>
+        <li>Scope is the biggest divide: Precoro covers procure-to-pay and indirect spend, while JAGGAER runs the full source-to-pay lifecycle, including direct spend.</li>
+        <li>Sourcing capability differs too: JAGGAER adds category management and sourcing optimization through its Source-to-Contract module, while Precoro offers RFP creation and bid comparison.</li>
+        <li>ERP integrations reflect each platform's target market. JAGGAER runs on Tier 1 systems such as SAP and Oracle. Precoro plugs into cloud accounting platforms such as NetSuite and QuickBooks.</li>
+        <li>Pricing models also diverge: Precoro publishes package-based tiers with 2 to 8 week implementation, while JAGGAER uses custom, module-based pricing for enterprise deployments.</li>
+      </ul>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S1 -->
+    <h2 id="s1">JAGGAER vs. Precoro at a Glance</h2>
+
+    <p>The table below compares both platforms across nine dimensions.</p>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table" id="glance-table">
+        <thead>
+          <tr><th>Dimension</th><th>JAGGAER</th><th>Precoro</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Core scope</td><td>Full source-to-pay: sourcing, contracts, P2P, and supplier intelligence</td><td>Procure-to-pay and AP centralization, with light sourcing support</td></tr>
+          <tr><td>Best-fit organization</td><td>Mid-market to large enterprise with multi-entity, complex spend</td><td>Small to mid-sized companies standardizing purchasing</td></tr>
+          <tr data-target="diff-direct"><td>Direct spend</td><td>Dedicated workflows: BOM-driven sourcing, supplier quality (SCAR, APQP, PPAP), ASN/VMI</td><td>No dedicated direct-materials workflow</td></tr>
+          <tr data-target="diff-sourcing"><td>Strategic sourcing</td><td>Dedicated sourcing and category management modules</td><td>RFP creation and side-by-side bid comparison</td></tr>
+          <tr data-target="diff-risk"><td>Supplier intelligence</td><td>Supplier network, performance scoring, and ESG and risk data feeds</td><td>Supplier Portal plus an AI Crew for contract terms and reliability</td></tr>
+          <tr><td>Contract management</td><td>Full contract lifecycle management module</td><td>Contract storage with AI-assisted term extraction</td></tr>
+          <tr><td>ERP integrations</td><td>SAP, Oracle, Workday, Infor, NetSuite, and <a href="https://www.jaggaer.com/solutions/source-to-pay" target="_blank" rel="noopener">1,000+ connectors</a></td><td><a href="https://precoro.com/product" target="_blank" rel="noopener">NetSuite, QuickBooks, Xero, Sage Intacct, and Microsoft Dynamics 365 Business Central</a></td></tr>
+          <tr><td>Pricing</td><td>Custom quotes by module and scale</td><td>Published, package-based tiers</td></tr>
+          <tr><td>Typical rollout</td><td>Phased, multi-module enterprise deployment</td><td>2 to 8 weeks, per Precoro's own timeline</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="source-note">Clickable rows jump to that comparison in Key Differences below.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See the Full Platform in Action &rarr;</p>
+        <p class="jag-cta-desc">Explore how JAGGAER connects sourcing, contracts, and procure-to-pay on one data layer.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/source-to-pay" class="jag-cta-btn" target="_blank" rel="noopener">Explore the Source-to-Pay Platform &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S2 -->
+    <h2 id="s2">JAGGAER vs. Precoro: Platform Overview</h2>
+
+    <p>Here's how each platform is positioned.</p>
+
+    <div class="profile-infographic">
+
+      <div class="profile-card profile-card--jaggaer">
+        <div class="profile-card-head">
+          <div class="profile-avatar">J</div>
+          <div>
+            <h3>JAGGAER</h3>
+            <span class="profile-tagline">Enterprise Source-to-Pay</span>
+          </div>
+        </div>
+        <div class="profile-body">
+          <div class="profile-block">
+            <span class="profile-block-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Overview</span>
+            <p>JAGGAER organizes procurement into three connected areas: Source-to-Contract, Procure-to-Pay, and Supplier Intelligence. Sourcing decisions carry through automatically into purchasing and invoicing.</p>
+          </div>
+          <div class="profile-block">
+            <span class="profile-block-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Primary Solution Focus</span>
+            <p>Direct and indirect spend management for multi-entity organizations, spanning <a href="https://www.jaggaer.com/solutions/procure-to-pay" target="_blank" rel="noopener">Procure-to-Pay</a> and <a href="https://www.jaggaer.com/solutions/supplier-intelligence" target="_blank" rel="noopener">Supplier Intelligence</a> alongside strategic sourcing and contract management.</p>
+          </div>
+          <div class="profile-block">
+            <span class="profile-block-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>Capabilities</span>
+            <p>JAGGAER embeds <a href="https://www.jaggaer.com/solutions/jai" target="_blank" rel="noopener">AI</a> across every module. Automation runs from sourcing through payment.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-card profile-card--precoro">
+        <div class="profile-card-head">
+          <div class="profile-avatar">P</div>
+          <div>
+            <h3>Precoro</h3>
+            <span class="profile-tagline">Procure-to-Pay &amp; AP</span>
+          </div>
+        </div>
+        <div class="profile-body">
+          <div class="profile-block">
+            <span class="profile-block-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Overview</span>
+            <p>Precoro is procurement automation software for growing mid-sized organizations, replacing manual, spreadsheet-based purchasing with a centralized system.</p>
+          </div>
+          <div class="profile-block">
+            <span class="profile-block-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Primary Solution Focus</span>
+            <p>Procure-to-pay: intake, approvals, purchase orders, receiving, invoicing, payments, and expense tracking in one connected workflow.</p>
+          </div>
+          <div class="profile-block">
+            <span class="profile-block-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>Capabilities</span>
+            <p>Five AI Crews (Intake, Purchasing, AP Automation, Supplier Management, Spend Intelligence) automate requisition creation, PO matching, and invoice capture. In April 2026, Precoro added a <a href="https://www.reuters.com/press-releases/precoro-ai-procurement-quote-to-requisition-2026-04-21/" target="_blank" rel="noopener">feature that converts supplier quotes directly into purchase requisitions</a>. JAGGAER's Source-to-Contract module already spans sourcing through contract execution in one connected workflow.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S3 -->
+    <h2 id="s3">JAGGAER vs. Precoro: Key Differences</h2>
+
+    <p>Here's where the two platforms genuinely diverge.</p>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table">
+        <thead>
+          <tr><th>Dimension</th><th>JAGGAER</th><th>Precoro</th></tr>
+        </thead>
+        <tbody>
+          <tr id="diff-sourcing"><td>Sourcing Depth</td><td>Treats <a href="https://www.jaggaer.com/solutions/sourcing" target="_blank" rel="noopener">strategic sourcing</a> as a standalone discipline, with category management and sourcing optimization ahead of <a href="https://www.jaggaer.com/solutions/contracts" target="_blank" rel="noopener">contract lifecycle management</a></td><td>RFP tool supports competitive bidding, but doesn't extend into category strategy or sourcing optimization</td></tr>
+          <tr id="diff-direct"><td>Direct Spend</td><td><a href="https://www.jaggaer.com/solutions/supply-chain-collaboration" target="_blank" rel="noopener">Direct-materials workflows</a> serve manufacturing and life sciences supply chains, and add supplier quality management and bill-of-materials visibility</td><td>Scope stays within indirect purchasing; no dedicated direct-materials workflow</td></tr>
+          <tr id="diff-risk"><td>Supplier Risk</td><td><a href="https://www.jaggaer.com/solutions/supplier-intelligence" target="_blank" rel="noopener">Supplier Intelligence</a> layer combines a supplier network, performance scoring, and third-party ESG and risk data feeds</td><td>Supplier Management Crew focuses on contract terms and day-to-day delivery and pricing reliability</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S4 -->
+    <h2 id="s4">JAGGAER vs. Precoro: Where Each Platform Fits</h2>
+
+    <p>Those capability gaps show up as different buyer profiles.</p>
+
+    <div class="choose-grid choose-grid--pair">
+      <div class="choose-card" tabindex="0" role="button" aria-pressed="false">
+        <h3>JAGGAER fits when&hellip;</h3>
+        <ul>
+          <li>You're a manufacturer, higher education system, or public sector agency. You manage layered approval chains across business units.</li>
+        </ul>
+      </div>
+      <div class="choose-card" tabindex="0" role="button" aria-pressed="false">
+        <h3>Precoro fits when&hellip;</h3>
+        <ul>
+          <li>Precoro suits teams whose procurement needs start and end with purchase requests, approvals, and AP automation. These are organizations that have outgrown spreadsheets but don't yet run formal sourcing events or manage direct materials.</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S5 -->
+    <h2 id="s5">How to Choose Between JAGGAER and Precoro: The Bottom Line</h2>
+
+    <p><strong>This JAGGAER vs. Precoro comparison comes down to one distinction: enterprise source-to-pay versus mid-market procure-to-pay.</strong> The right fit depends on how much of the procurement lifecycle your organization needs to run inside one system. Answer three questions to see which platform fits your setup.</p>
+
+    <div class="decide-tool">
+      <div class="decide-q-group">
+        <p class="decide-q"><strong>1.</strong> Does procurement include direct materials, or is spend entirely indirect?</p>
+        <div class="decide-options">
+          <button type="button" class="decide-btn" data-points="jaggaer">Includes direct materials</button>
+          <button type="button" class="decide-btn" data-points="precoro">Entirely indirect</button>
+        </div>
+      </div>
+      <div class="decide-q-group">
+        <p class="decide-q"><strong>2.</strong> Does the team run formal RFPs and category strategy work, or mainly process purchase requests?</p>
+        <div class="decide-options">
+          <button type="button" class="decide-btn" data-points="jaggaer">Formal RFPs &amp; category strategy</button>
+          <button type="button" class="decide-btn" data-points="precoro">Mainly purchase requests</button>
+        </div>
+      </div>
+      <div class="decide-q-group">
+        <p class="decide-q"><strong>3.</strong> How many ERPs does the platform need to serve today?</p>
+        <div class="decide-options">
+          <button type="button" class="decide-btn" data-points="jaggaer">Multiple ERPs</button>
+          <button type="button" class="decide-btn" data-points="precoro">A single ERP</button>
+        </div>
+      </div>
+      <div class="decide-verdict">
+        <p>Your answers point to: <strong id="decide-result">Answer the three questions above to see a recommendation.</strong></p>
+      </div>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See JAGGAER in Your Environment &rarr;</p>
+        <p class="jag-cta-desc">See how JAGGAER handles sourcing, contracts, and procure-to-pay for your organization.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S6 -->
+    <div id="assessment-section">
+    <h2 id="s6">Rate Your Own Procurement Setup</h2>
+
+    <p><strong>This self-assessment scores your current procurement and finance setup.</strong> It does not compare vendor feature lists. Rate each factor from 0 (not at all) to 10 (fully mature). The note below each question updates automatically. Use the button at the end to print this assessment or save it as a PDF.</p>
+
+    <div class="assessment-tool">
+
+      <div class="rate-question" data-gap="JAGGAER embeds AI across every module. Automation runs from sourcing through payment." data-strong="Your AI adoption already looks strong.">
+        <p class="rate-q-title"><strong>1. AI Adoption:</strong> Are you using AI in your procurement or sourcing workflows today?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="AI Adoption score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Not at all</span><span>10 = Extensively</span></div>
+        <p class="rate-result" aria-live="polite"></p>
+      </div>
+
+      <div class="rate-question" data-gap="JAGGAER connects to SAP, Oracle, Workday, Infor, and NetSuite through 1,000+ pre-built connectors." data-strong="Your ERP integration already looks strong.">
+        <p class="rate-q-title"><strong>2. ERP Integration:</strong> Is your ERP integrated with your procurement and spend tools, or is data reconciled manually?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="ERP Integration score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Fully manual</span><span>10 = Fully integrated</span></div>
+        <p class="rate-result" aria-live="polite"></p>
+      </div>
+
+      <div class="rate-question" data-gap="JAGGAER treats strategic sourcing as a standalone discipline, with dedicated category management and sourcing optimization." data-strong="Your sourcing process already looks strong.">
+        <p class="rate-q-title"><strong>3. Formal Sourcing:</strong> Do you run formal, tracked RFPs or category-strategy work for major purchases?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Formal Sourcing score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Never</span><span>10 = Always, tracked</span></div>
+        <p class="rate-result" aria-live="polite"></p>
+      </div>
+
+      <div class="rate-question" data-gap="JAGGAER includes a full contract lifecycle management module." data-strong="Your contract visibility already looks strong.">
+        <p class="rate-q-title"><strong>4. Contract Visibility:</strong> Do you have a system tracking contract renewals and obligations, or is it manual or spreadsheet-based?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Contract Visibility score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Fully manual</span><span>10 = Fully automated</span></div>
+        <p class="rate-result" aria-live="polite"></p>
+      </div>
+
+      <div class="rate-question" data-gap="JAGGAER's Supplier Intelligence layer combines a supplier network, performance scoring, and third-party ESG and risk data feeds." data-strong="Your supplier risk visibility already looks strong.">
+        <p class="rate-q-title"><strong>5. Supplier Risk Visibility:</strong> Can you see supplier risk and performance data in one place today?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Supplier Risk Visibility score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = No visibility</span><span>10 = Full visibility</span></div>
+        <p class="rate-result" aria-live="polite"></p>
+      </div>
+
+      <div class="rate-question" data-gap="JAGGAER serves mid-market to large enterprise organizations with multi-entity, complex spend." data-strong="Your process already scales well across entities.">
+        <p class="rate-q-title"><strong>6. Multi-Entity Scalability:</strong> How well does your current procurement process scale across multiple business units or entities?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Multi-Entity Scalability score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Not at all</span><span>10 = Fully standardized</span></div>
+        <p class="rate-result" aria-live="polite"></p>
+      </div>
+
+      <div class="rate-summary">
+        <p>Your average score: <span class="rate-summary-score" id="rate-avg">N/A</span> / 10</p>
+        <p class="rate-result" id="rate-overall-msg"></p>
+      </div>
+
+      <div class="assessment-btn-row">
+        <button type="button" id="print-assessment-btn" class="jag-cta-btn">Print or Save as PDF</button>
+        <button type="button" id="clear-assessment-btn">Clear All</button>
+      </div>
+
+    </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S7 -->
+    <h2 id="s7">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>Which platform targets enterprise-scale procurement, JAGGAER or Precoro? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">JAGGAER covers direct and indirect spend, multi-entity operations, and Tier 1 ERPs like SAP and Oracle. Precoro targets mid-sized, procure-to-pay-focused teams.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Does Precoro support strategic sourcing? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Only at a basic level.</strong> Precoro offers RFP creation and bid comparison, not the category management or sourcing optimization in JAGGAER's Source-to-Contract module.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>In a Precoro vs. JAGGAER comparison, which platform integrates with QuickBooks and NetSuite? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Precoro, primarily.</strong> Precoro centers on QuickBooks and NetSuite; JAGGAER also connects to NetSuite, alongside larger ERPs like SAP and Oracle.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the main difference between JAGGAER and Precoro? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Scope.</strong> JAGGAER covers the full source-to-pay lifecycle across direct and indirect spend. Precoro handles procure-to-pay and AP automation for mid-sized teams.</div>
+    </details>
+
+  </article>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Click an At a Glance row to jump to and highlight that Key Difference row
+document.querySelectorAll('#glance-table tbody tr[data-target]').forEach(row => {
+  row.addEventListener('click', () => {
+    const targetId = row.getAttribute('data-target');
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      target.classList.add('row-highlight');
+      setTimeout(() => target.classList.remove('row-highlight'), 1500);
+    }
+  });
+});
+
+// Where Each Platform Fits: click-to-highlight cards
+const chooseCards = document.querySelectorAll('.choose-card');
+chooseCards.forEach(card => {
+  const select = () => {
+    const nowSelected = !card.classList.contains('is-selected');
+    chooseCards.forEach(c => { c.classList.remove('is-selected'); c.setAttribute('aria-pressed', 'false'); });
+    if (nowSelected) { card.classList.add('is-selected'); card.setAttribute('aria-pressed', 'true'); }
+  };
+  card.addEventListener('click', select);
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
+  });
+});
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+
+// Interactive "How to Choose" decision tool
+const decideAnswers = {};
+const decideResultEl = document.getElementById('decide-result');
+document.querySelectorAll('.decide-q-group').forEach((group, qi) => {
+  group.querySelectorAll('.decide-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      group.querySelectorAll('.decide-btn').forEach(b => b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+      decideAnswers[qi] = btn.getAttribute('data-points');
+      const values = Object.values(decideAnswers);
+      if (values.length < 3 || !decideResultEl) return;
+      const jaggaerCount = values.filter(v => v === 'jaggaer').length;
+      const precoroCount = values.filter(v => v === 'precoro').length;
+      decideResultEl.textContent = jaggaerCount > precoroCount
+        ? "JAGGAER fits best. Its broader source-to-pay footprint covers direct spend, formal sourcing, and multi-ERP environments."
+        : "Precoro fits best. Its procure-to-pay focus fits indirect-only spend and simpler ERP environments.";
+    });
+  });
+});
+
+// Self-assessment tool
+const rateQuestions = document.querySelectorAll('.rate-question');
+const scores = new Array(rateQuestions.length).fill(null);
+
+function updateSummary() {
+  const answered = scores.filter(v => v !== null);
+  const avgEl = document.getElementById('rate-avg');
+  const overallEl = document.getElementById('rate-overall-msg');
+  if (answered.length === 0) {
+    avgEl.textContent = 'N/A';
+    overallEl.textContent = '';
+    return;
+  }
+  const avg = answered.reduce((a, b) => a + b, 0) / answered.length;
+  avgEl.textContent = avg.toFixed(1);
+  if (answered.length < rateQuestions.length) {
+    overallEl.textContent = 'Rate all six factors above to see your full result.';
+  } else if (avg < 6) {
+    overallEl.textContent = 'Your overall profile suggests meaningful gaps. A Source-to-Pay platform closes them.';
+  } else {
+    overallEl.textContent = 'Your setup already looks mature across several dimensions. A Source-to-Pay platform consolidates and automates what remains manual, even in mature setups.';
+  }
+}
+
+rateQuestions.forEach((q, qi) => {
+  const scale = q.querySelector('.rate-scale');
+  const resultEl = q.querySelector('.rate-result');
+  const gapMsg = q.getAttribute('data-gap');
+  const strongMsg = q.getAttribute('data-strong');
+  for (let v = 0; v <= 10; v++) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'rate-btn';
+    btn.textContent = v;
+    btn.setAttribute('data-value', v);
+    btn.setAttribute('aria-pressed', 'false');
+    btn.addEventListener('click', () => {
+      scale.querySelectorAll('.rate-btn').forEach(b => { b.classList.remove('is-selected'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('is-selected');
+      btn.setAttribute('aria-pressed', 'true');
+      scores[qi] = v;
+      resultEl.textContent = v < 6 ? gapMsg : strongMsg;
+      updateSummary();
+    });
+    scale.appendChild(btn);
+  }
+});
+
+// Print or Save as PDF (scoped to just the self-assessment tool)
+const printBtn = document.getElementById('print-assessment-btn');
+if (printBtn) {
+  printBtn.addEventListener('click', () => {
+    document.body.classList.add('print-assessment-only');
+    window.print();
+  });
+  window.addEventListener('afterprint', () => {
+    document.body.classList.remove('print-assessment-only');
+  });
+}
+
+const clearBtn = document.getElementById('clear-assessment-btn');
+if (clearBtn) {
+  clearBtn.addEventListener('click', () => {
+    scores.fill(null);
+    rateQuestions.forEach(q => {
+      q.querySelectorAll('.rate-btn').forEach(b => { b.classList.remove('is-selected'); b.setAttribute('aria-pressed', 'false'); });
+      q.querySelector('.rate-result').textContent = '';
+    });
+    updateSummary();
+  });
+}
+</script>
+</body>
+</html>
