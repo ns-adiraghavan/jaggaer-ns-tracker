@@ -2931,7 +2931,7 @@
               "title": "Best Procurement Software for Manufacturing Teams in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "marketing-review",
+              "status": "ed-review",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (Listicle)",
@@ -2943,12 +2943,12 @@
               "schedule_week": 1,
               "publish_day": "Mon",
               "planned_publish_date": "Aug 25, 2026",
-              "revision_count": 2,
+              "revision_count": 3,
               "deliverable_ext": "html",
               "return_to_stage": null,
-              "last_upload": "2026-08-26T11:51:46.131Z",
+              "last_upload": "2026-09-01T15:09:04.480Z",
               "last_upload_by": "m-5jitd",
-              "last_updated": "2026-08-26T11:51:46.131Z",
+              "last_updated": "2026-09-01T15:09:04.480Z",
               "last_updated_by": "m-5jitd",
               "status_history": [
                 {
@@ -2959,6 +2959,11 @@
                 {
                   "stage": "ed-review",
                   "ts": "2026-08-26T11:51:46.132Z",
+                  "by": "m-5jitd"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-09-01T15:09:04.480Z",
                   "by": "m-5jitd"
                 }
               ]
