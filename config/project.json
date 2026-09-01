@@ -3315,7 +3315,7 @@
               "title": "Jaggaer Vs Precoro",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3326,7 +3326,21 @@
               "geography": "all",
               "schedule_week": 1,
               "publish_day": "Thu",
-              "planned_publish_date": "Aug 28, 2026"
+              "planned_publish_date": "Aug 28, 2026",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-09-01T04:49:42.497Z",
+              "last_upload_by": "m-e10nz",
+              "last_updated": "2026-09-01T04:49:42.497Z",
+              "last_updated_by": "m-e10nz",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-09-01T04:49:42.498Z",
+                  "by": "m-e10nz"
+                }
+              ]
             },
             {
               "id": "p2-geo-jaggaer-vs-spendflo",
