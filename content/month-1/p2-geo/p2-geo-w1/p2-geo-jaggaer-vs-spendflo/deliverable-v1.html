@@ -1,0 +1,574 @@
+<!-- uploaded by manager at 2026-09-01T16:04:59.611Z -->
+<!-- piece: Jaggaer Vs Spendflo -->
+<!-- built from the same house template as jaggaer-vs-sap-ariba-v2.html / jaggaer-vs-zip-v1.html / jaggaer-vs-ivalua-v2.html, reused for batch consistency -->
+<!-- FLAGS FOR CLIENT REVIEW ARE MARKED INLINE WITH: <!~~ FLAG: ... ~~> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>document.documentElement.classList.add('js-enabled');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JAGGAER vs Spendflo (2026): Which Platform Fits?</title>
+<meta name="description" content="Compare JAGGAER and Spendflo on scope, supplier compliance, and AI approach. See which platform fits your procurement setup, or if you need both.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Jason Rydzewski">
+<meta name="theme-color" content="#5300CE">
+<!-- FLAG: canonical URL follows the naming pattern used by the other three comparison pieces but is not confirmed live -- verify or replace before publish -->
+<link rel="canonical" href="https://www.jaggaer.com/blog/jaggaer-vs-spendflo-2026">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235300CE'/%3E%3Cstop offset='1' stop-color='%23E22B83'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="JAGGAER">
+<meta property="og:title" content="JAGGAER vs Spendflo (2026): Which Platform Fits?">
+<meta property="og:description" content="Compare JAGGAER and Spendflo on scope, supplier compliance, and AI approach. See which platform fits your procurement setup, or if you need both.">
+<meta property="og:url" content="https://www.jaggaer.com/blog/jaggaer-vs-spendflo-2026">
+<meta property="article:published_time" content="2026-09">
+<meta property="article:section" content="Platform Comparison">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"JAGGAER vs Spendflo (2026): Which Platform Fits?","description":"Compare JAGGAER and Spendflo on scope, supplier compliance, and AI approach. See which platform fits your procurement setup, or if you need both.","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"datePublished":"2026-09","dateModified":"2026-09","author":{"@type":"Person","name":"Jason Rydzewski"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is JAGGAER a Spendflo alternative?","acceptedAnswer":{"@type":"Answer","text":"Not directly. The two only overlap in indirect and software spend. JAGGAER's strength is in supplier compliance and direct-materials capability, which sit outside Spendflo's published scope."}},{"@type":"Question","name":"Which platform is cheaper?","acceptedAnswer":{"@type":"Answer","text":"Neither company publishes standard pricing, so there's no public number to compare directly. What's confirmed is scope: Spendflo covers indirect and software spend; JAGGAER covers that plus direct-materials sourcing, supplier qualification, and spend control across every category. Cost should be evaluated against how much of that scope your organization actually needs."}},{"@type":"Question","name":"Can JAGGAER customers still run into SaaS sprawl?","acceptedAnswer":{"@type":"Answer","text":"Yes. A full source-to-pay suite is built for sourcing depth and supplier governance, not day-to-day SaaS renewal tracking. That's a separate, narrower problem some organizations manage with a dedicated layer alongside it."}},{"@type":"Question","name":"Does JAGGAER cover SaaS-specific features like Spendflo does?","acceptedAnswer":{"@type":"Answer","text":"JAGGAER's spend visibility extends across every category, including software, but it isn't built around SaaS-specific workflows like shadow IT discovery or dedicated renewal negotiation the way Spendflo is."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #5b6270;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --color-navy-tint:   #E9EFF4;
+  --jai-a:             #5300CE;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg,#5300CE 0%,#E22B83 100%);
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-label:   0.75rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1.05rem, 1rem + 0.23vw, 1.18rem);
+  --font-size-h4:      clamp(1.25rem, 1.18rem + 0.38vw, 1.46rem);
+  --font-size-h3:      clamp(1.4rem, 1.3rem + 0.5vw, 1.65rem);
+  --font-size-h2:      clamp(1.6rem, 1.45rem + 0.75vw, 1.95rem);
+  --font-size-h1:      clamp(1.9rem, 1.65rem + 1vw, 2.25rem);
+  --line-height-base:  1.6;
+  --line-height-heading: 1.18;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-base);font-weight:700;line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);}
+h2{font-size:var(--font-size-h2);}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:500;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+a:focus-visible,.toc-link:focus-visible,summary:focus-visible,.sa-option:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;border-radius:2px;}
+strong{color:var(--color-ink-3);font-weight:700;}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.6;margin-bottom:.35rem;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+.article-badges{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:var(--space-m);}
+.article-badge{display:inline-block;font-size:var(--font-size-label);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:9999px;padding:.3rem .8rem;}
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--jai-gradient);z-index:1000;transition:width .08s linear;}
+
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-header h1{font-weight:800;letter-spacing:-0.02em;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.35rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:var(--font-size-label);color:var(--color-ink-2);font-weight:500;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+
+.page-wrapper{display:flex;align-items:flex-start;max-width:1160px;margin:0 auto;padding:0 var(--space-m);gap:var(--space-m);}
+
+.toc-sidebar{width:220px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) 0;scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-size:var(--font-size-label);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:500;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:700;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) 0;}
+article h2{font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);scroll-margin-top:1.5rem;}
+article h3{font-size:var(--font-size-h5);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+article h3.mt-0{margin-top:0;}
+
+/* Short-version callout */
+.key-takeaways{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-left:4px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);}
+.key-takeaways-kicker{display:block;font-size:var(--font-size-label);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);margin-bottom:var(--space-s);}
+.key-takeaways p{margin-bottom:0;}
+
+/* CTA */
+.jag-cta{display:flex;align-items:center;gap:var(--space-m);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-eyebrow{font-size:var(--font-size-label);font-style:italic;color:var(--color-ink-3);display:block;margin-bottom:var(--space-2xs);}
+.jag-cta-body{flex:1;min-width:200px;}
+.jag-cta-head{font-size:var(--font-size-base);font-weight:700;color:var(--color-ink);margin:0 0 .2rem;line-height:1.4;}
+.jag-cta-sub{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.6;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:var(--font-size-base);font-weight:600;color:#fff;background:var(--color-red);padding:.6rem 1.3rem;text-decoration:none;border:none;white-space:nowrap;flex-shrink:0;border-radius:var(--border-radius-sm);transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* Customer proof point */
+.proof-point{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.proof-point p{margin-bottom:var(--space-s);}
+.proof-point p:last-child{margin-bottom:0;}
+.proof-point cite{font-style:normal;font-size:var(--font-size-label);color:var(--color-ink-3);display:block;}
+
+/* Comparison table */
+.leak-compare-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.leak-compare-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:600px;}
+.leak-compare-table th{background:var(--jai-a);color:#fff;font-weight:700;font-size:var(--font-size-label);letter-spacing:.04em;text-align:left;padding:.7rem var(--space-s);border-right:1px solid #ffffff20;}
+.leak-compare-table th:last-child{border-right:none;}
+.leak-compare-table td{padding:.8rem var(--space-s);border-bottom:var(--border);color:var(--color-ink-2);vertical-align:top;line-height:1.6;font-size:var(--font-size-base);}
+.leak-compare-table tr:last-child td{border-bottom:none;}
+.leak-compare-table td:first-child{font-weight:700;color:var(--color-ink);white-space:nowrap;}
+
+/* Which Platform Fits - two-column */
+.fit-table{display:grid;grid-template-columns:1fr 1fr;border:var(--border);border-radius:var(--border-radius);overflow:hidden;margin:var(--space-m) 0 var(--space-l);background:var(--color-white);}
+.fit-col{padding:var(--space-m) var(--space-l);}
+.fit-col-jag{border-right:var(--border);background:var(--purple-tint-3);}
+.fit-col-head{font-weight:700;font-size:var(--font-size-base);padding-bottom:var(--space-s);margin-bottom:var(--space-s);border-bottom:2px solid var(--jai-a);}
+.fit-col-spendflo .fit-col-head{border-bottom-color:var(--color-teal);}
+.fit-col p{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.6;text-wrap:pretty;}
+.fit-col-both{grid-column:1 / -1;border-right:none;border-top:var(--border);background:var(--color-cream);}
+@media(max-width:768px){.fit-table{grid-template-columns:1fr;}.fit-col-jag{border-right:none;border-bottom:var(--border);}}
+
+/* Self-assessment tool */
+.sa-wrap{border:var(--border);border-radius:var(--border-radius);background:var(--color-white);overflow:hidden;margin:var(--space-m) 0 var(--space-l);}
+.sa-intro{padding:var(--space-m) var(--space-l) 0;font-size:var(--font-size-label);color:var(--color-ink-3);font-style:italic;}
+.sa-question{padding:var(--space-m) var(--space-l);border-bottom:var(--border);}
+.sa-question:last-of-type{border-bottom:none;}
+.sa-q-title{font-weight:700;color:var(--color-ink);font-size:var(--font-size-base);margin-bottom:var(--space-s);}
+.sa-options{display:flex;flex-direction:column;gap:.5rem;}
+.sa-option{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem var(--space-s);border:var(--border);border-radius:var(--border-radius-sm);cursor:pointer;transition:background .15s,border-color .15s;}
+.sa-option:hover{background:var(--purple-tint-3);border-color:var(--purple-soft);}
+.sa-option input{margin-top:.2rem;accent-color:var(--jai-a);flex-shrink:0;}
+.sa-option span{font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.5;}
+.sa-option.is-checked{background:var(--purple-tint);border-color:var(--jai-a);}
+.sa-question.is-hidden{display:none;}
+.sa-result{background:var(--purple-tint-3);border-top:2px solid var(--jai-a);padding:var(--space-l);}
+.sa-result-label{font-size:var(--font-size-label);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:var(--space-s);}
+.sa-result-headline{font-size:var(--font-size-h4);font-weight:800;color:var(--color-ink);margin:0 0 var(--space-s);}
+.sa-result-text{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0 0 var(--space-m);line-height:1.6;}
+.sa-result-cta{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:var(--font-size-base);font-weight:600;color:#fff;background:var(--color-red);padding:.6rem 1.3rem;text-decoration:none;border:none;border-radius:var(--border-radius-sm);transition:background .2s;}
+.sa-result-cta:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+.sa-result-cta.is-soft{background:var(--color-teal);}
+.sa-reset-btn{font-family:var(--font-base);font-size:var(--font-size-label);font-weight:600;color:var(--color-ink-3);background:var(--color-white);border:var(--border);border-radius:var(--border-radius-sm);padding:.5rem 1rem;cursor:pointer;transition:background .15s;margin-top:var(--space-s);}
+.sa-reset-btn:hover{background:var(--color-cream);}
+.sa-progress-note{font-size:var(--font-size-label);color:var(--color-ink-3);}
+
+/* FAQ accordion */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-base);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+article h3.faq-q{margin:0;font-size:inherit;font-weight:inherit;color:inherit;line-height:inherit;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.6;border-top:var(--border);background:var(--color-white);}
+
+@media(max-width:900px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">Where They Differ</a>
+      <a class="toc-link" href="#s2">The AI Question</a>
+      <a class="toc-link" href="#s3">Which Platform Fits You</a>
+      <a class="toc-link" href="#s4">Check Your Fit</a>
+      <a class="toc-link" href="#s5">FAQs</a>
+      <a class="toc-link" href="#s6">Bottom Line</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-badges">
+          <span class="article-badge">Procurement Software</span>
+          <span class="article-badge">Platform Comparison</span>
+        </div>
+        <h1 id="s0">JAGGAER vs Spendflo (2026): Which Platform Fits?</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            4&ndash;5 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Published <time datetime="2026-09">September 2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Jason Rydzewski</span>
+        </div>
+      </div>
+    </header>
+
+    <p>JAGGAER vs. Spendflo comes down to scope: JAGGAER covers direct materials, supplier compliance, and formal qualification workflows: the processes manufacturing, public-sector, and higher-education teams depend on. Spendflo covers a narrower slice: intake-to-pay for indirect and software spend.</p>
+
+    <p>The comparison comes up often because procurement teams are increasingly running two separate problems at once: strategic sourcing across their full spend base, and the specific, recurring creep of software subscriptions that tends to get tracked apart from everything else. Choosing between the two platforms, or deciding whether you actually need both, depends on which of those problems describes your organization, not on company size or budget alone.</p>
+
+    <div class="key-takeaways">
+      <span class="key-takeaways-kicker">The Short Version</span>
+      <p>If direct materials, formal supplier qualification, or compliance sign-off are part of your procurement work, JAGGAER is built for that scope. If your procurement work stays within indirect and software spend, Spendflo covers it. The two also take different approaches to AI. JAGGAER configures agents against your own rules, with high-stakes decisions routed to a named person, while Spendflo's Flo runs more of the cycle autonomously by design. The sections below walk through exactly where that line sits.</p>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <span class="jag-cta-eyebrow">Already sure this is your situation?</span>
+        <p class="jag-cta-head">JAGGAER One for Complex Procurement</p>
+        <p class="jag-cta-sub">If your procurement work touches direct materials, formal supplier qualification, or compliance sign-off, see exactly how JAGGAER One handles it.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s1">JAGGAER vs Spendflo: Where the Platforms Actually Differ</h2>
+
+    <p>JAGGAER and Spendflo cover different territory: JAGGAER runs direct-materials sourcing, formal supplier qualification, and regulated compliance workflows: the processes manufacturing, public-sector, and higher-education buyers depend on. Spendflo runs intake-to-pay for indirect and software spend; Spendflo's published scope doesn't include direct-materials sourcing or formal supplier qualification. Here's what each platform actually does.</p>
+
+    <h3 class="mt-0">What JAGGAER Solves</h3>
+    <p>JAGGAER is built for procurement work that has to hold up under audit: qualifying a new supplier before they touch a production line, justifying a sole-source decision to a compliance team, running competitive bids across dozens of categories at once.</p>
+
+    <div class="proof-point">
+      <p>Saint-Gobain, the global manufacturer, uses JAGGAER to onboard suppliers at scale (62,000 of them) with ESG and compliance criteria built into the tender process from the start.</p>
+      <p>&ldquo;JAGGAER was able to enrich my program by integrating ESG criteria in the tender and by giving us the ability to monitor it from the very beginning.&rdquo;</p>
+      <cite>Cecilia Frasnetti, Responsible Purchasing Director, Saint-Gobain</cite>
+    </div>
+
+    <p>That system connects to a <a href="https://www.jaggaer.com/" target="_blank" rel="noopener">network of 13M+ suppliers spanning direct materials, services, and indirect spend, and integrates with 40+ ERPs, including SAP, Oracle, and Workday, across 38 industries</a>.</p>
+
+    <h3>What Spendflo Solves</h3>
+    <p>Spendflo runs procurement end to end for indirect and software spend: a request comes in, moves through approval, gets negotiated, and closes out once the invoice is matched against what was actually agreed. A finance team renewing a batch of software contracts keeps the negotiation in-house, while Flo, Spendflo's AI agent, tracks renewal deadlines, onboards new suppliers, and flags spend commitments as they come in. The same system checks the invoice against the contract once the renewal closes.</p>
+
+    <h3>JAGGAER vs Spendflo at a Glance</h3>
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table">
+        <thead>
+          <tr><th>Dimension</th><th>JAGGAER</th><th>Spendflo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Typical buyer</td>
+            <td>Manufacturing, aerospace/defense, medical devices, public sector, higher ed</td>
+            <td>Finance and procurement teams managing indirect/software spend</td>
+          </tr>
+          <tr>
+            <td>Supplier qualification</td>
+            <td>PPAP, sole-source justification, formal qualification workflows</td>
+            <td>Not part of Spendflo's published scope</td>
+          </tr>
+          <tr>
+            <td>Process coverage</td>
+            <td>Direct &amp; indirect sourcing, contracts, purchasing, invoicing, payments</td>
+            <td>Software &amp; indirect sourcing, contracting, purchasing, invoicing, payments</td>
+          </tr>
+          <tr>
+            <td>AI approach</td>
+            <td>JAI: embedded, cited to source, decision stays with your team</td>
+            <td>Flo: autonomous agent handling intake-to-pay end to end</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s2">The AI Question: Configured Autonomy vs. Managed Autonomy</h2>
+    <p>JAGGAER and Spendflo both automate real steps in the procurement cycle now. The real difference is what's automated, and what still requires a person to act.</p>
+
+    <h3 class="mt-0">JAGGAER's JAI: Configurable Agents, Audited by Design</h3>
+    <p>Through <a href="https://www.jaggaer.com/blog/ai-procurement-platform-landscape-2026" target="_blank" rel="noopener">Agent OS</a>, JAGGAER's no-code agentic workflow builder, customers configure agents against their own rules. A low-risk purchase order can be auto-approved, an invoice matched, or a requisition routed automatically. Higher-stakes calls, like a sole-source award or a contract signature, are designed to route to a named person. In 2025, JAGGAER announced it had become the first source-to-pay vendor certified to ISO/IEC 42001, the AI management system standard. Every JAI action traces back to the rule that triggered it.</p>
+
+    <h3>Spendflo's Flo: Autonomous Execution, Negotiation Stays Human</h3>
+    <p>Flo runs routing, policy enforcement, contract review, renewal tracking, and invoice matching without a person driving each step. The negotiation itself, the part that actually moves the price, stays with the customer's own procurement team, not the agent.</p>
+
+    <p>Both approaches trade off differently: JAI routes high-stakes purchases to a named decision-maker by design, so a person is always accountable for the call. Flo automates most of the routine renewal cycle end to end, since that work doesn't need a person driving it.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s3">Which Platform Fits You</h2>
+    <p>Your spend profile decides this, not company size or budget. If direct materials, supplier qualification, or compliance sign-off show up anywhere in your procurement work, that's the deciding factor, not how large the software line item is.</p>
+
+    <div class="fit-table">
+      <div class="fit-col fit-col-jag">
+        <div class="fit-col-head">Choose JAGGAER if:</div>
+        <p>Your spend includes direct materials, formal supplier qualification, or compliance requirements: sole-source justification, PPAP, sourcing that spans multiple categories at once. This is the profile that shows up the moment an auditor asks how a supplier was qualified, not just who approved the purchase.</p>
+      </div>
+      <div class="fit-col fit-col-spendflo">
+        <div class="fit-col-head">Choose Spendflo if:</div>
+        <p>Your procurement needs are centered on indirect and software spend. Spendflo's published scope doesn't extend into supplier compliance or direct-materials work, so it's a narrower fit once those requirements are part of the picture, even if your spend today is entirely software subscriptions and renewal negotiations.</p>
+      </div>
+      <div class="fit-col fit-col-both">
+        <div class="fit-col-head">Run both if:</div>
+        <p>You need full source-to-pay coverage for regulated and direct spend, alongside a dedicated layer for software renewals and negotiation. A manufacturing team running formal supplier qualification in JAGGAER while a separate finance team manages the SaaS stack in Spendflo is one way to structure it, not a compromise. The two can work well together rather than overlap.</p>
+      </div>
+    </div>
+
+    <p>Not sure where you land? Answer the quick questions below.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s4">Check Your Fit</h2>
+    <p class="sa-progress-note" style="margin-bottom:var(--space-s);">Answer the questions below. Questions 1 and 2 can settle it on their own. The rest only matter if neither applies to you.</p>
+
+    <div class="sa-wrap" id="sa-tool">
+      <p class="sa-intro">Select the option that best describes your organization.</p>
+
+      <div class="sa-question" data-sa-q="1" data-sa-type="gate">
+        <p class="sa-q-title">1. Does your organization require formal supplier qualification or compliance sign-off before working with a new vendor, such as PPAP, sole-source justification, or audit requirements?</p>
+        <div class="sa-options">
+          <label class="sa-option"><input type="radio" name="sa-q1" value="1"><span>Yes</span></label>
+          <label class="sa-option"><input type="radio" name="sa-q1" value="0"><span>No</span></label>
+        </div>
+      </div>
+
+      <div class="sa-question" data-sa-q="2" data-sa-type="gate">
+        <p class="sa-q-title">2. Does your procurement spend include direct materials: physical components or goods that go into what you manufacture or sell?</p>
+        <div class="sa-options">
+          <label class="sa-option"><input type="radio" name="sa-q2" value="1"><span>Yes</span></label>
+          <label class="sa-option"><input type="radio" name="sa-q2" value="0"><span>No</span></label>
+        </div>
+      </div>
+
+      <div class="sa-question" data-sa-q="3" data-sa-type="secondary">
+        <p class="sa-q-title">3. How is your organization structured?</p>
+        <div class="sa-options">
+          <label class="sa-option"><input type="radio" name="sa-q3" value="0"><span>A single business unit</span></label>
+          <label class="sa-option"><input type="radio" name="sa-q3" value="1"><span>A few units sharing one procurement process</span></label>
+          <label class="sa-option"><input type="radio" name="sa-q3" value="2"><span>Multiple entities, subsidiaries, or business units</span></label>
+        </div>
+      </div>
+
+      <div class="sa-question" data-sa-q="4" data-sa-type="secondary">
+        <p class="sa-q-title">4. Roughly how much total spend would this platform need to cover?</p>
+        <div class="sa-options">
+          <label class="sa-option"><input type="radio" name="sa-q4" value="0"><span>Under $2M a year</span></label>
+          <label class="sa-option"><input type="radio" name="sa-q4" value="1"><span>$2M&ndash;$20M a year</span></label>
+          <label class="sa-option"><input type="radio" name="sa-q4" value="2"><span>Enterprise-wide spend, $20M+</span></label>
+        </div>
+      </div>
+
+      <div class="sa-question" data-sa-q="5" data-sa-type="secondary">
+        <p class="sa-q-title">5. How would you describe your procurement process today?</p>
+        <div class="sa-options">
+          <label class="sa-option"><input type="radio" name="sa-q5" value="0"><span>We track spend and vendors informally, without a structured process</span></label>
+          <label class="sa-option"><input type="radio" name="sa-q5" value="1"><span>We have some structure in place, and we're working to make it official</span></label>
+          <label class="sa-option"><input type="radio" name="sa-q5" value="2"><span>We run structured sourcing events or RFPs as standard practice</span></label>
+        </div>
+      </div>
+
+      <div class="sa-result">
+        <span class="sa-result-label">Your Result</span>
+        <p class="sa-result-headline" id="sa-result-headline">Answer the questions above to see your result</p>
+        <p class="sa-result-text" id="sa-result-text">Question 1 or 2 alone can settle it. If neither applies, answer questions 3&ndash;5 too.</p>
+        <a href="https://www.jaggaer.com/book-a-demo" class="sa-result-cta" id="sa-result-cta" target="_blank" rel="noopener" style="display:none;">Book a Demo &rarr;</a>
+        <br>
+        <button type="button" class="sa-reset-btn" id="sa-reset">Reset</button>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s5">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary><h3 class="faq-q">Is JAGGAER a Spendflo alternative?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Not directly. The two only overlap in indirect and software spend. <strong>JAGGAER's strength is in supplier compliance and direct-materials capability</strong>, which sit outside Spendflo's published scope.</div>
+    </details>
+    <details class="faq-item">
+      <summary><h3 class="faq-q">Which platform is cheaper?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Neither company publishes standard pricing, so there's no public number to compare directly. What's confirmed is scope: Spendflo covers indirect and software spend; JAGGAER covers that plus direct-materials sourcing, supplier qualification, and spend control across every category. <strong>Cost should be evaluated against how much of that scope your organization actually needs.</strong></div>
+    </details>
+    <details class="faq-item">
+      <summary><h3 class="faq-q">Can JAGGAER customers still run into SaaS sprawl?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Yes. A full source-to-pay suite is built for sourcing depth and supplier governance, not day-to-day SaaS renewal tracking. <strong>That's a separate, narrower problem</strong> some organizations manage with a dedicated layer alongside it.</div>
+    </details>
+    <details class="faq-item">
+      <summary><h3 class="faq-q">Does JAGGAER cover SaaS-specific features like Spendflo does?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body">JAGGAER's spend visibility extends across every category, including software, but <strong>it isn't built around SaaS-specific workflows</strong> like shadow IT discovery or dedicated renewal negotiation the way Spendflo is.</div>
+    </details>
+
+    <p><strong>Comparing other platforms too?</strong> See how JAGGAER stacks up against <a href="#" class="link-pending" data-pending="true">JAGGAER vs. Zip</a>, <a href="#" class="link-pending" data-pending="true">JAGGAER vs. Oracle Procurement Cloud</a>, and <a href="#" class="link-pending" data-pending="true">JAGGAER vs. Precoro</a>.</p>
+    <!-- FLAG: the three links above are placeholders (href="#") -- replace with live URLs once each comparison piece is published -->
+
+    <hr class="section-divider">
+
+    <h2 id="s6">Bottom Line</h2>
+    <p>If your procurement work touches direct materials, formal supplier qualification, or compliance sign-off, JAGGAER is built for that scope. Spendflo has its place for organizations whose procurement work stays within indirect and software spend.</p>
+    <p><strong>Book a demo</strong> and see how JAGGAER handles your direct-materials sourcing, supplier qualification, and compliance requirements, scoped to your setup.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See JAGGAER One in Action</p>
+        <p class="jag-cta-sub">Talk to JAGGAER about source-to-pay for organizations with complex, compliance-heavy procurement.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo &rarr;</a>
+    </div>
+
+  </article>
+
+</div>
+
+<script>
+// Reading progress bar
+try {
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+} catch (err) {}
+
+// Active TOC link on scroll
+try {
+  const sections = document.querySelectorAll('article h2[id]');
+  const links = document.querySelectorAll('.toc-link');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+} catch (err) {}
+
+// Check Your Fit: gate + secondary scoring self-assessment
+try {
+  const saTool = document.getElementById('sa-tool');
+  const headline = document.getElementById('sa-result-headline');
+  const resultText = document.getElementById('sa-result-text');
+  const resultCta = document.getElementById('sa-result-cta');
+  const resetBtn = document.getElementById('sa-reset');
+  const allInputs = saTool.querySelectorAll('input[type="radio"]');
+
+  function getVal(name) {
+    const checked = saTool.querySelector('input[name="' + name + '"]:checked');
+    return checked ? parseInt(checked.value, 10) : null;
+  }
+
+  function updateOptionStyles() {
+    saTool.querySelectorAll('.sa-option').forEach(opt => {
+      const input = opt.querySelector('input');
+      opt.classList.toggle('is-checked', input.checked);
+    });
+  }
+
+  function evaluate() {
+    updateOptionStyles();
+    const q1 = getVal('sa-q1');
+    const q2 = getVal('sa-q2');
+
+    // Gate check: either "Yes" settles it immediately, regardless of other answers
+    if (q1 === 1 || q2 === 1) {
+      headline.textContent = 'JAGGAER is built for what you\'re describing.';
+      if (q1 === 1 && q2 === 1) {
+        resultText.textContent = 'Formal supplier qualification and direct-materials sourcing both sit outside Spendflo\'s published scope. JAGGAER is built for exactly this.';
+      } else if (q1 === 1) {
+        resultText.textContent = 'Formal supplier qualification is something Spendflo doesn\'t publicly document. JAGGAER is built for exactly this.';
+      } else {
+        resultText.textContent = 'Direct-materials sourcing sits outside Spendflo\'s published scope. JAGGAER is built for exactly this.';
+      }
+      resultCta.textContent = 'Book a Demo →';
+      resultCta.className = 'sa-result-cta';
+      resultCta.style.display = 'inline-flex';
+      return;
+    }
+
+    // If gates are both "No" but not yet answered at all, wait
+    if (q1 === null || q2 === null) {
+      headline.textContent = 'Answer the questions above to see your result';
+      resultText.textContent = 'Question 1 or 2 alone can settle it. If neither applies, answer questions 3–5 too.';
+      resultCta.style.display = 'none';
+      return;
+    }
+
+    // Both gates are "No" -- check secondary questions
+    const q3 = getVal('sa-q3');
+    const q4 = getVal('sa-q4');
+    const q5 = getVal('sa-q5');
+
+    if (q3 === null || q4 === null || q5 === null) {
+      headline.textContent = 'Almost there';
+      resultText.textContent = 'Answer questions 3–5 to complete your result.';
+      resultCta.style.display = 'none';
+      return;
+    }
+
+    const secondaryScore = q3 + q4 + q5;
+
+    if (secondaryScore >= 3) {
+      headline.textContent = 'JAGGAER gives you room to grow into.';
+      resultText.textContent = 'Your organization\'s structure and spend size are already moving past what a single-category tool comfortably covers. JAGGAER is built to scale with that complexity.';
+    } else {
+      headline.textContent = 'JAGGAER One scales with you.';
+      resultText.textContent = 'Your procurement needs are straightforward today, but JAGGAER One is built to grow with you. Direct-materials sourcing, formal supplier qualification, and multi-entity complexity are already built in for when you need them.';
+    }
+    resultCta.textContent = 'Book a Demo →';
+    resultCta.className = 'sa-result-cta';
+    resultCta.style.display = 'inline-flex';
+  }
+
+  allInputs.forEach(input => {
+    input.addEventListener('change', evaluate);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    allInputs.forEach(input => { input.checked = false; });
+    updateOptionStyles();
+    headline.textContent = 'Answer the questions above to see your result';
+    resultText.textContent = 'Question 1 or 2 alone can settle it. If neither applies, answer questions 3–5 too.';
+    resultCta.style.display = 'none';
+  });
+} catch (err) { /* self-assessment is a progressive enhancement */ }
+</script>
+
+</body>
+</html>
