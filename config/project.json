@@ -3403,7 +3403,7 @@
               "title": "Jaggaer Vs Synertrade",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3414,7 +3414,21 @@
               "geography": "all",
               "schedule_week": 1,
               "publish_day": "Fri",
-              "planned_publish_date": "Aug 29, 2026"
+              "planned_publish_date": "Aug 29, 2026",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-09-02T07:08:55.682Z",
+              "last_upload_by": "manager",
+              "last_updated": "2026-09-02T07:08:55.682Z",
+              "last_updated_by": "manager",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-09-02T07:08:55.682Z",
+                  "by": "manager"
+                }
+              ]
             },
             {
               "id": "p2-geo-jaggaer-vs-workday-spend-management",
