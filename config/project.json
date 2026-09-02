@@ -5427,6 +5427,18 @@
         "section": "¶28 — \"At a Glance…\"",
         "revision": 1
       }
+    ],
+    "p2-geo-best-procurement-software-for-higher-education-in-2026-8-pla": [
+      {
+        "id": "ann-i72x0n",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "If possible, please include a feature that in this view, I can see Meta title + meta description + SLUG for each page",
+        "ts": "2026-09-02T11:26:57.710Z",
+        "annotation": true,
+        "section": "NOTE",
+        "revision": 3
+      }
     ]
   },
   "build_with_claude": [
