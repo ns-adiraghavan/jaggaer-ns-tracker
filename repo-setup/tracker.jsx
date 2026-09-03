@@ -2376,7 +2376,7 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
         {mode === "replace" && canReplace && <ReplaceDraftPanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} updatePiece={updatePiece} stages={stages} onDone={() => setMode("details")} />}
         {mode === "review" && canReview && <ReviewPanel piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} addFeedback={addFeedback} stages={stages} stageMeta={stageMeta} onDone={() => setMode("history")} />}
         {mode === "preview" && hasDeliverable && <PreviewPanel piece={piece} cluster={cluster} pillar={pillar} project={project} />}
-        {mode === "annotate" && hasDeliverable && <AnnotatePanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} addFeedback={addFeedback} updatePiece={updatePiece} onDone={() => setMode("history")} />}
+        {mode === "annotate" && hasDeliverable && <AnnotatePanel piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} addFeedback={addFeedback} updatePiece={updatePiece} canReview={canReview} onGoToReview={() => setMode("review")} onDone={() => setMode("history")} />}
         {mode === "history" && <NotesHistory piece={piece} project={project} />}
         {mode === "details" && <PieceDetails piece={piece} cluster={cluster} pillar={pillar} project={project} currentUser={currentUser} adminMode={adminMode} updatePiece={updatePiece} />}
         {mode === "edit" && adminMode && <EditPiecePanel piece={piece} cluster={cluster} project={project} updatePiece={updatePiece} onDone={() => setMode("details")} />}
@@ -3590,9 +3590,7 @@ function seoSlugify(s) {
     .replace(/&/g, " and ")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/-{2,}/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 75)
-    .replace(/-+$/g, "");
+    .replace(/^-+|-+$/g, "");
 }
 // Last path segment of a live URL, if one exists — the real published slug.
 function seoSlugFromUrl(url) {
@@ -3653,10 +3651,6 @@ function SeoMetaSection({ piece, cluster, project, currentUser, updatePiece }) {
 
   const hasAny = seo.meta_title || seo.meta_description || seo.slug;
   const updatedBy = seo.updated_by ? [...(project.team?.ns || []), ...(project.team?.jaggaer || [])].find(m => m.id === seo.updated_by) : null;
-
-  // SEO length guidance (Google typically truncates ~60 title / ~160 desc).
-  const titleLen = form.meta_title.length, descLen = form.meta_description.length;
-  const counterColor = (len, hi) => len === 0 ? "#b7b1a8" : len > hi ? "#c8401a" : len > hi - 10 ? "#b0791a" : "#1e7a45";
 
   const ACC = "#3b3f9e", ACC_BG = "#eef0fb", ACC_BD = "#cdd2f0";
   const inputStyle = { ...FONT, fontSize: "0.82rem", padding: "8px 10px", borderRadius: "3px",
@@ -3758,20 +3752,14 @@ function SeoMetaSection({ piece, cluster, project, currentUser, updatePiece }) {
           <div>
             <div style={labelStyle}>
               <span>Meta Title</span>
-              <span style={{ display: "flex", gap: "8px", alignItems: "center", textTransform: "none", letterSpacing: 0 }}>
-                <span style={{ fontSize: "0.66rem", fontWeight: 600, color: counterColor(titleLen, 60) }}>{titleLen}/60</span>
-                {suggest.meta_title && <button type="button" onClick={() => useSuggestion("meta_title")} style={suggestBtn}>Use title</button>}
-              </span>
+              {suggest.meta_title && <button type="button" onClick={() => useSuggestion("meta_title")} style={{ ...suggestBtn, textTransform: "none", letterSpacing: 0 }}>Use title</button>}
             </div>
             <input value={form.meta_title} onChange={field("meta_title")} placeholder="Concise, keyword-led title for search results" style={inputStyle} />
           </div>
           <div>
             <div style={labelStyle}>
               <span>Meta Description</span>
-              <span style={{ display: "flex", gap: "8px", alignItems: "center", textTransform: "none", letterSpacing: 0 }}>
-                <span style={{ fontSize: "0.66rem", fontWeight: 600, color: counterColor(descLen, 160) }}>{descLen}/160</span>
-                {suggest.meta_description && <button type="button" onClick={() => useSuggestion("meta_description")} style={suggestBtn}>Suggest</button>}
-              </span>
+              {suggest.meta_description && <button type="button" onClick={() => useSuggestion("meta_description")} style={{ ...suggestBtn, textTransform: "none", letterSpacing: 0 }}>Suggest</button>}
             </div>
             <textarea value={form.meta_description} onChange={field("meta_description")} rows={3}
               placeholder="1–2 sentence summary with the primary keyword. Shown under the title in search results."
@@ -3852,8 +3840,6 @@ function SeoReviewCard({ piece, cluster, project, currentUser, updatePiece }) {
   }
 
   const ACC = "#3b3f9e", ACC_BG = "#eef0fb", ACC_BD = "#cdd2f0";
-  const titleLen = form.meta_title.length, descLen = form.meta_description.length;
-  const counterColor = (len, hi) => len === 0 ? "#b7b1a8" : len > hi ? "#c8401a" : len > hi - 10 ? "#b0791a" : "#1e7a45";
   const input = { ...FONT, fontSize: "0.74rem", padding: "6px 8px", borderRadius: "3px", border: `1px solid ${ACC_BD}`,
     background: "#fff", color: "#1a2535", width: "100%", boxSizing: "border-box", outline: "none" };
   const suggestBtn = { ...FONT, fontSize: "0.6rem", fontWeight: 700, color: ACC, background: "#fff",
@@ -3931,20 +3917,14 @@ function SeoReviewCard({ piece, cluster, project, currentUser, updatePiece }) {
               <div>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "3px" }}>
                   <span style={fieldLabel}>Meta Title</span>
-                  <span style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-                    <span style={{ fontSize: "0.6rem", fontWeight: 600, color: counterColor(titleLen, 60) }}>{titleLen}/60</span>
-                    {suggest.meta_title && <button type="button" onClick={() => useSuggestion("meta_title")} style={suggestBtn}>Title</button>}
-                  </span>
+                  {suggest.meta_title && <button type="button" onClick={() => useSuggestion("meta_title")} style={suggestBtn}>Title</button>}
                 </div>
                 <input value={form.meta_title} onChange={field("meta_title")} style={input} placeholder="Search title" />
               </div>
               <div>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "3px" }}>
                   <span style={fieldLabel}>Meta Description</span>
-                  <span style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-                    <span style={{ fontSize: "0.6rem", fontWeight: 600, color: counterColor(descLen, 160) }}>{descLen}/160</span>
-                    {suggest.meta_description && <button type="button" onClick={() => useSuggestion("meta_description")} style={suggestBtn}>Suggest</button>}
-                  </span>
+                  {suggest.meta_description && <button type="button" onClick={() => useSuggestion("meta_description")} style={suggestBtn}>Suggest</button>}
                 </div>
                 <textarea value={form.meta_description} onChange={field("meta_description")} rows={3} style={{ ...input, resize: "vertical", lineHeight: 1.4 }} placeholder="Search description" />
               </div>
@@ -4477,7 +4457,7 @@ function BriefUploadPanel({ piece, cluster, pillar, project, currentUser, update
 
 
 // ─── Annotate Panel — iframe preview with inline comment sidebar ───────────────
-function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedback, updatePiece, onDone }) {
+function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedback, updatePiece, canReview, onGoToReview, onDone }) {
   const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
   const monthId = project.active_month || "month-1";
   const rev = piece.revision_count || 1;
@@ -4723,6 +4703,27 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
               : "Each comment saves to GitHub the moment you add it. Wait for the ✓ before closing."}
           </div>
         </div>
+
+        {/* Send-back nudge — comments alone don't hand the piece back; the reviewer
+            must Send Back. Shown once this reviewer has commented this round. */}
+        {canReview && (() => {
+          const myComments = existingAnnotations.filter(a => a.author === currentUser?.id).length;
+          if (myComments === 0) return null;
+          return (
+            <div style={{ ...FONT, margin: "0", padding: "12px 16px", background: "#fffaf0",
+              borderBottom: "1px solid #e8e3da", borderLeft: "3px solid #d18f2e" }}>
+              <div style={{ fontSize: "0.72rem", color: "#7a5a20", lineHeight: 1.45, marginBottom: "8px" }}>
+                You've added <strong>{myComments}</strong> comment{myComments === 1 ? "" : "s"} this round.
+                Comments don't return the piece on their own — <strong>Send Back</strong> to hand it to NS with your notes attached.
+              </div>
+              <button onClick={() => onGoToReview && onGoToReview()}
+                style={{ ...FONT, fontSize: "0.74rem", fontWeight: 700, color: "#fff", background: "#c8401a",
+                  border: "none", borderRadius: "3px", padding: "7px 14px", cursor: "pointer" }}>
+                Send Back to NS →
+              </button>
+            </div>
+          );
+        })()}
 
         {/* existing inline annotations */}
         <div style={{ flex:1, overflowY:"auto", padding:"16px" }}>
