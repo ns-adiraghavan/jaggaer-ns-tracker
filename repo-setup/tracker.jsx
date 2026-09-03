@@ -4501,6 +4501,7 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
   const [saveError, setSaveError] = useStateTR(false);
   const [frameReady, setFrameReady] = useStateTR(false);
   const [focusLine, setFocusLine] = useStateTR(null);
+  const [commentFormOpen, setCommentFormOpen] = useStateTR(true);
   const iframeRef = useRefTR(null);
 
   const allAnnotations = ((project.feedback || {})[piece.id] || []).filter(f => f.annotation);
@@ -4667,41 +4668,48 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
         </div>
       </div>
 
-      {/* comment sidebar right */}
-      <div style={{ width:"300px", flexShrink:0, display:"flex", flexDirection:"column", background:"#faf9f7" }}>
-        {/* SEO metadata — visible to the reviewer while reading the article */}
+      {/* comment sidebar right — the whole rail scrolls so every comment is reachable */}
+      <div style={{ width:"300px", flexShrink:0, display:"flex", flexDirection:"column", background:"#faf9f7", minHeight:0, overflowY:"auto" }}>
+        {/* SEO metadata — visible to the reviewer while reading the article (collapsible) */}
         {piece.status !== "not-started" && (
           <SeoReviewCard piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} />
         )}
-        {/* new comment form */}
-        <div style={{ padding:"16px", borderBottom:"1px solid #e8e3da" }}>
-          <div style={{ ...FONT, fontSize:"0.68rem", fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase", color:"#888", marginBottom:"10px" }}>
-            Add Comment
+        {/* new comment form — collapsible */}
+        <div style={{ borderBottom:"1px solid #e8e3da" }}>
+          <div onClick={() => setCommentFormOpen(o => !o)}
+            style={{ ...FONT, display:"flex", alignItems:"center", gap:"8px", padding:"12px 16px", cursor:"pointer" }}>
+            <span style={{ fontSize:"0.68rem", fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase", color:"#888" }}>Add Comment</span>
+            <span style={{ flex:1 }} />
+            <span style={{ fontSize:"0.7rem", color:"#888", transform: commentFormOpen ? "rotate(90deg)" : "none", transition:"transform 0.12s" }}>▸</span>
           </div>
-          <input
-            value={section}
-            onChange={e => setSection(e.target.value)}
-            placeholder="Click a paragraph in the preview to pin here, or type a section name…"
-            style={{ ...FONT, width:"100%", fontSize:"0.78rem", padding:"7px 10px", border:"1px solid #d4cfc8", borderRadius:"3px", marginBottom:"8px", background:"#fff", color:"#0d0d0d", boxSizing:"border-box" }}
-          />
-          <textarea
-            value={commentText}
-            onChange={e => setCommentText(e.target.value)}
-            placeholder="Your comment — be specific about what to change and why."
-            rows={4}
-            style={{ ...FONT, width:"100%", fontSize:"0.78rem", padding:"7px 10px", border:"1px solid #d4cfc8", borderRadius:"3px", resize:"vertical", background:"#fff", color:"#0d0d0d", boxSizing:"border-box", lineHeight:1.5 }}
-          />
-          <button
-            onClick={submitAnnotation}
-            disabled={submitting || !commentText.trim()}
-            style={{ ...FONT, marginTop:"8px", width:"100%", padding:"8px", fontSize:"0.78rem", fontWeight:600, background: saveError?"#c8401a":submitted?"#1e7a45":submitting?"#7d6608":"#c8401a", color:"#fff", border:"none", borderRadius:"3px", cursor: (submitting||!commentText.trim())?"not-allowed":"pointer", opacity: commentText.trim()?1:0.5, transition:"background 0.2s" }}>
-            {saveError ? "Not saved — Retry" : submitted ? "Saved to GitHub ✓" : submitting ? "Saving…" : "Add Comment →"}
-          </button>
-          <div style={{ ...FONT, fontSize:"0.68rem", color: saveError?"#c8401a":"#aaa", marginTop:"6px", lineHeight:1.4 }}>
-            {saveError
-              ? "That comment did not reach GitHub. Your text is kept above — click Retry."
-              : "Each comment saves to GitHub the moment you add it. Wait for the ✓ before closing."}
-          </div>
+          {commentFormOpen && (
+            <div style={{ padding:"0 16px 16px" }}>
+              <input
+                value={section}
+                onChange={e => setSection(e.target.value)}
+                placeholder="Click a paragraph in the preview to pin here, or type a section name…"
+                style={{ ...FONT, width:"100%", fontSize:"0.78rem", padding:"7px 10px", border:"1px solid #d4cfc8", borderRadius:"3px", marginBottom:"8px", background:"#fff", color:"#0d0d0d", boxSizing:"border-box" }}
+              />
+              <textarea
+                value={commentText}
+                onChange={e => setCommentText(e.target.value)}
+                placeholder="Your comment — be specific about what to change and why."
+                rows={4}
+                style={{ ...FONT, width:"100%", fontSize:"0.78rem", padding:"7px 10px", border:"1px solid #d4cfc8", borderRadius:"3px", resize:"vertical", background:"#fff", color:"#0d0d0d", boxSizing:"border-box", lineHeight:1.5 }}
+              />
+              <button
+                onClick={submitAnnotation}
+                disabled={submitting || !commentText.trim()}
+                style={{ ...FONT, marginTop:"8px", width:"100%", padding:"8px", fontSize:"0.78rem", fontWeight:600, background: saveError?"#c8401a":submitted?"#1e7a45":submitting?"#7d6608":"#c8401a", color:"#fff", border:"none", borderRadius:"3px", cursor: (submitting||!commentText.trim())?"not-allowed":"pointer", opacity: commentText.trim()?1:0.5, transition:"background 0.2s" }}>
+                {saveError ? "Not saved — Retry" : submitted ? "Saved to GitHub ✓" : submitting ? "Saving…" : "Add Comment →"}
+              </button>
+              <div style={{ ...FONT, fontSize:"0.68rem", color: saveError?"#c8401a":"#aaa", marginTop:"6px", lineHeight:1.4 }}>
+                {saveError
+                  ? "That comment did not reach GitHub. Your text is kept above — click Retry."
+                  : "Each comment saves to GitHub the moment you add it. Wait for the ✓ before closing."}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Send-back nudge — comments alone don't hand the piece back; the reviewer
@@ -4725,8 +4733,8 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
           );
         })()}
 
-        {/* existing inline annotations */}
-        <div style={{ flex:1, overflowY:"auto", padding:"16px" }}>
+        {/* existing inline annotations — flows in the rail's scroll so all are reachable */}
+        <div style={{ padding:"16px", paddingBottom:"28px" }}>
           {/* helper to scroll iframe to a paragraph number */}
           {/* current-version comments */}
           <div style={{ ...FONT, fontSize:"0.68rem", fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase", color:"#888", marginBottom:"10px" }}>
