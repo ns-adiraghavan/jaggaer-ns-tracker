@@ -3807,6 +3807,172 @@ function SeoMetaSection({ piece, cluster, project, currentUser, updatePiece }) {
   );
 }
 
+// ─── SEO card for the review rail ─────────────────────────────────────────────
+// Compact, collapsible version of the metadata block, shown at the top of the
+// Preview & Comment sidebar so the reviewer sees (and can edit) the meta title /
+// description / slug WHILE reading the article. Shares storage + seeding rules
+// with SeoMetaSection (piece.seo).
+function SeoReviewCard({ piece, cluster, project, currentUser, updatePiece }) {
+  const { useState: useSeoR } = React;
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const canEdit = currentUser?.org === "ns" || currentUser?.org === "jaggaer";
+  const seo = piece.seo || {};
+  const liveSlug = seoSlugFromUrl(piece.publishing?.live_url || piece.url);
+  const suggest = {
+    meta_title: (piece.title || piece.primary_keyword || "").trim(),
+    meta_description: piece.primary_keyword
+      ? `${(piece.title || piece.primary_keyword).trim()}. ${piece.primary_keyword}${piece.secondary_keyword ? `, ${piece.secondary_keyword}` : ""} — practical guidance for procurement teams.`.trim()
+      : "",
+    slug: liveSlug || seoSlugify(piece.primary_keyword || piece.title),
+  };
+  const hasAny = seo.meta_title || seo.meta_description || seo.slug;
+  const [open, setOpen] = useSeoR(true);
+  const [editing, setEditing] = useSeoR(false);
+  const [saved, setSaved] = useSeoR(false);
+  const [form, setForm] = useSeoR({ meta_title: seo.meta_title || "", meta_description: seo.meta_description || "", slug: seo.slug || "" });
+
+  function field(key) { return e => setForm(f => ({ ...f, [key]: e.target.value })); }
+  function useSuggestion(key) { setForm(f => ({ ...f, [key]: suggest[key] })); }
+  function save() {
+    const clean = {
+      meta_title: form.meta_title.trim(),
+      meta_description: form.meta_description.trim(),
+      slug: seoSlugify(form.slug),
+      updated_at: new Date().toISOString(),
+      updated_by: currentUser?.id || null,
+    };
+    updatePiece(cluster.id, piece.id, { seo: clean });
+    setForm({ meta_title: clean.meta_title, meta_description: clean.meta_description, slug: clean.slug });
+    setSaved(true);
+    setTimeout(() => { setSaved(false); setEditing(false); }, 1200);
+  }
+  function cancel() {
+    setForm({ meta_title: seo.meta_title || "", meta_description: seo.meta_description || "", slug: seo.slug || "" });
+    setEditing(false);
+  }
+
+  const ACC = "#3b3f9e", ACC_BG = "#eef0fb", ACC_BD = "#cdd2f0";
+  const titleLen = form.meta_title.length, descLen = form.meta_description.length;
+  const counterColor = (len, hi) => len === 0 ? "#b7b1a8" : len > hi ? "#c8401a" : len > hi - 10 ? "#b0791a" : "#1e7a45";
+  const input = { ...FONT, fontSize: "0.74rem", padding: "6px 8px", borderRadius: "3px", border: `1px solid ${ACC_BD}`,
+    background: "#fff", color: "#1a2535", width: "100%", boxSizing: "border-box", outline: "none" };
+  const suggestBtn = { ...FONT, fontSize: "0.6rem", fontWeight: 700, color: ACC, background: "#fff",
+    border: `1px solid ${ACC_BD}`, borderRadius: "2px", padding: "1px 6px", cursor: "pointer" };
+  const fieldLabel = { fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#4a4e8c" };
+  const domain = "jaggaer.com/blog";
+  const previewSlug = editing ? seoSlugify(form.slug) : seo.slug;
+  const previewTitle = editing ? form.meta_title : seo.meta_title;
+  const previewDesc = editing ? form.meta_description : seo.meta_description;
+
+  return (
+    <div style={{ ...FONT, borderBottom: "1px solid #e8e3da", background: ACC_BG }}>
+      {/* header */}
+      <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 14px", cursor: "pointer" }}
+        onClick={() => setOpen(o => !o)}>
+        <span style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: ACC }}>
+          ⌕ SEO Metadata
+        </span>
+        {!hasAny && <span style={{ fontSize: "0.62rem", color: "#8a86b0", fontStyle: "italic" }}>not set</span>}
+        <span style={{ flex: 1 }} />
+        {canEdit && open && !editing && (
+          <button onClick={e => { e.stopPropagation(); setEditing(true); }}
+            style={{ ...suggestBtn, fontSize: "0.64rem", padding: "2px 8px" }}>{hasAny ? "Edit" : "+ Add"}</button>
+        )}
+        <span style={{ fontSize: "0.7rem", color: ACC, transform: open ? "rotate(90deg)" : "none", transition: "transform 0.12s" }}>▸</span>
+      </div>
+
+      {open && (
+        <div style={{ padding: "0 14px 14px" }}>
+          {/* SERP preview */}
+          {(hasAny || editing) && (
+            <div style={{ background: "#fff", border: `1px solid ${ACC_BD}`, borderRadius: "4px", padding: "8px 10px", marginBottom: "10px" }}>
+              <div style={{ color: "#4d5156", fontSize: "0.64rem" }}>{domain}{previewSlug ? ` › ${previewSlug}` : ""}</div>
+              <div style={{ color: "#1a0dab", fontSize: "0.86rem", lineHeight: 1.3, margin: "1px 0 2px" }}>
+                {previewTitle || <span style={{ color: "#b7b1a8" }}>Meta title…</span>}
+              </div>
+              <div style={{ color: "#4d5156", fontSize: "0.68rem", lineHeight: 1.4 }}>
+                {previewDesc || <span style={{ color: "#b7b1a8" }}>Meta description…</span>}
+              </div>
+            </div>
+          )}
+
+          {/* Read mode — stacked for the narrow rail */}
+          {!editing && (
+            hasAny ? (
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                {[["Meta Title", seo.meta_title], ["Meta Description", seo.meta_description], ["Slug", seo.slug]].map(([label, val]) => (
+                  <div key={label}>
+                    <div style={fieldLabel}>{label}</div>
+                    <div style={{ fontSize: "0.76rem", color: val ? "#1a2535" : "#9b948c", wordBreak: "break-word", lineHeight: 1.4 }}>{val || "—"}</div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div style={{ fontSize: "0.72rem", color: "#8a86b0", lineHeight: 1.5 }}>
+                No metadata yet.{canEdit ? " Click Add — suggestions are pre-filled from the tagged keywords." : ""}
+              </div>
+            )
+          )}
+
+          {/* Reference chips */}
+          {!editing && (piece.primary_keyword || piece.secondary_keyword) && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "5px", marginTop: "10px" }}>
+              {[piece.primary_keyword && ["KW", piece.primary_keyword], piece.secondary_keyword && ["2nd", piece.secondary_keyword]].filter(Boolean).map(([k, v]) => (
+                <span key={k} style={{ fontSize: "0.6rem", color: "#4a4e8c", background: "#fff", border: `1px solid ${ACC_BD}`, borderRadius: "2px", padding: "1px 6px" }}>
+                  <span style={{ fontWeight: 700, opacity: 0.7 }}>{k}:</span> {v}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Edit mode */}
+          {editing && canEdit && (
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "3px" }}>
+                  <span style={fieldLabel}>Meta Title</span>
+                  <span style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+                    <span style={{ fontSize: "0.6rem", fontWeight: 600, color: counterColor(titleLen, 60) }}>{titleLen}/60</span>
+                    {suggest.meta_title && <button type="button" onClick={() => useSuggestion("meta_title")} style={suggestBtn}>Title</button>}
+                  </span>
+                </div>
+                <input value={form.meta_title} onChange={field("meta_title")} style={input} placeholder="Search title" />
+              </div>
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "3px" }}>
+                  <span style={fieldLabel}>Meta Description</span>
+                  <span style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+                    <span style={{ fontSize: "0.6rem", fontWeight: 600, color: counterColor(descLen, 160) }}>{descLen}/160</span>
+                    {suggest.meta_description && <button type="button" onClick={() => useSuggestion("meta_description")} style={suggestBtn}>Suggest</button>}
+                  </span>
+                </div>
+                <textarea value={form.meta_description} onChange={field("meta_description")} rows={3} style={{ ...input, resize: "vertical", lineHeight: 1.4 }} placeholder="Search description" />
+              </div>
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "3px" }}>
+                  <span style={fieldLabel}>Slug</span>
+                  {suggest.slug && <button type="button" onClick={() => useSuggestion("slug")} style={suggestBtn}>{liveSlug ? "Live URL" : "Keyword"}</button>}
+                </div>
+                <input value={form.slug} onChange={field("slug")} onBlur={() => setForm(f => ({ ...f, slug: seoSlugify(f.slug) }))} style={input} placeholder="url-slug" />
+              </div>
+              <div style={{ display: "flex", gap: "8px" }}>
+                <button onClick={save} disabled={saved}
+                  style={{ ...FONT, fontSize: "0.72rem", fontWeight: 600, background: ACC, color: "#fff", border: "none", padding: "7px 14px", borderRadius: "3px", cursor: saved ? "default" : "pointer", opacity: saved ? 0.8 : 1 }}>
+                  {saved ? "Saved ✓" : "Save"}
+                </button>
+                <button onClick={cancel}
+                  style={{ ...FONT, fontSize: "0.72rem", fontWeight: 500, background: "transparent", color: "#6b6560", border: "1px solid #c8c3bb", padding: "7px 12px", borderRadius: "3px", cursor: "pointer" }}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Piece details ────────────────────────────────────────────────────────────
 function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode, updatePiece }) {
   const weekSlot = (project.schedule || []).find(w => w.slots.some(s => s.cluster === cluster.id));
@@ -4523,6 +4689,10 @@ function AnnotatePanel({ piece, cluster, pillar, project, currentUser, addFeedba
 
       {/* comment sidebar right */}
       <div style={{ width:"300px", flexShrink:0, display:"flex", flexDirection:"column", background:"#faf9f7" }}>
+        {/* SEO metadata — visible to the reviewer while reading the article */}
+        {piece.status !== "not-started" && (
+          <SeoReviewCard piece={piece} cluster={cluster} project={project} currentUser={currentUser} updatePiece={updatePiece} />
+        )}
         {/* new comment form */}
         <div style={{ padding:"16px", borderBottom:"1px solid #e8e3da" }}>
           <div style={{ ...FONT, fontSize:"0.68rem", fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase", color:"#888", marginBottom:"10px" }}>
