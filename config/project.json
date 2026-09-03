@@ -3587,7 +3587,7 @@
               "title": "Jaggaer Vs Tipalti",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3598,7 +3598,21 @@
               "geography": "all",
               "schedule_week": 2,
               "publish_day": "Tue",
-              "planned_publish_date": "Sep 02, 2026"
+              "planned_publish_date": "Sep 02, 2026",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-09-03T06:26:05.963Z",
+              "last_upload_by": "orlagh",
+              "last_updated": "2026-09-03T06:26:05.963Z",
+              "last_updated_by": "orlagh",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-09-03T06:26:05.963Z",
+                  "by": "orlagh"
+                }
+              ]
             },
             {
               "id": "p2-geo-best-procure-to-pay-software-for-manufacturing-procurement-t",
