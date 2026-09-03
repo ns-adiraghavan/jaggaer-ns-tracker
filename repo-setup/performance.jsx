@@ -465,7 +465,10 @@ function PerformancePanel({ project, setProject, currentUser, adminMode, activeP
     for (const pillar of project.pillars || []) {
       for (const cluster of pillar.clusters || []) {
         for (const piece of cluster.pieces || []) {
-          if (piece.status !== "approved") continue;
+          // A published piece is either "approved" or has since moved to "live".
+          // Both belong here — excluding "live" is what left every shipped piece
+          // out and turned its Search Console export into an orphan.
+          if (piece.status !== "approved" && piece.status !== "live") continue;
           const url = piece.publishing?.live_url || piece.url || null;
           if (!url) { approvedNoUrl++; continue; }
           out.push({ piece, cluster, pillar, url, key: perfSlug(url) });
@@ -584,9 +587,11 @@ function PerformancePanel({ project, setProject, currentUser, adminMode, activeP
       const ranked = withData
         .map(p => {
           const view = perfRecordView(perfData[p.key]);
+          if (!view) return { p, view: null, t3Impr: 0 };
           const t3 = perfWindowTotals(perfTrailing3Month(view.timeseries, perfReleaseTs(p.piece)) || []);
           return { p, view, t3Impr: t3.impressions };
         })
+        .filter(r => r.view)
         .sort((a, b) => b.t3Impr - a.t3Impr);
       wowByArticle = ranked.map(({ p, view }, i) => {
         const thisImpr = perfSumRange(view.timeseries, tw.start, tw.end).impressions;

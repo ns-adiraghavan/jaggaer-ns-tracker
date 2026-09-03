@@ -45,9 +45,9 @@ const DEFAULT_WORKFLOW_STAGES = [
   { id: "brief-uploaded",   label: "Brief Uploaded",                color: "#0e6655",             bg: "#e8f5f0",             actor: ["ns", "jaggaer"] },
   { id: "writing",          label: "Writing",                       color: "#1e6fa8",             bg: "#e8f2fa",             actor: "ns" },
   { id: "marketing-review", label: "Abhishek and Orlagh Review",    color: "#6c3483",             bg: "#f5eef8",             actor: ["person:abhishek", "person:m-ny8dy"] },
-  { id: "ed-review",         label: "Ed Content Review",             color: "#7d6608",             bg: "#fefde8",             actor: "person:m-ed01" },
+  { id: "ed-review",         label: "Content reviewer",              color: "#7d6608",             bg: "#fefde8",             actor: "person:m-ed01", optional: true },
   { id: "approved",         label: "Approved",                      color: "#1e7a45",             bg: "#e6f5ec",             actor: null },
-  { id: "live",             label: "Live",                          color: "#0d5c8a",             bg: "#e6f2fa",             actor: ["ns", "jaggaer"] },
+  { id: "live",             label: "Live",                          color: "#0d5c8a",             bg: "#e6f2fa",             actor: null },
 ];
 
 // Ad-Hoc Articles run a short two-stage chain instead of the full pipeline above:
@@ -76,6 +76,25 @@ function getWorkflowStages(project) {
   return (project && project.workflow_stages && project.workflow_stages.length)
     ? project.workflow_stages
     : DEFAULT_WORKFLOW_STAGES;
+}
+
+// ─── Optional (skippable) stages ──────────────────────────────────────────────
+// "Content reviewer" (ed-review) is no longer part of the default forward path.
+// A piece only ever enters it when a Visnja reviewer explicitly routes it there
+// (the "Needs content review" toggle on a send-back). Everywhere the pipeline
+// advances a piece by walking to the next stage, optional stages are skipped.
+// Detected by an explicit `optional` flag OR by id, so it works whether or not
+// the live config carries the flag.
+const OPTIONAL_STAGE_IDS = new Set(["ed-review"]);
+function isOptionalStage(stage) {
+  return !!stage && (stage.optional === true || OPTIONAL_STAGE_IDS.has(stage.id));
+}
+// First non-optional stage id at or after `fromIdx`. Falls back to "approved".
+function firstNonOptionalStageId(stages, fromIdx) {
+  for (let i = fromIdx; i < stages.length; i++) {
+    if (!isOptionalStage(stages[i])) return stages[i].id;
+  }
+  return "approved";
 }
 
 function buildStatusMeta(stages) {
@@ -629,7 +648,9 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
   }
 
   const myTurnStageIds = new Set(stages.filter(s => isMyTurn(s.actor)).map(s => s.id));
-  const terminalIds = new Set(["not-started", "approved"]);
+  // "live" is terminal: a published piece is nobody's action item, so it must
+  // never surface in "Your Turn" / "Awaiting Your Review" or the Recent list.
+  const terminalIds = new Set(["not-started", "approved", "live"]);
 
   const myActions = [], recent = [];
   const byStage = {};
@@ -2601,6 +2622,25 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
       last_updated_by: currentUser.id,
       status_history: appendStatusHistory(piece, newStatus, currentUser.id),
     });
+    // A cosmetic-fix re-upload can land straight on "approved" (Visnja skipped
+    // the Content reviewer). Fire the same approval notification a reviewer
+    // approval would, so stakeholders still hear about it.
+    if (newStatus === "approved") {
+      const _monthId = project.active_month || "month-1";
+      const _deliverablePath = `content/${_monthId}/${pillar.id}/${cluster.id}/${piece.id}/deliverable-v${nextRev}.${payload.ext || "html"}`;
+      fetch("/api/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "piece-approved",
+          piece: { id: piece.id, title: piece.title, format: piece.format || "", url: piece.url || "", deliverablePath: _deliverablePath },
+          cluster: cluster.label,
+          pillar: pillar.label || "",
+          approvedBy: currentUser.name || currentUser.id,
+          note: "Re-upload accepted — approved without further review.",
+        }),
+      }).catch(() => {});
+    }
     setStage("done");
   }
 
@@ -2854,6 +2894,9 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
   const [verdict, setVerdict] = useStateTR("approved");
   const [body, setBody] = useStateTR("");
   const [submitting, setSubmitting] = useStateTR(false);
+  // Visnja-only: on a send-back, tick this to route the NS re-upload through the
+  // Content reviewer instead of straight to Approved. Default off (cosmetic fix).
+  const [routeContentReview, setRouteContentReview] = useStateTR(false);
 
   const inputRef = useRefTR(null);
 
@@ -2863,6 +2906,13 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
   const currentIdx = stageOrder.indexOf(piece.status);
   const currentStage = isAdHocReviewStage ? getAdHocReviewStage(project) : workflowStages[currentIdx];
   const nextStage = isAdHocReviewStage ? null : (workflowStages[currentIdx + 1] || null);
+  // Where an approval actually lands — the next NON-optional stage. Content
+  // reviewer (ed-review) is optional, so approving at Visnja skips it → Approved.
+  const advanceId = isAdHocReviewStage ? "approved" : firstNonOptionalStageId(workflowStages, currentIdx + 1);
+  const advanceStage = workflowStages.find(s => s.id === advanceId) || (stageMeta && stageMeta[advanceId]) || { id: advanceId, label: advanceId };
+  // If the immediately-next stage is the optional content-review gate, THIS
+  // reviewer (Visnja) is the one who decides whether the revision needs it.
+  const contentGateStage = (!isAdHocReviewStage && isOptionalStage(nextStage)) ? nextStage : null;
   // "Send back" goes to the nearest NS-actor stage before current.
   // Return-to-sender: after NS fixes and re-uploads, the piece jumps back to
   // THIS reviewer's stage (not restarting from Abhishek/Orlagh).
@@ -2870,7 +2920,7 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
   const sendBackStage = isAdHocReviewStage
     ? { id: "writing" }
     : ([...workflowStages].slice(0, currentIdx).reverse().find(s => s.actor === "ns") || workflowStages[0]);
-  const isLastStage = isAdHocReviewStage ? true : (nextStage?.id === "approved" || nextStage?.id === "live" || !nextStage);
+  const isLastStage = isAdHocReviewStage ? true : (advanceId === "approved" || advanceId === "live");
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
   async function submit() {
@@ -2879,12 +2929,19 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
     let newStatus = piece.status;
     let extraFields = {};
     if (verdict === "approved") {
-      newStatus = isAdHocReviewStage ? "approved" : (nextStage ? nextStage.id : "approved");
+      // Advance to the next non-optional stage — Content reviewer is skipped by default.
+      newStatus = isAdHocReviewStage ? "approved" : advanceId;
       extraFields = { return_to_stage: null }; // clear any pending return
     } else if (verdict === "needs-revision") {
       newStatus = sendBackStage.id;
-      // Store which stage to return to after NS fixes — skip the chain below this reviewer
-      extraFields = { return_to_stage: piece.status };
+      // Where the piece lands when NS re-uploads:
+      //  · At the Visnja gate: cosmetic fix (toggle off) → straight to Approved;
+      //    significant (toggle on) → through the Content reviewer.
+      //  · Any other reviewer: return-to-sender (back to this reviewer's stage).
+      const returnTo = contentGateStage
+        ? (routeContentReview ? contentGateStage.id : advanceId)
+        : piece.status;
+      extraFields = { return_to_stage: returnTo };
     }
     // "question" keeps current status
     const entry = {
@@ -2951,9 +3008,25 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
         <textarea className="ns-feedback-textarea" value={body} onChange={e => setBody(e.target.value)}
           placeholder={verdict==="approved" ? "Anything for the team on the way out — optional." : verdict==="needs-revision" ? "What needs to change and where. Be specific — section, paragraph, claim." : "Ask a question. Status stays; NS and Jaggaer both see it."}>
         </textarea>
+        {/* Visnja send-back toggle: route the fix through the Content reviewer, or straight to Approved. */}
+        {verdict==="needs-revision" && contentGateStage && (
+          <label style={{ ...FONT, display: "flex", alignItems: "flex-start", gap: "8px", marginTop: "12px",
+            fontSize: "0.76rem", color: "#3a2f52", background: "#f7f2fb", border: "1px solid #e2d5f0",
+            borderRadius: "4px", padding: "9px 11px", cursor: "pointer" }}>
+            <input type="checkbox" checked={routeContentReview} onChange={e => setRouteContentReview(e.target.checked)}
+              style={{ marginTop: "2px", accentColor: "#6c3483", cursor: "pointer" }} />
+            <span>
+              <strong>Needs content review after revision</strong>
+              <span style={{ display: "block", color: "#7a6a8c", fontSize: "0.7rem", marginTop: "2px" }}>
+                Leave off for cosmetic edits — the re-upload goes straight to <em>Approved</em>. Tick it for
+                significant changes — the re-upload routes through <em>{contentGateStage.label}</em> first.
+              </span>
+            </span>
+          </label>
+        )}
         <div className="ns-feedback-actions">
           <button className="ns-feedback-submit" disabled={submitting||(verdict!=="approved"&&!body.trim())} onClick={submit}>
-            {submitting ? "Submitting…" : verdict==="approved" ? `Approve → ${nextStage?.label || "Done"}` : verdict==="needs-revision" ? `Send Back → ${sendBackStage.label}` : "Log Question"}
+            {submitting ? "Submitting…" : verdict==="approved" ? `Approve → ${advanceStage?.label || "Done"}` : verdict==="needs-revision" ? `Send Back → ${sendBackStage.label}` : "Log Question"}
           </button>
         </div>
       </div>
@@ -3002,8 +3075,14 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
         })()}
         <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>Stage</div>
         <ol className="ns-feedback-process">
-          <li><strong>Approved</strong> — advances to <em>{nextStage?.label || "complete"}</em>.</li>
-          <li><strong>Needs revision</strong> — sends to NS (<em>{sendBackStage.label}</em>). When NS re-uploads, it returns directly to <em>{currentStage?.label || "this stage"}</em> — not the full chain.</li>
+          <li><strong>Approved</strong> — advances to <em>{advanceStage?.label || "complete"}</em>.</li>
+          {contentGateStage ? (
+            <li><strong>Needs revision</strong> — sends to NS (<em>{sendBackStage.label}</em>). On re-upload it goes
+              straight to <em>Approved</em>, unless you tick <em>“needs content review”</em> above — then it routes
+              through <em>{contentGateStage.label}</em> first.</li>
+          ) : (
+            <li><strong>Needs revision</strong> — sends to NS (<em>{sendBackStage.label}</em>). When NS re-uploads, it returns directly to <em>{currentStage?.label || "this stage"}</em> — not the full chain.</li>
+          )}
           <li><strong>Question</strong> — open thread, status unchanged.</li>
         </ol>
         {isLastStage && (
@@ -3500,6 +3579,234 @@ function PublishingInfoSection({ piece, cluster, project, currentUser, updatePie
   );
 }
 
+// ─── SEO Metadata Section — meta title / description / slug per piece ──────────
+// Editable by BOTH NS and Jaggaer (Visnja). Seeded from the title + keywords
+// already tagged to the piece. Stored at piece.seo = { meta_title,
+// meta_description, slug, updated_at, updated_by }. A live SERP preview and
+// length guidance help whoever fills it write search-friendly metadata.
+function seoSlugify(s) {
+  return String(s || "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/-{2,}/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 75)
+    .replace(/-+$/g, "");
+}
+// Last path segment of a live URL, if one exists — the real published slug.
+function seoSlugFromUrl(url) {
+  if (!url) return "";
+  let s = String(url).trim().replace(/^https?:\/\/[^/]+/, "").replace(/[?#].*$/, "").replace(/\/+$/, "");
+  const parts = s.split("/").filter(Boolean);
+  return parts.length ? parts[parts.length - 1] : "";
+}
+
+function SeoMetaSection({ piece, cluster, project, currentUser, updatePiece }) {
+  const { useState: useSeo } = React;
+  const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const canEdit = currentUser?.org === "ns" || currentUser?.org === "jaggaer";
+  const seo = piece.seo || {};
+
+  // Suggestions seeded from what's already tagged to the piece.
+  const liveSlug = seoSlugFromUrl(piece.publishing?.live_url || piece.url);
+  const suggest = {
+    meta_title: (piece.title || piece.primary_keyword || "").trim(),
+    meta_description: piece.primary_keyword
+      ? `${(piece.title || piece.primary_keyword).trim()}. ${piece.primary_keyword}${piece.secondary_keyword ? `, ${piece.secondary_keyword}` : ""} — practical guidance for procurement teams.`.trim()
+      : "",
+    slug: liveSlug || seoSlugify(piece.primary_keyword || piece.title),
+  };
+
+  const [form, setForm] = useSeo({
+    meta_title: seo.meta_title || "",
+    meta_description: seo.meta_description || "",
+    slug: seo.slug || "",
+  });
+  const [editing, setEditing] = useSeo(false);
+  const [saved, setSaved] = useSeo(false);
+  const [copied, setCopied] = useSeo("");
+
+  function field(key) { return e => setForm(f => ({ ...f, [key]: e.target.value })); }
+  function useSuggestion(key) { setForm(f => ({ ...f, [key]: suggest[key] })); }
+  function save() {
+    const clean = {
+      meta_title: form.meta_title.trim(),
+      meta_description: form.meta_description.trim(),
+      slug: seoSlugify(form.slug),
+      updated_at: new Date().toISOString(),
+      updated_by: currentUser?.id || null,
+    };
+    updatePiece(cluster.id, piece.id, { seo: clean });
+    setForm({ meta_title: clean.meta_title, meta_description: clean.meta_description, slug: clean.slug });
+    setSaved(true);
+    setTimeout(() => { setSaved(false); setEditing(false); }, 1200);
+  }
+  function cancel() {
+    setForm({ meta_title: seo.meta_title || "", meta_description: seo.meta_description || "", slug: seo.slug || "" });
+    setEditing(false);
+  }
+  function copy(key, val) {
+    if (!val) return;
+    navigator.clipboard?.writeText(val).then(() => { setCopied(key); setTimeout(() => setCopied(""), 1200); });
+  }
+
+  const hasAny = seo.meta_title || seo.meta_description || seo.slug;
+  const updatedBy = seo.updated_by ? [...(project.team?.ns || []), ...(project.team?.jaggaer || [])].find(m => m.id === seo.updated_by) : null;
+
+  // SEO length guidance (Google typically truncates ~60 title / ~160 desc).
+  const titleLen = form.meta_title.length, descLen = form.meta_description.length;
+  const counterColor = (len, hi) => len === 0 ? "#b7b1a8" : len > hi ? "#c8401a" : len > hi - 10 ? "#b0791a" : "#1e7a45";
+
+  const ACC = "#3b3f9e", ACC_BG = "#eef0fb", ACC_BD = "#cdd2f0";
+  const inputStyle = { ...FONT, fontSize: "0.82rem", padding: "8px 10px", borderRadius: "3px",
+    border: `1px solid ${ACC_BD}`, background: "#fff", color: "#1a2535", fontWeight: 400, outline: "none", width: "100%", boxSizing: "border-box" };
+  const labelStyle = { display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "8px",
+    fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: ACC, marginBottom: "5px" };
+  const suggestBtn = { ...FONT, fontSize: "0.64rem", fontWeight: 700, letterSpacing: "0.04em", color: ACC,
+    background: "#fff", border: `1px solid ${ACC_BD}`, borderRadius: "2px", padding: "2px 7px", cursor: "pointer", textTransform: "none" };
+
+  // Chips showing the tagged inputs the writer is drafting from.
+  const refChips = [
+    piece.primary_keyword && ["Primary", piece.primary_keyword],
+    piece.secondary_keyword && ["Secondary", piece.secondary_keyword],
+    piece.funnel && ["Funnel", piece.funnel],
+  ].filter(Boolean);
+
+  const domain = "jaggaer.com/blog";
+
+  return (
+    <div style={{ ...FONT, background: ACC_BG, border: `1.5px solid ${ACC_BD}`, borderLeft: `4px solid ${ACC}`,
+      borderRadius: "4px", padding: "20px 24px", marginBottom: "24px" }}>
+      {/* Header */}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+        <div style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: ACC }}>
+          ⌕ SEO Metadata
+        </div>
+        <div style={{ flex: 1, height: "1px", background: ACC_BD }} />
+        {canEdit && !editing && (
+          <button onClick={() => setEditing(true)}
+            style={{ fontSize: "0.7rem", fontWeight: 600, color: ACC, background: "#fff", border: `1px solid ${ACC_BD}`,
+              padding: "4px 12px", borderRadius: "3px", cursor: "pointer" }}>
+            {hasAny ? "Edit" : "+ Add SEO Metadata"}
+          </button>
+        )}
+      </div>
+
+      {/* Reference: what's already tagged to this piece */}
+      {refChips.length > 0 && (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "16px" }}>
+          {refChips.map(([k, v]) => (
+            <span key={k} style={{ fontSize: "0.66rem", color: "#4a4e8c", background: "#fff",
+              border: `1px solid ${ACC_BD}`, borderRadius: "2px", padding: "2px 8px" }}>
+              <span style={{ fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em", opacity: 0.7 }}>{k}:</span> {v}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* SERP preview — how it renders in search results */}
+      {(hasAny || editing) && (
+        <div style={{ background: "#fff", border: `1px solid ${ACC_BD}`, borderRadius: "4px", padding: "12px 14px", marginBottom: "16px" }}>
+          <div style={{ fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#b7b1a8", marginBottom: "6px" }}>
+            Search preview
+          </div>
+          <div style={{ color: "#4d5156", fontSize: "0.72rem" }}>
+            {domain}{(editing ? form.slug : seo.slug) ? ` › ${editing ? seoSlugify(form.slug) : seo.slug}` : ""}
+          </div>
+          <div style={{ color: "#1a0dab", fontSize: "1.02rem", lineHeight: 1.3, margin: "1px 0 2px" }}>
+            {(editing ? form.meta_title : seo.meta_title) || <span style={{ color: "#b7b1a8" }}>Meta title…</span>}
+          </div>
+          <div style={{ color: "#4d5156", fontSize: "0.78rem", lineHeight: 1.45 }}>
+            {(editing ? form.meta_description : seo.meta_description) || <span style={{ color: "#b7b1a8" }}>Meta description…</span>}
+          </div>
+        </div>
+      )}
+
+      {/* Read mode */}
+      {!editing && (
+        <div style={{ display: "grid", gridTemplateColumns: "130px 1fr", gap: "10px 14px" }}>
+          {[["Meta Title", seo.meta_title], ["Meta Description", seo.meta_description], ["Slug", seo.slug]].map(([label, val]) => (
+            <React.Fragment key={label}>
+              <div style={{ fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#4a4e8c", paddingTop: "2px" }}>{label}</div>
+              <div style={{ fontSize: "0.82rem", color: val ? "#1a2535" : "#9b948c", display: "flex", alignItems: "center", gap: "8px" }}>
+                <span style={{ wordBreak: "break-word" }}>{val || "—"}</span>
+                {val && (
+                  <button onClick={() => copy(label, val)} title="Copy"
+                    style={{ ...suggestBtn, flexShrink: 0 }}>{copied === label ? "✓" : "Copy"}</button>
+                )}
+              </div>
+            </React.Fragment>
+          ))}
+          {updatedBy && (
+            <>
+              <div style={{ fontSize: "0.66rem", color: "#9b98c0", letterSpacing: "0.06em", textTransform: "uppercase" }}>Last edited</div>
+              <div style={{ fontSize: "0.72rem", color: "#9b98c0" }}>{updatedBy.name}{seo.updated_at ? ` · ${formatEST(seo.updated_at)}` : ""}</div>
+            </>
+          )}
+          {!hasAny && !updatedBy && (
+            <div style={{ gridColumn: "1 / -1", fontSize: "0.75rem", color: "#8a86b0", fontStyle: "italic" }}>
+              No metadata set yet.{canEdit ? " Click Edit to add it — suggestions are pre-filled from the tagged keywords." : ""}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Edit mode — NS or Jaggaer */}
+      {editing && canEdit && (
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          <div>
+            <div style={labelStyle}>
+              <span>Meta Title</span>
+              <span style={{ display: "flex", gap: "8px", alignItems: "center", textTransform: "none", letterSpacing: 0 }}>
+                <span style={{ fontSize: "0.66rem", fontWeight: 600, color: counterColor(titleLen, 60) }}>{titleLen}/60</span>
+                {suggest.meta_title && <button type="button" onClick={() => useSuggestion("meta_title")} style={suggestBtn}>Use title</button>}
+              </span>
+            </div>
+            <input value={form.meta_title} onChange={field("meta_title")} placeholder="Concise, keyword-led title for search results" style={inputStyle} />
+          </div>
+          <div>
+            <div style={labelStyle}>
+              <span>Meta Description</span>
+              <span style={{ display: "flex", gap: "8px", alignItems: "center", textTransform: "none", letterSpacing: 0 }}>
+                <span style={{ fontSize: "0.66rem", fontWeight: 600, color: counterColor(descLen, 160) }}>{descLen}/160</span>
+                {suggest.meta_description && <button type="button" onClick={() => useSuggestion("meta_description")} style={suggestBtn}>Suggest</button>}
+              </span>
+            </div>
+            <textarea value={form.meta_description} onChange={field("meta_description")} rows={3}
+              placeholder="1–2 sentence summary with the primary keyword. Shown under the title in search results."
+              style={{ ...inputStyle, resize: "vertical", lineHeight: 1.45 }} />
+          </div>
+          <div>
+            <div style={labelStyle}>
+              <span>Slug</span>
+              {suggest.slug && <button type="button" onClick={() => useSuggestion("slug")} style={{ ...suggestBtn, textTransform: "none", letterSpacing: 0 }}>Use {liveSlug ? "live URL" : "keyword"}</button>}
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "0" }}>
+              <span style={{ fontSize: "0.78rem", color: "#8a86b0", padding: "8px 6px 8px 0", whiteSpace: "nowrap" }}>{domain}/</span>
+              <input value={form.slug} onChange={field("slug")} onBlur={() => setForm(f => ({ ...f, slug: seoSlugify(f.slug) }))}
+                placeholder="url-slug-in-kebab-case" style={inputStyle} />
+            </div>
+            <div style={{ fontSize: "0.66rem", color: "#8a86b0", marginTop: "4px" }}>Lowercase, hyphenated — spaces and symbols are converted automatically on save.</div>
+          </div>
+          <div style={{ display: "flex", gap: "10px" }}>
+            <button onClick={save} disabled={saved}
+              style={{ ...FONT, fontSize: "0.78rem", fontWeight: 600, background: ACC, color: "#fff",
+                border: "none", padding: "9px 20px", borderRadius: "3px", cursor: saved ? "default" : "pointer", opacity: saved ? 0.8 : 1 }}>
+              {saved ? "Saved ✓" : "Save SEO Metadata"}
+            </button>
+            <button onClick={cancel}
+              style={{ ...FONT, fontSize: "0.78rem", fontWeight: 500, background: "transparent", color: "#6b6560",
+                border: "1px solid #c8c3bb", padding: "9px 16px", borderRadius: "3px", cursor: "pointer" }}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Piece details ────────────────────────────────────────────────────────────
 function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode, updatePiece }) {
   const weekSlot = (project.schedule || []).find(w => w.slots.some(s => s.cluster === cluster.id));
@@ -3544,6 +3851,14 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
       {/* ── Publishing Info — top of details, approved + live pieces ── */}
       {(piece.status === "approved" || piece.status === "live") && (
         <PublishingInfoSection
+          piece={piece} cluster={cluster} project={project}
+          currentUser={currentUser} updatePiece={updatePiece}
+        />
+      )}
+
+      {/* ── SEO Metadata — every piece past not-started; NS or Visnja edits ── */}
+      {piece.status !== "not-started" && (
+        <SeoMetaSection
           piece={piece} cluster={cluster} project={project}
           currentUser={currentUser} updatePiece={updatePiece}
         />

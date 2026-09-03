@@ -90,8 +90,14 @@ function withinLastWeek(isoString) {
   return (Date.now() - t) <= ONE_WEEK_MS && t <= Date.now();
 }
 
-function StatusExportBar({ tookLive }) {
+function StatusExportBar({ tookLive, project }) {
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  const getMember = memberLookup(project || {});
+  const exportStages = getWorkflowStages(project || {});
+  const stageLabelFor = (id) => {
+    if (id === "ad-hoc-review") return getAdHocReviewStage(project || {}).label;
+    return exportStages.find(s => s.id === id)?.label || id;
+  };
   const [copied, setCopied] = useStateWR(false);
   const todayISO = new Date().toISOString().slice(0, 10);
   const monthAgoISO = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
@@ -112,39 +118,70 @@ function StatusExportBar({ tookLive }) {
     });
   }
 
-  function downloadCsv() {
+  // Rows in the selected date window, newest first — shared by both exports.
+  function reportRows() {
     const fromT = from ? new Date(from + "T00:00:00").getTime() : -Infinity;
     const toT = to ? new Date(to + "T23:59:59").getTime() : Infinity;
     // Use launch_date (the actual publish date Jovana records) for filtering.
     // Fall back to publishing.updated_at then approval ts for older pieces.
-    const rows = withUrl.filter(({ piece, ts }) => {
-      const ld = piece.publishing?.launch_date; // "2026-08-21"
+    const dateOf = ({ piece, ts }) => {
+      const ld = piece.publishing?.launch_date;
+      const upd = piece.publishing?.updated_at;
+      return ld ? new Date(ld + "T00:00:00").getTime()
+                : (upd ? new Date(upd).getTime() : new Date(ts || 0).getTime());
+    };
+    return withUrl.filter(({ piece, ts }) => {
+      const ld = piece.publishing?.launch_date;
       const upd = piece.publishing?.updated_at;
       const raw = ld ? new Date(ld + "T00:00:00").getTime()
                      : (upd ? new Date(upd).getTime() : (ts ? new Date(ts).getTime() : NaN));
       return !isNaN(raw) && raw >= fromT && raw <= toT;
-    }).sort((a, b) => {
-      const dateOf = ({ piece, ts }) => {
-        const ld = piece.publishing?.launch_date;
-        const upd = piece.publishing?.updated_at;
-        return ld ? new Date(ld + "T00:00:00").getTime()
-                  : (upd ? new Date(upd).getTime() : new Date(ts || 0).getTime());
-      };
-      return dateOf(b) - dateOf(a);
-    });
-    const header = ["Title", "Phase", "Launch date", "URL"];
-    const body = rows.map(({ piece, ts }) => {
-      const ld = piece.publishing?.launch_date; // "YYYY-MM-DD"
-      const upd = piece.publishing?.updated_at;
-      const displayDate = ld ? ld : (upd ? formatEST(upd) : (ts ? formatEST(ts) : ""));
-      return [
-        csvCell(piece.title),
-        "P" + (piece.phase || 1),
-        csvCell(displayDate),
-        csvCell(piece.publishing.live_url),
-      ].join(",");
-    });
-    const csv = [header.join(","), ...body].join("\n");
+    }).sort((a, b) => dateOf(b) - dateOf(a));
+  }
+
+  // Lean "funnel health" columns — one row per published piece. Mirrors the
+  // Released-Articles enriched sheet, minus the per-stage day-timing columns.
+  const REPORT_HEADER = ["#", "Title", "Format", "Phase", "Funnel", "Category",
+    "Pillar", "Geography", "Status", "Assignee", "Revisions", "Published By",
+    "Go-Live Date", "Live URL"];
+
+  function rowValues({ piece, cluster, pillar }, i) {
+    const assignee = getMember(piece.assignee);
+    const geo = piece.geography || pillar?.geography || "All";
+    return [
+      i + 1,
+      piece.title || "",
+      piece.format || "",
+      "P" + (piece.phase || 1),
+      piece.funnel || "",
+      cluster?.label || "",
+      pillar?.label || "",
+      geo,
+      stageLabelFor(piece.status),
+      assignee ? assignee.name : "",
+      piece.revision_count || 1,
+      piece.publishing?.published_by || "",
+      piece.publishing?.launch_date || "",
+      piece.publishing?.live_url || "",
+    ];
+  }
+
+  function downloadReport() {
+    const rows = reportRows();
+    const matrix = [REPORT_HEADER, ...rows.map((r, i) => rowValues(r, i))];
+    // Prefer a real .xlsx (SheetJS is already loaded globally for GSC parsing),
+    // so the status report matches the funnel-health sheet. Fall back to CSV.
+    if (window.XLSX && window.XLSX.utils) {
+      const ws = window.XLSX.utils.aoa_to_sheet(matrix);
+      ws["!cols"] = [{ wch: 4 }, { wch: 52 }, { wch: 18 }, { wch: 6 }, { wch: 8 },
+        { wch: 28 }, { wch: 20 }, { wch: 12 }, { wch: 12 }, { wch: 16 }, { wch: 9 },
+        { wch: 16 }, { wch: 13 }, { wch: 60 }];
+      const wb = window.XLSX.utils.book_new();
+      window.XLSX.utils.book_append_sheet(wb, ws, "Status Report");
+      window.XLSX.writeFile(wb, `status-report_${from}_to_${to}.xlsx`);
+      return;
+    }
+    const csv = matrix.map(row => row.map(csvCell).join(",")).join("\n");
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -173,8 +210,8 @@ function StatusExportBar({ tookLive }) {
       <input type="date" value={from} max={to} onChange={e => setFrom(e.target.value)} style={inputStyle} />
       <label style={{ ...FONT, fontSize: "0.68rem", color: "#888" }}>To</label>
       <input type="date" value={to} min={from} onChange={e => setTo(e.target.value)} style={inputStyle} />
-      <button onClick={downloadCsv} style={btnStyle(true)} title="Download published pieces in range as CSV">
-        ↓ Download CSV
+      <button onClick={downloadReport} style={btnStyle(true)} title="Download published pieces in range as an .xlsx funnel-health report">
+        ↓ Download report
       </button>
       <span style={{ ...FONT, fontSize: "0.66rem", color: "#b0a99e", marginLeft: "auto" }}>
         {withUrl.length} published with links
@@ -201,16 +238,24 @@ function WeeklyReportPanel({ project, currentUser, activePhase }) {
   // Fallback: if "ed-review" is ever removed/renamed, fall back to the last
   // reviewer gate before "approved" so this bucket never silently empties — the
   // exact failure the old hardcoded "editors"/CTA reference had.
-  const CONTENT_LEADERSHIP_STAGE_ID = "ed-review";
-  const approvedIdx = stages.findIndex(s => s.id === "approved");
-  const lastGateBeforeApproved = approvedIdx > 0 ? stages[approvedIdx - 1] : null;
-  const leadershipStage = stages.find(s => s.id === CONTENT_LEADERSHIP_STAGE_ID) || lastGateBeforeApproved;
+  // A piece is "one action from published" when its next NON-optional stage is
+  // "approved" — i.e. the reviewer sitting on it can approve it straight to
+  // Approved. Under the new default path (Content reviewer is optional and
+  // skipped), that gate is the Visnja review stage; the Content reviewer still
+  // counts when a piece has been explicitly routed there. Ad-hoc pieces have
+  // only their own review gate, so that counts too. Derived from the live
+  // workflow via firstNonOptionalStageId so it can never silently empty.
   const adHocReviewStage = getAdHocReviewStage(project);
-  const planNextStageIds = new Set([leadershipStage?.id, "ad-hoc-review"].filter(Boolean));
-  // Human label is the fixed phrase "content leadership review" (with ad-hoc
-  // noted) rather than echoing the stage's raw name, so it reads consistently.
-  const planNextSub  = "under content leadership review";
-  const planNextJoin = "content leadership review or ad-hoc review";
+  const planNextStageIds = new Set(
+    stages
+      .filter(s => s.id !== "not-started" && s.id !== "approved" && s.id !== "live"
+        && firstNonOptionalStageId(stages, stages.indexOf(s) + 1) === "approved")
+      .map(s => s.id)
+  );
+  planNextStageIds.add("ad-hoc-review");
+  // Human label kept as a fixed phrase rather than echoing a raw stage name.
+  const planNextSub  = "in final review";
+  const planNextJoin = "final review";
 
   // Collapsed by default — brief-stage / upload-log detail is background noise
   // most weeks. The counts stay visible; the row detail expands on demand.
@@ -359,7 +404,7 @@ function WeeklyReportPanel({ project, currentUser, activePhase }) {
       </div>
 
       {/* ── Export — copy titles+links, or download a date-range CSV ──── */}
-      <StatusExportBar tookLive={data.tookLive} />
+      <StatusExportBar tookLive={data.tookLive} project={project} />
 
       {/* ── Took live — the hero section ──────────────────────────────── */}
       <div ref={refTookLive} style={{ scrollMarginTop: "16px" }} />

@@ -548,9 +548,15 @@ function computeStats(project, activeMonthId, activePhase) {
       let cT = phasePieces.length, cA = 0;
       for (const piece of phasePieces) {
         total++;
-        if (piece.status === "approved") { approved++; pA++; cA++; }
+        // "Live" is approved-and-beyond: a published piece counts toward Approved
+        // and toward cluster-readiness exactly like an approved one. Without this,
+        // a cluster whose pieces have all gone live shows 0 approved / not ready.
+        const done = piece.status === "approved" || piece.status === "live";
+        if (done) { approved++; pA++; cA++; }
         const st = stageById[piece.status];
-        if (st && piece.status !== "approved" && piece.status !== "not-started" && jaggaerSide(st.actor)) awaiting++;
+        // Awaiting Jaggaer = pieces sitting at a Jaggaer-side stage that still needs
+        // action. Terminal stages (approved, live, not-started) are never "awaiting".
+        if (st && !done && piece.status !== "not-started" && jaggaerSide(st.actor)) awaiting++;
       }
       byCluster[c.id] = { total: cT, approved: cA, ready: cA === cT && cT > 0 };
       pT += cT;
