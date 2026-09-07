@@ -2931,7 +2931,7 @@
               "title": "Best Procurement Software for Manufacturing Teams in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (Listicle)",
@@ -2965,8 +2965,20 @@
                   "stage": "ed-review",
                   "ts": "2026-09-01T15:09:04.480Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-07T10:21:07.763Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-04",
+                "live_url": "https://www.jaggaer.com/blog/best-procurement-software-manufacturing-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-07T10:21:07.762Z"
+              }
             },
             {
               "id": "p2-geo-best-procurement-software-for-higher-education-in-2026-8-pla",
