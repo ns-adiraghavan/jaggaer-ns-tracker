@@ -3213,7 +3213,14 @@
                   "ts": "2026-08-31T12:09:39.091Z",
                   "by": "m-e10nz"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "JAGGAER vs Ramp (2026): Procurement vs Spend Management",
+                "meta_description": "JAGGAER is a Source-to-Pay platform for sourcing and supplier governance. Ramp is a finance operations platform for cards and AP. Compare both for 2026.",
+                "slug": "jaggaer-vs-ramp-2026",
+                "updated_at": "2026-09-07T09:22:58.401Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "p2-geo-jaggaer-vs-ivalua",
