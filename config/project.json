@@ -3312,7 +3312,7 @@
               "title": "Best Procurement Software for Government Agencies in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (Listicle)",
@@ -3336,6 +3336,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-01T07:27:11.090Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-07T15:03:54.219Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -3344,6 +3349,13 @@
                 "slug": "",
                 "updated_at": "2026-09-07T12:44:34.666Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-07",
+                "live_url": "https://www.jaggaer.com/blog/best-procurement-software-government-agencies-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-07T15:03:54.219Z"
               }
             },
             {
