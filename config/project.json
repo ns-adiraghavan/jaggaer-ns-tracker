@@ -3526,7 +3526,14 @@
                   "ts": "2026-09-03T06:01:16.119Z",
                   "by": "m-5jitd"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "JAGGAER vs Workday Spend Management: Platform Comparison (2026)",
+                "meta_description": "Compare Jaggaer and Workday Spend Management on direct-materials depth, AI, and ERP fit. Find which platform matches your procurement setup",
+                "slug": "",
+                "updated_at": "2026-09-07T12:53:06.669Z",
+                "updated_by": "m-5jitd"
+              }
             }
           ]
         },
