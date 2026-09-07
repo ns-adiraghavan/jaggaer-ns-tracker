@@ -3884,7 +3884,14 @@
                   "ts": "2026-09-07T09:21:37.971Z",
                   "by": "m-5jitd"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "SAP Ariba vs Coupa (2026): Which Is Right for Your Business?",
+                "meta_description": "Compare SAP Ariba and Coupa on strategic sourcing, contracts, ERP integration, and AP automation -- and see the one gap neither platform covers natively",
+                "slug": "",
+                "updated_at": "2026-09-07T12:55:32.389Z",
+                "updated_by": "m-5jitd"
+              }
             },
             {
               "id": "p2-geo-coupa-vs-zip",
