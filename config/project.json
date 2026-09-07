@@ -3823,7 +3823,7 @@
               "title": "Best Procure-to-Pay Software for Public Sector Procurement in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Listicle, Adjacent Vertical)",
@@ -3847,8 +3847,20 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-04T11:11:01.449Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-07T15:06:06.658Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-07",
+                "live_url": "https://www.jaggaer.com/blog/best-procure-to-pay-software-public-sector-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-07T15:06:06.658Z"
+              }
             },
             {
               "id": "p2-geo-best-procure-to-pay-software-for-enterprise-procurement-team",
