@@ -3027,7 +3027,7 @@
               "title": "Best Procurement Software for Public Sector Procurement in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (Listicle)",
@@ -3056,8 +3056,20 @@
                   "stage": "ed-review",
                   "ts": "2026-08-26T12:05:49.535Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-07T15:02:20.531Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-07",
+                "live_url": "https://www.jaggaer.com/blog/best-procurement-software-public-sector-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-07T15:02:20.531Z"
+              }
             },
             {
               "id": "p2-geo-best-procurement-software-for-enterprise-procurement-teams-i",
