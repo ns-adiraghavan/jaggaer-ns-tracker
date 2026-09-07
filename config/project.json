@@ -3385,7 +3385,14 @@
                   "ts": "2026-09-01T04:49:42.498Z",
                   "by": "m-e10nz"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "JAGGAER vs. Precoro: Source-to-Pay vs. P2P Compared",
+                "meta_description": "Compare JAGGAER vs. Precoro across strategic sourcing, direct and indirect spend, ERP integrations, and procure-to-pay to find the right procurement platform.",
+                "slug": "jaggaer-vs-precoro",
+                "updated_at": "2026-09-07T09:31:25.369Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "p2-geo-jaggaer-vs-spendflo",
