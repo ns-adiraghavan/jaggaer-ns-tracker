@@ -3076,7 +3076,7 @@
               "title": "Best Procurement Software for Enterprise Procurement Teams in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (Listicle)",
@@ -3115,8 +3115,20 @@
                   "stage": "ed-review",
                   "ts": "2026-08-28T16:57:02.089Z",
                   "by": "m-pifrn"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-07T15:03:08.402Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-04",
+                "live_url": "https://www.jaggaer.com/blog/best-procurement-software-for-enterprise-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-07T15:03:08.402Z"
+              }
             },
             {
               "id": "p2-geo-jaggaer-vs-coupa",
