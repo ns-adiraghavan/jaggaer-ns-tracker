@@ -3772,7 +3772,7 @@
               "title": "Best Procure-to-Pay Software for Higher Education in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Listicle, Adjacent Vertical)",
@@ -3796,6 +3796,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-04T07:11:27.708Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-07T15:05:20.668Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -3804,6 +3809,13 @@
                 "slug": "",
                 "updated_at": "2026-09-04T07:13:55.188Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-07",
+                "live_url": "https://www.jaggaer.com/blog/best-procure-to-pay-software-higher-education-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-07T15:05:20.668Z"
               }
             },
             {
