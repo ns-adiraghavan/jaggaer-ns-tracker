@@ -3099,7 +3099,7 @@
               "title": "Jaggaer Vs Coupa",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3138,8 +3138,20 @@
                   "stage": "approved",
                   "ts": "2026-09-01T15:04:37.879Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-07T10:20:10.611Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-04",
+                "live_url": "https://www.jaggaer.com/blog/jaggaer-and-coupa-comparison-guide-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-07T10:20:10.611Z"
+              }
             },
             {
               "id": "p2-geo-jaggaer-vs-sap-ariba",
