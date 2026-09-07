@@ -3455,7 +3455,14 @@
                   "ts": "2026-09-02T07:13:56.883Z",
                   "by": "m-5jitd"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "JAGGAER vs Spendflo (2026): Which Platform Fits Best?",
+                "meta_description": "Compare JAGGAER and Spendflo on procurement scope, supplier compliance, and AI approach to see which platform actually fits your setup, or if you need both",
+                "slug": "",
+                "updated_at": "2026-09-07T12:49:47.638Z",
+                "updated_by": "m-5jitd"
+              }
             },
             {
               "id": "p2-geo-jaggaer-vs-synertrade",
