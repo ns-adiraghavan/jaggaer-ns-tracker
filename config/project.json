@@ -6005,6 +6005,16 @@
         "annotation": true,
         "section": "¶26 — \"Frequently Asked Questions…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-pnxshx",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "General comment - These don't appear naturally anywhere in the current text and should be worked in across the piece without forcing them: \"procurement software comparison,\" \"source-to-pay platform,\" \"Oracle procurement alternative,\" \"enterprise procurement software.\" (and similar) - use naturally where and if suitable",
+        "ts": "2026-09-08T12:40:15.117Z",
+        "annotation": true,
+        "section": "¶20 — \"JAGGAER vs Oracle Procurement Cloud (202…\"",
+        "revision": 1
       }
     ]
   },
