@@ -4145,7 +4145,14 @@
                   "ts": "2026-09-08T10:19:34.593Z",
                   "by": "m-e10nz"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "Coupa vs Ramp (2026): Which Procurement Platform Fits You?",
+                "meta_description": "Coupa vs Ramp (2026): compare procurement, spend management, and AP automation, then see when your needs call for JAGGAER's full Source-to-Pay platform.",
+                "slug": "coupa-vs-ramp",
+                "updated_at": "2026-09-08T10:20:00.627Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "p2-geo-coupa-vs-ivalua",
