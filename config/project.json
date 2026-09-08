@@ -2985,7 +2985,7 @@
               "title": "Best Procurement Software for Higher Education in 2026: 8 Platforms Compared",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (Listicle)",
@@ -3019,8 +3019,20 @@
                   "stage": "approved",
                   "ts": "2026-08-26T11:55:25.518Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-08T11:11:26.543Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-07",
+                "live_url": "https://www.jaggaer.com/blog/best-procurement-software-higher-education-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-08T11:11:26.542Z"
+              }
             },
             {
               "id": "p2-geo-best-procurement-software-for-public-sector-procurement-in-2",
