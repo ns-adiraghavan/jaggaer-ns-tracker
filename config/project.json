@@ -5925,6 +5925,16 @@
         "annotation": true,
         "section": "¶21 — \"JAGGAER vs Oracle Procurement Cloud: Pla…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-2qkjr2",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Add a sentence at the end that says who each is for — something like: \"JAGGAER One is built for organizations managing procurement across multiple enterprise systems; Oracle Fusion Cloud Procurement is the natural fit for organizations committed to a single Oracle environment.\"",
+        "ts": "2026-09-08T12:16:11.405Z",
+        "annotation": true,
+        "section": "¶2 — \"JAGGAER One brings together source-to-pa…\"",
+        "revision": 1
       }
     ]
   },
