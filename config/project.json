@@ -3432,7 +3432,14 @@
                   "ts": "2026-09-01T06:08:05.666Z",
                   "by": "orlagh"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "",
+                "meta_description": "",
+                "slug": "jaggaer-vs-oracle-procurement-cloud",
+                "updated_at": "2026-09-08T11:47:19.107Z",
+                "updated_by": "m-pifrn"
+              }
             },
             {
               "id": "p2-geo-jaggaer-vs-precoro",
