@@ -5995,6 +5995,16 @@
         "annotation": true,
         "section": "¶26 — \"Frequently Asked Questions…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-d9ayvg",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Add some of these instead: \"What types of organizations is JAGGAER One best suited for?\" — lets you name the precise buyer one more time in a format search engines favor for People Also Ask.\n\n\"Does JAGGAER support direct materials and BOM sourcing?\" — high intent for manufacturing and industrial buyers, not answered anywhere in FAQ form currently.\n\n\"How does JAGGAER handle procurement across multiple ERP systems?\" — targets multi-ERP search intent directly, relevant for buyers evaluating away from a single Oracle environment.\n\n\"What should I look for when evaluating an Oracle Fusion procurement alternative?\" — high intent, mid-funnel, lets you define the evaluation criteria on JAGGAER's terms",
+        "ts": "2026-09-08T12:36:42.726Z",
+        "annotation": true,
+        "section": "¶26 — \"Frequently Asked Questions…\"",
+        "revision": 1
       }
     ]
   },
