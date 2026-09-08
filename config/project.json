@@ -5985,6 +5985,16 @@
         "annotation": true,
         "section": "¶20 — \"JAGGAER vs Oracle Procurement Cloud (202…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-gc1bhm",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "remove these two\nQ1 \"What is the main difference between JAGGAER One and Oracle Fusion Cloud Procurement?\" — already answered in the intro and the table. Redundant.\n\nQ2 \"How do JAGGAER One and Oracle Fusion Cloud Procurement differ for complex sourcing?\" — already answered in the Sourcing row of the table and the Choose If boxes. Redundant.",
+        "ts": "2026-09-08T12:35:57.859Z",
+        "annotation": true,
+        "section": "¶26 — \"Frequently Asked Questions…\"",
+        "revision": 1
       }
     ]
   },
