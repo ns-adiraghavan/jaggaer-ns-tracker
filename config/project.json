@@ -5975,6 +5975,16 @@
         "annotation": true,
         "section": "¶64 — \"Your procurement environment spans multi…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-h8k17n",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Possibly use some of this info in the content where and if appropriate - TrustRadius\nhttps://www.trustradius.com/compare-products/jaggaer-vs-oracle-fusion-cloud-erp\n\nLikelihood to Recommend: JAGGAER 9.0 vs Oracle 7.7\nSupport quote: Larry D'Ambrosa, eProcurement System Administrator — \"Their support team is knowledgeable and responsive. Their Supplier Enablement team is very good and is a feature that most of their competitors don't have.\"\nOracle implementation complexity: Director of Consulting reviewer, March 2025 — paraphrase as a factual note on Fusion Cloud customization constraints\n\nG2\nhttps://www.g2.com/compare/jaggaer-vs-oracle-procurement-cloud\n\nStrategic Sourcing score: JAGGAER 9.7/10\nLikelihood to Be a Good Partner: JAGGAER 8.6 vs Oracle 8.0\nAI reviewer quote: \"AI agentic centric solutions\" that improve task management — G2 reviewer, 2026\nOracle entry-level pricing: $650 per user/month for the Sourcing module\nCategory breadth: JAGGAER appears in 5 G2 categories Oracle doesn't — Strategic Sourcing, Supplier Relationship Management, Spend Management, Procurement Spend Analysis, Autonomous Sourcing",
+        "ts": "2026-09-08T12:34:23.796Z",
+        "annotation": true,
+        "section": "¶20 — \"JAGGAER vs Oracle Procurement Cloud (202…\"",
+        "revision": 1
       }
     ]
   },
