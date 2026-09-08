@@ -5935,6 +5935,16 @@
         "annotation": true,
         "section": "¶2 — \"JAGGAER One brings together source-to-pa…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-tf42sk",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "The ERP & Integration row for JAGGAER says \"40+ pre-built integrations, Multi-ERP support, Connects with Oracle, SAP, Workday and others.\" This needs to go deeper — name what actually syncs (purchase orders, invoices, supplier master data) rather than just listing system names.",
+        "ts": "2026-09-08T12:16:57.635Z",
+        "annotation": true,
+        "section": "¶29 — \"JAGGAER vs Oracle Procurement Cloud: Key…\"",
+        "revision": 1
       }
     ]
   },
