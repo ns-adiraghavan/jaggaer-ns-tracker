@@ -6025,6 +6025,16 @@
         "annotation": true,
         "section": "¶25 — \"Bottom Line…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-9nkmvx",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Change this heading to be the one you have as the H3 below - JAGGAER vs Oracle ...",
+        "ts": "2026-09-08T12:41:39.825Z",
+        "annotation": true,
+        "section": "¶22 — \"Where JAGGAER and Oracle Actually Differ…\"",
+        "revision": 1
       }
     ]
   },
