@@ -3255,7 +3255,7 @@
               "title": "Jaggaer Vs Ramp",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3284,6 +3284,11 @@
                   "stage": "ed-review",
                   "ts": "2026-08-31T12:09:39.091Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-08T11:58:52.820Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -3292,6 +3297,13 @@
                 "slug": "jaggaer-vs-ramp-2026",
                 "updated_at": "2026-09-07T09:22:58.401Z",
                 "updated_by": "m-e10nz"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-08",
+                "live_url": "https://www.jaggaer.com/blog/jaggaer-vs-ramp-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-08T11:58:52.820Z"
               }
             },
             {
