@@ -5945,6 +5945,16 @@
         "annotation": true,
         "section": "¶29 — \"JAGGAER vs Oracle Procurement Cloud: Key…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-e753o9",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "The table currently has no row where Oracle wins. Looking at the rows : ERP & Integration, Sourcing, Supplier Management, Procurement Architecture, AI & Automation — JAGGAER is either equal or stronger in every one. Add a row for Oracle's Sourcing Command Center or guided negotiations where Oracle's April 2026 AI investment is a genuine strength, and give Oracle the win there.",
+        "ts": "2026-09-08T12:18:48.768Z",
+        "annotation": true,
+        "section": "¶8 — \"The platforms overlap across many core p…\"",
+        "revision": 1
       }
     ]
   },
