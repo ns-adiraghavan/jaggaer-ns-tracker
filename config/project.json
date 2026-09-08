@@ -3206,7 +3206,7 @@
               "title": "Jaggaer Vs Sap Ariba",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3235,8 +3235,20 @@
                   "stage": "ed-review",
                   "ts": "2026-08-31T13:54:54.440Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-08T11:58:16.208Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-08",
+                "live_url": "https://www.jaggaer.com/blog/jaggaer-vs-sap-ariba-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-08T11:58:16.208Z"
+              }
             },
             {
               "id": "p2-geo-jaggaer-vs-ramp",
