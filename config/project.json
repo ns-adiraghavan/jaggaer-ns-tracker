@@ -5955,6 +5955,16 @@
         "annotation": true,
         "section": "¶8 — \"The platforms overlap across many core p…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-1xbm8c",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "The JAGGAER box currently reads like a checklist of features. Rewrite it so it sounds like you're describing a real person and their situation. Instead of listing what the platform does, describe who the buyer is and what they're dealing with.",
+        "ts": "2026-09-08T12:21:29.097Z",
+        "annotation": true,
+        "section": "¶65 — \"Complex direct, indirect, strategic, or …\"",
+        "revision": 1
       }
     ]
   },
