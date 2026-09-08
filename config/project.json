@@ -3411,7 +3411,7 @@
               "title": "Jaggaer Vs Zip",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3435,8 +3435,20 @@
                   "stage": "marketing-review",
                   "ts": "2026-08-31T13:18:26.295Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-08T12:00:36.259Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-08",
+                "live_url": "https://www.jaggaer.com/blog/jaggaer-vs-zip-comparison-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-08T12:00:36.259Z"
+              }
             },
             {
               "id": "p2-geo-jaggaer-vs-oracle-procurement-cloud",
