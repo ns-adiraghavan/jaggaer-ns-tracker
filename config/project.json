@@ -5915,6 +5915,16 @@
         "annotation": true,
         "section": "¶1 — \"This JAGGAER vs Oracle Procurement Cloud…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-urcbav",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "The main fix here is adding one honest limitation sentence to the bottom of each card. For JAGGAER something like: \"organizations with straightforward procurement needs or a single-ERP environment may find the platform's breadth more than they require.\" For Oracle something like: \"organizations running procurement across multiple ERP systems may find the platform's dependency on the Fusion ecosystem a constraint.\" Just one sentence each, at the bottom of the respective card.",
+        "ts": "2026-09-08T12:15:39.145Z",
+        "annotation": true,
+        "section": "¶21 — \"JAGGAER vs Oracle Procurement Cloud: Pla…\"",
+        "revision": 1
       }
     ]
   },
