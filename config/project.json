@@ -3311,7 +3311,7 @@
               "title": "Jaggaer Vs Ivalua",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3340,8 +3340,20 @@
                   "stage": "ed-review",
                   "ts": "2026-08-31T09:19:09.824Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-08T11:59:43.372Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-08",
+                "live_url": "https://www.jaggaer.com/blog/jaggaer-vs-ivalua-comparison-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-08T11:59:43.372Z"
+              }
             },
             {
               "id": "p2-geo-best-procurement-software-for-government-agencies-in-2026-8-",
