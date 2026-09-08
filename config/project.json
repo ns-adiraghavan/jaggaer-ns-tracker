@@ -5857,6 +5857,16 @@
         "annotation": true,
         "section": "¶4 — \"Solutions/products: Source-to-Contract, …\"",
         "revision": 1
+      },
+      {
+        "id": "ann-f7cr0m",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Add two things at the very top before anything else:\n\nA one or two sentence hook that explains why this decision matters right now — something happening in 2026 that makes choosing the right procurement platform urgent. AI, supply chain pressure, cost mandates — pick one and make it feel real.\n\nThen, before describing either platform, briefly define what serious enterprise procurement actually requires. This sets JAGGAER's frame before Oracle even enters the picture.",
+        "ts": "2026-09-08T11:56:34.671Z",
+        "annotation": true,
+        "section": "¶1 — \"This JAGGAER vs Oracle Procurement Cloud…\"",
+        "revision": 1
       }
     ]
   },
