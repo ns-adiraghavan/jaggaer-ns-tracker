@@ -5965,6 +5965,16 @@
         "annotation": true,
         "section": "¶65 — \"Complex direct, indirect, strategic, or …\"",
         "revision": 1
+      },
+      {
+        "id": "ann-0ym2le",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "One paragraph, not five bullets. Start with \"Choose JAGGAER One if...\" and then describe the type of organization, what their procurement environment looks like, and what they're trying to solve. The reader should recognize themselves in it.",
+        "ts": "2026-09-08T12:21:46.139Z",
+        "annotation": true,
+        "section": "¶64 — \"Your procurement environment spans multi…\"",
+        "revision": 1
       }
     ]
   },
