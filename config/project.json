@@ -5839,6 +5839,18 @@
         "section": "NOTE",
         "revision": 3
       }
+    ],
+    "p2-geo-jaggaer-vs-oracle-procurement-cloud": [
+      {
+        "id": "ann-df0tne",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "You can add additional internal links to our solutions/products here",
+        "ts": "2026-09-08T11:45:58.231Z",
+        "annotation": true,
+        "section": "¶4 — \"Solutions/products: Source-to-Contract, …\"",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
