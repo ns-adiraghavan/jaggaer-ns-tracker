@@ -3606,7 +3606,7 @@
               "title": "Jaggaer Vs Synertrade",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3630,8 +3630,20 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-02T07:08:55.682Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-09T13:41:29.679Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-09",
+                "live_url": "https://www.jaggaer.com/blog/jaggaer-vs-spendflo",
+                "performance_data": "",
+                "updated_at": "2026-09-09T13:41:29.679Z"
+              }
             },
             {
               "id": "p2-geo-jaggaer-vs-workday-spend-management",
