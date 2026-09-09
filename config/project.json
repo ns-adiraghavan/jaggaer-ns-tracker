@@ -4302,7 +4302,14 @@
                   "ts": "2026-09-09T06:57:02.659Z",
                   "by": "m-e10nz"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "SAP Ariba vs Ramp (2026): Which Platform Is Right?",
+                "meta_description": "SAP Ariba vs Ramp compared for 2026: enterprise sourcing, AP automation, and procurement, plus when your needs call for a connected Source-to-Pay platform.",
+                "slug": "sap-ariba-vs-ramp",
+                "updated_at": "2026-09-09T06:58:22.086Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "p2-geo-basware-vs-ramp",
