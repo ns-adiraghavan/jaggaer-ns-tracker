@@ -3650,7 +3650,7 @@
               "title": "Jaggaer Vs Workday Spend Management",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3674,6 +3674,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-03T06:01:16.119Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-09T13:42:44.743Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -3682,6 +3687,13 @@
                 "slug": "",
                 "updated_at": "2026-09-07T12:53:06.669Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-09",
+                "live_url": "https://www.jaggaer.com/blog/jaggaer-vs-workday-spend-management",
+                "performance_data": "",
+                "updated_at": "2026-09-09T13:42:44.743Z"
               }
             }
           ]
