@@ -4277,7 +4277,7 @@
               "title": "Sap Ariba Vs Ramp",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -4288,7 +4288,21 @@
               "geography": "all",
               "schedule_week": 3,
               "publish_day": "Wed",
-              "planned_publish_date": "Sep 10, 2026"
+              "planned_publish_date": "Sep 10, 2026",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-09-09T06:57:02.658Z",
+              "last_upload_by": "m-e10nz",
+              "last_updated": "2026-09-09T06:57:02.658Z",
+              "last_updated_by": "m-e10nz",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-09-09T06:57:02.659Z",
+                  "by": "m-e10nz"
+                }
+              ]
             },
             {
               "id": "p2-geo-basware-vs-ramp",
