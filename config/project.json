@@ -3555,7 +3555,7 @@
               "title": "Jaggaer Vs Spendflo",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3579,6 +3579,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-02T07:13:56.883Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-09T13:39:51.031Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -3587,6 +3592,13 @@
                 "slug": "",
                 "updated_at": "2026-09-07T12:49:47.638Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-09",
+                "live_url": "https://www.jaggaer.com/blog/jaggaer-vs-spendflo",
+                "performance_data": "",
+                "updated_at": "2026-09-09T13:39:51.031Z"
               }
             },
             {
