@@ -3455,7 +3455,7 @@
               "title": "Jaggaer Vs Oracle Procurement Cloud",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "ed-review",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 1 (JAGGAER vs Competitor)",
@@ -3467,13 +3467,13 @@
               "schedule_week": 1,
               "publish_day": "Thu",
               "planned_publish_date": "Aug 28, 2026",
-              "revision_count": 1,
+              "revision_count": 2,
               "deliverable_ext": "html",
-              "return_to_stage": "ed-review",
-              "last_upload": "2026-09-01T06:08:05.666Z",
+              "return_to_stage": null,
+              "last_upload": "2026-09-09T07:20:10.595Z",
               "last_upload_by": "orlagh",
-              "last_updated": "2026-09-08T12:52:22.563Z",
-              "last_updated_by": "m-pifrn",
+              "last_updated": "2026-09-09T07:20:10.595Z",
+              "last_updated_by": "orlagh",
               "status_history": [
                 {
                   "stage": "marketing-review",
@@ -3484,6 +3484,11 @@
                   "stage": "writing",
                   "ts": "2026-09-08T12:52:22.563Z",
                   "by": "m-pifrn"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-09-09T07:20:10.595Z",
+                  "by": "orlagh"
                 }
               ],
               "seo": {
