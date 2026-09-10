@@ -4546,7 +4546,14 @@
                   "ts": "2026-09-10T13:05:54.053Z",
                   "by": "m-e10nz"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "Coupa vs Oracle Procurement Cloud (2026) Compared",
+                "meta_description": "Compare Coupa and Oracle Procurement Cloud on platform focus, capabilities, and pricing, then see which procurement platform truly fits your organization.",
+                "slug": "coupa-vs-oracle-procurement-cloud",
+                "updated_at": "2026-09-10T13:11:09.971Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "p2-geo-coupa-vs-basware",
