@@ -4432,7 +4432,7 @@
               "title": "Procurify Vs Ramp",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -4443,7 +4443,21 @@
               "geography": "all",
               "schedule_week": 3,
               "publish_day": "Wed",
-              "planned_publish_date": "Sep 10, 2026"
+              "planned_publish_date": "Sep 10, 2026",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-09-10T12:47:35.525Z",
+              "last_upload_by": "m-5jitd",
+              "last_updated": "2026-09-10T12:47:35.525Z",
+              "last_updated_by": "m-5jitd",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-09-10T12:47:35.525Z",
+                  "by": "m-5jitd"
+                }
+              ]
             },
             {
               "id": "p2-geo-ivalua-vs-ramp",
