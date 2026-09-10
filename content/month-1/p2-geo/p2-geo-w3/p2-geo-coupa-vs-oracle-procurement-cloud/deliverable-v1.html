@@ -1,0 +1,758 @@
+<!-- uploaded by m-e10nz at 2026-09-10T13:05:52.089Z -->
+<!-- piece: Coupa Vs Oracle Procurement Cloud -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coupa vs Oracle Procurement Cloud (2026) Compared</title>
+<meta name="description" content="Compare Coupa and Oracle Procurement Cloud on platform focus, capabilities, and pricing before choosing a procurement platform.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/coupa-vs-oracle-procurement-cloud">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&amp;family=Plus+Jakarta+Sans:wght@500..800&amp;display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Coupa vs Oracle Procurement Cloud (2026): Which Procurement Platform Is Right for Your Business?","description":"Compare Coupa and Oracle Procurement Cloud on platform focus, capabilities, and pricing before choosing a procurement platform.","datePublished":"2026-09","dateModified":"2026-09","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"author":{"@type":"Person","name":"Jason Rydzewski"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Coupa or Oracle Procurement Cloud better for enterprise procurement?","acceptedAnswer":{"@type":"Answer","text":"Neither Coupa nor Oracle Fusion Cloud Procurement is universally better, since the right fit depends on your organization's priorities. Coupa fits organizations prioritizing fast adoption. Oracle Fusion Cloud Procurement fits organizations already standardized on Oracle ERP. Organizations with direct-materials spend or multi-entity complexity should evaluate JAGGAER as well."}},{"@type":"Question","name":"How does Coupa pricing compare to Oracle Procurement Cloud pricing?","acceptedAnswer":{"@type":"Answer","text":"Neither Coupa nor Oracle publishes full list pricing as of September 2026. Coupa's pricing is quote-based and scoped to modules and spend volume. Oracle Fusion Cloud Procurement's pricing is subscription-based and modular. Contact JAGGAER directly to evaluate pricing fit for your organization."}},{"@type":"Question","name":"Does Coupa or Oracle Procurement Cloud integrate with major ERPs?","acceptedAnswer":{"@type":"Answer","text":"Both Coupa and Oracle Fusion Cloud Procurement integrate with major ERPs, though through different models. Coupa sits alongside an organization's ERP of record and offers connectors for SAP, Oracle, and NetSuite. Oracle Fusion Cloud Procurement is native to the Oracle Fusion Applications family. Integration with Oracle Fusion Cloud Financials, Oracle Fusion Cloud HCM, and Oracle Fusion Cloud SCM is built in. Confirm integration depth against your specific ERP version before purchasing."}},{"@type":"Question","name":"Which platform is easier to implement, Coupa or Oracle Procurement Cloud?","acceptedAnswer":{"@type":"Answer","text":"Coupa generally implements faster than Oracle Fusion Cloud Procurement, based on each vendor's documented deployment approach. Coupa markets a guided onboarding wizard designed to shorten initial setup. Oracle Fusion Cloud Procurement typically deploys as part of a broader Oracle Fusion Applications rollout, which extends implementation timelines for multi-module deployments. JAGGAER's implementation runs through a dedicated JAGGAER team."}},{"@type":"Question","name":"What does JAGGAER offer that Coupa and Oracle Procurement Cloud don't?","acceptedAnswer":{"@type":"Answer","text":"JAGGAER's core differentiation is BOM-driven, direct-materials sourcing. A dedicated Supplier Intelligence module covers supplier risk and ESG data in one place. Contracts connect directly to the sourcing events that created them. JAI, JAGGAER's AI layer, is embedded across the full source-to-pay workflow."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --navy-tint:         #E9EFF4;
+  --teal-tint:         #E4EEF0;
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-sm:      14px;
+  --font-size-base:    14px;
+  --font-size-h5:      clamp(0.9rem, 0.86rem + 0.2vw, 1rem);
+  --font-size-h4:      clamp(1.05rem, 1rem + 0.32vw, 1.22rem);
+  --font-size-h3:      clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --font-size-h2:      clamp(1.5rem, 1.35rem + 0.7vw, 1.85rem);
+  --font-size-h1:      clamp(1.8rem, calc(1.55rem + 0.95vw), 2.1rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+strong{color:var(--color-ink);font-weight:700;}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+.article-badges{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:var(--space-m);}
+.article-badge{display:inline-block;font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--color-teal);background:var(--teal-tint);border:1px solid #bcd8dc;border-radius:9999px;padding:.3rem .8rem;}
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-weight:400;text-transform:uppercase;letter-spacing:.03em;color:var(--color-ink);}
+
+.page-wrapper{display:flex;align-items:flex-start;max-width:1140px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+.toc-sidebar{width:270px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+article{flex:1;min-width:0;max-width:880px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:700;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-h3);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+.summary-box{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-left:4px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.summary-box p{font-size:var(--font-size-base);margin-bottom:.5rem;}
+.summary-box ul{margin-bottom:.25rem;padding-left:1.15rem;}
+.summary-box li{font-size:var(--font-size-base);margin-bottom:.3rem;color:var(--color-ink-2);line-height:1.5;}
+.summary-box li:last-child{margin-bottom:0;}
+.context-box{background:var(--color-surface-2,#f6f6f8);border:1px solid var(--color-border,#e2e2e8);border-left:4px solid var(--color-ink-2,#4a4a55);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-s) 0;}
+.context-box p{font-size:var(--font-size-base);line-height:1.5;margin-bottom:0;}
+.context-box p strong{display:block;font-size:var(--font-size-base);margin-bottom:.4rem;}
+.capability-box{background:var(--teal-tint);border:1px solid #bcd8dc;border-left:4px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.capability-box ul{list-style:none;margin-bottom:0;padding-left:0;}
+.capability-box li{font-size:var(--font-size-base);margin-bottom:.5rem;color:var(--color-ink-2);line-height:1.45;padding-left:1rem;position:relative;}
+.capability-box li::before{content:"•";position:absolute;left:0;color:var(--color-teal);font-weight:700;}
+.capability-box li:last-child{margin-bottom:0;}
+.capability-box li strong{display:inline;color:var(--color-ink);margin-right:.3rem;}
+.source-note{font-size:.75rem;color:var(--color-ink-3);font-style:italic;}
+
+.leak-compare-wrap{overflow-x:auto;margin:var(--space-s) 0 var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);}
+.leak-compare-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:600px;}
+.leak-compare-table th{background:var(--purple-tint-2);color:var(--color-ink);font-family:var(--font-display);font-weight:600;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;text-align:left;padding:.65rem var(--space-s);border-bottom:var(--border);}
+.leak-compare-table td{padding:.75rem var(--space-s);border-bottom:var(--border);color:var(--color-ink-2);vertical-align:top;line-height:1.5;font-size:var(--font-size-base);}
+.leak-compare-table td strong{color:var(--color-ink);}
+.leak-compare-table tr:last-child td{border-bottom:none;}
+.leak-compare-table tr{transition:background .15s;}
+.leak-compare-table tr:hover td{background:var(--purple-tint-3);}
+.leak-compare-table td:first-child{font-family:var(--font-display);font-weight:700;color:var(--color-ink);white-space:nowrap;}
+
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-s) var(--space-m);margin:var(--space-m) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:1rem;font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary h3{font-family:inherit;font-size:inherit;font-weight:inherit;color:inherit;line-height:inherit;letter-spacing:inherit;margin:0;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-item summary::marker{content:none;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-s);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.55;border-top:var(--border);background:var(--color-white);}
+
+.choose-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-m);margin:var(--space-m) 0 var(--space-s);}
+.choose-card{border:var(--border);border-top:3px solid var(--color-teal);border-radius:var(--border-radius-sm);background:var(--color-white);padding:var(--space-s);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;}
+.choose-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(11,13,18,.08);}
+.choose-card:focus-visible{outline:2px solid var(--color-teal);outline-offset:2px;}
+.choose-card.is-selected{background:var(--teal-tint);border-color:var(--color-teal);}
+.choose-card h3{margin:0 0 .4rem;font-size:1rem;}
+.choose-card p{font-size:var(--font-size-base);margin-bottom:0;}
+.choose-hint{font-size:.75rem;color:var(--color-ink-3);margin:0 0 var(--space-s);}
+@media(max-width:900px){.choose-grid{grid-template-columns:1fr;}}
+
+/* Platform Overview: side-by-side infographic cards */
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.overview-card{border:var(--border);border-radius:14px;overflow:hidden;background:var(--color-white);}
+.overview-card-header{display:flex;align-items:center;gap:var(--space-s);padding:var(--space-s) var(--space-m);}
+.overview-card-header.hdr-jaggaer{background:var(--purple-tint);}
+.overview-card-header.hdr-basware{background:linear-gradient(135deg,var(--color-teal),var(--color-navy));}
+.overview-name{font-family:var(--font-display);font-weight:700;font-size:1.15rem;line-height:1.3;}
+.hdr-jaggaer .overview-name{color:var(--color-ink);}
+.hdr-basware .overview-name{color:#fff;}
+.overview-tag{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.hdr-jaggaer .overview-tag{color:var(--jai-a);}
+.hdr-basware .overview-tag{color:rgba(255,255,255,.85);}
+.overview-body{padding:var(--space-s) var(--space-m) var(--space-m);}
+.overview-meta{display:flex;align-items:center;flex-wrap:nowrap;gap:.5rem;font-size:.7rem;color:var(--color-ink-2);margin-bottom:.6rem;padding-bottom:.5rem;border-bottom:1px solid var(--color-light-grey,#e2e2e8);white-space:nowrap;overflow-x:auto;}
+.overview-meta .meta-item{flex-shrink:0;}
+.overview-meta .meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;flex-shrink:0;}
+.overview-section{margin-bottom:.75rem;}
+.overview-section:last-child{margin-bottom:0;}
+.overview-section-label{display:flex;align-items:center;gap:.4rem;font-family:var(--font-display);font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.45rem;}
+.overview-card.card-jaggaer .overview-section-label{color:var(--jai-a);}
+.overview-card.card-basware .overview-section-label{color:var(--color-teal);}
+.overview-section p{font-size:var(--font-size-base);margin-bottom:0;}
+.overview-section ul{margin:.2rem 0 0;padding-left:1.1rem;}
+.overview-section ul li{font-size:var(--font-size-base);margin-bottom:.25rem;}
+@media(max-width:700px){.overview-grid{grid-template-columns:1fr;}}
+
+/* Self-Assessment tool */
+.assessment-tool{margin-top:var(--space-s);background:var(--color-white);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m);}
+.rate-question{margin-bottom:var(--space-s);padding-bottom:var(--space-s);border-bottom:1px solid var(--color-light-grey,#e2e2e8);}
+.rate-question:last-of-type{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.rate-q-title{margin-bottom:.5rem;font-size:var(--font-size-base);}
+.rate-scale{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.3rem;}
+.rate-btn{width:2rem;height:2rem;border-radius:9999px;border:var(--border);background:var(--color-white);color:var(--color-ink-2);font-family:var(--font-base);font-weight:600;font-size:.75rem;cursor:pointer;transition:background .15s,color .15s,border-color .15s;}
+.rate-btn:hover{border-color:var(--jai-a);color:var(--jai-a);}
+.rate-btn.is-selected{background:var(--jai-a);border-color:var(--jai-a);color:#fff;}
+.rate-scale-labels{display:flex;justify-content:space-between;max-width:27rem;font-size:.75rem;color:var(--color-ink-3);margin-bottom:var(--space-s);}
+.rate-result{font-size:var(--font-size-base);font-style:italic;color:var(--color-navy);background:var(--purple-tint-3);border-left:3px solid var(--jai-a);padding:.5rem .75rem;border-radius:4px;min-height:1.2rem;}
+.rate-result:empty{padding:0;min-height:0;border:none;background:none;}
+.rate-summary{margin-top:var(--space-s);padding:var(--space-s) var(--space-m);background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);}
+.rate-summary:has(#rate-overall-msg:empty){display:none;}
+.assessment-btn-row{display:flex;gap:var(--space-s);flex-wrap:wrap;margin-top:var(--space-s);align-items:center;}
+.assessment-btn-row .jag-cta-btn{padding:.55rem 1.2rem;font-size:.875rem;}
+.stat-box{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-s);background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.stat-item{text-align:center;padding:.25rem;}
+.stat-value{display:block;font-family:var(--font-display);font-weight:700;font-size:1.35rem;color:var(--jai-a);line-height:1.2;}
+.stat-label{display:block;font-size:.72rem;color:var(--color-ink-2);margin-top:.25rem;line-height:1.35;}
+@media(max-width:640px){.stat-box{grid-template-columns:1fr 1fr 1fr;}}
+#clear-assessment-btn{cursor:pointer;font-family:inherit;font-size:.875rem;font-weight:700;padding:.55rem 1.2rem;border-radius:8px;background:var(--color-white);color:var(--color-ink-2);border:1px solid var(--color-ink-2);transition:background .2s,color .2s;}
+#clear-assessment-btn:hover{background:var(--color-cream);color:var(--color-ink);}
+
+@media(max-width:900px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style></head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">Coupa vs Oracle at a Glance</a>
+      <a class="toc-link" href="#s2">Platform Overview</a>
+      <a class="toc-link" href="#s3">Where They Differ</a>
+      <a class="toc-link" href="#s4">Where Both Have Limits</a>
+      <a class="toc-link" href="#s5">How JAGGAER Addresses Gaps</a>
+      <a class="toc-link" href="#s6">Coupa vs Oracle vs JAGGAER</a>
+      <a class="toc-link" href="#s7">Which Platform Fits Your Needs?</a>
+      <a class="toc-link" href="#s8">Best Fit for Enterprise</a>
+      <a class="toc-link" href="#s9">Readiness Self-Assessment</a>
+      <a class="toc-link" href="#s10">Why Choose JAGGAER Instead?</a>
+      <a class="toc-link" href="#s11">The Bottom Line</a>
+      <a class="toc-link" href="#s12">More Comparisons</a>
+      <a class="toc-link" href="#s13">Frequently Asked Questions</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-badges">
+          <span class="article-badge">Procurement Software</span>
+          <span class="article-badge">Platform Comparison</span>
+        </div>
+        <h1>Coupa vs Oracle Procurement Cloud (2026): Which Procurement Platform Is Right for Your Business?</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            4-5 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Published</span> <time datetime="2026-09">September 2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Jason Rydzewski</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <p><strong>The right choice between Coupa and Oracle Procurement Cloud depends on your tech stack, category mix, and sourcing complexity, not which platform is "better."</strong> Coupa is a cloud-native spend management platform built around a guided, shopping-style buying experience. Oracle Procurement Cloud, officially named Oracle Fusion Cloud Procurement, is a <a href="https://www.jaggaer.com/source-to-contract/contracts/" target="_blank" rel="noopener">source-to-settle suite</a> embedded inside Oracle's broader ERP. This guide compares both platforms, then looks at what happens when requirements outgrow either one.</p>
+
+    <hr class="section-divider">
+
+    <div class="context-box">
+      <p><strong>Why This Decision Matters Now</strong><strong>Procurement teams are adopting AI faster than most other back-office functions.</strong> Ardent Partners' 2026 research on chief procurement officers describes this shift as a move from pilot projects to daily operational use. Platforms chosen mainly for purchase-order automation before 2024 often lack the AI and direct-materials depth today's buying committees need. Organizations that skip this evaluation frequently scope a second procurement implementation within 18 months of the first.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S1 -->
+    <h2 id="s1">Coupa vs Oracle Procurement Cloud at a Glance</h2>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table">
+        <thead>
+          <tr><th></th><th>Coupa</th><th>Oracle Procurement Cloud</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Core focus</td><td>Procurement, invoicing, expense, and supplier data on one shared record</td><td>Native procurement suite inside Oracle Fusion Cloud Applications</td></tr>
+          <tr><td>Best fit for</td><td>Fast adoption through a guided, shopping-style buying experience</td><td>Organizations already standardized on Oracle ERP, HCM, or SCM</td></tr>
+          <tr><td>Primary spend focus</td><td>Indirect spend: services, software, general categories</td><td>Indirect spend, with strong compliance controls for regulated industries</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Explore JAGGAER</p>
+        <p class="jag-cta-desc">See how JAGGAER approaches sourcing and direct materials differently.</p>
+      </div>
+      <a href="https://www.jaggaer.com/lp/strategic_sourcing" class="jag-cta-btn" target="_blank" rel="noopener">Explore JAGGAER &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S3 -->
+    <h2 id="s2">Coupa vs Oracle Procurement Cloud: Platform Overview</h2>
+
+    <div class="overview-grid">
+
+      <div class="overview-card card-jaggaer">
+        <div class="overview-card-header hdr-jaggaer">
+          <div>
+            <div class="overview-name">Coupa</div>
+            <div class="overview-tag">Cloud-Native Spend Management</div>
+          </div>
+        </div>
+        <div class="overview-body">
+          <div class="overview-section">
+            <div class="overview-section-label">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              Overview
+            </div>
+            <p><strong>Coupa's guided buying interface and Open Buy marketplace route employee purchases through pre-approved suppliers without requiring extensive training.</strong> Coupa AI automates tasks across sourcing, procurement, and invoice processing.</p>
+          </div>
+          <div class="overview-section">
+            <div class="overview-section-label">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              Primary Solution Focus
+            </div>
+            <p><strong>Indirect spend management on one shared record spanning procurement, invoicing, and expense.</strong></p>
+          </div>
+          <div class="overview-section">
+            <div class="overview-section-label">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              Capabilities
+            </div>
+            <ul>
+              <li><strong>Procurement intake:</strong> catalog-driven requisitioning with supplier price comparison</li>
+              <li><strong>Supplier management:</strong> self-service Supplier Portal plus a shared buyer supplier network</li>
+              <li><strong>Procure to Pay:</strong> requisition to purchase order workflows with three way invoice matching</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="overview-card card-basware">
+        <div class="overview-card-header hdr-basware">
+          <div>
+            <div class="overview-name">Oracle Fusion Cloud Procurement</div>
+            <div class="overview-tag">ERP-Native Procurement</div>
+          </div>
+        </div>
+        <div class="overview-body">
+          <div class="overview-section">
+            <div class="overview-section-label">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              Overview
+            </div>
+            <p><strong>Oracle Fusion Cloud Procurement is part of Oracle Fusion Applications, alongside Oracle Fusion Cloud Financials, Oracle Fusion Cloud SCM, and Oracle Fusion Cloud HCM.</strong> Because these applications share one data model, Oracle Fusion Cloud Procurement inherits Oracle's security controls and audit trail directly from Oracle Fusion Cloud Financials.</p>
+          </div>
+          <div class="overview-section">
+            <div class="overview-section-label">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              Primary Solution Focus
+            </div>
+            <p><strong>Native, ERP-embedded procurement focused on indirect spend, with compliance controls inherited from Oracle Fusion Cloud Financials.</strong></p>
+          </div>
+          <div class="overview-section">
+            <div class="overview-section-label">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              Capabilities
+            </div>
+            <ul>
+              <li><strong>Procurement intake:</strong> self-service requisitioning through catalog and non-catalog buying</li>
+              <li><strong>Sourcing:</strong> RFPs, RFIs, RFQs, and reverse auctions with automated bid analysis</li>
+              <li><strong>Supplier management:</strong> Oracle Supplier Qualification Management with a self-service supplier portal</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S4 -->
+    <h2 id="s3">Where Coupa and Oracle Procurement Cloud Differ</h2>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table">
+        <thead>
+          <tr><th>Area</th><th>Coupa</th><th>Oracle Fusion Cloud Procurement</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>AP and payments</td><td>Invoice validation and bill pay on Coupa's shared spend record</td><td>AP processing tied directly into Oracle Fusion Cloud Financials</td></tr>
+          <tr><td>Procurement intake</td><td>Guided, shopping-style buying interface</td><td>Configurable catalog buying; Oracle documentation indicates additional setup for catalog configuration</td></tr>
+          <tr><td>Supplier management</td><td>Self service Supplier Portal plus a shared buyer supplier network</td><td>Oracle Supplier Qualification Management with document collection</td></tr>
+          <tr><td>Strategic sourcing</td><td>RFx workflows within Coupa's broader spend management suite</td><td>RFx workflows tied into Oracle's ERP compliance controls</td></tr>
+          <tr><td>Pricing model, as of September 2026</td><td>Quote based; Coupa does not publish list pricing</td><td>Subscription based and modular; Oracle does not publish list pricing</td></tr>
+          <tr><td>Mobile access</td><td>A dedicated Coupa mobile app covers approvals, expense capture, and shopping</td><td>Access runs through the general Oracle Fusion Applications mobile app</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S5 -->
+    <h2 id="s4">Where Both Platforms Have Limits</h2>
+
+    <p><strong>Neither Coupa nor Oracle Fusion Cloud Procurement was originally engineered around direct-materials sourcing, multi-entity governance, or supplier risk scoring as a primary design goal.</strong></p>
+
+    <ul>
+      <li>Both platforms originated in indirect spend management; neither is built primarily for bill of materials (BOM) driven sourcing</li>
+      <li>Neither Coupa nor Oracle Fusion Cloud Procurement offers a dedicated, purpose-built supplier risk and ESG intelligence module as a core component</li>
+      <li>In both platforms, contract terms are not always automatically linked back to the sourcing event that produced them</li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <!-- S6 -->
+    <h2 id="s5">How JAGGAER Addresses These Gaps</h2>
+
+    <p><strong>JAGGAER's platform is built around direct materials procurement, bill-of-materials management, and connected sourcing-to-payment workflows.</strong> Gartner's <a href="https://www.gartner.com/en/documents/7351130" target="_blank" rel="noopener">Critical Capabilities for Source-to-Pay Suites</a> report, published January 26, 2026, also evaluates JAGGAER.</p>
+
+    <div class="capability-box">
+      <ul>
+        <li><strong>Strategic sourcing:</strong> A sourcing optimization engine runs multi round RFx events, scenario modeling, and award optimization.</li>
+        <li><strong>Direct materials:</strong> BOM management and BOM costing are built into the core platform, not sold as an add-on.</li>
+        <li><strong>Supplier Intelligence:</strong> Supplier performance, risk, and ESG data combine in one connected module.</li>
+        <li><strong>Contracts:</strong> Contract terms inherit directly from the sourcing event that created them.</li>
+        <li><strong>Procure to Pay:</strong> eProcurement, invoicing, and payments run on the same platform as sourcing and contracts.</li>
+        <li><strong>Procurement AI:</strong> JAI, JAGGAER's AI layer, is embedded across sourcing, contracts, and procure-to-pay workflows.</li>
+      </ul>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See What JAGGAER Sees</p>
+        <p class="jag-cta-desc">Compare Coupa's and Oracle Fusion Cloud Procurement's direct-materials capabilities against JAGGAER's.</p>
+      </div>
+      <a href="https://www.jaggaer.com/lp/source_to_pay_technology" class="jag-cta-btn" target="_blank" rel="noopener">Explore JAGGAER for direct spend &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S7 -->
+    <h2 id="s6">Coupa vs Oracle Procurement Cloud vs JAGGAER</h2>
+
+    <p>For teams whose requirements extend beyond what either platform was designed for, the picture looks like this. Adding JAGGAER to the comparison surfaces the sourcing depth, direct-materials coverage, and supplier-risk visibility that fall outside Coupa's and Oracle Fusion Cloud Procurement's core scope.</p>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table">
+        <thead>
+          <tr><th>Area</th><th>Coupa</th><th>Oracle Fusion Cloud Procurement</th><th>JAGGAER</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Strategic sourcing</td><td>RFx within Coupa's broader spend suite</td><td>RFx tied to Oracle's ERP compliance controls</td><td>Multi round RFx, scenario modeling, award optimization</td></tr>
+          <tr><td>Direct materials</td><td>Not a core focus of Coupa's platform</td><td>Not a core focus of Oracle Fusion Cloud Procurement</td><td>BOM management and BOM costing built into JAGGAER's core platform</td></tr>
+          <tr><td>Supplier Intelligence</td><td>Coupa's Supplier Portal and network data</td><td>Oracle Supplier Qualification Management</td><td>Dedicated module for supplier risk and ESG data</td></tr>
+          <tr><td>AP and global payments</td><td>Coupa's invoice automation and bill pay on one shared record</td><td>AP tied directly into Oracle Fusion Cloud Financials</td><td>AP automation connected to upstream sourcing data</td></tr>
+          <tr><td>Expense management</td><td>Coupa's shopping and expense capture in one app</td><td>Handled through broader Oracle Fusion applications</td><td>Not a primary focus of JAGGAER's platform</td></tr>
+          <tr><td>Procurement architecture</td><td>Coupa's unified record spans procurement, invoicing, and expense</td><td>Oracle Fusion Cloud Procurement is native to the Oracle Fusion data model</td><td>Connected architecture spans sourcing through payment</td></tr>
+          <tr><td>Procurement AI</td><td>Coupa AI across Coupa's suite</td><td>Oracle's AI driven supplier suggestions and contract analysis</td><td>JAI embedded across JAGGAER's sourcing, contracts, and P2P modules</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S8 -->
+    <h2 id="s7">Which Platform Fits Your Needs?</h2>
+
+    <p><strong>Match the platform to where your procurement function sits today</strong>, not just your current pain point. This section is meant to help you decide, not to sell you a JAGGAER subscription regardless of fit. If Coupa or Oracle Fusion Cloud Procurement is genuinely the better starting point for your team, that's the honest answer below.</p>
+
+    <div class="choose-grid">
+      <div class="choose-card" tabindex="0" role="button" aria-pressed="false">
+        <h3>Choose Coupa If</h3>
+        <p>Your spend is mostly indirect, no single ERP already governs procurement, and fast adoption matters more than deep sourcing depth.</p>
+      </div>
+      <div class="choose-card" tabindex="0" role="button" aria-pressed="false">
+        <h3>Choose Oracle Fusion Cloud Procurement If</h3>
+        <p>You're already standardized on Oracle ERP, Oracle HCM, or Oracle SCM, and procurement needs to inherit that same compliance model.</p>
+      </div>
+      <div class="choose-card" tabindex="0" role="button" aria-pressed="false">
+        <h3>When JAGGAER Fits Best</h3>
+        <p>Your spend includes direct materials, sourcing spans multiple entities, or procurement is shifting from a purchasing function into a strategic one.</p>
+      </div>
+    </div>
+
+    <p class="choose-hint">These aren't mutually exclusive: some organizations run Coupa or Oracle Fusion Cloud Procurement for day-to-day purchasing while managing direct materials and strategic sourcing through a dedicated platform like JAGGAER.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See Where You Fit</p>
+        <p class="jag-cta-desc">Get a clearer read on which platform matches your procurement function's current complexity.</p>
+      </div>
+      <a href="https://www.jaggaer.com/lp/categorycontract-management" class="jag-cta-btn" target="_blank" rel="noopener">Talk to JAGGAER &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S9 -->
+    <h2 id="s8">Which Procurement Platform Is Best for Enterprise Companies in 2026?</h2>
+
+    <p><strong>Organizations with direct materials, complex supplier networks, or multi-entity procurement should evaluate <a href="https://www.jaggaer.com/lp/procurement_software_2" target="_blank" rel="noopener">JAGGAER</a>, while single-entity companies running mostly indirect spend can succeed on Coupa or Oracle Fusion Cloud Procurement.</strong> Enterprise procurement complexity, not company size, drives this difference. Coupa's advantage at enterprise scale is adoption speed. Oracle Fusion Cloud Procurement's advantage is ERP-native governance for organizations already standardized on Oracle. A multi-entity manufacturer running direct materials across several regions is more likely to encounter the gaps described earlier in this guide.</p>
+
+    <hr class="section-divider">
+
+    <!-- S10 -->
+    <div id="assessment-section">
+    <h2 id="s9">Procurement Readiness Self-Assessment</h2>
+
+    <p><strong>Score your organization from 0 to 10 on each dimension below, then add the five scores together for a total out of 50.</strong> Use the button below to clear your answers and start over.</p>
+
+    <div class="assessment-tool">
+
+      <div class="rate-question">
+        <p class="rate-q-title"><strong>1. Strategic sourcing maturity:</strong> How mature is your strategic sourcing process?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Strategic sourcing maturity score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Not mature</span><span>10 = Fully mature</span></div>
+      </div>
+
+      <div class="rate-question">
+        <p class="rate-q-title"><strong>2. Supplier risk, performance, and compliance:</strong> How effectively do you manage supplier risk, performance, and compliance today?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Supplier risk, performance, and compliance score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Not effectively</span><span>10 = Very effectively</span></div>
+      </div>
+
+      <div class="rate-question">
+        <p class="rate-q-title"><strong>3. Sourcing, contracts, and purchasing integration:</strong> How connected are sourcing, contracts, purchasing, and supplier management?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Sourcing, contracts, and purchasing integration score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Not connected</span><span>10 = Fully connected</span></div>
+      </div>
+
+      <div class="rate-question">
+        <p class="rate-q-title"><strong>4. Complex and direct-material sourcing support:</strong> How well does your current technology support complex categories or BOM-driven sourcing?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Complex and direct-material sourcing support score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Not supported</span><span>10 = Fully supported</span></div>
+      </div>
+
+      <div class="rate-question">
+        <p class="rate-q-title"><strong>5. Procure-to-pay and payment automation:</strong> How automated are your invoicing, AP, and payment processes today?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Procure-to-pay and payment automation score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Not automated</span><span>10 = Fully automated</span></div>
+      </div>
+
+      <div class="rate-summary">
+        <p class="rate-result" id="rate-overall-msg"></p>
+      </div>
+
+      <div class="assessment-btn-row">
+        <button type="button" id="clear-assessment-btn">Clear All</button>
+      </div>
+
+    </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S11 -->
+    <h2 id="s10">Why Choose JAGGAER Instead?</h2>
+
+    <p><strong>JAGGAER is designed for procurement functions that have moved beyond cost control into value creation.</strong> As that shift happens, platform requirements change with it.</p>
+
+    <h3>Why Teams Choose JAGGAER</h3>
+
+    <div class="stat-box">
+      <div class="stat-item">
+        <span class="stat-value">1,400+</span>
+        <span class="stat-label">Enterprise customers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">$2.9T</span>
+        <span class="stat-label">Annual spend managed on the platform</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">13M+</span>
+        <span class="stat-label">Suppliers in the network</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">58%</span>
+        <span class="stat-label">Faster sourcing cycle times reported by customers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">50%</span>
+        <span class="stat-label">Time saved on requisition-to-PO reported by customers</span>
+      </div>
+    </div>
+    <p class="source-note">Figures per <a href="https://www.jaggaer.com/" target="_blank" rel="noopener">JAGGAER</a>, as of September 2026.</p>
+
+    <div class="capability-box">
+      <ul>
+        <li><strong>Strategic sourcing:</strong> A sourcing optimization engine handles complex multi-round RFx events, scenario modeling, and award optimization. These capabilities fall outside the core scope of Coupa and Oracle Fusion Cloud Procurement as reviewed here.</li>
+        <li><strong>Direct materials and complex procurement:</strong> BOM management and BOM costing are native to the platform, not bolted on. <a href="https://www.businesswire.com/news/home/20250114225226/en" target="_blank" rel="noopener">IDC</a> MarketScape included JAGGAER in its Worldwide SaaS and Cloud-Enabled Direct Spend assessment, announced January 14, 2025.</li>
+        <li><strong>Supplier Intelligence:</strong> The Supplier Intelligence module holds supplier performance, risk, and ESG data in one connected view rather than a set of disconnected reports.</li>
+        <li><strong>Contract management:</strong> Contracts inherit terms directly from the sourcing events that created them.</li>
+        <li><strong>Procure-to-Pay:</strong> eProcurement, invoicing, and payments run on the same backbone as sourcing, avoiding a separate system stitched on afterward.</li>
+        <li><strong>Procurement AI:</strong> JAI is embedded across sourcing, contracts, and P2P workflows, grounded in each customer's own policies and data.</li>
+      </ul>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Talk to JAGGAER</p>
+        <p class="jag-cta-desc">See how JAGGAER handles direct-materials sourcing and connected source-to-pay in a personalized walkthrough.</p>
+      </div>
+      <a href="https://www.jaggaer.com/lp/demo_v2" class="jag-cta-btn" target="_blank" rel="noopener">Book a JAGGAER demo &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S12 -->
+    <h2 id="s11">Coupa vs Oracle Procurement Cloud: The Bottom Line</h2>
+
+    <p><strong>Coupa and Oracle Fusion Cloud Procurement both handle indirect spend well, and organizations whose sourcing has outgrown either platform should evaluate JAGGAER next.</strong> The right choice between Coupa and Oracle Fusion Cloud Procurement depends on your existing ERP relationship and your appetite for a guided buying experience. It also depends on how much of your spend is indirect versus direct. Coupa's strength is adoption speed and unified spend visibility. Oracle Fusion Cloud Procurement's strength is native ERP governance for organizations already standardized on Oracle.</p>
+
+    <hr class="section-divider">
+
+    <!-- S13 -->
+    <h2 id="s12">Explore More Procurement Software Comparisons</h2>
+
+    <ul>
+      <li>SAP Ariba vs Coupa</li>
+      <li>Oracle Procurement Cloud vs Tipalti</li>
+      <li>Coupa vs ZIP</li>
+      <li>Gep Smart vs Oracle Procurement Cloud</li>
+      <li>JAGGAER vs Coupa</li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <!-- S14 -->
+    <h2 id="s13">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary><h3>Is Coupa or Oracle Procurement Cloud better for enterprise procurement?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Neither Coupa nor Oracle Fusion Cloud Procurement is universally better, since the right fit depends on your organization's priorities.</strong> Coupa fits organizations prioritizing fast adoption. Oracle Fusion Cloud Procurement fits organizations already standardized on Oracle ERP. Organizations with direct-materials spend or multi-entity complexity should evaluate JAGGAER as well.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><h3>How does Coupa pricing compare to Oracle Procurement Cloud pricing?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Neither Coupa nor Oracle publishes full list pricing as of September 2026.</strong> Coupa's pricing is quote-based and scoped to modules and spend volume. Oracle Fusion Cloud Procurement's pricing is subscription-based and modular. Contact JAGGAER directly to evaluate pricing fit for your organization.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><h3>Does Coupa or Oracle Procurement Cloud integrate with major ERPs?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Both Coupa and Oracle Fusion Cloud Procurement integrate with major ERPs, though through different models.</strong> Coupa sits alongside an organization's ERP of record and offers connectors for SAP, Oracle, and NetSuite. Oracle Fusion Cloud Procurement is native to the Oracle Fusion Applications family. Integration with Oracle Fusion Cloud Financials, Oracle Fusion Cloud HCM, and Oracle Fusion Cloud SCM is built in. Confirm integration depth against your specific ERP version before purchasing.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><h3>Which platform is easier to implement, Coupa or Oracle Procurement Cloud?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Coupa generally implements faster than Oracle Fusion Cloud Procurement, based on each vendor's documented deployment approach.</strong> Coupa markets a guided onboarding wizard designed to shorten initial setup. Oracle Fusion Cloud Procurement typically deploys as part of a broader Oracle Fusion Applications rollout, which extends implementation timelines for multi-module deployments. JAGGAER's implementation runs through a dedicated JAGGAER team.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary><h3>What does JAGGAER offer that Coupa and Oracle Procurement Cloud don't?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>JAGGAER's core differentiation is BOM-driven, direct-materials sourcing.</strong> A dedicated Supplier Intelligence module covers supplier risk and ESG data in one place. Contracts connect directly to the sourcing events that created them. JAI, JAGGAER's AI layer, is embedded across the full source-to-pay workflow.</div>
+    </details>
+
+  </article>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Which Platform Is Right: click-to-highlight cards
+const chooseCards = document.querySelectorAll('.choose-card');
+chooseCards.forEach(card => {
+  const select = () => {
+    const nowSelected = !card.classList.contains('is-selected');
+    chooseCards.forEach(c => { c.classList.remove('is-selected'); c.setAttribute('aria-pressed', 'false'); });
+    if (nowSelected) { card.classList.add('is-selected'); card.setAttribute('aria-pressed', 'true'); }
+  };
+  card.addEventListener('click', select);
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
+  });
+});
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+
+// Self-assessment tool: 5 questions, 0-10 each, summed to a 0-50 band
+const rateQuestions = document.querySelectorAll('.rate-question');
+const scores = new Array(rateQuestions.length).fill(null);
+
+function updateAssessmentSummary() {
+  const answered = scores.filter(v => v !== null);
+  const overallEl = document.getElementById('rate-overall-msg');
+  if (answered.length === 0) {
+    overallEl.textContent = '';
+    return;
+  }
+  if (answered.length < rateQuestions.length) {
+    overallEl.textContent = 'Rate all five dimensions above to see your total score.';
+    return;
+  }
+  const total = answered.reduce((a, b) => a + b, 0);
+  if (total <= 20) {
+    overallEl.textContent = 'Score: ' + total + '/50 (Foundational). Coupa or Oracle Fusion Cloud Procurement will likely cover your core needs well.';
+  } else if (total <= 35) {
+    overallEl.textContent = 'Score: ' + total + '/50 (Developing). Watch for the gap areas described earlier in this guide as your category complexity grows.';
+  } else {
+    overallEl.textContent = 'Score: ' + total + '/50 (Advanced). Your requirements likely extend past what either platform was built around, and this is where JAGGAER is worth a serious look.';
+  }
+}
+
+rateQuestions.forEach((q, qi) => {
+  const scale = q.querySelector('.rate-scale');
+  for (let v = 0; v <= 10; v++) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'rate-btn';
+    btn.textContent = v;
+    btn.setAttribute('data-value', v);
+    btn.setAttribute('aria-pressed', 'false');
+    btn.addEventListener('click', () => {
+      scale.querySelectorAll('.rate-btn').forEach(b => { b.classList.remove('is-selected'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('is-selected');
+      btn.setAttribute('aria-pressed', 'true');
+      scores[qi] = v;
+      updateAssessmentSummary();
+    });
+    scale.appendChild(btn);
+  }
+});
+
+const clearBtn = document.getElementById('clear-assessment-btn');
+if (clearBtn) {
+  clearBtn.addEventListener('click', () => {
+    scores.fill(null);
+    rateQuestions.forEach(q => {
+      q.querySelectorAll('.rate-btn').forEach(b => { b.classList.remove('is-selected'); b.setAttribute('aria-pressed', 'false'); });
+    });
+    updateAssessmentSummary();
+  });
+}
+updateAssessmentSummary();
+</script>
+</body>
+</html>
