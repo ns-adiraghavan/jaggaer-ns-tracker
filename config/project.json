@@ -2907,6 +2907,28 @@
               "last_upload": "2026-08-26T06:14:17.399Z",
               "last_upload_by": "jason",
               "secondary_keyword": ""
+            },
+            {
+              "id": "piece-14q7m0",
+              "title": "JAGGAER Procurement Performance vs. Industry Benchmarks (2026)",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "writing",
+              "content_type": "geo",
+              "phase": 2,
+              "schedule_month": "p2-month-1",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-09-10T07:36:42.268Z",
+                  "by": "manager"
+                }
+              ],
+              "last_updated": "2026-09-10T07:36:42.268Z",
+              "last_updated_by": "manager"
             }
           ]
         }
