@@ -4621,7 +4621,14 @@
               "geography": "all",
               "schedule_week": 3,
               "publish_day": "Thu",
-              "planned_publish_date": "Sep 11, 2026"
+              "planned_publish_date": "Sep 11, 2026",
+              "seo": {
+                "meta_title": "Coupa vs Basware (2026): Which Fits Procurement?",
+                "meta_description": "Coupa vs Basware (2026): compare sourcing depth, invoice automation, ERP integration, and AI approach, then see which platform fits your procurement needs.",
+                "slug": "",
+                "updated_at": "2026-09-11T12:33:03.729Z",
+                "updated_by": "m-5jitd"
+              }
             },
             {
               "id": "p2-geo-zycus-vs-ramp",
