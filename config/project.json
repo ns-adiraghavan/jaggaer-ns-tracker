@@ -4738,7 +4738,14 @@
                   "ts": "2026-09-11T13:47:10.756Z",
                   "by": "m-e10nz"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "GEP SMART vs Oracle Procurement Cloud: 2026 Comparison",
+                "meta_description": "GEP SMART vs Oracle Procurement Cloud: compare these standalone and ERP-native source-to-pay platforms, then see which one fits your organization best.",
+                "slug": "gep-smart-vs-oracle-procurement-cloud",
+                "updated_at": "2026-09-11T13:47:43.732Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "p2-geo-oracle-procurement-cloud-vs-workday-spend-management",
