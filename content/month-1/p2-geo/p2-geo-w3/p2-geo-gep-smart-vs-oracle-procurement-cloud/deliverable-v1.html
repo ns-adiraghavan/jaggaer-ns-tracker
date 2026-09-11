@@ -1,0 +1,765 @@
+<!-- uploaded by m-e10nz at 2026-09-11T13:47:09.030Z -->
+<!-- piece: Gep Smart Vs Oracle Procurement Cloud -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEP SMART vs Oracle Procurement Cloud: 2026 Comparison</title>
+<meta name="description" content="GEP SMART vs Oracle Procurement Cloud: compare these standalone and ERP-native source-to-pay platforms, then see when your needs extend further.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/gep-smart-vs-oracle-procurement-cloud">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"GEP SMART vs Oracle Procurement Cloud (2026): Which Procurement Platform Is Right for Your Business?","description":"GEP SMART vs Oracle Procurement Cloud: compare these standalone and ERP-native source-to-pay platforms, then see when your needs extend further.","datePublished":"2026-09","dateModified":"2026-09","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"author":{"@type":"Person","name":"Jason Rydzewski"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is GEP SMART or Oracle Procurement Cloud better for enterprise procurement?","acceptedAnswer":{"@type":"Answer","text":"Both are established, analyst-recognized choices. GEP SMART fits organizations wanting a standalone platform; Oracle fits organizations already standardized on Oracle Fusion. JAGGAER is worth evaluating for direct-materials and multi-entity complexity."}},{"@type":"Question","name":"How does GEP SMART pricing compare to Oracle Procurement Cloud pricing?","acceptedAnswer":{"@type":"Answer","text":"Neither vendor publishes a public price list. Both use custom, quote-based pricing tied to modules, user count, and deployment scale. Request quotes directly rather than relying on third-party estimates."}},{"@type":"Question","name":"Does GEP SMART or Oracle Procurement Cloud integrate with major ERPs?","acceptedAnswer":{"@type":"Answer","text":"GEP SMART integrates with major ERPs as a standalone layer. Oracle Procurement Cloud runs natively inside Oracle Fusion Applications, sharing a data model with Oracle's finance and HR modules."}},{"@type":"Question","name":"Which platform is easier to implement, GEP SMART or Oracle Procurement Cloud?","acceptedAnswer":{"@type":"Answer","text":"GEP SMART deploys as a standalone project, independent of any broader ERP rollout. Oracle's timeline is often tied to the wider Fusion rollout when deployed with other modules."}},{"@type":"Question","name":"What does JAGGAER offer that GEP SMART and Oracle Procurement Cloud don't?","acceptedAnswer":{"@type":"Answer","text":"JAGGAER's clearest differentiation is depth in regulated, multi-tier direct-materials procurement: native PPAP and IATF 16949 qualification, battery traceability, 3TG and CBAM reporting, and supplier risk mapped past Tier 1."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --navy-tint:         #E9EFF4;
+  --teal-tint:         #E4EEF0;
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-sm:      14px;
+  --font-size-base:    14px;
+  --font-size-h5:      clamp(0.9rem, 0.86rem + 0.2vw, 1rem);
+  --font-size-h4:      clamp(1.05rem, 1rem + 0.32vw, 1.22rem);
+  --font-size-h3:      clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --font-size-h2:      clamp(1.5rem, 1.35rem + 0.7vw, 1.85rem);
+  --font-size-h1:      clamp(1.8rem, calc(1.55rem + 0.95vw), 2.1rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+strong{color:var(--color-ink);font-weight:700;}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+.article-badges{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:var(--space-m);}
+.article-badge{display:inline-block;font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--color-teal);background:var(--teal-tint);border:1px solid #bcd8dc;border-radius:9999px;padding:.3rem .8rem;}
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-weight:400;text-transform:uppercase;letter-spacing:.03em;color:var(--color-ink);}
+
+.page-wrapper{display:flex;align-items:flex-start;max-width:1140px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+.toc-sidebar{width:270px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+article{flex:1;min-width:0;max-width:880px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:700;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-h3);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+.summary-box{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-left:4px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.summary-box p{font-size:var(--font-size-base);margin-bottom:.5rem;}
+.summary-box ul{margin-bottom:.25rem;padding-left:1.15rem;}
+.summary-box li{font-size:var(--font-size-base);margin-bottom:.3rem;color:var(--color-ink-2);line-height:1.5;}
+.summary-box li:last-child{margin-bottom:0;}
+.context-box{background:var(--color-surface-2,#f6f6f8);border:1px solid var(--color-border,#e2e2e8);border-left:4px solid var(--color-ink-2,#4a4a55);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-s) 0;}
+.context-box p{font-size:var(--font-size-base);line-height:1.5;margin-bottom:0;}
+.context-box p strong{display:block;font-size:var(--font-size-base);margin-bottom:.4rem;}
+.capability-box{background:var(--teal-tint);border:1px solid #bcd8dc;border-left:4px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.capability-box ul{list-style:none;margin-bottom:0;padding-left:0;}
+.capability-box li{font-size:var(--font-size-base);margin-bottom:.5rem;color:var(--color-ink-2);line-height:1.45;padding-left:1rem;position:relative;}
+.capability-box li::before{content:"•";position:absolute;left:0;color:var(--color-teal);font-weight:700;}
+.capability-box li:last-child{margin-bottom:0;}
+.capability-box li strong{display:inline;color:var(--color-ink);margin-right:.3rem;}
+.source-note{font-size:.75rem;color:var(--color-ink-3);font-style:italic;}
+
+.leak-compare-wrap{overflow-x:auto;margin:var(--space-s) 0 var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);}
+.leak-compare-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:600px;}
+.leak-compare-table th{background:var(--purple-tint-2);color:var(--color-ink);font-family:var(--font-display);font-weight:600;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;text-align:left;padding:.65rem var(--space-s);border-bottom:var(--border);}
+.leak-compare-table td{padding:.75rem var(--space-s);border-bottom:var(--border);color:var(--color-ink-2);vertical-align:top;line-height:1.5;font-size:var(--font-size-base);}
+.leak-compare-table td strong{color:var(--color-ink);}
+.leak-compare-table tr:last-child td{border-bottom:none;}
+.leak-compare-table tr{transition:background .15s;}
+.leak-compare-table tr:hover td{background:var(--purple-tint-3);}
+.leak-compare-table td:first-child{font-family:var(--font-display);font-weight:700;color:var(--color-ink);white-space:nowrap;}
+
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-s) var(--space-m);margin:var(--space-m) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:1rem;font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-item summary::marker{content:none;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-s);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.55;border-top:var(--border);background:var(--color-white);}
+
+.choose-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-m);margin:var(--space-m) 0 var(--space-s);}
+.choose-card{border:var(--border);border-top:3px solid var(--color-teal);border-radius:var(--border-radius-sm);background:var(--color-white);padding:var(--space-s);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;}
+.choose-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(11,13,18,.08);}
+.choose-card:focus-visible{outline:2px solid var(--color-teal);outline-offset:2px;}
+.choose-card.is-selected{background:var(--teal-tint);border-color:var(--color-teal);}
+.choose-card h3{margin:0 0 .4rem;font-size:1rem;}
+.choose-card p{font-size:var(--font-size-base);margin-bottom:0;}
+.choose-hint{font-size:.75rem;color:var(--color-ink-3);margin:0 0 var(--space-s);}
+@media(max-width:900px){.choose-grid{grid-template-columns:1fr;}}
+
+/* Platform Overview: side-by-side infographic cards */
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.overview-card{border:var(--border);border-radius:14px;overflow:hidden;background:var(--color-white);}
+.overview-card-header{display:flex;align-items:center;gap:var(--space-s);padding:var(--space-s) var(--space-m);}
+.overview-card-header.hdr-jaggaer{background:var(--purple-tint);}
+.overview-card-header.hdr-basware{background:linear-gradient(135deg,var(--color-teal),var(--color-navy));}
+.overview-name{font-family:var(--font-display);font-weight:700;font-size:1.15rem;line-height:1.3;}
+.hdr-jaggaer .overview-name{color:var(--color-ink);}
+.hdr-basware .overview-name{color:#fff;}
+.overview-tag{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.hdr-jaggaer .overview-tag{color:var(--jai-a);}
+.hdr-basware .overview-tag{color:rgba(255,255,255,.85);}
+.overview-body{padding:var(--space-s) var(--space-m) var(--space-m);}
+.overview-meta{display:flex;align-items:center;flex-wrap:nowrap;gap:.5rem;font-size:.7rem;color:var(--color-ink-2);margin-bottom:.6rem;padding-bottom:.5rem;border-bottom:1px solid var(--color-light-grey,#e2e2e8);white-space:nowrap;overflow-x:auto;}
+.overview-meta .meta-item{flex-shrink:0;}
+.overview-meta .meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;flex-shrink:0;}
+.overview-section{margin-bottom:.75rem;}
+.overview-section:last-child{margin-bottom:0;}
+.overview-section-label{display:flex;align-items:center;gap:.4rem;font-family:var(--font-display);font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.45rem;}
+.overview-card.card-jaggaer .overview-section-label{color:var(--jai-a);}
+.overview-card.card-basware .overview-section-label{color:var(--color-teal);}
+.overview-section p{font-size:var(--font-size-base);margin-bottom:0;}
+@media(max-width:700px){.overview-grid{grid-template-columns:1fr;}}
+
+/* Self-Assessment tool */
+.assessment-tool{margin-top:var(--space-s);background:var(--color-white);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m);}
+.rate-question{margin-bottom:var(--space-s);padding-bottom:var(--space-s);border-bottom:1px solid var(--color-light-grey,#e2e2e8);}
+.rate-question:last-of-type{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.rate-q-title{margin-bottom:.5rem;font-size:var(--font-size-base);}
+.rate-scale{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.3rem;}
+.rate-btn{width:2rem;height:2rem;border-radius:9999px;border:var(--border);background:var(--color-white);color:var(--color-ink-2);font-family:var(--font-base);font-weight:600;font-size:.75rem;cursor:pointer;transition:background .15s,color .15s,border-color .15s;}
+.rate-btn:hover{border-color:var(--jai-a);color:var(--jai-a);}
+.rate-btn.is-selected{background:var(--jai-a);border-color:var(--jai-a);color:#fff;}
+.rate-scale-labels{display:flex;justify-content:space-between;max-width:27rem;font-size:.75rem;color:var(--color-ink-3);margin-bottom:var(--space-s);}
+.rate-result{font-size:var(--font-size-base);font-style:italic;color:var(--color-navy);background:var(--purple-tint-3);border-left:3px solid var(--jai-a);padding:.5rem .75rem;border-radius:4px;min-height:1.2rem;}
+.rate-result:empty{padding:0;min-height:0;border:none;background:none;}
+.rate-summary{margin-top:var(--space-s);padding:var(--space-s) var(--space-m);background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);}
+.rate-summary:has(#rate-overall-msg:empty){display:none;}
+.assessment-btn-row{display:flex;gap:var(--space-s);flex-wrap:wrap;margin-top:var(--space-s);align-items:center;}
+.assessment-btn-row .jag-cta-btn{padding:.55rem 1.2rem;font-size:.875rem;}
+.stat-box{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-s);background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.stat-item{text-align:center;padding:.25rem;}
+.stat-value{display:block;font-family:var(--font-display);font-weight:700;font-size:1.35rem;color:var(--jai-a);line-height:1.2;}
+.stat-label{display:block;font-size:.72rem;color:var(--color-ink-2);margin-top:.25rem;line-height:1.35;}
+@media(max-width:640px){.stat-box{grid-template-columns:1fr 1fr 1fr;}}
+#clear-assessment-btn{cursor:pointer;font-family:inherit;font-size:.875rem;font-weight:700;padding:.55rem 1.2rem;border-radius:8px;background:var(--color-white);color:var(--color-ink-2);border:1px solid var(--color-ink-2);transition:background .2s,color .2s;}
+#clear-assessment-btn:hover{background:var(--color-cream);color:var(--color-ink);}
+
+@media(max-width:900px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style></head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">GEP SMART vs Oracle Procurement Cloud at a Glance (2026)</a>
+      <a class="toc-link" href="#s2">Platform Overview</a>
+      <a class="toc-link" href="#s3">Where They Differ</a>
+      <a class="toc-link" href="#s4">Where Both Have Limits</a>
+      <a class="toc-link" href="#s6">How JAGGAER Addresses Gaps</a>
+      <a class="toc-link" href="#s7">GEP SMART vs Oracle Procurement Cloud vs JAGGAER</a>
+      <a class="toc-link" href="#s8">Which Platform Fits Your Needs?</a>
+      <a class="toc-link" href="#s-enterprise">Best Fit for Enterprise</a>
+      <a class="toc-link" href="#s-assess">Readiness Self-Assessment</a>
+      <a class="toc-link" href="#s-why-jaggaer">Why Choose JAGGAER Instead?</a>
+      <a class="toc-link" href="#s9">The Bottom Line</a>
+      <a class="toc-link" href="#s-related">More Comparisons</a>
+      <a class="toc-link" href="#s10">Frequently Asked Questions</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-badges">
+          <span class="article-badge">Procurement Software</span>
+          <span class="article-badge">Platform Comparison</span>
+        </div>
+        <h1>GEP SMART vs Oracle Procurement Cloud (2026): Which Procurement Platform Is Right for Your Business?</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            4-5 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Published</span> <time datetime="2026-09">September 2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Jason Rydzewski</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <p><strong>GEP SMART and Oracle Procurement Cloud are both established, enterprise-grade source-to-pay platforms, and the right choice comes down to one factor: whether your organization already runs on Oracle.</strong> GEP SMART is an AI-powered, standalone source-to-pay suite built to run independent of any single ERP. Oracle Fusion Cloud Procurement, still widely searched under its earlier name Oracle Procurement Cloud, is an integrated suite built natively inside the Oracle Fusion ecosystem. This comparison covers what each platform does, where they differ, and when a third option, JAGGAER, is worth evaluating for buyers with deeper direct-materials or multi-tier supplier requirements.</p>
+
+    <div class="context-box">
+      <p><strong>Why This Decision Matters Now</strong>Choosing a procurement platform that cannot scale with your complexity often means rebuilding the stack within 18 months, an outcome a careful evaluation up front can help prevent. GEP and Oracle both expanded agentic AI capabilities across their platforms in early 2026, so the gap between AI-enabled and AI-native is now a real evaluation criterion.</p>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Explore JAGGAER</p>
+        <p class="jag-cta-desc">See how JAGGAER handles your direct-materials sourcing.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/datasheet/sourcing" class="jag-cta-btn" target="_blank" rel="noopener">View the JAGGAER Sourcing brief &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S1 -->
+    <h2 id="s1">GEP SMART vs Oracle Procurement Cloud at a Glance (2026)</h2>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table">
+        <thead>
+          <tr><th></th><th>GEP SMART</th><th>Oracle Procurement Cloud</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Platform architecture</td><td>Standalone, runs independent of any ERP</td><td>Native module inside Oracle Fusion Cloud Applications</td></tr>
+          <tr><td>Best suited for</td><td>Organizations wanting one procurement system decoupled from their ERP</td><td>Organizations standardized on Oracle Fusion for finance, HR, or supply chain</td></tr>
+          <tr><td>Spend coverage</td><td>Direct and indirect spend in one environment</td><td>Sourcing, supplier management, and purchasing; direct materials often handled through adjacent Oracle SCM modules</td></tr>
+          <tr><td>AI approach</td><td>GEP Quantum Intelligence, GEP's agentic AI layer</td><td>Generative AI built into Oracle's Redwood interface</td></tr>
+          <tr><td>Pricing model</td><td>Custom, quote-based; no published price list</td><td>Quote-based; Oracle does not publish a public price list</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S2 -->
+    <h2 id="s2">GEP SMART vs Oracle Procurement Cloud: Platform Overview</h2>
+
+    <div class="overview-grid">
+
+      <div class="overview-card card-jaggaer">
+        <div class="overview-card-header hdr-jaggaer">
+          <div>
+            <div class="overview-name">GEP SMART</div>
+            <div class="overview-tag">Standalone Source-to-Pay</div>
+          </div>
+        </div>
+        <div class="overview-body">
+          <div class="overview-section">
+            <div class="overview-section-label">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              Overview
+            </div>
+            <p>GEP SMART is a standalone, AI-native source-to-pay platform built on GEP Quantum Intelligence. It unifies direct and indirect spend in one environment.</p>
+          </div>
+          <div class="overview-section">
+            <div class="overview-section-label">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              Primary Solution Focus
+            </div>
+            <p>End-to-end source-to-pay for organizations that want one procurement system separate from their ERP of record.</p>
+          </div>
+          <div class="overview-section">
+            <div class="overview-section-label">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              Capabilities
+            </div>
+            <ul>
+              <li><strong>Sourcing and RFx:</strong> Direct and indirect RFx events, multi-round negotiations, and award scenario modeling</li>
+              <li><strong>Contract management:</strong> Creation, templates, and collaboration within the sourcing workspace</li>
+              <li><strong>Procure-to-Pay:</strong> Requisitioning, purchasing, and invoicing on one platform</li>
+              <li><strong>Spend analytics:</strong> Native spend classification and savings tracking</li>
+              <li><strong>Direct materials:</strong> Native BOM-level costing for technical and manufacturing bids</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="overview-card card-basware">
+        <div class="overview-card-header hdr-basware">
+          <div>
+            <div class="overview-name">Oracle Procurement Cloud</div>
+            <div class="overview-tag">ERP-Native Procurement</div>
+          </div>
+        </div>
+        <div class="overview-body">
+          <div class="overview-section">
+            <div class="overview-section-label">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              Overview
+            </div>
+            <p>Oracle Fusion Cloud Procurement runs natively inside Oracle Fusion Cloud Applications, using generative AI for negotiation, collaboration, and contract review.</p>
+          </div>
+          <div class="overview-section">
+            <div class="overview-section-label">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              Primary Solution Focus
+            </div>
+            <p>Procurement embedded inside a broader Oracle Fusion ERP estate, for organizations standardized on Oracle.</p>
+          </div>
+          <div class="overview-section">
+            <div class="overview-section-label">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              Capabilities
+            </div>
+            <ul>
+              <li><strong>Sourcing and negotiation:</strong> Generative-AI-suggested negotiation questions and supplier recommendations</li>
+              <li><strong>Contract lifecycle management:</strong> Automated change-order processing and generative-AI contract summaries</li>
+              <li><strong>Procure-to-Pay:</strong> Requisitioning and invoicing tied to Oracle Fusion Financials</li>
+              <li><strong>Supplier qualification:</strong> Dedicated supplier qualification management module</li>
+              <li><strong>ERP integration:</strong> Native ties to Oracle Fusion Applications</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S3 -->
+    <h2 id="s3">Where GEP SMART and Oracle Procurement Cloud Differ</h2>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table">
+        <thead>
+          <tr><th>Area</th><th>GEP SMART</th><th>Oracle Procurement Cloud</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Deployment model</td><td>Standalone, independent of ERP</td><td>Native module within Oracle Fusion</td></tr>
+          <tr><td>Implementation approach</td><td>Self-contained project</td><td>Often sequenced with a broader Oracle Fusion rollout</td></tr>
+          <tr><td>Contract management</td><td>Creation, templates, and collaboration within sourcing workspace</td><td>Automated change orders and generative-AI summaries of contract terms</td></tr>
+          <tr><td>Procure-to-Pay reporting</td><td>Native spend classification and savings tracking</td><td>Analytics embedded in the same layer as Oracle Fusion Financials</td></tr>
+          <tr><td>Direct materials</td><td>Native BOM-level costing</td><td>Often extended through adjacent Oracle SCM modules</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Both are recognised as established, enterprise-grade platforms by industry analysts,</strong> a signal that neither is a fringe or unproven choice in the category.</p>
+
+    <hr class="section-divider">
+
+    <!-- S4 -->
+    <h2 id="s4">Where Both Platforms Have Limits</h2>
+
+    <p><strong>GEP SMART and Oracle Procurement Cloud share one core limitation: neither ships pre-configured compliance workflows for regulated manufacturing sub-verticals.</strong> Both are broad, horizontal suites built for general enterprise procurement, not automotive or aerospace-specific programs.</p>
+
+    <ul>
+      <li>Automotive and aerospace supplier qualification standards, such as PPAP and IATF 16949, typically require custom configuration on both platforms.</li>
+      <li>Neither platform is purpose-built for sub-tier (Tier 2-4) supplier risk mapping as a dedicated capability.</li>
+      <li>Neither platform includes dedicated logistics or freight rate-card sourcing as a core module.</li>
+      <li>Battery traceability, conflict-minerals (3TG), and CBAM reporting are not native workflows in either platform today.</li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <!-- S6 -->
+    <h2 id="s6">How JAGGAER Addresses These Gaps</h2>
+
+    <p><strong>JAGGAER is built for the requirements that surface once your procurement organization moves into complex, regulated, direct-materials supply chains.</strong> <a href="https://www.jaggaer.com/solutions/source-to-pay" target="_blank" rel="noopener">JAGGAER</a> connects sourcing, contracts, and procure-to-pay in one architecture.</p>
+
+    <div class="capability-box">
+      <ul>
+        <li><strong>Strategic sourcing:</strong> Autonomous Sourcing Optimization runs multi-variable award scenarios too complex to score manually.</li>
+        <li><strong>Direct materials:</strong> <a href="https://www.jaggaer.com/wp-content/uploads/JAGGAER-Sourcing-Product-Brief.pdf" target="_blank" rel="noopener">JAGGAER Sourcing</a> supports multi-level BOM integration for your manufacturing programs. Its <a href="https://www.jaggaer.com/vertical/automotive" target="_blank" rel="noopener">automotive configuration</a> handles IATF 16949 qualification, battery traceability, 3TG, and CBAM reporting natively.</li>
+        <li><strong>Supplier Intelligence:</strong> Risk visibility mapped beyond Tier 1, into sub-tier supplier networks.</li>
+        <li><strong>Contract management:</strong> Contracts, sourcing events, and supplier records share one data model.</li>
+        <li><strong>Procure-to-Pay:</strong> Requisitioning and invoicing inherit sourcing and contract terms automatically.</li>
+        <li><strong>Procurement AI:</strong> <a href="https://www.jaggaer.com/press-release/jaggaer-launches-jai-ai-assistant" target="_blank" rel="noopener">JAI</a> became generally available on May 5, 2026, and now spans more than 40 workflows.</li>
+      </ul>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S7 -->
+    <h2 id="s7">GEP SMART vs Oracle Procurement Cloud vs JAGGAER</h2>
+
+    <p><strong>Adding JAGGAER to the comparison reveals a specific gap: neither GEP SMART nor Oracle Procurement Cloud was designed for regulated, direct-materials procurement at this depth.</strong> For teams whose requirements extend beyond what either platform covers, the table below shows where JAGGAER picks up.</p>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table">
+        <thead>
+          <tr><th>Area</th><th>GEP SMART</th><th>Oracle Procurement Cloud</th><th>JAGGAER</th><th>Best Fit</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Strategic sourcing</td><td>Native RFx and negotiation workflows</td><td>Generative-AI-assisted negotiation</td><td>Autonomous Sourcing Optimization for multi-variable award scenarios</td><td>Depends on ERP fit</td></tr>
+          <tr><td>Direct-materials &amp; BOM sourcing</td><td>Native BOM support</td><td>Often via adjacent Oracle SCM modules</td><td>Native BOM with cost-breakdown structures for technical bids</td><td>Depends on regulatory depth needed</td></tr>
+          <tr><td>Regulated manufacturing config</td><td>Requires custom configuration</td><td>Requires custom configuration</td><td>Native IATF 16949, battery traceability, 3TG, and CBAM support</td><td><strong>JAGGAER</strong></td></tr>
+          <tr><td>Supplier Intelligence at scale</td><td>Native supplier performance modules</td><td>Supplier qualification management</td><td>Risk mapping extended to Tier 2, 3, and 4</td><td><strong>JAGGAER</strong></td></tr>
+          <tr><td>Contract management</td><td>Creation and collaboration within sourcing</td><td>Automated change orders</td><td>Contracts tied directly to the originating sourcing event</td><td>Depends on existing systems</td></tr>
+          <tr><td>Native ERP embedding</td><td>Standalone by design</td><td>Native to Oracle Fusion</td><td>Standalone by design</td><td><strong>Oracle Procurement Cloud</strong>, if already on Oracle Fusion</td></tr>
+          <tr><td>Implementation approach</td><td>Self-contained, standalone rollout</td><td>Often sequenced with the broader Fusion rollout</td><td>Enterprise implementation with dedicated onboarding</td><td><strong>GEP SMART</strong>, for fastest standalone deployment</td></tr>
+          <tr><td>Procurement AI</td><td>GEP Quantum Intelligence</td><td>Redwood generative-AI tools</td><td>JAI, spanning 40+ workflows since May 2026</td><td>Depends on existing ecosystem</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Neither GEP SMART nor Oracle Procurement Cloud loses across the board, and JAGGAER doesn't win every row either.</strong> The Best Fit column reflects genuine trade-offs: GEP SMART leads on standalone deployment speed, Oracle leads when you're already on Oracle Fusion, and JAGGAER leads on regulated, multi-tier direct-materials depth.</p>
+
+    <hr class="section-divider">
+
+    <!-- S8 -->
+    <h2 id="s8">Which Platform Fits Your Needs?</h2>
+
+    <p><strong>The right match depends on where your procurement function sits today, not just your current pain point.</strong></p>
+
+    <div class="choose-grid">
+      <div class="choose-card" tabindex="0" role="button" aria-pressed="false">
+        <h3>Choose GEP SMART If</h3>
+        <ul>
+          <li>You want one standalone platform independent of any ERP</li>
+          <li>A self-contained implementation timeline matters more than native ERP embedding</li>
+          <li>Direct-materials needs are real but not tied to IATF or PPAP compliance</li>
+        </ul>
+      </div>
+      <div class="choose-card" tabindex="0" role="button" aria-pressed="false">
+        <h3>Choose Oracle Procurement Cloud If</h3>
+        <ul>
+          <li>Finance, HR, or supply chain already run on Oracle Fusion</li>
+          <li>Procurement data sharing one model with the rest of the ERP is a priority</li>
+          <li>You are building toward a single-vendor Oracle strategy</li>
+        </ul>
+      </div>
+      <div class="choose-card" tabindex="0" role="button" aria-pressed="false">
+        <h3>When JAGGAER Fits Best</h3>
+        <ul>
+          <li>Sourcing involves direct materials or regulated categories like automotive or aerospace</li>
+          <li>Supplier networks span multiple tiers, and visibility must extend past Tier 1</li>
+          <li>Sourcing, contracts, and P2P need one connected data model, not separate licenses</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Explore JAGGAER</p>
+        <p class="jag-cta-desc">See how JAGGAER configures for your manufacturing and direct-materials needs.</p>
+      </div>
+      <a href="https://www.jaggaer.com/vertical/automotive" class="jag-cta-btn" target="_blank" rel="noopener">View the automotive vertical page &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S-ENTERPRISE -->
+    <h2 id="s-enterprise">Which Procurement Platform Is Best for Enterprise Companies?</h2>
+
+    <p><strong>Enterprise organizations need platforms that hold up under multi-entity complexity, and both GEP SMART and Oracle Procurement Cloud handle much of that well.</strong> Oracle's advantage at scale often comes specifically from its embedding inside Oracle Fusion, valuable for Oracle-standardized organizations and irrelevant otherwise. For the regulated, multi-tier requirements outlined above, JAGGAER remains the platform built specifically for that complexity.</p>
+
+    <hr class="section-divider">
+
+    <!-- S-ASSESS -->
+    <div id="assessment-section">
+    <h2 id="s-assess">Procurement Readiness Self-Assessment</h2>
+
+    <p><strong>This self-assessment scores your current procurement setup rather than comparing vendor feature lists.</strong> Rate each factor from 0 (not at all) to 10 (fully mature), and the note below each question updates automatically.</p>
+
+    <div class="assessment-tool">
+
+      <div class="rate-question" data-gap="A connected source-to-pay platform adds structured RFx and award optimization beyond ad hoc buying." data-strong="Your sourcing process already looks strong.">
+        <p class="rate-q-title"><strong>1. Strategic Sourcing Maturity:</strong> What share of major purchases goes through a formal, tracked sourcing process?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Strategic Sourcing Maturity score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Not at all</span><span>10 = Always, tracked</span></div>
+        <p class="rate-result" aria-live="polite"></p>
+      </div>
+
+      <div class="rate-question" data-gap="Supplier Intelligence adds risk visibility mapped beyond Tier 1." data-strong="Your supplier risk monitoring already looks strong.">
+        <p class="rate-q-title"><strong>2. Supplier Risk, Performance, and Compliance:</strong> How effectively is supplier risk, performance, and compliance monitored today, including past Tier 1?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Supplier Risk score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Not monitored</span><span>10 = Continuously monitored</span></div>
+        <p class="rate-result" aria-live="polite"></p>
+      </div>
+
+      <div class="rate-question" data-gap="A connected architecture carries negotiated terms from sourcing straight into purchasing." data-strong="Your integration across these functions already looks strong.">
+        <p class="rate-q-title"><strong>3. Sourcing, Contracts, and Purchasing Integration:</strong> How connected are sourcing, contracts, and purchasing today?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Integration score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Not connected</span><span>10 = Fully connected</span></div>
+        <p class="rate-result" aria-live="polite"></p>
+      </div>
+
+      <div class="rate-question" data-gap="Native BOM-level sourcing and manufacturing-vertical configuration support this complexity." data-strong="Your direct-material sourcing support already looks strong.">
+        <p class="rate-q-title"><strong>4. Complex and Direct-Material Sourcing Support:</strong> How well does your current stack handle BOM-driven or regulated-category sourcing?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Direct-Material Sourcing score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Not supported</span><span>10 = Fully supported</span></div>
+        <p class="rate-result" aria-live="polite"></p>
+      </div>
+
+      <div class="rate-question" data-gap="A connected procure-to-pay layer inherits contracted terms automatically at the point of purchase." data-strong="Your procure-to-pay automation already looks strong.">
+        <p class="rate-q-title"><strong>5. Procure-to-Pay and Payment Automation:</strong> How automated is your organization's invoicing, AP, and payment process?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Procure-to-Pay Automation score, 0 to 10"></div>
+        <div class="rate-scale-labels"><span>0 = Mostly manual</span><span>10 = Fully automated</span></div>
+        <p class="rate-result" aria-live="polite"></p>
+      </div>
+
+      <div class="rate-summary">
+        <p class="rate-result" id="rate-overall-msg"></p>
+      </div>
+
+      <div class="assessment-btn-row">
+        <button type="button" id="clear-assessment-btn">Clear All</button>
+      </div>
+
+    </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S-WHY-JAGGAER -->
+    <h2 id="s-why-jaggaer">Why Choose JAGGAER Instead?</h2>
+
+    <p>When your procurement shifts from a cost center to a value-creation function, the requirements change. <strong>Your sourcing needs to model trade-offs, not just compare unit prices, and your contracts need to inherit sourcing terms automatically.</strong></p>
+
+    <h3>Why Teams Choose JAGGAER</h3>
+
+    <div class="stat-box">
+      <div class="stat-item">
+        <span class="stat-value">1,400+</span>
+        <span class="stat-label">Enterprise customers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">13M+</span>
+        <span class="stat-label">Suppliers in its network</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">$2.9T</span>
+        <span class="stat-label">In annual spend managed</span>
+      </div>
+    </div>
+
+    <p class="source-note">Figures as of 2026. Source: <a href="https://www.jaggaer.com/company/" target="_blank" rel="noopener">JAGGAER's company page</a>.</p>
+
+    <div class="capability-box">
+      <ul>
+        <li><strong>Strategic sourcing:</strong> Multi-round RFx events and award optimization for complex scenarios.</li>
+        <li><strong>Direct materials:</strong> Multi-level BOMs and should-cost modeling, with IATF 16949 qualification built in.</li>
+        <li><strong>Supplier Intelligence:</strong> Risk visibility mapped to Tier 2, 3, and 4.</li>
+        <li><strong>Contract management:</strong> Connected directly to the sourcing event and supplier record.</li>
+        <li><strong>Procure-to-Pay:</strong> Requisitions and invoices inherit upstream terms automatically.</li>
+        <li><strong>Procurement AI:</strong> <a href="https://www.jaggaer.com/download/datasheet/jai" target="_blank" rel="noopener">JAI</a>, generally available since May 5, 2026, is projected to cut first-year support tickets by about 50%.</li>
+      </ul>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S9 -->
+    <h2 id="s9">GEP SMART vs Oracle Procurement Cloud: The Bottom Line</h2>
+
+    <p><strong>Both GEP SMART and Oracle Procurement Cloud are substantial, analyst-recognized platforms.</strong> Organizations off Oracle Fusion often fit GEP SMART well; organizations already on Oracle often fit Oracle Procurement Cloud well. Organizations with deep direct-materials and multi-tier supplier needs may find JAGGAER worth evaluating alongside both.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See JAGGAER In Action</p>
+        <p class="jag-cta-desc">Get a personalized walkthrough of how JAGGAER fits your stack.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a JAGGAER Demo &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S-RELATED -->
+    <h2 id="s-related">Explore More Procurement Software Comparisons</h2>
+
+    <ul>
+      <li>GEP SMART vs Coupa</li>
+      <li>Oracle Procurement Cloud vs SAP Ariba</li>
+      <li>JAGGAER vs GEP SMART</li>
+      <li>JAGGAER vs Oracle Procurement Cloud</li>
+      <li>Coupa vs SAP Ariba</li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <!-- S10 -->
+    <h2 id="s10">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>Is GEP SMART or Oracle Procurement Cloud better for enterprise procurement? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Both are established, analyst-recognized choices. GEP SMART fits organizations wanting a standalone platform; Oracle fits organizations already standardized on Oracle Fusion. <strong>JAGGAER is worth evaluating for direct-materials and multi-entity complexity.</strong></div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How does GEP SMART pricing compare to Oracle Procurement Cloud pricing? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Neither vendor publishes a public price list.</strong> Both use custom, quote-based pricing tied to modules, user count, and deployment scale. Request quotes directly rather than relying on third-party estimates.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Does GEP SMART or Oracle Procurement Cloud integrate with major ERPs? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">GEP SMART integrates with major ERPs as a standalone layer. <strong>Oracle Procurement Cloud runs natively inside Oracle Fusion Applications, sharing a data model with Oracle's finance and HR modules.</strong></div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Which platform is easier to implement, GEP SMART or Oracle Procurement Cloud? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>GEP SMART deploys as a standalone project, independent of any broader ERP rollout.</strong> Oracle's timeline is often tied to the wider Fusion rollout when deployed with other modules.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What does JAGGAER offer that GEP SMART and Oracle Procurement Cloud don't? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>JAGGAER's clearest differentiation is depth in regulated, multi-tier direct-materials procurement:</strong> native PPAP and IATF 16949 qualification, battery traceability, 3TG and CBAM reporting, and supplier risk mapped past Tier 1.</div>
+    </details>
+
+  </article>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Which Platform Is Right: click-to-highlight cards
+const chooseCards = document.querySelectorAll('.choose-card');
+chooseCards.forEach(card => {
+  const select = () => {
+    const nowSelected = !card.classList.contains('is-selected');
+    chooseCards.forEach(c => { c.classList.remove('is-selected'); c.setAttribute('aria-pressed', 'false'); });
+    if (nowSelected) { card.classList.add('is-selected'); card.setAttribute('aria-pressed', 'true'); }
+  };
+  card.addEventListener('click', select);
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
+  });
+});
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+
+// Self-assessment tool
+const rateQuestions = document.querySelectorAll('.rate-question');
+const scores = new Array(rateQuestions.length).fill(null);
+
+function updateAssessmentSummary() {
+  const answered = scores.filter(v => v !== null);
+  const overallEl = document.getElementById('rate-overall-msg');
+  if (answered.length === 0) {
+    overallEl.textContent = '';
+    return;
+  }
+  const avg = answered.reduce((a, b) => a + b, 0) / answered.length;
+  if (answered.length < rateQuestions.length) {
+    overallEl.textContent = 'Rate all five factors above to see your full result.';
+  } else if (avg < 6) {
+    overallEl.textContent = 'Your overall profile suggests meaningful gaps that a connected Source-to-Pay platform could close.';
+  } else {
+    overallEl.textContent = 'Your setup already looks mature across several dimensions. A dedicated platform may still help consolidate and automate what you are currently doing manually.';
+  }
+}
+
+rateQuestions.forEach((q, qi) => {
+  const scale = q.querySelector('.rate-scale');
+  const resultEl = q.querySelector('.rate-result');
+  const gapMsg = q.getAttribute('data-gap');
+  const strongMsg = q.getAttribute('data-strong');
+  for (let v = 0; v <= 10; v++) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'rate-btn';
+    btn.textContent = v;
+    btn.setAttribute('data-value', v);
+    btn.setAttribute('aria-pressed', 'false');
+    btn.addEventListener('click', () => {
+      scale.querySelectorAll('.rate-btn').forEach(b => { b.classList.remove('is-selected'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('is-selected');
+      btn.setAttribute('aria-pressed', 'true');
+      scores[qi] = v;
+      resultEl.textContent = v < 6 ? gapMsg : strongMsg;
+      updateAssessmentSummary();
+    });
+    scale.appendChild(btn);
+  }
+});
+
+const clearBtn = document.getElementById('clear-assessment-btn');
+if (clearBtn) {
+  clearBtn.addEventListener('click', () => {
+    scores.fill(null);
+    rateQuestions.forEach(q => {
+      q.querySelectorAll('.rate-btn').forEach(b => { b.classList.remove('is-selected'); b.setAttribute('aria-pressed', 'false'); });
+      q.querySelector('.rate-result').textContent = '';
+    });
+    updateAssessmentSummary();
+  });
+}
+updateAssessmentSummary();
+</script>
+</body>
+</html>
