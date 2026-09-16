@@ -4880,7 +4880,14 @@
                   "ts": "2026-09-16T10:49:20.265Z",
                   "by": "m-e10nz"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "GEP SMART vs Zycus (2026): Full Platform Comparison",
+                "meta_description": "Compare GEP SMART and Zycus on sourcing, direct materials, supplier intelligence, and procurement AI, and see where JAGGAER fits for complex enterprise needs.",
+                "slug": "blog-gep-smart-vs-zycus",
+                "updated_at": "2026-09-16T10:51:56.766Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "p2-geo-ivalua-vs-oracle-procurement-cloud",
