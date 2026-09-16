@@ -128,6 +128,7 @@ function MobileNav({ view, setView, currentUser, adminMode, onSignOut, project }
   const SHEET_ITEMS = [
     { id: "ai-playground",  label: "AI Playground" },
     { id: "content-flow",   label: "Content Flow" },
+    { id: "sme-guide",      label: "Content Experts" },
     { id: "style-guide",    label: "Style Guide" },
     ...(adminMode ? [{ id: "admin", label: "Admin" }] : []),
   ];
@@ -476,6 +477,7 @@ function App() {
         {view === "ai-playground" && <AIPlaygroundPanel onBack={() => setView("tracker")} project={project} setProject={setProject} currentUser={currentUser} saveState={saveState} />}
         {view === "style-guide" && <StyleGuidePanel project={project} adminMode={adminMode} />}
         {view === "content-flow" && <ContentFlowPanel project={project} adminMode={adminMode} />}
+        {view === "sme-guide" && <SMEGuidePanel project={project} adminMode={adminMode} />}
         {view === "admin" && adminMode && (
           <AdminPanel project={project} setProject={setProject} adminTarget={adminTarget} setAdminTarget={setAdminTarget} />
         )}
