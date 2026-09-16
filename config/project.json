@@ -5131,7 +5131,14 @@
                   "ts": "2026-09-16T09:51:49.068Z",
                   "by": "m-5jitd"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "Procurement Analytics: ROI, TCO & Metrics Guide",
+                "meta_description": "\"Procurement analytics\" near the start, reader benefit (prove ROI before you buy), soft CTA",
+                "slug": "",
+                "updated_at": "2026-09-16T09:58:27.197Z",
+                "updated_by": "m-5jitd"
+              }
             },
             {
               "id": "p2-seo-procurement-transformation",
