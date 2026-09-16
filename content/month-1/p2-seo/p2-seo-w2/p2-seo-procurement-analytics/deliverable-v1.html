@@ -1,0 +1,718 @@
+<!-- uploaded by m-5jitd at 2026-09-16T09:51:47.324Z -->
+<!-- piece: Procurement Analytics: The ROI and TCO Case for Data- Driven Procurement -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procurement Analytics: ROI, TCO &amp; Metrics Guide</title>
+<meta name="description" content="Procurement analytics turns spend data into board-ready ROI and TCO numbers. See the KPIs, benchmarks, and a $30M case before you buy.">
+<link rel="canonical" href="https://www.jaggaer.com/procurement-analytics">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Procurement Analytics in 2026: The ROI and TCO Case for Data-Driven Procurement","description":"Procurement analytics turns spend data into board-ready ROI and TCO numbers. See the KPIs, benchmarks, and a $30M case before you buy.","datePublished":"2026-09","dateModified":"2026-09","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"author":{"@type":"Person","name":"Jason Rydzewski"}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are the different types of procurement analytics?","acceptedAnswer":{"@type":"Answer","text":"Procurement analytics splits into 4 types, descriptive (what happened), diagnostic (why it happened), predictive (what's likely next), and prescriptive (what to do about it). Each stage builds on the one before it, and each takes longer to put into practice than the last. Prescriptive is the one most directly tied to a specific recommended action, though a person still makes the call."}},{"@type":"Question","name":"How can procurement analytics improve supplier performance?","acceptedAnswer":{"@type":"Answer","text":"Analytics improves supplier performance through 3 concrete mechanisms. Scorecards track delivery, quality, and pricing over time. Automated flags catch price spikes and off-contract spend for a person to review. And compliance tracking catches drift from negotiated terms early. An Aberdeen benchmark study, cited by JAGGAER, found that companies rolling out standardized supplier performance metrics saw performance improve by 26.6% on average. But that effect runs through people acting on what the data shows, not through software by itself."}},{"@type":"Question","name":"What makes a good procurement analytics tool?","acceptedAnswer":{"@type":"Answer","text":"Good procurement analytics tools classify spend data automatically, and at high accuracy (JAGGAER's IntelliClass hits 95%+ accuracy against your taxonomy) instead of relying on manual tagging. They should also show confidence scores, so humans only need to review genuine edge cases. And the output should connect directly to a sourcing or compliance action, not just sit on a dashboard."}},{"@type":"Question","name":"What's the difference between procurement analytics and spend analytics?","acceptedAnswer":{"@type":"Answer","text":"Spend analytics is a subset of procurement analytics, focused specifically on historical purchasing data, meaning what was bought, from whom, and at what price. It's the wider category. It stretches into supplier risk, forecasting, contract compliance, and ESG tracking alongside spend. In practice, most teams use procurement and spend analytics almost interchangeably, even though the scope technically differs."}},{"@type":"Question","name":"What is big data analytics in procurement?","acceptedAnswer":{"@type":"Answer","text":"Big data analytics in procurement means running analytics at the scale of an entire enterprise's transaction volume, not just a sampled subset. Often that means millions of line items across ERPs, invoices, and supplier records. The value comes specifically from classification and pattern detection at that scale."}},{"@type":"Question","name":"How long does it take to see ROI from procurement analytics?","acceptedAnswer":{"@type":"Answer","text":"There's no single universal timeline here, so treat any source that hands you one number with caution. JAGGAER's 2026 benchmark shows median ROI ranging 2.7x-6.6x by company size, with top performers reaching 58x. Execution, how deeply a team adopts what it buys, is the biggest factor in how much of that opportunity actually gets captured. Starting with one pilot category, deeply adopted, is one of the most reliable ways to see a measurable result fast."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    1rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.stat{font-family:var(--font-display);font-weight:600;color:var(--jai-a);font-variant-numeric:tabular-nums;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Badges */
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-family:var(--font-display);font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.badge-pending{background:#fdecea;color:var(--color-red);margin-bottom:var(--space-xs);}
+.section-eyebrow{display:block;font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+
+/* Progress bar */
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-label{display:block;font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:720px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-family:var(--font-display);font-size:.625rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.08em;}
+.qa-question{font-weight:700;color:var(--color-ink);margin-bottom:.35rem;}
+.reader-disclaimer{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:0 0 var(--space-m);font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;}
+.freshness-note{font-size:.75rem;color:var(--color-ink-3);}
+.source-line{font-size:.75rem;color:var(--color-ink-3);font-style:italic;margin-top:-.5rem;margin-bottom:var(--space-m);}
+
+/* Primary Visual: five-tile stat grid */
+.leak-stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-s);margin:var(--space-m) 0 var(--space-l);}
+.leak-stat-tile{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-s);text-align:center;transition:box-shadow .2s,border-color .2s;}
+.leak-stat-tile a{display:block;text-decoration:none;border-bottom:none;}
+.leak-stat-tile:has(a):hover{box-shadow:0 4px 14px rgba(83,0,206,.12);border-color:var(--purple-soft);}
+.leak-stat-num{display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(1.4rem,1.2rem + 1vw,1.9rem);color:var(--jai-a);font-variant-numeric:tabular-nums;line-height:1.1;margin-bottom:.4rem;}
+.leak-stat-label{display:block;font-size:.75rem;color:var(--color-ink-2);line-height:1.4;}
+.leak-stat-source{display:block;font-size:.65rem;color:var(--color-ink-3);margin-top:.4rem;}
+@media(max-width:768px){.leak-stat-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.leak-stat-grid{grid-template-columns:1fr;}}
+
+/* Secondary Visual: comparison / data table */
+.leak-compare-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.leak-compare-table{width:100%;border-collapse:collapse;font-size:.875rem;min-width:600px;}
+.leak-compare-table th{background:var(--purple-tint-2);color:var(--color-ink);font-family:var(--font-display);font-weight:600;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;text-align:left;padding:.65rem var(--space-s);border-bottom:var(--border);}
+.leak-compare-table td{padding:.75rem var(--space-s);border-bottom:var(--border);color:var(--color-ink-2);vertical-align:top;line-height:1.5;}
+.leak-compare-table td strong{color:var(--color-ink);}
+.leak-compare-table tr:last-child td{border-bottom:none;}
+.leak-compare-table td:first-child{font-family:var(--font-display);font-weight:700;color:var(--color-ink);white-space:nowrap;}
+
+/* Expert Sidebar ("What the Experts Are Saying") */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--color-ink);line-height:1;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.68rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:.68rem;}
+.exp-link{font-size:.62rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.expert-sidebar{display:none;}}
+
+/* CTA block - JAI gradient theme */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:.95rem;font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-head a{color:inherit;border-bottom:none;}
+.jag-cta-head a:hover{color:var(--color-red);}
+.jag-cta-desc{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-desc.placeholder{font-style:italic;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:.875rem;font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item summary::marker{content:none;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.9375rem;color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+details{height:auto;overflow:hidden;transition:height .3s ease;}
+details:not([open]){height:3.75rem;}
+
+/* Closing notes */
+.abbrev-note{font-size:.75rem;color:var(--color-ink-3);line-height:1.6;margin-top:var(--space-l);}
+.disclaimer-note{font-size:.75rem;color:var(--color-ink-3);line-height:1.6;margin-top:var(--space-s);font-style:italic;}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}.leak-stat-grid{grid-template-columns:repeat(2,1fr);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Proof-section single stat callout (hook-stat) */
+.hook-stat{display:flex;align-items:center;gap:var(--space-l);background:var(--color-cream);border:var(--border);border-left:4px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-l);margin:var(--space-m) 0 var(--space-l);flex-wrap:wrap;}
+.hook-stat a{text-decoration:none;border-bottom:none;}
+.hook-stat-num{font-family:var(--font-display);font-weight:700;font-size:clamp(2.2rem,1.8rem + 2vw,3rem);color:var(--jai-a);font-variant-numeric:tabular-nums;line-height:1;flex-shrink:0;display:block;}
+.hook-stat-body{flex:1;min-width:200px;}
+.hook-stat-label{display:block;font-size:.9375rem;color:var(--color-ink);font-weight:600;line-height:1.4;margin-bottom:.3rem;}
+.hook-stat-label:hover{color:var(--jai-a);}
+.hook-stat-source{display:block;font-size:.9rem;font-weight:600;color:var(--color-ink-2);margin-top:.2rem;}
+@media(max-width:480px){.hook-stat{flex-direction:column;align-items:flex-start;}}
+
+/* Evaluation / mechanism list */
+.criteria-list{padding-left:0;margin:var(--space-m) 0 var(--space-l);list-style:none;}
+.criteria-list li{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin-bottom:var(--space-s);background:var(--color-white);}
+.criteria-list li:last-child{margin-bottom:0;}
+.criteria-list li strong{color:var(--color-ink);font-family:var(--font-display);}
+
+/* Legacy checklist, kept for style-block fidelity; superseded by .step-flow below for Getting Started */
+.checklist{padding-left:0;margin:var(--space-m) 0 var(--space-l);list-style:none;}
+.checklist li{display:flex;gap:.6rem;border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin-bottom:var(--space-s);background:var(--purple-tint-3);border-color:var(--purple-soft);}
+.checklist li:last-child{margin-bottom:0;}
+.checklist-num{flex-shrink:0;font-family:var(--font-display);font-weight:700;color:var(--jai-a);}
+
+/* --- Piece-specific additions --- */
+
+/* Getting Started: 4-step visual flow, replacing plain checklist boxes */
+.step-flow{display:flex;align-items:flex-start;gap:var(--space-2xs);margin:var(--space-m) 0 var(--space-l);}
+.step-flow-item{flex:1;min-width:0;text-align:center;background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-s);}
+.step-flow-circle{width:2.4rem;height:2.4rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:1rem;margin:0 auto var(--space-s);}
+.step-flow-title{display:block;font-family:var(--font-display);font-weight:700;font-size:.8rem;color:var(--color-ink);margin-bottom:.3rem;line-height:1.3;}
+.step-flow-desc{display:block;font-size:.72rem;color:var(--color-ink-2);line-height:1.5;}
+.step-flow-arrow{flex:0 0 auto;color:var(--purple-soft);font-size:1.3rem;font-weight:700;align-self:center;padding-top:1.2rem;}
+@media(max-width:768px){.step-flow{flex-direction:column;}.step-flow-arrow{display:none;}.step-flow-item{display:flex;align-items:center;gap:var(--space-m);text-align:left;}.step-flow-circle{margin:0;flex-shrink:0;}}
+
+/* A Real Example: compact proof-point chips */
+.proof-chip-row{display:flex;gap:var(--space-s);margin:var(--space-m) 0 var(--space-l);flex-wrap:wrap;}
+.proof-chip{flex:1;min-width:160px;border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-cream);transition:box-shadow .2s,border-color .2s;display:block;text-decoration:none;border-bottom:none;}
+.proof-chip:hover{box-shadow:0 4px 14px rgba(83,0,206,.1);border-color:var(--purple-soft);}
+.proof-chip-source{display:block;font-family:var(--font-display);font-weight:700;font-size:.8rem;margin-bottom:.25rem;color:var(--jai-a);}
+.proof-chip-stat{display:block;font-size:.78rem;color:var(--color-ink-2);line-height:1.45;}
+
+/* Supplier Performance: 3 mechanisms as icon cards, replacing the plain bullet list */
+.mechanism-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-s);margin:var(--space-m) 0 var(--space-l);}
+.mechanism-card{background:var(--color-white);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-s);text-align:center;transition:box-shadow .2s,border-color .2s;}
+.mechanism-card:hover{box-shadow:0 4px 14px rgba(83,0,206,.1);border-color:var(--purple-soft);}
+.mechanism-icon{width:2.75rem;height:2.75rem;border-radius:50%;background:var(--purple-tint);color:var(--jai-a);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-s);}
+.mechanism-icon svg{width:1.35rem;height:1.35rem;}
+.mechanism-title{display:block;font-family:var(--font-display);font-weight:700;font-size:.85rem;color:var(--color-ink);margin-bottom:.35rem;line-height:1.3;}
+.mechanism-desc{display:block;font-size:.78rem;color:var(--color-ink-2);line-height:1.5;}
+@media(max-width:768px){.mechanism-grid{grid-template-columns:1fr;}.mechanism-card{display:flex;align-items:center;gap:var(--space-m);text-align:left;padding:var(--space-s) var(--space-m);}.mechanism-icon{margin:0;flex-shrink:0;}}
+
+/* Supplier Performance: 2-tile stat highlight, replacing a stat-heavy paragraph */
+.mini-stat-row{display:flex;gap:var(--space-m);margin:var(--space-m) 0 var(--space-l);flex-wrap:wrap;}
+.mini-stat{flex:1;min-width:220px;background:var(--color-cream);border:var(--border);border-left:4px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);display:block;text-decoration:none;border-bottom:none;transition:box-shadow .2s;}
+.mini-stat:hover{box-shadow:0 4px 14px rgba(83,0,206,.12);}
+.mini-stat-num{display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(1.8rem,1.5rem + 1.5vw,2.4rem);color:var(--jai-a);font-variant-numeric:tabular-nums;line-height:1;margin-bottom:.35rem;}
+.mini-stat-label{display:block;font-size:.8125rem;color:var(--color-ink);font-weight:600;line-height:1.45;}
+
+</style></head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Is Procurement Analytics?</a>
+      <a class="toc-link" href="#s2">The Four Types of Procurement Analytics</a>
+      <a class="toc-link" href="#s3">KPIs That Prove ROI in 2026</a>
+      <a class="toc-link" href="#s3-recent">What's Changed in 2026</a>
+      <a class="toc-link" href="#s4">Analytics vs. Basic Reporting</a>
+      <a class="toc-link" href="#s5">Build vs. Buy</a>
+      <a class="toc-link" href="#s6">Supplier Performance</a>
+      <a class="toc-link" href="#s7">Getting Started</a>
+      <a class="toc-link" href="#s8">A Real Example: Alkermes</a>
+      <a class="toc-link" href="#s9">Perspective from a Procurement Leader</a>
+      <a class="toc-link" href="#s10">Frequently Asked Questions</a>
+      <a class="toc-link" href="#s11">Next Steps</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <span class="article-label">Procurement &amp; Spend Analytics &middot; ROI &amp; TCO</span>
+        <h1>Procurement Analytics in 2026: The ROI and TCO Case for Data-Driven Procurement</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            4&ndash;5 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Published</span>&nbsp;September 2026</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Jason Rydzewski</span>
+        </div>
+      </div>
+    </header>
+
+    
+    <p><strong><a href="https://www.jaggaer.com/download/analyst-report/manufacturing-supply-chain-procurement-benchmark-2026" target="_blank" rel="noopener">JAGGAER's 2026 benchmark</a> puts the median return on procurement analytics at 2.7x to 6.6x, with top performers reaching 58x</strong>, backed by <a href="https://www.jaggaer.com/success-stories/alkermes" target="_blank" rel="noopener">a real $30M-plus case study at Alkermes</a>. Procurement analytics turns purchasing data into that ROI and TCO case for a CFO. It covers the 4 analytics types, the KPIs that prove payback, and what the software really costs against building it yourself.</p>
+
+    <p>Company size affects how much opportunity is on the table. But most of that gap comes down to how deeply a team actually uses what it buys, not how many modules it buys. <strong>Broad rollouts with shallow adoption keep losing to focused rollouts with deep adoption.</strong> Throughout, this piece uses <a href="https://www.jaggaer.com/solutions/spend-analytics" target="_blank" rel="noopener">JAGGAER's own Spend Analytics platform</a>, the platform behind that 58x benchmark, as the working example. The numbers below are ready to use in your own business case.</p>
+
+    <div class="hook-stat">
+      <a href="https://www.jaggaer.com/download/analyst-report/manufacturing-supply-chain-procurement-benchmark-2026" target="_blank" rel="noopener" aria-label="View JAGGAER's 2026 benchmark report">
+        <span class="hook-stat-num">58x</span>
+      </a>
+      <div class="hook-stat-body">
+        <a href="https://www.jaggaer.com/download/analyst-report/manufacturing-supply-chain-procurement-benchmark-2026" target="_blank" rel="noopener">
+          <span class="hook-stat-label">Top-performer ROI on JAGGAER's 2026 benchmark, against a median of 2.7x&ndash;6.6x across 200+ customer deployments.</span>
+        </a>
+      </div>
+    </div>
+
+    
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER's Spend Analytics platform hits 58x ROI &rarr;</p>
+        <p class="jag-cta-desc">Median ROI of 2.7x&ndash;6.6x, up to 58x for the deepest adopters, across 200+ customer deployments.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/spend-analytics" class="jag-cta-btn" target="_blank" rel="noopener">Explore Spend Analytics &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S1 -->
+    <h2 id="s1">What Is Procurement Analytics?</h2>
+
+    <p><strong>Procurement analytics takes transaction-level purchasing records, including spend data, contracts, supplier scorecards, and invoices across both direct and indirect categories.</strong> <strong>It turns that raw data into a system for finding savings, flagging supplier risk, and surfacing compliance gaps.</strong> Not just whatever one system happens to export.</p>
+
+    <p>Procurement analytics, sometimes called procurement analysis, gets mixed up with a spend report a lot, since both start from the same data. Here's the real difference. A report shows what you spent. <strong>Analytics points you toward what to do next</strong>, where the leakage is and where supplier consolidation might make sense. It also shows how a category's cost could shift over its lifecycle, not just its sticker price.</p>
+
+    <hr class="section-divider">
+
+    <!-- S2 -->
+    <h2 id="s2">The Four Types of Procurement Analytics, and What Each Is Worth</h2>
+
+    <p><strong>Procurement analytics splits into 4 stages.</strong> They are descriptive, diagnostic, predictive, and prescriptive, and where a company actually lands has more to do with category than company size. It's the same basic taxonomy Gartner and Hackett both use to talk about analytics maturity. A team might run predictive models on high-spend direct categories while indirect spend sits stuck at purely descriptive.</p>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table">
+        <thead><tr><th>Stage</th><th>What It Answers</th><th>Relative Pace to Value</th><th>What It's Worth</th></tr></thead>
+        <tbody>
+          <tr><td>Descriptive</td><td>What happened?</td><td>Fastest, needing only clean, classified spend data</td><td>Baseline visibility, the floor the other 3 stages build on</td></tr>
+          <tr><td>Diagnostic</td><td>Why did it happen?</td><td>Fast, building directly on descriptive once that's trusted</td><td>Surfaces variance tied to maverick spend and off-contract buying</td></tr>
+          <tr><td>Predictive</td><td>What's likely next?</td><td>Slower, needing enough historical data to train a reliable model</td><td>Flags price and demand shifts early enough to act on</td></tr>
+          <tr><td>Prescriptive</td><td>What should we do?</td><td>Slowest, depending on trust built through the first 3 stages</td><td>Recommends a specific action; JAI suggests, a person still decides</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Classification accuracy is the foundation the other 3 stages sit on. Better to get specific here than take it on faith. <a href="https://www.jaggaer.com/solutions/spend-analytics" target="_blank" rel="noopener">JAGGAER's IntelliClass</a> runs 9 NLP and ML algorithms to <strong><a href="https://www.jaggaer.com/solutions/spend-analytics" target="_blank" rel="noopener">classify transactions against your taxonomy at 95%+ accuracy out of the box</a></strong>, and the interface shows confidence scores right there. People only review the edge cases the model flags, not the whole pile of transactions.</p>
+
+    <p>What that accuracy number doesn't do, on its own, is guarantee everything built on top of it. Diagnostic, predictive, and prescriptive analytics each need more than clean classification, including data completeness, historical depth, and how well the system's learned your actual business. <strong>Classification is the floor.</strong> It's not the whole building.</p>
+
+    
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER's IntelliClass classifies spend at 95%+ accuracy &rarr;</p>
+        <p class="jag-cta-desc">9 NLP and ML algorithms classify transactions against your taxonomy out of the box, with confidence scores surfaced inline.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/spend-analytics" class="jag-cta-btn" target="_blank" rel="noopener">Explore Spend Analytics &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S3 -->
+    <h2 id="s3">The KPIs That Prove Procurement Analytics ROI in 2026</h2>
+
+    <p><strong>The KPI that matters most to a CFO is ROI itself.</strong> <strong><a href="https://www.jaggaer.com/download/analyst-report/manufacturing-supply-chain-procurement-benchmark-2026" target="_blank" rel="noopener">JAGGAER's own 2026 benchmark puts median ROI at 2.7x to 6.6x, with top performers reaching 58x</a>, across <a href="https://www.jaggaer.com/blog/procurement-roi-by-company-size-2026-benchmark" target="_blank" rel="noopener">more than 200 customer deployments</a>.</strong> Size affects how much opportunity sits on the table. But execution, how deeply a team actually adopts what it buys, is what separates the companies that capture that opportunity from the ones that don't.</p>
+
+    <p>Four more KPIs round out the case.</p>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table">
+        <thead><tr><th>KPI</th><th>What It Measures</th><th>ROI Signal</th></tr></thead>
+        <tbody>
+          <tr><td>Procurement ROI</td><td>Value generated (savings, avoidance, efficiency) against the cost of the platform and function</td><td><a href="https://www.jaggaer.com/download/analyst-report/manufacturing-supply-chain-procurement-benchmark-2026" target="_blank" rel="noopener">Median 2.7x&ndash;6.6x, up to 58x</a>, across <a href="https://www.jaggaer.com/blog/procurement-roi-by-company-size-2026-benchmark" target="_blank" rel="noopener">200+ customer deployments</a></td></tr>
+          <tr><td>Cost savings vs. cost avoidance</td><td>Realized price reduction vs. a prevented cost increase</td><td><strong><a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf" target="_blank" rel="noopener">Deloitte's 2025 Global CPO Survey found "Digital Masters" hit their cost-savings targets 96% of the time and their cost-avoidance targets 94% of the time, against 80% and 75% for followers</a></strong></td></tr>
+          <tr><td>Total Cost of Ownership (TCO)</td><td>Full lifecycle cost (price, logistics, quality, inventory, disruption), not unit price alone</td><td>No single verified, attributable industry benchmark exists at the specificity often claimed online. <a href="https://www.jaggaer.com/solutions/spend-analytics" target="_blank" rel="noopener">JAGGAER's own Spend Analytics platform</a> is built to reconcile forecast, actual, and validated savings against P&amp;L outcomes</td></tr>
+          <tr><td>Contract and catalog compliance</td><td>Share of spend flowing through approved suppliers and catalogs</td><td>Alkermes moved catalog-aligned purchasing from <a href="https://www.jaggaer.com/success-stories/video-alkermes" target="_blank" rel="noopener">2% to 50% after implementation</a></td></tr>
+          <tr><td>Cycle time and processing cost</td><td>Time and cost to move from requisition to PO</td><td><a href="https://www.jaggaer.com/success-stories/alkermes" target="_blank" rel="noopener">Alkermes cut cycle times 32% and PO processing costs 23%</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Two more numbers deserve to sit in plain text, not just a chart, since they're the ones most likely to get pulled into a search result or an AI-generated answer. <strong><a href="https://www.jaggaer.com/solutions/spend-analytics" target="_blank" rel="noopener">JAGGAER customers report 90% savings on spend previously lost to pricing inaccuracies, and 75% less time cleansing data</a>.</strong> A dashboard can show those numbers after the fact; it doesn't do the classification, the anomaly-flagging, or the action that actually produced them.</p>
+
+    <p>The wider research backs the direction here, even if the exact multiples bounce around. <strong>The Hackett Group's 2025 Digital World Class research found that top-quartile procurement organizations pull in 2.6x greater ROI than their peers.</strong> <strong>They also run with 31% fewer full-time staff and 19% lower cost as a share of spend.</strong> That's a broad measure of digital maturity, not a number tied to any one analytics tool, but it lines up with the wider link between digital maturity and procurement performance. Hackett is named but not hyperlinked here, per this document's own no-third-party-link policy.</p>
+
+    <p><a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf" target="_blank" rel="noopener">Deloitte's 2025 Global CPO Survey found self-reported "Digital Masters" pulled a 2.8x return on GenAI investment, against 1.6x for followers</a>. And <strong>McKinsey's October 2025 research on AI-driven procurement found a 20% savings potential from using analytics tools</strong>, with one specialty-chemicals company saving 13% on raw materials through should-cost modeling. McKinsey is also named, not hyperlinked, per the same policy.</p>
+
+    <hr class="section-divider">
+
+    
+    <h2 id="s3-recent">What's Changed in 2026</h2>
+
+    <p>GenAI moved from pilot to tracked ROI metric this year, with Digital Masters posting a 2.8x return against 1.6x for followers. JAGGAER's 2026 benchmark also sharpened the "adoption beats breadth" argument into a specific number, a 58x ceiling against a 2.7x&ndash;6.6x median.</p>
+
+    <hr class="section-divider">
+
+    <!-- S4 -->
+    <h2 id="s4">Procurement Analytics vs. Basic Reporting</h2>
+
+    <p>Even when a procurement team already has spend visibility, <strong>visibility alone doesn't move ROI.</strong> A basic spend report shows where the money went. It won't tell finance what changes next quarter, or where consolidation might make sense, or how a category's cost could shift over 3 years instead of just 1 purchase order.</p>
+
+    <p>That's the real line between reporting and analytics. Reporting shows historical data on a chart. Analytics classifies that data and checks it against your own contracts and the wider market. Then it turns that into something you can act on, such as a price flag, a consolidation opportunity, or a compliance gap. <strong>Classification accuracy, benchmarking depth, and how directly the output ties back to a decision</strong> are what actually close that gap, not a fancier procurement analytics dashboard.</p>
+
+    <hr class="section-divider">
+
+    <!-- S5 -->
+    <h2 id="s5">Build vs. Buy: What Procurement Analytics Software Actually Costs You</h2>
+
+    <p><strong>The real cost of building this yourself isn't the BI license.</strong> <strong>It's the ongoing IT work of cleansing, classifying, and re-integrating the system every time supplier data, ERP systems, or taxonomies change.</strong> That's easy to miss in an initial build estimate, and it's exactly what total cost of ownership is meant to catch.</p>
+
+    <p>Buying isn't free either. Subscription, implementation, and integration costs are all real; the difference is you see those costs upfront, instead of finding them 18 months into a DIY build. Some teams scope this narrowly as procure to pay analytics, covering just the requisition-through-payment cycle, but the same build-vs-buy math applies either way.</p>
+
+    <p>TCO discipline matters on both sides here. It's the lifecycle cost of what you procure, and the cost of the system you use to manage it. <strong>KPMG's 2025 research on procurement excellence names TCO reduction as one of procurement's core strategic goals</strong> (named, not hyperlinked, per policy). A generic BI tool can visualize either kind of TCO model once somebody builds it, but it won't classify the underlying spend data or catch pricing anomalies on its own. That engineering work on top of a BI stack is exactly what DIY approaches tend to underestimate.</p>
+
+    <p><a href="https://www.jaggaer.com/solutions/spend-analytics" target="_blank" rel="noopener">JAGGAER's Spend Analytics platform</a> says this plainly in its own positioning. <strong>JAGGAER defines outcomes and KPIs before you sign.</strong> Applied to TCO and ROI, that means you set the targets as part of the deal, not something you go back and verify a year down the line.</p>
+
+    
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER defines outcomes and KPIs before you sign &rarr;</p>
+        <p class="jag-cta-desc">TCO and ROI targets set as part of the deal, not left for you to discover 18 months into a DIY build.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/spend-analytics" class="jag-cta-btn" target="_blank" rel="noopener">Explore Spend Analytics &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S6 -->
+    <h2 id="s6">How Procurement Analytics Improves Supplier Performance</h2>
+
+    <p><strong>Procurement analytics improves supplier performance mainly by giving category teams better data.</strong> That data lets them score suppliers consistently, catch risk signals early, and monitor contract compliance continuously instead of only at audit time. 3 mechanisms carry most of that weight.</p>
+
+    
+    <div class="mechanism-grid">
+      <div class="mechanism-card">
+        <span class="mechanism-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="6" y2="14"/><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/></svg>
+        </span>
+        <span class="mechanism-title">Scorecards</span>
+        <span class="mechanism-desc">Track delivery, quality, and pricing over time.</span>
+      </div>
+      <div class="mechanism-card">
+        <span class="mechanism-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </span>
+        <span class="mechanism-title">Automated Flags</span>
+        <span class="mechanism-desc">Catch price spikes, duplicate payments, and off-contract spend for review.</span>
+      </div>
+      <div class="mechanism-card">
+        <span class="mechanism-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>
+        </span>
+        <span class="mechanism-title">Compliance Tracking</span>
+        <span class="mechanism-desc">Catches drift from negotiated terms before it piles up.</span>
+      </div>
+    </div>
+
+    <p>The effect is measurable, though the causal chain runs through people, not software on its own.</p>
+
+    
+    <div class="mini-stat-row">
+      <a class="mini-stat" href="https://www.jaggaer.com/blog/6-benefits-of-supplier-performance-management" target="_blank" rel="noopener">
+        <span class="mini-stat-num">26.6%</span>
+        <span class="mini-stat-label">Average performance improvement from standardized supplier scorecards, across quality, on-time delivery, price, cost, compliance, lead times, and responsiveness (Aberdeen, cited by JAGGAER).</span>
+      </a>
+      <a class="mini-stat" href="https://www.jaggaer.com/solutions/source-to-pay" target="_blank" rel="noopener">
+        <span class="mini-stat-num">60%</span>
+        <span class="mini-stat-label">Faster sourcing cycle times on JAGGAER's Source-to-Pay platform, freeing category teams to act on what scorecards surface.</span>
+      </a>
+    </div>
+
+    
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER's platform speeds up sourcing cycles &rarr;</p>
+        <p class="jag-cta-desc">60% faster sourcing cycle times, freeing category teams to act on what scorecards surface.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/spend-analytics" class="jag-cta-btn" target="_blank" rel="noopener">Explore Spend Analytics &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S7 -->
+    <h2 id="s7">Getting Started: A Practical Path to ROI</h2>
+
+    <p><strong><a href="https://www.jaggaer.com/download/analyst-report/manufacturing-supply-chain-procurement-benchmark-2026" target="_blank" rel="noopener">JAGGAER's 2026 benchmark found that companies with a wide mix of modules but shallow adoption end up with lower ROI</a> than focused companies that deeply adopt fewer modules.</strong></p>
+
+    <p>A practical path avoids that pattern in 4 steps.</p>
+
+    <div class="step-flow">
+      <div class="step-flow-item">
+        <span class="step-flow-circle">1</span>
+        <span class="step-flow-title">Audit First</span>
+        <span class="step-flow-desc">Get a real classification baseline before setting ROI targets.</span>
+      </div>
+      <span class="step-flow-arrow" aria-hidden="true">&rarr;</span>
+      <div class="step-flow-item">
+        <span class="step-flow-circle">2</span>
+        <span class="step-flow-title">Pilot One Category</span>
+        <span class="step-flow-desc">Pick usable data and clear savings potential, not your hardest category.</span>
+      </div>
+      <span class="step-flow-arrow" aria-hidden="true">&rarr;</span>
+      <div class="step-flow-item">
+        <span class="step-flow-circle">3</span>
+        <span class="step-flow-title">Prove It, in Writing</span>
+        <span class="step-flow-desc">Document before-and-after savings, cycle time, and compliance.</span>
+      </div>
+      <span class="step-flow-arrow" aria-hidden="true">&rarr;</span>
+      <div class="step-flow-item">
+        <span class="step-flow-circle">4</span>
+        <span class="step-flow-title">Scale on Adoption</span>
+        <span class="step-flow-desc">Add modules only as fast as the current ones actually get used.</span>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S8 -->
+    <h2 id="s8">A Real Example: Alkermes</h2>
+
+    <p><a href="https://www.jaggaer.com/success-stories/alkermes" target="_blank" rel="noopener">How Alkermes cut PO processing costs and cycle times with JAGGAER</a> is a procurement analytics case study. It starts with a biopharmaceutical company whose procurement had been scattered across multiple ERP systems, with no common taxonomy and limited spend visibility, before centralizing on a single platform.</p>
+
+    <div class="leak-stat-grid">
+      <div class="leak-stat-tile"><a href="https://www.jaggaer.com/success-stories/alkermes" target="_blank" rel="noopener"><span class="leak-stat-num">$30M+</span><span class="leak-stat-label">Projected cost savings</span></a></div>
+      <div class="leak-stat-tile"><a href="https://www.jaggaer.com/success-stories/alkermes" target="_blank" rel="noopener"><span class="leak-stat-num">32%</span><span class="leak-stat-label">Cycle-time reduction</span></a></div>
+      <div class="leak-stat-tile"><a href="https://www.jaggaer.com/success-stories/alkermes" target="_blank" rel="noopener"><span class="leak-stat-num">23%</span><span class="leak-stat-label">PO processing cost reduction</span></a></div>
+      <div class="leak-stat-tile"><a href="https://www.jaggaer.com/success-stories/video-alkermes" target="_blank" rel="noopener"><span class="leak-stat-num">2%&rarr;50%</span><span class="leak-stat-label">Catalog-aligned purchasing</span></a></div>
+    </div>
+
+    <p>JAGGAER's case study describes the results as going "beyond simple ROI." Half of Alkermes's buying now runs through pre-negotiated, compliant channels instead of ad hoc purchase orders. Leadership pointed to the operational cost, compliance risk, and lost supplier-relationship value the old, transactional process was creating.</p>
+
+    
+    <span class="badge badge-pending">Clearance Pending</span>
+    <p class="disclaimer-note">Examples of JAGGAER platform value beyond Alkermes. Written confirmation of reference authority from the account team is not yet on file for these three customers.</p>
+
+    <div class="proof-chip-row">
+      <a class="proof-chip" href="https://www.jaggaer.com/success-stories/dubai-airports" target="_blank" rel="noopener">
+        <span class="proof-chip-source">Dubai Airports</span>
+        <span class="proof-chip-stat">Best Public Procurement Project 2024, CIPS MENA</span>
+      </a>
+      <a class="proof-chip" href="https://www.jaggaer.com/success-stories/ge-vernova" target="_blank" rel="noopener">
+        <span class="proof-chip-source">GE Vernova</span>
+        <span class="proof-chip-stat">$20B in annual spend managed on the platform</span>
+      </a>
+      <a class="proof-chip" href="https://www.jaggaer.com/success-stories/signify" target="_blank" rel="noopener">
+        <span class="proof-chip-source">Signify</span>
+        <span class="proof-chip-stat">Moved from spreadsheets to real data analytics with JAGGAER One</span>
+      </a>
+    </div>
+
+    
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER's platform delivers results like Alkermes's &rarr;</p>
+        <p class="jag-cta-desc">$30M+ projected savings, 32% faster cycle times, and catalog-aligned purchasing up from 2% to 50%.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/spend-analytics" class="jag-cta-btn" target="_blank" rel="noopener">Explore Spend Analytics &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S9 -->
+    <h2 id="s9">Perspective from a Procurement Leader</h2>
+
+    <span class="badge badge-pending">Pending Contribution</span>
+    <p class="disclaimer-note">A first-person perspective from JAGGAER's CPO Advisor thought-leader network is to be added directly by the contributor.</p>
+
+    <hr class="section-divider">
+
+    <!-- S10 -->
+    <h2 id="s10">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>What are the different types of procurement analytics? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Procurement analytics splits into 4 types, descriptive (what happened), diagnostic (why it happened), predictive (what's likely next), and prescriptive (what to do about it). Each stage builds on the one before it, and each takes longer to put into practice than the last. <strong>Prescriptive is the one most directly tied to a specific recommended action, though a person still makes the call.</strong></div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How can procurement analytics improve supplier performance? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Analytics improves supplier performance through 3 concrete mechanisms. Scorecards track delivery, quality, and pricing over time. Automated flags catch price spikes and off-contract spend for a person to review. And compliance tracking catches drift from negotiated terms early. <strong><a href="https://www.jaggaer.com/blog/6-benefits-of-supplier-performance-management" target="_blank" rel="noopener">An Aberdeen benchmark study, cited by JAGGAER, found that companies rolling out standardized supplier performance metrics saw performance improve by 26.6% on average</a></strong>. But that effect runs through people acting on what the data shows, not through software by itself.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What makes a good procurement analytics tool? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Good procurement analytics tools classify spend data automatically, and at high accuracy (<strong><a href="https://www.jaggaer.com/solutions/spend-analytics" target="_blank" rel="noopener">JAGGAER's IntelliClass hits 95%+ accuracy against your taxonomy</a></strong>) instead of relying on manual tagging. They should also show confidence scores, so humans only need to review genuine edge cases. And the output should connect directly to a sourcing or compliance action, not just sit on a dashboard.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What's the difference between procurement analytics and spend analytics? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Spend analytics is a subset of procurement analytics, focused specifically on historical purchasing data, meaning what was bought, from whom, and at what price. <strong>It's the wider category.</strong> It stretches into supplier risk, forecasting, contract compliance, and ESG tracking alongside spend. In practice, most teams use procurement and spend analytics almost interchangeably, even though the scope technically differs.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is big data analytics in procurement? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Big data analytics in procurement means <strong>running analytics at the scale of an entire enterprise's transaction volume, not just a sampled subset.</strong> Often that means millions of line items across ERPs, invoices, and supplier records. The value comes specifically from classification and pattern detection at that scale.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How long does it take to see ROI from procurement analytics? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">There's no single universal timeline here, so treat any source that hands you one number with caution. <strong><a href="https://www.jaggaer.com/download/analyst-report/manufacturing-supply-chain-procurement-benchmark-2026" target="_blank" rel="noopener">JAGGAER's 2026 benchmark shows median ROI ranging 2.7x&ndash;6.6x by company size, with top performers reaching 58x</a></strong>. Execution, how deeply a team adopts what it buys, is the biggest factor in how much of that opportunity actually gets captured. Starting with one pilot category, deeply adopted, is one of the most reliable ways to see a measurable result fast.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <!-- S11 -->
+    <h2 id="s11">Next Steps</h2>
+
+    <p>One practical way to turn any of these numbers into your own business case is to start with the category where your spend data is usable, not perfect. <a href="https://www.jaggaer.com/solutions/spend-analytics" target="_blank" rel="noopener">JAGGAER's Spend Analytics platform</a> is built around exactly that. JAGGAER's own language for it is direct, "defined before you sign, measured at the line." This connects to how this feeds <a href="P2P-ARTICLE-URL-TBC">procure-to-pay performance</a> (article in progress), and to JAGGAER's wider <a href="PILLAR-URL-TBC">Spend &amp; Procurement Analytics pillar page</a> (pending finalization).</p>
+
+    
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Build your business case with JAGGAER &rarr;</p>
+        <p class="jag-cta-desc">Outcomes and KPIs defined before you sign, measured at the line, not left for you to discover afterward.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/spend-analytics" class="jag-cta-btn" target="_blank" rel="noopener">Explore Spend Analytics &rarr;</a>
+    </div>
+
+    
+
+  </article>
+
+  
+  <aside class="expert-sidebar" aria-label="What the experts are saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">JAGGAER</span>
+        <span class="exp-num">58x</span>
+        <p class="exp-stat">Top-performer ROI on JAGGAER's 2026 benchmark; median 2.7x&ndash;6.6x across 200+ customer deployments.</p>
+        <a href="https://www.jaggaer.com/download/analyst-report/manufacturing-supply-chain-procurement-benchmark-2026" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">JAGGAER</span>
+        <span class="exp-num">$30M+</span>
+        <p class="exp-stat">Projected cost savings from Alkermes's procurement transformation on JAGGAER.</p>
+        <a href="https://www.jaggaer.com/success-stories/alkermes" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">JAGGAER</span>
+        <span class="exp-num">2%&rarr;50%</span>
+        <p class="exp-stat">Alkermes's catalog-aligned purchasing after implementation, per JAGGAER's video testimonial.</p>
+        <a href="https://www.jaggaer.com/success-stories/video-alkermes" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">JAGGAER</span>
+        <span class="exp-num">95%+</span>
+        <p class="exp-stat">Classification accuracy IntelliClass hits against a customer's taxonomy, out of the box.</p>
+        <a href="https://www.jaggaer.com/solutions/spend-analytics" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Aberdeen</span>
+        <span class="exp-num">26.6%</span>
+        <p class="exp-stat">Average supplier-performance improvement from standardized scorecards, cited by JAGGAER.</p>
+        <a href="https://www.jaggaer.com/blog/6-benefits-of-supplier-performance-management" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Deloitte</span>
+        <span class="exp-num">2.8x</span>
+        <p class="exp-stat">GenAI return on investment for "Digital Masters," against 1.6x for followers (2025 Global CPO Survey).</p>
+        <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Hackett Group</span>
+        <span class="exp-num">2.6x</span>
+        <p class="exp-stat">Greater ROI for top-quartile procurement organizations (2025 Digital World Class research).</p>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">McKinsey</span>
+        <span class="exp-num">20%</span>
+        <p class="exp-stat">Savings potential from deploying analytics tools in AI-driven procurement (Oct 2025 research).</p>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">KPMG</span>
+        <span class="exp-num">TCO</span>
+        <p class="exp-stat">Names TCO reduction as a core procurement-organization strategic goal (2025 research).</p>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id], article .article-header');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
