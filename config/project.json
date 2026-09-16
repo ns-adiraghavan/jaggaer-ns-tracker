@@ -5145,7 +5145,7 @@
               "title": "Procurement Transformation: The Roadmap, Benefits, and Industry Examples You Need",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "seo",
               "phase": 2,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -5156,7 +5156,21 @@
               "geography": "all",
               "schedule_week": 2,
               "publish_day": "Wed",
-              "planned_publish_date": "Sep 03, 2026"
+              "planned_publish_date": "Sep 03, 2026",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-09-16T10:41:19.007Z",
+              "last_upload_by": "orlagh",
+              "last_updated": "2026-09-16T10:41:19.007Z",
+              "last_updated_by": "orlagh",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-09-16T10:41:19.007Z",
+                  "by": "orlagh"
+                }
+              ]
             },
             {
               "id": "p2-seo-b2b-procurement-platform",
