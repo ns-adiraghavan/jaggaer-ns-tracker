@@ -1,0 +1,804 @@
+<!-- uploaded by m-5jitd at 2026-09-17T13:11:13.154Z -->
+<!-- piece: Ivalua Vs Oracle Procurement Cloud -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ivalua vs Oracle Procurement Cloud (2026): Full Comparison</title>
+<meta name="description" content="Compare Ivalua vs Oracle Procurement Cloud on architecture, AI, direct materials, and pricing. Find the right fit for enterprise procurement needs in 2026.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/ivalua-vs-oracle-procurement-cloud">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&amp;family=Plus+Jakarta+Sans:wght@500..800&amp;display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Ivalua vs Oracle Procurement Cloud (2026): Full Comparison","description":"Compare Ivalua vs Oracle Procurement Cloud on architecture, AI, direct materials, and pricing. Find the right fit for enterprise procurement needs in 2026.","datePublished":"2026-09","dateModified":"2026-09","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"author":{"@type":"Person","name":"Jason Rydzewski"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Ivalua or Oracle Procurement Cloud better for enterprise procurement?","acceptedAnswer":{"@type":"Answer","text":"Both run inside large, complex organizations today. The real difference is complexity profile. If you're standardized on Oracle Fusion, Oracle Procurement Cloud's native fit reduces integration work. If you run multiple ERPs, Ivalua's ERP-agnostic architecture fits that better. For regulated direct materials or auditable AI, JAGGAER covers that gap."}},{"@type":"Question","name":"How does Ivalua's pricing compare to Oracle Procurement Cloud's?","acceptedAnswer":{"@type":"Answer","text":"Neither publishes a public price list. Both are quote-based, scoped to your spend volume and module mix rather than a fixed rate card. Get a quote scoped to your own modules and user count from each vendor directly."}},{"@type":"Question","name":"Does Ivalua integrate with SAP if we're not running Oracle?","acceptedAnswer":{"@type":"Answer","text":"Yes. Ivalua describes itself as ERP-agnostic with prebuilt connectors for SAP, Oracle, and Microsoft Dynamics. Ivalua reports that more than 80% of its customers run SAP as their ERP. Oracle builds Procurement Cloud natively into Oracle Fusion, so running it alongside SAP means integrating with an external ERP, not getting the native fit it's designed around. JAGGAER integrates with 40+ ERP systems including SAP, Oracle, and Workday, with JAGGAER Link connecting to 1,000+ systems overall."}},{"@type":"Question","name":"Which platform is easier to implement?","acceptedAnswer":{"@type":"Answer","text":"We don't have verified implementation-timeline data for either platform. Ask each vendor for a reference implementation matching your size and complexity, rather than trust a generic estimate."}},{"@type":"Question","name":"What does JAGGAER offer that Ivalua and Oracle Procurement Cloud don't?","acceptedAnswer":{"@type":"Answer","text":"4 specific things. Certification-standard management for IATF 16949 and AS9100. Battery traceability, 3TG, and CBAM tracked natively in sourcing events. Category strategy built on named frameworks. AI, JAI, that cites its source every time. See how it handles regulated, direct-materials sourcing in a personalized walkthrough."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --navy-tint:         #E9EFF4;
+  --teal-tint:         #E4EEF0;
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-sm:      14px;
+  --font-size-base:    14px;
+  --font-size-h5:      clamp(0.9rem, 0.86rem + 0.2vw, 1rem);
+  --font-size-h4:      clamp(1.05rem, 1rem + 0.32vw, 1.22rem);
+  --font-size-h3:      clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --font-size-h2:      clamp(1.5rem, 1.35rem + 0.7vw, 1.85rem);
+  --font-size-h1:      clamp(1.8rem, calc(1.55rem + 0.95vw), 2.1rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+strong{color:var(--color-ink);font-weight:700;}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+.article-badges{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:var(--space-m);}
+.article-badge{display:inline-block;font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--color-teal);background:var(--teal-tint);border:1px solid #bcd8dc;border-radius:9999px;padding:.3rem .8rem;}
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-weight:400;text-transform:uppercase;letter-spacing:.03em;color:var(--color-ink);}
+
+.page-wrapper{display:flex;align-items:flex-start;max-width:1140px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+.toc-sidebar{width:270px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+article{flex:1;min-width:0;max-width:880px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:700;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-h3);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+.summary-box{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-left:4px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.summary-box p{font-size:var(--font-size-base);margin-bottom:.5rem;}
+.summary-box ul{margin-bottom:.25rem;padding-left:1.15rem;}
+.summary-box li{font-size:var(--font-size-base);margin-bottom:.3rem;color:var(--color-ink-2);line-height:1.5;}
+.summary-box li:last-child{margin-bottom:0;}
+.context-box{background:var(--color-surface-2,#f6f6f8);border:1px solid var(--color-border,#e2e2e8);border-left:4px solid var(--color-ink-2,#4a4a55);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-s) 0;}
+.context-box p{font-size:var(--font-size-base);line-height:1.5;margin-bottom:0;}
+.context-box p strong{display:block;font-size:var(--font-size-base);margin-bottom:.4rem;}
+.capability-box{background:var(--teal-tint);border:1px solid #bcd8dc;border-left:4px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.capability-box ul{list-style:none;margin-bottom:0;padding-left:0;}
+.capability-box li{font-size:var(--font-size-base);margin-bottom:.5rem;color:var(--color-ink-2);line-height:1.45;padding-left:1rem;position:relative;}
+.capability-box li::before{content:"•";position:absolute;left:0;color:var(--color-teal);font-weight:700;}
+.capability-box li:last-child{margin-bottom:0;}
+.capability-box li strong{display:inline;color:var(--color-ink);margin-right:.3rem;}
+.source-note{font-size:.75rem;color:var(--color-ink-3);font-style:italic;}
+
+.leak-compare-wrap{overflow-x:auto;margin:var(--space-s) 0 var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);}
+.leak-compare-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:600px;}
+.leak-compare-table th{background:var(--purple-tint-2);color:var(--color-ink);font-family:var(--font-display);font-weight:600;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;text-align:left;padding:.65rem var(--space-s);border-bottom:var(--border);}
+.leak-compare-table td{padding:.75rem var(--space-s);border-bottom:var(--border);color:var(--color-ink-2);vertical-align:top;line-height:1.5;font-size:var(--font-size-base);}
+.leak-compare-table td strong{color:var(--color-ink);}
+.leak-compare-table tr:last-child td{border-bottom:none;}
+.leak-compare-table tr{transition:background .15s;}
+.leak-compare-table tr:hover td{background:var(--purple-tint-3);}
+.leak-compare-table td:first-child{font-family:var(--font-display);font-weight:700;color:var(--color-ink);white-space:nowrap;}
+.leak-compare-table.three-way{min-width:700px;}
+.leak-compare-table.three-way td:first-child{white-space:normal;}
+.leak-compare-table.three-way td,.leak-compare-table.three-way th{word-break:break-word;}
+
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-s) var(--space-m);margin:var(--space-m) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:1rem;font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-item summary::marker{content:none;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-s);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.55;border-top:var(--border);background:var(--color-white);}
+.faq-item summary h3{display:inline;margin:0;font-size:inherit;font-weight:inherit;font-family:inherit;color:inherit;letter-spacing:inherit;}
+
+.choose-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-m);margin:var(--space-m) 0 var(--space-s);}
+.choose-card{border:var(--border);border-top:3px solid var(--color-teal);border-radius:var(--border-radius-sm);background:var(--color-white);padding:var(--space-s);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;}
+.choose-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(11,13,18,.08);}
+.choose-card:focus-visible{outline:2px solid var(--color-teal);outline-offset:2px;}
+.choose-card.is-selected{background:var(--teal-tint);border-color:var(--color-teal);}
+.choose-card h3{margin:0 0 .4rem;font-size:1rem;}
+.choose-card p{font-size:var(--font-size-base);margin-bottom:0;}
+.choose-card ul{padding-left:1.1rem;margin-bottom:0;}
+.choose-card li{font-size:var(--font-size-base);margin-bottom:.3rem;}
+.choose-hint{font-size:.75rem;color:var(--color-ink-3);margin:0 0 var(--space-s);}
+@media(max-width:900px){.choose-grid{grid-template-columns:1fr;}}
+
+/* Platform Overview: side-by-side infographic cards */
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.overview-card{border:var(--border);border-radius:14px;overflow:hidden;background:var(--color-white);}
+.overview-card-header{display:flex;align-items:center;gap:var(--space-s);padding:var(--space-s) var(--space-m);}
+.overview-card-header.hdr-ivalua{background:var(--purple-tint);}
+.overview-card-header.hdr-oracle{background:linear-gradient(135deg,var(--color-teal),var(--color-navy));}
+.overview-name{font-family:var(--font-display);font-weight:700;font-size:1.15rem;line-height:1.3;}
+.hdr-ivalua .overview-name{color:var(--color-ink);}
+.hdr-oracle .overview-name{color:#fff;}
+.overview-tag{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.hdr-ivalua .overview-tag{color:var(--jai-a);}
+.hdr-oracle .overview-tag{color:rgba(255,255,255,.85);}
+.overview-body{padding:var(--space-s) var(--space-m) var(--space-m);}
+.overview-section{margin-bottom:.75rem;}
+.overview-section:last-child{margin-bottom:0;}
+.overview-section-label{display:flex;align-items:center;gap:.4rem;font-family:var(--font-display);font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.45rem;}
+.overview-card.card-ivalua .overview-section-label{color:var(--jai-a);}
+.overview-card.card-oracle .overview-section-label{color:var(--color-teal);}
+.overview-section p{font-size:var(--font-size-base);margin-bottom:0;}
+.overview-section p + p{margin-top:.5rem;}
+@media(max-width:700px){.overview-grid{grid-template-columns:1fr;}}
+
+/* Self-Assessment tool */
+.assessment-tool{margin-top:var(--space-s);background:var(--color-white);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m);}
+.rate-question{margin-bottom:var(--space-s);padding-bottom:var(--space-s);border-bottom:1px solid var(--color-light-grey,#e2e2e8);}
+.rate-question:last-of-type{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.rate-q-title{margin-bottom:.5rem;font-size:var(--font-size-base);}
+.rate-scale{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.3rem;}
+.rate-btn{width:2rem;height:2rem;border-radius:9999px;border:var(--border);background:var(--color-white);color:var(--color-ink-2);font-family:var(--font-base);font-weight:600;font-size:.75rem;cursor:pointer;transition:background .15s,color .15s,border-color .15s;}
+.rate-btn:hover{border-color:var(--jai-a);color:var(--jai-a);}
+.rate-btn.is-selected{background:var(--jai-a);border-color:var(--jai-a);color:#fff;}
+.rate-scale-labels{display:flex;justify-content:space-between;max-width:27rem;font-size:.75rem;color:var(--color-ink-3);margin-bottom:var(--space-s);}
+.rate-summary{margin-top:var(--space-s);padding:var(--space-s) var(--space-m);background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);}
+.rate-score-display{font-family:var(--font-display);font-weight:700;color:var(--jai-a);font-size:1.1rem;}
+.score-gauge{margin-top:.75rem;}
+.score-gauge-track{position:relative;height:10px;border-radius:9999px;background:linear-gradient(90deg,var(--color-teal) 0%,var(--color-teal) 40%,var(--jai-a) 40%,var(--jai-a) 70%,var(--color-red) 70%,var(--color-red) 100%);opacity:.3;}
+.score-gauge-fill{position:absolute;top:-3px;bottom:-3px;left:0;width:0%;background:var(--color-ink);border-radius:9999px;transition:width .35s ease;box-shadow:0 0 0 2px var(--purple-tint-3);}
+.score-gauge-marker{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--color-white);}
+.score-gauge-labels{display:flex;justify-content:space-between;font-size:.7rem;color:var(--color-ink-3);margin-top:.35rem;}
+.rate-result{min-height:1.4em;}
+.rate-result:empty::before{content:"Answer all 5 questions above to see where you land.";color:var(--color-ink-3);font-style:italic;}
+.assessment-btn-row{display:flex;gap:var(--space-s);flex-wrap:wrap;margin-top:var(--space-s);align-items:center;}
+.assessment-btn-row .jag-cta-btn{padding:.55rem 1.2rem;font-size:.875rem;}
+.stat-box{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-s);background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.stat-item{text-align:center;padding:.25rem;}
+.stat-value{display:block;font-family:var(--font-display);font-weight:700;font-size:1.35rem;color:var(--jai-a);line-height:1.2;}
+.stat-label{display:block;font-size:.72rem;color:var(--color-ink-2);margin-top:.25rem;line-height:1.35;}
+.stat-value a{color:inherit;border-bottom:none;}
+.stat-value a:hover{color:var(--color-navy);}
+@media(max-width:640px){.stat-box{grid-template-columns:1fr 1fr;}}
+#clear-assessment-btn{cursor:pointer;font-family:inherit;font-size:.875rem;font-weight:700;padding:.55rem 1.2rem;border-radius:8px;background:var(--color-white);color:var(--color-ink-2);border:1px solid var(--color-ink-2);transition:background .2s,color .2s;}
+#clear-assessment-btn:hover{background:var(--color-cream);color:var(--color-ink);}
+
+@media(max-width:900px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style></head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">At a Glance</a>
+      <a class="toc-link" href="#s2">Platform Overview</a>
+      <a class="toc-link" href="#s3">Where They Differ</a>
+      <a class="toc-link" href="#s4">Where Both Have Limits</a>
+      <a class="toc-link" href="#s5">How JAGGAER Addresses Gaps</a>
+      <a class="toc-link" href="#s6">Ivalua vs Oracle vs JAGGAER</a>
+      <a class="toc-link" href="#s7">Which Platform Fits Your Needs?</a>
+      <a class="toc-link" href="#s8">Best for Enterprise Companies</a>
+      <a class="toc-link" href="#s-assess">Readiness Self-Assessment</a>
+      <a class="toc-link" href="#s-why-jaggaer">Why Choose JAGGAER Instead?</a>
+      <a class="toc-link" href="#s9">Where They Stop, JAGGAER Starts</a>
+      <a class="toc-link" href="#s-explore-more">Explore More Comparisons</a>
+      <a class="toc-link" href="#s10">Frequently Asked Questions</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-badges">
+          <span class="article-badge">Procurement Software</span>
+          <span class="article-badge">Platform Comparison</span>
+        </div>
+        <h1>Ivalua vs Oracle Procurement Cloud (2026): Full Comparison</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            4&ndash;5 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Published</span> <time datetime="2026-09">September 2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Jason Rydzewski</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <p><strong>Ivalua vs Oracle Procurement Cloud comes down to one structural bet.</strong> Ivalua configures itself to match how your team already works. Oracle Procurement Cloud ties procurement directly into the Oracle Fusion ecosystem you already run on. Ivalua is a source-to-pay platform built around one configurable data model. Oracle Procurement Cloud (more precisely Oracle Fusion Cloud Procurement today) runs natively inside Oracle Fusion Cloud Applications. This comparison covers what each platform does, where they differ, and when JAGGAER is worth evaluating for direct-materials or multi-tier supplier requirements.</p>
+
+    <div class="context-box">
+      <p><strong>Why This Decision Matters Now.</strong> A platform that can't scale with your complexity often means rebuilding the stack within 18 months. <strong>Both Ivalua and Oracle expanded their AI capabilities through 2025 and into 2026.</strong> How far that AI reaches into direct materials and regulated sourcing is now a concrete part of any serious evaluation.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S1 -->
+    <h2 id="s1">Ivalua vs Oracle Procurement Cloud at a Glance (2026)</h2>
+
+    <p><strong>Ivalua</strong> is a configurable source-to-pay platform built around one data model, aimed at enterprises with complex, non-standard, or regulated procurement, including direct-materials sourcing tied to the bill of materials and supplier risk monitored down to the sub-tier level. <strong>Oracle Procurement Cloud</strong> runs natively inside Oracle Fusion Cloud Applications, built for organizations already standardized on Fusion who want procurement sharing that same data model and ERP investment. This comparison is for procurement teams weighing a configurable, ERP-agnostic platform against one built natively into an ERP they already run.</p>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table">
+        <thead>
+          <tr><th>Area</th><th>Ivalua</th><th>Oracle Procurement Cloud</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Platform architecture</td><td>Configurable data model, shaped to your existing processes</td><td>Native module inside Oracle Fusion Cloud Applications</td></tr>
+          <tr><td>Best suited for</td><td>Enterprises with complex, non-standard, or regulated procurement</td><td>Organizations already standardized on Oracle Fusion Cloud Applications</td></tr>
+          <tr><td>Spend coverage</td><td>Sourcing, contracts, procurement, supplier management, and payments on one unified data model</td><td>Sourcing, supplier management, and purchasing; works alongside Oracle Fusion SCM</td></tr>
+          <tr><td>AI approach</td><td>IVA (single assistant, multi-LLM, full platform access)</td><td>Fusion Agentic Applications and AI Agent Studio, surfaced through the Redwood interface</td></tr>
+          <tr><td>Pricing model</td><td>Custom, quote-based pricing</td><td>Custom, quote-based pricing</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER approaches procurement differently.</p>
+        <p class="jag-cta-desc">A look at how sourcing, direct materials, and category strategy run on one connected platform.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/sourcing" class="jag-cta-btn" target="_blank" rel="noopener">Explore JAGGAER &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S2 -->
+    <h2 id="s2">Ivalua vs Oracle Procurement Cloud: Platform Overview</h2>
+
+    <div class="overview-grid">
+
+      <div class="overview-card card-ivalua">
+        <div class="overview-card-header hdr-ivalua">
+          <div>
+            <div class="overview-name">Ivalua</div>
+            <div class="overview-tag">Configurable Source-to-Pay</div>
+          </div>
+        </div>
+        <div class="overview-body">
+          <div class="overview-section">
+            <p><strong>Ivalua runs sourcing, contracting, procurement, supplier management, and payments on one unified data model.</strong> IVA, Ivalua's AI agent, operates against that same data model. It doesn't run as a separate point-solution agent bolted on top of it.</p>
+            <p><strong>Ivalua serves enterprises with complex, non-standard, or regulated procurement.</strong> That includes direct-materials sourcing linked directly from the bill of materials. It also includes multi-tier supplier risk monitoring down to the sub-tier level.</p>
+          </div>
+          <div class="overview-section">
+            <div class="overview-section-label">Capabilities</div>
+            <ul>
+              <li><strong>Strategic Sourcing:</strong> eRFx and eAuctions, with AI-assisted category intelligence</li>
+              <li><strong>Direct Materials:</strong> Sourcing events launched from the BOM. Ivalua builds in APQP and PPAP workflows</li>
+              <li><strong>Contract Lifecycle Management:</strong> AI risk scoring flags clause-level compliance issues, with audit trails and a central repository</li>
+              <li><strong>Supplier Management &amp; Risk:</strong> Risk monitored at the supplier, sub-tier, and contract level, with AI-synthesized external risk intelligence</li>
+              <li><strong>eProcurement &amp; Invoicing:</strong> Requisition-to-PO workflows with real-time supplier collaboration, three-way matching, and electronic invoicing</li>
+              <li><strong>Procurement AI (IVA):</strong> One agentic core with full platform access, LLM-agnostic</li>
+            </ul>
+          </div>
+          <div class="overview-section">
+            <p>If your evaluation also touches AP-automation-first platforms, look at the <!-- PLACEHOLDER: will 404 until published --><a href="https://www.jaggaer.com/blog/basware-vs-workday-spend-management" target="_blank" rel="noopener">Basware vs Workday Spend Management comparison</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="overview-card card-oracle">
+        <div class="overview-card-header hdr-oracle">
+          <div>
+            <div class="overview-name">Oracle Procurement Cloud</div>
+            <div class="overview-tag">ERP-Native Procurement</div>
+          </div>
+        </div>
+        <div class="overview-body">
+          <div class="overview-section">
+            <p><strong>Oracle delivers Fusion Cloud Procurement as part of the full Oracle Fusion Cloud Applications suite.</strong> It connects procurement activity to Fusion Financials, SCM, and HCM. Oracle states this directly: Procurement "is not positioned as a replacement for Oracle Fusion Cloud ERP or Oracle Fusion Cloud SCM."</p>
+            <p><strong>Procurement here is part of a bigger Oracle Fusion setup.</strong> It works alongside Oracle's SCM and ERP applications. It doesn't replace them.</p>
+          </div>
+          <div class="overview-section">
+            <div class="overview-section-label">Capabilities</div>
+            <ul>
+              <li><strong>Sourcing and negotiation:</strong> Generative AI-assisted supplier recommendations, negotiation requirement suggestions, and negotiation summaries</li>
+              <li><strong>Contract management:</strong> Generative AI contract summarization and key-terms extraction from contract documents</li>
+              <li><strong>Procure-to-Pay:</strong> Purchase orders and change orders created, acknowledged, and processed within Redwood-designed pages, tied to Oracle Fusion Financials</li>
+              <li><strong>Supplier qualification:</strong> Dedicated Supplier Qualification Management module</li>
+              <li><strong>ERP integration:</strong> Delivered from the same Oracle Fusion Cloud Applications suite as Financials, SCM, and HCM</li>
+            </ul>
+          </div>
+          <div class="overview-section">
+            <p>Oracle isn't the only competitor worth evaluating this way. See the <!-- PLACEHOLDER: will 404 until published --><a href="https://www.jaggaer.com/blog/oracle-procurement-cloud-vs-tipalti" target="_blank" rel="noopener">Oracle Procurement Cloud vs Tipalti comparison</a>.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S3 -->
+    <h2 id="s3">Where Ivalua vs Oracle Procurement Cloud Differs</h2>
+
+    <p><strong>Ivalua vs Oracle Procurement Cloud differs most clearly in 3 areas:</strong> configuration philosophy, ERP integration, and how each handles direct-materials procurement.</p>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table">
+        <thead>
+          <tr><th>Area</th><th>Ivalua</th><th>Oracle Procurement Cloud</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Architecture philosophy</td><td>Configurable: matched to your existing processes</td><td>Native module within Oracle Fusion Cloud Applications</td></tr>
+          <tr><td>ERP integration</td><td>ERP-agnostic (Ivalua's own term) with prebuilt connectors for SAP, Oracle, and Microsoft Dynamics</td><td>Delivered from the Oracle Fusion Cloud Applications suite; Oracle states Procurement "is not positioned as a replacement for" Fusion ERP or SCM</td></tr>
+          <tr><td>Contract management</td><td>AI risk scoring flags clause-level compliance issues, audit trails, central repository</td><td>Generative AI contract summarization via the Contract Summarization Agent</td></tr>
+          <tr><td>Direct materials</td><td>Sourcing events launched from the BOM; APQP and PPAP workflows built in</td><td>Direct-material and quality workflows mainly sit in Oracle Fusion SCM</td></tr>
+          <tr><td>AI approach</td><td>Single assistant (IVA), multi-LLM, full platform access</td><td>Named, task-specific AI agents (Autonomous Sourcing Assistant, Purchase Order Status Advisor, Procurement Policy Advisor, Contract Advisor) built through AI Agent Studio</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The AI-approach row is a real tradeoff, not just a feature list. A single agent with full platform access is more flexible but harder to scope permissions on. Named, task-specific agents are more auditable but split the work across more surface area. Neither company's public materials settle which approach is safer to govern at scale.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER became the first S2P vendor with certified AI governance.</p>
+        <p class="jag-cta-desc">ISO/IEC 42001:2023 certification means every JAI recommendation sits inside an independently audited framework, not a self-declared one.</p>
+      </div>
+      <a href="https://www.jaggaer.com/press-release/iso-iec-42001-certification-for-ai" class="jag-cta-btn" target="_blank" rel="noopener">Read the Certification Announcement &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S4 -->
+    <h2 id="s4">Where Both Platforms Have Limits</h2>
+
+    <p><strong>Neither Ivalua nor Oracle Procurement Cloud documents 4 specific capabilities: AI that cites its source, certification-standard management, battery/3TG/CBAM tracking, or a named category-strategy framework.</strong> Both platforms cover sourcing and contracts in real form. These 4 gaps sit inside that coverage, not in whether sourcing and contracts exist. As of mid-2026, neither platform's public documentation shows a procurement-module capability for any of the four.</p>
+
+    <p><strong>AI that cites its source.</strong> Both platforms describe recommendations, summaries, or automated actions. Neither shows a checkable citation trail back to the actual policy or contract clause. Oracle's own Procurement release notes list that same capability as not supported in Redwood Procurement Contracts.</p>
+
+    <p><strong>Certification-standard management for regulated manufacturing.</strong> Ivalua's quality workflows name real process frameworks: APQP, PPAP, FAI (First Article Inspection), and 8D all appear in its own materials. That's process support, not certification-standard management itself. Neither company describes built-in IATF 16949, AS9100, or ISO 13485 certification-lifecycle management as a procurement-module capability.</p>
+
+    <p><strong>Battery traceability, conflict-minerals (3TG), and <a href="https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en" target="_blank" rel="noopener">CBAM</a> reporting.</strong> Neither platform documents native workflows for these compliance requirements within the procurement module. Oracle continues to file an annual Conflict Minerals Report as a hardware manufacturer under SEC Rule 13p-1, most recently for the 2025 reporting year. That's an ongoing corporate compliance obligation, not a customer-facing procurement feature. Oracle's Fusion Cloud Sustainability functionality handles broader GHG accounting fed by procurement data. That's a different thing from these specific regulatory workflows.</p>
+
+    <p><strong>Category strategy depth and detail.</strong> Ivalua's category intelligence references Porter's Five Forces as one framework. Oracle's public procurement materials describe sourcing productivity and AI-driven supplier recommendations. Neither documents AI that auto-drafts category-strategy outputs, such as Kraljic or SWOT positioning, from live market data.</p>
+
+    <hr class="section-divider">
+
+    <!-- S5 -->
+    <h2 id="s5">How JAGGAER Addresses These Gaps</h2>
+
+    <p><strong>JAGGAER connects sourcing, contracts, supplier intelligence, and procure-to-pay within JAGGAER One.</strong> Each point below maps directly to a gap established above.</p>
+
+    <div class="capability-box">
+      <ul>
+        <li><strong>Strategic sourcing and category strategy.</strong> JAGGAER <a href="https://www.jaggaer.com/solutions/category-management" target="_blank" rel="noopener">auto-drafts Kraljic and SWOT outputs from live market signals in seconds</a>, inside a stage-gated category process. Customers surface 25% more savings ideas per category, every cycle.</li>
+        <li><strong>Direct materials and complex procurement.</strong> JAGGAER One ships with <a href="https://www.jaggaer.com/vertical/automotive" target="_blank" rel="noopener">IATF 16949</a> and <a href="https://www.jaggaer.com/vertical/aerospace-defense" target="_blank" rel="noopener">AS9100</a> supplier qualification workflows: audit checklists, evidence collection, scorecards, re-qualification cycles. PPAP, APQP, and FAIR (First Article Inspection Report, as JAGGAER names it) are out of the box. Battery traceability covers cells, modules, packs, and raw materials with country-of-origin and supplier-tier mapping. JAGGAER tracks 3TG and CBAM in every sourcing event.</li>
+        <li><strong>Supplier Intelligence.</strong> JAGGAER <a href="https://www.jaggaer.com/solutions/supplier-intelligence" target="_blank" rel="noopener">scores risk across financial, ESG, and geopolitical signals</a> and surfaces recommended levers at the category level. JAGGAER also integrates with specialist risk-intelligence partners, including Sphera, for customers who want that layered on top.</li>
+        <li><strong>Contract management connected to sourcing.</strong> Contracts, sourcing events, and supplier records are available within the JAGGAER One contract repository, with AI-generated summaries. Its contract AI <a href="https://www.jaggaer.com/solutions/contracts" target="_blank" rel="noopener">cites every clause</a>.</li>
+        <li><strong>Procure-to-Pay connected to upstream sourcing.</strong> Requisitioning and invoicing inherit sourcing and contract terms rather than being re-entered downstream.</li>
+        <li><strong>Direct-materials price intelligence, added September 2026.</strong> JAGGAER's <a href="https://www.jaggaer.com/press-release/jaggaer-completes-acquisition-of-ivoflow" target="_blank" rel="noopener">completed acquisition of Ivoflow</a> adds AI-powered spend and price benchmarking built specifically for direct materials: purchasing records get checked against outside market data, like commodity prices and currency movements, to flag whether a component's price still holds up. <a href="https://www.jaggaer.com/press-release/jaggaer-completes-acquisition-of-ivoflow" target="_blank" rel="noopener">JAGGAER states fewer than 2% of manufacturers run a purpose-built capability like this today</a>.</li>
+        <li><strong>Procurement AI.</strong> <a href="https://www.jaggaer.com/solutions/jai" target="_blank" rel="noopener">JAI</a> is embedded across sourcing, contracts, and procurement, not bolted on top. It answers only from approved source documents and cites them every time. If it doesn't have a confident, grounded answer, it says so and routes to a person. It's multi-model (Gemini and Claude, chosen per task), runs inside JAGGAER's <a href="https://www.iso.org/standard/42001" target="_blank" rel="noopener">ISO/IEC 42001:2023</a>-certified AI governance framework, and cut support tickets by 75% in early access.</li>
+      </ul>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S6 -->
+    <h2 id="s6">Ivalua vs Oracle Procurement Cloud vs JAGGAER</h2>
+
+    <p><strong>JAGGAER answers the 3 questions this piece keeps returning to: ERP fit, category-strategy depth, and AI that names its source.</strong> The table below shows where each platform lands on all three.</p>
+
+    <div class="leak-compare-wrap">
+      <table class="leak-compare-table three-way">
+        <colgroup>
+          <col style="width:16%">
+          <col style="width:28%">
+          <col style="width:28%">
+          <col style="width:28%">
+        </colgroup>
+        <thead>
+          <tr><th>Area</th><th>Ivalua</th><th>Oracle Procurement Cloud</th><th>JAGGAER</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ERP relationship</td><td>Describes itself as ERP-agnostic; prebuilt connectors for SAP, Oracle, and Microsoft Dynamics</td><td>Native module inside Oracle Fusion Cloud Applications; Oracle states Procurement is "not positioned as a replacement for" Fusion ERP or SCM</td><td>Also describes itself as ERP-agnostic; integrates with 40+ ERP systems including SAP, Oracle, Workday, and Microsoft Dynamics, with <a href="https://www.jaggaer.com/solutions/jaggaer-link" target="_blank" rel="noopener">JAGGAER Link connecting to 1,000+ systems</a> overall</td></tr>
+          <tr><td>Category strategy structure</td><td>References Porter's Five Forces within its category intelligence</td><td>No named category-strategy approach documented</td><td>States that JAGGAER auto-drafts Kraljic and SWOT outputs from live market signals, inside a stage-gated category process</td></tr>
+          <tr><td>Direct materials and regulated compliance</td><td>BOM-triggered sourcing with APQP and PPAP built in; IATF 16949, AS9100, and battery/3TG/CBAM workflows not documented as procurement-module capabilities</td><td>Direct-material workflows mainly sit in Fusion SCM, not native to Procurement</td><td>States that IATF 16949 and AS9100 supplier qualification, PPAP/APQP/FAIR, battery traceability, and 3TG/CBAM tracking ship natively by vertical</td></tr>
+          <tr><td>Supplier risk intelligence</td><td>Risk monitored at supplier, sub-tier, and contract level, with AI-synthesized external risk intelligence</td><td>Monitors supplier risk across finance, compliance, ESG, and cybersecurity, per Oracle's own procurement materials; sub-tier-specific visibility not established</td><td>Risk scored across financial, ESG, and geopolitical signals, with levers at the category level. <strong>Both Ivalua and JAGGAER document real sub-tier risk capability here</strong></td></tr>
+          <tr><td>Contract AI with source citations</td><td>Risk scoring and summarization; no documented clause-level citation</td><td>Key-term extraction exists elsewhere in Oracle's stack, not in Redwood Procurement Contracts</td><td>States that its contract AI cites every clause across the repository</td></tr>
+          <tr><td>Procurement AI grounding</td><td>IVA (single assistant, multi-LLM, full platform access); source-citation behavior not documented</td><td>Named agents via AI Agent Studio; citation behavior not documented for Procurement</td><td>States that JAI answers only from approved documents, cites them, and routes to a human when not confident, under ISO/IEC 42001:2023 governance</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>This table isn't a scorecard.</strong> Ivalua and JAGGAER both claim ERP-agnostic architecture. That's a real similarity, not a point of difference. Oracle's bet is the opposite one: depth through native Fusion integration rather than agnosticism. JAGGAER connects to Oracle as one of its 40+ supported ERPs without requiring that same native embedding. Where JAGGAER's documented capabilities do stand apart: category strategy, regulated direct materials, and AI that names its source. Those are the gaps established above, not a claim spread evenly across every row.</p>
+
+    <hr class="section-divider">
+
+    <!-- S7 -->
+    <h2 id="s7">Which Platform Fits Your Needs?</h2>
+
+    <div class="choose-grid">
+      <div class="choose-card" tabindex="0" role="button" aria-pressed="false">
+        <h3>Choose Ivalua if:</h3>
+        <ul>
+          <li>You want a platform that configures itself to match how your team already works, not a fixed template</li>
+          <li>You run multiple ERPs (SAP, Oracle, Microsoft Dynamics) and want one procurement layer across all of them</li>
+          <li>Your direct-materials sourcing needs BOM-triggered events with APQP and PPAP workflows already built in</li>
+          <li>You need supplier risk monitored down to the sub-tier level, with AI-synthesized external risk data</li>
+          <li>You're prepared to invest in configuration work to get that level of fit</li>
+        </ul>
+      </div>
+      <div class="choose-card" tabindex="0" role="button" aria-pressed="false">
+        <h3>Choose Oracle Procurement Cloud if:</h3>
+        <ul>
+          <li>You're already running Oracle Fusion Cloud Applications and want Procurement sharing that same data model</li>
+          <li>You want Procurement to operate inside the Oracle Fusion environment you're already invested in</li>
+          <li>Your sourcing and negotiation work benefits from generative AI features already embedded in the Fusion suite</li>
+          <li>You want named, task-specific AI agents instead of one broad assistant handling everything</li>
+        </ul>
+      </div>
+      <div class="choose-card" tabindex="0" role="button" aria-pressed="false">
+        <h3>Choose JAGGAER if:</h3>
+        <ul>
+          <li>Your direct-materials sourcing needs certification-standard management (IATF 16949, AS9100), not just the process frameworks Ivalua already supports</li>
+          <li>You need battery traceability, 3TG, or CBAM tracked natively in sourcing events</li>
+          <li>You want category strategy built on named frameworks (Kraljic, SWOT, Porter) with a stage-gated process</li>
+          <li>You need AI that cites its source every time it answers</li>
+          <li>You want AI governance that's independently certified under ISO/IEC 42001:2023, not self-declared</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER helped Alkermes cut cycle times by 32%.</p>
+        <p class="jag-cta-desc">A biopharma team split across Oracle and SAP unified strategic sourcing on one platform and found $30M+ in projected savings.</p>
+      </div>
+      <a href="https://www.jaggaer.com/success-stories/alkermes" class="jag-cta-btn" target="_blank" rel="noopener">Download the Alkermes Case Study &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S8 -->
+    <h2 id="s8">Which Procurement Platform Is Best for Enterprise Companies?</h2>
+
+    <p><strong>Enterprise scale alone doesn't separate these platforms.</strong> The more useful difference is complexity profile: how much of your enterprise's procurement is regulated, direct-materials-heavy, and spread across multiple ERPs.</p>
+
+    <p>For an enterprise standardized on Oracle Fusion, <strong>Oracle Procurement Cloud offers native alignment with that application environment</strong>. For an enterprise running multiple ERPs, Ivalua's ERP-agnostic setup handles that.</p>
+
+    <p><strong>The more meaningful difference in the public documentation is regulatory depth, not size.</strong> For enterprises whose needs are mainly standard indirect procurement, the gaps identified in this comparison matter less. An enterprise sourcing direct materials requiring supplier qualification against standards like IATF 16949 or AS9100 is asking for something neither platform documents at that level. <strong>For organizations managing direct materials, complex supplier networks, or multi-entity procurement, JAGGAER handles exactly this level of complexity.</strong></p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER cut Axfood's contract turnaround by 70%.</p>
+        <p class="jag-cta-desc">Contract confirmation dropped from weeks to five days once sourcing, contracts, and compliance ran on one connected platform.</p>
+      </div>
+      <a href="https://www.jaggaer.com/success-stories/axfood" class="jag-cta-btn" target="_blank" rel="noopener">Download the Axfood Case Study &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S-ASSESS -->
+    <div id="assessment-section">
+    <h2 id="s-assess">Procurement Readiness Self-Assessment</h2>
+
+    <p><em>Rate your own environment from 0 to 10 on each dimension. Your total score maps to the differences this Ivalua vs Oracle Procurement Cloud comparison has already drawn.</em></p>
+
+    <div class="assessment-tool">
+
+      <div class="rate-question">
+        <p class="rate-q-title"><strong>1. Strategic sourcing maturity:</strong> How mature is your strategic sourcing process?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Strategic sourcing maturity score, 0 to 10"></div>
+      </div>
+
+      <div class="rate-question">
+        <p class="rate-q-title"><strong>2. Supplier risk, performance, and compliance:</strong> How well do you manage supplier risk, including sub-tier visibility?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Supplier risk, performance, and compliance score, 0 to 10"></div>
+      </div>
+
+      <div class="rate-question">
+        <p class="rate-q-title"><strong>3. Sourcing, contracts, and purchasing integration:</strong> How well do sourcing, contracts, purchasing, and supplier management work together today?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Sourcing, contracts, and purchasing integration score, 0 to 10"></div>
+      </div>
+
+      <div class="rate-question">
+        <p class="rate-q-title"><strong>4. Complex and direct-material sourcing support:</strong> How well does your technology support complex categories, BOM-driven sourcing, or regulated supplier qualification?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Complex and direct-material sourcing support score, 0 to 10"></div>
+      </div>
+
+      <div class="rate-question">
+        <p class="rate-q-title"><strong>5. Procure-to-pay and AI-assisted automation:</strong> How automated are your procure-to-pay and AP processes, and how much do you rely on AI you can actually check?</p>
+        <div class="rate-scale" role="radiogroup" aria-label="Procure-to-pay and AI-assisted automation score, 0 to 10"></div>
+      </div>
+
+      <div class="rate-summary">
+        <p><strong>YOUR SCORE:</strong> <span class="rate-score-display" id="rate-score-total">0</span> of 50</p>
+        <div class="score-gauge">
+          <div class="score-gauge-track">
+            <div class="score-gauge-fill" id="score-gauge-fill"></div>
+            <div class="score-gauge-marker" style="left:40%"></div>
+            <div class="score-gauge-marker" style="left:70%"></div>
+          </div>
+          <div class="score-gauge-labels"><span>0</span><span>20</span><span>35</span><span>50</span></div>
+        </div>
+        <p class="rate-result" id="rate-overall-msg" aria-live="polite"></p>
+      </div>
+
+      <div class="assessment-btn-row">
+        <button type="button" id="clear-assessment-btn">Clear All</button>
+      </div>
+
+    </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S-WHY-JAGGAER -->
+    <h2 id="s-why-jaggaer">Why Choose JAGGAER Instead?</h2>
+
+    <p><strong>Sourcing, contracts, and payments run as separate systems on Ivalua vs Oracle Procurement Cloud. JAGGAER runs them as one.</strong> That's what changes once procurement stops being a cost center and starts being a value-creation function.</p>
+
+    <h3>Why Teams Choose JAGGAER</h3>
+    <p class="source-note">The numbers behind organizations that have made that shift.</p>
+
+    <div class="stat-box">
+      <div class="stat-item">
+        <span class="stat-value">30+</span>
+        <span class="stat-label">Years in procurement</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value"><a href="https://www.jaggaer.com/about-us" target="_blank" rel="noopener">1,400+</a></span>
+        <span class="stat-label">Enterprise customers globally</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">13M+</span>
+        <span class="stat-label">Connected suppliers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value"><a href="https://www.jaggaer.com/" target="_blank" rel="noopener">$2.9T</a></span>
+        <span class="stat-label">In spend managed</span>
+      </div>
+    </div>
+
+    <div class="capability-box">
+      <ul>
+        <li><strong>Category management ROI.</strong> Customers running category strategy through JAGGAER's stage-gated process report 20% savings from controlling spend at the category level, with sourcing and contract review cycles cut 60% through the same connected-platform automation.</li>
+        <li><strong>Direct materials, backed by named workflows.</strong> IATF 16949 and AS9100 supplier qualification, PPAP/APQP/FAIR, and battery/3TG/CBAM tracking aren't a slide-deck bullet — they're documented, running workflows on JAGGAER's own automotive and aerospace-defense pages: audit checklists, evidence collection, scorecards, and re-qualification cycles.</li>
+        <li><strong>Supplier risk, quantified.</strong> Customers on Supplier Intelligence report 95% fewer supplier onboarding errors and 25% total cost savings — outcomes tied to the platform overall, not one dashboard feature in isolation.</li>
+        <li><strong>Contracts that don't sit in a shared drive.</strong> <a href="https://www.jaggaer.com/success-stories/axfood" target="_blank" rel="noopener">Axfood</a> cut contract turnaround from weeks to five days with JAGGAER's contract management — the same connected repository this section already described, not a separate tool bolted on.</li>
+        <li><strong>Procure-to-pay, measured in cash.</strong> Customers report 85% time savings on invoice processing, 18% recovered from maverick spend snapping back to contract, and a 40% reduction in payment costs.</li>
+        <li><strong>AI that shows up in the numbers, not just the demo.</strong> Beyond the 75% ticket reduction covered above, JAGGAER also reports cutting time from requisition to PO by 50% platform-wide, the kind of throughput gain that's harder to fake than a chatbot bolted onto a slide.</li>
+      </ul>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER connects sourcing, direct materials, and payments.</p>
+        <p class="jag-cta-desc">Requisitioning and invoicing inherit sourcing terms automatically, with no separate system to reconcile by hand.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/source-to-pay" class="jag-cta-btn" target="_blank" rel="noopener">Explore the Platform &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S9 -->
+    <h2 id="s9">Where Ivalua vs Oracle Stops, JAGGAER Starts</h2>
+
+    <p><strong>Ivalua vs Oracle Procurement Cloud stops at 4 specific gaps: certification-standard management, battery/3TG/CBAM tracking, named category-strategy frameworks, and AI that cites its source. JAGGAER starts there.</strong> Both platforms do real work well before that point. Ivalua gives you one configurable procurement layer across ERPs you don't want to standardize away from. Oracle Procurement Cloud gives you procurement that lives inside the Fusion environment you're already running. Neither is the wrong choice for the buyer it's built for.</p>
+
+    <p><strong>Each of those 4 gaps comes from the same root cause: neither platform handles regulated, direct-materials complexity at this depth.</strong> JAGGAER does.</p>
+
+    <p><strong>Switching platforms is a real cost, and no honest comparison should pretend otherwise.</strong> If these requirements matter to your organization, JAGGAER fits exactly that scope. JAGGAER's implementation process is structured around exactly this kind of migration, so the switching cost is managed, not left to chance.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER fits your specific procurement setup.</p>
+        <p class="jag-cta-desc">A personalized walkthrough scoped to your direct materials, supplier risk, and AI requirements.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S-EXPLORE-MORE -->
+    <h2 id="s-explore-more">Explore More Procurement Software Comparisons</h2>
+
+    <p>Weighing other platforms against the same requirements? These comparisons cover related ground.</p>
+
+    <ul class="explore-more-list">
+      <li><!-- PLACEHOLDER: will 404 until published --><a href="https://www.jaggaer.com/blog/gep-smart-vs-tipalti" target="_blank" rel="noopener">GEP SMART vs Tipalti</a></li>
+      <li><!-- PLACEHOLDER: will 404 until published --><a href="https://www.jaggaer.com/blog/gep-smart-vs-zycus" target="_blank" rel="noopener">GEP SMART vs Zycus</a></li>
+      <li><!-- PLACEHOLDER: will 404 until published --><a href="https://www.jaggaer.com/blog/oracle-procurement-cloud-vs-tipalti" target="_blank" rel="noopener">Oracle Procurement Cloud vs Tipalti</a></li>
+      <li><!-- PLACEHOLDER: will 404 until published --><a href="https://www.jaggaer.com/blog/basware-vs-workday-spend-management" target="_blank" rel="noopener">Basware vs Workday Spend Management</a></li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <!-- S10 -->
+    <h2 id="s10">Frequently Asked Questions</h2>
+
+    <p>Common questions about this Ivalua vs Oracle Procurement Cloud comparison, answered directly.</p>
+
+    <details class="faq-item">
+      <summary><h3>Is Ivalua or Oracle Procurement Cloud better for enterprise procurement?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Both run inside large, complex organizations today. The real difference is complexity profile. If you're standardized on Oracle Fusion, Oracle Procurement Cloud's native fit reduces integration work. If you run multiple ERPs, Ivalua's ERP-agnostic architecture fits that better. <strong>For regulated direct materials or auditable AI, JAGGAER covers that gap.</strong></div>
+    </details>
+
+    <details class="faq-item">
+      <summary><h3>How does Ivalua's pricing compare to Oracle Procurement Cloud's?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Neither publishes a public price list. Both are quote-based, scoped to your spend volume and module mix rather than a fixed rate card. <strong>Get a quote scoped to your own modules and user count from each vendor directly.</strong></div>
+    </details>
+
+    <details class="faq-item">
+      <summary><h3>Does Ivalua integrate with SAP if we're not running Oracle?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Yes. Ivalua describes itself as ERP-agnostic with prebuilt connectors for SAP, Oracle, and Microsoft Dynamics. <strong>Ivalua reports that more than 80% of its customers run SAP as their ERP.</strong> Oracle builds Procurement Cloud natively into Oracle Fusion, so running it alongside SAP means integrating with an external ERP, not getting the native fit it's designed around. <strong>JAGGAER integrates with 40+ ERP systems including SAP, Oracle, and Workday, with JAGGAER Link connecting to 1,000+ systems overall.</strong></div>
+    </details>
+
+    <details class="faq-item">
+      <summary><h3>Which platform is easier to implement?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body">We don't have verified implementation-timeline data for either platform. <strong>Ask each vendor for a reference implementation matching your size and complexity, rather than trust a generic estimate.</strong></div>
+    </details>
+
+    <details class="faq-item">
+      <summary><h3>What does JAGGAER offer that Ivalua and Oracle Procurement Cloud don't?</h3> <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>4 specific things.</strong> Certification-standard management for IATF 16949 and AS9100. Battery traceability, 3TG, and CBAM tracked natively in sourcing events. Category strategy built on named frameworks. AI, JAI, that cites its source every time. See how it handles regulated, direct-materials sourcing in a personalized walkthrough.</div>
+    </details>
+
+  </article>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Which Platform Is Right: click-to-highlight cards
+const chooseCards = document.querySelectorAll('.choose-card');
+chooseCards.forEach(card => {
+  const select = () => {
+    const nowSelected = !card.classList.contains('is-selected');
+    chooseCards.forEach(c => { c.classList.remove('is-selected'); c.setAttribute('aria-pressed', 'false'); });
+    if (nowSelected) { card.classList.add('is-selected'); card.setAttribute('aria-pressed', 'true'); }
+  };
+  card.addEventListener('click', select);
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }
+  });
+});
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+
+// Self-assessment tool: 5 questions, 0-10 each, live total out of 50, banded interpretation
+const rateQuestions = document.querySelectorAll('.rate-question');
+const scores = new Array(rateQuestions.length).fill(null);
+
+function updateAssessmentSummary() {
+  const answered = scores.filter(v => v !== null);
+  const total = answered.reduce((a, b) => a + b, 0);
+  document.getElementById('rate-score-total').textContent = total;
+  document.getElementById('score-gauge-fill').style.width = (total / 50 * 100) + '%';
+  const overallEl = document.getElementById('rate-overall-msg');
+  if (answered.length < rateQuestions.length) {
+    overallEl.textContent = '';
+    return;
+  }
+  if (total <= 20) {
+    overallEl.textContent = 'A platform matched to your current ERP setup likely fits well here. The choice is mostly about which ERP you\u2019re already using, not capability gaps.';
+  } else if (total <= 35) {
+    overallEl.textContent = 'You\u2019re likely weighing ERP-agnostic flexibility against Fusion-native integration, not running into an undocumented gap.';
+  } else {
+    overallEl.textContent = 'Certification-standard management, battery/3TG/CBAM tracking, named category-strategy frameworks, and AI that cites its source are more likely to matter in practice. Worth evaluating whether JAGGAER covers those requirements.';
+  }
+}
+
+rateQuestions.forEach((q, qi) => {
+  const scale = q.querySelector('.rate-scale');
+  for (let v = 0; v <= 10; v++) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'rate-btn';
+    btn.textContent = v;
+    btn.setAttribute('data-value', v);
+    btn.setAttribute('aria-pressed', 'false');
+    btn.addEventListener('click', () => {
+      scale.querySelectorAll('.rate-btn').forEach(b => { b.classList.remove('is-selected'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('is-selected');
+      btn.setAttribute('aria-pressed', 'true');
+      scores[qi] = v;
+      updateAssessmentSummary();
+    });
+    scale.appendChild(btn);
+  }
+});
+
+const clearBtn = document.getElementById('clear-assessment-btn');
+if (clearBtn) {
+  clearBtn.addEventListener('click', () => {
+    scores.fill(null);
+    rateQuestions.forEach(q => {
+      q.querySelectorAll('.rate-btn').forEach(b => { b.classList.remove('is-selected'); b.setAttribute('aria-pressed', 'false'); });
+    });
+    updateAssessmentSummary();
+  });
+}
+updateAssessmentSummary();
+</script>
+</body>
+</html>
