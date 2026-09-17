@@ -5123,7 +5123,7 @@
               "title": "The Procure to Pay Process: Steps, Common Breakdowns, and Choosing the Right Software",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "seo",
               "phase": 2,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -5134,7 +5134,21 @@
               "geography": "all",
               "schedule_week": 2,
               "publish_day": "Tue",
-              "planned_publish_date": "Sep 02, 2026"
+              "planned_publish_date": "Sep 02, 2026",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-09-17T12:03:34.160Z",
+              "last_upload_by": "manager",
+              "last_updated": "2026-09-17T12:03:34.160Z",
+              "last_updated_by": "manager",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-09-17T12:03:34.160Z",
+                  "by": "manager"
+                }
+              ]
             },
             {
               "id": "p2-seo-procurement-analytics",
