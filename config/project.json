@@ -4359,7 +4359,7 @@
               "title": "Zip Vs Ramp",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -4383,8 +4383,20 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-08T09:10:13.048Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-18T11:08:31.616Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-18",
+                "live_url": "https://www.jaggaer.com/blog/zip-vs-ramp-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-18T11:08:31.616Z"
+              }
             },
             {
               "id": "p2-geo-coupa-vs-ramp",
