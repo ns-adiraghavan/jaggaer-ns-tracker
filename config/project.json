@@ -4789,7 +4789,7 @@
               "title": "Gep Smart Vs Ramp",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -4813,8 +4813,20 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-11T12:50:18.588Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-18T13:52:37.488Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-18",
+                "live_url": "https://www.jaggaer.com/blog/gep-smart-vs-ramp-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-18T13:52:37.488Z"
+              }
             },
             {
               "id": "p2-geo-gep-smart-vs-oracle-procurement-cloud",
