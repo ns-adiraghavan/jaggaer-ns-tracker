@@ -4635,7 +4635,7 @@
               "title": "Procurify Vs Precoro",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -4659,8 +4659,20 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-10T12:47:25.634Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-18T13:50:59.272Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-18",
+                "live_url": "https://www.jaggaer.com/blog/gep-smart-vs-ramp-2026",
+                "performance_data": "",
+                "updated_at": "2026-09-18T13:50:59.272Z"
+              }
             },
             {
               "id": "p2-geo-coupa-vs-oracle-procurement-cloud",
