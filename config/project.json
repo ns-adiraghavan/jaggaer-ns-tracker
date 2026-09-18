@@ -4127,7 +4127,7 @@
               "title": "Tipalti Vs Ramp",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -4151,8 +4151,20 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-07T09:15:14.927Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-18T11:05:59.585Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-18",
+                "live_url": "https://www.jaggaer.com/blog/tipalti-vs-ramp",
+                "performance_data": "",
+                "updated_at": "2026-09-18T11:05:59.585Z"
+              }
             },
             {
               "id": "p2-geo-sap-ariba-vs-coupa",
