@@ -1,0 +1,642 @@
+<!-- uploaded by m-5jitd at 2026-09-22T12:50:06.702Z -->
+<!-- piece: Procure-to-Pay Automation: Why One Platform Beats a Stack of Point Solutions -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>document.documentElement.classList.add('js-enabled');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procure-to-Pay Automation: Platform vs. Point Tools</title>
+<meta name="description" content="Procure-to-pay automation explained, and why most &quot;automated&quot; P2P is really 3–4 disconnected tools. See what a single platform removes.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="JAGGAER">
+<meta name="theme-color" content="#5300CE">
+<link rel="canonical" href="https://www.jaggaer.com/procure-to-pay-automation">
+<!-- NOTE: canonical URL, publish date, and named author are unconfirmed placeholders pending client sign-off -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235300CE'/%3E%3Cstop offset='1' stop-color='%23E22B83'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="JAGGAER">
+<meta property="og:title" content="Procure-to-Pay Automation: Platform vs. Point Tools">
+<meta property="og:description" content="Procure-to-pay automation explained, and why most &quot;automated&quot; P2P is really 3–4 disconnected tools. See what a single platform removes.">
+<meta property="og:url" content="https://www.jaggaer.com/procure-to-pay-automation">
+<meta property="article:published_time" content="2026-09">
+<meta property="article:section" content="Procure-to-Pay">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Procure-to-Pay Automation: Platform vs. Point Tools">
+<meta name="twitter:description" content="Procure-to-pay automation explained, and why most &quot;automated&quot; P2P is really 3–4 disconnected tools. See what a single platform removes.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Procure-to-Pay Automation: Platform vs. Point Tools","description":"Procure-to-pay automation explained, and why most \"automated\" P2P is really 3–4 disconnected tools. See what a single platform removes.","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"datePublished":"2026-09","dateModified":"2026-09","author":{"@type":"Organization","name":"JAGGAER"}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need both AP automation and a P2P platform?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. If your P2P platform already covers invoice capture, matching, and payment in production, a separate AP tool is probably redundant. Most commonly, you need a separate AP tool because your P2P rollout stopped at the PO and never reached invoicing, though a specialized invoice volume or an existing AP investment can be a reason too. Check what your current platform actually does before buying anything new."}},{"@type":"Question","name":"What's the difference between P2P automation and RPA?","acceptedAnswer":{"@type":"Answer","text":"RPA is a general-purpose automation technology. It clicks through interfaces or calls APIs to do repetitive tasks in any application, with no procurement focus built in. Procure to pay automation is built for that job from the start, not reused from something else. Point solutions use RPA to bridge the gaps between disconnected systems. A single platform closes that gap by design."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading: 700;
+  --line-height-base:  1.6;
+  --line-height-heading: 1.1;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-base);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);}
+h1{font-size:var(--font-size-h1);}
+h2{font-size:var(--font-size-h2);}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+a:focus-visible,.toc-link:focus-visible,.next-card:focus-visible,.faq-item summary:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;border-radius:2px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.link-pending{color:var(--color-teal);border-bottom:1px solid #4D819440;}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.stat{font-weight:700;color:var(--color-red);}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.section-eyebrow{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;line-height:var(--line-height-heading);color:var(--color-ink);max-width:760px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-size:.625rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0;gap:0;}
+
+.toc-sidebar{width:212px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+.expert-sidebar{width:212px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-size:1.15rem;font-weight:700;color:var(--color-ink);line-height:1;display:block;margin-bottom:.15rem;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.68rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:.68rem;}
+.exp-link{font-size:.62rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-num.small{font-size:.72rem;line-height:1.25;letter-spacing:0;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1060px){.expert-sidebar{display:none;}}
+
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);scroll-margin-top:1.5rem;}
+article h3{font-size:var(--font-size-h5);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.05em;}
+article h3.section-style{font-size:var(--font-size-h3);text-transform:none;letter-spacing:normal;padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3.mt-0{margin-top:0;}
+h1[id]{scroll-margin-top:1.5rem;}
+
+.callout-note{background:var(--color-light-blue);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.callout-note-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-xs);}
+.callout-note p{font-size:var(--font-size-sm);color:var(--color-ink-2);margin:0;line-height:1.6;}
+.callout-note.callout-purple{background:var(--purple-tint);border-left-color:var(--jai-a);}
+.callout-note.callout-purple .callout-note-label{color:var(--jai-a);}
+
+.obl-table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.obl-table{width:100%;border-collapse:collapse;font-size:.8125rem;min-width:580px;}
+.obl-table th{padding:.75rem 1rem;background:var(--jai-a);color:#fff;font-weight:700;text-align:left;border-bottom:1px solid #ffffff18;border-right:1px solid #ffffff18;font-size:.75rem;letter-spacing:.04em;}
+.obl-table th:last-child{border-right:none;}
+.obl-table td{padding:.75rem 1rem;border-bottom:var(--border);border-right:var(--border);vertical-align:top;line-height:1.5;color:var(--color-ink-2);font-size:.8rem;}
+.obl-table td:last-child{border-right:none;}
+.obl-table tr:last-child td{border-bottom:none;}
+.obl-table td:first-child{font-weight:700;color:var(--color-ink);background:var(--color-cream);}
+.obl-note{font-size:.72rem;color:var(--color-ink-3);display:block;margin-top:.4rem;font-weight:400;}
+
+.key-facts{background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.kf-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-s);}
+.key-facts ul,.key-facts ol{margin-bottom:0;}
+.key-facts li{font-size:.8125rem;line-height:1.6;}
+
+.bullet-list{list-style:disc;padding-left:1.4rem;margin:var(--space-s) 0 var(--space-m);}
+.bullet-list li{font-size:var(--font-size-sm);color:var(--color-ink-2);line-height:1.65;margin-bottom:var(--space-s);}
+.bullet-list li:last-child{margin-bottom:0;}
+ol.bullet-list{list-style:decimal;}
+
+.jag-cta{display:flex;align-items:center;gap:var(--space-m);border:1px solid transparent;background:linear-gradient(#fff,#fff) padding-box, linear-gradient(90deg,#5300CE,#E22B83) border-box;border-radius:var(--border-radius);padding:var(--space-s) var(--space-m);margin:var(--space-l) 0;transition:box-shadow .2s;position:relative;overflow:hidden;}
+.jag-cta::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,#5300ce0d 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.jag-cta:hover{box-shadow:0 8px 32px rgba(83,0,206,.12);}
+.jag-cta-label{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.15rem var(--space-s);border-radius:9999px;white-space:nowrap;margin-bottom:var(--space-2xs);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .15rem;line-height:1.35;}
+.jag-cta-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.5;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:.875rem;font-weight:600;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.5rem 1.25rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;min-width:140px;border-radius:var(--border-radius-sm);transition:opacity .2s;}
+.jag-cta-btn:hover{opacity:.88;color:#fff;border-bottom:none;}
+.jag-cta--red{background:var(--color-white);border:1px solid var(--color-red);}
+.jag-cta--red .jag-cta-label{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn:hover{background:var(--color-grey);opacity:1;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:flex-start;max-width:100%;}}
+
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;border-top:var(--border);background:var(--color-white);}
+
+.next-grid{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0 var(--space-l);}
+.next-card{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);flex-wrap:wrap;transition:border-color .2s,box-shadow .2s;}
+.next-card:hover{border-color:var(--jai-a);box-shadow:0 4px 16px rgba(83,0,206,.08);}
+.next-card-title{font-weight:700;color:var(--color-ink);font-size:.85rem;margin-bottom:.2rem;}
+.next-card-desc{font-size:.78rem;color:var(--color-ink-2);line-height:1.5;margin:0;}
+.next-card-link{flex-shrink:0;font-size:.78rem;font-weight:600;color:var(--jai-a);border-bottom:1px solid #5300ce40;white-space:nowrap;}
+.next-card-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Procure-to-Pay Automation Actually Covers</a>
+      <a class="toc-link" href="#s2">The Point-Solution Stack Most Companies End Up With</a>
+      <a class="toc-link" href="#s3">Where the Seams Actually Break</a>
+      <a class="toc-link" href="#s4">Procure-to-Pay Automation vs. AP Automation vs. Source-to-Pay</a>
+      <a class="toc-link" href="#s5">What a Single Platform Removes</a>
+      <a class="toc-link" href="#s6">Automating Procure to Pay Process: A Step-by-Step Starting Point</a>
+      <a class="toc-link" href="#s7">Recent Developments in Procure-to-Pay Automation (2026)</a>
+      <a class="toc-link" href="#s8">FAQ</a>
+      <a class="toc-link" href="#s9">Next Steps</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+    <header class="article-header">
+      <div class="article-header-inner">
+        <span class="article-label">Procure-to-Pay Automation</span>
+        <h1 id="s0">Procure-to-Pay Automation: Why One Platform Beats a Stack of Point Solutions</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            4-5 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Published</span><time datetime="2026-09">2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Jason Rydzewski</span>
+        </div>
+      </div>
+    </header>
+
+    <p>Most procure to pay automation isn't one system. It's a stack of disconnected point tools, and that stack is where control quietly disappears. An AP tool handles invoices. An iPaaS connects it to the ERP. Maybe there's an OCR layer, maybe RPA bots for the rest. Each tool does its job. <strong>Nobody owns the seam between one tool's job and the next.</strong></p>
+
+    <p>Procure-to-pay automation, also called P2P automation, is supposed to solve exactly this: one connected workflow from requisition through invoice processing and payment, instead of manual handoffs. <strong>In practice, it often becomes several disconnected systems wearing one label.</strong></p>
+
+    <p>This piece is one part of a wider look at <a href="#" class="link-pending">how procurement technology fits together</a>. It walks through what a fragmented stack actually costs, and where P2P stops being the same thing as AP automation or source-to-pay. Then it gets into what a single platform actually removes when it's done right. It also covers how to start automating without bolting on another tool. If you're running procurement software and wondering whether you need AP automation too, start here. If you're not sure <strong>whether your stack is quietly costing you more than it looks</strong>, start here too.</p>
+
+    <!-- S1 -->
+    <h2 id="s1">What Procure-to-Pay Automation Actually Covers</h2>
+
+    <p>Procure to pay automation, also called P2P automation, <strong>connects every step of the buying cycle into one workflow</strong>, from the first requisition to the final payment. No step happens in isolation: each one triggers the next automatically.</p>
+
+    <p>At a glance, the cycle runs through 5 connected stages:</p>
+
+    <ul class="bullet-list">
+      <li><strong>Requisition.</strong> An employee requests a purchase.</li>
+      <li><strong>Approval &amp; PO.</strong> A manager approves it, and the system issues a purchase order.</li>
+      <li><strong>Receipt.</strong> The goods arrive, or the service is confirmed, and someone logs it against the PO.</li>
+      <li><strong>Invoice matching.</strong> The system checks the invoice against the PO and, where required, the receipt.</li>
+      <li><strong>Payment.</strong> The platform schedules the approved invoice for payment under its terms.</li>
+    </ul>
+
+    <p>P2P sits at the seam between procurement and accounts payable. Procurement typically governs the front half: requisition, approval, and the PO itself. The back half, invoice through matching to payment, typically falls to AP. <strong>A connected workflow ties them together instead of two departments trading paperwork.</strong></p>
+
+    <p>Without integration, teams juggle inboxes and spreadsheets, patching together systems that don't talk to each other. Staff re-enter the same data more than once and chase approvals by hand. <strong>Automation cuts that duplicate entry and shortens the wait.</strong> Approvals and exception handling still involve people. Automation reduces the volume, not the responsibility.</p>
+
+    <p>That's procure to pay automation in practice: a connected workflow across systems, not 5 separate handoffs.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER helped the University of Virginia connect requisitions, POs, and invoices into one process.</p>
+        <p class="jag-cta-sub">UVA now creates every PO in JAGGAER first, matches invoices against it automatically, and brought 100% of spend under management while cutting invoice processing from hours to about a minute.</p>
+      </div>
+      <a href="https://www.jaggaer.com/success-stories/university-of-virginia-eprocurement-customer-story" class="jag-cta-btn" target="_blank" rel="noopener">Download the UVA Case Study</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S2 -->
+    <h2 id="s2">The Point-Solution Stack Most Companies End Up With</h2>
+
+    <p>A lot of "automated" procure-to-pay isn't one system. <strong>It's a handful of separate tools, each covering its own piece.</strong></p>
+
+    <p>Here's the common pattern: an AP tool captures and processes invoices, while an iPaaS connects it to the ERP so data actually moves between them. Often there's a document or OCR layer too, handling invoices that arrive as PDFs or paper, and RPA bots frequently cover whatever's left, usually the re-entry no native connector touches. Each tool owns its own layer, and <strong>none of them is responsible for what happens at the seams between them.</strong></p>
+
+    <div class="obl-table-wrap">
+      <table class="obl-table">
+        <thead>
+          <tr>
+            <th>Layer</th>
+            <th>Typical Point-Solution Owner</th>
+            <th>Unified Platform</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Requisition</td>
+            <td>Usually the ERP, a spreadsheet, or a separate intake tool, rarely connected to what happens downstream</td>
+            <td>One system, start to finish</td>
+          </tr>
+          <tr>
+            <td>PO</td>
+            <td>Usually the ERP's purchasing module, sometimes a separate procurement tool</td>
+            <td>Same system</td>
+          </tr>
+          <tr>
+            <td>Invoice Capture</td>
+            <td>The AP tool, often backed by an OCR layer for paper and PDFs</td>
+            <td>Same system</td>
+          </tr>
+          <tr>
+            <td>Matching</td>
+            <td>The AP tool, matching what it can see: PO and invoice, not always the receipt</td>
+            <td>Same system</td>
+          </tr>
+          <tr>
+            <td>Payment</td>
+            <td>The AP tool exports data back into the ERP's payment run</td>
+            <td>One workflow. Release happens here, though the bank still sends the transfer</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The iPaaS and any RPA bots don't appear in this table because they aren't a layer with a defined job. <strong>They connect the layers that do.</strong></p>
+
+    <p>It's the same tradeoff behind <a href="#" class="link-pending">outsourcing vs. building procurement operations</a>, just playing out one layer at a time. Each tool can do its own job well. The problem shows up where they meet, and that's next.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER's Procure-to-Pay platform runs requisition through payment on one system.</p>
+        <p class="jag-cta-sub">A JAGGAER specialist walks through the platform against your own requisition, invoice, and payment workflows.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Walkthrough</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S3 -->
+    <h2 id="s3">Where the Seams Actually Break</h2>
+
+    <p>These gaps aren't hypothetical. <strong>They show up as bad data and a fragmented audit trail, or as one vendor's outage stalling the whole chain.</strong></p>
+
+    <p>Take a payment fraud scenario. A supplier submits a bank-detail change through its portal. The AP tool still has the old record stored, and nothing forces a re-check before the next payment run. Without a verification step, <strong>that payment can go out on stale banking details.</strong></p>
+
+    <p>When an invoice gets disputed, there's no single trail to check. Someone pulls records from the AP tool, then the iPaaS, then the ERP, each checked separately, then pieces together what happened by hand. <strong>Ardent Partners' <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" target="_blank" rel="noopener">State of ePayables 2025</a> research puts the average invoice exception rate at 18.4%.</strong> That's nearly 1 in 5 invoices needing some kind of manual handling before they clear. That is a processing metric, not a fraud figure. The fraud risk is a separate problem covered next.</p>
+
+    <p>If the OCR vendor that captures invoice data goes down for an afternoon, invoices don't stop arriving. They just queue up. Without a fallback capture route, <strong>the AP tool has nothing new to process until the vendor's back online.</strong></p>
+
+    <p><strong>The <a href="https://www.acfe-mexico.com.mx/inicio/sitepad-data/uploads/2026/07/Reporte-a-las-Naciones-2026.pdf" target="_blank" rel="noopener">ACFE's 2026 Report to the Nations</a> identifies billing schemes as one of the most common forms of occupational fraud.</strong> That's 21% of cases, with a $90,000 median loss per case. The report doesn't study P2P systems specifically, but weak controls at the handoffs are exactly where schemes like this find room to operate.</p>
+
+    <p>The problem isn't that there are multiple tools. <strong>It's that nobody owns what happens between them.</strong></p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER helped Rensselaer Polytechnic Institute close its invoice-processing gap.</p>
+        <p class="jag-cta-sub">RPI paired JAGGAER Invoicing with AppZen and cut invoice processing from days to under a minute, with 97% capture accuracy.</p>
+      </div>
+      <a href="https://www.jaggaer.com/success-stories/rpi-appzen" class="jag-cta-btn" target="_blank" rel="noopener">Download the RPI Case Study</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S4 -->
+    <h2 id="s4">Procure-to-Pay Automation vs. AP Automation vs. Source-to-Pay</h2>
+
+    <p>AP automation, P2P automation, and source-to-pay sound like the same thing marketed as 3 variants of the same thing. <strong>Each one covers a different slice of the process</strong>, and the differences matter once you're evaluating software. You'll also see "source-to-pay automation" used for this same S2P layer. It's the same concept, just with the word automation attached.</p>
+
+    <div class="obl-table-wrap">
+      <table class="obl-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>AP Automation</th>
+            <th>P2P Automation</th>
+            <th>Source-to-Pay</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Layer</td>
+            <td>Invoice processing, from capture through payment</td>
+            <td>The full buying cycle: purchasing through payment</td>
+            <td>Everything from finding a supplier through paying them</td>
+          </tr>
+          <tr>
+            <td>Where it starts</td>
+            <td>An invoice arrives</td>
+            <td>Someone submits a requisition</td>
+            <td>A sourcing need surfaces, before any requisition exists</td>
+          </tr>
+          <tr>
+            <td>Where it ends</td>
+            <td>AP processes and pays the invoice</td>
+            <td>Payment closes it out, the same endpoint as AP automation</td>
+            <td>Same endpoint as P2P. It just starts much earlier</td>
+          </tr>
+          <tr>
+            <td>What it doesn't cover</td>
+            <td>Requisitions, POs, or anything upstream of the invoice</td>
+            <td>Sourcing, contracts, or supplier selection: that's S2P's job</td>
+            <td>The bank that executes the payment and the ERP's general ledger: S2P runs procurement, not core accounting or treasury</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Do you need both AP automation and a P2P platform? It depends on what your P2P platform actually covers. If it already handles invoice capture, matching, and payment, a separate AP tool is probably redundant. <strong>The real question is whether your P2P rollout reaches the invoice at all, or stops at the PO.</strong> That gap usually shows up the same way: suppliers never adopt the portal. Invoices come back as PDFs the platform can't read, and someone ends up processing them by hand anyway.</p>
+
+    <hr class="section-divider">
+
+    <!-- S5 -->
+    <h2 id="s5">What a Single Platform Removes</h2>
+
+    <p><strong>What a single platform removes is the disconnected workflow: one place to see the whole transaction, not three.</strong> It doesn't remove every system it depends on. The ERP still processes the accounting entry and the bank still executes the transfer.</p>
+
+    <p>Less re-entering data between an AP tool and an ERP. Less pulling logs from three systems to settle a dispute. Less exposure to a separate OCR vendor's outage, because invoice capture isn't yet another system that has to stay up on its own. Everything from the earlier sections traces back to the same gap: too many systems, with none of them accountable for what happens between them. A single platform removes that gap. The ERP and the bank stay right where they were. <strong>What disappears are the disconnected tools that used to fill the space between them.</strong></p>
+
+    <p>If you're evaluating procure to pay automation software, or comparing p2p automation software more broadly, here's what separates a platform like <a href="https://www.jaggaer.com/solutions/procure-to-pay" target="_blank" rel="noopener">JAGGAER's Procure-to-Pay</a> from a stack wearing one label:</p>
+
+    <ul class="bullet-list">
+      <li><strong>One workflow, start to finish.</strong> Requisition, PO, invoice, and payment status are visible in one place, even though the ERP still handles the accounting entry and the bank still moves the money.</li>
+      <li><strong>Matching and payment release happen natively.</strong> Nobody exports data to a separate AP product and imports it back.</li>
+      <li><strong>One connected trail.</strong> A dispute takes one query, not three system logins.</li>
+      <li><strong>One vendor accountable for the whole chain</strong>, not three or four pointing at each other when something breaks.</li>
+    </ul>
+
+    <p>That's the actual test. <strong>Forget what the vendor calls the product and check whether these four things are true in production.</strong></p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER helped McGill University unify a fragmented procurement process.</p>
+        <p class="jag-cta-sub">McGill ran internal purchasing across spreadsheets and disconnected systems. After moving onto one platform, it cut billing time by 75% and processed $15.5M in internal supplier revenue in a year.</p>
+      </div>
+      <a href="https://www.jaggaer.com/success-stories/mcgill-university" class="jag-cta-btn" target="_blank" rel="noopener">Download the McGill Case Study</a>
+    </div>
+
+    <h3 class="section-style">How to Automate P2P Without Adding Another Tool</h3>
+
+    <p>To automate P2P without adding another tool, extend the platform you already have. Don't patch around it with something new. <strong>The stage that feels broken, usually invoice capture or matching, is rarely the whole platform failing.</strong></p>
+
+    <p>Before buying anything new, check 3 things:</p>
+
+    <ul class="bullet-list">
+      <li><strong>Is the capability already there?</strong> Most platforms broad enough to run P2P end-to-end already include invoice capture, matching, and payment. Check what's licensed but unused before assuming you need a new vendor.</li>
+      <li><strong>Is this a configuration gap or a tooling gap?</strong> A missing approval rule or an unmapped GL code needs configuration, not new software. Finish the setup instead of adding another tool.</li>
+      <li><strong>Did the rollout stop at the PO?</strong> If procurement automated but AP didn't, extending the same platform to invoice and payment closes that gap without adding a system.</li>
+    </ul>
+
+    <p>Buying a point tool for one broken stage is how you build the stack from the earlier sections. One tool at a time, <strong>each one fixes what's broken right now and quietly sets up the next integration problem.</strong></p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER helped Atlanta Public Schools get more from an existing platform investment.</p>
+        <p class="jag-cta-sub">Atlanta expanded its use of JAGGAER's eProcurement and Invoicing tools rather than bringing in a separate vendor, funding the investment from its existing budget and seeing a 6-to-1 return.</p>
+      </div>
+      <a href="https://www.jaggaer.com/success-stories/atlanta-public-schools-ensure-price-paid-is-price-negotiated" class="jag-cta-btn" target="_blank" rel="noopener">Download the Atlanta Public Schools Case Study</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S6 -->
+    <h2 id="s6">Automating Procure to Pay Process: A Step-by-Step Starting Point</h2>
+
+    <p>Procure to pay process automation works best when you follow these 6, roughly in this order; a couple can run in parallel:</p>
+
+    <ol class="bullet-list">
+      <li><strong>Map what's already automated.</strong> Before automating further, find out where manual work actually happens today, which invoices need re-keying, which approvals sit in someone's inbox. You can't fix what you haven't located.</li>
+      <li><strong>Clean up master data, and keep it clean.</strong> Automation moves bad supplier records and GL codes faster, not slower. Fix these before go-live, then keep them that way; supplier and payment data doesn't stay accurate on its own.</li>
+      <li><strong>Start with your highest-volume, simplest invoice type.</strong> PO-backed, single-line invoices are usually the easiest starting point. Save services and non-PO spend for a later phase, once the process is proven.</li>
+      <li><strong>Set tolerance rules before you configure matching.</strong> Decide what counts as a clean match versus an exception first; a $5 variance and a $5,000 variance shouldn't route the same way. Then build the matching rules around those limits.</li>
+      <li>Get matching working reliably before you automate payment. Prove that PO-to-invoice matching holds up against real transactions before payment automation sits on top of it. <strong>Unreliable matching plus automated payment just moves bad payments faster.</strong></li>
+      <li><strong>Roll out to one entity, category, or supplier group ready for it, not everywhere at once.</strong> Prove the process at a manageable scale before expanding.</li>
+    </ol>
+
+    <p>Each step reduces a different risk. <strong>Skip straight to a full rollout, and you're taking on all of them at once.</strong></p>
+
+    <hr class="section-divider">
+
+    <!-- S7 -->
+    <h2 id="s7">Recent Developments in Procure-to-Pay Automation (2026)</h2>
+
+    <p>Two developments matter for how procurement teams evaluate procure to pay automation platforms this year.</p>
+
+    <p>Analyst benchmarks are moving away from dollar-cost metrics toward production behavior. <strong>The <a href="https://www.thehackettgroup.com/hackett-identifies-ap-solutions-delivering-gains-through-ai/" target="_blank" rel="noopener">Hackett Group's November 2025 AP Digital World Class Matrix</a> reports that leading AP platforms now deliver 60% touchless straight-through processing and 59% faster AP cycle times</strong>, a shift from the cost-per-invoice framing that dominated benchmarking for years.</p>
+
+    <p>CPOs are increasing technology budgets even as efficiency gains continue. <strong><a href="https://www.deloitte.com/us/en/about/press-room/2025-chief-procurement-officer-survey.html" target="_blank" rel="noopener">Deloitte's 2025 Global Chief Procurement Officer Survey</a> found that Digital Masters, Deloitte's term for the top-performing CPOs in its research, allocate up to 24% of their procurement budget to technology</strong>, nearly double what Digital Masters themselves spent in 2023.</p>
+
+    <p>Neither development changes the core argument here. <strong>Fragmentation is still what breaks P2P automation in production, regardless of how many tools are involved.</strong> But both are worth watching if you're building the internal case for consolidation.</p>
+
+    <hr class="section-divider">
+
+    <!-- S8 -->
+    <h2 id="s8">FAQ</h2>
+
+    <details class="faq-item">
+      <summary>Do I need both AP automation and a P2P platform?<span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-body">
+        <p>Not necessarily. If your P2P platform already covers invoice capture, matching, and payment in production, a separate AP tool is probably redundant. <strong>Most commonly, you need a separate AP tool because your P2P rollout stopped at the PO and never reached invoicing</strong>, though a specialized invoice volume or an existing AP investment can be a reason too. Check what your current platform actually does before buying anything new.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What's the difference between P2P automation and RPA?<span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-body">
+        <p>RPA is a general-purpose automation technology. It clicks through interfaces or calls APIs to do repetitive tasks in any application, with no procurement focus built in. <strong>Procure to pay automation is built for that job from the start, not reused from something else.</strong> Point solutions use RPA to bridge the gaps between disconnected systems. A single platform closes that gap by design.</p>
+      </div>
+    </details>
+
+    <hr class="section-divider">
+
+    <!-- S9 -->
+    <h2 id="s9">Next Steps</h2>
+
+    <p>Point solutions versus a unified platform is a familiar tradeoff well beyond P2P. It is the same build-vs-buy-vs-outsource decision procurement faces everywhere else. For the wider view of where P2P fits inside procurement technology as a whole, see the procurement technology pillar page. And if the same argument applies further upstream, sourcing and contracting, not just buying, JAGGAER's Source-to-Pay platform makes the same case.</p>
+
+    <div class="next-grid">
+      <div class="next-card">
+        <div>
+          <p class="next-card-title">Outsourcing vs. Building Procurement Operations</p>
+          <p class="next-card-desc">The same build-vs-buy-vs-outsource decision, playing out beyond invoicing and payment.</p>
+        </div>
+        <a href="#" class="next-card-link link-pending">Read more →</a>
+      </div>
+      <div class="next-card">
+        <div>
+          <p class="next-card-title">Procurement Technology, the Full Picture</p>
+          <p class="next-card-desc">Where P2P fits inside procurement technology as a whole.</p>
+        </div>
+        <a href="#" class="next-card-link link-pending">Read more →</a>
+      </div>
+      <div class="next-card">
+        <div>
+          <p class="next-card-title">JAGGAER Procure-to-Pay</p>
+          <p class="next-card-desc">See one platform run requisition through payment end to end.</p>
+        </div>
+        <a href="https://www.jaggaer.com/solutions/procure-to-pay" class="next-card-link" target="_blank" rel="noopener">Explore →</a>
+      </div>
+      <div class="next-card">
+        <div>
+          <p class="next-card-title">JAGGAER Source-to-Pay</p>
+          <p class="next-card-desc">The same argument applies further upstream: sourcing and contracting, not just buying.</p>
+        </div>
+        <a href="https://www.jaggaer.com/solutions/source-to-pay" class="next-card-link" target="_blank" rel="noopener">Explore →</a>
+      </div>
+    </div>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER's Procure-to-Pay platform works, end to end.</p>
+        <p class="jag-cta-sub">Skip the reading and talk to a JAGGAER specialist directly about your own requisition-to-payment workflow.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo</a>
+    </div>
+
+  </article>
+
+  <!-- EXPERT SIDEBAR -->
+  <aside class="expert-sidebar" aria-label="Data at a glance">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">Ardent Partners · 2025</span>
+        <p class="exp-stat">Average invoice exception rate sits at <strong>18.4%</strong>, nearly 1 in 5 invoices needing manual handling.</p>
+        <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" class="exp-link" target="_blank" rel="noopener">View source →</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">ACFE · 2026</span>
+        <p class="exp-stat">Billing schemes account for <strong>21%</strong> of occupational fraud cases, with a <strong>$90,000</strong> median loss per case.</p>
+        <a href="https://www.acfe-mexico.com.mx/inicio/sitepad-data/uploads/2026/07/Reporte-a-las-Naciones-2026.pdf" class="exp-link" target="_blank" rel="noopener">View source →</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Hackett Group · Nov 2025</span>
+        <p class="exp-stat">Leading AP platforms deliver <strong>60%</strong> touchless processing and <strong>59%</strong> faster AP cycle times.</p>
+        <a href="https://www.thehackettgroup.com/hackett-identifies-ap-solutions-delivering-gains-through-ai/" class="exp-link" target="_blank" rel="noopener">View source →</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Deloitte · 2025</span>
+        <p class="exp-stat">Digital Masters allocate up to <strong>24%</strong> of procurement budget to technology.</p>
+        <a href="https://www.deloitte.com/us/en/about/press-room/2025-chief-procurement-officer-survey.html" class="exp-link" target="_blank" rel="noopener">View source →</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// Reading progress bar
+try {
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+} catch (err) { /* progress bar is cosmetic only */ }
+
+// Active TOC link on scroll
+try {
+  const sections = document.querySelectorAll('article h2[id]');
+  const links = document.querySelectorAll('.toc-link');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+} catch (err) { /* TOC highlighting is cosmetic only */ }
+</script>
+
+</body>
+</html>
