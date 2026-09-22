@@ -5476,7 +5476,7 @@
               "title": "Procure-to-Pay Automation: Why One Platform Beats a Stack of Point Solutions",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "seo",
               "phase": 2,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -5487,7 +5487,21 @@
               "geography": "all",
               "schedule_week": 3,
               "publish_day": "Mon",
-              "planned_publish_date": "Sep 08, 2026"
+              "planned_publish_date": "Sep 08, 2026",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-09-22T12:50:31.326Z",
+              "last_upload_by": "m-5jitd",
+              "last_updated": "2026-09-22T12:50:31.326Z",
+              "last_updated_by": "m-5jitd",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-09-22T12:50:31.326Z",
+                  "by": "m-5jitd"
+                }
+              ]
             },
             {
               "id": "p2-seo-strategic-procurement",
