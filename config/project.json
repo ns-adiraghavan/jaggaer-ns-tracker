@@ -5462,7 +5462,14 @@
                   "ts": "2026-09-22T12:46:03.484Z",
                   "by": "orlagh"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "Procurement Outsourcing: Costs, Risks & Alternatives",
+                "meta_description": "Procurement outsourcing explained — what it solves, what it risks, and when a S2P platform closes the gap without losing control",
+                "slug": "procurement-outsourcing",
+                "updated_at": "2026-09-22T12:46:46.298Z",
+                "updated_by": "orlagh"
+              }
             },
             {
               "id": "p2-seo-cloud-native-procurement-platform",
