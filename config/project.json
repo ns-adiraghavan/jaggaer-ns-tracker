@@ -5476,7 +5476,14 @@
                   "ts": "2026-09-24T07:53:08.178Z",
                   "by": "m-e10nz"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "Supplier Relationship Management: The Complete Guide",
+                "meta_description": "What supplier relationship management is, how the Kraljic Matrix guides supplier segmentation, and how software supports performance management, no sales pitch.",
+                "slug": "supplier-relationship-management",
+                "updated_at": "2026-09-24T07:56:46.500Z",
+                "updated_by": "m-e10nz"
+              }
             }
           ]
         },
