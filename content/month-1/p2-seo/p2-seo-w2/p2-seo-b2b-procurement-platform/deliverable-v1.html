@@ -1,0 +1,989 @@
+<!-- uploaded by m-e10nz at 2026-09-24T07:53:06.240Z -->
+<!-- piece: Supplier Relationship Management: A Complete Guide to Building Stronger Supplier Partnerships -->
+<!-- generated for JAGGAER SRM content deliverable -->
+<!-- piece: Supplier Relationship Management: A Complete Guide to Building Stronger Supplier Partnerships -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supplier Relationship Management: The Complete Guide</title>
+<meta name="description" content="What supplier relationship management is, how the SRM process works, and how software supports each stage, without the sales pitch.">
+<link rel="canonical" href="https://www.jaggaer.com/supplier-relationship-management">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Supplier Relationship Management: A Complete Guide to Building Stronger Supplier Partnerships","description":"What supplier relationship management is, how the SRM process works, and how software supports each stage, without the sales pitch.","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"datePublished":"2026-09-22","dateModified":"2026-09-22","author":{"@type":"Organization","name":"JAGGAER"}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are the key capabilities of supplier relationship management software?","acceptedAnswer":{"@type":"Answer","text":"Core capabilities include centralized supplier data management, spend- and risk-based segmentation, performance scorecards and dashboards, financial and compliance risk monitoring, and collaboration tools for structured supplier reviews. Together, these connect supplier data to segmentation, segmentation to strategy, and performance results back into ongoing supplier decisions."}},{"@type":"Question","name":"What's the difference between SRM and supply chain management?","acceptedAnswer":{"@type":"Answer","text":"Supply chain management covers the physical and logistical flow of goods: production, transportation, warehousing, and inventory. SRM is narrower and sits inside procurement. It governs how an organization segments, engages, and evaluates the suppliers that feed that supply chain, not the logistics of moving goods through it."}},{"@type":"Question","name":"How often should supplier business reviews happen?","acceptedAnswer":{"@type":"Answer","text":"Common practice is quarterly business reviews with executive involvement for strategic suppliers. Leverage suppliers typically get semi-annual reviews at the account-management level. Bottleneck and non-critical suppliers need only periodic, risk-triggered check-ins rather than a standing calendar slot."}},{"@type":"Question","name":"Who should own supplier relationship management within a procurement organization?","acceptedAnswer":{"@type":"Answer","text":"Category managers typically own day-to-day relationship management for suppliers in their category. Strategic-item suppliers usually warrant a named executive sponsor alongside the category owner. A cross-functional governance structure, not procurement alone, should own escalation and segmentation review, since supplier performance affects operations, quality, and finance as much as procurement."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-amber:       #B7791F;
+  --color-amber-bg:    #FBF0DD;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* ---- type scale (uniform, comfortable reading size) ---- */
+  --font-size-xs:      0.78rem;
+  --font-size-sm:      0.88rem;
+  --font-size-base:    14px;
+  --font-size-lg:      1.1rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.2vw, 1.1rem);
+  --font-size-h4:      clamp(1.15rem, 1.08rem + 0.3vw, 1.32rem);
+  --font-size-h3:      clamp(1.32rem, 1.22rem + 0.45vw, 1.56rem);
+  --font-size-h2:      clamp(1.5rem, 1.38rem + 0.6vw, 1.82rem);
+  --font-size-h1:      clamp(1.9rem, 1.68rem + 0.95vw, 2.3rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.65;
+  --line-height-heading: 1.25;
+
+  /* ---- spacing scale (single source of truth, used everywhere) ---- */
+  --space-3xs: 0.28rem;
+  --space-2xs: 0.4rem;
+  --space-xs:  0.6rem;
+  --space-s:   clamp(0.85rem, 0.78rem + 0.3vw, 1.05rem);
+  --space-m:   clamp(1.05rem, 0.92rem + 0.55vw, 1.4rem);
+  --space-l:   clamp(1.4rem, 1.2rem + 0.85vw, 1.9rem);
+  --space-xl:  clamp(1.9rem, 1.55rem + 1.5vw, 2.6rem);
+  --space-2xl: clamp(2.4rem, 1.95rem + 1.9vw, 3.4rem);
+
+  --border-radius:    0.6rem;
+  --border-radius-sm: 0.45rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+
+  /* ---- unified "card" padding used by every visual component ---- */
+  --card-pad-y: 0.7rem;
+  --card-pad-x: 0.95rem;
+  --card-margin: 0.85rem 0;
+
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-base);line-height:var(--line-height-heading);color:var(--color-ink);}
+h1{font-size:var(--font-size-h1);font-weight:700;}
+h2{font-size:var(--font-size-h2);font-weight:700;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:500;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+.link-pending{color:var(--color-teal);border-bottom:1px solid #4D819440;cursor:default;}
+ul{padding-left:1.4rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.7;margin-bottom:.4rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.stat{font-weight:700;color:var(--color-red);}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* ---- unified kicker/eyebrow label — used for EVERY small-caps label across the page ---- */
+.kicker,
+.section-eyebrow,
+.bar-chart-kicker,
+.stat-metrics-kicker,
+.article-label,
+.toc-head-lbl{
+  display:block;
+  font-size:.76rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--color-teal);
+  margin-bottom:var(--space-xs);
+}
+.bar-chart-kicker,.stat-metrics-kicker,.toc-head-lbl{color:var(--jai-a);}
+.callout-note-label{
+  display:block;font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--color-navy);margin-bottom:var(--space-2xs);
+}
+.callout-note.callout-purple .callout-note-label{color:var(--jai-a);}
+
+.badge{display:inline-block;padding:.22rem .7rem;border-radius:9999px;font-size:.74rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:820px;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;line-height:var(--line-height-heading);color:var(--color-ink);max-width:760px;margin-top:.2rem;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.45rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--color-ink-2);font-weight:500;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-ink);}
+
+.page-wrapper{display:flex;align-items:flex-start;max-width:1258px;margin:0 auto;padding:0;gap:0;}
+
+.toc-sidebar{width:222px;flex-shrink:0;position:sticky;top:28px;max-height:calc(100vh - 56px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:.55rem var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:.6rem var(--space-m);font-size:.82rem;font-weight:500;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:700;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+.expert-sidebar{width:216px;flex-shrink:0;position:sticky;top:28px;max-height:calc(100vh - 56px);overflow-y:auto;padding:0 var(--space-m) var(--space-l) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.45rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.65rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-size:1.15rem;font-weight:800;color:var(--color-ink);line-height:1;display:block;margin-bottom:.2rem;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.72rem;color:var(--color-ink-2);line-height:1.45;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:.72rem;}
+.exp-link{font-size:.66rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.02em;transition:color .15s;display:inline-block;margin-top:.35rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.expert-sidebar{display:none;}}
+
+article{flex:1;min-width:0;max-width:820px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-size:var(--font-size-h5);font-weight:700;color:var(--color-ink);margin:var(--space-m) 0 var(--space-xs);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.04em;}
+
+/* ==================================================================
+   VISUAL COMPONENT SYSTEM
+   Every card-style component below shares the same padding rhythm
+   (--card-pad-y / --card-pad-x), the same margin rhythm (--card-margin),
+   the same border/radius treatment, and the same internal type scale
+   for titles (0.78rem, 700, uppercase) and body copy (0.85–0.88rem).
+   ================================================================== */
+
+.stat-metrics{background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--card-pad-y) var(--card-pad-x);margin:var(--card-margin);}
+.stat-metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.stat-metric{padding:var(--space-s) var(--space-xs);text-align:center;background:var(--color-white);}
+.stat-metric:first-child{border-radius:var(--border-radius-sm) 0 0 var(--border-radius-sm);}
+.stat-metric:last-child{border-radius:0 var(--border-radius-sm) var(--border-radius-sm) 0;}
+.stat-num{font-size:clamp(1.3rem,1.8vw,1.6rem);font-weight:800;color:var(--color-red);display:block;line-height:1;margin-bottom:.3rem;}
+.stat-label{font-size:.74rem;font-weight:600;color:var(--color-ink);display:block;line-height:1.3;margin-bottom:.2rem;}
+.stat-sub{font-size:.66rem;color:var(--color-ink-3);display:block;font-style:italic;}
+@media(max-width:600px){.stat-metrics-grid{grid-template-columns:repeat(2,1fr);}.stat-metric:first-child,.stat-metric:last-child{border-radius:0;}}
+
+.hook-stat{display:flex;align-items:center;gap:var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--card-margin);}
+.hook-stat-num{font-size:clamp(1.4rem,2.2vw,1.7rem);font-weight:800;color:var(--jai-a);line-height:1;letter-spacing:-.01em;flex-shrink:0;}
+.hook-stat-body{min-width:0;}
+.hook-stat-lead{font-size:14px;font-weight:600;color:var(--color-ink);line-height:1.4;margin:0 0 .2rem;}
+.hook-stat-sub{font-size:var(--font-size-xs);color:var(--color-ink-3);margin:0;line-height:1.5;}
+@media(max-width:580px){.hook-stat{flex-direction:column;align-items:flex-start;gap:var(--space-xs);}}
+
+.callout-note{background:var(--color-light-blue);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:.7rem .95rem;margin:var(--card-margin);}
+.callout-note p{font-size:14px;color:var(--color-ink-2);margin:0;line-height:1.65;}
+.callout-note.callout-purple{background:var(--purple-tint);border-left-color:var(--jai-a);}
+
+.obl-table-wrap{overflow-x:auto;margin:var(--card-margin);border:var(--border);border-radius:var(--border-radius-sm);}
+.obl-table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px;}
+.obl-table th{padding:.55rem .75rem;background:var(--jai-a);color:#fff;font-weight:700;text-align:left;border-bottom:1px solid #ffffff18;border-right:1px solid #ffffff18;font-size:.76rem;letter-spacing:.03em;}
+.obl-table th:last-child{border-right:none;}
+.obl-table td{padding:.55rem .75rem;border-bottom:var(--border);border-right:var(--border);vertical-align:top;line-height:1.5;color:var(--color-ink-2);font-size:14px;}
+.obl-table td:last-child{border-right:none;}
+.obl-table tr:last-child td{border-bottom:none;}
+.obl-table td:first-child{font-weight:700;color:var(--color-ink);background:var(--color-cream);}
+.obl-note{font-size:.78rem;color:var(--color-ink-3);display:block;margin-top:.5rem;font-weight:400;}
+
+/* ---- phase-cards (6-step workflow) ---- */
+.phase-cards{display:flex;flex-direction:column;gap:3px;margin:var(--card-margin);}
+.phase-item{display:flex;align-items:stretch;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;}
+.phase-accent{width:4px;flex-shrink:0;}
+.pa-1{background:var(--color-teal);}
+.pa-2{background:var(--color-navy);}
+.pa-3{background:var(--color-grey);}
+.pa-4{background:var(--jai-a);}
+.pa-5{background:var(--color-red);}
+.phase-body{flex:1;padding:.65rem .95rem;background:var(--color-white);display:flex;gap:.75rem;align-items:center;}
+.phase-num{flex-shrink:0;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--purple-tint);color:var(--jai-a);font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+.phase-text{min-width:0;}
+.phase-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--color-ink-3);display:block;margin-bottom:.25rem;}
+.phase-title{font-weight:700;color:var(--color-ink);font-size:var(--font-size-sm);margin-bottom:.25rem;}
+.phase-desc{font-size:14px;color:var(--color-ink-2);line-height:1.55;margin:0;}
+
+.key-facts{background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--card-margin);}
+.kf-label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-s);}
+.key-facts ul{margin-bottom:0;}
+.key-facts li{font-size:14px;line-height:1.65;}
+
+/* ---- CTA banner ---- */
+.jag-cta{display:flex;align-items:center;gap:.9rem;border:1px solid transparent;background:linear-gradient(#fff,#fff) padding-box, linear-gradient(90deg,#5300CE,#E22B83) border-box;border-radius:var(--border-radius);padding:.75rem 1rem;margin:var(--card-margin);transition:box-shadow .2s;position:relative;overflow:hidden;}
+.jag-cta::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,#5300ce0d 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.jag-cta:hover{box-shadow:0 8px 32px rgba(83,0,206,.12);}
+.jag-cta-label{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.15rem .7rem;border-radius:9999px;white-space:nowrap;margin-bottom:.3rem;}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:.95rem;font-weight:700;color:var(--color-ink);margin:0 0 .2rem;line-height:1.4;}
+.jag-cta-sub{font-size:14px;color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:.86rem;font-weight:600;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.55rem 1.15rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.3;flex-shrink:0;min-width:150px;border-radius:var(--border-radius-sm);transition:opacity .2s;}
+.jag-cta-btn:hover{opacity:.88;color:#fff;border-bottom:none;}
+.jag-cta--red{background:var(--color-white);border:1px solid var(--color-red);}
+.jag-cta--red .jag-cta-label{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn:hover{background:var(--color-grey);opacity:1;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:flex-start;max-width:100%;}}
+
+/* ---- FAQ accordion ---- */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:4px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:.65rem .95rem;font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:.9rem;background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-body{padding:0 .95rem .7rem;font-size:14px;color:var(--color-ink-2);line-height:1.6;border-top:var(--border);background:var(--color-white);}
+details{height:auto;overflow:hidden;transition:height .3s ease;}
+details:not([open]){height:3.15rem;}
+
+.bullet-list{list-style:disc;padding-left:1.4rem;margin:var(--space-s) 0 var(--space-m);}
+.bullet-list li{font-size:var(--font-size-sm);color:var(--color-ink-2);line-height:1.65;margin-bottom:.4rem;}
+
+.chart-card{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--card-pad-y) var(--card-pad-x);margin:var(--card-margin);background:var(--color-white);}
+.chart-head{margin-bottom:var(--space-m);display:flex;flex-direction:column;gap:.15rem;}
+.chart-title{font-size:.95rem;font-weight:700;color:var(--color-ink);}
+.chart-source{font-size:.7rem;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.04em;}
+.chart-foot{font-size:.78rem;color:var(--color-ink-3);margin-top:var(--space-s);line-height:1.55;font-style:italic;}
+
+.next-grid{display:flex;flex-direction:column;gap:3px;margin:var(--card-margin);}
+.next-card{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);flex-wrap:wrap;transition:border-color .2s,box-shadow .2s;}
+.next-card:hover{border-color:var(--jai-a);box-shadow:0 4px 16px rgba(83,0,206,.08);}
+.next-card-title{font-weight:700;color:var(--color-ink);font-size:.9rem;margin-bottom:.25rem;}
+.next-card-desc{font-size:14px;color:var(--color-ink-2);line-height:1.55;margin:0;}
+.next-card-link{flex-shrink:0;font-size:.82rem;font-weight:600;color:var(--jai-a);border-bottom:1px solid #5300ce40;white-space:nowrap;}
+.next-card-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* ---- pull-definition (s1) ---- */
+.pull-definition{position:relative;background:linear-gradient(135deg,var(--purple-tint-3) 0%,var(--color-white) 100%);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.85rem 1.05rem;margin:var(--card-margin);}
+.pull-definition::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--jai-gradient);border-radius:var(--border-radius-sm) 0 0 var(--border-radius-sm);}
+.pull-definition-mark{font-size:2.1rem;line-height:.5;color:var(--jai-a);opacity:.35;font-weight:800;display:block;margin-bottom:.3rem;}
+.pull-definition p{font-size:1.02rem;font-weight:600;color:var(--color-ink);line-height:1.5;margin:0;}
+.pull-definition-tag{display:inline-block;margin-top:.55rem;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--color-teal);}
+
+/* ---- customer-quote / pull style reused for framework attribution ---- */
+.customer-quote{position:relative;background:linear-gradient(135deg,var(--purple-tint-3) 0%,var(--color-white) 100%);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.85rem 1.05rem;margin:var(--card-margin);}
+.customer-quote::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--jai-gradient);border-radius:var(--border-radius-sm) 0 0 var(--border-radius-sm);}
+.customer-quote p{font-size:.92rem;font-weight:500;color:var(--color-ink);line-height:1.55;margin:0 0 .5rem;font-style:italic;}
+.customer-quote-attribution{font-size:.72rem;color:var(--color-ink-3);font-weight:500;}
+.customer-quote-attribution strong{color:var(--color-ink);font-weight:700;}
+
+/* ---- risk-cards (challenges) — equal-height grid ---- */
+.risk-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:var(--card-margin);align-items:stretch;}
+.risk-item{display:flex;flex-direction:column;border:1px solid var(--purple-soft);border-top:3px solid var(--color-amber);border-radius:var(--border-radius-sm);padding:.8rem .9rem;background:var(--color-white);}
+.risk-icon{width:1.9rem;height:1.9rem;border-radius:50%;background:var(--color-amber-bg);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-s);flex-shrink:0;}
+.risk-icon svg{width:15px;height:15px;stroke:var(--color-amber);}
+.risk-title{font-size:.78rem;font-weight:700;color:var(--color-ink);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.02em;}
+.risk-desc{font-size:14px;color:var(--color-ink-2);line-height:1.55;margin:0;}
+@media(max-width:820px){.risk-cards{grid-template-columns:1fr;}}
+
+/* ---- comparison bar-chart ---- */
+.bar-chart-card{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--card-pad-y) var(--card-pad-x);margin:var(--card-margin);background:var(--color-white);}
+.bar-chart{display:flex;flex-direction:column;gap:var(--space-m);}
+.bar-row{display:grid;grid-template-columns:170px 1fr 58px;align-items:center;gap:var(--space-s);row-gap:.3rem;}
+.bar-label{font-size:14px;font-weight:600;color:var(--color-ink);}
+.bar-track{grid-column:2;height:10px;background:var(--color-cream);border-radius:9999px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:9999px;background:var(--jai-gradient);}
+.bar-fill.grey{background:var(--color-ink-3);}
+.bar-value{grid-column:3;font-size:.88rem;font-weight:800;color:var(--jai-a);text-align:right;}
+.bar-value.grey-val{color:var(--color-ink-3);}
+.bar-desc{grid-column:1 / -1;font-size:14px;color:var(--color-ink-3);line-height:1.5;margin-top:-.05rem;}
+@media(max-width:640px){.bar-row{grid-template-columns:120px 1fr 50px;}}
+
+/* ---- donut-wrap ---- */
+.donut-card{display:flex;align-items:center;gap:var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--card-pad-y) var(--card-pad-x);margin:var(--card-margin);background:var(--color-white);flex-wrap:wrap;}
+.donut-wrap{flex-shrink:0;position:relative;width:104px;height:104px;}
+.donut-wrap svg{width:100%;height:100%;}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.donut-center-num{font-size:1.25rem;font-weight:800;color:var(--jai-a);line-height:1;}
+.donut-center-lbl{font-size:.56rem;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.04em;margin-top:.15rem;}
+.donut-body{min-width:220px;flex:1;}
+.donut-legend{display:flex;flex-direction:column;gap:.4rem;margin-top:.5rem;}
+.donut-legend-item{display:flex;align-items:center;gap:.4rem;font-size:14px;color:var(--color-ink-2);}
+.donut-swatch{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
+
+/* ---- gauge-wrap ---- */
+.gauge-card{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--card-pad-y) var(--card-pad-x);margin:var(--card-margin);background:var(--color-white);}
+.gauge-pair{display:flex;gap:var(--space-l);align-items:flex-start;justify-content:space-around;flex-wrap:wrap;}
+.gauge-wrap{text-align:center;}
+.gauge-visual{position:relative;width:140px;height:82px;margin:0 auto;}
+.gauge-visual svg{width:100%;height:100%;display:block;}
+.gauge-num{position:absolute;left:0;right:0;bottom:2px;font-size:1.3rem;font-weight:800;color:var(--jai-a);line-height:1;}
+.gauge-num.grey-val{color:var(--color-ink-3);}
+.gauge-lbl{font-size:.76rem;color:var(--color-ink-3);margin-top:.5rem;font-weight:600;}
+.gauge-gap-badge{display:block;margin:var(--space-s) auto 0;text-align:center;font-size:.76rem;font-weight:700;color:var(--color-red);background:#fdecec;border-radius:9999px;padding:.28rem .9rem;width:fit-content;}
+
+/* ---- criteria-grid (numbered card grid — components / evaluation) ---- */
+.criteria-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:var(--card-margin);align-items:stretch;}
+.criteria-card{display:flex;flex-direction:column;border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.8rem .9rem;background:linear-gradient(180deg,var(--purple-tint-3),var(--color-white) 55%);}
+.criteria-head{display:flex;align-items:center;gap:.55rem;margin-bottom:.5rem;}
+.criteria-badge{width:1.85rem;height:1.85rem;border-radius:50%;background:var(--jai-gradient);color:#fff;font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.criteria-title{font-size:.78rem;font-weight:700;color:var(--color-ink);text-transform:uppercase;letter-spacing:.02em;margin:0;}
+.criteria-desc{font-size:14px;color:var(--color-ink-2);line-height:1.55;margin:0;}
+@media(max-width:820px){.criteria-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.criteria-grid{grid-template-columns:1fr;}}
+
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:780px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.8rem,5vw,2.3rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Is SRM?</a>
+      <a class="toc-link" href="#s2">Supplier Management vs. SRM</a>
+      <a class="toc-link" href="#s3">Why SRM Matters</a>
+      <a class="toc-link" href="#s4">The Kraljic Matrix</a>
+      <a class="toc-link" href="#s5">The SRM Process</a>
+      <a class="toc-link" href="#s6">Supplier Performance Management</a>
+      <a class="toc-link" href="#s7">Key Components of an SRM Strategy</a>
+      <a class="toc-link" href="#s8">The Role of Software</a>
+      <a class="toc-link" href="#s9">Common Challenges</a>
+      <a class="toc-link" href="#s10">Best Practices</a>
+      <a class="toc-link" href="#s11">FAQ</a>
+      <a class="toc-link" href="#s12">Next Steps</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-badges">
+          <span class="badge badge-blue">Guide</span>
+          <span class="badge badge-green">Procurement Strategy</span>
+        </div>
+        <span class="article-label">Procurement &middot; Supplier Relationship Management</span>
+        <h1 id="s0">Supplier Relationship Management: A Complete Guide to Building Stronger Supplier Partnerships</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            7&ndash;8 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Published</span><time datetime="2026-09">September 2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">By</span>Jason Rydzewski</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <p>Supplier relationship management (SRM) is the practice of segmenting suppliers by strategic and financial impact, then applying a distinct engagement, performance, and risk strategy to each segment. SRM differs from basic supplier administration in one key way: <strong>it treats select suppliers as sources of value creation, not just cost control.</strong></p>
+
+    <p><strong>Deloitte&rsquo;s 2025 Global Chief Procurement Officer Survey found that 61% of procurement leaders now treat supplier information sharing and collaboration as a top risk mitigation strategy.</strong> Vendor ecosystems are growing fast enough to make that urgent. <strong><a href="https://www.whistic.com/resources/blog/tprm-impact-report-midyear-update" target="_blank" rel="noopener">Whistic&rsquo;s 2025 State of TPRM report</a> found that the average organization&rsquo;s third-party vendor count reached 286, up 21% year over year.</strong> At that scale, ad hoc supplier management stops working, and segmentation becomes necessary rather than optional.</p>
+
+    <p>This guide walks through SRM segmentation, the end-to-end SRM process, and performance management. It also covers where JAGGAER&rsquo;s platform supports specific stages of that work, and how SRM fits into the broader <a class="link-pending">procurement strategy pillar guide</a>.</p>
+
+    <hr class="section-divider">
+
+    <!-- H2 1: DEFINITION -->
+    <span class="section-eyebrow">Definitions</span>
+    <h2 id="s1">What Is Supplier Relationship Management (SRM)?</h2>
+
+    <p><strong>Supplier relationship management organizes a company&rsquo;s supplier base into segments, then applies a distinct governance and engagement strategy to each.</strong> That classification step is what separates SRM from ordinary supplier interaction.</p>
+
+    <div class="pull-definition">
+      <span class="pull-definition-mark">&ldquo;</span>
+      <p>SRM meaning: the discipline of segmenting suppliers by strategic and financial impact, then applying a distinct engagement, investment, and collaboration strategy to each segment, rather than managing every supplier the same way.</p>
+    </div>
+
+    <p><strong>The discipline rests on four connected activities: segmenting the supplier base, setting performance expectations per segment, structuring engagement around that segmentation, and routing performance data back into the segmentation as conditions change.</strong> None of this happens from good intentions alone. It requires a deliberate operating model.</p>
+
+    <p>Ordinary supplier interaction is reactive. A delivery issue prompts a phone call. A contract renewal prompts a negotiation. SRM flips that: procurement decides in advance which suppliers warrant an executive-sponsored review and which need no relationship investment at all. A team managing hundreds of active supplier relationships cannot hold quarterly business reviews with every one of them. <strong>Segmentation exists to put limited relationship capacity where it earns the most return.</strong></p>
+
+    <hr class="section-divider">
+
+    <!-- H2 2: SUPPLIER MANAGEMENT VS SRM -->
+    <span class="section-eyebrow">Key Distinction</span>
+    <h2 id="s2">Supplier Management vs. Supplier Relationship Management</h2>
+
+    <p><strong>A supplier management system is the operational backbone SRM strategy runs on top of.</strong> Supplier management and SRM describe two layers of the same function, though procurement teams often blur the distinction. Supplier management is operational, covering onboarding, documentation, and compliance, while SRM is strategic, covering collaboration, performance, and long-term value creation.</p>
+
+    <p>That system tracks supplier records, certifications, and onboarding status. <strong>That operational layer is a precondition for SRM, not a substitute for it.</strong></p>
+
+    <!-- VISUAL: comparison table -->
+    <div class="obl-table-wrap">
+      <table class="obl-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Supplier Management (Operational)</th>
+            <th>Supplier Relationship Management (Strategic)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Scope</td>
+            <td>Individual transactions and records</td>
+            <td>The full supplier relationship over time</td>
+          </tr>
+          <tr>
+            <td>Focus</td>
+            <td>Compliance, onboarding, documentation</td>
+            <td>Collaboration, performance, joint value</td>
+          </tr>
+          <tr>
+            <td>Objective</td>
+            <td>Accuracy, control, administrative efficiency</td>
+            <td>Resilience, innovation, long-term supplier value</td>
+          </tr>
+          <tr>
+            <td>Typical activities</td>
+            <td>Registration, credentialing, invoice matching</td>
+            <td>Segmentation, KPI reviews, joint roadmaps, risk planning</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Neither layer replaces the other. <strong>A mature procurement organization runs both, in sequence.</strong></p>
+
+    <hr class="section-divider">
+
+    <!-- H2 3: WHY IT MATTERS -->
+    <span class="section-eyebrow">Why It Matters</span>
+    <h2 id="s3">Why Supplier Relationship Management Matters</h2>
+
+    <p><strong><a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" target="_blank" rel="noopener">Deloitte&rsquo;s</a></strong> 2025 Global Chief Procurement Officer Survey ties supplier relationship management directly to risk mitigation. Procurement leaders point to three strategies most often:</p>
+
+    <!-- VISUAL: bar-chart -->
+    <div class="bar-chart-card">
+      <span class="chart-title">Top Supply-Risk Mitigation Strategies</span>
+      <span class="chart-source">Deloitte &middot; 2025 Global CPO Survey</span>
+      <div class="bar-chart" style="margin-top:var(--space-m);">
+        <div class="bar-row">
+          <span class="bar-label">Alternative supply sources</span>
+          <div class="bar-track"><div class="bar-fill" style="width:74%"></div></div>
+          <span class="bar-value">74%</span>
+          <span class="bar-desc">Cited as the most effective mitigation strategy</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Supply chain visibility</span>
+          <div class="bar-track"><div class="bar-fill" style="width:64%"></div></div>
+          <span class="bar-value">64%</span>
+          <span class="bar-desc">Prioritized as a top risk-reduction lever</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-label">Supplier collaboration</span>
+          <div class="bar-track"><div class="bar-fill" style="width:61%"></div></div>
+          <span class="bar-value">61%</span>
+          <span class="bar-desc">Information sharing and joint planning with suppliers</span>
+        </div>
+      </div>
+    </div>
+
+    <p><strong>Those three priorities are essentially what SRM exists to deliver</strong>, and the performance gap between organizations that act on them and those that do not is substantial. Alternative sourcing, visibility, and collaboration only function as real risk controls when they are applied consistently across the supplier base, which is what a structured SRM program provides and ad hoc effort does not.</p>
+
+    <div class="hook-stat">
+      <div class="hook-stat-num">84% vs 59%</div>
+      <div class="hook-stat-body">
+        <p class="hook-stat-lead"><strong>Organizations Deloitte calls &ldquo;Digital Masters&rdquo; met or exceeded supplier performance targets 84% of the time, compared with 59% for lower-performing peers.</strong></p>
+        <p class="hook-stat-sub">Deloitte, 2025 Global Chief Procurement Officer Survey</p>
+      </div>
+    </div>
+
+    <p><strong><a href="https://srm.stateofflux.co.uk/2025-report-showcase" target="_blank" rel="noopener">State of Flux&rsquo;s</a></strong> 2025 Global SRM Research Report reinforces this from the relationship side, rather than the risk side. The study surveyed 480+ respondents across 335+ organizations in 13 industry sectors.</p>
+
+    <div class="callout-note callout-purple">
+      <span class="callout-note-label">Beyond Negotiated Savings</span>
+      <p><strong>61% of the leaders surveyed said better supplier management creates financial value beyond negotiated contract savings alone.</strong> That figure is distinct from Deloitte&rsquo;s 61% collaboration statistic above; the two surveys measure different things, and the matching number is coincidental.</p>
+    </div>
+
+    <p>Vendor ecosystems are expanding fast enough that this isn&rsquo;t a gain to chase only when convenient. <strong>The 286-vendor figure cited earlier is exactly why segmentation stops being optional at this scale:</strong> without it, that growth simply competes for the same limited procurement attention. At 286 vendors per organization, ad hoc management does not fail occasionally, it fails systematically, which is the case for structured SRM.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See Supplier Performance Data in One View</p>
+        <p class="jag-cta-sub">JAGGAER&rsquo;s Supplier Management platform tracks quality, delivery, and compliance scorecards for every supplier in one dashboard.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/supplier-management" class="jag-cta-btn" target="_blank" rel="noopener">Explore Supplier Management</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- H2 4: KRALJIC MATRIX -->
+    <span class="section-eyebrow">Segmentation Framework</span>
+    <h2 id="s4">The Kraljic Matrix: Segmenting Suppliers for Relationship Strategy</h2>
+
+    <p><strong>Peter Kraljic</strong> introduced supplier segmentation in his 1983 <em><a href="https://hbr.org/1983/09/purchasing-must-become-supply-management" target="_blank" rel="noopener">Harvard Business Review</a></em> article, &ldquo;Purchasing Must Become Supply Management.&rdquo; <strong>The framework plots every purchase category across two axes, profit impact and supply risk, producing four quadrants.</strong></p>
+
+    <p>Most procurement teams still use the Kraljic Matrix purely as a sourcing tool. It works equally well as a relationship-strategy tool. <strong>Each quadrant implies a different engagement model, not just a different sourcing approach.</strong></p>
+
+    <p>Procurement teams already use this exact framework for sourcing decisions in our <a class="link-pending">Kraljic Matrix for sourcing strategy</a> guide. Here, it is applied to relationship strategy instead.</p>
+
+    <!-- VISUAL: SRM-specific Kraljic Matrix (SVG diagram) -->
+    <div class="chart-card">
+      <span class="chart-title">The SRM Kraljic Matrix</span>
+      <span class="chart-source">Adapted from Kraljic, Harvard Business Review, 1983</span>
+      <svg viewBox="0 0 560 500" xmlns="http://www.w3.org/2000/svg" role="img" style="width:100%;height:auto;max-width:560px;display:block;margin:0.5rem auto 0;" aria-label="Kraljic Matrix: a 2 by 2 grid plotting profit impact against supply risk, producing four supplier segments, each with its own relationship strategy.">
+        <rect x="120" y="20" width="200" height="200" fill="#E9EFF4" stroke="#4D8194" stroke-width="1.5"/>
+        <rect x="320" y="20" width="200" height="200" fill="#EAE2F8" stroke="#5300CE" stroke-width="1.5"/>
+        <rect x="120" y="220" width="200" height="200" fill="#eef0f3" stroke="#6a7180" stroke-width="1.5"/>
+        <rect x="320" y="220" width="200" height="200" fill="#FBF0DD" stroke="#B7791F" stroke-width="1.5"/>
+
+        <text x="220" y="50" text-anchor="middle" font-size="13" font-weight="700" fill="#1B3A5C">LEVERAGE ITEMS</text>
+        <text x="420" y="50" text-anchor="middle" font-size="13" font-weight="700" fill="#5300CE">STRATEGIC ITEMS</text>
+        <text x="220" y="250" text-anchor="middle" font-size="13" font-weight="700" fill="#3F434F">NON-CRITICAL ITEMS</text>
+        <text x="420" y="250" text-anchor="middle" font-size="13" font-weight="700" fill="#B7791F">BOTTLENECK ITEMS</text>
+
+        <text x="220" y="75" text-anchor="middle" font-size="11" fill="#3a3f4a">
+          <tspan x="220" dy="0">Structured account</tspan>
+          <tspan x="220" dy="14">management; periodic</tspan>
+          <tspan x="220" dy="14">performance reviews</tspan>
+        </text>
+        <text x="420" y="75" text-anchor="middle" font-size="11" fill="#3a3f4a">
+          <tspan x="420" dy="0">Executive-sponsored</tspan>
+          <tspan x="420" dy="14">partnership; joint</tspan>
+          <tspan x="420" dy="14">roadmaps, shared risk</tspan>
+          <tspan x="420" dy="14">planning</tspan>
+        </text>
+        <text x="220" y="275" text-anchor="middle" font-size="11" fill="#3a3f4a">
+          <tspan x="220" dy="0">Self-service,</tspan>
+          <tspan x="220" dy="14">minimal-touch</tspan>
+          <tspan x="220" dy="14">management</tspan>
+        </text>
+        <text x="420" y="275" text-anchor="middle" font-size="11" fill="#3a3f4a">
+          <tspan x="420" dy="0">Continuity planning;</tspan>
+          <tspan x="420" dy="14">dual-sourcing</tspan>
+          <tspan x="420" dy="14">discussions</tspan>
+        </text>
+
+        <line x1="120" y1="20" x2="120" y2="420" stroke="#0B0D12" stroke-width="1.5"/>
+        <line x1="120" y1="420" x2="520" y2="420" stroke="#0B0D12" stroke-width="1.5"/>
+
+        <text x="35" y="220" text-anchor="middle" font-size="13" font-weight="700" fill="#0B0D12" transform="rotate(-90 35 220)">Profit Impact</text>
+        <text x="105" y="35" text-anchor="end" font-size="11" fill="#6a7180">High</text>
+        <text x="105" y="415" text-anchor="end" font-size="11" fill="#6a7180">Low</text>
+
+        <text x="320" y="460" text-anchor="middle" font-size="13" font-weight="700" fill="#0B0D12">Supply Risk</text>
+        <text x="220" y="440" text-anchor="middle" font-size="11" fill="#6a7180">Low</text>
+        <text x="420" y="440" text-anchor="middle" font-size="11" fill="#6a7180">High</text>
+      </svg>
+    </div>
+
+    <div class="obl-table-wrap">
+      <table class="obl-table">
+        <thead>
+          <tr>
+            <th>Quadrant</th>
+            <th>Profit Impact / Supply Risk</th>
+            <th>Sourcing Implication</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Strategic Items</td>
+            <td>High / High</td>
+            <td>Long-term partnership sourcing</td>
+          </tr>
+          <tr>
+            <td>Leverage Items</td>
+            <td>High / Low</td>
+            <td>Competitive bidding, volume consolidation</td>
+          </tr>
+          <tr>
+            <td>Bottleneck Items</td>
+            <td>Low / High</td>
+            <td>Secure supply, qualify alternates</td>
+          </tr>
+          <tr>
+            <td>Non-Critical Items</td>
+            <td>Low / Low</td>
+            <td>Simplify and automate purchasing</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <span class="obl-note">Sourcing implications shown for reference; relationship implications for each quadrant are shown in the diagram above. Source: Peter Kraljic, &ldquo;Purchasing Must Become Supply Management,&rdquo; Harvard Business Review, 1983.</span>
+
+    <p>A strategic-item supplier failure can stop production, which is why that quadrant justifies executive sponsorship. A bottleneck-item supplier carries little spend but real scarcity risk, which is why it justifies continuity planning regardless of dollar value. <strong>Segment placement should drive relationship investment, not invoice size.</strong></p>
+
+    <p>Getting that segmentation right depends on having accurate, current spend and supplier data across the full base. <strong>JAGGAER&rsquo;s <a href="https://www.jaggaer.com/solutions/supplier-intelligence" target="_blank" rel="noopener">Supplier Intelligence</a> platform combines spend, risk, and performance data into one supplier record, built specifically to support segmentation at this scale.</strong></p>
+
+    <p>That same segmentation data carries forward into <a href="https://www.jaggaer.com/solutions/source-to-contract" target="_blank" rel="noopener">sourcing decisions through Source-to-Contract</a>, connecting supplier risk directly to the next event.</p>
+
+    <hr class="section-divider">
+
+    <!-- H2 5: THE PROCESS -->
+    <span class="section-eyebrow">The Workflow</span>
+    <h2 id="s5">The Supplier Relationship Management Process</h2>
+
+    <p>The SRM process runs as a six-step cycle, not a one-time project. It repeats as supplier conditions change:</p>
+
+    <!-- VISUAL: phase-cards -->
+    <div class="phase-cards">
+      <div class="phase-item">
+        <div class="phase-accent pa-1"></div>
+        <div class="phase-body">
+          <div class="phase-num">1</div>
+          <div class="phase-text">
+            <span class="phase-label">Supplier Segmentation</span>
+            <p class="phase-desc">Classify suppliers using the Kraljic Matrix or an equivalent model, scoring each on profit impact and supply risk. Where a supplier lands determines everything that follows, including how often it is reviewed and who signs off on changes. Skipping this step means every later decision defaults to guesswork.</p>
+          </div>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-2"></div>
+        <div class="phase-body">
+          <div class="phase-num">2</div>
+          <div class="phase-text">
+            <span class="phase-label">KPI Setting</span>
+            <p class="phase-desc">Define quality, delivery, cost, and risk thresholds for each segment before engagement begins, <strong>not during a dispute</strong>. Strategic suppliers typically need more granular KPIs than non-critical ones, since more is riding on the relationship. Vague thresholds are the single most common reason performance reviews turn into arguments instead of decisions.</p>
+          </div>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-3"></div>
+        <div class="phase-body">
+          <div class="phase-num">3</div>
+          <div class="phase-text">
+            <span class="phase-label">Relationship Strategy Development</span>
+            <p class="phase-desc">Assign an engagement model per segment: executive sponsorship for strategic suppliers, continuity planning for bottleneck suppliers, and lighter-touch account management for leverage suppliers. Non-critical suppliers typically need no dedicated strategy at all beyond standard procurement controls. The strategy should specify who owns the relationship and how often it is reviewed, not just what tier the supplier sits in.</p>
+          </div>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-4"></div>
+        <div class="phase-body">
+          <div class="phase-num">4</div>
+          <div class="phase-text">
+            <span class="phase-label">Supplier Engagement</span>
+            <p class="phase-desc">Put the strategy into practice through business reviews, joint planning sessions, and structured communication cadences. This is where segmentation either earns its keep or gets ignored, since a strategy nobody executes is just a spreadsheet. Cadence should match the segment: frequent for strategic suppliers, minimal for everyone else.</p>
+          </div>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-5"></div>
+        <div class="phase-body">
+          <div class="phase-num">5</div>
+          <div class="phase-text">
+            <span class="phase-label">Performance Monitoring</span>
+            <p class="phase-desc">Track KPIs against actual supplier behavior continuously, not quarterly. A quality decline should surface before it causes a disruption, not after a shipment fails inspection. This is the step most SRM programs under-invest in, since it takes ongoing attention rather than a one-time setup.</p>
+          </div>
+        </div>
+      </div>
+      <div class="phase-item">
+        <div class="phase-accent pa-1"></div>
+        <div class="phase-body">
+          <div class="phase-num">6</div>
+          <div class="phase-text">
+            <span class="phase-label">Feedback and Continuous Improvement</span>
+            <p class="phase-desc">Route performance data back into segmentation. A supplier&rsquo;s risk classification isn&rsquo;t fixed, and a leverage supplier that develops a proprietary capability may need to move toward strategic status. Without this feedback loop, segmentation calcifies into a one-time exercise instead of a living model that reflects how the relationship actually changes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>Technology supports each step differently: centralized data keeps segmentation consistent, automated scorecards make monitoring continuous, and workflow tools make engagement structured rather than ad hoc. <strong>The cycle only works if data moves cleanly from one step to the next.</strong></p>
+
+    <hr class="section-divider">
+
+    <!-- H2 6: PERFORMANCE MANAGEMENT -->
+    <span class="section-eyebrow">Measurement</span>
+    <h2 id="s6">Supplier Performance Management</h2>
+
+    <p>Supplier performance management is the measurement layer that makes SRM credible. <strong>As cited above, Deloitte&rsquo;s 2025 CPO Survey found that top-performing procurement organizations met or exceeded supplier-performance targets 84% of the time, against 59% for lower-performing organizations.</strong> The survey ties that gap to combined technology and talent investment.</p>
+
+    <p>A solid performance framework needs KPIs across at least four dimensions: quality, delivery, cost, and compliance. Risk indicators layer on top for critical suppliers. <strong>Scorecards translate all of that into a format both procurement and the supplier can review together.</strong></p>
+
+    <div class="callout-note">
+      <span class="callout-note-label">Evidence Over Impression</span>
+      <p><strong>An objective, data-backed scorecard is harder to dispute than a buyer&rsquo;s verbal complaint.</strong> That shift, from subjective impression to evidence-based review, is what performance data actually changes.</p>
+    </div>
+
+    <p>Corrective action should trigger automatically once a score crosses a set threshold, rather than depend on someone noticing manually. <strong>That is the real job of supplier performance management software: not replacing judgment, but making sure declining performance surfaces on schedule.</strong> JAGGAER&rsquo;s Supplier Management &amp; Performance solution builds configurable scorecards with automatic development-plan triggers for exactly this purpose.</p>
+
+    <hr class="section-divider">
+
+    <!-- H2 7: KEY COMPONENTS -->
+    <span class="section-eyebrow">Strategy Components</span>
+    <h2 id="s7">Key Components of an SRM Strategy</h2>
+
+    <p>A mature SRM strategy rests on eight components, and they only function together as a system, not as a checklist completed in isolation:</p>
+
+    <!-- VISUAL: criteria-grid -->
+    <div class="criteria-grid">
+      <div class="criteria-card">
+        <div class="criteria-head"><div class="criteria-badge">1</div><div class="criteria-title">Segmentation</div></div>
+        <p class="criteria-desc"><strong>The foundation: every other component depends on knowing which suppliers deserve which level of attention.</strong> Skip this and the other seven components have nothing to calibrate against.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><div class="criteria-badge">2</div><div class="criteria-title">Risk Management</div></div>
+        <p class="criteria-desc">Identifies exposure across financial, geographic, and single-source dimensions. A supplier that looks stable on a scorecard can still carry concentrated risk if it is the only source for a critical component.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><div class="criteria-badge">3</div><div class="criteria-title">Performance Management</div></div>
+        <p class="criteria-desc">Turns expectations into measurable, trackable outcomes. Without it, the KPI-setting step earlier in the process never gets tested against reality.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><div class="criteria-badge">4</div><div class="criteria-title">Collaboration</div></div>
+        <p class="criteria-desc">Creates value beyond the contract through joint innovation and shared forecasting. Deloitte&rsquo;s 2025 research, cited above, identifies this as a primary risk-mitigation priority, not an optional relationship perk.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><div class="criteria-badge">5</div><div class="criteria-title">Contract Management</div></div>
+        <p class="criteria-desc">Keeps commercial terms aligned with what is operationally agreed. Contracts that drift from actual practice become a liability the next time a dispute reaches legal review.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><div class="criteria-badge">6</div><div class="criteria-title">Governance</div></div>
+        <p class="criteria-desc">Assigns clear ownership so disputes escalate cleanly instead of stalling. Without a named owner, even a well-designed segmentation model reverts to whoever answers the phone first.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><div class="criteria-badge">7</div><div class="criteria-title">Communication</div></div>
+        <p class="criteria-desc">Structured cadences, not ad hoc emails, keep both sides aligned between formal reviews. This is what prevents small issues from surfacing only at the next scheduled review.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><div class="criteria-badge">8</div><div class="criteria-title">Continuous Improvement</div></div>
+        <p class="criteria-desc">Closes the loop by feeding performance and risk data back into segmentation on a set schedule. Without this step, the segmentation drawn up in year one never reflects how supplier relationships evolved since.</p>
+      </div>
+    </div>
+
+    <p><strong>Pull any one of these out and the rest weakens.</strong> Strong performance management without governance, for instance, just produces good data that nobody acts on.</p>
+
+    <hr class="section-divider">
+
+    <!-- H2 8: ROLE OF SOFTWARE -->
+    <span class="section-eyebrow">Technology</span>
+    <h2 id="s8">The Role of Software in Supplier Relationship Management</h2>
+
+    <p>What is supplier relationship management software? It is the platform layer that connects supplier data, segmentation, and performance tracking into one system. <strong>That connection is what makes SRM strategy executable across a large supplier base, something manual tracking cannot do.</strong> This is what software supplier relationship management looks like in practice: one connected data layer, not a collection of standalone tools.</p>
+
+    <p>Across the SRM lifecycle, software typically covers the following:</p>
+
+    <ul class="bullet-list">
+      <li>Centralized supplier data management</li>
+      <li>Guided onboarding with built-in compliance checks</li>
+      <li>Segmentation support using spend and risk data</li>
+      <li>Risk visibility that aggregates financial, geographic, and compliance signals</li>
+      <li>Performance scorecards tracking quality, delivery, cost, and compliance in near real time</li>
+      <li>Collaboration tools for structured supplier reviews</li>
+      <li>Reporting that connects supplier outcomes back to procurement leadership</li>
+    </ul>
+
+    <p>JAGGAER illustrates what this looks like in practice, measured against its own published capabilities rather than a general industry claim. <strong>Its <a href="https://www.jaggaer.com/solutions/supplier-management" target="_blank" rel="noopener">supplier onboarding and performance platform</a> centers on a 360&deg; supplier snapshot, configurable scorecards, and lifecycle tracking from onboarding through ongoing evaluation.</strong></p>
+
+    <p>Its Supplier Intelligence platform, spanning a 13M+ supplier network per JAGGAER&rsquo;s own published figures, adds spend- and risk-based segmentation. <strong>That platform also maintains one continuously updated supplier record covering performance, risk, and compliance data, the same data Kraljic-style segmentation depends on.</strong></p>
+
+    <p>Segmentation and performance data connect directly to sourcing, too. A supplier&rsquo;s risk score is relevant the next time that category goes out to bid. <strong>JAGGAER&rsquo;s <a href="https://www.jaggaer.com/solutions/source-to-contract" target="_blank" rel="noopener">sourcing and contract management platform</a> sits on the same data layer, carrying that supplier intelligence forward into sourcing events and contract terms.</strong></p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Manage Suppliers Through One Connected Platform</p>
+        <p class="jag-cta-sub">JAGGAER&rsquo;s Supplier Management platform covers onboarding, segmentation, scorecards, and risk monitoring in one system.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/supplier-management" class="jag-cta-btn" target="_blank" rel="noopener">Explore Supplier Management</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- H2 9: COMMON CHALLENGES -->
+    <span class="section-eyebrow">Where Programs Fail</span>
+    <h2 id="s9">Common Challenges in Supplier Relationship Management</h2>
+
+    <p>SRM programs tend to fail in a small number of predictable ways:</p>
+
+    <!-- VISUAL: risk-cards -->
+    <div class="risk-cards">
+      <div class="risk-item">
+        <div class="risk-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="risk-title">Fragmented Data &amp; Segmentation</div>
+        <p class="risk-desc">Supplier data split across ERPs, spreadsheets, and unstructured communications makes consistent segmentation difficult from the outset. Without a shared framework, two category managers can classify the same supplier differently.</p>
+      </div>
+      <div class="risk-item">
+        <div class="risk-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="risk-title">Unclear Ownership &amp; Weak KPIs</div>
+        <p class="risk-desc">Programs stall even when data and framework are solid if nobody owns the relationship. Vague metrics produce scorecards nobody trusts, inviting dispute rather than resolving it.</p>
+      </div>
+      <div class="risk-item">
+        <div class="risk-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="risk-title">Reactive, Siloed Management</div>
+        <p class="risk-desc"><strong>Treating SRM as an escalation process means the first serious supplier conversation happens during a crisis.</strong> Weak cross-functional collaboration and disconnected systems keep issues siloed and hard to act on.</p>
+      </div>
+    </div>
+
+    <div class="callout-note">
+      <span class="callout-note-label">What&rsquo;s Changed Since 2025</span>
+      <p><strong>Three shifts are reshaping how SRM programs operate day to day.</strong> Vendor counts keep climbing, per the Whistic figure cited earlier, so manual segmentation reviews fall further behind every quarter. ESG and supply-chain due-diligence requirements now extend supplier monitoring well beyond financial and delivery metrics. And risk scoring is shifting from periodic manual review toward continuous, AI-assisted monitoring that flags changes as they happen instead of at the next scheduled audit.</p>
+    </div>
+
+    <div class="callout-note">
+      <span class="callout-note-label">The Trade-Off That Remains</span>
+      <p><strong>Balancing cost pressure against resilience and long-term value is a genuine trade-off, and no platform resolves it outright.</strong> A connected data platform fixes the visibility and fragmentation problems directly. It does not substitute for clear ownership or disciplined governance.</p>
+    </div>
+
+    <p>Where limited internal capacity is the root cause behind several of these, some procurement organizations address it through <a class="link-pending">procurement outsourcing for supplier management</a> rather than adding headcount.</p>
+
+    <hr class="section-divider">
+
+    <!-- H2 10: BEST PRACTICES -->
+    <span class="section-eyebrow">Best Practices</span>
+    <h2 id="s10">Best Practices for Strategic Supplier Relationships</h2>
+
+    <p>Turning these principles into practice is the difference between SRM as an aspiration and SRM as a running operating model. The disciplines below are what that model looks like in practice:</p>
+
+    <ul class="bullet-list">
+      <li>Segment suppliers using a documented framework, like the Kraljic Matrix, rather than gut feel.</li>
+      <li>Align relationship investment to supplier criticality, not invoice size.</li>
+      <li>Set measurable KPIs before engagement starts.</li>
+      <li>Assign clear ownership for every supplier relationship that matters.</li>
+      <li>Schedule structured business reviews on a fixed cadence. Quarterly is common practice for strategic suppliers.</li>
+      <li><strong>A supplier reviewing its own scorecard is more likely to address declining performance proactively than one that receives only a verbal complaint.</strong></li>
+      <li>Involve stakeholders across procurement, operations, and the business functions that depend on the relationship.</li>
+      <li>Build supplier feedback loops so SRM runs in both directions, not just top-down.</li>
+      <li>Maintain a single source of supplier information.</li>
+      <li>Review segmentation periodically, since a supplier&rsquo;s strategic value shifts over time.</li>
+      <li>Connect SRM directly to sourcing and category strategy, so relationship intelligence informs the next RFP.</li>
+    </ul>
+
+    <div class="callout-note callout-purple">
+      <span class="callout-note-label">In Short</span>
+      <p>SRM segments suppliers by strategic value, not spend size. The Kraljic Matrix maps each quadrant to a distinct relationship strategy. Performance data should trigger action automatically, not manually. And software executes the strategy. It does not set it.</p>
+    </div>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Talk to the JAGGAER Team</p>
+        <p class="jag-cta-sub">See a live walkthrough of how JAGGAER connects supplier segmentation, scorecards, and risk data in one platform, tailored to your supplier base.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Request a Demo</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- FAQ -->
+    <span class="section-eyebrow">People Also Ask</span>
+    <h2 id="s11">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>What are the key capabilities of supplier relationship management software? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Core capabilities include centralized supplier data management, spend- and risk-based segmentation, performance scorecards and dashboards, financial and compliance risk monitoring, and collaboration tools for structured supplier reviews. Together, these connect supplier data to segmentation, segmentation to strategy, and performance results back into ongoing supplier decisions.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What&rsquo;s the difference between SRM and supply chain management? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Supply chain management covers the physical and logistical flow of goods: production, transportation, warehousing, and inventory. SRM is narrower and sits inside procurement. It governs how an organization segments, engages, and evaluates the suppliers that feed that supply chain, not the logistics of moving goods through it.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How often should supplier business reviews happen? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Common practice is quarterly business reviews with executive involvement for strategic suppliers. Leverage suppliers typically get semi-annual reviews at the account-management level. Bottleneck and non-critical suppliers need only periodic, risk-triggered check-ins rather than a standing calendar slot.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Who should own supplier relationship management within a procurement organization? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Category managers typically own day-to-day relationship management for suppliers in their category. Strategic-item suppliers usually warrant a named executive sponsor alongside the category owner. A cross-functional governance structure, not procurement alone, should own escalation and segmentation review.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <!-- NEXT STEPS -->
+    <span class="section-eyebrow">Keep Going</span>
+    <h2 id="s12">Next Steps</h2>
+
+    <p><strong>SRM works best as one part of a broader procurement strategy.</strong> For the sourcing-strategy foundation this guide builds on, see our <a class="link-pending">procurement strategy pillar guide</a>, where the <a class="link-pending">Kraljic Matrix for sourcing strategy</a> was first developed for this content cluster.</p>
+
+    <p>If limited internal capacity is the real bottleneck behind a stalled SRM program, our <a class="link-pending">procurement outsourcing options guide</a> covers an alternative path. For managing the supplier data behind all of this directly, explore <a href="https://www.jaggaer.com/solutions/supplier-management" target="_blank" rel="noopener">JAGGAER&rsquo;s supplier data management platform</a>.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Connect Supplier Data to Sourcing and Contracts</p>
+        <p class="jag-cta-sub">JAGGAER&rsquo;s Source-to-Contract platform carries supplier risk and performance data from Supplier Intelligence directly into sourcing events and contract terms.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/source-to-contract" class="jag-cta-btn" target="_blank" rel="noopener">Explore Source-to-Contract</a>
+    </div>
+
+  </article>
+
+  <!-- EXPERT SIDEBAR -->
+  <aside class="expert-sidebar" aria-label="Data at a glance">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">Deloitte &middot; 2025 CPO Survey</span>
+        <span class="exp-num red">61%</span>
+        <p class="exp-stat">Of procurement leaders cite <strong>supplier collaboration</strong> as a top risk-mitigation strategy.</p>
+        <a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Deloitte &middot; 2025 CPO Survey</span>
+        <span class="exp-num red">84% vs 59%</span>
+        <p class="exp-stat">&ldquo;Digital Masters&rdquo; meeting <strong>supplier-performance targets</strong>, versus lower-performing peers.</p>
+        <a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Whistic &middot; 2025 State of TPRM</span>
+        <span class="exp-num red">286</span>
+        <p class="exp-stat">Average <strong>third-party vendor count</strong> per organization, up 21% year over year.</p>
+        <a href="https://www.whistic.com/resources/blog/tprm-impact-report-midyear-update" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">State of Flux &middot; 2025 SRM Research</span>
+        <span class="exp-num red">61%</span>
+        <p class="exp-stat">Of <strong>480+ leaders surveyed</strong> say better supplier management creates value beyond negotiated savings.</p>
+        <a href="https://srm.stateofflux.co.uk/2025-report-showcase" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Kraljic &middot; Harvard Business Review, 1983</span>
+        <span class="exp-num red">4 quadrants</span>
+        <p class="exp-stat">Original <strong>supplier segmentation framework</strong>: profit impact &times; supply risk.</p>
+        <a href="https://hbr.org/1983/09/purchasing-must-become-supply-management" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
