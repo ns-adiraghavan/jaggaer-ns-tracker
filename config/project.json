@@ -5238,7 +5238,14 @@
                   "ts": "2026-09-24T07:36:50.031Z",
                   "by": "manager"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "SAP Ariba Alternatives in 2026: How to Compare Them and Which Fits Your Procurement",
+                "meta_description": "SAP Ariba alternatives compared for enterprise procurement teams, with a routing table that matches each option to your ERP estate and supplier fee model.",
+                "slug": "sap-ariba-alternatives",
+                "updated_at": "2026-09-24T07:40:42.620Z",
+                "updated_by": "manager"
+              }
             },
             {
               "id": "p2-geo-precoro-alternatives",
