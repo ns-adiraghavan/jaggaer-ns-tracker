@@ -4612,7 +4612,7 @@
               "title": "Procurify Vs Ramp",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -4636,6 +4636,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-10T12:47:35.525Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-26T10:18:31.587Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -4644,6 +4649,13 @@
                 "slug": "",
                 "updated_at": "2026-09-10T12:48:01.898Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-25",
+                "live_url": "https://www.jaggaer.com/blog/procurify-vs-ramp",
+                "performance_data": "",
+                "updated_at": "2026-09-26T10:18:31.587Z"
               }
             },
             {
