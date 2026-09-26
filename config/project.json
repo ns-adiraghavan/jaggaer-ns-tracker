@@ -4517,7 +4517,7 @@
               "title": "Sap Ariba Vs Ramp",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -4541,6 +4541,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-09T06:57:02.659Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-26T10:18:01.747Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -4549,6 +4554,13 @@
                 "slug": "sap-ariba-vs-ramp",
                 "updated_at": "2026-09-09T06:58:22.086Z",
                 "updated_by": "m-e10nz"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-25",
+                "live_url": "https://www.jaggaer.com/blog/sap-ariba-vs-ramp",
+                "performance_data": "",
+                "updated_at": "2026-09-26T10:18:01.747Z"
               }
             },
             {
