@@ -4466,7 +4466,7 @@
               "title": "Coupa Vs Ivalua",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -4490,6 +4490,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-09T06:14:54.048Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-26T10:17:28.539Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -4498,6 +4503,13 @@
                 "slug": "",
                 "updated_at": "2026-09-09T06:15:27.389Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-22",
+                "live_url": "https://www.jaggaer.com/blog/coupa-vs-ivalua",
+                "performance_data": "",
+                "updated_at": "2026-09-26T10:17:28.539Z"
               }
             },
             {
