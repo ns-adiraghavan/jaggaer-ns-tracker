@@ -4327,7 +4327,7 @@
               "title": "Coupa Vs Tipalti",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -4351,8 +4351,20 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-08T10:20:41.920Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-26T10:16:21.484Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-22",
+                "live_url": "https://www.jaggaer.com/blog/coupa-vs-tipalti",
+                "performance_data": "",
+                "updated_at": "2026-09-26T10:16:21.483Z"
+              }
             },
             {
               "id": "p2-geo-zip-vs-ramp",
