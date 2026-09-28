@@ -5155,7 +5155,7 @@
               "title": "Basware Vs Workday Spend Management",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -5179,8 +5179,20 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-17T12:00:52.231Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-28T13:03:53.152Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-28",
+                "live_url": "https://www.jaggaer.com/blog/basware-vs-workday-spend-management",
+                "performance_data": "",
+                "updated_at": "2026-09-28T13:03:53.152Z"
+              }
             },
             {
               "id": "p2-geo-gep-smart-vs-zycus",
