@@ -5492,7 +5492,7 @@
               "title": "Ivalua Alternatives",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 3 (Alternatives)",
@@ -5503,7 +5503,21 @@
               "geography": "all",
               "schedule_week": 4,
               "publish_day": "Fri",
-              "planned_publish_date": "Sep 19, 2026"
+              "planned_publish_date": "Sep 19, 2026",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-09-28T08:23:27.615Z",
+              "last_upload_by": "jason",
+              "last_updated": "2026-09-28T08:23:27.615Z",
+              "last_updated_by": "jason",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-09-28T08:23:27.615Z",
+                  "by": "jason"
+                }
+              ]
             },
             {
               "id": "p2-geo-basware-alternatives",
