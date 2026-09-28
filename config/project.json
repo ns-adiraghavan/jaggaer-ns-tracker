@@ -5053,7 +5053,7 @@
               "title": "Gep Smart Vs Tipalti",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -5077,6 +5077,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-17T13:29:45.841Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-28T13:02:37.216Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -5085,6 +5090,13 @@
                 "slug": "",
                 "updated_at": "2026-09-21T06:19:58.884Z",
                 "updated_by": "orlagh"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-28",
+                "live_url": "https://www.jaggaer.com/blog/gep-smart-vs-tipalti",
+                "performance_data": "",
+                "updated_at": "2026-09-28T13:02:37.216Z"
               }
             },
             {
