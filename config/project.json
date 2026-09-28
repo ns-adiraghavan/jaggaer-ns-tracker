@@ -5199,7 +5199,7 @@
               "title": "Gep Smart Vs Zycus",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -5223,6 +5223,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-16T10:49:20.265Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-09-28T13:04:23.392Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -5231,6 +5236,13 @@
                 "slug": "blog-gep-smart-vs-zycus",
                 "updated_at": "2026-09-16T10:51:56.766Z",
                 "updated_by": "m-e10nz"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-28",
+                "live_url": "https://www.jaggaer.com/blog/gep-smart-vs-zycus",
+                "performance_data": "",
+                "updated_at": "2026-09-28T13:04:23.392Z"
               }
             },
             {
