@@ -5385,7 +5385,7 @@
               "title": "Procurify Alternatives",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 3 (Alternatives)",
@@ -5396,7 +5396,21 @@
               "geography": "all",
               "schedule_week": 4,
               "publish_day": "Thu",
-              "planned_publish_date": "Sep 18, 2026"
+              "planned_publish_date": "Sep 18, 2026",
+              "revision_count": 1,
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-09-28T08:17:32.669Z",
+              "last_upload_by": "m-5jitd",
+              "last_updated": "2026-09-28T08:17:32.669Z",
+              "last_updated_by": "m-5jitd",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-09-28T08:17:32.669Z",
+                  "by": "m-5jitd"
+                }
+              ]
             },
             {
               "id": "p2-geo-sap-ariba-alternatives",
