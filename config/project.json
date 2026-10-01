@@ -559,18 +559,28 @@
               "title": "AI Direction in Source-to-Pay: Where the Industry Is Actually Heading in 2026",
               "format": "Ad-Hoc Article",
               "assignee": "",
-              "status": "writing",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 0,
+              "revision_count": 1,
               "primary_keyword": "",
               "secondary_keyword": "",
               "geography": "all",
               "planned_publish_date": "Oct 05, 2026",
               "deliverable_ext": "html",
               "return_to_stage": null,
-              "status_history": []
+              "status_history": [
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-10-01T12:32:15.918Z",
+                  "by": "m-5jitd"
+                }
+              ],
+              "last_upload": "2026-10-01T12:32:15.918Z",
+              "last_upload_by": "m-5jitd",
+              "last_updated": "2026-10-01T12:32:15.918Z",
+              "last_updated_by": "m-5jitd"
             },
             {
               "id": "piece-p3ah02",
