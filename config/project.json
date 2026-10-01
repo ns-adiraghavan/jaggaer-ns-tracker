@@ -69,6 +69,569 @@
   ],
   "pillars": [
     {
+      "id": "ad-hoc-articles",
+      "label": "Ad-Hoc Articles",
+      "sequence": 5,
+      "clusters": [
+        {
+          "id": "c-ad-hoc",
+          "label": "Ad-Hoc Articles",
+          "sequence": 1,
+          "intent": "expedited",
+          "anchor_piece": "",
+          "month_id": "month-1",
+          "pieces": [
+            {
+              "id": "piece-dyeb2f",
+              "title": "Fable 5 for Procurement",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "live",
+              "content_type": "ad-hoc",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-07-02T07:15:52.096Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-10T13:47:31.794Z",
+                  "by": "Alex"
+                }
+              ],
+              "last_updated": "2026-07-02T07:15:52.096Z",
+              "last_updated_by": "manager",
+              "publishing": {
+                "published_by": "Alex",
+                "launch_date": "2026-06-23",
+                "live_url": "https://www.jaggaer.com/blog/claude-fable-5-for-source-to-pay",
+                "performance_data": "",
+                "updated_at": "2026-07-10T13:47:31.794Z"
+              },
+              "phase": 1
+            },
+            {
+              "id": "piece-jjmo5z",
+              "title": "Gartner_AI in procurement",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "live",
+              "content_type": "ad-hoc",
+              "revision_count": 1,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-07-02T10:49:23.470Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-07-02T10:49:33.506Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-07-28T10:53:43.867Z",
+                  "by": "Jovana"
+                }
+              ],
+              "last_updated": "2026-07-02T10:49:33.506Z",
+              "last_updated_by": "manager",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-07-02T10:49:33.506Z",
+              "last_upload_by": "manager",
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-07-24",
+                "live_url": "https://www.jaggaer.com/blog/ai-in-procurement-closing-the-supply-chain-talent-gap",
+                "performance_data": "",
+                "updated_at": "2026-07-28T10:53:43.867Z"
+              },
+              "phase": 1
+            },
+            {
+              "id": "piece-si3t6m",
+              "title": "Procurement's AI Adoption Gap in 2026 What Closes It",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "live",
+              "content_type": "ad-hoc",
+              "revision_count": 1,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-07-13T12:06:15.020Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-07-13T12:06:25.541Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-03T10:57:30.324Z",
+                  "by": "Jovana"
+                }
+              ],
+              "last_updated": "2026-07-13T12:06:25.541Z",
+              "last_updated_by": "manager",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-07-13T12:06:25.541Z",
+              "last_upload_by": "manager",
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-07-28",
+                "live_url": "https://www.jaggaer.com/blog/procurement-ai-adoption-gap-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-03T10:57:30.324Z"
+              },
+              "phase": 1
+            },
+            {
+              "id": "piece-cgx6uf",
+              "title": "What Is Design-to-Pay: Why It Matters More Than Source-to-Pay for Discrete Manufacturers",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "live",
+              "content_type": "ad-hoc",
+              "revision_count": 3,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-10T10:35:49.454Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-08-10T10:35:57.550Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-08-10T13:43:12.122Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-08-10T13:47:30.583Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-24T09:48:21.060Z",
+                  "by": "Jovana"
+                }
+              ],
+              "last_updated": "2026-08-10T13:47:30.582Z",
+              "last_updated_by": "manager",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-08-10T13:47:30.582Z",
+              "last_upload_by": "manager",
+              "secondary_keyword": "",
+              "phase": 1,
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-11",
+                "live_url": "https://www.jaggaer.com/blog/what-is-design-to-pay",
+                "performance_data": "",
+                "updated_at": "2026-08-24T09:48:21.060Z"
+              }
+            },
+            {
+              "id": "piece-3m8n1u",
+              "title": "The AI Procurement Platform Landscape in Q3 2026",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "live",
+              "content_type": "ad-hoc",
+              "revision_count": 1,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-12T14:27:39.725Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-08-12T14:27:47.835Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-24T12:12:28.398Z",
+                  "by": "m-izu4e"
+                }
+              ],
+              "last_updated": "2026-08-12T14:27:47.835Z",
+              "last_updated_by": "manager",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-08-12T14:27:47.835Z",
+              "last_upload_by": "manager",
+              "phase": 1,
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-21",
+                "live_url": "https://www.jaggaer.com/blog/ai-procurement-platform-landscape-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-24T12:12:28.398Z"
+              }
+            },
+            {
+              "id": "piece-ct5t23",
+              "title": "Frontier AI Vs Procurement Native AI",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "live",
+              "content_type": "ad-hoc",
+              "revision_count": 1,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-12T14:29:05.098Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-08-12T14:29:12.882Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-24T12:13:14.166Z",
+                  "by": "m-izu4e"
+                }
+              ],
+              "last_updated": "2026-08-12T14:29:12.882Z",
+              "last_updated_by": "manager",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-08-12T14:29:12.882Z",
+              "last_upload_by": "manager",
+              "phase": 1,
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-24",
+                "live_url": "https://www.jaggaer.com/blog/frontier-ai-vs-procurement-vendor-ai-s2p-2026",
+                "performance_data": "",
+                "updated_at": "2026-08-24T12:13:14.166Z"
+              }
+            },
+            {
+              "id": "piece-66bmrt",
+              "title": "JAGGAER CEO Andrew Roszko on AI Governance",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "live",
+              "content_type": "ad-hoc",
+              "revision_count": 3,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-13T13:05:02.547Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-08-13T13:05:33.706Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "not-started",
+                  "ts": "2026-08-14T10:39:20.595Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-17T11:03:37.631Z",
+                  "by": "m-pifrn"
+                },
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-08-18T07:48:48.664Z",
+                  "by": "jason"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-19T10:37:33.190Z",
+                  "by": "Jovana"
+                }
+              ],
+              "last_updated": "2026-08-18T07:48:48.664Z",
+              "last_updated_by": "jason",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-08-18T07:48:48.664Z",
+              "last_upload_by": "jason",
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-19",
+                "live_url": "https://www.jaggaer.com/blog/jaggaer-ceo-andrew-roszko-ai-governance-procurement",
+                "performance_data": "",
+                "updated_at": "2026-08-19T10:37:33.190Z"
+              },
+              "phase": 1
+            },
+            {
+              "id": "piece-tswxjd",
+              "title": "10 Myths About Standalone CLM Software Tested Against the 2026 Data_V1_13082026",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "live",
+              "content_type": "ad-hoc",
+              "revision_count": 3,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-13T14:14:26.218Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-08-13T14:14:39.209Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "not-started",
+                  "ts": "2026-08-14T05:24:33.941Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-08-14T10:35:43.310Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-08-24T12:14:15.694Z",
+                  "by": "m-izu4e"
+                }
+              ],
+              "last_updated": "2026-08-14T10:35:43.310Z",
+              "last_updated_by": "manager",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-08-14T10:35:43.310Z",
+              "last_upload_by": "manager",
+              "secondary_keyword": "",
+              "phase": 1,
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-08-24",
+                "live_url": "https://www.jaggaer.com/blog/myths-about-standalone-clm-software",
+                "performance_data": "",
+                "updated_at": "2026-08-24T12:14:15.694Z"
+              }
+            },
+            {
+              "id": "piece-hwovfi",
+              "title": "How to Evaluate Procurement AI Vendors",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "marketing-review",
+              "content_type": "ad-hoc",
+              "phase": 2,
+              "schedule_month": "p2-month-1",
+              "revision_count": 3,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-08-25T12:57:09.567Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-08-25T12:57:17.406Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "not-started",
+                  "ts": "2026-08-25T16:26:18.578Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-08-26T06:14:17.399Z",
+                  "by": "jason"
+                }
+              ],
+              "last_updated": "2026-08-26T06:14:17.399Z",
+              "last_updated_by": "jason",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-08-26T06:14:17.399Z",
+              "last_upload_by": "jason",
+              "secondary_keyword": ""
+            },
+            {
+              "id": "piece-14q7m0",
+              "title": "JAGGAER Procurement Performance vs. Industry Benchmarks (2026)",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "marketing-review",
+              "content_type": "geo",
+              "phase": 2,
+              "schedule_month": "p2-month-1",
+              "revision_count": 1,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-09-10T07:36:42.268Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-09-10T07:40:17.589Z",
+                  "by": "manager"
+                }
+              ],
+              "last_updated": "2026-09-10T07:40:17.589Z",
+              "last_updated_by": "manager",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-09-10T07:40:17.589Z",
+              "last_upload_by": "manager"
+            },
+            {
+              "id": "piece-8b110p",
+              "title": "AI Direction Source to Pay",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "ad-hoc-review",
+              "content_type": "ad-hoc",
+              "phase": 2,
+              "schedule_month": "p2-month-1",
+              "revision_count": 1,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "writing",
+                  "ts": "2026-09-29T13:48:36.480Z",
+                  "by": "manager"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-09-29T13:48:47.183Z",
+                  "by": "manager"
+                }
+              ],
+              "last_updated": "2026-09-29T13:48:47.183Z",
+              "last_updated_by": "manager",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-09-29T13:48:47.183Z",
+              "last_upload_by": "manager"
+            },
+            {
+              "id": "piece-p3ah01",
+              "title": "AI Direction in Source-to-Pay: Where the Industry Is Actually Heading in 2026",
+              "format": "Ad-Hoc Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "geography": "all",
+              "planned_publish_date": "Oct 05, 2026",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "status_history": []
+            },
+            {
+              "id": "piece-p3ah02",
+              "title": "Comparing Supply Chain Agents",
+              "format": "Ad-Hoc Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "geography": "all",
+              "planned_publish_date": "Oct 05, 2026",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "status_history": []
+            },
+            {
+              "id": "piece-p3ah03",
+              "title": "Ocean peak season endures, defying forecast of early end | Supply Chain Dive",
+              "format": "Ad-Hoc Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "geography": "all",
+              "planned_publish_date": "Oct 05, 2026",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "status_history": []
+            },
+            {
+              "id": "piece-p3ah04",
+              "title": "Sustainability Needs for Manufacturing In 2026",
+              "format": "Ad-Hoc Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "secondary_keyword": "",
+              "geography": "all",
+              "planned_publish_date": "Oct 05, 2026",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "status_history": []
+            }
+          ]
+        }
+      ],
+      "phase": null
+    },
+    {
       "id": "ai-in-s2p",
       "label": "AI in S2P",
       "subtitle": "Build With Claude",
@@ -4028,569 +4591,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "ad-hoc-articles",
-      "label": "Ad-Hoc Articles",
-      "sequence": 5,
-      "clusters": [
-        {
-          "id": "c-ad-hoc",
-          "label": "Ad-Hoc Articles",
-          "sequence": 1,
-          "intent": "expedited",
-          "anchor_piece": "",
-          "month_id": "month-1",
-          "pieces": [
-            {
-              "id": "piece-dyeb2f",
-              "title": "Fable 5 for Procurement",
-              "format": "Ad-Hoc Article",
-              "assignee": "manager",
-              "status": "live",
-              "content_type": "ad-hoc",
-              "revision_count": 0,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "writing",
-                  "ts": "2026-07-02T07:15:52.096Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "live",
-                  "ts": "2026-07-10T13:47:31.794Z",
-                  "by": "Alex"
-                }
-              ],
-              "last_updated": "2026-07-02T07:15:52.096Z",
-              "last_updated_by": "manager",
-              "publishing": {
-                "published_by": "Alex",
-                "launch_date": "2026-06-23",
-                "live_url": "https://www.jaggaer.com/blog/claude-fable-5-for-source-to-pay",
-                "performance_data": "",
-                "updated_at": "2026-07-10T13:47:31.794Z"
-              },
-              "phase": 1
-            },
-            {
-              "id": "piece-jjmo5z",
-              "title": "Gartner_AI in procurement",
-              "format": "Ad-Hoc Article",
-              "assignee": "manager",
-              "status": "live",
-              "content_type": "ad-hoc",
-              "revision_count": 1,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "writing",
-                  "ts": "2026-07-02T10:49:23.470Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-07-02T10:49:33.506Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "live",
-                  "ts": "2026-07-28T10:53:43.867Z",
-                  "by": "Jovana"
-                }
-              ],
-              "last_updated": "2026-07-02T10:49:33.506Z",
-              "last_updated_by": "manager",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-07-02T10:49:33.506Z",
-              "last_upload_by": "manager",
-              "secondary_keyword": "",
-              "publishing": {
-                "published_by": "Jovana",
-                "launch_date": "2026-07-24",
-                "live_url": "https://www.jaggaer.com/blog/ai-in-procurement-closing-the-supply-chain-talent-gap",
-                "performance_data": "",
-                "updated_at": "2026-07-28T10:53:43.867Z"
-              },
-              "phase": 1
-            },
-            {
-              "id": "piece-si3t6m",
-              "title": "Procurement's AI Adoption Gap in 2026 What Closes It",
-              "format": "Ad-Hoc Article",
-              "assignee": "manager",
-              "status": "live",
-              "content_type": "ad-hoc",
-              "revision_count": 1,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "writing",
-                  "ts": "2026-07-13T12:06:15.020Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-07-13T12:06:25.541Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "live",
-                  "ts": "2026-08-03T10:57:30.324Z",
-                  "by": "Jovana"
-                }
-              ],
-              "last_updated": "2026-07-13T12:06:25.541Z",
-              "last_updated_by": "manager",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-07-13T12:06:25.541Z",
-              "last_upload_by": "manager",
-              "secondary_keyword": "",
-              "publishing": {
-                "published_by": "Jovana",
-                "launch_date": "2026-07-28",
-                "live_url": "https://www.jaggaer.com/blog/procurement-ai-adoption-gap-2026",
-                "performance_data": "",
-                "updated_at": "2026-08-03T10:57:30.324Z"
-              },
-              "phase": 1
-            },
-            {
-              "id": "piece-cgx6uf",
-              "title": "What Is Design-to-Pay: Why It Matters More Than Source-to-Pay for Discrete Manufacturers",
-              "format": "Ad-Hoc Article",
-              "assignee": "manager",
-              "status": "live",
-              "content_type": "ad-hoc",
-              "revision_count": 3,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "writing",
-                  "ts": "2026-08-10T10:35:49.454Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-08-10T10:35:57.550Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-08-10T13:43:12.122Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-08-10T13:47:30.583Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "live",
-                  "ts": "2026-08-24T09:48:21.060Z",
-                  "by": "Jovana"
-                }
-              ],
-              "last_updated": "2026-08-10T13:47:30.582Z",
-              "last_updated_by": "manager",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-08-10T13:47:30.582Z",
-              "last_upload_by": "manager",
-              "secondary_keyword": "",
-              "phase": 1,
-              "publishing": {
-                "published_by": "Jovana",
-                "launch_date": "2026-08-11",
-                "live_url": "https://www.jaggaer.com/blog/what-is-design-to-pay",
-                "performance_data": "",
-                "updated_at": "2026-08-24T09:48:21.060Z"
-              }
-            },
-            {
-              "id": "piece-3m8n1u",
-              "title": "The AI Procurement Platform Landscape in Q3 2026",
-              "format": "Ad-Hoc Article",
-              "assignee": "manager",
-              "status": "live",
-              "content_type": "ad-hoc",
-              "revision_count": 1,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "writing",
-                  "ts": "2026-08-12T14:27:39.725Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-08-12T14:27:47.835Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "live",
-                  "ts": "2026-08-24T12:12:28.398Z",
-                  "by": "m-izu4e"
-                }
-              ],
-              "last_updated": "2026-08-12T14:27:47.835Z",
-              "last_updated_by": "manager",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-08-12T14:27:47.835Z",
-              "last_upload_by": "manager",
-              "phase": 1,
-              "secondary_keyword": "",
-              "publishing": {
-                "published_by": "Jovana",
-                "launch_date": "2026-08-21",
-                "live_url": "https://www.jaggaer.com/blog/ai-procurement-platform-landscape-2026",
-                "performance_data": "",
-                "updated_at": "2026-08-24T12:12:28.398Z"
-              }
-            },
-            {
-              "id": "piece-ct5t23",
-              "title": "Frontier AI Vs Procurement Native AI",
-              "format": "Ad-Hoc Article",
-              "assignee": "manager",
-              "status": "live",
-              "content_type": "ad-hoc",
-              "revision_count": 1,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "writing",
-                  "ts": "2026-08-12T14:29:05.098Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-08-12T14:29:12.882Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "live",
-                  "ts": "2026-08-24T12:13:14.166Z",
-                  "by": "m-izu4e"
-                }
-              ],
-              "last_updated": "2026-08-12T14:29:12.882Z",
-              "last_updated_by": "manager",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-08-12T14:29:12.882Z",
-              "last_upload_by": "manager",
-              "phase": 1,
-              "secondary_keyword": "",
-              "publishing": {
-                "published_by": "Jovana",
-                "launch_date": "2026-08-24",
-                "live_url": "https://www.jaggaer.com/blog/frontier-ai-vs-procurement-vendor-ai-s2p-2026",
-                "performance_data": "",
-                "updated_at": "2026-08-24T12:13:14.166Z"
-              }
-            },
-            {
-              "id": "piece-66bmrt",
-              "title": "JAGGAER CEO Andrew Roszko on AI Governance",
-              "format": "Ad-Hoc Article",
-              "assignee": "manager",
-              "status": "live",
-              "content_type": "ad-hoc",
-              "revision_count": 3,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "writing",
-                  "ts": "2026-08-13T13:05:02.547Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-08-13T13:05:33.706Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "not-started",
-                  "ts": "2026-08-14T10:39:20.595Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "writing",
-                  "ts": "2026-08-17T11:03:37.631Z",
-                  "by": "m-pifrn"
-                },
-                {
-                  "stage": "marketing-review",
-                  "ts": "2026-08-18T07:48:48.664Z",
-                  "by": "jason"
-                },
-                {
-                  "stage": "live",
-                  "ts": "2026-08-19T10:37:33.190Z",
-                  "by": "Jovana"
-                }
-              ],
-              "last_updated": "2026-08-18T07:48:48.664Z",
-              "last_updated_by": "jason",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-08-18T07:48:48.664Z",
-              "last_upload_by": "jason",
-              "secondary_keyword": "",
-              "publishing": {
-                "published_by": "Jovana",
-                "launch_date": "2026-08-19",
-                "live_url": "https://www.jaggaer.com/blog/jaggaer-ceo-andrew-roszko-ai-governance-procurement",
-                "performance_data": "",
-                "updated_at": "2026-08-19T10:37:33.190Z"
-              },
-              "phase": 1
-            },
-            {
-              "id": "piece-tswxjd",
-              "title": "10 Myths About Standalone CLM Software Tested Against the 2026 Data_V1_13082026",
-              "format": "Ad-Hoc Article",
-              "assignee": "manager",
-              "status": "live",
-              "content_type": "ad-hoc",
-              "revision_count": 3,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "writing",
-                  "ts": "2026-08-13T14:14:26.218Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-08-13T14:14:39.209Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "not-started",
-                  "ts": "2026-08-14T05:24:33.941Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-08-14T10:35:43.310Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "live",
-                  "ts": "2026-08-24T12:14:15.694Z",
-                  "by": "m-izu4e"
-                }
-              ],
-              "last_updated": "2026-08-14T10:35:43.310Z",
-              "last_updated_by": "manager",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-08-14T10:35:43.310Z",
-              "last_upload_by": "manager",
-              "secondary_keyword": "",
-              "phase": 1,
-              "publishing": {
-                "published_by": "Jovana",
-                "launch_date": "2026-08-24",
-                "live_url": "https://www.jaggaer.com/blog/myths-about-standalone-clm-software",
-                "performance_data": "",
-                "updated_at": "2026-08-24T12:14:15.694Z"
-              }
-            },
-            {
-              "id": "piece-hwovfi",
-              "title": "How to Evaluate Procurement AI Vendors",
-              "format": "Ad-Hoc Article",
-              "assignee": "manager",
-              "status": "marketing-review",
-              "content_type": "ad-hoc",
-              "phase": 2,
-              "schedule_month": "p2-month-1",
-              "revision_count": 3,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "writing",
-                  "ts": "2026-08-25T12:57:09.567Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-08-25T12:57:17.406Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "not-started",
-                  "ts": "2026-08-25T16:26:18.578Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ed-review",
-                  "ts": "2026-08-26T06:14:17.399Z",
-                  "by": "jason"
-                }
-              ],
-              "last_updated": "2026-08-26T06:14:17.399Z",
-              "last_updated_by": "jason",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-08-26T06:14:17.399Z",
-              "last_upload_by": "jason",
-              "secondary_keyword": ""
-            },
-            {
-              "id": "piece-14q7m0",
-              "title": "JAGGAER Procurement Performance vs. Industry Benchmarks (2026)",
-              "format": "Ad-Hoc Article",
-              "assignee": "manager",
-              "status": "marketing-review",
-              "content_type": "geo",
-              "phase": 2,
-              "schedule_month": "p2-month-1",
-              "revision_count": 1,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "writing",
-                  "ts": "2026-09-10T07:36:42.268Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "marketing-review",
-                  "ts": "2026-09-10T07:40:17.589Z",
-                  "by": "manager"
-                }
-              ],
-              "last_updated": "2026-09-10T07:40:17.589Z",
-              "last_updated_by": "manager",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-09-10T07:40:17.589Z",
-              "last_upload_by": "manager"
-            },
-            {
-              "id": "piece-8b110p",
-              "title": "AI Direction Source to Pay",
-              "format": "Ad-Hoc Article",
-              "assignee": "manager",
-              "status": "ad-hoc-review",
-              "content_type": "ad-hoc",
-              "phase": 2,
-              "schedule_month": "p2-month-1",
-              "revision_count": 1,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "writing",
-                  "ts": "2026-09-29T13:48:36.480Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-09-29T13:48:47.183Z",
-                  "by": "manager"
-                }
-              ],
-              "last_updated": "2026-09-29T13:48:47.183Z",
-              "last_updated_by": "manager",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-09-29T13:48:47.183Z",
-              "last_upload_by": "manager"
-            },
-            {
-              "id": "piece-p3ah01",
-              "title": "AI Direction in Source-to-Pay: Where the Industry Is Actually Heading in 2026",
-              "format": "Ad-Hoc Article",
-              "assignee": "",
-              "status": "not-started",
-              "content_type": "ad-hoc",
-              "phase": 3,
-              "schedule_month": "p3-month-1",
-              "revision_count": 0,
-              "primary_keyword": "",
-              "secondary_keyword": "",
-              "geography": "all",
-              "planned_publish_date": "Oct 05, 2026",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "status_history": []
-            },
-            {
-              "id": "piece-p3ah02",
-              "title": "Comparing Supply Chain Agents",
-              "format": "Ad-Hoc Article",
-              "assignee": "",
-              "status": "not-started",
-              "content_type": "ad-hoc",
-              "phase": 3,
-              "schedule_month": "p3-month-1",
-              "revision_count": 0,
-              "primary_keyword": "",
-              "secondary_keyword": "",
-              "geography": "all",
-              "planned_publish_date": "Oct 05, 2026",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "status_history": []
-            },
-            {
-              "id": "piece-p3ah03",
-              "title": "Ocean peak season endures, defying forecast of early end | Supply Chain Dive",
-              "format": "Ad-Hoc Article",
-              "assignee": "",
-              "status": "not-started",
-              "content_type": "ad-hoc",
-              "phase": 3,
-              "schedule_month": "p3-month-1",
-              "revision_count": 0,
-              "primary_keyword": "",
-              "secondary_keyword": "",
-              "geography": "all",
-              "planned_publish_date": "Oct 05, 2026",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "status_history": []
-            },
-            {
-              "id": "piece-p3ah04",
-              "title": "Sustainability Needs for Manufacturing In 2026",
-              "format": "Ad-Hoc Article",
-              "assignee": "",
-              "status": "not-started",
-              "content_type": "ad-hoc",
-              "phase": 3,
-              "schedule_month": "p3-month-1",
-              "revision_count": 0,
-              "primary_keyword": "",
-              "secondary_keyword": "",
-              "geography": "all",
-              "planned_publish_date": "Oct 05, 2026",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "status_history": []
-            }
-          ]
-        }
-      ],
-      "phase": null
     },
     {
       "id": "p2-geo",
