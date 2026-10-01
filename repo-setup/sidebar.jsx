@@ -242,6 +242,12 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           rightMeta="diagram"
         />
         <NavSection
+          label="Architecture Map"
+          active={view === "architecture-map"}
+          onClick={() => setView("architecture-map")}
+          rightMeta="pillars"
+        />
+        <NavSection
           label="Content Experts"
           active={view === "sme-guide"}
           onClick={() => setView("sme-guide")}

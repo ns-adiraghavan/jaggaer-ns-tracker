@@ -478,6 +478,7 @@ function App() {
         {view === "ai-playground" && <AIPlaygroundPanel onBack={() => setView("tracker")} project={project} setProject={setProject} currentUser={currentUser} saveState={saveState} />}
         {view === "style-guide" && <StyleGuidePanel project={project} adminMode={adminMode} />}
         {view === "content-flow" && <ContentFlowPanel project={project} adminMode={adminMode} />}
+        {view === "architecture-map" && <ArchitectureMapPanel />}
         {view === "sme-guide" && <SMEGuidePanel project={project} adminMode={adminMode} />}
         {view === "admin" && adminMode && (
           <AdminPanel project={project} setProject={setProject} adminTarget={adminTarget} setAdminTarget={setAdminTarget} />
