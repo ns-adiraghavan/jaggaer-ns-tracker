@@ -595,11 +595,11 @@
               "title": "Ocean peak season endures, defying forecast of early end | Supply Chain Dive",
               "format": "Ad-Hoc Article",
               "assignee": "",
-              "status": "writing",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 1,
+              "revision_count": 2,
               "primary_keyword": "",
               "secondary_keyword": "",
               "geography": "all",
@@ -611,11 +611,16 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-10-01T11:55:56.800Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-10-01T12:31:41.198Z",
+                  "by": "m-5jitd"
                 }
               ],
-              "last_upload": "2026-10-01T11:55:56.800Z",
+              "last_upload": "2026-10-01T12:31:41.197Z",
               "last_upload_by": "m-5jitd",
-              "last_updated": "2026-10-01T11:55:56.800Z",
+              "last_updated": "2026-10-01T12:31:41.197Z",
               "last_updated_by": "m-5jitd",
               "seo": {
                 "meta_title": "Ocean peak season 2026: why import forecasts keep changing",
