@@ -1,0 +1,854 @@
+<!-- uploaded by m-5jitd at 2026-10-01T12:32:13.658Z -->
+<!-- piece: AI Direction in Source-to-Pay: Where the Industry Is Actually Heading in 2026 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>document.documentElement.classList.add('js-enabled');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Procurement vs. Purchasing: What's the Difference in 2026?</title>
+<meta name="description" content="Procurement vs purchasing: procurement sets the terms, purchasing executes them. See the key differences, where savings leak, and how to close the gap.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Jason Rydzewski">
+<meta name="theme-color" content="#5300CE">
+<link rel="canonical" href="https://www.jaggaer.com/blog/procurement-vs-purchasing">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235300CE'/%3E%3Cstop offset='1' stop-color='%23E22B83'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="JAGGAER">
+<meta property="og:title" content="Procurement vs. Purchasing: What's the Difference in 2026?">
+<meta property="og:description" content="Procurement vs purchasing: procurement sets the terms, purchasing executes them. See the key differences, where savings leak, and how to close the gap.">
+<meta property="og:url" content="https://www.jaggaer.com/blog/procurement-vs-purchasing">
+<meta property="article:published_time" content="2026-10-01">
+<meta property="article:section" content="Procurement">
+
+<!-- Twitter -->
+<!-- TODO: add the shared hero image (absolute URL, about 1200x630) as og:image and twitter:image once it is live -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Procurement vs. Purchasing: What's the Difference in 2026?">
+<meta name="twitter:description" content="Procurement vs purchasing: procurement sets the terms, purchasing executes them. See the key differences, where savings leak, and how to close the gap.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "Procurement vs. Purchasing: What's the Difference in 2026?", "description": "Procurement vs purchasing: procurement sets the terms, purchasing executes them. See the key differences, where savings leak, and how to close the gap.", "publisher": {"@type": "Organization", "name": "JAGGAER", "url": "https://www.jaggaer.com"}, "datePublished": "2026-10-01", "dateModified": "2026-10-01", "author": {"@type": "Person", "name": "Jason Rydzewski"}, "mainEntityOfPage": "https://www.jaggaer.com/blog/procurement-vs-purchasing"}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is purchasing part of procurement?", "acceptedAnswer": {"@type": "Answer", "text": "In procurement vs. purchasing, purchasing is the transactional subset, from requisition to payment. Procurement typically covers the upstream work: sourcing, negotiation, contract management, and supplier performance. Purchasing executes the terms procurement sets. SoftwareConnect's 2024 guide drew the same line."}}, {"@type": "Question", "name": "What's the difference between procure-to-pay and source-to-pay?", "acceptedAnswer": {"@type": "Answer", "text": "Procure-to-pay, also called purchase-to-pay (P2P), generally covers the downstream buying process, from requisition through payment. JAGGAER describes it as the part that follows contracting, while source-to-pay starts earlier, at sourcing. JAGGAER states that running both on one data layer lets sourcing decisions enforce automatically in purchasing."}}, {"@type": "Question", "name": "How much spend goes off-contract, according to APQC?", "acceptedAnswer": {"@type": "Answer", "text": "APQC's live data, checked in late September 2026, showed median maverick buying at 1.2% of purchase value. That measure counts only purchases that ignore an existing contract. Broader off-contract measures can be higher because they may also include categories with no contract. Split your own procurement vs. purchasing leakage into coverage and compliance before you act."}}, {"@type": "Question", "name": "What does procurement software do for purchasing?", "acceptedAnswer": {"@type": "Answer", "text": "JAGGAER eProcurement runs the purchasing workflow: catalog search, requisition, approval routing, purchase order creation, and an audit trail. Guided buying helps steer orders toward contracted suppliers, exceptions stay visible, and the platform supports ERP write-back to SAP, Oracle, and Infor."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading: 700;
+  --line-height-base:  1.6;
+  --line-height-heading: 1.1;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-base);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);}
+h1{font-size:var(--font-size-h1);}
+h2{font-size:var(--font-size-h2);}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+a:focus-visible,.toc-link:focus-visible,.next-card:focus-visible,.faq-item summary:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;border-radius:2px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.link-pending{color:var(--color-teal);border-bottom:1px solid #4D819440;}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.stat{font-weight:700;color:var(--color-red);}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.section-eyebrow{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;line-height:var(--line-height-heading);color:var(--color-ink);max-width:760px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-size:.625rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0;gap:0;}
+
+.toc-sidebar{width:212px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+.expert-sidebar{width:212px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-size:1.15rem;font-weight:700;color:var(--color-ink);line-height:1;display:block;margin-bottom:.15rem;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.68rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:.68rem;}
+.exp-link{font-size:.62rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-num.small{font-size:.72rem;line-height:1.25;letter-spacing:0;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1060px){.expert-sidebar{display:none;}}
+
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);scroll-margin-top:1.5rem;}
+article h3{font-size:var(--font-size-h5);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.05em;}
+article h3.mt-0{margin-top:0;}
+h1[id]{scroll-margin-top:1.5rem;}
+
+.stat-metrics{background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-m) 0;}
+.stat-metrics-kicker{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);margin-bottom:var(--space-s);display:block;}
+.stat-metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;}
+.stat-metrics-grid.cols-3{grid-template-columns:repeat(3,1fr);}
+.stat-metrics-grid.cols-1{grid-template-columns:1fr;max-width:14rem;margin:0 auto;}
+.stat-metric-key{border:2px solid var(--color-red);}
+.stat-metric{padding:.6rem .5rem;text-align:center;background:var(--color-white);border-radius:var(--border-radius-sm);}
+.stat-num{font-size:clamp(1.2rem,2vw,1.5rem);font-weight:800;color:var(--color-red);display:block;line-height:1;margin-bottom:.2rem;}
+.stat-label{font-size:.68rem;font-weight:600;color:var(--color-ink);display:block;line-height:1.25;margin-bottom:.15rem;}
+.stat-sub{font-size:.62rem;color:var(--color-ink-3);display:block;font-style:italic;}
+
+.hook-stat{display:flex;align-items:center;gap:var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:0 0 var(--space-m);}
+.hook-stat-num{font-size:clamp(1.5rem,2.6vw,1.9rem);font-weight:800;color:var(--jai-a);line-height:1;letter-spacing:-.01em;flex-shrink:0;}
+.hook-stat-body{min-width:0;}
+.hook-stat-lead{font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);line-height:1.35;margin:0 0 .15rem;}
+.hook-stat-sub{font-size:var(--font-size-xs);color:var(--color-ink-3);margin:0;line-height:1.45;}
+@media(max-width:580px){.hook-stat{flex-direction:column;align-items:flex-start;gap:var(--space-xs);}}
+@media(max-width:600px){.stat-metrics-grid{grid-template-columns:repeat(2,1fr);}}
+
+.callout-note{background:var(--color-light-blue);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.callout-note-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-xs);}
+.callout-note p{font-size:var(--font-size-sm);color:var(--color-ink-2);margin:0;line-height:1.6;}
+.callout-note.callout-purple{background:var(--purple-tint);border-left-color:var(--jai-a);}
+.callout-note.callout-purple .callout-note-label{color:var(--jai-a);}
+
+.obl-table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.obl-table{width:100%;border-collapse:collapse;font-size:.8125rem;min-width:580px;}
+.obl-table th{padding:.75rem 1rem;background:var(--jai-a);color:#fff;font-weight:700;text-align:left;border-bottom:1px solid #ffffff18;border-right:1px solid #ffffff18;font-size:.75rem;letter-spacing:.04em;}
+.obl-table th:last-child{border-right:none;}
+.obl-table td{padding:.75rem 1rem;border-bottom:var(--border);border-right:var(--border);vertical-align:top;line-height:1.5;color:var(--color-ink-2);font-size:.8rem;}
+.obl-table td:last-child{border-right:none;}
+.obl-table tr:last-child td{border-bottom:none;}
+.obl-table td:first-child{font-weight:700;color:var(--color-ink);background:var(--color-cream);}
+.obl-note{font-size:.72rem;color:var(--color-ink-3);display:block;margin-top:.4rem;font-weight:400;}
+.obl-caption{caption-side:top;text-align:left;padding:.75rem 1rem;font-size:.9rem;font-weight:700;color:var(--color-ink);background:var(--color-cream);border-bottom:var(--border);}
+.score-table,.supplier-table{table-layout:fixed;min-width:100%;}
+.cols-6-equal col{width:16.6667%;}
+.score-table th,.score-table td{text-align:center;word-wrap:break-word;}
+.score-table td:first-child{text-align:left;}
+.supplier-table th,.supplier-table td{overflow-wrap:normal;word-break:keep-all;hyphens:none;}
+.supplier-table th{white-space:normal;line-height:1.3;}
+@media(max-width:560px){.score-table,.supplier-table{table-layout:auto;min-width:640px;}}
+
+.phase-cards{display:flex;flex-direction:column;gap:var(--space-s);margin:var(--space-m) 0 var(--space-l);}
+.phase-item{display:flex;align-items:stretch;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;}
+.phase-accent{width:4px;flex-shrink:0;}
+.pa-1{background:var(--color-teal);}
+.pa-2{background:var(--color-navy);}
+.pa-3{background:var(--color-grey);}
+.pa-4{background:var(--jai-a);}
+.pa-5{background:var(--color-red);}
+.phase-body{flex:1;padding:var(--space-s) var(--space-m);background:var(--color-white);}
+.phase-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--color-ink-3);display:block;margin-bottom:var(--space-2xs);}
+.phase-title{font-weight:700;color:var(--color-ink);font-size:var(--font-size-sm);margin-bottom:.25rem;}
+.phase-desc{font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;margin:0;}
+
+.key-facts{background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.kf-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-s);}
+.key-facts ul{margin-bottom:0;}
+.key-facts li{font-size:.8125rem;line-height:1.6;}
+
+.pull-quote{background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.pull-quote p{font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);line-height:1.5;margin:0 0 var(--space-xs);font-style:normal;}
+.pull-quote cite{display:block;font-size:.75rem;font-weight:600;font-style:normal;color:var(--color-ink-3);}
+
+.jag-cta{display:flex;align-items:center;gap:var(--space-m);border:1px solid transparent;background:linear-gradient(#fff,#fff) padding-box, linear-gradient(90deg,#5300CE,#E22B83) border-box;border-radius:var(--border-radius);padding:var(--space-s) var(--space-m);margin:var(--space-l) 0;transition:box-shadow .2s;position:relative;overflow:hidden;}
+.jag-cta::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,#5300ce0d 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.jag-cta:hover{box-shadow:0 8px 32px rgba(83,0,206,.12);}
+.jag-cta-label{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.15rem var(--space-s);border-radius:9999px;white-space:nowrap;margin-bottom:var(--space-2xs);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .15rem;line-height:1.35;}
+.jag-cta-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.5;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:.875rem;font-weight:600;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.5rem 1.25rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;min-width:140px;border-radius:var(--border-radius-sm);transition:opacity .2s;}
+.jag-cta-btn:hover{opacity:.88;color:#fff;border-bottom:none;}
+.jag-cta--red{background:var(--color-white);border:1px solid var(--color-red);}
+.jag-cta--red .jag-cta-label{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn:hover{background:var(--color-grey);opacity:1;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:flex-start;max-width:100%;}}
+
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;border-top:var(--border);background:var(--color-white);}
+
+.bullet-list{list-style:disc;padding-left:1.4rem;margin:var(--space-s) 0 var(--space-m);}
+.bullet-list li{font-size:var(--font-size-sm);color:var(--color-ink-2);line-height:1.65;margin-bottom:var(--space-s);}
+.bullet-list li:last-child{margin-bottom:0;}
+
+.chart-card{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--color-white);}
+.chart-head{margin-bottom:var(--space-m);display:flex;flex-direction:column;gap:.1rem;}
+.chart-title{font-size:.9rem;font-weight:700;color:var(--color-ink);}
+.chart-source{font-size:.65rem;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.05em;}
+.chart-foot{font-size:.72rem;color:var(--color-ink-3);margin-top:var(--space-s);line-height:1.5;font-style:italic;}
+.disclaimer-box{background:var(--color-bg-2,#F7F7F9);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-l) 0;}
+.disclaimer-box p{font-size:.75rem;color:var(--color-ink-3);line-height:1.6;margin:0;font-style:italic;}
+.compare-table-wrap{overflow:hidden;margin:var(--space-m) 0 var(--space-l);border:2px dashed var(--jai-a);border-radius:var(--border-radius-sm);padding:.4rem;background:var(--color-white);}
+.compare-table-scroll{overflow-x:auto;border-radius:calc(var(--border-radius-sm) - 2px);}
+.compare-table{width:100%;border-collapse:collapse;font-size:.76rem;min-width:480px;}
+.compare-table th{padding:.55rem .85rem;font-weight:700;text-align:left;font-size:.78rem;letter-spacing:.01em;}
+.compare-table th.col-fa{background:rgba(210,36,40,.14);color:var(--color-red);}
+.compare-table th.col-pn{background:var(--purple-tint-2);color:var(--jai-a);}
+.compare-table td{padding:.55rem .85rem;line-height:1.4;vertical-align:top;color:var(--color-ink-2);border-top:1px solid #ffffffb0;}
+.compare-table td.col-fa{background:rgba(210,36,40,.05);}
+.compare-table td.col-pn{background:var(--purple-tint);}
+.compare-table tr:first-child td{border-top:none;}
+
+.bar-chart{display:flex;flex-direction:column;gap:var(--space-m);}
+.bar-row{display:grid;grid-template-columns:230px 1fr 64px;align-items:center;gap:var(--space-s);}
+.bar-row .bar-label{font-size:.78rem;color:var(--color-ink-2);font-weight:600;line-height:1.3;}
+.bar-track{background:var(--color-cream);border-radius:9999px;height:12px;overflow:hidden;position:relative;}
+.bar-fill{height:100%;border-radius:9999px;display:block;width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1);}
+.bar-value{font-size:.9rem;font-weight:800;text-align:right;color:var(--color-ink);}
+.c-red{background:var(--color-red);} .v-red{color:var(--color-red);}
+.c-purple{background:var(--jai-a);} .v-purple{color:var(--jai-a);}
+.c-teal{background:var(--color-teal);} .v-teal{color:var(--color-teal);}
+.c-navy{background:var(--color-navy);} .v-navy{color:var(--color-navy);}
+.c-grey{background:var(--color-grey);} .v-grey{color:var(--color-grey);}
+@media(max-width:640px){.bar-row{grid-template-columns:1fr;gap:.3rem;}.bar-value{text-align:left;}}
+
+.next-grid{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0 var(--space-l);}
+.next-card{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);flex-wrap:wrap;transition:border-color .2s,box-shadow .2s;}
+.next-card:hover{border-color:var(--jai-a);box-shadow:0 4px 16px rgba(83,0,206,.08);}
+.next-card-title{font-weight:700;color:var(--color-ink);font-size:.85rem;margin-bottom:.2rem;}
+.next-card-desc{font-size:.78rem;color:var(--color-ink-2);line-height:1.5;margin:0;}
+.next-card-link{flex-shrink:0;font-size:.78rem;font-weight:600;color:var(--jai-a);border-bottom:1px solid #5300ce40;white-space:nowrap;}
+.next-card-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Before/after workflow diagram */
+.workflow-compare{display:flex;gap:var(--space-m);align-items:stretch;flex-wrap:wrap;}
+.workflow-col{flex:1;min-width:220px;display:flex;flex-direction:column;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;background:var(--color-white);}
+.workflow-col-head{padding:var(--space-s) var(--space-m);font-weight:700;font-size:.8rem;color:#fff;display:flex;align-items:center;gap:.4rem;}
+.workflow-col-head.wf-before{background:var(--color-grey);}
+.workflow-col-head.wf-after{background:linear-gradient(90deg,#5300CE,#E22B83);}
+.workflow-steps{padding:var(--space-m);display:flex;flex-direction:column;gap:var(--space-s);flex:1;}
+.workflow-step{display:flex;gap:.6rem;align-items:flex-start;font-size:.78rem;color:var(--color-ink-2);line-height:1.5;}
+.workflow-step-num{width:20px;height:20px;border-radius:50%;background:var(--color-cream);color:var(--color-ink-3);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.workflow-time{padding:var(--space-s) var(--space-m);border-top:var(--border);font-size:.85rem;font-weight:800;text-align:center;}
+.workflow-time.wf-time-before{color:var(--color-ink-3);}
+.workflow-time.wf-time-after{color:var(--jai-a);}
+.workflow-arrow{display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--color-ink-3);flex:0 0 auto;}
+@media(max-width:640px){.workflow-arrow{transform:rotate(90deg);}}
+
+/* Prompt / Output side-by-side panel */
+.po-grid{display:flex;align-items:stretch;flex-wrap:wrap;}
+.po-col{padding:var(--space-m) var(--space-l);flex:1;min-width:260px;}
+.po-col-prompt{background:var(--color-cream);border-right:var(--border);}
+.po-col-output{background:var(--purple-tint-3);}
+.po-label{display:block;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--color-ink-3);margin-bottom:var(--space-xs);}
+.po-col-output .po-label{color:var(--jai-a);}
+.po-output-block p{font-size:.8125rem;line-height:1.65;color:var(--color-ink-2);margin:0 0 var(--space-xs);}
+.po-output-block p:last-child{margin-bottom:0;}
+.po-output-block em{font-weight:700;font-style:normal;color:var(--color-ink);}
+@media(max-width:640px){.po-col{min-width:100%;}.po-col-prompt{border-right:none;border-bottom:var(--border);}}
+/* Claude chat-window mockup */
+.claude-window{border:var(--border);border-radius:var(--border-radius);overflow:hidden;margin:var(--space-m) 0 var(--space-l);background:var(--color-white);box-shadow:0 6px 24px rgba(11,13,18,.06);}
+.claude-window-bar{display:flex;align-items:center;gap:.6rem;padding:.65rem 1rem;background:#F7F5F3;border-bottom:var(--border);}
+.claude-window-dots{display:flex;gap:.32rem;}
+.claude-window-dots span{width:8px;height:8px;border-radius:50%;background:#dce0e8;display:block;}
+.claude-window-title{display:flex;align-items:center;gap:.4rem;margin-left:.2rem;}
+.claude-window-title span{font-size:.72rem;font-weight:700;color:var(--color-ink-3);}
+.claude-window-body{padding:var(--space-m) var(--space-l);}
+.claude-mark{width:18px;height:18px;border-radius:5px;background:#D97757;flex-shrink:0;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1;}
+.claude-avatar{width:26px;height:26px;border-radius:7px;background:#D97757;flex-shrink:0;margin-top:.1rem;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1;}
+.claude-turn{display:flex;margin-bottom:var(--space-m);}
+.claude-turn:last-child{margin-bottom:0;}
+.claude-turn-user{justify-content:flex-end;}
+.claude-bubble-user{background:#F0EEEC;border-radius:16px 16px 4px 16px;padding:.85rem 1.1rem;max-width:90%;font-size:.8125rem;line-height:1.65;color:var(--color-ink-2);}
+.claude-bubble-user--panel{max-width:100%;border-radius:12px;}
+.claude-turn-assistant{display:flex;align-items:flex-start;gap:.65rem;}
+.claude-response{flex:1;min-width:0;}
+.claude-response-label{font-size:.7rem;font-weight:700;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem;display:block;}
+.claude-response-body{font-size:.8125rem;line-height:1.65;color:var(--color-ink-2);}
+.claude-response-body p{margin:0 0 var(--space-xs);font-size:.8125rem;}
+.claude-response-body p:last-child{margin-bottom:0;}
+.claude-response-body .obl-table-wrap{margin:var(--space-xs) 0 0;}
+@media(max-width:480px){.claude-bubble-user{max-width:100%;}.claude-window-body{padding:var(--space-m);}}
+
+/* Interactive layer: copy button, typing reveal, sortable table */
+.claude-window-bar{position:relative;}
+.claude-window-actions{margin-left:auto;display:flex;align-items:center;gap:.5rem;}
+.copy-btn{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--font-base);font-size:.7rem;font-weight:600;color:var(--color-ink-3);background:var(--color-white);border:1px solid var(--border-color);border-radius:9999px;padding:.3rem .7rem;cursor:pointer;transition:border-color .15s,color .15s,background .15s;}
+.copy-btn svg{width:12px;height:12px;flex-shrink:0;}
+.copy-btn:hover{border-color:var(--jai-a);color:var(--jai-a);}
+.copy-btn:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;}
+.copy-btn.is-copied{border-color:#558156;color:#558156;background:#e5eeeb;}
+
+.claude-typing{display:none;}
+.js-enabled .claude-typing{display:flex;align-items:center;gap:.3rem;padding:.15rem 0 .2rem;}
+.claude-typing span{width:6px;height:6px;border-radius:50%;background:var(--color-ink-3);opacity:.35;animation:claudeTypingBounce 1.1s infinite ease-in-out;}
+.claude-typing span:nth-child(2){animation-delay:.15s;}
+.claude-typing span:nth-child(3){animation-delay:.3s;}
+@keyframes claudeTypingBounce{0%,60%,100%{transform:translateY(0);opacity:.35;}30%{transform:translateY(-4px);opacity:1;}}
+@keyframes claudeFadeInUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.claude-response-body.cr-hidden{display:block;}
+.js-enabled .claude-response-body.cr-hidden{display:none;}
+.claude-response-body.cr-visible{animation:claudeFadeInUp .45s ease both;}
+@media(prefers-reduced-motion:reduce){.claude-typing span{animation:none;opacity:.6;}.claude-response-body.cr-visible{animation:none;}}
+
+.score-table th[data-sort]{cursor:pointer;user-select:none;position:relative;padding-right:1.6rem;}
+.score-table th[data-sort]:hover{background:#4200a3;}
+.score-table th[data-sort]:focus-visible{outline:2px solid #fff;outline-offset:-3px;}
+.sort-arrow{display:inline-block;margin-left:.35rem;font-size:.65rem;opacity:.55;}
+.score-table th[aria-sort="ascending"] .sort-arrow,.score-table th[aria-sort="descending"] .sort-arrow{opacity:1;}
+.score-table-hint{font-size:.68rem;color:var(--color-ink-3);margin:.5rem 0 0;font-style:italic;}
+
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+.jag-cta--red::before{display:none;}
+.jag-cta--red:hover{box-shadow:0 8px 32px rgba(210,36,40,.14);}
+.jag-feature{background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:4px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.jag-feature-label{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.15rem var(--space-s);border-radius:9999px;margin-bottom:var(--space-xs);}
+.jag-feature-lead{font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);line-height:1.5;margin:0 0 var(--space-xs);}
+.jag-feature-lead strong{color:var(--color-ink);}
+.jag-feature p:last-child{margin-bottom:0;}
+.article-label,.toc-head-lbl,.exp-head-lbl,.exp-source,.stat-metrics-kicker,.kf-label,.jag-feature-label,.meta-label{text-transform:none;letter-spacing:0;}
+
+/* ===== Additions for this article (everything above is the reference stylesheet, unchanged) ===== */
+h1 strong,h2 strong{color:inherit;}
+
+/* Comparison table: uses the reference compare-table pattern, with a row-label column */
+.compare-table caption{caption-side:top;text-align:left;padding:.1rem .35rem .6rem;font-size:.9rem;font-weight:700;color:var(--color-ink);}
+.compare-table thead th.col-lbl{background:var(--color-cream);}
+.compare-table tbody th{background:var(--color-cream);color:var(--color-ink);font-size:.76rem;font-weight:700;padding:.55rem .85rem;text-align:left;vertical-align:top;width:19%;border-top:1px solid #ffffffb0;}
+.compare-table tbody tr:first-child th{border-top:none;}
+.compare-table th.col-pu{background:rgba(210,36,40,.14);color:var(--color-red);}
+.compare-table th.col-pr{background:var(--purple-tint-2);color:var(--jai-a);}
+.compare-table td.col-pu{background:rgba(210,36,40,.05);}
+.compare-table td.col-pr{background:var(--purple-tint);}
+.compare-table{min-width:520px;}
+.vs-strip{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;padding:.5rem .2rem .8rem;}
+.vs-pill{display:inline-block;border-radius:9999px;padding:.28rem .9rem;font-size:.72rem;font-weight:700;}
+.vs-pr{background:var(--purple-tint-2);color:var(--jai-a);}
+.vs-pu{background:rgba(210,36,40,.12);color:var(--color-red);}
+.vs-arrow{color:var(--color-ink-3);font-weight:700;font-size:1rem;line-height:1;}
+
+/* Two-leak cards */
+.leak-grid{display:flex;gap:var(--space-m);flex-wrap:wrap;margin:var(--space-m) 0 var(--space-m);}
+.leak-card{flex:1;min-width:250px;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;background:var(--color-white);display:flex;flex-direction:column;}
+.leak-head{padding:.7rem var(--space-m);color:#fff;font-weight:700;font-size:.8rem;display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.leak-head small{font-weight:600;opacity:.85;font-size:.68rem;}
+.leak-cov .leak-head{background:var(--color-navy);}
+.leak-com .leak-head{background:var(--color-red);}
+.leak-body{padding:var(--space-m);flex:1;}
+.leak-body p{font-size:.8125rem;margin:0 0 var(--space-xs);}
+.leak-body p:last-child{margin-bottom:0;}
+
+/* Self-check */
+.quiz-card{border:var(--border);border-radius:var(--border-radius-sm);background:var(--color-white);margin:var(--space-m) 0 var(--space-l);overflow:hidden;}
+.quiz-group{padding:var(--space-m) var(--space-l);border-bottom:var(--border);}
+.quiz-kicker{display:block;font-size:.7rem;font-weight:700;letter-spacing:.04em;color:var(--jai-a);margin-bottom:var(--space-s);}
+.quiz-group.q-comp .quiz-kicker{color:var(--color-red);}
+.quiz-list{list-style:none;padding:0;margin:0;}
+.quiz-item{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);padding:.6rem 0;border-top:1px solid var(--color-cream);flex-wrap:wrap;}
+.quiz-item:first-child{border-top:none;padding-top:0;}
+.quiz-text{font-size:.8125rem;color:var(--color-ink-2);line-height:1.5;margin:0;flex:1;min-width:240px;}
+.quiz-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--color-cream);color:var(--color-ink-3);font-size:.65rem;font-weight:800;margin-right:.5rem;}
+.quiz-opts{display:flex;gap:.35rem;flex-shrink:0;}
+.quiz-opts button{font-family:var(--font-base);font-size:.75rem;font-weight:600;color:var(--color-ink-3);background:var(--color-white);border:1px solid var(--border-color);border-radius:9999px;padding:.3rem .95rem;cursor:pointer;transition:border-color .15s,color .15s,background .15s;}
+.quiz-opts button:hover{border-color:var(--jai-a);color:var(--jai-a);}
+.quiz-opts button:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;}
+.quiz-opts button[aria-pressed="true"]{background:var(--jai-a);border-color:var(--jai-a);color:#fff;}
+.quiz-opts button[data-v="no"][aria-pressed="true"]{background:var(--color-red);border-color:var(--color-red);}
+.quiz-result{padding:var(--space-s) var(--space-l);background:var(--purple-tint-3);font-size:.8125rem;color:var(--color-ink-2);line-height:1.55;}
+.quiz-result strong{color:var(--color-ink);}
+html:not(.js-enabled) .quiz-opts{display:none;}
+html:not(.js-enabled) .quiz-result{display:none;}
+
+/* FAQ: keep the H3 (for structure and schema) but style it like the reference summary text */
+article .faq-item summary h3{font-size:inherit;text-transform:none;letter-spacing:0;margin:0;padding:0;border:0;line-height:inherit;font-weight:inherit;color:inherit;flex:1;}
+.faq-body p{font-size:.8125rem;margin:0;}
+
+/* Phones: fit the comparison table on screen instead of scrolling sideways */
+@media(max-width:560px){
+  .compare-table{min-width:0;}
+  .compare-table th,.compare-table td,.compare-table tbody th{padding:.45rem .5rem;font-size:.7rem;}
+  .compare-table tbody th{width:22%;}
+  .compare-table caption{font-size:.8rem;}
+  .vs-strip{flex-wrap:nowrap;gap:.35rem;}
+  .vs-pill{font-size:.62rem;padding:.25rem .55rem;}
+}
+
+/* Accessibility: AA-contrast adjustments to the reference palette */
+a,.exp-link,.link-pending{color:#3B6C80;border-bottom-color:#3B6C8040;}
+a:hover,.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+.toc-link{color:#5B6270;}
+.callout-note strong,.key-facts strong,.jag-feature strong{color:var(--color-ink);}
+.compare-table th.col-pu{color:#A81C20;}
+.skip-link{position:absolute;left:-9999px;top:0;background:#fff;color:var(--jai-a);padding:.5rem 1rem;z-index:1100;border:2px solid var(--jai-a);border-radius:var(--border-radius-sm);font-weight:600;}
+.skip-link:focus{left:.5rem;top:.5rem;}
+
+/* Contents sidebar text matches the experts sidebar (heading 10.4px, links 10.9px) */
+.toc-head-lbl{font-size:.65rem;}
+.toc-link{font-size:.68rem;}
+
+/* Axe-core fixes: small-text contrast and a main landmark (colours and structure only, no sizes) */
+.article-label{color:#3B6C80;}
+.vs-pu{color:#A81C20;}
+.leak-head small{opacity:1;color:#fff;}
+.exp-stat strong{color:#3a3f4a;}
+.quiz-num{color:#4B5563;}
+.jag-feature-label{background:linear-gradient(90deg,#5300CE,#C8247A);}
+main{display:block;}
+
+/* Small screens: show the expert sidebar under the article instead of hiding it */
+@media(max-width:1060px){
+  .page-wrapper{flex-direction:column;align-items:stretch;}
+  article{width:100%;flex:none;}
+  .expert-sidebar{display:block;width:100%;position:static;max-height:none;overflow:visible;max-width:760px;margin:0 auto;padding:0 var(--space-m) var(--space-2xl);}
+}
+
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#s0">Skip to article</a>
+<div id="progress-bar" aria-hidden="true"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Is the Difference Between Procurement and Purchasing?</a>
+      <a class="toc-link" href="#s2">Procurement vs. Purchasing: Are the Two Terms Interchangeable?</a>
+      <a class="toc-link" href="#s3">Procurement vs. Purchasing: Where Does the Money Leak?</a>
+      <a class="toc-link" href="#s4">What Should Procurement-Led Teams Do Differently?</a>
+      <a class="toc-link" href="#s5">What Changed in 2026: AI Became a Priority, Not Yet a Scaled Capability</a>
+      <a class="toc-link" href="#s6">How Does Procurement Software Keep Purchasing on Contract?</a>
+      <a class="toc-link" href="#s7">Which Leak Are You Running?</a>
+      <a class="toc-link" href="#s8">Frequently Asked Questions</a>
+      <a class="toc-link" href="#s9">Decide Once. Buy on Contract. See Every Exception.</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <main>
+  <article>
+    <header class="article-header">
+      <div class="article-header-inner">
+        <span class="article-label">Procurement vs. purchasing · Procurement</span>
+        <h1 id="s0">Procurement vs. Purchasing: What's the Difference in 2026?</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Published</span><time datetime="2026-10-01">October 2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Jason Rydzewski</span>
+        </div>
+      </div>
+    </header>
+
+    <p><strong>A useful way to frame procurement vs. purchasing is decision versus execution.</strong> Procurement decides from whom to buy, and on what terms. Purchasing is the transactional subset that buys what procurement decided. Here it means the workflow from requisition through payment. Some organizations assign invoicing and payment to accounts payable. When the two connect, a negotiated contract shows up where the requester shops. When they don't, the decision doesn't reach the transaction, and negotiated value leaks in the gap.</p>
+
+    <p>That gap shows up in two ways. <strong>Either no contract exists for the category (a coverage gap), or buyers go around the contract that does (a compliance gap).</strong> Each needs a different fix, and fixing one does not fix the other. Fix coverage upstream, fix compliance across the buying process, and connect the two. As more transactional work moves onto software, the commercial decisions are what remain with your team.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER enforces contracted suppliers at search.</p>
+        <p class="jag-cta-sub">JAGGAER eProcurement routes non-catalog requests through configurable intake workflows and applies guided buying to preferred items and suppliers.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/procurement-software" class="jag-cta-btn" target="_blank" rel="noopener">Explore procurement software</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s1">What Is the Difference Between Procurement and Purchasing?</h2>
+
+    <p><strong><a href="https://softwareconnect.com/learn/procurement-vs-purchasing" target="_blank" rel="noopener">SoftwareConnect's 2024 guide</a> described purchasing as a subset of the procurement process.</strong> Procurement sets the terms across sourcing, contracts, and supplier performance. Our guide to <a href="https://www.jaggaer.com/blog/what-is-procurement" target="_blank" rel="noopener">what procurement is</a> covers the full process. Purchasing executes those terms from requisition to payment.</p>
+
+    <p><strong>Procurement answers "why this supplier, at this price, under these terms?"</strong> Purchasing answers "how and when do we order it?"</p>
+
+    <div class="compare-table-wrap">
+      <div class="vs-strip" aria-hidden="true">
+        <span class="vs-pill vs-pr">Procurement decides</span>
+        <span class="vs-arrow">→</span>
+        <span class="vs-pill vs-pu">Purchasing executes</span>
+      </div>
+      <div class="compare-table-scroll">
+        <table class="compare-table">
+          <caption>Procurement vs. purchasing at a glance</caption>
+          <thead><tr><th scope="col" class="col-lbl"><span class="sr-only">Dimension</span></th><th scope="col" class="col-pr">Procurement</th><th scope="col" class="col-pu">Purchasing</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Scope</th><td class="col-pr">End to end: sourcing to supplier performance</td><td class="col-pu">Transaction: requisition to payment</td></tr>
+            <tr><th scope="row">Typical horizon</th><td class="col-pr">Strategic sourcing, contracts, and supplier relationships</td><td class="col-pu">Individual transactions and orders</td></tr>
+            <tr><th scope="row">Core question</th><td class="col-pr">Who do we buy from, on what terms?</td><td class="col-pu">How and when do we buy?</td></tr>
+            <tr><th scope="row">Typical measures</th><td class="col-pr">Total cost, contract coverage, supplier risk</td><td class="col-pu">Order accuracy, cycle time, price compliance</td></tr>
+            <tr><th scope="row">Typical owner</th><td class="col-pr">Category managers, sourcing leads, the chief procurement officer (CPO)</td><td class="col-pu">Buyers and requesters</td></tr>
+            <tr><th scope="row">Typical tools</th><td class="col-pr">Sourcing, contracts, supplier management, spend analytics</td><td class="col-pu">Enterprise resource planning (ERP) purchasing, eProcurement</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p>Neither side of procurement vs. purchasing is the junior partner. <strong>A negotiated price saves money only when the order uses it.</strong> A clean requisition process, in turn, cannot fix a category that has no contract.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s2">Procurement vs. Purchasing: Are the Two Terms Interchangeable?</h2>
+
+    <p><strong>People often use the two terms interchangeably</strong>, so the line between them blurs. A purchasing manager can run strategic sourcing, and a procurement analyst can spend the week chasing purchase orders (POs).</p>
+
+    <p>The procurement vs. purchasing line only holds when you define it by what the work does, not what the title says. One test works well: <strong>does the activity set the terms, or execute against terms already set?</strong> Setting terms is procurement. Executing is purchasing.</p>
+
+    <p>Organizations split these activities differently, so procurement vs. purchasing is a functional boundary, not a rule about job titles. In some organizations, <strong>a procurement operations team sits between the layers</strong> and owns the systems and workflows that carry sourcing decisions into compliant buying. One team can do both. The trouble starts when nothing connects the two halves of the procurement vs. purchasing handoff.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s3">Procurement vs. Purchasing: Where Does the Money Leak?</h2>
+
+    <p>Two sources of savings leakage are worth separating: <strong>no contract exists, or buyers ignore the contract.</strong> APQC's maverick-buying measure captures the second.</p>
+
+    <p><strong>As of late September 2026, <a href="https://www.apqc.org/resources/benchmarking/open-standards-benchmarking/measures/percentage-total-purchases-procured" target="_blank" rel="noopener">live data from the American Productivity & Quality Center (APQC)</a> showed median maverick buying at 1.2% of purchase value.</strong> APQC defines maverick buying as purchases that ignore an existing contract, so the measure does not capture categories with no contract. A median also says nothing about organizations in the tail.</p>
+
+    <div class="leak-grid">
+      <div class="leak-card leak-cov">
+        <div class="leak-head"><span>The coverage leak</span><small>Upstream</small></div>
+        <div class="leak-body">
+          <p><strong>The coverage leak is primarily an upstream procurement problem.</strong> No contract exists for the category, the contract has lapsed, or the supplier was never sourced. Purchasing has nothing to buy against, so orders can go out at the price the supplier quotes.</p>
+        </div>
+      </div>
+      <div class="leak-card leak-com">
+        <div class="leak-head"><span>The compliance leak</span><small>At the point of purchase</small></div>
+        <div class="leak-body">
+          <p><strong>The compliance leak appears when buyers don't follow an existing contract.</strong> APQC's maverick-buying measure captures this one.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Here's how a compliance leak forms in the procurement vs. purchasing handoff. A sourcing team spends months on an award. Six weeks later, a requester in another department buys the same category from a supplier they already know. The preferred supplier isn't in their catalog, and the approved route takes longer than a phone call. <strong>The purchase is legitimate, yet it bypasses the terms procurement negotiated.</strong></p>
+
+    <p><strong><a href="https://www.apqc.org/blog/maverick-purchasing-means-slower-more-costly-purchases" target="_blank" rel="noopener">APQC says</a> maverick purchasing often starts when employees judge the standard buying process too complicated or not worth the effort.</strong> Three gaps can create that friction in the procurement vs. purchasing handoff:</p>
+
+    <ul class="bullet-list">
+      <li>Preferred items that are hard to find. The contract exists, but not where the requester shops.</li>
+      <li>Approval routes slower than the workaround. Buyers facing a deadline may phone a known supplier instead of waiting on several sign-offs.</li>
+      <li>Decentralized buying authority. Business units hold their own budgets and supplier relationships.</li>
+    </ul>
+
+    <p>Part of the procurement vs. purchasing gap comes from process design, which makes it fixable. <strong>Design won't remove every bypass, but it removes the easy ones.</strong> Our guide to <a href="https://www.jaggaer.com/blog/5-tips-to-help-prevent-and-control-maverick-spend" target="_blank" rel="noopener">preventing and controlling maverick spend</a> starts with spend visibility.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER connects sourcing awards to the requisition screen.</p>
+        <p class="jag-cta-sub">Sourcing, contracts, and purchasing run on one JAGGAER data layer, so decisions made in sourcing carry into purchasing.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/source-to-pay" class="jag-cta-btn" target="_blank" rel="noopener">Explore source-to-pay</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s4">What Should Procurement-Led Teams Do Differently?</h2>
+
+    <p><strong>Start by closing the coverage leak where it appears</strong>, because nothing can enforce a contract that doesn't exist. Then make the compliant path the easiest path. Track contract coverage by category, not only spend by supplier, and measure <a href="https://www.jaggaer.com/blog/spend-analytics-optimization-visibility-kpis-control" target="_blank" rel="noopener">contract utilization and price compliance rates</a>. Treat purchasing as the layer that carries procurement's decisions to the order, so the procurement vs. purchasing handoff works as one connected process.</p>
+
+    <p><strong>According to <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf" target="_blank" rel="noopener">Deloitte's 2025 Global CPO Survey</a>, improving margins through cost reduction and cost avoidance ranked as the top enterprise priority, at 72%.</strong> The open question in procurement vs. purchasing is how much negotiated value survives the buying process.</p>
+
+    <p><strong>In Deloitte's survey, 96% of Digital Masters met or exceeded their cost-savings plans, against 80% of Followers.</strong> Digital Masters are top-quartile performers that also rank top quartile in demonstrated capabilities. Followers are the comparison group. Deloitte reported an association between technology and talent competencies and performance. The survey covered 250+ CPOs across 40 countries, and Deloitte noted it is not a formal procurement benchmark.</p>
+
+    <div class="stat-metrics">
+      <span class="stat-metrics-kicker">Digital Masters vs. Followers, per Deloitte's 2025 Global CPO Survey</span>
+      <div class="stat-metrics-grid cols-3">
+        <div class="stat-metric">
+          <span class="stat-num">96%</span>
+          <span class="stat-label">Met or exceeded cost-savings plans</span>
+          <span class="stat-sub">vs. 80% of Followers</span>
+        </div>
+        <div class="stat-metric">
+          <span class="stat-num">24%</span>
+          <span class="stat-label">Of current budgets on procurement technology</span>
+          <span class="stat-sub">vs. 18% of Followers</span>
+        </div>
+        <div class="stat-metric">
+          <span class="stat-num">34%</span>
+          <span class="stat-label">Higher allocation of time to strategic work</span>
+          <span class="stat-sub">vs. Followers</span>
+        </div>
+      </div>
+    </div>
+
+    <p><strong>Deloitte found Digital Masters spend a 34% higher share of their time on strategic work than Followers. But roughly 2/3 of their time is still non-strategic.</strong> Automating transactional work can give procurement teams more capacity for strategic work.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s5">What Changed in 2026: AI Became a Priority, Not Yet a Scaled Capability</h2>
+
+    <p><strong>According to <a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" target="_blank" rel="noopener">The Hackett Group's 2026 Procurement Key Issues Study</a>, 43% of organizations were actively pursuing AI deployment. But only 12% reported large-scale implementation.</strong> The 12% is part of the 43%, and most organizations pursuing AI are still in pilots or single use cases. The 43% is nearly double last year's level. Early gains cluster in cycle time, productivity, and effectiveness.</p>
+
+    <div class="chart-card">
+      <div class="chart-head">
+        <span class="chart-title">AI in procurement: intent versus scale</span>
+        <span class="chart-source">The Hackett Group · 2026 Procurement Key Issues Study</span>
+      </div>
+      <div class="bar-chart">
+        <div class="bar-row"><span class="bar-label">Actively pursuing AI deployment</span><div class="bar-track"><span class="bar-fill c-purple" style="width:43%"></span></div><span class="bar-value v-purple">43%</span></div>
+        <div class="bar-row"><span class="bar-label">Reported large-scale implementation</span><div class="bar-track"><span class="bar-fill c-red" style="width:12%"></span></div><span class="bar-value v-red">12%</span></div>
+      </div>
+      <p class="chart-foot">The 12% is part of the 43%. The 43% is nearly double last year's level.</p>
+    </div>
+
+    <p>Hackett also found that 69% of organizations accessed AI through capabilities embedded in their existing procurement platforms, particularly for transactional processes. Hackett cautions that simply switching on vendor-provided AI features is a missed opportunity. As more transactional work automates, the procurement vs. purchasing line <strong>depends less on who does the work and more on where teams make commercial decisions.</strong></p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER embeds AI in the purchasing workflow.</p>
+        <p class="jag-cta-sub">JAGGAER procure-to-pay connects purchasing, invoicing, and payments on one platform, with AI-assisted coding and approval routing.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/procure-to-pay" class="jag-cta-btn" target="_blank" rel="noopener">Explore procure-to-pay</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s6">How Does Procurement Software Keep Purchasing on Contract?</h2>
+
+    <div class="jag-feature">
+      <span class="jag-feature-label">JAGGAER eProcurement</span>
+      <p class="jag-feature-lead">Buyers bypass contracts when the contracted option is hard to find, so JAGGAER says its eProcurement <strong>enforces contracted suppliers at search</strong>.</p>
+      <p>It routes non-catalog requests through configurable intake workflows. Guided buying steers your requesters to preferred items and suppliers. Approvals follow value, commodity, and cost center, and budget commits at requisition, before the purchase order exists. The platform keeps an audit trail across decision points, and every exception is visible.</p>
+    </div>
+
+    <p><strong><a href="https://www.thehackettgroup.com/digital-world-class-matrix-quantifies-the-value-realized-from-purchase-to-pay-software-solutions-providers/" target="_blank" rel="noopener">The Hackett Group's 2023 purchase-to-pay (P2P) research</a> found that companies using top-performing P2P platforms achieved a 29% reduction in requisition-to-PO transaction cost, with 92% purchase order adoption.</strong> Hackett's release gives no baseline for the 29%, and the figures describe top-performing platforms as a group, not any one vendor.</p>
+
+    <p>Software cannot settle procurement vs. purchasing on its own. It can't enforce a contract that doesn't exist, and it won't fix a weak category strategy. <strong>The coverage leak is a sourcing and <a href="https://www.jaggaer.com/solutions/contracts" target="_blank" rel="noopener">contract lifecycle management</a> problem.</strong> In complex organizations, with multiple ERPs and decentralized buyers, the gap can widen. That's why source-to-pay matters. JAGGAER runs sourcing, contracts, and purchasing on one data layer, which it says means no integration tax between them. It states that decisions made in sourcing enforce automatically in purchasing.</p>
+
+    <p><strong>JAGGAER connects to ERP and enterprise systems such as SAP, Oracle, Workday, and NetSuite</strong> through pre-built integrations, which JAGGAER says means no rip-and-replace.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s7">Which Leak Are You Running?</h2>
+
+    <p><strong>Two "no" answers in the first pair suggest a coverage gap, and two in the second suggest a compliance gap.</strong> Use these four questions as a quick heuristic, not a diagnostic, to test your own procurement vs. purchasing handoff. Then investigate the weaker side first.</p>
+
+    <div class="quiz-card" id="leak-quiz">
+      <div class="quiz-group q-cov" data-group="coverage">
+        <span class="quiz-kicker">Coverage questions</span>
+        <ol class="quiz-list">
+          <li class="quiz-item"><p class="quiz-text"><span class="quiz-num">1</span>Can you measure active contract coverage by category today?</p><div class="quiz-opts" role="group" aria-label="Answer to question 1"><button type="button" data-v="yes" aria-pressed="false">Yes</button><button type="button" data-v="no" aria-pressed="false">No</button></div></li>
+          <li class="quiz-item"><p class="quiz-text"><span class="quiz-num">2</span>Does every major category have an active contract?</p><div class="quiz-opts" role="group" aria-label="Answer to question 2"><button type="button" data-v="yes" aria-pressed="false">Yes</button><button type="button" data-v="no" aria-pressed="false">No</button></div></li>
+        </ol>
+      </div>
+      <div class="quiz-group q-comp" data-group="compliance">
+        <span class="quiz-kicker">Compliance questions</span>
+        <ol class="quiz-list" start="3">
+          <li class="quiz-item"><p class="quiz-text"><span class="quiz-num">3</span>When a contract exists, can requesters easily find and buy from the contracted supplier?</p><div class="quiz-opts" role="group" aria-label="Answer to question 3"><button type="button" data-v="yes" aria-pressed="false">Yes</button><button type="button" data-v="no" aria-pressed="false">No</button></div></li>
+          <li class="quiz-item"><p class="quiz-text"><span class="quiz-num">4</span>Does the compliant route take less effort than the workaround?</p><div class="quiz-opts" role="group" aria-label="Answer to question 4"><button type="button" data-v="yes" aria-pressed="false">Yes</button><button type="button" data-v="no" aria-pressed="false">No</button></div></li>
+        </ol>
+      </div>
+      <div class="quiz-result" id="quiz-result" role="status" aria-live="polite">Answer the four questions to see where to look first.</div>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s8">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary><h3>Is purchasing part of procurement?</h3><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-body"><p><strong>In procurement vs. purchasing, purchasing is the transactional subset, from requisition to payment.</strong> Procurement typically covers the upstream work: sourcing, negotiation, contract management, and supplier performance. Purchasing executes the terms procurement sets. SoftwareConnect's 2024 guide drew the same line.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><h3>What's the difference between procure-to-pay and source-to-pay?</h3><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-body"><p><strong>Procure-to-pay, also called purchase-to-pay (P2P), generally covers the downstream buying process, from requisition through payment.</strong> JAGGAER describes it as the part that follows contracting, while source-to-pay starts earlier, at sourcing. JAGGAER states that running both on one data layer lets sourcing decisions enforce automatically in purchasing.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><h3>How much spend goes off-contract, according to APQC?</h3><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-body"><p><strong>APQC's live data, checked in late September 2026, showed median maverick buying at 1.2% of purchase value.</strong> That measure counts only purchases that ignore an existing contract. Broader off-contract measures can be higher because they may also include categories with no contract. Split your own procurement vs. purchasing leakage into coverage and compliance before you act.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><h3>What does procurement software do for purchasing?</h3><span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-body"><p><strong>JAGGAER eProcurement runs the purchasing workflow</strong>: catalog search, requisition, approval routing, purchase order creation, and an audit trail. Guided buying helps steer orders toward contracted suppliers, exceptions stay visible, and the platform supports ERP write-back to SAP, Oracle, and Infor.</p></div>
+    </details>
+
+    <hr class="section-divider">
+
+    <h2 id="s9">Decide Once. Buy on <strong>Contract</strong>. See Every Exception.</h2>
+
+    <p><strong>Procurement vs. purchasing often comes down to one test: whether the contract price reaches the requester.</strong> Pick one category and trace a single order from award to invoice. Where the negotiated price stops appearing, you have likely found a leak.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See where JAGGAER fits your current setup.</p>
+        <p class="jag-cta-sub">Tell us where your procurement vs. purchasing handoff breaks down. We'll show where JAGGAER fits, with specifics, not a generic demo.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a demo</a>
+    </div>
+
+    <div class="disclaimer-box">
+      <p>Statistics in this procurement vs. purchasing guide come from the linked sources, checked September 30 to October 1, 2026. APQC figures are live data and may change. Hackett's 2023 release gives no baseline for its figures, and Hackett describes its research as opinion. The comparison table is our own summary, not a cited source.</p>
+    </div>
+
+  </article>
+  </main>
+
+  <!-- EXPERT SIDEBAR -->
+  <aside class="expert-sidebar" aria-label="What the experts are saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the experts are saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">Deloitte · 2025 Global CPO Survey</span>
+        <p class="exp-stat">Cost reduction and avoidance ranked as the top enterprise priority, at <strong>72%</strong>. Digital Masters met or exceeded savings plans at <strong>96%</strong> vs. <strong>80%</strong> of Followers.</p>
+        <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf" class="exp-link" target="_blank" rel="noopener" aria-label="View source: Deloitte · 2025 Global CPO Survey">View source →</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">The Hackett Group · 2026 Key Issues Study</span>
+        <p class="exp-stat"><strong>43%</strong> of organizations were actively pursuing AI deployment, nearly double the prior year. <strong>12%</strong> reported large-scale implementation, a subset of the 43%.</p>
+        <a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" class="exp-link" target="_blank" rel="noopener" aria-label="View source: The Hackett Group · 2026 Key Issues Study">View source →</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">The Hackett Group · 2023 P2P research</span>
+        <p class="exp-stat">Companies using top-performing P2P platforms achieved a <strong>29%</strong> cut in requisition-to-PO transaction cost, with <strong>92%</strong> PO adoption.</p>
+        <a href="https://www.thehackettgroup.com/digital-world-class-matrix-quantifies-the-value-realized-from-purchase-to-pay-software-solutions-providers/" class="exp-link" target="_blank" rel="noopener" aria-label="View source: The Hackett Group · 2023 P2P research">View source →</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">APQC · live data, late Sept 2026</span>
+        <p class="exp-stat">Median maverick buying was <strong>1.2%</strong> of purchase value.</p>
+        <a href="https://www.apqc.org/resources/benchmarking/open-standards-benchmarking/measures/percentage-total-purchases-procured" class="exp-link" target="_blank" rel="noopener" aria-label="View source: APQC · live data, late Sept 2026">View source →</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// Reading progress bar
+try {
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const range = h.scrollHeight - h.clientHeight;
+    const pct = range > 0 ? (h.scrollTop || document.body.scrollTop) / range * 100 : 0;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+} catch (err) { /* progress bar is cosmetic only */ }
+
+// Active TOC link on scroll
+try {
+  const sections = document.querySelectorAll('article h2[id]');
+  const links = document.querySelectorAll('.toc-link');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+} catch (err) { /* TOC highlighting is cosmetic only */ }
+
+// Self-check: tally "no" answers per pair (progressive enhancement; questions read fine without JS)
+try {
+  const card = document.getElementById('leak-quiz');
+  const out = document.getElementById('quiz-result');
+  const answers = {};
+  const S2C = '<a href="https://www.jaggaer.com/solutions/source-to-contract" target="_blank" rel="noopener">source-to-contract</a>';
+  const GB  = '<a href="https://www.jaggaer.com/blog/ai-procurement-intake-guided-buying" target="_blank" rel="noopener">guided buying and intake workflows</a>';
+  const DEMO = '<a href="https://www.jaggaer.com/book-a-demo" target="_blank" rel="noopener">demo</a>';
+  const msg = {
+    both: '<strong>Both pairs point to a gap.</strong> Start with the categories that have no contract: nothing can enforce a contract that doesn\'t exist. JAGGAER can help with both: ' + S2C + ' runs sourcing and contract lifecycle management on a single data layer, and ' + GB + ' steer requesters to preferred items and suppliers.',
+    cov:  '<strong>Two "no" answers in the coverage pair suggest a coverage gap.</strong> Start with contract coverage by category. JAGGAER can help: ' + S2C + ' runs sourcing and contract lifecycle management on a single data layer.',
+    com:  '<strong>Two "no" answers in the compliance pair suggest a compliance gap.</strong> Start at the point of purchase. JAGGAER can help: ' + GB + ' steer requesters to preferred items and suppliers.',
+    none: '<strong>Your answers don\'t point to a clear gap.</strong> Check any pair where you answered "no" once. A JAGGAER ' + DEMO + ' can show where JAGGAER fits against your current setup.'
+  };
+  card.querySelectorAll('.quiz-item').forEach((item, i) => {
+    const group = item.closest('.quiz-group').dataset.group;
+    item.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        item.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+        answers[i] = { group, v: btn.dataset.v };
+        if (Object.keys(answers).length === 4) {
+          const no = g => Object.values(answers).filter(a => a.group === g && a.v === 'no').length;
+          const cov = no('coverage') === 2, com = no('compliance') === 2;
+          out.innerHTML = cov && com ? msg.both : cov ? msg.cov : com ? msg.com : msg.none;
+        } else {
+          out.textContent = 'Answer the four questions to see where to look first.';
+        }
+      });
+    });
+  });
+} catch (err) { /* self-check is cosmetic only */ }
+</script>
+
+</body>
+</html>
