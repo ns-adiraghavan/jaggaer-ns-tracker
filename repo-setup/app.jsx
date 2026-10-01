@@ -216,7 +216,8 @@ function App() {
   const [currentUser, setCurrentUser] = useStateApp(readSession);
   const [view, setView] = useStateApp("tracker");
   const [activePhase, setActivePhaseRaw] = useStateApp(() => {
-    const p = (typeof window !== "undefined" && /\/tracker\/phase2/.test(window.location.pathname)) ? 2 : 1;
+    const _path = (typeof window !== "undefined") ? window.location.pathname : "";
+    const p = /\/tracker\/phase3/.test(_path) ? 3 : /\/tracker\/phase2/.test(_path) ? 2 : 1;
     window.NS_ACTIVE_PHASE = p;
     return p;
   });
@@ -238,7 +239,7 @@ function App() {
     setActiveContentType(null);
     setActiveMonthId(null);
     try {
-      const target = ph === 2 ? "/tracker/phase2" : "/tracker";
+      const target = ph === 3 ? "/tracker/phase3" : ph === 2 ? "/tracker/phase2" : "/tracker";
       if (window.location.pathname !== target) window.history.pushState({ phase: ph }, "", target);
     } catch (e) {}
   }
@@ -364,7 +365,7 @@ function App() {
   // Browser back/forward toggles the phase in step with the URL.
   useEffectApp(() => {
     const onPop = () => {
-      const ph = /\/tracker\/phase2/.test(window.location.pathname) ? 2 : 1;
+      const ph = /\/tracker\/phase3/.test(window.location.pathname) ? 3 : /\/tracker\/phase2/.test(window.location.pathname) ? 2 : 1;
       window.NS_ACTIVE_PHASE = ph;
       setActivePhaseRaw(ph);
       setActivePillar(null); setActiveCluster(null); setActiveContentType(null); setActiveMonthId(null);

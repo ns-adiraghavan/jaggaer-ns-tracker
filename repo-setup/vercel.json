@@ -25,6 +25,10 @@
     {
       "source": "/tracker/phase2",
       "destination": "/index.html"
+    },
+    {
+      "source": "/tracker/phase3",
+      "destination": "/index.html"
     }
   ]
 }

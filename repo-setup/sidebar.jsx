@@ -5,6 +5,7 @@ const { useMemo: useMemoSB } = React;
 // phase 2 uses project.phase2_active_month. Centralised so stats + views agree.
 function phaseActiveMonth(project, phase) {
   if ((phase || 1) === 2) return project.phase2_active_month || 'p2-month-1';
+  if ((phase || 1) === 3) return project.phase3_active_month || 'p3-month-1';
   return project.active_month;
 }
 window.NS_phaseMonth = phaseActiveMonth;
@@ -57,7 +58,7 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           const ct = piece.content_type || 'msv';
           if (out[ct]) {
             out[ct].total++;
-            if (piece.status === 'approved') out[ct].approved++;
+            if (piece.status === 'approved' || piece.status === 'live') out[ct].approved++;
           }
         }
       }
@@ -90,11 +91,11 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
         <div className="ns-phase-switch" style={{ margin: '0 0 12px' }}>
           <div className="ns-eyebrow ns-eyebrow-light">PHASE</div>
           <div style={{ display: 'flex', gap: '4px', marginTop: '5px' }}>
-            {[1, 2].map(ph => (
+            {[1, 2, 3].map(ph => (
               <button
                 key={ph}
                 onClick={() => setActivePhase && setActivePhase(ph)}
-                title={ph === 1 ? 'Phase 1 · Pillar programme' : 'Phase 2 · SEO / GEO / BOFU calendar'}
+                title={ph === 1 ? 'Phase 1 · Pillar programme' : ph === 2 ? 'Phase 2 · SEO / GEO / BOFU calendar' : 'Phase 3 · SEO calendar (Oct)'}
                 style={{
                   flex: 1, padding: '8px 0',
                   fontFamily: 'Noto Sans, sans-serif', fontSize: '0.74rem', fontWeight: 700,
@@ -189,7 +190,7 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           </div>
         )}
 
-        {phase === 2 && (
+        {phase >= 2 && (
           <div className="ns-sidebar-pillars">
             <div style={{ padding: '4px 14px 6px', fontFamily: 'Noto Sans, sans-serif', fontSize: '0.6rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#b0a99e' }}>
               Categories
@@ -411,7 +412,7 @@ function ContentTypeNav({ project, ctStats, setView, setActivePillar, setActiveC
     <div>
       {Object.entries(CT_META).map(([ctId, meta]) => {
         const items = byType[ctId] || [];
-        const approvedCount = items.filter(x => x.piece.status === 'approved').length;
+        const approvedCount = items.filter(x => x.piece.status === 'approved' || x.piece.status === 'live').length;
         const isOpen = expanded[ctId];
         return (
           <div key={ctId} style={{ marginBottom: '2px' }}>

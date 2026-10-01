@@ -1313,7 +1313,7 @@ function TrackerHeader({ project, stats, activePhase, activeCluster, setActiveCl
   const effMonthId = window.NS_phaseMonth(project, phase);
   const activeMonth = (project.months || []).find(m => m.id === effMonthId) || (project.months || [])[0];
   const monthLabel = activeMonth ? activeMonth.label : "";
-  const groupNoun = phase === 2 ? "categories" : "pillars";
+  const groupNoun = phase >= 2 ? "categories" : "pillars";
   const eyebrow = phase === 2 ? monthLabel : monthLabel;
 
   // Phase-2 chips: live SEO / GEO / BOFU counts. Phase-1: the weighted split.
@@ -1322,10 +1322,10 @@ function TrackerHeader({ project, stats, activePhase, activeCluster, setActiveCl
     for (const p of phasePillars) for (const c of p.clusters) for (const pc of c.pieces) {
       if ((pc.phase || 1) !== phase) continue;
       if ((pc.content_type || "") !== id) continue;
-      total++; if (pc.status === "approved") approved++;
+      total++; if (pc.status === "approved" || pc.status === "live") approved++;
     }
     return { id, total, approved };
-  }).filter(x => x.total > 0 || x.id === "bofu");
+  }).filter(x => x.total > 0 || (phase === 2 && x.id === "bofu"));
 
   return (
     <header className="ns-tracker-head">
@@ -1352,7 +1352,7 @@ function TrackerHeader({ project, stats, activePhase, activeCluster, setActiveCl
               })}
             </div>
           )}
-          {phase === 2 && (
+          {phase >= 2 && (
             <div style={{ display: "flex", gap: "8px", marginTop: "6px", flexWrap: "wrap", alignItems: "center" }}>
               {p2Chips.map(ch => {
                 const meta = CT_DISPLAY[ch.id];
@@ -1796,7 +1796,9 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
   const feedback = (project.feedback || {})[piece.id] || [];
   const isNS = currentUser.org === "ns";
   const isJG = currentUser.org === "jaggaer";
-  const phaseBadge = piece.phase === 2
+  const phaseBadge = piece.phase === 3
+    ? { label: "P3", color: "#0E6655", bg: "#e8f5f0" }
+    : piece.phase === 2
     ? { label: "P2", color: "#6C3483", bg: "#f5eef8" }
     : { label: "P1", color: "#1F618D", bg: "#eaf2f8" };
 
@@ -4212,7 +4214,7 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
             pillar.clusters.forEach((cluster, ci) => {
               const pal = CLUSTER_PALETTE[ci % CLUSTER_PALETTE.length];
               const total = cluster.pieces.length;
-              const approved = cluster.pieces.filter(p => p.status === "approved").length;
+              const approved = cluster.pieces.filter(p => p.status === "approved" || p.status === "live").length;
 
               rows.push(
                 <tr key={`cluster-${cluster.id}`} className="ns-ct-cluster-row" style={{ background: pal.bg }}>
