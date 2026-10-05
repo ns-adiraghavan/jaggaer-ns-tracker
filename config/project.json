@@ -7016,7 +7016,7 @@
               "title": "Ramp Alternatives",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 3 (Alternatives)",
@@ -7040,6 +7040,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-24T13:21:31.063Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-10-05T08:00:31.879Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -7048,6 +7053,13 @@
                 "slug": "",
                 "updated_at": "2026-09-24T13:21:57.180Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-10-01",
+                "live_url": "https://www.jaggaer.com/blog/ramp-alternatives",
+                "performance_data": "",
+                "updated_at": "2026-10-05T08:00:31.879Z"
               }
             },
             {
