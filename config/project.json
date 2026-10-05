@@ -7169,7 +7169,7 @@
               "title": "Procurify Alternatives",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 3 (Alternatives)",
@@ -7193,8 +7193,20 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-28T08:17:32.669Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-10-05T08:02:27.551Z",
+                  "by": "m-izu4e"
                 }
-              ]
+              ],
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-10-01",
+                "live_url": "https://www.jaggaer.com/blog/procurify-alternatives",
+                "performance_data": "",
+                "updated_at": "2026-10-05T08:02:27.551Z"
+              }
             },
             {
               "id": "p2-geo-sap-ariba-alternatives",
