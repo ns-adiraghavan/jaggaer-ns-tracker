@@ -3100,7 +3100,7 @@
               "title": "Procurement vs. Purchasing: What's the Difference and Why It Matters",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -3112,9 +3112,20 @@
               "schedule_week": 5,
               "publish_day": "Mon",
               "planned_publish_date": "Oct 05, 2026",
-              "revision_count": 0,
+              "revision_count": 1,
               "deliverable_ext": "html",
-              "return_to_stage": null
+              "return_to_stage": null,
+              "last_upload": "2026-10-05T12:46:38.837Z",
+              "last_upload_by": "m-5jitd",
+              "last_updated": "2026-10-05T12:46:38.837Z",
+              "last_updated_by": "m-5jitd",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-10-05T12:46:38.837Z",
+                  "by": "m-5jitd"
+                }
+              ]
             },
             {
               "id": "p3-seo-top-procurement-software-alternatives-to-ariba-and-coupa",
