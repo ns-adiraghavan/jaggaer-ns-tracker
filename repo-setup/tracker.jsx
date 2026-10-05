@@ -2921,7 +2921,9 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
   // Ad-Hoc Articles only ever send back to "writing" — there's no chain to walk.
   const sendBackStage = isAdHocReviewStage
     ? { id: "writing" }
-    : ([...workflowStages].slice(0, currentIdx).reverse().find(s => s.actor === "ns") || workflowStages[0]);
+    : ([...workflowStages].slice(0, currentIdx).reverse().find(s => s.actor === "ns")
+       || workflowStages.find(s => s.id === "writing")
+       || workflowStages[0]);
   const isLastStage = isAdHocReviewStage ? true : (advanceId === "approved" || advanceId === "live");
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
@@ -4335,7 +4337,7 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                     <td className="ns-ct-td ns-ct-td-status">
                       <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
                         {(() => {
-                          const _sm = buildStatusMeta(getWorkflowStages(project));
+                          const _sm = buildStatusMeta([...getWorkflowStages(project), getAdHocReviewStage(project)]);
                           return adminMode ? (
                             <InlineCell
                               value={piece.status}
