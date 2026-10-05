@@ -2457,6 +2457,7 @@ function EditPiecePanel({ piece, cluster, project, updatePiece, onDone }) {
 // ─── Delete confirm ───────────────────────────────────────────────────────────
 function DeletePiecePanel({ piece, cluster, deletePiece, onClose }) {
   const { useState: useStateDP } = React;
+  const [confirmed, setConfirmed] = useStateDP(false);
   const isApproved = piece.status === "approved" || piece.status === "live";
   const isLiveDP = piece.status === "live";
 
