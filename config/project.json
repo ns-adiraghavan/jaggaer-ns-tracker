@@ -524,37 +524,6 @@
               "last_upload_by": "manager"
             },
             {
-              "id": "piece-8b110p",
-              "title": "AI Direction Source to Pay",
-              "format": "Ad-Hoc Article",
-              "assignee": "manager",
-              "status": "ad-hoc-review",
-              "content_type": "ad-hoc",
-              "phase": 2,
-              "schedule_month": "p2-month-1",
-              "revision_count": 1,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "writing",
-                  "ts": "2026-09-29T13:48:36.480Z",
-                  "by": "manager"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-09-29T13:48:47.183Z",
-                  "by": "manager"
-                }
-              ],
-              "last_updated": "2026-09-29T13:48:47.183Z",
-              "last_updated_by": "manager",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-09-29T13:48:47.183Z",
-              "last_upload_by": "manager"
-            },
-            {
               "id": "piece-p3ah01",
               "title": "AI Direction in Source-to-Pay: Where the Industry Is Actually Heading in 2026",
               "format": "Ad-Hoc Article",
