@@ -7213,7 +7213,7 @@
               "title": "Sap Ariba Alternatives",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 3 (Alternatives)",
@@ -7237,6 +7237,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-24T07:36:50.031Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-10-05T08:03:27.088Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -7245,6 +7250,13 @@
                 "slug": "sap-ariba-alternatives",
                 "updated_at": "2026-09-24T07:44:11.286Z",
                 "updated_by": "manager"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-10-01",
+                "live_url": "https://www.jaggaer.com/blog/sap-ariba-alternatives",
+                "performance_data": "",
+                "updated_at": "2026-10-05T08:03:27.088Z"
               }
             },
             {
