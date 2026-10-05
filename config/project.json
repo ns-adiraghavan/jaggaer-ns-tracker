@@ -7366,7 +7366,7 @@
               "title": "Ivalua Alternatives",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 3 (Alternatives)",
@@ -7390,6 +7390,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-28T08:23:27.615Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-10-05T08:05:39.417Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -7398,6 +7403,13 @@
                 "slug": "",
                 "updated_at": "2026-09-28T08:24:35.826Z",
                 "updated_by": "jason"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-10-02",
+                "live_url": "https://www.jaggaer.com/blog/ivalua-alternatives",
+                "performance_data": "",
+                "updated_at": "2026-10-05T08:05:39.416Z"
               }
             },
             {
