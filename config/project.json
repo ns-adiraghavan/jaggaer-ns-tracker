@@ -6965,7 +6965,7 @@
               "title": "Tipalti Alternatives",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 3 (Alternatives)",
@@ -6989,6 +6989,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-24T10:07:29.491Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-10-05T07:59:54.120Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -6997,6 +7002,13 @@
                 "slug": "tipalti-alternatives",
                 "updated_at": "2026-09-24T10:07:54.756Z",
                 "updated_by": "orlagh"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-10-01",
+                "live_url": "https://www.jaggaer.com/blog/tipalti-alternatives",
+                "performance_data": "",
+                "updated_at": "2026-10-05T07:59:54.119Z"
               }
             },
             {
