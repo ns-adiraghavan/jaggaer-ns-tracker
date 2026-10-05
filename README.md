@@ -92,8 +92,9 @@ The proxy architecture (browser → `/api/*` → external API) is intentional. *
 │   ├── api.js                ← browser-side GitHub/Anthropic helper (calls /api/* proxies)
 │   ├── login.jsx             ← two-team login gate (loaded first; sets org in localStorage)
 │   ├── entry.jsx             ← name selector (org-scoped, post-login; attribution only)
-│   ├── sidebar.jsx           ← left nav (By Pillar / By Type; Phase 2 category nav)
+│   ├── sidebar.jsx           ← left nav (By Pillar / By Type; Phase 2/3 category nav)
 │   ├── tracker.jsx           ← main tracker, drawer, review panels, CSV sync, piece links
+│   ├── architecture-map.jsx  ← Architecture Map view (static pillar/cluster topic map in a sandboxed iframe)
 │   ├── weekly-report.jsx     ← Status Report tab + StatusExportBar (CSV export by launch_date)
 │   ├── performance.jsx       ← Search Performance tab
 │   ├── admin.jsx             ← admin config editor
@@ -156,6 +157,7 @@ Everything the app renders derives from `config/project.json`. Adding pillars, c
   "active_month": "month-1",
   "active_phase": 1,
   "phase2_active_month": "p2-month-1",
+  "phase3_active_month": "p3-month-1",
   "content_type_split": [...],
   "pillars": [...],
   "team": { "ns": [...], "jaggaer": [...] },
@@ -167,7 +169,7 @@ Everything the app renders derives from `config/project.json`. Adding pillars, c
 }
 ```
 
-`active_phase` (`1` or `2`) and `phase2_active_month` are the two Phase 2 control fields written by the app when the user switches phases. `playground_comments[]` is written lazily at runtime and may be absent until the first pin is placed.
+`active_phase` (`1`, `2`, or `3`), `phase2_active_month`, and `phase3_active_month` are the phase-control fields written by the app when the user switches phases. `playground_comments[]` is written lazily at runtime and may be absent until the first pin is placed.
 
 ### months
 
@@ -175,11 +177,13 @@ Everything the app renders derives from `config/project.json`. Adding pillars, c
 { "id": "month-1", "label": "Month 1 · May–Jun 2026", "active": true, "start_date": "2026-05-21" }
 ```
 
-Phase 2 adds a fourth month entry: `{ "id": "p2-month-1", "label": "Phase 2 · Aug–Sep 2026" }`.
+Phase 2 adds a fourth month entry: `{ "id": "p2-month-1", "label": "Phase 2 · Aug–Sep 2026" }`. Phase 3 adds a fifth: `{ "id": "p3-month-1", "label": "Phase 3 · Oct 2026", "phase": 3 }`.
 
 ### pillars → clusters → pieces
 
-Phase 1 pillars (`ai-in-s2p`, `discrete-manufacturing`, `public-sector`, `higher-education`, `ad-hoc-articles`) carry `"phase": 1`. Phase 2 pillars (`p2-geo`, `p2-seo`, `p2-bofu`) carry `"phase": 2` and live in the same array. Phase 2 cluster IDs follow the pattern `p2-{type}-w{n}` (weekly buckets).
+Phase 1 pillars (`ai-in-s2p`, `discrete-manufacturing`, `public-sector`, `higher-education`) carry `"phase": 1`. Phase 2 pillars (`p2-geo`, `p2-seo`, `p2-bofu`) carry `"phase": 2`; Phase 3 adds `p3-seo` with `"phase": 3`. All live in the same array. Phase 2/3 cluster IDs follow the pattern `p{2,3}-{type}-w{n}` (weekly buckets) — Phase 3 SEO runs `p3-seo-w5` … `p3-seo-w8` (October, Weeks 5–8).
+
+The `ad-hoc-articles` pillar (`"phase": null`) is **shared across all phases** — it appears in whichever phase has ad-hoc pieces, keyed per-piece by the piece's own `phase`. It is kept **first in the `pillars` array** so it renders at the top of the tracker in every phase.
 
 ```json
 {
@@ -267,14 +271,15 @@ Identical to v3.8 — see §3 of the previous README version or the schema inlin
 
 ## 4. Phase 2 Data Model
 
-Phase 2 introduces a parallel programme of 64 pieces (GEO, SEO, BOFU) running alongside Phase 1.
+Phase 2 introduces a parallel programme of 64 pieces (GEO, SEO, BOFU) running alongside Phase 1. **Phase 3** (October) adds a further SEO programme — 71 SEO Tier 1 pieces across Weeks 5–8 under the `p3-seo` pillar, plus October ad-hoc articles in the shared ad-hoc pillar. It reuses the Phase 2 category UI model (see Phase 3 subsection below).
 
 ### Control fields in project.json
 
 | Field | Values | Written by |
 |---|---|---|
-| `active_phase` | `1` or `2` | Phase toggle in sidebar |
+| `active_phase` | `1`, `2`, or `3` | Phase toggle in sidebar |
 | `phase2_active_month` | `"p2-month-1"` | Phase 2 month selector |
+| `phase3_active_month` | `"p3-month-1"` | Phase 3 month selector |
 
 ### phase2-reference.json
 
@@ -296,6 +301,19 @@ SheetJS is loaded via CDN in `index.html` for client-side `.xlsx` parsing.
 ### Phase 2 categories in sidebar
 
 Phase 2 uses `PillarNav` components for its three categories (GEO / SEO / BOFU), collapsible by click on the category header. Sub-clusters are weekly buckets (e.g. `Week 1 · Aug 25-29`). The sidebar shows `P01 GEO`, `P02 SEO`, `P03 BOFU` labels with `approved/total` counts.
+
+> **Category progress counts are `approved`-and-beyond.** The header category chips (GEO/SEO/BOFU `x/total`) and the cluster `x/total` fractions count pieces whose status is `approved` **or** `live` — because a piece auto-promotes `approved → live` when a `live_url` is saved, counting only `approved` made live pieces silently drop off (GEO showed `0/58`). `computeStats` has always treated `live` as approved-and-beyond; the chips and cluster fractions now match it.
+
+### Phase 3 (October programme)
+
+Phase 3 reuses the Phase 2 category model wholesale — same `PillarNav` category sidebar (rendered for `phase >= 2`), same weekly-bucket clusters, same `x/total` chips. Specifics:
+
+- **Pillar:** `p3-seo` (`"phase": 3`); clusters `p3-seo-w5`…`p3-seo-w8` (October, Weeks 5–8). Pieces are `content_type: "seo"`, seeded at `not-started` (same as Phase 2 SEO — NS uploads a draft which advances `writing → marketing-review`/"Visnja Review").
+- **Ad-hoc:** October ad-hoc articles live in the shared `ad-hoc-articles` pillar with `"phase": 3`, seeded at `writing` (ad-hoc skips the brief gate — the same convention as the in-app **Add Ad-Hoc** action and all other ad-hoc pieces).
+- **Phase switch:** the sidebar toggle renders `[1, 2, 3]`.
+- **Routing:** bookmarkable at `/tracker/phase3` (rewrite in `vercel.json`); detected on load and maintained via `pushState`/`popstate`, exactly like Phase 2.
+- **Source of truth:** seeded from the **Master Content Log** sheet of the content-calendar workbook, *not* the Content Calendar sheet (whose Week-5 header is malformed and would mis-bucket those rows into Week 4). The admin **Sync Calendar** tool remains Phase-2-only.
+- **Architecture Map:** a static pillar/cluster topic map is available in the sidebar (**Architecture Map**) across all phases — see §8, `architecture-map.jsx`.
 
 ---
 
@@ -320,7 +338,9 @@ Current live funnel (from `project.workflow_stages`):
 
 > **Stale `robert-review` fallback constants remain in `admin.jsx` and `api/digest.js`** — inert at runtime, flagged for cleanup in §14.
 
-**Ad-Hoc Articles** use a separate `ad-hoc-review` stage (simplified two-stage: NS submit → Jaggaer review → approved). This stage deliberately lives **outside** `project.workflow_stages` so it doesn't shift the indices of the main funnel — every component carries an explicit patch for it (`getAdHocReviewStage`).
+**Ad-Hoc Articles** use a separate `ad-hoc-review` stage (simplified two-stage: NS submit → Jaggaer review → approved). This stage deliberately lives **outside** `project.workflow_stages` so it doesn't shift the indices of the main funnel — every component carries an explicit patch for it (`getAdHocReviewStage`). **Any UI that renders a status label must append this stage to its `buildStatusMeta` input** (`[...getWorkflowStages(project), getAdHocReviewStage(project)]`); otherwise a piece at `ad-hoc-review` falls through `StatusChip`'s default and displays as "Not Started". The card view, drawer, and (as of v4.0) the table view all do this.
+
+> **Send-back never lands on `not-started`.** When a reviewer returns a piece, `sendBackStage` walks back to the nearest NS-actor stage; if none precedes the current stage (e.g. a review at SME/brief/writing), it now falls back to the `writing` stage rather than `workflowStages[0]` (`not-started`), which had stranded pieces where NS can't re-upload. The reviewer's stage is stored in `return_to_stage` so the NS re-upload returns straight to them.
 
 ---
 
@@ -362,7 +382,7 @@ window.__CONFIG__ = { GITHUB_REPO: "ns-adiraghavan/jaggaer-ns-tracker" };
 ```
 
 ### sidebar.jsx
-Left nav with a **By Pillar / By Type** toggle (Phase 1) or **GEO / SEO / BOFU** category nav (Phase 2). In By Type mode, the category label area sets the tracker filter and the chevron (›/▾) toggles the piece list expand/collapse independently — these are two separate controls. Exposes `window.Sidebar`, `window.computeStats`.
+Left nav with a **By Pillar / By Type** toggle (Phase 1) or category nav (Phase 2/3, rendered for `phase >= 2`). In By Type mode, the category label area sets the tracker filter and the chevron (›/▾) toggles the piece list expand/collapse independently — these are two separate controls. The phase switch renders `[1, 2, 3]`; an **Architecture Map** nav entry appears in every phase. Exposes `window.Sidebar`, `window.computeStats`, `window.NS_phaseMonth`, `window.NS_pillarsForPhase`. `computeStats` and the category counters treat `live` as approved-and-beyond.
 
 ### tracker.jsx
 Main content area + all review machinery. Exposes `window.Tracker`, `window.CT_DISPLAY`, `window.NS_syncWorkflow`, `window.CsvSyncPanel`, `window.projectToCsv`. Holds the `STATUS_META` / `DEFAULT_WORKFLOW_STAGES` fallback stage definitions (must be kept in sync with `project.workflow_stages`).
@@ -387,8 +407,11 @@ Holds three components exported to `window`:
 ### phase2_logic.js
 Client-side `.xlsx` parse logic used by `Phase2SyncPanel`. Reads the Phase 2 topics/keywords workbook via SheetJS and builds a diff against the current `project.json`. Never overwrites status, feedback, or uploaded files.
 
+### architecture-map.jsx
+**Architecture Map** sidebar view. Renders a static pillar/cluster topic map (the JAGGAER site architecture: master pillar, product pillars, clusters, and the cross-cutting vertical/role/need layer) inside a **sandboxed iframe via `srcDoc`**, so the map's page-level CSS (`body`/`h1`/`table`/…) stays fully isolated from the app's styles. The iframe auto-sizes to its content on load. Exposes `window.ArchitectureMapPanel`. To update the map, replace the `ARCH_MAP_HTML` template-literal string.
+
 ### app.jsx
-Root component. Hydrates from GitHub on load, falls back to `MOCK_PROJECT` on error, debounced auto-save (1.5 s) on state change. Phase 2 is bookmarkable at `/tracker/phase2` — detected from `window.location.pathname` on load and maintained via `history.pushState` + `popstate`. The `active_phase` toggle in the sidebar calls `setActivePhase()`, which updates both React state and the URL. `popstate` (browser back/forward) syncs phase state back without re-hydrating.
+Root component. Hydrates from GitHub on load, falls back to `MOCK_PROJECT` on error, debounced auto-save (1.5 s) on state change. Phases 2 and 3 are bookmarkable at `/tracker/phase2` and `/tracker/phase3` — detected from `window.location.pathname` on load and maintained via `history.pushState` + `popstate`. The `active_phase` toggle in the sidebar calls `setActivePhase()`, which updates both React state and the URL. `popstate` (browser back/forward) syncs phase state back without re-hydrating.
 
 ### api/github.js
 GitHub Contents API proxy. Reads `GITHUB_TOKEN` + `GITHUB_REPO` from `process.env`. Body limit 10 MB for PDF deliverable uploads.
@@ -460,6 +483,7 @@ For serverless functions and other plain-JS files: `node --check api/*.js`.
 | `/piece/:id` | `api/piece-page.js` |
 | `/tracker` | `index.html` |
 | `/tracker/phase2` | `index.html` |
+| `/tracker/phase3` | `index.html` |
 
 The `/tracker/phase2` → `index.html` rewrite is what enables hard-refresh at the Phase 2 URL. Combined with `<base href="/">` in `index.html`, this is the complete fix for the refresh-404 issue.
 
@@ -493,7 +517,7 @@ Unchanged from v3.8 — two flows (daily digest via Vercel Cron; piece-approval 
 2. **Guarded string replacement only.** Python with `assert s.count(old) == 1` before every replace. No rewrites.
 3. **Watch for global-scope naming collisions.** Unbundled script-tag architecture — every identifier shares global scope. Name helpers per-module.
 4. **Keep the two workflow config copies in sync.** `project.json` is source of truth; `tracker.jsx` (`STATUS_META` / `DEFAULT_WORKFLOW_STAGES`) is the pre-hydration fallback. When you rename a stage in one, rename it in the other.
-5. **Never hardcode stage IDs in new UI.** Resolve through `project.workflow_stages` at runtime; patch `ad-hoc-review` via `getAdHocReviewStage()`.
+5. **Never hardcode stage IDs in new UI.** Resolve through `project.workflow_stages` at runtime; patch `ad-hoc-review` via `getAdHocReviewStage()`. Any new status-label renderer must feed `buildStatusMeta([...getWorkflowStages(project), getAdHocReviewStage(project)])` — omitting the ad-hoc stage makes `ad-hoc-review` pieces display as "Not Started" (the bug fixed in the table view in v4.0).
 6. **GitHub Contents API needs a fresh SHA on every PUT.** `saveProject` already refreshes and retries once — don't reintroduce a cached SHA.
 7. **Validate before delivering:** Babel CLI on every touched `.jsx`, `node --check` on plain JS, then a headless render check.
 8. **Don't revert the proxy architecture.** Browser → `/api/*` → external API is deliberate.
@@ -518,6 +542,9 @@ Edit `config/project.json` (or use **Admin → Pieces / Pillars & Clusters**). N
 
 ### Add a Phase 2 piece
 Edit `config/project.json` under the appropriate `p2-geo`, `p2-seo`, or `p2-bofu` pillar. Or upload the updated `.xlsx` workbook via **Phase 2 → Upload workbook** (admin) — the sync calendar will diff and apply changes.
+
+### Add a Phase 3 piece
+Edit `config/project.json` under the `p3-seo` pillar (SEO, clusters `p3-seo-w{n}`, `month_id: "p3-month-1"`, `"phase": 3`, seed `status: "not-started"`), or add an October ad-hoc under the shared `ad-hoc-articles` pillar (`"phase": 3`, seed `status: "writing"`). There is no Phase 3 workbook sync — add pieces by hand or in Admin. Switch to Phase 3 with the sidebar phase toggle (or the `/tracker/phase3` URL).
 
 ### Sync the Phase 2 calendar from the workbook
 Admin → switch to **Phase 2** → **Upload workbook (.xlsx)**. The sync refreshes P2 Reference tabs, piece titles, keywords, and dates. Status, feedback, and uploaded files are never overwritten.
@@ -567,7 +594,16 @@ Force-trigger the digest once (§13) so `digest-state.json` reseeds with current
 
 ---
 
-*Last updated: August 2026, v3.9. Changes from v3.8:*
+*Last updated: October 2026, v4.0. Changes from v3.9:*
+- *Added **Phase 3** (October SEO programme): `p3-seo` pillar (`"phase": 3`), clusters `p3-seo-w5`…`p3-seo-w8`, 71 SEO Tier 1 pieces, October ad-hoc under the shared ad-hoc pillar; `p3-month-1` month, `phase3_active_month` control field, `[1,2,3]` phase switch, `/tracker/phase3` route (new `vercel.json` rewrite). Documented in §3, §4 (Phase 3 subsection), §8, §11, §15.*
+- *Fixed **category progress counts**: GEO/SEO/BOFU header chips and cluster `x/total` fractions now count `approved` **or** `live` (pieces auto-promote to `live` on `live_url` save, so counting only `approved` dropped them — GEO read `0/58`). Aligns with `computeStats`. (§4)*
+- *Fixed **send-back to `not-started`**: `sendBackStage` now falls back to the `writing` stage, never `not-started`, when no NS-actor stage precedes the review point. (§5)*
+- *Fixed **table-view status display**: the table now appends the `ad-hoc-review` stage to its `buildStatusMeta` input, so ad-hoc pieces in review no longer show "Not Started". Added a maintenance rule (§5, §14).*
+- *Fixed **admin delete crash** (`ReferenceError: confirmed is not defined`): `DeletePiecePanel` was missing its `confirmed`/`setConfirmed` `useState`.*
+- *Added **Architecture Map** sidebar view (`architecture-map.jsx`) — static pillar/cluster topic map in a sandboxed `srcDoc` iframe. (§2, §8)*
+- *Moved the shared `ad-hoc-articles` pillar to the front of the `pillars` array so it renders first in every phase. (§3)*
+
+*Changes in v3.9 (from v3.8):*
 - *Added **Phase 2** throughout: data model (§4), `p2-geo`/`p2-seo`/`p2-bofu` pillars, `active_phase` + `phase2_active_month` control fields, `phase2-reference.json`, `phase2.jsx`, `phase2_logic.js`.*
 - *Documented **Phase 2 routing**: `/tracker/phase2` rewrite in `vercel.json` + `<base href="/">` in `index.html` as the two-part fix for hard-refresh 404s; added recipe and maintenance note.*
 - *Documented **CommentsPanel** scroll fix (`overflowY: auto, height: 100%`).*
