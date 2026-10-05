@@ -7118,7 +7118,7 @@
               "title": "Zip Alternatives",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 3 (Alternatives)",
@@ -7142,6 +7142,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-24T11:37:01.179Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-10-05T08:01:50.775Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -7150,6 +7155,13 @@
                 "slug": "zip-alternatives",
                 "updated_at": "2026-09-24T11:45:23.472Z",
                 "updated_by": "m-e10nz"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-10-01",
+                "live_url": "https://www.jaggaer.com/blog/zip-alternatives",
+                "performance_data": "",
+                "updated_at": "2026-10-05T08:01:50.775Z"
               }
             },
             {
