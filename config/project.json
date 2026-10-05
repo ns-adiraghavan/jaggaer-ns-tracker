@@ -7067,7 +7067,7 @@
               "title": "Coupa Alternatives",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 3 (Alternatives)",
@@ -7091,6 +7091,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-23T06:47:54.636Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-10-05T08:01:14.864Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -7099,6 +7104,13 @@
                 "slug": "coupa-alternatives-in-2026",
                 "updated_at": "2026-09-24T07:43:44.323Z",
                 "updated_by": "manager"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-10-01",
+                "live_url": "https://www.jaggaer.com/blog/coupa-alternatives",
+                "performance_data": "",
+                "updated_at": "2026-10-05T08:01:14.864Z"
               }
             },
             {
