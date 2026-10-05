@@ -7315,7 +7315,7 @@
               "title": "Zycus Alternatives",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 3 (Alternatives)",
@@ -7339,6 +7339,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-28T08:31:40.388Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-10-05T08:04:44.097Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -7347,6 +7352,13 @@
                 "slug": "zycus-alternatives",
                 "updated_at": "2026-09-28T08:33:16.878Z",
                 "updated_by": "m-e10nz"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-10-02",
+                "live_url": "https://www.jaggaer.com/blog/zycus-alternatives",
+                "performance_data": "",
+                "updated_at": "2026-10-05T08:04:44.097Z"
               }
             },
             {
