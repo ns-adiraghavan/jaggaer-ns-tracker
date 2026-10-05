@@ -63,6 +63,9 @@ function getAdHocReviewStage(project) {
   return stages.find(s => s.id === "ad-hoc-review") || ADHOC_REVIEW_STAGE;
 }
 function isAdHoc(piece) { return piece && piece.content_type === "ad-hoc"; }
+// Ad-hoc piece that has not yet been submitted for review (new → Not Started; sent back → Writing).
+// An NS upload on one of these moves it straight to Ad-Hoc Review.
+function isAdHocPreReview(piece) { return isAdHoc(piece) && (piece.status === "not-started" || piece.status === "writing"); }
 // White-paper deliverables require BOTH a PDF and an HTML companion file.
 // Formats that trigger dual-upload mode:
 const WP_FORMATS = ["Whitepaper", "Whitepaper (gated)", "eBook / Guide"];
@@ -945,14 +948,14 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
         title: title.trim() || "Untitled ad-hoc article",
         format: "Ad-Hoc Article",
         assignee: currentUser?.id || "",
-        status: "writing", // NS uploads directly — no brief/SME-review gate for ad-hoc
+        status: "not-started", // ad-hoc starts Not Started; first NS upload → Ad-Hoc Review (no brief/SME gate)
         content_type: contentType || "ad-hoc",
         phase: window.NS_ACTIVE_PHASE || 1,
         schedule_month: window.NS_phaseMonth ? window.NS_phaseMonth(next, window.NS_ACTIVE_PHASE || 1) : next.active_month,
         revision_count: 0,
         primary_keyword: "",
         geography: "all",
-        status_history: [{ stage: "writing", ts: new Date().toISOString(), by: currentUser?.id || null }],
+        status_history: [{ stage: "not-started", ts: new Date().toISOString(), by: currentUser?.id || null }],
         last_updated: new Date().toISOString(),
         last_updated_by: currentUser?.id || null,
       });
@@ -1831,12 +1834,16 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
 
   function primaryAction() {
     if (!currentStage || piece.status === "approved" || piece.status === "live") return null;
+    // Ad-hoc, Not Started: no brief step — NS submits the draft straight to Ad-Hoc Review.
+    if (isAdHoc(piece) && piece.status === "not-started") {
+      return isNS ? { label: `Submit → ${getAdHocReviewStage(project).label}`, mode: "upload" } : null;
+    }
     const actor = currentStage.actor;
     if (!actorMatches(actor)) return null;
     // Label logic
     if (piece.status === "not-started") return { label: "Upload Brief", mode: "brief" };
     if (hasActorType(actor, "ns") || isNS) {
-      const displayNext = (isAdHoc(piece) && piece.status === "writing") ? getAdHocReviewStage(project) : nextStage;
+      const displayNext = isAdHocPreReview(piece) ? getAdHocReviewStage(project) : nextStage;
       return { label: displayNext ? `Submit → ${displayNext.label}` : "Submit", mode: "upload" };
     }
     // Named person or Jaggaer reviewer
@@ -2321,7 +2328,7 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   const currentStage = isAdHocReviewStage ? getAdHocReviewStage(project) : stages.find(s => s.id === piece.status);
   const nextStage = isAdHocReviewStage ? null : (stages[currentStageIdx + 1] || null);
   // For ad-hoc pieces still writing, the real next stage is Ad-Hoc Review, not the standard chain's marketing-review.
-  const displayNextStage = (isAdHoc(piece) && piece.status === "writing") ? getAdHocReviewStage(project) : nextStage;
+  const displayNextStage = isAdHocPreReview(piece) ? getAdHocReviewStage(project) : nextStage;
 
   function actorMatches(actor) {
     if (!actor) return false;
@@ -2341,10 +2348,10 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   }
 
   const isCurrentActor = currentStage && actorMatches(currentStage.actor);
-  const canBrief = isCurrentActor && piece.status === "not-started"; // Jaggaer uploads brief
+  const canBrief = isCurrentActor && piece.status === "not-started" && !isAdHoc(piece); // Jaggaer uploads brief (not for ad-hoc)
   // NS (or admin) can upload/reupload at any non-terminal stage, regardless of whose actor turn it is
   // NS can upload in approved state too — that's how they move a piece to "live".
-  const canUpload = (isNS || adminMode) && piece.status !== "not-started" && piece.status !== "live";
+  const canUpload = (isNS || adminMode) && (piece.status !== "not-started" || isAdHoc(piece)) && piece.status !== "live";
   const canReview = isCurrentActor && !isNS && piece.status !== "not-started" && piece.status !== "approved";
   // canReplace is now redundant (canUpload covers it), kept as false to avoid stale tab
   const canReplace = false;
@@ -2432,6 +2439,7 @@ function EditPiecePanel({ piece, cluster, project, updatePiece, onDone }) {
         <label className="ns-edit-label">Status
           <select className="ns-edit-input ns-edit-select" value={form.status} onChange={field("status")}>
             {getWorkflowStages(project).map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+            {isAdHoc(piece) && !getWorkflowStages(project).some(s => s.id === "ad-hoc-review") && <option value="ad-hoc-review">{getAdHocReviewStage(project).label}</option>}
           </select>
         </label>
         <label className="ns-edit-label">Assignee
@@ -2595,7 +2603,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
   const nextStage = workflowStages[currentIdx + 1] || null;
   const nextRev = (piece.revision_count || 0) + 1;
   // Ad-Hoc Articles skip the standard chain: writing → ad-hoc-review directly.
-  const adHocNext = isAdHoc(piece) && piece.status === "writing" ? getAdHocReviewStage(project) : null;
+  const adHocNext = isAdHocPreReview(piece) ? getAdHocReviewStage(project) : null;
 
   async function handleFile(file) {
     setStage("uploading"); setFilename(file.name); setBytes(file.size);
@@ -4016,7 +4024,7 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
       )}
 
       {/* ── Brief upload nudge — not-started pieces, Jaggaer only ── */}
-      {piece.status === "not-started" && currentUser?.org === "jaggaer" && (
+      {piece.status === "not-started" && !isAdHoc(piece) && currentUser?.org === "jaggaer" && (
         <div style={{
           fontFamily: "Noto Sans, sans-serif",
           background: "#fffbf5",

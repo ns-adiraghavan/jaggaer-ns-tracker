@@ -138,21 +138,114 @@ window.NS_API = (function () {
     }
   }
 
-  async function saveProject(project, sha, message) {
+  // ── Conflict-safe save ────────────────────────────────────────────────────
+  // project.json is ONE file edited by several people at once (NS + Jaggaer).
+  // GitHub rejects a PUT whose sha is stale (409). Previously that failure was
+  // permanent: the cached sha was never refreshed, so every later save failed
+  // until a page reload (which then discarded the unsaved edits).
+  // Now: on a conflict we re-fetch the live file, 3-way merge (base = what this
+  // browser last synced, local = our edits, remote = what others saved), and
+  // retry with the live sha.
+  const _j = (o) => JSON.stringify(o === undefined ? null : o);
+  function _isConflict(msg) {
+    return /gh-put-(409|422)/.test(msg || "") || /does not match|sha/i.test(msg || "");
+  }
+  function mergeProjects(base, local, remote) {
+    const out = JSON.parse(JSON.stringify(remote));
+    base = base || {};
+    // 1. Top-level fields (everything except pillars/feedback): ours wins only if we changed it.
+    for (const k of Object.keys(local)) {
+      if (k === "pillars" || k === "feedback") continue;
+      if (_j(local[k]) !== _j(base[k])) out[k] = JSON.parse(_j(local[k]));
+    }
+    // 2. Pillars / clusters / pieces, matched by id.
+    const idx = (proj) => {
+      const m = {};
+      for (const p of (proj.pillars || [])) for (const c of (p.clusters || [])) for (const pc of (c.pieces || [])) m[pc.id] = pc;
+      return m;
+    };
+    const B = idx(base), L = idx(local);
+    out.pillars = out.pillars || [];
+    const seen = new Set();
+    for (const rp of out.pillars) {
+      const lp = (local.pillars || []).find(x => x.id === rp.id);
+      const bp = (base.pillars || []).find(x => x.id === rp.id);
+      if (lp) for (const k of Object.keys(lp)) {
+        if (k === "clusters") continue;
+        if (_j(lp[k]) !== _j(bp && bp[k])) rp[k] = JSON.parse(_j(lp[k]));
+      }
+      for (const rc of (rp.clusters || [])) {
+        const lc = lp && (lp.clusters || []).find(x => x.id === rc.id);
+        const bc = bp && (bp.clusters || []).find(x => x.id === rc.id);
+        if (lc) for (const k of Object.keys(lc)) {
+          if (k === "pieces") continue;
+          if (_j(lc[k]) !== _j(bc && bc[k])) rc[k] = JSON.parse(_j(lc[k]));
+        }
+        const kept = [];
+        for (const rpc of (rc.pieces || [])) {
+          seen.add(rpc.id);
+          const lpc = L[rpc.id], bpc = B[rpc.id];
+          if (!lpc) { if (bpc) continue; kept.push(rpc); continue; }   // we deleted it / someone else added it
+          kept.push(_j(lpc) !== _j(bpc) ? JSON.parse(_j(lpc)) : rpc);  // we edited it → ours; else theirs
+        }
+        rc.pieces = kept;
+      }
+    }
+    // Pieces we added that the remote does not have yet.
+    for (const lp of (local.pillars || [])) for (const lc of (lp.clusters || [])) for (const lpc of (lc.pieces || [])) {
+      if (seen.has(lpc.id) || B[lpc.id]) continue;
+      let pillar = out.pillars.find(x => x.id === lp.id);
+      if (!pillar) { pillar = { ...JSON.parse(_j({ ...lp, clusters: [] })), clusters: [] }; out.pillars.push(pillar); }
+      let cluster = (pillar.clusters || []).find(x => x.id === lc.id);
+      if (!cluster) { cluster = { ...JSON.parse(_j({ ...lc, pieces: [] })), pieces: [] }; pillar.clusters.push(cluster); }
+      cluster.pieces.push(JSON.parse(_j(lpc)));
+    }
+    // 3. Feedback: union per piece (comments are append-only).
+    out.feedback = out.feedback || {};
+    for (const pid of Object.keys(local.feedback || {})) {
+      const have = new Set((out.feedback[pid] || []).map(_j));
+      const list = out.feedback[pid] ? out.feedback[pid].slice() : [];
+      for (const e of local.feedback[pid]) if (!have.has(_j(e))) list.push(e);
+      out.feedback[pid] = list;
+    }
+    return out;
+  }
+
+  // base = the project as last synced with GitHub (needed to merge). Returns
+  // { ok, sha, project? } — `project` is present when a merge changed content.
+  async function saveProject(project, sha, message, base) {
+    const msg = message || "update project.json";
     try {
-      const result = await githubPutFile(
-        "config/project.json",
-        JSON.stringify(project, null, 2),
-        message || "update project.json",
-        sha
-      );
+      const result = await githubPutFile("config/project.json", JSON.stringify(project, null, 2), msg, sha);
       const newSha = result.content?.sha;
       if (!newSha) throw new Error("no-sha-in-response");
       return { ok: true, sha: newSha };
     } catch (e) {
-      console.warn("[NS_API] GitHub save failed:", e.message);
-      return { ok: false, error: e.message };
+      if (!_isConflict(e.message)) {
+        console.warn("[NS_API] GitHub save failed:", e.message);
+        return { ok: false, error: e.message };
+      }
+      console.warn("[NS_API] save conflict — merging with live project.json:", e.message);
     }
+    // Conflict path: re-fetch live, merge, retry (up to 3 times — others may save meanwhile).
+    let lastErr = "conflict";
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        const meta = await githubGetFile("config/project.json");
+        const raw = atob(meta.content.replace(/\n/g, ""));
+        const remote = JSON.parse(new TextDecoder("utf-8").decode(Uint8Array.from(raw, c => c.charCodeAt(0))));
+        const merged = base ? mergeProjects(base, project, remote) : project;
+        const result = await githubPutFile("config/project.json", JSON.stringify(merged, null, 2), msg + " (merged)", meta.sha);
+        const newSha = result.content?.sha;
+        if (!newSha) throw new Error("no-sha-in-response");
+        return { ok: true, sha: newSha, project: merged };
+      } catch (e) {
+        lastErr = e.message;
+        if (!_isConflict(e.message)) break;
+      }
+    }
+    console.warn("[NS_API] GitHub save failed after merge retries:", lastErr);
+    return { ok: false, error: lastErr };
   }
 
   async function uploadPieceDeliverable(piece, cluster, pillar, month, file, author) {

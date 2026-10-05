@@ -247,6 +247,7 @@ function App() {
   const toastTimerRef = useRefApp(null);
   const firstSaveRef = useRefApp(true);
   const shaRef = useRefApp(null);
+  const baseRef = useRefApp(null); // last project state known to be on GitHub (merge base)
   const projectRef = useRefApp(null);
   const suppressAutoSaveRef = useRefApp(false);
 
@@ -285,6 +286,7 @@ function App() {
       setSource(source);
       setSha(sha);
       shaRef.current = sha;
+      baseRef.current = JSON.parse(JSON.stringify(project));
       if (error) setLoadError(error);
     }).catch(e => {
       // Should never reach here (loadProject has its own catch), but just in case
@@ -308,10 +310,13 @@ function App() {
     clearTimeout(toastTimerRef.current);
     setSaveState("saving");
     saveTimerRef.current = setTimeout(async () => {
-      const r = await window.NS_API.saveProject(project, shaRef.current, "tracker update");
+      const r = await window.NS_API.saveProject(project, shaRef.current, "tracker update", baseRef.current);
       if (r.ok && r.sha) {
         setSha(r.sha);
         shaRef.current = r.sha;
+        const saved = r.project || project;
+        baseRef.current = JSON.parse(JSON.stringify(saved));
+        if (r.project) { suppressAutoSaveRef.current = true; setProject(r.project); } // pick up teammates' changes
       }
       setSaveState(r.ok ? "saved" : "error");
       toastTimerRef.current = setTimeout(() => setSaveState(null), 2400);
@@ -339,10 +344,11 @@ function App() {
       clearTimeout(saveTimerRef.current);
       clearTimeout(toastTimerRef.current);
       setSaveState("saving");
-      const r = await window.NS_API.saveProject(next, shaRef.current, "comment " + pieceId);
+      const r = await window.NS_API.saveProject(next, shaRef.current, "comment " + pieceId, baseRef.current);
       if (r.ok && r.sha) {
         shaRef.current = r.sha;
         setSha(r.sha);
+        baseRef.current = JSON.parse(JSON.stringify(r.project || next));
         if (r.project) {
           projectRef.current = r.project;
           suppressAutoSaveRef.current = true;
