@@ -6914,7 +6914,7 @@
               "title": "Ivalua Vs Oracle Procurement Cloud",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "geo",
               "phase": 2,
               "tier": "GEO Tier 2 (Competitor vs Competitor)",
@@ -6938,6 +6938,11 @@
                   "stage": "marketing-review",
                   "ts": "2026-09-17T13:11:14.606Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-10-05T07:59:17.664Z",
+                  "by": "m-izu4e"
                 }
               ],
               "seo": {
@@ -6946,6 +6951,13 @@
                 "slug": "",
                 "updated_at": "2026-09-17T13:11:59.432Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-09-29",
+                "live_url": "https://www.jaggaer.com/blog/ivalua-vs-oracle-procurement-cloud",
+                "performance_data": "",
+                "updated_at": "2026-10-05T07:59:17.664Z"
               }
             },
             {
