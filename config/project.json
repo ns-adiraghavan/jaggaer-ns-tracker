@@ -631,11 +631,11 @@
               "title": "Sustainability Needs for Manufacturing In 2026",
               "format": "Ad-Hoc Article",
               "assignee": "",
-              "status": "not-started",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 2,
+              "revision_count": 3,
               "primary_keyword": "",
               "secondary_keyword": "",
               "geography": "all",
@@ -652,11 +652,16 @@
                   "stage": "not-started",
                   "ts": "2026-10-06T11:44:03.878Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-10-06T11:45:08.308Z",
+                  "by": "jason"
                 }
               ],
-              "last_upload": "2026-10-06T11:44:03.878Z",
+              "last_upload": "2026-10-06T11:45:08.308Z",
               "last_upload_by": "jason",
-              "last_updated": "2026-10-06T11:44:03.878Z",
+              "last_updated": "2026-10-06T11:45:08.308Z",
               "last_updated_by": "jason"
             }
           ]
