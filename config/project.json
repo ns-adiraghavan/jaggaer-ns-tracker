@@ -3257,7 +3257,14 @@
                   "ts": "2026-10-07T08:11:05.386Z",
                   "by": "jason"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "Vendor Selection Process in Procurement: 7 Steps",
+                "meta_description": "A 7-step vendor selection process for procurement teams, with a weighted scorecard template and RFP/ RFQ guidance.",
+                "slug": "vendor-selection-process",
+                "updated_at": "2026-10-07T08:12:46.300Z",
+                "updated_by": "jason"
+              }
             },
             {
               "id": "p3-seo-cpg-tail-spend-optimization-sector-cuts-for-public-sector-cp",
