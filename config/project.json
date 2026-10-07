@@ -3292,7 +3292,7 @@
               "title": "How to Improve RFP Process: A Step-by-Step Guide",
               "format": "Article",
               "assignee": "",
-              "status": "marketing-review",
+              "status": "ed-review",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -3304,17 +3304,22 @@
               "schedule_week": 5,
               "publish_day": "Tue",
               "planned_publish_date": "Oct 06, 2026",
-              "revision_count": 1,
+              "revision_count": 2,
               "deliverable_ext": "html",
               "return_to_stage": null,
-              "last_upload": "2026-10-07T06:21:39.039Z",
+              "last_upload": "2026-10-07T08:14:22.640Z",
               "last_upload_by": "m-e10nz",
-              "last_updated": "2026-10-07T06:21:39.039Z",
+              "last_updated": "2026-10-07T08:14:22.641Z",
               "last_updated_by": "m-e10nz",
               "status_history": [
                 {
                   "stage": "marketing-review",
                   "ts": "2026-10-07T06:21:39.039Z",
+                  "by": "m-e10nz"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-10-07T08:14:22.641Z",
                   "by": "m-e10nz"
                 }
               ],
