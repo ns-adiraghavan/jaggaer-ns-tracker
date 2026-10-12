@@ -7999,6 +7999,12 @@
         "org": "jaggaer",
         "role": "Content Reviewer",
         "reports_to": "anna"
+      },
+      {
+        "id": "m-72umx",
+        "name": "New member",
+        "role": "Researcher",
+        "org": "jaggaer"
       }
     ]
   },
