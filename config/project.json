@@ -7991,7 +7991,8 @@
         "id": "m-pifrn",
         "name": "Visnja Radosavlijevic",
         "role": "Marketing",
-        "org": "jaggaer"
+        "org": "jaggaer",
+        "admin": true
       },
       {
         "id": "m-ed01",
