@@ -3476,7 +3476,14 @@
                   "ts": "2026-10-14T15:51:46.915Z",
                   "by": "m-5jitd"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "Purchase Order Management in 2026: Process & Best Practices",
+                "meta_description": "See how purchase order management works from requisition to payment: approvals, match depth, tolerances, KPIs and PO software criteria",
+                "slug": "",
+                "updated_at": "2026-10-14T15:53:48.480Z",
+                "updated_by": "m-5jitd"
+              }
             },
             {
               "id": "p3-seo-purchase-requisition-vs-purchase-order-key-differences-expla",
