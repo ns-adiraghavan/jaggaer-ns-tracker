@@ -3513,7 +3513,14 @@
                   "ts": "2026-10-14T13:44:08.991Z",
                   "by": "m-e10nz"
                 }
-              ]
+              ],
+              "seo": {
+                "meta_title": "Requisition Management Software: How to Choose (2026)",
+                "meta_description": "Requisition management software connects intake, budget checks, approvals, and PO creation. See which features to test and how to choose the right solution.",
+                "slug": "requisition-management-software",
+                "updated_at": "2026-10-14T13:45:47.342Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "p3-seo-rfp-process-vs-rfq-vs-rfi-the-complete-comparison",
