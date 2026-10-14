@@ -3446,7 +3446,7 @@
               "title": "Purchase Order Management: Process, Software and Best Practices",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -3458,9 +3458,20 @@
               "schedule_week": 5,
               "publish_day": "Wed",
               "planned_publish_date": "Oct 07, 2026",
-              "revision_count": 0,
+              "revision_count": 1,
               "deliverable_ext": "html",
-              "return_to_stage": null
+              "return_to_stage": null,
+              "last_upload": "2026-10-14T15:51:07.333Z",
+              "last_upload_by": "m-5jitd",
+              "last_updated": "2026-10-14T15:51:07.333Z",
+              "last_updated_by": "m-5jitd",
+              "status_history": [
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-10-14T15:51:07.334Z",
+                  "by": "m-5jitd"
+                }
+              ]
             },
             {
               "id": "p3-seo-purchase-requisition-vs-purchase-order-key-differences-expla",
