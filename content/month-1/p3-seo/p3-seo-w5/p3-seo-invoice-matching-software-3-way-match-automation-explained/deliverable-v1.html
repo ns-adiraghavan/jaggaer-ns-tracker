@@ -1,0 +1,829 @@
+<!-- uploaded by orlagh at 2026-10-14T13:16:06.960Z -->
+<!-- piece: Invoice Matching Software: 3-Way Match Automation Explained -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice Matching Software: 3-Way Match Automation (2026)</title>
+<meta name="description" content="How invoice matching software automates three-way matching in accounts payable: match types, tolerances, exceptions, features, AI, and KPIs.">
+<link rel="canonical" href="https://www.jaggaer.com/invoice-matching-software">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Invoice Matching Software: 3-Way Match Automation (2026)","mainEntityOfPage":"https://www.jaggaer.com/invoice-matching-software","description":"How invoice matching software automates three-way matching in accounts payable: match types, tolerances, exceptions, features, AI, and KPIs.","datePublished":"2026-10-09","dateModified":"2026-10-09","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"author":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is invoice matching software?","acceptedAnswer":{"@type":"Answer","text":"It compares supplier invoices with purchase orders and goods receipts before payment. Invoices that match move on to approval or payment, and the rest go to the right person for review."}},{"@type":"Question","name":"What is three-way matching in accounts payable?","acceptedAnswer":{"@type":"Answer","text":"It is a control that checks the invoice against the purchase order and the goods receipt. When all three agree within set tolerances, the invoice can proceed to approval or payment."}},{"@type":"Question","name":"What happens when an invoice fails three-way matching?","acceptedAnswer":{"@type":"Answer","text":"It goes on hold and is sent to whoever owns the problem: the buyer for price issues, the receiver for missing receipts, or the supplier for billing errors. Once fixed, it is matched again."}},{"@type":"Question","name":"Can three-way matching work for services?","acceptedAnswer":{"@type":"Answer","text":"Yes, if a service entry sheet, approved timesheet, or milestone sign-off stands in for the goods receipt. Without one, services usually fall back to 2-way matching plus budget-owner approval."}},{"@type":"Question","name":"What happens to invoices without a PO?","acceptedAnswer":{"@type":"Answer","text":"They cannot go through PO-based matching, since there is no purchase order to compare against. They are usually routed for coding and approval instead, and some AI-enabled AP tools can suggest likely account codes."}},{"@type":"Question","name":"Does invoice matching software prevent payment fraud?","acceptedAnswer":{"@type":"Answer","text":"Not by itself. It catches billing for goods never received or at the wrong price. Fake vendors and bank-detail fraud need separate controls, like separation of duties and bank-change verification."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs:      0.75rem;  /* 12px, used only for small captions, badges, and meta labels */
+  --font-size-sm:      0.8125rem; /* 13px, used only where 14px genuinely does not fit */
+  --font-size-base:    0.875rem; /* 14px, default body copy per style guide 9.1 */
+  --font-size-lg:      1rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2rem, calc(1.72rem + 1.05vw), 2.25rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:980px;}
+.article-tags{display:flex;gap:.5rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.tag-pill{display:inline-flex;align-items:center;font-family:var(--font-display);font-size:.7rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--color-navy);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:999px;padding:.4rem .9rem;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:980px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1480px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:230px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.75rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:980px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.08em;}
+
+/* Diagnostic checklist */
+.diag-checklist{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.diag-checklist ul{list-style:none;padding-left:0;margin-bottom:0;}
+.diag-checklist li{position:relative;padding-left:1.6rem;margin-bottom:.55rem;font-size:var(--font-size-base);}
+.diag-checklist li:last-child{margin-bottom:0;}
+.diag-checklist li::before{content:"";position:absolute;left:0;top:.2rem;width:1.05rem;height:1.05rem;border-radius:4px;border:1.5px solid var(--color-teal);background:var(--color-white);}
+.diag-checklist li::after{content:"✓";position:absolute;left:.22rem;top:-.05rem;color:var(--color-teal);font-size:.75rem;font-weight:700;}
+
+/* Roadmap phase cards */
+.phase-cards{display:flex;flex-direction:column;gap:2px;margin:var(--space-m) 0 var(--space-l);border-radius:var(--border-radius-sm);overflow:hidden;border:var(--border);}
+.phase-item{display:flex;gap:var(--space-m);padding:var(--space-s) var(--space-m);background:var(--color-white);align-items:flex-start;}
+.phase-item:nth-child(even){background:var(--color-cream);}
+.phase-num{flex-shrink:0;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);}
+.phase-body{flex:1;min-width:0;}
+.phase-title{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink);margin-bottom:.15rem;display:block;}
+.phase-desc{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.6;}
+
+/* Hook stat contrast callout */
+.hook-stat{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.hook-stat p{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.65;}
+.hook-stat .stat-num{font-family:var(--font-display);font-weight:700;color:var(--color-ink-3);}
+
+/* Customer results stat block */
+.stat-block{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-l) var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.stat-block-head{font-family:var(--font-display);font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);text-align:center;margin:0 0 var(--space-l);}
+.stat-block-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-m);}
+.stat-block-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.35rem;}
+.stat-block-num{font-family:var(--font-display);font-weight:700;font-size:clamp(1.1rem,1rem + 0.6vw,1.5rem);color:var(--color-ink-3);line-height:1.1;font-variant-numeric:tabular-nums;}
+.stat-block-label{font-size:var(--font-size-sm);color:var(--color-ink-2);line-height:1.35;}
+@media(max-width:640px){.stat-block-grid{grid-template-columns:repeat(2,1fr);row-gap:var(--space-l);}}
+
+/* Industry mini-grid */
+.industry-list{display:flex;flex-direction:column;gap:2px;margin:var(--space-m) 0 var(--space-l);border-radius:var(--border-radius-sm);overflow:hidden;border:var(--border);}
+.industry-item{padding:var(--space-s) var(--space-m);background:var(--color-white);}
+.industry-item:nth-child(even){background:var(--color-cream);}
+.industry-item strong{color:var(--color-ink-3);font-family:var(--font-display);font-weight:700;}
+.industry-item p{margin:.25rem 0 0;font-size:var(--font-size-base);}
+
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--color-ink);line-height:1.2;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:12px;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-link{font-size:12px;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.page-wrapper{flex-wrap:wrap;}.expert-sidebar{position:static;width:100%;max-height:none;padding:0 0 var(--space-l) 0;order:99;}.exp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;}.exp-item{border-bottom:none;border-right:1px solid var(--purple-soft);}}
+@media(max-width:640px){.expert-sidebar .exp-list{grid-template-columns:1fr;}.expert-sidebar .exp-item{border-right:none;border-bottom:1px solid var(--purple-soft);}}
+
+/* CTA block */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-base);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:var(--font-size-base);font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-base);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;line-height:1;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Readability overrides: supporting text kept within 12px to 14px */
+.tag-pill{font-size:var(--font-size-xs);}
+.toc-link{font-size:var(--font-size-xs);}
+.meta-item{font-size:var(--font-size-xs);}
+
+/* Interactive: process stepper */
+.flow{border:var(--border);border-radius:var(--border-radius-sm);margin:var(--space-m) 0;overflow:hidden;background:var(--color-white);}
+.flow-steps{display:flex;border-bottom:var(--border);background:var(--purple-tint-3);}
+.flow-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:var(--space-s) .4rem;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:var(--font-base);font-size:var(--font-size-sm);color:var(--color-ink-3);transition:background .2s,color .2s;}
+.flow-step:hover{background:var(--purple-tint);color:var(--jai-a);}
+.flow-step.is-active{color:var(--jai-a);font-weight:600;border-bottom-color:var(--jai-a);background:var(--purple-tint);}
+.flow-num{width:1.9rem;height:1.9rem;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--color-white);border:1.5px solid var(--purple-soft);font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink-3);}
+.flow-step.is-active .flow-num{background:var(--jai-gradient);color:#fff;border-color:transparent;}
+.flow-panels{padding:var(--space-m) var(--space-l);}
+.js .flow-panel{display:none;}
+.js .flow-panel.is-active{display:block;}
+.flow-panel{margin-bottom:var(--space-s);}
+.flow-nav{display:flex;justify-content:space-between;padding:0 var(--space-l) var(--space-m);}
+.no-js .flow-nav{display:none;}
+.flow-btn,.opt{font-family:var(--font-base);font-size:var(--font-size-sm);font-weight:600;color:var(--color-teal);background:var(--color-white);border:1px solid var(--color-border);border-radius:8px;padding:.45rem .9rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.flow-btn:hover,.opt:hover{border-color:var(--color-teal);background:var(--color-light-blue);}
+.flow-btn:disabled{opacity:.4;cursor:default;}
+
+/* Interactive: tabs */
+.tabs{border:var(--border);border-radius:var(--border-radius-sm);margin:var(--space-m) 0;overflow:hidden;}
+.tab-list{display:flex;flex-wrap:wrap;gap:4px;padding:.5rem;background:var(--purple-tint-3);border-bottom:var(--border);}
+.tab-btn{font-family:var(--font-base);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink-3);background:transparent;border:1px solid transparent;border-radius:999px;padding:.4rem .9rem;cursor:pointer;transition:background .2s,color .2s;}
+.tab-btn:hover{color:var(--jai-a);background:var(--purple-tint);}
+.tab-btn.is-active{color:#fff;background:var(--jai-gradient);}
+.tab-panel{padding:var(--space-m) var(--space-l);border-bottom:var(--border);}
+.tab-panel:last-child{border-bottom:none;}
+.js .tab-panel{display:none;border-bottom:none;}
+.js .tab-panel.is-active{display:block;}
+.tab-panel h3{margin-top:0;}
+.tab-fit{background:var(--color-cream);border-left:3px solid var(--color-teal);padding:.5rem .8rem;border-radius:4px;}
+
+/* Interactive: capability check */
+.eval{border:1.5px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;background:var(--color-white);}
+.eval-head{display:flex;justify-content:space-between;align-items:center;gap:var(--space-s);flex-wrap:wrap;margin-bottom:.5rem;}
+.eval-title{font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-size:var(--font-size-base);}
+.eval-score{font-size:var(--font-size-sm);font-weight:600;color:var(--jai-a);}
+.eval-bar{height:6px;background:var(--color-cream);border-radius:999px;overflow:hidden;margin-bottom:var(--space-s);}
+.eval-fill{display:block;height:100%;width:0;background:var(--jai-gradient);transition:width .3s ease;}
+.eval-item{display:flex;gap:.6rem;align-items:flex-start;padding:.45rem 0;border-bottom:1px dashed var(--color-border);cursor:pointer;font-size:var(--font-size-base);line-height:1.5;}
+.eval-item input{margin-top:.25rem;accent-color:var(--jai-a);width:1rem;height:1rem;flex-shrink:0;}
+.eval-msg{margin:var(--space-s) 0 0;font-size:var(--font-size-sm);color:var(--color-ink-3);}
+
+/* Interactive: model picker */
+.picker{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.picker-q{margin-bottom:var(--space-s);}
+.picker-lbl{font-weight:600;color:var(--color-ink);margin-bottom:.4rem;}
+.picker-opts{display:flex;gap:.5rem;}
+.opt.is-on{background:var(--color-teal);color:#fff;border-color:var(--color-teal);}
+.picker-result{margin-top:var(--space-s);padding:.7rem .9rem;background:var(--color-white);border-left:3px solid var(--color-teal);border-radius:4px;font-size:var(--font-size-base);color:var(--color-ink-2);}
+.picker-result strong{color:var(--color-ink);}
+
+/* KPI grid */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-s);margin:var(--space-m) 0;}
+.kpi-card{border:var(--border);border-top:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);transition:box-shadow .2s;}
+.kpi-card:hover{box-shadow:0 6px 20px rgba(83,0,206,.08);}
+.kpi-name{display:block;font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-size:var(--font-size-base);margin-bottom:.25rem;}
+.kpi-card p{font-size:var(--font-size-sm);margin:0;line-height:1.5;}
+/* Solution type cards */
+.type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-s);margin:var(--space-m) 0;}
+.type-card{position:relative;border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m);background:var(--color-white);display:flex;flex-direction:column;}
+.type-num{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-sm);color:var(--jai-a);background:var(--purple-tint);border-radius:999px;padding:.15rem .6rem;align-self:flex-start;margin-bottom:.5rem;}
+.type-card h3{margin:0 0 .4rem;}
+.type-card p{font-size:var(--font-size-base);margin-bottom:.6rem;}
+.type-card .type-fit{margin:auto 0 0;background:var(--color-cream);border-left:3px solid var(--color-teal);padding:.45rem .7rem;border-radius:4px;font-size:var(--font-size-sm);}
+/* Challenge cards */
+.challenge-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-s);margin:var(--space-m) 0;}
+.challenge-card{border:var(--border);border-left:3px solid var(--color-red);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);}
+.challenge-name{display:block;font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-size:var(--font-size-base);margin-bottom:.25rem;}
+.challenge-card p{font-size:var(--font-size-base);margin:0;line-height:1.55;}
+@media(max-width:640px){.type-grid,.challenge-grid{grid-template-columns:1fr;}}
+/* Next steps roadmap (compact, neutral) */
+.road-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin:var(--space-m) 0;}
+.road-step{border:var(--border);border-top:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:.75rem .85rem;background:var(--color-white);}
+.road-num{display:block;font-size:var(--font-size-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-teal);margin-bottom:.15rem;}
+.road-title{display:block;font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-size:var(--font-size-base);margin-bottom:.25rem;}
+.road-step p{font-size:var(--font-size-sm);margin:0;line-height:1.5;}
+@media(max-width:900px){.road-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.road-grid{grid-template-columns:1fr;}}
+.h1-br{display:none;}@media(min-width:1340px){.h1-br{display:inline;}}
+/* Benefit cards */
+.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-s);margin:var(--space-m) 0;}
+.benefit-card{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m);background:var(--color-white);transition:box-shadow .2s,transform .2s;}
+.benefit-card:hover{box-shadow:0 6px 20px rgba(83,0,206,.08);transform:translateY(-2px);}
+.benefit-icon{width:2.25rem;height:2.25rem;border-radius:.6rem;display:flex;align-items:center;justify-content:center;background:var(--purple-tint);color:var(--jai-a);margin-bottom:.6rem;}
+.benefit-tag{display:block;font-size:var(--font-size-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-teal);margin-bottom:.2rem;}
+.benefit-name{display:block;font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-size:var(--font-size-base);margin-bottom:.3rem;line-height:1.3;}
+.benefit-card p{font-size:var(--font-size-sm);margin:0;line-height:1.5;}
+@media(max-width:768px){.benefit-grid,.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.benefit-grid,.kpi-grid{grid-template-columns:1fr;}}
+@media(max-width:580px){.flow-lbl{font-size:var(--font-size-xs);}.flow-panels,.flow-nav,.eval,.picker,.tab-panel{padding-left:var(--space-m);padding-right:var(--space-m);}}
+
+/* Readability overrides: expert sidebar text kept at 12px minimum */
+.exp-head-lbl,.exp-source,.exp-stat,.exp-link{font-size:12px;}
+@media(min-width:1101px){.expert-sidebar{width:220px;}}
+
+/* Interactive: match type documents */
+.doc-row{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:.2rem 0 .8rem;}
+.doc-chip{display:inline-flex;align-items:center;gap:.35rem;font-size:var(--font-size-sm);font-weight:600;padding:.4rem .75rem;border-radius:999px;border:1px dashed var(--color-border);color:var(--color-ink-3);background:var(--color-white);}
+.doc-chip.is-on{border:1px solid var(--jai-a);background:var(--purple-tint);color:var(--jai-a);}
+.doc-plus{color:var(--color-ink-3);font-size:var(--font-size-sm);}
+
+/* 3-way example: three document cards */
+.doc-compare{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-s);margin:var(--space-m) 0 .5rem;}
+.doc-card{border:var(--border);border-top:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);text-align:center;}
+.doc-card.is-flag{border-top-color:var(--color-red);}
+.doc-label{display:block;font-size:var(--font-size-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-teal);margin-bottom:.2rem;}
+.doc-card.is-flag .doc-label{color:var(--color-red);}
+.doc-val{display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(1.1rem,1rem + .6vw,1.5rem);color:var(--color-ink);line-height:1.2;font-variant-numeric:tabular-nums;}
+.doc-sub{display:block;font-size:var(--font-size-sm);color:var(--color-ink-3);}
+.doc-verdict{font-size:var(--font-size-sm);color:var(--color-ink-2);background:var(--color-cream);border-left:3px solid var(--color-red);padding:.5rem .8rem;border-radius:4px;margin-bottom:var(--space-m);}
+@media(max-width:580px){.doc-compare{grid-template-columns:1fr;}}
+
+/* Interactive: tolerance simulator */
+.sim{border:1.5px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;background:var(--color-white);}
+.sim-title{display:block;font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-size:var(--font-size-base);margin-bottom:.2rem;}
+.sim-note{font-size:var(--font-size-sm);color:var(--color-ink-3);margin-bottom:var(--space-s);}
+.sim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem var(--space-s);}
+.sim-field{display:flex;flex-direction:column;gap:.25rem;font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink-2);}
+.sim-field input{font-family:var(--font-base);font-size:var(--font-size-base);color:var(--color-ink);padding:.45rem .6rem;border:1px solid var(--color-border);border-radius:8px;background:var(--color-white);width:100%;}
+.sim-field input:focus{outline:2px solid var(--purple-soft);border-color:var(--jai-a);}
+.sim-out{margin-top:var(--space-s);padding:.7rem .9rem;border-radius:4px;font-size:var(--font-size-base);background:var(--color-cream);border-left:3px solid var(--color-teal);color:var(--color-ink-2);}
+.sim-out.is-hold{border-left-color:var(--color-red);}
+.sim-out strong{color:var(--color-ink);}
+@media(max-width:640px){.sim-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* Table */
+.tbl-wrap{overflow-x:auto;margin:var(--space-m) 0;border:var(--border);border-radius:var(--border-radius-sm);}
+.tbl{width:100%;border-collapse:collapse;font-size:var(--font-size-base);}
+.tbl th{font-family:var(--font-display);font-weight:700;text-align:left;color:var(--color-ink);background:var(--purple-tint-3);padding:.6rem var(--space-m);border-bottom:var(--border);font-size:var(--font-size-sm);}
+.tbl td{padding:.6rem var(--space-m);border-bottom:var(--border);color:var(--color-ink-2);vertical-align:top;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:nth-child(even) td{background:var(--color-cream);}
+.sim-foot{font-size:var(--font-size-sm);color:var(--color-ink-3);margin:.6rem 0 0;}
+.benefit-grid--2{grid-template-columns:repeat(2,1fr);}
+@media(max-width:480px){.benefit-grid--2{grid-template-columns:1fr;}}
+
+
+/* V6 addition: key takeaways label */
+.takeaways-title{font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-size:var(--font-size-base);margin-bottom:.6rem;}
+
+</style>
+</head>
+<body>
+
+<div id="progress-bar" style="position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;"></div>
+
+<div class="page-wrapper">
+
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Is Invoice Matching Software?</a>
+      <a class="toc-link" href="#s2">2-Way vs. 3-Way vs. 4-Way Matching</a>
+      <a class="toc-link" href="#s3">Three-Way Matching in Accounts Payable</a>
+      <a class="toc-link" href="#s4">How 3-Way Match Automation Works</a>
+      <a class="toc-link" href="#s5">Tolerances and Exceptions</a>
+      <a class="toc-link" href="#s6">Benefits and Limits</a>
+      <a class="toc-link" href="#s7">Best Practices</a>
+      <a class="toc-link" href="#s8">Key Features to Look For</a>
+      <a class="toc-link" href="#s9">How AI Is Changing Matching</a>
+      <a class="toc-link" href="#s10">KPIs to Track</a>
+      <a class="toc-link" href="#s11">FAQ</a>
+      <a class="toc-link" href="#s12">Next Steps</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-tags">
+          <span class="tag-pill">Procure-to-Pay</span>
+          <span class="tag-pill">Invoicing</span>
+        </div>
+        <h1>Invoice Matching Software: 3-Way Match<br class="h1-br"> Automation Explained (2026)</h1>
+        <div class="article-meta">
+          <span class="meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 10 to 11 min read</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Published: <time datetime="2026-10-09">October 2026</time></span>
+        </div>
+      </div>
+    </header>
+
+    <p><strong>Invoice matching software checks each supplier invoice against its purchase order (PO) and goods receipt before payment.</strong> When all three agree within set tolerances, the invoice can move forward without manual review. When they do not, the invoice is held and sent to the buyer, receiver, or AP specialist who can resolve it. This check is called three-way matching. Automating it lets AP teams pay faster without paying for goods that never arrived.</p>
+
+    <p><strong>Exceptions are what slow this process down.</strong> According to <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" target="_blank" rel="noopener"><strong>Ardent Partners</strong></a>, 18.4% of invoices end up as exceptions. Below, we cover how three-way matching in accounts payable works, from match types and tolerances to features, AI, and KPIs.</p>
+
+    <div class="diag-checklist">
+      <p class="takeaways-title">Key takeaways</p>
+      <ul>
+        <li>Three-way matching clears an invoice only when the PO, receipt, and invoice agree within tolerance.</li>
+        <li>Match line by line, not on the total, or two errors can cancel each other out.</li>
+        <li>Many exceptions start upstream, with late receipts, old PO prices, or missing PO references.</li>
+        <li>Matching checks what you pay for, not who you pay, so add bank-detail checks too.</li>
+      </ul>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">JAGGAER Invoicing</p>
+        <p class="jag-cta-desc">See how JAGGAER Invoicing matches invoices against POs, receipts, and contracts.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/invoicing" class="jag-cta-btn" target="_blank" rel="noopener">Explore JAGGAER Invoicing &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s1">What Is Invoice Matching Software?</h2>
+
+    <p><strong>Invoice matching software compares a supplier invoice with the order and receiving records behind it.</strong> Invoice matching software sits between invoice capture and payment approval — one of the last checks before cash leaves the business. On each line it looks at the supplier, item, quantity, unit price, tax, and total, then either clears the invoice or puts it on hold. The results are only as good as the PO and receipt data it reads.</p>
+
+    <h3>Header-Level vs. Line-Level Matching</h3>
+
+    <p><strong>Header-level matching only compares totals.</strong> Line-level matching checks every line item. Say a supplier overbills one line by $1,000 and underbills another by $1,000. The totals still agree, so a header check lets it through, while a line check catches both mistakes.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s2">2-Way vs. 3-Way vs. 4-Way Matching</h2>
+
+    <p><strong>The difference is how many records must agree before payment.</strong> Pick a type to compare them.</p>
+
+    <div class="tabs" data-tabs>
+      <div class="tab-list" role="tablist" aria-label="Invoice match types">
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tp1" id="tb1">2-Way</button>
+        <button class="tab-btn is-active" role="tab" aria-selected="true" aria-controls="tp2" id="tb2">3-Way</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tp3" id="tb3">4-Way</button>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="tp1" aria-labelledby="tb1">
+        <div class="doc-row"><span class="doc-chip is-on">Invoice</span><span class="doc-plus">+</span><span class="doc-chip is-on">PO</span></div>
+        <p>Checks that the billed price and quantity stay within what the PO allows. It confirms what was agreed, not what arrived.</p>
+        <p class="tab-fit"><strong>Best fit:</strong> subscriptions, utilities, and recurring fixed-fee services.</p>
+      </div>
+      <div class="tab-panel is-active" role="tabpanel" id="tp2" aria-labelledby="tb2">
+        <div class="doc-row"><span class="doc-chip is-on">Invoice</span><span class="doc-plus">+</span><span class="doc-chip is-on">PO</span><span class="doc-plus">+</span><span class="doc-chip is-on">Receipt</span></div>
+        <p>Adds a check against the quantity actually received, so you pay only for what showed up.</p>
+        <p class="tab-fit"><strong>Best fit:</strong> physical goods, most PO-backed purchases, and services with a sign-off.</p>
+      </div>
+      <div class="tab-panel" role="tabpanel" id="tp3" aria-labelledby="tb3">
+        <div class="doc-row"><span class="doc-chip is-on">Invoice</span><span class="doc-plus">+</span><span class="doc-chip is-on">PO</span><span class="doc-plus">+</span><span class="doc-chip is-on">Receipt</span><span class="doc-plus">+</span><span class="doc-chip is-on">Inspection</span></div>
+        <p>Adds inspection or acceptance results, so goods must pass quality checks before payment.</p>
+        <p class="tab-fit"><strong>Best fit:</strong> pharma, medical devices, aerospace parts, and capital equipment.</p>
+      </div>
+    </div>
+
+    <p><strong>At every level, an invoice outside tolerance gets a matching hold.</strong> The invoice is held from automated processing until the exception is resolved or authorized. Many AP teams mix levels, using 2-way for low-risk spend, 3-way as the default, and 4-way where quality really matters.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s3">Three-Way Matching in Accounts Payable: How It Works</h2>
+
+    <p><strong>Three-way matching in accounts payable asks 3 simple questions.</strong> Was it ordered, was it received, and does the bill agree with both? A different document answers each one.</p>
+
+    <div class="industry-list">
+      <div class="industry-item"><strong>Purchase order (PO)</strong><p>Shows the purchase was approved, plus the agreed items, prices, and terms. Procurement creates it.</p></div>
+      <div class="industry-item"><strong>Goods receipt or service confirmation</strong><p>Shows what arrived, how much, and when. For services, a service entry sheet or signed timesheet plays this role.</p></div>
+      <div class="industry-item"><strong>Supplier invoice</strong><p>States what the supplier says you owe. It is the document being tested.</p></div>
+    </div>
+
+    <p>No single document proves a payment is due. Here is a simple case. A company orders 500 units at $25 each, receives 480, and then gets billed for all 500.</p>
+
+    <div class="doc-compare">
+      <div class="doc-card"><span class="doc-label">Purchase order</span><span class="doc-val">500</span><span class="doc-sub">units ordered</span></div>
+      <div class="doc-card"><span class="doc-label">Goods receipt</span><span class="doc-val">480</span><span class="doc-sub">units received</span></div>
+      <div class="doc-card is-flag"><span class="doc-label">Invoice</span><span class="doc-val">500</span><span class="doc-sub">units billed</span></div>
+    </div>
+    <p class="doc-verdict"><strong>Result: matching hold.</strong> The invoice bills 20 units more than were received, about 4% over. Without the receipt check, the company would pay $500 for goods it never got.</p>
+
+    <h3>Who Owns Each Part of the Match</h3>
+
+    <p><strong>Three-way matching is a shared job, not just an AP task.</strong> When one team falls behind, holds pile up for everyone.</p>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th scope="col">Role</th><th scope="col">Responsibility</th><th scope="col">Exceptions they usually fix</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Buyers</strong></td><td>Create accurate POs and update them when terms change</td><td>Price variances, wrong or closed POs</td></tr>
+          <tr><td><strong>Receivers</strong></td><td>Post receipts or service sign-offs quickly</td><td>Missing receipts, short deliveries</td></tr>
+          <tr><td><strong>Accounts payable</strong></td><td>Capture invoices, run the match, manage holds</td><td>Duplicates, tax and freight differences</td></tr>
+          <tr><td><strong>Suppliers</strong></td><td>Quote the PO number and bill lines as ordered</td><td>Corrected invoices and credit notes</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Keep these roles apart. If one person can raise the PO, post the receipt, and approve payment, a fake invoice can match perfectly.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s4">How 3-Way Match Automation Works</h2>
+
+    <p><strong>3-way match automation swaps a slow manual check for rules that run the moment an invoice arrives.</strong> A typical flow has 5 steps.</p>
+
+    <div class="flow" data-flow>
+      <div class="flow-steps" role="tablist" aria-label="How 3-way match automation works">
+        <button class="flow-step is-active" role="tab" aria-selected="true" aria-controls="fp1" id="ft1"><span class="flow-num">1</span><span class="flow-lbl">Capture</span></button>
+        <button class="flow-step" role="tab" aria-selected="false" aria-controls="fp2" id="ft2"><span class="flow-num">2</span><span class="flow-lbl">Find PO</span></button>
+        <button class="flow-step" role="tab" aria-selected="false" aria-controls="fp3" id="ft3"><span class="flow-num">3</span><span class="flow-lbl">Compare</span></button>
+        <button class="flow-step" role="tab" aria-selected="false" aria-controls="fp4" id="ft4"><span class="flow-num">4</span><span class="flow-lbl">Tolerances</span></button>
+        <button class="flow-step" role="tab" aria-selected="false" aria-controls="fp5" id="ft5"><span class="flow-num">5</span><span class="flow-lbl">Route</span></button>
+      </div>
+      <div class="flow-panels">
+        <div class="flow-panel is-active" role="tabpanel" id="fp1" aria-labelledby="ft1"><span class="phase-title">Capture the invoice</span><p class="phase-desc">Invoices come in through portals, EDI, cXML, Peppol, email, or scans. PDFs and paper need data extraction first.</p></div>
+        <div class="flow-panel" role="tabpanel" id="fp2" aria-labelledby="ft2"><span class="phase-title">Find the PO and receipt</span><p class="phase-desc">The system links the invoice by PO number, supplier, and line references. Some tools suggest a likely PO when the reference is missing.</p></div>
+        <div class="flow-panel" role="tabpanel" id="fp3" aria-labelledby="ft3"><span class="phase-title">Compare the records</span><p class="phase-desc">Supplier, item, quantity, price, tax, and received quantity get checked line by line.</p></div>
+        <div class="flow-panel" role="tabpanel" id="fp4" aria-labelledby="ft4"><span class="phase-title">Apply tolerances</span><p class="phase-desc">A small rounding gap can pass. A big price jump goes to review.</p></div>
+        <div class="flow-panel" role="tabpanel" id="fp5" aria-labelledby="ft5"><span class="phase-title">Route the result</span><p class="phase-desc">Matched invoices move forward, but many organizations still require approval before payment, depending on their workflow. Exceptions go to whoever owns them, with all 3 documents attached.</p></div>
+      </div>
+      <div class="flow-nav"><button class="flow-btn" data-dir="-1" aria-label="Previous step">&larr; Previous</button><button class="flow-btn" data-dir="1" aria-label="Next step">Next &rarr;</button></div>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s5">Tolerances and Exceptions: Where Matching Needs Human Review</h2>
+
+    <p><strong>A matching tolerance is how much price or quantity variation you will accept before an invoice needs review.</strong> Too tight, and tiny rounding gaps flood the queue. Too loose, and real overbilling slips past. Try it with the 500-unit example.</p>
+
+    <div class="sim" data-sim>
+      <span class="sim-title">Tolerance check</span>
+      <p class="sim-note">Illustrative only. Change any value to test the result.</p>
+      <div class="sim-grid">
+        <label class="sim-field">PO price ($)<input type="number" min="0" step="0.01" value="25" data-k="poPrice"></label>
+        <label class="sim-field">Invoice price ($)<input type="number" min="0" step="0.01" value="25" data-k="invPrice"></label>
+        <label class="sim-field">Price tolerance (%)<input type="number" min="0" step="0.5" value="2" data-k="priceTol"></label>
+        <label class="sim-field">Quantity received<input type="number" min="0" step="1" value="480" data-k="rcvQty"></label>
+        <label class="sim-field">Quantity billed<input type="number" min="0" step="1" value="500" data-k="invQty"></label>
+        <label class="sim-field">Quantity tolerance (%)<input type="number" min="0" step="0.5" value="2" data-k="qtyTol"></label>
+      </div>
+      <div class="sim-out" data-out aria-live="polite"></div>
+      <p class="sim-foot">This check flags price differences in either direction, since an unexpectedly low price can signal a wrong item or unit. Some teams flag only overbilling. Real systems also support fixed-amount tolerances and rules by supplier or category. Logic varies by platform, and some teams measure against ordered rather than received quantities.</p>
+    </div>
+
+    <h3>How to Set Tolerances</h3>
+
+    <ul>
+      <li><strong>Pair a percentage with a fixed cap.</strong> On a $40,000 line, a 2% rule alone lets $800 slide by.</li>
+      <li><strong>Vary by risk.</strong> Go tighter on capital or regulated spend and looser on low-value items.</li>
+      <li><strong>Handle freight and tax separately</strong> from item price.</li>
+      <li><strong>Test first.</strong> Run new rules in report-only mode for a month, then switch on holds.</li>
+    </ul>
+
+    <h3>Common 3-Way Matching Exceptions</h3>
+
+    <div class="challenge-grid">
+      <div class="challenge-card"><span class="challenge-name">Price variance</span><p>The invoice price differs from the PO by more than tolerance, sometimes because nobody updated the PO after a price change.</p></div>
+      <div class="challenge-card"><span class="challenge-name">Quantity variance</span><p>More units billed than received, often from partial deliveries.</p></div>
+      <div class="challenge-card"><span class="challenge-name">Missing receipt</span><p>The goods arrived, but nobody posted the receipt.</p></div>
+      <div class="challenge-card"><span class="challenge-name">No or wrong PO reference</span><p>The invoice quotes no PO, a closed one, or the wrong one.</p></div>
+      <div class="challenge-card"><span class="challenge-name">Duplicate invoice</span><p>The same bill arrives twice, sometimes with a new number or date.</p></div>
+      <div class="challenge-card"><span class="challenge-name">Tax, freight, or unit mismatch</span><p>Extra charges, or billing by the case when the PO ordered single units.</p></div>
+    </div>
+
+    <p><strong>Not every exception is the supplier's fault.</strong> Missing receipts and stale PO prices are internal gaps. A good tool shows the cause and sends it to the team that can fix it.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s6">Benefits and Limits of Automated 3-Way Matching</h2>
+
+    <p><strong>According to <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/#:~:text=79%25" target="_blank" rel="noopener">Ardent Partners' 2025 benchmarks</a>, Best-in-Class AP teams outperform their peers on these four measures.</strong> Ardent defines Best-in-Class as the 20% of enterprises with the lowest invoice processing costs and shortest cycle times. <strong>These figures describe top-performing AP teams overall, not results guaranteed by any single tool.</strong></p>
+
+    <div class="stat-block">
+      <p class="stat-block-head">Best-in-Class AP Teams vs. Peers (Ardent Partners)</p>
+      <div class="stat-block-grid">
+        <div class="stat-block-item"><span class="stat-block-num">79%</span><span class="stat-block-label">lower per-invoice processing costs</span></div>
+        <div class="stat-block-item"><span class="stat-block-num">47%</span><span class="stat-block-label">lower invoice exception rates</span></div>
+        <div class="stat-block-item"><span class="stat-block-num">1.8x</span><span class="stat-block-label">more invoices processed straight through</span></div>
+        <div class="stat-block-item"><span class="stat-block-num">1.4x</span><span class="stat-block-label">more suppliers enabled to send e-invoices</span></div>
+      </div>
+    </div>
+
+    <h3>What Matching Catches, and What It Does Not</h3>
+
+    <p><strong>According to the <a href="https://www.acfe.com/fraud-resources/report-to-the-nations" target="_blank" rel="noopener">ACFE's Occupational Fraud 2026: A Report to the Nations</a>, billing schemes remain one of the most significant fraud risks.</strong> The study analyzed 2,402 cases, and the median fraud ran 12 months before detection. Three-way matching makes the simplest schemes harder — such as billing for goods that never arrived. <strong>It cannot stop all of them.</strong></p>
+
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th scope="col">Risk</th><th scope="col">Does matching catch it?</th><th scope="col">Control to add</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Billing for goods never received</td><td>Yes, with 3-way matching</td><td>Fast, accurate receipting</td></tr>
+          <tr><td>Price above the PO</td><td>Yes, when outside tolerance</td><td>Contract price matching</td></tr>
+          <tr><td>Duplicate invoice</td><td>Partly</td><td>Duplicate checks on number, amount, and date</td></tr>
+          <tr><td>Fake supplier with matching PO and receipt</td><td>No, if one person controls all three</td><td>Separation of duties and vendor checks</td></tr>
+          <tr><td>Fraudulent bank-detail change</td><td>No</td><td>Independent verification of bank changes</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="hook-stat">
+      <p><strong>Bank-detail fraud is the gap matching cannot close.</strong> According to the <a href="https://www.financialprofessionals.org/about/learn-more/press-releases/Details/over-75-percent-of-us-firms-experienced-payments-fraud-in-2025-while-ai-adoption-for-fraud-mitigation-lags" target="_blank" rel="noopener"><strong>AFP 2026 Payments Fraud and Control Survey</strong></a>, <span class="stat-num">76%</span> of U.S. organizations faced attempted or actual payments fraud in 2025. Business email compromise affected <span class="stat-num">74%</span> of organizations.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s7">Best Practices for Three-Way Matching</h2>
+
+    <p><strong>Software speeds things up, but clean upstream data is what raises your match rate.</strong> These 5 habits make the biggest difference.</p>
+
+    <div class="phase-cards">
+      <div class="phase-item"><span class="phase-num">1</span><div class="phase-body"><span class="phase-title">Enforce "no PO, no pay"</span><p class="phase-desc"><strong>Require an approved PO before ordering.</strong> Agree up front on the few exempt categories, like utilities and taxes.</p></div></div>
+      <div class="phase-item"><span class="phase-num">2</span><div class="phase-body"><span class="phase-title">Post receipts the same day</span><p class="phase-desc"><strong>Late receipts block good invoices.</strong> Give receivers a quick way to confirm delivery, and track how fast they do it.</p></div></div>
+      <div class="phase-item"><span class="phase-num">3</span><div class="phase-body"><span class="phase-title">Keep PO prices current</span><p class="phase-desc"><strong>When a contract price changes, update open POs and catalogs too.</strong> Otherwise every new invoice turns into an exception.</p></div></div>
+      <div class="phase-item"><span class="phase-num">4</span><div class="phase-body"><span class="phase-title">Move suppliers to e-invoicing</span><p class="phase-desc"><strong>Portals, EDI, cXML, and Peppol can require a PO reference and structured line data.</strong> <strong>Ardent Partners'</strong> research says 57% of suppliers can already send invoices electronically.</p></div></div>
+      <div class="phase-item"><span class="phase-num">5</span><div class="phase-body"><span class="phase-title">Give every exception an owner</span><p class="phase-desc"><strong>Assign each exception type to a role with a target fix time.</strong> Then review causes monthly and fix the repeat offenders.</p></div></div>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s8">Key Features to Look For in Invoice Matching Software</h2>
+
+    <p><strong>Good invoice matching software handles messy, real-world invoices.</strong> Tick what your current setup covers.</p>
+
+    <div class="eval" data-eval>
+      <div class="eval-head"><span class="eval-title">Capability check</span><span class="eval-score" aria-live="polite"><span data-score>0</span> of 10 covered</span></div>
+      <div class="eval-bar"><span class="eval-fill" data-fill></span></div>
+      <label class="eval-item"><input type="checkbox"> <span><strong>Line-level 2-way, 3-way, and n-way matching</strong></span></label>
+      <label class="eval-item"><input type="checkbox"> <span><strong>Configurable tolerances</strong> by supplier, category, and value</span></label>
+      <label class="eval-item"><input type="checkbox"> <span><strong>Contract price matching</strong>, not just PO matching</span></label>
+      <label class="eval-item"><input type="checkbox"> <span><strong>Multi-channel capture</strong> across portals, EDI, cXML, email, OCR, and Peppol</span></label>
+      <label class="eval-item"><input type="checkbox"> <span><strong>Exception routing</strong> with owners, aging, and escalation</span></label>
+      <label class="eval-item"><input type="checkbox"> <span><strong>Partial-delivery and multi-PO handling</strong></span></label>
+      <label class="eval-item"><input type="checkbox"> <span><strong>Duplicate and anomaly detection</strong></span></label>
+      <label class="eval-item"><input type="checkbox"> <span><strong>Full audit trail</strong> of matches, overrides, and approvals</span></label>
+      <label class="eval-item"><input type="checkbox"> <span><strong>ERP and procurement integration</strong></span></label>
+      <label class="eval-item"><input type="checkbox"> <span><strong>E-invoicing and tax compliance</strong> for mandate countries</span></label>
+      <p class="eval-msg" data-msg>Tick the capabilities you have today to see where the gaps are.</p>
+    </div>
+
+    <p><strong>Pick a tool that connects to purchasing, not just the ERP.</strong> When POs, receipts, and invoices live on one platform, matching runs on the data buyers actually entered.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Download the JAGGAER Invoicing Product Brief</p>
+        <p class="jag-cta-desc">Get the details on 2-, 3-, and n-way matching with configurable tolerances.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/987519366" class="jag-cta-btn" target="_blank" rel="noopener">Download the Brief &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s9">How AI Is Changing Invoice Matching</h2>
+
+    <p><strong>AI is pushing invoice matching past fixed rules.</strong> AI-enabled tools can learn from how past invoices and exceptions were handled, not just from the tolerances you set.</p>
+
+    <p><strong>According to <a href="https://www.thehackettgroup.com/the-hackett-group-study-shows-ai-adoption-rapidly-accelerating-across-core-finance-processes/" target="_blank" rel="noopener">The Hackett Group's 2026 Finance Key Issues Study</a>, 33% of organizations are already scaling AI in accounts payable.</strong> That makes AP the most mature finance process for AI. Keep in mind the figure covers AP broadly, not matching alone. In matching, AI helps with:</p>
+
+    <ul>
+      <li><strong>Data extraction</strong> from PDFs, scans, and emails</li>
+      <li><strong>PO matching</strong> when references are missing</li>
+      <li><strong>Anomaly detection</strong> for odd prices, quantities, or billing patterns</li>
+      <li><strong>Exception support</strong> that suggests a fix based on similar past cases</li>
+    </ul>
+
+    <p><strong>Anomaly detection helps with control, too.</strong> <a href="https://www.acfe.com/-/media/files/acfe/pdfs/rttn/2026/2026-report-to-the-nations.pdf" target="_blank" rel="noopener">The <strong>ACFE</strong> study</a> found that organizations with proactive data monitoring and analysis had 53% lower median fraud losses.</p>
+
+    <div class="hook-stat">
+      <p><strong>According to a <a href="https://www.gartner.com/en/newsroom/press-releases/2026-09-24-gartner-says-cfos-must-take-a-more-disciplined-approach" target="_blank" rel="noopener">2026 Gartner survey of 160 senior finance leaders</a>, AI for AP and AR automation generally delivers returns within <span class="stat-num">9 to 10 months</span>.</strong></p>
+    </div>
+
+    <p><strong>AI does not replace control design, though.</strong> Teams still set tolerances, approval limits, and audit trails. A sensible rule is to <strong>let AI recommend, and keep human sign-off above a set value or risk level.</strong></p>
+
+    <hr class="section-divider">
+
+    <h2 id="s10">KPIs to Track</h2>
+
+    <p><strong>These 6 KPIs show whether matching is getting more accurate, faster, and cheaper.</strong> Where shown, benchmarks are Ardent Partners' 2025 AP averages.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-card"><span class="kpi-name">First-pass match rate</span><p>PO invoices matched on arrival &divide; all PO invoices.</p></div>
+      <div class="kpi-card"><span class="kpi-name">Touchless processing rate</span><p>Invoices with no manual touch &divide; all invoices.</p></div>
+      <div class="kpi-card"><span class="kpi-name">Exception rate by cause</span><p>Invoices that stop, split by cause. Benchmark: 18.4%.</p></div>
+      <div class="kpi-card"><span class="kpi-name">Exception resolution time</span><p>Average days from hold to release, by owner.</p></div>
+      <div class="kpi-card"><span class="kpi-name">Invoice cycle time</span><p>Days to process an invoice. Benchmark: 8.2 days.</p></div>
+      <div class="kpi-card"><span class="kpi-name">Cost per invoice</span><p>Total AP cost &divide; invoices processed. Benchmark: $9.84.</p></div>
+    </div>
+
+    <p><strong>Split each KPI by supplier and site.</strong> Company-wide averages can hide one supplier or warehouse that causes most of the holds.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s11">FAQ</h2>
+
+    <details class="faq-item">
+      <summary>What is invoice matching software? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">It compares supplier invoices with purchase orders and goods receipts before payment. Invoices that match move on to approval or payment, and the rest go to the right person for review.</div>
+    </details>
+    <details class="faq-item">
+      <summary>What is three-way matching in accounts payable? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">It is a control that checks the invoice against the purchase order and the goods receipt. When all three agree within set tolerances, the invoice can proceed to approval or payment.</div>
+    </details>
+    <details class="faq-item">
+      <summary>What happens when an invoice fails three-way matching? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">It goes on hold and is sent to whoever owns the problem: the buyer for price issues, the receiver for missing receipts, or the supplier for billing errors. Once fixed, it is matched again.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Can three-way matching work for services? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Yes, if a service entry sheet, approved timesheet, or milestone sign-off stands in for the goods receipt. Without one, services usually fall back to 2-way matching plus budget-owner approval.</div>
+    </details>
+    <details class="faq-item">
+      <summary>What happens to invoices without a PO? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">They cannot go through PO-based matching, since there is no purchase order to compare against. They are usually routed for coding and approval instead, and some AI-enabled AP tools can suggest likely account codes.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Does invoice matching software prevent payment fraud? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Not by itself. It catches billing for goods never received or at the wrong price. Fake vendors and bank-detail fraud need separate controls, like separation of duties and bank-change verification.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <h2 id="s12">Next Steps</h2>
+
+    <p><strong>JAGGAER Invoicing, part of JAGGAER One, captures invoices from portal, email, EDI, cXML, OCR, and Peppol.</strong> It runs 2-, 3-, and n-way matching against POs, receipts, and contracts with configurable tolerances. Exceptions go to the right owner, and approved invoices post to your ERP.</p>
+
+    <p><a href="https://www.jaggaer.com/solutions/jai" target="_blank" rel="noopener">JAI</a> scores invoices against past approval decisions and flags anomalies and high-risk lines. <a href="https://www.jaggaer.com/solutions/appzen-autonomous-ap" target="_blank" rel="noopener">AppZen Autonomous AP</a>, a partner solution for JAGGAER Invoicing, adds AI-driven invoice ingestion, invoice-to-PO matching, and duplicate auditing. For the wider picture, see <a href="https://www.jaggaer.com/solutions/accounts-payable-automation" target="_blank" rel="noopener">JAGGAER accounts payable automation</a>.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See 3-way matching in action</p>
+        <p class="jag-cta-desc">Watch matching and exception routing run live in a guided demo.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo &rarr;</a>
+    </div>
+  </article>
+
+  <aside class="expert-sidebar" aria-label="What the experts are saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">Gartner &middot; Sep 2026</span>
+        <span class="exp-num red" style="font-size:14px;">9&ndash;10 mo</span>
+        <p class="exp-stat">AP and AR automation generally deliver returns within 9&ndash;10 months.</p>
+        <a href="https://www.gartner.com/en/newsroom/press-releases/2026-09-24-gartner-says-cfos-must-take-a-more-disciplined-approach" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">ACFE &middot; May 2026</span>
+        <span class="exp-num red" style="font-size:14px;">53%</span>
+        <p class="exp-stat">Lower median fraud losses with proactive data monitoring and analysis.</p>
+        <a href="https://www.acfe.com/fraud-resources/report-to-the-nations" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">AFP &middot; Apr 2026</span>
+        <span class="exp-num red" style="font-size:14px;">76%</span>
+        <p class="exp-stat">U.S. organizations hit by attempted or actual payments fraud in 2025.</p>
+        <a href="https://www.financialprofessionals.org/about/learn-more/press-releases/Details/over-75-percent-of-us-firms-experienced-payments-fraud-in-2025-while-ai-adoption-for-fraud-mitigation-lags" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">The Hackett Group &middot; Mar 2026</span>
+        <span class="exp-num red" style="font-size:14px;">33%</span>
+        <p class="exp-stat">Organizations already scaling AI in accounts payable.</p>
+        <a href="https://www.thehackettgroup.com/the-hackett-group-study-shows-ai-adoption-rapidly-accelerating-across-core-finance-processes/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Ardent Partners &middot; Jan 2026</span>
+        <span class="exp-num red" style="font-size:14px;">18.4%</span>
+        <p class="exp-stat">Average invoice exception rate. Best-in-Class rates are 47% lower.</p>
+        <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+<script>
+document.documentElement.classList.add('js');
+// Process stepper
+document.querySelectorAll('[data-flow]').forEach(flow=>{
+  const steps=[...flow.querySelectorAll('.flow-step')], panels=[...flow.querySelectorAll('.flow-panel')];
+  const btns=flow.querySelectorAll('.flow-btn'); let cur=0;
+  const show=i=>{cur=i;steps.forEach((s,j)=>{s.classList.toggle('is-active',j===i);s.setAttribute('aria-selected',j===i);});
+    panels.forEach((p,j)=>p.classList.toggle('is-active',j===i));btns[0].disabled=i===0;btns[1].disabled=i===steps.length-1;};
+  steps.forEach((s,i)=>s.addEventListener('click',()=>show(i)));
+  btns.forEach(b=>b.addEventListener('click',()=>show(Math.min(steps.length-1,Math.max(0,cur+Number(b.dataset.dir))))));
+  show(0);
+});
+// Tabs
+document.querySelectorAll('[data-tabs]').forEach(t=>{
+  const tb=[...t.querySelectorAll('.tab-btn')], tp=[...t.querySelectorAll('.tab-panel')];
+  const show=i=>{tb.forEach((b,j)=>{b.classList.toggle('is-active',j===i);b.setAttribute('aria-selected',j===i);});tp.forEach((p,j)=>p.classList.toggle('is-active',j===i));};
+  tb.forEach((b,i)=>{b.addEventListener('click',()=>show(i));b.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=(i+(e.key==='ArrowRight'?1:-1)+tb.length)%tb.length;tb[n].focus();show(n);}});});
+});
+// Capability check
+document.querySelectorAll('[data-eval]').forEach(ev=>{
+  const boxes=ev.querySelectorAll('input[type=checkbox]'), score=ev.querySelector('[data-score]'), fill=ev.querySelector('[data-fill]'), msg=ev.querySelector('[data-msg]');
+  const total=boxes.length;
+  const upd=()=>{const n=[...boxes].filter(b=>b.checked).length; score.textContent=n; fill.style.width=(n/total*100)+'%';
+    msg.textContent=n===0?'Tick the capabilities you have today to see where the gaps are.':n<4?'Several core capabilities are missing. Start with line-level matching and configurable tolerances.':n<total?'Good base. Closing the remaining gaps can raise your touchless rate.':'Full coverage. Focus on exception causes and supplier e-invoicing adoption.';};
+  boxes.forEach(b=>b.addEventListener('change',upd));
+});
+// Tolerance simulator (illustrative)
+document.querySelectorAll('[data-sim]').forEach(sm=>{
+  const out=sm.querySelector('[data-out]'), inputs=sm.querySelectorAll('input[data-k]');
+  const fmt=n=>(Math.round(n*10)/10).toString();
+  const run=()=>{
+    const v={}; let invalid=false;
+    inputs.forEach(i=>{const raw=i.value.trim(); const n=Number(raw); if(raw===''||!isFinite(n)||n<0) invalid=true; v[i.dataset.k]=n;});
+    const note=msg=>{out.classList.remove('is-hold');out.innerHTML=msg;};
+    if(invalid){note('<strong>Check your inputs.</strong> Enter a number of zero or more in every field to run the check.');return;}
+    if(v.poPrice===0){note('<strong>Check your inputs.</strong> Enter a PO price above zero to compare prices.');return;}
+    if(v.invQty===0){note('<strong>Check your inputs.</strong> Enter a billed quantity above zero.');return;}
+    const issues=[];
+    if(v.invPrice!==v.poPrice){const pv=Math.abs(v.invPrice-v.poPrice)/v.poPrice*100; if(pv>v.priceTol) issues.push('The price is '+fmt(pv)+'% '+(v.invPrice>v.poPrice?'above':'below')+' the PO (tolerance '+fmt(v.priceTol)+'%).');}
+    if(v.rcvQty===0){issues.push('No goods receipt has been posted, so the billed quantity cannot be matched.');}
+    else if(v.invQty>v.rcvQty){const qv=(v.invQty-v.rcvQty)/v.rcvQty*100; if(qv>v.qtyTol) issues.push('The billed quantity is '+fmt(qv)+'% above what was received (tolerance '+fmt(v.qtyTol)+'%).');}
+    if(issues.length){out.classList.add('is-hold');out.innerHTML='<strong>Exception: matching hold.</strong> '+issues.join(' ')+' This invoice goes to review.';}
+    else{out.classList.remove('is-hold');out.innerHTML='<strong>Match: within tolerance.</strong> Price and quantity agree within the limits you set, so the invoice can move forward without manual review.';}
+  };
+  inputs.forEach(i=>i.addEventListener('input',run)); run();
+});
+</script>
+</body>
+</html>
