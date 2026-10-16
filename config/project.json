@@ -683,6 +683,28 @@
               "last_upload_by": "jason",
               "last_updated": "2026-10-06T11:45:08.308Z",
               "last_updated_by": "jason"
+            },
+            {
+              "id": "piece-nqnwvg",
+              "title": "What is Procurement - Updated 2026",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-10-16T13:25:53.997Z",
+                  "by": "manager"
+                }
+              ],
+              "last_updated": "2026-10-16T13:25:53.999Z",
+              "last_updated_by": "manager"
             }
           ]
         }
