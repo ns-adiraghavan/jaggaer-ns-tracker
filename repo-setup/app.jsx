@@ -129,6 +129,7 @@ function MobileNav({ view, setView, currentUser, adminMode, onSignOut, project }
     { id: "ai-playground",  label: "AI Playground" },
     { id: "content-flow",   label: "Content Flow" },
     { id: "sme-guide",      label: "Content Experts" },
+    ...((currentUser?.org === "jaggaer" || adminMode) ? [{ id: "briefs-priority", label: "Briefs & Priority" }] : []),
     { id: "style-guide",    label: "Style Guide" },
     ...(adminMode ? [{ id: "admin", label: "Admin" }] : []),
   ];
@@ -477,6 +478,11 @@ function App() {
           for (const pl of project.pillars) for (const c of pl.clusters) if (c.id === clusterId) for (const pc of c.pieces) if (pc.id === pieceId) ph = (pc.phase || 1);
           window.NS_PENDING_OPEN = { clusterId, pieceId, mode: "annotate" };
           setActivePhase(ph);
+          setView("tracker");
+        }} />}
+        {view === "briefs-priority" && (currentUser?.org === "jaggaer" || adminMode) && <BriefsPriorityPanel project={project} setProject={setProject} currentUser={currentUser} adminMode={adminMode} activePhase={activePhase} onOpenPiece={(clusterId, pieceId, pillarId, ph) => {
+          window.NS_PENDING_OPEN = { clusterId, pieceId, mode: "details" };
+          setActivePhase(ph || 1);
           setView("tracker");
         }} />}
         {view === "phase2-reference" && <Phase2ReferencePanel />}

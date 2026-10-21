@@ -259,6 +259,14 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           onClick={() => setView("comments")}
           rightMeta="history"
         />
+        {(currentUser?.org === "jaggaer" || adminMode) && (
+          <NavSection
+            label="Briefs & Priority"
+            active={view === "briefs-priority"}
+            onClick={() => setView("briefs-priority")}
+            rightMeta="P1–P3"
+          />
+        )}
         {phase === 2 && (
           <NavSection
             label="P2 Reference"
