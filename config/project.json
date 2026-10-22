@@ -792,6 +792,28 @@
                 "updated_at": "2026-10-22T10:30:15.772Z",
                 "updated_by": "orlagh"
               }
+            },
+            {
+              "id": "piece-zwmbks",
+              "title": "Contract Lifecycle Management: AI-Driven CLM Software Guide",
+              "format": "Ad-Hoc Article",
+              "assignee": "jason",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-10-22T10:34:50.015Z",
+                  "by": "jason"
+                }
+              ],
+              "last_updated": "2026-10-22T10:34:50.016Z",
+              "last_updated_by": "jason"
             }
           ]
         }
