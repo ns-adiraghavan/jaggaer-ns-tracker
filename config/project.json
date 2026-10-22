@@ -9413,6 +9413,18 @@
         "section": "Tail Spend Management: Direct vs Indirect Spend Strategies",
         "revision": 1
       }
+    ],
+    "piece-p3ah04": [
+      {
+        "id": "ann-iu7j85",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Manufacturing Sustainability Trends 2026: What Has Changed",
+        "ts": "2026-10-22T13:36:18.663Z",
+        "annotation": true,
+        "section": "¶38 — \"Sustainability Needs for Manufacturing i…\"",
+        "revision": 3
+      }
     ]
   },
   "build_with_claude": [
