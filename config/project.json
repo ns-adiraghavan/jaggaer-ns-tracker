@@ -745,7 +745,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-10-22T08:16:13.827Z",
-              "last_upload_by": "m-5jitd"
+              "last_upload_by": "m-5jitd",
+              "seo": {
+                "meta_title": "Tail Spend Management: Direct vs Indirect Spend Strategies",
+                "meta_description": "Learn tail spend management strategies, how direct and indirect spend differ, and how to automate low-value purchases and cut costs.",
+                "slug": "",
+                "updated_at": "2026-10-22T08:18:59.825Z",
+                "updated_by": "m-5jitd"
+              }
             }
           ]
         }
