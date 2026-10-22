@@ -759,11 +759,11 @@
               "title": "Procure to Pay Process: Automate Every Step with a P2P System",
               "format": "Ad-Hoc Article",
               "assignee": "orlagh",
-              "status": "writing",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 0,
+              "revision_count": 1,
               "primary_keyword": "",
               "geography": "all",
               "status_history": [
@@ -771,11 +771,20 @@
                   "stage": "not-started",
                   "ts": "2026-10-22T10:06:08.039Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-10-22T10:23:43.400Z",
+                  "by": "orlagh"
                 }
               ],
-              "last_updated": "2026-10-22T10:06:08.039Z",
+              "last_updated": "2026-10-22T10:23:43.399Z",
               "last_updated_by": "orlagh",
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-10-22T10:23:43.399Z",
+              "last_upload_by": "orlagh"
             }
           ]
         }
