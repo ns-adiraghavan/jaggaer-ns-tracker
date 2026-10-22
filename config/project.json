@@ -878,7 +878,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-10-22T11:56:51.160Z",
-              "last_upload_by": "m-5jitd"
+              "last_upload_by": "m-5jitd",
+              "seo": {
+                "meta_title": "Spend Analysis in 2027: AI Trends and Strategies That Work",
+                "meta_description": "Spend analysis in 2027: how AI, clean data and tariff changes reshape procurement, plus the steps, tools and dashboards that turn spend data into savings.",
+                "slug": "blog-what-is-spend-analysis",
+                "updated_at": "2026-10-22T11:58:09.154Z",
+                "updated_by": "m-5jitd"
+              }
             }
           ]
         }
