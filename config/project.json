@@ -651,7 +651,7 @@
               "title": "Sustainability Needs for Manufacturing In 2026",
               "format": "Ad-Hoc Article",
               "assignee": "",
-              "status": "ad-hoc-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -661,7 +661,7 @@
               "geography": "all",
               "planned_publish_date": "Oct 05, 2026",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ad-hoc-review",
               "status_history": [
                 {
                   "stage": "ad-hoc-review",
@@ -677,12 +677,17 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-10-06T11:45:08.308Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-10-22T13:46:49.005Z",
+                  "by": "m-pifrn"
                 }
               ],
               "last_upload": "2026-10-06T11:45:08.308Z",
               "last_upload_by": "jason",
-              "last_updated": "2026-10-06T11:45:08.308Z",
-              "last_updated_by": "jason",
+              "last_updated": "2026-10-22T13:46:49.005Z",
+              "last_updated_by": "m-pifrn",
               "seo": {
                 "meta_title": "",
                 "meta_description": "Manufacturing sustainability trends in 2026: new CBAM, CSRD and SB 253 rules, double materiality and how to get verifiable Scope 3 data from suppliers.",
@@ -9451,6 +9456,14 @@
         "annotation": true,
         "section": "¶1 — \"In 2026, manufacturers must back every s…\"",
         "revision": 3
+      },
+      {
+        "id": "fb-vk25ls",
+        "author": "m-pifrn",
+        "verdict": "needs-revision",
+        "body": "Quick revision and can go to Jovana",
+        "ts": "2026-10-22T13:46:49.003Z",
+        "stage": "ad-hoc-review"
       }
     ]
   },
