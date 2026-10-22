@@ -784,7 +784,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-10-22T10:23:43.399Z",
-              "last_upload_by": "orlagh"
+              "last_upload_by": "orlagh",
+              "seo": {
+                "meta_title": "Procure to Pay Process: Automate Every Step with a P2P System",
+                "meta_description": "Learn the procure to pay process step by step, and how P2P system automation cuts manual work and speeds up approvals",
+                "slug": "blog-understanding-procure-to-pay-process",
+                "updated_at": "2026-10-22T10:30:15.772Z",
+                "updated_by": "orlagh"
+              }
             }
           ]
         }
