@@ -813,11 +813,11 @@
               "title": "Contract Lifecycle Management: AI-Driven CLM Software Guide",
               "format": "Ad-Hoc Article",
               "assignee": "jason",
-              "status": "ad-hoc-review",
+              "status": "not-started",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 1,
+              "revision_count": 2,
               "primary_keyword": "",
               "geography": "all",
               "status_history": [
@@ -830,13 +830,18 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-10-22T10:34:57.914Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "not-started",
+                  "ts": "2026-10-22T11:38:20.693Z",
+                  "by": "jason"
                 }
               ],
-              "last_updated": "2026-10-22T10:34:57.914Z",
+              "last_updated": "2026-10-22T11:38:20.693Z",
               "last_updated_by": "jason",
               "deliverable_ext": "html",
               "return_to_stage": null,
-              "last_upload": "2026-10-22T10:34:57.914Z",
+              "last_upload": "2026-10-22T11:38:20.693Z",
               "last_upload_by": "jason"
             }
           ]
