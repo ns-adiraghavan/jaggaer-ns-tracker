@@ -9441,6 +9441,16 @@
         "annotation": true,
         "section": "¶39 — \"What's changed for manufacturers in 2026…\"",
         "revision": 3
+      },
+      {
+        "id": "ann-mubhjn",
+        "author": "m-pifrn",
+        "verdict": "question",
+        "body": "Start with the kw \"manufacturing sustainability trend\" - e.g. The defining manufacturing sustainability trend of 2026 is verifiable data: manufacturers must back every claim, especially with supplier data…",
+        "ts": "2026-10-22T13:38:46.429Z",
+        "annotation": true,
+        "section": "¶1 — \"In 2026, manufacturers must back every s…\"",
+        "revision": 3
       }
     ]
   },
