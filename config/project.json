@@ -720,7 +720,7 @@
               "title": "Tail Spend Management Strategies: Direct vs Indirect Spend Explained",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "not-started",
+              "status": "writing",
               "content_type": "msv",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -735,7 +735,8 @@
                 }
               ],
               "last_updated": "2026-10-22T05:49:34.790Z",
-              "last_updated_by": "m-5jitd"
+              "last_updated_by": "m-5jitd",
+              "secondary_keyword": ""
             }
           ]
         }
