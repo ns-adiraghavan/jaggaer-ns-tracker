@@ -9578,6 +9578,16 @@
         "annotation": true,
         "section": "General",
         "revision": 3
+      },
+      {
+        "id": "ann-8iz258",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Button redirecting to solutions page",
+        "ts": "2026-10-23T11:13:46.792Z",
+        "annotation": true,
+        "section": "¶21 — \"Jaggaer Contract Management provides pre…\"",
+        "revision": 3
       }
     ]
   },
