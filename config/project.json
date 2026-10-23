@@ -9481,6 +9481,16 @@
         "annotation": true,
         "section": "¶49 — \"For Example (examples of Jaggaer platfor…\"",
         "revision": 4
+      },
+      {
+        "id": "ann-129rt9",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Change title to \"How AI changes tail spend management\"",
+        "ts": "2026-10-23T10:03:42.545Z",
+        "annotation": true,
+        "section": "¶71 — \"What changed in 2026…\"",
+        "revision": 4
       }
     ]
   },
