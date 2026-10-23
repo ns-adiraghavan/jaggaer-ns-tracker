@@ -9491,6 +9491,16 @@
         "annotation": true,
         "section": "¶71 — \"What changed in 2026…\"",
         "revision": 4
+      },
+      {
+        "id": "ann-94o2qz",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Add 1–2 natural mentions of “tail spend analysis” in the analysis section’s closing paragraph and in Next steps.\nAdd one more mention of “tail spend management solutions” where managed services and software are compared.",
+        "ts": "2026-10-23T10:12:57.528Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 4
       }
     ]
   },
