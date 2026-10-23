@@ -9513,6 +9513,16 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "ann-8svmk1",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The page cites both a 50% expected ticket reduction (launch announcement) and a 75% reduction (product page). Support-ticket savings aren’t a P2P outcome, so consider cutting both",
+        "ts": "2026-10-23T10:33:06.491Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
