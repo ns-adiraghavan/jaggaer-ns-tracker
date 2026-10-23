@@ -9558,6 +9558,16 @@
         "annotation": true,
         "section": "¶70 — \"06\n        \n          Stage 6 of 6¶546. …\"",
         "revision": 3
+      },
+      {
+        "id": "ann-ejgsta",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The page uses ~9% average loss (WorldCC 2025) in the sidebar. Lets use one value with same year.",
+        "ts": "2026-10-23T11:08:30.271Z",
+        "annotation": true,
+        "section": "¶22 — \"CLM software strengthens governance by c…\"",
+        "revision": 3
       }
     ]
   },
