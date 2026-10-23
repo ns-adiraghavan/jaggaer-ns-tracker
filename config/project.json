@@ -9506,6 +9506,16 @@
         "annotation": true,
         "section": "General",
         "revision": 4
+      },
+      {
+        "id": "ann-dntl7d",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "All the CTA are  being redirected to demo pages only, At least one or two CTA should redirect to solutions page like eProcurement.",
+        "ts": "2026-10-23T10:53:09.538Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 4
       }
     ],
     "piece-k06t1v": [
