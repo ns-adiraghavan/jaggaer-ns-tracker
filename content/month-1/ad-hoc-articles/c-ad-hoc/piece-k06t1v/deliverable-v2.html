@@ -1,0 +1,1148 @@
+<!-- uploaded by orlagh at 2026-10-23T13:13:54.631Z -->
+<!-- piece: Procure to Pay Process: Automate Every Step with a P2P System -->
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Procure to Pay Process: Automate Every Step with a P2P System</title>
+<meta name="description" content="Learn the procure to pay process step by step, and how P2P system automation cuts manual work and speeds up approvals.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/understanding-procure-to-pay-process">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Procure to Pay Process: Automate Every Step with a P2P System">
+<meta property="og:description" content="Learn the procure to pay process step by step, and how P2P system automation cuts manual work and speeds up approvals.">
+<meta property="og:url" content="https://www.jaggaer.com/blog/understanding-procure-to-pay-process">
+<meta property="article:published_time" content="2024-12-13T16:33:45+00:00">
+<meta name="author" content="Visnja Radosavljevic">
+<meta property="article:modified_time" content="2026-10-22">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Procure to Pay Process: Automate Every Step with a P2P System","description":"Learn the procure to pay process step by step, and how P2P system automation cuts manual work and speeds up approvals.","datePublished":"2024-12-13","dateModified":"2026-10-22","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com","logo":{"@type":"ImageObject","url":"https://www.jaggaer.com/wp-content/uploads/JAGGAER-Logo-Red.png"}},"author":{"@type":"Person","name":"Visnja Radosavljevic"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.jaggaer.com/blog/understanding-procure-to-pay-process"},"inLanguage":"en-US","citation":[{"@type":"CreativeWork","name":"Ardent Partners, AP Metrics that Matter in 2026","url":"https://www.tungstenautomation.com/-/media/files/reports/en/ap-metrics-that-matter-2026.pdf"},{"@type":"CreativeWork","name":"The Hackett Group press release, March 17, 2026","url":"https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/"},{"@type":"CreativeWork","name":"AFP 2026 Payments Fraud and Control Survey press release","url":"https://www.financialprofessionals.org/about/learn-more/press-releases/Details/over-75-percent-of-us-firms-experienced-payments-fraud-in-2025-while-ai-adoption-for-fraud-mitigation-lags"},{"@type":"CreativeWork","name":"Gartner press release, October 8, 2026","url":"https://www.gartner.com/en/newsroom/press-releases/2026-10-08-gartner-survey-shows-chief-procurement-officers-stalling-on-needed-ai-role-redesign"},{"@type":"CreativeWork","name":"WiseTREND, e-Invoice Mandates 2026","url":"https://www.wisetrend.com/blog/e-invoice-mandates-2026-state-of-adoption-top-10-countries/"},{"@type":"CreativeWork","name":"Sovos, e-invoicing in Germany","url":"https://sovos.com/en-gb/vat/tax-rules/e-invoicing-germany/"}]}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the procure to pay process?","acceptedAnswer":{"@type":"Answer","text":"It is the full cycle an organization uses to buy goods and services. It runs from the first purchase request to the final supplier payment and its reconciliation in the ERP."}},{"@type":"Question","name":"What are the steps in the P2P process?","acceptedAnswer":{"@type":"Answer","text":"The 8 steps are: identify the need, create the requisition, approve it, and issue the purchase order. Then receive the goods, capture the invoice, match it, and pay and reconcile."}},{"@type":"Question","name":"What is the difference between procure to pay and source to pay?","acceptedAnswer":{"@type":"Answer","text":"Source to pay is the wider cycle. It starts with deciding what to buy and from whom, then negotiating contracts. Procure to pay covers the buying and payment that follow."}},{"@type":"Question","name":"What is the difference between procure to pay and accounts payable?","acceptedAnswer":{"@type":"Answer","text":"Accounts payable covers the invoice and payment stages. Procure to pay also includes the requisition, approval, purchase order, and receiving steps that come before the invoice."}},{"@type":"Question","name":"What is three-way matching?","acceptedAnswer":{"@type":"Answer","text":"Three-way matching compares the supplier invoice with the purchase order and the goods receipt before payment. Differences outside set tolerances are flagged as exceptions for review."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs: 0.8125rem;
+  --font-size-sm:      0.8125rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2rem, calc(1.72rem + 1.05vw), 2.25rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul,ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li,ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:980px;}
+.article-tags{display:flex;gap:.5rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.tag-pill{display:inline-flex;align-items:center;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--color-navy);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:999px;padding:.4rem .9rem;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:980px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.8125rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1480px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:230px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:980px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+article h3.sub-question{font-size:var(--font-size-h4);text-transform:none;letter-spacing:-0.01em;font-weight:700;border-bottom:none;padding-bottom:0;}
+
+/* Comparison / data tables */
+.table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.data-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:520px;}
+.data-table th{background:var(--purple-tint-2);color:var(--color-navy);font-family:var(--font-display);font-weight:700;font-size:.8125rem;text-align:left;padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--purple-soft);}
+.data-table td{padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--color-ink-2);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--color-cream);}
+.data-table td strong,.data-table th strong{color:var(--color-ink);}
+
+/* Roadmap / framework phase cards */
+.phase-cards{display:flex;flex-direction:column;gap:2px;margin:var(--space-m) 0 var(--space-l);border-radius:var(--border-radius-sm);overflow:hidden;border:var(--border);}
+.phase-item{display:flex;gap:var(--space-m);padding:var(--space-s) var(--space-m);background:var(--color-white);align-items:flex-start;}
+.phase-num{flex-shrink:0;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);}
+.phase-body{flex:1;min-width:0;}
+.phase-title{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink);margin-bottom:.15rem;display:block;}
+.phase-desc{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.6;}
+
+/* Hook stat contrast callout */
+.hook-stat{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.hook-stat p{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.65;}
+.hook-stat .stat-num{font-family:var(--font-display);font-weight:700;color:var(--color-ink-3);}
+
+/* Interactive toggle: expertise gap vs process gap */
+.toggle-box{border:1.5px solid var(--purple-soft);border-radius:var(--border-radius);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--purple-tint-3);}
+.toggle-head{display:flex;gap:.4rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.toggle-btn{font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.02em;color:var(--jai-a);background:var(--color-white);border:1.5px solid var(--purple-soft);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.toggle-btn:hover{border-color:var(--jai-a);}
+.toggle-btn.active{background:var(--jai-gradient);color:#fff;border-color:transparent;}
+.toggle-panel{display:none;}
+.toggle-panel.active{display:block;animation:fadeIn .25s ease;}
+.toggle-panel p{margin-bottom:.6rem;}
+.toggle-panel p:last-child{margin-bottom:0;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* Decision-checker widget */
+.decision-widget{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-l) var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.decision-widget-head{font-family:var(--font-display);font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);margin:0 0 var(--space-2xs);}
+.decision-widget-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0 0 var(--space-m);}
+.decision-options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:var(--space-m);}
+.decision-option{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem var(--space-s);border:var(--border);border-radius:var(--border-radius-sm);cursor:pointer;transition:border-color .2s,background .2s;font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-option:hover{border-color:var(--jai-a);background:var(--purple-tint-3);}
+.decision-option input{margin-top:.2rem;accent-color:var(--jai-a);}
+.decision-result{display:none;background:var(--color-cream);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-result.show{display:block;animation:fadeIn .25s ease;}
+.decision-reset{display:inline-block;margin-top:var(--space-s);font-size:.8125rem;font-weight:600;color:var(--color-teal);cursor:pointer;background:none;border:none;padding:0;border-bottom:1px solid #4D819440;font-family:var(--font-base);}
+.decision-reset:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Benefit / risk checklist */
+.diag-checklist{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.diag-checklist ul{list-style:none;padding-left:0;margin-bottom:0;}
+.diag-checklist li{position:relative;padding-left:1.6rem;margin-bottom:.55rem;font-size:var(--font-size-base);}
+.diag-checklist li:last-child{margin-bottom:0;}
+.diag-checklist li::before{content:"";position:absolute;left:0;top:.2rem;width:1.05rem;height:1.05rem;border-radius:4px;border:1.5px solid var(--color-teal);background:var(--color-white);}
+.diag-checklist li::after{content:"✓";position:absolute;left:.22rem;top:-.05rem;color:var(--color-teal);font-size:.8125rem;font-weight:700;}
+
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--color-ink);line-height:1.15;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.8125rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-link{font-size:.8125rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.page-wrapper{flex-wrap:wrap;}.expert-sidebar{position:static;width:100%;max-height:none;padding:0 0 var(--space-l) 0;order:99;}.exp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;}.exp-item{border-bottom:none;border-right:1px solid var(--purple-soft);}}
+@media(max-width:640px){.expert-sidebar .exp-list{grid-template-columns:1fr;}.expert-sidebar .exp-item{border-right:none;border-bottom:1px solid var(--purple-soft);}}
+
+/* CTA block */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-base);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:var(--font-size-base);font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-base);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;line-height:1;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Font-size floor: all body and UI text held between 13px and 14px */
+.tag-pill,.meta-item,.toc-link,.exp-head-lbl,.exp-source,.exp-stat,.exp-link,.toc-head-lbl{font-size:.8125rem;}
+.exp-stat{line-height:1.45;}
+article .phase-body ul,article .phase-body ol{margin:.35rem 0 0;}
+article .phase-body li{margin-bottom:.15rem;}
+
+/* Interactive tables */
+.interactive-table tbody tr{transition:background .15s;cursor:default;}
+.interactive-table tbody tr:hover td{background:var(--purple-tint-3);}
+.interactive-table td.col-on,.interactive-table th.col-on{background:var(--purple-tint)!important;color:var(--color-ink);}
+.interactive-table th.col-on{background:var(--jai-gradient)!important;color:#fff;}
+.col-toggle{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin:var(--space-m) 0 -.4rem;}
+.col-toggle-lbl{font-size:.8125rem;font-weight:600;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.06em;margin-right:.2rem;}
+.table-filter{display:flex;align-items:center;gap:.6rem;margin:var(--space-m) 0 -.4rem;flex-wrap:wrap;}
+.table-filter input{flex:1;min-width:200px;max-width:340px;font-family:var(--font-base);font-size:.8125rem;padding:.5rem .9rem;border:1.5px solid var(--purple-soft);border-radius:999px;outline:none;background:var(--purple-tint-3);transition:border-color .2s;}
+.table-filter input:focus{border-color:var(--jai-a);background:#fff;}
+.table-filter span{font-size:.8125rem;color:var(--color-ink-3);font-weight:600;}
+
+/* Kraljic matrix */
+.kraljic{display:grid;grid-template-columns:auto 1fr;gap:.5rem;margin:var(--space-s) 0 0;}
+.k-axis-y{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);text-align:center;}
+.k-axis-x{grid-column:2;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);text-align:center;}
+.k-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.k-cell{text-align:left;font-family:var(--font-base);font-size:.8125rem;line-height:1.5;color:var(--color-ink-2);background:var(--purple-tint-3);border:1.5px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.75rem .9rem;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;}
+.k-cell:hover{transform:translateY(-2px);border-color:var(--jai-a);box-shadow:0 6px 18px rgba(83,0,206,.1);}
+.k-cell strong{color:var(--jai-a);}
+.k-cell.active{background:var(--jai-gradient);border-color:transparent;color:#fff;}
+.k-cell.active strong{color:#fff;}
+
+/* RFI / RFP / RFQ cards */
+.mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:var(--space-s) 0 var(--space-m);}
+.mini-card{font-size:.8125rem;line-height:1.55;background:#fff;border:var(--border);border-top:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:.8rem .9rem;transition:transform .2s,box-shadow .2s;}
+.mini-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(83,0,206,.1);}
+.mini-card strong{display:block;color:var(--jai-a);margin-bottom:.25rem;}
+
+/* Software tool tiles */
+.tool-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:.45rem;margin:var(--space-s) 0 var(--space-m);}
+.tool-tile{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.6rem .85rem;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);font-size:.8125rem;font-weight:600;color:var(--color-navy);transition:background .2s,border-color .2s,transform .2s;}
+.tool-tile::after{content:"\2192";color:var(--jai-a);transition:transform .2s;}
+.tool-tile:hover{background:var(--purple-tint);border-color:var(--jai-a);color:var(--jai-a);transform:translateY(-1px);}
+.tool-tile:hover::after{transform:translateX(3px);}
+
+/* Phase cards & checklist hover polish */
+.phase-item{transition:background .2s;}
+.phase-item:hover{background:var(--purple-tint-3);}
+.faq-item[open] summary{background:var(--purple-tint-3);}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-icon{transition:transform .2s;}
+
+@media(max-width:640px){.mini-cards{grid-template-columns:1fr;}.k-cell{padding:.6rem .7rem;}}
+
+.inline-toc{background:var(--color-light-blue);border:1px solid var(--color-border);border-radius:var(--border-radius-sm);padding:1rem 1.25rem;margin:1.5rem 0;}
+.inline-toc-title{font-weight:700;color:var(--color-navy);margin:0 0 .5rem;font-size:.9375rem;}
+.inline-toc ul{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;list-style:none;margin:0;padding:0;}
+.inline-toc li{margin:0;font-size:.9375rem;}
+.inline-toc a{color:var(--color-teal);text-decoration:underline;}
+.jag-cta-desc a{color:inherit;text-decoration:underline;}
+article h2[id],article h3[id]{scroll-margin-top:1.5rem;}
+</style><style>
+/* Carried over from the previous template: customer results stat block */
+.stat-block{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-l) var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.stat-block-head{font-family:var(--font-display);font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);text-align:center;margin:0 0 var(--space-l);}
+.stat-block-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-m);}
+.stat-block-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.35rem;}
+.stat-block-num{font-family:var(--font-display);font-weight:700;font-size:clamp(1.1rem,1rem + 0.6vw,1.5rem);color:var(--color-teal);line-height:1.1;font-variant-numeric:tabular-nums;}
+.stat-block-label{font-size:var(--font-size-sm);color:var(--color-ink-2);line-height:1.35;}
+@media(max-width:640px){.stat-block-grid{grid-template-columns:repeat(2,1fr);row-gap:var(--space-l);}}
+/* Snippet answer under the P2P systems H2 */
+.snippet-answer{background:var(--color-light-blue);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);color:var(--color-ink);}
+</style>
+
+<style>
+/* ---------- Additional components (built on the reference tokens) ---------- */
+.definition-box{background:var(--color-light-blue);border-left:3px solid var(--color-navy);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.definition-box p{color:var(--color-ink);margin:0;}
+.table-wrap{overflow-x:auto;border:var(--border);border-radius:var(--border-radius-sm);margin:var(--space-m) 0 var(--space-s);}
+.compare-table{width:100%;border-collapse:collapse;min-width:520px;font-size:var(--font-size-base);}
+.compare-table th{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-sm);color:var(--color-ink);background:var(--purple-tint);text-align:left;padding:.7rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.compare-table td{color:var(--color-ink-2);padding:.65rem var(--space-s);border-bottom:var(--border);vertical-align:top;line-height:1.55;}
+.compare-table tbody tr:nth-child(even) td{background:var(--color-cream);}
+.compare-table tbody tr:last-child td{border-bottom:none;}
+.compare-table strong{color:var(--color-ink-3);}
+.table-source{font-size:.8125rem;color:var(--color-ink-3);margin:0 0 var(--space-m);}
+.bar-chart{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);}
+.bar-chart-head{font-family:var(--font-display);font-size:var(--font-size-base);font-weight:700;color:var(--color-ink);margin:0 0 var(--space-s);}
+.bar-row{margin-bottom:.7rem;}
+.bar-label{display:flex;justify-content:space-between;gap:1rem;font-size:var(--font-size-sm);color:var(--color-ink-2);margin-bottom:.25rem;}
+.bar-label b{font-family:var(--font-display);color:var(--color-ink);font-variant-numeric:tabular-nums;}
+.bar-track{height:8px;background:var(--color-cream);border-radius:999px;overflow:hidden;}
+.bar-fill{height:100%;width:0;background:var(--jai-gradient);border-radius:999px;transition:width .9s ease;}
+.bar-source{font-size:.8125rem;color:var(--color-ink-3);margin:var(--space-s) 0 0;}
+summary:focus-visible,a:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;}
+</style>
+<style>
+.self-check{border:1.5px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-s) 0 var(--space-m);background:var(--color-white);}
+.self-check label{display:flex;gap:.65rem;align-items:flex-start;padding:.5rem .4rem;border-radius:8px;cursor:pointer;font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.55;transition:background .2s;}
+.self-check label:hover{background:var(--color-cream);}
+.self-check input{margin-top:.3rem;width:1rem;height:1rem;flex-shrink:0;accent-color:var(--color-teal);cursor:pointer;}
+.self-check input:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;}
+.self-check-result{margin:var(--space-s) 0 0;padding-top:var(--space-s);border-top:var(--border);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);}
+.phase-item.reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease;}
+.phase-item.reveal.is-in{opacity:1;transform:none;}
+@media (prefers-reduced-motion: reduce){.phase-item.reveal{opacity:1;transform:none;transition:none;}}
+</style>
+<style>
+.match{border:1.5px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.seg{display:inline-flex;border:1px solid var(--color-teal);border-radius:8px;overflow:hidden;}
+.seg button{font-family:var(--font-base);font-size:var(--font-size-sm);font-weight:600;color:var(--color-teal);background:var(--color-white);border:none;padding:.45rem .9rem;cursor:pointer;transition:background .2s,color .2s;}
+.seg button+button{border-left:1px solid var(--color-teal);}
+.seg button[aria-pressed="true"]{background:var(--color-teal);color:#fff;}
+.seg button:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;}
+.match-docs{display:flex;flex-wrap:wrap;gap:.5rem;margin:var(--space-s) 0;}
+.doc{font-size:var(--font-size-sm);font-weight:600;padding:.4rem .75rem;border-radius:999px;border:1px dashed var(--border-color);color:var(--color-ink-3);background:var(--color-cream);transition:all .25s;}
+.doc.on{border:1px solid var(--color-teal);color:var(--color-white);background:var(--color-teal);}
+.match-text{margin:0;font-size:var(--font-size-base);}
+</style>
+<style>
+/* ---- Visual polish ---- */
+.hook-stat{border-left-width:4px;}
+.hook-stat .stat-num{color:var(--color-red);font-size:1.15em;}
+.stat-block-num{color:var(--color-teal);}
+.exp-item{transition:transform .2s ease,box-shadow .2s ease;}
+.exp-item:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(11,13,18,.06);}
+article h2{scroll-margin-top:1.25rem;position:relative;}
+.h-anchor{opacity:0;margin-left:.4rem;font-size:1rem;color:var(--color-teal);text-decoration:none;border:none;background:none;cursor:pointer;vertical-align:middle;transition:opacity .2s;}
+article h2:hover .h-anchor,.h-anchor:focus-visible{opacity:1;}
+.h-anchor.copied::after{content:" Link copied";font-family:var(--font-base);font-size:.8125rem;color:var(--color-ink-3);}
+
+/* ---- P2P rail ---- */
+.p2p-rail{margin:var(--space-m) 0 var(--space-l);padding:var(--space-m);border:var(--border);border-radius:var(--border-radius);background:linear-gradient(180deg,var(--color-white),var(--color-cream));}
+.rail-phases{display:grid;grid-template-columns:5fr 3fr;gap:.5rem;margin-bottom:.75rem;}
+.ph{font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-align:center;padding:.3rem;border-radius:999px;}
+.ph.proc{background:var(--color-light-blue);color:var(--color-teal);}
+.ph.ap{background:var(--purple-tint);color:var(--jai-a);}
+.rail-track{display:grid;grid-template-columns:repeat(8,1fr);position:relative;}
+.rail-track::before{content:"";position:absolute;left:6%;right:6%;top:17px;height:2px;background:linear-gradient(90deg,var(--color-teal) 0 62%,var(--jai-a) 62% 100%);opacity:.35;}
+.rail-node,.rail-node:hover{border-bottom:none;box-shadow:none;}
+.rail-node{display:flex;flex-direction:column;align-items:center;gap:.35rem;text-decoration:none;position:relative;z-index:1;}
+.rail-dot{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:.85rem;background:var(--color-white);color:var(--color-teal);border:2px solid var(--color-teal);transition:transform .2s,background .2s,color .2s;}
+.rail-node.ap .rail-dot{color:var(--jai-a);border-color:var(--jai-a);}
+.rail-label{font-size:.8125rem;font-weight:600;color:var(--color-ink-2);text-align:center;line-height:1.2;}
+.rail-node:hover .rail-dot,.rail-node.is-active .rail-dot{transform:scale(1.12);background:var(--color-teal);color:#fff;}
+.rail-node.ap:hover .rail-dot,.rail-node.ap.is-active .rail-dot{background:var(--jai-a);color:#fff;}
+.rail-node:focus-visible{outline:2px solid var(--jai-a);outline-offset:3px;border-radius:8px;}
+@media(max-width:640px){.rail-track{grid-template-columns:repeat(4,1fr);row-gap:.9rem;}.rail-track::before{display:none;}.rail-phases{display:none;}}
+.phase-item.flash{box-shadow:0 0 0 2px var(--color-teal);border-radius:var(--border-radius-sm);transition:box-shadow .3s;}
+
+/* ---- Fraud rings ---- */
+.rings{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-m);border:var(--border);border-radius:var(--border-radius);padding:var(--space-m);margin:var(--space-m) 0;}
+.ring{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.ring svg{width:110px;height:110px;transform:rotate(-90deg);}
+.ring-bg{fill:none;stroke:var(--color-cream);stroke-width:12;}
+.ring-fg{fill:none;stroke:var(--color-red);stroke-width:12;stroke-linecap:round;stroke-dasharray:314.16;stroke-dashoffset:314.16;transition:stroke-dashoffset 1.1s ease;}
+.ring.is-in .ring-fg{stroke-dashoffset:calc(314.16 - 314.16 * var(--p) / 100);}
+.ring-num{position:absolute;top:38px;left:0;right:0;font-family:var(--font-display);font-weight:700;font-size:1.35rem;color:var(--color-ink);}
+.ring-label{margin-top:.4rem;font-size:var(--font-size-sm);color:var(--color-ink-2);line-height:1.35;max-width:16ch;}
+.rings-source{grid-column:1/-1;margin:0;font-size:.8125rem;color:var(--color-ink-3);text-align:center;}
+@media(max-width:520px){.rings{grid-template-columns:1fr 1fr;}.ring svg{width:96px;height:96px;}.ring-num{top:32px;}}
+
+/* ---- KPI bars ---- */
+.kpi-val{display:block;font-weight:600;color:var(--color-ink);font-variant-numeric:tabular-nums;}
+.kpi-val.best{color:var(--color-teal);}
+.kpi-bar{display:block;height:6px;border-radius:999px;background:var(--color-cream);margin-top:.3rem;overflow:hidden;min-width:70px;}
+.kpi-bar i{display:block;height:100%;width:0;background:var(--color-ink-3);border-radius:999px;transition:width .9s ease;}
+.kpi-bar.best i{background:var(--color-teal);}
+
+/* ---- Before / after ---- */
+.ba{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0 0;}
+.ba-row{display:grid;grid-template-columns:44px 1fr 80px;align-items:center;gap:.75rem;margin:.35rem 0;}
+.ba-k{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-sm);color:var(--color-ink-3);}
+.ba-track{height:12px;background:var(--color-cream);border-radius:999px;overflow:hidden;}
+.ba-track i{display:block;height:100%;width:0;background:var(--color-ink-3);border-radius:999px;transition:width 1s ease;}
+.ba-row.after .ba-track i{background:var(--color-teal);}
+.ba-v{font-weight:700;font-size:var(--font-size-sm);color:var(--color-ink);text-align:right;}
+
+/* ---- Back to top ---- */
+.to-top{position:fixed;right:1.25rem;bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));width:44px;height:44px;border-radius:50%;border:none;background:var(--color-ink);color:#fff;font-size:1.1rem;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s,background .2s;z-index:50;box-shadow:0 6px 16px rgba(11,13,18,.18);}
+.to-top.show{opacity:1;pointer-events:auto;transform:none;}
+.to-top:hover{background:var(--color-red);}
+.to-top:focus-visible{outline:2px solid var(--jai-a);outline-offset:3px;}
+@media (prefers-reduced-motion: reduce){.ring-fg,.kpi-bar i,.ba-track i,.rail-dot,.to-top{transition:none;}}
+</style>
+<style>
+.hint{font-size:var(--font-size-sm);color:var(--color-ink-3);margin-bottom:var(--space-xs);}
+/* Benefit cards */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-s);margin:var(--space-s) 0 var(--space-m);}
+.mini-card{border-top:3px solid var(--color-teal) !important;display:flex;flex-direction:column;gap:.35rem;padding:var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);background:var(--color-white);transition:transform .2s,box-shadow .2s,border-color .2s;outline:none;}
+.mini-card:hover,.mini-card:focus-visible{transform:translateY(-3px);box-shadow:0 10px 24px rgba(11,13,18,.08);border-color:var(--color-teal);}
+.mini-card strong{font-family:var(--font-display);font-size:var(--font-size-base);color:var(--color-ink);}
+.mini-card span:last-child{font-size:var(--font-size-sm);color:var(--color-ink-2);line-height:1.5;}
+.mini-icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--color-light-blue);color:var(--color-teal);font-weight:700;font-size:1rem;}
+/* Feature chips */
+.feat{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:0 0 var(--space-m);background:var(--color-white);}
+.feat-chips{display:flex;flex-wrap:wrap;gap:.5rem;}
+.feat-chip{font-family:var(--font-base);font-size:var(--font-size-sm);font-weight:600;color:var(--color-teal);background:var(--color-light-blue);border:1px solid transparent;border-radius:999px;padding:.45rem .85rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.feat-chip:hover{border-color:var(--color-teal);}
+.feat-chip[aria-pressed="true"]{background:var(--color-teal);color:#fff;}
+.feat-chip:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;}
+.feat-detail{margin:var(--space-s) 0 0;padding:var(--space-s) var(--space-m);border-left:3px solid var(--color-teal);background:var(--color-cream);border-radius:0 var(--border-radius-sm) var(--border-radius-sm) 0;}
+/* Choose checklist */
+.choose{border:1.5px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:0 0 var(--space-m);}
+.choose label{display:flex;gap:.65rem;align-items:flex-start;padding:.45rem .4rem;border-radius:8px;cursor:pointer;font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.55;transition:background .2s;}
+.choose label:hover{background:var(--color-cream);}
+.choose input{margin-top:.3rem;width:1rem;height:1rem;flex-shrink:0;accent-color:var(--color-teal);cursor:pointer;}
+.choose input:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;}
+.choose-bar{height:8px;border-radius:999px;background:var(--color-cream);overflow:hidden;margin-top:var(--space-s);}
+.choose-bar i{display:block;height:100%;width:0;background:var(--color-teal);border-radius:999px;transition:width .4s ease;}
+.choose-result{margin:.5rem 0 0;font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);}
+/* Step cards hover */
+.phase-item{transition:background .2s;}
+.phase-item:hover{background:var(--color-light-blue);}
+@media(max-width:700px){.card-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:440px){.card-grid{grid-template-columns:1fr;}}
+@media (prefers-reduced-motion: reduce){.mini-card,.choose-bar i{transition:none;}}
+</style>
+<style>
+html{scroll-behavior:smooth;}
+#workload,#cost-per-invoice,#fraud-stats,#ai-adoption,#e-invoicing{scroll-margin-top:1.5rem;}
+#workload:target,#fraud-stats:target,#cost-per-invoice:target,#ai-adoption:target,#e-invoicing:target{animation:flashbg 1.6s ease;}
+@keyframes flashbg{0%{background:var(--purple-tint);}100%{background:transparent;}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+</style>
+<style>
+.bic{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0 var(--space-xs);}
+.bic-head{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink);margin:0 0 var(--space-s);}
+.bic .ba-row{grid-template-columns:minmax(120px,210px) 1fr 56px;margin:.2rem 0;}
+.bic .ba-row.dim{margin-bottom:.75rem;}
+.bic .ba-k{font-family:var(--font-base);font-weight:600;color:var(--color-ink-2);font-size:var(--font-size-sm);line-height:1.3;}
+.bic .ba-track i{background:var(--color-teal);}
+.bic .ba-row.dim .ba-track i{background:var(--color-ink-3);opacity:.55;}
+.bic .ba-v.best{color:var(--color-teal);}
+.bic-legend{margin:.25rem 0 0;font-size:.8125rem;color:var(--color-ink-3);display:flex;align-items:center;gap:.4rem;}
+.sw{display:inline-block;width:12px;height:8px;border-radius:4px;background:var(--color-ink-3);opacity:.55;margin-left:.5rem;}
+.sw.best{background:var(--color-teal);opacity:1;margin-left:0;}
+@media(max-width:560px){.bic .ba-row{grid-template-columns:1fr 48px;}.bic .ba-k{grid-column:1/-1;}.bic .ba-row.dim .ba-k{display:none;}}
+</style>
+<style>
+.vendor-q td:nth-child(2){color:var(--color-ink);font-style:italic;}
+.vendor-q td:nth-child(3){font-size:var(--font-size-sm);}
+.vendor-q tbody tr{transition:background .2s;}
+.vendor-q tbody tr:hover td{background:var(--color-light-blue);}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:var(--space-s) 0 var(--space-m);counter-reset:fl;}
+.flow-step{position:relative;flex:1 1 140px;counter-increment:fl;padding:.7rem .9rem .7rem 2.4rem;background:var(--color-light-blue);color:var(--color-ink);font-size:var(--font-size-sm);font-weight:600;line-height:1.35;border:1px solid var(--color-white);transition:background .2s,color .2s;}
+.flow-step::before{content:counter(fl);position:absolute;left:.7rem;top:50%;transform:translateY(-50%);width:1.3rem;height:1.3rem;border-radius:50%;display:grid;place-items:center;background:var(--color-teal);color:#fff;font-size:.8125rem;font-weight:700;}
+.flow-step:first-child{border-radius:var(--border-radius-sm) 0 0 var(--border-radius-sm);}
+.flow-step:last-child{border-radius:0 var(--border-radius-sm) var(--border-radius-sm) 0;}
+.flow-step:hover{background:var(--color-teal);color:#fff;}
+.flow-step:hover::before{background:#fff;color:var(--color-teal);}
+@media(max-width:560px){.flow{flex-direction:column;}.flow-step,.flow-step:first-child,.flow-step:last-child{border-radius:8px;margin-bottom:4px;}}
+</style>
+</head>
+<body>
+
+<div id="progress-bar" style="position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;"></div>
+
+<div class="page-wrapper">
+
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Is the Procure to Pay Process?</a>
+      <a class="toc-link" href="#s2">Procure to Pay Process Steps</a>
+      <a class="toc-link" href="#s3">Why Manual P2P Processes Cost More</a>
+      <a class="toc-link" href="#s4">Benefits of Procure to Pay Automation</a>
+      <a class="toc-link" href="#s5">P2P Process KPIs to Track</a>
+      <a class="toc-link" href="#s6">Procure to Pay Systems: Features &amp; How to Choose</a>
+      <a class="toc-link" href="#s7">Procure to Pay Automation and AI</a>
+      <a class="toc-link" href="#s8">Customer Example: SUNY</a>
+      <a class="toc-link" href="#s9">FAQ</a>
+      <a class="toc-link" href="#s10">Next Steps</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-tags">
+          <span class="tag-pill">Procure to Pay</span>
+          <span class="tag-pill">P2P Automation</span>
+        </div>
+        <h1>Procure to Pay Process: Automate Every Step<br>with a P2P System</h1>
+        <div class="article-meta">
+          <span class="meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 10 min read</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Published: <time datetime="2024-12-13">December 13, 2024</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Updated: <time datetime="2026-10-22">October 2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Visnja Radosavljevic</span>
+        </div>
+      </div>
+    </header>
+
+    <p>Every purchase follows the same path. Someone needs something, it is approved and ordered, it arrives, and the supplier is paid. That path is the <strong>procure to pay process</strong>. How well it runs decides what each purchase really costs and how much control finance has over spend.</p>
+
+    <p id="workload">Yet many teams still run the P2P process on email approvals, re-keyed purchase orders, and invoices matched by hand. That is getting harder to sustain. <a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" target="_blank" rel="noopener">The Hackett Group</a> projects <strong>procurement workloads will rise 8% in 2026</strong>, while headcount and operating budgets decline. <strong>A P2P system helps close that gap</strong> by automating the handoffs, so people only handle exceptions.</p>
+
+    <p>This guide walks through each step of the procure to pay process, the cost of manual work, and the benefits of procure to pay automation. It also covers how to choose procure to pay software and where AI fits. To see every step connected on one platform, explore the <a href="https://www.jaggaer.com/solutions/procure-to-pay" target="_blank" rel="noopener">JAGGAER procure-to-pay solution</a>.</p>
+
+        <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Start every purchase in the right channel &rarr;</p>
+        <p class="jag-cta-desc">JAGGAER eProcurement guides requesters to approved catalogs, suppliers, and contract prices.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/eprocurement" class="jag-cta-btn" target="_blank" rel="noopener">Explore eProcurement &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s1">What Is the Procure to Pay Process?</h2>
+
+    <div class="definition-box">
+      <p><strong>Procure to pay (P2P) is the end-to-end process for requesting, approving, ordering, receiving, and paying for goods and services.</strong> It ends when the supplier is paid and the transaction is reconciled, which is why any useful procure to pay definition spans both procurement and finance.</p>
+    </div>
+
+    <p>The procure to pay business process connects 2 teams with different priorities. Procurement wants <strong>the right goods at the negotiated price</strong>. Accounts payable wants accurate invoices paid on time with a clean audit trail.</p>
+
+    <p>A connected procure to pay workflow gives both teams the same records. An approved order then moves to payment without being re-entered. P2P covers <strong>indirect spend</strong>, such as software and services, and <strong>direct spend</strong>, such as components and raw materials.</p>
+
+    <h3 class="sub-question">Procure to Pay vs. Source to Pay vs. Accounts Payable</h3>
+
+    <div class="table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr><th scope="col">Process</th><th scope="col">What it covers</th><th scope="col">Where it starts</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Source to pay (S2P)</strong></td><td>Spend analysis, sourcing, supplier selection, and contracting, plus every P2P step</td><td>Category and sourcing decisions</td></tr>
+          <tr><td><strong>Procure to pay (P2P)</strong></td><td>Requisition, approval, purchase order, receipt, invoice, matching, and payment</td><td>A business need</td></tr>
+          <tr><td><strong>Accounts payable (AP)</strong></td><td>Invoice receipt, matching, approval, and payment</td><td>The supplier invoice</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>P2P is the downstream half of S2P, and AP is the final stage of P2P</strong>.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s2">Procure to Pay Process Steps: How to Automate Each One</h2>
+
+    <p>Most P2P processes follow 8 steps. Click a step to jump to <strong>what a P2P system automates</strong>.</p>
+
+    <h3 class="sub-question">The Procure to Pay Workflow at a Glance</h3>
+
+    <div class="p2p-rail" role="navigation" aria-label="P2P process overview">
+      <div class="rail-phases" aria-hidden="true"><span class="ph proc">Procurement</span><span class="ph ap">Accounts payable</span></div>
+      <div class="rail-track">
+        <a class="rail-node" href="#step-1" data-step="1"><span class="rail-dot">1</span><span class="rail-label">Need</span></a>
+        <a class="rail-node" href="#step-2" data-step="2"><span class="rail-dot">2</span><span class="rail-label">Requisition</span></a>
+        <a class="rail-node" href="#step-3" data-step="3"><span class="rail-dot">3</span><span class="rail-label">Approval</span></a>
+        <a class="rail-node" href="#step-4" data-step="4"><span class="rail-dot">4</span><span class="rail-label">Purchase order</span></a>
+        <a class="rail-node" href="#step-5" data-step="5"><span class="rail-dot">5</span><span class="rail-label">Receipt</span></a>
+        <a class="rail-node ap" href="#step-6" data-step="6"><span class="rail-dot">6</span><span class="rail-label">Invoice</span></a>
+        <a class="rail-node ap" href="#step-7" data-step="7"><span class="rail-dot">7</span><span class="rail-label">Match</span></a>
+        <a class="rail-node ap" href="#step-8" data-step="8"><span class="rail-dot">8</span><span class="rail-label">Payment</span></a>
+      </div>
+    </div>
+
+    <div class="phase-cards">
+      <div class="phase-item" id="step-1">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">Identify the Need</span>
+          <p class="phase-desc">A department needs a product or service. <strong>Guided buying</strong> points users to approved catalogs and preferred suppliers from the start.</p>
+        </div>
+      </div>
+      <div class="phase-item" id="step-2">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">Create the Purchase Requisition</span>
+          <p class="phase-desc">The requester records the item, quantity, and cost center. <strong>Catalog items pre-fill prices and supplier details.</strong></p>
+        </div>
+      </div>
+      <div class="phase-item" id="step-3">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Approve the Requisition</span>
+          <p class="phase-desc">Budget holders check the request against policy. <strong>Workflows route approvals by amount and category</strong>, with reminders.</p>
+        </div>
+      </div>
+      <div class="phase-item" id="step-4">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <span class="phase-title">Issue the Purchase Order</span>
+          <p class="phase-desc">The approved request becomes a purchase order (PO) with agreed prices and terms. <strong>POs are created and sent electronically</strong>, and suppliers confirm them in a portal.</p>
+        </div>
+      </div>
+      <div class="phase-item" id="step-5">
+        <span class="phase-num">5</span>
+        <div class="phase-body">
+          <span class="phase-title">Receive Goods or Services</span>
+          <p class="phase-desc">The receiving team confirms what arrived and its condition. <strong>Digital goods receipts</strong> are logged against the PO, including partial deliveries.</p>
+        </div>
+      </div>
+      <div class="phase-item" id="step-6">
+        <span class="phase-num">6</span>
+        <div class="phase-body">
+          <span class="phase-title">Capture the Supplier Invoice</span>
+          <p class="phase-desc">Invoices arrive on paper, as PDFs, through portals, or as e-invoices. With <a href="https://www.jaggaer.com/solutions/accounts-payable-automation" target="_blank" rel="noopener">accounts payable automation</a>, <strong>invoices are captured across channels such as portal, EDI, and PEPPOL</strong>, and the data is extracted without manual keying.</p>
+        </div>
+      </div>
+      <div class="phase-item" id="step-7">
+        <span class="phase-num">7</span>
+        <div class="phase-body">
+          <span class="phase-title">Match the Invoice and Resolve Exceptions</span>
+          <p class="phase-desc">The invoice is compared with the PO and goods receipt, known as <strong>three-way matching</strong>. Matching invoices pass straight through. Only price, quantity, or missing-PO exceptions reach a person.</p>
+        </div>
+      </div>
+      <div class="phase-item" id="step-8">
+        <span class="phase-num">8</span>
+        <div class="phase-body">
+          <span class="phase-title">Pay the Supplier and Reconcile</span>
+          <p class="phase-desc">Approved invoices are paid on terms or early to <strong>capture discounts</strong>. Payments are then reconciled in the ERP automatically.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-question">Two-Way, Three-Way, and Four-Way Matching</h3>
+
+    <p>Select a type to see which documents are compared.</p>
+
+    <div class="match" data-match>
+      <div class="seg" role="group" aria-label="Choose matching type">
+        <button type="button" data-m="2" aria-pressed="false">Two-way</button>
+        <button type="button" data-m="3" aria-pressed="true">Three-way</button>
+        <button type="button" data-m="4" aria-pressed="false">Four-way</button>
+      </div>
+      <div class="match-docs" aria-hidden="true">
+        <span class="doc" data-doc="1">Purchase order</span>
+        <span class="doc" data-doc="2">Invoice</span>
+        <span class="doc" data-doc="3">Goods receipt</span>
+        <span class="doc" data-doc="4">Inspection report</span>
+      </div>
+      <p class="match-text" aria-live="polite"><strong>Three-way match:</strong> the invoice is checked against the PO and the goods receipt. This is the standard control for physical goods.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s3">Why Manual P2P Processes Cost More</h2>
+
+        <h3 class="sub-question" id="cost-per-invoice">Higher Cost per Invoice</h3>
+
+    <p>According to <a href="https://www.tungstenautomation.com/-/media/files/reports/en/ap-metrics-that-matter-2026.pdf" target="_blank" rel="noopener">Ardent Partners' AP Metrics that Matter in 2026</a>, <strong>the average invoice costs $9.90 and takes 11.6 days to process</strong>. Much of that cost comes from manual work, such as keying invoice data, chasing missing receipts, and resolving price or quantity mismatches. Each extra touch adds time, and slow processing can lead to missed early-payment discounts or late fees.</p>
+
+    <h3 class="sub-question">Greater Exposure to Payment Fraud</h3>
+
+    <div class="rings" id="fraud-stats" data-rings>
+      <div class="ring" style="--p:76"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-bg" cx="60" cy="60" r="50"/><circle class="ring-fg" cx="60" cy="60" r="50"/></svg><span class="ring-num">76%</span><span class="ring-label">faced payments fraud</span></div>
+      <div class="ring" style="--p:74"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-bg" cx="60" cy="60" r="50"/><circle class="ring-fg" cx="60" cy="60" r="50"/></svg><span class="ring-num">74%</span><span class="ring-label">affected by business email compromise</span></div>
+      <div class="ring" style="--p:58"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-bg" cx="60" cy="60" r="50"/><circle class="ring-fg" cx="60" cy="60" r="50"/></svg><span class="ring-num">58%</span><span class="ring-label">said checks are targeted by fraud</span></div>
+      <p class="rings-source">Share of U.S. organizations in 2025. Source: <a href="https://www.financialprofessionals.org/about/learn-more/press-releases/Details/over-75-percent-of-us-firms-experienced-payments-fraud-in-2025-while-ai-adoption-for-fraud-mitigation-lags" target="_blank" rel="noopener">2026 AFP Payments Fraud and Control Survey</a></p>
+    </div>
+
+    <p>Business email compromise often targets P2P, for example a fake request to change a supplier's bank details. <strong>Controlled supplier records and PO-backed payments</strong> make these requests far easier to spot.</p>
+
+    <h3 class="sub-question">Common Root Causes: A Quick Self-Check</h3>
+
+    <p>Tick what applies to you.</p>
+
+    <div class="self-check" data-selfcheck>
+      <label><input type="checkbox"> <span><strong>Disconnected systems:</strong> requests, POs, and invoices sit in separate tools</span></label>
+      <label><input type="checkbox"> <span><strong>Inconsistent supplier data:</strong> duplicate or outdated records exist across systems</span></label>
+      <label><input type="checkbox"> <span><strong>Off-contract buying:</strong> people bypass the slow approved channel</span></label>
+      <label><input type="checkbox"> <span><strong>Invoices without POs:</strong> many invoices need manual review before payment</span></label>
+      <label><input type="checkbox"> <span><strong>Sequential approvals:</strong> requests wait in one inbox after another</span></label>
+      <p class="self-check-result" aria-live="polite">0 of 5 selected. Tick any that apply.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s4">Benefits of Procure to Pay Automation</h2>
+
+    <p>Procure to pay automation benefits <strong>procurement, finance, and suppliers at once</strong>:</p>
+
+    <div class="card-grid">
+      <div class="mini-card" tabindex="0"><strong>Lower processing costs</strong><span>Fewer manual touches per transaction</span></div>
+      <div class="mini-card" tabindex="0"><strong>Faster cycle times</strong><span>Automated routing and matching speed up payment</span></div>
+      <div class="mini-card" tabindex="0"><strong>More spend under contract</strong><span>Negotiated prices apply to every order</span></div>
+      <div class="mini-card" tabindex="0"><strong>Stronger controls</strong><span>Every approval, change, and payment is logged for audit</span></div>
+      <div class="mini-card" tabindex="0"><strong>Better supplier relationships</strong><span>Accurate, on-time payments mean fewer disputes</span></div>
+      <div class="mini-card" tabindex="0"><strong>Better cash management</strong><span>Finance decides when to pay, including early for discounts</span></div>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s5">P2P Process KPIs to Track</h2>
+
+    <p>These core KPIs show where procure to pay automation is paying off and where your P2P process still stalls.</p>
+
+    <div class="table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr><th scope="col">KPI</th><th scope="col">What it shows</th><th scope="col">2026 average</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Cost per invoice</strong></td><td>Overall AP efficiency</td><td><span class="kpi-val">$9.90</span></td></tr>
+          <tr><td><strong>Invoice processing time</strong></td><td>Time to process one invoice</td><td><span class="kpi-val">11.6 days</span></td></tr>
+          <tr><td><strong>Exception rate</strong></td><td>Invoices needing manual fixes</td><td><span class="kpi-val">19.9%</span></td></tr>
+          <tr><td><strong>Straight-through processing</strong></td><td>Invoices with no manual touch</td><td><span class="kpi-val">38.3%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="bic" data-ba>
+      <p class="bic-head">Best-in-Class vs. all other AP teams</p>
+      <div class="ba-row"><span class="ba-k">PO-linked invoices</span><span class="ba-track"><i data-w="85.1"></i></span><span class="ba-v best">85.1%</span></div>
+      <div class="ba-row dim"><span class="ba-k"></span><span class="ba-track"><i data-w="46.9"></i></span><span class="ba-v">46.9%</span></div>
+      <div class="ba-row"><span class="ba-k">Staff time on supplier questions</span><span class="ba-track"><i data-w="18.9"></i></span><span class="ba-v best">18.9%</span></div>
+      <div class="ba-row dim"><span class="ba-k"></span><span class="ba-track"><i data-w="31.1"></i></span><span class="ba-v">31.1%</span></div>
+      <p class="bic-legend"><span class="sw best"></span>Best-in-Class <span class="sw"></span>All others</p>
+    </div>
+    <p class="table-source">Source: <a href="https://www.tungstenautomation.com/-/media/files/reports/en/ap-metrics-that-matter-2026.pdf" target="_blank" rel="noopener">Ardent Partners, AP Metrics that Matter in 2026</a> (survey of 194 AP, finance, and P2P leaders). Best-in-Class is the top 20% by invoice cost and cycle time.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s6">Procure to Pay Systems: Features and How to Choose</h2>
+
+    <p class="snippet-answer">A procure to pay system is software that runs the full purchasing cycle in one place, from requisition and approval to purchase order, receipt, and invoice matching. It also handles supplier payment, applies buying rules automatically, and gives procurement and finance one shared record of every transaction.</p>
+
+    <p><strong>Unified procure to pay systems remove the handoffs between steps</strong>, where most delays and errors happen.</p>
+
+    <h3 class="sub-question">Core Features of a P2P System</h3>
+
+    <ul>
+      <li><strong>Guided buying:</strong> catalogs, punchouts, and contract pricing</li>
+      <li><strong>Requisition and approval workflows:</strong> configurable rules by amount, category, and cost center</li>
+      <li><strong>Supplier portal:</strong> order confirmations, invoice submission, and payment status</li>
+      <li><strong>Invoice capture and matching:</strong> multi-channel capture with two- and three-way matching</li>
+      <li><strong>Payments and reconciliation:</strong> electronic payments and ERP posting</li>
+      <li><strong>Supplier management and analytics:</strong> one supplier record plus spend reporting</li>
+    </ul>
+
+    <h3 class="sub-question">Supplier Payment Options</h3>
+
+    <p><strong>Virtual cards</strong> can be generated for a single approved PO, with limits tied to that order. In July 2026, JAGGAER and Conferma <a href="https://www.jaggaer.com/press-release/jaggaer-conferma-embedded-virtual-card-payments" target="_blank" rel="noopener">launched embedded virtual card payments</a>, extending JAGGAER Pay to Europe.</p>
+
+    <h3 class="sub-question" id="e-invoicing">E-Invoicing Compliance in 2026</h3>
+
+    <p>According to <a href="https://www.wisetrend.com/blog/e-invoice-mandates-2026-state-of-adoption-top-10-countries/" target="_blank" rel="noopener">WiseTREND</a>, <strong>61 of the 133 countries it tracks</strong> have a B2B e-invoicing mandate live or phasing in. France went live on September 1, 2026. <a href="https://sovos.com/en-gb/vat/tax-rules/e-invoicing-germany/" target="_blank" rel="noopener">Germany</a> has required businesses to receive e-invoices since January 2025. Issuing starts in January 2027 for businesses with turnover above €800,000, and in January 2028 for all others. U.S. firms with German entities must already be able to receive e-invoices. The United States has no federal B2B mandate. U.S. organizations with suppliers or entities abroad still need a P2P system that receives, validates, and archives compliant e-invoices. See <a href="https://www.jaggaer.com/solutions/global-einvoicing-compliance" target="_blank" rel="noopener">JAGGAER global e-invoicing compliance</a>.</p>
+
+    <h3 class="sub-question">How to Choose Procure to Pay Software</h3>
+
+    <p>Ask these in vendor demos.</p>
+
+    <div class="table-wrap">
+      <table class="compare-table vendor-q">
+        <thead>
+          <tr><th scope="col">Criterion</th><th scope="col">Ask the vendor</th><th scope="col">Why it matters</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Fit with your spend</strong></td><td>&ldquo;Can it run direct, indirect, and services purchases in one flow?&rdquo;</td><td>Side processes leak spend</td></tr>
+          <tr><td><strong>Ease of use</strong></td><td>&ldquo;How does an occasional buyer place a catalog order?&rdquo;</td><td>Adoption drives compliance</td></tr>
+          <tr><td><strong>One platform</strong></td><td>&ldquo;Do sourcing, P2P, and AP share one supplier record?&rdquo;</td><td>Shared data enables automation</td></tr>
+          <tr><td><strong>ERP integration</strong></td><td>&ldquo;Which ERPs have prebuilt connectors?&rdquo;</td><td>Integration gaps create manual rework</td></tr>
+          <tr><td><strong>Global compliance</strong></td><td>&ldquo;Which e-invoicing mandates are covered today?&rdquo;</td><td>Mandates are live in many countries</td></tr>
+          <tr><td><strong>Governed AI</strong></td><td>&ldquo;What can AI do without human approval?&rdquo;</td><td>Guardrails keep audits clean</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>For deeper evaluation criteria when comparing procure to pay software, read <a href="https://www.jaggaer.com/blog/procure-to-pay-solutions-what-you-need-to-know" target="_blank" rel="noopener">what to look for in a P2P solution</a>. You can also use the <a href="https://www.jaggaer.com/download/checklist/p2p-evaluation-checklist" target="_blank" rel="noopener">P2P evaluation checklist</a> to compare vendors.</p>
+
+        <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Automate invoice capture and matching &rarr;</p>
+        <p class="jag-cta-desc">JAGGAER Invoicing captures invoices across portal, EDI, cXML, OCR, and PEPPOL, and routes exceptions to the right team.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/invoicing" class="jag-cta-btn" target="_blank" rel="noopener">Explore Invoicing &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- REVIEW NOTE (per SEO brief): every JAGGAER capability in this section must be confirmed with Product Marketing before publishing. -->
+    <h2 id="s7">Procure to Pay Automation and AI</h2>
+
+    <p>Procure to pay automation began with digital workflows, then rules automated <strong>approval routing, matching, and payment scheduling</strong>. AI now handles work that fixed rules cannot.</p>
+
+    <h3 class="sub-question">Where AI Adds Value in P2P</h3>
+
+    <ul>
+      <li><strong>Invoice processing:</strong> extracting and validating data from invoices in any format</li>
+      <li><strong>Fraud and anomaly detection:</strong> flagging duplicate invoices, unusual prices, and bank-detail changes before payment</li>
+      <li><strong>Predictive insight:</strong> warning of delivery delays or supplier disruptions early</li>
+      <li><strong>User guidance:</strong> answering policy questions in plain language</li>
+      <li><strong>AI agents:</strong> investigating a match exception, gathering context, and resolving or escalating it within set rules</li>
+    </ul>
+
+    <h3 class="sub-question" id="ai-adoption">How Procurement Teams Are Adopting AI</h3>
+
+    <div class="hook-stat">
+      <p><strong><span class="stat-num">69%</span> of organizations access AI through capabilities embedded in their existing procurement platforms</strong>, mainly for transactional processes, according to <a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" target="_blank" rel="noopener">The Hackett Group</a>.</p>
+    </div>
+
+    <p><a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" target="_blank" rel="noopener">Hackett</a> also found only 12% report large-scale implementation. In <a href="https://www.gartner.com/en/newsroom/press-releases/2026-10-08-gartner-survey-shows-chief-procurement-officers-stalling-on-needed-ai-role-redesign" target="_blank" rel="noopener">Gartner's 2026 CPO Survey</a> of 213 senior procurement leaders, <strong>63% expect AI to significantly improve procurement performance</strong> within 3 years. In a separate Gartner survey, only 25% of the 134 procurement leaders polled had redesigned jobs and roles as a direct result of AI.</p>
+
+    <p><a href="https://www.tungstenautomation.com/-/media/files/reports/en/ap-metrics-that-matter-2026.pdf" target="_blank" rel="noopener">Ardent Partners</a> found <strong>58% of AP teams are using or piloting AI</strong> in 2026, most often for invoice capture. Yet <a href="https://www.financialprofessionals.org/about/learn-more/press-releases/Details/over-75-percent-of-us-firms-experienced-payments-fraud-in-2025-while-ai-adoption-for-fraud-mitigation-lags" target="_blank" rel="noopener">AFP</a> found <strong>just 17% of organizations use AI to fight payments fraud</strong>. <a href="https://www.jaggaer.com/blog/ai-driven-procure-to-pay-cost-management" target="_blank" rel="noopener">AI-driven procure to pay</a> works best on clean supplier data and consistent workflows.</p>
+
+    <h3 class="sub-question">AI in the JAGGAER Platform</h3>
+
+    <p><a href="https://www.jaggaer.com/solutions/jai" target="_blank" rel="noopener">JAGGAER AI (JAI)</a> is embedded in the JAGGAER One platform, not offered as a separate tool. Launched in May 2026, it answers questions about purchasing rules, suppliers, contracts, and spend in 28 languages. Its answers are <strong>grounded in each customer's own policies and data</strong>, and it respects existing access controls.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s8">Customer Example: How SUNY Connected Every P2P Step</h2>
+
+    <p><a href="https://www.jaggaer.com/success-stories/suny" target="_blank" rel="noopener">The State University of New York (SUNY)</a> runs the largest comprehensive U.S. higher education system, with 64 campuses, per JAGGAER's SUNY success story. Its procurement was <strong>manual and paper-based</strong>, with transactions moving desk to desk and no central visibility.</p>
+
+    <p>After a 2-campus pilot, SUNY rolled out JAGGAER across the full P2P cycle:</p>
+
+    <div class="flow" aria-label="SUNY P2P rollout">
+      <span class="flow-step">Requisitions and POs in eProcurement</span>
+      <span class="flow-step">Touchless processing in Invoicing</span>
+      <span class="flow-step">Contract compliance in JAGGAER Contract Management</span>
+      <span class="flow-step">Tracking from requisition to payment</span>
+    </div>
+
+    <div class="stat-block">
+      <p class="stat-block-head">SUNY on JAGGAER, per JAGGAER's SUNY success story</p>
+      <div class="stat-block-grid">
+        <div class="stat-block-item">
+          <span class="stat-block-num">$400.6M</span>
+          <span class="stat-block-label">annual spend managed</span>
+        </div>
+        <div class="stat-block-item">
+          <span class="stat-block-num">54,000</span>
+          <span class="stat-block-label">active users</span>
+        </div>
+        <div class="stat-block-item">
+          <span class="stat-block-num">800</span>
+          <span class="stat-block-label">contracts</span>
+        </div>
+        <div class="stat-block-item">
+          <span class="stat-block-num">217,000</span>
+          <span class="stat-block-label">vendors</span>
+        </div>
+      </div>
+    </div>
+
+    <p>SUNY reports <strong>faster requisition approvals and PO issuance</strong>, higher contract usage, and real-time tracking. Procurement and AP now work without silos. As SUNY's Lori Nunziato put it, <strong>"that visibility from beginning to end was something we needed."</strong></p>
+
+    <hr class="section-divider">
+
+    <h2 id="s9">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>What is the procure to pay process? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">It is the full cycle an organization uses to buy goods and services. It runs from the first purchase request to the final supplier payment and its reconciliation in the ERP.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What are the steps in the P2P process? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">The 8 steps are: identify the need, create the requisition, approve it, and issue the purchase order. Then receive the goods, capture the invoice, match it, and pay and reconcile.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the difference between procure to pay and source to pay? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Source to pay is the wider cycle. It starts with deciding what to buy and from whom, then negotiating contracts. Procure to pay covers the buying and payment that follow.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the difference between procure to pay and accounts payable? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Accounts payable covers the invoice and payment stages. Procure to pay also includes the requisition, approval, purchase order, and receiving steps that come before the invoice.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is three-way matching? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Three-way matching compares the supplier invoice with the purchase order and the goods receipt before payment. Differences outside set tolerances are flagged as exceptions for review.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <h2 id="s10">Next Steps</h2>
+
+    <p>Start by <strong>setting a baseline</strong>. Measure cost per invoice, cycle time, exception rate, and PO coverage to see where your process stalls. Then clean the data underneath it: one supplier record shared by procurement and AP, contract prices in catalogs, and verified bank details. With that in place, start procure to pay automation with the highest-volume steps, usually invoice capture, matching, and approval routing.</p>
+
+    <p>Next, <strong>move suppliers onto a portal and structured e-invoices</strong>. This raises straight-through processing and prepares you for mandates abroad. Choose procure to pay software that adds AI with clear guardrails on what it may do without review, and track your KPIs monthly. The <a href="https://www.jaggaer.com/solutions/procure-to-pay" target="_blank" rel="noopener">JAGGAER procure-to-pay solution</a> supports each of these stages within JAGGAER One.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Ready to automate your procure to pay process? &rarr;</p>
+        <p class="jag-cta-desc">See how JAGGAER One connects every step, from requisition to payment, in a personalized demo.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo &rarr;</a>
+    </div>
+
+  </article>
+
+  <aside class="expert-sidebar" aria-label="What the experts are saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">The Hackett Group &middot; Mar 2026</span>
+        <span class="exp-num red">8%</span>
+        <p class="exp-stat">Projected rise in procurement workloads in 2026 as budgets shrink.</p>
+        <a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">AFP &middot; Apr 2026</span>
+        <span class="exp-num red">76%</span>
+        <p class="exp-stat">U.S. organizations hit by attempted or actual payments fraud in 2025.</p>
+        <a href="https://www.financialprofessionals.org/about/learn-more/press-releases/Details/over-75-percent-of-us-firms-experienced-payments-fraud-in-2025-while-ai-adoption-for-fraud-mitigation-lags" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Ardent Partners &middot; Aug 2026</span>
+        <span class="exp-num red">$9.90</span>
+        <p class="exp-stat">Average cost to process one invoice in 2026.</p>
+        <a href="https://www.tungstenautomation.com/-/media/files/reports/en/ap-metrics-that-matter-2026.pdf" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Gartner &middot; Oct 2026</span>
+        <span class="exp-num red">63%</span>
+        <p class="exp-stat">Senior procurement leaders expecting AI to significantly lift performance (2026 CPO Survey, 213 leaders).</p>
+        <a href="https://www.gartner.com/en/newsroom/press-releases/2026-10-08-gartner-survey-shows-chief-procurement-officers-stalling-on-needed-ai-role-redesign" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">WiseTREND &middot; Sep 2026</span>
+        <span class="exp-num red">61 of 133</span>
+        <p class="exp-stat">Countries with a B2B e-invoicing mandate live or phasing in.</p>
+        <a href="https://www.wisetrend.com/blog/e-invoice-mandates-2026-state-of-adoption-top-10-countries/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+
+<script>
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Self-check: live count with short guidance */
+  var box = document.querySelector('[data-selfcheck]');
+  if (box) {
+    var boxes = box.querySelectorAll('input[type="checkbox"]');
+    var out = box.querySelector('.self-check-result');
+    function update() {
+      var n = 0; boxes.forEach(function (b) { if (b.checked) n++; });
+      var msg = n + ' of 5 selected. ';
+      if (n === 0) msg += 'Tick any that apply.';
+      else if (n <= 2) msg += 'Targeted automation of these steps should bring quick gains.';
+      else msg += 'A unified P2P system would likely remove several of these issues at once.';
+      out.textContent = msg;
+    }
+    boxes.forEach(function (b) { b.addEventListener('change', update); });
+  }
+
+  /* Count-up for simple numeric stats */
+  var nums = document.querySelectorAll('.stat-num, .exp-num, .stat-block-num, .ring-num');
+  function countUp(el) {
+    var m = el.textContent.trim().match(/^(\$?)(\d+(?:\.\d+)?)(%?)$/);
+    if (!m || reduce) return;
+    var target = parseFloat(m[2]), dec = (m[2].split('.')[1] || '').length, start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / 900, 1);
+      el.textContent = m[1] + (target * p).toFixed(dec) + m[3];
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* Reveal step cards */
+  var cards = document.querySelectorAll('.phase-item');
+  if (!reduce) cards.forEach(function (c) { c.classList.add('reveal'); });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries, o) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        if (e.target.classList.contains('phase-item')) e.target.classList.add('is-in');
+        else countUp(e.target);
+        o.unobserve(e.target);
+      });
+    }, { threshold: 0.3 });
+    nums.forEach(function (n) { io.observe(n); });
+    cards.forEach(function (c) { io.observe(c); });
+  } else {
+    cards.forEach(function (c) { c.classList.add('is-in'); });
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var m = document.querySelector('[data-match]');
+  if (!m) return;
+  var info = {
+    '2': '<strong>Two-way match:</strong> the invoice is checked against the PO only. It suits services or low-risk purchases where no receipt is recorded.',
+    '3': '<strong>Three-way match:</strong> the invoice is checked against the PO and the goods receipt. This is the standard control for physical goods.',
+    '4': '<strong>Four-way match:</strong> an inspection or quality acceptance record is added. It suits regulated items and direct materials that must pass quality checks.'
+  };
+  var btns = m.querySelectorAll('[data-m]'), docs = m.querySelectorAll('.doc'), txt = m.querySelector('.match-text');
+  function set(level) {
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-m') === level ? 'true' : 'false'); });
+    docs.forEach(function (d) { d.classList.toggle('on', parseInt(d.getAttribute('data-doc'), 10) <= parseInt(level, 10)); });
+    txt.innerHTML = info[level];
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { set(b.getAttribute('data-m')); }); });
+  set('3');
+})();
+</script>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Rail: highlight and flash the matching step card */
+  var nodes = document.querySelectorAll('.rail-node');
+  nodes.forEach(function (n) {
+    n.addEventListener('click', function () {
+      nodes.forEach(function (x) { x.classList.remove('is-active'); });
+      n.classList.add('is-active');
+      var card = document.getElementById('step-' + n.getAttribute('data-step'));
+      if (card) {
+        card.classList.add('is-in', 'flash');
+        setTimeout(function () { card.classList.remove('flash'); }, 1600);
+      }
+    });
+  });
+
+  /* Animate rings, KPI bars, before/after bars on view */
+  function fillBars(root) {
+    root.querySelectorAll('i[data-w]').forEach(function (i) { i.style.width = i.getAttribute('data-w') + '%'; });
+  }
+  var targets = document.querySelectorAll('.ring, .compare-table, [data-ba]');
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (entries, o) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in'); fillBars(e.target); o.unobserve(e.target);
+      });
+    }, { threshold: 0.3 });
+    targets.forEach(function (t) { io.observe(t); });
+  } else {
+    targets.forEach(function (t) { t.classList.add('is-in'); fillBars(t); });
+  }
+
+  /* Copy-link buttons on section headings */
+  document.querySelectorAll('article h2[id]').forEach(function (h) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'h-anchor'; b.textContent = '#';
+    b.setAttribute('aria-label', 'Copy link to this section');
+    b.addEventListener('click', function () {
+      var url = location.href.split('#')[0] + '#' + h.id;
+      if (navigator.clipboard) { navigator.clipboard.writeText(url).catch(function () {}); }
+      b.classList.add('copied'); setTimeout(function () { b.classList.remove('copied'); }, 1500);
+    });
+    h.appendChild(b);
+  });
+
+  /* Back to top */
+  var top = document.createElement('button');
+  top.type = 'button'; top.className = 'to-top'; top.innerHTML = '&uarr;';
+  top.setAttribute('aria-label', 'Back to top');
+  top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+  document.body.appendChild(top);
+  window.addEventListener('scroll', function () { top.classList.toggle('show', window.scrollY > 600); }, { passive: true });
+})();
+</script>
+
+<script>
+(function () {
+  /* Feature chips */
+  var feat = document.querySelector('[data-feat]');
+  if (feat) {
+    var chips = feat.querySelectorAll('.feat-chip'), out = feat.querySelector('.feat-detail');
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        chips.forEach(function (x) { x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); });
+        out.innerHTML = '';
+        var s = document.createElement('strong'); s.textContent = c.textContent + ':';
+        out.appendChild(s); out.appendChild(document.createTextNode(' ' + c.getAttribute('data-d')));
+      });
+    });
+  }
+  /* Vendor criteria checklist */
+  var ch = document.querySelector('[data-choose]');
+  if (ch) {
+    var boxes = ch.querySelectorAll('input[type="checkbox"]'), bar = ch.querySelector('.choose-bar i'), res = ch.querySelector('.choose-result');
+    function upd() {
+      var n = 0; boxes.forEach(function (b) { if (b.checked) n++; });
+      bar.style.width = (n / boxes.length * 100) + '%';
+      var msg = n + ' of ' + boxes.length + ' criteria met by your shortlist.';
+      if (n === boxes.length) msg += ' Strong fit.';
+      else if (n >= 4) msg += ' Close the remaining gaps before you decide.';
+      res.textContent = msg;
+    }
+    boxes.forEach(function (b) { b.addEventListener('change', upd); });
+  }
+
+  /* Robust scroll-spy: keeps the contents menu in sync, including at page bottom */
+  var hs = Array.prototype.slice.call(document.querySelectorAll('article h2[id]'));
+  var tl = document.querySelectorAll('.toc-link');
+  var ticking = false;
+  function spy() {
+    ticking = false;
+    var cur = hs[0], line = window.innerHeight * 0.3;
+    hs.forEach(function (h) { if (h.getBoundingClientRect().top <= line) cur = h; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = hs[hs.length - 1];
+    tl.forEach(function (l) { l.classList.toggle('active', l.getAttribute('href') === '#' + cur.id); });
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
+  spy();
+})();
+</script>
+
+</body>
+</html>
