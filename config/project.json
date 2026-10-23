@@ -835,7 +835,7 @@
               "title": "Contract Lifecycle Management: AI-Driven CLM Software Guide",
               "format": "Ad-Hoc Article",
               "assignee": "jason",
-              "status": "ad-hoc-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -862,12 +862,17 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-10-22T11:38:37.151Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-10-23T11:15:48.403Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-10-22T11:38:37.151Z",
-              "last_updated_by": "jason",
+              "last_updated": "2026-10-23T11:15:48.403Z",
+              "last_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ad-hoc-review",
               "last_upload": "2026-10-22T11:38:37.151Z",
               "last_upload_by": "jason",
               "seo": {
@@ -9595,6 +9600,14 @@
         "annotation": true,
         "section": "¶21 — \"Jaggaer Contract Management provides pre…\"",
         "revision": 3
+      },
+      {
+        "id": "fb-h445th",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "Check comments",
+        "ts": "2026-10-23T11:15:48.400Z",
+        "stage": "ad-hoc-review"
       }
     ]
   },
