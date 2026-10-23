@@ -869,7 +869,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-10-22T11:38:37.151Z",
-              "last_upload_by": "jason"
+              "last_upload_by": "jason",
+              "seo": {
+                "meta_title": "Contract Lifecycle Management: AI-Driven CLM Software Guide",
+                "meta_description": "What is contract lifecycle management (CLM)? Learn the stages, key benefits and how AI cuts risk and speeds up contract cycles.",
+                "slug": "blog-contract-lifecycle-management-clm-guide",
+                "updated_at": "2026-10-23T11:15:25.229Z",
+                "updated_by": "m-14bwv"
+              }
             },
             {
               "id": "piece-1w2mtw",
