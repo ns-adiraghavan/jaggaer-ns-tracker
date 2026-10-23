@@ -9609,6 +9609,18 @@
         "ts": "2026-10-23T11:15:48.400Z",
         "stage": "ad-hoc-review"
       }
+    ],
+    "piece-1w2mtw": [
+      {
+        "id": "ann-xqr71n",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "\"AI spend analysis\" and \"Spend analysis tools\" keywords only appear once, try to add them naturally in the content at least 2 to 3 times.",
+        "ts": "2026-10-23T11:26:48.506Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
