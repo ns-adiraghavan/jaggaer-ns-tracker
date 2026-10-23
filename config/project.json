@@ -9502,6 +9502,18 @@
         "section": "General",
         "revision": 4
       }
+    ],
+    "piece-k06t1v": [
+      {
+        "id": "ann-vefxew",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "\"Procure to pay software” has the second-highest MSV (1,600) but only 2 mentions, both in the systems section. “Procure to pay automation” is also thin. Consider retitling “Benefits of an Automated P2P Process” to “Benefits of procure to pay automation”, and add one mention in the intro.",
+        "ts": "2026-10-23T10:32:16.300Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
