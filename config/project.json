@@ -9470,6 +9470,18 @@
         "ts": "2026-10-22T13:46:49.003Z",
         "stage": "ad-hoc-review"
       }
+    ],
+    "piece-51rko8": [
+      {
+        "id": "ann-zunzci",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Replace placeholders with exact year. Chang the starting words - \"For Example (examples of Jaggaer platform value)\"",
+        "ts": "2026-10-23T09:55:44.278Z",
+        "annotation": true,
+        "section": "¶49 — \"For Example (examples of Jaggaer platfor…\"",
+        "revision": 4
+      }
     ]
   },
   "build_with_claude": [
