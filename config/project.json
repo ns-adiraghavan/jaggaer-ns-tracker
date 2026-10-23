@@ -9568,6 +9568,16 @@
         "annotation": true,
         "section": "¶22 — \"CLM software strengthens governance by c…\"",
         "revision": 3
+      },
+      {
+        "id": "ann-g8qj5q",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "“Jaggaer” and “JAGGAER” are mixed. Lets use \"Jaggaer\" everywhere according to latest brand guidelines.",
+        "ts": "2026-10-23T11:12:17.602Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 3
       }
     ]
   },
