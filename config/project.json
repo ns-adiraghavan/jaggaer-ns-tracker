@@ -9547,6 +9547,18 @@
         "ts": "2026-10-23T10:51:15.346Z",
         "stage": "ad-hoc-review"
       }
+    ],
+    "piece-zwmbks": [
+      {
+        "id": "ann-99t0z1",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The prose says the worst performers lose “15% or more” but the chart says “above 20%”.",
+        "ts": "2026-10-23T11:07:23.293Z",
+        "annotation": true,
+        "section": "¶70 — \"06\n        \n          Stage 6 of 6¶546. …\"",
+        "revision": 3
+      }
     ]
   },
   "build_with_claude": [
