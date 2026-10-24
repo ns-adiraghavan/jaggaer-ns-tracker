@@ -737,11 +737,11 @@
               "title": "Tail Spend Management Strategies: Direct vs Indirect Spend Explained",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "marketing-review",
+              "status": "ed-review",
               "content_type": "msv",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 4,
+              "revision_count": 5,
               "primary_keyword": "",
               "geography": "all",
               "status_history": [
@@ -769,14 +769,19 @@
                   "stage": "marketing-review",
                   "ts": "2026-10-22T10:57:45.939Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-10-24T07:54:06.680Z",
+                  "by": "m-5jitd"
                 }
               ],
-              "last_updated": "2026-10-22T10:57:45.939Z",
+              "last_updated": "2026-10-24T07:54:06.680Z",
               "last_updated_by": "m-5jitd",
               "secondary_keyword": "",
               "deliverable_ext": "html",
               "return_to_stage": null,
-              "last_upload": "2026-10-22T10:57:45.939Z",
+              "last_upload": "2026-10-24T07:54:06.680Z",
               "last_upload_by": "m-5jitd",
               "seo": {
                 "meta_title": "Tail Spend Management: Direct vs Indirect Spend Strategies",
