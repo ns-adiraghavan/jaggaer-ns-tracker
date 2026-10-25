@@ -1009,6 +1009,28 @@
                 "updated_at": "2026-10-22T12:35:54.036Z",
                 "updated_by": "m-5jitd"
               }
+            },
+            {
+              "id": "piece-86azqg",
+              "title": "Spend Analytics in Procurement: Visibility, KPIs and Cost Control",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-5jitd",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-10-25T08:07:13.390Z",
+                  "by": "m-5jitd"
+                }
+              ],
+              "last_updated": "2026-10-25T08:07:13.390Z",
+              "last_updated_by": "m-5jitd"
             }
           ]
         }
