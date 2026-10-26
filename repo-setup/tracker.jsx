@@ -66,6 +66,36 @@ function isAdHoc(piece) { return piece && piece.content_type === "ad-hoc"; }
 // Ad-hoc piece that has not yet been submitted for review (new → Not Started; sent back → Writing).
 // An NS upload on one of these moves it straight to Ad-Hoc Review.
 function isAdHocPreReview(piece) { return isAdHoc(piece) && (piece.status === "not-started" || piece.status === "writing"); }
+// ─── Review-stage nomenclature follows the brief owner ────────────────────────
+// The review gate used to read "Visnja Review" for every piece. Anyone can now
+// upload a brief, so for these stage ids the label becomes "<First name> Review"
+// of the Jaggaer person who uploaded the piece's brief (first brief file).
+// Display only — who can review is still decided by the stage's actor config.
+// Falls back to the configured stage label (NS uploader, no brief, etc.).
+const BRIEF_OWNER_REVIEW_STAGE_IDS = new Set(["marketing-review"]);
+function briefOwnerFirstName(piece, project) {
+  const bf = piece && Array.isArray(piece.brief_files) ? piece.brief_files[0] : null;
+  if (!bf || !bf.uploaded_by) return null;
+  const m = ((project && project.team && project.team.jaggaer) || []).find(x => x.id === bf.uploaded_by);
+  if (!m || !m.name) return null;
+  const n = String(m.name).trim();
+  return (n.includes("@") ? n.split("@")[0] : n.split(/\s+/)[0]) || null;
+}
+function NS_stageLabelFor(piece, stage, project) {
+  if (!stage) return "";
+  if (BRIEF_OWNER_REVIEW_STAGE_IDS.has(stage.id)) {
+    const first = briefOwnerFirstName(piece, project);
+    if (first) return first + " Review";
+  }
+  return stage.label;
+}
+window.NS_stageLabelFor = NS_stageLabelFor;
+function NS_statusLabelFor(piece, project) {
+  const st = getWorkflowStages(project).find(s => s.id === piece.status);
+  return st ? NS_stageLabelFor(piece, st, project) : null;
+}
+window.NS_statusLabelFor = NS_statusLabelFor;
+
 // White-paper deliverables require BOTH a PDF and an HTML companion file.
 // Formats that trigger dual-upload mode:
 const WP_FORMATS = ["Whitepaper", "Whitepaper (gated)", "eBook / Guide"];
@@ -554,11 +584,11 @@ function assigneeName(project, id) {
   return m ? m.name.split(" ")[0] : "—";
 }
 
-function StatusChip({ status, stageMeta }) {
+function StatusChip({ status, stageMeta, label }) {
   const meta = (stageMeta || STATUS_META)[status] || STATUS_META["not-started"] || { label: status, color: "#888", bg: "#eee" };
   return (
     <span className="ns-status-chip" style={{ background: meta.bg, color: meta.color }}>
-      {meta.label}
+      {label || meta.label}
     </span>
   );
 }
@@ -1844,7 +1874,7 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
     if (piece.status === "not-started") return { label: "Upload Brief", mode: "brief" };
     if (hasActorType(actor, "ns") || isNS) {
       const displayNext = isAdHocPreReview(piece) ? getAdHocReviewStage(project) : nextStage;
-      return { label: displayNext ? `Submit → ${displayNext.label}` : "Submit", mode: "upload" };
+      return { label: displayNext ? `Submit → ${NS_stageLabelFor(piece, displayNext, project)}` : "Submit", mode: "upload" };
     }
     // Named person or Jaggaer reviewer
     return { label: "Review", mode: "review" };
@@ -1868,10 +1898,10 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
               options={stageOrder.map(s => ({ value: s, label: stageMeta[s]?.label || s }))}
               onSave={val => updatePiece(cluster.id, piece.id, { status: val })}
             >
-              <StatusChip status={piece.status} stageMeta={stageMeta} />
+              <StatusChip status={piece.status} stageMeta={stageMeta} label={NS_statusLabelFor(piece, project)} />
             </InlineCell>
           ) : (
-            <StatusChip status={piece.status} stageMeta={stageMeta} />
+            <StatusChip status={piece.status} stageMeta={stageMeta} label={NS_statusLabelFor(piece, project)} />
           )}
           <div className="ns-piece-text">
             <div className="ns-piece-title-row">
@@ -2348,7 +2378,7 @@ function PieceDrawer({ piece, cluster, pillar, project, mode, setMode, updatePie
   }
 
   const isCurrentActor = currentStage && actorMatches(currentStage.actor);
-  const canBrief = isCurrentActor && piece.status === "not-started" && !isAdHoc(piece); // Jaggaer uploads brief (not for ad-hoc)
+  const canBrief = !!currentUser && piece.status === "not-started" && !isAdHoc(piece); // anyone can upload a brief (not for ad-hoc)
   // NS (or admin) can upload/reupload at any non-terminal stage, regardless of whose actor turn it is
   // NS can upload in approved state too — that's how they move a piece to "live".
   const canUpload = (isNS || adminMode) && (piece.status !== "not-started" || isAdHoc(piece)) && piece.status !== "live";
@@ -2695,7 +2725,7 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
           <li>One file per upload. Re-uploads create a new versioned file.</li>
           <li>Versions are preserved — nothing is overwritten.</li>
           {(piece.return_to_stage || nextStage) && (
-            <li>Status moves to <strong>{piece.return_to_stage ? (workflowStages.find(s => s.id === piece.return_to_stage)?.label || piece.return_to_stage) : nextStage.label}</strong>{piece.return_to_stage ? " — returning directly to the reviewer who sent this back." : "."}</li>
+            <li>Status moves to <strong>{piece.return_to_stage ? (workflowStages.find(s => s.id === piece.return_to_stage)?.label || piece.return_to_stage) : NS_stageLabelFor(piece, nextStage, project)}</strong>{piece.return_to_stage ? " — returning directly to the reviewer who sent this back." : "."}</li>
           )}
         </ul>
       </div>
@@ -2872,12 +2902,12 @@ function WhitepaperUploadPanel({ piece, cluster, pillar, project, currentUser, u
           }}
         >
           {submitted
-            ? `✓ Submitted → ${(nextStage?.label || "next stage")}`
+            ? `✓ Submitted → ${(nextStage ? NS_stageLabelFor(piece, nextStage, project) : "next stage")}`
             : submitting
               ? "Submitting…"
               : !pdfReady
                 ? "Upload PDF to submit"
-                : `Submit → ${nextStage?.label || "next stage"}`}
+                : `Submit → ${nextStage ? NS_stageLabelFor(piece, nextStage, project) : "next stage"}`}
         </button>
       </div>
 
@@ -2888,7 +2918,7 @@ function WhitepaperUploadPanel({ piece, cluster, pillar, project, currentUser, u
           <li>Upload the <strong>HTML page</strong> if available — this is the landing/teaser page reviewers can preview inline.</li>
           <li>Both files are stored at the same revision number. Reviewers can toggle between them in the preview.</li>
           {(piece.return_to_stage || nextStage) && (
-            <li>Submitting moves status to <strong>{piece.return_to_stage ? (workflowStages.find(s=>s.id===piece.return_to_stage)?.label||piece.return_to_stage) : nextStage.label}</strong>.</li>
+            <li>Submitting moves status to <strong>{piece.return_to_stage ? (workflowStages.find(s=>s.id===piece.return_to_stage)?.label||piece.return_to_stage) : NS_stageLabelFor(piece, nextStage, project)}</strong>.</li>
           )}
         </ul>
       </div>
@@ -3208,6 +3238,7 @@ function FeedbackCard({ entry, project, ordinal }) {
 // Shown in the Details tab. Jaggaer can attach SEO briefs / keyword files here.
 // All users can see attached files and download them. Jaggaer can add more files at any stage.
 function BriefFilesSection({ piece, cluster, pillar, project, currentUser, updatePiece }) {
+  // Briefs can be attached by anyone signed in (no longer Jaggaer-only).
   const [uploadStage, setUploadStage] = useStateTR("idle"); // idle | uploading | done | error
   const [uploadFilename, setUploadFilename] = useStateTR(null);
   const [uploadError, setUploadError] = useStateTR(null);
@@ -3215,7 +3246,7 @@ function BriefFilesSection({ piece, cluster, pillar, project, currentUser, updat
   const inputRef = useRefTR(null);
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
 
-  const isJaggaer = currentUser?.org === "jaggaer";
+  const isJaggaer = !!currentUser; // legacy var name: true = may attach briefs (anyone signed in)
   const briefFiles = piece.brief_files || [];
 
   async function handleFile(file) {
@@ -3985,7 +4016,7 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
     ["Target URL",        piece.url || piece.notes?.match(/URL:\s*(\S+)/)?.[1] || "—"],
     ["Word count",        piece.notes?.match(/Words:\s*([\d,–-]+)/)?.[1] || "—"],
     ["Revision count",    piece.revision_count || 0],
-    ["Status",            STATUS_META[piece.status]?.label || piece.status],
+    ["Status",            NS_statusLabelFor(piece, project) || STATUS_META[piece.status]?.label || piece.status],
   ];
   if (piece.notes) rows.push(["Notes", piece.notes.replace(/\s*\|\s*(URL|Words):[^|]*/g, "").trim()]);
 
@@ -4024,7 +4055,7 @@ function PieceDetails({ piece, cluster, pillar, project, currentUser, adminMode,
       )}
 
       {/* ── Brief upload nudge — not-started pieces, Jaggaer only ── */}
-      {piece.status === "not-started" && !isAdHoc(piece) && currentUser?.org === "jaggaer" && (
+      {piece.status === "not-started" && !isAdHoc(piece) && !!currentUser && (
         <div style={{
           fontFamily: "Noto Sans, sans-serif",
           background: "#fffbf5",
@@ -4354,10 +4385,10 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                               options={getWorkflowStages(project).map(s => ({ value: s.id, label: s.label }))}
                               onSave={val => updatePiece(cluster.id, piece.id, { status: val })}
                             >
-                              <StatusChip status={piece.status} stageMeta={_sm} />
+                              <StatusChip status={piece.status} stageMeta={_sm} label={NS_statusLabelFor(piece, project)} />
                             </InlineCell>
                           ) : (
-                            <StatusChip status={piece.status} stageMeta={_sm} />
+                            <StatusChip status={piece.status} stageMeta={_sm} label={NS_statusLabelFor(piece, project)} />
                           );
                         })()}
                         {hasAction && !adminMode && <span className="ns-ct-action-dot" title={awaitsJG ? "Needs your feedback" : "Awaiting upload"} />}

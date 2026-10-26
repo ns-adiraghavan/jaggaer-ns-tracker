@@ -114,8 +114,8 @@ function MobileNav({ view, setView, currentUser, adminMode, onSignOut, project }
 
   const MAIN_TABS = [
     { id: "tracker",      icon: "📋", label: "Tracker" },
-    { id: "weekly-report",icon: "📅", label: "Weekly" },
-    { id: "performance",  icon: "📈", label: "Stats" },
+    { id: "briefs-priority", icon: "📝", label: "Briefs" },
+    { id: "comments",     icon: "💬", label: "Comments" },
     { id: "more",         icon: "☰",  label: "More" },
   ];
 
@@ -127,9 +127,7 @@ function MobileNav({ view, setView, currentUser, adminMode, onSignOut, project }
 
   const SHEET_ITEMS = [
     { id: "ai-playground",  label: "AI Playground" },
-    { id: "content-flow",   label: "Content Flow" },
     { id: "sme-guide",      label: "Content Experts" },
-    ...((currentUser?.org === "jaggaer" || adminMode) ? [{ id: "briefs-priority", label: "Briefs & Priority" }] : []),
     { id: "style-guide",    label: "Style Guide" },
     ...(adminMode ? [{ id: "admin", label: "Admin" }] : []),
   ];
@@ -480,7 +478,7 @@ function App() {
           setActivePhase(ph);
           setView("tracker");
         }} />}
-        {view === "briefs-priority" && (currentUser?.org === "jaggaer" || adminMode) && <BriefsPriorityPanel project={project} setProject={setProject} currentUser={currentUser} adminMode={adminMode} activePhase={activePhase} onOpenPiece={(clusterId, pieceId, pillarId, ph) => {
+        {view === "briefs-priority" && <BriefsPriorityPanel project={project} setProject={setProject} currentUser={currentUser} adminMode={adminMode} activePhase={activePhase} onOpenPiece={(clusterId, pieceId, pillarId, ph) => {
           window.NS_PENDING_OPEN = { clusterId, pieceId, mode: "details" };
           setActivePhase(ph || 1);
           setView("tracker");

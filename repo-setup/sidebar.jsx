@@ -211,18 +211,8 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
 
         <div className="ns-sidebar-divider"></div>
 
-        <NavSection
-          label="Status Report"
-          active={view === "weekly-report"}
-          onClick={() => setView("weekly-report")}
-          rightMeta="cycle"
-        />
-        <NavSection
-          label="Performance"
-          active={view === "performance"}
-          onClick={() => setView("performance")}
-          rightMeta="GA4"
-        />
+        {/* Archived tabs (hidden from nav, code + data kept): Status Report, Performance, Content Flow.
+            To restore one, re-add its <NavSection> here — the routes in app.jsx are still in place. */}
         <NavSection
           label="AI Playground"
           active={view === "ai-playground"}
@@ -234,12 +224,6 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           active={view === "style-guide"}
           onClick={() => setView("style-guide")}
           rightMeta="docx"
-        />
-        <NavSection
-          label="Content Flow"
-          active={view === "content-flow"}
-          onClick={() => setView("content-flow")}
-          rightMeta="diagram"
         />
         <NavSection
           label="Architecture Map"
@@ -259,14 +243,12 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           onClick={() => setView("comments")}
           rightMeta="history"
         />
-        {(currentUser?.org === "jaggaer" || adminMode) && (
-          <NavSection
-            label="Briefs & Priority"
-            active={view === "briefs-priority"}
-            onClick={() => setView("briefs-priority")}
-            rightMeta="P1–P3"
-          />
-        )}
+        <NavSection
+          label="Briefs & Topics"
+          active={view === "briefs-priority"}
+          onClick={() => setView("briefs-priority")}
+          rightMeta="intake"
+        />
         {phase === 2 && (
           <NavSection
             label="P2 Reference"
