@@ -110,12 +110,15 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
   const [scope, setScope] = useBPState("phase");      // 'phase' | 'all'
   const [pfilter, setPfilter] = useBPState("all");    // all | unassigned | P1 | P2 | P3
   const [query, setQuery] = useBPState("");
+  const [wfilter, setWfilter] = useBPState("all");    // all | <cluster id> (week strip)
   const [busy, setBusy] = useBPState({});             // pieceId -> true while uploading
   const [errors, setErrors] = useBPState({});         // pieceId -> message
   const [showNew, setShowNew] = useBPState(false);
   const [priOpen, setPriOpen] = useBPState(null);       // pieceId whose priority tray is open
   const [notice, setNotice] = useBPState(null);       // { kind: 'ok'|'warn', text }
   const fileRefs = useBPRef({});
+  const weekStripRef = useBPRef(null);
+  const bpArrow = { ...BPFONT, width: "28px", height: "28px", flex: "0 0 auto", border: "1px solid #ddd6c8", background: "#fff", borderRadius: "50%", cursor: "pointer", fontSize: "1rem", lineHeight: 1, color: "#555" };
   const phase = activePhase || 1;
 
   const rows = useBPMemo(() => {
@@ -146,15 +149,43 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
     return s;
   }, [project]);
 
-  const counts = useBPMemo(() => {
-    const n = { all: rows.length, unassigned: 0, P1: 0, P2: 0, P3: 0 };
-    rows.forEach(r => { const p = r.piece.priority; if (BP_RANK[p] !== undefined) n[p]++; else n.unassigned++; });
-    return n;
+  // Week strip: one entry per cluster (week) that has open pieces, in calendar order
+  // (later phases first, Ad-Hoc last). Ad-Hoc has no week so it gets its own bucket.
+  const groups = useBPMemo(() => {
+    const m = new Map();
+    rows.forEach(r => {
+      const g = m.get(r.cluster.id) || { id: r.cluster.id, cluster: r.cluster, pillar: r.pillar, adhoc: r.pillar.id === "ad-hoc-articles", n: 0, needBrief: 0 };
+      g.n++;
+      if (r.piece.status === "not-started" && r.piece.content_type !== "ad-hoc") g.needBrief++;
+      m.set(r.cluster.id, g);
+    });
+    return [...m.values()].sort((a, b) =>
+      (a.adhoc - b.adhoc) ||
+      ((b.pillar.phase || 0) - (a.pillar.phase || 0)) ||
+      ((a.cluster.sequence || 0) - (b.cluster.sequence || 0)) ||
+      String(a.pillar.id).localeCompare(String(b.pillar.id)));
   }, [rows]);
+  const groupIndex = useBPMemo(() => { const o = {}; groups.forEach((g, i) => { o[g.id] = i; }); return o; }, [groups]);
+  const activeWeek = wfilter !== "all" && groupIndex[wfilter] !== undefined ? wfilter : "all";   // stale selection → All weeks
+
+  function weekShort(g) {
+    if (g.adhoc) return "Ad-Hoc";
+    const m = /^(Week\s*\d+)\s*[·\-–]\s*(.+)$/.exec(g.cluster.label || "");
+    const base = m ? "Wk " + m[1].replace(/\D+/g, "") + " · " + m[2] : (g.cluster.label || g.cluster.id);
+    return scope === "all" && g.pillar.label ? g.pillar.label + " · " + base : base;
+  }
+
+  const weekRows = useBPMemo(() => activeWeek === "all" ? rows : rows.filter(r => r.cluster.id === activeWeek), [rows, activeWeek]);
+
+  const counts = useBPMemo(() => {
+    const n = { all: weekRows.length, unassigned: 0, P1: 0, P2: 0, P3: 0 };
+    weekRows.forEach(r => { const p = r.piece.priority; if (BP_RANK[p] !== undefined) n[p]++; else n.unassigned++; });
+    return n;
+  }, [weekRows]);
 
   const visible = useBPMemo(() => {
     const q = query.trim().toLowerCase();
-    return rows
+    return weekRows
       .filter(r => {
         const p = r.piece.priority;
         if (pfilter === "unassigned" && BP_RANK[p] !== undefined) return false;
@@ -165,11 +196,13 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
                (r.piece.primary_keyword || "").toLowerCase().includes(q);
       })
       .sort((a, b) => {
+        const ga = groupIndex[a.cluster.id], gb = groupIndex[b.cluster.id];
+        if (ga !== gb) return ga - gb;                       // week order first
         const ra = BP_RANK[a.piece.priority] ?? 9, rb = BP_RANK[b.piece.priority] ?? 9;
-        if (ra !== rb) return ra - rb;
+        if (ra !== rb) return ra - rb;                       // then P1 → P3 → unassigned
         return (a.piece.title || "").localeCompare(b.piece.title || "");
       });
-  }, [rows, pfilter, query]);
+  }, [weekRows, pfilter, query, groupIndex]);
 
   function patchPiece(pieceId, fn) {
     setProject(prev => {
@@ -346,6 +379,24 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
         </div>
       )}
 
+      {groups.length > 0 && (
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+          <button aria-label="Scroll weeks left" onClick={() => weekStripRef.current && weekStripRef.current.scrollBy({ left: -240, behavior: "smooth" })} style={bpArrow}>‹</button>
+          <div ref={weekStripRef} style={{ display: "flex", gap: "6px", overflowX: "auto", flex: 1, padding: "2px 0", scrollbarWidth: "thin" }}>
+            {[{ id: "all", label: "All weeks", n: rows.length, need: 0 }, ...groups.map(g => ({ id: g.id, label: weekShort(g), n: g.n, need: g.needBrief }))].map(w => {
+              const on = activeWeek === w.id;
+              return (
+                <button key={w.id} onClick={() => setWfilter(w.id)} title={w.need ? w.need + " still need a brief" : undefined} style={{
+                  ...BPFONT, flex: "0 0 auto", padding: "6px 12px", fontSize: "0.72rem", fontWeight: 700, borderRadius: "3px", cursor: "pointer", whiteSpace: "nowrap",
+                  border: "1px solid " + (on ? "#c8401a" : "#ddd6c8"), background: on ? "#c8401a" : "#fff", color: on ? "#fff" : "#555",
+                }}>{w.label} <span style={{ opacity: on ? 0.85 : 0.6 }}>{w.n}</span>{w.need > 0 && <span title={w.need + " still need a brief"} style={{ marginLeft: "6px", fontSize: "0.62rem", padding: "1px 5px", borderRadius: "999px", background: on ? "rgba(255,255,255,0.25)" : "#fef3e8", color: on ? "#fff" : "#b05e00" }}>{w.need} to brief</span>}</button>
+              );
+            })}
+          </div>
+          <button aria-label="Scroll weeks right" onClick={() => weekStripRef.current && weekStripRef.current.scrollBy({ left: 240, behavior: "smooth" })} style={bpArrow}>›</button>
+        </div>
+      )}
+
       <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center", marginBottom: "16px" }}>
         <input
           value={query} onChange={e => setQuery(e.target.value)} placeholder="Search title or keyword…"
@@ -364,15 +415,25 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
       )}
 
       <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-        {visible.map(row => {
+        {visible.map((row, vi) => {
           const { piece, cluster, pillar } = row;
+          const showHead = activeWeek === "all" && (vi === 0 || visible[vi - 1].cluster.id !== cluster.id);
+          const hg = showHead ? groups[groupIndex[cluster.id]] : null;
           const meta = bpStatusMeta(piece.status);
           const files = piece.brief_files || [];
           const isBusy = !!busy[piece.id];
           const moves = piece.status === "not-started" && piece.content_type !== "ad-hoc";
           const pr = BP_RANK[piece.priority] !== undefined ? BP_PRIORITIES[BP_RANK[piece.priority]] : null;
           return (
-            <div key={piece.id} style={{
+            <React.Fragment key={piece.id}>
+            {showHead && hg && (
+              <div style={{ display: "flex", alignItems: "baseline", gap: "10px", margin: vi === 0 ? "0 0 2px" : "16px 0 2px", paddingBottom: "6px", borderBottom: "2px solid #0f1923" }}>
+                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.05rem", fontWeight: 700, color: "#0f1923" }}>{hg.adhoc ? "Ad-Hoc Articles" : hg.cluster.label}</span>
+                {!hg.adhoc && hg.pillar.label && <span style={{ fontSize: "0.72rem", color: "#888" }}>{hg.pillar.label}</span>}
+                <span style={{ marginLeft: "auto", fontSize: "0.72rem", color: "#888" }}>{hg.n} open{hg.needBrief > 0 ? " · " + hg.needBrief + " to brief" : ""}</span>
+              </div>
+            )}
+            <div style={{
               display: "grid", gridTemplateColumns: "minmax(0,1fr) auto auto auto", gap: "14px", alignItems: "center",
               padding: "12px 14px", background: "#fff", border: "1px solid #e8e3da", borderRadius: "4px",
             }}>
@@ -443,6 +504,7 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
                 </div>
               )}
             </div>
+            </React.Fragment>
           );
         })}
       </div>
