@@ -1034,8 +1034,8 @@
                   "by": "m-5jitd"
                 }
               ],
-              "last_updated": "2026-10-25T08:08:37.356Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-10-26T07:48:39.842Z",
+              "last_updated_by": "manager",
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-10-25T08:08:37.356Z",
@@ -1046,7 +1046,16 @@
                 "slug": "blog-spend-analytics-optimization-visibility-kpis-control",
                 "updated_at": "2026-10-25T08:09:17.307Z",
                 "updated_by": "m-5jitd"
-              }
+              },
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Spend_Analytics_Procurement_Refresh.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-86azqg/brief/JAGGAER_SEO_Brief_Spend_Analytics_Procurement_Refresh.pdf",
+                  "uploaded_by": "manager",
+                  "uploaded_at": "2026-10-26T07:48:39.842Z"
+                }
+              ],
+              "brief_last_updated": "2026-10-26T07:48:39.842Z"
             }
           ]
         }
