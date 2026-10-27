@@ -1228,6 +1228,38 @@
                 }
               ],
               "brief_last_updated": "2026-10-27T05:23:42.088Z"
+            },
+            {
+              "id": "piece-o6sa8a",
+              "title": "Category Management Strategy: The 4 Ps Framework Applied to IT and MRO",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-14bwv",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "category management strategy",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-10-27T08:52:38.478Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-10-27T08:52:42.026Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Category_Management_Strategy_Refresh.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-o6sa8a/brief/JAGGAER_SEO_Brief_Category_Management_Strategy_Refresh.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-10-27T08:52:42.026Z"
+                }
+              ],
+              "brief_last_updated": "2026-10-27T08:52:42.026Z"
             }
           ]
         }
