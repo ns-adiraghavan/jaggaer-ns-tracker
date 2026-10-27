@@ -962,7 +962,7 @@
               "title": "Spend Analysis in 2027: AI Trends and Strategies That Work",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "ad-hoc-review",
+              "status": "ed-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1022,7 +1022,8 @@
                   "uploaded_at": "2026-10-27T05:02:41.722Z"
                 }
               ],
-              "brief_last_updated": "2026-10-27T05:02:41.722Z"
+              "brief_last_updated": "2026-10-27T05:02:41.722Z",
+              "secondary_keyword": ""
             },
             {
               "id": "piece-h5h0ak",
