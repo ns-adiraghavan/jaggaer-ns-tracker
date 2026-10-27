@@ -583,18 +583,28 @@
               "title": "Comparing Supply Chain Agents",
               "format": "Ad-Hoc Article",
               "assignee": "",
-              "status": "not-started",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 0,
+              "revision_count": 1,
               "primary_keyword": "",
               "secondary_keyword": "",
               "geography": "all",
               "planned_publish_date": "Oct 05, 2026",
               "deliverable_ext": "html",
               "return_to_stage": null,
-              "status_history": []
+              "status_history": [
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-10-27T07:15:41.170Z",
+                  "by": "jason"
+                }
+              ],
+              "last_upload": "2026-10-27T07:15:41.170Z",
+              "last_upload_by": "jason",
+              "last_updated": "2026-10-27T07:15:41.170Z",
+              "last_updated_by": "jason"
             },
             {
               "id": "piece-p3ah03",
