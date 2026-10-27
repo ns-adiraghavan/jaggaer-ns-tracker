@@ -5358,6 +5358,35 @@
               "revision_count": 0,
               "deliverable_ext": "html",
               "return_to_stage": null
+            },
+            {
+              "id": "piece-6ffdwp",
+              "title": "What Is CLM? Meaning, Stages and How CLM Software Works",
+              "format": "Article",
+              "assignee": "",
+              "status": "not-started",
+              "content_type": "seo",
+              "phase": 3,
+              "tier": "SEO Tier 1 (Quick Win)",
+              "primary_keyword": "clm software",
+              "secondary_keyword": "",
+              "intent": "",
+              "funnel": "",
+              "geography": "all",
+              "revision_count": 0,
+              "schedule_month": "p3-month-1",
+              "schedule_week": 8,
+              "review_owner": "m-14bwv",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-10-27T08:46:40.328Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-10-27T08:46:40.328Z",
+              "last_updated_by": "m-14bwv"
             }
           ]
         }
