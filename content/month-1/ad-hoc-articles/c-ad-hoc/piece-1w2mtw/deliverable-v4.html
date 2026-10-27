@@ -1,0 +1,846 @@
+<!-- uploaded by m-5jitd at 2026-10-27T07:11:43.661Z -->
+<!-- piece: Spend Analysis in 2027: AI Trends and Strategies That Work -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spend Analysis in 2027: AI Trends and Strategies That Work</title>
+<meta name="description" content="Explore the spend analysis trends shaping 2027, from AI to dashboards, and the strategies that turn procurement data into savings.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/what-is-spend-analysis">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "Spend Analysis in 2027: AI Trends and Strategies That Work", "description": "Explore the spend analysis trends shaping 2027, from AI to dashboards, and the strategies that turn procurement data into savings.", "datePublished": "2020-09-22", "dateModified": "2026-10-22", "keywords": "spend analysis, spend analysis software, spend analysis in procurement, tail spend analysis, spend analysis tools, spend analytics software, ai spend analysis, spend analysis dashboards", "publisher": {"@type": "Organization", "name": "JAGGAER", "url": "https://www.jaggaer.com"}, "author": {"@type": "Organization", "name": "JAGGAER"}, "mainEntityOfPage": "https://www.jaggaer.com/blog/what-is-spend-analysis"}
+</script>
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between spend analysis and spend analytics?", "acceptedAnswer": {"@type": "Answer", "text": "Spend analysis is the process of collecting, cleansing, classifying and analyzing spend data. Spend analytics usually refers to the software and dashboards that run that process continuously. Many procurement teams use the two terms interchangeably."}}, {"@type": "Question", "name": "Can AI analyze procurement spend?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. AI spend analysis can classify spend transactions, flag duplicate suppliers and surface unusual purchases for review. It needs clean supplier and category data to do that well. Keep a person approving each action, and ask the tool to show the source behind every answer."}}, {"@type": "Question", "name": "What is tail spend analysis?", "acceptedAnswer": {"@type": "Answer", "text": "Tail spend analysis reviews the many low-value purchases spread across a long list of suppliers. It shows where you can consolidate suppliers, add catalogs or move repeat buying onto existing contracts."}}, {"@type": "Question", "name": "What is an example of spend analysis?", "acceptedAnswer": {"@type": "Answer", "text": "Illustrative example: a manufacturer links 3 supplier name variants to 1 parent company. It then finds that parent supplies 4 plants on 4 different price lists. Moving all 4 plants onto one contract is the next step."}}, {"@type": "Question", "name": "What are the benefits of spend analysis?", "acceptedAnswer": {"@type": "Answer", "text": "Spend analysis gives procurement one trusted source of spend data. Teams use it to bring more spend under management, improve contract compliance, shorten cycle times and uncover maverick spend. It also gives the CPO and CFO numbers they can defend with executives."}}, {"@type": "Question", "name": "How often should you run a spend analysis?", "acceptedAnswer": {"@type": "Answer", "text": "Run spend analysis continuously rather than once a year. Refresh the data at least as often as you close the books. Set alerts for new suppliers, off-contract buying and price changes between reviews."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    1rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading: 400;
+  --line-height-base:  1.6;
+  --line-height-heading: 1.1;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-base);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);}
+h1{font-size:var(--font-size-h1);}
+h2{font-size:var(--font-size-h2);}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+a:focus-visible,.toc-link:focus-visible,.next-card:focus-visible,.faq-item summary:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;border-radius:2px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.link-pending{color:var(--color-teal);border-bottom:1px solid #4D819440;}
+ul,ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li,ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+article p, article li{font-size:.875rem;line-height:1.65;}
+article p{margin-bottom:var(--space-s);}
+
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+.section-eyebrow{display:block;font-size:.8125rem;font-weight:700;letter-spacing:.01em;text-transform:none;color:var(--color-teal);margin-bottom:var(--space-xs);}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-size:.8125rem;font-weight:700;letter-spacing:.01em;text-transform:none;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;line-height:var(--line-height-heading);color:var(--color-ink);max-width:760px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.8125rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-size:.8125rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-size:.8125rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);scroll-margin-top:1.5rem;}
+article h3{font-size:var(--font-size-h5);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:none;letter-spacing:0;}
+article h3.sub-question{font-size:var(--font-size-h4);text-transform:none;letter-spacing:-0.01em;font-weight:700;border-bottom:none;padding-bottom:0;}
+
+.obl-table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.obl-table{width:100%;border-collapse:collapse;font-size:.8125rem;min-width:580px;}
+.obl-table th{padding:.75rem 1rem;background:var(--jai-a);color:#fff;font-weight:700;text-align:left;border-bottom:1px solid #ffffff18;border-right:1px solid #ffffff18;font-size:.8125rem;letter-spacing:.04em;}
+.obl-table th:last-child{border-right:none;}
+.obl-table td{padding:.75rem 1rem;border-bottom:var(--border);border-right:var(--border);vertical-align:top;line-height:1.5;color:var(--color-ink-2);font-size:.8125rem;}
+.obl-table td:last-child{border-right:none;}
+.obl-table tr:last-child td{border-bottom:none;}
+.obl-table td:first-child{font-weight:700;color:var(--color-ink);background:var(--color-cream);}
+.obl-table td strong{color:var(--color-ink);}
+
+.phase-cards{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0 var(--space-l);}
+.phase-item{display:flex;gap:var(--space-m);padding:var(--space-s) var(--space-m);background:var(--color-white);align-items:flex-start;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;}
+.phase-num{flex-shrink:0;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--color-teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8125rem;}
+.phase-body{flex:1;min-width:0;}
+.phase-title{font-weight:700;color:var(--color-ink);font-size:var(--font-size-sm);line-height:1.65;margin-bottom:.25rem;display:block;}
+.phase-desc{font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;margin:0;}
+.phase-desc strong{color:var(--color-ink);}
+
+.hook-stat{display:flex;align-items:center;gap:var(--space-s);background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:.55rem var(--space-m);margin:0 0 var(--space-m);}
+.hook-stat-num{font-size:1.3rem;font-weight:800;color:var(--jai-a);line-height:1;letter-spacing:-.01em;flex-shrink:0;}
+.hook-stat-body{min-width:0;}
+.hook-stat-lead{font-size:.8125rem;font-weight:600;color:var(--color-ink);line-height:1.35;margin:0 0 .15rem;}
+.hook-stat-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.45;}
+@media(max-width:580px){.hook-stat{flex-direction:column;align-items:flex-start;gap:var(--space-xs);}}
+
+/* Interactive toggle: expertise gap vs process gap */
+.toggle-box{border:1.5px solid var(--purple-soft);border-radius:var(--border-radius);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--purple-tint-3);}
+.toggle-head{display:flex;gap:.4rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.toggle-panel{display:none;}
+.toggle-panel.active{display:block;animation:fadeIn .25s ease;}
+.toggle-panel p{margin-bottom:.6rem;}
+.toggle-panel p:last-child{margin-bottom:0;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* Decision-checker widget */
+.decision-widget{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-l) var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.decision-widget-head{font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);margin:0 0 var(--space-2xs);}
+.decision-options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:var(--space-m);}
+.decision-option{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem var(--space-s);border:var(--border);border-radius:var(--border-radius-sm);cursor:pointer;transition:border-color .2s,background .2s;font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-option:hover{border-color:var(--jai-a);background:var(--purple-tint-3);}
+.decision-option input{margin-top:.2rem;accent-color:var(--jai-a);}
+.decision-result{display:none;background:var(--color-cream);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-result.show{display:block;animation:fadeIn .25s ease;}
+
+/* Benefit / risk checklist */
+.diag-checklist{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.diag-checklist ul{list-style:none;padding-left:0;margin-bottom:0;}
+.diag-checklist li{position:relative;padding-left:1.6rem;margin-bottom:.55rem;font-size:var(--font-size-base);}
+.diag-checklist li:last-child{margin-bottom:0;}
+.diag-checklist li::before{content:"";position:absolute;left:0;top:.2rem;width:1.05rem;height:1.05rem;border-radius:4px;border:1.5px solid var(--color-teal);background:var(--color-white);}
+
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.45rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.15rem;}
+.exp-num{font-size:1rem;font-weight:700;color:var(--color-grey);line-height:1;display:block;margin-bottom:.1rem;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:13px;color:var(--color-ink-3);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:13px;}
+.exp-link{font-size:.8125rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.15rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.page-wrapper{flex-wrap:wrap;}.expert-sidebar{position:static;width:100%;max-height:none;padding:0 0 var(--space-l) 0;order:99;}.exp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;}.exp-item{border-bottom:none;border-right:1px solid var(--purple-soft);}}
+@media(max-width:640px){.expert-sidebar .exp-list{grid-template-columns:1fr;}.expert-sidebar .exp-item{border-right:none;border-bottom:1px solid var(--purple-soft);}}
+
+.jag-cta{display:flex;align-items:center;gap:var(--space-m);border:1px solid transparent;background:linear-gradient(#fff,#fff) padding-box, linear-gradient(90deg,#5300CE,#E22B83) border-box;border-radius:var(--border-radius);padding:.75rem var(--space-m);margin:var(--space-m) 0;transition:box-shadow .2s;position:relative;overflow:hidden;}
+.jag-cta::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,#5300ce0d 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.jag-cta:hover{box-shadow:0 8px 32px rgba(83,0,206,.12);}
+.jag-cta-label{display:inline-block;font-size:.8125rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.15rem var(--space-s);border-radius:9999px;white-space:nowrap;margin-bottom:var(--space-2xs);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .15rem;line-height:1.35;}
+.jag-cta-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.5;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:.8125rem;font-weight:600;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.45rem 1rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;min-width:0;border-radius:var(--border-radius-sm);transition:opacity .2s;}
+.jag-cta-btn:hover{opacity:.88;color:#fff;border-bottom:none;}
+.jag-cta--red{background:var(--color-white);border:1px solid var(--color-red);}
+.jag-cta--red .jag-cta-label{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn:hover{background:var(--color-grey);opacity:1;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:flex-start;max-width:100%;}}
+
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;border-top:var(--border);background:var(--color-white);}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Additions for this article (components from sister references) */
+
+.callout-note{background:var(--color-light-blue);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.callout-note-label{display:block;font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-xs);}
+.callout-note p{font-size:var(--font-size-sm);color:var(--color-ink-2);margin:0;line-height:1.6;}
+
+.criteria-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin:var(--space-m) 0 var(--space-l);}
+.criteria-card{display:flex;flex-direction:column;border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.9rem 1rem;background:linear-gradient(180deg,var(--purple-tint-3),var(--color-white) 55%);}
+.criteria-head{display:flex;align-items:center;gap:.55rem;margin-bottom:.5rem;}
+.criteria-badge{width:1.85rem;height:1.85rem;border-radius:50%;background:var(--color-teal);color:#fff;font-weight:800;font-size:.8125rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.criteria-title{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0;}
+.criteria-desc{font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;margin:0 0 .5rem;}
+.criteria-test{font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;margin:auto 0 0;padding-top:.5rem;border-top:1px dashed var(--purple-soft);}
+.criteria-test span{font-weight:700;color:var(--jai-a);}
+@media(max-width:620px){.criteria-grid{grid-template-columns:1fr;}}
+
+/* Risk cards */
+.risk-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:var(--space-m) 0 var(--space-l);}
+.risk-item{display:flex;flex-direction:column;border:1px solid var(--purple-soft);border-top:3px solid #B7791F;border-radius:var(--border-radius-sm);padding:.8rem .9rem;background:var(--color-white);}
+.risk-head{display:flex;align-items:center;gap:.55rem;margin-bottom:.45rem;}
+.risk-icon{width:1.9rem;height:1.9rem;border-radius:50%;background:#FBF0DD;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.risk-icon svg{width:15px;height:15px;stroke:#B7791F;}
+.risk-desc{font-size:.95rem;color:var(--color-ink-2);line-height:1.55;margin:0;}
+@media(max-width:820px){.risk-cards{grid-template-columns:1fr;}}
+
+.stat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin:var(--space-m) 0 .4rem;border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);overflow:hidden;background:var(--purple-soft);}
+.stat-cell{background:var(--purple-tint-3);padding:.85rem .9rem;}
+.stat-big{display:block;font-size:clamp(1.3rem,2vw,1.7rem);font-weight:800;color:var(--color-ink);line-height:1.1;}
+.stat-cap{display:block;font-size:.8125rem;font-weight:600;color:var(--color-ink);line-height:1.3;margin-top:.2rem;}
+article .stat-row-source{font-size:.8125rem;color:var(--color-ink-3);margin-bottom:var(--space-m);}
+@media(max-width:700px){.stat-row{grid-template-columns:repeat(2,1fr);}}
+
+/* Scorecard */
+.scorecard{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.scorecard-head{font-size:1.05rem;font-weight:700;color:var(--color-ink);margin:0 0 .2rem;}
+.scorecard-sub{font-size:.9rem;color:var(--color-ink-3);margin:0 0 var(--space-s);}
+.scorecard-wrap{margin:0 0 var(--space-s);}
+.scorecard-table td{vertical-align:middle;}
+.scorecard-table input{width:4.2rem;padding:.3rem .4rem;font:inherit;font-size:.95rem;border:1px solid var(--border-color);border-radius:6px;text-align:center;color:var(--color-ink);background:var(--color-white);}
+.scorecard-table input:focus{outline:2px solid var(--jai-a);outline-offset:1px;}
+.scorecard-table tfoot td{font-weight:700;color:var(--color-ink);background:var(--purple-tint);border-top:1px solid var(--purple-soft);}
+.scorecard-table td.sc-best{color:var(--jai-a);}
+.scorecard-note{font-size:.85rem;color:var(--color-ink-3);margin:0;}
+.scorecard-note.warn{color:var(--color-red);font-weight:600;}
+
+.next-grid{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0 var(--space-l);}
+.next-card{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);flex-wrap:wrap;transition:border-color .2s,box-shadow .2s;}
+.next-card:hover{border-color:var(--jai-a);box-shadow:0 4px 16px rgba(83,0,206,.08);}
+.next-card-title{font-weight:700;color:var(--color-ink);font-size:.85rem;margin:0 0 .2rem;}
+.next-card-desc{font-size:.8125rem;color:var(--color-ink-2);line-height:1.5;margin:0;}
+.next-card-link{flex-shrink:0;font-size:.8125rem;font-weight:600;color:var(--jai-a);border-bottom:1px solid #5300ce40;white-space:nowrap;}
+.next-card-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Draft-only flag for claims pending Product Marketing sign-off */
+</style>
+
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Is Spend Analysis?</a>
+      <a class="toc-link" href="#s2">Spend Analysis FAQs</a>
+      <a class="toc-link" href="#s3">How the Spend Analysis Process Works</a>
+      <a class="toc-link" href="#s4">How AI Is Changing Spend Analysis</a>
+      <a class="toc-link" href="#s5">Spend Analysis Trends for 2027</a>
+      <a class="toc-link" href="#s6">Spend Analysis Strategies That Work</a>
+      <a class="toc-link" href="#s7">Spend Analysis Software and Tools: What to Look For</a>
+      <a class="toc-link" href="#s8">Dashboards and Reporting</a>
+      <a class="toc-link" href="#experts">What the Experts Are Saying</a>
+      <a class="toc-link" href="#s9">Next Steps</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-badges">
+          <span class="badge badge-blue">Spend Management</span>
+          <span class="badge badge-green">AI Trends</span>
+        </div>
+        <h1>Spend Analysis in 2027: AI Trends and Strategies That Work</h1>
+        <div class="article-meta">
+          <span class="meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 13 min read</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Published</span><time datetime="2020-09-22">September 2020</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Updated</span><time datetime="2026-10">October 2026</time></span>
+        </div>
+      </div>
+    </header>
+
+    <p class="lede"><strong>In 2027, spend analysis pays off when clean, classified data comes first and AI comes second.</strong> Use it to size tariff exposure, consolidate the tail and pull off-contract buying back onto contract. Then let AI handle cleansing and classification, with a person approving every action.</p>
+
+    <p><strong>In February 2025, <a href="https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk" target="_blank" rel="noopener">Gartner</a> predicted that organizations would abandon 60% of AI projects unsupported by AI-ready data through 2026.</strong> Start with the data, not the agent: clean, classified spend belongs at the front of every AI plan.</p>
+
+    <p><strong>Treat spend analysis in procurement as a running process, not an annual project.</strong> Run it in <a href="https://www.jaggaer.com/solutions/spend-analytics" title="Pillar page">spend analytics software</a> that refreshes as new transactions arrive, so category teams act on this month&rsquo;s numbers. Finance and procurement then review the same figures, from the same source, at the same time.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">Gartner Report &middot; May 2026</span>
+        <p class="jag-cta-head">Download Gartner&rsquo;s CPO&rsquo;s Guide to Building Agentic AI Readiness &rarr;</p>
+        <p class="jag-cta-sub">Gartner&rsquo;s guide to the data, governance and requirements procurement needs in place before AI agents go live. Provided by JAGGAER, with 6 categories of questions to test every AI claim before you commit.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/analyst-report/cpos-guide-to-building-agentic-ai-readiness-in-sourcing-and-procurement" class="jag-cta-btn" target="_blank" rel="noopener">Download the Gartner Report</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Start with the definition</span>
+    <h2 id="s1">What Is Spend Analysis?</h2>
+
+    <p><strong>Spend analysis is the process of collecting, cleansing, classifying and analyzing an organization&rsquo;s spend data to cut costs, control risk and enforce contracts.</strong> It shows what you buy, from which suppliers, at what price and on which terms.</p>
+
+    <p>Connect every source before you analyze any of it. <strong>Spend analysis in procurement joins accounts payable, general ledger, purchasing card and contract data into one view by supplier and category.</strong> Without that join, each team argues from its own extract.</p>
+
+    <p>Most teams still decide on a fraction of the data they hold. <strong><a href="https://www.mckinsey.com/capabilities/operations/our-insights/redefining-procurement-performance-in-the-era-of-agentic-ai" target="_blank" rel="noopener">McKinsey</a> estimates that procurement functions use less than 20% of the data available to them to support decision-making (2026).</strong> Spend analysis brings more of that data into the decision.</p>
+
+    <div class="obl-table-wrap">
+      <table class="obl-table">
+        <thead>
+          <tr><th scope="col">Question spend analysis answers</th><th scope="col">Data it draws on</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>What are we spending, and with whom?</strong></td><td>Accounts payable invoices, general ledger, purchasing cards</td></tr>
+          <tr><td><strong>Are we buying on contract?</strong></td><td>Contracts, PO lines, invoice prices</td></tr>
+          <tr><td><strong>Which suppliers are really one supplier?</strong></td><td>Supplier master, parent-child hierarchies</td></tr>
+          <tr><td><strong>Where do cost and risk concentrate?</strong></td><td>Category taxonomy, country of origin, supplier risk data</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Keep the definition narrow: spend analysis finds the opportunity, and sourcing, contracts and buying controls capture it.</strong> That split keeps each team accountable for its share of the savings.</p>
+
+    <p><strong>Use the same data as a single source of truth beyond procurement.</strong> Finance can budget and plan from it, operations can manage inventory against it, and category teams can set a strategic sourcing roadmap.</p>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Quick answers</span>
+    <h2 id="s2">Spend Analysis FAQs</h2>
+
+    <details class="faq-item">
+      <summary>What is the difference between spend analysis and spend analytics?<span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Spend analysis is the process of collecting, cleansing, classifying and analyzing spend data. Spend analytics usually refers to the software and dashboards that run that process continuously. Many procurement teams use the two terms interchangeably.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can AI analyze procurement spend?<span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Yes. AI spend analysis can classify spend transactions, flag duplicate suppliers and surface unusual purchases for review. It needs clean supplier and category data to do that well. Keep a person approving each action, and ask the tool to show the source behind every answer.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is tail spend analysis?<span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Tail spend analysis reviews the many low-value purchases spread across a long list of suppliers. It shows where you can consolidate suppliers, add catalogs or move repeat buying onto existing contracts.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is an example of spend analysis?<span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Illustrative example: a manufacturer links 3 supplier name variants to 1 parent company. It then finds that parent supplies 4 plants on 4 different price lists. Moving all 4 plants onto one contract is the next step.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What are the benefits of spend analysis?<span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Spend analysis gives procurement one trusted source of spend data. Teams use it to bring more spend under management, improve contract compliance, shorten cycle times and uncover maverick spend. It also gives the CPO and CFO numbers they can defend with executives.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How often should you run a spend analysis?<span class="faq-icon" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Run spend analysis continuously rather than once a year. Refresh the data at least as often as you close the books. Set alerts for new suppliers, off-contract buying and price changes between reviews.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Seven steps, run continuously</span>
+    <h2 id="s3">How the Spend Analysis Process Works</h2>
+
+    <p><strong>Run spend analysis in 7 steps: identify, gather, cleanse, group, categorize, analyze and repeat.</strong> Then keep the cycle running, so every category review starts from current data rather than last year&rsquo;s extract.</p>
+
+    <p>Measure the gap the process closes. <strong><a href="https://cporising.com/2026/09/14/the-path-to-ai-first-procurement-pt-6-the-data-problem-underneath-procurements-ai-ambition/" target="_blank" rel="noopener">Ardent Partners&rsquo; July 2026 research</a> found 48% of procurement organizations still work from fragmented or largely unstructured data.</strong> Closing that gap starts with seeing all of the spend.</p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">Identify every source</span>
+          <p class="phase-desc">List accounts payable, general ledger, purchasing card, eProcurement and contract data, plus the supplier master. Add customs and country-of-origin records if you import.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">Gather it in one place</span>
+          <p class="phase-desc">Pull every source into one data set through connectors or ERP feeds rather than manual extracts.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Cleanse to one standard</span>
+          <p class="phase-desc">Correct descriptions, currencies and duplicate records. Hand routine fixes to AI-assisted cleansing, and keep a person reviewing the exceptions.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <span class="phase-title">Group suppliers by parent</span>
+          <p class="phase-desc">Link name variants and subsidiaries to one parent supplier. Then enrich each record with risk and diversity attributes for <a href="https://www.jaggaer.com/solutions/supplier-intelligence">supplier management</a>.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">5</span>
+        <div class="phase-body">
+          <span class="phase-title">Categorize against one taxonomy</span>
+          <p class="phase-desc">Choose UNSPSC, ECLASS or your own taxonomy, then classify every line against it.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">6</span>
+        <div class="phase-body">
+          <span class="phase-title">Analyze against KPIs</span>
+          <p class="phase-desc">Track spend under management, contract-compliant spend, savings and suppliers per category.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">7</span>
+        <div class="phase-body">
+          <span class="phase-title">Repeat continuously</span>
+          <p class="phase-desc">Refresh the data on a schedule. Set alerts for new suppliers, off-contract buying and price changes.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Go deeper on each step in <a href="https://www.jaggaer.com/blog/how-to-conduct-a-spend-analysis-in-seven-steps">how to conduct a spend analysis in seven steps</a>. <strong>Pair the steps with <a href="https://www.jaggaer.com/need/spend-visibility">spend visibility</a> across every business unit, so no source sits outside the analysis.</strong></p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">JAGGAER Checklist</span>
+        <p class="jag-cta-head">Download the 7-step spend analysis checklist &rarr;</p>
+        <p class="jag-cta-sub">A checklist for each step, from identifying your data sources to repeating the analysis.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/checklist/spend-analysis-steps" class="jag-cta-btn" target="_blank" rel="noopener">Download the Checklist</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Classify faster, decide yourself</span>
+    <h2 id="s4">How AI Is Changing Spend Analysis</h2>
+
+    <p><strong>Use AI spend analysis for the slowest parts of the work: cleansing, classification and spotting anomalies.</strong> Keep the decisions with your team, and ask every AI answer to show its source.</p>
+
+    <p>Adoption is moving from pilots toward daily use. <strong><a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" target="_blank" rel="noopener">The Hackett Group&rsquo;s 2026 study</a> found only 12% of organizations report large-scale AI implementation in procurement.</strong> Current AI use concentrates in contract management, market intelligence and spend analytics.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">The Hackett Group &middot; 2026</span>
+        <p class="jag-cta-head">Download The Hackett Group&rsquo;s 2026 Procurement Agenda and Key Issues Study &rarr;</p>
+        <p class="jag-cta-sub">The Hackett Group&rsquo;s 2026 study of procurement priorities, workloads and AI adoption. Provided by JAGGAER.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/analyst-report/the-hackett-group-2026-procurement-agenda-and-key-issues-study" class="jag-cta-btn" target="_blank" rel="noopener">Download the Study</a>
+    </div>
+
+    <p>Set governance before you scale. <strong><a href="https://cporising.com/2026/10/19/the-path-to-ai-first-procurement-pt-8-governancetrust-and-ai-control/" target="_blank" rel="noopener">Ardent&rsquo;s July 2026 research</a> found 34% of procurement organizations have no formal AI governance in place.</strong> Plan the rollout in stages, category by category.</p>
+
+    <p><strong><a href="https://www.alixpartners.com/insights/102mlz0/tariffs-inflation-and-supply-risk-rethinking-procurement-in-an-age-of-disrupti/" target="_blank" rel="noopener">AlixPartners</a> found only 5% of organizations have fully deployed AI across procurement processes (2026).</strong> Most are still piloting or planning.</p>
+
+    <p>Fix data quality before you scale. <strong>A June 2026 <a href="https://www.alixpartners.com/media/3wtmszw0/alixpartners-2026-cost-inflation-outlook.pdf" target="_blank" rel="noopener">AlixPartners/LaRocco Consulting survey</a> found 46% of supply-chain leaders still do not use AI in decisions.</strong> Talent (29%) and data quality (23%) are the top barriers. Start your AI spend analysis with cleansing and supplier grouping, where clean data pays off first.</p>
+
+    <p>For the mechanics of AI classification and spend under management, see <a href="https://www.jaggaer.com/blog/ai-spend-management-reducing-unmanaged-spend">AI and automation in spend management</a>. For the wider picture, see how JAGGAER approaches <a href="https://www.jaggaer.com/need/ai-in-procurement">AI in procurement</a>.</p>
+
+    <p><strong>Demand AI that cites its sources and leaves the decision with a person.</strong> <a href="https://www.jaggaer.com/solutions/jai">JAGGAER AI (JAI)</a> is embedded in JAGGAER One. JAI suggests. A human decides. Your data never trains foundation models.</p>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Five shifts to plan for</span>
+    <h2 id="s5">Spend Analysis Trends for 2027</h2>
+    <!-- Brief: every 2027 trend below needs Product Marketing review before publish. -->
+
+    <p><strong>All 5 spend analysis trends for 2027 turn on data readiness: semantics, role redesign, AI priority, tariffs and digitization.</strong> Each one rewards teams whose spend data is already clean and classified.</p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">Semantics decide how well AI agents perform</span>
+          <p class="phase-desc"><strong><a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-11-gartner-says-lack-of-semantics-causes-inaccurate-artificial-intelligence-agents-and-wasted-spending" target="_blank" rel="noopener">Gartner</a></strong> predicts that by 2027, organizations that prioritize semantics in AI-ready data will raise agentic AI accuracy by up to 80% (2026). The same organizations will cut costs by up to 60%. Spend analysis starts that work with consistent category and supplier definitions.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">AI expectations outrun role redesign</span>
+          <p class="phase-desc">Two <strong><a href="https://www.gartner.com/en/newsroom/press-releases/2026-10-08-gartner-survey-shows-chief-procurement-officers-stalling-on-needed-ai-role-redesign" target="_blank" rel="noopener">Gartner</a></strong> surveys, concluded in April 2026 and published on October 8, point the same way. 63% of senior procurement leaders expect AI to significantly improve performance over the next 3 years. But only 25% of procurement leaders have redesigned jobs and roles as a direct result of AI.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">AI joins the top 3 procurement priorities</span>
+          <p class="phase-desc"><strong><a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" target="_blank" rel="noopener">Hackett&rsquo;s 2026 study</a></strong> ranks deploying AI-enabled technology among the top 3 procurement priorities for the first time, behind supply continuity and cost reduction. Hackett also found 43% actively pursuing AI-enabled technology, nearly double last year&rsquo;s level.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <span class="phase-title">Tariffs keep reshaping the supply base</span>
+          <p class="phase-desc">The <strong><a href="https://www.alixpartners.com/disruption-index/" target="_blank" rel="noopener">2026 AlixPartners Disruption Index</a></strong> found 82% of executives have adjusted, or are adjusting, their supply chains in response to tariffs and geopolitical instability.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">5</span>
+        <div class="phase-body">
+          <span class="phase-title">Digitization targets run to 2027</span>
+          <p class="phase-desc"><strong><a href="https://www.alixpartners.com/insights/102mlz0/tariffs-inflation-and-supply-risk-rethinking-procurement-in-an-age-of-disrupti/" target="_blank" rel="noopener">AlixPartners&rsquo; 2026 CPO Survey</a></strong> found almost half of procurement executives cite digitization as their primary value lever. Their goal is to digitize up to 70% of procurement processes by 2027. Its <a href="https://www.alixpartners.com/media/3wtmszw0/alixpartners-2026-cost-inflation-outlook.pdf" target="_blank" rel="noopener">October 2026 cost outlook</a> expects IT hardware and infrastructure to sustain double-digit inflation through 2027.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Expect some agent projects to stop before they scale. <strong><a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027" target="_blank" rel="noopener">Gartner</a> predicts organizations will cancel over 40% of agentic AI projects by the end of 2027 (2025).</strong> Gartner names escalating costs, unclear business value or inadequate risk controls as the reasons.</p>
+
+    <h3 id="s5b">What Changed in 2026</h3>
+
+    <p><strong>Recheck tariff exposure in your spend data, because the legal basis for US tariffs changed in 2026.</strong> 3 changes matter for spend analysis.</p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">The Supreme Court struck down IEEPA tariffs (20 February 2026)</span>
+          <p class="phase-desc"><strong><a href="https://www.alixpartners.com/insights/102mlz0/tariffs-inflation-and-supply-risk-rethinking-procurement-in-an-age-of-disrupti/" target="_blank" rel="noopener">AlixPartners</a></strong> reports that a 6-3 ruling in Learning Resources, Inc. v. Trump found IEEPA does not authorize tariffs. <strong><a href="https://www.cbp.gov/trade/programs-administration/trade-remedies/ieepa-duty-refunds" target="_blank" rel="noopener">CBP</a></strong> opened its CAPE refund portal on 20 April 2026 and began issuing refunds in May.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">A temporary Section 122 surcharge ran and expired (24 February to 24 July 2026)</span>
+          <p class="phase-desc"><strong><a href="https://www.federalregister.gov/documents/2026/02/25/2026-03824/imposing-a-temporary-import-surcharge-to-address-fundamental-international-payments-problems" target="_blank" rel="noopener">Proclamation 11012</a></strong> imposed a 10% surcharge for 150 days. On 7 May 2026, the <strong><a href="https://www.cit.uscourts.gov/node/377" target="_blank" rel="noopener">Court of International Trade</a></strong> held it invalid. Relief went only to the plaintiffs, and an appeal is pending.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Section 301 forced-labor tariffs took over (24 July 2026)</span>
+          <p class="phase-desc"><strong><a href="https://ustr.gov/sites/default/files/files/Press/Releases/2026/FLIP%20301%20Investigation%20Final%20Action%20FRN%207-23-26%20FINAL.pdf" target="_blank" rel="noopener">USTR</a></strong> imposed additional duties of 10% or 12.5% on imports from 60 economies. Section 232 duties on steel, aluminum, copper and other sectors continue.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Size refund eligibility and new exposure from the same data set. <strong><a href="https://www.alixpartners.com/insights/102mlz0/tariffs-inflation-and-supply-risk-rethinking-procurement-in-an-age-of-disrupti/" target="_blank" rel="noopener">AlixPartners</a> advises auditing IEEPA-related tariff payments made since 2025 by category and supplier.</strong> Extend the same audit to Section 122 payments, which may also be recoverable while the appeal runs. Spend analysis that already tags supplier and country of origin makes that audit a query, not a project.</p>
+
+
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Act on what the data shows</span>
+    <h2 id="s6">Spend Analysis Strategies That Work</h2>
+
+    <p><strong>Point spend analysis at 3 places where savings hide: tariff exposure, the long tail and off-contract buying.</strong> Each one needs the same clean supplier and category data, so build that data once and use it for all 3.</p>
+
+    <h3>Size Tariff Exposure</h3>
+
+    <p><strong>Cut spend by supplier, category and country of origin to size tariff exposure and refund eligibility.</strong> Add customs entries to the data set, so each tariff payment ties back to a supplier and a contract.</p>
+
+    <p>Map exposure before the next announcement. <strong><a href="https://www.alixpartners.com/media/3wtmszw0/alixpartners-2026-cost-inflation-outlook.pdf" target="_blank" rel="noopener">AlixPartners&rsquo; October 2026 outlook</a> says the companies pulling ahead have mapped exposure by product, supplier geography and trade flow.</strong> They built mitigation options rather than reacting to each announcement.</p>
+
+    <div class="hook-stat">
+      <span class="hook-stat-num">3&ndash;5%</span>
+      <div class="hook-stat-body">
+        <p class="hook-stat-lead"><strong>AlixPartners</strong> found supplier cost increases averaged 5&ndash;7% over the past 12 months for most organizations. But leading procurement functions held them to 3&ndash;5%.</p>
+        <p class="hook-stat-sub">Source: <a href="https://www.alixpartners.com/insights/102mlz0/tariffs-inflation-and-supply-risk-rethinking-procurement-in-an-age-of-disrupti/" target="_blank" rel="noopener">AlixPartners CPO Executive Survey, 2026</a>. Leading functions apply a wider set of mitigation levers beyond direct negotiation and RFPs. AlixPartners credits that to spend visibility, category intelligence and analytical capacity.</p>
+      </div>
+    </div>
+
+    <div class="callout-note">
+      <span class="callout-note-label">Illustrative example: discrete manufacturing</span>
+      <p><strong>Tag every direct-material line with country of origin before the next tariff change.</strong> A manufacturer buying castings from 3 countries can then compare landed cost by supplier. It can also see which contracts carry tariff clauses and model a switch before it renegotiates.</p>
+    </div>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">JAGGAER Spend Analytics</span>
+        <p class="jag-cta-head">See how JAGGAER Spend Analytics analyzes spend by supplier and category &rarr;</p>
+        <p class="jag-cta-sub">JAGGAER Spend Analytics aggregates, cleanses and classifies spend data from multiple sources, then analyzes it by supplier and category.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/spend-analytics" class="jag-cta-btn" target="_blank" rel="noopener">View Spend Analytics</a>
+    </div>
+
+    <h3>Tail Spend Analysis</h3>
+
+    <p><strong>Use <a href="https://www.jaggaer.com/blog/tail-spend-management-direct-vs-indirect-spend">tail spend analysis</a> to find low-value suppliers you can consolidate, catalog or move onto contract.</strong> Start with suppliers used once or twice a year in categories where you already hold a contract.</p>
+
+    <p><strong><a href="https://www.mckinsey.com/capabilities/operations/our-insights/redefining-procurement-performance-in-the-era-of-agentic-ai" target="_blank" rel="noopener">McKinsey</a> reports a telco that used AI agents in negotiations across its long-tail software spend, cutting analysis and email time by up to 90% (2026).</strong> McKinsey reports the AI-guided negotiations led to 10&ndash;15% savings across suppliers. Test the approach on your own tail first, with a person signing off each agreed price.</p>
+
+    <h3>Bring Off-Contract Spend Back</h3>
+
+    <p><strong>Route repeat off-contract purchases, the <a href="https://www.jaggaer.com/blog/5-tips-to-help-prevent-and-control-maverick-spend">maverick spend</a> in your data, to existing contracts before you negotiate new ones.</strong> Spend analysis shows which suppliers already hold a contract. The fix is often a catalog or a buying rule, not a new sourcing event.</p>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Buy for the data, not the demo</span>
+    <h2 id="s7">Spend Analysis Software and Tools: What to Look For</h2>
+
+    <p><strong>Choose spend analysis software on the 4 required features in <a href="https://www.gartner.com/reviews/market/spend-analytics-solutions" target="_blank" rel="noopener">Gartner&rsquo;s market definition</a>: integration, cleansing, enrichment and role-based dashboards.</strong> Then add 2 tests of your own: AI governance and one data layer shared with sourcing and contracts.</p>
+
+    <p>Compare spend analysis tools on these 6 tests, run on your own data rather than demo data.</p>
+
+    <div class="criteria-grid">
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">1</span><p class="criteria-title">Multi-source integration</p></div>
+        <p class="criteria-desc"><strong><a href="https://www.gartner.com/reviews/market/spend-analytics-solutions" target="_blank" rel="noopener">Gartner</a></strong> lists integration with multiple source systems and buying channels as a required feature, updated September 2025.</p>
+        <p class="criteria-test"><span>Test it:</span> ask for a live feed from your ERP, accounts payable and card data, not a sample file.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">2</span><p class="criteria-title">Cleansing and normalization</p></div>
+        <p class="criteria-desc"><strong>Gartner&rsquo;s</strong> required features include removing duplicates, correcting errors and normalizing currencies across regions.</p>
+        <p class="criteria-test"><span>Test it:</span> load a supplier list with name variants and mixed currencies. Count the manual fixes.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">3</span><p class="criteria-title">Data enrichment</p></div>
+        <p class="criteria-desc"><strong>Gartner</strong> expects tools to enrich spend data with supplier details, market intelligence and custom taxonomies.</p>
+        <p class="criteria-test"><span>Test it:</span> ask how the tool maps your own taxonomy alongside UNSPSC.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">4</span><p class="criteria-title">Role-based dashboards</p></div>
+        <p class="criteria-desc"><strong>Gartner</strong> lists customizable dashboards and reports for each user role as a required feature.</p>
+        <p class="criteria-test"><span>Test it:</span> ask a category manager to build a view without help from IT.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">5</span><p class="criteria-title">AI with governance</p></div>
+        <p class="criteria-desc"><strong><a href="https://cporising.com/2026/10/19/the-path-to-ai-first-procurement-pt-8-governancetrust-and-ai-control/" target="_blank" rel="noopener">Ardent&rsquo;s July 2026 research</a></strong> found 63% of procurement leaders name human-in-the-loop approval as the non-negotiable AI governance requirement.</p>
+        <p class="criteria-test"><span>Test it:</span> ask the AI a spend question. Check that it shows the source data behind the answer.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">6</span><p class="criteria-title">One data layer</p></div>
+        <p class="criteria-desc"><strong><a href="https://www.mckinsey.com/capabilities/operations/our-insights/redefining-procurement-performance-in-the-era-of-agentic-ai" target="_blank" rel="noopener">McKinsey</a></strong> calls for a common data spine across spend, suppliers, contracts and market benchmarks (2026).</p>
+        <p class="criteria-test"><span>Test it:</span> change a contract price, then check whether the spend view picks it up.</p>
+      </div>
+    </div>
+
+    <p>Decide where spend analysis tools sit in your stack before you compare features. <strong><a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" target="_blank" rel="noopener">Hackett&rsquo;s 2026 study</a> advises first assessing where AI drives value, then choosing between embedded capabilities, AI-native point solutions or custom-developed solutions.</strong> Each point solution adds integrations your team has to build and maintain.</p>
+
+    <p>Ask for transparency before you trust any classification. <strong><a href="https://cporising.com/2026/10/19/the-path-to-ai-first-procurement-pt-8-governancetrust-and-ai-control/" target="_blank" rel="noopener">Ardent&rsquo;s July 2026 research</a> found 44% of procurement leaders call limited AI transparency an outright deal-breaker.</strong> Spend analysis tools on your shortlist should each show the source behind every answer.</p>
+
+    <p>Keep spend data on the same layer as your contracts, so a contract price change shows up in the spend view. <strong>JAGGAER Spend Analytics runs inside JAGGAER One on Snowflake and Tableau, and feeds Sourcing, Contracts and Procure-to-Pay on the same data layer.</strong> It connects to 40+ ERPs, with JAGGAER Link reaching 1,000+ systems. Pre-configured, not custom-built.</p>
+
+    <p>AI in JAGGAER Spend Analytics classifies spend transactions, enriches supplier data and flags anomalies and outliers in real time.</p>
+
+    <div class="stat-row">
+      <div class="stat-cell"><span class="stat-big">$2.9T</span><span class="stat-cap">annual spend managed</span></div>
+      <div class="stat-cell"><span class="stat-big">13M+</span><span class="stat-cap">suppliers on the JAGGAER network</span></div>
+    </div>
+    <p class="stat-row-source">Sources: JAGGAER procure-to-pay product page and jaggaer.com, 2026. Results reflect the JAGGAER One platform overall.</p>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Measure what moves</span>
+    <h2 id="s8">Dashboards and Reporting</h2>
+
+    <p><strong>Build spend analysis dashboards around 5 KPIs: spend under management, contract-compliant spend, savings, suppliers per category and tail spend share.</strong> Give each KPI one owner and one review cadence.</p>
+
+    <p>Measure what AI changes. <strong><a href="https://www.thehackettgroup.com/insights/2026-procurement-key-issues-2601/" target="_blank" rel="noopener">Hackett&rsquo;s 2026 research</a> found 76% of organizations report AI-driven improvements of 25% or more in key performance metrics.</strong> A dashboard nobody owns will not show those gains.</p>
+
+    <div class="hook-stat">
+      <span class="hook-stat-num">11%</span>
+      <div class="hook-stat-body">
+        <p class="hook-stat-lead"><strong>Ardent Partners</strong> found only 11% of procurement organizations run a unified data model across source-to-pay. But 41% call their data integrated while still reconciling it manually across systems.</p>
+        <p class="hook-stat-sub">Source: <a href="https://cporising.com/2026/09/14/the-path-to-ai-first-procurement-pt-6-the-data-problem-underneath-procurements-ai-ambition/" target="_blank" rel="noopener">Ardent Partners, The Path to AI-First Procurement, July 2026</a>.</p>
+      </div>
+    </div>
+
+    <div class="obl-table-wrap">
+      <table class="obl-table">
+        <thead>
+          <tr><th scope="col">KPI</th><th scope="col">What it shows</th><th scope="col">Where to start</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Spend under management</strong></td><td>Share of spend procurement manages or influences</td><td>Set a baseline, then raise it each quarter</td></tr>
+          <tr><td><strong>Contract-compliant spend</strong></td><td>Share of spend bought on contracted terms</td><td>Flag categories below your own average</td></tr>
+          <tr><td><strong>Savings rate</strong></td><td>Realized savings against addressable spend</td><td>Track realized savings, not negotiated savings</td></tr>
+          <tr><td><strong>Suppliers per category</strong></td><td>How fragmented each category is</td><td>Rank categories by supplier count</td></tr>
+          <tr><td><strong>Tail spend share</strong></td><td>Share of spend outside your core suppliers</td><td>Set a threshold, then track it monthly</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>For definitions and formulas, see these <a href="https://www.jaggaer.com/blog/top-ten-key-performance-indicators-for-successful-spend-analysis">spend analysis KPIs</a>. <strong>Review the dashboard with category owners each month, and act on one KPI at a time.</strong> Keep a spend report by category for every cycle, so you can compare results and see which behaviors changed.</p>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Keep going</span>
+    <h2 id="s9">Next Steps</h2>
+
+    <p><strong>Start your 2027 spend analysis with one clean data set, then add AI where the data holds up.</strong> Connect the sources. Classify the spend. Set the KPIs. Pilot AI agents only once all 3 are in place.</p>
+
+    <p><strong>Bring every source onto one data layer</strong> with <a href="https://www.jaggaer.com/solutions/spend-analytics" title="Pillar page">spend analytics software</a> that runs inside JAGGAER One, pre-configured rather than custom-built.</p>
+
+    <div class="next-grid">
+      <div class="next-card">
+        <div><p class="next-card-title">How to conduct a spend analysis</p><p class="next-card-desc">Each of the 7 steps in detail, from sources to repeat cycles.</p></div>
+        <a href="https://www.jaggaer.com/blog/how-to-conduct-a-spend-analysis-in-seven-steps" class="next-card-link">Read more &rarr;</a>
+      </div>
+      <div class="next-card">
+        <div><p class="next-card-title">Spend analysis KPIs</p><p class="next-card-desc">The metrics to put on your dashboard, with definitions.</p></div>
+        <a href="https://www.jaggaer.com/blog/top-ten-key-performance-indicators-for-successful-spend-analysis" class="next-card-link">Read more &rarr;</a>
+      </div>
+      <div class="next-card">
+        <div><p class="next-card-title">AI in spend management</p><p class="next-card-desc">How AI classifies spend and raises spend under management.</p></div>
+        <a href="https://www.jaggaer.com/blog/ai-spend-management-reducing-unmanaged-spend" class="next-card-link">Read more &rarr;</a>
+      </div>
+      <div class="next-card">
+        <div><p class="next-card-title">Tail spend management</p><p class="next-card-desc">Strategies for the tail, and how direct and indirect spend differ.</p></div>
+        <a href="https://www.jaggaer.com/blog/tail-spend-management-direct-vs-indirect-spend" class="next-card-link">Read more &rarr;</a>
+      </div>
+    </div>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">Book a Demo</span>
+        <p class="jag-cta-head">See where JAGGAER Spend Analytics fits your current setup &rarr;</p>
+        <p class="jag-cta-sub">A walkthrough of JAGGAER Spend Analytics inside JAGGAER One.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a JAGGAER Demo</a>
+    </div>
+
+  </article>
+
+  <aside class="expert-sidebar" id="experts" aria-label="What the Experts Are Saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">Gartner &middot; 2025</span>
+        <span class="exp-num red">60%</span>
+        <p class="exp-stat">Of AI projects without AI-ready data that Gartner predicted, in February 2025, organizations would abandon.</p>
+        <a href="https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">McKinsey &middot; 2026</span>
+        <span class="exp-num red">&lt;20%</span>
+        <p class="exp-stat">Share of available data that procurement functions use for decisions, by McKinsey&rsquo;s estimate.</p>
+        <a href="https://www.mckinsey.com/capabilities/operations/our-insights/redefining-procurement-performance-in-the-era-of-agentic-ai" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">The Hackett Group &middot; 2026</span>
+        <span class="exp-num red">43%</span>
+        <p class="exp-stat">Of organizations actively pursuing AI deployment in procurement, nearly double the prior year.</p>
+        <a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Ardent Partners &middot; 2026</span>
+        <span class="exp-num red">11%</span>
+        <p class="exp-stat">Run a unified procurement data model across source-to-pay.</p>
+        <a href="https://cporising.com/2026/09/14/the-path-to-ai-first-procurement-pt-6-the-data-problem-underneath-procurements-ai-ambition/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">AlixPartners &middot; 2026</span>
+        <span class="exp-num red">3&ndash;5%</span>
+        <p class="exp-stat">Supplier cost increases held by leading functions, but 5&ndash;7% for most organizations.</p>
+        <a href="https://www.alixpartners.com/insights/102mlz0/tariffs-inflation-and-supply-risk-rethinking-procurement-in-an-age-of-disrupti/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+
+/* Weighted vendor scorecard */
+(function () {
+  const card = document.getElementById('scorecard');
+  if (!card) return;
+  const rows = card.querySelectorAll('tbody tr');
+  function num(el, lo, hi) { let v = parseFloat(el.value); if (isNaN(v)) v = 0; return Math.min(hi, Math.max(lo, v)); }
+  function calc() {
+    let wsum = 0; const tot = [0, 0, 0];
+    rows.forEach(r => {
+      const w = num(r.querySelector('.sc-w'), 0, 100); wsum += w;
+      r.querySelectorAll('.sc-s').forEach(s => { tot[+s.dataset.v] += w * num(s, 0, 5); });
+    });
+    document.getElementById('sc-wsum').textContent = wsum;
+    const vals = tot.map(t => wsum ? t / wsum : 0);
+    const best = Math.max.apply(null, vals);
+    vals.forEach((v, i) => {
+      const c = document.getElementById('sc-t' + i);
+      c.textContent = v.toFixed(2);
+      c.classList.toggle('sc-best', best > 0 && v === best && vals.filter(x => x === best).length === 1);
+    });
+    const note = document.getElementById('sc-note');
+    if (wsum !== 100) { note.textContent = 'Weights total ' + wsum + '. Adjust them to 100 so each criterion carries its intended share.'; note.classList.add('warn'); }
+    else { note.textContent = 'Weights total 100. The highest weighted score is highlighted.'; note.classList.remove('warn'); }
+  }
+  card.addEventListener('input', calc);
+  calc();
+})();
+</script>
+
+
+</body>
+</html>
