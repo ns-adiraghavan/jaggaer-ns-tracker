@@ -1169,8 +1169,17 @@
                   "by": "manager"
                 }
               ],
-              "last_updated": "2026-10-27T05:22:40.786Z",
-              "last_updated_by": "manager"
+              "last_updated": "2026-10-27T05:22:49.308Z",
+              "last_updated_by": "manager",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Cloud_Procurement_Software.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-02qxf5/brief/JAGGAER_SEO_Brief_Cloud_Procurement_Software.pdf",
+                  "uploaded_by": "manager",
+                  "uploaded_at": "2026-10-27T05:22:49.308Z"
+                }
+              ],
+              "brief_last_updated": "2026-10-27T05:22:49.308Z"
             }
           ]
         }
