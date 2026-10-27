@@ -951,8 +951,8 @@
                   "by": "m-e10nz"
                 }
               ],
-              "last_updated": "2026-10-23T13:48:57.160Z",
-              "last_updated_by": "m-e10nz",
+              "last_updated": "2026-10-27T05:02:41.722Z",
+              "last_updated_by": "manager",
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-10-23T13:48:57.160Z",
@@ -963,7 +963,16 @@
                 "slug": "blog-what-is-spend-analysis",
                 "updated_at": "2026-10-22T11:58:09.154Z",
                 "updated_by": "m-5jitd"
-              }
+              },
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Spend_Analysis_Blog_Refresh (1).pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-1w2mtw/brief/JAGGAER_SEO_Brief_Spend_Analysis_Blog_Refresh__1_.pdf",
+                  "uploaded_by": "manager",
+                  "uploaded_at": "2026-10-27T05:02:41.722Z"
+                }
+              ],
+              "brief_last_updated": "2026-10-27T05:02:41.722Z"
             },
             {
               "id": "piece-h5h0ak",
