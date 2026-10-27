@@ -5444,7 +5444,7 @@
               "title": "Category Management in Procurement: Process, Tools and Best Practices",
               "format": "Article",
               "assignee": "",
-              "status": "not-started",
+              "status": "brief-uploaded",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -5465,8 +5465,19 @@
                   "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-10-27T08:48:54.341Z",
-              "last_updated_by": "m-14bwv"
+              "last_updated": "2026-10-27T08:50:50.770Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Category_Management_Process_Refresh.pdf",
+                  "path": "content/month-1/p3-seo/p3-seo-w8/piece-84iifl/brief/JAGGAER_SEO_Brief_Category_Management_Process_Refresh.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-10-27T08:50:50.770Z"
+                }
+              ],
+              "brief_last_updated": "2026-10-27T08:50:50.770Z",
+              "last_upload": "2026-10-27T08:50:50.770Z",
+              "last_upload_by": "m-14bwv"
             }
           ]
         }
