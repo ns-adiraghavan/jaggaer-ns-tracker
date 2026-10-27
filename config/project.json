@@ -1149,6 +1149,28 @@
                 }
               ],
               "brief_last_updated": "2026-10-27T05:05:29.484Z"
+            },
+            {
+              "id": "piece-02qxf5",
+              "title": "Cloud Procurement Software: What It Is and How to Choose One",
+              "format": "Ad-Hoc Article",
+              "assignee": "manager",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "",
+              "geography": "all",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-10-27T05:22:40.786Z",
+                  "by": "manager"
+                }
+              ],
+              "last_updated": "2026-10-27T05:22:40.786Z",
+              "last_updated_by": "manager"
             }
           ]
         }
