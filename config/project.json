@@ -1200,8 +1200,17 @@
                   "by": "manager"
                 }
               ],
-              "last_updated": "2026-10-27T05:23:05.135Z",
-              "last_updated_by": "manager"
+              "last_updated": "2026-10-27T05:23:13.222Z",
+              "last_updated_by": "manager",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Cost_Efficiency_Update.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-0x1ob3/brief/JAGGAER_SEO_Brief_Cost_Efficiency_Update.pdf",
+                  "uploaded_by": "manager",
+                  "uploaded_at": "2026-10-27T05:23:13.222Z"
+                }
+              ],
+              "brief_last_updated": "2026-10-27T05:23:13.222Z"
             }
           ]
         }
