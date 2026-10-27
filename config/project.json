@@ -1253,7 +1253,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-10-27T11:49:17.267Z",
-              "last_upload_by": "m-5jitd"
+              "last_upload_by": "m-5jitd",
+              "seo": {
+                "meta_title": "Change Management in Procurement: 10 Success Principles",
+                "meta_description": "Learn how to approach change management in procurement: ten principles for eProcurement\nadoption and transformation. Read the guide today.",
+                "slug": "blog-procurement-change-management-principles",
+                "updated_at": "2026-10-27T11:49:56.178Z",
+                "updated_by": "m-5jitd"
+              }
             },
             {
               "id": "piece-o6sa8a",
