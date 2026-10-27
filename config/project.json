@@ -1038,53 +1038,6 @@
               "priority_updated_by": "manager"
             },
             {
-              "id": "piece-xg0fvx",
-              "title": "Tail Spend Management Strategies: Direct vs Indirect Spend Explained",
-              "format": "Ad-Hoc Article",
-              "assignee": "m-5jitd",
-              "status": "ad-hoc-review",
-              "content_type": "ad-hoc",
-              "phase": 3,
-              "schedule_month": "p3-month-1",
-              "revision_count": 1,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "not-started",
-                  "ts": "2026-10-22T12:34:27.296Z",
-                  "by": "m-5jitd"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-10-22T12:34:38.474Z",
-                  "by": "m-5jitd"
-                }
-              ],
-              "last_updated": "2026-10-27T05:03:52.804Z",
-              "last_updated_by": "manager",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-10-22T12:34:38.474Z",
-              "last_upload_by": "m-5jitd",
-              "seo": {
-                "meta_title": "Tail Spend Management: Direct vs Indirect Spend Strategies",
-                "meta_description": "Learn tail spend management strategies, how direct and indirect spend differ, and how to automate low-value purchases and cut costs.",
-                "slug": "blog-tail-spend-management-direct-vs-indirect-spend",
-                "updated_at": "2026-10-22T12:35:54.036Z",
-                "updated_by": "m-5jitd"
-              },
-              "brief_files": [
-                {
-                  "filename": "JAGGAER_SEO_Brief_Tail_Spend_Management_Blog_Refresh.pdf",
-                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-xg0fvx/brief/JAGGAER_SEO_Brief_Tail_Spend_Management_Blog_Refresh.pdf",
-                  "uploaded_by": "manager",
-                  "uploaded_at": "2026-10-27T05:03:52.804Z"
-                }
-              ],
-              "brief_last_updated": "2026-10-27T05:03:52.804Z"
-            },
-            {
               "id": "piece-86azqg",
               "title": "Spend Analytics in Procurement: Visibility, KPIs and Cost Control",
               "format": "Ad-Hoc Article",
@@ -9700,18 +9653,6 @@
         "body": "Please review",
         "ts": "2026-09-08T12:52:22.559Z",
         "stage": "marketing-review"
-      }
-    ],
-    "piece-xg0fvx": [
-      {
-        "id": "ann-xpsr3j",
-        "author": "m-5jitd",
-        "verdict": "question",
-        "body": "Learn tail spend management strategies, how direct and indirect spend differ, and how to automate low-value purchases and cut costs.",
-        "ts": "2026-10-22T12:35:08.574Z",
-        "annotation": true,
-        "section": "Tail Spend Management: Direct vs Indirect Spend Strategies",
-        "revision": 1
       }
     ],
     "piece-p3ah04": [
