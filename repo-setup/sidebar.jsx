@@ -214,6 +214,13 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
         {/* Archived tabs (hidden from nav, code + data kept): Status Report, Performance, Content Flow.
             To restore one, re-add its <NavSection> here — the routes in app.jsx are still in place. */}
         <NavSection
+          label="Briefs & Topics"
+          bold
+          active={view === "briefs-priority"}
+          onClick={() => setView("briefs-priority")}
+          rightMeta="intake"
+        />
+        <NavSection
           label="AI Playground"
           active={view === "ai-playground"}
           onClick={() => setView("ai-playground")}
@@ -242,12 +249,6 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           active={view === "comments"}
           onClick={() => setView("comments")}
           rightMeta="history"
-        />
-        <NavSection
-          label="Briefs & Topics"
-          active={view === "briefs-priority"}
-          onClick={() => setView("briefs-priority")}
-          rightMeta="intake"
         />
         {phase === 2 && (
           <NavSection
@@ -328,14 +329,14 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
   );
 }
 
-function NavSection({ label, active, onClick, rightMeta }) {
+function NavSection({ label, active, onClick, rightMeta, bold }) {
   return (
     <button
       className={`ns-nav-section ${active ? "is-active" : ""}`}
       onClick={onClick}
     >
       <span className="ns-nav-section-rule"></span>
-      <span className="ns-nav-section-label">{label}</span>
+      <span className="ns-nav-section-label" style={bold ? { fontWeight: 800 } : undefined}>{label}</span>
       <span className="ns-nav-section-meta">{rightMeta}</span>
     </button>
   );

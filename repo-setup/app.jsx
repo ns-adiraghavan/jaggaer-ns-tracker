@@ -214,6 +214,8 @@ function App() {
   const [loadError, setLoadError] = useStateApp(null);
   const [currentUser, setCurrentUser] = useStateApp(readSession);
   const [view, setView] = useStateApp("tracker");
+  const [briefOpen, setBriefOpen] = useStateApp(null);   // piece drawer opened from the Briefs tab (stays in that tab)
+  useEffectApp(() => { if (view !== "briefs-priority") setBriefOpen(null); }, [view]);
   const [activePhase, setActivePhaseRaw] = useStateApp(() => {
     const _path = (typeof window !== "undefined") ? window.location.pathname : "";
     const p = /\/tracker\/phase3/.test(_path) ? 3 : /\/tracker\/phase2/.test(_path) ? 2 : 1;
@@ -479,10 +481,17 @@ function App() {
           setView("tracker");
         }} />}
         {view === "briefs-priority" && <BriefsPriorityPanel project={project} setProject={setProject} currentUser={currentUser} adminMode={adminMode} activePhase={activePhase} onOpenPiece={(clusterId, pieceId, pillarId, ph, mode) => {
-          window.NS_PENDING_OPEN = { clusterId, pieceId, mode: mode || "details" };
-          setActivePhase(ph || 1);
-          setView("tracker");
+          setBriefOpen({ clusterId, pieceId, mode: mode || "details" });
         }} />}
+        {view === "briefs-priority" && briefOpen && (
+          <Tracker
+            key={briefOpen.pieceId + ":" + briefOpen.mode}
+            drawerOnly initialOpen={briefOpen} onDrawerClose={() => setBriefOpen(null)}
+            project={project} setProject={setProject} currentUser={currentUser}
+            adminMode={adminMode} activePhase={activePhase}
+            onAdminEditPiece={(clusterId, pieceId) => { setView("admin"); setAdminTarget({ kind: "pieces", clusterId, pieceId }); }}
+          />
+        )}
         {view === "phase2-reference" && <Phase2ReferencePanel />}
         {view === "phase2-sync" && adminMode && <Phase2SyncPanel project={project} setProject={setProject} />}
         {view === "ai-playground" && <AIPlaygroundPanel onBack={() => setView("tracker")} project={project} setProject={setProject} currentUser={currentUser} saveState={saveState} />}

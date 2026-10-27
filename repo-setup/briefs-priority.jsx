@@ -161,10 +161,7 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
   const [priOpen, setPriOpen] = useBPState(null);       // pieceId whose priority tray is open
   const [notice, setNotice] = useBPState(null);       // { kind: 'ok'|'warn', text }
   const fileRefs = useBPRef({});
-  const weekStripRef = useBPRef(null);
-  const bpArrow = { ...BPFONT, width: "28px", height: "28px", flex: "0 0 auto", border: "1px solid #ddd6c8", background: "#fff", borderRadius: "50%", cursor: "pointer", fontSize: "1rem", lineHeight: 1, color: "#555" };
   const phase = activePhase || 1;
-  React.useEffect(() => { const el = weekStripRef.current; if (el) el.scrollLeft = el.scrollWidth; }, [mine, scope]);
 
   function ownerOf(piece) { return window.NS_reviewOwnerId ? window.NS_reviewOwnerId(piece, project) : null; }
   function isMine(piece) {
@@ -223,10 +220,12 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
       String(a.pillar.id).localeCompare(String(b.pillar.id)));
   }, [rows]);
   const groupIndex = useBPMemo(() => { const o = {}; groups.forEach((g, i) => { o[g.id] = i; }); return o; }, [groups]);
-  // Default view: the current calendar week (latest week started), else the last week listed.
+  // Default view: Ad-Hoc when it has open pieces, else the current calendar week (latest week started), else the last week listed.
   // "My briefs" opens on all weeks so a reviewer sees everything of theirs at once.
   const defaultWeek = useBPMemo(() => {
     if (mine) return "all";
+    const adhocG = groups.find(g => g.adhoc);
+    if (adhocG) return adhocG.id;          // open on Ad-Hoc by default
     const weeksOnly = groups.filter(g => !g.adhoc);
     if (!weeksOnly.length) return groups.length ? groups[0].id : "all";
     const MON = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
@@ -468,25 +467,14 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
         </div>
       )}
 
-      {groups.length > 0 && (
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
-          <button aria-label="Scroll weeks left" onClick={() => weekStripRef.current && weekStripRef.current.scrollBy({ left: -240, behavior: "smooth" })} style={bpArrow}>‹</button>
-          <div ref={weekStripRef} style={{ display: "flex", gap: "6px", overflowX: "auto", flex: 1, padding: "2px 0", scrollbarWidth: "thin" }}>
-            {[...groups.map(g => ({ id: g.id, label: weekShort(g), n: g.n, need: g.needBrief })), { id: "all", label: "All weeks", n: rows.length, need: 0 }].map(w => {
-              const on = activeWeek === w.id;
-              return (
-                <button key={w.id} onClick={() => setWfilter(w.id)} title={w.need ? w.need + " still need a brief" : undefined} style={{
-                  ...BPFONT, flex: "0 0 auto", padding: "6px 12px", fontSize: "0.72rem", fontWeight: 700, borderRadius: "3px", cursor: "pointer", whiteSpace: "nowrap",
-                  border: "1px solid " + (on ? "#c8401a" : "#ddd6c8"), background: on ? "#c8401a" : "#fff", color: on ? "#fff" : "#555",
-                }}>{w.label} <span style={{ opacity: on ? 0.85 : 0.6 }}>{w.n}</span>{w.need > 0 && <span title={w.need + " still need a brief"} style={{ marginLeft: "6px", fontSize: "0.62rem", padding: "1px 5px", borderRadius: "999px", background: on ? "rgba(255,255,255,0.25)" : "#fef3e8", color: on ? "#fff" : "#b05e00" }}>{w.need} to brief</span>}</button>
-              );
-            })}
-          </div>
-          <button aria-label="Scroll weeks right" onClick={() => weekStripRef.current && weekStripRef.current.scrollBy({ left: 240, behavior: "smooth" })} style={bpArrow}>›</button>
-        </div>
-      )}
-
       <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center", marginBottom: "16px" }}>
+        {groups.length > 0 && (
+          <select value={activeWeek} onChange={e => setWfilter(e.target.value)} aria-label="Week"
+            style={{ ...BPFONT, padding: "6px 10px", fontSize: "0.8rem", fontWeight: 700, border: "1px solid #c8401a", borderRadius: "3px", background: "#fff", color: "#c8401a", cursor: "pointer", maxWidth: "340px" }}>
+            {groups.map(g => <option key={g.id} value={g.id}>{weekShort(g)} · {g.n}{g.needBrief > 0 ? " · " + g.needBrief + " to brief" : ""}</option>)}
+            <option value="all">All weeks · {rows.length}</option>
+          </select>
+        )}
         <input
           value={query} onChange={e => setQuery(e.target.value)} placeholder="Search title or keyword…"
           style={{ padding: "6px 10px", fontSize: "0.8rem", border: "1px solid #ddd6c8", borderRadius: "3px", minWidth: "240px", ...BPFONT }}

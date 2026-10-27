@@ -634,6 +634,16 @@ function assigneeName(project, id) {
   return m ? m.name.split(" ")[0] : "—";
 }
 
+// Reviewer tag (Visnja / Prashanth) shown beside the status for pieces that are tagged but not yet
+// at the shared review stage (at that stage the status label itself already reads "<Name> Review").
+function NS_ReviewerTag({ piece, project }) {
+  if (!piece || ["marketing-review", "approved", "live"].includes(piece.status)) return null;
+  const oid = NS_reviewOwnerId(piece, project);
+  const name = oid && window.NS_reviewOwnerName(oid, project);
+  if (!name) return null;
+  return <span className="ns-reviewer-tag" title={"Reviewer: " + name} style={{ fontSize: "0.62rem", fontWeight: 700, color: "#6c3483", background: "#f5eef8", border: "1px solid #dccce8", borderRadius: "999px", padding: "1px 7px", whiteSpace: "nowrap" }}>→ {name}</span>;
+}
+
 function StatusChip({ status, stageMeta, label }) {
   const meta = (stageMeta || STATUS_META)[status] || STATUS_META["not-started"] || { label: status, color: "#888", bg: "#eee" };
   return (
@@ -916,7 +926,7 @@ function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveF
 
 
 // ─── Tracker root ─────────────────────────────────────────────────────────────
-function Tracker({ project, setProject, currentUser, activePillar, activeCluster, setActiveCluster, adminMode, activeMonthId, activeContentType, activePhase, onAdminEditPiece, onAdminEditCluster }) {
+function Tracker({ project, setProject, currentUser, activePillar, activeCluster, setActiveCluster, adminMode, activeMonthId, activeContentType, activePhase, onAdminEditPiece, onAdminEditCluster, drawerOnly, initialOpen, onDrawerClose }) {
   const phase = activePhase || 1;
   const effectiveMonthId = activeMonthId || window.NS_phaseMonth(project, phase);
   const stats = window.computeStats(project, effectiveMonthId, phase);
@@ -944,13 +954,14 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
   const pillars = filteredPillars; // pillar + contentType filtering handled in filteredPillars above
   const [activeTab, setActiveTab] = useStateTR("tracker");
   const [viewMode, setViewMode] = useStateTR("table");
-  const [openPiece, setOpenPiece] = useStateTR(null);
+  const [openPiece, setOpenPiece] = useStateTR(initialOpen || null);
   const [activeFilter, setActiveFilter] = useStateTR(null);
   const [searchQuery, setSearchQuery] = useStateTR("");
   const [showAdHocModal, setShowAdHocModal] = useStateTR(false);
 
   // Allow other views (e.g. Comments history) to open a piece drawer directly.
   useEffectTR(() => {
+    if (drawerOnly) return;   // drawer-only mount (Briefs tab): no global hooks, no deep-link handoff
     window.NS_OPEN_PIECE = (clusterId, pieceId, mode) => setOpenPiece({ clusterId, pieceId, mode: mode || "annotate" });
     // Deep-link handoff: if another view (Comments) queued a piece to open
     // before the Tracker mounted, honour it now that we're here.
@@ -1070,6 +1081,24 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
     }
   }
 
+  const closeDrawer = () => { setOpenPiece(null); if (onDrawerClose) onDrawerClose(); };
+
+  // Drawer-only mount: another tab (Briefs & Topics) borrows the piece drawer and stays put underneath.
+  if (drawerOnly) {
+    return (overlayPiece && overlayCluster && overlayPillar) ? (
+      <DrawerOverlay
+        piece={overlayPiece} cluster={overlayCluster} pillar={overlayPillar}
+        project={project} mode={openPiece.mode || (overlayPiece.revision_count ? "annotate" : "details")}
+        setMode={m => setOpenPiece(prev => ({ ...prev, mode: m }))}
+        updatePiece={updatePiece} addFeedback={addFeedback}
+        currentUser={currentUser} adminMode={adminMode}
+        onAdminEditPiece={onAdminEditPiece}
+        deletePiece={deletePiece}
+        onClose={closeDrawer}
+      />
+    ) : null;
+  }
+
   return (
     <main className="ns-tracker">
       <TrackerHeader
@@ -1135,7 +1164,7 @@ function Tracker({ project, setProject, currentUser, activePillar, activeCluster
           currentUser={currentUser} adminMode={adminMode}
           onAdminEditPiece={onAdminEditPiece}
           deletePiece={deletePiece}
-          onClose={() => setOpenPiece(null)}
+          onClose={closeDrawer}
         />
       )}
     </main>
@@ -1952,6 +1981,7 @@ function PieceRow({ piece, cluster, pillar, isAnchor, isLast, project, openPiece
           ) : (
             <StatusChip status={piece.status} stageMeta={stageMeta} label={NS_statusLabelFor(piece, project)} />
           )}
+          <NS_ReviewerTag piece={piece} project={project} />
           <div className="ns-piece-text">
             <div className="ns-piece-title-row">
               {isAnchor && <span className="ns-anchor-mark" title="Anchor piece">◆</span>}
@@ -4438,6 +4468,7 @@ function CompactTable({ pillars, project, setOpenPiece, currentUser, adminMode, 
                             <StatusChip status={piece.status} stageMeta={_sm} label={NS_statusLabelFor(piece, project)} />
                           );
                         })()}
+                        <NS_ReviewerTag piece={piece} project={project} />
                         {hasAction && !adminMode && <span className="ns-ct-action-dot" title={awaitsJG ? "Needs your feedback" : "Awaiting upload"} />}
                         {piece.status !== "not-started" && (() => {
                           const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
