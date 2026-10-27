@@ -1029,8 +1029,8 @@
                   "by": "m-5jitd"
                 }
               ],
-              "last_updated": "2026-10-22T12:34:38.474Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-10-27T05:03:52.804Z",
+              "last_updated_by": "manager",
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-10-22T12:34:38.474Z",
@@ -1041,7 +1041,16 @@
                 "slug": "blog-tail-spend-management-direct-vs-indirect-spend",
                 "updated_at": "2026-10-22T12:35:54.036Z",
                 "updated_by": "m-5jitd"
-              }
+              },
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Tail_Spend_Management_Blog_Refresh.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-xg0fvx/brief/JAGGAER_SEO_Brief_Tail_Spend_Management_Blog_Refresh.pdf",
+                  "uploaded_by": "manager",
+                  "uploaded_at": "2026-10-27T05:03:52.804Z"
+                }
+              ],
+              "brief_last_updated": "2026-10-27T05:03:52.804Z"
             },
             {
               "id": "piece-86azqg",
