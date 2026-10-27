@@ -5,7 +5,11 @@
 //   • Brief upload on any row behaves like the in-piece "Upload Brief" tab:
 //     Not Started → Brief Uploaded (ad-hoc pieces / later stages: file is attached only).
 //   • Priority P1/P2/P3 is an optional piece field (missing = Unassigned), not a workflow
-//     stage. Only Jaggaer users and admin can change it; everyone can see it.
+//     stage. Any signed-in user can set or clear it.
+//   • Reviewer routing: each piece has a reviewer owner (Visnja or Prashanth) for the shared
+//     review stage. Visnja/Prashanth land on "My briefs" (their own pieces) as an action tab;
+//     anyone can tag the reviewer from the row. Default week = current/latest, Ad-Hoc on top.
+//   • Each row links to its brief file(s) and, once a deliverable exists, to the piece preview.
 // Depends on: window.NS_API.uploadBriefFile (api.js). Names are BP-prefixed to avoid
 // global collisions (scripts load without a bundler).
 
@@ -36,15 +40,43 @@ function bpStatusLabel(piece, project) {
   return bpStatusMeta(piece.status).label;
 }
 
+// Open a repo file in a new tab. Goes through the authenticated /api/github proxy (the repo can be
+// private); falls back to the raw URL when the proxy returns no inline content (large files).
+async function bpOpenRepoFile(path, filename) {
+  const win = window.open("", "_blank");   // open synchronously so popup blockers allow it
+  const REPO = (window.__CONFIG__ && window.__CONFIG__.GITHUB_REPO) || "ns-adiraghavan/jaggaer-ns-tracker";
+  const raw = "https://raw.githubusercontent.com/" + REPO + "/main/" + path;
+  try {
+    const r = await fetch("/api/github?path=" + encodeURIComponent(path));
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const data = await r.json();
+    if (!data.content) throw new Error("no inline content");
+    const bytes = Uint8Array.from(atob(String(data.content).replace(/\n/g, "")), c => c.charCodeAt(0));
+    const ext = (String(filename || path).split(".").pop() || "").toLowerCase();
+    const types = { pdf: "application/pdf", html: "text/html;charset=utf-8", htm: "text/html;charset=utf-8", txt: "text/plain;charset=utf-8", md: "text/plain;charset=utf-8", csv: "text/plain;charset=utf-8", png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", gif: "image/gif" };
+    const type = types[ext];
+    const url = URL.createObjectURL(new Blob([bytes], type ? { type } : {}));
+    if (type) { if (win) win.location.href = url; else window.open(url, "_blank"); }
+    else {   // docx / xlsx etc. can't render inline — download with its real name
+      const a = document.createElement("a"); a.href = url; a.download = filename || "brief"; document.body.appendChild(a); a.click(); a.remove();
+      if (win) win.close();
+    }
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  } catch (e) {
+    if (win) win.location.href = raw; else window.open(raw, "_blank");
+  }
+}
+
 function bpNorm(s) { return String(s || "").trim().toLowerCase().replace(/\s+/g, " "); }
 
 // ── New-topic modal (same look as the Ad-Hoc modal) ─────────────────────────
-function BPNewTopicModal({ weeks, existingTitles, onClose, onCreate }) {
+function BPNewTopicModal({ weeks, existingTitles, onClose, onCreate, project, defaultReviewer }) {
   const [title, setTitle] = useBPState("");
   const [clusterId, setClusterId] = useBPState("");   // "" = ad-hoc
   const [keyword, setKeyword] = useBPState("");
   const [notes, setNotes] = useBPState("");
   const [file, setFile] = useBPState(null);
+  const [reviewer, setReviewer] = useBPState(defaultReviewer || "");
   const [busy, setBusy] = useBPState(false);
   const fileRef = useBPRef(null);
   const dup = title.trim() && existingTitles.has(bpNorm(title));
@@ -54,7 +86,7 @@ function BPNewTopicModal({ weeks, existingTitles, onClose, onCreate }) {
   async function submit() {
     if (!title.trim() || busy) return;
     setBusy(true);
-    await onCreate({ title: title.trim(), clusterId, keyword: keyword.trim(), notes: notes.trim(), file });
+    await onCreate({ title: title.trim(), clusterId, keyword: keyword.trim(), notes: notes.trim(), file, reviewer: clusterId ? reviewer : "" });
   }
 
   return (
@@ -75,6 +107,14 @@ function BPNewTopicModal({ weeks, existingTitles, onClose, onCreate }) {
           <option value="">No week — Ad-Hoc article</option>
           {weeks.map(w => <option key={w.cluster.id} value={w.cluster.id}>{w.cluster.label}{w.pillar.label ? " · " + w.pillar.label : ""}</option>)}
         </select>
+
+        {clusterId && (<>
+          <div style={lab}>Review by <span style={{ fontWeight: 400, textTransform: "none", letterSpacing: 0 }}>(optional — Visnja or Prashanth)</span></div>
+          <select value={reviewer} onChange={e => setReviewer(e.target.value)} style={field}>
+            <option value="">Not tagged yet</option>
+            {window.NS_REVIEW_OWNER_IDS.map(id => <option key={id} value={id}>{window.NS_reviewOwnerName(id, project) || id}</option>)}
+          </select>
+        </>)}
 
         <div style={lab}>Primary keyword <span style={{ fontWeight: 400, textTransform: "none", letterSpacing: 0 }}>(optional)</span></div>
         <input type="text" value={keyword} onChange={e => setKeyword(e.target.value)} style={field} />
@@ -106,11 +146,15 @@ function BPNewTopicModal({ weeks, existingTitles, onClose, onCreate }) {
 
 function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, activePhase, onOpenPiece }) {
   const canUpload = !!currentUser;                                          // anyone signed in
-  const canPrioritise = currentUser?.org === "jaggaer" || !!adminMode;     // Jaggaer + admin only
-  const [scope, setScope] = useBPState("phase");      // 'phase' | 'all'
+  const canPrioritise = !!currentUser;                                      // anyone signed in
   const [pfilter, setPfilter] = useBPState("all");    // all | unassigned | P1 | P2 | P3
   const [query, setQuery] = useBPState("");
-  const [wfilter, setWfilter] = useBPState("all");    // all | <cluster id> (week strip)
+  const meId = currentUser && currentUser.id;
+  const isReviewer = !!(window.NS_REVIEW_OWNER_IDS && window.NS_REVIEW_OWNER_IDS.includes(meId));
+  const [scope, setScope] = useBPState(isReviewer ? "all" : "phase");   // 'phase' | 'all' — reviewers start across phases
+  const [mine, setMine] = useBPState(isReviewer);     // Visnja/Prashanth open on their own briefs
+  const [needsMe, setNeedsMe] = useBPState(false);    // only pieces waiting on my review
+  const [wfilter, setWfilter] = useBPState(null);     // null = default week; 'all' | <cluster id>
   const [busy, setBusy] = useBPState({});             // pieceId -> true while uploading
   const [errors, setErrors] = useBPState({});         // pieceId -> message
   const [showNew, setShowNew] = useBPState(false);
@@ -120,8 +164,19 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
   const weekStripRef = useBPRef(null);
   const bpArrow = { ...BPFONT, width: "28px", height: "28px", flex: "0 0 auto", border: "1px solid #ddd6c8", background: "#fff", borderRadius: "50%", cursor: "pointer", fontSize: "1rem", lineHeight: 1, color: "#555" };
   const phase = activePhase || 1;
+  React.useEffect(() => { const el = weekStripRef.current; if (el) el.scrollLeft = el.scrollWidth; }, [mine, scope]);
 
-  const rows = useBPMemo(() => {
+  function ownerOf(piece) { return window.NS_reviewOwnerId ? window.NS_reviewOwnerId(piece, project) : null; }
+  function isMine(piece) {
+    return ownerOf(piece) === meId || (piece.brief_files || []).some(b => b.uploaded_by === meId);
+  }
+  function waitingOnMe(piece) {
+    if (!currentUser || !window.NS_pieceTurnFor) return false;
+    if (piece.status === "not-started" || piece.status === "brief-uploaded" || piece.status === "writing") return false;
+    return window.NS_pieceTurnFor(piece, currentUser, project).isTurn;
+  }
+
+  const allRows = useBPMemo(() => {
     const out = [];
     for (const pl of project.pillars || [])
       for (const c of pl.clusters || [])
@@ -132,6 +187,7 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
         }
     return out;
   }, [project, scope, phase]);
+  const rows = useBPMemo(() => mine ? allRows.filter(r => isMine(r.piece)) : allRows, [allRows, mine, meId, project]);
 
   // Weeks a new topic can be slotted into: clusters of the active phase's pillars.
   const weeks = useBPMemo(() => {
@@ -150,7 +206,7 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
   }, [project]);
 
   // Week strip: one entry per cluster (week) that has open pieces, in calendar order
-  // (later phases first, Ad-Hoc last). Ad-Hoc has no week so it gets its own bucket.
+  // (Ad-Hoc first, then weeks oldest → latest). Ad-Hoc has no week so it gets its own bucket.
   const groups = useBPMemo(() => {
     const m = new Map();
     rows.forEach(r => {
@@ -160,13 +216,32 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
       m.set(r.cluster.id, g);
     });
     return [...m.values()].sort((a, b) =>
-      (a.adhoc - b.adhoc) ||
-      ((b.pillar.phase || 0) - (a.pillar.phase || 0)) ||
+      (b.adhoc - a.adhoc) ||                                  // Ad-Hoc on top
+      ((a.pillar.phase || 0) - (b.pillar.phase || 0)) ||      // then weeks, oldest → latest
+
       ((a.cluster.sequence || 0) - (b.cluster.sequence || 0)) ||
       String(a.pillar.id).localeCompare(String(b.pillar.id)));
   }, [rows]);
   const groupIndex = useBPMemo(() => { const o = {}; groups.forEach((g, i) => { o[g.id] = i; }); return o; }, [groups]);
-  const activeWeek = wfilter !== "all" && groupIndex[wfilter] !== undefined ? wfilter : "all";   // stale selection → All weeks
+  // Default view: the current calendar week (latest week started), else the last week listed.
+  // "My briefs" opens on all weeks so a reviewer sees everything of theirs at once.
+  const defaultWeek = useBPMemo(() => {
+    if (mine) return "all";
+    const weeksOnly = groups.filter(g => !g.adhoc);
+    if (!weeksOnly.length) return groups.length ? groups[0].id : "all";
+    const MON = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+    const now = new Date(); const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    let best = null, bestStart = -Infinity;
+    weeksOnly.forEach(g => {
+      const m = /([A-Za-z]{3})[a-z]*\s*(\d{1,2})/.exec(g.cluster.label || "");
+      if (!m || MON[m[1].toLowerCase()] === undefined) return;
+      const start = new Date(now.getFullYear(), MON[m[1].toLowerCase()], +m[2]).getTime();
+      if (start <= today.getTime() && start > bestStart) { best = g; bestStart = start; }
+    });
+    return (best || weeksOnly[weeksOnly.length - 1]).id;
+  }, [groups, mine]);
+  const chosenWeek = wfilter === null ? defaultWeek : wfilter;
+  const activeWeek = chosenWeek === "all" || groupIndex[chosenWeek] !== undefined ? chosenWeek : defaultWeek;   // stale selection → default
 
   function weekShort(g) {
     if (g.adhoc) return "Ad-Hoc";
@@ -175,7 +250,9 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
     return scope === "all" && g.pillar.label ? g.pillar.label + " · " + base : base;
   }
 
-  const weekRows = useBPMemo(() => activeWeek === "all" ? rows : rows.filter(r => r.cluster.id === activeWeek), [rows, activeWeek]);
+  const weekRowsAll = useBPMemo(() => activeWeek === "all" ? rows : rows.filter(r => r.cluster.id === activeWeek), [rows, activeWeek]);
+  const needsMeCount = weekRowsAll.filter(r => waitingOnMe(r.piece)).length;
+  const weekRows = useBPMemo(() => needsMe ? weekRowsAll.filter(r => waitingOnMe(r.piece)) : weekRowsAll, [weekRowsAll, needsMe, meId, project]);
 
   const counts = useBPMemo(() => {
     const n = { all: weekRows.length, unassigned: 0, P1: 0, P2: 0, P3: 0 };
@@ -238,6 +315,7 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
         pc.brief_last_updated = now;
         pc.last_updated = now;
         pc.last_updated_by = currentUser.id;
+        if (!pc.review_owner && isReviewer && pc.content_type !== "ad-hoc") pc.review_owner = currentUser.id;
         // Same transition as the in-piece Upload Brief tab (not for ad-hoc pieces).
         if (pc.status === "not-started" && pc.content_type !== "ad-hoc") {
           pc.status = "brief-uploaded";
@@ -263,7 +341,7 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
   }
 
   // Create a topic: into the chosen weekly cluster (standard pipeline) or as Ad-Hoc.
-  async function createTopic({ title, clusterId, keyword, notes, file }) {
+  async function createTopic({ title, clusterId, keyword, notes, file, reviewer }) {
     const now = new Date().toISOString();
     const newId = "piece-" + Math.random().toString(36).slice(2, 8);
     const adhoc = !clusterId;
@@ -315,6 +393,7 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
         cluster.pieces.push(piece);
       }
       if (notes) piece.notes = notes;
+      if (!adhoc && reviewer) piece.review_owner = reviewer;
       piece.created_via = "briefs-tab";
       piece.status_history = [{ stage: "not-started", ts: now, by: currentUser?.id || null }];
       piece.last_updated = now;
@@ -350,11 +429,21 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
         <div style={{ display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}>
           <div style={{ display: "flex", gap: "4px", background: "#f0ece4", borderRadius: "3px", padding: "2px" }}>
             {[["phase", "This phase"], ["all", "All phases"]].map(([id, label]) => (
-              <button key={id} onClick={() => setScope(id)} style={{
+              <button key={id} onClick={() => { setScope(id); setWfilter(null); }} style={{
                 padding: "5px 12px", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.04em",
                 border: "none", borderRadius: "2px", cursor: "pointer",
                 background: scope === id ? "#fff" : "transparent", color: scope === id ? "#0f1923" : "#888",
                 boxShadow: scope === id ? "0 1px 3px rgba(0,0,0,0.1)" : "none",
+              }}>{label}</button>
+            ))}
+          </div>
+          <div style={{ display: "flex", gap: "4px", background: "#f0ece4", borderRadius: "3px", padding: "2px" }}>
+            {[[true, isReviewer ? "My briefs" : "Mine"], [false, "All topics"]].map(([v, label]) => (
+              <button key={String(v)} onClick={() => { setMine(v); setWfilter(null); setNeedsMe(false); }} style={{
+                padding: "5px 12px", fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.04em",
+                border: "none", borderRadius: "2px", cursor: "pointer",
+                background: mine === v ? "#fff" : "transparent", color: mine === v ? "#0f1923" : "#888",
+                boxShadow: mine === v ? "0 1px 3px rgba(0,0,0,0.1)" : "none",
               }}>{label}</button>
             ))}
           </div>
@@ -368,7 +457,7 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
       <p style={{ fontSize: "0.82rem", color: "#666", margin: "0 0 18px", lineHeight: 1.5 }}>
         Upload briefs and add new topics here, or from inside the piece as usual.
         Uploading a brief to a <strong>Not Started</strong> piece moves it to <strong>Brief Uploaded</strong>.
-        {canPrioritise ? " Priority is optional — use Assign priority on a row if you want to rank it." : " Priorities, where set, are shown read-only."}
+        {" Priority is optional — use Assign priority on a row if you want to rank it. Click a brief file to open it, or View piece to preview the article."}
       </p>
 
       {notice && (
@@ -383,7 +472,7 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
         <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
           <button aria-label="Scroll weeks left" onClick={() => weekStripRef.current && weekStripRef.current.scrollBy({ left: -240, behavior: "smooth" })} style={bpArrow}>‹</button>
           <div ref={weekStripRef} style={{ display: "flex", gap: "6px", overflowX: "auto", flex: 1, padding: "2px 0", scrollbarWidth: "thin" }}>
-            {[{ id: "all", label: "All weeks", n: rows.length, need: 0 }, ...groups.map(g => ({ id: g.id, label: weekShort(g), n: g.n, need: g.needBrief }))].map(w => {
+            {[...groups.map(g => ({ id: g.id, label: weekShort(g), n: g.n, need: g.needBrief })), { id: "all", label: "All weeks", n: rows.length, need: 0 }].map(w => {
               const on = activeWeek === w.id;
               return (
                 <button key={w.id} onClick={() => setWfilter(w.id)} title={w.need ? w.need + " still need a brief" : undefined} style={{
@@ -403,6 +492,9 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
           style={{ padding: "6px 10px", fontSize: "0.8rem", border: "1px solid #ddd6c8", borderRadius: "3px", minWidth: "240px", ...BPFONT }}
         />
         <span style={{ marginLeft: "auto", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "#aaa" }}>Priority filter</span>
+        {needsMeCount > 0 || needsMe ? (
+          <button onClick={() => setNeedsMe(v => !v)} style={{ padding: "5px 12px", fontSize: "0.72rem", fontWeight: 700, border: "1px solid #c8401a", borderRadius: "999px", cursor: "pointer", background: needsMe ? "#c8401a" : "#fff", color: needsMe ? "#fff" : "#c8401a" }}>Needs my review <span style={{ opacity: 0.8 }}>{needsMeCount}</span></button>
+        ) : null}
         {chip("all", "All", counts.all)}
         {chip("unassigned", "Unassigned", counts.unassigned)}
         {BP_PRIORITIES.map(p => chip(p.id, p.label, counts[p.id]))}
@@ -410,7 +502,7 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
 
       {visible.length === 0 && (
         <div style={{ padding: "40px", textAlign: "center", color: "#888", fontSize: "0.85rem", border: "1px dashed #ddd6c8", borderRadius: "4px" }}>
-          No pieces match this view.
+          {mine ? "No briefs of yours match this view — switch to All topics to find a piece to brief." : "No pieces match this view."}
         </div>
       )}
 
@@ -445,8 +537,42 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
                 >{piece.title}</div>
                 <div style={{ fontSize: "0.72rem", color: "#888", marginTop: "2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                   {pillar.label || pillar.id} · {cluster.label || cluster.id}
-                  {files.length > 0 && <span> · {files.length} brief file{files.length === 1 ? "" : "s"}</span>}
                 </div>
+                {pillar.id !== "ad-hoc-articles" && (() => {
+                  const oid = ownerOf(piece);
+                  const explicit = piece.review_owner || "";
+                  const nNotes = ((project.feedback || {})[piece.id] || []).length;
+                  return (
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap", marginTop: "6px" }}>
+                      <label style={{ display: "inline-flex", alignItems: "center", gap: "5px", fontSize: "0.7rem", fontWeight: 600, color: oid ? "#6c3483" : "#b05e00" }}>
+                        Review by
+                        <select value={explicit || oid || ""} disabled={!canUpload}
+                          onChange={e => patchPiece(piece.id, pc => { if (e.target.value) pc.review_owner = e.target.value; else delete pc.review_owner; pc.last_updated = new Date().toISOString(); pc.last_updated_by = meId; })}
+                          style={{ ...BPFONT, fontSize: "0.7rem", padding: "2px 6px", border: "1px solid " + (oid ? "#dccce8" : "#f0cfa6"), borderRadius: "3px", background: oid ? "#f5eef8" : "#fef3e8", color: "inherit", fontWeight: 600 }}>
+                          <option value="">— tag reviewer —</option>
+                          {window.NS_REVIEW_OWNER_IDS.map(id => <option key={id} value={id}>{window.NS_reviewOwnerName(id, project) || id}</option>)}
+                        </select>
+                      </label>
+                      {nNotes > 0 && onOpenPiece && (
+                        <button onClick={() => onOpenPiece(cluster.id, piece.id, pillar.id, piece.phase || 1, "history")}
+                          style={{ ...BPFONT, background: "none", border: "none", padding: 0, fontSize: "0.7rem", fontWeight: 600, color: "#1e6fa8", cursor: "pointer", textDecoration: "underline" }}>
+                          {nNotes} note{nNotes === 1 ? "" : "s"}
+                        </button>
+                      )}
+                    </div>
+                  );
+                })()}
+                {files.length > 0 && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "6px" }}>
+                    {files.map((bf, i) => (
+                      <button key={i} onClick={() => bpOpenRepoFile(bf.path, bf.filename)} title={"Open brief: " + bf.filename}
+                        style={{ ...BPFONT, display: "inline-flex", alignItems: "center", gap: "5px", maxWidth: "260px", padding: "2px 8px", fontSize: "0.7rem", fontWeight: 600, color: "#1e6fa8", background: "#eef5fb", border: "1px solid #c5ddef", borderRadius: "3px", cursor: "pointer" }}>
+                        <span style={{ fontSize: "0.62rem", fontWeight: 700, color: "#c8401a" }}>{(String(bf.filename).split(".").pop() || "").toUpperCase()}</span>
+                        <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{bf.filename}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
                 {errors[piece.id] && <div style={{ fontSize: "0.72rem", color: "#b42318", marginTop: "3px" }}>Upload failed: {errors[piece.id]}</div>}
               </div>
 
@@ -454,7 +580,15 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
                 {bpStatusLabel(piece, project)}
               </span>
 
-              <div>
+              <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                {onOpenPiece && waitingOnMe(piece) && (
+                  <button onClick={() => onOpenPiece(cluster.id, piece.id, pillar.id, piece.phase || 1, "review")} title="Give your verdict and feedback"
+                    style={{ ...BPFONT, padding: "7px 14px", fontSize: "0.76rem", fontWeight: 700, borderRadius: "3px", cursor: "pointer", whiteSpace: "nowrap", border: "1px solid #c8401a", background: "#c8401a", color: "#fff" }}>Review</button>
+                )}
+                {onOpenPiece && piece.status !== "not-started" && (piece.revision_count || 0) > 0 && (
+                  <button onClick={() => onOpenPiece(cluster.id, piece.id, pillar.id, piece.phase || 1, "annotate")} title="Open the article preview"
+                    style={{ ...BPFONT, padding: "7px 12px", fontSize: "0.76rem", fontWeight: 700, borderRadius: "3px", cursor: "pointer", whiteSpace: "nowrap", border: "1px solid #1e6fa8", background: "#fff", color: "#1e6fa8" }}>View piece</button>
+                )}
                 {canUpload && (
                   <>
                     <input
@@ -509,7 +643,7 @@ function BriefsPriorityPanel({ project, setProject, currentUser, adminMode, acti
         })}
       </div>
 
-      {showNew && <BPNewTopicModal weeks={weeks} existingTitles={existingTitles} onClose={() => setShowNew(false)} onCreate={createTopic} />}
+      {showNew && <BPNewTopicModal weeks={weeks} existingTitles={existingTitles} project={project} defaultReviewer={isReviewer ? meId : ""} onClose={() => setShowNew(false)} onCreate={createTopic} />}
     </div>
   );
 }

@@ -66,25 +66,73 @@ function isAdHoc(piece) { return piece && piece.content_type === "ad-hoc"; }
 // Ad-hoc piece that has not yet been submitted for review (new → Not Started; sent back → Writing).
 // An NS upload on one of these moves it straight to Ad-Hoc Review.
 function isAdHocPreReview(piece) { return isAdHoc(piece) && (piece.status === "not-started" || piece.status === "writing"); }
-// ─── Review-stage nomenclature follows the brief owner ────────────────────────
-// The review gate used to read "Visnja Review" for every piece. Anyone can now
-// upload a brief, so for these stage ids the label becomes "<First name> Review"
-// of the Jaggaer person who uploaded the piece's brief (first brief file).
-// Display only — who can review is still decided by the stage's actor config.
-// Falls back to the configured stage label (NS uploader, no brief, etc.).
-const BRIEF_OWNER_REVIEW_STAGE_IDS = new Set(["marketing-review"]);
-function briefOwnerFirstName(piece, project) {
-  const bf = piece && Array.isArray(piece.brief_files) ? piece.brief_files[0] : null;
-  if (!bf || !bf.uploaded_by) return null;
-  const m = ((project && project.team && project.team.jaggaer) || []).find(x => x.id === bf.uploaded_by);
+// ─── Review-stage naming & reviewer routing ───────────────────────────────────
+// Stage ids stay shared; only how a stage is NAMED/ROUTED to people changes here.
+//  • marketing-review → "Visnja/Prashanth Review". Each piece has a reviewer owner
+//    (Visnja or Prashanth); when known the label reads "<First name> Review".
+//  • ed-review        → "Rishabh Review" (Rishabh = m-72umx, previously an unnamed email).
+// Labels are only replaced while the live config still carries the old default label, so
+// an admin who renames a stage in the Admin panel always wins. Nothing is written to
+// project.json — this is applied on read (see getWorkflowStages).
+const NS_REVIEW_OWNER_IDS = ["m-pifrn", "m-14bwv"];          // Visnja, Prashanth
+const NS_DEFAULT_REVIEW_OWNER = "m-14bwv";                    // pieces already in review with no Visnja brief → Prashanth
+const STAGE_NAME_DEFAULTS = {
+  "marketing-review": {
+    legacy: ["visnja review", "abhishek and orlagh review", "visnja/prashanth review"],
+    label: "Visnja/Prashanth Review",
+    addActors: ["person:m-pifrn", "person:m-14bwv"],
+  },
+  "ed-review": {
+    legacy: ["content reviewer", "content review", "ed review", "rishabh review"],
+    label: "Rishabh Review",
+    addActors: ["person:m-72umx"],
+  },
+};
+const _stageNormCache = new WeakMap();
+function normalizeWorkflowStages(stages) {
+  if (!stages) return stages;
+  if (_stageNormCache.has(stages)) return _stageNormCache.get(stages);
+  const out = stages.map(st => {
+    const d = STAGE_NAME_DEFAULTS[st.id];
+    if (!d) return st;
+    const label = d.legacy.includes(String(st.label || "").trim().toLowerCase()) ? d.label : st.label;
+    const cur = st.actor == null ? [] : (Array.isArray(st.actor) ? st.actor : [st.actor]);
+    const actor = [...cur, ...d.addActors.filter(a => !cur.includes(a))];
+    return { ...st, label, actor };
+  });
+  _stageNormCache.set(stages, out);
+  return out;
+}
+window.NS_normalizeWorkflowStages = normalizeWorkflowStages;
+
+function _jaggaerMember(project, id) {
+  return ((project && project.team && project.team.jaggaer) || []).find(x => x.id === id) || null;
+}
+function _firstName(m) {
   if (!m || !m.name) return null;
   const n = String(m.name).trim();
   return (n.includes("@") ? n.split("@")[0] : n.split(/\s+/)[0]) || null;
 }
+// Who owns the review gate for this piece (Visnja or Prashanth), or null.
+// Order: explicit tag → Visnja/Prashanth if they uploaded the brief → pieces already sitting
+// in the review stage with neither default to Prashanth.
+function NS_reviewOwnerId(piece, project) {
+  if (!piece) return null;
+  if (piece.review_owner && NS_REVIEW_OWNER_IDS.includes(piece.review_owner)) return piece.review_owner;
+  const bfs = Array.isArray(piece.brief_files) ? piece.brief_files : [];
+  const bf = bfs.find(b => b && NS_REVIEW_OWNER_IDS.includes(b.uploaded_by));
+  if (bf) return bf.uploaded_by;
+  if (piece.status === "marketing-review") return NS_DEFAULT_REVIEW_OWNER;
+  return null;
+}
+window.NS_REVIEW_OWNER_IDS = NS_REVIEW_OWNER_IDS;
+window.NS_reviewOwnerId = NS_reviewOwnerId;
+window.NS_reviewOwnerName = (id, project) => _firstName(_jaggaerMember(project, id)) || (id === "m-pifrn" ? "Visnja" : id === "m-14bwv" ? "Prashanth" : null);
 function NS_stageLabelFor(piece, stage, project) {
   if (!stage) return "";
-  if (BRIEF_OWNER_REVIEW_STAGE_IDS.has(stage.id)) {
-    const first = briefOwnerFirstName(piece, project);
+  if (stage.id === "marketing-review") {
+    const oid = NS_reviewOwnerId(piece, project);
+    const first = oid && window.NS_reviewOwnerName(oid, project);
     if (first) return first + " Review";
   }
   return stage.label;
@@ -106,10 +154,12 @@ function wpDeliverablePath(piece, pillar, cluster, month, rev, ext) {
 }
 
 function getWorkflowStages(project) {
-  return (project && project.workflow_stages && project.workflow_stages.length)
+  return normalizeWorkflowStages((project && project.workflow_stages && project.workflow_stages.length)
     ? project.workflow_stages
-    : DEFAULT_WORKFLOW_STAGES;
+    : DEFAULT_WORKFLOW_STAGES);
 }
+window.NS_getWorkflowStages = getWorkflowStages;
+window.NS_pieceTurnFor = (piece, user, project) => pieceTurnFor(piece, user, project);
 
 // ─── Optional (skippable) stages ──────────────────────────────────────────────
 // "Content reviewer" (ed-review) is no longer part of the default forward path.
@@ -662,8 +712,7 @@ function InlineCell({ value, type, options, onSave, children, className }) {
 // ─── Activity Bar — recent uploads/feedback, phase-filtered ─────────────────
 function FilterBar({ project, currentWeek, onOpenPiece, activeFilter, setActiveFilter, currentUser, activePhase }) {
   const PANEL = { fontFamily: "Noto Sans, sans-serif" };
-  const baseStages = (project.workflow_stages && project.workflow_stages.length)
-    ? project.workflow_stages : DEFAULT_WORKFLOW_STAGES;
+  const baseStages = getWorkflowStages(project);
   const stages = baseStages.some(s => s.id === "ad-hoc-review") ? baseStages : [...baseStages, getAdHocReviewStage(project)];
   const stageMeta = {};
   stages.forEach(s => { stageMeta[s.id] = s; });
@@ -3069,7 +3118,7 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
         )}
         <div className="ns-feedback-actions">
           <button className="ns-feedback-submit" disabled={submitting||(verdict!=="approved"&&!body.trim())} onClick={submit}>
-            {submitting ? "Submitting…" : verdict==="approved" ? `Approve → ${advanceStage?.label || "Done"}` : verdict==="needs-revision" ? `Send Back → ${sendBackStage.label}` : "Log Question"}
+            {submitting ? "Submitting…" : verdict==="approved" ? `Approve → ${advanceStage ? NS_stageLabelFor(piece, advanceStage, project) : "Done"}` : verdict==="needs-revision" ? `Send Back → ${sendBackStage.label}` : "Log Question"}
           </button>
         </div>
       </div>
@@ -3118,7 +3167,7 @@ function ReviewPanel({ piece, cluster, project, currentUser, updatePiece, addFee
         })()}
         <div className="ns-eyebrow ns-eyebrow-dark" style={{marginBottom:10}}>Stage</div>
         <ol className="ns-feedback-process">
-          <li><strong>Approved</strong> — advances to <em>{advanceStage?.label || "complete"}</em>.</li>
+          <li><strong>Approved</strong> — advances to <em>{advanceStage ? NS_stageLabelFor(piece, advanceStage, project) : "complete"}</em>.</li>
           {contentGateStage ? (
             <li><strong>Needs revision</strong> — sends to NS (<em>{sendBackStage.label}</em>). On re-upload it goes
               straight to <em>Approved</em>, unless you tick <em>“needs content review”</em> above — then it routes
@@ -3259,6 +3308,7 @@ function BriefFilesSection({ piece, cluster, pillar, project, currentUser, updat
       updatePiece(cluster.id, piece.id, {
         brief_files: [...briefFiles, newRecord],
         brief_last_updated: now,
+        ...(!piece.review_owner && NS_REVIEW_OWNER_IDS.includes(currentUser.id) ? { review_owner: currentUser.id } : {}),
         last_updated: now,
         last_updated_by: currentUser.id,
       });
@@ -3293,9 +3343,6 @@ function BriefFilesSection({ piece, cluster, pillar, project, currentUser, updat
           Brief & Keyword Files
         </div>
         <div style={{ flex: 1, height: "1px", background: "#e8e3da" }} />
-        {isJaggaer && (
-          <span style={{ fontSize: "0.68rem", color: "#6b6560" }}>Jaggaer only</span>
-        )}
       </div>
 
       {/* Attached files list */}
@@ -4438,6 +4485,10 @@ function BriefUploadPanel({ piece, cluster, pillar, project, currentUser, update
   const [progress, setProgress] = useStateTR(0);
   const inputRef = useRefTR(null);
   const FONT = { fontFamily: "Noto Sans, sans-serif" };
+  // Who reviews this piece at the Visnja/Prashanth gate. Visnja/Prashanth uploading default to themselves;
+  // anyone else can tag one of them (optional — can also be set later from the Briefs & Topics tab).
+  const [reviewer, setReviewer] = useStateTR(
+    piece.review_owner || (NS_REVIEW_OWNER_IDS.includes(currentUser.id) ? currentUser.id : ""));
 
   async function handleFile(file) {
     setStage("uploading"); setFilename(file.name); setBytes(file.size);
@@ -4449,6 +4500,7 @@ function BriefUploadPanel({ piece, cluster, pillar, project, currentUser, update
     const existing = piece.brief_files || [];
     updatePiece(cluster.id, piece.id, {
       status: "brief-uploaded",
+      ...(reviewer ? { review_owner: reviewer } : {}),
       brief_files: [...existing, newFileRecord],
       brief_last_updated: now,
       last_upload: now,
@@ -4462,6 +4514,14 @@ function BriefUploadPanel({ piece, cluster, pillar, project, currentUser, update
   return (
     <div className="ns-upload">
       <div className="ns-upload-l">
+        <label style={{ ...FONT, display: "flex", alignItems: "center", gap: "8px", fontSize: "0.74rem", fontWeight: 600, color: "#555", marginBottom: "10px" }}>
+          Review by
+          <select value={reviewer} onChange={e => setReviewer(e.target.value)} disabled={stage !== "idle"}
+            style={{ ...FONT, fontSize: "0.78rem", padding: "5px 8px", border: "1px solid #d4cfc8", borderRadius: "3px", background: "#fff" }}>
+            <option value="">— tag Visnja or Prashanth —</option>
+            {NS_REVIEW_OWNER_IDS.map(id => <option key={id} value={id}>{window.NS_reviewOwnerName(id, project) || id}</option>)}
+          </select>
+        </label>
         <div className={`ns-dropzone ${dragging?"is-dragging":""} ${stage!=="idle"?"is-busy":""}`}
           onDragOver={e => { e.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)}
           onDrop={e => { e.preventDefault(); setDragging(false); const f = e.dataTransfer.files?.[0]; if(f) handleFile(f); }}

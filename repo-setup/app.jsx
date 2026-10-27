@@ -478,8 +478,8 @@ function App() {
           setActivePhase(ph);
           setView("tracker");
         }} />}
-        {view === "briefs-priority" && <BriefsPriorityPanel project={project} setProject={setProject} currentUser={currentUser} adminMode={adminMode} activePhase={activePhase} onOpenPiece={(clusterId, pieceId, pillarId, ph) => {
-          window.NS_PENDING_OPEN = { clusterId, pieceId, mode: "details" };
+        {view === "briefs-priority" && <BriefsPriorityPanel project={project} setProject={setProject} currentUser={currentUser} adminMode={adminMode} activePhase={activePhase} onOpenPiece={(clusterId, pieceId, pillarId, ph, mode) => {
+          window.NS_PENDING_OPEN = { clusterId, pieceId, mode: mode || "details" };
           setActivePhase(ph || 1);
           setView("tracker");
         }} />}
