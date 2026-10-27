@@ -825,8 +825,8 @@
                   "by": "orlagh"
                 }
               ],
-              "last_updated": "2026-10-23T13:13:56.970Z",
-              "last_updated_by": "orlagh",
+              "last_updated": "2026-10-27T05:01:37.728Z",
+              "last_updated_by": "manager",
               "secondary_keyword": "",
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -838,7 +838,16 @@
                 "slug": "blog-understanding-procure-to-pay-process",
                 "updated_at": "2026-10-22T10:30:15.772Z",
                 "updated_by": "orlagh"
-              }
+              },
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Procure_to_Pay_Process.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-k06t1v/brief/JAGGAER_SEO_Brief_Procure_to_Pay_Process.pdf",
+                  "uploaded_by": "manager",
+                  "uploaded_at": "2026-10-27T05:01:37.728Z"
+                }
+              ],
+              "brief_last_updated": "2026-10-27T05:01:37.728Z"
             },
             {
               "id": "piece-zwmbks",
