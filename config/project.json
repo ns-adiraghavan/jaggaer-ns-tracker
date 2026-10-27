@@ -776,8 +776,8 @@
                   "by": "m-5jitd"
                 }
               ],
-              "last_updated": "2026-10-24T07:54:06.680Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-10-27T05:04:04.655Z",
+              "last_updated_by": "manager",
               "secondary_keyword": "",
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -789,7 +789,16 @@
                 "slug": "",
                 "updated_at": "2026-10-22T08:18:59.825Z",
                 "updated_by": "m-5jitd"
-              }
+              },
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Tail_Spend_Management_Blog_Refresh.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-51rko8/brief/JAGGAER_SEO_Brief_Tail_Spend_Management_Blog_Refresh.pdf",
+                  "uploaded_by": "manager",
+                  "uploaded_at": "2026-10-27T05:04:04.655Z"
+                }
+              ],
+              "brief_last_updated": "2026-10-27T05:04:04.655Z"
             },
             {
               "id": "piece-k06t1v",
