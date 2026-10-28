@@ -10142,6 +10142,18 @@
         "section": "Tail Spend Management: Direct vs Indirect Spend Strategies",
         "revision": 1
       }
+    ],
+    "p3-seo-tail-spend-management-solutions-a-general-overview": [
+      {
+        "id": "ann-37x2ke",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "No H2 contains “solutions” word",
+        "ts": "2026-10-28T08:34:07.467Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 2
+      }
     ]
   },
   "build_with_claude": [
