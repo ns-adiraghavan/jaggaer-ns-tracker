@@ -1343,11 +1343,11 @@
               "title": "What Is Cost Efficiency? Definition, Examples and How to Achieve It",
               "format": "Ad-Hoc Article",
               "assignee": "m-e10nz",
-              "status": "ad-hoc-review",
+              "status": "not-started",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 1,
+              "revision_count": 2,
               "primary_keyword": "",
               "geography": "all",
               "status_history": [
@@ -1360,13 +1360,18 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-10-28T08:38:54.593Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "not-started",
+                  "ts": "2026-10-28T08:39:14.237Z",
+                  "by": "m-e10nz"
                 }
               ],
-              "last_updated": "2026-10-28T08:38:54.593Z",
+              "last_updated": "2026-10-28T08:39:14.237Z",
               "last_updated_by": "m-e10nz",
-              "deliverable_ext": "pdf",
+              "deliverable_ext": "html",
               "return_to_stage": null,
-              "last_upload": "2026-10-28T08:38:54.593Z",
+              "last_upload": "2026-10-28T08:39:14.237Z",
               "last_upload_by": "m-e10nz"
             }
           ]
