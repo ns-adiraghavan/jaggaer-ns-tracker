@@ -3867,7 +3867,7 @@
               "title": "Tail Spend Management Solutions: A General Overview",
               "format": "Article",
               "assignee": "",
-              "status": "marketing-review",
+              "status": "approved",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -3884,8 +3884,8 @@
               "return_to_stage": null,
               "last_upload": "2026-10-07T09:24:42.307Z",
               "last_upload_by": "orlagh",
-              "last_updated": "2026-10-07T09:24:42.307Z",
-              "last_updated_by": "orlagh",
+              "last_updated": "2026-10-28T08:48:06.577Z",
+              "last_updated_by": "m-14bwv",
               "status_history": [
                 {
                   "stage": "marketing-review",
@@ -3896,6 +3896,11 @@
                   "stage": "ed-review",
                   "ts": "2026-10-07T09:24:42.307Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-10-28T08:48:06.577Z",
+                  "by": "m-14bwv"
                 }
               ],
               "seo": {
@@ -10180,6 +10185,14 @@
         "annotation": true,
         "section": "¶38 — \"Software is not the only path. Outsourci…\"",
         "revision": 2
+      },
+      {
+        "id": "fb-gxxtlw",
+        "author": "m-14bwv",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-10-28T08:48:06.577Z",
+        "stage": "marketing-review"
       }
     ]
   },
