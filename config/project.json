@@ -10215,6 +10215,16 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "ann-2vzxgg",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Lets be consistent with currency, use $ only wherever possible.",
+        "ts": "2026-10-28T09:05:20.801Z",
+        "annotation": true,
+        "section": "¶92 — \"Internal benchmarking. Compare prices fo…\"",
+        "revision": 1
       }
     ]
   },
