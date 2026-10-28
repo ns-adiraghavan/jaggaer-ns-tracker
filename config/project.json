@@ -10225,6 +10225,16 @@
         "annotation": true,
         "section": "¶92 — \"Internal benchmarking. Compare prices fo…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-rvktef",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Lets change this heading and keep it generic as we are reaching the end of 2026",
+        "ts": "2026-10-28T09:07:21.711Z",
+        "annotation": true,
+        "section": "¶65 — \"Why visibility and control matter in 202…\"",
+        "revision": 1
       }
     ]
   },
