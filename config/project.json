@@ -1064,7 +1064,7 @@
               "title": "Spend Analytics in Procurement: Visibility, KPIs and Cost Control",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "ad-hoc-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1081,12 +1081,17 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-10-25T08:08:37.356Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-10-28T09:10:04.089Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-10-26T07:48:39.842Z",
-              "last_updated_by": "manager",
+              "last_updated": "2026-10-28T09:10:04.089Z",
+              "last_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ad-hoc-review",
               "last_upload": "2026-10-25T08:08:37.356Z",
               "last_upload_by": "m-5jitd",
               "seo": {
@@ -10235,6 +10240,14 @@
         "annotation": true,
         "section": "¶65 — \"Why visibility and control matter in 202…\"",
         "revision": 1
+      },
+      {
+        "id": "fb-uwiqae",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "Please check comments",
+        "ts": "2026-10-28T09:10:04.086Z",
+        "stage": "ad-hoc-review"
       }
     ]
   },
