@@ -10170,6 +10170,16 @@
         "annotation": true,
         "section": "¶9 — \"For the deeper breakdown, see JAGGAER's …\"",
         "revision": 2
+      },
+      {
+        "id": "ann-6k4hv1",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Link missing for software buyers guide.",
+        "ts": "2026-10-28T08:47:56.113Z",
+        "annotation": true,
+        "section": "¶38 — \"Software is not the only path. Outsourci…\"",
+        "revision": 2
       }
     ]
   },
