@@ -10196,6 +10196,16 @@
         "annotation": true,
         "section": "General",
         "revision": 2
+      },
+      {
+        "id": "ann-wc6h5h",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The Indirect vs direct spend blog is already link in second bullet point. Also the link is missing for the last words",
+        "ts": "2026-10-28T08:39:58.248Z",
+        "annotation": true,
+        "section": "¶9 — \"For the deeper breakdown, see JAGGAER's …\"",
+        "revision": 2
       }
     ]
   },
