@@ -10205,6 +10205,16 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "ann-ia0tit",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "There are 30 external links against 11 internal - remove the duplicate ones to reduce count.",
+        "ts": "2026-10-28T09:04:02.951Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
