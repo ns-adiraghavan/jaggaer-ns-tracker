@@ -1377,7 +1377,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-10-28T08:39:54.310Z",
-              "last_upload_by": "m-e10nz"
+              "last_upload_by": "m-e10nz",
+              "seo": {
+                "meta_title": "Cost Efficiency Decoded: Meaning, Examples & Tips | JAGGAER",
+                "meta_description": "What is cost efficiency? Learn what cost efficient means, how it differs from cost effective, and\nhow to improve it. Read the guide today.",
+                "slug": "blog-what-cost-efficiency",
+                "updated_at": "2026-10-28T08:40:33.069Z",
+                "updated_by": "m-e10nz"
+              }
             }
           ]
         }
