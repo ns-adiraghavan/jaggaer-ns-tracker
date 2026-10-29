@@ -10263,6 +10263,18 @@
         "ts": "2026-10-28T09:10:04.086Z",
         "stage": "ad-hoc-review"
       }
+    ],
+    "p3-seo-purchase-order-management-process-software-and-best-practice": [
+      {
+        "id": "ann-7z0iqa",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "2027 should be the year as we are almost ending 2026 and by add 2027 in the title will be giving signal to google for the upcoming searches. Nobody has written “best X 2027” yet. The first good page usually takes the top spot and keeps it",
+        "ts": "2026-10-29T15:52:21.975Z",
+        "annotation": true,
+        "section": "¶65 — \"Purchase Order Management in 2026: Proce…\"",
+        "revision": 2
+      }
     ]
   },
   "build_with_claude": [
