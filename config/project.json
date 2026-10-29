@@ -752,7 +752,7 @@
               "title": "Tail Spend Management Strategies: Direct vs Indirect Spend Explained",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "ed-review",
+              "status": "writing",
               "content_type": "msv",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -794,13 +794,18 @@
                   "stage": "approved",
                   "ts": "2026-10-27T07:30:01.673Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-10-29T16:36:36.008Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-10-27T07:30:01.673Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-10-29T16:36:36.008Z",
+              "last_updated_by": "m-72umx",
               "secondary_keyword": "",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-10-27T07:30:01.673Z",
               "last_upload_by": "m-5jitd",
               "seo": {
@@ -10103,6 +10108,14 @@
         "annotation": true,
         "section": "General",
         "revision": 6
+      },
+      {
+        "id": "fb-cl2naf",
+        "author": "m-72umx",
+        "verdict": "needs-revision",
+        "body": "check the CTA rest is fine",
+        "ts": "2026-10-29T16:36:36.005Z",
+        "stage": "ed-review"
       }
     ],
     "piece-k06t1v": [
