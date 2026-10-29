@@ -10191,6 +10191,16 @@
         "body": "Check comments",
         "ts": "2026-10-23T11:29:48.448Z",
         "stage": "ad-hoc-review"
+      },
+      {
+        "id": "ann-ajra1y",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "any particular reason to have FAQs in between of the blog",
+        "ts": "2026-10-29T16:29:46.592Z",
+        "annotation": true,
+        "section": "¶104 — \"Spend Analysis FAQs…\"",
+        "revision": 4
       }
     ],
     "piece-xg0fvx": [
