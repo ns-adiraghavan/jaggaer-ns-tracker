@@ -4124,7 +4124,7 @@
               "title": "Purchase Order Management: Process, Software and Best Practices",
               "format": "Article",
               "assignee": "",
-              "status": "ed-review",
+              "status": "writing",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -4138,11 +4138,11 @@
               "planned_publish_date": "Oct 07, 2026",
               "revision_count": 2,
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-10-14T15:51:46.915Z",
               "last_upload_by": "m-5jitd",
-              "last_updated": "2026-10-14T15:51:46.915Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-10-29T16:00:29.194Z",
+              "last_updated_by": "m-72umx",
               "status_history": [
                 {
                   "stage": "marketing-review",
@@ -4153,6 +4153,11 @@
                   "stage": "ed-review",
                   "ts": "2026-10-14T15:51:46.915Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-10-29T16:00:29.194Z",
+                  "by": "m-72umx"
                 }
               ],
               "seo": {
@@ -10284,6 +10289,14 @@
         "annotation": true,
         "section": "¶26 — \"JAGGAER procurement software commits bud…\"",
         "revision": 2
+      },
+      {
+        "id": "fb-z7fjjj",
+        "author": "m-72umx",
+        "verdict": "needs-revision",
+        "body": "check the added comments",
+        "ts": "2026-10-29T16:00:29.191Z",
+        "stage": "ed-review"
       }
     ]
   },
