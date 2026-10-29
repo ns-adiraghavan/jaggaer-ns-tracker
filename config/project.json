@@ -10274,6 +10274,16 @@
         "annotation": true,
         "section": "¶65 — \"Purchase Order Management in 2026: Proce…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-7kd3hg",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "CTA needs to Request a Demo if we are not adding any content",
+        "ts": "2026-10-29T15:57:12.488Z",
+        "annotation": true,
+        "section": "¶26 — \"JAGGAER procurement software commits bud…\"",
+        "revision": 2
       }
     ]
   },
