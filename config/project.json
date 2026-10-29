@@ -820,7 +820,7 @@
               "title": "Procure to Pay Process: Automate Every Step with a P2P System",
               "format": "Ad-Hoc Article",
               "assignee": "orlagh",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -847,10 +847,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-10-23T13:13:56.971Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-10-29T16:13:56.044Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-10-27T05:01:37.728Z",
-              "last_updated_by": "manager",
+              "last_updated": "2026-10-29T16:13:56.044Z",
+              "last_updated_by": "m-72umx",
               "secondary_keyword": "",
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -878,7 +883,7 @@
               "title": "Contract Lifecycle Management: AI-Driven CLM Software Guide",
               "format": "Ad-Hoc Article",
               "assignee": "jason",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -925,10 +930,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-10-27T05:36:55.823Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-10-29T16:17:04.291Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-10-27T05:36:55.823Z",
-              "last_updated_by": "jason",
+              "last_updated": "2026-10-29T16:17:04.291Z",
+              "last_updated_by": "m-72umx",
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-10-27T05:36:55.823Z",
@@ -10095,6 +10105,14 @@
         "body": "Seecomments",
         "ts": "2026-10-23T10:51:15.346Z",
         "stage": "ad-hoc-review"
+      },
+      {
+        "id": "fb-yfxkwb",
+        "author": "m-72umx",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-10-29T16:13:56.040Z",
+        "stage": "ed-review"
       }
     ],
     "piece-zwmbks": [
@@ -10145,6 +10163,14 @@
         "body": "Check comments",
         "ts": "2026-10-23T11:15:48.400Z",
         "stage": "ad-hoc-review"
+      },
+      {
+        "id": "fb-hghuhn",
+        "author": "m-72umx",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-10-29T16:17:04.287Z",
+        "stage": "ed-review"
       }
     ],
     "piece-1w2mtw": [
