@@ -5745,7 +5745,7 @@
               "title": "Source to Contract vs Source to Pay vs Procure to Pay: Key Differences",
               "format": "Article",
               "assignee": "",
-              "status": "brief-uploaded",
+              "status": "writing",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -5754,7 +5754,7 @@
               "intent": "",
               "funnel": "",
               "geography": "all",
-              "revision_count": 0,
+              "revision_count": 1,
               "schedule_month": "p3-month-1",
               "schedule_week": 8,
               "review_owner": "m-14bwv",
@@ -5764,10 +5764,15 @@
                   "stage": "not-started",
                   "ts": "2026-10-27T08:51:53.649Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-10-30T11:47:30.807Z",
+                  "by": "m-5jitd"
                 }
               ],
-              "last_updated": "2026-10-27T08:51:57.586Z",
-              "last_updated_by": "m-14bwv",
+              "last_updated": "2026-10-30T11:47:30.807Z",
+              "last_updated_by": "m-5jitd",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Source_to_Contract_Comparison_Refresh.pdf",
@@ -5777,11 +5782,13 @@
                 }
               ],
               "brief_last_updated": "2026-10-27T08:51:57.586Z",
-              "last_upload": "2026-10-27T08:51:57.586Z",
-              "last_upload_by": "m-14bwv",
+              "last_upload": "2026-10-30T11:47:30.807Z",
+              "last_upload_by": "m-5jitd",
               "priority": "P1",
               "priority_updated": "2026-10-27T08:52:07.065Z",
-              "priority_updated_by": "m-14bwv"
+              "priority_updated_by": "m-14bwv",
+              "deliverable_ext": "html",
+              "return_to_stage": null
             }
           ]
         }
