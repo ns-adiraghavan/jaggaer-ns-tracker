@@ -1,0 +1,811 @@
+<!-- uploaded by m-5jitd at 2026-10-30T05:59:43.587Z -->
+<!-- piece: Tail Spend Management Strategies: Direct vs Indirect Spend Explained -->
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tail Spend Management: Direct vs Indirect Spend Strategies</title>
+<meta name="description" content="Learn tail spend management strategies, how direct and indirect spend differ, and how to automate low-value purchases and cut costs.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/tail-spend-management-direct-vs-indirect-spend">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Tail Spend Management Strategies: Direct vs Indirect Spend Explained","description":"Learn tail spend management strategies, how direct and indirect spend differ, and how to automate low-value purchases and cut costs.","datePublished":"2025-11-13","dateModified":"2026-10-21","inLanguage":"en-US","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.jaggaer.com/blog/tail-spend-management-direct-vs-indirect-spend"},"publisher":{"@type":"Organization","name":"Jaggaer","url":"https://www.jaggaer.com","logo":{"@type":"ImageObject","url":"https://www.jaggaer.com/wp-content/uploads/JAGGAER-Logo-Red.png"}},"author":{"@type":"Person","name":"Visnja Radosavljevic","worksFor":{"@type":"Organization","name":"Jaggaer"}},"citation":[{"@type":"CreativeWork","name":"Roland Berger, Unlocking the hidden value in tail spend (April 22, 2026)","url":"https://www.rolandberger.com/en/Insights/Publications/Unlocking-the-hidden-value-in-tail-spend-How-small-moves-create-big-impact.html"},{"@type":"CreativeWork","name":"Kearney, AI and the new economics of tail spend (Supply Chain Management Review, May 15, 2026)","url":"https://www.scmr.com/article/ai-and-the-new-economics-of-tail-spend"},{"@type":"CreativeWork","name":"BCG, Taming Tail Spend (2019)","url":"https://www.bcg.com/publications/2019/taming-tail-spend"},{"@type":"CreativeWork","name":"McKinsey, Long tail, big savings (2018)","url":"https://www.mckinsey.com/capabilities/operations/our-insights/long-tail-big-savings-digital-unlocks-hidden-value-in-procurement"},{"@type":"CreativeWork","name":"The Hackett Group, press release on the 2026 Procurement Key Issues Study (March 17, 2026)","url":"https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/"},{"@type":"CreativeWork","name":"AFP 2026 Payments Fraud and Control Survey, press release (April 14, 2026)","url":"https://www.financialprofessionals.org/about/learn-more/press-releases/Details/over-75-percent-of-us-firms-experienced-payments-fraud-in-2025-while-ai-adoption-for-fraud-mitigation-lags"},{"@type":"CreativeWork","name":"Federal Register, FAC 2025-06, Inflation Adjustment of Acquisition-Related Thresholds, 90 FR 41872 (2025)","url":"https://www.govinfo.gov/content/pkg/FR-2025-08-27/html/2025-16412.htm"},{"@type":"CreativeWork","name":"eCFR, 2 CFR 200.320 Procurement methods","url":"https://www.ecfr.gov/current/title-2/part-200/section-200.320"},{"@type":"CreativeWork","name":"Federal Register, Regulation for Federal Financial Assistance, proposed rule (May 29, 2026)","url":"https://www.federalregister.gov/documents/2026/05/29/2026-10817/regulation-for-federal-financial-assistance"},{"@type":"CreativeWork","name":"Congressional Research Service, The Uniform Grants Regulation: OMB's Relation to Federal Grantmaking Agencies (2026)","url":"https://www.congress.gov/crs-product/LSB11464"},{"@type":"CreativeWork","name":"Southern Oregon University, news release on the 2017 email payment fraud","url":"https://news.sou.edu/2017/06/effort-underway-to-recover-funds-stolen-from-sou/"}]}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"How to run a tail spend analysis in 6 steps","description":"Tail spend analysis starts with one calculation: the share of spend held by suppliers you don't actively manage.","step":[{"@type":"HowToStep","position":1,"name":"Pull 12 months of spend","text":"Pull 12 months of spend from AP, purchasing, P-card and expense systems with spend analytics."},{"@type":"HowToStep","position":2,"name":"Normalize supplier names","text":"Normalize supplier names so duplicates collapse into one record."},{"@type":"HowToStep","position":3,"name":"Rank suppliers by annual spend","text":"Rank suppliers by annual spend, highest first."},{"@type":"HowToStep","position":4,"name":"Calculate cumulative spend","text":"Calculate cumulative spend as a percentage of total."},{"@type":"HowToStep","position":5,"name":"Mark the 80% line","text":"Mark where cumulative spend reaches 80%, or use another documented cutoff. Every supplier after that point is your tail."},{"@type":"HowToStep","position":6,"name":"Segment the tail","text":"Segment the tail by category, purchase frequency and contract coverage."}]}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is tail spend management?","acceptedAnswer":{"@type":"Answer","text":"Tail spend management is the process of identifying, controlling and reducing low-value, fragmented purchases outside strategic contracts. Roland Berger (2026) says tail suppliers typically make up 80–90% of the vendor base but only about 20% of indirect spend. Teams manage it through analysis, controlled buying channels and supplier consolidation."}},{"@type":"Question","name":"How do you calculate tail spend?","acceptedAnswer":{"@type":"Answer","text":"Rank suppliers by annual spend, calculate cumulative spend as a percentage of the total and mark where it reaches 80%, or your documented cutoff. Every supplier beyond that point is your tail. State your metric (spend, suppliers or transactions) and your cutoff, then review both each year."}},{"@type":"Question","name":"What are examples of tail spend?","acceptedAnswer":{"@type":"Answer","text":"Common indirect examples include office supplies, consumables, facilities repairs, marketing services, one-off consulting and temporary labor. Direct examples include prototype parts, test housings and emergency fasteners. Each is small, infrequent and often bought outside contract."}},{"@type":"Question","name":"How do you reduce tail spend?","acceptedAnswer":{"@type":"Answer","text":"Move repeatable buys into catalogs, marketplaces and P-cards. Consolidate overlapping suppliers by category and retire inactive suppliers. Roland Berger (2026) reports that well-designed programs typically generate 13–25% in savings."}},{"@type":"Question","name":"What is the difference between tail spend and maverick spend?","acceptedAnswer":{"@type":"Answer","text":"Tail spend describes the size and fragmentation of a purchase. Maverick spend describes buying outside policy or contract. A tail purchase through an approved catalog is compliant. A large off-contract purchase is maverick spend but not tail spend."}},{"@type":"Question","name":"What is higher education tail spend?","acceptedAnswer":{"@type":"Answer","text":"Higher education tail spend is the volume of small, decentralized purchases made by departments, labs and faculty. For federal awards, the FAR sets default thresholds of $15,000 for micro-purchases and $350,000 for simplified acquisitions, according to the Federal Register (2025)."}},{"@type":"Question","name":"What is the difference between direct and indirect spend?","acceptedAnswer":{"@type":"Answer","text":"Direct spend buys the materials and labor that go into your product. Indirect spend buys goods and services that support operations, such as MRO, IT and facilities. Tail spend appears in both categories, though it is often found in indirect ones."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs: 0.8125rem;
+  --font-size-sm:      0.8125rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2rem, calc(1.72rem + 1.05vw), 2.25rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul,ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li,ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:980px;}
+.article-tags{display:flex;gap:.5rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.tag-pill{display:inline-flex;align-items:center;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--color-navy);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:999px;padding:.4rem .9rem;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:980px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.8125rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1480px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:230px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:980px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+article h3.sub-question{font-size:var(--font-size-h4);text-transform:none;letter-spacing:-0.01em;font-weight:700;border-bottom:none;padding-bottom:0;}
+
+/* Comparison / data tables */
+.table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.data-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:520px;}
+.data-table th{background:var(--purple-tint-2);color:var(--color-navy);font-family:var(--font-display);font-weight:700;font-size:.8125rem;text-align:left;padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--purple-soft);}
+.data-table td{padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--color-ink-2);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--color-cream);}
+.data-table td strong,.data-table th strong{color:var(--color-ink);}
+
+/* Roadmap / framework phase cards */
+.phase-cards{display:flex;flex-direction:column;gap:2px;margin:var(--space-m) 0 var(--space-l);border-radius:var(--border-radius-sm);overflow:hidden;border:var(--border);}
+.phase-item{display:flex;gap:var(--space-m);padding:var(--space-s) var(--space-m);background:var(--color-white);align-items:flex-start;}
+.phase-num{flex-shrink:0;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);}
+.phase-body{flex:1;min-width:0;}
+.phase-title{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink);margin-bottom:.15rem;display:block;}
+.phase-desc{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.6;}
+
+/* Hook stat contrast callout */
+.hook-stat{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.hook-stat p{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.65;}
+.hook-stat .stat-num{font-family:var(--font-display);font-weight:700;color:var(--color-ink-3);}
+
+/* Interactive toggle: expertise gap vs process gap */
+.toggle-box{border:1.5px solid var(--purple-soft);border-radius:var(--border-radius);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--purple-tint-3);}
+.toggle-head{display:flex;gap:.4rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.toggle-btn{font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.02em;color:var(--jai-a);background:var(--color-white);border:1.5px solid var(--purple-soft);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.toggle-btn:hover{border-color:var(--jai-a);}
+.toggle-btn.active{background:var(--jai-gradient);color:#fff;border-color:transparent;}
+.toggle-panel{display:none;}
+.toggle-panel.active{display:block;animation:fadeIn .25s ease;}
+.toggle-panel p{margin-bottom:.6rem;}
+.toggle-panel p:last-child{margin-bottom:0;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* Decision-checker widget */
+.decision-widget{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-l) var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.decision-widget-head{font-family:var(--font-display);font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);margin:0 0 var(--space-2xs);}
+.decision-widget-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0 0 var(--space-m);}
+.decision-options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:var(--space-m);}
+.decision-option{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem var(--space-s);border:var(--border);border-radius:var(--border-radius-sm);cursor:pointer;transition:border-color .2s,background .2s;font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-option:hover{border-color:var(--jai-a);background:var(--purple-tint-3);}
+.decision-option input{margin-top:.2rem;accent-color:var(--jai-a);}
+.decision-result{display:none;background:var(--color-cream);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-result.show{display:block;animation:fadeIn .25s ease;}
+.decision-reset{display:inline-block;margin-top:var(--space-s);font-size:.8125rem;font-weight:600;color:var(--color-teal);cursor:pointer;background:none;border:none;padding:0;border-bottom:1px solid #4D819440;font-family:var(--font-base);}
+.decision-reset:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Benefit / risk checklist */
+.diag-checklist{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.diag-checklist ul{list-style:none;padding-left:0;margin-bottom:0;}
+.diag-checklist li{position:relative;padding-left:1.6rem;margin-bottom:.55rem;font-size:var(--font-size-base);}
+.diag-checklist li:last-child{margin-bottom:0;}
+.diag-checklist li::before{content:"";position:absolute;left:0;top:.2rem;width:1.05rem;height:1.05rem;border-radius:4px;border:1.5px solid var(--color-teal);background:var(--color-white);}
+.diag-checklist li::after{content:"✓";position:absolute;left:.22rem;top:-.05rem;color:var(--color-teal);font-size:.8125rem;font-weight:700;}
+
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--color-ink);line-height:1.15;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.8125rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-link{font-size:.8125rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.page-wrapper{flex-wrap:wrap;}.expert-sidebar{position:static;width:100%;max-height:none;padding:0 0 var(--space-l) 0;order:99;}.exp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;}.exp-item{border-bottom:none;border-right:1px solid var(--purple-soft);}}
+@media(max-width:640px){.expert-sidebar .exp-list{grid-template-columns:1fr;}.expert-sidebar .exp-item{border-right:none;border-bottom:1px solid var(--purple-soft);}}
+
+/* CTA block */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-base);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:var(--font-size-base);font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-base);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;line-height:1;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Font-size floor: all body and UI text held between 13px and 14px */
+.tag-pill,.meta-item,.toc-link,.exp-head-lbl,.exp-source,.exp-stat,.exp-link,.toc-head-lbl{font-size:.8125rem;}
+.exp-stat{line-height:1.45;}
+article .phase-body ul,article .phase-body ol{margin:.35rem 0 0;}
+article .phase-body li{margin-bottom:.15rem;}
+
+/* Interactive tables */
+.interactive-table tbody tr{transition:background .15s;cursor:default;}
+.interactive-table tbody tr:hover td{background:var(--purple-tint-3);}
+.interactive-table td.col-on,.interactive-table th.col-on{background:var(--purple-tint)!important;color:var(--color-ink);}
+.interactive-table th.col-on{background:var(--jai-gradient)!important;color:#fff;}
+.col-toggle{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin:var(--space-m) 0 -.4rem;}
+.col-toggle-lbl{font-size:.8125rem;font-weight:600;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.06em;margin-right:.2rem;}
+.table-filter{display:flex;align-items:center;gap:.6rem;margin:var(--space-m) 0 -.4rem;flex-wrap:wrap;}
+.table-filter input{flex:1;min-width:200px;max-width:340px;font-family:var(--font-base);font-size:.8125rem;padding:.5rem .9rem;border:1.5px solid var(--purple-soft);border-radius:999px;outline:none;background:var(--purple-tint-3);transition:border-color .2s;}
+.table-filter input:focus{border-color:var(--jai-a);background:#fff;}
+.table-filter span{font-size:.8125rem;color:var(--color-ink-3);font-weight:600;}
+
+/* Kraljic matrix */
+.kraljic{display:grid;grid-template-columns:auto 1fr;gap:.5rem;margin:var(--space-s) 0 0;}
+.k-axis-y{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);text-align:center;}
+.k-axis-x{grid-column:2;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);text-align:center;}
+.k-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.k-cell{text-align:left;font-family:var(--font-base);font-size:.8125rem;line-height:1.5;color:var(--color-ink-2);background:var(--purple-tint-3);border:1.5px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.75rem .9rem;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;}
+.k-cell:hover{transform:translateY(-2px);border-color:var(--jai-a);box-shadow:0 6px 18px rgba(83,0,206,.1);}
+.k-cell strong{color:var(--jai-a);}
+.k-cell.active{background:var(--jai-gradient);border-color:transparent;color:#fff;}
+.k-cell.active strong{color:#fff;}
+
+/* RFI / RFP / RFQ cards */
+.mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:var(--space-s) 0 var(--space-m);}
+.mini-card{font-size:.8125rem;line-height:1.55;background:#fff;border:var(--border);border-top:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:.8rem .9rem;transition:transform .2s,box-shadow .2s;}
+.mini-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(83,0,206,.1);}
+.mini-card strong{display:block;color:var(--jai-a);margin-bottom:.25rem;}
+
+/* Software tool tiles */
+.tool-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:.45rem;margin:var(--space-s) 0 var(--space-m);}
+.tool-tile{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.6rem .85rem;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);font-size:.8125rem;font-weight:600;color:var(--color-navy);transition:background .2s,border-color .2s,transform .2s;}
+.tool-tile::after{content:"\2192";color:var(--jai-a);transition:transform .2s;}
+.tool-tile:hover{background:var(--purple-tint);border-color:var(--jai-a);color:var(--jai-a);transform:translateY(-1px);}
+.tool-tile:hover::after{transform:translateX(3px);}
+
+/* Phase cards & checklist hover polish */
+.phase-item{transition:background .2s;}
+.phase-item:hover{background:var(--purple-tint-3);}
+.faq-item[open] summary{background:var(--purple-tint-3);}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-icon{transition:transform .2s;}
+
+@media(max-width:640px){.mini-cards{grid-template-columns:1fr;}.k-cell{padding:.6rem .7rem;}}
+
+.inline-toc{background:var(--color-light-blue);border:1px solid var(--color-border);border-radius:var(--border-radius-sm);padding:1rem 1.25rem;margin:1.5rem 0;}
+.inline-toc-title{font-weight:700;color:var(--color-navy);margin:0 0 .5rem;font-size:.9375rem;}
+.inline-toc ul{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;list-style:none;margin:0;padding:0;}
+.inline-toc li{margin:0;font-size:.9375rem;}
+.inline-toc a{color:var(--color-teal);text-decoration:underline;}
+.jag-cta-desc a{color:inherit;text-decoration:underline;}
+article h2[id],article h3[id]{scroll-margin-top:1.5rem;}
+</style>
+</head>
+<body>
+
+<div id="progress-bar" style="position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;"></div>
+
+<div class="page-wrapper">
+
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Is Tail Spend Management?</a>
+      <a class="toc-link" href="#s2">Direct vs. Indirect Spend</a>
+      <a class="toc-link" href="#s3">Tail Spend Analysis</a>
+      <a class="toc-link" href="#s4">Tail Spend Strategies</a>
+      <a class="toc-link" href="#s5">Automation and Software</a>
+      <a class="toc-link" href="#s6">How AI Changes Tail Spend Management</a>
+      <a class="toc-link" href="#s7">KPIs</a>
+      <a class="toc-link" href="#s8">Higher Education Case Study</a>
+      <a class="toc-link" href="#s9">FAQ</a>
+      <a class="toc-link" href="#s10">Next Steps</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-tags">
+          <span class="tag-pill">Spend Management</span>
+          <span class="tag-pill">Tail Spend</span>
+        </div>
+        <h1>Tail Spend Management Strategies: Direct vs Indirect Spend Explained</h1>
+        <div class="article-meta">
+          <span class="meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> About 12 min read</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Visnja Radosavljevic</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Published <time datetime="2025-11">November 2025</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Updated <time datetime="2026-10">October 2026</time></span>
+        </div>
+      </div>
+    </header>
+
+    <p><strong>Tail spend management strategies control low-value, fragmented purchases through analysis, controlled buying channels and automation, in both direct and indirect spend.</strong> Direct spend buys what goes into your product. Indirect spend buys what keeps the business running. The tail cuts across both and is often found in indirect categories.</p>
+
+    <p><strong>According to <a href="https://www.rolandberger.com/en/Insights/Publications/Unlocking-the-hidden-value-in-tail-spend-How-small-moves-create-big-impact.html" rel="noopener" target="_blank">Roland Berger</a> (2026), tail suppliers typically make up 80–90% of the vendor base BUT only about 20% of indirect spend.</strong> The goal isn't to micromanage every $500 purchase. It's to build systems that handle them.</p>
+
+    <p><strong>Tail spend management works when 4 steps happen in order.</strong> Analyze the tail. Route repeatable buys to controlled channels. Consolidate suppliers category by category. Track the result against a baseline. Each step feeds your wider <a href="https://www.jaggaer.com/blog/strategic-spend-management-complete-guide" rel="noopener" target="_blank">strategic spend management</a> program. Higher education tail spend follows the same 4 steps, with federal grant rules layered on top.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer identifies tail spend, supplier consolidation opportunities and off-contract leakage in your spend data</p>
+        <p class="jag-cta-desc">AI classifies spend transactions in Jaggaer spend analytics and identifies tail spend, supplier consolidation opportunities and off-contract leakage. The same data layer feeds sourcing, contracts and procure-to-pay.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo &rarr;</a>
+    </div>
+
+    <p><strong><a href="https://www.rolandberger.com/en/Insights/Publications/Unlocking-the-hidden-value-in-tail-spend-How-small-moves-create-big-impact.html" rel="noopener" target="_blank">Roland Berger</a> (2026) finds that about 55% of expenses among the bottom 20% of indirect spend vendors are effectively unknown.</strong> Fragmented data, vague purchase descriptions and decentralized buying make that spend hard to analyze, the firm adds. Each purchase is small. Each supplier still needs setup, approvals and payment. Across thousands of suppliers, that administrative cost compounds. Direct and indirect spend both feed the tail, and the fix is the same for each: measure it, route it and track it.</p>
+
+    <nav class="inline-toc" aria-label="In this article">
+      <p class="inline-toc-title">In this article</p>
+      <ul>
+        <li><a href="#s1">What Is Tail Spend Management?</a></li>
+        <li><a href="#s2">Direct vs. Indirect Spend</a></li>
+        <li><a href="#s3">Tail Spend Analysis</a></li>
+        <li><a href="#s4">Tail Spend Strategies</a></li>
+        <li><a href="#s5">Automation and Software</a></li>
+        <li><a href="#s6">How AI Changes Tail Spend Management</a></li>
+        <li><a href="#s7">KPIs</a></li>
+        <li><a href="#s8">Higher Education Case Study</a></li>
+      </ul>
+    </nav>
+
+    <hr class="section-divider">
+
+    <h2 id="s1">What is tail spend management?</h2>
+
+    <p><strong>Tail spend management is the process of identifying, controlling and reducing the low-value, fragmented purchases that sit outside your strategic contracts.</strong> That spend is small, infrequent, decentralized and administratively heavy. Each purchase costs little. The supplier setup, approvals and invoice handling behind it cost more than they should.</p>
+
+    <p><strong>Sources define and size the tail differently.</strong></p>
+
+    <div class="table-wrap">
+      <table class="data-table" id="definitionTable">
+        <thead>
+          <tr><th>Source</th><th>What it counts</th><th>Finding</th><th>Year</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong><a href="https://www.rolandberger.com/en/Insights/Publications/Unlocking-the-hidden-value-in-tail-spend-How-small-moves-create-big-impact.html" rel="noopener" target="_blank">Roland Berger</a></strong></td><td>Vendors</td><td>Tail suppliers typically make up 80–90% of the vendor base, but only about 20% of indirect spend.</td><td>2026</td></tr>
+          <tr><td><strong><a href="https://www.scmr.com/article/ai-and-the-new-economics-of-tail-spend" rel="noopener" target="_blank">Kearney, in Supply Chain Management Review</a></strong></td><td>Suppliers</td><td>Tail suppliers often make up 60–80% of the supplier base, but only 10–20% of spend.</td><td>2026</td></tr>
+          <tr><td><strong><a href="https://www.bcg.com/publications/2019/taming-tail-spend" rel="noopener" target="_blank">BCG</a></strong></td><td>Transactions</td><td>Roughly 80% of transactions, but only 20% of spend volume.</td><td>2019</td></tr>
+          <tr><td><strong><a href="https://www.mckinsey.com/capabilities/operations/our-insights/long-tail-big-savings-digital-unlocks-hidden-value-in-procurement" rel="noopener" target="_blank">McKinsey</a></strong></td><td>Items</td><td>80–90% of the items a typical company buys account for only 10–20% of direct spend, per its Exhibit 1.</td><td>2018</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Pick one metric, document it and hold it constant.</strong> Your tail spend management program is only as stable as its definition.</p>
+
+    <p><strong>Tail spend and maverick spend overlap, but they aren't the same thing.</strong> Tail spend describes the size and fragmentation of a purchase. Maverick spend describes a purchase made outside policy or contract. A tail purchase through an approved catalog is compliant. A large off-contract purchase is maverick spend, not tail spend.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s2">Direct vs indirect spend explained</h2>
+
+    <p><strong>Direct spend buys what goes into your product, and indirect spend buys what keeps the business running.</strong> <a href="https://www.jaggaer.com/need/direct-procurement" rel="noopener" target="_blank">Direct procurement</a> covers raw materials, components and production labor. Indirect procurement covers MRO, IT and software, facilities, travel, marketing and professional services. Capital expenditure is often managed as a separate category.</p>
+
+    <div class="col-toggle" data-for="diTable">
+      <span class="col-toggle-lbl">Highlight:</span>
+      <button type="button" class="toggle-btn" data-col="2">Direct spend</button>
+      <button type="button" class="toggle-btn" data-col="3">Indirect spend</button>
+      <button type="button" class="toggle-btn" data-col="4">Tail spend</button>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table interactive-table" id="diTable">
+        <thead>
+          <tr><th>Area</th><th>Direct spend</th><th>Indirect spend</th><th>Tail spend</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>What it buys</strong></td><td>Materials and labor in the finished product</td><td>Goods and services that support operations</td><td>Small, fragmented purchases in either category</td></tr>
+          <tr><td><strong>Typical examples</strong></td><td>Steel, tires, components</td><td>MRO, IT, facilities, marketing</td><td>Office supplies, one-off services, prototype parts</td></tr>
+          <tr><td><strong>Typical buying pattern</strong></td><td>Planned, forecast-driven, strategic contracts</td><td>Variable, department-led, shorter terms</td><td>Ad hoc, decentralized, often off-contract</td></tr>
+          <tr><td><strong>Typical main risk</strong></td><td>Supply disruption and price swings</td><td>Poor visibility and maverick spend</td><td>Duplicate suppliers and unmanaged cost</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Tail spend management has to cover both categories, because the tail cuts across direct and indirect spend.</strong> Tail spend is often found in indirect categories, but direct tail spend is real. A prototype gearbox casting, a custom bearing for a test rig and an emergency run of gaskets all count as direct spend. They are also one-off, low-volume buys, often sourced outside your main supplier contracts.</p>
+
+    <p><strong><a href="https://www.mckinsey.com/capabilities/operations/our-insights/long-tail-big-savings-digital-unlocks-hidden-value-in-procurement" rel="noopener" target="_blank">McKinsey</a> (2018) measured the direct side in its Exhibit 1: 80–90% of the items a typical company buys account for only 10–20% of direct spend.</strong> Direct tail spend is real enough to measure, even though many examples sit in indirect categories.</p>
+
+    <p><strong>Include those direct purchases in your tail spend management scope, even though they feed production.</strong> The test is how the purchase behaves, not what it touches. Small, infrequent and fragmented means tail. Contract coverage is a separate question.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s3">Tail spend analysis</h2>
+
+    <p><strong>Tail spend analysis is the first step of tail spend management.</strong> It starts with one calculation: the share of spend held by suppliers you don't actively manage. Run it in 6 steps.</p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">Pull 12 months of spend from AP, purchasing, P-card and expense systems with <a href="https://www.jaggaer.com/solutions/spend-analytics" rel="noopener" target="_blank">spend analytics</a>.</span>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">Normalize supplier names so duplicates collapse into one record.</span>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Rank suppliers by annual spend, highest first.</span>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <span class="phase-title">Calculate cumulative spend as a percentage of total.</span>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">5</span>
+        <div class="phase-body">
+          <span class="phase-title">Mark where cumulative spend reaches 80%, or use another documented cutoff.</span>
+          <p class="phase-desc">Every supplier after that point is your tail.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">6</span>
+        <div class="phase-body">
+          <span class="phase-title">Segment the tail by category, purchase frequency and contract coverage.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hook-stat">
+      <p><strong>In this illustrative example, the remaining 1,600 suppliers hold <span class="stat-num">$40M</span>, and that <span class="stat-num">$40M</span> is the tail.</strong> A company spends <span class="stat-num">$200M</span> across 2,000 suppliers. The top 400 suppliers account for <span class="stat-num">$160M</span>, or <span class="stat-num">80%</span>. These figures are illustrative, not benchmarks. Decide up front whether the supplier that crosses the 80% line counts as head or tail.</p>
+    </div>
+
+    <p><strong>Separate micro-tails from hidden tails before you act.</strong> Micro-tails are one-off, very low-value purchases. Hidden tails are repeat purchases from small suppliers that you could consolidate. Start with hidden tails: repeatable, non-strategic buys are where automation tends to pay back first.</p>
+
+    <p><strong><a href="https://www.rolandberger.com/en/Insights/Publications/Unlocking-the-hidden-value-in-tail-spend-How-small-moves-create-big-impact.html" rel="noopener" target="_blank">Roland Berger</a> (2026) segments the tail in dollars: micro-tail suppliers typically below $30K, mid-tail $30K to $150K, and macro-tail just below strategic.</strong></p>
+
+    <div class="mini-cards">
+      <div class="mini-card"><strong>Micro-tail</strong> Suppliers typically below $30K.</div>
+      <div class="mini-card"><strong>Mid-tail</strong> Suppliers from $30K to $150K.</div>
+      <div class="mini-card"><strong>Macro-tail</strong> Suppliers just below strategic.</div>
+    </div>
+
+    <p>Treat those bands as a starting point and write your own cutoff down. Some teams use annual spend per supplier. Others use transaction value. Either works if you document it, because each tail spend analysis should use the same rule year to year. Review the cutoff yearly, since what counted as tail last year may merit strategic sourcing this year.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s4">Tail spend management strategies</h2>
+
+    <p><strong>The strongest tail spend management strategies move volume out of manual buying and into controlled channels.</strong> 6 moves do most of the work.</p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">Define the tail for your organization.</span>
+          <p class="phase-desc">Choose the metric and the cutoff, then document both.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">Route repeatable buys to catalogs, marketplaces and P-cards.</span>
+          <p class="phase-desc">Approved channels standardize pricing and automate approvals.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Rationalize suppliers category by category.</span>
+          <p class="phase-desc">Skip the mass cull. Find overlapping suppliers, such as several office-supply vendors, and ask preferred suppliers to absorb the volume.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <span class="phase-title">Use cooperatives and group purchasing organizations for common categories.</span>
+          <p class="phase-desc">They offer pre-negotiated contracts for IT peripherals, lab supplies, furniture and MRO.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">5</span>
+        <div class="phase-body">
+          <span class="phase-title">Phase out inactive suppliers.</span>
+          <p class="phase-desc">Close records that see no spend, then set up small-supplier frameworks for niche or local vendors with unique value.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">6</span>
+        <div class="phase-body">
+          <span class="phase-title">Make compliant buying the easy path.</span>
+          <p class="phase-desc">Self-service tools and guided buying reduce the reasons to go around policy.</p>
+        </div>
+      </div>
+    </div>
+
+    <p><strong><a href="https://www.rolandberger.com/en/Insights/Publications/Unlocking-the-hidden-value-in-tail-spend-How-small-moves-create-big-impact.html" rel="noopener" target="_blank">Roland Berger</a> (2026) reports that well-designed tail spend programs typically generate 13–25% in savings, often within as little as 10 weeks.</strong> The firm adds that organizations typically capture 11–16% of total tail spend savings across categories.</p>
+
+    <p><strong><a href="https://www.mckinsey.com/capabilities/operations/our-insights/long-tail-big-savings-digital-unlocks-hidden-value-in-procurement" rel="noopener" target="_blank">McKinsey</a> (2018) puts the opportunity lower, at 5–15%, especially for companies that have not managed the tail.</strong> Roland Berger's range describes well-designed programs, so treat it as the high end. Treat all three figures as consultancy estimates, not audited results. A tail spend management program also needs <a href="https://www.jaggaer.com/blog/what-is-spend-management-process-best-practices" rel="noopener" target="_blank">spend management best practices</a> behind it, so tracking and governance keep savings visible after year one.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer Sourcing handles direct, indirect and tail spend events</p>
+        <p class="jag-cta-desc">Jaggaer Sourcing is one platform for direct, indirect, complex and tail events, run through one workflow. Spend analytics feeds sourcing on the same data layer.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s5">Tail spend automation and software</h2>
+
+    <p><strong>Tail spend automation matters because manual handling doesn't scale across thousands of suppliers.</strong> It routes requests to approved suppliers, runs approvals by rule and captures the data automatically.</p>
+
+    <p><strong>According to <a href="https://www.rolandberger.com/en/Insights/Publications/Unlocking-the-hidden-value-in-tail-spend-How-small-moves-create-big-impact.html" rel="noopener" target="_blank">Roland Berger</a> (2026), AI-enabled tools let procurement teams negotiate with hundreds of suppliers at once within predefined governance frameworks.</strong> The firm adds that human expertise remains essential for ambiguous categories and for negotiations where judgment matters.</p>
+
+    <p><strong><a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" rel="noopener" target="_blank">The Hackett Group</a> (2026) finds that 80% of procurement executives identify AI-enabled technology as the most transformational trend over the next 5 years.</strong> Automation matters most where transaction volume is highest. Tail spend often combines high transaction volume with heavy manual handling.</p>
+
+    <p><strong>Tail spend management software should do 6 things.</strong></p>
+
+    <div class="diag-checklist">
+      <ul>
+        <li>Ingest spend data from ERP, procure-to-pay and card systems.</li>
+        <li>Normalize and categorize suppliers.</li>
+        <li>Offer catalogs and marketplace access for repeat buys.</li>
+        <li>Guide requesters to compliant channels at intake.</li>
+        <li>Enforce approval rules with an audit trail.</li>
+        <li>Report maverick spend and contract coverage by department.</li>
+      </ul>
+    </div>
+
+    <p><strong>Tail spend management solutions also include managed services, which fit when internal bandwidth is the constraint.</strong> Keep decision rights and supplier data in house either way. When you compare tail spend management solutions, start with the <!-- PRE-PUBLISH CHECK: /tail-spend-management-software must be live before this page goes out. If it is not, repoint this link to https://www.jaggaer.com/solutions/spend-analytics or remove the anchor. --><a href="https://www.jaggaer.com/tail-spend-management-software" rel="noopener" target="_blank">tail spend management software</a> page, and see <a href="https://www.jaggaer.com/blog/ai-spend-management-reducing-unmanaged-spend" rel="noopener" target="_blank">AI and automation in spend management</a>.</p>
+
+    <p><strong>Pair every AI capability in tail spend management with a control.</strong> JAI suggests, a human decides, and the recommendation stays traceable. Jaggaer says it does not use customer data to train foundation models, per its <a href="https://www.jaggaer.com/blog/ai-procurement-platform-landscape-2026" rel="noopener" target="_blank">published AI governance position</a>.</p>
+
+    <p><strong>Jaggaer's <a href="https://www.jaggaer.com/solutions/spend-analytics" rel="noopener" target="_blank">spend analytics solution</a> classifies spend and identifies tail spend, supplier consolidation opportunities and off-contract leakage.</strong></p>
+
+    <hr class="section-divider">
+
+    <h2 id="s6">How AI changes tail spend management</h2>
+
+    <p><strong><a href="https://www.scmr.com/article/ai-and-the-new-economics-of-tail-spend" rel="noopener" target="_blank">Kearney, in Supply Chain Management Review</a> (2026), finds that AI lowers the effort of engaging each tail supplier.</strong> Its practical limits call for a realistic assessment. Tail spend management teams should size the opportunity realistically and keep a human decision at the point of award.</p>
+
+    <p><strong>According to <a href="https://www.financialprofessionals.org/about/learn-more/press-releases/Details/over-75-percent-of-us-firms-experienced-payments-fraud-in-2025-while-ai-adoption-for-fraud-mitigation-lags" rel="noopener" target="_blank">AFP</a> (2026), 76% of US organizations experienced attempted or actual payments fraud in 2025, BUT only 17% use AI to combat it.</strong> AFP surveyed 465 US treasury practitioners in January 2026. Treat supplier onboarding and banking-detail changes as control points in every tail workflow, with verified supplier records behind each.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s7">KPIs and tracking progress</h2>
+
+    <p><strong>Track 6 tail spend management KPIs against a baseline, or the tail drifts back into old habits.</strong></p>
+
+    <div class="table-filter">
+      <input type="search" id="kpiFilter" placeholder="Search KPIs, e.g. cycle time" aria-label="Search the KPI table">
+      <span id="kpiCount">6 of 6</span>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table interactive-table" id="kpiTable">
+        <thead>
+          <tr><th>#</th><th>KPI to track</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>1</strong></td><td>Percentage of spend under management</td></tr>
+          <tr><td><strong>2</strong></td><td>Supplier count, split into active and passive suppliers</td></tr>
+          <tr><td><strong>3</strong></td><td>On-contract spend and contract coverage</td></tr>
+          <tr><td><strong>4</strong></td><td>Maverick spend rate</td></tr>
+          <tr><td><strong>5</strong></td><td>Cost per transaction and requisition-to-order cycle time</td></tr>
+          <tr><td><strong>6</strong></td><td>Savings achieved against baseline</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong><a href="https://www.datocms-assets.com/80283/1744404602-ardent-partners-ap-metrics-that-matter-in-2025-pagero-final.pdf" rel="noopener" target="_blank">Ardent Partners</a> (2025) puts the average all-inclusive cost to process one invoice at $9.40, against $2.78 for best-in-class teams.</strong> Invoice processing is only one transaction type, so treat the figure as a reference point for your own cost-per-transaction baseline.</p>
+
+    <p><strong>Review these <a href="https://www.jaggaer.com/blog/spend-analytics-optimization-visibility-kpis-control" rel="noopener" target="_blank">spend analytics KPIs</a> monthly and publish them to buying departments.</strong> Visible results make the compliant route the easier choice. Revisit your tail cutoff every year as well.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s8">Higher education tail spend: a university case study</h2>
+
+    <p><strong>Higher education tail spend management has to fit how departments, labs and faculty actually buy, because purchasing is decentralized.</strong> <a href="https://www.jaggaer.com/vertical/education-procurement" rel="noopener" target="_blank">Higher education procurement</a> teams usually start with visibility: where spend sits, which suppliers overlap and which purchases already follow contract.</p>
+
+    <p><strong>According to the <a href="https://www.govinfo.gov/content/pkg/FR-2025-08-27/html/2025-16412.htm" rel="noopener" target="_blank">Federal Register</a> (2025), the FAR micro-purchase threshold rose from $10,000 to $15,000, and the simplified acquisition threshold from $250,000 to $350,000.</strong> Both took effect on October 1, 2025. For award recipients, the FAR amount is the default threshold under 2 CFR 200. The FAR itself sets lower figures for some categories, such as $2,000 for construction under Davis-Bacon wage rules.</p>
+
+    <p><strong>Under <a href="https://www.ecfr.gov/current/title-2/part-200/section-200.320" rel="noopener" target="_blank">2 CFR § 200.320</a> (as revised in 2024), a micro-purchase can be awarded without competitive quotes when the price is reasonable and documented.</strong> Purchase cards may be used as a method of payment. Institutions can self-certify a higher threshold of up to $50,000 a year. That needs a justification and one supporting basis: low-risk auditee status, an annual risk assessment or, for public institutions, state law. The same section asks institutions to spread micro-purchases equitably among qualified suppliers where practicable, so check how supplier consolidation fits with your compliance office. These rules apply to purchases under federal awards. Your tail cutoff is a separate policy choice.</p>
+
+    <p><a href="https://www.federalregister.gov/documents/2026/05/29/2026-10817/regulation-for-federal-financial-assistance" rel="noopener" target="_blank">OMB proposed a rewrite</a> of 2 CFR 200 on May 29, 2026. <strong>As of October 2026, Congress has barred OMB from finalizing it through December 11, 2026 (<a href="https://www.congress.gov/crs-product/LSB11464" rel="noopener" target="_blank">Congressional Research Service</a>, 2026).</strong> Work from the current text, and recheck after that date. For detail, see Jaggaer's guide to <a href="https://www.jaggaer.com/blog/omb-uniform-guidance-university-procurement-2026" rel="noopener" target="_blank">OMB Uniform Guidance for university procurement</a> and the <a href="https://www.jaggaer.com/blog/grant-procurement-compliance-checklist-2026" rel="noopener" target="_blank">grant procurement compliance</a> checklist.</p>
+
+    <div class="hook-stat">
+      <p><strong>Customer results in higher education:</strong> The University of Virginia began with a state compliance requirement. Jaggaer eProcurement put catalogs of contracted products and services behind one purchasing process. Off-catalog purchases fell <span class="stat-num">70%</span> where catalog purchasing is available (<a href="https://jaggaer.com/wp-content/uploads/University-of-Virginia-EN.pdf" rel="noopener" target="_blank">Jaggaer success story, University of Virginia</a>). At the University of North Carolina at Greensboro, the share of addressable spend running through Jaggaer grew from about <span class="stat-num">13%</span> in 2011 to <span class="stat-num">90%</span>. The remaining <span class="stat-num">10%</span> covers P-card and reimbursement transactions (<a href="https://www.jaggaer.com/success-stories/uncg" rel="noopener" target="_blank">Jaggaer success story, UNC Greensboro</a>). At Wayne State University, P-card spend fell about <span class="stat-num">20%</span>, from about <span class="stat-num">$12 million</span> to <span class="stat-num">$10 million</span> a year (<a href="https://www.jaggaer.com/success-stories/wayne-state-university" rel="noopener" target="_blank">Jaggaer success story, Wayne State University</a>). Purchases moved into eProcurement instead.</p>
+    </div>
+
+    <p>Supplier banking-detail controls matter on every payment, not only tail spend. <strong>In 2017, Southern Oregon University sent about $1.9 million to a bank account its contractor did not control (<a href="https://news.sou.edu/2017/06/effort-underway-to-recover-funds-stolen-from-sou/" rel="noopener" target="_blank">Southern Oregon University</a>, 2017).</strong> An email scheme, in which someone posed as a contractor official, redirected the payment. It was a construction payment, not tail spend, but it shows why every banking-detail change needs independent verification.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer eProcurement and catalogs work for higher education</p>
+        <p class="jag-cta-desc">Jaggaer eProcurement is an online private marketplace that incorporates electronic catalogs of contracted products and services for easy web-based ordering. At the University of Virginia, it helped overhaul the business process and align every purchase made by the organization.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s9">FAQ</h2>
+
+    <details class="faq-item">
+      <summary>What is tail spend management? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Tail spend management is the process of identifying, controlling and reducing low-value, fragmented purchases outside strategic contracts. <a href="https://www.rolandberger.com/en/Insights/Publications/Unlocking-the-hidden-value-in-tail-spend-How-small-moves-create-big-impact.html" rel="noopener" target="_blank">Roland Berger</a> (2026) says tail suppliers typically make up 80–90% of the vendor base but only about 20% of indirect spend. Teams manage it through analysis, controlled buying channels and supplier consolidation.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do you calculate tail spend? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Rank suppliers by annual spend, calculate cumulative spend as a percentage of the total and mark where it reaches 80%, or your documented cutoff. Every supplier beyond that point is your tail. State your metric (spend, suppliers or transactions) and your cutoff, then review both each year.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What are examples of tail spend? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Common indirect examples include office supplies, consumables, facilities repairs, marketing services, one-off consulting and temporary labor. Direct examples include prototype parts, test housings and emergency fasteners. Each is small, infrequent and often bought outside contract.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do you reduce tail spend? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Move repeatable buys into catalogs, marketplaces and P-cards. Consolidate overlapping suppliers by category and retire inactive suppliers. <a href="https://www.rolandberger.com/en/Insights/Publications/Unlocking-the-hidden-value-in-tail-spend-How-small-moves-create-big-impact.html" rel="noopener" target="_blank">Roland Berger</a> (2026) reports that well-designed programs typically generate 13–25% in savings.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the difference between tail spend and maverick spend? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Tail spend describes the size and fragmentation of a purchase. Maverick spend describes buying outside policy or contract. A tail purchase through an approved catalog is compliant. A large off-contract purchase is maverick spend but not tail spend.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is higher education tail spend? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Higher education tail spend is the volume of small, decentralized purchases made by departments, labs and faculty. For federal awards, the FAR sets default thresholds of $15,000 for micro-purchases and $350,000 for simplified acquisitions, according to the <a href="https://www.govinfo.gov/content/pkg/FR-2025-08-27/html/2025-16412.htm" rel="noopener" target="_blank">Federal Register</a> (2025).</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the difference between direct and indirect spend? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Direct spend buys the materials and labor that go into your product. Indirect spend buys goods and services that support operations, such as MRO, IT and facilities. Tail spend appears in both categories, though it is often found in indirect ones.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <h2 id="s10">Next steps</h2>
+
+    <p><strong>Start with the analysis, because every other step depends on it.</strong> Run the 6 steps of tail spend analysis on 12 months of spend. Fix your tail definition. Pick one repeatable category to move into a controlled channel first. Then track the KPIs against that baseline.</p>
+
+    <p><strong>You decide how far to automate.</strong> Tail spend management scales when your data, your policies and your buying channels work from the same record. For the full framework, read Jaggaer's <a href="https://www.jaggaer.com/blog/strategic-spend-management-complete-guide" rel="noopener" target="_blank">strategic spend management</a> guide.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer classifies spend and identifies tail spend in your data</p>
+        <p class="jag-cta-desc">Bring your biggest procurement challenge, and Jaggaer listens first, then shows you where Jaggaer One fits. Jaggaer Link connects to 1,000+ business applications, including SAP, Oracle, and Workday.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo &rarr;</a>
+    </div>
+
+
+  </article>
+
+  <aside class="expert-sidebar" aria-label="What the experts are saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">CRS &middot; 2026</span>
+        <span class="exp-num red">Dec 11</span>
+        <p class="exp-stat">As of October 2026, OMB cannot finalize its proposed 2 CFR 200 rewrite on or before this date.</p>
+        <a href="https://www.congress.gov/crs-product/LSB11464" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Kearney, in Supply Chain Management Review &middot; 2026</span>
+        <span class="exp-num red">60&ndash;80%</span>
+        <p class="exp-stat">Share of the supplier base that tail suppliers often make up, for only 10–20% of spend.</p>
+        <a href="https://www.scmr.com/article/ai-and-the-new-economics-of-tail-spend" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Roland Berger &middot; 2026</span>
+        <span class="exp-num red">55%</span>
+        <p class="exp-stat">Expenses among the bottom 20% of indirect spend vendors that are effectively unknown.</p>
+        <a href="https://www.rolandberger.com/en/Insights/Publications/Unlocking-the-hidden-value-in-tail-spend-How-small-moves-create-big-impact.html" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">AFP &middot; 2026</span>
+        <span class="exp-num red">76%</span>
+        <p class="exp-stat">US organizations that faced attempted or actual payments fraud in 2025.</p>
+        <a href="https://www.financialprofessionals.org/about/learn-more/press-releases/Details/over-75-percent-of-us-firms-experienced-payments-fraud-in-2025-while-ai-adoption-for-fraud-mitigation-lags" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+
+/* Toggle box: expertise gap vs. process gap */
+function jagToggle(targetId, btn) {
+  const box = btn.closest('.toggle-box');
+  box.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  box.querySelectorAll('.toggle-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  box.querySelector('#' + targetId).classList.add('active');
+}
+
+/* Decision-check widget */
+const decisionCopy = {
+  repeat: {head: "Consider a source-to-pay platform.", body: "Repeatable work such as PO processing, invoice matching, and approval routing may be better addressed through automation."},
+  expertise: {head: "Consider selective outsourcing.", body: "External support may help when specialized category expertise is missing internally."},
+  capacity: {head: "Consider time-bound outsourcing.", body: "External support can add temporary capacity for M&A integrations or major sourcing programs."},
+  strategy: {head: "Keep strategic ownership internal.", body: "Consider technology or selective external expertise for the supporting activities, not the decision itself."}
+};
+document.querySelectorAll('input[name="decisionQ"]').forEach(input => {
+  input.addEventListener('change', () => {
+    const result = document.getElementById('decisionResult');
+    const choice = decisionCopy[input.value];
+    result.innerHTML = '<strong>' + choice.head + '</strong> ' + choice.body;
+    result.classList.add('show');
+    document.getElementById('decisionReset').style.display = 'inline-block';
+  });
+});
+function jagResetDecision() {
+  document.querySelectorAll('input[name="decisionQ"]').forEach(i => i.checked = false);
+  const result = document.getElementById('decisionResult');
+  result.classList.remove('show');
+  result.textContent = '';
+  document.getElementById('decisionReset').style.display = 'none';
+}
+</script>
+
+<script>
+/* Five-question check */
+const fiveQ = document.querySelectorAll('#fiveQ input');
+fiveQ.forEach(c => c.addEventListener('change', () => {
+  const n = [...fiveQ].filter(x => x.checked).length;
+  document.getElementById('fiveQCount').textContent = n + ' of 5';
+}));
+
+/* Column highlight for comparison tables */
+document.querySelectorAll('.col-toggle').forEach(box => {
+  const table = document.getElementById(box.dataset.for);
+  box.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+    const on = btn.classList.contains('active');
+    box.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    table.querySelectorAll('.col-on').forEach(c => c.classList.remove('col-on'));
+    if (!on) {
+      btn.classList.add('active');
+      table.querySelectorAll('tr > :nth-child(' + btn.dataset.col + ')').forEach(c => c.classList.add('col-on'));
+    }
+  }));
+});
+
+/* KPI search */
+const kpiInput = document.getElementById('kpiFilter');
+const kpiRows = document.querySelectorAll('#kpiTable tbody tr');
+kpiInput.addEventListener('input', () => {
+  const q = kpiInput.value.trim().toLowerCase();
+  let n = 0;
+  kpiRows.forEach(r => { const show = !q || r.textContent.toLowerCase().includes(q); r.style.display = show ? '' : 'none'; if (show) n++; });
+  document.getElementById('kpiCount').textContent = n + ' of ' + kpiRows.length;
+});
+
+/* Kraljic matrix */
+document.querySelectorAll('.k-cell').forEach(c => c.addEventListener('click', () => {
+  const on = c.classList.contains('active');
+  document.querySelectorAll('.k-cell').forEach(x => x.classList.remove('active'));
+  if (!on) c.classList.add('active');
+}));
+</script>
+
+</body>
+</html>
