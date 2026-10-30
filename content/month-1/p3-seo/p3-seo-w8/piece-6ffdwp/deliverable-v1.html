@@ -1,0 +1,822 @@
+<!-- uploaded by m-5jitd at 2026-10-30T11:49:14.712Z -->
+<!-- piece: What Is CLM? Meaning, Stages and How CLM Software Works -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What Is CLM? Meaning, Stages and How CLM Software Works</title>
+<meta name="description" content="Learn what CLM means, the nine stages of the contract lifecycle and how CLM software works to improve compliance, speed and visibility.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/what-is-clm-contract-lifecycle-management">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "What Is CLM? Meaning, Stages and How CLM Software Works", "description": "Learn what CLM means, the nine stages of the contract lifecycle and how CLM software works to improve compliance, speed and visibility.", "datePublished": "2026-01-09", "dateModified": "2026-10-30", "keywords": "clm software, what is clm software, clm tool, what is contract lifecycle management, clm system, clm contract lifecycle management, what is a clm system, ai contract management software, stages of contract lifecycle management", "publisher": {"@type": "Organization", "name": "JAGGAER", "url": "https://www.jaggaer.com"}, "author": {"@type": "Person", "name": "Visnja"}, "mainEntityOfPage": "https://www.jaggaer.com/blog/what-is-clm-contract-lifecycle-management"}
+</script>
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a CLM system?", "acceptedAnswer": {"@type": "Answer", "text": "A CLM system is a platform that manages contracts from request to renewal in one workflow. It holds the contract record, routes approvals by rule, tracks obligations and alerts owners before renewal dates."}}, {"@type": "Question", "name": "What is CLM software used for?", "acceptedAnswer": {"@type": "Answer", "text": "Teams use CLM software to draft contracts from approved templates, route approvals, store signed agreements as searchable data and track obligations. Procurement teams also use it to carry contract terms into purchasing and invoicing."}}, {"@type": "Question", "name": "Is CLM a CRM tool?", "acceptedAnswer": {"@type": "Answer", "text": "CLM is not a CRM tool: CLM governs the agreements, while CRM governs the customer pipeline. The two often integrate, so sales teams can start a contract from a CRM record."}}, {"@type": "Question", "name": "What are the five stages of contract lifecycle management?", "acceptedAnswer": {"@type": "Answer", "text": "A 5-stage model usually covers request and creation, negotiation, approval and execution, obligation management, and renewal or termination. The 9-stage model splits the same work into finer steps that CLM software tracks one by one."}}, {"@type": "Question", "name": "What is AI contract management software?", "acceptedAnswer": {"@type": "Answer", "text": "AI contract management software uses AI to extract clauses and dates, flag deviations from approved language and summarize contracts. Choose tools that cite the source clause for every answer and keep a person approving every change."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs:      0.8125rem;
+  --font-size-sm:      0.8125rem;
+  --font-size-base:    1rem;
+  --font-size-lg:      1rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2rem, calc(1.72rem + 1.05vw), 2.25rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul,ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li,ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:980px;}
+.article-tags{display:flex;gap:.5rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.tag-pill{display:inline-flex;align-items:center;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--color-navy);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:999px;padding:.4rem .9rem;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:980px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.8125rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1480px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:230px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:980px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+article h3.sub-question{font-size:var(--font-size-h4);text-transform:none;letter-spacing:-0.01em;font-weight:700;border-bottom:none;padding-bottom:0;}
+
+/* Comparison / data tables */
+.table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.data-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:520px;}
+.data-table th{background:var(--purple-tint-2);color:var(--color-navy);font-family:var(--font-display);font-weight:700;font-size:.8125rem;text-align:left;padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--purple-soft);}
+.data-table td{padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--color-ink-2);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--color-cream);}
+.data-table td strong,.data-table th strong{color:var(--color-ink);}
+
+/* Roadmap / framework phase cards */
+.phase-cards{display:flex;flex-direction:column;gap:2px;margin:var(--space-m) 0 var(--space-l);border-radius:var(--border-radius-sm);overflow:hidden;border:var(--border);}
+.phase-item{display:flex;gap:var(--space-m);padding:var(--space-s) var(--space-m);background:var(--color-white);align-items:flex-start;}
+.phase-num{flex-shrink:0;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);}
+.phase-body{flex:1;min-width:0;}
+.phase-title{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink);margin-bottom:.15rem;display:block;}
+.phase-desc{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.6;}
+
+/* Hook stat contrast callout */
+.hook-stat{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.hook-stat p{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.65;}
+.hook-stat .stat-num{font-family:var(--font-display);font-weight:700;color:var(--color-ink-3);}
+
+/* Interactive toggle: expertise gap vs process gap */
+.toggle-box{border:1.5px solid var(--purple-soft);border-radius:var(--border-radius);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--purple-tint-3);}
+.toggle-head{display:flex;gap:.4rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.toggle-btn{font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.02em;color:var(--jai-a);background:var(--color-white);border:1.5px solid var(--purple-soft);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.toggle-btn:hover{border-color:var(--jai-a);}
+.toggle-btn.active{background:var(--jai-gradient);color:#fff;border-color:transparent;}
+.toggle-panel{display:none;}
+.toggle-panel.active{display:block;animation:fadeIn .25s ease;}
+.toggle-panel p{margin-bottom:.6rem;}
+.toggle-panel p:last-child{margin-bottom:0;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* Decision-checker widget */
+.decision-widget{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-l) var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.decision-widget-head{font-family:var(--font-display);font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);margin:0 0 var(--space-2xs);}
+.decision-widget-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0 0 var(--space-m);}
+.decision-options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:var(--space-m);}
+.decision-option{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem var(--space-s);border:var(--border);border-radius:var(--border-radius-sm);cursor:pointer;transition:border-color .2s,background .2s;font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-option:hover{border-color:var(--jai-a);background:var(--purple-tint-3);}
+.decision-option input{margin-top:.2rem;accent-color:var(--jai-a);}
+.decision-result{display:none;background:var(--color-cream);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-result.show{display:block;animation:fadeIn .25s ease;}
+.decision-reset{display:inline-block;margin-top:var(--space-s);font-size:.8125rem;font-weight:600;color:var(--color-teal);cursor:pointer;background:none;border:none;padding:0;border-bottom:1px solid #4D819440;font-family:var(--font-base);}
+.decision-reset:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Benefit / risk checklist */
+.diag-checklist{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.diag-checklist ul{list-style:none;padding-left:0;margin-bottom:0;}
+.diag-checklist li{position:relative;padding-left:1.6rem;margin-bottom:.55rem;font-size:var(--font-size-base);}
+.diag-checklist li:last-child{margin-bottom:0;}
+.diag-checklist li::before{content:"";position:absolute;left:0;top:.2rem;width:1.05rem;height:1.05rem;border-radius:4px;border:1.5px solid var(--color-teal);background:var(--color-white);}
+.diag-checklist li::after{content:"✓";position:absolute;left:.22rem;top:-.05rem;color:var(--color-teal);font-size:.8125rem;font-weight:700;}
+
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--color-ink);line-height:1.15;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.8125rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-link{font-size:.8125rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.page-wrapper{flex-wrap:wrap;}.expert-sidebar{position:static;width:100%;max-height:none;padding:0 0 var(--space-l) 0;order:99;}.exp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;}.exp-item{border-bottom:none;border-right:1px solid var(--purple-soft);}}
+@media(max-width:640px){.expert-sidebar .exp-list{grid-template-columns:1fr;}.expert-sidebar .exp-item{border-right:none;border-bottom:1px solid var(--purple-soft);}}
+
+/* CTA block */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-base);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:var(--font-size-base);font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-base);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;line-height:1;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Additions for this article (components from sister references) */
+.lede{font-size:1.0625rem;color:var(--color-ink);}
+.link-pending{color:var(--color-teal);border-bottom:1px dashed #4D819480;cursor:default;}
+.section-eyebrow{display:block;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-teal);margin:var(--space-l) 0 calc(-1 * var(--space-s));}
+.jag-cta-label{display:inline-block;font-size:.8125rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--color-red);padding:.15rem .7rem;border-radius:9999px;white-space:nowrap;margin-bottom:.35rem;}
+.jag-cta-sub{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.criteria-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin:var(--space-m) 0 var(--space-l);}
+.criteria-card{display:flex;flex-direction:column;border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.9rem 1rem;background:linear-gradient(180deg,var(--purple-tint-3),var(--color-white) 55%);}
+.criteria-head{display:flex;align-items:center;gap:.55rem;margin-bottom:.5rem;}
+.criteria-badge{width:1.85rem;height:1.85rem;border-radius:50%;background:var(--jai-gradient);color:#fff;font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.criteria-title{font-family:var(--font-display);font-size:.82rem;font-weight:700;color:var(--color-ink);text-transform:uppercase;letter-spacing:.02em;margin:0;}
+.criteria-desc{font-size:.95rem;color:var(--color-ink-2);line-height:1.55;margin:0 0 .5rem;}
+.criteria-test{font-size:.95rem;color:var(--color-ink-2);line-height:1.55;margin:auto 0 0;padding-top:.5rem;border-top:1px dashed var(--purple-soft);}
+.criteria-test span{font-weight:700;color:var(--jai-a);}
+@media(max-width:620px){.criteria-grid{grid-template-columns:1fr;}}
+.callout-note{background:var(--color-light-blue);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:.8rem 1rem;margin:var(--space-m) 0;}
+.callout-note-label{display:block;font-size:.8125rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-2xs);}
+.callout-note p{margin:0;}
+.hook-stat{display:flex;align-items:center;gap:var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);}
+.hook-stat-num{font-family:var(--font-display);font-size:clamp(1.6rem,2.4vw,2rem);font-weight:800;color:var(--jai-a);line-height:1;flex-shrink:0;}
+.hook-stat-lead{font-weight:600;color:var(--color-ink);margin:0 0 .25rem;}
+.hook-stat-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0;}
+@media(max-width:580px){.hook-stat{flex-direction:column;align-items:flex-start;}}
+.risk-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:var(--space-m) 0 var(--space-l);}
+.risk-item{display:flex;flex-direction:column;border:1px solid var(--purple-soft);border-top:3px solid #B7791F;border-radius:var(--border-radius-sm);padding:.8rem .9rem;background:var(--color-white);}
+.risk-head{display:flex;align-items:center;gap:.55rem;margin-bottom:.45rem;}
+.risk-icon{width:1.9rem;height:1.9rem;border-radius:50%;background:#FBF0DD;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.risk-icon svg{width:15px;height:15px;stroke:#B7791F;}
+.risk-title{font-family:var(--font-display);font-size:.8125rem;font-weight:700;color:var(--color-ink);text-transform:uppercase;letter-spacing:.02em;margin:0;}
+.risk-desc{font-size:.95rem;color:var(--color-ink-2);line-height:1.55;margin:0;}
+@media(max-width:820px){.risk-cards{grid-template-columns:1fr;}}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:var(--space-m) 0 .4rem;border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);overflow:hidden;background:var(--purple-soft);}
+.stat-cell{background:var(--purple-tint-3);padding:.85rem .9rem;}
+.stat-big{display:block;font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--color-ink);line-height:1.1;}
+.stat-cap{display:block;font-size:.85rem;color:var(--color-ink-2);line-height:1.4;margin-top:.2rem;}
+.stat-row-source{font-size:.8125rem;color:var(--color-ink-3);margin-bottom:var(--space-m);}
+@media(max-width:700px){.stat-row{grid-template-columns:repeat(2,1fr);}}
+.scorecard{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.scorecard-head{font-family:var(--font-display);font-size:1.05rem;font-weight:700;color:var(--color-ink);margin:0 0 .2rem;}
+.scorecard-sub{font-size:.9rem;color:var(--color-ink-3);margin:0 0 var(--space-s);}
+.scorecard-wrap{margin:0 0 var(--space-s);}
+.scorecard-table td{vertical-align:middle;}
+.scorecard-table input{width:4.2rem;padding:.3rem .4rem;font:inherit;font-size:.95rem;border:1px solid var(--border-color);border-radius:6px;text-align:center;color:var(--color-ink);background:var(--color-white);}
+.scorecard-table input:focus{outline:2px solid var(--jai-a);outline-offset:1px;}
+.scorecard-table tfoot td{font-weight:700;color:var(--color-ink);background:var(--purple-tint);border-top:1px solid var(--purple-soft);}
+.scorecard-table td.sc-best{color:var(--jai-a);}
+.scorecard-note{font-size:.85rem;color:var(--color-ink-3);margin:0;}
+.scorecard-note.warn{color:var(--color-red);font-weight:600;}
+.next-grid{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0;}
+.next-card{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);flex-wrap:wrap;transition:border-color .2s,box-shadow .2s;}
+.next-card:hover{border-color:var(--jai-a);box-shadow:0 4px 16px rgba(83,0,206,.08);}
+.next-card-title{font-weight:700;color:var(--color-ink);margin:0 0 .2rem;}
+.next-card-desc{font-size:.95rem;color:var(--color-ink-2);margin:0;}
+.next-card-link{flex-shrink:0;font-size:.88rem;font-weight:600;color:var(--jai-a);border-bottom:1px solid #5300ce40;white-space:nowrap;}
+
+/* Style Guide 9.1: body 12pt; no supporting text under 12px */
+.expert-sidebar{width:230px;}
+.exp-stat{font-size:.8125rem;}
+article h3.sub-question{margin-top:var(--space-l);}
+</style>
+
+</head>
+<body>
+
+<div id="progress-bar" style="position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;"></div>
+
+<div class="page-wrapper">
+
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Does Contract Lifecycle Management Stand For?</a>
+      <a class="toc-link" href="#s2">The Stages of Contract Lifecycle Management</a>
+      <a class="toc-link" href="#s3">How CLM Software Works</a>
+      <a class="toc-link" href="#s4">Key Benefits of Contract Lifecycle Management</a>
+      <a class="toc-link" href="#s5">How Do Different Teams Use CLM?</a>
+      <a class="toc-link" href="#s6">How Automation and AI Contract Management Software Are Elevating CLM</a>
+      <a class="toc-link" href="#s7">How Do You Get Started With CLM Software?</a>
+      <a class="toc-link" href="#experts">What the Experts Are Saying</a>
+      <a class="toc-link" href="#s8">Frequently Asked Questions</a>
+      <a class="toc-link" href="#s9">Summary: CLM Software in 2026</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-tags">
+          <span class="tag-pill">Contract Lifecycle Management</span>
+          <span class="tag-pill">Explainer</span>
+        </div>
+        <h1>What Is CLM? Meaning, Stages and How CLM Software Works</h1>
+        <div class="article-meta">
+          <span class="meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 11 min read</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Published <time datetime="2026-01-09">January 2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Updated <time datetime="2026-10-30">October 2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Visnja</span>
+        </div>
+      </div>
+    </header>
+
+    <p class="lede"><strong>CLM (contract lifecycle management) is the process of managing a contract from first request to renewal or exit.</strong> It runs through 9 stages, from intake and drafting to approvals, signature, obligations, renewal and analytics. CLM software runs those stages on one platform, giving every contract one record, one workflow and one audit trail.</p>
+
+    <p>Measure CLM by what happens after signature. <strong>According to <a href="https://info.worldcc.com/closing-the-procurement-value-gap" target="_blank" rel="noopener">2026 value-gap research from World Commerce &amp; Contracting (WorldCC)</a>, organizations lose an average of 11% of the value of procurement contracts.</strong> The same research places that leakage after signature, in how teams turn terms into behavior, governance and relationships.</p>
+
+    <p>Post-signature value depends on whether contract terms reach purchasing and invoicing, the focus of buy-side CLM inside procurement suites. For governance, integration and AI in depth, see the <a href="https://www.jaggaer.com/blog/contract-lifecycle-management-clm-guide" target="_blank" rel="noopener" title="Pillar">complete guide to contract lifecycle management</a>.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">IDC MarketScape &middot; 2025</span>
+        <p class="jag-cta-head">Download IDC's 2025 MarketScape excerpt on buy-side CLM inside procurement suites &rarr;</p>
+        <p class="jag-cta-sub">IDC assesses how CLM grew from a basic legal function into an enterprise capability, and names JAGGAER a Leader. Provided by JAGGAER.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/analyst-report/idc-marketscape-worldwide-ai-enabled-buy-side-clm-2025" class="jag-cta-btn" target="_blank" rel="noopener">Download the IDC Excerpt</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">One term, two meanings</span>
+    <h2 id="s1">What Does Contract Lifecycle Management Stand For?</h2>
+
+    <p><strong>CLM stands for contract lifecycle management: a discipline for running contracts and the software category that automates it.</strong> What is contract lifecycle management in practice? It covers the rules, workflows and data that carry a contract from request to renewal, expiry or termination.</p>
+
+    <p>The discipline decides who requests, drafts, approves and owns each contract. <strong>CLM software enforces those decisions, so the process stops depending on inboxes and shared drives.</strong> Today, buy-side contracting usually sits inside a wider <a href="https://www.jaggaer.com/solutions/source-to-contract" target="_blank" rel="noopener">source-to-contract</a> process within source-to-pay.</p>
+
+    <p>Storage alone does not make a CLM system. <strong>In a 2026 survey of 170 respondents by <a href="https://www.businesswire.com/news/home/20260518870836/en/" target="_blank" rel="noopener">WorldCC and Sirion</a>, shared drives remain a primary storage location for 71% of North American respondents.</strong> Those files hold the terms but do not act on them.</p>
+
+    <h3>CLM vs. Contract Management</h3>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th></th><th>Contract management</th><th>Contract lifecycle management (CLM)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Scope</strong></td><td>Mostly after signature</td><td>Request to renewal, before and after signature</td></tr>
+          <tr><td><strong>Main job</strong></td><td>Store contracts and track dates</td><td>Create, negotiate, approve, sign, track and renew</td></tr>
+          <tr><td><strong>Typical tool</strong></td><td>Repository or shared drive</td><td>Connected platform with workflows and analytics</td></tr>
+          <tr><td><strong>Main users</strong></td><td>Legal or a contract administrator</td><td>Legal, procurement, finance, sales and operations</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">9 stages, 3 phases</span>
+    <h2 id="s2">The Stages of Contract Lifecycle Management</h2>
+
+    <p><strong>The stages of contract lifecycle management run from intake to analytics, and most models use 5 to 9 of them.</strong> CLM software supports all 9 stages below, grouped into 3 phases: pre-signature, signature and post-signature. For a walkthrough that groups the same work into 6 stages, see <a href="https://www.jaggaer.com/blog/clm-process-from-creation-to-renewal" target="_blank" rel="noopener">the CLM process from creation to renewal</a>.</p>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Stage</th><th>What happens</th><th>Who is usually involved</th><th>In the 6-stage view</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>1. Intake and request</strong></td><td>The business requests a new contract or amendment, with scope, value and risk level.</td><td>Business owner and procurement</td><td>Request and creation</td></tr>
+          <tr><td><strong>2. Authoring and drafting</strong></td><td>The first draft starts from templates and approved clauses.</td><td>Legal, with procurement on commercial terms</td><td>Request and creation</td></tr>
+          <tr><td><strong>3. Negotiation</strong></td><td>The parties exchange redlines on scope, price, obligations and risk.</td><td>Legal on wording, procurement on price</td><td>Review and negotiation</td></tr>
+          <tr><td><strong>4. Approvals</strong></td><td>Reviewers check the contract against legal, financial and policy rules.</td><td>Legal, procurement, finance and compliance</td><td>Approval and execution</td></tr>
+          <tr><td><strong>5. Signature and execution</strong></td><td>The parties sign, usually by e-signature, and the contract becomes binding.</td><td>Authorized signatories</td><td>Approval and execution</td></tr>
+          <tr><td><strong>6. Obligation and performance management</strong></td><td>Teams track delivery, service levels, pricing and invoicing against the terms.</td><td>Procurement and the business owner</td><td>Storage, obligations and performance monitoring</td></tr>
+          <tr><td><strong>7. Amendments</strong></td><td>Changes to scope, price or dates go through controlled revision and re-approval.</td><td>Any stakeholder</td><td>Renewal or termination</td></tr>
+          <tr><td><strong>8. Renewal or termination</strong></td><td>Before expiry, the team decides to renew, renegotiate or exit.</td><td>Procurement, with legal for formal notices</td><td>Renewal or termination</td></tr>
+          <tr><td><strong>9. Archival and analytics</strong></td><td>The contract and its data feed reporting on risk, spend and renewals.</td><td>Procurement, legal and finance</td><td>Storage and obligation management</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">Pre-signature: stages 1 to 4</span>
+          <p class="phase-desc">Agree terms from approved language, with the right approvals.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">Signature: stage 5</span>
+          <p class="phase-desc">Make the contract binding.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Post-signature: stages 6 to 9</span>
+          <p class="phase-desc">Make the contract deliver what it promised.</p>
+        </div>
+      </div>
+    </div>
+
+    <p><strong>Point your CLM software at stages 6 to 9 first.</strong> WorldCC's 2026 value-gap research finds value leakage happens after signature, when procurement and legal frequently step away. Name an owner for every contract after signature.</p>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">One record, one workflow</span>
+    <h2 id="s3">How CLM Software Works</h2>
+
+    <p><strong>CLM software works by giving every contract one record that moves through one rule-based workflow, from intake form to renewal alert.</strong> Vendors may call the product a CLM tool or a CLM system; the names mean the same thing.</p>
+
+    <h3 class="sub-question">What Is a CLM System?</h3>
+
+    <p><strong>A CLM system is one platform that holds the contract, its data and its workflow together.</strong> Each request starts as a structured intake. Each signed contract becomes searchable data, not a PDF.</p>
+
+    <div class="criteria-grid">
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">1</span><p class="criteria-title">Central repository</p></div>
+        <p class="criteria-desc">Every contract in one searchable place, with clause-level data and permission controls.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">2</span><p class="criteria-title">Templates and clause library</p></div>
+        <p class="criteria-desc">Approved language, fallback clauses and version control, so drafts start from a safe baseline.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">3</span><p class="criteria-title">Approval workflows</p></div>
+        <p class="criteria-desc">Routing by contract type, value, region or risk, with every approval logged.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">4</span><p class="criteria-title">Negotiation tools</p></div>
+        <p class="criteria-desc">Side-by-side redlining, comparison and change tracking with the other party.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">5</span><p class="criteria-title">Obligations and renewals</p></div>
+        <p class="criteria-desc">Owners, due dates and alerts for milestones, notice periods and renewal windows.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">6</span><p class="criteria-title">Analytics</p></div>
+        <p class="criteria-desc">Dashboards on cycle times, renewals, spend under contract and risk.</p>
+      </div>
+    </div>
+
+    <h3>How a Contract Moves Through a CLM System</h3>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">Request</span>
+          <p class="phase-desc">An intake form captures scope, value and risk.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">Draft</span>
+          <p class="phase-desc">The system picks a template and pre-fills known data.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Negotiate and approve</span>
+          <p class="phase-desc">Redlines and approvals run in one place, with full history.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <span class="phase-title">Sign and store</span>
+          <p class="phase-desc">The signed contract lands in the repository as data.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">5</span>
+        <div class="phase-body">
+          <span class="phase-title">Track and renew</span>
+          <p class="phase-desc">Alerts flag obligations, milestones and renewal dates to named owners.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Connect CLM software to the systems that buy and pay. <strong>In the 2026 WorldCC and Sirion survey of 170 respondents, 54% of organizations reported no automated data flow between systems.</strong> Only 9% had bidirectional synchronization. For the patterns that close that gap, see <a href="https://www.jaggaer.com/blog/integrating-clm-with-procurement-finance-crm" target="_blank" rel="noopener">integrating CLM with procurement, finance and CRM</a>.</p>
+
+    <p>On the buy side, test whether your CLM software carries contract terms to the purchase order and the invoice. <strong>JAGGAER's contract management page describes that link: purchases go to contracted suppliers, spend tracks against contract and suppliers invoice against a contract.</strong></p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">JAGGAER Product Brief</span>
+        <p class="jag-cta-head">See how JAGGAER Contracts links sourcing to purchasing: download the product brief &rarr;</p>
+        <p class="jag-cta-sub">The brief describes JAGGAER Contracts as the bridge between upstream and downstream procurement processes.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/product-brief/jaggaer-contracts" class="jag-cta-btn" target="_blank" rel="noopener">Download the Brief</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Proof, not adjectives</span>
+    <h2 id="s4">Key Benefits of Contract Lifecycle Management</h2>
+
+    <p><strong>CLM delivers 4 benefits: lower risk, faster turnaround, clearer visibility and protected savings.</strong> Each one targets a point where contract value slips. For the full business case, see the <a href="https://www.jaggaer.com/blog/benefits-of-contract-lifecycle-management" target="_blank" rel="noopener">business benefits of CLM</a>.</p>
+
+    <p>Start with the size of the gap. <strong>WorldCC's 2026 research describes the 11% average loss on procurement contracts as an accumulation of failures, including missed savings, unmanaged clauses and unauthorized changes.</strong> It adds that the figure can often run significantly higher, because most organizations do not formally track value leakage.</p>
+
+    <h3>Stronger Compliance and Reduced Risk</h3>
+    <p><strong>Start every contract from approved clauses and keep a record of every change.</strong> Alerts flag obligations and notice periods before they lapse. The outcome: <a href="https://www.jaggaer.com/blog/how-clm-reduces-business-risk-governance" target="_blank" rel="noopener">reduced risk</a> across the portfolio, with an audit trail behind every approval.</p>
+
+    <h3>Faster Contract Turnaround</h3>
+    <p><strong>Route approvals by rule, not by email.</strong> Templates, automated routing and e-signature in CLM software remove manual hand-offs, so contracts spend less time waiting in inboxes.</p>
+
+    <h3>Better Visibility and Control</h3>
+    <p><strong>One repository shows leaders and auditors what you have committed to, which terms apply and what renews next quarter.</strong> In complex portfolios, CLM software gives each answer from a single source of truth.</p>
+
+    <h3>Protected Savings</h3>
+    <p><strong>Negotiated <a href="https://www.jaggaer.com/blog/clm-value-across-supplier-lifecycle" target="_blank" rel="noopener">savings</a> only land when the contract governs buying.</strong> Use CLM software to track supplier performance against agreed terms and review price, rebate and volume clauses before renewal.</p>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th></th><th>Without CLM</th><th>With CLM software</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Finding a contract</strong></td><td>Search emails and shared drives</td><td>Search one repository</td></tr>
+          <tr><td><strong>Approvals</strong></td><td>Chased by email</td><td>Routed by rules, with a log</td></tr>
+          <tr><td><strong>Renewals</strong></td><td>Missed or auto-renewed</td><td>Flagged in advance to an owner</td></tr>
+          <tr><td><strong>Supplier obligations</strong></td><td>Rarely checked</td><td>Tracked against the terms</td></tr>
+          <tr><td><strong>Contract price at invoice</strong></td><td>Checked by hand, if at all</td><td>Compared with the contracted price</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Procurement &middot; Legal &middot; Finance &middot; Sales</span>
+    <h2 id="s5">How Do Different Teams Use CLM?</h2>
+
+    <p><strong>Procurement, legal, finance and sales use CLM software for different jobs on the same contract record.</strong></p>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Team</th><th>Main job in CLM</th><th>What CLM software does for it</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Procurement</strong></td><td>Supplier contracts, from award to renewal</td><td>Standardizes terms and flags renewals early</td></tr>
+          <tr><td><strong>Legal</strong></td><td>Templates, clause library and risk guardrails</td><td>Enforces approved language and logs negotiation</td></tr>
+          <tr><td><strong>Finance</strong></td><td>Commitments, pricing terms and audit support</td><td>Turns terms into data for forecasts and controls</td></tr>
+          <tr><td><strong>Sales</strong></td><td>Customer agreements and renewals</td><td>Speeds approved drafts and tracks renewals</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Legal teams still need help turning contracts into insight. <strong>In a July 2025 <a href="https://www.gartner.com/en/newsroom/press-releases/2025-10-01-gartner-survey-shows-ai-and-contract-analytics-ar-urgent-priorities-for-general-counsel" target="_blank" rel="noopener">Gartner survey of 104 general counsel</a>, 37% reported relatively low confidence in using advanced contract analytics.</strong> Structured data in CLM software gives that analysis a reliable base.</p>
+
+    <div class="callout-note">
+      <span class="callout-note-label">Illustrative example: direct materials</span>
+      <p>A manufacturer signs a 3-year supply agreement for a machined part with a price-index clause. CLM software stores the index, alerts the buyer before each review and passes the agreed price to purchasing. Invoices above that price stop for review.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Embedded, cited, accountable</span>
+    <h2 id="s6">How Automation and AI Contract Management Software Are Elevating CLM</h2>
+
+    <p><strong>AI elevates CLM by reading contracts at scale, so teams review faster and spot risk earlier while people keep the final decision.</strong></p>
+
+    <p><strong>In the <a href="https://info.worldcc.com/ai-in-contracting-2026" target="_blank" rel="noopener">CCM Institute and WorldCC AI in Contracting 2026 study</a>, 79% expect AI to automate repetitive tasks.</strong> In the same 2026 CCM Institute study, 76% expect AI to reduce time spent drafting and reviewing contracts. For use cases at each stage, see <a href="https://www.jaggaer.com/blog/ai-automation-in-contract-lifecycle-management" target="_blank" rel="noopener">AI-enabled CLM</a>.</p>
+
+    <p>Ambition still outruns data. In the 2026 WorldCC and Sirion survey of 170 respondents, 42% of organizations are adopting or implementing AI in contracting. <strong>But only 27% store all executed contracts exclusively in CLM.</strong></p>
+
+    <h3>What It Does, and the Controls to Ask For</h3>
+
+    <p><strong>AI contract management software extracts clauses and dates, flags deviations from approved language and summarizes long agreements.</strong> Inside CLM software, pair each of those capabilities with a control you can check. WorldCC's procurement value gap research notes AI is only 80% correct on obligation tracking without context, so human judgment stays in the loop.</p>
+
+    <div class="diag-checklist">
+      <ul>
+        <li>Does every AI answer cite the clause and contract it came from?</li>
+        <li>Does a person approve every AI-suggested change before it takes effect?</li>
+        <li>Does an audit trail log each AI action, with the user who accepted it?</li>
+        <li>Does your contract data stay yours, outside model training?</li>
+      </ul>
+    </div>
+
+    <p>JAGGAER's JAI page states the same principle for JAGGAER One. JAI suggests, you decide, and every answer cites its source. Where the field heads next is in <a href="https://www.jaggaer.com/blog/future-of-clm-decision-intelligence" target="_blank" rel="noopener">the future of CLM</a>.</p>
+
+    <h3>What Changed in 2026</h3>
+
+    <p><strong>3 findings from 2026 point AI in contracting toward contract value after signature.</strong></p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">The value gap is widening (January 2026)</span>
+          <p class="phase-desc">WorldCC's 2026 research found the 11% average loss of procurement contract value is widening relative to suppliers.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">Value realization topped AI priorities (February 2026)</span>
+          <p class="phase-desc">In the CCM Institute and WorldCC study, contract value realization led practitioners' list of AI implementation priorities.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Contract management drew current AI use (March 2026)</span>
+          <p class="phase-desc">Current procurement AI use concentrates in areas such as contract management, market intelligence and spend analytics. That finding comes from <a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" target="_blank" rel="noopener"><strong>The Hackett Group's 2026 Procurement Key Issues Study</strong></a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">The Hackett Group &middot; 2026</span>
+        <p class="jag-cta-head">Download The Hackett Group's 2026 Procurement Agenda and Key Issues Study &rarr;</p>
+        <p class="jag-cta-sub">The Hackett Group's source for the contract management finding above. Covers 2026 priorities, technology adoption and the Gen AI journey. Provided by JAGGAER.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/analyst-report/the-hackett-group-2026-procurement-agenda-and-key-issues-study" class="jag-cta-btn" target="_blank" rel="noopener">Download the Study</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Start narrow, then scale</span>
+    <h2 id="s7">How Do You Get Started With CLM Software?</h2>
+
+    <p><strong>Start CLM software with one contract family, clean data and named owners, then scale category by category.</strong></p>
+
+    <p>Budget is moving the same way. <strong><a href="https://www.deloitte.com/ch/en/services/consulting/research/procurement-strategy.html" target="_blank" rel="noopener">Deloitte's 2025 Global CPO Survey</a> found Digital Masters, the top quartile of procurement organizations, allocate about 20% of their budget to procurement technology.</strong> That is nearly 2x the relative investment reported in 2023.</p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">Map the current process</span>
+          <p class="phase-desc">List who requests, drafts, approves and owns each contract type today, and where contracts live.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">Agree templates and owners</span>
+          <p class="phase-desc">Bring legal, procurement and finance together on templates, approval rules and post-signature ownership.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Pilot one contract family</span>
+          <p class="phase-desc">Pick a high-volume family, such as supplier master service agreements, and run it end to end.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <span class="phase-title">Connect the systems that act</span>
+          <p class="phase-desc">Link CLM software to sourcing, purchasing, invoicing and your ERP. Get connector pricing in writing, so integration does not become an integration tax.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">5</span>
+        <div class="phase-body">
+          <span class="phase-title">Measure, then scale</span>
+          <p class="phase-desc">Track cycle time, on-time renewals and spend under contract, then add the next contract family to your CLM software.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Straight answers</span>
+    <h2 id="s8">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>What is a CLM system? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">A CLM system is a platform that manages contracts from request to renewal in one workflow. It holds the contract record, routes approvals by rule, tracks obligations and alerts owners before renewal dates.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is CLM software used for? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Teams use CLM software to draft contracts from approved templates, route approvals, store signed agreements as searchable data and track obligations. Procurement teams also use it to carry contract terms into purchasing and invoicing.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is CLM a CRM tool? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">CLM is not a CRM tool: CLM governs the agreements, while CRM governs the customer pipeline. The two often integrate, so sales teams can start a contract from a CRM record.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What are the five stages of contract lifecycle management? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">A 5-stage model usually covers request and creation, negotiation, approval and execution, obligation management, and renewal or termination. The 9-stage model splits the same work into finer steps that CLM software tracks one by one.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is AI contract management software? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">AI contract management software uses AI to extract clauses and dates, flag deviations from approved language and summarize contracts. Choose tools that cite the source clause for every answer and keep a person approving every change.</div>
+    </details>
+
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Keep going</span>
+    <h2 id="s9">Summary: CLM Software in 2026</h2>
+
+    <p><strong>CLM software turns signed contracts into governed data that steers buying, paying and renewal.</strong> Define the process. Centralize the record. Connect the systems that act on it.</p>
+
+    <p>Check analyst coverage before you shortlist. <strong>In its 2025 MarketScape, IDC named JAGGAER a Leader for AI-enabled buy-side contract lifecycle management within suites.</strong> JAGGAER announced this in a September 2025 press release.</p>
+
+    <div class="next-grid">
+      <div class="next-card">
+        <div><p class="next-card-title">The complete CLM guide</p><p class="next-card-desc">Governance, integration and AI across the contract lifecycle.</p></div>
+        <a href="https://www.jaggaer.com/blog/contract-lifecycle-management-clm-guide" class="next-card-link" target="_blank" rel="noopener" title="Pillar">Read the pillar guide &rarr;</a>
+      </div>
+      <div class="next-card">
+        <div><p class="next-card-title">The CLM process</p><p class="next-card-desc">Each stage in depth, from request to renewal.</p></div>
+        <a href="https://www.jaggaer.com/blog/clm-process-from-creation-to-renewal" class="next-card-link" target="_blank" rel="noopener">Read more &rarr;</a>
+      </div>
+      <div class="next-card">
+        <div><p class="next-card-title">The business case for CLM</p><p class="next-card-desc">7 benefits and the metrics to measure them.</p></div>
+        <a href="https://www.jaggaer.com/blog/benefits-of-contract-lifecycle-management" class="next-card-link" target="_blank" rel="noopener">Read more &rarr;</a>
+      </div>
+      <div class="next-card">
+        <div><p class="next-card-title">AI and automation in CLM</p><p class="next-card-desc">How AI applies at each stage, with real use cases.</p></div>
+        <a href="https://www.jaggaer.com/blog/ai-automation-in-contract-lifecycle-management" class="next-card-link" target="_blank" rel="noopener">Read more &rarr;</a>
+      </div>
+    </div>
+
+    <p>Go deeper with the <a href="https://www.jaggaer.com/blog/contract-lifecycle-management-clm-guide" target="_blank" rel="noopener" title="Pillar">complete guide to contract lifecycle management</a>. <strong>To see the buy-side approach in practice, explore <a href="https://www.jaggaer.com/solutions/contracts" target="_blank" rel="noopener">JAGGAER contract management</a>.</strong></p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">Book a Demo</span>
+        <p class="jag-cta-head">See JAGGAER Contracts run on your own contract types &rarr;</p>
+        <p class="jag-cta-sub">We show you where JAGGAER One fits your current setup, with results defined before you sign. Or start with <a href="https://www.jaggaer.com/solutions/contracts" target="_blank" rel="noopener">JAGGAER contract management</a>.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a JAGGAER Demo</a>
+    </div>
+
+  </article>
+
+  <aside class="expert-sidebar" id="experts" aria-label="What the Experts Are Saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">WorldCC &middot; 2026</span>
+        <span class="exp-num red">11%</span>
+        <p class="exp-stat">Average loss of procurement contract value, with leakage happening after signature.</p>
+        <a href="https://info.worldcc.com/closing-the-procurement-value-gap" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">WorldCC &amp; Sirion &middot; 2026</span>
+        <span class="exp-num red">42% / 27%</span>
+        <p class="exp-stat">Of 170 respondents: adopting AI in contracting, but storing all executed contracts exclusively in CLM.</p>
+        <a href="https://www.businesswire.com/news/home/20260518870836/en/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">WorldCC &amp; Sirion &middot; 2026</span>
+        <span class="exp-num red">54%</span>
+        <p class="exp-stat">Of 170 respondents, report no automated data flow between systems; only 9% have bidirectional sync.</p>
+        <a href="https://www.businesswire.com/news/home/20260518870836/en/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">CCM Institute &middot; 2026</span>
+        <span class="exp-num red">79%</span>
+        <p class="exp-stat">Expect AI to automate repetitive contracting tasks; 76% expect less drafting and review time.</p>
+        <a href="https://info.worldcc.com/ai-in-contracting-2026" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Gartner &middot; 2025</span>
+        <span class="exp-num red">37%</span>
+        <p class="exp-stat">Of 104 general counsel surveyed in July 2025, the share with relatively low confidence in advanced contract analytics.</p>
+        <a href="https://www.gartner.com/en/newsroom/press-releases/2025-10-01-gartner-survey-shows-ai-and-contract-analytics-ar-urgent-priorities-for-general-counsel" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Deloitte &middot; 2025</span>
+        <span class="exp-num red">~20%</span>
+        <p class="exp-stat">Share of budget Digital Masters (top-quartile procurement teams) put into procurement technology, nearly 2x the 2023 level.</p>
+        <a href="https://www.deloitte.com/ch/en/services/consulting/research/procurement-strategy.html" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">The Hackett Group &middot; 2026</span>
+        <span class="exp-num red">Contracts</span>
+        <p class="exp-stat">Contract management is among the areas where current procurement AI use concentrates.</p>
+        <a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+
+</script>
+
+</body>
+</html>
