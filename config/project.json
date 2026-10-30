@@ -5721,7 +5721,14 @@
               "priority_updated": "2026-10-27T08:51:01.667Z",
               "priority_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null
+              "return_to_stage": null,
+              "seo": {
+                "meta_title": "Category Management in Procurement: Process and Tools",
+                "meta_description": "What is category management in procurement? Learn the category management process, tools, roles and best practices that turn spend categories into savings.",
+                "slug": "blog-category-management-process-procurement",
+                "updated_at": "2026-10-30T09:43:25.947Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "piece-atx2yl",
