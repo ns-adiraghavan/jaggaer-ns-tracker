@@ -1423,6 +1423,38 @@
                 }
               ],
               "brief_last_updated": "2026-10-30T09:30:37.157Z"
+            },
+            {
+              "id": "piece-as3hmb",
+              "title": "What Is SRM? Supplier Relationship Management Meaning, Process and  Benefits",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-14bwv",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "supplier relationship management",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-10-30T09:32:44.984Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-10-30T09:32:48.753Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_SRM_Guide_Refresh.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-as3hmb/brief/JAGGAER_SEO_Brief_SRM_Guide_Refresh.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-10-30T09:32:48.753Z"
+                }
+              ],
+              "brief_last_updated": "2026-10-30T09:32:48.753Z"
             }
           ]
         }
