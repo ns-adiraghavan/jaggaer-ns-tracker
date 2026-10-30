@@ -5678,7 +5678,7 @@
               "title": "Category Management in Procurement: Process, Tools and Best Practices",
               "format": "Article",
               "assignee": "",
-              "status": "brief-uploaded",
+              "status": "writing",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -5687,7 +5687,7 @@
               "intent": "",
               "funnel": "",
               "geography": "all",
-              "revision_count": 0,
+              "revision_count": 1,
               "schedule_month": "p3-month-1",
               "schedule_week": 8,
               "review_owner": "m-14bwv",
@@ -5697,10 +5697,15 @@
                   "stage": "not-started",
                   "ts": "2026-10-27T08:48:54.341Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-10-30T09:41:33.675Z",
+                  "by": "m-e10nz"
                 }
               ],
-              "last_updated": "2026-10-27T08:50:50.770Z",
-              "last_updated_by": "m-14bwv",
+              "last_updated": "2026-10-30T09:41:33.675Z",
+              "last_updated_by": "m-e10nz",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Category_Management_Process_Refresh.pdf",
@@ -5710,11 +5715,13 @@
                 }
               ],
               "brief_last_updated": "2026-10-27T08:50:50.770Z",
-              "last_upload": "2026-10-27T08:50:50.770Z",
-              "last_upload_by": "m-14bwv",
+              "last_upload": "2026-10-30T09:41:33.675Z",
+              "last_upload_by": "m-e10nz",
               "priority": "P1",
               "priority_updated": "2026-10-27T08:51:01.667Z",
-              "priority_updated_by": "m-14bwv"
+              "priority_updated_by": "m-14bwv",
+              "deliverable_ext": "html",
+              "return_to_stage": null
             },
             {
               "id": "piece-atx2yl",
