@@ -1,0 +1,936 @@
+<!-- uploaded by m-5jitd at 2026-10-30T11:52:04.986Z -->
+<!-- piece: Source to Contract vs Source to Pay vs Procure to Pay: Key Differences -->
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Source to Contract vs Source to Pay vs Procure to Pay</title>
+<meta name="description" content="Source to contract (S2C) is the upstream half of source to pay (S2P); procure to pay (P2P) is the downstream half. See how the three differ.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/essential-guide-to-source-to-pay-source-to-contract-and-procure-to-pay">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Source to Contract vs Source to Pay vs Procure to Pay: Key Differences","description":"Source to contract (S2C) is the upstream half of source to pay (S2P); procure to pay (P2P) is the downstream half. See how the three differ.","datePublished":"2024-12-13","dateModified":"2026-10-28","inLanguage":"en-US","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.jaggaer.com/blog/essential-guide-to-source-to-pay-source-to-contract-and-procure-to-pay"},"publisher":{"@type":"Organization","name":"Jaggaer","url":"https://www.jaggaer.com","logo":{"@type":"ImageObject","url":"https://www.jaggaer.com/wp-content/uploads/JAGGAER-Logo-Red.png"}},"author":{"@type":"Person","name":"Visnja Radosavljevic"},"citation":[{"@type":"CreativeWork","name":"The Hackett Group, Source-to-Contract Solutions (September 2026)","url":"https://www.thehackettgroup.com/insights/source-to-contract-solutions/"},{"@type":"CreativeWork","name":"The Hackett Group, AP Digital World Class Matrix (November 2025)","url":"https://www.thehackettgroup.com/hackett-identifies-ap-solutions-delivering-gains-through-ai/"},{"@type":"CreativeWork","name":"Gartner Peer Insights, Spend Analytics Solutions","url":"https://www.gartner.com/reviews/market/spend-analytics-solutions"},{"@type":"CreativeWork","name":"Gartner Peer Insights, Source-to-Pay Suites","url":"https://www.gartner.com/reviews/market/source-to-pay-suites"},{"@type":"CreativeWork","name":"Gartner, CPO survey press release (October 2026)","url":"https://www.gartner.com/en/newsroom/press-releases/2026-10-08-gartner-survey-shows-chief-procurement-officers-stalling-on-needed-ai-role-redesign"},{"@type":"CreativeWork","name":"KPMG, The State of Next-Gen Supply Chain (March 2026)","url":"https://kpmg.com/kpmg-us/content/dam/kpmg/corporate-communications/pdf/2026/FINAL%20US%20procurement%20supply%20chain%20survey_2026.pdf"},{"@type":"CreativeWork","name":"Deloitte, 2025 Global CPO Survey (2025)","url":"https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf"}]}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between source to pay and procure to pay?","acceptedAnswer":{"@type":"Answer","text":"Source to pay covers the full lifecycle; procure to pay covers only the purchasing half. S2P runs from spend analysis and sourcing through payment. P2P runs from requisition to payment, under the contract where one exists. S2P includes P2P, and P2P does not include strategic sourcing."}},{"@type":"Question","name":"What is the difference between source to contract and procure to pay?","acceptedAnswer":{"@type":"Answer","text":"Source to contract sets the terms; procure to pay buys and pays under them. S2C ends in a signed contract that it then manages. P2P enforces that contract’s prices and terms at each purchase."}},{"@type":"Question","name":"Where does source to contract end and procure to pay begin?","acceptedAnswer":{"@type":"Answer","text":"The line is the signed contract. Source to contract produces and manages the agreement. P2P starts when someone raises a requisition under it. Contract management continues after signature, so the 2 overlap in practice."}},{"@type":"Question","name":"Is contract lifecycle management part of source to contract?","acceptedAnswer":{"@type":"Answer","text":"Yes. Contract lifecycle management is the contract management area of S2C. It runs from drafting and negotiation through signing, monitoring and renewal. The Hackett Group calls it the final concrete step of S2C."}},{"@type":"Question","name":"What is the difference between purchase to pay and procure to pay?","acceptedAnswer":{"@type":"Answer","text":"There is no difference in scope. Both names describe the same cycle, from requisition to payment."}},{"@type":"Question","name":"How is procure to pay different from accounts payable automation?","acceptedAnswer":{"@type":"Answer","text":"P2P is wider in scope. Accounts payable automation starts when an invoice lands and runs through matching and payment. P2P also covers the steps before that: requisitions, approvals, purchase orders and receiving."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs: 0.8125rem;
+  --font-size-sm:      0.8125rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2rem, calc(1.72rem + 1.05vw), 2.25rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul,ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li,ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:980px;}
+.article-tags{display:flex;gap:.5rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.tag-pill{display:inline-flex;align-items:center;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--color-navy);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:999px;padding:.4rem .9rem;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:980px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.8125rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1480px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:230px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:980px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+article h3.sub-question{font-size:var(--font-size-h4);text-transform:none;letter-spacing:-0.01em;font-weight:700;border-bottom:none;padding-bottom:0;}
+
+/* Comparison / data tables */
+.table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.data-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:520px;}
+.data-table th{background:var(--purple-tint-2);color:var(--color-navy);font-family:var(--font-display);font-weight:700;font-size:.8125rem;text-align:left;padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--purple-soft);}
+.data-table td{padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--color-ink-2);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--color-cream);}
+.data-table td strong,.data-table th strong{color:var(--color-ink);}
+
+/* Roadmap / framework phase cards */
+.phase-cards{display:flex;flex-direction:column;gap:2px;margin:var(--space-m) 0 var(--space-l);border-radius:var(--border-radius-sm);overflow:hidden;border:var(--border);}
+.phase-item{display:flex;gap:var(--space-m);padding:var(--space-s) var(--space-m);background:var(--color-white);align-items:flex-start;}
+.phase-num{flex-shrink:0;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);}
+.phase-body{flex:1;min-width:0;}
+.phase-title{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink);margin-bottom:.15rem;display:block;}
+.phase-desc{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.6;}
+
+/* Hook stat contrast callout */
+.hook-stat{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.hook-stat p{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.65;}
+.hook-stat .stat-num{font-family:var(--font-display);font-weight:700;color:var(--color-ink-3);}
+
+/* Interactive toggle: expertise gap vs process gap */
+.toggle-box{border:1.5px solid var(--purple-soft);border-radius:var(--border-radius);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--purple-tint-3);}
+.toggle-head{display:flex;gap:.4rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.toggle-btn{font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.02em;color:var(--jai-a);background:var(--color-white);border:1.5px solid var(--purple-soft);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.toggle-btn:hover{border-color:var(--jai-a);}
+.toggle-btn.active{background:var(--jai-gradient);color:#fff;border-color:transparent;}
+.toggle-panel{display:none;}
+.toggle-panel.active{display:block;animation:fadeIn .25s ease;}
+.toggle-panel p{margin-bottom:.6rem;}
+.toggle-panel p:last-child{margin-bottom:0;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* Decision-checker widget */
+.decision-widget{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-l) var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.decision-widget-head{font-family:var(--font-display);font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);margin:0 0 var(--space-2xs);}
+.decision-widget-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0 0 var(--space-m);}
+.decision-options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:var(--space-m);}
+.decision-option{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem var(--space-s);border:var(--border);border-radius:var(--border-radius-sm);cursor:pointer;transition:border-color .2s,background .2s;font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-option:hover{border-color:var(--jai-a);background:var(--purple-tint-3);}
+.decision-option input{margin-top:.2rem;accent-color:var(--jai-a);}
+.decision-result{display:none;background:var(--color-cream);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-result.show{display:block;animation:fadeIn .25s ease;}
+.decision-reset{display:inline-block;margin-top:var(--space-s);font-size:.8125rem;font-weight:600;color:var(--color-teal);cursor:pointer;background:none;border:none;padding:0;border-bottom:1px solid #4D819440;font-family:var(--font-base);}
+.decision-reset:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Benefit / risk checklist */
+.diag-checklist{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.diag-checklist ul{list-style:none;padding-left:0;margin-bottom:0;}
+.diag-checklist li{position:relative;padding-left:1.6rem;margin-bottom:.55rem;font-size:var(--font-size-base);}
+.diag-checklist li:last-child{margin-bottom:0;}
+.diag-checklist li::before{content:"";position:absolute;left:0;top:.2rem;width:1.05rem;height:1.05rem;border-radius:4px;border:1.5px solid var(--color-teal);background:var(--color-white);}
+.diag-checklist li::after{content:"✓";position:absolute;left:.22rem;top:-.05rem;color:var(--color-teal);font-size:.8125rem;font-weight:700;}
+
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--color-ink);line-height:1.15;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.8125rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-link{font-size:.8125rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.page-wrapper{flex-wrap:wrap;}.expert-sidebar{position:static;width:100%;max-height:none;padding:0 0 var(--space-l) 0;order:99;}.exp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;}.exp-item{border-bottom:none;border-right:1px solid var(--purple-soft);}}
+@media(max-width:640px){.expert-sidebar .exp-list{grid-template-columns:1fr;}.expert-sidebar .exp-item{border-right:none;border-bottom:1px solid var(--purple-soft);}}
+
+/* CTA block */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-base);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:var(--font-size-base);font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-base);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;line-height:1;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Font-size floor: all body and UI text held between 13px and 14px */
+.tag-pill,.meta-item,.toc-link,.exp-head-lbl,.exp-source,.exp-stat,.exp-link,.toc-head-lbl{font-size:.8125rem;}
+.exp-stat{line-height:1.45;}
+article .phase-body ul,article .phase-body ol{margin:.35rem 0 0;}
+article .phase-body li{margin-bottom:.15rem;}
+
+/* Interactive tables */
+.interactive-table tbody tr{transition:background .15s;cursor:default;}
+.interactive-table tbody tr:hover td{background:var(--purple-tint-3);}
+.interactive-table td.col-on,.interactive-table th.col-on{background:var(--purple-tint)!important;color:var(--color-ink);}
+.interactive-table th.col-on{background:var(--jai-gradient)!important;color:#fff;}
+.col-toggle{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin:var(--space-m) 0 -.4rem;}
+.col-toggle-lbl{font-size:.8125rem;font-weight:600;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.06em;margin-right:.2rem;}
+.table-filter{display:flex;align-items:center;gap:.6rem;margin:var(--space-m) 0 -.4rem;flex-wrap:wrap;}
+.table-filter input{flex:1;min-width:200px;max-width:340px;font-family:var(--font-base);font-size:.8125rem;padding:.5rem .9rem;border:1.5px solid var(--purple-soft);border-radius:999px;outline:none;background:var(--purple-tint-3);transition:border-color .2s;}
+.table-filter input:focus{border-color:var(--jai-a);background:#fff;}
+.table-filter span{font-size:.8125rem;color:var(--color-ink-3);font-weight:600;}
+
+/* Kraljic matrix */
+.kraljic{display:grid;grid-template-columns:auto 1fr;gap:.5rem;margin:var(--space-s) 0 0;}
+.k-axis-y{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);text-align:center;}
+.k-axis-x{grid-column:2;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);text-align:center;}
+.k-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.k-cell{text-align:left;font-family:var(--font-base);font-size:.8125rem;line-height:1.5;color:var(--color-ink-2);background:var(--purple-tint-3);border:1.5px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.75rem .9rem;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;}
+.k-cell:hover{transform:translateY(-2px);border-color:var(--jai-a);box-shadow:0 6px 18px rgba(83,0,206,.1);}
+.k-cell strong{color:var(--jai-a);}
+.k-cell.active{background:var(--jai-gradient);border-color:transparent;color:#fff;}
+.k-cell.active strong{color:#fff;}
+
+/* RFI / RFP / RFQ cards */
+.mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:var(--space-s) 0 var(--space-m);}
+.mini-card{font-size:.8125rem;line-height:1.55;background:#fff;border:var(--border);border-top:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:.8rem .9rem;transition:transform .2s,box-shadow .2s;}
+.mini-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(83,0,206,.1);}
+.mini-card strong{display:block;color:var(--jai-a);margin-bottom:.25rem;}
+
+/* Software tool tiles */
+.tool-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:.45rem;margin:var(--space-s) 0 var(--space-m);}
+.tool-tile{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.6rem .85rem;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);font-size:.8125rem;font-weight:600;color:var(--color-navy);transition:background .2s,border-color .2s,transform .2s;}
+.tool-tile::after{content:"\2192";color:var(--jai-a);transition:transform .2s;}
+.tool-tile:hover{background:var(--purple-tint);border-color:var(--jai-a);color:var(--jai-a);transform:translateY(-1px);}
+.tool-tile:hover::after{transform:translateX(3px);}
+
+/* Phase cards & checklist hover polish */
+.phase-item{transition:background .2s;}
+.phase-item:hover{background:var(--purple-tint-3);}
+.faq-item[open] summary{background:var(--purple-tint-3);}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-icon{transition:transform .2s;}
+
+@media(max-width:640px){.mini-cards{grid-template-columns:1fr;}.k-cell{padding:.6rem .7rem;}}
+
+.inline-toc{background:var(--color-light-blue);border:1px solid var(--color-border);border-radius:var(--border-radius-sm);padding:1rem 1.25rem;margin:1.5rem 0;}
+.inline-toc-title{font-weight:700;color:var(--color-navy);margin:0 0 .5rem;font-size:.9375rem;}
+.inline-toc ul{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;list-style:none;margin:0;padding:0;}
+.inline-toc li{margin:0;font-size:.9375rem;}
+.inline-toc a{color:var(--color-teal);text-decoration:underline;}
+.jag-cta-desc a{color:inherit;text-decoration:underline;}
+article h2[id],article h3[id]{scroll-margin-top:1.5rem;}
+
+
+/* ===== Added for this piece: data-visualisation components (built only from the reference's tokens, colours and type scale) ===== */
+.toc-link.sub{padding-left:calc(var(--space-m) + .85rem);}
+.viz{border:var(--border);border-radius:var(--border-radius);background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);}
+.viz-flat{border:none;padding:0;margin:var(--space-m) 0;}
+.viz-title{display:block;font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink);margin:0 0 .2rem;line-height:1.35;}
+.viz-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0 0 var(--space-s);line-height:1.5;}
+.viz-note,.viz-src{font-size:.8125rem;color:var(--color-ink-3);margin:.5rem 0 0;line-height:1.5;}
+.viz p:last-child{margin-bottom:0;}
+
+/* Bar chart */
+.bar-chart{display:grid;grid-template-columns:minmax(130px,32%) 1fr max-content;gap:.75rem var(--space-s);align-items:center;margin-top:var(--space-s);}
+.bar-row{display:contents;}
+.bar-label{font-size:.8125rem;color:var(--color-ink-2);line-height:1.4;}
+.bar-track{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:999px;height:1.5rem;overflow:hidden;}
+.bar-fill{height:100%;width:var(--w);background:var(--jai-gradient);border-radius:999px;animation:barGrow .9s ease both;}
+.bar-fill.alt{background:var(--color-teal);}
+.bar-fill.mute{background:var(--purple-soft);}
+.bar-fill span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.bar-row .bar-val{font-family:var(--font-display);font-weight:700;font-size:.8125rem;color:var(--color-ink);text-align:right;white-space:nowrap;}
+@keyframes barGrow{from{width:0;}to{width:var(--w);}}
+@media(max-width:640px){.bar-chart{grid-template-columns:1fr auto;}.bar-label{grid-column:1 / -1;margin-bottom:-.35rem;}}
+
+/* Donut */
+.donut-wrap{display:flex;align-items:center;gap:var(--space-m);flex-wrap:wrap;margin-top:var(--space-s);}
+.donut{position:relative;width:128px;height:128px;flex-shrink:0;}
+.donut svg{width:100%;height:100%;transform:rotate(-90deg);display:block;}
+.donut .ring-bg{fill:none;stroke:var(--purple-tint-2);stroke-width:4;}
+.donut .ring{fill:none;stroke:url(#jagGrad);stroke-width:4;stroke-linecap:round;animation:ringGrow .9s ease both;}
+@keyframes ringGrow{from{stroke-dasharray:0 100;}}
+.donut-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:1.25rem;color:var(--color-ink);}
+.donut-text{flex:1;min-width:220px;}
+.donut-text p{margin-bottom:.4rem;}
+
+/* Gauge */
+.gauge-wrap{display:flex;align-items:center;gap:var(--space-m);flex-wrap:wrap;margin-top:var(--space-s);}
+.gauge{position:relative;width:240px;flex-shrink:0;}
+.gauge svg{width:100%;height:auto;display:block;}
+.g-track{fill:none;stroke:var(--purple-tint-2);stroke-width:18;}
+.g-fill{fill:none;stroke:url(#jagGrad);stroke-width:18;}
+.g-tick{stroke:var(--color-red);stroke-width:3;}
+.g-tick-lbl{font-family:var(--font-display);font-size:13px;font-weight:700;fill:var(--color-red);}
+.gauge-center{position:absolute;left:0;right:0;bottom:4%;text-align:center;font-family:var(--font-display);font-weight:700;font-size:1.25rem;color:var(--color-ink);}
+.gauge-text{flex:1;min-width:220px;}
+.gauge-text p{margin-bottom:.4rem;}
+
+/* Golden Triangle */
+.tri-wrap{max-width:380px;margin:var(--space-s) auto 0;text-align:center;}
+.tri-wrap svg{width:100%;height:auto;display:block;}
+.tri-shape{fill:var(--purple-tint-3);stroke:var(--purple-soft);stroke-width:2;}
+.tri-node{fill:#fff;stroke:var(--jai-a);stroke-width:2;}
+.tri-main{fill:url(#jagGrad);stroke:none;}
+.tri-txt{font-family:var(--font-display);font-size:13px;font-weight:700;fill:var(--color-navy);}
+.tri-txt-w{fill:#fff;}
+.tri-cap{font-size:.8125rem;color:var(--color-ink-3);margin:.4rem 0 0;}
+
+/* Before / after */
+.before-after{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--space-s);align-items:stretch;margin-top:var(--space-s);}
+.ba-card{display:flex;flex-direction:column;gap:.2rem;background:var(--purple-tint-3);border:1.5px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);}
+.ba-after{background:var(--jai-gradient);border-color:transparent;}
+.ba-num{font-family:var(--font-display);font-weight:700;font-size:2rem;line-height:1;color:var(--color-ink);}
+.ba-unit{font-weight:700;font-size:var(--font-size-base);color:var(--color-navy);}
+.ba-sub{font-size:.8125rem;color:var(--color-ink-3);}
+.ba-after .ba-num,.ba-after .ba-unit,.ba-after .ba-sub{color:#fff;}
+.ba-arrow{align-self:center;font-size:1.4rem;color:var(--jai-a);}
+@media(max-width:640px){.before-after{grid-template-columns:1fr;}.ba-arrow{justify-self:center;transform:rotate(90deg);}}
+
+/* Stacked distribution bar */
+.stack-bar{display:flex;gap:2px;border-radius:999px;overflow:hidden;margin-top:var(--space-s);}
+.stack-seg{flex:0 0 var(--w);min-width:0;padding:.55rem .6rem;font-family:var(--font-display);font-size:.8125rem;font-weight:700;color:#fff;text-align:center;line-height:1.25;}
+.stack-seg.s1{background:var(--jai-a);}
+.stack-seg.s2{background:var(--jai-b);}
+.stack-seg.s3{background:var(--color-teal);}
+
+/* Four element tiles, principle tiles, row highlight */
+.mini-cards.four{grid-template-columns:repeat(2,1fr);margin:var(--space-s) 0 var(--space-s);}
+@media(max-width:640px){.mini-cards.four{grid-template-columns:1fr;}}
+.tool-tiles{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));}
+.row-toggle{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin:var(--space-m) 0 -.4rem;}
+.interactive-table tbody tr.row-on td{background:var(--purple-tint)!important;color:var(--color-ink);}
+
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="jagGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5300CE"></stop><stop offset="100%" stop-color="#E22B83"></stop></linearGradient></defs></svg>
+
+<div id="progress-bar" style="position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;"></div>
+
+
+<div class="page-wrapper">
+
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What is source to contract (S2C)?</a>
+      <a class="toc-link sub" href="#p1">The 4 activity areas of S2C</a>
+      <a class="toc-link sub" href="#p2">Source to contract steps: from need to signed contract</a>
+      <a class="toc-link" href="#s2">What is source to pay (S2P)?</a>
+      <a class="toc-link" href="#s3">What is procure to pay (P2P)?</a>
+      <a class="toc-link" href="#s4">Source to contract vs source to pay vs procure to pay: how they compare</a>
+      <a class="toc-link sub" href="#p3">Source to contract vs procure to pay: the short answers</a>
+      <a class="toc-link" href="#s5">Key differences between source to pay and procure to pay</a>
+      <a class="toc-link" href="#s6">Where source to contract hands off to procure to pay</a>
+      <a class="toc-link" href="#s7">Which should you start with?</a>
+      <a class="toc-link" href="#s8">Recent developments in source to contract, source to pay and procure to pay</a>
+      <a class="toc-link" href="#s9">Frequently asked questions</a>
+      <a class="toc-link" href="#s10">Next steps</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-tags">
+          <span class="tag-pill">Cross-Industry</span>
+          <span class="tag-pill">Source to Pay</span>
+        </div>
+        <h1>Source to Contract vs Source to Pay vs Procure to Pay: Key Differences</h1>
+        <div class="article-meta">
+          <span class="meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> About 8 min read</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Visnja Radosavljevic</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><time datetime="2024-12-13">Published December 2024</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><time datetime="2026-10-28">Updated October 2026</time></span>
+        </div>
+      </div>
+    </header>
+
+    <p><strong>Source to contract (S2C) is the upstream half of source to pay (S2P); procure to pay (P2P) is the downstream half.</strong> S2C decides who you buy from and on what terms. P2P carries out the purchase under those terms, from requisition to payment. S2P joins both halves into a single lifecycle.</p>
+
+    <div class="mini-cards" data-viz="glance">
+      <div class="mini-card"><strong>S2C</strong>Upstream half. It decides who you buy from and on what terms.</div>
+      <div class="mini-card"><strong>S2P</strong>Joins both halves into a single lifecycle.</div>
+      <div class="mini-card"><strong>P2P</strong>Downstream half. It carries out the purchase under those terms, from requisition to payment.</div>
+    </div>
+
+    <p>The boundary is the signed contract. S2C sets the terms and keeps managing the agreement afterward. P2P starts when someone buys under it. <strong>The handoff is where negotiated terms have to reach the purchase order.</strong></p>
+
+    <div class="jag-cta" data-cta="early">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer runs sourcing, contracts and purchasing on a single data layer</p>
+        <p class="jag-cta-desc">Jaggaer’s source-to-pay platform covers source to contract and procure to pay on a single data layer. Spend analytics, category management, sourcing and contract management sit upstream; eProcurement, supply chain collaboration, invoicing and payments sit downstream. Use the platform page to see where your own process splits between the 2.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/source-to-pay" class="jag-cta-btn">Explore the platform &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s1">What is source to contract (S2C)?</h2>
+
+    <p>Source to contract (S2C) covers procurement from spend analysis to a signed supplier contract, then manages that contract through renewal. <strong>It sets who you buy from and on what terms.</strong> Buying under that contract belongs to P2P.</p>
+
+    <p><strong>According to <a href="https://www.thehackettgroup.com/insights/source-to-contract-solutions/" rel="noopener" target="_blank">The Hackett Group</a> (September 2026), contract lifecycle management is the final concrete step of S2C.</strong></p>
+
+    <h3 id="p1" class="sub-question">The 4 activity areas of S2C</h3>
+
+    <p><strong>S2C has 4 activity areas: spend management, category management, strategic sourcing and contract management.</strong></p>
+
+    <div class="mini-cards four" data-viz="areas">
+      <div class="mini-card"><strong>Spend management.</strong><a href="https://www.jaggaer.com/solutions/spend-analytics" rel="noopener">Spend analytics</a> shows where your money goes and with which suppliers. <b><a href="https://www.gartner.com/reviews/market/spend-analytics-solutions" rel="noopener" target="_blank">Gartner</a></b> (page updated September 2025) defines these tools as cleansing, normalizing, enriching and visualizing spend data to support category and sourcing decisions.</div>
+      <div class="mini-card"><strong>Category management.</strong>It groups similar spend into categories and sets a strategy for each. Sourcing then carries that strategy out.</div>
+      <div class="mini-card"><strong>Strategic sourcing.</strong>It runs the RFx events and evaluates bids on several factors, including detailed cost breakdowns.</div>
+      <div class="mini-card"><strong>Contract management.</strong>It turns the award into a signed agreement, then tracks obligations and renewals against it.</div>
+    </div>
+
+    <p><strong><a href="https://kpmg.com/kpmg-us/content/dam/kpmg/corporate-communications/pdf/2026/FINAL%20US%20procurement%20supply%20chain%20survey_2026.pdf" rel="noopener" target="_blank">KPMG</a>’s March 2026 survey found logistics and transportation costs the biggest source of value leakage, at 38%.</strong> Inefficient sourcing or suboptimal supplier terms followed at 34%. The survey covered 462 US supply chain leaders at companies with $1 billion or more in annual revenue.</p>
+
+    <figure class="viz" data-viz="donut">
+      <figcaption class="viz-title">Leaders who cite inefficient sourcing or suboptimal supplier terms as the second-largest source of value leakage</figcaption>
+      <div class="donut-wrap">
+        <div class="donut" role="img" aria-label="34%">
+          <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="ring-bg" cx="18" cy="18" r="15.9155"></circle><circle class="ring" cx="18" cy="18" r="15.9155" stroke-dasharray="34 66"></circle></svg>
+          <span class="donut-center">34%</span>
+        </div>
+        <div class="donut-text"><p>The survey covered 462 US supply chain leaders at companies with $1 billion or more in annual revenue.</p><p class="viz-src">Source: KPMG, March 2026</p></div>
+      </div>
+    </figure>
+
+    <h3 id="p2" class="sub-question">Source to contract steps: from need to signed contract</h3>
+
+    <p>This guide splits the source to contract process into 5 steps. <strong>Each step cuts the supplier list until a single supplier holds a signed agreement.</strong></p>
+
+    <div class="phase-cards" data-viz="phases">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">Analyze spend and define the need.</span>
+          <p class="phase-desc">Review what you buy today and what the business requires.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">Research the market and shortlist suppliers.</span>
+          <p class="phase-desc">Screen for capability, cost and risk.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Run the RFx and compare bids.</span>
+          <p class="phase-desc">Issue an RFI, RFP or RFQ and score every response on the same criteria.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <span class="phase-title">Negotiate and select.</span>
+          <p class="phase-desc">Agree price, service levels and terms with the preferred supplier.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">5</span>
+        <div class="phase-body">
+          <span class="phase-title">Sign and manage the contract.</span>
+          <p class="phase-desc">Store the agreement, then track obligations and renewals.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Jaggaer’s <a href="https://www.jaggaer.com/solutions/source-to-contract" rel="noopener">source-to-contract platform</a> covers spend analytics, category management, sourcing and contract management.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s2">What is source to pay (S2P)?</h2>
+
+    <p>Source to pay (S2P) is the full procurement lifecycle. It includes source to contract and procure to pay, run as a single process. <strong><a href="https://www.gartner.com/reviews/market/source-to-pay-suites" rel="noopener" target="_blank">Gartner</a> (page updated July 2026) defines the S2P suite market as an integrated set of solutions to source, contract, request, procure, receive and pay.</strong></p>
+
+    <p><strong>S2P is the lifecycle that contains the other 2 processes, not a third process beside them.</strong> Supplier, price and contract data entered in sourcing is the same data that purchasing and invoicing need later.</p>
+
+    <figure class="viz" data-viz="stack">
+      <figcaption class="viz-title">Source to pay (S2P): the full lifecycle</figcaption>
+      <div class="stack-bar" role="img" aria-label="S2P is the full lifecycle">
+        <span class="stack-seg s3" style="--w:100%">S2P: the full lifecycle</span>
+      </div>
+      <div class="stack-bar" role="img" aria-label="S2C runs from the business need to a signed contract; P2P runs from the requisition to payment">
+        <span class="stack-seg s1" style="--w:50%">S2C: from the business need to a signed contract</span>
+        <span class="stack-seg s2" style="--w:50%">P2P: from the requisition to payment</span>
+      </div>
+    </figure>
+
+    <p>Read <a href="https://www.jaggaer.com/blog/source-to-pay-steps-benefits-best-practices" rel="noopener">what source to pay is and how it works</a>, or the <a href="https://www.jaggaer.com/blog/source-to-pay-sourcing-complete-guide" rel="noopener">guide to source-to-pay and strategic sourcing</a>. Jaggaer’s <a href="https://www.jaggaer.com/solutions/source-to-pay" rel="noopener">source-to-pay platform</a> runs both halves on a single data layer.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s3">What is procure to pay (P2P)?</h2>
+
+    <p>Procure to pay (P2P) covers the buying cycle from requisition to supplier payment, under the contract wherever one exists. <strong>For contracted spend, it starts once the contract is in place.</strong> P2P has 4 activity areas:</p>
+
+    <div class="mini-cards four" data-viz="areas">
+      <div class="mini-card"><strong>eProcurement.</strong>Buyers order from catalogs linked to the contract, so purchases match the negotiated terms.</div>
+      <div class="mini-card"><strong>Supply chain collaboration.</strong>Buyers and suppliers share order and delivery information.</div>
+      <div class="mini-card"><strong>Invoicing.</strong>Software matches each supplier invoice against the purchase order and receipt. People handle the exceptions.</div>
+      <div class="mini-card"><strong>Payments.</strong>Approved invoices pay on the agreed terms and post to the ERP.</div>
+    </div>
+
+    <p><strong><a href="https://www.thehackettgroup.com/hackett-identifies-ap-solutions-delivering-gains-through-ai/" rel="noopener" target="_blank">Hackett</a>’s 2025 Accounts Payable Digital World Class Matrix found that companies with 30%+ touchless invoice processing have, on average, 3.5 times higher AP productivity.</strong> The Hackett Group published this provider-perspective study of 15 AP software providers in November 2025. It draws on vendor briefings, Hackett ratings and customer feedback, and it concerns accounts payable, the invoice-to-pay side of P2P.</p>
+
+    <figure class="viz" data-viz="beforeafter">
+      <figcaption class="viz-title">Touchless invoice processing and AP productivity</figcaption>
+      <div class="before-after">
+        <div class="ba-card"><span class="ba-num">30%+</span><span class="ba-unit">touchless invoice processing</span><span class="ba-sub">companies at or above this share</span></div>
+        <span class="ba-arrow" aria-hidden="true">&rarr;</span>
+        <div class="ba-card ba-after"><span class="ba-num">3.5×</span><span class="ba-unit">higher AP productivity</span><span class="ba-sub">on average</span></div>
+      </div>
+      <p class="viz-src">Source: The Hackett Group’s 2025 Accounts Payable Digital World Class Matrix, a provider-perspective study of 15 AP software providers (November 2025).</p>
+    </figure>
+
+    <p>See <a href="https://www.jaggaer.com/blog/understanding-procure-to-pay-process" rel="noopener">the procure to pay process step by step</a>, or <a href="https://www.jaggaer.com/blog/procure-to-pay-solutions-what-you-need-to-know" rel="noopener">what to look for in a P2P solution</a>. Jaggaer’s <a href="https://www.jaggaer.com/solutions/procure-to-pay" rel="noopener">procure-to-pay solution</a> covers all 4 areas.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s4">Source to contract vs source to pay vs procure to pay: how they compare</h2>
+
+    <p><strong>S2C and P2P are the 2 halves of S2P: S2C sets the terms and P2P carries out the purchases.</strong> S2C runs from the business need to a signed contract. P2P runs from the requisition to payment.</p>
+
+    <div class="col-toggle" data-for="cmpTable">
+      <span class="col-toggle-lbl">Highlight:</span>
+      <button type="button" class="toggle-btn" data-col="2">S2C</button>
+      <button type="button" class="toggle-btn" data-col="3">S2P</button>
+      <button type="button" class="toggle-btn" data-col="4">P2P</button>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table interactive-table" id="cmpTable">
+        <thead>
+          <tr><th></th><th>S2C</th><th>S2P</th><th>P2P</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Starts at</td><td>Spend analysis and a business need</td><td>Spend analysis and a business need</td><td>An approved purchase requisition, under a contract where one exists</td></tr>
+          <tr><td>Ends at</td><td>A signed contract, then managed through renewal</td><td>Supplier payment</td><td>Supplier payment</td></tr>
+          <tr><td>Decides</td><td>Who you buy from and on what terms</td><td>Both</td><td>Whether each purchase follows those terms</td></tr>
+          <tr><td>Main activities</td><td>Spend analytics, category management, strategic sourcing, contract management</td><td>S2C plus P2P</td><td>eProcurement, supply chain collaboration, invoicing, payments</td></tr>
+          <tr><td>Spend visibility</td><td>Planned spend, before commitment</td><td>Before and after commitment</td><td>Spend as orders and invoices arrive</td></tr>
+          <tr><td>Where savings come from</td><td>Better prices, terms and supplier mix</td><td>Both</td><td>Fewer errors, faster cycles, spend that follows the contract</td></tr>
+          <tr><td>Relationship</td><td>Upstream half of S2P</td><td>S2C plus P2P</td><td>Downstream half of S2P</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 id="p3" class="sub-question">Source to contract vs procure to pay: the short answers</h3>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Question</th><th>Short answer</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Source to contract vs source to pay</td><td>S2C is the upstream half. S2P is the whole lifecycle.</td></tr>
+          <tr><td>Source to contract vs procure to pay</td><td>S2C sets the terms. P2P buys and pays under them.</td></tr>
+          <tr><td>Source to pay vs procure to pay</td><td>S2P includes sourcing and contracting. P2P starts after the contract.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s5">Key differences between source to pay and procure to pay</h2>
+
+    <p><strong>The difference between source to pay and procure to pay is where each starts: S2P with the need, P2P with the purchase request.</strong> That start point leads to 5 more differences.</p>
+
+    <div class="phase-cards" data-viz="phases">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">Scope.</span>
+          <p class="phase-desc">S2P covers sourcing, contracting, purchasing and payment. P2P covers purchasing and payment.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">Decisions vs action.</span>
+          <p class="phase-desc">S2P decides which suppliers and terms apply. P2P checks that each purchase follows them.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Contract management.</span>
+          <p class="phase-desc">In S2P it is a core activity. In P2P the contract already exists, and purchasing works from its terms.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <span class="phase-title">Spend visibility.</span>
+          <p class="phase-desc">S2P sees spend before you commit it. P2P sees it as orders and invoices arrive.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">5</span>
+        <div class="phase-body">
+          <span class="phase-title">Where savings come from.</span>
+          <p class="phase-desc">S2P saves on price, terms and supplier choice. P2P saves on errors, cycle time and off-contract buying.</p>
+        </div>
+      </div>
+    </div>
+
+    <p><strong>Neither replaces the other.</strong> S2C sets the terms, and P2P buys under them.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s6">Where source to contract hands off to procure to pay</h2>
+
+    <p><strong>The handoff is where the signed contract from source to contract starts to govern purchases in procure to pay.</strong> In a strong P2P process, employees buy from approved suppliers at contracted prices.</p>
+
+    <p><strong>Gartner (page updated July 2026) says the integrated design of source-to-pay suites lets data flow across the process.</strong> On that page, users can view a purchase order alongside its related contract and the sourcing event behind it.</p>
+
+    <p><strong>The Hackett Group (September 2026) says an S2C platform helps maximize commercial value before execution moves to P2P systems.</strong></p>
+
+    <p><strong><a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf" rel="noopener" target="_blank">Deloitte</a>’s 2025 Global CPO Survey found 57% list siloed ways of working among their top 3 barriers to delivering value.</strong> It covered 250+ CPOs in 40 countries. Deloitte asks about silos in general, not the handoff between sourcing and purchasing.</p>
+
+    <figure class="viz" data-viz="donut">
+      <figcaption class="viz-title">CPOs who list siloed ways of working among their top 3 barriers to delivering value</figcaption>
+      <div class="donut-wrap">
+        <div class="donut" role="img" aria-label="57%">
+          <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="ring-bg" cx="18" cy="18" r="15.9155"></circle><circle class="ring" cx="18" cy="18" r="15.9155" stroke-dasharray="57 43"></circle></svg>
+          <span class="donut-center">57%</span>
+        </div>
+        <div class="donut-text"><p>The survey covered 250+ CPOs in 40 countries.</p><p class="viz-src">Source: Deloitte, 2025</p></div>
+      </div>
+    </figure>
+
+    <p>On Jaggaer One, both halves share a single data layer, so purchasing can enforce sourcing decisions. Use these 3 checks to test your own handoff:</p>
+
+    <div class="viz viz-flat" data-viz="checklist">
+      <div class="diag-checklist"><ul><li>Contract prices load into catalogs and purchase orders without retyping.</li><li>Purchasing flags orders that fall outside the contract.</li><li>Renewal dates reach the person who owns the spend.</li></ul></div>
+    </div>
+
+    <div class="jag-cta" data-cta="mid">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer connects contract terms to purchase orders</p>
+        <p class="jag-cta-desc">On Jaggaer One, eProcurement can tie purchases to a contract, a budget and an approved supplier. Guided buying can steer buyers to contracted suppliers at search, and negotiated pricing can apply in the cart. Use the eProcurement page to see how purchases can stay on contract.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/eprocurement" class="jag-cta-btn">Explore eProcurement &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s7">Which should you start with?</h2>
+
+    <p><strong>Start with the half where the trouble sits, and plan for both.</strong></p>
+
+    <div class="mini-cards" data-viz="start">
+      <div class="mini-card">If approvals stall, invoices fail to match or purchases skip the contract, start with P2P.</div>
+      <div class="mini-card">If a few suppliers hold most of your spend, or contracts renew without review, start with source to contract.</div>
+      <div class="mini-card">If the 2 halves run in separate systems, connect them before you add tools to either.</div>
+    </div>
+
+    <p>The Hackett Group (September 2026) names “throwing apps at the problem” as a roadblock to choosing S2C technology. <strong>Map the whole process first, then choose the pieces.</strong></p>
+
+    <hr class="section-divider">
+
+    <h2 id="s8">Recent developments in source to contract, source to pay and procure to pay</h2>
+
+    <p><strong>2026 research shows 2 shifts: tariffs are pushing supplier changes, and AI expectations are running ahead of role redesign.</strong></p>
+
+    <p><strong>KPMG (March 2026) found 37% name diversifying the supplier base or shifting to alternative markets as their top near-term measure to limit tariff-related costs.</strong> Changing suppliers is source to contract work, because S2C decides who you buy from and on what terms.</p>
+
+    <figure class="viz" data-viz="donut">
+      <figcaption class="viz-title">Leaders who name diversifying suppliers or shifting markets as their top near-term tariff measure</figcaption>
+      <div class="donut-wrap">
+        <div class="donut" role="img" aria-label="37%">
+          <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="ring-bg" cx="18" cy="18" r="15.9155"></circle><circle class="ring" cx="18" cy="18" r="15.9155" stroke-dasharray="37 63"></circle></svg>
+          <span class="donut-center">37%</span>
+        </div>
+        <div class="donut-text"><p>The top near-term measure to limit tariff-related costs.</p><p class="viz-src">Source: KPMG, March 2026</p></div>
+      </div>
+    </figure>
+
+    <p><strong><a href="https://www.gartner.com/en/newsroom/press-releases/2026-10-08-gartner-survey-shows-chief-procurement-officers-stalling-on-needed-ai-role-redesign" rel="noopener" target="_blank">Gartner</a> (October 8, 2026) found 63% of senior procurement leaders expect AI to significantly improve procurement performance over 3 years.</strong> Only 25% of procurement leaders have redesigned jobs and roles as a direct result of AI. Gartner drew on 2 surveys that concluded in April 2026. Its CPO Survey included 213 senior procurement leaders. Its C-Suite AI Survey included 1,303 respondents, 134 of them procurement leaders. Gartner describes CPOs as stalling on the role redesign that AI needs.</p>
+
+    <figure class="viz" data-viz="beforeafter">
+      <figcaption class="viz-title">AI expectations and role redesign</figcaption>
+      <div class="before-after">
+        <div class="ba-card"><span class="ba-num">63%</span><span class="ba-unit">expect AI to significantly improve procurement performance</span><span class="ba-sub">senior procurement leaders, over 3 years</span></div>
+        <span class="ba-arrow" aria-label="and">and</span>
+        <div class="ba-card ba-after"><span class="ba-num">25%</span><span class="ba-unit">have redesigned jobs and roles</span><span class="ba-sub">procurement leaders, as a direct result of AI</span></div>
+      </div>
+      <p class="viz-src">Source: Gartner, October 8, 2026. The figures come from 2 separate surveys that concluded in April 2026.</p>
+    </figure>
+
+    <hr class="section-divider">
+
+    <h2 id="s9">Frequently asked questions</h2>
+
+    <details class="faq-item">
+      <summary>What is the difference between source to pay and procure to pay? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Source to pay covers the full lifecycle; procure to pay covers only the purchasing half.</strong> S2P runs from spend analysis and sourcing through payment. P2P runs from requisition to payment, under the contract where one exists. S2P includes P2P, and P2P does not include strategic sourcing.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the difference between source to contract and procure to pay? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Source to contract sets the terms; procure to pay buys and pays under them.</strong> S2C ends in a signed contract that it then manages. P2P enforces that contract’s prices and terms at each purchase.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Where does source to contract end and procure to pay begin? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>The line is the signed contract.</strong> Source to contract produces and manages the agreement. P2P starts when someone raises a requisition under it. Contract management continues after signature, so the 2 overlap in practice.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is contract lifecycle management part of source to contract? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Yes. Contract lifecycle management is the contract management area of S2C.</strong> It runs from drafting and negotiation through signing, monitoring and renewal. The Hackett Group calls it the final concrete step of S2C.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the difference between purchase to pay and procure to pay? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>There is no difference in scope.</strong> Both names describe the same cycle, from requisition to payment.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How is procure to pay different from accounts payable automation? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>P2P is wider in scope.</strong> Accounts payable automation starts when an invoice lands and runs through matching and payment. P2P also covers the steps before that: requisitions, approvals, purchase orders and receiving.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <h2 id="s10">Next steps</h2>
+
+    <p><strong>Source to contract is the upstream part of source to pay, and procure to pay is the downstream part.</strong> Map where your own process splits between the 2, then check that contract terms reach purchasing. Jaggaer’s <a href="https://www.jaggaer.com/solutions/source-to-contract" rel="noopener">source-to-contract platform</a>, <a href="https://www.jaggaer.com/solutions/source-to-pay" rel="noopener">source-to-pay platform</a> and <a href="https://www.jaggaer.com/solutions/procure-to-pay" rel="noopener">procure-to-pay solution</a> run on a single data layer.</p>
+
+    <div class="jag-cta" data-cta="closing">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer helps you overcome your procurement challenges</p>
+        <p class="jag-cta-desc">You manage supplier relationships, supply chain disruption, sustainable sourcing and costs. Procurement professionals built Jaggaer’s tools for procurement professionals, to give you real-time insights and help you optimize your processes. Book a demo to discover how to overcome your own procurement challenges.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn">Book a demo &rarr;</a>
+    </div>
+
+  </article>
+
+  <aside class="expert-sidebar" aria-label="What the experts are saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">Gartner &middot; 2026</span>
+        <span class="exp-num red">63%</span>
+        <p class="exp-stat">of senior procurement leaders expect AI to significantly improve procurement performance over 3 years</p>
+        <a href="https://www.gartner.com/en/newsroom/press-releases/2026-10-08-gartner-survey-shows-chief-procurement-officers-stalling-on-needed-ai-role-redesign" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Gartner &middot; 2026</span>
+        <span class="exp-num red">25%</span>
+        <p class="exp-stat">of procurement leaders have redesigned jobs and roles as a direct result of AI</p>
+        <a href="https://www.gartner.com/en/newsroom/press-releases/2026-10-08-gartner-survey-shows-chief-procurement-officers-stalling-on-needed-ai-role-redesign" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">KPMG &middot; 2026</span>
+        <span class="exp-num red">37%</span>
+        <p class="exp-stat">name diversifying suppliers or shifting markets as their top near-term measure to limit tariff-related costs</p>
+        <a href="https://kpmg.com/kpmg-us/content/dam/kpmg/corporate-communications/pdf/2026/FINAL%20US%20procurement%20supply%20chain%20survey_2026.pdf" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">KPMG &middot; 2026</span>
+        <span class="exp-num red">34%</span>
+        <p class="exp-stat">cite inefficient sourcing or suboptimal supplier terms as the second-largest source of value leakage</p>
+        <a href="https://kpmg.com/kpmg-us/content/dam/kpmg/corporate-communications/pdf/2026/FINAL%20US%20procurement%20supply%20chain%20survey_2026.pdf" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">The Hackett Group &middot; 2025</span>
+        <span class="exp-num red">3.5×</span>
+        <p class="exp-stat">higher AP productivity, on average, for companies with 30%+ touchless invoice processing, in a provider-perspective AP study</p>
+        <a href="https://www.thehackettgroup.com/hackett-identifies-ap-solutions-delivering-gains-through-ai/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Deloitte &middot; 2025</span>
+        <span class="exp-num red">57%</span>
+        <p class="exp-stat">of CPOs list siloed ways of working among their top 3 barriers to delivering value</p>
+        <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+
+/* Toggle box: expertise gap vs. process gap */
+function jagToggle(targetId, btn) {
+  const box = btn.closest('.toggle-box');
+  box.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  box.querySelectorAll('.toggle-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  box.querySelector('#' + targetId).classList.add('active');
+}
+
+/* Decision-check widget */
+const decisionCopy = {
+  repeat: {head: "Consider a source-to-pay platform.", body: "Repeatable work such as PO processing, invoice matching, and approval routing may be better addressed through automation."},
+  expertise: {head: "Consider selective outsourcing.", body: "External support may help when specialized category expertise is missing internally."},
+  capacity: {head: "Consider time-bound outsourcing.", body: "External support can add temporary capacity for M&A integrations or major sourcing programs."},
+  strategy: {head: "Keep strategic ownership internal.", body: "Consider technology or selective external expertise for the supporting activities, not the decision itself."}
+};
+document.querySelectorAll('input[name="decisionQ"]').forEach(input => {
+  input.addEventListener('change', () => {
+    const result = document.getElementById('decisionResult');
+    const choice = decisionCopy[input.value];
+    result.innerHTML = '<strong>' + choice.head + '</strong> ' + choice.body;
+    result.classList.add('show');
+    document.getElementById('decisionReset').style.display = 'inline-block';
+  });
+});
+function jagResetDecision() {
+  document.querySelectorAll('input[name="decisionQ"]').forEach(i => i.checked = false);
+  const result = document.getElementById('decisionResult');
+  result.classList.remove('show');
+  result.textContent = '';
+  document.getElementById('decisionReset').style.display = 'none';
+}
+</script>
+
+<script>
+/* Five-question check */
+const fiveQ = document.querySelectorAll('#fiveQ input');
+fiveQ.forEach(c => c.addEventListener('change', () => {
+  const n = [...fiveQ].filter(x => x.checked).length;
+  document.getElementById('fiveQCount').textContent = n + ' of 5';
+}));
+
+/* Column highlight for comparison tables */
+document.querySelectorAll('.col-toggle').forEach(box => {
+  const table = document.getElementById(box.dataset.for);
+  box.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+    const on = btn.classList.contains('active');
+    box.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    table.querySelectorAll('.col-on').forEach(c => c.classList.remove('col-on'));
+    if (!on) {
+      btn.classList.add('active');
+      table.querySelectorAll('tr > :nth-child(' + btn.dataset.col + ')').forEach(c => c.classList.add('col-on'));
+    }
+  }));
+});
+
+/* KPI search */
+const kpiInput = document.getElementById('kpiFilter');
+const kpiRows = document.querySelectorAll('#kpiTable tbody tr');
+if (kpiInput) kpiInput.addEventListener('input', () => {
+  const q = kpiInput.value.trim().toLowerCase();
+  let n = 0;
+  kpiRows.forEach(r => { const show = !q || r.textContent.toLowerCase().includes(q); r.style.display = show ? '' : 'none'; if (show) n++; });
+  document.getElementById('kpiCount').textContent = n + ' of ' + kpiRows.length;
+});
+
+/* Kraljic matrix */
+document.querySelectorAll('.k-cell').forEach(c => c.addEventListener('click', () => {
+  const on = c.classList.contains('active');
+  document.querySelectorAll('.k-cell').forEach(x => x.classList.remove('active'));
+  if (!on) c.classList.add('active');
+}));
+</script>
+
+<script>
+/* Highlight rows of the Golden Triangle table by primary emphasis */
+document.querySelectorAll('.row-toggle').forEach(box => {
+  const table = document.getElementById(box.dataset.rowsFor);
+  box.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+    const on = btn.classList.contains('active');
+    box.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    table.querySelectorAll('tr.row-on').forEach(r => r.classList.remove('row-on'));
+    if (!on) {
+      btn.classList.add('active');
+      table.querySelectorAll('tbody tr').forEach(r => { if (r.dataset.emph === btn.dataset.emph) r.classList.add('row-on'); });
+    }
+  }));
+});
+
+/* Contents sidebar: also follow the principle sub-headings */
+(function () {
+  const subs = document.querySelectorAll('article h3[id^="p"]');
+  const links = document.querySelectorAll('.toc-link');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  subs.forEach(s => io.observe(s));
+})();
+
+</script>
+
+</body>
+</html>
