@@ -1,0 +1,892 @@
+<!-- uploaded by m-5jitd at 2026-10-30T11:28:37.330Z -->
+<!-- piece: Purchase Order Management: Process, Software and Best Practices -->
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purchase Order Management in 2027: Process &amp; Best Practices</title>
+<meta name="description" content="See how purchase order management works from requisition to payment: approvals, match depth, tolerances, KPIs and PO software criteria.">
+<link rel="canonical" href="https://www.jaggaer.com/purchase-order-management">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Purchase Order Management in 2027: Process, Software and Best Practices","description":"See how purchase order management works from requisition to payment: approvals, match depth, tolerances, KPIs and PO software criteria.","datePublished":"2026-10","dateModified":"2026-10","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"author":{"@type":"Organization","name":"JAGGAER"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.jaggaer.com/purchase-order-management"},"inLanguage":"en-US","citation":[{"@type":"CreativeWork","name":"Association of Certified Fraud Examiners (ACFE), Key Findings from Occupational Fraud 2026","url":"https://www.acfe.com/acfe-insights-blog/blog-detail?s=key-findings-report-to-the-nations-2026"},{"@type":"CreativeWork","name":"Ardent Partners, The State of ePayables 2025","url":"https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/"},{"@type":"CreativeWork","name":"The Hackett Group, 2025 Digital World Class Procurement research","url":"https://www.thehackettgroup.com/the-hackett-group-digital-world-class-procurement-teams-achieve-2-6x-higher-roi/"},{"@type":"CreativeWork","name":"The Hackett Group, 2025 Digital World Class Procurement research (cycle times)","url":"https://www.thehackettgroup.com/the-hackett-group-digital-world-class-procurement-teams-achieve-2-6x-higher-roi/"}]}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is purchase order management?","acceptedAnswer":{"@type":"Answer","text":"Purchase order management covers everything that happens to a PO between request and payment: approval, issue, receipt, invoice match and close. It provides the workflows and controls to authorize purchases, record receipt and match invoices."}},{"@type":"Question","name":"What are the steps in the purchase order process?","acceptedAnswer":{"@type":"Answer","text":"The purchase order management process commonly has 7 steps: requisition, approval, PO creation, transmission, receiving, invoice matching, and payment with PO close. Counts vary: teams often describe procure-to-pay in 5 stages, and some lists add vendor selection, which belongs to sourcing."}},{"@type":"Question","name":"What is the difference between PO management and procurement?","acceptedAnswer":{"@type":"Answer","text":"Procurement is the wider function: sourcing, contracting and supplier management. Purchase order management is the operational process that begins with the internal request and approval and runs through receipt, matching and close."}},{"@type":"Question","name":"What is the difference between a purchase requisition and a purchase order?","acceptedAnswer":{"@type":"Answer","text":"A requisition is an internal request to buy. A PO is the formal document sent to the supplier, and it is a legally binding contract between buyer and supplier. The purchase requisition vs. purchase order guide covers the full comparison."}},{"@type":"Question","name":"What are two-way, three-way and four-way match, and when is each used?","acceptedAnswer":{"@type":"Answer","text":"Two-way match compares the PO and invoice, three-way adds a goods receipt or service acceptance, and four-way adds inspection results. Match depth follows risk. Use two-way for lower-risk buys, three-way where you must confirm delivery, and four-way where inspection decides payment."}},{"@type":"Question","name":"What are the different types of purchase orders?","acceptedAnswer":{"@type":"Answer","text":"Common PO structures include standard, blanket, planned or scheduled, and contract-backed POs. Terminology varies by ERP."}},{"@type":"Question","name":"Why do after-the-fact POs happen, and how do you reduce them?","acceptedAnswer":{"@type":"Answer","text":"After-the-fact POs can happen when buying moves faster than approval, or when the PO process is harder than working around it. Reduce them with guided buying and catalogs, simpler approvals, requester training and a no-PO-no-work rule for in-scope purchases, with documented exceptions."}},{"@type":"Question","name":"When should a company move from spreadsheets to PO management software?","acceptedAnswer":{"@type":"Answer","text":"Consider purchase order management software when manual processes stop giving you control. Spreadsheets can track POs but typically lack integrated workflow, audit trail and matching."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.8125rem;
+  --font-size-base:    0.9375rem;
+  --font-size-lg:      1.062rem;
+  --font-size-h5:      clamp(0.9375rem, 0.8875rem + 0.23vw, 1.067rem);
+  --font-size-h4:      clamp(1.137rem, 1.067rem + 0.38vw, 1.347rem);
+  --font-size-h3:      clamp(1.377rem, 1.258rem + 0.58vw, 1.698rem);
+  --font-size-h2:      clamp(1.667rem, 1.498rem + 0.85vw, 2.138rem);
+  --font-size-h1:      clamp(2.007rem, calc(1.738rem + 1.12vw), 2.337rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.stat{font-family:var(--font-display);font-weight:600;color:var(--jai-a);font-variant-numeric:tabular-nums;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Badges */
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-family:var(--font-display);font-size:0.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.badge-pending{background:#fdecea;color:var(--color-red);margin-bottom:var(--space-xs);}
+.section-eyebrow{display:block;font-family:var(--font-display);font-size:0.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+
+/* Progress bar */
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-label{display:block;font-family:var(--font-display);font-size:0.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:720px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:0.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:0.9375rem;line-height:1;}
+.meta-label{font-family:var(--font-display);font-size:0.625rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:0.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:0.75rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.08em;}
+.qa-question{font-weight:700;color:var(--color-ink);margin-bottom:.35rem;}
+.reader-disclaimer{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:0 0 var(--space-m);font-size:0.75rem;color:var(--color-ink-2);line-height:1.6;}
+.freshness-note{font-size:0.75rem;color:var(--color-ink-3);}
+.source-line{font-size:0.75rem;color:var(--color-ink-3);font-style:italic;margin-top:-.5rem;margin-bottom:var(--space-m);}
+
+/* Primary Visual: five-tile stat grid */
+.leak-stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-s);margin:var(--space-m) 0 var(--space-l);}
+.leak-stat-tile{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-s);text-align:center;transition:box-shadow .2s,border-color .2s;}
+.leak-stat-tile a{display:block;text-decoration:none;border-bottom:none;}
+.leak-stat-tile:has(a):hover{box-shadow:0 4px 14px rgba(83,0,206,.12);border-color:var(--purple-soft);}
+.leak-stat-num{display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(1.337rem,1.137rem + 1vw,1.837rem);color:var(--jai-a);font-variant-numeric:tabular-nums;line-height:1.1;margin-bottom:.4rem;}
+.leak-stat-label{display:block;font-size:0.75rem;color:var(--color-ink-2);line-height:1.4;}
+.leak-stat-source{display:block;font-size:0.65rem;color:var(--color-ink-3);margin-top:.4rem;}
+@media(max-width:768px){.leak-stat-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.leak-stat-grid{grid-template-columns:1fr;}}
+
+/* Secondary Visual: comparison / data table */
+.leak-compare-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.leak-compare-table{width:100%;border-collapse:collapse;font-size:0.8125rem;min-width:600px;}
+.leak-compare-table th{background:var(--purple-tint-2);color:var(--color-ink);font-family:var(--font-display);font-weight:600;font-size:0.7rem;letter-spacing:.05em;text-transform:uppercase;text-align:left;padding:.65rem var(--space-s);border-bottom:var(--border);}
+.leak-compare-table td{padding:.75rem var(--space-s);border-bottom:var(--border);color:var(--color-ink-2);vertical-align:top;line-height:1.5;}
+.leak-compare-table td strong{color:var(--color-ink);}
+.leak-compare-table tr:last-child td{border-bottom:none;}
+.leak-compare-table td:first-child{font-family:var(--font-display);font-weight:700;color:var(--color-ink);white-space:nowrap;}
+
+/* Expert Sidebar ("What the Experts Are Saying") */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:0.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:0.7875rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.087rem;font-weight:600;color:var(--color-ink);line-height:1;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:0.68rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:0.68rem;}
+.exp-link{font-size:0.62rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.expert-sidebar{display:none;}}
+
+/* CTA block - JAI gradient theme */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:0.8875rem;font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-head a{color:inherit;border-bottom:none;}
+.jag-cta-head a:hover{color:var(--color-red);}
+.jag-cta-desc{font-size:0.75rem;color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-desc.placeholder{font-style:italic;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:0.8125rem;font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.038rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item summary::marker{content:none;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:0.875rem;color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+details{height:auto;overflow:hidden;transition:height .3s ease;}
+details:not([open]){height:3.75rem;}
+
+/* Closing notes */
+.abbrev-note{font-size:0.75rem;color:var(--color-ink-3);line-height:1.6;margin-top:var(--space-l);}
+.disclaimer-note{font-size:0.75rem;color:var(--color-ink-3);line-height:1.6;margin-top:var(--space-s);font-style:italic;}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.688rem,5vw,2.337rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}.leak-stat-grid{grid-template-columns:repeat(2,1fr);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Proof-section single stat callout (hook-stat) */
+.hook-stat{display:flex;align-items:center;gap:var(--space-l);background:var(--color-cream);border:var(--border);border-left:4px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-l);margin:var(--space-m) 0 var(--space-l);flex-wrap:wrap;}
+.hook-stat a{text-decoration:none;border-bottom:none;}
+.hook-stat-num{font-family:var(--font-display);font-weight:700;font-size:clamp(2.138rem,1.738rem + 2vw,2.938rem);color:var(--jai-a);font-variant-numeric:tabular-nums;line-height:1;flex-shrink:0;display:block;}
+.hook-stat-body{flex:1;min-width:200px;}
+.hook-stat-label{display:block;font-size:0.875rem;color:var(--color-ink);font-weight:600;line-height:1.4;margin-bottom:.3rem;}
+.hook-stat-label:hover{color:var(--jai-a);}
+.hook-stat-source{display:block;font-size:0.8375rem;font-weight:600;color:var(--color-ink-2);margin-top:.2rem;}
+@media(max-width:480px){.hook-stat{flex-direction:column;align-items:flex-start;}}
+
+/* Evaluation / mechanism list */
+.criteria-list{padding-left:0;margin:var(--space-m) 0 var(--space-l);list-style:none;}
+.criteria-list li{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin-bottom:var(--space-s);background:var(--color-white);}
+.criteria-list li:last-child{margin-bottom:0;}
+.criteria-list li strong{color:var(--color-ink);font-family:var(--font-display);}
+
+/* Legacy checklist, kept for style-block fidelity; superseded by .step-flow below for Getting Started */
+.checklist{padding-left:0;margin:var(--space-m) 0 var(--space-l);list-style:none;}
+.checklist li{display:flex;gap:.6rem;border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin-bottom:var(--space-s);background:var(--purple-tint-3);border-color:var(--purple-soft);}
+.checklist li:last-child{margin-bottom:0;}
+.checklist-num{flex-shrink:0;font-family:var(--font-display);font-weight:700;color:var(--jai-a);}
+
+/* --- Piece-specific additions --- */
+
+/* Getting Started: 4-step visual flow, replacing plain checklist boxes */
+.step-flow{display:flex;align-items:flex-start;gap:var(--space-2xs);margin:var(--space-m) 0 var(--space-l);}
+.step-flow-item{flex:1;min-width:0;text-align:center;background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-s);}
+.step-flow-circle{width:2.4rem;height:2.4rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:0.9375rem;margin:0 auto var(--space-s);}
+.step-flow-title{display:block;font-family:var(--font-display);font-weight:700;font-size:0.8rem;color:var(--color-ink);margin-bottom:.3rem;line-height:1.3;}
+.step-flow-desc{display:block;font-size:0.72rem;color:var(--color-ink-2);line-height:1.5;}
+.step-flow-arrow{flex:0 0 auto;color:var(--purple-soft);font-size:1.238rem;font-weight:700;align-self:center;padding-top:1.2rem;}
+@media(max-width:768px){.step-flow{flex-direction:column;}.step-flow-arrow{display:none;}.step-flow-item{display:flex;align-items:center;gap:var(--space-m);text-align:left;}.step-flow-circle{margin:0;flex-shrink:0;}}
+
+/* A Real Example: compact proof-point chips */
+.proof-chip-row{display:flex;gap:var(--space-s);margin:var(--space-m) 0 var(--space-l);flex-wrap:wrap;}
+.proof-chip{flex:1;min-width:160px;border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-cream);transition:box-shadow .2s,border-color .2s;display:block;text-decoration:none;border-bottom:none;}
+.proof-chip:hover{box-shadow:0 4px 14px rgba(83,0,206,.1);border-color:var(--purple-soft);}
+.proof-chip-source{display:block;font-family:var(--font-display);font-weight:700;font-size:0.8rem;margin-bottom:.25rem;color:var(--jai-a);}
+.proof-chip-stat{display:block;font-size:0.78rem;color:var(--color-ink-2);line-height:1.45;}
+
+/* Supplier Performance: 3 mechanisms as icon cards, replacing the plain bullet list */
+.mechanism-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-s);margin:var(--space-m) 0 var(--space-l);}
+.mechanism-card{background:var(--color-white);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-s);text-align:center;transition:box-shadow .2s,border-color .2s;}
+.mechanism-card:hover{box-shadow:0 4px 14px rgba(83,0,206,.1);border-color:var(--purple-soft);}
+.mechanism-icon{width:2.75rem;height:2.75rem;border-radius:50%;background:var(--purple-tint);color:var(--jai-a);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-s);}
+.mechanism-icon svg{width:1.35rem;height:1.35rem;}
+.mechanism-title{display:block;font-family:var(--font-display);font-weight:700;font-size:0.7875rem;color:var(--color-ink);margin-bottom:.35rem;line-height:1.3;}
+.mechanism-desc{display:block;font-size:0.78rem;color:var(--color-ink-2);line-height:1.5;}
+@media(max-width:768px){.mechanism-grid{grid-template-columns:1fr;}.mechanism-card{display:flex;align-items:center;gap:var(--space-m);text-align:left;padding:var(--space-s) var(--space-m);}.mechanism-icon{margin:0;flex-shrink:0;}}
+
+/* Supplier Performance: 2-tile stat highlight, replacing a stat-heavy paragraph */
+.mini-stat-row{display:flex;gap:var(--space-m);margin:var(--space-m) 0 var(--space-l);flex-wrap:wrap;}
+.mini-stat{flex:1;min-width:220px;background:var(--color-cream);border:var(--border);border-left:4px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);display:block;text-decoration:none;border-bottom:none;transition:box-shadow .2s;}
+.mini-stat:hover{box-shadow:0 4px 14px rgba(83,0,206,.12);}
+.mini-stat-num{display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(1.738rem,1.438rem + 1.5vw,2.337rem);color:var(--jai-a);font-variant-numeric:tabular-nums;line-height:1;margin-bottom:.35rem;}
+.mini-stat-label{display:block;font-size:0.75rem;color:var(--color-ink);font-weight:600;line-height:1.45;}
+
+
+/* --- Piece-specific additions: Purchase Order Management --- */
+
+/* One step down in type size across the article */
+:root{--font-size-base:0.875rem;--font-size-sm:0.75rem;
+  --font-size-h1:clamp(1.788rem,calc(1.538rem + 1vw),2.087rem);
+  --font-size-h2:clamp(1.438rem,1.298rem + .75vw,1.837rem);}
+.toc-link{font-size:0.75rem;}
+.leak-compare-table{font-size:0.75rem;}
+.faq-item summary{font-size:0.75rem;}
+.faq-body{font-size:0.8125rem;}
+.jag-cta-head{font-size:0.8375rem;}
+.jag-cta-desc{font-size:0.8rem;}
+.article-label{font-size:0.7rem;}
+.exp-stat{font-size:0.65rem;}
+.exp-source{font-size:0.78rem;}
+
+/* CTA with head, sub head and button */
+.jag-cta-desc{margin-top:.15rem;line-height:1.6;}
+.jag-cta-btn{white-space:normal;max-width:15rem;}
+@media(max-width:580px){.jag-cta-btn{max-width:none;}}
+.hook-stat-source{display:block;}
+
+/* 7-step process flow */
+.step-flow--wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-s);align-items:stretch;}
+.step-flow--wrap .step-flow-item{display:block;}
+.step-flow-text{display:block;}
+.step-flow-control{margin-top:.35rem;color:var(--color-teal);font-style:normal;font-weight:700;}
+@media(max-width:1060px){.step-flow--wrap{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:768px){.step-flow--wrap{grid-template-columns:1fr;}.step-flow--wrap .step-flow-item{display:flex;align-items:center;gap:var(--space-m);text-align:left;}.step-flow--wrap .step-flow-circle{margin:0;flex-shrink:0;}}
+
+/* Numbered evaluation list */
+.criteria-list--num{counter-reset:crit;}
+.criteria-list--num li{counter-increment:crit;position:relative;padding-left:calc(var(--space-m) + 1.9rem);}
+.criteria-list--num li::before{content:counter(crit);position:absolute;left:var(--space-m);top:var(--space-s);font-family:var(--font-display);font-weight:700;color:var(--jai-a);}
+
+/* Callout boxes */
+.callout{border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:var(--space-m) 0;}
+.callout p{margin:0;}
+.callout--key{background:var(--purple-tint-3);border-left:4px solid var(--jai-a);}
+.callout--warn{background:#fff6e5;border-left:4px solid #e0a100;}
+.callout--source{background:var(--color-light-blue);border-left:4px solid var(--color-teal);}
+.callout::before{content:attr(data-label);display:block;font-family:var(--font-display);font-size:0.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem;color:var(--jai-a);}
+.callout--warn::before{color:#8a6100;}
+.callout--source::before{color:var(--color-navy);}
+
+/* Requisition vs PO pair */
+.pair{display:grid;grid-template-columns:1fr 1.7fr;gap:var(--space-s);margin:var(--space-m) 0 var(--space-s);}
+.pair-box{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m);background:#fff;}
+.pair-box--po{background:var(--purple-tint-3);border-color:var(--purple-soft);}
+.pair-box p{margin:0;font-size:0.8125rem;line-height:1.55;}
+.pair-label{display:block;font-family:var(--font-display);font-size:0.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);margin-bottom:.3rem;}
+@media(max-width:700px){.pair{grid-template-columns:1fr;}}
+
+/* Approval ladder */
+.tier-ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-s);margin:var(--space-m) 0 var(--space-s);}
+.tier{background:var(--color-cream);border:var(--border);border-top:4px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-s);}
+.tier[data-level="1"]{margin-top:3rem;}
+.tier[data-level="2"]{margin-top:2rem;border-top-color:#a98be0;}
+.tier[data-level="3"]{margin-top:1rem;border-top-color:var(--jai-a);}
+.tier[data-level="4"]{margin-top:0;border-top-color:var(--color-red);}
+.tier-name{display:block;font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-size:0.8375rem;margin-bottom:var(--space-xs);}
+.tier-field{margin:0 0 var(--space-xs)!important;font-size:0.78rem!important;line-height:1.45!important;}
+.tier-field::before{content:attr(data-label);display:block;font-family:var(--font-display);font-size:0.6rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-teal);margin-bottom:.1rem;}
+@media(max-width:900px){.tier-ladder{grid-template-columns:repeat(2,1fr);}.tier{margin-top:0!important;}}
+@media(max-width:520px){.tier-ladder{grid-template-columns:1fr;}}
+
+/* PO type cards */
+.type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-s);margin:var(--space-m) 0 var(--space-l);}
+.type-card{display:flex;gap:var(--space-s);background:#fff;border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m);transition:box-shadow .2s,border-color .2s;}
+.type-card:hover{box-shadow:0 4px 14px rgba(83,0,206,.1);border-color:var(--purple-soft);}
+.type-icon{width:2.4rem;height:2.4rem;border-radius:50%;background:var(--purple-tint);color:var(--jai-a);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.type-icon svg{width:1.2rem;height:1.2rem;}
+.type-title{display:block;font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-size:0.8375rem;margin-bottom:.2rem;}
+.type-use{display:block;font-size:0.75rem;line-height:1.5;margin-bottom:.45rem;}
+.type-watch{display:block;font-size:0.75rem;line-height:1.45;background:#fdecea;color:#8a1c1f;border-radius:6px;padding:.35rem .55rem;}
+.type-watch-label{font-weight:700;}
+@media(max-width:700px){.type-grid{grid-template-columns:1fr;}}
+
+/* Match lanes */
+.match-lanes{display:grid;gap:var(--space-s);margin:var(--space-m) 0 var(--space-l);}
+.match-lane{display:grid;grid-template-columns:6.5rem 1fr;gap:.35rem var(--space-m);align-items:center;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);}
+.match-name{font-family:var(--font-display);font-weight:700;color:var(--jai-a);font-size:0.8375rem;}
+.match-chips{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;}
+.chip{background:#fff;border:1px solid var(--purple-soft);border-radius:999px;padding:.22rem .7rem;font-size:0.75rem;font-weight:600;color:var(--color-ink);}
+.chip::first-letter{text-transform:uppercase;}
+.chip--new{background:var(--jai-a);color:#fff;border-color:var(--jai-a);}
+.plus{color:var(--jai-a);font-weight:700;}
+.match-use{grid-column:2;margin:0!important;font-size:0.78rem!important;color:var(--color-ink-2);}
+.match-use::before{content:"Typical use: ";font-weight:700;color:var(--color-teal);}
+@media(max-width:600px){.match-lane{grid-template-columns:1fr;}.match-use{grid-column:1;}}
+
+/* Capability cards */
+.cap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-s);margin:var(--space-m) 0 var(--space-l);}
+.cap-card{position:relative;background:#fff;border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m) var(--space-s) 3.2rem;}
+.cap-card:last-child{grid-column:1/-1;}
+.cap-num{position:absolute;left:var(--space-s);top:var(--space-s);width:1.8rem;height:1.8rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.78rem;font-family:var(--font-display);}
+.cap-title{display:block;font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-size:0.7875rem;margin-bottom:.2rem;}
+.cap-desc{display:block;font-size:0.78rem;line-height:1.5;}
+@media(max-width:700px){.cap-grid{grid-template-columns:1fr;}}
+
+/* Manual vs automated lanes */
+.vs-grid{margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;}
+.vs-head,.vs-row{display:grid;grid-template-columns:8.5rem 1fr 1fr;}
+.vs-head span{padding:.6rem var(--space-s);font-family:var(--font-display);font-size:0.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+.vs-head .vs-blank{background:var(--purple-tint-2);}
+.vs-head .vs-manual{background:#fdecea;color:#8a1c1f;}
+.vs-head .vs-auto{background:#e5eeeb;color:#3f6a40;}
+.vs-row{border-top:var(--border);}
+.vs-stage{padding:.7rem var(--space-s);font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-size:0.8rem;background:var(--color-cream);}
+.vs-cell{padding:.7rem var(--space-s);font-size:0.78rem;line-height:1.45;}
+.vs-cell--manual{background:#fff8f7;}
+.vs-cell--auto{background:#f4faf6;}
+@media(max-width:700px){.vs-head{display:none;}.vs-row{grid-template-columns:1fr;}.vs-cell--manual::before{content:"Manual: ";font-weight:700;color:#8a1c1f;}.vs-cell--auto::before{content:"Automated: ";font-weight:700;color:#3f6a40;}}
+
+/* KPI tiles */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-s);margin:var(--space-m) 0 var(--space-l);}
+.kpi-tile{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-s);transition:box-shadow .2s,border-color .2s;}
+.kpi-tile:hover{box-shadow:0 4px 14px rgba(83,0,206,.1);border-color:var(--purple-soft);}
+.kpi-name{display:block;font-family:var(--font-display);font-weight:700;color:var(--jai-a);font-size:0.8375rem;margin-bottom:.3rem;line-height:1.3;}
+.kpi-measure{display:block;font-size:0.78rem;color:var(--color-ink);font-weight:600;margin-bottom:.4rem;line-height:1.4;}
+.kpi-formula{display:block;font-size:0.72rem;background:#fff;border:1px dashed var(--purple-soft);border-radius:6px;padding:.4rem .5rem;margin-bottom:.4rem;line-height:1.4;}
+.kpi-formula::before{content:"How to calculate: ";font-weight:700;color:var(--color-teal);}
+.kpi-why{display:block;font-size:0.72rem;color:var(--color-ink-3);line-height:1.4;}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.kpi-grid{grid-template-columns:1fr;}}
+
+/* Stat tiles with contrast */
+.mini-stat{cursor:default;}
+.mini-stat-row--contrast{align-items:stretch;}
+.source-note{font-size:0.75rem;color:var(--color-muted,#555);margin-top:-.4rem;}
+.but-chip{align-self:center;font-family:var(--font-display);font-weight:700;font-size:0.8rem;color:var(--color-red);background:#fdecea;border-radius:999px;padding:.3rem .8rem;}
+.mini-stat-source{display:block;width:100%;font-size:0.72rem;color:var(--color-ink-3);margin-top:-.4rem;}
+.mini-stat-num{font-size:clamp(1.438rem,1.238rem + 1.2vw,1.938rem);}
+.mini-stat-label{font-size:0.78rem;}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Is Purchase Order Management?</a>
+      <a class="toc-link" href="#s2">The Purchase Order Management Process</a>
+      <a class="toc-link" href="#s3">Common Purchase Order Management Challenges</a>
+      <a class="toc-link" href="#s4">Purchase Order Management Best Practices</a>
+      <a class="toc-link" href="#s5">Purchase Order Management Software: Core Capabilities</a>
+      <a class="toc-link" href="#s6">FAQ</a>
+      <a class="toc-link" href="#s7">Next Steps</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <span class="article-label">Procure-to-Pay &middot; Purchase Order Management</span>
+        <h1>Purchase Order Management in 2027: Process, Software and Best Practices</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            10&ndash;11 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Updated</span>&nbsp;October 2026</span>
+        </div>
+      </div>
+    </header>
+
+    <p>Purchase order management is the end-to-end control of a purchase, from requisition to payment and PO close. <strong>It governs who can commit spend, what the supplier agrees to, and whether the invoice matches what arrived.</strong></p>
+
+    <div class="hook-stat">
+      <a href="https://www.acfe.com/acfe-insights-blog/blog-detail?s=key-findings-report-to-the-nations-2026" target="_blank" rel="noopener" aria-label="View ACFE's 2026 key findings"><span class="hook-stat-num">Over half</span></a>
+      <div class="hook-stat-body">
+        <a href="https://www.acfe.com/acfe-insights-blog/blog-detail?s=key-findings-report-to-the-nations-2026" target="_blank" rel="noopener"><span class="hook-stat-label"><strong>ACFE's</strong> 2026 study of 2,402 occupational fraud cases found more than half involved a lack of internal controls or an override of existing ones.</span></a>
+        <span class="hook-stat-source">ACFE, 2026</span>
+      </div>
+    </div>
+
+    <p>The purchase order process runs in 7 steps, each with a control: requisition, approval, PO creation, transmission, receiving, invoice matching, and payment with PO close.</p>
+
+    <p>When those steps run on email and spreadsheets, <strong>the common failures include off-PO spend, stalled approvals and mismatched invoices.</strong></p>
+
+    <p>The sections below cover the controls at each step, the practices that hold them in place, and the KPIs that prove they work. They also cover what to compare in PO software. For the full cycle, see <a href="https://www.jaggaer.com/solutions/procure-to-pay" rel="noopener" target="_blank">JAGGAER's procure-to-pay solutions</a>.</p>
+
+    <div class="jag-cta" data-cta-id="po-cta-1-demo-intro">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER takes a requisition through approval, PO and invoice match &rarr;</p>
+        <p class="jag-cta-desc">JAGGAER eProcurement takes a requisition through approval to PO. JAGGAER Invoicing matches the invoice against the PO and receipt.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener" data-cta-id="po-cta-1-demo-intro" data-cta-type="demo" data-cta-section="intro">Request a demo &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s1">What Is Purchase Order Management?</h2>
+
+    <p>PO management is the process of creating, approving, sending, tracking and reconciling purchase orders, from requisition to payment and PO close. <strong>It sets how you authorize, receive and match a purchase before payment.</strong> Accounts payable (AP) and treasury controls then govern the payment itself.</p>
+
+    <p><strong>PO management answers 4 questions: who approved the spend, what the supplier committed to, what arrived, and whether the invoice matches.</strong> Each answer should leave a record an auditor can follow.</p>
+
+    <p><strong>Purchase order management is the control layer within procure-to-pay, the cycle of requisitioning, ordering, receiving, invoicing and payment.</strong> For the distinction from procurement, read how <a href="/procurement-vs-purchasing">procurement vs. purchasing</a> differ.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s2">The Purchase Order Management Process</h2>
+
+    <p>The purchase order management process has 7 steps, and <strong>each step has a key control.</strong></p>
+
+    <div class="step-flow step-flow--wrap">
+      <div class="step-flow-item">
+        <div class="step-flow-circle">1</div>
+        <div class="step-flow-text"><span class="step-flow-title">Requisition</span><span class="step-flow-desc">The requester states the need, quantity and cost center.</span><span class="step-flow-desc step-flow-control">Control: budget check.</span></div>
+      </div>
+      <div class="step-flow-item">
+        <div class="step-flow-circle">2</div>
+        <div class="step-flow-text"><span class="step-flow-title">Approval</span><span class="step-flow-desc">The approver reviews the request against policy.</span><span class="step-flow-desc step-flow-control">Control: approval limit.</span></div>
+      </div>
+      <div class="step-flow-item">
+        <div class="step-flow-circle">3</div>
+        <div class="step-flow-text"><span class="step-flow-title">PO creation</span><span class="step-flow-desc">The buyer issues the PO with supplier, price, quantity and terms.</span><span class="step-flow-desc step-flow-control">Control: approved supplier and price.</span></div>
+      </div>
+      <div class="step-flow-item">
+        <div class="step-flow-circle">4</div>
+        <div class="step-flow-text"><span class="step-flow-title">Transmission and acknowledgment</span><span class="step-flow-desc">The PO goes to the supplier through the agreed channel.</span><span class="step-flow-desc step-flow-control">Control: confirmed transmission, and acknowledgment where required.</span></div>
+      </div>
+      <div class="step-flow-item">
+        <div class="step-flow-circle">5</div>
+        <div class="step-flow-text"><span class="step-flow-title">Receiving</span><span class="step-flow-desc">The receiver records goods received or services accepted against the PO lines.</span><span class="step-flow-desc step-flow-control">Control: receipt or acceptance before payment.</span></div>
+      </div>
+      <div class="step-flow-item">
+        <div class="step-flow-circle">6</div>
+        <div class="step-flow-text"><span class="step-flow-title">Invoice matching</span><span class="step-flow-desc">AP compares the invoice with the PO and the receipt.</span><span class="step-flow-desc step-flow-control">Control: tolerance check.</span></div>
+      </div>
+      <div class="step-flow-item">
+        <div class="step-flow-circle">7</div>
+        <div class="step-flow-text"><span class="step-flow-title">Payment and PO close</span><span class="step-flow-desc">AP pays approved invoices. The PO closes when no commitment remains.</span><span class="step-flow-desc step-flow-control">Control: remaining commitment released.</span></div>
+      </div>
+    </div>
+
+    <div class="callout callout--key" data-label="Control"><p>Change orders cut across the 7 steps. <strong>Record agreed price and quantity changes on the PO before AP matches the invoice.</strong> Unrecorded changes become match exceptions.</p></div>
+
+    <div class="pair">
+      <div class="pair-box"><span class="pair-label">Requisition</span><p>A requisition is an internal request to buy.</p></div>
+      <div class="pair-box pair-box--po"><span class="pair-label">Purchase order</span><p>A PO is a formal document a buyer issues to a supplier, specifying the type, quantities and agreed prices of goods or services. <strong>It is a legally binding contract between buyer and supplier.</strong></p></div>
+    </div>
+    <p>The <a href="/purchase-requisition-vs-purchase-order">purchase requisition vs. purchase order</a> guide covers the full difference.</p>
+
+    <h3>Roles and Responsibilities</h3>
+
+    <p>5 roles typically touch a PO: requester, approver, buyer, receiver and AP. <strong>No one person should control authorization, receipt and recording of the same purchase.</strong> Where a small team cannot separate every duty, design alternative control activities, such as added management review.</p>
+
+    <div class="callout callout--source" data-label="Standard"><p><strong><a href="https://guides.gaoinnovations.gov/greenbook/2025/principle-10-design-control-activities/" rel="noopener" target="_blank">GAO's 2025 Green Book</a>, the federal internal-control standard, lists segregation of duties under Principle 10 (paragraphs 10.21–10.23).</strong></p></div>
+
+    <h3>Approval Workflows and Limits</h3>
+
+    <p><strong>Build the purchase order approval workflow around spend band and risk, not habit.</strong> Approver level should rise with spend and tighten for new suppliers and services. Add an escalation rule so a stalled approval reaches a delegate.</p>
+
+    <div class="tier-ladder" role="table" aria-label="Approval limits by spend band">
+      <div class="tier" data-level="1" role="row">
+        <span class="tier-name">Low</span>
+        <p class="tier-field" data-label="Who approves">Budget owner</p>
+        <p class="tier-field" data-label="Example extra control">Catalog or contract price only</p>
+      </div>
+      <div class="tier" data-level="2" role="row">
+        <span class="tier-name">Mid</span>
+        <p class="tier-field" data-label="Who approves">Budget owner and department head</p>
+        <p class="tier-field" data-label="Example extra control">Finance review of budget coding</p>
+      </div>
+      <div class="tier" data-level="3" role="row">
+        <span class="tier-name">High</span>
+        <p class="tier-field" data-label="Who approves">Designated senior approver</p>
+        <p class="tier-field" data-label="Example extra control">Budget check before release</p>
+      </div>
+      <div class="tier" data-level="4" role="row">
+        <span class="tier-name">Non-standard (new supplier, services)</span>
+        <p class="tier-field" data-label="Who approves">Procurement and budget owner</p>
+        <p class="tier-field" data-label="Example extra control">Supplier vetting before the PO issues</p>
+      </div>
+    </div>
+
+    <p>These bands are illustrative, so set yours from your own risk tolerance. No dollar figure is a universal standard for approval limits.</p>
+
+    <div class="jag-cta" data-cta-id="po-cta-2-approvals">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER handles purchase order management approvals and budget checks before you create a PO &rarr;</p>
+        <p class="jag-cta-desc">JAGGAER procurement software commits budget at requisition and enforces contracted suppliers at search. It routes approvals by value, commodity, business unit and cost center, with auto-escalation.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/procurement-software" class="jag-cta-btn" target="_blank" rel="noopener" data-cta-id="po-cta-2-approvals" data-cta-type="solution-page" data-cta-section="approval-limits">See approval routing in JAGGAER &rarr;</a>
+    </div>
+
+    <h3>Types of Purchase Orders</h3>
+
+    <p><strong>Match the PO type to how predictable the purchase is.</strong> Standard POs suit one-time buys, while blanket and planned POs suit repeat spend.</p>
+
+    <div class="type-grid">
+      <div class="type-card">
+        <span class="type-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="14" y2="17"/></svg></span>
+        <div><span class="type-title">Standard</span><span class="type-use">One-time purchase with known items, price and date</span><span class="type-watch"><span class="type-watch-label">Risk if misused:</span> Overuse for repeat buys multiplies PO volume</span></div>
+      </div>
+      <div class="type-card">
+        <span class="type-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></span>
+        <div><span class="type-title">Blanket</span><span class="type-use">Recurring buys from one supplier up to a set limit</span><span class="type-watch"><span class="type-watch-label">Risk if misused:</span> Needs a spend cap, release tracking and an expiry or review date</span></div>
+      </div>
+      <div class="type-card">
+        <span class="type-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+        <div><span class="type-title">Planned or scheduled</span><span class="type-use">Known total, with release dates still to come</span><span class="type-watch"><span class="type-watch-label">Risk if misused:</span> Releases drift from the plan unless reviewed</span></div>
+      </div>
+      <div class="type-card">
+        <span class="type-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+        <div><span class="type-title">Contract-backed</span><span class="type-use">Releases against a negotiated agreement</span><span class="type-watch"><span class="type-watch-label">Risk if misused:</span> Release prices must match the contract</span></div>
+      </div>
+    </div>
+
+    <p>Type names vary by ERP, so map these to your system's terms.</p>
+
+    <h3>Two-, Three- and Four-Way Match</h3>
+
+    <p>Match depth should follow risk and the evidence you need that delivery happened. <strong>Two-way suits low-risk buys, three-way adds a receipt or service acceptance, and four-way adds inspection results.</strong></p>
+
+    <div class="match-lanes">
+      <div class="match-lane">
+        <span class="match-name">Two-way</span>
+        <div class="match-chips"><span class="chip">PO</span> <span class="plus" aria-hidden="true">+</span> <span class="chip">invoice</span></div>
+        <p class="match-use">Low-risk or low-value buys, and services without a receipt record</p>
+      </div>
+      <div class="match-lane">
+        <span class="match-name">Three-way</span>
+        <div class="match-chips"><span class="chip">PO</span> <span class="plus" aria-hidden="true">+</span> <span class="chip">goods receipt or service acceptance</span> <span class="plus" aria-hidden="true">+</span> <span class="chip">invoice</span></div>
+        <p class="match-use">Goods, and services with a recorded acceptance</p>
+      </div>
+      <div class="match-lane">
+        <span class="match-name">Four-way</span>
+        <div class="match-chips"><span class="chip">three-way match</span> <span class="plus" aria-hidden="true">+</span> <span class="chip chip--new">inspection results</span></div>
+        <p class="match-use">Buyers that inspect before paying</p>
+      </div>
+    </div>
+
+    <p><strong>For services, the receipt may be a service entry, milestone acceptance or approved timesheet.</strong></p>
+
+    <p>Set a tolerance so small variances do not trigger exceptions. <strong>Apply it by percentage, amount or both, and fail the match only beyond it.</strong> Cap percentage tolerances with a fixed amount.</p>
+
+    <div class="mini-stat-row">
+      <div class="mini-stat"><span class="mini-stat-num">$100,000</span><span class="mini-stat-label">For example, 5% of a $2,000,000 order</span></div>
+    </div>
+
+    <p>Decide in policy whether freight and tax variances fall under tolerance or need a change order.</p>
+
+    <p class="reader-disclaimer"><strong>In this hypothetical example,</strong> a medical device maker receives 500 components. Inspection rejects 40. A four-way match holds payment for the rejected quantity until the supplier credits or replaces the units.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s3">Common Purchase Order Management Challenges</h2>
+
+    <div class="callout callout--key" data-label="Key point"><p>After-the-fact (retroactive) POs show where buyers bypass your purchase order management process. <strong>Track them by business unit, supplier and requester to find where the process breaks.</strong> One UK council shows the pattern. <a href="https://democracy.york.gov.uk/documents/s184494/Purchasing%20Compliance%20Update%20AG%20Report.html?CT=2" rel="noopener" target="_blank"><strong>City of York Council's</strong> 2025 committee report</a> counts an order as retrospective when its PO date follows the invoice date. Retrospective shares by department ran from 19% to 37% between January and June 2025.</p></div>
+
+    <p>Some retroactive POs are legitimate, such as emergency repairs. Log those as exceptions, not as the baseline. For the rest, match the fix to the cause. Options include guided buying and catalogs, simpler approvals, requester training, and a no-PO-no-work rule with suppliers for in-scope purchases. Not every purchase needs a PO, so document the exceptions: spend under an existing contract and low-value buys under a set threshold. <strong>The right fix depends on whether the cause is friction, policy gaps or habit.</strong></p>
+
+    <p>5 more purchase order management challenges recur:</p>
+
+    <ul>
+      <li><strong>Manual entry errors.</strong> Wrong quantities and prices surface at invoice match. Pull PO lines from the approved requisition instead of re-keying them.</li>
+      <li><strong>Approval bottlenecks.</strong> Stalled approvals push buyers to work around the PO. Set delegates and escalation timers.</li>
+      <li><strong>Receipt and invoice mismatches.</strong> Late or missing receipts fail the match, so record receipts promptly and follow up on overdue ones.</li>
+      <li><strong>No view of open commitments.</strong> Without purchase order tracking, stale open POs hide committed spend, so review them on a fixed schedule, such as monthly.</li>
+      <li><strong>Change orders that never reach the PO.</strong> Price or quantity changes agreed by email break the match.</li>
+    </ul>
+
+    <div class="jag-cta" data-cta-id="po-cta-3-uva-story">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER helped the University of Virginia put every PO ahead of the invoice &rarr;</p>
+        <p class="jag-cta-desc">Before JAGGAER, users bypassed the procurement system, and some generated PO numbers after the fact to force an invoice match. Now every purchase order starts in JAGGAER, and off-catalog purchases fell 70% where catalog buying is available.</p>
+      </div>
+      <a href="https://www.jaggaer.com/success-stories/university-of-virginia-eprocurement-customer-story" class="jag-cta-btn" target="_blank" rel="noopener" data-cta-id="po-cta-3-uva-story" data-cta-type="customer-story" data-cta-section="challenges">Read the University of Virginia story &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s4">Purchase Order Management Best Practices</h2>
+
+    <p>7 purchase order management practices give you a working control baseline. <strong>Each addresses a specific purchase order control gap.</strong></p>
+
+    <ol class="criteria-list criteria-list--num">
+      <li><strong>PO before purchase.</strong> Require the PO before the commitment. <strong>A retroactive PO cannot enforce the approval and budget checks it exists for.</strong> <a href="https://www.thehackettgroup.com/the-hackett-group-digital-world-class-procurement-teams-achieve-2-6x-higher-roi/" rel="noopener" target="_blank"><strong>The Hackett Group's</strong> 2025 research</a> reports top-quartile procurement teams lose 60% less savings than peers to maverick buying and contract noncompliance. That is a procurement-wide benchmark, not a PO-specific one.</li>
+      <li><strong>Approval limits tied to spend and role.</strong> Tie each limit to spend band and role, so <strong>approvals scale with risk, not availability.</strong></li>
+      <li><strong>Segregation of duties, from the auditor's view.</strong> An auditor tests who performed each control and what evidence shows it. <strong>Keep approvals and receipts in the system, not in email threads.</strong></li>
+      <li><strong>Tolerance rules for matching.</strong> Set tolerances by value and category, <strong>tight enough to catch errors and loose enough to ignore rounding differences.</strong> <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" rel="noopener" target="_blank"><strong>Ardent Partners'</strong> State of ePayables 2025</a> puts the average invoice exception rate at 18.4%. Best-in-class AP teams run 47% lower than the rest of the marketplace. That covers all invoice exceptions, not only PO mismatches.</li>
+      <li><strong>Catalogs for repeat buys.</strong> Catalog items carry approved prices and suppliers, so <strong>requesters stay on policy by default.</strong> Where low-value buying is scattered, add <a href="/tail-spend-management-solutions">tail spend management solutions</a>.</li>
+      <li><strong>Blanket POs for recurring spend.</strong> One capped PO replaces dozens of identical ones. <strong>Track releases against the cap and set an expiry.</strong></li>
+      <li><strong>Regular review of open POs.</strong> <strong>Stale open POs overstate commitments and hide late deliveries.</strong> <a href="https://www.acfe.com/acfe-insights-blog/blog-detail?s=key-findings-report-to-the-nations-2026" rel="noopener" target="_blank"><strong>ACFE's</strong> 2026 report</a> associates controls such as management review and proactive data monitoring with lower losses and faster detection.</li>
+    </ol>
+
+    <p><strong><a href="https://www.acfe.com/acfe-insights-blog/blog-detail?s=key-findings-report-to-the-nations-2026" rel="noopener" target="_blank">ACFE found</a> fraud caught within 6 months had a $40,000 median loss. Schemes running over 5 years had median losses above $1.1 million.</strong></p>
+
+    <div class="mini-stat-row mini-stat-row--contrast">
+      <div class="mini-stat"><span class="mini-stat-num">$40,000</span><span class="mini-stat-label">caught within 6 months</span></div>
+      <span class="but-chip" aria-label="versus">vs.</span>
+      <div class="mini-stat"><span class="mini-stat-num">$1.1M+</span><span class="mini-stat-label">running over 5 years</span></div>
+    </div>
+
+    <p class="source-note">Source: ACFE, Occupational Fraud 2026: A Report to the Nations (May 2026).</p>
+
+    <p>Track 5 purchase order management KPIs to see whether these practices hold.</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-tile">
+        <span class="kpi-name">Share of spend under PO</span>
+        <span class="kpi-measure"><strong>Share of invoiced spend that sits on a PO</strong></span>
+        <span class="kpi-formula">Invoiced spend on POs divided by in-scope invoiced spend for the period, excluding payroll and tax</span>
+        <span class="kpi-why">Shows how far buying bypasses controls</span>
+      </div>
+      <div class="kpi-tile">
+        <span class="kpi-name">After-the-fact PO rate</span>
+        <span class="kpi-measure"><strong>POs raised after the invoice or goods receipt</strong></span>
+        <span class="kpi-formula">POs dated after the invoice or receipt date divided by total POs</span>
+        <span class="kpi-why">Pinpoints where buyers bypass the process</span>
+      </div>
+      <div class="kpi-tile">
+        <span class="kpi-name">PO cycle time</span>
+        <span class="kpi-measure"><strong>Speed from approved requisition to released PO</strong></span>
+        <span class="kpi-formula">Release date minus requisition approval date, averaged</span>
+        <span class="kpi-why">Long cycles push buyers to work around the process</span>
+      </div>
+      <div class="kpi-tile">
+        <span class="kpi-name">First-pass match rate</span>
+        <span class="kpi-measure"><strong>PO invoices matched with no manual exception handling</strong></span>
+        <span class="kpi-formula">Invoices matched first time divided by total PO invoices</span>
+        <span class="kpi-why">Low rates point to upstream data and receipt problems</span>
+      </div>
+      <div class="kpi-tile">
+        <span class="kpi-name">Match exceptions by cause</span>
+        <span class="kpi-measure"><strong>Why matches fail</strong></span>
+        <span class="kpi-formula">Exception count by cause: price, quantity, missing receipt</span>
+        <span class="kpi-why">Points to the control to fix first</span>
+      </div>
+    </div>
+
+    <div class="jag-cta" data-cta-id="po-cta-4-demo-match">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER applies match tolerances and routes invoice exceptions &rarr;</p>
+        <p class="jag-cta-desc">JAGGAER Invoicing applies configurable price and quantity tolerances to each match. It identifies mismatches and routes exceptions to the right team.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener" data-cta-id="po-cta-4-demo-match" data-cta-type="demo" data-cta-section="best-practices">Request a demo &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s5">Purchase Order Management Software: Core Capabilities</h2>
+
+    <p>Look for purchase order management software when manual processes create control gaps or limit visibility. <strong>The signs are approvals that stall in email, POs raised after invoices arrive, invoices that fail the match, and no single view of open commitments.</strong></p>
+
+    <p>Check first whether your existing purchase order system, ERP or source-to-pay platform can close the gap through configuration.</p>
+
+    <div class="callout callout--warn" data-label="Watch out"><p>Software does not create a control by itself. <strong>Design the workflow, rules, permissions and exception handling correctly.</strong></p></div>
+
+    <p>In JAGGAER's product structure, purchase order management sits within eProcurement, and invoicing is a separate module.</p>
+
+    <p>Compare purchase order management software on 7 capabilities:</p>
+
+    <div class="cap-grid">
+      <div class="cap-card">
+        <span class="cap-num">1</span>
+        <span class="cap-title">Configurable approval routing</span>
+        <span class="cap-desc">Routes by rules such as spend, category, business unit or supplier risk, with parallel approvals, delegation and escalation</span>
+      </div>
+      <div class="cap-card">
+        <span class="cap-num">2</span>
+        <span class="cap-title">Guided buying and catalogs</span>
+        <span class="cap-desc">Steers repeat buys to approved suppliers and prices at the point of request</span>
+      </div>
+      <div class="cap-card">
+        <span class="cap-num">3</span>
+        <span class="cap-title">Supplier transmission and status tracking</span>
+        <span class="cap-desc">Sends the PO through the agreed channel and tracks acknowledgment or order status where supported</span>
+      </div>
+      <div class="cap-card">
+        <span class="cap-num">4</span>
+        <span class="cap-title">Configurable matching and exception handling</span>
+        <span class="cap-desc">Supports two-, three- and four-way match in the PO or invoicing module, with configurable tolerances, partial receipts and exception routing</span>
+      </div>
+      <div class="cap-card">
+        <span class="cap-num">5</span>
+        <span class="cap-title">Policy controls and audit trail</span>
+        <span class="cap-desc">Enforces PO-before-purchase rules, routes documented exceptions and logs who approved, received and changed what</span>
+      </div>
+      <div class="cap-card">
+        <span class="cap-num">6</span>
+        <span class="cap-title">ERP and financial-system integration</span>
+        <span class="cap-desc">Synchronizes supplier, budget, PO, receipt and invoice data with your ERP and flags failed transactions</span>
+      </div>
+      <div class="cap-card">
+        <span class="cap-num">7</span>
+        <span class="cap-title">Reporting and commitment visibility</span>
+        <span class="cap-desc">Shows open commitments, after-the-fact POs, cycle time and match exceptions</span>
+      </div>
+    </div>
+
+    <p>Manual and automated purchase order management differ at 4 stages:</p>
+
+    <div class="vs-grid">
+      <div class="vs-head"><span class="vs-blank">Process stage</span><span class="vs-manual">Manual approach</span><span class="vs-auto">Automated approach</span></div>
+      <div class="vs-row"><div class="vs-stage">Approval routing</div><div class="vs-cell vs-cell--manual">Email chains and spreadsheet limits</div><div class="vs-cell vs-cell--auto">Rules route by band, category and risk</div></div>
+      <div class="vs-row"><div class="vs-stage">PO transmission</div><div class="vs-cell vs-cell--manual">Email or PDF, with no confirmation</div><div class="vs-cell vs-cell--auto">Sent through the agreed channel, with status tracking</div></div>
+      <div class="vs-row"><div class="vs-stage">Matching</div><div class="vs-cell vs-cell--manual">Side-by-side comparison of PO, receipt and invoice</div><div class="vs-cell vs-cell--auto">Rule-based match with tolerances and exception routing</div></div>
+      <div class="vs-row"><div class="vs-stage">Visibility</div><div class="vs-cell vs-cell--manual">Spreadsheet snapshots</div><div class="vs-cell vs-cell--auto">Current view of open commitments</div></div>
+    </div>
+
+    <p><strong>For example, <a href="https://www.jaggaer.com/solutions/procurement-software" rel="noopener" target="_blank">JAGGAER eProcurement</a> combines guided buying, catalog management and punchout buying, and supplier PO acknowledgment through a portal.</strong> The <a href="/procure-to-pay-software-buyers-guide">procure-to-pay software buyer's guide</a> covers the full evaluation.</p>
+
+    <div class="jag-cta" data-cta-id="po-cta-5-p2p-checklist">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER's P2P evaluation checklist helps you compare software requirements &rarr;</p>
+        <p class="jag-cta-desc">The checklist covers feature requirements, user adoption best practices, ongoing support and the partner ecosystem to look for in a procure-to-pay solution. It is a free download that asks you to complete a form.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/checklist/p2p-evaluation-checklist" class="jag-cta-btn" target="_blank" rel="noopener" data-cta-id="po-cta-5-p2p-checklist" data-cta-type="checklist-download" data-cta-section="software">Download the P2P evaluation checklist &rarr;</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s6">FAQ</h2>
+
+    <details class="faq-item">
+      <summary>What is purchase order management? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Purchase order management covers everything that happens to a PO between request and payment: approval, issue, receipt, invoice match and close.</strong> It provides the workflows and controls to authorize purchases, record receipt and match invoices.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What are the steps in the purchase order process? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>The purchase order management process commonly has 7 steps: requisition, approval, PO creation, transmission, receiving, invoice matching, and payment with PO close.</strong> Counts vary: teams often describe procure-to-pay in 5 stages, and some lists add vendor selection, which belongs to sourcing.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the difference between PO management and procurement? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Procurement is the wider function: sourcing, contracting and supplier management. <strong>Purchase order management is the operational process that begins with the internal request and approval and runs through receipt, matching and close.</strong></div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the difference between a purchase requisition and a purchase order? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>A requisition is an internal request to buy.</strong> A PO is the formal document sent to the supplier, and it is a legally binding contract between buyer and supplier. The <a href="/purchase-requisition-vs-purchase-order">purchase requisition vs. purchase order</a> guide covers the full comparison.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What are two-way, three-way and four-way match, and when is each used? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Two-way match compares the PO and invoice, three-way adds a goods receipt or service acceptance, and four-way adds inspection results.</strong> Match depth follows risk. Use two-way for lower-risk buys, three-way where you must confirm delivery, and four-way where inspection decides payment.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What are the different types of purchase orders? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Common PO structures include standard, blanket, planned or scheduled, and contract-backed POs.</strong> Terminology varies by ERP.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Why do after-the-fact POs happen, and how do you reduce them? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>After-the-fact POs can happen when buying moves faster than approval, or when the PO process is harder than working around it.</strong> Reduce them with guided buying and catalogs, simpler approvals, requester training and a no-PO-no-work rule for in-scope purchases, with documented exceptions.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>When should a company move from spreadsheets to PO management software? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Consider purchase order management software when manual processes stop giving you control.</strong> Spreadsheets can track POs but typically lack integrated workflow, audit trail and matching.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <h2 id="s7">Next Steps</h2>
+
+    <p>If you are building out a purchase order management program, read how <a href="/procurement-vs-purchasing">procurement vs. purchasing</a> differ. For the wider procure-to-pay view, see <a href="https://www.jaggaer.com/solutions/procure-to-pay" rel="noopener" target="_blank">JAGGAER's procure-to-pay solutions</a>.</p>
+
+    <p class="disclaimer-note"><em>Control and audit guidance here is general information, not audit or legal advice.</em></p>
+
+  </article>
+
+  <aside class="expert-sidebar" aria-label="What the experts are saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">ACFE 2026</span>
+        <span class="exp-num">Over half</span>
+        <p class="exp-stat">More than half of 2,402 occupational fraud cases investigated by Certified Fraud Examiners involved a lack of internal controls or an override of existing ones.</p>
+        <a href="https://www.acfe.com/acfe-insights-blog/blog-detail?s=key-findings-report-to-the-nations-2026" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Ardent Partners 2025</span>
+        <span class="exp-num">18.4%</span>
+        <p class="exp-stat">The average invoice exception rate is 18.4%, and best-in-class AP teams run 47% lower than the rest of the marketplace.</p>
+        <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Hackett Group 2025</span>
+        <span class="exp-num">60%</span>
+        <p class="exp-stat">Top-quartile procurement teams lose 60% less savings to maverick buying and contract noncompliance.</p>
+        <a href="https://www.thehackettgroup.com/the-hackett-group-digital-world-class-procurement-teams-achieve-2-6x-higher-roi/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Hackett Group 2025</span>
+        <span class="exp-num">58%</span>
+        <p class="exp-stat">Top-quartile procurement teams run 58% shorter requisition-to-purchase order cycle times.</p>
+        <a href="https://www.thehackettgroup.com/the-hackett-group-digital-world-class-procurement-teams-achieve-2-6x-higher-roi/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// Reading progress bar
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+// Active TOC link on scroll
+const sections = document.querySelectorAll('article h2[id], article .article-header');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
