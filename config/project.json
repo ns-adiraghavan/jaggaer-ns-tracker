@@ -5683,7 +5683,7 @@
               "title": "Category Management in Procurement: Process, Tools and Best Practices",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "marketing-review",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -5692,7 +5692,7 @@
               "intent": "",
               "funnel": "",
               "geography": "all",
-              "revision_count": 1,
+              "revision_count": 2,
               "schedule_month": "p3-month-1",
               "schedule_week": 8,
               "review_owner": "m-14bwv",
@@ -5707,9 +5707,14 @@
                   "stage": "writing",
                   "ts": "2026-10-30T09:41:33.675Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "marketing-review",
+                  "ts": "2026-10-30T11:40:39.557Z",
+                  "by": "m-e10nz"
                 }
               ],
-              "last_updated": "2026-10-30T09:41:33.675Z",
+              "last_updated": "2026-10-30T11:40:39.557Z",
               "last_updated_by": "m-e10nz",
               "brief_files": [
                 {
@@ -5720,7 +5725,7 @@
                 }
               ],
               "brief_last_updated": "2026-10-27T08:50:50.770Z",
-              "last_upload": "2026-10-30T09:41:33.675Z",
+              "last_upload": "2026-10-30T11:40:39.557Z",
               "last_upload_by": "m-e10nz",
               "priority": "P1",
               "priority_updated": "2026-10-27T08:51:01.667Z",
