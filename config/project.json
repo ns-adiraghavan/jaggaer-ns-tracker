@@ -1412,8 +1412,17 @@
                   "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-10-30T09:30:34.370Z",
-              "last_updated_by": "m-14bwv"
+              "last_updated": "2026-10-30T09:30:37.157Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Category_Management_Guide_Refresh.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-hjxaho/brief/JAGGAER_SEO_Brief_Category_Management_Guide_Refresh.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-10-30T09:30:37.157Z"
+                }
+              ],
+              "brief_last_updated": "2026-10-30T09:30:37.157Z"
             }
           ]
         }
