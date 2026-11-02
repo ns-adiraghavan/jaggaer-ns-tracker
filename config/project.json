@@ -1458,6 +1458,29 @@
               "priority": "P2",
               "priority_updated": "2026-11-02T12:45:31.995Z",
               "priority_updated_by": "m-5jitd"
+            },
+            {
+              "id": "piece-oxoi6j",
+              "title": "Procurement Orchestration: Definition, Examples and How to Get Started",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-5jitd",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "procurement orchestration",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-02T12:46:49.707Z",
+                  "by": "m-5jitd"
+                }
+              ],
+              "last_updated": "2026-11-02T12:46:49.707Z",
+              "last_updated_by": "m-5jitd"
             }
           ]
         }
