@@ -5574,7 +5574,7 @@
               "title": "What Is CLM? Meaning, Stages and How CLM Software Works",
               "format": "Article",
               "assignee": "",
-              "status": "marketing-review",
+              "status": "writing",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -5603,10 +5603,15 @@
                   "stage": "marketing-review",
                   "ts": "2026-10-30T11:52:21.929Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-02T11:35:43.391Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-10-30T11:52:21.929Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-02T11:35:43.390Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_What_Is_CLM_Blog_Refresh.pdf",
@@ -5622,7 +5627,7 @@
               "priority_updated": "2026-10-27T08:51:07.539Z",
               "priority_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "seo": {
                 "meta_title": "What Is CLM? Meaning, Stages and How CLM Software Works",
                 "meta_description": "Learn what CLM means, the nine stages of the contract lifecycle and how CLM software works\nto improve compliance, speed and visibility",
@@ -10615,6 +10620,14 @@
         "annotation": true,
         "section": "¶9 — \"The stages of contract lifecycle managem…\"",
         "revision": 2
+      },
+      {
+        "id": "fb-2j0li0",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "Check comments",
+        "ts": "2026-11-02T11:35:43.386Z",
+        "stage": "marketing-review"
       }
     ]
   },
