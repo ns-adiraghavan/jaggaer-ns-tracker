@@ -10550,6 +10550,16 @@
         "annotation": true,
         "section": "¶89 — \"Reference framework: CIPS describes its …\"",
         "revision": 2
+      },
+      {
+        "id": "ann-yu4nf7",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "This looks like a incomplete sentence, please correct it",
+        "ts": "2026-11-02T10:47:57.681Z",
+        "annotation": true,
+        "section": "¶13 — \"For example (manufacturing): Each stage …\"",
+        "revision": 2
       }
     ]
   },
