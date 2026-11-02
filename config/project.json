@@ -1549,8 +1549,17 @@
                   "by": "m-5jitd"
                 }
               ],
-              "last_updated": "2026-11-02T12:48:55.067Z",
-              "last_updated_by": "m-5jitd"
+              "last_updated": "2026-11-02T12:52:45.623Z",
+              "last_updated_by": "m-5jitd",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_AI_in_Procurement_Orchestration_Blog_Refresh (1).pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-yi5qu9/brief/JAGGAER_SEO_Brief_AI_in_Procurement_Orchestration_Blog_Refresh__1_.pdf",
+                  "uploaded_by": "m-5jitd",
+                  "uploaded_at": "2026-11-02T12:52:45.623Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-02T12:52:45.623Z"
             }
           ]
         }
