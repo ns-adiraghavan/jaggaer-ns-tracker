@@ -1515,7 +1515,10 @@
                 }
               ],
               "last_updated": "2026-11-02T12:47:46.476Z",
-              "last_updated_by": "m-5jitd"
+              "last_updated_by": "m-5jitd",
+              "priority": "P2",
+              "priority_updated": "2026-11-02T12:48:04.362Z",
+              "priority_updated_by": "m-5jitd"
             }
           ]
         }
