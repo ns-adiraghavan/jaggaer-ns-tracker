@@ -5748,7 +5748,7 @@
               "title": "Source to Contract vs Source to Pay vs Procure to Pay: Key Differences",
               "format": "Article",
               "assignee": "",
-              "status": "marketing-review",
+              "status": "writing",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -5777,10 +5777,15 @@
                   "stage": "marketing-review",
                   "ts": "2026-10-30T11:52:06.891Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-02T10:35:47.991Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-10-30T11:52:06.891Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-02T10:35:47.991Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Source_to_Contract_Comparison_Refresh.pdf",
@@ -5796,7 +5801,7 @@
               "priority_updated": "2026-10-27T08:52:07.065Z",
               "priority_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "seo": {
                 "meta_title": "Source to Contract vs Source to Pay vs Procure to Pay",
                 "meta_description": "Source to contract (S2C) is the upstream half of source to pay (S2P); procure to pay (P2P) is \nthe downstream half. See how the three differ",
@@ -10525,6 +10530,14 @@
         "annotation": true,
         "section": "¶3 — \"See how Jaggaer runs sourcing, contracts…\"",
         "revision": 2
+      },
+      {
+        "id": "fb-w3l4z9",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "See comments",
+        "ts": "2026-11-02T10:35:47.987Z",
+        "stage": "marketing-review"
       }
     ]
   },
