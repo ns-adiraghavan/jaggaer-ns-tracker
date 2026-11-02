@@ -10539,6 +10539,18 @@
         "ts": "2026-11-02T10:35:47.987Z",
         "stage": "marketing-review"
       }
+    ],
+    "piece-84iifl": [
+      {
+        "id": "ann-z9z7oj",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Explain what are the 4 key phases and 6 Key activities in FAQ's",
+        "ts": "2026-11-02T10:45:16.457Z",
+        "annotation": true,
+        "section": "¶89 — \"Reference framework: CIPS describes its …\"",
+        "revision": 2
+      }
     ]
   },
   "build_with_claude": [
