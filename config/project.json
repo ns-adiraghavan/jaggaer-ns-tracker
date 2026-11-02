@@ -10604,6 +10604,18 @@
         "ts": "2026-11-02T11:16:54.863Z",
         "stage": "marketing-review"
       }
+    ],
+    "piece-6ffdwp": [
+      {
+        "id": "ann-ev1mer",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "IN the below table, the 6-stage view mentions only about 5 stages.",
+        "ts": "2026-11-02T11:25:16.911Z",
+        "annotation": true,
+        "section": "¶9 — \"The stages of contract lifecycle managem…\"",
+        "revision": 2
+      }
     ]
   },
   "build_with_claude": [
