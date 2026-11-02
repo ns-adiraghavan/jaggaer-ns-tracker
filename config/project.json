@@ -752,7 +752,7 @@
               "title": "Tail Spend Management Strategies: Direct vs Indirect Spend Explained",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "msv",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -804,10 +804,15 @@
                   "stage": "ed-review",
                   "ts": "2026-10-30T05:59:45.769Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-02T14:38:00.314Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-10-30T05:59:45.769Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-02T14:38:00.314Z",
+              "last_updated_by": "m-72umx",
               "secondary_keyword": "",
               "deliverable_ext": "html",
               "return_to_stage": null,
@@ -4331,7 +4336,7 @@
               "title": "Purchase Order Management: Process, Software and Best Practices",
               "format": "Article",
               "assignee": "",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -4348,8 +4353,8 @@
               "return_to_stage": null,
               "last_upload": "2026-10-30T11:28:40.266Z",
               "last_upload_by": "m-5jitd",
-              "last_updated": "2026-10-30T11:28:40.266Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-02T14:36:36.021Z",
+              "last_updated_by": "m-72umx",
               "status_history": [
                 {
                   "stage": "marketing-review",
@@ -4370,6 +4375,11 @@
                   "stage": "ed-review",
                   "ts": "2026-10-30T11:28:40.267Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-02T14:36:36.021Z",
+                  "by": "m-72umx"
                 }
               ],
               "seo": {
@@ -10382,6 +10392,14 @@
         "body": "check the CTA rest is fine",
         "ts": "2026-10-29T16:36:36.005Z",
         "stage": "ed-review"
+      },
+      {
+        "id": "fb-ba5vek",
+        "author": "m-72umx",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-02T14:38:00.311Z",
+        "stage": "ed-review"
       }
     ],
     "piece-k06t1v": [
@@ -10657,6 +10675,14 @@
         "verdict": "needs-revision",
         "body": "check the added comments",
         "ts": "2026-10-29T16:00:29.191Z",
+        "stage": "ed-review"
+      },
+      {
+        "id": "fb-n8e0jy",
+        "author": "m-72umx",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-02T14:36:36.018Z",
         "stage": "ed-review"
       }
     ],
