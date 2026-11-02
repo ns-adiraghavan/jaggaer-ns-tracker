@@ -1493,6 +1493,38 @@
               "priority": "P2",
               "priority_updated": "2026-11-02T12:47:16.807Z",
               "priority_updated_by": "m-5jitd"
+            },
+            {
+              "id": "piece-kg4uxv",
+              "title": "AI in Procurement Orchestration: How Intake and Orchestration Agents  Work",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-5jitd",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "ai in procurement orchestration",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-02T12:47:46.476Z",
+                  "by": "m-5jitd"
+                }
+              ],
+              "last_updated": "2026-11-02T12:47:49.883Z",
+              "last_updated_by": "m-5jitd",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_AI_in_Procurement_Orchestration_Blog_Refresh.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-kg4uxv/brief/JAGGAER_SEO_Brief_AI_in_Procurement_Orchestration_Blog_Refresh.pdf",
+                  "uploaded_by": "m-5jitd",
+                  "uploaded_at": "2026-11-02T12:47:49.883Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-02T12:47:49.883Z"
             }
           ]
         }
