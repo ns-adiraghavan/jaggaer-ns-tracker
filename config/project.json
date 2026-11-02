@@ -10570,6 +10570,16 @@
         "annotation": true,
         "section": "¶83 — \"Define who owns what in category managem…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-b4oaq8",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Add one FAQ for “What is a category management system?”",
+        "ts": "2026-11-02T10:51:02.540Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 2
       }
     ]
   },
