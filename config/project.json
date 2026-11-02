@@ -5686,7 +5686,7 @@
               "title": "Category Management in Procurement: Process, Tools and Best Practices",
               "format": "Article",
               "assignee": "",
-              "status": "marketing-review",
+              "status": "writing",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -5715,10 +5715,15 @@
                   "stage": "marketing-review",
                   "ts": "2026-10-30T11:40:39.557Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-02T11:16:54.868Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-10-30T11:40:39.557Z",
-              "last_updated_by": "m-e10nz",
+              "last_updated": "2026-11-02T11:16:54.868Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Category_Management_Process_Refresh.pdf",
@@ -5734,7 +5739,7 @@
               "priority_updated": "2026-10-27T08:51:01.667Z",
               "priority_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "seo": {
                 "meta_title": "Category Management in Procurement: Process and Tools",
                 "meta_description": "What is category management in procurement? Learn the category management process, tools, roles and best practices that turn spend categories into savings.",
@@ -10590,6 +10595,14 @@
         "annotation": true,
         "section": "¶55 — \"Category Management: Overcoming Barriers…\"",
         "revision": 2
+      },
+      {
+        "id": "fb-1x3px5",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "Check comments",
+        "ts": "2026-11-02T11:16:54.863Z",
+        "stage": "marketing-review"
       }
     ]
   },
