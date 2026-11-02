@@ -10504,6 +10504,18 @@
         "ts": "2026-10-29T16:00:29.191Z",
         "stage": "ed-review"
       }
+    ],
+    "piece-atx2yl": [
+      {
+        "id": "ann-6hlb2c",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The CTA here should redirect to Source to contract page - https://www.jaggaer.com/solutions/source-to-contract",
+        "ts": "2026-11-02T10:21:45.271Z",
+        "annotation": true,
+        "section": "¶3 — \"See how Jaggaer runs sourcing, contracts…\"",
+        "revision": 2
+      }
     ]
   },
   "build_with_claude": [
