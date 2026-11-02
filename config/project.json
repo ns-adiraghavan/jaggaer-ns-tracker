@@ -1559,7 +1559,10 @@
                   "uploaded_at": "2026-11-02T12:52:45.623Z"
                 }
               ],
-              "brief_last_updated": "2026-11-02T12:52:45.623Z"
+              "brief_last_updated": "2026-11-02T12:52:45.623Z",
+              "priority": "P2",
+              "priority_updated": "2026-11-02T12:52:48.775Z",
+              "priority_updated_by": "m-5jitd"
             }
           ]
         }
