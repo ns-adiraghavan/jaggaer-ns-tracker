@@ -10515,6 +10515,16 @@
         "annotation": true,
         "section": "¶3 — \"See how Jaggaer runs sourcing, contracts…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-5hdccp",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The CTA here should redirect to Source to contract page - https://www.jaggaer.com/solutions/source-to-contract",
+        "ts": "2026-11-02T10:34:29.215Z",
+        "annotation": true,
+        "section": "¶3 — \"See how Jaggaer runs sourcing, contracts…\"",
+        "revision": 2
       }
     ]
   },
