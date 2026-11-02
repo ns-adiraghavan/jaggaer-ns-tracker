@@ -10580,6 +10580,16 @@
         "annotation": true,
         "section": "General",
         "revision": 2
+      },
+      {
+        "id": "ann-4fgbdg",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Move this whitepaper to top, may be as 2nd or 3rd CTA",
+        "ts": "2026-11-02T11:16:26.521Z",
+        "annotation": true,
+        "section": "¶55 — \"Category Management: Overcoming Barriers…\"",
+        "revision": 2
       }
     ]
   },
