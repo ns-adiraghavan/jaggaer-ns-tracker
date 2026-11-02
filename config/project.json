@@ -10560,6 +10560,16 @@
         "annotation": true,
         "section": "¶13 — \"For example (manufacturing): Each stage …\"",
         "revision": 2
+      },
+      {
+        "id": "ann-gg317k",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "change the last words to \"in procurement category management\"",
+        "ts": "2026-11-02T10:49:22.477Z",
+        "annotation": true,
+        "section": "¶83 — \"Define who owns what in category managem…\"",
+        "revision": 2
       }
     ]
   },
