@@ -1528,6 +1528,38 @@
                 }
               ],
               "brief_last_updated": "2026-11-02T12:48:15.726Z"
+            },
+            {
+              "id": "piece-yi5qu9",
+              "title": "Procurement Orchestration Software & Solutions",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-5jitd",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "procurement orchestration software",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-02T12:48:55.067Z",
+                  "by": "m-5jitd"
+                }
+              ],
+              "last_updated": "2026-11-02T12:48:58.414Z",
+              "last_updated_by": "m-5jitd",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Procurement_Orchestration_Software.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-yi5qu9/brief/JAGGAER_SEO_Brief_Procurement_Orchestration_Software.pdf",
+                  "uploaded_by": "m-5jitd",
+                  "uploaded_at": "2026-11-02T12:48:58.414Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-02T12:48:58.414Z"
             }
           ]
         }
