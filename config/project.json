@@ -5846,7 +5846,7 @@
               "title": "Category Management in Procurement: Process, Tools and Best Practices",
               "format": "Article",
               "assignee": "",
-              "status": "writing",
+              "status": "ed-review",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -5855,7 +5855,7 @@
               "intent": "",
               "funnel": "",
               "geography": "all",
-              "revision_count": 2,
+              "revision_count": 3,
               "schedule_month": "p3-month-1",
               "schedule_week": 8,
               "review_owner": "m-14bwv",
@@ -5880,10 +5880,15 @@
                   "stage": "writing",
                   "ts": "2026-11-02T11:16:54.868Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-11-03T06:39:27.537Z",
+                  "by": "m-e10nz"
                 }
               ],
-              "last_updated": "2026-11-02T11:16:54.868Z",
-              "last_updated_by": "m-14bwv",
+              "last_updated": "2026-11-03T06:39:27.537Z",
+              "last_updated_by": "m-e10nz",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Category_Management_Process_Refresh.pdf",
@@ -5893,13 +5898,13 @@
                 }
               ],
               "brief_last_updated": "2026-10-27T08:50:50.770Z",
-              "last_upload": "2026-10-30T11:40:39.557Z",
+              "last_upload": "2026-11-03T06:39:27.537Z",
               "last_upload_by": "m-e10nz",
               "priority": "P1",
               "priority_updated": "2026-10-27T08:51:01.667Z",
               "priority_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": "ed-review",
+              "return_to_stage": null,
               "seo": {
                 "meta_title": "Category Management in Procurement: Process and Tools",
                 "meta_description": "What is category management in procurement? Learn the category management process, tools, roles and best practices that turn spend categories into savings.",
