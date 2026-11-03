@@ -1404,7 +1404,10 @@
                   "uploaded_at": "2026-10-30T09:30:37.157Z"
                 }
               ],
-              "brief_last_updated": "2026-10-30T09:30:37.157Z"
+              "brief_last_updated": "2026-10-30T09:30:37.157Z",
+              "priority": "P2",
+              "priority_updated": "2026-11-03T12:22:43.446Z",
+              "priority_updated_by": "m-14bwv"
             },
             {
               "id": "piece-as3hmb",
