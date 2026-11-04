@@ -1727,7 +1727,10 @@
                   "uploaded_at": "2026-11-04T09:56:13.279Z"
                 }
               ],
-              "brief_last_updated": "2026-11-04T09:56:13.279Z"
+              "brief_last_updated": "2026-11-04T09:56:13.279Z",
+              "priority": "P2",
+              "priority_updated": "2026-11-04T09:58:11.077Z",
+              "priority_updated_by": "m-14bwv"
             },
             {
               "id": "piece-g2cq2j",
