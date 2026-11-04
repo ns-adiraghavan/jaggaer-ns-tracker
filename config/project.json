@@ -1728,6 +1728,38 @@
                 }
               ],
               "brief_last_updated": "2026-11-04T09:56:13.279Z"
+            },
+            {
+              "id": "piece-g2cq2j",
+              "title": "MRO Spend Analysis with AI: How Manufacturers Control Indirect Spend",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-14bwv",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "mro spend analysis",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-04T09:56:47.537Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-11-04T09:56:51.319Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_MRO_Spend_Analysis_AI_New_Blog.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-g2cq2j/brief/JAGGAER_SEO_Brief_MRO_Spend_Analysis_AI_New_Blog.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-11-04T09:56:51.319Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-04T09:56:51.319Z"
             }
           ]
         }
