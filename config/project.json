@@ -1664,6 +1664,29 @@
               ],
               "last_updated": "2026-11-04T09:53:19.397Z",
               "last_updated_by": "m-14bwv"
+            },
+            {
+              "id": "piece-45tvxq",
+              "title": "What Are AI Workers? From AI Assistant to AI Workforce in Procurement",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-14bwv",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "ai workers",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-04T09:54:30.749Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-11-04T09:54:30.749Z",
+              "last_updated_by": "m-14bwv"
             }
           ]
         }
