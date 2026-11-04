@@ -28,6 +28,8 @@ Deployed at **`jaggaer-ns-tracker.vercel.app`**. Repo: **`ns-adiraghavan/jaggaer
 13. [Email Notifications](#13-email-notifications)
 14. [Maintenance Playbook](#14-maintenance-playbook)
 15. [Common Tasks — Recipes](#15-common-tasks--recipes)
+16. [Reporting Tab](#16-reporting-tab)
+17. [Making Changes with Claude (non-technical guide + context prompt)](#17-making-changes-with-claude-non-technical-guide--context-prompt)
 
 ---
 
@@ -103,6 +105,8 @@ The proxy architecture (browser → `/api/*` → external API) is intentional. *
 │   ├── content-flow.jsx      ← Content Flow diagram viewer/uploader (image)
 │   ├── phase2.jsx            ← CommentsPanel, Phase2ReferencePanel, Phase2SyncPanel
 │   ├── phase2_logic.js       ← Phase 2 .xlsx calendar sync logic (client-side SheetJS parse)
+│   ├── reporting_logic.js    ← Reporting tab maths: dates, owner, filters, summary, CSV rows (also runs in Node for tests)
+│   ├── reporting.jsx         ← Reporting tab UI (filters, summary, articles table, CSV/Excel download)
 │   ├── app.jsx               ← root component; hydration + debounced auto-save; phase routing
 │   │
 │   │  ── Static / standalone ──
@@ -244,6 +248,7 @@ The `ad-hoc-articles` pillar (`"phase": null`) is **shared across all phases** �
 | `deliverable_ext` | Set on upload; enables PDF/DOCX round-trip. Defaults to `"html"` |
 | `publishing.launch_date` | Date Jovana records as the actual publish date (`"YYYY-MM-DD"`). This is what the Status Report CSV uses for date filtering — not the internal approval timestamp |
 | `publishing.live_url` | Live URL; joins the piece to its Search Console `performanceData` record via URL slug |
+| `reporting` | Optional, written by the Reporting tab: `brief_requested`, `ns_content`, `approved` (manual `"YYYY-MM-DD"` overrides of the automatic dates), `brief_owner` (user id), `topic_cluster` (free text), plus `updated_at` / `updated_by`. Absent = everything is derived automatically. See §16 |
 | `status_history` | Append-only log of `{ stage, ts, by }`. Stored UTC, displayed US Eastern |
 | `brief_files` | Array of uploaded brief file objects |
 
@@ -338,6 +343,8 @@ Current live funnel (from `project.workflow_stages`):
 
 > **Stale `robert-review` fallback constants remain in `admin.jsx` and `api/digest.js`** — inert at runtime, flagged for cleanup in §14.
 
+**Ad-Hoc re-uploads:** when NS uploads a new file for a piece that is already in `ad-hoc-review`, `UploadPanel` keeps it in `ad-hoc-review` (new revision, status-history entry, reviewer re-cued). `PieceDrawer` passes the upload panel `getWorkflowStages(project)`, which has no `ad-hoc-review` entry, so without the explicit `piece.status === "ad-hoc-review"` check the panel computes `currentIdx = -1` and `nextStage = stages[0]` (Not Started). Any new upload panel must handle this stage the same way.
+
 **Ad-Hoc Articles** use a separate `ad-hoc-review` stage (simplified two-stage: NS submit → Jaggaer review → approved). This stage deliberately lives **outside** `project.workflow_stages` so it doesn't shift the indices of the main funnel — every component carries an explicit patch for it (`getAdHocReviewStage`). **Any UI that renders a status label must append this stage to its `buildStatusMeta` input** (`[...getWorkflowStages(project), getAdHocReviewStage(project)]`); otherwise a piece at `ad-hoc-review` falls through `StatusChip`'s default and displays as "Not Started". The card view, drawer, and (as of v4.0) the table view all do this.
 
 > **Send-back never lands on `not-started`.** When a reviewer returns a piece, `sendBackStage` walks back to the nearest NS-actor stage; if none precedes the current stage (e.g. a review at SME/brief/writing), it now falls back to the `writing` stage rather than `workflowStages[0]` (`not-started`), which had stranded pieces where NS can't re-upload. The reviewer's stage is stored in `return_to_stage` so the NS re-upload returns straight to them.
@@ -412,6 +419,12 @@ Client-side `.xlsx` parse logic used by `Phase2SyncPanel`. Reads the Phase 2 top
 
 ### app.jsx
 Root component. Hydrates from GitHub on load, falls back to `MOCK_PROJECT` on error, debounced auto-save (1.5 s) on state change. Phases 2 and 3 are bookmarkable at `/tracker/phase2` and `/tracker/phase3` — detected from `window.location.pathname` on load and maintained via `history.pushState` + `popstate`. The `active_phase` toggle in the sidebar calls `setActivePhase()`, which updates both React state and the URL. `popstate` (browser back/forward) syncs phase state back without re-hydrating.
+
+### reporting_logic.js
+Pure functions, no React/DOM; exposed as `window.NS_REPORTING` and `module.exports` (testable in Node). `buildRows(project, opts)` flattens every piece into a report row with derived dates; `applyFilters`, `summarize`, `toMatrix`, `toCSV`. **`COLUMNS` is the single list that drives the on-screen table, CSV and Excel** — add, rename or reorder report columns there.
+
+### reporting.jsx
+`ReportingPanel` (`window.ReportingPanel`), routed as `view === "reporting"` in `app.jsx`, linked from `sidebar.jsx` (and the mobile "More" sheet). Names are `RP`-prefixed to avoid global collisions. Excel export uses the SheetJS global already loaded in `index.html`.
 
 ### api/github.js
 GitHub Contents API proxy. Reads `GITHUB_TOKEN` + `GITHUB_REPO` from `process.env`. Body limit 10 MB for PDF deliverable uploads.
@@ -594,7 +607,131 @@ Force-trigger the digest once (§13) so `digest-state.json` reseeds with current
 
 ---
 
-*Last updated: October 2026, v4.0. Changes from v3.9:*
+## 16. Reporting Tab
+
+Purpose: replace the separate tracking spreadsheet. Jovana / Rishabh no longer key the same dates into the app and a sheet. Columns mirror the spreadsheet's `Sheet1`.
+
+**Columns (in sheet order):** Month/Week · Article/Topic · Primary Keyword · Cluster · Brief given by · Funnel Stage · Brief Given · NS Content · Article Approval · Article Publish · Live Link — then extra context (status, content type, pillar, app cluster/week, format, phase, priority, days between stages, published by, revisions, NS assignee, geography, planned publish date).
+
+| Report column | Where it comes from | Editable by |
+|---|---|---|
+| Brief Given | `reporting.brief_requested`, else earliest `brief_files[].uploaded_at`, else first `brief-uploaded` history entry | Jovana, Rishabh, admins |
+| NS Content | `reporting.ns_content`, else first time the piece entered `marketing-review` / `ad-hoc-review` | same |
+| Article Approval | `reporting.approved`, else the latest `approved` history entry | same |
+| Article Publish | `publishing.launch_date` — **the same field as Publishing Info → Launch date**, so it is entered once | same (also sets `published_by` if empty) |
+| Live Link | `publishing.live_url`, else `url` | via Publishing Info |
+| Month/Week | Derived from Brief Given: `Oct/Week N`, where N = ceil(day-of-month / 7) (16 Oct → Week 3, 27 Oct → Week 4) | — |
+| Brief given by | `reporting.brief_owner`, else the review-owner tag (Visnja / Prashanth), else whoever uploaded the brief if they are Visnja / Prashanth / Rishabh | same |
+| Funnel Stage | `piece.funnel` | via Admin → Pieces |
+| Cluster | `reporting.topic_cluster` (free text, e.g. "Tail Spend"). The app's own clusters are weekly, so the topic cluster is a separate field; the app cluster is exported as "App cluster / week" | same |
+
+Rules of the road:
+- Dates are plain `YYYY-MM-DD` strings (no timezone drift). Automatic dates show an **AUTO** tag; picking a date stores a manual override, clearing it falls back to the automatic value.
+- Only Brief given by owners are Visnja (`m-pifrn`), Prashanth (`m-14bwv`) and Rishabh (`m-72umx`) — edit `OWNERS` in `reporting_logic.js` to change. Who may edit dates: `DATE_EDITORS` (Jovana `m-izu4e`, Rishabh `m-72umx`) plus admin mode and any user flagged `admin`.
+- Entering an Article Publish date does **not** change status. The existing rule stands: saving a `live_url` on an `approved` piece promotes it to `live`.
+- **Filters:** date range (applied to Brief Given, NS Content, Article Approval or Article Publish — pieces with no date in that field are excluded while a range is set), brief owner, status, content type, phase, text search. Empty selection = no restriction.
+- **Summary view:** totals, average days brief → approved and approved → live, and breakdowns by owner, status, content type and month. **Download:** CSV (UTF-8 with BOM, opens cleanly in Excel) and Excel (`Articles` + `Summary` sheets) — both export exactly the filtered rows, with every column.
+- Legacy data caveat: only pieces that passed through `approved` after status history was introduced have an automatic approval date; older Live pieces show a blank Article Approval until someone enters it.
+
+Testing: `reporting_logic.js` runs in Node — `node -e "const R=require('./repo-setup/reporting_logic.js'); const p=require('./config/project.json'); console.log(R.summarize(R.buildRows(p,{})))"`.
+
+---
+
+## 17. Making Changes with Claude (non-technical guide + context prompt)
+
+You do not need to read code to change this app. The workflow that has worked: describe the problem in business terms, give Claude the project files, let it find the cause, then review a short summary and a zip of changed files.
+
+**What to attach every time**
+1. The latest repo zip (GitHub → Code → Download ZIP), so Claude edits what is actually live.
+2. Any spreadsheet or document that defines what you want (e.g. the column list).
+3. A sentence on who it affects (e.g. "Jovana and Rishabh") — Claude uses this for permissions and wording.
+
+**What you get back**
+- A plain-language summary of what was wrong or what was added.
+- A zip containing only the changed files, in their repo folders. Unzip it over your local copy of the repo, commit and push; Vercel redeploys automatically.
+- A list of assumptions to confirm. Answer those first — they are cheap to fix now and annoying later.
+
+**Good requests look like:** "When we re-upload a file for an Ad-Hoc Review piece, the status doesn't change. Can you find out why?" or "Add a Reporting tab with these columns, these filters and a download."
+
+### Copy-paste context prompt
+
+Paste everything between the lines into a new Claude conversation (with the repo zip attached), then add your request underneath.
+
+```text
+-----------------------------------------------------------------------
+You are helping me maintain a web app called the "NS × Jaggaer Content
+Tracker". I am not a developer, so please explain things in plain
+language and keep technical detail to a minimum unless I ask.
+
+WHAT THE APP IS
+- A shared workspace where Netscribes (NS, the writing agency) and
+  Jaggaer (the client) move articles through a review process: brief
+  uploaded -> NS writes -> Jaggaer reviews -> approved -> live.
+- It lives online at jaggaer-ns-tracker.vercel.app. The code is in a
+  GitHub repository (ns-adiraghavan/jaggaer-ns-tracker), and Vercel
+  republishes the site automatically whenever new code is pushed.
+- All the information (every article, its status, dates, comments) is
+  stored in ONE file: config/project.json. There is no separate
+  database. Uploaded briefs and drafts are stored as files under
+  content/.
+- The visible app is in the folder repo-setup/. It has no build step:
+  the screens are written as .jsx files that the browser reads
+  directly, and index.html lists them in a specific order.
+- The README.md in the zip explains the structure. Read it first, then
+  read the actual files before changing anything.
+
+WHO IS WHO
+- NS side: Chahat (manager/admin) and the NS writers.
+- Jaggaer side: Visnja and Prashanth (review owners), Rishabh (content
+  reviewer), Jovana (records live dates/links), Indy (CMO), others.
+- Statuses include: Not Started, Brief Uploaded, Writing, Review,
+  Approved, Live, plus a separate short "Ad-Hoc Review (Jaggaer)"
+  stage used only for ad-hoc articles.
+
+HOW I WANT YOU TO WORK
+1. Diagnose before fixing. If something is broken, find the root cause
+   first and tell me what it is in plain words, then fix it.
+2. Make small, targeted edits to the existing files. Do not rewrite
+   files or redesign things I did not ask about. Read the real file
+   content before editing.
+3. Check your work before handing it over: confirm the screen files
+   still parse, run any logic against the real config/project.json, and
+   tell me what you actually tested and what you could not test.
+4. Never invent data. If I refer to a file, column list or rule you
+   cannot see, say so and ask me for it instead of guessing. If you
+   must assume something, list the assumption clearly.
+5. Don't create side effects I didn't ask for (for example, don't
+   change an article's status when I only asked for a date field).
+6. Be careful with shared data: two people can edit at once, and the
+   app saves by committing project.json to GitHub, so never add code
+   that overwrites the whole file from stale information.
+7. Deliver ONLY the changed files, zipped, with the same folder paths
+   as the repo (for example repo-setup/tracker.jsx), so I can unzip
+   them over my copy, commit and push. Also update README.md when you
+   add or change something a future maintainer needs to know.
+8. Keep your replies short and numbered. Start with what changed and
+   why it matters to the team, then list assumptions or questions.
+
+MY REQUEST
+[Describe what you want here in everyday words: what you see, what you
+expected, who is affected. Attach any spreadsheets or documents that
+define the request.]
+-----------------------------------------------------------------------
+```
+
+**Tips**
+- If Claude's answer doesn't match what you expected, say what you expected the screen to show — that is more useful than saying it's wrong.
+- After deploying, test with a real piece: do the action, refresh, and check the status and history again. Tell Claude exactly what you saw.
+- Keep a copy of the previous zip so a change can be reverted by restoring the earlier files.
+
+---
+
+*Last updated: November 2026, v4.1. Changes from v4.0:*
+- *Added the **Reporting tab** (`reporting.jsx`, `reporting_logic.js`): dates mirroring the tracking sheet, filters, summary, CSV/Excel download; optional `piece.reporting` field. (§3, §8, §16)*
+- *Fixed **Ad-Hoc Review re-upload**: a new file for a piece already in `ad-hoc-review` now keeps it there as a fresh revision instead of falling to the first stage. (§5)*
+- *Added §17: non-technical guide and copy-paste context prompt for making changes with Claude.*
+
+*Changes in v4.0 (from v3.9):*
 - *Added **Phase 3** (October SEO programme): `p3-seo` pillar (`"phase": 3`), clusters `p3-seo-w5`…`p3-seo-w8`, 71 SEO Tier 1 pieces, October ad-hoc under the shared ad-hoc pillar; `p3-month-1` month, `phase3_active_month` control field, `[1,2,3]` phase switch, `/tracker/phase3` route (new `vercel.json` rewrite). Documented in §3, §4 (Phase 3 subsection), §8, §11, §15.*
 - *Fixed **category progress counts**: GEO/SEO/BOFU header chips and cluster `x/total` fractions now count `approved` **or** `live` (pieces auto-promote to `live` on `live_url` save, so counting only `approved` dropped them — GEO read `0/58`). Aligns with `computeStats`. (§4)*
 - *Fixed **send-back to `not-started`**: `sendBackStage` now falls back to the `writing` stage, never `not-started`, when no NS-actor stage precedes the review point. (§5)*
