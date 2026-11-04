@@ -1603,6 +1603,38 @@
                 }
               ],
               "brief_last_updated": "2026-11-04T08:40:16.465Z"
+            },
+            {
+              "id": "piece-eitgqp",
+              "title": "Intake to Procure Explained: From Request to Purchase Order in Five Step",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-14bwv",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "intake to procure",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-04T08:41:19.988Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-11-04T08:41:37.998Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Intake_to_Procure_Explained_New_Blog.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-eitgqp/brief/JAGGAER_SEO_Brief_Intake_to_Procure_Explained_New_Blog.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-11-04T08:41:37.998Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-04T08:41:37.998Z"
             }
           ]
         }
