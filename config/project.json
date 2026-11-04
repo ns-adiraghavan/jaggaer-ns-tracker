@@ -1592,8 +1592,17 @@
                   "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-04T08:40:13.695Z",
-              "last_updated_by": "m-14bwv"
+              "last_updated": "2026-11-04T08:40:16.465Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Intake_to_Procure_vs_Procure_to_Pay_New_Blog.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-60sdoa/brief/JAGGAER_SEO_Brief_Intake_to_Procure_vs_Procure_to_Pay_New_Blog.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-11-04T08:40:16.465Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-04T08:40:16.465Z"
             }
           ]
         }
