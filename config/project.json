@@ -1637,7 +1637,42 @@
                   "uploaded_at": "2026-11-04T08:41:37.998Z"
                 }
               ],
-              "brief_last_updated": "2026-11-04T08:41:37.998Z"
+              "brief_last_updated": "2026-11-04T08:41:37.998Z",
+              "priority": "P1",
+              "priority_updated": "2026-11-04T09:52:41.716Z",
+              "priority_updated_by": "m-14bwv"
+            },
+            {
+              "id": "piece-5wxtri",
+              "title": "AI Intake for Procurement: How It Works, What to Look For and How to  Pilot It",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-14bwv",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "ai intake",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-04T09:53:19.397Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-11-04T09:53:23.314Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_AI_Intake_New_Blog.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-5wxtri/brief/JAGGAER_SEO_Brief_AI_Intake_New_Blog.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-11-04T09:53:23.314Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-04T09:53:23.314Z"
             }
           ]
         }
