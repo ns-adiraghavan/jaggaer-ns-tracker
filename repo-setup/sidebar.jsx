@@ -221,6 +221,12 @@ function Sidebar({ project, currentUser, activePillar, setActivePillar, activeCl
           rightMeta="intake"
         />
         <NavSection
+          label="Reporting"
+          active={view === "reporting"}
+          onClick={() => setView("reporting")}
+          rightMeta="dates"
+        />
+        <NavSection
           label="AI Playground"
           active={view === "ai-playground"}
           onClick={() => setView("ai-playground")}

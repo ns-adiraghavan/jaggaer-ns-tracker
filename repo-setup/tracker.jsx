@@ -2712,7 +2712,10 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
   const nextStage = workflowStages[currentIdx + 1] || null;
   const nextRev = (piece.revision_count || 0) + 1;
   // Ad-Hoc Articles skip the standard chain: writing → ad-hoc-review directly.
-  const adHocNext = isAdHocPreReview(piece) ? getAdHocReviewStage(project) : null;
+  // A re-upload while the piece is already IN ad-hoc-review is a resubmission: it stays in
+  // Ad-Hoc Review (new revision, reviewer re-cued). Without this, `stages` (which has no
+  // ad-hoc-review entry) gives currentIdx = -1 and nextStage = stages[0] ("Not Started").
+  const adHocNext = (isAdHocPreReview(piece) || piece.status === "ad-hoc-review") ? getAdHocReviewStage(project) : null;
 
   async function handleFile(file) {
     setStage("uploading"); setFilename(file.name); setBytes(file.size);
@@ -2803,8 +2806,8 @@ function UploadPanel({ piece, cluster, pillar, project, currentUser, updatePiece
         <ul className="ns-upload-rules">
           <li>One file per upload. Re-uploads create a new versioned file.</li>
           <li>Versions are preserved — nothing is overwritten.</li>
-          {(piece.return_to_stage || nextStage) && (
-            <li>Status moves to <strong>{piece.return_to_stage ? (workflowStages.find(s => s.id === piece.return_to_stage)?.label || piece.return_to_stage) : NS_stageLabelFor(piece, nextStage, project)}</strong>{piece.return_to_stage ? " — returning directly to the reviewer who sent this back." : "."}</li>
+          {(piece.return_to_stage || adHocNext || nextStage) && (
+            <li>Status moves to <strong>{piece.return_to_stage ? (workflowStages.find(s => s.id === piece.return_to_stage)?.label || piece.return_to_stage) : NS_stageLabelFor(piece, adHocNext || nextStage, project)}</strong>{piece.return_to_stage ? " — returning directly to the reviewer who sent this back." : "."}</li>
           )}
         </ul>
       </div>

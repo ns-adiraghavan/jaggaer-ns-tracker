@@ -126,6 +126,7 @@ function MobileNav({ view, setView, currentUser, adminMode, onSignOut, project }
   }
 
   const SHEET_ITEMS = [
+    { id: "reporting",      label: "Reporting" },
     { id: "ai-playground",  label: "AI Playground" },
     { id: "sme-guide",      label: "Content Experts" },
     { id: "style-guide",    label: "Style Guide" },
@@ -492,6 +493,13 @@ function App() {
             onAdminEditPiece={(clusterId, pieceId) => { setView("admin"); setAdminTarget({ kind: "pieces", clusterId, pieceId }); }}
           />
         )}
+        {view === "reporting" && <ReportingPanel project={project} setProject={setProject} currentUser={currentUser} adminMode={adminMode} onOpenPiece={(clusterId, pieceId) => {
+          let ph = 1;
+          for (const pl of project.pillars) for (const c of pl.clusters) if (c.id === clusterId) for (const pc of c.pieces) if (pc.id === pieceId) ph = (pc.phase || 1);
+          window.NS_PENDING_OPEN = { clusterId, pieceId, mode: "details" };
+          setActivePhase(ph);
+          setView("tracker");
+        }} />}
         {view === "phase2-reference" && <Phase2ReferencePanel />}
         {view === "phase2-sync" && adminMode && <Phase2SyncPanel project={project} setProject={setProject} />}
         {view === "ai-playground" && <AIPlaygroundPanel onBack={() => setView("tracker")} project={project} setProject={setProject} currentUser={currentUser} saveState={saveState} />}
