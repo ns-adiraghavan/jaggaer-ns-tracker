@@ -1695,7 +1695,10 @@
                   "uploaded_at": "2026-11-04T09:54:34.549Z"
                 }
               ],
-              "brief_last_updated": "2026-11-04T09:54:34.549Z"
+              "brief_last_updated": "2026-11-04T09:54:34.549Z",
+              "priority": "P1",
+              "priority_updated": "2026-11-04T09:58:22.033Z",
+              "priority_updated_by": "m-14bwv"
             },
             {
               "id": "piece-fmg9pm",
