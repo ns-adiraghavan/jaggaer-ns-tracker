@@ -1762,7 +1762,10 @@
                   "uploaded_at": "2026-11-04T09:56:51.319Z"
                 }
               ],
-              "brief_last_updated": "2026-11-04T09:56:51.319Z"
+              "brief_last_updated": "2026-11-04T09:56:51.319Z",
+              "priority": "P1",
+              "priority_updated": "2026-11-04T09:58:15.645Z",
+              "priority_updated_by": "m-14bwv"
             },
             {
               "id": "piece-c46xog",
