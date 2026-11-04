@@ -1602,7 +1602,10 @@
                   "uploaded_at": "2026-11-04T08:40:16.465Z"
                 }
               ],
-              "brief_last_updated": "2026-11-04T08:40:16.465Z"
+              "brief_last_updated": "2026-11-04T08:40:16.465Z",
+              "priority": "P1",
+              "priority_updated": "2026-11-04T09:52:36.576Z",
+              "priority_updated_by": "m-14bwv"
             },
             {
               "id": "piece-eitgqp",
