@@ -1534,7 +1534,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-05T11:24:02.364Z",
-              "last_upload_by": "orlagh"
+              "last_upload_by": "orlagh",
+              "seo": {
+                "meta_title": "Procurement Orchestration: Definition, Examples, First Steps",
+                "meta_description": "What is procurement orchestration? It coordinates requests, approvals, sourcing and payment across systems. See examples and first steps",
+                "slug": "blog-procurement-orchestration-definition-examples",
+                "updated_at": "2026-11-05T11:25:04.615Z",
+                "updated_by": "orlagh"
+              }
             },
             {
               "id": "piece-kg4uxv",
