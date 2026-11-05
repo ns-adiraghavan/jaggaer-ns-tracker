@@ -1425,7 +1425,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-05T12:33:00.998Z",
-              "last_upload_by": "m-e10nz"
+              "last_upload_by": "m-e10nz",
+              "seo": {
+                "meta_title": "Category Management: An End-to-End Guide to Planning and AI",
+                "meta_description": "What is category management? An end-to-end guide to planning, strategy, process, industry \npractice and AI for procurement teams.",
+                "slug": "blog-category-management-procurement-guide",
+                "updated_at": "2026-11-05T12:33:41.659Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "piece-as3hmb",
