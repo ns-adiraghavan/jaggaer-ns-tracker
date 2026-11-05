@@ -1071,7 +1071,7 @@
               "title": "4 Benefits of Greater Visibility Across the Procurement Workflow",
               "format": "Ad-Hoc Article",
               "assignee": "jason",
-              "status": "ad-hoc-review",
+              "status": "marketing-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1098,7 +1098,8 @@
               "last_upload_by": "jason",
               "priority": "P1",
               "priority_updated": "2026-10-27T06:59:38.936Z",
-              "priority_updated_by": "manager"
+              "priority_updated_by": "manager",
+              "secondary_keyword": ""
             },
             {
               "id": "piece-86azqg",
