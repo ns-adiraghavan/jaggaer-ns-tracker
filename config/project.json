@@ -1164,7 +1164,7 @@
               "title": "Procurement Guided Buying & AI-Driven Intake",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "ad-hoc-review",
+              "status": "marketing-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1198,7 +1198,8 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-10-28T10:54:56.803Z",
-              "last_upload_by": "jason"
+              "last_upload_by": "jason",
+              "secondary_keyword": ""
             },
             {
               "id": "piece-02qxf5",
