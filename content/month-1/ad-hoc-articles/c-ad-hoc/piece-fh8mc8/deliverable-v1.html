@@ -1,0 +1,818 @@
+<!-- uploaded by m-5jitd at 2026-11-05T06:57:41.473Z -->
+<!-- piece: Intake Management in Procurement: Process, Compliance and How to Get  Started -->
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Intake Management in Procurement: Process and First Steps</title>
+<meta name="description" content="What is intake management in procurement? It captures and routes every request under policy. See the process, compliance and first steps.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/intake-management-in-procurement">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Intake Management in Procurement: Process, Compliance and How to Get Started","description":"What is intake management in procurement? It captures and routes every request under policy. See the process, compliance and first steps.","datePublished":"2026-11-03","dateModified":"2026-11-03","inLanguage":"en-US","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.jaggaer.com/blog/intake-management-in-procurement"},"publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com","logo":{"@type":"ImageObject","url":"https://www.jaggaer.com/wp-content/uploads/JAGGAER-Logo-Red.png"}},"author":{"@type":"Person","name":"Visnja Radosavljevic"}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is intake management in procurement?","acceptedAnswer":{"@type":"Answer","text":"Intake management in procurement is the front-door process that captures, validates and routes purchase, supplier and contract requests before they enter sourcing or buying workflows."}},{"@type":"Question","name":"How do you handle urgent requests in procurement intake management?","acceptedAnswer":{"@type":"Answer","text":"Route urgent requests through a defined fast lane with guardrails. A named person confirms the need, approvals follow delegation of authority, and a named owner reviews and logs any purchase someone places before approval."}},{"@type":"Question","name":"What is the difference between intake management and a purchase requisition?","acceptedAnswer":{"@type":"Answer","text":"Intake management decides which process a request follows, and a purchase requisition is one of its outputs. A request can also lead to supplier onboarding, a sourcing event or a contract review."}},{"@type":"Question","name":"Is intake management the same as procurement orchestration?","acceptedAnswer":{"@type":"Answer","text":"No: intake management starts the process, and orchestration coordinates what follows. Gartner's 2025 Hype Cycle listed them as separate categories, and Hackett's 2026 study groups them as one."}},{"@type":"Question","name":"What should a procurement intake form ask?","acceptedAnswer":{"@type":"Answer","text":"A procurement intake form should ask for the business need, budget, supplier preference, timeline and data access. It should enforce required fields, available budget, existing-contract checks and approval thresholds."}},{"@type":"Question","name":"How do you measure intake management success?","acceptedAnswer":{"@type":"Answer","text":"Track request cycle time, front-door share, rework rate and on-contract share to measure intake management. Set your baseline before the pilot so each measure has something to move against."}},{"@type":"Question","name":"Where does intake fit in the stages of procurement?","acceptedAnswer":{"@type":"Answer","text":"Intake comes first in procurement, before sourcing, contracting and purchasing begin. It captures and validates the need."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs: 0.8125rem;
+  --font-size-sm:      0.8125rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2rem, calc(1.72rem + 1.05vw), 2.25rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul,ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li,ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:980px;}
+.article-tags{display:flex;gap:.5rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.tag-pill{display:inline-flex;align-items:center;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--color-navy);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:999px;padding:.4rem .9rem;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:980px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.8125rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1480px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:230px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:980px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+article h3.sub-question{font-size:var(--font-size-h4);text-transform:none;letter-spacing:-0.01em;font-weight:700;border-bottom:none;padding-bottom:0;}
+
+/* Comparison / data tables */
+.table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.data-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:520px;}
+.data-table th{background:var(--purple-tint-2);color:var(--color-navy);font-family:var(--font-display);font-weight:700;font-size:.8125rem;text-align:left;padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--purple-soft);}
+.data-table td{padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--color-ink-2);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--color-cream);}
+.data-table td strong,.data-table th strong{color:var(--color-ink);}
+
+/* Roadmap / framework phase cards */
+.phase-cards{display:flex;flex-direction:column;gap:2px;margin:var(--space-m) 0 var(--space-l);border-radius:var(--border-radius-sm);overflow:hidden;border:var(--border);}
+.phase-item{display:flex;gap:var(--space-m);padding:var(--space-s) var(--space-m);background:var(--color-white);align-items:flex-start;}
+.phase-num{flex-shrink:0;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);}
+.phase-body{flex:1;min-width:0;}
+.phase-title{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink);margin-bottom:.15rem;display:block;}
+.phase-desc{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.6;}
+
+/* Hook stat contrast callout */
+.hook-stat{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.hook-stat p{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.65;}
+.hook-stat .stat-num{font-family:var(--font-display);font-weight:700;color:var(--color-ink-3);}
+
+/* Interactive toggle: expertise gap vs process gap */
+.toggle-box{border:1.5px solid var(--purple-soft);border-radius:var(--border-radius);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--purple-tint-3);}
+.toggle-head{display:flex;gap:.4rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.toggle-btn{font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.02em;color:var(--jai-a);background:var(--color-white);border:1.5px solid var(--purple-soft);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.toggle-btn:hover{border-color:var(--jai-a);}
+.toggle-btn.active{background:var(--jai-gradient);color:#fff;border-color:transparent;}
+.toggle-panel{display:none;}
+.toggle-panel.active{display:block;animation:fadeIn .25s ease;}
+.toggle-panel p{margin-bottom:.6rem;}
+.toggle-panel p:last-child{margin-bottom:0;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* Decision-checker widget */
+.decision-widget{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-l) var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.decision-widget-head{font-family:var(--font-display);font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);margin:0 0 var(--space-2xs);}
+.decision-widget-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0 0 var(--space-m);}
+.decision-options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:var(--space-m);}
+.decision-option{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem var(--space-s);border:var(--border);border-radius:var(--border-radius-sm);cursor:pointer;transition:border-color .2s,background .2s;font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-option:hover{border-color:var(--jai-a);background:var(--purple-tint-3);}
+.decision-option input{margin-top:.2rem;accent-color:var(--jai-a);}
+.decision-result{display:none;background:var(--color-cream);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-result.show{display:block;animation:fadeIn .25s ease;}
+.decision-reset{display:inline-block;margin-top:var(--space-s);font-size:.8125rem;font-weight:600;color:var(--color-teal);cursor:pointer;background:none;border:none;padding:0;border-bottom:1px solid #4D819440;font-family:var(--font-base);}
+.decision-reset:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Benefit / risk checklist */
+.diag-checklist{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.diag-checklist ul{list-style:none;padding-left:0;margin-bottom:0;}
+.diag-checklist li{position:relative;padding-left:1.6rem;margin-bottom:.55rem;font-size:var(--font-size-base);}
+.diag-checklist li:last-child{margin-bottom:0;}
+.diag-checklist li::before{content:"";position:absolute;left:0;top:.2rem;width:1.05rem;height:1.05rem;border-radius:4px;border:1.5px solid var(--color-teal);background:var(--color-white);}
+.diag-checklist li::after{content:"✓";position:absolute;left:.22rem;top:-.05rem;color:var(--color-teal);font-size:.8125rem;font-weight:700;}
+
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--color-ink);line-height:1.15;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.8125rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-link{font-size:.8125rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.page-wrapper{flex-wrap:wrap;}.expert-sidebar{position:static;width:100%;max-height:none;padding:0 0 var(--space-l) 0;order:99;}.exp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;}.exp-item{border-bottom:none;border-right:1px solid var(--purple-soft);}}
+@media(max-width:640px){.expert-sidebar .exp-list{grid-template-columns:1fr;}.expert-sidebar .exp-item{border-right:none;border-bottom:1px solid var(--purple-soft);}}
+
+/* CTA block */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-base);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:var(--font-size-base);font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-base);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;line-height:1;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Font-size floor: all body and UI text held between 13px and 14px */
+.tag-pill,.meta-item,.toc-link,.exp-head-lbl,.exp-source,.exp-stat,.exp-link,.toc-head-lbl{font-size:.8125rem;}
+.exp-stat{line-height:1.45;}
+article .phase-body ul,article .phase-body ol{margin:.35rem 0 0;}
+article .phase-body li{margin-bottom:.15rem;}
+
+/* Interactive tables */
+.interactive-table tbody tr{transition:background .15s;cursor:default;}
+.interactive-table tbody tr:hover td{background:var(--purple-tint-3);}
+.interactive-table td.col-on,.interactive-table th.col-on{background:var(--purple-tint)!important;color:var(--color-ink);}
+.interactive-table th.col-on{background:var(--jai-gradient)!important;color:#fff;}
+.col-toggle{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin:var(--space-m) 0 -.4rem;}
+.col-toggle-lbl{font-size:.8125rem;font-weight:600;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.06em;margin-right:.2rem;}
+.table-filter{display:flex;align-items:center;gap:.6rem;margin:var(--space-m) 0 -.4rem;flex-wrap:wrap;}
+.table-filter input{flex:1;min-width:200px;max-width:340px;font-family:var(--font-base);font-size:.8125rem;padding:.5rem .9rem;border:1.5px solid var(--purple-soft);border-radius:999px;outline:none;background:var(--purple-tint-3);transition:border-color .2s;}
+.table-filter input:focus{border-color:var(--jai-a);background:#fff;}
+.table-filter span{font-size:.8125rem;color:var(--color-ink-3);font-weight:600;}
+
+/* Kraljic matrix */
+.kraljic{display:grid;grid-template-columns:auto 1fr;gap:.5rem;margin:var(--space-s) 0 0;}
+.k-axis-y{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);text-align:center;}
+.k-axis-x{grid-column:2;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);text-align:center;}
+.k-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.k-cell{text-align:left;font-family:var(--font-base);font-size:.8125rem;line-height:1.5;color:var(--color-ink-2);background:var(--purple-tint-3);border:1.5px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.75rem .9rem;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;}
+.k-cell:hover{transform:translateY(-2px);border-color:var(--jai-a);box-shadow:0 6px 18px rgba(83,0,206,.1);}
+.k-cell strong{color:var(--jai-a);}
+.k-cell.active{background:var(--jai-gradient);border-color:transparent;color:#fff;}
+.k-cell.active strong{color:#fff;}
+
+/* RFI / RFP / RFQ cards */
+.mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:var(--space-s) 0 var(--space-m);}
+.mini-card{font-size:.8125rem;line-height:1.55;background:#fff;border:var(--border);border-top:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:.8rem .9rem;transition:transform .2s,box-shadow .2s;}
+.mini-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(83,0,206,.1);}
+.mini-card strong{display:block;color:var(--jai-a);margin-bottom:.25rem;}
+
+/* Software tool tiles */
+.tool-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:.45rem;margin:var(--space-s) 0 var(--space-m);}
+.tool-tile{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.6rem .85rem;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);font-size:.8125rem;font-weight:600;color:var(--color-navy);transition:background .2s,border-color .2s,transform .2s;}
+.tool-tile::after{content:"\2192";color:var(--jai-a);transition:transform .2s;}
+.tool-tile:hover{background:var(--purple-tint);border-color:var(--jai-a);color:var(--jai-a);transform:translateY(-1px);}
+.tool-tile:hover::after{transform:translateX(3px);}
+
+/* Phase cards & checklist hover polish */
+.phase-item{transition:background .2s;}
+.phase-item:hover{background:var(--purple-tint-3);}
+.faq-item[open] summary{background:var(--purple-tint-3);}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-icon{transition:transform .2s;}
+
+@media(max-width:640px){.mini-cards{grid-template-columns:1fr;}.k-cell{padding:.6rem .7rem;}}
+
+.inline-toc{background:var(--color-light-blue);border:1px solid var(--color-border);border-radius:var(--border-radius-sm);padding:1rem 1.25rem;margin:1.5rem 0;}
+.inline-toc-title{font-weight:700;color:var(--color-navy);margin:0 0 .5rem;font-size:.9375rem;}
+.inline-toc ul{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;list-style:none;margin:0;padding:0;}
+.inline-toc li{margin:0;font-size:.9375rem;}
+.inline-toc a{color:var(--color-teal);text-decoration:underline;}
+.jag-cta-desc a{color:inherit;text-decoration:underline;}
+article h2[id],article h3[id]{scroll-margin-top:1.5rem;}
+</style>
+<style>
+/* Additive components (same tokens as the reference; no reference rule is changed) */
+.mini-cards--4{grid-template-columns:repeat(2,1fr);}
+.jag-cta-btn{white-space:normal;max-width:100%;}
+.chart-card{margin:var(--space-m) 0 var(--space-l);padding:var(--space-m) var(--space-l);border:var(--border);border-radius:var(--border-radius);background:var(--color-white);}
+.chart-card figcaption{margin-top:var(--space-s);font-size:.8125rem;color:var(--color-ink-3);line-height:1.5;}
+.donut-wrap{display:flex;align-items:center;gap:var(--space-l);flex-wrap:wrap;}
+.donut-box{position:relative;width:200px;height:200px;flex-shrink:0;}
+.donut{width:100%;height:100%;display:block;}
+.donut-bg{stroke:var(--color-cream);}
+.donut-seg{transition:opacity .2s,stroke-width .2s;cursor:pointer;outline:none;}
+.donut-seg.seg-1{stroke:var(--jai-b);}.donut-seg.seg-2{stroke:#8F5FE0;}.donut-seg.seg-3{stroke:var(--jai-a);}.donut-seg.seg-4{stroke:var(--color-light-grey);}
+.donut-wrap.has-focus .donut-seg{opacity:.28;}
+.donut-wrap.has-focus .donut-seg.on{opacity:1;stroke-width:34;}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;text-align:center;}
+.donut-num{font-family:var(--font-display);font-size:1.75rem;font-weight:700;color:var(--color-ink);line-height:1.1;font-variant-numeric:tabular-nums;}
+.donut-lbl{font-size:.8125rem;color:var(--color-ink-3);font-weight:600;}
+.donut-legend{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.35rem;flex:1;min-width:200px;}
+.donut-legend li{margin:0;}
+.donut-leg{width:100%;display:flex;align-items:center;gap:.6rem;font-family:var(--font-base);font-size:var(--font-size-base);color:var(--color-ink-2);background:var(--purple-tint-3);border:1.5px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.5rem .8rem;cursor:pointer;text-align:left;transition:border-color .2s,background .2s;}
+.donut-leg:hover,.donut-leg.on{border-color:var(--jai-a);background:var(--purple-tint);}
+.donut-leg .swatch{width:.8rem;height:.8rem;border-radius:3px;flex-shrink:0;}
+.swatch.seg-1{background:var(--jai-b);}.swatch.seg-2{background:#8F5FE0;}.swatch.seg-3{background:var(--jai-a);}.swatch.seg-4{background:var(--color-light-grey);}
+.donut-leg .leg-lbl{flex:1;font-weight:600;color:var(--color-ink);}
+.donut-leg .leg-val{font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-variant-numeric:tabular-nums;}
+.bar-chart{display:flex;flex-direction:column;gap:var(--space-s);}
+.bar-row{display:grid;grid-template-columns:minmax(120px,210px) 1fr auto;align-items:center;gap:var(--space-s);}
+.bar-lbl{font-size:var(--font-size-base);font-weight:600;color:var(--color-ink);line-height:1.35;}
+.bar-track{height:1.15rem;background:var(--color-cream);border-radius:999px;overflow:hidden;}
+.bar-fill{height:100%;width:0;border-radius:999px;background:var(--jai-gradient);transition:width 1s ease;}
+.bar-val{font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-variant-numeric:tabular-nums;min-width:4.2rem;text-align:right;}
+.diag-checklist ul li strong{color:var(--color-ink);}
+@media(max-width:640px){.bar-row{grid-template-columns:1fr auto;}.bar-track{grid-column:1 / -1;order:3;}.chart-card{padding:var(--space-m);}.mini-cards--4{grid-template-columns:1fr;}}
+@media(prefers-reduced-motion:reduce){.bar-fill{transition:none;}}
+.jag-cta-btn--stretch{position:relative;cursor:pointer;}
+.jag-cta-btn--stretch::after{content:"\00a0\2192";}
+.jag-cta-btn--stretch a,.jag-cta-btn--stretch a:hover{color:#fff;border-bottom:none;font-weight:700;text-decoration:none;}
+.jag-cta-btn--stretch a::before{content:"";position:absolute;inset:0;border-radius:8px;}
+.jag-cta-btn--stretch:focus-within{outline:2px solid var(--color-ink);outline-offset:2px;}
+</style>
+<noscript><style>.bar-fill{width:var(--w)!important;}</style></noscript>
+</head>
+<body>
+
+<div id="progress-bar" style="position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;"></div>
+
+<div class="page-wrapper">
+
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">The procurement intake process, step by step</a>
+      <a class="toc-link" href="#s2">The procurement intake form: what to ask and enforce</a>
+      <a class="toc-link" href="#s3">Intake management and compliance</a>
+      <a class="toc-link" href="#s4">Handling urgent and exception requests</a>
+      <a class="toc-link" href="#s5">Where AI fits</a>
+      <a class="toc-link" href="#s6">From intake to orchestration</a>
+      <a class="toc-link" href="#s7">How to get started</a>
+      <a class="toc-link" href="#s8">Next steps</a>
+      <a class="toc-link" href="#s9">Frequently asked questions</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <h1>Intake Management in Procurement: Process, Compliance and How to Get Started</h1>
+        <div class="article-meta">
+          <span class="meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> About 8 min read</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Visnja Radosavljevic</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Published: <time datetime="2026-11-03">November 2026</time></span>
+        </div>
+      </div>
+    </header>
+
+    <p><strong>Intake management in procurement is the front-door process that captures, validates and routes purchase, supplier and contract requests before anyone commits spend.</strong></p>
+
+    <div class="hook-stat">
+      <p>According to <strong><a href="https://www.jaggaer.com/download/analyst-report/the-hackett-group-2026-procurement-agenda-and-key-issues-study" target="_blank" rel="noopener">The Hackett Group's 2026 study</a>, <span class="stat-num">35%</span> of surveyed procurement organizations are investigating AI-enabled intake and orchestration.</strong> But only <span class="stat-num">7%</span> have implemented it.</p>
+    </div>
+
+    <p>Procurement intake management is one design response: it gives every request a single tracked entry point. According to <strong><a href="https://www.deloitte.com/ch/en/services/consulting/research/procurement-strategy.html" target="_blank" rel="noopener">Deloitte's 2025 Global CPO Survey</a>, 57% of CPOs rank siloed ways of working a top-3 barrier</strong> to procurement delivering value. The survey covered 250+ CPOs in 40 countries.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See what Hackett&#x27;s 2026 study found on AI-enabled intake and orchestration</p>
+        <p class="jag-cta-desc">35% of surveyed procurement organizations are investigating AI-enabled intake and orchestration. But only 7% have implemented it. The study covered midsize and large enterprises and ran in late 2025.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/analyst-report/the-hackett-group-2026-procurement-agenda-and-key-issues-study" class="jag-cta-btn" target="_blank" rel="noopener">Download the Study &rarr;</a>
+    </div>
+
+    <nav class="inline-toc" aria-label="In this article">
+      <p class="inline-toc-title">In this article</p>
+      <ul>
+        <li><a href="#s1">The procurement intake process, step by step</a></li>
+        <li><a href="#s2">The procurement intake form: what to ask and enforce</a></li>
+        <li><a href="#s3">Intake management and compliance</a></li>
+        <li><a href="#s4">Handling urgent and exception requests</a></li>
+        <li><a href="#s5">Where AI fits</a></li>
+        <li><a href="#s6">From intake to orchestration</a></li>
+        <li><a href="#s7">How to get started</a></li>
+        <li><a href="#s8">Next steps</a></li>
+        <li><a href="#s9">Frequently asked questions</a></li>
+      </ul>
+    </nav>
+
+    <hr class="section-divider">
+
+    <h2 id="s1">The procurement intake process, step by step</h2>
+
+    <p>The process runs in 6 stages, and <strong>each stage either adds data or enforces policy.</strong></p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">Capture</span>
+          <p class="phase-desc">Give requesters one place to describe the need once. Re-enter email, chat and hallway requests there. Track every request from the moment it arrives.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">Classify</span>
+          <p class="phase-desc">Type each request as a purchase, new supplier, contract request or renewal. Send each type to its own workflow. Flag anything an existing contract or catalog already covers. Record the type and workflow, so the requester sees where it went.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Validate</span>
+          <p class="phase-desc">Check required fields, available budget and policy rules. Return incomplete requests to the requester before any reviewer sees them. Show the requester which checks passed and which did not.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <span class="phase-title">Route and approve</span>
+          <p class="phase-desc">Route by value, category and risk. Delegation of authority sets who signs. Show the requester who holds the request now.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">5</span>
+        <div class="phase-body">
+          <span class="phase-title">Fulfill</span>
+          <p class="phase-desc">Turn each approved request into a catalog order, a PO, a sourcing event or a contract request. Track the order, event or request through to completion.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">6</span>
+        <div class="phase-body">
+          <span class="phase-title">Track and close</span>
+          <p class="phase-desc">Show the requester status at every stage, and ask for feedback when the work ends.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hook-stat">
+      <p><em>Hypothetical example:</em> A marketing manager requests a $12,000 analytics subscription. <strong>Intake, connected to license-usage data, flags an existing license with unused seats before anyone negotiates a new one.</strong> It then asks whether the tool will hold personal data and routes the request to IT security and finance.</p>
+    </div>
+
+    <h3 class="sub-question">The intake management process (fulfillment)</h3>
+
+    <p><strong>Intake hands off at fulfillment: a catalog item or standard PO continues through <a href="https://www.jaggaer.com/solutions/procure-to-pay" target="_blank" rel="noopener">procure-to-pay</a> workflows.</strong> A non-standard need becomes a sourcing event or contract request instead. Once you approve a request, <a href="https://www.jaggaer.com/blog/understanding-procure-to-pay-process" target="_blank" rel="noopener">the procure to pay process</a> takes over from intake management.</p>
+
+    <h2 id="s2">The procurement intake form: what to ask and enforce</h2>
+
+    <p><strong>Intake management fails when the form takes longer than the email it replaced.</strong> Requesters route around it, and the front door stands empty. Requesters use short forms that branch by request type.</p>
+
+    <p>Ask fields capture context. Enforce rules block a request until the requester meets a condition.</p>
+
+    <div class="col-toggle" data-for="askTable">
+      <span class="col-toggle-lbl">Highlight:</span>
+      <button type="button" class="toggle-btn" data-col="1">Ask (captured)</button><button type="button" class="toggle-btn" data-col="2">Enforce (blocks the request)</button>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table interactive-table" id="askTable">
+        <thead><tr><th>Ask (captured)</th><th>Enforce (blocks the request)</th></tr></thead>
+        <tbody>
+          <tr><td>Business need and justification</td><td>Required fields complete before submission</td></tr>
+          <tr><td>Budget code and amount</td><td>Available budget at the time of request</td></tr>
+          <tr><td>Preferred supplier, or none</td><td>Check existing contracts and catalogs first</td></tr>
+          <tr><td>Timeline and reason for urgency</td><td>Route approval by value, not by requester</td></tr>
+          <tr><td>Data or system access involved</td><td>Security or privacy review above a threshold</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Conditional fields show only what the request type needs.</strong> A software request adds data-access questions.</p>
+
+    <div class="hook-stat">
+      <p><em>For Example (higher education, hypothetical):</em> A faculty member requests lab consumables on a research grant. The form asks for the grant code and project end date. <strong>It enforces the remaining grant balance and routes orders above a set value to the research office.</strong></p>
+    </div>
+
+    <h2 id="s3">Intake management and compliance</h2>
+
+    <p><strong><a href="https://www.gao.gov/products/GAO-25-107721" target="_blank" rel="noopener">GAO's May 2025 Green Book revision</a> emphasizes preventive control activities, and intake management applies that idea to purchasing: check policy before anyone commits spend.</strong> The Green Book is the federal internal control standard, and nonfederal entities may adopt it.</p>
+
+    <p><strong>A traceable request leaves a record that answers 4 questions: who asked, which checks ran, who approved, and when.</strong> Delegation of authority and segregation of duties shape the routing rules. A requester should not approve their own request, and where that is impractical, a documented compensating control applies. Review your routing rules after every reorganization, because stale approval chains weaken the control.</p>
+
+    <p><strong>In 2025, <a href="https://www.gartner.com/en/documents/6603202" target="_blank" rel="noopener">Gartner</a> warned that without intake management, end users manage their procurement journey independently.</strong> That could increase noncompliance.</p>
+
+    <p><strong>Security, privacy and legal reviews follow documented risk criteria, and mandatory reviews always apply.</strong> Teams can <a href="https://www.jaggaer.com/blog/5-tips-to-help-prevent-and-control-maverick-spend" target="_blank" rel="noopener">prevent and control maverick spend</a> by making the compliant path the easiest one.</p>
+
+    <h2 id="s4">Handling urgent and exception requests</h2>
+
+    <p><strong>An urgent request needs a fast lane with guardrails, not a bypass.</strong> Define urgency narrowly: a documented operational need with a date. Intake management then treats it as a path, not an exception to the rules.</p>
+
+    <p>4 guardrails keep the lane honest:</p>
+
+    <div class="diag-checklist">
+      <ul>
+        <li>A named person confirms the urgent need.</li>
+        <li>Approvals still follow delegation of authority. Compress them, never skip them.</li>
+        <li>A named owner reviews any purchase someone places before approval, logs the reason, and escalates repeat cases.</li>
+        <li>Check related requests to the same supplier within a set window for split requirements before thresholds apply.</li>
+      </ul>
+    </div>
+
+    <p><strong>Name one exception owner.</strong> Requests that fail validation, name a supplier outside contract, or exceed a threshold go to that person instead of stalling in a queue.</p>
+
+    <div class="hook-stat">
+      <p><em>Hypothetical example:</em> A production-line pump fails on a Friday. The maintenance lead invokes the fast lane, an authorized manager confirms the need, and the PO issues the same day. <strong>Procurement logs the reason and reviews the case on Monday.</strong></p>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER applies guided buying and policy checks at request submission, configured to your buying policies</p>
+        <p class="jag-cta-desc">Check required fields, available budget and policy rules. Return incomplete requests to the requester before any reviewer sees them. Route by value, category and risk.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a demo &rarr;</a>
+    </div>
+
+    <h2 id="s5">Where AI fits</h2>
+
+    <p><strong>AI reads a free-text request and checks whether an existing contract or preferred supplier already fits, and you decide what happens next.</strong> <a href="https://www.jaggaer.com/blog/ai-procurement-intake-guided-buying" target="_blank" rel="noopener">AI-driven intake and guided buying</a> put those options in front of the requester first. Keep a human decision on approvals, cite the policy or contract behind every suggestion, and log every automated step.</p>
+
+    <p><strong><a href="https://www.jaggaer.com/download/analyst-report/the-hackett-group-2026-procurement-agenda-and-key-issues-study" target="_blank" rel="noopener">Hackett's 2026 study</a> found 17% of surveyed organizations are piloting AI-enabled intake and orchestration.</strong> Another 41% are not using it. The study covered midsize and large enterprises and ran in late 2025.</p>
+
+    <figure class="chart-card">
+      <div class="donut-wrap">
+        <div class="donut-box">
+          <svg class="donut" viewBox="0 0 200 200" role="img" aria-label="AI-enabled intake and orchestration by status: 41% not using, 35% investigating, 17% piloting, 7% implemented">
+            <circle class="donut-bg" cx="100" cy="100" r="70" fill="none" stroke-width="30"></circle>
+            <g transform="rotate(-90 100 100)" fill="none" stroke-width="30"><circle class="donut-seg seg-4" data-key="Not using" data-val="41" cx="100" cy="100" r="70" pathLength="100" stroke-dasharray="41 59" stroke-dashoffset="0" tabindex="0"></circle><circle class="donut-seg seg-2" data-key="Investigating" data-val="35" cx="100" cy="100" r="70" pathLength="100" stroke-dasharray="35 65" stroke-dashoffset="-41" tabindex="0"></circle><circle class="donut-seg seg-3" data-key="Piloting" data-val="17" cx="100" cy="100" r="70" pathLength="100" stroke-dasharray="17 83" stroke-dashoffset="-76" tabindex="0"></circle><circle class="donut-seg seg-1" data-key="Implemented" data-val="7" cx="100" cy="100" r="70" pathLength="100" stroke-dasharray="7 93" stroke-dashoffset="-93" tabindex="0"></circle></g>
+          </svg>
+          <div class="donut-center" aria-live="polite"><span class="donut-num" id="donutNum">7%</span><span class="donut-lbl" id="donutLbl">Implemented</span></div>
+        </div>
+        <ul class="donut-legend"><li><button type="button" class="donut-leg" data-key="Not using" data-val="41"><span class="swatch seg-4"></span><span class="leg-lbl">Not using</span><span class="leg-val">41%</span></button></li><li><button type="button" class="donut-leg" data-key="Investigating" data-val="35"><span class="swatch seg-2"></span><span class="leg-lbl">Investigating</span><span class="leg-val">35%</span></button></li><li><button type="button" class="donut-leg" data-key="Piloting" data-val="17"><span class="swatch seg-3"></span><span class="leg-lbl">Piloting</span><span class="leg-val">17%</span></button></li><li><button type="button" class="donut-leg" data-key="Implemented" data-val="7"><span class="swatch seg-1"></span><span class="leg-lbl">Implemented</span><span class="leg-val">7%</span></button></li></ul>
+      </div>
+      <figcaption>AI-enabled intake and orchestration, by status. Source: The Hackett Group, 2026 (research ran in late 2025).</figcaption>
+    </figure>
+
+    <p><strong><a href="https://www.deloitte.com/ch/en/services/consulting/research/procurement-strategy.html" target="_blank" rel="noopener">Deloitte's 2025 survey</a> ranks data quality (43.97%) as CPOs' top internal GenAI risk.</strong> Governance, security and compliance concerns rank second at 35.41%.</p>
+
+    <figure class="chart-card">
+      <div class="bar-chart" role="img" aria-label="Top internal GenAI risks cited by CPOs: data quality 43.97%, governance, security and compliance 35.41%">
+        <div class="bar-row"><span class="bar-lbl">Data quality</span><div class="bar-track"><div class="bar-fill" data-w="43.97" style="--w:43.97%"></div></div><span class="bar-val">43.97%</span></div>
+        <div class="bar-row"><span class="bar-lbl">Governance, security and compliance</span><div class="bar-track"><div class="bar-fill" data-w="35.41" style="--w:35.41%"></div></div><span class="bar-val">35.41%</span></div>
+      </div>
+      <figcaption>Top internal GenAI risks cited by CPOs. Source: Deloitte, 2025.</figcaption>
+    </figure>
+
+    <p><strong>Gartner Senior Director Analyst Kaitlynn Sommers said in July 2025 that “fragmented and low-quality data across procurement systems can hinder accurate outputs.”</strong></p>
+
+    <p><strong><a href="https://www.gartner.com/en/documents/6603202" target="_blank" rel="noopener">Gartner's 2025 Hype Cycle</a> expects early agents to act as assistants on simple tasks.</strong> <a href="https://www.jaggaer.com/blog/intake-and-orchestration-in-procurement" target="_blank" rel="noopener">How intake and orchestration agents work</a> depends on clean request data.</p>
+
+    <h2 id="s6">From intake to orchestration</h2>
+
+    <p><strong>Intake management captures and routes demand, and orchestration coordinates what follows.</strong> One platform can provide both. In 2025, <a href="https://www.gartner.com/en/documents/6603202" target="_blank" rel="noopener">Gartner</a> noted that intake tools “initiate processes but lack comprehensive orchestration capabilities.” It added that vendors often claim orchestration capabilities they do not fully have.</p>
+
+    <div class="col-toggle" data-for="compTable">
+      <span class="col-toggle-lbl">Highlight:</span>
+      <button type="button" class="toggle-btn" data-col="2">Intake management</button><button type="button" class="toggle-btn" data-col="3">Guided buying</button><button type="button" class="toggle-btn" data-col="4">Procurement orchestration</button>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table interactive-table" id="compTable">
+        <thead><tr><th></th><th>Intake management</th><th>Guided buying</th><th>Procurement orchestration</th></tr></thead>
+        <tbody>
+          <tr><td>Starts with</td><td>Any request, including non-catalog needs</td><td>A catalog or contract purchase</td><td>End-to-end source-to-pay workflows</td></tr>
+          <tr><td>Main job</td><td>Capture, validate and route</td><td>Steer buyers to preferred items</td><td>Coordinate people, systems and workflows</td></tr>
+          <tr><td>Typical output</td><td>A routed, policy-checked request</td><td>A compliant order</td><td>A completed process across systems</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Test any intake tool on 3 points.</strong></p>
+
+    <div class="diag-checklist">
+      <ul>
+        <li>Check that it connects to your ERP, sourcing and contracts.</li>
+        <li>Check that it carries the request to completion.</li>
+        <li>Check that it keeps one audit trail across systems.</li>
+      </ul>
+    </div>
+
+    <p>Once requests cross those systems, learn <a href="https://www.jaggaer.com/blog/procurement-orchestration-definition-examples" target="_blank" rel="noopener">what procurement orchestration is</a>.</p>
+
+    <h2 id="s7">How to get started</h2>
+
+    <p><strong>Start with one request type, not the whole organization.</strong> Pick a category with steady volume, repeatable requirements, clear approval authority and a measurable baseline.</p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <p class="phase-desc">Map one request type and count its handoffs. That count is the baseline.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <p class="phase-desc">Name an intake owner and an exception owner.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <p class="phase-desc">Set the form: what to ask, what to enforce, and the approval thresholds.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <p class="phase-desc">Pilot with one category for a fixed window and compare against the baseline.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">5</span>
+        <div class="phase-body">
+          <p class="phase-desc">Track 4 measures: request cycle time, front-door share, rework rate and on-contract share.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mini-cards mini-cards--4">
+      <div class="mini-card"><strong>Request cycle time</strong> runs from submission to approval.</div>
+      <div class="mini-card"><strong>Front-door share</strong> is the percentage of all known requests that enter through intake.</div>
+      <div class="mini-card"><strong>Rework rate</strong> counts requests that return to the requester for missing information.</div>
+      <div class="mini-card"><strong>On-contract share</strong> counts purchases that use an existing contract.</div>
+    </div>
+
+    <p><strong>Run <a href="https://www.jaggaer.com/solutions/eprocurement" target="_blank" rel="noopener">guided buying and intake workflows</a> together in JAGGAER eProcurement: guided buying covers your catalog, and intake covers everything else.</strong></p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how JAGGAER eProcurement runs guided buying and intake workflows together</p>
+        <p class="jag-cta-desc">Guided buying covers your catalog, and intake covers everything else. Pick one request type and map its handoffs this quarter. Intake management starts with that baseline.</p>
+      </div>
+      <span class="jag-cta-btn jag-cta-btn--stretch">Download the&nbsp;<a href="https://www.jaggaer.com/download/product-brief/eprocurement" target="_blank" rel="noopener">eProcurement product brief</a></span>
+    </div>
+
+    <h2 id="s8">Next steps</h2>
+
+    <p><strong>Pick one request type and map its handoffs this quarter.</strong> Intake management starts with that baseline. See how <a href="https://www.jaggaer.com/solutions/eprocurement" target="_blank" rel="noopener">guided buying and intake workflows</a> in JAGGAER eProcurement fit that request type.</p>
+
+    <h2 id="s9">Frequently asked questions</h2>
+
+    <details class="faq-item">
+      <summary>What is intake management in procurement? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Intake management in procurement is the front-door process that captures, validates and routes purchase, supplier and contract requests</strong> before they enter sourcing or buying workflows.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do you handle urgent requests in procurement intake management? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Route urgent requests through a defined fast lane with guardrails.</strong> A named person confirms the need, approvals follow delegation of authority, and a named owner reviews and logs any purchase someone places before approval.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the difference between intake management and a purchase requisition? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Intake management decides which process a request follows, and a purchase requisition is one of its outputs.</strong> A request can also lead to supplier onboarding, a sourcing event or a contract review.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is intake management the same as procurement orchestration? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>No: intake management starts the process, and orchestration coordinates what follows.</strong> Gartner's 2025 Hype Cycle listed them as separate categories, and Hackett's 2026 study groups them as one.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What should a procurement intake form ask? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>A procurement intake form should ask for the business need, budget, supplier preference, timeline and data access.</strong> It should enforce required fields, available budget, existing-contract checks and approval thresholds.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do you measure intake management success? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Track request cycle time, front-door share, rework rate and on-contract share to measure intake management.</strong> Set your baseline before the pilot so each measure has something to move against.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Where does intake fit in the stages of procurement? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Intake comes first in procurement, before sourcing, contracting and purchasing begin.</strong> It captures and validates the need.</div>
+    </details>
+
+  </article>
+
+  <aside class="expert-sidebar" aria-label="What the experts are saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">The Hackett Group &middot; 2026</span>
+        <span class="exp-num red">35% and 7%</span>
+        <p class="exp-stat">35% of surveyed organizations are investigating AI-enabled intake and orchestration. Only 7% have implemented it.</p>
+        <a href="https://www.jaggaer.com/download/analyst-report/the-hackett-group-2026-procurement-agenda-and-key-issues-study" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+            <div class="exp-item">
+        <span class="exp-source">Deloitte &middot; 2025</span>
+        <span class="exp-num red">57%</span>
+        <p class="exp-stat">57% of CPOs rank siloed ways of working a top-3 barrier to procurement delivering value (250+ CPOs, 40 countries)</p>
+        <a href="https://www.deloitte.com/ch/en/services/consulting/research/procurement-strategy.html" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Gartner &middot; June 2025</span>
+        <span class="exp-num red">20% to 50%</span>
+        <p class="exp-stat">2025 edition: intake management at 20% to 50% market penetration (Gartner estimate). It sat at the Peak of Inflated Expectations. Gartner published a 2026 edition on June 10, 2026.</p>
+        <a href="https://www.gartner.com/en/documents/6603202" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+                </div>
+  </aside>
+
+</div>
+
+<script>
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+
+/* Toggle box: expertise gap vs. process gap */
+function jagToggle(targetId, btn) {
+  const box = btn.closest('.toggle-box');
+  box.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  box.querySelectorAll('.toggle-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  box.querySelector('#' + targetId).classList.add('active');
+}
+
+/* Decision-check widget */
+const decisionCopy = {
+  repeat: {head: "Consider a source-to-pay platform.", body: "Repeatable work such as PO processing, invoice matching, and approval routing may be better addressed through automation."},
+  expertise: {head: "Consider selective outsourcing.", body: "External support may help when specialized category expertise is missing internally."},
+  capacity: {head: "Consider time-bound outsourcing.", body: "External support can add temporary capacity for M&A integrations or major sourcing programs."},
+  strategy: {head: "Keep strategic ownership internal.", body: "Consider technology or selective external expertise for the supporting activities, not the decision itself."}
+};
+document.querySelectorAll('input[name="decisionQ"]').forEach(input => {
+  input.addEventListener('change', () => {
+    const result = document.getElementById('decisionResult');
+    const choice = decisionCopy[input.value];
+    result.innerHTML = '<strong>' + choice.head + '</strong> ' + choice.body;
+    result.classList.add('show');
+    document.getElementById('decisionReset').style.display = 'inline-block';
+  });
+});
+function jagResetDecision() {
+  document.querySelectorAll('input[name="decisionQ"]').forEach(i => i.checked = false);
+  const result = document.getElementById('decisionResult');
+  result.classList.remove('show');
+  result.textContent = '';
+  document.getElementById('decisionReset').style.display = 'none';
+}
+</script>
+
+<script>
+/* Five-question check */
+const fiveQ = document.querySelectorAll('#fiveQ input');
+fiveQ.forEach(c => c.addEventListener('change', () => {
+  const n = [...fiveQ].filter(x => x.checked).length;
+  document.getElementById('fiveQCount').textContent = n + ' of 5';
+}));
+
+/* Column highlight for comparison tables */
+document.querySelectorAll('.col-toggle').forEach(box => {
+  const table = document.getElementById(box.dataset.for);
+  box.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+    const on = btn.classList.contains('active');
+    box.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    table.querySelectorAll('.col-on').forEach(c => c.classList.remove('col-on'));
+    if (!on) {
+      btn.classList.add('active');
+      table.querySelectorAll('tr > :nth-child(' + btn.dataset.col + ')').forEach(c => c.classList.add('col-on'));
+    }
+  }));
+});
+
+/* KPI search */
+const kpiInput = document.getElementById('kpiFilter');
+if (kpiInput) {
+const kpiRows = document.querySelectorAll('#kpiTable tbody tr');
+kpiInput.addEventListener('input', () => {
+  const q = kpiInput.value.trim().toLowerCase();
+  let n = 0;
+  kpiRows.forEach(r => { const show = !q || r.textContent.toLowerCase().includes(q); r.style.display = show ? '' : 'none'; if (show) n++; });
+  document.getElementById('kpiCount').textContent = n + ' of ' + kpiRows.length;
+});
+
+}
+/* Kraljic matrix */
+document.querySelectorAll('.k-cell').forEach(c => c.addEventListener('click', () => {
+  const on = c.classList.contains('active');
+  document.querySelectorAll('.k-cell').forEach(x => x.classList.remove('active'));
+  if (!on) c.classList.add('active');
+}));
+</script>
+
+<script>
+/* Charts: bars animate in view; donut legend and segments highlight on hover, focus or click */
+(function(){
+  const fills=document.querySelectorAll('.bar-fill');
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.width=e.target.dataset.w+'%';io.unobserve(e.target);}}),{threshold:.4});
+    fills.forEach(f=>io.observe(f));
+  } else { fills.forEach(f=>f.style.width=f.dataset.w+'%'); }
+  const wrap=document.querySelector('.donut-wrap'); if(!wrap) return;
+  const num=document.getElementById('donutNum'), lbl=document.getElementById('donutLbl');
+  const segs=[...wrap.querySelectorAll('.donut-seg')], legs=[...wrap.querySelectorAll('.donut-leg')];
+  function show(key,val){
+    num.textContent=val+'%'; lbl.textContent=key; wrap.classList.add('has-focus');
+    segs.forEach(s=>s.classList.toggle('on',s.dataset.key===key)); legs.forEach(l=>l.classList.toggle('on',l.dataset.key===key));
+  }
+  function reset(){ num.textContent='7%'; lbl.textContent='Implemented'; wrap.classList.remove('has-focus'); segs.forEach(s=>s.classList.remove('on')); legs.forEach(l=>l.classList.remove('on')); }
+  [...segs,...legs].forEach(el=>{
+    el.addEventListener('mouseenter',()=>show(el.dataset.key,el.dataset.val));
+    el.addEventListener('focus',()=>show(el.dataset.key,el.dataset.val));
+    el.addEventListener('click',()=>show(el.dataset.key,el.dataset.val));
+    el.addEventListener('mouseleave',reset); el.addEventListener('blur',reset);
+  });
+})();
+</script>
+
+</body>
+</html>
