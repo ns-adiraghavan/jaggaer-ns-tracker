@@ -11012,6 +11012,16 @@
         "annotation": true,
         "section": "¶2 — \"The boundary is the signed contract. S2C…\"",
         "revision": 3
+      },
+      {
+        "id": "ann-klk74o",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "Can we limit the type of CTA we are using in the blog so that we can use A/B testing on which CTA gets clicked more , we should maintain a reposetory on which CTA we are suing in which blog and which banner and CTA is working more.",
+        "ts": "2026-11-05T11:04:22.082Z",
+        "annotation": true,
+        "section": "¶4 — \"Jaggaer’s source-to-pay platform covers …\"",
+        "revision": 3
       }
     ],
     "piece-84iifl": [
