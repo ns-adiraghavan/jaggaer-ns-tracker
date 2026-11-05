@@ -1865,45 +1865,6 @@
                 }
               ],
               "brief_last_updated": "2026-11-04T09:57:40.551Z"
-            },
-            {
-              "id": "piece-uju9la",
-              "title": "Category Management: An End-to-End Guide to Planning, Strategy and AI",
-              "format": "Ad-Hoc Article",
-              "assignee": "m-e10nz",
-              "status": "marketing-review",
-              "content_type": "ad-hoc",
-              "phase": 3,
-              "schedule_month": "p3-month-1",
-              "revision_count": 1,
-              "primary_keyword": "",
-              "geography": "all",
-              "status_history": [
-                {
-                  "stage": "not-started",
-                  "ts": "2026-11-05T12:26:32.615Z",
-                  "by": "m-e10nz"
-                },
-                {
-                  "stage": "ad-hoc-review",
-                  "ts": "2026-11-05T12:27:28.068Z",
-                  "by": "m-e10nz"
-                }
-              ],
-              "last_updated": "2026-11-05T12:27:28.067Z",
-              "last_updated_by": "m-e10nz",
-              "deliverable_ext": "html",
-              "return_to_stage": null,
-              "last_upload": "2026-11-05T12:27:28.067Z",
-              "last_upload_by": "m-e10nz",
-              "seo": {
-                "meta_title": "Category Management: An End-to-End Guide to Planning and AI",
-                "meta_description": "What is category management? An end-to-end guide to planning, strategy, process, industry \npractice and AI for procurement teams.",
-                "slug": "blog-category-management-procurement-guide",
-                "updated_at": "2026-11-05T12:30:36.017Z",
-                "updated_by": "m-e10nz"
-              },
-              "secondary_keyword": ""
             }
           ]
         }
