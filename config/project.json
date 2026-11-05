@@ -1106,7 +1106,7 @@
               "title": "Spend Analytics in Procurement: Visibility, KPIs and Cost Control",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "ad-hoc-review",
+              "status": "ed-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1156,7 +1156,8 @@
                   "uploaded_at": "2026-10-26T07:48:39.842Z"
                 }
               ],
-              "brief_last_updated": "2026-10-26T07:48:39.842Z"
+              "brief_last_updated": "2026-10-26T07:48:39.842Z",
+              "secondary_keyword": ""
             },
             {
               "id": "piece-zgthd0",
