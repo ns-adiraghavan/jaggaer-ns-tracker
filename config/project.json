@@ -721,7 +721,7 @@
               "title": "What is Procurement - Updated 2026",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "ad-hoc-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -745,7 +745,8 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-10-16T13:26:18.563Z",
-              "last_upload_by": "manager"
+              "last_upload_by": "manager",
+              "secondary_keyword": ""
             },
             {
               "id": "piece-51rko8",
