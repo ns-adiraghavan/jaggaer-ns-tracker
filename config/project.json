@@ -1350,7 +1350,7 @@
               "title": "Category Management Strategy: The 4 Ps Framework Applied to IT and MRO",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ad-hoc-review",
+              "status": "marketing-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1387,7 +1387,8 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-05T08:02:31.068Z",
-              "last_upload_by": "jason"
+              "last_upload_by": "jason",
+              "secondary_keyword": ""
             },
             {
               "id": "piece-hjxaho",
