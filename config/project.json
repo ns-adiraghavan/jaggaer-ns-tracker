@@ -6114,7 +6114,7 @@
               "title": "Category Management in Procurement: Process, Tools and Best Practices",
               "format": "Article",
               "assignee": "",
-              "status": "ed-review",
+              "status": "writing",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -6153,10 +6153,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-03T06:39:27.537Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-05T10:58:07.213Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-03T06:39:27.537Z",
-              "last_updated_by": "m-e10nz",
+              "last_updated": "2026-11-05T10:58:07.213Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Category_Management_Process_Refresh.pdf",
@@ -6172,7 +6177,7 @@
               "priority_updated": "2026-10-27T08:51:01.667Z",
               "priority_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "seo": {
                 "meta_title": "Category Management in Procurement: Process and Tools",
                 "meta_description": "What is category management in procurement? Learn the category management process, tools, roles and best practices that turn spend categories into savings.",
@@ -11087,6 +11092,14 @@
         "annotation": true,
         "section": "¶98 — \"Decide: Category scope, team, and execut…\"",
         "revision": 3
+      },
+      {
+        "id": "fb-agbzib",
+        "author": "m-72umx",
+        "verdict": "needs-revision",
+        "body": "check comments",
+        "ts": "2026-11-05T10:58:07.211Z",
+        "stage": "ed-review"
       }
     ],
     "piece-6ffdwp": [
