@@ -11072,6 +11072,16 @@
         "body": "Check comments",
         "ts": "2026-11-02T11:35:43.386Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "ann-bxdkil",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "Heding can be changed like - Discover Why Jaggaer Named A Leader In The IDC MarketScape",
+        "ts": "2026-11-05T10:32:47.258Z",
+        "annotation": true,
+        "section": "¶4 — \"Download IDC's 2025 MarketScape excerpt …\"",
+        "revision": 4
       }
     ]
   },
