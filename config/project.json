@@ -11002,6 +11002,16 @@
         "body": "See comments",
         "ts": "2026-11-02T10:35:47.987Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "ann-ssfilg",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "Above this para i think it will be better to put a graphic to explain How S2P covers everything and S2C and P2P is a part , we can add Alt tag to explain , the current one did not able to show this.",
+        "ts": "2026-11-05T11:01:16.846Z",
+        "annotation": true,
+        "section": "¶2 — \"The boundary is the signed contract. S2C…\"",
+        "revision": 3
       }
     ],
     "piece-84iifl": [
