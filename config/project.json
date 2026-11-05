@@ -1468,7 +1468,7 @@
               "title": "Intake Management in Procurement: Process, Compliance and How to Get  Started",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ad-hoc-review",
+              "status": "marketing-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1512,7 +1512,8 @@
                 "slug": "blog-intake-management-in-procurement",
                 "updated_at": "2026-11-05T06:58:34.750Z",
                 "updated_by": "m-5jitd"
-              }
+              },
+              "secondary_keyword": ""
             },
             {
               "id": "piece-oxoi6j",
