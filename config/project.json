@@ -5982,7 +5982,7 @@
               "title": "What Is CLM? Meaning, Stages and How CLM Software Works",
               "format": "Article",
               "assignee": "",
-              "status": "ed-review",
+              "status": "writing",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -6026,10 +6026,15 @@
                   "stage": "approved",
                   "ts": "2026-11-03T07:23:27.539Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-05T10:42:14.448Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-03T07:23:27.539Z",
-              "last_updated_by": "orlagh",
+              "last_updated": "2026-11-05T10:42:14.448Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_What_Is_CLM_Blog_Refresh.pdf",
@@ -6045,7 +6050,7 @@
               "priority_updated": "2026-10-27T08:51:07.539Z",
               "priority_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "seo": {
                 "meta_title": "What Is CLM? Meaning, Stages and How CLM Software Works",
                 "meta_description": "Learn what CLM means, the nine stages of the contract lifecycle and how CLM software works\nto improve compliance, speed and visibility",
@@ -11052,6 +11057,16 @@
         "body": "Check comments",
         "ts": "2026-11-02T11:16:54.863Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "ann-mzqyj6",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "i think we should also focus on how we can interlink our solution page with the related blog, by try giving the anchor text in the first 100 words if possible.",
+        "ts": "2026-11-05T10:47:48.397Z",
+        "annotation": true,
+        "section": "¶67 — \"Category Management in Procurement: Proc…\"",
+        "revision": 3
       }
     ],
     "piece-6ffdwp": [
@@ -11092,6 +11107,14 @@
         "annotation": true,
         "section": "¶35 — \"See how JAGGAER Contracts links sourcing…\"",
         "revision": 4
+      },
+      {
+        "id": "fb-kv7mai",
+        "author": "m-72umx",
+        "verdict": "needs-revision",
+        "body": "check comments",
+        "ts": "2026-11-05T10:42:14.446Z",
+        "stage": "ed-review"
       }
     ]
   },
