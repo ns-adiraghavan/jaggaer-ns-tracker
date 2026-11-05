@@ -1522,7 +1522,7 @@
               "title": "Procurement Orchestration: Definition, Examples and How to Get Started",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "ad-hoc-review",
+              "status": "marketing-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1566,7 +1566,8 @@
                 "slug": "blog-procurement-orchestration-definition-examples",
                 "updated_at": "2026-11-05T11:25:04.615Z",
                 "updated_by": "orlagh"
-              }
+              },
+              "secondary_keyword": ""
             },
             {
               "id": "piece-kg4uxv",
