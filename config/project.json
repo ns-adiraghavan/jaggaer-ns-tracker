@@ -1474,7 +1474,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-05T06:57:44.022Z",
-              "last_upload_by": "m-5jitd"
+              "last_upload_by": "m-5jitd",
+              "seo": {
+                "meta_title": "Intake Management in Procurement: Process and First Steps",
+                "meta_description": "What is intake management in procurement? It captures and routes every request under \npolicy. See the process, compliance and first steps.",
+                "slug": "blog-intake-management-in-procurement",
+                "updated_at": "2026-11-05T06:58:34.750Z",
+                "updated_by": "m-5jitd"
+              }
             },
             {
               "id": "piece-oxoi6j",
