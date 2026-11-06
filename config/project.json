@@ -11092,6 +11092,16 @@
         "body": "check comments",
         "ts": "2026-11-05T11:06:46.297Z",
         "stage": "ed-review"
+      },
+      {
+        "id": "ann-rcdz8y",
+        "author": "m-5jitd",
+        "verdict": "question",
+        "body": "I have changed all the CTA's to Book a Demo for easy A/B testing",
+        "ts": "2026-11-06T07:16:00.865Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 4
       }
     ],
     "piece-84iifl": [
