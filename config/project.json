@@ -853,7 +853,7 @@
               "title": "Procure to Pay Process: Automate Every Step with a P2P System",
               "format": "Ad-Hoc Article",
               "assignee": "orlagh",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -885,6 +885,11 @@
                   "stage": "approved",
                   "ts": "2026-10-29T16:13:56.044Z",
                   "by": "m-72umx"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-07T11:43:05.811Z",
+                  "by": "m-izu4e"
                 }
               ],
               "last_updated": "2026-10-29T16:13:56.044Z",
@@ -909,7 +914,14 @@
                   "uploaded_at": "2026-10-27T05:01:37.728Z"
                 }
               ],
-              "brief_last_updated": "2026-10-27T05:01:37.728Z"
+              "brief_last_updated": "2026-10-27T05:01:37.728Z",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-11-05",
+                "live_url": "https://www.jaggaer.com/blog/understanding-procure-to-pay-process",
+                "performance_data": "",
+                "updated_at": "2026-11-07T11:43:05.811Z"
+              }
             },
             {
               "id": "piece-zwmbks",
