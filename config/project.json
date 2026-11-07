@@ -721,7 +721,7 @@
               "title": "What is Procurement - Updated 2026",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -738,6 +738,11 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-10-16T13:26:18.564Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-07T11:46:15.371Z",
+                  "by": "m-izu4e"
                 }
               ],
               "last_updated": "2026-10-16T13:26:18.563Z",
@@ -746,7 +751,14 @@
               "return_to_stage": null,
               "last_upload": "2026-10-16T13:26:18.563Z",
               "last_upload_by": "manager",
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-10-26",
+                "live_url": "https://www.jaggaer.com/blog/what-is-procurement",
+                "performance_data": "",
+                "updated_at": "2026-11-07T11:46:15.370Z"
+              }
             },
             {
               "id": "piece-51rko8",
