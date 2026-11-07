@@ -753,7 +753,7 @@
               "title": "Tail Spend Management Strategies: Direct vs Indirect Spend Explained",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "approved",
+              "status": "live",
               "content_type": "msv",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -810,6 +810,11 @@
                   "stage": "approved",
                   "ts": "2026-11-02T14:38:00.314Z",
                   "by": "m-72umx"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-07T11:39:54.731Z",
+                  "by": "m-izu4e"
                 }
               ],
               "last_updated": "2026-11-02T14:38:00.314Z",
@@ -834,7 +839,14 @@
                   "uploaded_at": "2026-10-27T05:04:04.655Z"
                 }
               ],
-              "brief_last_updated": "2026-10-27T05:04:04.655Z"
+              "brief_last_updated": "2026-10-27T05:04:04.655Z",
+              "publishing": {
+                "published_by": "Jovana",
+                "launch_date": "2026-11-06",
+                "live_url": "https://www.jaggaer.com/blog/tail-spend-management-direct-vs-indirect-spend",
+                "performance_data": "",
+                "updated_at": "2026-11-07T11:39:54.731Z"
+              }
             },
             {
               "id": "piece-k06t1v",
