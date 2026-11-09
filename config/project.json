@@ -1622,7 +1622,7 @@
               "title": "AI in Procurement Orchestration: How Intake and Orchestration Agents  Work",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "not-started",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1650,7 +1650,8 @@
                   "uploaded_at": "2026-11-02T12:48:15.726Z"
                 }
               ],
-              "brief_last_updated": "2026-11-02T12:48:15.726Z"
+              "brief_last_updated": "2026-11-02T12:48:15.726Z",
+              "secondary_keyword": ""
             },
             {
               "id": "piece-yi5qu9",
