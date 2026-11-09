@@ -6082,7 +6082,7 @@
               "title": "What Is CLM? Meaning, Stages and How CLM Software Works",
               "format": "Article",
               "assignee": "",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -6136,10 +6136,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-06T05:18:06.191Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-09T12:11:41.647Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-06T05:18:06.191Z",
-              "last_updated_by": "orlagh",
+              "last_updated": "2026-11-09T12:11:41.646Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_What_Is_CLM_Blog_Refresh.pdf",
@@ -11305,6 +11310,14 @@
         "verdict": "needs-revision",
         "body": "check comments",
         "ts": "2026-11-05T10:42:14.446Z",
+        "stage": "ed-review"
+      },
+      {
+        "id": "fb-tql2nk",
+        "author": "m-72umx",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-09T12:11:41.643Z",
         "stage": "ed-review"
       }
     ]
