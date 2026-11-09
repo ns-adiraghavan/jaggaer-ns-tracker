@@ -6311,7 +6311,7 @@
               "title": "Source to Contract vs Source to Pay vs Procure to Pay: Key Differences",
               "format": "Article",
               "assignee": "",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -6360,10 +6360,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-06T07:15:08.650Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-09T12:14:35.167Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-06T07:15:08.650Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-09T12:14:35.167Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Source_to_Contract_Comparison_Refresh.pdf",
@@ -11170,6 +11175,14 @@
         "annotation": true,
         "section": "General",
         "revision": 4
+      },
+      {
+        "id": "fb-w16wty",
+        "author": "m-72umx",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-09T12:14:35.163Z",
+        "stage": "ed-review"
       }
     ],
     "piece-84iifl": [
