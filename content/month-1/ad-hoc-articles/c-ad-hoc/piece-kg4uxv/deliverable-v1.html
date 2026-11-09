@@ -1,0 +1,769 @@
+<!-- uploaded by manager at 2026-11-09T12:26:30.955Z -->
+<!-- piece: AI in Procurement Orchestration: How Intake and Orchestration Agents  Work -->
+<!-- piece: AI in Procurement Orchestration: How Intake and Orchestration Agents Work | blog refresh | slug /blog/intake-and-orchestration-in-procurement | draft v1 2026-11-06 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI in Procurement Orchestration: How Intake Agents Work</title>
+<meta name="description" content="AI in procurement orchestration: intake agents classify requests and orchestration agents route approvals and trigger POs. See how it works.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/intake-and-orchestration-in-procurement">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "AI in Procurement Orchestration: How Intake and Orchestration Agents Work", "description": "AI in procurement orchestration: intake agents classify requests and orchestration agents route approvals and trigger POs. See how it works.", "datePublished": "2025-04-16", "dateModified": "2026-11-06", "mainEntityOfPage": "https://www.jaggaer.com/blog/intake-and-orchestration-in-procurement", "publisher": {"@type": "Organization", "name": "JAGGAER", "url": "https://www.jaggaer.com"}, "author": {"@type": "Person", "name": "Visnja Radosavljevic"}}
+</script>
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is orchestration in procurement?", "acceptedAnswer": {"@type": "Answer", "text": "Orchestration in procurement, or procurement orchestration, coordinates the steps, people and systems a request needs, in order. In simple terms, it decides what happens next after a request arrives. AI helps by reading the request and checking prerequisites, and a person approves each commitment."}}, {"@type": "Question", "name": "What is the difference between intake and orchestration?", "acceptedAnswer": {"@type": "Answer", "text": "Intake captures and classifies a request. Orchestration routes the work that follows, such as contract tasks, approvals, the requisition and the purchase order. Intake is the front door; orchestration runs the steps behind it."}}, {"@type": "Question", "name": "How is procurement orchestration different from procure-to-pay?", "acceptedAnswer": {"@type": "Answer", "text": "Procurement orchestration coordinates the steps around procure-to-pay transactions, including intake, contracts and supplier onboarding. Orchestration decides the order of work; procure-to-pay executes the transactions."}}, {"@type": "Question", "name": "What is an orchestration platform?", "acceptedAnswer": {"@type": "Answer", "text": "An orchestration platform connects the systems a process touches and runs its steps in order. In procurement, it links intake, contracts, approvals and purchasing, and connects to the ERP. It routes work by rules and dependencies, with people approving commitments."}}, {"@type": "Question", "name": "What is autonomous procurement?", "acceptedAnswer": {"@type": "Answer", "text": "Autonomous procurement describes systems that run procurement steps with less human prompting. KPMG's Q3 2026 cross-industry survey found 49% of leaders have defined high-risk use cases where agents may not decide autonomously. In JAGGAER's approach, JAI suggests and people decide."}}, {"@type": "Question", "name": "What is predictive procurement orchestration?", "acceptedAnswer": {"@type": "Answer", "text": "Predictive procurement orchestration uses historical data to anticipate the next step before a request arrives. It forecasts demand, flags likely exceptions and suggests a channel early. A person still decides whether to act."}}]}
+</script>
+
+<style>
+
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.8125rem;
+  --font-size-base:    1rem;
+  --font-size-lg:      1rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2rem, calc(1.72rem + 1.05vw), 2.25rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul,ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li,ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:980px;}
+.article-tags{display:flex;gap:.5rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.tag-pill{display:inline-flex;align-items:center;font-family:var(--font-display);font-size:.75rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--color-navy);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:999px;padding:.4rem .9rem;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:980px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1480px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:230px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.75rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:980px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.08em;}
+article h3.sub-question{font-size:var(--font-size-h4);text-transform:none;letter-spacing:-0.01em;font-weight:700;border-bottom:none;padding-bottom:0;}
+
+/* Comparison / data tables */
+.table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.data-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:520px;}
+.data-table th{background:var(--purple-tint-2);color:var(--color-navy);font-family:var(--font-display);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;text-align:left;padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--purple-soft);}
+.data-table td{padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--color-ink-2);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--color-cream);}
+.data-table td strong,.data-table th strong{color:var(--color-ink);}
+
+/* Roadmap / framework phase cards */
+.phase-cards{display:flex;flex-direction:column;gap:2px;margin:var(--space-m) 0 var(--space-l);border-radius:var(--border-radius-sm);overflow:hidden;border:var(--border);}
+.phase-item{display:flex;gap:var(--space-m);padding:var(--space-s) var(--space-m);background:var(--color-white);align-items:flex-start;}
+.phase-num{flex-shrink:0;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);}
+.phase-body{flex:1;min-width:0;}
+.phase-title{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink);margin-bottom:.15rem;display:block;}
+.phase-desc{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.6;}
+
+/* Hook stat contrast callout */
+.hook-stat{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.hook-stat p{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.65;}
+.hook-stat .stat-num{font-family:var(--font-display);font-weight:700;color:var(--color-ink-3);}
+
+/* Interactive toggle: expertise gap vs process gap */
+.toggle-box{border:1.5px solid var(--purple-soft);border-radius:var(--border-radius);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--purple-tint-3);}
+.toggle-head{display:flex;gap:.4rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.toggle-btn{font-family:var(--font-display);font-size:.78rem;font-weight:700;letter-spacing:.02em;color:var(--jai-a);background:var(--color-white);border:1.5px solid var(--purple-soft);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.toggle-btn:hover{border-color:var(--jai-a);}
+.toggle-btn.active{background:var(--jai-gradient);color:#fff;border-color:transparent;}
+.toggle-panel{display:none;}
+.toggle-panel.active{display:block;animation:fadeIn .25s ease;}
+.toggle-panel p{margin-bottom:.6rem;}
+.toggle-panel p:last-child{margin-bottom:0;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* Decision-checker widget */
+.decision-widget{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-l) var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.decision-widget-head{font-family:var(--font-display);font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);margin:0 0 var(--space-2xs);}
+.decision-widget-sub{font-size:.8rem;color:var(--color-ink-3);margin:0 0 var(--space-m);}
+.decision-options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:var(--space-m);}
+.decision-option{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem var(--space-s);border:var(--border);border-radius:var(--border-radius-sm);cursor:pointer;transition:border-color .2s,background .2s;font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-option:hover{border-color:var(--jai-a);background:var(--purple-tint-3);}
+.decision-option input{margin-top:.2rem;accent-color:var(--jai-a);}
+.decision-result{display:none;background:var(--color-cream);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-result.show{display:block;animation:fadeIn .25s ease;}
+.decision-reset{display:inline-block;margin-top:var(--space-s);font-size:.78rem;font-weight:600;color:var(--color-teal);cursor:pointer;background:none;border:none;padding:0;border-bottom:1px solid #4D819440;font-family:var(--font-base);}
+.decision-reset:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Benefit / risk checklist */
+.diag-checklist{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.diag-checklist ul{list-style:none;padding-left:0;margin-bottom:0;}
+.diag-checklist li{position:relative;padding-left:1.6rem;margin-bottom:.55rem;font-size:var(--font-size-base);}
+.diag-checklist li:last-child{margin-bottom:0;}
+.diag-checklist li::before{content:"";position:absolute;left:0;top:.2rem;width:1.05rem;height:1.05rem;border-radius:4px;border:1.5px solid var(--color-teal);background:var(--color-white);}
+.diag-checklist li::after{content:"✓";position:absolute;left:.22rem;top:-.05rem;color:var(--color-teal);font-size:.75rem;font-weight:700;}
+
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--color-ink);line-height:1.15;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.8125rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-link{font-size:.75rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.page-wrapper{flex-wrap:wrap;}.expert-sidebar{position:static;width:100%;max-height:none;padding:0 0 var(--space-l) 0;order:99;}.exp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;}.exp-item{border-bottom:none;border-right:1px solid var(--purple-soft);}}
+@media(max-width:640px){.expert-sidebar .exp-list{grid-template-columns:1fr;}.expert-sidebar .exp-item{border-right:none;border-bottom:1px solid var(--purple-soft);}}
+
+/* CTA block */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-base);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:var(--font-size-base);font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-base);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;line-height:1;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Additions for this article (components from sister references) */
+.lede{font-size:1.0625rem;color:var(--color-ink);}
+.link-pending{color:var(--color-teal);border-bottom:1px dashed #4D819480;cursor:default;}
+.section-eyebrow{display:block;font-family:var(--font-display);font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-teal);margin:var(--space-l) 0 calc(-1 * var(--space-s));}
+.jag-cta-label{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--color-red);padding:.15rem .7rem;border-radius:9999px;white-space:nowrap;margin-bottom:.35rem;}
+.jag-cta-sub{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.criteria-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin:var(--space-m) 0 var(--space-l);}
+.criteria-card{display:flex;flex-direction:column;border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.9rem 1rem;background:linear-gradient(180deg,var(--purple-tint-3),var(--color-white) 55%);}
+.criteria-head{display:flex;align-items:center;gap:.55rem;margin-bottom:.5rem;}
+.criteria-badge{width:1.85rem;height:1.85rem;border-radius:50%;background:var(--jai-gradient);color:#fff;font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.criteria-title{font-family:var(--font-display);font-size:.82rem;font-weight:700;color:var(--color-ink);text-transform:uppercase;letter-spacing:.02em;margin:0;}
+.criteria-desc{font-size:.95rem;color:var(--color-ink-2);line-height:1.55;margin:0 0 .5rem;}
+.criteria-test{font-size:.95rem;color:var(--color-ink-2);line-height:1.55;margin:auto 0 0;padding-top:.5rem;border-top:1px dashed var(--purple-soft);}
+.criteria-test span{font-weight:700;color:var(--jai-a);}
+@media(max-width:620px){.criteria-grid{grid-template-columns:1fr;}}
+.callout-note{background:var(--color-light-blue);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:.8rem 1rem;margin:var(--space-m) 0;}
+.callout-note-label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-2xs);}
+.callout-note p{margin:0;}
+.hook-stat{display:flex;align-items:center;gap:var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);}
+.hook-stat-num{font-family:var(--font-display);font-size:clamp(1.6rem,2.4vw,2rem);font-weight:800;color:var(--jai-a);line-height:1;flex-shrink:0;}
+.hook-stat-lead{font-weight:600;color:var(--color-ink);margin:0 0 .25rem;}
+.hook-stat-sub{font-size:.8rem;color:var(--color-ink-3);margin:0;}
+@media(max-width:580px){.hook-stat{flex-direction:column;align-items:flex-start;}}
+.risk-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:var(--space-m) 0 var(--space-l);}
+.risk-item{display:flex;flex-direction:column;border:1px solid var(--purple-soft);border-top:3px solid #B7791F;border-radius:var(--border-radius-sm);padding:.8rem .9rem;background:var(--color-white);}
+.risk-head{display:flex;align-items:center;gap:.55rem;margin-bottom:.45rem;}
+.risk-icon{width:1.9rem;height:1.9rem;border-radius:50%;background:#FBF0DD;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.risk-icon svg{width:15px;height:15px;stroke:#B7791F;}
+.risk-title{font-family:var(--font-display);font-size:.8rem;font-weight:700;color:var(--color-ink);text-transform:uppercase;letter-spacing:.02em;margin:0;}
+.risk-desc{font-size:.95rem;color:var(--color-ink-2);line-height:1.55;margin:0;}
+@media(max-width:820px){.risk-cards{grid-template-columns:1fr;}}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:var(--space-m) 0 .4rem;border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);overflow:hidden;background:var(--purple-soft);}
+.stat-cell{background:var(--purple-tint-3);padding:.85rem .9rem;}
+.stat-big{display:block;font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--color-ink);line-height:1.1;}
+.stat-cap{display:block;font-size:.85rem;color:var(--color-ink-2);line-height:1.4;margin-top:.2rem;}
+.stat-row-source{font-size:.8rem;color:var(--color-ink-3);margin-bottom:var(--space-m);}
+@media(max-width:700px){.stat-row{grid-template-columns:repeat(2,1fr);}}
+.scorecard{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.scorecard-head{font-family:var(--font-display);font-size:1.05rem;font-weight:700;color:var(--color-ink);margin:0 0 .2rem;}
+.scorecard-sub{font-size:.9rem;color:var(--color-ink-3);margin:0 0 var(--space-s);}
+.scorecard-wrap{margin:0 0 var(--space-s);}
+.scorecard-table td{vertical-align:middle;}
+.scorecard-table input{width:4.2rem;padding:.3rem .4rem;font:inherit;font-size:.95rem;border:1px solid var(--border-color);border-radius:6px;text-align:center;color:var(--color-ink);background:var(--color-white);}
+.scorecard-table input:focus{outline:2px solid var(--jai-a);outline-offset:1px;}
+.scorecard-table tfoot td{font-weight:700;color:var(--color-ink);background:var(--purple-tint);border-top:1px solid var(--purple-soft);}
+.scorecard-table td.sc-best{color:var(--jai-a);}
+.scorecard-note{font-size:.85rem;color:var(--color-ink-3);margin:0;}
+.scorecard-note.warn{color:var(--color-red);font-weight:600;}
+.next-grid{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0;}
+.next-card{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);flex-wrap:wrap;transition:border-color .2s,box-shadow .2s;}
+.next-card:hover{border-color:var(--jai-a);box-shadow:0 4px 16px rgba(83,0,206,.08);}
+.next-card-title{font-weight:700;color:var(--color-ink);margin:0 0 .2rem;}
+.next-card-desc{font-size:.95rem;color:var(--color-ink-2);margin:0;}
+.next-card-link{flex-shrink:0;font-size:.88rem;font-weight:600;color:var(--jai-a);border-bottom:1px solid #5300ce40;white-space:nowrap;}
+
+/* Style Guide 9.1: body 12pt; no supporting text under 12px */
+.expert-sidebar{width:230px;}
+.exp-stat{font-size:.8125rem;}
+
+/* Additions for this article */
+.toc-link{font-size:.8125rem;}
+.example-label{font-size:.95rem;font-style:italic;color:var(--color-ink-3);margin:var(--space-s) 0 var(--space-xs);}
+.step-tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--jai-a);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:999px;padding:.05rem .55rem;margin:0 .3rem 0 .15rem;vertical-align:1px;}
+.step-tag--person{color:var(--color-navy);background:var(--color-light-blue);border-color:#c9d6e2;}
+article h3{text-transform:none;letter-spacing:-0.01em;font-size:var(--font-size-h4);}
+.lede strong{color:var(--color-ink);}
+
+</style>
+</head>
+<body>
+
+<div id="progress-bar" style="position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;"></div>
+
+<div class="page-wrapper">
+
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What Is AI in Procurement Orchestration?</a>
+      <a class="toc-link" href="#s2">What Is Intake AI?</a>
+      <a class="toc-link" href="#s3">Intake AI vs Orchestration AI</a>
+      <a class="toc-link" href="#s4">How Intake and Orchestration Agents Work</a>
+      <a class="toc-link" href="#s5">From Generative to Agentic AI</a>
+      <a class="toc-link" href="#s6">Use Cases in Procurement</a>
+      <a class="toc-link" href="#s7">AI Governance</a>
+      <a class="toc-link" href="#s8">How JAGGAER Delivers Intake and Orchestration</a>
+      <a class="toc-link" href="#s9">What Changed in 2026</a>
+      <a class="toc-link" href="#experts">What the Experts Are Saying</a>
+      <a class="toc-link" href="#s10">Frequently Asked Questions</a>
+      <a class="toc-link" href="#s11">Next Steps</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-tags">
+          <span class="tag-pill">AI in Procurement</span>
+          <span class="tag-pill">Procurement Orchestration</span>
+        </div>
+        <h1>AI in Procurement Orchestration: How Intake and Orchestration Agents Work</h1>
+        <div class="article-meta">
+          <span class="meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 11 min read</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Updated: <time datetime="2026-11-06">November 6, 2026</time></span>
+        </div>
+      </div>
+    </header>
+
+    <p class="lede"><strong>AI in procurement orchestration turns one request into the contract, requisition and purchase order it needs.</strong> Intake classifies the request; orchestration routes approvals and triggers each next step. The value sits in those handoffs, where AI suggests and a person approves.</p>
+
+    <p>What is procurement orchestration? It is the coordination layer that moves a request across the people, policies and systems it touches. AI helps at each handoff, from reading the request to checking prerequisites, while a person approves each commitment.</p>
+
+    <div class="hook-stat">
+      <span class="hook-stat-num">60%</span>
+      <div>
+        <p class="hook-stat-lead">In <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf" target="_blank" rel="noopener"><strong>Deloitte's 2025 Global CPO Survey, 60% of "Digital Masters" use more flexible automation tools</strong></a>, including process orchestration tools beyond intake management. But only 18% of Followers do.</p>
+        <p class="hook-stat-sub">Survey of more than 250 CPOs across 40 countries and 10 industries.</p>
+      </div>
+    </div>
+
+    <p>For the wider context, see JAGGAER's view of <a href="https://www.jaggaer.com/need/ai-in-procurement" target="_blank" rel="noopener">AI in procurement</a>.</p>
+
+    <p><a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" target="_blank" rel="noopener"><strong>The Hackett Group's 2026 Key Issues Study found 80% of procurement executives see AI-enabled technology as the most transformational trend</strong></a> over the next 5 years.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">Analyst Report</span>
+        <p class="jag-cta-head">Get the Hackett 2026 study behind the AI priority shift &rarr;</p>
+        <p class="jag-cta-sub">The Hackett Group&reg; 2026 Procurement Agenda and Key Issues Study: how procurement teams are accelerating AI and automation adoption. Licensed by JAGGAER.</p>
+      </div>
+      <a href="https://jaggaer.com/download/analyst-report/the-hackett-group-2026-procurement-agenda-and-key-issues-study" class="jag-cta-btn" target="_blank" rel="noopener">Get the Report</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Definition</span>
+    <h2 id="s1">What Is AI in Procurement Orchestration?</h2>
+
+    <p><strong>AI in procurement orchestration applies AI to the handoffs between intake, approvals, contracts, requisitions and purchase orders.</strong> Intake decides what a request is. Orchestration decides what happens next, in which system and in what order.</p>
+
+    <p>Procurement orchestration on its own is not new. Workflow tools have routed approvals for years. The change is that AI now reads a plain-language request and checks it against policy before a person approves.</p>
+
+    <p>CPOs are moving in this direction. <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf" target="_blank" rel="noopener"><strong>Deloitte's 2025 CPO Survey reports that many CPOs are focusing on intake and triage capabilities</strong></a>. Deloitte points to an ongoing need to build automated guidance via process orchestration to preferred process paths, not just a virtual "front door".</p>
+
+    <p>Run a quick procurement orchestration test on your own process. If requesters still email procurement to ask which form to use, intake is missing. If a signed contract still waits for someone to raise the requisition, orchestration is missing.</p>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">One front door</span>
+    <h2 id="s2">What Is Intake AI?</h2>
+
+    <p><strong>Intake AI captures a request in plain language and turns it into a structured request procurement can act on.</strong> It asks follow-up questions, classifies the request and points the requester to the right channel.</p>
+
+    <p>Intake is the front door to procurement orchestration, not the whole house. A clean request still stalls if the contract, budget check and purchase order run as separate workflows. For the requester side in depth, read the guide to <a href="https://www.jaggaer.com/blog/ai-procurement-intake-guided-buying" target="_blank" rel="noopener">AI-driven procurement intake and guided buying</a>.</p>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Two jobs, one handoff</span>
+    <h2 id="s3">Intake AI vs Orchestration AI</h2>
+
+    <p><strong>Intake AI decides what a request is; orchestration AI decides what happens next.</strong> Most teams need both for AI in procurement orchestration. The handoff between them is where a person should approve.</p>
+
+    <p>Some vendors sell the pair as artificial intelligence intake management &amp; orchestration. The 2 jobs stay distinct, so compare them side by side:</p>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Dimension</th><th>Intake AI</th><th>Orchestration AI</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Core job</strong></td><td>Understand and classify the request</td><td>Sequence and route the work that follows</td></tr>
+          <tr><td><strong>Input</strong></td><td>Plain-language request, quote or form</td><td>A classified, policy-checked request</td></tr>
+          <tr><td><strong>Output</strong></td><td>A structured request and the right channel</td><td>Contract tasks, approvals, requisition and PO</td></tr>
+          <tr><td><strong>Typical checks</strong></td><td>Category, catalog match, policy thresholds</td><td>Dependencies, prerequisites, budget, approvers</td></tr>
+          <tr><td><strong>Where a person decides</strong></td><td>Requester confirms; buyer accepts the channel</td><td>Approvers approve; buyer releases the PO</td></tr>
+          <tr><td><strong>What breaks without it</strong></td><td>Requests arrive by email, incomplete</td><td>Steps wait on someone to start the next one</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Leaders invest in the procurement orchestration column. <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf" target="_blank" rel="noopener"><strong>Deloitte's 2025 CPO Survey found Digital Masters deployed process management and orchestration tools at 2x the rate of peers</strong></a>, 23% vs 10%.</p>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Follow one request</span>
+    <h2 id="s4">How Intake and Orchestration Agents Work</h2>
+
+    <p><strong>Intake AI captures and classifies the request; orchestration routes approvals, holds for prerequisites and triggers the PO.</strong> A person approves each commitment along the way. The labels describe 2 jobs within procurement orchestration, not 2 products. Follow one request through the 5 handoffs below.</p>
+
+    <p class="example-label">Illustrative example: a plant manager needs an outside calibration service under a new contract.</p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">Capture the request</span>
+          <p class="phase-desc">Intake AI reads the plain-language request and asks for missing details, such as site, budget owner and dates. <span class="step-tag step-tag--person">Person approves</span> The requester confirms the request.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">Classify and check policy</span>
+          <p class="phase-desc">Intake AI classifies the request as a service that needs a contract and checks policy thresholds. <span class="step-tag">AI suggests</span> It proposes the channel; the buyer confirms it.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">Route the work</span>
+          <p class="phase-desc">Orchestration opens the contract task and routes approvals by value and cost center. <span class="step-tag step-tag--person">Person approves</span> Each approver decides.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <span class="phase-title">Hold for prerequisites</span>
+          <p class="phase-desc">Orchestration holds the requisition until the contract owner signs and finance commits the budget. <span class="step-tag step-tag--person">Person approves</span> The contract owner signs.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">5</span>
+        <div class="phase-body">
+          <span class="phase-title">Trigger the purchase order</span>
+          <p class="phase-desc">Orchestration creates the requisition and the purchase order from the approved data. <span class="step-tag step-tag--person">Person approves</span> The buyer releases the PO.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>Data decides how well each procurement orchestration handoff runs. <a href="https://www.mckinsey.com/capabilities/operations/our-insights/redefining-procurement-performance-in-the-era-of-agentic-ai" target="_blank" rel="noopener"><strong>McKinsey estimated in February 2026 that procurement functions use less than 20% of the data available to them</strong></a> to support decisions. Connect the data first, then automate the steps.</p>
+
+    <p>See the wider set of source-to-pay workflows in <a href="https://www.jaggaer.com/blog/ai-powered-intelligent-procurement-workflows" target="_blank" rel="noopener">AI-powered intelligent procurement workflows</a>.</p>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Draft, predict, act</span>
+    <h2 id="s5">From Generative to Agentic AI</h2>
+
+    <p><strong>Generative AI drafts and predictive AI forecasts; McKinsey describes agentic AI as carrying out multistep tasks.</strong> <a href="https://www.mckinsey.com/capabilities/operations/our-insights/redefining-procurement-performance-in-the-era-of-agentic-ai" target="_blank" rel="noopener">McKinsey</a> framed the shift in February 2026 as analytical AI ("Show me the data") giving way to agentic AI ("Do it for me").</p>
+
+    <p>Select each type to compare its role in AI in procurement orchestration:</p>
+
+    <div class="toggle-box">
+      <div class="toggle-head">
+        <button class="toggle-btn active" type="button" onclick="jagToggle('t-gen', this)">Generative</button>
+        <button class="toggle-btn" type="button" onclick="jagToggle('t-pred', this)">Predictive</button>
+        <button class="toggle-btn" type="button" onclick="jagToggle('t-agent', this)">Agentic</button>
+      </div>
+      <div class="toggle-panel active" id="t-gen">
+        <p><strong>Drafts and summarizes.</strong> Turns a plain-language request into structured fields, summarizes a requisition and drafts RFx text.</p>
+        <p>In orchestration, it prepares the next document for a person to review.</p>
+      </div>
+      <div class="toggle-panel" id="t-pred">
+        <p><strong>Forecasts and flags.</strong> Uses history to anticipate demand, likely exceptions and the right channel before a request arrives.</p>
+        <p>In orchestration, it suggests the next step early. A person still decides whether to act.</p>
+      </div>
+      <div class="toggle-panel" id="t-agent">
+        <p><strong>Acts on multistep tasks.</strong> In McKinsey's 2026 description, AI agents carry out multistep tasks and generate options and recommendations.</p>
+        <p>In orchestration, it can run a sequence of steps. Commitments still need a person's approval.</p>
+      </div>
+    </div>
+
+    <h3 id="s5-predictive">Predictive Procurement Orchestration</h3>
+
+    <p>Predictive procurement orchestration uses historical data to anticipate the next step before a request arrives. It forecasts demand, flags likely exceptions and suggests the channel early. A person still decides whether to act on the forecast.</p>
+
+    <h3>Where Autonomy Fits</h3>
+
+    <p>An autonomous procurement orchestration platform, as vendors use the term, runs steps without a prompt. <strong>Any autonomous procurement orchestration system still needs a person to approve commitments, such as a contract award or a PO release.</strong> In JAGGAER's approach, <a href="https://www.jaggaer.com/solutions/jai" target="_blank" rel="noopener">JAGGAER AI (JAI)</a> suggests and people decide.</p>
+
+    <p><a href="https://www.mckinsey.com/capabilities/operations/our-insights/transforming-procurement-functions-for-an-ai-driven-world" target="_blank" rel="noopener"><strong>McKinsey's October 2025 analysis says the shift could make procurement 25 to 40 percent more efficient</strong></a>.</p>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Where it pays first</span>
+    <h2 id="s6">Use Cases in Procurement</h2>
+
+    <p><strong>Start with requests that touch more than 1 system or need a prerequisite before the next step.</strong> Those handoffs are where procurement orchestration saves requesters waiting and buyers chasing.</p>
+
+    <p><a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" target="_blank" rel="noopener"><strong>The Hackett Group's March 2026 Key Issues Study found current AI use concentrated in contract management, market intelligence and spend analytics</strong></a>. Hackett's 2026 study also found 69% of organizations access AI through capabilities embedded in their existing procurement platforms.</p>
+
+    <p>Use the 4 cases below to pick a starting point:</p>
+
+    <div class="criteria-grid">
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">1</span><p class="criteria-title">Services under a new contract</p></div>
+        <p class="criteria-desc">The contract must exist before the requisition. Orchestration holds the PO until the contract owner signs.</p>
+        <p class="criteria-test"><span>Person approves:</span> the contract owner signs; the buyer releases the PO.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">2</span><p class="criteria-title">Non-catalog purchases</p></div>
+        <p class="criteria-desc">Intake points the requester to a contracted supplier or routes the request to sourcing.</p>
+        <p class="criteria-test"><span>Person approves:</span> the buyer accepts the channel or opens a sourcing event.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">3</span><p class="criteria-title">Invoice-to-contract compliance</p></div>
+        <p class="criteria-desc"><a href="https://www.mckinsey.com/capabilities/operations/our-insights/redefining-procurement-performance-in-the-era-of-agentic-ai" target="_blank" rel="noopener">McKinsey</a> reported in February 2026 that a pharmaceutical company cut the value lost through leakage by 4 percent. Its AI agents check invoices and POs against contract terms.</p>
+        <p class="criteria-test"><span>Person approves:</span> AP decides on each flagged mismatch.</p>
+      </div>
+      <div class="criteria-card">
+        <div class="criteria-head"><span class="criteria-badge">4</span><p class="criteria-title">New supplier before the first PO</p></div>
+        <p class="criteria-desc">Intake spots a supplier that is not yet onboarded. Orchestration starts onboarding and waits before the PO.</p>
+        <p class="criteria-test"><span>Person approves:</span> supplier management approves the new supplier.</p>
+      </div>
+    </div>
+
+    <p>See how JAGGAER first shipped this pattern in the <a href="https://www.jaggaer.com/releases/25-3-release-highlights" target="_blank" rel="noopener">25.3 release highlights</a>.</p>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Controls before commitments</span>
+    <h2 id="s7">AI Governance</h2>
+
+    <p><strong>Govern the procurement orchestration handoffs, not just the model.</strong> Define which steps AI may complete and which need a person's approval before anyone commits money.</p>
+
+    <p><a href="https://www.ey.com/en_us/newsroom/2026/09/ey-survey-finds-that-autonomous-ai-implementation-outpaces-oversight-yielding-an-ai-governance-gap" target="_blank" rel="noopener"><strong>In EY's September 2026 survey, 91% of senior AI executives report agentic AI in active pilots or full enterprise deployment.</strong></a> But 49% of those say their organization has not yet updated its governance framework for agentic AI. EY's sample is not procurement-specific: 202 senior AI executives at US public companies with at least $1 billion in revenue (margin of error ±7 points).</p>
+
+    <p>Oversight is the gap. In EY's 2026 survey, 85% of agentic AI users say at least a handful of these systems act without real-time human involvement. <a href="https://kpmg.com/us/en/media/news/q3-ai-pulse-2026.html" target="_blank" rel="noopener"><strong>KPMG's Q3 2026 AI Pulse Survey found 49% have defined high-risk use cases where agents may not decide autonomously</strong></a>. KPMG's sample is not procurement-specific either: 314 US C-suite and business leaders at organizations with $1 billion or more in revenue.</p>
+
+    <p>In Deloitte's 2025 CPO Survey, 33.2% ranked risk from autonomous decision-making among their top 3 external GenAI risks. <a href="https://www.pwc.com/us/en/tech-effect/ai-analytics/responsible-ai-survey.html" target="_blank" rel="noopener"><strong>PwC's 2025 Responsible AI Survey says AI agents are pushing organizations from static oversight to ongoing monitoring and control</strong></a>.</p>
+
+    <p>Ask these 5 questions of any AI in procurement orchestration before you approve it:</p>
+
+    <div class="diag-checklist">
+      <ul>
+        <li>Does each AI answer cite its source document?</li>
+        <li>Which steps need a person's approval before a commitment?</li>
+        <li>Is each AI interaction logged for audit?</li>
+        <li>Does the AI respect each user's existing permissions?</li>
+        <li>Does the vendor keep your data out of model training?</li>
+      </ul>
+    </div>
+
+    <p>For JAGGAER's platform view, see <a href="https://www.jaggaer.com/solutions/intelligence" target="_blank" rel="noopener">embedded intelligence and AI</a>.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">Meet JAI</span>
+        <p class="jag-cta-head">See AI in procurement orchestration with a person approving &rarr;</p>
+        <p class="jag-cta-sub">JAI answers policy questions with the source cited and summarizes a requisition before you approve it.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/jai" class="jag-cta-btn" target="_blank" rel="noopener">See JAI</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">One request, connected steps</span>
+    <h2 id="s8">How JAGGAER Delivers Intake and Orchestration</h2>
+
+    <p><strong>JAGGAER delivers intake and orchestration as configured workflow, with AI that suggests and people who decide.</strong> JAI suggests. You decide.</p>
+
+    <p>JAGGAER introduced Intake &amp; Orchestration in 25.3 (November 2025) as an Early Adopter feature for eProcurement. It gives complex requests a single point of entry. Contracts, requisitions and purchase orders no longer start as separate workflows.</p>
+
+    <p>The 25.3 release highlights describe document creation and routing based on dependencies. The workflow checks prerequisites before the next step and shows the real-time status of each step.</p>
+
+    <p>The <a href="https://www.jaggaer.com/solutions/eprocurement" target="_blank" rel="noopener">JAGGAER eProcurement page</a> describes guided buying that enforces contracted suppliers at search. Non-catalog requests route through configurable intake workflows. Approvals route by value, commodity, business unit and cost center.</p>
+
+    <p>The same page describes embedded AI in eProcurement. It recommends commodity and account codes, scores approval confidence from historical PO data and flags risky line items. You set the thresholds for its recommendations.</p>
+
+    <p>According to the JAI page, JAI answers policy questions and cites the source document. When it lacks a confident, grounded answer, it says so and routes the user to a person.</p>
+
+    <p><strong>JAGGAER reports 50% time saved from requisition to PO on its homepage (November 2026).</strong> JAGGAER Link connects to 1,000+ systems, according to the same page. On its JAI page, JAGGAER reports a 75% ticket reduction in early access (2026); each JAI answer cites its source.</p>
+
+    <p>Together, these pieces make up JAGGAER's <a href="https://www.jaggaer.com/solutions/platform" target="_blank" rel="noopener">procurement orchestration platform</a>. One point of entry. Cited answers. People who decide. Configured, not customized.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">Release 25.3</span>
+        <p class="jag-cta-head">See how Intake &amp; Orchestration starts contracts, requisitions and POs from one point of entry &rarr;</p>
+        <p class="jag-cta-sub">Review the 25.3 feature: dependency-based routing, prerequisite checks and real-time status for each step.</p>
+      </div>
+      <a href="https://www.jaggaer.com/releases/25-3-release-highlights" class="jag-cta-btn" target="_blank" rel="noopener">See 25.3 Highlights</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">2026</span>
+    <h2 id="s9">What Changed in 2026</h2>
+
+    <p><strong>Ambition for AI rose in 2026, and so did the focus on oversight.</strong> 4 dated changes shape AI in procurement orchestration this year:</p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body">
+          <span class="phase-title">McKinsey reframes procurement roles (February 2026)</span>
+          <p class="phase-desc">In February 2026, McKinsey described a rewired function where humans and AI agents work side by side. People focus on strategic decisions, orchestration and oversight.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body">
+          <span class="phase-title">CPOs doubt their redesign readiness (May 2026)</span>
+          <p class="phase-desc"><a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-survey-shows-just-36-perecent-of-chief-procurement-officers-are-very-confident-in-ability-to-redesign-function-for-ai" target="_blank" rel="noopener"><strong>Gartner found only 36% of CPOs are very confident they can redesign roles and processes around AI</strong></a>. The survey covered 101 CPOs in January and February 2026.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body">
+          <span class="phase-title">AI incidents become measurable (September 2026)</span>
+          <p class="phase-desc">EY's September 2026 cross-industry survey found 36% of senior AI executives say their organization had an AI incident or failure with a materially negative impact.</p>
+        </div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">4</span>
+        <div class="phase-body">
+          <span class="phase-title">Multi-agent systems climb (September 2026)</span>
+          <p class="phase-desc">KPMG's Q3 2026 cross-industry survey found 25% of organizations developing or implementing multi-agent systems, up from 6% in the 2 prior quarters.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Quick answers</span>
+    <h2 id="s10">Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+      <summary>What is orchestration in procurement? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Orchestration in procurement, or procurement orchestration, coordinates the steps, people and systems a request needs, in order. In simple terms, it decides what happens next after a request arrives. AI helps by reading the request and checking prerequisites, and a person approves each commitment.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the difference between intake and orchestration? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Intake captures and classifies a request. Orchestration routes the work that follows, such as contract tasks, approvals, the requisition and the purchase order. Intake is the front door; orchestration runs the steps behind it.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How is procurement orchestration different from procure-to-pay? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Procurement orchestration coordinates the steps around procure-to-pay transactions, including intake, contracts and supplier onboarding. Orchestration decides the order of work; procure-to-pay executes the transactions.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is an orchestration platform? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">An orchestration platform connects the systems a process touches and runs its steps in order. In procurement, it links intake, contracts, approvals and purchasing, and connects to the ERP. It routes work by rules and dependencies, with people approving commitments.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is autonomous procurement? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Autonomous procurement describes systems that run procurement steps with less human prompting. KPMG's Q3 2026 cross-industry survey found 49% of leaders have defined high-risk use cases where agents may not decide autonomously. In JAGGAER's approach, JAI suggests and people decide.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is predictive procurement orchestration? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">Predictive procurement orchestration uses historical data to anticipate the next step before a request arrives. It forecasts demand, flags likely exceptions and suggests a channel early. A person still decides whether to act.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <span class="section-eyebrow">Your next move</span>
+    <h2 id="s11">Next Steps</h2>
+
+    <p><strong>AI in procurement orchestration pays off at the handoffs, where AI suggests and a person approves.</strong> Map the requests that touch more than 1 system. Then decide which procurement orchestration steps AI may complete and which need approval.</p>
+
+    <div class="next-grid">
+      <div class="next-card">
+        <div><p class="next-card-title">Fix the front door first</p><p class="next-card-desc">How intake captures requests and guides buyers to the right channel.</p></div>
+        <a href="https://www.jaggaer.com/blog/ai-procurement-intake-guided-buying" class="next-card-link" target="_blank" rel="noopener">AI-driven intake and guided buying &rarr;</a>
+      </div>
+      <div class="next-card">
+        <div><p class="next-card-title">See the wider workflow map</p><p class="next-card-desc">Where AI fits across source-to-pay workflows.</p></div>
+        <a href="https://www.jaggaer.com/blog/ai-powered-intelligent-procurement-workflows" class="next-card-link" target="_blank" rel="noopener">AI-powered procurement workflows &rarr;</a>
+      </div>
+      <div class="next-card">
+        <div><p class="next-card-title">Understand agentic AI in procurement</p><p class="next-card-desc">Definitions, use cases and risks in one guide.</p></div>
+        <a href="https://www.jaggaer.com/blog/agentic-ai-in-procurement-complete-guide" class="next-card-link" target="_blank" rel="noopener">Agentic AI in procurement guide &rarr;</a>
+      </div>
+      <div class="next-card">
+        <div><p class="next-card-title">Keep people on the decisions</p><p class="next-card-desc">Governance and human-in-the-loop controls for procurement AI.</p></div>
+        <span class="next-card-link link-pending" title="Link pending: URL not yet verified">Procurement AI governance (link pending)</span>
+      </div>
+    </div>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <span class="jag-cta-label">Book a Demo</span>
+        <p class="jag-cta-head">See JAGGAER route one request to the contract, requisition and PO it needs &rarr;</p>
+        <p class="jag-cta-sub">Request a demo of intake, approvals and JAI on JAGGAER One.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a Demo</a>
+    </div>
+
+  </article>
+
+  <aside class="expert-sidebar" id="experts" aria-label="What the Experts Are Saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">Deloitte &middot; 2025</span>
+        <span class="exp-num red">60% vs 18%</span>
+        <p class="exp-stat">Digital Masters vs Followers using flexible automation, including process orchestration tools. 250+ CPOs, 40 countries.</p>
+        <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Deloitte &middot; 2025</span>
+        <span class="exp-num red">23% vs 10%</span>
+        <p class="exp-stat">Digital Masters vs peers deploying process management and orchestration tools. Same sample.</p>
+        <a href="https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2025/us-deloitte-2025-global-cpo-survey.pdf" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">EY &middot; 2026</span>
+        <span class="exp-num red">91% / 49%</span>
+        <p class="exp-stat">Use agentic AI in active pilots or full deployment / have not yet updated governance for it. 202 US senior AI executives; not procurement-specific.</p>
+        <a href="https://www.ey.com/en_us/newsroom/2026/09/ey-survey-finds-that-autonomous-ai-implementation-outpaces-oversight-yielding-an-ai-governance-gap" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">KPMG &middot; 2026</span>
+        <span class="exp-num red">49%</span>
+        <p class="exp-stat">Have defined high-risk use cases with no autonomous agent decisions. 314 US leaders, $1B+ revenue; not procurement-specific.</p>
+        <a href="https://kpmg.com/us/en/media/news/q3-ai-pulse-2026.html" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Gartner &middot; 2026</span>
+        <span class="exp-num red">36%</span>
+        <p class="exp-stat">CPOs very confident they can redesign roles and processes around AI. 101 CPOs, Jan&ndash;Feb 2026.</p>
+        <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-survey-shows-just-36-perecent-of-chief-procurement-officers-are-very-confident-in-ability-to-redesign-function-for-ai" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Hackett &middot; 2026</span>
+        <span class="exp-num red">69%</span>
+        <p class="exp-stat">Access AI through capabilities embedded in existing procurement platforms. Verified on press release.</p>
+        <a href="https://www.thehackettgroup.com/the-hackett-group-reports-rapid-progress-in-procurements-ai-agenda/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">McKinsey &middot; 2026</span>
+        <span class="exp-num red">&lt;20%</span>
+        <p class="exp-stat">Share of available data procurement functions use for decisions. McKinsey estimate.</p>
+        <a href="https://www.mckinsey.com/capabilities/operations/our-insights/redefining-procurement-performance-in-the-era-of-agentic-ai" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">McKinsey &middot; 2025</span>
+        <span class="exp-num red">25%&ndash;40%</span>
+        <p class="exp-stat">Potential procurement efficiency gain (25 to 40 percent). McKinsey analysis, not a survey.</p>
+        <a href="https://www.mckinsey.com/capabilities/operations/our-insights/transforming-procurement-functions-for-an-ai-driven-world" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+const bar=document.getElementById('progress-bar');
+window.addEventListener('scroll',()=>{const h=document.documentElement;const pct=(h.scrollTop||document.body.scrollTop)/(h.scrollHeight-h.clientHeight)*100;bar.style.width=pct+'%';},{passive:true});
+const sections=document.querySelectorAll('article h2[id]');
+const links=document.querySelectorAll('.toc-link');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));}});},{rootMargin:'-15% 0px -70% 0px'});
+sections.forEach(s=>obs.observe(s));
+function jagToggle(targetId,btn){const box=btn.closest('.toggle-box');box.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));box.querySelectorAll('.toggle-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');box.querySelector('#'+targetId).classList.add('active');}
+</script>
+
+
+</body>
+</html>
