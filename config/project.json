@@ -11419,6 +11419,16 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "ann-0xewub",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Lets have a form fill before downloading",
+        "ts": "2026-11-10T09:17:08.795Z",
+        "annotation": true,
+        "section": "¶46 — \"The brief covers the Kraljic, SWOT and P…\"",
+        "revision": 1
       }
     ]
   },
