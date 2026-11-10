@@ -1436,7 +1436,14 @@
               "return_to_stage": null,
               "last_upload": "2026-11-05T08:02:31.068Z",
               "last_upload_by": "jason",
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "seo": {
+                "meta_title": "Category Management Strategy: 4 Ps Applied to IT and MRO",
+                "meta_description": "A category management strategy sets long-term direction for a spend category. Learn the 4 Ps\nframework, with examples for IT and MRO.",
+                "slug": "category-management-strategy-frameworks",
+                "updated_at": "2026-11-10T08:26:03.615Z",
+                "updated_by": "m-14bwv"
+              }
             },
             {
               "id": "piece-hjxaho",
