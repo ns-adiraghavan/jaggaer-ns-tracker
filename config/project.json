@@ -11384,6 +11384,16 @@
         "annotation": true,
         "section": "¶20 — \"JAGGAER Category Management monitors KPI…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-pnjrmg",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "the text says “USP’s 2025 Annual Drug Shortages Report” while the callout and link say 2026",
+        "ts": "2026-11-10T08:30:00.847Z",
+        "annotation": true,
+        "section": "¶47 — \"In pharma and life sciences, Purpose car…\"",
+        "revision": 1
       }
     ]
   },
