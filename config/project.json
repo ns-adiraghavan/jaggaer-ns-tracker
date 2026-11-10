@@ -11494,6 +11494,16 @@
         "annotation": true,
         "section": "¶54 — \"Intake management and compliance…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-n2e893",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "If Gartner published a 2026 edition, why are the stats still showing 2025 data?",
+        "ts": "2026-11-10T10:25:17.761Z",
+        "annotation": true,
+        "section": "¶50 — \"2025 edition: intake management at 20% t…\"",
+        "revision": 1
       }
     ]
   },
