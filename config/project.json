@@ -11429,6 +11429,16 @@
         "annotation": true,
         "section": "¶46 — \"The brief covers the Kraljic, SWOT and P…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-42ameg",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Remove the year 2026, as date bound data needs yearly refresh",
+        "ts": "2026-11-10T09:18:45.548Z",
+        "annotation": true,
+        "section": "¶66 — \"How AI Is Changing Category Management i…\"",
+        "revision": 1
       }
     ]
   },
