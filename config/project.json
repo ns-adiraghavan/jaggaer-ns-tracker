@@ -1398,7 +1398,7 @@
               "title": "Category Management Strategy: The 4 Ps Framework Applied to IT and MRO",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "marketing-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1416,10 +1416,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-05T08:02:31.069Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-10T08:44:10.743Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-05T08:02:31.068Z",
-              "last_updated_by": "jason",
+              "last_updated": "2026-11-10T08:44:10.743Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Category_Management_Strategy_Refresh.pdf",
@@ -1433,7 +1438,7 @@
               "priority_updated": "2026-11-03T12:22:45.991Z",
               "priority_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-11-05T08:02:31.068Z",
               "last_upload_by": "jason",
               "secondary_keyword": "",
@@ -11394,6 +11399,14 @@
         "annotation": true,
         "section": "¶47 — \"In pharma and life sciences, Purpose car…\"",
         "revision": 1
+      },
+      {
+        "id": "fb-9trz4r",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "Check comments",
+        "ts": "2026-11-10T08:44:10.739Z",
+        "stage": "marketing-review"
       }
     ]
   },
