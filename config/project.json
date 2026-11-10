@@ -11463,6 +11463,18 @@
         "ts": "2026-11-10T10:04:00.664Z",
         "stage": "marketing-review"
       }
+    ],
+    "piece-fh8mc8": [
+      {
+        "id": "ann-tn5fke",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "remove from here as this is already present in sidebar",
+        "ts": "2026-11-10T10:20:47.617Z",
+        "annotation": true,
+        "section": "¶2 — \"According to The Hackett Group's 2026 st…\"",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
