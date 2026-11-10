@@ -11356,6 +11356,18 @@
         "ts": "2026-11-09T12:11:41.643Z",
         "stage": "ed-review"
       }
+    ],
+    "piece-yxk0ss": [
+      {
+        "id": "ann-z8djtw",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The canonical points to a new URL. It is https://www.jaggaer.com/category-management-strategy-4-ps-framework-it-mro, not /blog/category-management-strategy-frameworks.",
+        "ts": "2026-11-10T08:25:07.512Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
