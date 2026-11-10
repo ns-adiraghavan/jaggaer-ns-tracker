@@ -11514,6 +11514,16 @@
         "annotation": true,
         "section": "¶6 — \"In this article…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-s00mq3",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "I observed that for some blogs the Next Steps come after FAQ's and for some blogs it is the other way. Lets follow one strategy for consistency.",
+        "ts": "2026-11-10T10:33:22.669Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
