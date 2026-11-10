@@ -11484,6 +11484,16 @@
         "annotation": true,
         "section": "¶50 — \"2025 edition: intake management at 20% t…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-wuxavg",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Change heading to \"Procurement intake management and compliance\"",
+        "ts": "2026-11-10T10:24:37.217Z",
+        "annotation": true,
+        "section": "¶54 — \"Intake management and compliance…\"",
+        "revision": 1
       }
     ]
   },
