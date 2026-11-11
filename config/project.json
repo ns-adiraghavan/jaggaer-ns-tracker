@@ -1819,8 +1819,18 @@
                   "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-04T09:53:19.397Z",
-              "last_updated_by": "m-14bwv"
+              "last_updated": "2026-11-11T09:01:43.542Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_AI_Intake_New_Blog.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-5wxtri/brief/JAGGAER_SEO_Brief_AI_Intake_New_Blog.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-11-11T09:01:43.542Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-11T09:01:43.542Z",
+              "review_owner": "m-14bwv"
             },
             {
               "id": "piece-45tvxq",
