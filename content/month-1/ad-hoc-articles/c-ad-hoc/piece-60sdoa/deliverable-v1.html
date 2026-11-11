@@ -1,0 +1,696 @@
+<!-- uploaded by m-5jitd at 2026-11-11T17:39:37.898Z -->
+<!-- piece: Intake to Procure vs Procure to Pay: What Is the Difference? -->
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Intake to Procure vs Procure to Pay: What Is the Difference?</title>
+<meta name="description" content="What is the difference between intake to procure and procure to pay? See where each starts and ends and how they fit together.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/intake-to-procure-vs-procure-to-pay">
+<meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Intake to Procure vs Procure to Pay: What Is the Difference?">
+<meta property="og:description" content="What is the difference between intake to procure and procure to pay? See where each starts and ends and how they fit together.">
+<meta property="og:url" content="https://www.jaggaer.com/blog/intake-to-procure-vs-procure-to-pay">
+<meta property="og:site_name" content="JAGGAER">
+<meta property="og:image" content="https://www.jaggaer.com/wp-content/uploads/JAGGAER-Logo-Red.png">
+<meta property="og:image:secure_url" content="https://www.jaggaer.com/wp-content/uploads/JAGGAER-Logo-Red.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="JAGGAER logo">
+<meta property="og:updated_time" content="2026-11-10">
+<meta property="article:published_time" content="2026-11-10">
+<meta property="article:modified_time" content="2026-11-10">
+<meta property="article:section" content="Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Intake to Procure vs Procure to Pay: What Is the Difference?">
+<meta name="twitter:description" content="What is the difference between intake to procure and procure to pay? See where each starts and ends and how they fit together.">
+<meta name="twitter:image" content="https://www.jaggaer.com/wp-content/uploads/JAGGAER-Logo-Red.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Intake to Procure vs Procure to Pay: What Is the Difference?","description":"What is the difference between intake to procure and procure to pay? See where each starts and ends and how they fit together.","inLanguage":"en-US","author":{"@type":"Person","name":"Visnja Radosavljevic"},"datePublished":"2026-11-10","dateModified":"2026-11-10","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.jaggaer.com/blog/intake-to-procure-vs-procure-to-pay"},"publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com","logo":{"@type":"ImageObject","url":"https://www.jaggaer.com/wp-content/uploads/JAGGAER-Logo-Red.png"}}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between intake to procure and procure to pay?","acceptedAnswer":{"@type":"Answer","text":"Intake to procure runs from the first ask to an approved purchase order, and some requests route to a sourcing event first. Procure to pay starts at the requisition and runs through receiving, invoice matching and payment. They share the requisition and PO stages, and boundaries vary by platform."}},{"@type":"Question","name":"Which comes first, the purchase order (PO) or the purchase requisition (PR)?","acceptedAnswer":{"@type":"Answer","text":"The purchase requisition comes first. Once approved, it can generate the PO that goes to the supplier. Some purchases follow other workflows."}},{"@type":"Question","name":"What is the difference between procure to pay (P2P) and source to pay (S2P)?","acceptedAnswer":{"@type":"Answer","text":"Procure to pay covers purchasing, receiving, invoice processing and supplier payment. Source to pay adds sourcing and contracting before all of that."}},{"@type":"Question","name":"Do I need intake to procure if I already have procure to pay?","acceptedAnswer":{"@type":"Answer","text":"If your P2P workflows already collect the right information and send purchases to the right approvers, you may not need a separate intake tool. Organizations with complex requests or scattered submission channels may benefit from structured intake that connects to P2P."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs: 0.8125rem;
+  --font-size-sm:      0.8125rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2rem, calc(1.72rem + 1.05vw), 2.25rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul,ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li,ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:980px;}
+.article-tags{display:flex;gap:.5rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.tag-pill{display:inline-flex;align-items:center;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--color-navy);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:999px;padding:.4rem .9rem;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:980px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.8125rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1480px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:230px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:980px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+article h3.sub-question{font-size:var(--font-size-h4);text-transform:none;letter-spacing:-0.01em;font-weight:700;border-bottom:none;padding-bottom:0;}
+
+/* Comparison / data tables */
+.table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.data-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:520px;}
+.data-table th{background:var(--purple-tint-2);color:var(--color-navy);font-family:var(--font-display);font-weight:700;font-size:.8125rem;text-align:left;padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--purple-soft);}
+.data-table td{padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--color-ink-2);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--color-cream);}
+.data-table td strong,.data-table th strong{color:var(--color-ink);}
+
+/* Roadmap / framework phase cards */
+.phase-cards{display:flex;flex-direction:column;gap:2px;margin:var(--space-m) 0 var(--space-l);border-radius:var(--border-radius-sm);overflow:hidden;border:var(--border);}
+.phase-item{display:flex;gap:var(--space-m);padding:var(--space-s) var(--space-m);background:var(--color-white);align-items:flex-start;}
+.phase-num{flex-shrink:0;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);}
+.phase-body{flex:1;min-width:0;}
+.phase-title{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink);margin-bottom:.15rem;display:block;}
+.phase-desc{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.6;}
+
+/* Hook stat contrast callout */
+.hook-stat{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.hook-stat p{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.65;}
+.hook-stat .stat-num{font-family:var(--font-display);font-weight:700;color:var(--color-ink-3);}
+
+/* Interactive toggle: expertise gap vs process gap */
+.toggle-box{border:1.5px solid var(--purple-soft);border-radius:var(--border-radius);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--purple-tint-3);}
+.toggle-head{display:flex;gap:.4rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.toggle-btn{font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.02em;color:var(--jai-a);background:var(--color-white);border:1.5px solid var(--purple-soft);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.toggle-btn:hover{border-color:var(--jai-a);}
+.toggle-btn.active{background:var(--jai-gradient);color:#fff;border-color:transparent;}
+.toggle-panel{display:none;}
+.toggle-panel.active{display:block;animation:fadeIn .25s ease;}
+.toggle-panel p{margin-bottom:.6rem;}
+.toggle-panel p:last-child{margin-bottom:0;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* Decision-checker widget */
+.decision-widget{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-l) var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.decision-widget-head{font-family:var(--font-display);font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);margin:0 0 var(--space-2xs);}
+.decision-widget-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0 0 var(--space-m);}
+.decision-options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:var(--space-m);}
+.decision-option{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem var(--space-s);border:var(--border);border-radius:var(--border-radius-sm);cursor:pointer;transition:border-color .2s,background .2s;font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-option:hover{border-color:var(--jai-a);background:var(--purple-tint-3);}
+.decision-option input{margin-top:.2rem;accent-color:var(--jai-a);}
+.decision-result{display:none;background:var(--color-cream);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-result.show{display:block;animation:fadeIn .25s ease;}
+.decision-reset{display:inline-block;margin-top:var(--space-s);font-size:.8125rem;font-weight:600;color:var(--color-teal);cursor:pointer;background:none;border:none;padding:0;border-bottom:1px solid #4D819440;font-family:var(--font-base);}
+.decision-reset:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Benefit / risk checklist */
+.diag-checklist{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.diag-checklist ul{list-style:none;padding-left:0;margin-bottom:0;}
+.diag-checklist li{position:relative;padding-left:1.6rem;margin-bottom:.55rem;font-size:var(--font-size-base);}
+.diag-checklist li:last-child{margin-bottom:0;}
+.diag-checklist li::before{content:"";position:absolute;left:0;top:.2rem;width:1.05rem;height:1.05rem;border-radius:4px;border:1.5px solid var(--color-teal);background:var(--color-white);}
+.diag-checklist li::after{content:"✓";position:absolute;left:.22rem;top:-.05rem;color:var(--color-teal);font-size:.8125rem;font-weight:700;}
+
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--color-ink);line-height:1.15;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.8125rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-link{font-size:.8125rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.page-wrapper{flex-wrap:wrap;}.expert-sidebar{position:static;width:100%;max-height:none;padding:0 0 var(--space-l) 0;order:99;}.exp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;}.exp-item{border-bottom:none;border-right:1px solid var(--purple-soft);}}
+@media(max-width:640px){.expert-sidebar .exp-list{grid-template-columns:1fr;}.expert-sidebar .exp-item{border-right:none;border-bottom:1px solid var(--purple-soft);}}
+
+/* CTA block */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-base);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:var(--font-size-base);font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-base);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;line-height:1;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Font-size floor: all body and UI text held between 13px and 14px */
+.tag-pill,.meta-item,.toc-link,.exp-head-lbl,.exp-source,.exp-stat,.exp-link,.toc-head-lbl{font-size:.8125rem;}
+.exp-stat{line-height:1.45;}
+article .phase-body ul,article .phase-body ol{margin:.35rem 0 0;}
+article .phase-body li{margin-bottom:.15rem;}
+
+/* Interactive tables */
+.interactive-table tbody tr{transition:background .15s;cursor:default;}
+.interactive-table tbody tr:hover td{background:var(--purple-tint-3);}
+.interactive-table td.col-on,.interactive-table th.col-on{background:var(--purple-tint)!important;color:var(--color-ink);}
+.interactive-table th.col-on{background:var(--jai-gradient)!important;color:#fff;}
+.col-toggle{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin:var(--space-m) 0 -.4rem;}
+.col-toggle-lbl{font-size:.8125rem;font-weight:600;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.06em;margin-right:.2rem;}
+.table-filter{display:flex;align-items:center;gap:.6rem;margin:var(--space-m) 0 -.4rem;flex-wrap:wrap;}
+.table-filter input{flex:1;min-width:200px;max-width:340px;font-family:var(--font-base);font-size:.8125rem;padding:.5rem .9rem;border:1.5px solid var(--purple-soft);border-radius:999px;outline:none;background:var(--purple-tint-3);transition:border-color .2s;}
+.table-filter input:focus{border-color:var(--jai-a);background:#fff;}
+.table-filter span{font-size:.8125rem;color:var(--color-ink-3);font-weight:600;}
+
+/* Kraljic matrix */
+.kraljic{display:grid;grid-template-columns:auto 1fr;gap:.5rem;margin:var(--space-s) 0 0;}
+.k-axis-y{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);text-align:center;}
+.k-axis-x{grid-column:2;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);text-align:center;}
+.k-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.k-cell{text-align:left;font-family:var(--font-base);font-size:.8125rem;line-height:1.5;color:var(--color-ink-2);background:var(--purple-tint-3);border:1.5px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.75rem .9rem;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;}
+.k-cell:hover{transform:translateY(-2px);border-color:var(--jai-a);box-shadow:0 6px 18px rgba(83,0,206,.1);}
+.k-cell strong{color:var(--jai-a);}
+.k-cell.active{background:var(--jai-gradient);border-color:transparent;color:#fff;}
+.k-cell.active strong{color:#fff;}
+
+/* RFI / RFP / RFQ cards */
+.mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:var(--space-s) 0 var(--space-m);}
+.mini-card{font-size:.8125rem;line-height:1.55;background:#fff;border:var(--border);border-top:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:.8rem .9rem;transition:transform .2s,box-shadow .2s;}
+.mini-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(83,0,206,.1);}
+.mini-card strong{display:block;color:var(--jai-a);margin-bottom:.25rem;}
+
+/* Software tool tiles */
+.tool-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:.45rem;margin:var(--space-s) 0 var(--space-m);}
+.tool-tile{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.6rem .85rem;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);font-size:.8125rem;font-weight:600;color:var(--color-navy);transition:background .2s,border-color .2s,transform .2s;}
+.tool-tile::after{content:"\2192";color:var(--jai-a);transition:transform .2s;}
+.tool-tile:hover{background:var(--purple-tint);border-color:var(--jai-a);color:var(--jai-a);transform:translateY(-1px);}
+.tool-tile:hover::after{transform:translateX(3px);}
+
+/* Phase cards & checklist hover polish */
+.phase-item{transition:background .2s;}
+.phase-item:hover{background:var(--purple-tint-3);}
+.faq-item[open] summary{background:var(--purple-tint-3);}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-icon{transition:transform .2s;}
+
+@media(max-width:640px){.mini-cards{grid-template-columns:1fr;}.k-cell{padding:.6rem .7rem;}}
+
+.inline-toc{background:var(--color-light-blue);border:1px solid var(--color-border);border-radius:var(--border-radius-sm);padding:1rem 1.25rem;margin:1.5rem 0;}
+.inline-toc-title{font-weight:700;color:var(--color-navy);margin:0 0 .5rem;font-size:.9375rem;}
+.inline-toc ul{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;list-style:none;margin:0;padding:0;}
+.inline-toc li{margin:0;font-size:.9375rem;}
+.inline-toc a{color:var(--color-teal);text-decoration:underline;}
+.jag-cta-desc a{color:inherit;text-decoration:underline;}
+article h2[id],article h3[id]{scroll-margin-top:1.5rem;}
+</style>
+<style>
+/* Additive components (same tokens as the reference; no reference rule is changed) */
+.mini-cards--4{grid-template-columns:repeat(2,1fr);}
+.jag-cta-btn{white-space:normal;max-width:100%;}
+.chart-card{margin:var(--space-m) 0 var(--space-l);padding:var(--space-m) var(--space-l);border:var(--border);border-radius:var(--border-radius);background:var(--color-white);}
+.chart-card figcaption{margin-top:var(--space-s);font-size:.8125rem;color:var(--color-ink-3);line-height:1.5;}
+.donut-wrap{display:flex;align-items:center;gap:var(--space-l);flex-wrap:wrap;}
+.donut-box{position:relative;width:200px;height:200px;flex-shrink:0;}
+.donut{width:100%;height:100%;display:block;}
+.donut-bg{stroke:var(--color-cream);}
+.donut-seg{transition:opacity .2s,stroke-width .2s;cursor:pointer;outline:none;}
+.donut-seg.seg-1{stroke:var(--jai-b);}.donut-seg.seg-2{stroke:#8F5FE0;}.donut-seg.seg-3{stroke:var(--jai-a);}.donut-seg.seg-4{stroke:var(--color-light-grey);}
+.donut-wrap.has-focus .donut-seg{opacity:.28;}
+.donut-wrap.has-focus .donut-seg.on{opacity:1;stroke-width:34;}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;text-align:center;}
+.donut-num{font-family:var(--font-display);font-size:1.75rem;font-weight:700;color:var(--color-ink);line-height:1.1;font-variant-numeric:tabular-nums;}
+.donut-lbl{font-size:.8125rem;color:var(--color-ink-3);font-weight:600;}
+.donut-legend{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.35rem;flex:1;min-width:200px;}
+.donut-legend li{margin:0;}
+.donut-leg{width:100%;display:flex;align-items:center;gap:.6rem;font-family:var(--font-base);font-size:var(--font-size-base);color:var(--color-ink-2);background:var(--purple-tint-3);border:1.5px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.5rem .8rem;cursor:pointer;text-align:left;transition:border-color .2s,background .2s;}
+.donut-leg:hover,.donut-leg.on{border-color:var(--jai-a);background:var(--purple-tint);}
+.donut-leg .swatch{width:.8rem;height:.8rem;border-radius:3px;flex-shrink:0;}
+.swatch.seg-1{background:var(--jai-b);}.swatch.seg-2{background:#8F5FE0;}.swatch.seg-3{background:var(--jai-a);}.swatch.seg-4{background:var(--color-light-grey);}
+.donut-leg .leg-lbl{flex:1;font-weight:600;color:var(--color-ink);}
+.donut-leg .leg-val{font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-variant-numeric:tabular-nums;}
+.bar-chart{display:flex;flex-direction:column;gap:var(--space-s);}
+.bar-row{display:grid;grid-template-columns:minmax(120px,210px) 1fr auto;align-items:center;gap:var(--space-s);}
+.bar-lbl{font-size:var(--font-size-base);font-weight:600;color:var(--color-ink);line-height:1.35;}
+.bar-track{height:1.15rem;background:var(--color-cream);border-radius:999px;overflow:hidden;}
+.bar-fill{height:100%;width:0;border-radius:999px;background:var(--jai-gradient);transition:width 1s ease;}
+.bar-val{font-family:var(--font-display);font-weight:700;color:var(--color-ink);font-variant-numeric:tabular-nums;min-width:4.2rem;text-align:right;}
+.diag-checklist ul li strong{color:var(--color-ink);}
+@media(max-width:640px){.bar-row{grid-template-columns:1fr auto;}.bar-track{grid-column:1 / -1;order:3;}.chart-card{padding:var(--space-m);}.mini-cards--4{grid-template-columns:1fr;}}
+@media(prefers-reduced-motion:reduce){.bar-fill{transition:none;}}
+.jag-cta-btn--stretch{position:relative;cursor:pointer;}
+.jag-cta-btn--stretch::after{content:"\00a0\2192";}
+.jag-cta-btn--stretch a,.jag-cta-btn--stretch a:hover{color:#fff;border-bottom:none;font-weight:700;text-decoration:none;}
+.jag-cta-btn--stretch a::before{content:"";position:absolute;inset:0;border-radius:8px;}
+.jag-cta-btn--stretch:focus-within{outline:2px solid var(--color-ink);outline-offset:2px;}
+</style>
+<style>
+/* Additive components for this article (same tokens as the reference; no reference rule is changed) */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+.mini-cards--2{grid-template-columns:repeat(2,1fr);}
+.mini-cards--2 .mini-card{font-size:var(--font-size-base);line-height:1.6;padding:var(--space-s) var(--space-m);}
+@media(max-width:640px){.mini-cards--2{grid-template-columns:1fr;}}
+.jag-cta-btn{white-space:normal;}
+.ring-seg{transition:stroke-dasharray 1s ease;}
+.ring-wrap .donut-leg.static{cursor:default;}
+.ring-wrap .donut-leg.static:hover{border-color:var(--purple-soft);background:var(--purple-tint-3);}
+/* Where the processes start and end */
+.ov-card{margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius);padding:var(--space-m) var(--space-l);background:var(--color-white);}
+.ov-scroll{overflow-x:auto;padding-bottom:.25rem;}
+.ov{min-width:680px;position:relative;padding-top:2.6rem;}
+.ov-axis{position:absolute;top:0;left:0;right:0;height:2.2rem;}
+.ov-ms{position:absolute;top:0;font-family:var(--font-display);font-size:.8125rem;font-weight:700;color:var(--color-navy);white-space:nowrap;transform:translateX(-50%);}
+.ov-ms:first-child{transform:none;}
+.ov-ms:last-child{transform:translateX(-100%);}
+.ov-ms::after{content:"";position:absolute;left:50%;bottom:-.7rem;width:.6rem;height:.6rem;border-radius:50%;background:var(--jai-a);transform:translateX(-50%);}
+.ov-ms:first-child::after{left:0;transform:none;}
+.ov-ms:last-child::after{left:100%;transform:translateX(-100%);}
+.ov-zone{position:absolute;left:33.3333%;width:33.3334%;top:2.1rem;bottom:0;background:rgba(83,0,206,.07);border-left:1.5px dashed var(--purple-soft);border-right:1.5px dashed var(--purple-soft);border-radius:var(--border-radius-sm);}
+.ov-track{position:relative;display:flex;flex-direction:column;gap:.65rem;padding-top:.9rem;}
+.ov-row{position:relative;height:2.2rem;cursor:default;}
+.ov-bar{position:absolute;top:0;height:100%;border-radius:999px;display:flex;align-items:center;padding:0 1rem;font-family:var(--font-display);font-size:.8125rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;width:0;transition:width 1s ease,box-shadow .2s;}
+.ov-bar--a{background:linear-gradient(90deg,#5300CE,#8F5FE0);}
+.ov-bar--b{background:var(--purple-soft);color:var(--color-navy);}
+.ov-bar--c{background:var(--jai-gradient);}
+.ov-row:hover .ov-bar{box-shadow:0 6px 16px rgba(83,0,206,.28);}
+.ov-end{position:absolute;top:0;height:100%;display:flex;align-items:center;padding-left:.65rem;font-size:.8125rem;color:var(--color-ink-3);white-space:nowrap;}
+.ov-card figcaption{margin-top:var(--space-s);font-size:.8125rem;color:var(--color-ink-3);line-height:1.5;}
+@media(prefers-reduced-motion:reduce){.ring-seg,.ov-bar{transition:none;}}
+/* Readability and fit fixes */
+.stat-num a,.donut-num a,.leg-val a,.exp-num a,.exp-source a{font:inherit;letter-spacing:inherit;color:inherit;text-decoration:none;border-bottom:1px dotted currentColor;}
+.stat-num a:hover,.donut-num a:hover,.leg-val a:hover,.exp-num a:hover,.exp-source a:hover{border-bottom-style:solid;}
+.exp-num{font-size:.9375rem;line-height:1.25;}
+.exp-item{padding:.45rem var(--space-s);}
+.exp-source{margin-bottom:.2rem;}
+.phase-item{align-items:center;padding:.7rem var(--space-m);}
+.ov-m{display:none;}
+.ovm-row{display:grid;grid-template-columns:1.25fr repeat(3,1fr);gap:.35rem;align-items:stretch;margin-bottom:.35rem;}
+.ovm-row > span{font-size:.8125rem;line-height:1.3;display:flex;align-items:center;}
+.ovm-head > span{font-family:var(--font-display);font-weight:700;color:var(--color-navy);align-items:flex-end;}
+.ovm-lbl{font-weight:600;color:var(--color-ink);}
+.ovm-row > i{display:block;min-height:2.1rem;border-radius:8px;background:var(--color-cream);}
+.ovm-row > i.on.a{background:linear-gradient(135deg,#5300CE,#8F5FE0);}
+.ovm-row > i.on.b{background:var(--purple-soft);}
+.ovm-row > i.on.c{background:var(--jai-gradient);}
+@media(max-width:700px){.ov-scroll{display:none;}.ov-m{display:block;}.ov-card{padding:var(--space-m);}}
+@media(max-width:768px){.article-header{padding-left:0;padding-right:0;}}
+@media(max-width:560px){.meta-sep{display:none;}.article-meta{gap:.35rem var(--space-m);}}
+@media(min-width:641px) and (max-width:1100px){.expert-sidebar .exp-list{grid-template-columns:repeat(3,1fr);}}
+</style>
+<noscript><style>.bar-fill,.ov-bar{width:var(--w,100%)!important;}.ring-seg{stroke-dasharray:15 85!important;}</style></noscript>
+</head>
+<body>
+
+<div id="progress-bar" style="position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;"></div>
+
+<div class="page-wrapper">
+
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What is intake to procure?</a>
+      <a class="toc-link" href="#s2">What is procure to pay?</a>
+      <a class="toc-link" href="#s3">Procure to pay vs intake to procure: where does one end and the other begin?</a>
+      <a class="toc-link" href="#s4">How they fit together: from intake to payment</a>
+      <a class="toc-link" href="#s5">Do you need both?</a>
+      <a class="toc-link" href="#s6">Where source to pay and orchestration fit</a>
+      <a class="toc-link" href="#s7">Trace one purchase from need to payment</a>
+      <a class="toc-link" href="#s8">Next steps</a>
+      <a class="toc-link" href="#s9">Frequently asked questions</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <h1>Intake to Procure vs Procure to Pay: What Is the Difference?</h1>
+        <div class="article-meta">
+          <span class="meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 8 min read</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Visnja Radosavljevic</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span>Published <time datetime="2026-11-10">November 2026</time></span></span>
+        </div>
+      </div>
+    </header>
+
+    <p><strong>Intake to procure decides which procurement path a business need takes, and procure to pay carries the purchase from requisition to supplier payment.</strong> Both processes overlap at the requisition, and Jaggaer runs them on one platform, so controls set at the request stage can carry through to payment.</p>
+
+    <p>Most of the confusion in intake to procure vs procure to pay starts at that overlap. A requisition sits in an approval queue, or an invoice arrives without its purchase order (PO), and nobody knows which process owns the problem.</p>
+
+    <p>This guide explains the difference between intake to procure and procure to pay, including where each one starts and stops.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="s1">What is intake to procure?</h2>
+
+    <p>Intake to procure runs from the first ask to an approved purchase order. It captures the request and checks it against policy and budget before it reaches the right reviewers. Some requests route to a sourcing event first.</p>
+
+
+    <p>Say a department needs a batch of laptops. Intake decides whether that is a catalog order or something that needs a sourcing event, and who has to approve it. The need comes first. The requisition is the formal request to buy it.</p>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer’s P2P evaluation checklist supports a provider decision</p>
+        <p class="jag-cta-desc">If you are deploying procure-to-pay automation for the first time or considering a change of provider, use the <a href="https://www.jaggaer.com/download/checklist/p2p-evaluation-checklist" target="_blank" rel="noopener">P2P evaluation checklist</a>. It helps you track and evaluate your requirements.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/checklist/p2p-evaluation-checklist" class="jag-cta-btn" target="_blank" rel="noopener">Get the P2P evaluation checklist&nbsp;&rarr;</a>
+    </div>
+
+    <div class="hook-stat">
+      <p>Agiloft, a contract management software vendor, surveyed <a href="https://www.prnewswire.com/news-releases/agiloft-research-reveals-hidden-procurement-value-gap-52-of-enterprises-miss-contractual-remedies-as-supplier-spend-flows-off-contract-302878950.html" target="_blank" rel="noopener">2,005 senior procurement leaders in the US and UK in 2026</a>. Respondents estimated that at least <span class="stat-num"><a href="https://www.prnewswire.com/news-releases/agiloft-research-reveals-hidden-procurement-value-gap-52-of-enterprises-miss-contractual-remedies-as-supplier-spend-flows-off-contract-302878950.html" target="_blank" rel="noopener">15%</a></span> of supplier spend flows outside contracted agreements.</p>
+    </div>
+
+    <figure class="chart-card">
+      <div class="donut-wrap ring-wrap">
+        <div class="donut-box">
+          <svg class="donut" viewBox="0 0 200 200" role="img" aria-label="15% of supplier spend flows outside contracted agreements, as estimated by respondents">
+            <circle class="donut-bg" cx="100" cy="100" r="70" fill="none" stroke-width="30"></circle>
+            <g transform="rotate(-90 100 100)" fill="none" stroke-width="30"><circle class="donut-seg seg-1 ring-seg" data-final="15 85" cx="100" cy="100" r="70" pathLength="100" stroke-dasharray="0 100" stroke-dashoffset="0"></circle></g>
+          </svg>
+          <div class="donut-center"><span class="donut-num"><a href="https://www.prnewswire.com/news-releases/agiloft-research-reveals-hidden-procurement-value-gap-52-of-enterprises-miss-contractual-remedies-as-supplier-spend-flows-off-contract-302878950.html" target="_blank" rel="noopener">15%</a></span><span class="donut-lbl">at least</span></div>
+        </div>
+        <ul class="donut-legend"><li><span class="donut-leg static"><span class="swatch seg-1"></span><span class="leg-lbl">Supplier spend outside contracted agreements</span><span class="leg-val"><a href="https://www.prnewswire.com/news-releases/agiloft-research-reveals-hidden-procurement-value-gap-52-of-enterprises-miss-contractual-remedies-as-supplier-spend-flows-off-contract-302878950.html" target="_blank" rel="noopener">15%</a></span></span></li></ul>
+      </div>
+      <figcaption>Respondents’ estimate of supplier spend outside contracted agreements. Source: <a href="https://www.prnewswire.com/news-releases/agiloft-research-reveals-hidden-procurement-value-gap-52-of-enterprises-miss-contractual-remedies-as-supplier-spend-flows-off-contract-302878950.html" target="_blank" rel="noopener">Agiloft, 2026 (2,005 senior procurement leaders in the US and UK)</a>.</figcaption>
+    </figure>
+
+    <p>Intake alone will not close that gap. Procure to pay still has to enforce the contract downstream. Guided buying in Jaggaer <a href="https://www.jaggaer.com/solutions/eprocurement" target="_blank" rel="noopener">eProcurement software</a> steers requesters toward contracted suppliers and catalog items, and non-catalog requests go through configurable intake workflows. For more, see <a href="https://www.jaggaer.com/blog/intake-to-procure-explained" target="_blank" rel="noopener">intake to procure explained</a>.</p>
+
+    <h2 id="s2">What is procure to pay?</h2>
+
+    <p>Procure to pay (P2P) is the purchasing and payment process. It starts at the purchase requisition and runs through the PO, goods receipt, invoice matching and supplier payment. In Jaggaer the requisition step, including guided buying and catalogs, sits inside eProcurement.</p>
+
+    <p>Where three-way matching applies, the invoice has to match both the PO and the goods receipt, and mismatches go to review before anyone pays.</p>
+
+    <div class="hook-stat">
+      <p>Ardent Partners surveyed <a href="https://ardentpartners.com/product/state-of-epayables-2025/" target="_blank" rel="noopener">204 accounts payable (AP) professionals</a> for its <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" target="_blank" rel="noopener"><em>State of ePayables 2025</em></a> report. It puts the average cost of processing an invoice at <span class="stat-num"><a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" target="_blank" rel="noopener">$9.84</a></span>. Ardent also benchmarks a top cohort, the <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" target="_blank" rel="noopener">20%</a> of organizations with the lowest costs and fastest cycles. That group’s per-invoice processing costs are <span class="stat-num"><a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" target="_blank" rel="noopener">79% lower</a></span> than those of their peers.</p>
+    </div>
+
+    <p>For the stages in order, see <a href="https://www.jaggaer.com/blog/understanding-procure-to-pay-process" target="_blank" rel="noopener">the procure to pay process step by step</a>.</p>
+
+    <h2 id="s3">Procure to pay vs intake to procure: where does one end and the other begin?</h2>
+
+    <p>Jaggaer’s procure to pay starts at the requisition. Its intake to procure runs from the first ask to an approved purchase order, so both processes share the requisition and PO stages. Definitions vary by provider.</p>
+
+    <p>Intake to pay covers the whole path from need to payment. For intake to pay vs procure to pay, the difference is the front end. Intake to pay includes it. The table follows Jaggaer’s usage.</p>
+
+    <figure class="ov-card">
+      <div class="ov-scroll">
+        <div class="ov" aria-hidden="true">
+          <div class="ov-axis">
+            <span class="ov-ms" style="left:0%">A business need</span>
+            <span class="ov-ms" style="left:33.3333%">Purchase requisition</span>
+            <span class="ov-ms" style="left:66.6667%">PO</span>
+            <span class="ov-ms" style="left:100%">Supplier payment</span>
+          </div>
+          <span class="ov-zone"></span>
+          <div class="ov-track">
+            <div class="ov-row" data-col="2"><span class="ov-bar ov-bar--a" data-w="66.6667" style="left:0;--w:66.6667%">Intake to procure</span><span class="ov-end" style="left:66.6667%">Approved PO</span></div>
+            <div class="ov-row" data-col="3"><span class="ov-bar ov-bar--b" data-w="100" style="left:0;--w:100%">Intake to pay</span></div>
+            <div class="ov-row" data-col="4"><span class="ov-bar ov-bar--c" data-w="66.6667" style="left:33.3333%;--w:66.6667%">Procure to pay</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="ov-m" aria-hidden="true">
+        <div class="ovm-row ovm-head"><span></span><span>Intake to procure</span><span>Intake to pay</span><span>Procure to pay</span></div>
+        <div class="ovm-row"><span class="ovm-lbl">A business need</span><i class="on a"></i><i class="on b"></i><i></i></div>
+        <div class="ovm-row"><span class="ovm-lbl">Purchase requisition</span><i class="on a"></i><i class="on b"></i><i class="on c"></i></div>
+        <div class="ovm-row"><span class="ovm-lbl">PO</span><i class="on a"></i><i class="on b"></i><i class="on c"></i></div>
+        <div class="ovm-row"><span class="ovm-lbl">Supplier payment</span><i></i><i class="on b"></i><i class="on c"></i></div>
+      </div>
+      <figcaption>Where each process starts and ends, from the table below.</figcaption>
+    </figure>
+
+    <div class="col-toggle" data-for="compTable">
+      <span class="col-toggle-lbl">Highlight:</span>
+      <button type="button" class="toggle-btn" data-col="2">Intake to procure</button><button type="button" class="toggle-btn" data-col="3">Intake to pay</button><button type="button" class="toggle-btn" data-col="4">Procure to pay</button>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table interactive-table" id="compTable">
+        <thead><tr><th><span class="sr-only">Dimension</span></th><th>Intake to procure</th><th>Intake to pay</th><th>Procure to pay</th></tr></thead>
+        <tbody>
+          <tr><td>Starts at</td><td>A business need</td><td>A business need</td><td>Purchase requisition</td></tr>
+          <tr><td>Ends at</td><td>An approved PO</td><td>Supplier payment</td><td>Supplier payment</td></tr>
+          <tr><td>Main job</td><td>Route the need to the right procurement path</td><td>Connect intake with purchasing and payment</td><td>Buy, receive, match and pay</td></tr>
+          <tr><td>Typical stakeholders</td><td>Requesters, procurement, category managers, legal</td><td>Procurement, finance, reviewers</td><td>Procurement, receiving, AP, suppliers</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer connects requisition to payment</p>
+        <p class="jag-cta-desc">Jaggaer’s <a href="https://www.jaggaer.com/solutions/procure-to-pay" target="_blank" rel="noopener">procure-to-pay solution</a> covers the stretch from requisition to payment in one connected workflow. Jaggaer’s procure-to-pay page reports <a href="https://www.jaggaer.com/solutions/procure-to-pay" target="_blank" rel="noopener">50%</a> time saved from requisition to PO.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/procure-to-pay" class="jag-cta-btn" target="_blank" rel="noopener">Explore the procure-to-pay solution&nbsp;&rarr;</a>
+    </div>
+
+    <h2 id="s4">How they fit together: from intake to payment</h2>
+
+    <p>Procurement intake to payment is a chain of handoffs. Intake decides where a need goes, and procure to pay buys the goods and pays the supplier.</p>
+
+    <p>Follow one need, the laptops, through the process.</p>
+
+    <div class="phase-cards">
+      <div class="phase-item">
+        <span class="phase-num">1</span>
+        <div class="phase-body"><p class="phase-desc">Intake captures and reviews it.</p></div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">2</span>
+        <div class="phase-body"><p class="phase-desc">Someone creates and approves a requisition, and purchasing issues a PO.</p></div>
+      </div>
+      <div class="phase-item">
+        <span class="phase-num">3</span>
+        <div class="phase-body"><p class="phase-desc">Then the goods arrive, AP matches the invoice and the supplier gets paid.</p></div>
+      </div>
+    </div>
+
+    <p>Intake owns the first steps and procure to pay owns the last, and both processes share the requisition and the PO. Some non-PO invoices are legitimate. Others can trace back to a purchase that skipped intake.</p>
+
+    <p>Jaggaer <a href="https://www.jaggaer.com/releases/26-2-release-highlights" target="_blank" rel="noopener">26.2, released in October 2026</a>, added AI agents that check requisitions and invoices against policy rules before routing them for approval. It also added AI requisition summaries that flag compliance issues for the approver. The approver still decides. When JAI, Jaggaer’s AI, answers a policy question, it cites the document it used.</p>
+
+    <h2 id="s5">Do you need both?</h2>
+
+    <p>Many organizations with complex purchasing end up wanting both, though not always in separate tools.</p>
+
+    <div class="mini-cards mini-cards--2">
+      <div class="mini-card">If requests come in by email and chat and maverick spend keeps showing up, start with intake.</div>
+      <div class="mini-card">If requests arrive clean but invoices stall at matching, start with procure to pay.</div>
+    </div>
+
+    <p>Maverick spend and invoice exceptions are the numbers to watch.</p>
+
+    <p>Do not pick a platform by what it calls its process. Ask where that process starts and ends, and whether both halves share one workflow. Our guide to <a href="https://www.jaggaer.com/blog/procure-to-pay-solutions-what-you-need-to-know" target="_blank" rel="noopener">what to look for in a P2P solution</a> helps you evaluate your options.</p>
+
+    <h2 id="s6">Where source to pay and orchestration fit</h2>
+
+    <p>Source to pay adds sourcing and contracting upstream of procure to pay. Source to contract is that upstream half. The guide to <a href="https://www.jaggaer.com/blog/essential-guide-to-source-to-pay-source-to-contract-and-procure-to-pay" target="_blank" rel="noopener">source to contract vs source to pay vs procure to pay</a> compares them in detail.</p>
+
+    <p>Orchestration coordinates the people and systems a request touches. In Jaggaer’s framing, intake captures and classifies the request and orchestration coordinates the steps to fulfill it. Together they can trigger downstream steps such as supplier onboarding, contract management or PO creation. A new software subscription, say, might need IT and legal to review it in parallel before anyone raises a requisition.</p>
+
+    <h2 id="s7">Trace one purchase from need to payment</h2>
+
+    <p>Pick one purchase from last quarter and trace it from the original need to the supplier payment. Mark every point where it waited. That shows whether the delay sits in intake or in procure to pay.</p>
+
+    <h2 id="s8">Next steps</h2>
+
+    <p>Start with the stage where your traced purchase waited longest. Then see how Jaggaer’s <a href="https://www.jaggaer.com/solutions/procure-to-pay" target="_blank" rel="noopener">procure-to-pay solution</a> covers the stretch from requisition to payment in one connected workflow. You can also <a href="https://www.jaggaer.com/book-a-demo" target="_blank" rel="noopener">book a demo</a> to go through your own process.</p>
+
+    <h2 id="s9">Frequently asked questions</h2>
+
+    <details class="faq-item" open>
+      <summary>What is the difference between intake to procure and procure to pay? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Intake to procure runs from the first ask to an approved purchase order, and some requests route to a sourcing event first.</strong> Procure to pay starts at the requisition and runs through receiving, invoice matching and payment. They share the requisition and PO stages, and boundaries vary by platform.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Which comes first, the purchase order (PO) or the purchase requisition (PR)? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>The purchase requisition comes first.</strong> Once approved, it can generate the PO that goes to the supplier. Some purchases follow other workflows.</div>
+    </details>
+    <details class="faq-item">
+      <summary>What is the difference between procure to pay (P2P) and source to pay (S2P)? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Procure to pay covers purchasing, receiving, invoice processing and supplier payment.</strong> Source to pay adds sourcing and contracting before all of that.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Do I need intake to procure if I already have procure to pay? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>If your P2P workflows already collect the right information and send purchases to the right approvers, you may not need a separate intake tool.</strong> Organizations with complex requests or scattered submission channels may benefit from structured intake that connects to P2P.</div>
+    </details>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">See how Jaggaer runs intake and procure to pay on one platform</p>
+        <p class="jag-cta-desc">To walk through your own process with Jaggaer, <a href="https://www.jaggaer.com/book-a-demo" target="_blank" rel="noopener">book a demo</a>. Start with one purchase from last quarter, traced from the original need to the supplier payment.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo" class="jag-cta-btn" target="_blank" rel="noopener">Book a demo&nbsp;&rarr;</a>
+    </div>
+
+  </article>
+
+  <aside class="expert-sidebar" aria-label="What the experts are saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source"><a href="https://www.prnewswire.com/news-releases/agiloft-research-reveals-hidden-procurement-value-gap-52-of-enterprises-miss-contractual-remedies-as-supplier-spend-flows-off-contract-302878950.html" target="_blank" rel="noopener">Agiloft &middot; 2026</a></span>
+        <span class="exp-num red"><a href="https://www.prnewswire.com/news-releases/agiloft-research-reveals-hidden-procurement-value-gap-52-of-enterprises-miss-contractual-remedies-as-supplier-spend-flows-off-contract-302878950.html" target="_blank" rel="noopener">At least 15%</a></span>
+        <p class="exp-stat">Estimated share of supplier spend outside contracted agreements. Survey by Agiloft, a contract management software vendor, of <a href="https://www.prnewswire.com/news-releases/agiloft-research-reveals-hidden-procurement-value-gap-52-of-enterprises-miss-contractual-remedies-as-supplier-spend-flows-off-contract-302878950.html" target="_blank" rel="noopener">2,005</a> senior procurement leaders in the US and UK.</p>
+        <a href="https://www.prnewswire.com/news-releases/agiloft-research-reveals-hidden-procurement-value-gap-52-of-enterprises-miss-contractual-remedies-as-supplier-spend-flows-off-contract-302878950.html" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source"><a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" target="_blank" rel="noopener">Ardent Partners &middot; 2025</a></span>
+        <span class="exp-num red"><a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" target="_blank" rel="noopener">$9.84</a></span>
+        <p class="exp-stat">Average cost of processing an invoice, from a survey of <a href="https://ardentpartners.com/product/state-of-epayables-2025/" target="_blank" rel="noopener">204</a> AP professionals. The top <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" target="_blank" rel="noopener">20%</a> on cost and speed form the benchmark cohort. Their per-invoice costs are <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" target="_blank" rel="noopener">79%</a> lower than their peers’.</p>
+        <a href="https://payablesplace.ardentpartners.com/2026/01/state-of-epayables-part-nine-ap-benchmarks-and-best-in-class-performance/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+/* Reading progress */
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+/* Contents highlight follows the section in view */
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+
+/* Column highlight for the comparison table (buttons, plus hover on the diagram rows) */
+document.querySelectorAll('.col-toggle').forEach(box => {
+  const table = document.getElementById(box.dataset.for);
+  const paint = col => {
+    table.querySelectorAll('.col-on').forEach(c => c.classList.remove('col-on'));
+    if (col) table.querySelectorAll('tr > :nth-child(' + col + ')').forEach(c => c.classList.add('col-on'));
+  };
+  const activeCol = () => { const a = box.querySelector('button.active'); return a ? a.dataset.col : null; };
+  box.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+    const on = btn.classList.contains('active');
+    box.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    if (!on) btn.classList.add('active');
+    paint(on ? null : btn.dataset.col);
+  }));
+  document.querySelectorAll('.ov-row').forEach(row => {
+    row.addEventListener('mouseenter', () => paint(row.dataset.col));
+    row.addEventListener('mouseleave', () => paint(activeCol()));
+  });
+});
+
+/* Charts animate in when they scroll into view */
+(function(){
+  const fills = document.querySelectorAll('.bar-fill');
+  const ovBars = document.querySelectorAll('.ov-bar');
+  const rings = document.querySelectorAll('.ring-seg');
+  const run = el => {
+    if (el.classList.contains('bar-fill')) el.style.width = el.dataset.w + '%';
+    else if (el.classList.contains('ov-bar')) el.style.width = el.dataset.w + '%';
+    else el.setAttribute('stroke-dasharray', el.dataset.final);
+  };
+  const all = [...fills, ...ovBars, ...rings];
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } }), { threshold: .4 });
+    all.forEach(f => io.observe(f));
+  } else { all.forEach(run); }
+})();
+</script>
+
+</body>
+</html>
