@@ -1769,7 +1769,7 @@
               "title": "Intake to Procure Explained: From Request to Purchase Order in Five Step",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "not-started",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1797,7 +1797,8 @@
               "brief_last_updated": "2026-11-04T08:41:37.998Z",
               "priority": "P1",
               "priority_updated": "2026-11-04T09:52:41.716Z",
-              "priority_updated_by": "m-14bwv"
+              "priority_updated_by": "m-14bwv",
+              "secondary_keyword": ""
             },
             {
               "id": "piece-5wxtri",
