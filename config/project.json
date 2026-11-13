@@ -9467,8 +9467,8 @@
               "return_to_stage": null,
               "last_upload": "2026-10-07T09:17:53.887Z",
               "last_upload_by": "orlagh",
-              "last_updated": "2026-10-07T09:17:53.887Z",
-              "last_updated_by": "orlagh",
+              "last_updated": "2026-11-13T10:03:37.613Z",
+              "last_updated_by": "m-14bwv",
               "status_history": [
                 {
                   "stage": "marketing-review",
@@ -9480,7 +9480,8 @@
                   "ts": "2026-10-07T09:17:53.887Z",
                   "by": "orlagh"
                 }
-              ]
+              ],
+              "review_owner": "m-pifrn"
             },
             {
               "id": "p2-seo-b2b-procurement-platform",
