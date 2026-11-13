@@ -1824,7 +1824,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-13T08:43:36.057Z",
-              "last_upload_by": "m-5jitd"
+              "last_upload_by": "m-5jitd",
+              "seo": {
+                "meta_title": "Intake to Procure Explained: Request to Purchase Order",
+                "meta_description": "What is intake to procure? It takes a request from the first ask to a purchase order in five \nsteps. See how each step works.",
+                "slug": "blog-intake-to-procure-explained",
+                "updated_at": "2026-11-13T08:44:19.084Z",
+                "updated_by": "m-5jitd"
+              }
             },
             {
               "id": "piece-5wxtri",
