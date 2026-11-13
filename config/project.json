@@ -1682,7 +1682,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-09T12:26:32.952Z",
-              "last_upload_by": "manager"
+              "last_upload_by": "manager",
+              "seo": {
+                "meta_title": "AI in Procurement Orchestration: How Intake Agents Work",
+                "meta_description": "AI in procurement orchestration: intake agents classify requests and orchestration agents route\napprovals and trigger POs. See how it works.",
+                "slug": "intake-and-orchestration-in-procurement",
+                "updated_at": "2026-11-13T12:48:36.932Z",
+                "updated_by": "m-14bwv"
+              }
             },
             {
               "id": "piece-yi5qu9",
