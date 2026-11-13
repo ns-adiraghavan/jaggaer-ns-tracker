@@ -11690,6 +11690,18 @@
         "ts": "2026-11-13T11:20:16.239Z",
         "stage": "ad-hoc-review"
       }
+    ],
+    "piece-45tvxq": [
+      {
+        "id": "ann-pn271v",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "FAQs are missing in this article",
+        "ts": "2026-11-13T12:47:10.744Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
