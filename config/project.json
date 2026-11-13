@@ -4658,8 +4658,8 @@
               "return_to_stage": null,
               "last_upload": "2026-10-07T08:11:05.386Z",
               "last_upload_by": "jason",
-              "last_updated": "2026-10-07T08:11:05.386Z",
-              "last_updated_by": "jason",
+              "last_updated": "2026-11-13T13:27:22.746Z",
+              "last_updated_by": "m-14bwv",
               "status_history": [
                 {
                   "stage": "marketing-review",
@@ -4673,7 +4673,8 @@
                 "slug": "vendor-selection-process",
                 "updated_at": "2026-10-07T08:12:46.300Z",
                 "updated_by": "jason"
-              }
+              },
+              "review_owner": "m-pifrn"
             },
             {
               "id": "p3-seo-cpg-tail-spend-optimization-sector-cuts-for-public-sector-cp",
