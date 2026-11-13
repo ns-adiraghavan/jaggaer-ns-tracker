@@ -11655,6 +11655,18 @@
         "ts": "2026-11-13T11:07:44.109Z",
         "stage": "ad-hoc-review"
       }
+    ],
+    "piece-60sdoa": [
+      {
+        "id": "ann-l3bo1x",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "This comes from a contract-management software vendor, which competes with JAGGAER’s contracts product. Remove it.",
+        "ts": "2026-11-13T11:12:32.624Z",
+        "annotation": true,
+        "section": "¶34 — \"Estimated share of supplier spend outsid…\"",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
