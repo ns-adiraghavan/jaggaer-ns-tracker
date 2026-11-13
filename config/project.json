@@ -11733,6 +11733,16 @@
         "annotation": true,
         "section": "¶85 — \"Governance and human-in-the-loop control…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-8lihi1",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "\"Verified on press release.\" - remove this",
+        "ts": "2026-11-13T13:23:41.395Z",
+        "annotation": true,
+        "section": "¶93 — \"Access AI through capabilities embedded …\"",
+        "revision": 1
       }
     ]
   },
