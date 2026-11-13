@@ -11620,6 +11620,18 @@
         "ts": "2026-11-10T10:33:38.993Z",
         "stage": "marketing-review"
       }
+    ],
+    "piece-eitgqp": [
+      {
+        "id": "ann-fbai9c",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Make this h3 so the hyphenated form(intake-to-procure) is in a subheading",
+        "ts": "2026-11-13T10:37:07.052Z",
+        "annotation": true,
+        "section": "¶29 — \"What an intake-to-procure request should…\"",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
