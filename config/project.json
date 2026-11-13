@@ -4795,15 +4795,16 @@
               "return_to_stage": null,
               "last_upload": "2026-10-14T13:16:09.338Z",
               "last_upload_by": "orlagh",
-              "last_updated": "2026-10-14T13:16:09.338Z",
-              "last_updated_by": "orlagh",
+              "last_updated": "2026-11-13T13:27:33.605Z",
+              "last_updated_by": "m-14bwv",
               "status_history": [
                 {
                   "stage": "marketing-review",
                   "ts": "2026-10-14T13:16:09.338Z",
                   "by": "orlagh"
                 }
-              ]
+              ],
+              "review_owner": "m-pifrn"
             },
             {
               "id": "p3-seo-procure-to-pay-management-software-buyer-s-guide-and-evaluat",
