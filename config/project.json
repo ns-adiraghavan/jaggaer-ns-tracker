@@ -1881,7 +1881,7 @@
               "title": "What Are AI Workers? From AI Assistant to AI Workforce in Procurement",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "marketing-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1899,10 +1899,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-11T11:16:38.910Z",
                   "by": "manager"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-13T12:47:29.359Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-11T11:16:38.910Z",
-              "last_updated_by": "manager",
+              "last_updated": "2026-11-13T12:47:29.358Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_What_Are_AI_Workers_New_Blog.pdf",
@@ -1917,7 +1922,7 @@
               "priority_updated_by": "m-14bwv",
               "secondary_keyword": "",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-11-11T11:16:38.910Z",
               "last_upload_by": "manager"
             },
@@ -11701,6 +11706,14 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "fb-5eyr0a",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "Check comments",
+        "ts": "2026-11-13T12:47:29.355Z",
+        "stage": "marketing-review"
       }
     ]
   },
