@@ -1734,7 +1734,7 @@
               "title": "Intake to Procure vs Procure to Pay: What Is the Difference?",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ad-hoc-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1752,10 +1752,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-11T17:39:40.552Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-13T11:20:16.241Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-11T17:39:40.552Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-13T11:20:16.241Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Intake_to_Procure_vs_Procure_to_Pay_New_Blog.pdf",
@@ -1770,7 +1775,7 @@
               "priority_updated_by": "m-14bwv",
               "secondary_keyword": "",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ad-hoc-review",
               "last_upload": "2026-11-11T17:39:40.552Z",
               "last_upload_by": "m-5jitd",
               "seo": {
@@ -11676,6 +11681,14 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "fb-ycozox",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "Check comments",
+        "ts": "2026-11-13T11:20:16.239Z",
+        "stage": "ad-hoc-review"
       }
     ]
   },
