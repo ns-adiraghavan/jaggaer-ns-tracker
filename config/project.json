@@ -11666,6 +11666,16 @@
         "annotation": true,
         "section": "¶34 — \"Estimated share of supplier spend outsid…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-vkvu6d",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Add one more FAQ \"What is intake to pay?”",
+        "ts": "2026-11-13T11:15:46.684Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
