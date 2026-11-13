@@ -11743,6 +11743,16 @@
         "annotation": true,
         "section": "¶93 — \"Access AI through capabilities embedded …\"",
         "revision": 1
+      },
+      {
+        "id": "ann-f3wc2j",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Too many stats, remove some of them",
+        "ts": "2026-11-13T13:24:29.867Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
