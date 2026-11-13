@@ -11722,6 +11722,18 @@
         "ts": "2026-11-13T12:47:29.355Z",
         "stage": "marketing-review"
       }
+    ],
+    "piece-kg4uxv": [
+      {
+        "id": "ann-hzzv5p",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Link pending - What is the planned link here",
+        "ts": "2026-11-13T13:23:07.923Z",
+        "annotation": true,
+        "section": "¶85 — \"Governance and human-in-the-loop control…\"",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
