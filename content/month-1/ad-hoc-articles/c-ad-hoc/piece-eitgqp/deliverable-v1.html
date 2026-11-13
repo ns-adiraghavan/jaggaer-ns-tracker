@@ -1,0 +1,682 @@
+<!-- uploaded by m-5jitd at 2026-11-13T08:43:33.645Z -->
+<!-- piece: Intake to Procure Explained: From Request to Purchase Order in Five Step -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Intake to Procure Explained: Request to Purchase Order</title>
+<meta name="description" content="What is intake to procure? It takes a request from the first ask to a purchase order in five steps. See how each step works.">
+<link rel="canonical" href="https://www.jaggaer.com/blog/intake-to-procure-explained">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="JAGGAER">
+<meta property="og:title" content="Intake to Procure Explained: Request to Purchase Order">
+<meta property="og:description" content="What is intake to procure? It takes a request from the first ask to a purchase order in five steps. See how each step works.">
+<meta property="og:url" content="https://www.jaggaer.com/blog/intake-to-procure-explained">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Intake to Procure Explained: Request to Purchase Order">
+<meta name="twitter:description" content="What is intake to procure? It takes a request from the first ask to a purchase order in five steps. See how each step works.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "Intake to Procure Explained: From Request to Purchase Order in Five Steps", "description": "What is intake to procure? It takes a request from the first ask to a purchase order in five steps. See how each step works.", "datePublished": "2026-11-11", "dateModified": "2026-11-11", "keywords": "intake to procure, intake-to-procure, what does intake to procure mean, intake-to-procure procedure, intake to procure procedure, intake to procure meaning definition", "publisher": {"@type": "Organization", "name": "JAGGAER", "url": "https://www.jaggaer.com"}, "author": {"@type": "Person", "name": "Visnja Radosavljevic"}, "mainEntityOfPage": "https://www.jaggaer.com/blog/intake-to-procure-explained"}
+</script>
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which comes first, the purchase requisition or the purchase order?", "acceptedAnswer": {"@type": "Answer", "text": "The purchase requisition comes first. A requisition is the internal request to buy, and the purchase order is the commitment sent to the supplier after approval."}}, {"@type": "Question", "name": "What is intake management, and how does it relate to intake to procure?", "acceptedAnswer": {"@type": "Answer", "text": "Intake management sets the rules for how requests enter procurement: the forms, the questions and the routing. Intake to procure is the wider path that carries each request on to an approved purchase order."}}, {"@type": "Question", "name": "How is intake to procure different from intake to pay?", "acceptedAnswer": {"@type": "Answer", "text": "Intake to procure ends when the purchase order goes out. Intake to pay continues through receipt, invoice matching and supplier payment, so it spans intake and procure to pay."}}, {"@type": "Question", "name": "How does intake to procure fit the wider procurement process?", "acceptedAnswer": {"@type": "Answer", "text": "Intake to procure covers the front of purchasing, from need to purchase order. Receipt, invoicing and payment follow under procure to pay, while sourcing and contracting sit upstream in source to pay."}}, {"@type": "Question", "name": "What should an intake-to-procure request capture?", "acceptedAnswer": {"@type": "Answer", "text": "Capture the requester, cost center, item or service, business reason, estimated value, needed-by date and any supplier quote. Add flags for data, security or legal review so routing starts correctly."}}, {"@type": "Question", "name": "Does every request go through all 5 steps?", "acceptedAnswer": {"@type": "Answer", "text": "Requests pass all 5 steps, but step 3 changes shape by channel. Catalog items skip quotes, contract releases reuse agreed terms and new needs go to a sourcing event."}}, {"@type": "Question", "name": "What is the difference between P2P and S2P?", "acceptedAnswer": {"@type": "Answer", "text": "Procure to pay covers requisition through payment. Source to pay is the full lifecycle, adding sourcing, contracting and supplier management before purchasing begins."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.8125rem;
+  --font-size-base:    1rem;
+  --font-size-lg:      1rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2rem, calc(1.72rem + 1.05vw), 2.25rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul,ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li,ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:980px;}
+.article-tags{display:flex;gap:.5rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.tag-pill{display:inline-flex;align-items:center;font-family:var(--font-display);font-size:.75rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--color-navy);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:999px;padding:.4rem .9rem;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:980px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1480px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:230px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.75rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:980px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);text-transform:uppercase;letter-spacing:.08em;}
+article h3.sub-question{font-size:var(--font-size-h4);text-transform:none;letter-spacing:-0.01em;font-weight:700;border-bottom:none;padding-bottom:0;}
+
+/* Comparison / data tables */
+.table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.data-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:520px;}
+.data-table th{background:var(--purple-tint-2);color:var(--color-navy);font-family:var(--font-display);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;text-align:left;padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--purple-soft);}
+.data-table td{padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--color-ink-2);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--color-cream);}
+.data-table td strong,.data-table th strong{color:var(--color-ink);}
+
+/* Roadmap / framework phase cards */
+.phase-cards{display:flex;flex-direction:column;gap:2px;margin:var(--space-m) 0 var(--space-l);border-radius:var(--border-radius-sm);overflow:hidden;border:var(--border);}
+.phase-item{display:flex;gap:var(--space-m);padding:var(--space-s) var(--space-m);background:var(--color-white);align-items:flex-start;}
+.phase-num{flex-shrink:0;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);}
+.phase-body{flex:1;min-width:0;}
+.phase-title{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink);margin-bottom:.15rem;display:block;}
+.phase-desc{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.6;}
+
+/* Hook stat contrast callout */
+.hook-stat{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.hook-stat p{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.65;}
+.hook-stat .stat-num{font-family:var(--font-display);font-weight:700;color:var(--color-ink-3);}
+
+/* Interactive toggle: expertise gap vs process gap */
+.toggle-box{border:1.5px solid var(--purple-soft);border-radius:var(--border-radius);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--purple-tint-3);}
+.toggle-head{display:flex;gap:.4rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.toggle-btn{font-family:var(--font-display);font-size:.78rem;font-weight:700;letter-spacing:.02em;color:var(--jai-a);background:var(--color-white);border:1.5px solid var(--purple-soft);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.toggle-btn:hover{border-color:var(--jai-a);}
+.toggle-btn.active{background:var(--jai-gradient);color:#fff;border-color:transparent;}
+.toggle-panel{display:none;}
+.toggle-panel.active{display:block;animation:fadeIn .25s ease;}
+.toggle-panel p{margin-bottom:.6rem;}
+.toggle-panel p:last-child{margin-bottom:0;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* Decision-checker widget */
+.decision-widget{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-l) var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.decision-widget-head{font-family:var(--font-display);font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);margin:0 0 var(--space-2xs);}
+.decision-widget-sub{font-size:.8rem;color:var(--color-ink-3);margin:0 0 var(--space-m);}
+.decision-options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:var(--space-m);}
+.decision-option{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem var(--space-s);border:var(--border);border-radius:var(--border-radius-sm);cursor:pointer;transition:border-color .2s,background .2s;font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-option:hover{border-color:var(--jai-a);background:var(--purple-tint-3);}
+.decision-option input{margin-top:.2rem;accent-color:var(--jai-a);}
+.decision-result{display:none;background:var(--color-cream);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-result.show{display:block;animation:fadeIn .25s ease;}
+.decision-reset{display:inline-block;margin-top:var(--space-s);font-size:.78rem;font-weight:600;color:var(--color-teal);cursor:pointer;background:none;border:none;padding:0;border-bottom:1px solid #4D819440;font-family:var(--font-base);}
+.decision-reset:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Benefit / risk checklist */
+.diag-checklist{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.diag-checklist ul{list-style:none;padding-left:0;margin-bottom:0;}
+.diag-checklist li{position:relative;padding-left:1.6rem;margin-bottom:.55rem;font-size:var(--font-size-base);}
+.diag-checklist li:last-child{margin-bottom:0;}
+.diag-checklist li::before{content:"";position:absolute;left:0;top:.2rem;width:1.05rem;height:1.05rem;border-radius:4px;border:1.5px solid var(--color-teal);background:var(--color-white);}
+.diag-checklist li::after{content:"✓";position:absolute;left:.22rem;top:-.05rem;color:var(--color-teal);font-size:.75rem;font-weight:700;}
+
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--color-ink);line-height:1.15;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.75rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-link{font-size:.75rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.page-wrapper{flex-wrap:wrap;}.expert-sidebar{position:static;width:100%;max-height:none;padding:0 0 var(--space-l) 0;order:99;}.exp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;}.exp-item{border-bottom:none;border-right:1px solid var(--purple-soft);}}
+@media(max-width:640px){.expert-sidebar .exp-list{grid-template-columns:1fr;}.expert-sidebar .exp-item{border-right:none;border-bottom:1px solid var(--purple-soft);}}
+
+/* CTA block */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-base);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:var(--font-size-base);font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-base);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;line-height:1;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Additions for this article (components from sister references) */
+.lede{font-size:1.0625rem;color:var(--color-ink);}
+.link-pending{color:var(--color-teal);border-bottom:1px dashed #4D819480;cursor:default;}
+.section-eyebrow{display:block;font-family:var(--font-display);font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-teal);margin:var(--space-l) 0 calc(-1 * var(--space-s));}
+.jag-cta-label{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--color-red);padding:.15rem .7rem;border-radius:9999px;white-space:nowrap;margin-bottom:.35rem;}
+.jag-cta-sub{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.criteria-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin:var(--space-m) 0 var(--space-l);}
+.criteria-card{display:flex;flex-direction:column;border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.9rem 1rem;background:linear-gradient(180deg,var(--purple-tint-3),var(--color-white) 55%);}
+.criteria-head{display:flex;align-items:center;gap:.55rem;margin-bottom:.5rem;}
+.criteria-badge{width:1.85rem;height:1.85rem;border-radius:50%;background:var(--jai-gradient);color:#fff;font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.criteria-title{font-family:var(--font-display);font-size:.82rem;font-weight:700;color:var(--color-ink);text-transform:uppercase;letter-spacing:.02em;margin:0;}
+.criteria-desc{font-size:.95rem;color:var(--color-ink-2);line-height:1.55;margin:0 0 .5rem;}
+.criteria-test{font-size:.95rem;color:var(--color-ink-2);line-height:1.55;margin:auto 0 0;padding-top:.5rem;border-top:1px dashed var(--purple-soft);}
+.criteria-test span{font-weight:700;color:var(--jai-a);}
+@media(max-width:620px){.criteria-grid{grid-template-columns:1fr;}}
+.callout-note{background:var(--color-light-blue);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:.8rem 1rem;margin:var(--space-m) 0;}
+.callout-note-label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-2xs);}
+.callout-note p{margin:0;}
+.hook-stat{display:flex;align-items:center;gap:var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);}
+.hook-stat-num{font-family:var(--font-display);font-size:clamp(1.6rem,2.4vw,2rem);font-weight:800;color:var(--jai-a);line-height:1;flex-shrink:0;}
+.hook-stat-lead{font-weight:600;color:var(--color-ink);margin:0 0 .25rem;}
+.hook-stat-sub{font-size:.8rem;color:var(--color-ink-3);margin:0;}
+@media(max-width:580px){.hook-stat{flex-direction:column;align-items:flex-start;}}
+.risk-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:var(--space-m) 0 var(--space-l);}
+.risk-item{display:flex;flex-direction:column;border:1px solid var(--purple-soft);border-top:3px solid #B7791F;border-radius:var(--border-radius-sm);padding:.8rem .9rem;background:var(--color-white);}
+.risk-head{display:flex;align-items:center;gap:.55rem;margin-bottom:.45rem;}
+.risk-icon{width:1.9rem;height:1.9rem;border-radius:50%;background:#FBF0DD;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.risk-icon svg{width:15px;height:15px;stroke:#B7791F;}
+.risk-title{font-family:var(--font-display);font-size:.8rem;font-weight:700;color:var(--color-ink);text-transform:uppercase;letter-spacing:.02em;margin:0;}
+.risk-desc{font-size:.95rem;color:var(--color-ink-2);line-height:1.55;margin:0;}
+@media(max-width:820px){.risk-cards{grid-template-columns:1fr;}}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:var(--space-m) 0 .4rem;border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);overflow:hidden;background:var(--purple-soft);}
+.stat-cell{background:var(--purple-tint-3);padding:.85rem .9rem;}
+.stat-big{display:block;font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--color-ink);line-height:1.1;}
+.stat-cap{display:block;font-size:.85rem;color:var(--color-ink-2);line-height:1.4;margin-top:.2rem;}
+.stat-row-source{font-size:.8rem;color:var(--color-ink-3);margin-bottom:var(--space-m);}
+@media(max-width:700px){.stat-row{grid-template-columns:repeat(2,1fr);}}
+.scorecard{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.scorecard-head{font-family:var(--font-display);font-size:1.05rem;font-weight:700;color:var(--color-ink);margin:0 0 .2rem;}
+.scorecard-sub{font-size:.9rem;color:var(--color-ink-3);margin:0 0 var(--space-s);}
+.scorecard-wrap{margin:0 0 var(--space-s);}
+.scorecard-table td{vertical-align:middle;}
+.scorecard-table input{width:4.2rem;padding:.3rem .4rem;font:inherit;font-size:.95rem;border:1px solid var(--border-color);border-radius:6px;text-align:center;color:var(--color-ink);background:var(--color-white);}
+.scorecard-table input:focus{outline:2px solid var(--jai-a);outline-offset:1px;}
+.scorecard-table tfoot td{font-weight:700;color:var(--color-ink);background:var(--purple-tint);border-top:1px solid var(--purple-soft);}
+.scorecard-table td.sc-best{color:var(--jai-a);}
+.scorecard-note{font-size:.85rem;color:var(--color-ink-3);margin:0;}
+.scorecard-note.warn{color:var(--color-red);font-weight:600;}
+.next-grid{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0;}
+.next-card{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);flex-wrap:wrap;transition:border-color .2s,box-shadow .2s;}
+.next-card:hover{border-color:var(--jai-a);box-shadow:0 4px 16px rgba(83,0,206,.08);}
+.next-card-title{font-weight:700;color:var(--color-ink);margin:0 0 .2rem;}
+.next-card-desc{font-size:.95rem;color:var(--color-ink-2);margin:0;}
+.next-card-link{flex-shrink:0;font-size:.88rem;font-weight:600;color:var(--jai-a);border-bottom:1px solid #5300ce40;white-space:nowrap;}
+
+/* Style Guide 9.1: body 12pt; no supporting text under 12px */
+.expert-sidebar{width:230px;}
+.exp-stat{font-size:.8125rem;}
+
+/* Additions for this article */
+.toggle-intro{margin-bottom:var(--space-s);}
+.article-header h1 .h1-key{color:var(--jai-a);font-weight:800;}
+.checklist-head{font-family:var(--font-display);font-weight:700;color:var(--color-ink);margin-bottom:var(--space-s);}
+.callout-note p{margin:0 0 .5rem;}
+.callout-note p:last-child{margin-bottom:0;}
+</style>
+</head>
+<body>
+<div id="progress-bar" style="position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;"></div>
+<div class="page-wrapper">
+<aside aria-label="Table of Contents" class="toc-sidebar">
+<div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+<nav aria-label="Article sections" class="toc-nav">
+<a class="toc-link" href="#s1">What is intake to procure?</a>
+<a class="toc-link" href="#s2">Why intake to procure matters</a>
+<a class="toc-link" href="#s3">Intake to procure in five steps</a>
+<a class="toc-link" href="#s4">Illustrative example: one request from ask to purchase order</a>
+<a class="toc-link" href="#s5">How intake to procure differs from procure to pay</a>
+<a class="toc-link" href="#s6">What systems support intake to procure?</a>
+<a class="toc-link" href="#s7">What changes when AI helps</a>
+<a class="toc-link" href="#s8">What changed in 2026</a>
+<a class="toc-link" href="#s9">How Jaggaer helps</a>
+<a class="toc-link" href="#s10">How to get started</a>
+<a class="toc-link" href="#experts">What the experts are saying</a>
+<a class="toc-link" href="#s11">Frequently asked questions</a>
+<a class="toc-link" href="#s12">Next steps</a>
+</nav>
+</aside>
+<article>
+<header class="article-header">
+<div class="article-header-inner">
+<div class="article-tags">
+<span class="tag-pill">eProcurement</span>
+<span class="tag-pill">Procurement Process</span>
+</div>
+<h1>Intake to Procure Explained: From Request to Purchase Order in <strong class="h1-key">Five Steps</strong></h1>
+<div class="article-meta">
+<span class="meta-item"><svg aria-hidden="true" fill="none" height="12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="12"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span id="read-time">13</span> min read</span>
+<span aria-hidden="true" class="meta-sep">|</span>
+<span class="meta-item">Published: <time datetime="2026-11-11">November 2026</time></span>
+<span aria-hidden="true" class="meta-sep">|</span>
+<span class="meta-item">By Visnja Radosavljevic</span>
+</div>
+</div>
+</header>
+<p class="lede"><strong>By definition, intake to procure is the path a purchase request takes from the first ask to an approved purchase order.</strong> In practice, its meaning comes down to 5 steps: capture, validate, choose the buying channel, approve and issue the PO. Capture the request completely at step 1, and every later step works from the same record.</p>
+<p>Define those 5 steps before you automate them. Settle who owns each step, too. <strong><a href="https://www.thehackettgroup.com/insights/2026-procurement-key-issues-2601/" rel="noopener" target="_blank">The Hackett Group’s 2026 Procurement Agenda and Key Issues Study</a> found 35% of organizations investigating AI for intake management and orchestration.</strong> Hackett surveyed procurement leaders at midsize and large enterprises in late 2025.</p>
+<p>A request that arrives by email carries no budget check and no contract match. Jaggaer eProcurement, for example, commits budget at requisition and enforces contracted suppliers at search.</p>
+<div class="jag-cta">
+<div class="jag-cta-body">
+<span class="jag-cta-label">The Hackett Group · 2026</span>
+<p class="jag-cta-head">Download The Hackett Group 2026 Procurement Agenda and Key Issues Study →</p>
+<p class="jag-cta-sub">Get Hackett’s source for the 35% intake figure from Jaggaer. Covers 2026 procurement priorities, resources, technology adoption and AI use cases.</p>
+</div>
+<a class="jag-cta-btn" href="https://www.jaggaer.com/download/analyst-report/the-hackett-group-2026-procurement-agenda-and-key-issues-study" rel="noopener" target="_blank">Download the Hackett Study</a>
+</div>
+<hr class="section-divider"/>
+<span class="section-eyebrow">Start at the ask</span>
+<h2 id="s1">What is intake to procure?</h2>
+<p><strong>The process covers everything from the moment someone asks to buy to the moment a purchase order goes to the supplier.</strong> It captures the request, checks it against budget and policy, chooses how to buy and gets approval.</p>
+<p>People who search “what does intake to procure mean” usually want the practical answer: a request becomes a purchase order without anyone retyping it. The hyphenated form, intake-to-procure, means the same thing.</p>
+<p>Intake to procure stops where procure to pay carries on to receipt, invoice and payment. Jaggaer’s <a href="https://www.jaggaer.com/solutions/procure-to-pay" rel="noopener" target="_blank">procure-to-pay page</a> describes P2P as beginning at the requisition and ending at payment. The 2 processes share the stretch from requisition to PO.</p>
+<p><strong><a href="https://www.thehackettgroup.com/glossary/intake-and-orchestration-solutions/" rel="noopener" target="_blank">The Hackett Group</a> defines intake and orchestration solutions as platforms that simplify how employees submit requests.</strong> In Hackett’s definition, those platforms also help organizations route, manage and fulfill requests across business systems.</p>
+<hr class="section-divider"/>
+<span class="section-eyebrow">Catch spend before the PO</span>
+<h2 id="s2">Why intake to procure matters</h2>
+<p><strong>Intake to procure decides whether a purchase starts inside policy or turns into maverick spend you fix later.</strong> It also sets requisition-to-PO time.</p>
+<p><strong><a href="https://www.apqc.org/resources/benchmarking/open-standards-benchmarking/measures/average-days-issue-purchase-order" rel="noopener" target="_blank">APQC</a>’s Open Standards Benchmarking puts the median requisition-to-PO cycle at 2.0 days across 1,250 companies (accessed November 2026).</strong> APQC measures from the requisition received to the PO released to the supplier.</p>
+<p><strong>APQC research published in April 2026 shows the cost to process a single PO ranges from about $14 to more than $54.</strong> <a href="https://www.apqc.org/resource-library/resource/how-efficient-your-procurement-process-benchmarks-reveal-wide-performance" rel="noopener" target="_blank">APQC attributes the gap</a> largely to how teams structure and run procurement work.</p>
+<p><strong><a href="https://www.deloitte.com/us/en/about/press-room/2025-chief-procurement-officer-survey.html" rel="noopener" target="_blank">Deloitte’s 2025 Global CPO Survey</a> found siloed ways of working the most-cited barrier to value delivery, at 57% of CPOs.</strong> Deloitte surveyed more than 250 CPOs across 40 countries.</p>
+<p><strong><a href="https://www.pwc.ch/en/insights/digital/digital-procurement-survey-2026.html" rel="noopener" target="_blank">PwC’s 2026 Global Digital Procurement Survey</a> rates P2P digitalization maturity at 41% today.</strong> But respondents target 71% within 3 years. About one-third of PwC’s respondents are CPOs or executive committee members.</p>
+<p>Set clear rules for each request type through <a href="https://www.jaggaer.com/blog/intake-management-in-procurement" rel="noopener" target="_blank">intake management in procurement</a> before you add tools.</p>
+<hr class="section-divider"/>
+<span class="section-eyebrow">Ask to PO, step by step</span>
+<h2 id="s3">Intake to procure in five steps</h2>
+<p><strong>The intake-to-procure procedure runs in 5 steps: capture, validate, choose the channel, approve and issue the PO.</strong></p>
+<p>Work through the steps in order, then use the channel switch below them to see how step 3 changes the route.</p>
+<div class="phase-cards">
+<div class="phase-item">
+<span class="phase-num">1</span>
+<div class="phase-body">
+<span class="phase-title">Capture the request</span>
+<p class="phase-desc">The requester states what, why, how much, when and which cost center pays. Attach the quote or specification here, not in a later email.</p>
+</div>
+</div>
+<div class="phase-item">
+<span class="phase-num">2</span>
+<div class="phase-body">
+<span class="phase-title">Validate need, budget and policy</span>
+<p class="phase-desc">Check the budget, any existing contract or catalog item, and the policy rules for the category. Category rules decide whether IT, legal or risk review joins.</p>
+</div>
+</div>
+<div class="phase-item">
+<span class="phase-num">3</span>
+<div class="phase-body">
+<span class="phase-title">Choose the buying channel</span>
+<p class="phase-desc">Send the request to a catalog item, an existing contract or a sourcing event. The channel sets the price basis for approval.</p>
+</div>
+</div>
+<div class="phase-item">
+<span class="phase-num">4</span>
+<div class="phase-body">
+<span class="phase-title">Route for approval</span>
+<p class="phase-desc">Route by value, category, business unit and cost center. Approvers see the request, the channel and the budget check in one place.</p>
+</div>
+</div>
+<div class="phase-item">
+<span class="phase-num">5</span>
+<div class="phase-body">
+<span class="phase-title">Issue the purchase order</span>
+<p class="phase-desc">Convert the approved requisition to a PO and send it to the supplier. The PO writes back to the ERP, so finance sees the commitment.</p>
+</div>
+</div>
+</div>
+<p><strong>APQC’s Process Classification Framework names the same core activities: process requisitions, approve them, solicit supplier quotes and create purchase orders.</strong> A sourcing request often returns for a second approval once quotes arrive.</p>
+<div class="toggle-box" id="channel-toggle">
+<p class="toggle-intro"><strong>Step 3 by channel.</strong> Select a channel to see the route it sets.</p>
+<div aria-label="Buying channel" class="toggle-head" role="tablist">
+<button aria-controls="ch-catalog" aria-selected="true" class="toggle-btn active" data-panel="ch-catalog" id="tab-catalog" role="tab">Catalog</button>
+<button aria-controls="ch-contract" aria-selected="false" class="toggle-btn" data-panel="ch-contract" id="tab-contract" role="tab">Contract</button>
+<button aria-controls="ch-sourcing" aria-selected="false" class="toggle-btn" data-panel="ch-sourcing" id="tab-sourcing" role="tab">Sourcing event</button>
+</div>
+<div aria-labelledby="tab-catalog" class="toggle-panel active" id="ch-catalog" role="tabpanel"><p>The item and price already exist. The request skips quotes and goes to approval at the catalog price.</p></div>
+<div aria-labelledby="tab-contract" class="toggle-panel" id="ch-contract" role="tabpanel"><p>A negotiated agreement covers the need. The request releases against that contract, so its price and terms carry over.</p></div>
+<div aria-labelledby="tab-sourcing" class="toggle-panel" id="ch-sourcing" role="tabpanel"><p>No catalog item or contract fits. Buyers collect quotes or run an RFQ, then the winning price goes to approval.</p></div>
+</div>
+<p>Use this list to start your request form.</p>
+<div class="diag-checklist">
+<p class="checklist-head">What an intake-to-procure request should capture</p>
+<ul>
+<li>Requester, business unit and cost center</li>
+<li>Item or service, quantity and scope</li>
+<li>Business reason for the purchase</li>
+<li>Estimated value and currency</li>
+<li>Needed-by date</li>
+<li>Preferred or existing supplier, with any quote attached</li>
+<li>Flags for data, security, legal or on-site review</li>
+</ul>
+</div>
+<hr class="section-divider"/>
+<span class="section-eyebrow">Follow a request</span>
+<h2 id="s4">Illustrative example: one request from ask to purchase order</h2>
+<p><strong>Follow a facilities request through all 5 steps, and it ends as 2 purchase orders.</strong></p>
+<div class="callout-note">
+<span class="callout-note-label">Illustrative example: HVAC servicing across 3 sites</span>
+<p>A facilities manager needs quarterly HVAC servicing at 3 plants. She names the cost center and attaches an existing supplier’s quote.</p>
+<p><strong>Step 1.</strong> The form captures the 3 sites, the scope, a start date and the quote.</p>
+<p><strong>Step 2.</strong> The budget check passes. A contract search finds a framework agreement that covers 2 of the 3 sites.</p>
+<p><strong>Step 3.</strong> The request splits. Sites A and B release against the framework contract. Site C goes out for 3 supplier quotes.</p>
+<p><strong>Step 4.</strong> Approval routes by value to the facilities director and a finance reviewer. Site C returns for approval once quotes arrive.</p>
+<p><strong>Step 5.</strong> The request becomes 2 POs: 1 against the contract and 1 to the winning bidder. Both write back to the ERP.</p>
+</div>
+<p><strong>Skip step 2, and all 3 sites go to the quoting supplier at its own price.</strong> The contract search moved 2 sites onto negotiated terms before anyone approved spend.</p>
+<hr class="section-divider"/>
+<span class="section-eyebrow">Same requisition, different finish line</span>
+<h2 id="s5">How intake to procure differs from procure to pay</h2>
+<p><strong>Intake to procure ends at the purchase order, while procure to pay runs on to receipt, invoice and payment.</strong> They overlap from requisition to PO, so the same record can serve both.</p>
+<p>Intake adds the work before a requisition exists: the ask, the policy checks and the channel choice.</p>
+<div class="table-wrap">
+<table class="data-table">
+<thead>
+<tr><th>Process</th><th>Starts at</th><th>Ends at</th><th>Shares with intake to procure</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Intake to procure</strong></td><td>The first request to buy</td><td>PO sent to the supplier</td><td>–</td></tr>
+<tr><td><strong>Procure to pay</strong></td><td>The requisition</td><td>Supplier payment</td><td>Requisition to PO</td></tr>
+<tr><td><strong>Intake to pay</strong></td><td>The first request to buy</td><td>Supplier payment</td><td>All of it, plus receipt, invoice and payment</td></tr>
+<tr><td><strong>Source to pay</strong></td><td>Sourcing and contracting</td><td>Supplier payment</td><td>Requisition to PO, with contracts set upstream</td></tr>
+</tbody>
+</table>
+</div>
+<p>For a side-by-side comparison, read <a href="https://www.jaggaer.com/blog/intake-to-procure-vs-procure-to-pay" rel="noopener" target="_blank">intake to procure vs procure to pay</a>. For the downstream half, start with <a href="https://www.jaggaer.com/blog/understanding-procure-to-pay-process" rel="noopener" target="_blank">the procure to pay process</a>.</p>
+<hr class="section-divider"/>
+<span class="section-eyebrow">Run intake where you create the PO</span>
+<h2 id="s6">What systems support intake to procure?</h2>
+<p><strong>Intake to procure runs on an eProcurement suite, an ERP module or a separate intake tool that hands off to them.</strong> Whichever you choose, the request has to reach the PO without rekeying.</p>
+<p><strong>The Hackett Group’s 2026 study found suites deliver e-procurement for 56% of respondents.</strong> But point solutions deliver intake and orchestration for 50%, against 38% for suites and 17% for ERP. Hackett let respondents name more than one solution type.</p>
+<p>That gap puts many intake tools in front of a separate purchasing system. Each handoff is a place where request data can drift.</p>
+<p><strong><a href="https://www.mckinsey.com/capabilities/operations/our-insights/transforming-procurement-functions-for-an-ai-driven-world" rel="noopener" target="_blank">McKinsey</a> reported in October 2025 that only 60% of large and 30% of small organizations at its CPO Executive Forum have a P2P system.</strong></p>
+<p><strong>PwC’s 2026 survey found end-user experience a transformation driver for only 11% of respondents.</strong> PwC notes that many procurement tools favor process compliance over user adoption.</p>
+<p>Look for <a href="https://www.jaggaer.com/solutions/eprocurement" rel="noopener" target="_blank">guided buying and intake workflows</a> inside the system that issues the PO. Orchestration then coordinates steps across systems; see <a href="https://www.jaggaer.com/blog/procurement-orchestration-definition-examples" rel="noopener" target="_blank">what procurement orchestration is</a>.</p>
+<hr class="section-divider"/>
+<span class="section-eyebrow">JAI suggests. You decide.</span>
+<h2 id="s7">What changes when AI helps</h2>
+<p><strong>AI shortens intake by drafting, matching and flagging, while people keep the approval.</strong> Jaggaer’s <a href="https://www.jaggaer.com/solutions/jai" rel="noopener" target="_blank">JAI page</a> states the rule: JAI suggests. You decide. Always.</p>
+<p><strong><a href="https://www.jaggaer.com/solutions/eprocurement" rel="noopener" target="_blank">Jaggaer eProcurement</a> scores requisition confidence from historical PO data to recommend approvals, with thresholds you set.</strong> It also recommends commodity and account codes at line level and flags high- and low-risk line items for review.</p>
+<p>JAI answers only from approved source documents and cites them every time. If it lacks a confident grounded answer, it says so and routes the user to a person. Your data never trains foundation models.</p>
+<p>For the mechanics, see <a href="https://www.jaggaer.com/blog/intake-and-orchestration-in-procurement" rel="noopener" target="_blank">how intake and orchestration agents work</a> and <a href="https://www.jaggaer.com/blog/ai-procurement-intake-guided-buying" rel="noopener" target="_blank">AI-driven intake and guided buying</a>.</p>
+<p><strong><a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-survey-shows-just-36-perecent-of-chief-procurement-officers-are-very-confident-in-ability-to-redesign-function-for-ai" rel="noopener" target="_blank">Gartner’s May 2026 survey of 101 CPOs</a> found only 36% very confident they can redesign roles and processes around AI.</strong> Gartner ran the survey in January and February 2026.</p>
+<p><strong><a href="https://www.ey.com/content/dam/ey-unified-site/ey-com/en-gl/services/consulting/documents/ey-gl-cpo-survey-2025-outlook-report-02-2025.pdf" rel="noopener" target="_blank">EY’s 2025 Global CPO Survey</a> found 80% of CPOs plan to deploy GenAI in some capacity within 3 years.</strong> But only 36% had GenAI in meaningful use, among about 75 respondents.</p>
+<hr class="section-divider"/>
+<span class="section-eyebrow">Know what moved this year</span>
+<h2 id="s8">What changed in 2026</h2>
+<p><strong>In 2026, 4 dated changes moved intake onto the procurement agenda and closer to the PO.</strong></p>
+<div class="phase-cards">
+<div class="phase-item">
+<span class="phase-num">1</span>
+<div class="phase-body">
+<span class="phase-title">AI joined Hackett’s priority list (March 2026)</span>
+<p class="phase-desc">Hackett’s 2026 study added deploying AI-enabled technology to its priority list, where it entered in third position. Hackett also found 35% investigating AI for intake management and orchestration.</p>
+</div>
+</div>
+<div class="phase-item">
+<span class="phase-num">2</span>
+<div class="phase-body">
+<span class="phase-title">Requisitions can start RFQs in Jaggaer 26.1 (March 2026)</span>
+<p class="phase-desc">Per the <a href="https://www.jaggaer.com/releases/jaggaer-26-1-release-highlights" rel="noopener" target="_blank">26.1 release page</a>, buyers can initiate Direct RFQs from eProcurement requisitions, with header and line data carried over automatically.</p>
+</div>
+</div>
+<div class="phase-item">
+<span class="phase-num">3</span>
+<div class="phase-body">
+<span class="phase-title">PwC named intake an AI use case (October 2026)</span>
+<p class="phase-desc">PwC’s 2026 survey lists intake and orchestration among 4 emerging AI use cases. PwC describes it as routing requests to the right process, supplier and approvals.</p>
+</div>
+</div>
+<div class="phase-item">
+<span class="phase-num">4</span>
+<div class="phase-body">
+<span class="phase-title">Gartner published an RFP toolkit (October 2026)</span>
+<p class="phase-desc">Gartner published a <a href="https://www.gartner.com/en/documents/8519277" rel="noopener" target="_blank">toolkit for procurement orchestration platform RFPs</a> on October 16, 2026, covering intake management capabilities.</p>
+</div>
+</div>
+</div>
+<p><strong>Write your intake requirements before you shortlist tools.</strong> Gartner’s toolkit abstract notes that buyers often struggle to identify the right questions and requirements.</p>
+<hr class="section-divider"/>
+<span class="section-eyebrow">Configured, not customized</span>
+<h2 id="s9">How Jaggaer helps</h2>
+<p><strong>Jaggaer eProcurement runs intake to procure in the same system that issues the PO.</strong> Its <a href="https://www.jaggaer.com/solutions/eprocurement" rel="noopener" target="_blank">eProcurement page</a> describes guided buying that enforces contracted suppliers at search and routes non-catalog requests through configurable intake workflows. The software commits budget at requisition, before PO creation, and routes approvals by value, commodity, business unit and cost center.</p>
+<p><strong>Jaggaer reports a 60% reduction in PO processing time (October 2026).</strong> Approved purchases write back to ERPs such as SAP, Oracle and Workday through prebuilt Jaggaer Link connectors.</p>
+<hr class="section-divider"/>
+<span class="section-eyebrow">Start with the request form</span>
+<h2 id="s10">How to get started</h2>
+<p><strong>Start with 1 request type, write down its intake to procure procedure, and measure requisition-to-PO time before and after.</strong></p>
+<p><strong>PwC’s 2026 survey ranks cross-business engagement (56%) and clear definition of requirements (52%) as the top success factors.</strong> Bring finance, legal and IT into the form design, not only the approval chain.</p>
+<p>Then set 3 baselines: days from requisition to PO, the share of requests that arrive complete and the share that land on contract.</p>
+<p>The <a href="https://www.jaggaer.com/download/product-brief/eprocurement" rel="noopener" target="_blank">eProcurement product brief</a> sets out the guided buying and approval features to test against your rules.</p>
+<div class="jag-cta">
+<div class="jag-cta-body">
+<span class="jag-cta-label">Product Brief</span>
+<p class="jag-cta-head">Download the Jaggaer eProcurement product brief →</p>
+<p class="jag-cta-sub">Covers the purchasing life cycle from catalog submission and approval through to PO confirmation and shipping notices, including guided buying.</p>
+</div>
+<a class="jag-cta-btn" href="https://www.jaggaer.com/download/product-brief/eprocurement" rel="noopener" target="_blank">Download the Brief</a>
+</div>
+<hr class="section-divider"/>
+<span class="section-eyebrow">Straight answers</span>
+<h2 id="s11">Frequently asked questions</h2>
+<details class="faq-item">
+<summary>Which comes first, the purchase requisition or the purchase order? <span class="faq-icon">+</span></summary>
+<div class="faq-body">The purchase requisition comes first. A requisition is the internal request to buy, and the purchase order is the commitment sent to the supplier after approval.</div>
+</details>
+<details class="faq-item">
+<summary>What is intake management, and how does it relate to intake to procure? <span class="faq-icon">+</span></summary>
+<div class="faq-body">Intake management sets the rules for how requests enter procurement: the forms, the questions and the routing. Intake to procure is the wider path that carries each request on to an approved purchase order.</div>
+</details>
+<details class="faq-item">
+<summary>How is intake to procure different from intake to pay? <span class="faq-icon">+</span></summary>
+<div class="faq-body">Intake to procure ends when the purchase order goes out. Intake to pay continues through receipt, invoice matching and supplier payment, so it spans intake and procure to pay.</div>
+</details>
+<details class="faq-item">
+<summary>How does intake to procure fit the wider procurement process? <span class="faq-icon">+</span></summary>
+<div class="faq-body">Intake to procure covers the front of purchasing, from need to purchase order. Receipt, invoicing and payment follow under procure to pay, while sourcing and contracting sit upstream in source to pay.</div>
+</details>
+<details class="faq-item">
+<summary>What should an intake-to-procure request capture? <span class="faq-icon">+</span></summary>
+<div class="faq-body">Capture the requester, cost center, item or service, business reason, estimated value, needed-by date and any supplier quote. Add flags for data, security or legal review so routing starts correctly.</div>
+</details>
+<details class="faq-item">
+<summary>Does every request go through all 5 steps? <span class="faq-icon">+</span></summary>
+<div class="faq-body">Requests pass all 5 steps, but step 3 changes shape by channel. Catalog items skip quotes, contract releases reuse agreed terms and new needs go to a sourcing event.</div>
+</details>
+<details class="faq-item">
+<summary>What is the difference between P2P and S2P? <span class="faq-icon">+</span></summary>
+<div class="faq-body">Procure to pay covers requisition through payment. Source to pay is the full lifecycle, adding sourcing, contracting and supplier management before purchasing begins.</div>
+</details>
+<hr class="section-divider"/>
+<span class="section-eyebrow">Keep going</span>
+<h2 id="s12">Next steps</h2>
+<p><strong>Map your intake to procure steps, fix the request form first, then choose the system that issues the PO.</strong> Compare your list with <a href="https://www.jaggaer.com/solutions/eprocurement" rel="noopener" target="_blank">guided buying and intake workflows</a> in Jaggaer eProcurement.</p>
+<div class="next-grid">
+<div class="next-card">
+<div><p class="next-card-title">Intake and orchestration in procurement</p><p class="next-card-desc">How intake and orchestration split the work from request to PO.</p></div>
+<a class="next-card-link" href="https://www.jaggaer.com/blog/intake-and-orchestration-in-procurement" rel="noopener" target="_blank">Read more →</a>
+</div>
+<div class="next-card">
+<div><p class="next-card-title">AI procurement intake and guided buying</p><p class="next-card-desc">Where AI helps at the front door, with people approving.</p></div>
+<a class="next-card-link" href="https://www.jaggaer.com/blog/ai-procurement-intake-guided-buying" rel="noopener" target="_blank">Read more →</a>
+</div>
+<div class="next-card">
+<div><p class="next-card-title">The procure-to-pay process</p><p class="next-card-desc">What happens after the PO: receipt, invoice and payment.</p></div>
+<a class="next-card-link" href="https://www.jaggaer.com/blog/understanding-procure-to-pay-process" rel="noopener" target="_blank">Read more →</a>
+</div>
+<div class="next-card">
+<div><p class="next-card-title">Intake to procure vs procure to pay</p><p class="next-card-desc">A side-by-side view of where each process starts and stops.</p></div>
+<a class="next-card-link" href="https://www.jaggaer.com/blog/intake-to-procure-vs-procure-to-pay" rel="noopener" target="_blank">Read more →</a>
+</div>
+</div>
+<div class="jag-cta jag-cta--red">
+<div class="jag-cta-body">
+<span class="jag-cta-label">Book a Demo</span>
+<p class="jag-cta-head">See intake to procure in Jaggaer eProcurement, from request to purchase order →</p>
+<p class="jag-cta-sub">We show where Jaggaer One fits your current setup, with KPIs defined before you sign.</p>
+</div>
+<a class="jag-cta-btn" href="https://www.jaggaer.com/book-a-demo" rel="noopener" target="_blank">Book a Jaggaer Demo</a>
+</div>
+</article>
+<aside aria-label="What the experts are saying" class="expert-sidebar" id="experts">
+<div class="exp-head"><span class="exp-head-lbl">What the experts are saying</span></div>
+<div class="exp-list">
+<div class="exp-item">
+<span class="exp-source">APQC · 2026</span>
+<span class="exp-num red">2.0 days</span>
+<p class="exp-stat">Median requisition-to-PO cycle time. Open Standards Benchmarking, 1,250 companies (accessed Nov 2026).</p>
+<a class="exp-link" href="https://www.apqc.org/resources/benchmarking/open-standards-benchmarking/measures/average-days-issue-purchase-order" rel="noopener" target="_blank">View source →</a>
+</div>
+<div class="exp-item">
+<span class="exp-source">APQC · 2026</span>
+<span class="exp-num red">$14–$54+</span>
+<p class="exp-stat">Range in cost to process 1 purchase order (April 2026). Sample not stated.</p>
+<a class="exp-link" href="https://www.apqc.org/resource-library/resource/how-efficient-your-procurement-process-benchmarks-reveal-wide-performance" rel="noopener" target="_blank">View source →</a>
+</div>
+<div class="exp-item">
+<span class="exp-source">The Hackett Group · 2026</span>
+<span class="exp-num red">35%</span>
+<p class="exp-stat">Investigating AI for intake management and orchestration. Procurement leaders at midsize and large enterprises, late 2025.</p>
+<a class="exp-link" href="https://www.thehackettgroup.com/insights/2026-procurement-key-issues-2601/" rel="noopener" target="_blank">View source →</a>
+</div>
+<div class="exp-item">
+<span class="exp-source">The Hackett Group · 2026</span>
+<span class="exp-num red">50% / 38% / 17%</span>
+<p class="exp-stat">Deliver intake and orchestration through point solutions, suites and ERP.</p>
+<a class="exp-link" href="https://www.thehackettgroup.com/insights/2026-procurement-key-issues-2601/" rel="noopener" target="_blank">View source →</a>
+</div>
+<div class="exp-item">
+<span class="exp-source">PwC · 2026</span>
+<span class="exp-num red">41% → 71%</span>
+<p class="exp-stat">P2P digitalization maturity today, but 71% targeted in 3 years. Global respondents, 63.3% in Europe.</p>
+<a class="exp-link" href="https://www.pwc.ch/en/insights/digital/digital-procurement-survey-2026.html" rel="noopener" target="_blank">View source →</a>
+</div>
+<div class="exp-item">
+<span class="exp-source">Deloitte · 2025</span>
+<span class="exp-num red">57%</span>
+<p class="exp-stat">Cite siloed ways of working as a barrier to value delivery. More than 250 CPOs, 40 countries.</p>
+<a class="exp-link" href="https://www.deloitte.com/us/en/about/press-room/2025-chief-procurement-officer-survey.html" rel="noopener" target="_blank">View source →</a>
+</div>
+<div class="exp-item">
+<span class="exp-source">McKinsey · 2025</span>
+<span class="exp-num red">60% / 30%</span>
+<p class="exp-stat">Large and small organizations with a P2P system. CPO Executive Forum attendees.</p>
+<a class="exp-link" href="https://www.mckinsey.com/capabilities/operations/our-insights/transforming-procurement-functions-for-an-ai-driven-world" rel="noopener" target="_blank">View source →</a>
+</div>
+<div class="exp-item">
+<span class="exp-source">Gartner · 2026</span>
+<span class="exp-num red">36%</span>
+<p class="exp-stat">CPOs very confident they can redesign roles and processes for AI. 101 CPOs, Jan–Feb 2026.</p>
+<a class="exp-link" href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-survey-shows-just-36-perecent-of-chief-procurement-officers-are-very-confident-in-ability-to-redesign-function-for-ai" rel="noopener" target="_blank">View source →</a>
+</div>
+<div class="exp-item">
+<span class="exp-source">EY · 2025</span>
+<span class="exp-num red">80% / 36%</span>
+<p class="exp-stat">Plan to deploy GenAI within 3 years, but only 36% in meaningful use. About 75 CPOs.</p>
+<a class="exp-link" href="https://www.ey.com/content/dam/ey-unified-site/ey-com/en-gl/services/consulting/documents/ey-gl-cpo-survey-2025-outlook-report-02-2025.pdf" rel="noopener" target="_blank">View source →</a>
+</div>
+</div>
+</aside>
+</div>
+<script>
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+<script>
+/* Step 3 channel switch: all panel text stays in the DOM for crawlers */
+(function () {
+  const box = document.getElementById('channel-toggle');
+  if (!box) return;
+  box.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      box.querySelectorAll('.toggle-btn').forEach(b => { b.classList.toggle('active', b === btn); b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+      box.querySelectorAll('.toggle-panel').forEach(p => p.classList.toggle('active', p.id === btn.dataset.panel));
+    });
+  });
+})();
+</script>
+</body>
+</html>
