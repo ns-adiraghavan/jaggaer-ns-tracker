@@ -11814,6 +11814,16 @@
         "annotation": true,
         "section": "¶65 — \"Procurement Guided Buying Made Easy with…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-tt4y3b",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "this sentence \"go straight to procurement guided buying\" does not make sense.",
+        "ts": "2026-11-16T14:39:46.360Z",
+        "annotation": true,
+        "section": "¶14 — \"Auto-triage then checks the request agai…\"",
+        "revision": 1
       }
     ]
   },
