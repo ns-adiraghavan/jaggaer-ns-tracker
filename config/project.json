@@ -1592,7 +1592,7 @@
               "title": "Procurement Orchestration: Definition, Examples and How to Get Started",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "marketing-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1610,10 +1610,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-05T11:24:02.364Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-16T13:25:03.387Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-05T11:24:02.364Z",
-              "last_updated_by": "orlagh",
+              "last_updated": "2026-11-16T13:25:03.387Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Procurement_Orchestration_New_Blog.pdf",
@@ -11769,6 +11774,16 @@
         "verdict": "needs-revision",
         "body": "Check comments",
         "ts": "2026-11-13T13:26:39.684Z",
+        "stage": "marketing-review"
+      }
+    ],
+    "piece-oxoi6j": [
+      {
+        "id": "fb-enrlcf",
+        "author": "m-14bwv",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-16T13:25:03.383Z",
         "stage": "marketing-review"
       }
     ]
