@@ -11793,6 +11793,18 @@
         "ts": "2026-11-16T13:25:03.383Z",
         "stage": "marketing-review"
       }
+    ],
+    "piece-zgthd0": [
+      {
+        "id": "ann-8kalod",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The blog URL is /blog/ai-procurement-intake-guided-buying (existing URL). The article’s canonical, og:url and schema mainEntityOfPage all point to https://www.jaggaer.com/procurement-guided-buying-ai-driven-intake.",
+        "ts": "2026-11-16T14:03:02.092Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
