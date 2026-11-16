@@ -1247,7 +1247,14 @@
               "return_to_stage": null,
               "last_upload": "2026-10-28T10:54:56.803Z",
               "last_upload_by": "jason",
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "seo": {
+                "meta_title": "Procurement Guided Buying Made Easy with AI Intake | JAGGAER",
+                "meta_description": "Procurement guided buying and AI intake turn plain-language requests into compliant purchases and faster approvals. Read the guide today.",
+                "slug": "ai-procurement-intake-guided-buying",
+                "updated_at": "2026-11-16T14:01:17.303Z",
+                "updated_by": "m-14bwv"
+              }
             },
             {
               "id": "piece-02qxf5",
