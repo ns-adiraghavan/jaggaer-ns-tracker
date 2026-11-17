@@ -2233,8 +2233,17 @@
                   "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-17T13:39:04.905Z",
-              "last_updated_by": "m-14bwv"
+              "last_updated": "2026-11-17T13:39:08.986Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Supplier_Performance_Management_Solutions_New_Blog.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-t7jhnu/brief/JAGGAER_SEO_Brief_Supplier_Performance_Management_Solutions_New_Blog.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-11-17T13:39:08.986Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-17T13:39:08.986Z"
             }
           ]
         }
