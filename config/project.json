@@ -1937,7 +1937,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-17T10:39:48.388Z",
-              "last_upload_by": "m-5jitd"
+              "last_upload_by": "m-5jitd",
+              "seo": {
+                "meta_title": "AI Intake for Procurement: How It Works and What to Look For",
+                "meta_description": "What is AI intake? It guides a request in plain language, checks it against policy and routes it\nto the right channel. See how to pilot it.",
+                "slug": "blog-ai-intake-for-procurement",
+                "updated_at": "2026-11-17T10:40:42.283Z",
+                "updated_by": "m-5jitd"
+              }
             },
             {
               "id": "piece-45tvxq",
