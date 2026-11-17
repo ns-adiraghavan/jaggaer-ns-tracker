@@ -2155,8 +2155,17 @@
                   "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-10T12:52:37.714Z",
-              "last_updated_by": "m-14bwv"
+              "last_updated": "2026-11-17T13:00:07.813Z",
+              "last_updated_by": "manager",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_AI_Guardrails_for_Procurement_New_Blog.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-cw32cc/brief/JAGGAER_SEO_Brief_AI_Guardrails_for_Procurement_New_Blog.pdf",
+                  "uploaded_by": "manager",
+                  "uploaded_at": "2026-11-17T13:00:07.813Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-17T13:00:07.813Z"
             }
           ]
         }
