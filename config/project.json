@@ -2126,7 +2126,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-17T11:46:21.853Z",
-              "last_upload_by": "m-5jitd"
+              "last_upload_by": "m-5jitd",
+              "seo": {
+                "meta_title": "Off-Contract Buying in Higher Education: Guided Buying Fix",
+                "meta_description": "Off-contract buying in higher education: why departments buy outside contracts and how\nguided buying steers them back. See what works.",
+                "slug": "blog-off-contract-buying-in-higher-education",
+                "updated_at": "2026-11-17T11:50:48.721Z",
+                "updated_by": "m-5jitd"
+              }
             },
             {
               "id": "piece-cw32cc",
