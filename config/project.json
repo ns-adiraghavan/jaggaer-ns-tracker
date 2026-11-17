@@ -1930,11 +1930,11 @@
               "title": "What Are AI Workers? From AI Assistant to AI Workforce in Procurement",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "writing",
+              "status": "ed-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 1,
+              "revision_count": 2,
               "primary_keyword": "ai workers",
               "geography": "all",
               "created_via": "briefs-tab",
@@ -1953,10 +1953,15 @@
                   "stage": "writing",
                   "ts": "2026-11-13T12:47:29.359Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-11-17T06:49:00.804Z",
+                  "by": "jason"
                 }
               ],
-              "last_updated": "2026-11-13T12:47:29.358Z",
-              "last_updated_by": "m-14bwv",
+              "last_updated": "2026-11-17T06:49:00.804Z",
+              "last_updated_by": "jason",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_What_Are_AI_Workers_New_Blog.pdf",
@@ -1971,9 +1976,9 @@
               "priority_updated_by": "m-14bwv",
               "secondary_keyword": "",
               "deliverable_ext": "html",
-              "return_to_stage": "ed-review",
-              "last_upload": "2026-11-11T11:16:38.910Z",
-              "last_upload_by": "manager"
+              "return_to_stage": null,
+              "last_upload": "2026-11-17T06:49:00.804Z",
+              "last_upload_by": "jason"
             },
             {
               "id": "piece-fmg9pm",
