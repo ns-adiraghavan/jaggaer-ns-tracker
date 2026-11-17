@@ -2189,6 +2189,52 @@
               ],
               "last_updated": "2026-11-17T13:13:09.523Z",
               "last_updated_by": "m-14bwv"
+            },
+            {
+              "id": "piece-l1js7y",
+              "title": "Source to Pay Procurement Software: What It Covers and How to Evaluate It",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-14bwv",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "source to pay procurement software",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-17T13:13:49.021Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-11-17T13:13:49.021Z",
+              "last_updated_by": "m-14bwv"
+            },
+            {
+              "id": "piece-t7jhnu",
+              "title": "Supplier Performance Management Solutions: 2027 Guide to Trends, Scorecards and AI",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-14bwv",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "supplier performance management solutions",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-17T13:39:04.905Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-11-17T13:39:04.905Z",
+              "last_updated_by": "m-14bwv"
             }
           ]
         }
