@@ -1557,7 +1557,7 @@
               "title": "Intake Management in Procurement: Process, Compliance and How to Get  Started",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ed-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1585,10 +1585,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-17T05:54:18.452Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-18T09:51:20.312Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-17T05:54:18.452Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-18T09:51:20.311Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Intake_Management_New_Blog.pdf",
@@ -1602,7 +1607,7 @@
               "priority_updated": "2026-11-02T12:45:31.995Z",
               "priority_updated_by": "m-5jitd",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-11-17T05:54:18.452Z",
               "last_upload_by": "m-5jitd",
               "seo": {
@@ -11921,6 +11926,14 @@
         "annotation": true,
         "section": "¶45 — \"Pick one request type and map its handof…\"",
         "revision": 2
+      },
+      {
+        "id": "fb-v6d8w2",
+        "author": "m-72umx",
+        "verdict": "needs-revision",
+        "body": "check comments",
+        "ts": "2026-11-18T09:51:20.310Z",
+        "stage": "ed-review"
       }
     ],
     "piece-eitgqp": [
