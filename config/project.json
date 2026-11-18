@@ -12029,6 +12029,16 @@
         "annotation": true,
         "section": "¶1 — \"AI workers are AI agents that complete w…\"",
         "revision": 2
+      },
+      {
+        "id": "ann-l8j61j",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "we can include the 6 AI workers we released on 16th nov, you can find the details in home page of our website. You can add it as a seprate chapter in the last.",
+        "ts": "2026-11-18T09:59:48.683Z",
+        "annotation": true,
+        "section": "¶52 — \"What Are AI Workers? From AI Assistant t…\"",
+        "revision": 2
       }
     ],
     "piece-kg4uxv": [
