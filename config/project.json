@@ -1319,7 +1319,7 @@
               "title": "What Is Cost Efficiency? Definition, Examples and How to Achieve It",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "marketing-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1336,10 +1336,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-10-28T08:27:55.002Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-18T22:11:03.522Z",
+                  "by": "m-pifrn"
                 }
               ],
-              "last_updated": "2026-10-28T08:27:55.002Z",
-              "last_updated_by": "m-e10nz",
+              "last_updated": "2026-11-18T22:11:03.522Z",
+              "last_updated_by": "m-pifrn",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Cost_Efficiency_Update.pdf",
@@ -12196,6 +12201,16 @@
         "verdict": "approved",
         "body": "Published",
         "ts": "2026-11-18T15:18:31.071Z",
+        "stage": "marketing-review"
+      }
+    ],
+    "piece-0x1ob3": [
+      {
+        "id": "fb-4uv96o",
+        "author": "m-pifrn",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-18T22:11:03.519Z",
         "stage": "marketing-review"
       }
     ]
