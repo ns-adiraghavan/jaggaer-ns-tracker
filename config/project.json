@@ -2174,7 +2174,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-18T07:38:07.754Z",
-              "last_upload_by": "orlagh"
+              "last_upload_by": "orlagh",
+              "seo": {
+                "meta_title": "AI Guardrails for Procurement: Permissions and Human Approval",
+                "meta_description": "AI guardrails for procurement set what AI agents can see, do and approve. See how permissions and human approval keep AI in control",
+                "slug": "blog-ai-guardrails-for-procurement",
+                "updated_at": "2026-11-18T07:40:26.836Z",
+                "updated_by": "orlagh"
+              }
             },
             {
               "id": "piece-ozdqfo",
