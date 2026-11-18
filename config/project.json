@@ -11778,6 +11778,16 @@
         "body": "Check commnets",
         "ts": "2026-11-10T10:04:00.664Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "ann-0hopky",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "add more interlinks to our soultion pages , try in first 100 or 200 words",
+        "ts": "2026-11-18T09:39:37.853Z",
+        "annotation": true,
+        "section": "¶59 — \"Category Management: An End-to-End Guide…\"",
+        "revision": 2
       }
     ],
     "piece-fh8mc8": [
