@@ -2140,11 +2140,11 @@
               "title": "AI Guardrails for Procurement: Permissions and Human Approval",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "not-started",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 0,
+              "revision_count": 1,
               "primary_keyword": "ai guardrails",
               "geography": "all",
               "created_via": "briefs-tab",
@@ -2153,10 +2153,15 @@
                   "stage": "not-started",
                   "ts": "2026-11-10T12:52:37.714Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-11-18T07:38:07.754Z",
+                  "by": "orlagh"
                 }
               ],
-              "last_updated": "2026-11-17T13:00:07.813Z",
-              "last_updated_by": "manager",
+              "last_updated": "2026-11-18T07:38:07.754Z",
+              "last_updated_by": "orlagh",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_AI_Guardrails_for_Procurement_New_Blog.pdf",
@@ -2165,7 +2170,11 @@
                   "uploaded_at": "2026-11-17T13:00:07.813Z"
                 }
               ],
-              "brief_last_updated": "2026-11-17T13:00:07.813Z"
+              "brief_last_updated": "2026-11-17T13:00:07.813Z",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-11-18T07:38:07.754Z",
+              "last_upload_by": "orlagh"
             },
             {
               "id": "piece-ozdqfo",
