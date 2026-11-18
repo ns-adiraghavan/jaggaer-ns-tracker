@@ -2280,6 +2280,29 @@
                 }
               ],
               "brief_last_updated": "2026-11-17T13:39:08.986Z"
+            },
+            {
+              "id": "piece-qo8b9r",
+              "title": "Category Management Tools for Procurement: A Practical Guide",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-14bwv",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "category management tools",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-18T13:40:02.145Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-11-18T13:40:02.145Z",
+              "last_updated_by": "m-14bwv"
             }
           ]
         }
