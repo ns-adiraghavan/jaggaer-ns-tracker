@@ -1467,7 +1467,7 @@
               "title": "Category Management: An End-to-End Guide to Planning, Strategy and AI",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ed-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1495,10 +1495,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-17T07:53:58.840Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-18T09:44:33.835Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-17T07:53:58.840Z",
-              "last_updated_by": "m-e10nz",
+              "last_updated": "2026-11-18T09:44:33.834Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Category_Management_Guide_Refresh.pdf",
@@ -1512,7 +1517,7 @@
               "priority_updated": "2026-11-03T12:22:43.446Z",
               "priority_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-11-17T07:53:58.839Z",
               "last_upload_by": "m-e10nz",
               "seo": {
@@ -11818,6 +11823,14 @@
         "annotation": true,
         "section": "¶45 — \"Category Management: Overcoming Barriers…\"",
         "revision": 2
+      },
+      {
+        "id": "fb-5q573n",
+        "author": "m-72umx",
+        "verdict": "needs-revision",
+        "body": "check comments above",
+        "ts": "2026-11-18T09:44:33.833Z",
+        "stage": "ed-review"
       }
     ],
     "piece-fh8mc8": [
@@ -11888,6 +11901,16 @@
         "body": "Check comments",
         "ts": "2026-11-10T10:33:38.993Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "ann-f3ejj4",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "too long make it in pointer",
+        "ts": "2026-11-18T09:47:01.071Z",
+        "annotation": true,
+        "section": "¶4 — \"35% of surveyed procurement organization…\"",
+        "revision": 2
       }
     ],
     "piece-eitgqp": [
