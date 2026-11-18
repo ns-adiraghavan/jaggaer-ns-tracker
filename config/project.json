@@ -12019,6 +12019,16 @@
         "body": "Check comments",
         "ts": "2026-11-13T12:47:29.355Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "ann-1mtpdn",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "i think the first line should be generic in expalin AI worker , then we can move to the procurement specific details",
+        "ts": "2026-11-18T09:57:18.200Z",
+        "annotation": true,
+        "section": "¶1 — \"AI workers are AI agents that complete w…\"",
+        "revision": 2
       }
     ],
     "piece-kg4uxv": [
