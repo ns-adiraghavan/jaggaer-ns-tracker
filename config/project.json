@@ -6788,7 +6788,7 @@
               "title": "Source to Contract vs Source to Pay vs Procure to Pay: Key Differences",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -6842,6 +6842,11 @@
                   "stage": "approved",
                   "ts": "2026-11-09T12:14:35.167Z",
                   "by": "m-72umx"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-19T15:48:53.821Z",
+                  "by": "m-pifrn"
                 }
               ],
               "last_updated": "2026-11-09T12:14:35.167Z",
@@ -6868,6 +6873,13 @@
                 "slug": "blog-essential-guide-to-source-to-pay-source-to-contract-and-procure-to-pay",
                 "updated_at": "2026-10-30T11:48:31.777Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Visnja",
+                "launch_date": "2026-11-19",
+                "live_url": "https://www.jaggaer.com/blog/essential-guide-to-source-to-pay-source-to-contract-and-procure-to-pay",
+                "performance_data": "",
+                "updated_at": "2026-11-19T15:48:53.821Z"
               }
             }
           ]
