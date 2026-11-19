@@ -1947,7 +1947,7 @@
               "title": "AI Intake for Procurement: How It Works, What to Look For and How to  Pilot It",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ad-hoc-review",
+              "status": "ed-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1989,7 +1989,8 @@
                 "slug": "blog-ai-intake-for-procurement",
                 "updated_at": "2026-11-17T10:40:42.283Z",
                 "updated_by": "m-5jitd"
-              }
+              },
+              "secondary_keyword": ""
             },
             {
               "id": "piece-45tvxq",
