@@ -1567,11 +1567,11 @@
               "title": "Intake Management in Procurement: Process, Compliance and How to Get  Started",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "writing",
+              "status": "ed-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 2,
+              "revision_count": 3,
               "primary_keyword": "intake management",
               "geography": "all",
               "created_via": "briefs-tab",
@@ -1600,10 +1600,15 @@
                   "stage": "writing",
                   "ts": "2026-11-18T09:51:20.312Z",
                   "by": "m-72umx"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-11-19T05:48:19.112Z",
+                  "by": "m-5jitd"
                 }
               ],
-              "last_updated": "2026-11-18T09:51:20.311Z",
-              "last_updated_by": "m-72umx",
+              "last_updated": "2026-11-19T05:48:19.112Z",
+              "last_updated_by": "m-5jitd",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Intake_Management_New_Blog.pdf",
@@ -1617,8 +1622,8 @@
               "priority_updated": "2026-11-02T12:45:31.995Z",
               "priority_updated_by": "m-5jitd",
               "deliverable_ext": "html",
-              "return_to_stage": "ed-review",
-              "last_upload": "2026-11-17T05:54:18.452Z",
+              "return_to_stage": null,
+              "last_upload": "2026-11-19T05:48:19.112Z",
               "last_upload_by": "m-5jitd",
               "seo": {
                 "meta_title": "Intake Management in Procurement: Process and First Steps",
