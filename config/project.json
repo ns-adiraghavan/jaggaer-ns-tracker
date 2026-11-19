@@ -2203,7 +2203,7 @@
               "title": "AI Guardrails for Procurement: Permissions and Human Approval",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ad-hoc-review",
+              "status": "marketing-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2244,7 +2244,8 @@
                 "slug": "blog-ai-guardrails-for-procurement",
                 "updated_at": "2026-11-18T07:40:26.836Z",
                 "updated_by": "orlagh"
-              }
+              },
+              "secondary_keyword": ""
             },
             {
               "id": "piece-ozdqfo",
