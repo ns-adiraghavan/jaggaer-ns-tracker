@@ -1212,7 +1212,7 @@
               "title": "Procurement Guided Buying & AI-Driven Intake",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1240,10 +1240,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-19T07:07:09.602Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-19T10:55:47.443Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-19T07:07:09.601Z",
-              "last_updated_by": "jason",
+              "last_updated": "2026-11-19T10:55:47.443Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_AI_Intake_Guided_Buying_Update.pdf",
@@ -12270,6 +12275,14 @@
         "body": "Check comments",
         "ts": "2026-11-16T14:53:09.423Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "fb-g13xc6",
+        "author": "m-72umx",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-19T10:55:47.441Z",
+        "stage": "ed-review"
       }
     ],
     "piece-02qxf5": [
