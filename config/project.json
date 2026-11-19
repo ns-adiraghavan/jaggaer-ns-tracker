@@ -2154,7 +2154,7 @@
               "title": "Off-Contract Buying in Higher Education: How Guided Buying Helps",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ad-hoc-review",
+              "status": "marketing-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2195,7 +2195,8 @@
                 "slug": "blog-off-contract-buying-in-higher-education",
                 "updated_at": "2026-11-17T11:50:48.721Z",
                 "updated_by": "m-5jitd"
-              }
+              },
+              "secondary_keyword": ""
             },
             {
               "id": "piece-cw32cc",
