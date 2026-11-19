@@ -2057,7 +2057,7 @@
               "title": "Maverick Spend: Definition, Examples and 5 Tips to Prevent and Control It",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ad-hoc-review",
+              "status": "marketing-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2101,7 +2101,8 @@
                 "slug": "blog-5-tips-to-help-prevent-and-control-maverick-spend",
                 "updated_at": "2026-11-17T11:45:07.626Z",
                 "updated_by": "m-e10nz"
-              }
+              },
+              "secondary_keyword": ""
             },
             {
               "id": "piece-g2cq2j",
