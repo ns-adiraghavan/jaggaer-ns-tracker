@@ -2109,7 +2109,7 @@
               "title": "MRO Spend Analysis with AI: How Manufacturers Control Indirect Spend",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ad-hoc-review",
+              "status": "marketing-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2146,7 +2146,8 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-19T08:32:54.366Z",
-              "last_upload_by": "jason"
+              "last_upload_by": "jason",
+              "secondary_keyword": ""
             },
             {
               "id": "piece-c46xog",
