@@ -1890,7 +1890,7 @@
               "title": "Intake to Procure Explained: From Request to Purchase Order in Five Step",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1918,10 +1918,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-17T06:26:27.622Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-19T10:01:17.043Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-17T06:26:27.621Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-19T10:01:17.043Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Intake_to_Procure_Explained_New_Blog.pdf",
@@ -12065,6 +12070,14 @@
         "body": "Check comments",
         "ts": "2026-11-13T11:07:44.109Z",
         "stage": "ad-hoc-review"
+      },
+      {
+        "id": "fb-f5kved",
+        "author": "m-72umx",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-19T10:01:17.042Z",
+        "stage": "ed-review"
       }
     ],
     "piece-60sdoa": [
