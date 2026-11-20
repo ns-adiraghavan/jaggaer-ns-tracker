@@ -1442,7 +1442,7 @@
               "title": "Category Management Strategy: The 4 Ps Framework Applied to IT and MRO",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1470,6 +1470,11 @@
                   "stage": "ed-review",
                   "ts": "2026-11-19T07:19:32.975Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-20T21:15:40.513Z",
+                  "by": "m-pifrn"
                 }
               ],
               "last_updated": "2026-11-19T07:19:32.973Z",
@@ -1497,6 +1502,13 @@
                 "slug": "category-management-strategy-frameworks",
                 "updated_at": "2026-11-10T08:26:03.615Z",
                 "updated_by": "m-14bwv"
+              },
+              "publishing": {
+                "published_by": "Visnja on behalf of Prashanth",
+                "launch_date": "2026-11-20",
+                "live_url": "https://www.jaggaer.com/blog/category-management-strategy-frameworks",
+                "performance_data": "",
+                "updated_at": "2026-11-20T21:15:40.513Z"
               }
             },
             {
