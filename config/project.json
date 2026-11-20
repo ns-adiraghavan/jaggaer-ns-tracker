@@ -2323,7 +2323,7 @@
               "title": "Supplier Performance Management Solutions: 2027 Guide to Trends, Scorecards and AI",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "not-started",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2348,7 +2348,8 @@
                   "uploaded_at": "2026-11-17T13:39:08.986Z"
                 }
               ],
-              "brief_last_updated": "2026-11-17T13:39:08.986Z"
+              "brief_last_updated": "2026-11-17T13:39:08.986Z",
+              "secondary_keyword": ""
             },
             {
               "id": "piece-qo8b9r",
