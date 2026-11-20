@@ -2323,11 +2323,11 @@
               "title": "Supplier Performance Management Solutions: 2027 Guide to Trends, Scorecards and AI",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "writing",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 0,
+              "revision_count": 1,
               "primary_keyword": "supplier performance management solutions",
               "geography": "all",
               "created_via": "briefs-tab",
@@ -2336,10 +2336,15 @@
                   "stage": "not-started",
                   "ts": "2026-11-17T13:39:04.905Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-11-20T07:56:28.851Z",
+                  "by": "manager"
                 }
               ],
-              "last_updated": "2026-11-17T13:39:08.986Z",
-              "last_updated_by": "m-14bwv",
+              "last_updated": "2026-11-20T07:56:28.850Z",
+              "last_updated_by": "manager",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Supplier_Performance_Management_Solutions_New_Blog.pdf",
@@ -2349,7 +2354,11 @@
                 }
               ],
               "brief_last_updated": "2026-11-17T13:39:08.986Z",
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-11-20T07:56:28.850Z",
+              "last_upload_by": "manager"
             },
             {
               "id": "piece-qo8b9r",
