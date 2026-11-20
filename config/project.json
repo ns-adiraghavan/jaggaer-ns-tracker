@@ -1329,7 +1329,7 @@
               "title": "What Is Cost Efficiency? Definition, Examples and How to Achieve It",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1350,6 +1350,11 @@
                 {
                   "stage": "approved",
                   "ts": "2026-11-18T22:11:03.522Z",
+                  "by": "m-pifrn"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-20T21:06:59.902Z",
                   "by": "m-pifrn"
                 }
               ],
@@ -1375,7 +1380,14 @@
                 "updated_at": "2026-10-28T08:34:13.271Z",
                 "updated_by": "m-e10nz"
               },
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Visnja",
+                "launch_date": "2026-11-18",
+                "live_url": "https://www.jaggaer.com/blog/what-cost-efficiency",
+                "performance_data": "",
+                "updated_at": "2026-11-20T21:06:59.901Z"
+              }
             },
             {
               "id": "piece-0duw5x",
