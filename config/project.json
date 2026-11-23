@@ -10237,7 +10237,8 @@
         "id": "m-14bwv",
         "name": "Prashanth S",
         "role": "Marketing",
-        "org": "jaggaer"
+        "org": "jaggaer",
+        "admin": true
       }
     ]
   },
