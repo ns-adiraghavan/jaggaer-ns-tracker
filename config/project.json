@@ -10231,7 +10231,8 @@
         "id": "m-72umx",
         "name": "rikumar@jaggaer.com",
         "role": "Marketing",
-        "org": "jaggaer"
+        "org": "jaggaer",
+        "admin": true
       },
       {
         "id": "m-14bwv",
