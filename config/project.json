@@ -1650,7 +1650,10 @@
                 }
               ],
               "brief_last_updated": "2026-11-23T10:02:45.375Z",
-              "review_owner": "m-14bwv"
+              "review_owner": "m-14bwv",
+              "priority": "P1",
+              "priority_updated": "2026-11-23T10:06:08.222Z",
+              "priority_updated_by": "m-14bwv"
             },
             {
               "id": "piece-fh8mc8",
