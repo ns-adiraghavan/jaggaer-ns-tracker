@@ -12469,6 +12469,16 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "ann-6zga0a",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "FAQ duplication. \"What are AI guardrails?\" repeats the first H2, and \"How does AI governance fit with procurement governance?\" repeats an H3, with near-identical answers. Replace one or both with new questions, such as \"What is a permissions matrix?\" or \"Who should approve AI actions in procurement?\".",
+        "ts": "2026-11-23T17:02:37.489Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
