@@ -2301,7 +2301,7 @@
               "title": "AI Guardrails for Procurement: Permissions and Human Approval",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "marketing-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2319,10 +2319,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-18T07:38:07.754Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-23T17:03:46.724Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-18T07:38:07.754Z",
-              "last_updated_by": "orlagh",
+              "last_updated": "2026-11-23T17:03:46.724Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_AI_Guardrails_for_Procurement_New_Blog.pdf",
@@ -2333,7 +2338,7 @@
               ],
               "brief_last_updated": "2026-11-17T13:00:07.813Z",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-11-18T07:38:07.754Z",
               "last_upload_by": "orlagh",
               "seo": {
@@ -12479,6 +12484,14 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "fb-tvn4b7",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "Check comments",
+        "ts": "2026-11-23T17:03:46.721Z",
+        "stage": "marketing-review"
       }
     ]
   },
