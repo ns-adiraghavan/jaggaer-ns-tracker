@@ -12458,6 +12458,18 @@
         "ts": "2026-11-18T22:11:03.519Z",
         "stage": "marketing-review"
       }
+    ],
+    "piece-cw32cc": [
+      {
+        "id": "ann-4h42vf",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The ladder's level 4 is \"Act within limits\" with no human in the loop. The JAI section says \"a person at every approval checkpoint\" and \"JAI suggests, a human decides\", while also citing the \"assistant to copilot to autopilot\" path. JAI is always human in loop decision making, so change it accordingly",
+        "ts": "2026-11-23T16:57:13.137Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
