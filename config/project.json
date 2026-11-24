@@ -2187,7 +2187,7 @@
               "title": "Maverick Spend: Definition, Examples and 5 Tips to Prevent and Control It",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "marketing-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2205,10 +2205,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-17T11:42:35.062Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-24T12:34:13.017Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-17T11:42:35.061Z",
-              "last_updated_by": "m-e10nz",
+              "last_updated": "2026-11-24T12:34:13.017Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Maverick_Spend_Refresh.pdf",
@@ -2222,7 +2227,7 @@
               "priority_updated": "2026-11-04T09:58:11.077Z",
               "priority_updated_by": "m-14bwv",
               "deliverable_ext": "htm",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-11-17T11:42:35.061Z",
               "last_upload_by": "m-e10nz",
               "seo": {
@@ -2289,7 +2294,7 @@
               "title": "Off-Contract Buying in Higher Education: How Guided Buying Helps",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "marketing-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2307,10 +2312,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-17T11:46:21.853Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-24T15:55:42.593Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-17T11:46:21.853Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-24T15:55:42.593Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Off_Contract_Buying_Higher_Education_New_Blog.pdf",
@@ -12836,6 +12846,24 @@
         "annotation": true,
         "section": "¶83 — \"Conclusion: Build better control over ma…\"",
         "revision": 1
+      },
+      {
+        "id": "fb-xxyw95",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "Check comments",
+        "ts": "2026-11-24T12:34:13.014Z",
+        "stage": "marketing-review"
+      }
+    ],
+    "piece-c46xog": [
+      {
+        "id": "fb-phqmww",
+        "author": "m-14bwv",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-24T15:55:42.590Z",
+        "stage": "marketing-review"
       }
     ]
   },
