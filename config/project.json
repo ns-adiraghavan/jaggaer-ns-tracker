@@ -2695,8 +2695,17 @@
                   "by": "m-pifrn"
                 }
               ],
-              "last_updated": "2026-11-24T14:35:58.392Z",
-              "last_updated_by": "m-pifrn"
+              "last_updated": "2026-11-24T14:36:02.271Z",
+              "last_updated_by": "m-pifrn",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Supply_Chain_Risk_Management_Refresh.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-uym0vd/brief/JAGGAER_SEO_Brief_Supply_Chain_Risk_Management_Refresh.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-11-24T14:36:02.271Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-24T14:36:02.271Z"
             }
           ]
         }
