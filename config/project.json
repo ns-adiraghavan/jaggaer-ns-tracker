@@ -12765,6 +12765,16 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "ann-8epohf",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Use \"Next Steps\" section instead of Conclusion for consitenct",
+        "ts": "2026-11-24T12:33:36.070Z",
+        "annotation": true,
+        "section": "¶83 — \"Conclusion: Build better control over ma…\"",
+        "revision": 1
       }
     ]
   },
