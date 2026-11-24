@@ -12755,6 +12755,16 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "ann-g560qh",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Efficio's 93%, 85% and 81% figures are all linked to a news page about \"over 25% of indirect spend has no financial oversight\". The MRO article linked a different Efficio report for the 93%. Confirm which page contains each figure, and check the 300-respondent and £1 billion details.",
+        "ts": "2026-11-24T12:08:08.381Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
