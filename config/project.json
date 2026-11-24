@@ -12537,6 +12537,16 @@
         "annotation": true,
         "section": "¶118 — \"What changed in 2026…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-39fmnn",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The article says JAI launched on May 5, 2026, while the guardrails article cites a June 2025 JAI announcement. Reconcile the timeline.",
+        "ts": "2026-11-24T10:14:50.776Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
