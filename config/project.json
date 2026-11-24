@@ -2141,7 +2141,7 @@
                 },
                 {
                   "stage": "live",
-                  "ts": "2026-11-24T11:52:37.607Z",
+                  "ts": "2026-11-24T12:21:02.661Z",
                   "by": "m-pifrn"
                 }
               ],
@@ -2165,11 +2165,11 @@
               "last_upload": "2026-11-19T09:52:10.082Z",
               "last_upload_by": "jason",
               "publishing": {
-                "published_by": "Visnja on behalf of Prashanth",
+                "published_by": "Published by Visnja on behalf of Prashanth",
                 "launch_date": "2026-11-23",
                 "live_url": "https://www.jaggaer.com/blog/what-are-ai-workers",
                 "performance_data": "",
-                "updated_at": "2026-11-24T11:52:37.607Z"
+                "updated_at": "2026-11-24T12:21:02.661Z"
               }
             },
             {
