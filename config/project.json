@@ -2045,11 +2045,11 @@
               "title": "AI Intake for Procurement: How It Works, What to Look For and How to  Pilot It",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "writing",
+              "status": "ed-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 1,
+              "revision_count": 2,
               "primary_keyword": "ai intake",
               "geography": "all",
               "created_via": "briefs-tab",
@@ -2068,10 +2068,15 @@
                   "stage": "writing",
                   "ts": "2026-11-24T10:18:31.858Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-11-24T13:21:24.312Z",
+                  "by": "m-5jitd"
                 }
               ],
-              "last_updated": "2026-11-24T10:18:31.858Z",
-              "last_updated_by": "m-14bwv",
+              "last_updated": "2026-11-24T13:21:24.312Z",
+              "last_updated_by": "m-5jitd",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_AI_Intake_New_Blog.pdf",
@@ -2083,8 +2088,8 @@
               "brief_last_updated": "2026-11-11T09:01:43.542Z",
               "review_owner": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": "ed-review",
-              "last_upload": "2026-11-17T10:39:48.388Z",
+              "return_to_stage": null,
+              "last_upload": "2026-11-24T13:21:24.312Z",
               "last_upload_by": "m-5jitd",
               "seo": {
                 "meta_title": "AI Intake for Procurement: How It Works and What to Look For",
