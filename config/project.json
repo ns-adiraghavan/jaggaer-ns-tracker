@@ -2035,7 +2035,7 @@
               "title": "AI Intake for Procurement: How It Works, What to Look For and How to  Pilot It",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "marketing-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2053,10 +2053,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-17T10:39:48.388Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-24T10:18:31.858Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-17T10:39:48.388Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-24T10:18:31.858Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_AI_Intake_New_Blog.pdf",
@@ -2068,7 +2073,7 @@
               "brief_last_updated": "2026-11-11T09:01:43.542Z",
               "review_owner": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-11-17T10:39:48.388Z",
               "last_upload_by": "m-5jitd",
               "seo": {
@@ -12581,6 +12586,26 @@
         "ts": "2026-11-24T10:17:17.929Z",
         "annotation": true,
         "section": "General",
+        "revision": 1
+      },
+      {
+        "id": "fb-3xfabp",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "Check comments",
+        "ts": "2026-11-24T10:18:31.853Z",
+        "stage": "marketing-review"
+      }
+    ],
+    "piece-g2cq2j": [
+      {
+        "id": "ann-b8va6s",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "is there any source for Average downtime up to $1.7 million per hour as per the 3-country survey\" this stat?",
+        "ts": "2026-11-24T10:42:44.917Z",
+        "annotation": true,
+        "section": "¶10 — \"Tighter approvals, the usual fix, can ba…\"",
         "revision": 1
       }
     ]
