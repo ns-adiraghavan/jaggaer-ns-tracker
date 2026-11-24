@@ -2695,7 +2695,7 @@
                   "by": "m-pifrn"
                 }
               ],
-              "last_updated": "2026-11-24T14:37:19.060Z",
+              "last_updated": "2026-11-24T14:38:25.392Z",
               "last_updated_by": "m-pifrn",
               "brief_files": [
                 {
@@ -2703,9 +2703,15 @@
                   "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-uym0vd/brief/JAGGAER_SEO_Brief_Supply_Chain_Risk_Management_Refresh.pdf",
                   "uploaded_by": "m-pifrn",
                   "uploaded_at": "2026-11-24T14:37:19.060Z"
+                },
+                {
+                  "filename": "This is the correct brief - AGGAER_SEO_Brief_Predictive_Supplier_Risk_Update.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-uym0vd/brief/This_is_the_correct_brief_-_AGGAER_SEO_Brief_Predictive_Supplier_Risk_Update.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-11-24T14:38:25.392Z"
                 }
               ],
-              "brief_last_updated": "2026-11-24T14:37:19.060Z",
+              "brief_last_updated": "2026-11-24T14:38:25.392Z",
               "review_owner": "m-pifrn"
             }
           ]
