@@ -12516,6 +12516,18 @@
         "ts": "2026-11-23T17:03:46.721Z",
         "stage": "marketing-review"
       }
+    ],
+    "piece-5wxtri": [
+      {
+        "id": "ann-3thb0o",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "change the starting word to \"AI intake in procurement\" lets employee",
+        "ts": "2026-11-24T10:12:05.593Z",
+        "annotation": true,
+        "section": "¶1 — \"AI intake lets employees describe a need…\"",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
