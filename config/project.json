@@ -1418,7 +1418,7 @@
               "title": "Change Management in Procurement: 10 Principles for Success",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "marketing-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1435,10 +1435,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-10-27T11:49:17.267Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-24T11:39:30.715Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-10-27T11:49:17.267Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-24T11:39:30.715Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Procurement_Change_Management_Update (1).pdf",
@@ -1450,7 +1455,7 @@
               "brief_last_updated": "2026-10-27T05:23:42.088Z",
               "secondary_keyword": "",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-10-27T11:49:17.267Z",
               "last_upload_by": "m-5jitd",
               "seo": {
@@ -12715,6 +12720,14 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "fb-p9vfet",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "check comments",
+        "ts": "2026-11-24T11:39:30.711Z",
+        "stage": "marketing-review"
       }
     ]
   },
