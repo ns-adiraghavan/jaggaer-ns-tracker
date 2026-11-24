@@ -2562,6 +2562,30 @@
               ],
               "last_updated": "2026-11-24T10:08:34.776Z",
               "last_updated_by": "m-14bwv"
+            },
+            {
+              "id": "piece-5hf8c6",
+              "title": "Supplier Collaboration Benefits",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-pifrn",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "supplier collaboration benefits",
+              "geography": "all",
+              "notes": "This is an old post we're updating - this is the link: https://www.jaggaer.com/blog/supplier-collaboration-driving-innovation",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-24T11:24:40.854Z",
+                  "by": "m-pifrn"
+                }
+              ],
+              "last_updated": "2026-11-24T11:24:40.854Z",
+              "last_updated_by": "m-pifrn"
             }
           ]
         }
