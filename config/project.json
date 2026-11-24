@@ -12557,6 +12557,16 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "ann-yikang",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The article has 10 sourced surveys. We can put half of them here and move the next half to another article with similar topic",
+        "ts": "2026-11-24T10:17:17.929Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
