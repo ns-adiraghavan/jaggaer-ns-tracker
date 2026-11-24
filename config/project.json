@@ -12617,6 +12617,16 @@
         "annotation": true,
         "section": "¶52 — \"Pricing contribution to Fastenal’s sales…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-sz0hhb",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The 20% MRO-cost cut is quoted via Procurement Magazine. Cite the original McKinsey source.",
+        "ts": "2026-11-24T10:47:44.538Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
