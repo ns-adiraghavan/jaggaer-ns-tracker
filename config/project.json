@@ -12637,6 +12637,16 @@
         "annotation": true,
         "section": "¶46 — \"Jaggaer's eProcurement software provides…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-on07d0",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Keep all the headings title case",
+        "ts": "2026-11-24T10:48:48.450Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
