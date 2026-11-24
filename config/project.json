@@ -12705,6 +12705,16 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "ann-3r3odm",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The article carries about 25 data points and 8 inline graphics, and the sidebar repeats 5 of them. Consider trimming for readability.",
+        "ts": "2026-11-24T11:36:45.551Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
