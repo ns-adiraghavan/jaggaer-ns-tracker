@@ -12607,6 +12607,16 @@
         "annotation": true,
         "section": "¶10 — \"Tighter approvals, the usual fix, can ba…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-76azgp",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Distributor's pricing is not MRO spend. Consider removing it.",
+        "ts": "2026-11-24T10:44:05.997Z",
+        "annotation": true,
+        "section": "¶52 — \"Pricing contribution to Fastenal’s sales…\"",
+        "revision": 1
       }
     ]
   },
