@@ -12627,6 +12627,16 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "ann-4m5cnt",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The \"Book a Demo\" button goes to /solutions/eprocurement, not a demo pag",
+        "ts": "2026-11-24T10:48:13.694Z",
+        "annotation": true,
+        "section": "¶46 — \"Jaggaer's eProcurement software provides…\"",
+        "revision": 1
       }
     ]
   },
