@@ -5108,8 +5108,8 @@
               "return_to_stage": null,
               "last_upload": "2026-10-05T15:37:59.919Z",
               "last_upload_by": "m-e10nz",
-              "last_updated": "2026-10-05T15:37:59.919Z",
-              "last_updated_by": "m-e10nz",
+              "last_updated": "2026-11-24T11:39:53.072Z",
+              "last_updated_by": "m-14bwv",
               "status_history": [
                 {
                   "stage": "marketing-review",
@@ -5123,7 +5123,8 @@
                 "slug": "blog-top-procurement-software-alternatives-to-ariba-and-coupa",
                 "updated_at": "2026-10-05T15:38:54.244Z",
                 "updated_by": "m-e10nz"
-              }
+              },
+              "review_owner": "m-pifrn"
             },
             {
               "id": "p3-seo-tail-spend-management-solutions-a-general-overview",
