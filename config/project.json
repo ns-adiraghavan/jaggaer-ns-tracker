@@ -5064,8 +5064,8 @@
               "return_to_stage": null,
               "last_upload": "2026-10-06T12:02:45.276Z",
               "last_upload_by": "m-5jitd",
-              "last_updated": "2026-10-06T12:02:45.276Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-24T11:39:55.359Z",
+              "last_updated_by": "m-14bwv",
               "status_history": [
                 {
                   "stage": "marketing-review",
@@ -5084,7 +5084,8 @@
                 "slug": "",
                 "updated_at": "2026-10-06T12:03:17.184Z",
                 "updated_by": "m-5jitd"
-              }
+              },
+              "review_owner": "m-pifrn"
             },
             {
               "id": "p3-seo-top-procurement-software-alternatives-to-ariba-and-coupa",
