@@ -2650,7 +2650,7 @@
                   "by": "m-pifrn"
                 }
               ],
-              "last_updated": "2026-11-24T13:23:25.907Z",
+              "last_updated": "2026-11-24T13:42:53.579Z",
               "last_updated_by": "m-pifrn",
               "brief_files": [
                 {
@@ -2658,9 +2658,15 @@
                   "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-5eet87/brief/JAGGAER_SEO_Brief_Autonomous_Procurement_Update.pdf",
                   "uploaded_by": "m-pifrn",
                   "uploaded_at": "2026-11-24T13:23:25.907Z"
+                },
+                {
+                  "filename": "JAGGAER_SEO_Brief_Autonomous_Procurement_Update.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-5eet87/brief/JAGGAER_SEO_Brief_Autonomous_Procurement_Update.pdf",
+                  "uploaded_by": "m-pifrn",
+                  "uploaded_at": "2026-11-24T13:42:53.579Z"
                 }
               ],
-              "brief_last_updated": "2026-11-24T13:23:25.907Z"
+              "brief_last_updated": "2026-11-24T13:42:53.579Z"
             }
           ]
         }
