@@ -1418,11 +1418,11 @@
               "title": "Change Management in Procurement: 10 Principles for Success",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "writing",
+              "status": "ed-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 1,
+              "revision_count": 2,
               "primary_keyword": "",
               "geography": "all",
               "status_history": [
@@ -1440,10 +1440,15 @@
                   "stage": "writing",
                   "ts": "2026-11-24T11:39:30.715Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-11-24T12:43:32.619Z",
+                  "by": "m-5jitd"
                 }
               ],
-              "last_updated": "2026-11-24T11:39:30.715Z",
-              "last_updated_by": "m-14bwv",
+              "last_updated": "2026-11-24T12:43:32.619Z",
+              "last_updated_by": "m-5jitd",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Procurement_Change_Management_Update (1).pdf",
@@ -1455,8 +1460,8 @@
               "brief_last_updated": "2026-10-27T05:23:42.088Z",
               "secondary_keyword": "",
               "deliverable_ext": "html",
-              "return_to_stage": "ed-review",
-              "last_upload": "2026-10-27T11:49:17.267Z",
+              "return_to_stage": null,
+              "last_upload": "2026-11-24T12:43:32.619Z",
               "last_upload_by": "m-5jitd",
               "seo": {
                 "meta_title": "Change Management in Procurement: 10 Success Principles",
