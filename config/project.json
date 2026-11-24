@@ -12744,6 +12744,18 @@
         "ts": "2026-11-24T11:39:30.711Z",
         "stage": "marketing-review"
       }
+    ],
+    "piece-fmg9pm": [
+      {
+        "id": "ann-oetqq1",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "Agiloft is a kind of competitor, so remove ther references and add Efficio or Ardent instead.",
+        "ts": "2026-11-24T12:00:22.795Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
