@@ -2212,7 +2212,7 @@
               "title": "MRO Spend Analysis with AI: How Manufacturers Control Indirect Spend",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "marketing-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2230,10 +2230,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-19T08:32:54.366Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-24T10:49:31.851Z",
+                  "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-19T08:32:54.366Z",
-              "last_updated_by": "jason",
+              "last_updated": "2026-11-24T10:49:31.851Z",
+              "last_updated_by": "m-14bwv",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_MRO_Spend_Analysis_AI_New_Blog.pdf",
@@ -2247,7 +2252,7 @@
               "priority_updated": "2026-11-04T09:58:15.645Z",
               "priority_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-11-19T08:32:54.366Z",
               "last_upload_by": "jason",
               "secondary_keyword": ""
@@ -12647,6 +12652,14 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "fb-g7zv78",
+        "author": "m-14bwv",
+        "verdict": "needs-revision",
+        "body": "Check comments",
+        "ts": "2026-11-24T10:49:31.847Z",
+        "stage": "marketing-review"
       }
     ]
   },
