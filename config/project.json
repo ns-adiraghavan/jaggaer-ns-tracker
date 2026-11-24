@@ -2622,6 +2622,30 @@
                 }
               ],
               "brief_last_updated": "2026-11-24T11:24:43.015Z"
+            },
+            {
+              "id": "piece-5eet87",
+              "title": "Autonomous Procurement Agents: Hype or Real Value?",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-pifrn",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "autonomous procurement",
+              "geography": "all",
+              "notes": "Current title and link: Autonomous Procurement Agents: Hype or Real Value? \n - https://www.jaggaer.com/blog/autonomous-procurement-agents-hype-or-value - rewrite and update",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-24T13:23:23.864Z",
+                  "by": "m-pifrn"
+                }
+              ],
+              "last_updated": "2026-11-24T13:23:23.864Z",
+              "last_updated_by": "m-pifrn"
             }
           ]
         }
