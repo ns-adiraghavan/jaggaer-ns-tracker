@@ -12694,6 +12694,18 @@
         "ts": "2026-11-24T10:49:31.847Z",
         "stage": "marketing-review"
       }
+    ],
+    "piece-0duw5x": [
+      {
+        "id": "ann-rp8duu",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The Hackett 80% is described here as AI being \"the most transformational trend\". Other articles describe the same figure as AI-enabled technology in the top 5 transformational trends. Confirm the exact wording.",
+        "ts": "2026-11-24T11:36:07.111Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
