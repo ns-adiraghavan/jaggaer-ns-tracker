@@ -13006,6 +13006,16 @@
         "body": "check comments",
         "ts": "2026-11-24T11:39:30.711Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "ann-agqeq5",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "The FAQ and the first chapter heading is duplicate , can we make sure we include specific FAQs that we can get form \"people may ask\" section of the Google SERP",
+        "ts": "2026-11-25T12:47:04.103Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 2
       }
     ],
     "piece-fmg9pm": [
