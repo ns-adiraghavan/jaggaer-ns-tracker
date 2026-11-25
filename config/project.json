@@ -2809,6 +2809,30 @@
                 }
               ],
               "brief_last_updated": "2026-11-25T12:40:08.522Z"
+            },
+            {
+              "id": "piece-l6oc1n",
+              "title": "Supplier Financial Risk Signals Procurement Should Monitor in 2026",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-pifrn",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "supplier financial risk assessment",
+              "geography": "all",
+              "notes": "Old post, update with new guidelines and brief: https://www.jaggaer.com/blog/supplier-financial-risk-signals-procurement-should-monitor-in-2026",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-25T12:55:35.433Z",
+                  "by": "m-pifrn"
+                }
+              ],
+              "last_updated": "2026-11-25T12:55:35.433Z",
+              "last_updated_by": "m-pifrn"
             }
           ]
         }
