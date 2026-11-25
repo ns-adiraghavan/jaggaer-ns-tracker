@@ -1,0 +1,1155 @@
+<!-- uploaded by jason at 2026-11-25T09:09:31.346Z -->
+<!-- piece: MRO Spend Analysis with AI: How Manufacturers Control Indirect Spend -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>document.documentElement.classList.add('js-enabled');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRO Spend Analysis with AI for Manufacturers: Control Spend</title>
+<meta name="description" content="MRO spend analysis with AI shows manufacturers what they buy, from whom and at what price. Learn what to analyze and how to control indirect spend.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#5300CE">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235300CE'/%3E%3Cstop offset='1' stop-color='%23E22B83'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="canonical" href="https://www.jaggaer.com/blog/mro-spend-analysis-ai-manufacturing">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="JAGGAER">
+<meta property="og:title" content="MRO Spend Analysis with AI for Manufacturers: Control Spend">
+<meta property="og:description" content="MRO spend analysis with AI shows manufacturers what they buy, from whom and at what price. Learn what to analyze and how to control indirect spend.">
+<meta property="og:url" content="https://www.jaggaer.com/blog/mro-spend-analysis-ai-manufacturing">
+<meta property="article:section" content="Procurement">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MRO Spend Analysis with AI for Manufacturers: Control Spend">
+<meta name="twitter:description" content="MRO spend analysis with AI shows manufacturers what they buy, from whom and at what price. Learn what to analyze and how to control indirect spend.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"MRO Spend Analysis with AI for Manufacturers: Control Spend","description":"MRO spend analysis with AI shows manufacturers what they buy, from whom and at what price. Learn what to analyze and how to control indirect spend.","mainEntityOfPage":"https://www.jaggaer.com/blog/mro-spend-analysis-ai-manufacturing","datePublished":"2026-11","inLanguage":"en-US","publisher":{"@type":"Organization","name":"JAGGAER","url":"https://www.jaggaer.com"},"about":["MRO spend analysis","MRO in manufacturing","Indirect spend management","AI spend analysis","Indirect procurement strategy","MRO procurement best practices"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.jaggaer.com"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.jaggaer.com/blog"},{"@type":"ListItem","position":3,"name":"MRO Spend Analysis with AI for Manufacturers: Control Spend","item":"https://www.jaggaer.com/blog/mro-spend-analysis-ai-manufacturing"}]}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is MRO spend analysis?","acceptedAnswer":{"@type":"Answer","text":"MRO spend analysis reviews maintenance, repair and operations purchases to show what a manufacturer buys, from which suppliers and at what price. It exposes duplicate parts, price gaps between sites and off-contract buying."}},{"@type":"Question","name":"What counts as MRO spend in manufacturing?","acceptedAnswer":{"@type":"Answer","text":"MRO spend in manufacturing covers spare parts, maintenance supplies, tools, safety gear, facility supplies and repair services. These purchases keep plants running but never become part of the finished product."}},{"@type":"Question","name":"What is an indirect procurement strategy for MRO?","acceptedAnswer":{"@type":"Answer","text":"An indirect procurement strategy for MRO sorts items by how critical they are to production. Critical spares get assured supply, while commodity items are bought through catalogs at negotiated prices."}},{"@type":"Question","name":"How does AI improve MRO spend analysis?","acceptedAnswer":{"@type":"Answer","text":"AI improves MRO spend analysis by classifying free-text purchase lines, merging duplicate parts and flagging price outliers automatically. Category managers then review the findings instead of cleaning spreadsheets by hand."}},{"@type":"Question","name":"How can manufacturers reduce MRO spend?","acceptedAnswer":{"@type":"Answer","text":"Manufacturers reduce MRO spend by routing repeat items to eProcurement catalogs, consolidating suppliers and standardizing duplicate parts. Critical spares should keep a backup supplier so cost cuts never risk uptime."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs:      0.75rem;
+  --font-size-sm:      0.875rem;
+  --font-size-base:    1rem;
+  --font-size-lg:      1.125rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2.07rem, calc(1.8rem + 1.12vw), 2.4rem);
+  --font-weight-heading: 400;
+  --line-height-base:  1.6;
+  --line-height-heading: 1.1;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-base);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);}
+h1{font-size:var(--font-size-h1);}
+h2{font-size:var(--font-size-h2);}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+a:focus-visible,.toc-link:focus-visible,.next-card:focus-visible,.faq-item summary:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;border-radius:2px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.link-pending{color:var(--color-teal);border-bottom:1px solid #4D819440;}
+ul{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.stat{font-weight:700;color:var(--color-red);}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.badge-blue{background:#E9EFF4;color:#1B3A5C;}
+.badge-green{background:#e5eeeb;color:#558156;}
+.section-eyebrow{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-xs);}
+.article-badges{display:flex;flex-wrap:wrap;gap:var(--space-2xs);margin-bottom:var(--space-s);}
+
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;transition:width .08s linear;}
+
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:860px;}
+.article-label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-teal);margin-bottom:var(--space-m);}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;line-height:var(--line-height-heading);color:var(--color-ink);max-width:760px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.75rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+.meta-label{font-size:.625rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-ink);}
+
+.page-wrapper{display:flex;align-items:flex-start;max-width:1340px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+.toc-sidebar{width:210px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-size:1.15rem;font-weight:700;color:var(--color-ink);line-height:1;display:block;margin-bottom:.15rem;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.68rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-stat strong{font-weight:700;color:var(--color-ink-3);font-size:.68rem;}
+.exp-link{font-size:.62rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-num.small{font-size:.72rem;line-height:1.25;letter-spacing:0;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.expert-sidebar{display:none;}}
+
+article{flex:1;min-width:0;max-width:860px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:400;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);scroll-margin-top:1.5rem;}
+article h3{font-size:var(--font-size-h5);font-weight:700;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+article h3.mt-0{margin-top:0;}
+h1[id]{scroll-margin-top:1.5rem;}
+
+.stat-metrics{background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.stat-metrics-kicker{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);margin-bottom:var(--space-m);display:block;}
+.stat-metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.stat-metric{padding:var(--space-m);text-align:center;background:var(--color-white);}
+.stat-metric:first-child{border-radius:var(--border-radius-sm) 0 0 var(--border-radius-sm);}
+.stat-metric:last-child{border-radius:0 var(--border-radius-sm) var(--border-radius-sm) 0;}
+.stat-num{font-size:clamp(1.3rem,2vw,1.7rem);font-weight:800;color:var(--color-red);display:block;line-height:1;margin-bottom:.3rem;}
+.stat-label{font-size:.7rem;font-weight:600;color:var(--color-ink);display:block;line-height:1.3;margin-bottom:.2rem;}
+.stat-sub{font-size:.62rem;color:var(--color-ink-3);display:block;font-style:italic;}
+
+.hook-stat{display:flex;align-items:center;gap:var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);margin:0 0 var(--space-m);}
+.hook-stat-num{font-size:clamp(1.5rem,2.6vw,1.9rem);font-weight:800;color:var(--jai-a);line-height:1;letter-spacing:-.01em;flex-shrink:0;}
+.hook-stat-body{min-width:0;}
+.hook-stat-lead{font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);line-height:1.35;margin:0 0 .15rem;}
+.hook-stat-sub{font-size:var(--font-size-xs);color:var(--color-ink-3);margin:0;line-height:1.45;}
+@media(max-width:580px){.hook-stat{flex-direction:column;align-items:flex-start;gap:var(--space-xs);}}
+@media(max-width:600px){.stat-metrics-grid{grid-template-columns:repeat(2,1fr);}.stat-metric:first-child,.stat-metric:last-child{border-radius:0;}.stat-metric:nth-child(2){border-radius:0;}}
+
+.callout-note{background:var(--color-light-blue);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.callout-note-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-xs);}
+.callout-note p{font-size:var(--font-size-sm);color:var(--color-ink-2);margin:0;line-height:1.6;}
+.callout-note.callout-purple{background:var(--purple-tint);border-left-color:var(--jai-a);}
+.callout-note.callout-purple .callout-note-label{color:var(--jai-a);}
+
+.obl-table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.obl-table{width:100%;border-collapse:collapse;font-size:.8125rem;min-width:580px;}
+.obl-table th{padding:.75rem 1rem;background:var(--jai-a);color:#fff;font-weight:700;text-align:left;border-bottom:1px solid #ffffff18;border-right:1px solid #ffffff18;font-size:.75rem;letter-spacing:.04em;}
+.obl-table th:last-child{border-right:none;}
+.obl-table td{padding:.75rem 1rem;border-bottom:var(--border);border-right:var(--border);vertical-align:top;line-height:1.5;color:var(--color-ink-2);font-size:.8rem;}
+.obl-table td:last-child{border-right:none;}
+.obl-table tr:last-child td{border-bottom:none;}
+.obl-table td:first-child{font-weight:700;color:var(--color-ink);background:var(--color-cream);}
+.obl-note{font-size:.72rem;color:var(--color-ink-3);display:block;margin-top:.4rem;font-weight:400;}
+.obl-caption{caption-side:top;text-align:left;padding:.75rem 1rem;font-size:.9rem;font-weight:700;color:var(--color-ink);background:var(--color-cream);border-bottom:var(--border);}
+.score-table,.supplier-table{table-layout:fixed;min-width:100%;}
+.cols-6-equal col{width:16.6667%;}
+.score-table th,.score-table td{text-align:center;word-wrap:break-word;}
+.score-table td:first-child{text-align:left;}
+.supplier-table th,.supplier-table td{overflow-wrap:normal;word-break:keep-all;hyphens:none;}
+.supplier-table th{white-space:normal;line-height:1.3;}
+@media(max-width:560px){.score-table,.supplier-table{table-layout:auto;min-width:640px;}}
+
+.phase-cards{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0 var(--space-l);}
+.phase-item{display:flex;align-items:stretch;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;}
+.phase-accent{width:4px;flex-shrink:0;}
+.pa-1{background:var(--color-teal);}
+.pa-2{background:var(--color-navy);}
+.pa-3{background:var(--color-grey);}
+.pa-4{background:var(--jai-a);}
+.pa-5{background:var(--color-red);}
+.phase-body{flex:1;padding:var(--space-s) var(--space-m);background:var(--color-white);}
+.phase-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--color-ink-3);display:block;margin-bottom:var(--space-2xs);}
+.phase-title{font-weight:700;color:var(--color-ink);font-size:var(--font-size-sm);margin-bottom:.25rem;}
+.phase-desc{font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;margin:0;}
+
+.key-facts{background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.kf-label{display:block;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-navy);margin-bottom:var(--space-s);}
+.key-facts ul{margin-bottom:0;}
+.key-facts li{font-size:.8125rem;line-height:1.6;}
+
+.pull-quote{background:var(--purple-tint);border:1px solid var(--purple-soft);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.pull-quote p{font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);line-height:1.5;margin:0 0 var(--space-xs);font-style:normal;}
+.pull-quote cite{display:block;font-size:.75rem;font-weight:600;font-style:normal;color:var(--color-ink-3);}
+
+.jag-cta{display:flex;align-items:center;gap:var(--space-m);border:1px solid transparent;background:linear-gradient(#fff,#fff) padding-box, linear-gradient(90deg,#5300CE,#E22B83) border-box;border-radius:var(--border-radius);padding:var(--space-s) var(--space-m);margin:var(--space-l) 0;transition:box-shadow .2s;position:relative;overflow:hidden;}
+.jag-cta::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,#5300ce0d 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+.jag-cta:hover{box-shadow:0 8px 32px rgba(83,0,206,.12);}
+.jag-cta-label{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.15rem var(--space-s);border-radius:9999px;white-space:nowrap;margin-bottom:var(--space-2xs);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-sm);font-weight:700;color:var(--color-ink);margin:0 0 .15rem;line-height:1.35;}
+.jag-cta-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0;line-height:1.5;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:.875rem;font-weight:600;color:#fff;background:linear-gradient(90deg,#5300CE,#E22B83);padding:.5rem 1.25rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;min-width:140px;border-radius:var(--border-radius-sm);transition:opacity .2s;}
+.jag-cta-btn:hover{opacity:.88;color:#fff;border-bottom:none;}
+.jag-cta--red{background:var(--color-white);border:1px solid var(--color-red);}
+.jag-cta--red .jag-cta-label{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn{background:var(--color-red);}
+.jag-cta--red .jag-cta-btn:hover{background:var(--color-grey);opacity:1;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:flex-start;max-width:100%;}}
+
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-sm);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;transition:transform .2s;line-height:1;}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;border-top:var(--border);background:var(--color-white);}
+
+.bullet-list{list-style:disc;padding-left:1.4rem;margin:var(--space-s) 0 var(--space-m);}
+.bullet-list li{font-size:var(--font-size-sm);color:var(--color-ink-2);line-height:1.65;margin-bottom:.4rem;}
+
+.chart-card{border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--color-white);}
+.chart-head{margin-bottom:var(--space-m);display:flex;flex-direction:column;gap:.1rem;}
+.chart-title{font-size:.9rem;font-weight:700;color:var(--color-ink);}
+.chart-source{font-size:.65rem;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.05em;}
+.chart-foot{font-size:.72rem;color:var(--color-ink-3);margin-top:var(--space-s);line-height:1.5;font-style:italic;}
+.disclaimer-box{background:var(--color-bg-2,#F7F7F9);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-l) 0;}
+.disclaimer-box p{font-size:.75rem;color:var(--color-ink-3);line-height:1.6;margin:0;font-style:italic;}
+.compare-table-wrap{overflow:hidden;margin:var(--space-m) 0 var(--space-l);border:2px dashed var(--jai-a);border-radius:var(--border-radius-sm);padding:.4rem;background:var(--color-white);}
+.compare-table-scroll{overflow-x:auto;border-radius:calc(var(--border-radius-sm) - 2px);}
+.compare-table{width:100%;border-collapse:collapse;font-size:.76rem;min-width:480px;}
+.compare-table th{padding:.55rem .85rem;font-weight:700;text-align:left;font-size:.78rem;letter-spacing:.01em;}
+.compare-table th.col-fa{background:rgba(210,36,40,.14);color:var(--color-red);}
+.compare-table th.col-pn{background:var(--purple-tint-2);color:var(--jai-a);}
+.compare-table td{padding:.55rem .85rem;line-height:1.4;vertical-align:top;color:var(--color-ink-2);border-top:1px solid #ffffffb0;}
+.compare-table td.col-fa{background:rgba(210,36,40,.05);}
+.compare-table td.col-pn{background:var(--purple-tint);}
+.compare-table tr:first-child td{border-top:none;}
+
+.bar-chart{display:flex;flex-direction:column;gap:var(--space-m);}
+.bar-row{display:grid;grid-template-columns:230px 1fr 64px;align-items:center;gap:var(--space-s);}
+.bar-row .bar-label{font-size:.78rem;color:var(--color-ink-2);font-weight:600;line-height:1.3;}
+.bar-track{background:var(--color-cream);border-radius:9999px;height:12px;overflow:hidden;position:relative;}
+.bar-fill{height:100%;border-radius:9999px;display:block;width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1);}
+.bar-value{font-size:.9rem;font-weight:800;text-align:right;color:var(--color-ink);}
+.c-red{background:var(--color-red);} .v-red{color:var(--color-red);}
+.c-purple{background:var(--jai-a);} .v-purple{color:var(--jai-a);}
+.c-teal{background:var(--color-teal);} .v-teal{color:var(--color-teal);}
+.c-navy{background:var(--color-navy);} .v-navy{color:var(--color-navy);}
+.c-grey{background:var(--color-grey);} .v-grey{color:var(--color-grey);}
+@media(max-width:640px){.bar-row{grid-template-columns:1fr;gap:.3rem;}.bar-value{text-align:left;}}
+
+.next-grid{display:flex;flex-direction:column;gap:3px;margin:var(--space-m) 0 var(--space-l);}
+.next-card{display:flex;align-items:center;justify-content:space-between;gap:var(--space-m);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-s) var(--space-m);background:var(--color-white);flex-wrap:wrap;transition:border-color .2s,box-shadow .2s;}
+.next-card:hover{border-color:var(--jai-a);box-shadow:0 4px 16px rgba(83,0,206,.08);}
+.next-card-title{font-weight:700;color:var(--color-ink);font-size:.85rem;margin-bottom:.2rem;}
+.next-card-desc{font-size:.78rem;color:var(--color-ink-2);line-height:1.5;margin:0;}
+.next-card-link{flex-shrink:0;font-size:.78rem;font-weight:600;color:var(--jai-a);border-bottom:1px solid #5300ce40;white-space:nowrap;}
+.next-card-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Before/after workflow diagram */
+.workflow-compare{display:flex;gap:var(--space-m);align-items:stretch;flex-wrap:wrap;}
+.workflow-col{flex:1;min-width:220px;display:flex;flex-direction:column;border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;background:var(--color-white);}
+.workflow-col-head{padding:var(--space-s) var(--space-m);font-weight:700;font-size:.8rem;color:#fff;display:flex;align-items:center;gap:.4rem;}
+.workflow-col-head.wf-before{background:var(--color-grey);}
+.workflow-col-head.wf-after{background:linear-gradient(90deg,#5300CE,#E22B83);}
+.workflow-steps{padding:var(--space-m);display:flex;flex-direction:column;gap:var(--space-s);flex:1;}
+.workflow-step{display:flex;gap:.6rem;align-items:flex-start;font-size:.78rem;color:var(--color-ink-2);line-height:1.5;}
+.workflow-step-num{width:20px;height:20px;border-radius:50%;background:var(--color-cream);color:var(--color-ink-3);font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.workflow-time{padding:var(--space-s) var(--space-m);border-top:var(--border);font-size:.85rem;font-weight:800;text-align:center;}
+.workflow-time.wf-time-before{color:var(--color-ink-3);}
+.workflow-time.wf-time-after{color:var(--jai-a);}
+.workflow-arrow{display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--color-ink-3);flex:0 0 auto;}
+@media(max-width:640px){.workflow-arrow{transform:rotate(90deg);}}
+
+/* Prompt / Output side-by-side panel */
+.po-grid{display:flex;align-items:stretch;flex-wrap:wrap;}
+.po-col{padding:var(--space-m) var(--space-l);flex:1;min-width:260px;}
+.po-col-prompt{background:var(--color-cream);border-right:var(--border);}
+.po-col-output{background:var(--purple-tint-3);}
+.po-label{display:block;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--color-ink-3);margin-bottom:var(--space-xs);}
+.po-col-output .po-label{color:var(--jai-a);}
+.po-output-block p{font-size:.8125rem;line-height:1.65;color:var(--color-ink-2);margin:0 0 var(--space-xs);}
+.po-output-block p:last-child{margin-bottom:0;}
+.po-output-block em{font-weight:700;font-style:normal;color:var(--color-ink);}
+@media(max-width:640px){.po-col{min-width:100%;}.po-col-prompt{border-right:none;border-bottom:var(--border);}}
+/* Claude chat-window mockup */
+.claude-window{border:var(--border);border-radius:var(--border-radius);overflow:hidden;margin:var(--space-m) 0 var(--space-l);background:var(--color-white);box-shadow:0 6px 24px rgba(11,13,18,.06);}
+.claude-window-bar{display:flex;align-items:center;gap:.6rem;padding:.65rem 1rem;background:#F7F5F3;border-bottom:var(--border);}
+.claude-window-dots{display:flex;gap:.32rem;}
+.claude-window-dots span{width:8px;height:8px;border-radius:50%;background:#dce0e8;display:block;}
+.claude-window-title{display:flex;align-items:center;gap:.4rem;margin-left:.2rem;}
+.claude-window-title span{font-size:.72rem;font-weight:700;color:var(--color-ink-3);}
+.claude-window-body{padding:var(--space-m) var(--space-l);}
+.claude-mark{width:18px;height:18px;border-radius:5px;background:#D97757;flex-shrink:0;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1;}
+.claude-avatar{width:26px;height:26px;border-radius:7px;background:#D97757;flex-shrink:0;margin-top:.1rem;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1;}
+.claude-turn{display:flex;margin-bottom:var(--space-m);}
+.claude-turn:last-child{margin-bottom:0;}
+.claude-turn-user{justify-content:flex-end;}
+.claude-bubble-user{background:#F0EEEC;border-radius:16px 16px 4px 16px;padding:.85rem 1.1rem;max-width:90%;font-size:.8125rem;line-height:1.65;color:var(--color-ink-2);}
+.claude-bubble-user--panel{max-width:100%;border-radius:12px;}
+.claude-turn-assistant{display:flex;align-items:flex-start;gap:.65rem;}
+.claude-response{flex:1;min-width:0;}
+.claude-response-label{font-size:.7rem;font-weight:700;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem;display:block;}
+.claude-response-body{font-size:.8125rem;line-height:1.65;color:var(--color-ink-2);}
+.claude-response-body p{margin:0 0 var(--space-xs);font-size:.8125rem;}
+.claude-response-body p:last-child{margin-bottom:0;}
+.claude-response-body .obl-table-wrap{margin:var(--space-xs) 0 0;}
+@media(max-width:480px){.claude-bubble-user{max-width:100%;}.claude-window-body{padding:var(--space-m);}}
+
+/* Interactive layer: copy button, typing reveal, sortable table */
+.claude-window-bar{position:relative;}
+.claude-window-actions{margin-left:auto;display:flex;align-items:center;gap:.5rem;}
+.copy-btn{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--font-base);font-size:.7rem;font-weight:600;color:var(--color-ink-3);background:var(--color-white);border:1px solid var(--border-color);border-radius:9999px;padding:.3rem .7rem;cursor:pointer;transition:border-color .15s,color .15s,background .15s;}
+.copy-btn svg{width:12px;height:12px;flex-shrink:0;}
+.copy-btn:hover{border-color:var(--jai-a);color:var(--jai-a);}
+.copy-btn:focus-visible{outline:2px solid var(--jai-a);outline-offset:2px;}
+.copy-btn.is-copied{border-color:#558156;color:#558156;background:#e5eeeb;}
+
+.claude-typing{display:none;}
+.js-enabled .claude-typing{display:flex;align-items:center;gap:.3rem;padding:.15rem 0 .2rem;}
+.claude-typing span{width:6px;height:6px;border-radius:50%;background:var(--color-ink-3);opacity:.35;animation:claudeTypingBounce 1.1s infinite ease-in-out;}
+.claude-typing span:nth-child(2){animation-delay:.15s;}
+.claude-typing span:nth-child(3){animation-delay:.3s;}
+@keyframes claudeTypingBounce{0%,60%,100%{transform:translateY(0);opacity:.35;}30%{transform:translateY(-4px);opacity:1;}}
+@keyframes claudeFadeInUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.claude-response-body.cr-hidden{display:block;}
+.js-enabled .claude-response-body.cr-hidden{display:none;}
+.claude-response-body.cr-visible{animation:claudeFadeInUp .45s ease both;}
+@media(prefers-reduced-motion:reduce){.claude-typing span{animation:none;opacity:.6;}.claude-response-body.cr-visible{animation:none;}}
+
+.score-table th[data-sort]{cursor:pointer;user-select:none;position:relative;padding-right:1.6rem;}
+.score-table th[data-sort]:hover{background:#4200a3;}
+.score-table th[data-sort]:focus-visible{outline:2px solid #fff;outline-offset:-3px;}
+.sort-arrow{display:inline-block;margin-left:.35rem;font-size:.65rem;opacity:.55;}
+.score-table th[aria-sort="ascending"] .sort-arrow,.score-table th[aria-sort="descending"] .sort-arrow{opacity:1;}
+.score-table-hint{font-size:.68rem;color:var(--color-ink-3);margin:.5rem 0 0;font-style:italic;}
+
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* ===== Added components & overrides (built on the reference tokens) ===== */
+
+/* Body copy 14px throughout the article */
+article p, article li, article .platform-card-body p{font-size:.875rem;line-height:1.65;}
+article p{margin-bottom:var(--space-s);}
+
+/* H2s bold */
+article h2{font-weight:700;}
+
+/* Tighter reference components */
+.pull-quote{padding:var(--space-s) var(--space-m);margin:var(--space-s) 0 var(--space-m);}
+.pull-quote p{font-size:.975rem;line-height:1.45;margin-bottom:.35rem;}
+.pull-quote cite{font-size:.7rem;}
+.jag-cta{margin:var(--space-m) 0;padding:.75rem var(--space-m);}
+.jag-cta-sub{font-size:.75rem;}
+.jag-cta-btn{font-size:.8rem;padding:.45rem 1rem;min-width:0;}
+
+/* Shared compact viz frame */
+.viz-card{border:var(--border);border-radius:var(--border-radius-sm);padding:.7rem var(--space-m) .6rem;margin:var(--space-s) 0 var(--space-m);background:var(--color-white);}
+.viz-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-s);flex-wrap:wrap;margin-bottom:.35rem;}
+.viz-title{font-size:.8rem;font-weight:700;color:var(--color-ink);}
+.viz-src{font-size:.6rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--color-ink-3);}
+.viz-src-under{display:block;text-align:right;margin:-.35rem 0 var(--space-m);}
+
+/* Autonomy line: slim can / can't strip */
+.autonomy-line{display:flex;align-items:center;gap:.6rem;margin:var(--space-s) 0 var(--space-m);padding:.45rem .6rem;border:var(--border);border-radius:9999px;background:var(--color-white);}
+.al-side{display:flex;align-items:center;gap:.5rem;flex-shrink:0;}
+.al-no{flex-direction:row;}
+.al-no .al-text{text-align:right;}
+.al-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:#fff;flex-shrink:0;}
+.al-yes .al-icon{background:var(--jai-gradient);}
+.al-no .al-icon{background:var(--color-red);}
+.al-text{display:flex;flex-direction:column;line-height:1.15;}
+.al-tag{font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-ink-3);}
+.al-verb{font-size:.9rem;font-weight:800;color:var(--color-ink);}
+.al-mid{flex:1;display:flex;align-items:center;gap:.4rem;min-width:40px;}
+.al-rule{flex:1;height:0;border-top:1.5px dashed var(--purple-soft);}
+.al-pill{font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:9999px;padding:.15rem .5rem;white-space:nowrap;}
+@media(max-width:480px){.al-tag{font-size:.5rem;}.al-pill{display:none;}}
+
+/* Bullwhip */
+.bullwhip-svg{width:100%;height:auto;max-height:72px;display:block;}
+.bw-legend{display:flex;justify-content:space-between;font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--color-ink-3);margin-top:.25rem;}
+
+/* Numbered question tiles */
+.q-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem;margin:var(--space-xs) 0 var(--space-m);padding:0;list-style:none;}
+article .q-grid li.q-card{display:flex;align-items:center;gap:.55rem;border:var(--border);border-radius:var(--border-radius-sm);padding:.5rem .7rem;background:var(--color-white);margin:0;transition:border-color .2s,background .2s;}
+.q-card:hover{border-color:var(--purple-soft);background:var(--purple-tint-3);}
+.q-num{width:20px;height:20px;border-radius:50%;background:var(--jai-gradient);color:#fff;font-size:.65rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.q-text{font-size:.8rem;font-weight:600;color:var(--color-ink);line-height:1.35;}
+.q-grid.q-check .q-num{background:var(--color-white);border:1.5px solid var(--color-teal);color:var(--color-teal);}
+.q-grid.q-check .q-card:hover{border-color:var(--color-teal);background:var(--color-light-blue);}
+@media(max-width:600px){.q-grid{grid-template-columns:1fr;}}
+
+/* Platform cards */
+.platform-card{border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;margin:var(--space-s) 0;background:var(--color-white);}
+.platform-card-head{display:flex;align-items:center;gap:.5rem;padding:.45rem var(--space-m);background:var(--color-cream);border-bottom:var(--border);}
+.platform-mark{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.55rem;font-weight:800;flex-shrink:0;}
+.pm-teal{background:var(--color-teal);} .pm-navy{background:var(--color-navy);} .pm-grey{background:var(--color-grey);} .pm-jai{background:var(--jai-gradient);}
+article .platform-card-head h3{margin:0;font-size:.8rem;letter-spacing:.06em;}
+.platform-card-body{padding:.7rem var(--space-m) .8rem;}
+
+/* Guardrail chips */
+.chip-row{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem;margin:0 0 var(--space-m);}
+.chip-lead{font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-ink-3);margin-right:.2rem;}
+.chip{display:inline-flex;align-items:center;gap:.3rem;padding:.18rem .6rem;border-radius:9999px;background:var(--purple-tint-3);border:1px solid var(--purple-soft);font-size:.7rem;font-weight:600;color:var(--jai-a);}
+.chip::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--jai-gradient);}
+
+/* Metric row (JAGGAER results) */
+.metric-pre{display:block;font-size:.5rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-ink-3);margin-bottom:.15rem;}
+.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin:var(--space-s) 0 var(--space-m);}
+.metric{display:flex;align-items:center;gap:.6rem;border:var(--border);border-radius:var(--border-radius-sm);padding:.55rem .7rem;background:var(--color-white);}
+.metric-num{font-size:1.25rem;font-weight:800;line-height:1;flex-shrink:0;min-width:3.1rem;}
+.metric-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:.3rem;}
+.metric-label{font-size:.66rem;font-weight:600;color:var(--color-ink-2);line-height:1.3;}
+.metric-track{display:block;height:4px;border-radius:9999px;background:var(--color-cream);overflow:hidden;}
+@media(max-width:700px){.metric-row{grid-template-columns:1fr;}}
+
+/* Paired stat card (Gartner) */
+.pair-card{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin:var(--space-s) 0 var(--space-m);position:relative;padding-bottom:1rem;}
+.pair-cell{display:flex;align-items:center;gap:.65rem;border:var(--border);border-radius:var(--border-radius-sm);padding:.55rem .75rem;background:var(--color-white);}
+.pair-big{font-size:1.25rem;font-weight:800;color:var(--jai-a);line-height:1;min-width:52px;text-align:center;}
+.pair-body{display:flex;flex-direction:column;gap:.1rem;min-width:0;}
+.pair-lead{font-size:.75rem;font-weight:700;color:var(--color-ink);line-height:1.3;}
+.pair-sub{font-size:.66rem;color:var(--color-ink-3);line-height:1.35;}
+.pair-src{position:absolute;right:0;bottom:0;}
+.donut{width:52px;height:52px;flex-shrink:0;position:relative;}
+.donut svg{width:100%;height:100%;transform:rotate(-90deg);}
+.donut-ring{fill:none;stroke:var(--color-cream);stroke-width:4;}
+.donut-seg{fill:none;stroke:url(#donutGrad);stroke-width:4;stroke-linecap:round;stroke-dasharray:0 100;transition:stroke-dasharray 1.2s cubic-bezier(.2,.8,.2,1);}
+.donut-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:800;color:var(--jai-a);}
+@media(max-width:600px){.pair-card{grid-template-columns:1fr;}}
+
+/* Graduation steps */
+.stairs{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;align-items:end;margin:var(--space-s) 0 .35rem;}
+.stair{border:var(--border);border-radius:var(--border-radius-sm);padding:.55rem .75rem;background:var(--color-white);position:relative;overflow:hidden;}
+.stair::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.stair-1{min-height:62px;} .stair-1::before{background:var(--color-teal);}
+.stair-2{min-height:76px;} .stair-2::before{background:var(--color-navy);}
+.stair-3{min-height:90px;background:var(--purple-tint-3);border-color:var(--purple-soft);} .stair-3::before{background:var(--jai-gradient);}
+.stair-step{font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-ink-3);display:block;margin-bottom:.15rem;}
+.stair-name{font-size:.85rem;font-weight:800;color:var(--color-ink);display:block;margin-bottom:.1rem;}
+.stair-3 .stair-name{background:var(--jai-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+article .stair-desc{font-size:.7rem;color:var(--color-ink-2);line-height:1.35;margin:0;}
+.stairs-foot{display:flex;justify-content:space-between;gap:var(--space-s);font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:var(--space-m);}
+.sf-up{color:var(--jai-a);} .sf-down{color:var(--color-red);}
+@media(max-width:600px){.stairs{grid-template-columns:1fr;}.stair-1,.stair-2,.stair-3{min-height:0;}.stairs-foot{flex-direction:column;gap:.2rem;}}
+
+/* Compact hook-stat */
+.hook-stat{padding:.55rem var(--space-m);gap:var(--space-s);}
+.hook-stat-num{font-size:1.3rem;}
+.hook-stat-lead{font-size:.8rem;}
+.hook-stat-sub{font-size:.7rem;}
+
+/* Expert sidebar: crisp cards */
+.exp-item{padding:.45rem var(--space-s);}
+.exp-source{font-size:.55rem;margin-bottom:.15rem;}
+.exp-num{font-size:1rem;margin-bottom:.1rem;}
+.exp-num.small{font-size:.75rem;font-weight:800;}
+.exp-stat{font-size:13px;line-height:1.4;color:var(--color-ink-3);}
+.exp-stat strong{font-size:13px;}
+.exp-link{font-size:.58rem;margin-top:.15rem;}
+
+/* Double materiality table: equal-weight columns */
+.dm-table{table-layout:fixed;}
+.dm-table th,.dm-table td{width:50%;}
+.dm-table td:first-child{font-weight:400;color:var(--color-ink-2);background:var(--color-white);}
+/* Single-column numbered practice list */
+.q-grid.q-grid-1{grid-template-columns:1fr;}
+/* Pair card without source line */
+.pair-card.pair-card-nosrc{padding-bottom:0;}
+.donut-num{font-size:.55rem;text-align:center;line-height:1.1;}
+
+/* ===== Compact components (v2) ===== */
+/* 1) Rule strip */
+.rule-strip{display:grid;grid-template-columns:repeat(4,1fr);border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;background:var(--color-white);}
+.rule-cell{padding:.5rem .7rem;border-right:var(--border);display:flex;flex-direction:column;gap:.15rem;min-width:0;}
+.rule-cell:last-child{border-right:none;}
+.rule-tag{font-size:.52rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);}
+.rule-num{font-size:1.1rem;font-weight:800;line-height:1.05;color:var(--color-ink);}
+.rule-num small{font-size:.55rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--color-ink-3);margin-right:.2rem;vertical-align:middle;}
+.rule-num.red{color:var(--color-red);}
+article .rule-label{font-size:.68rem;line-height:1.3;color:var(--color-ink-2);margin:0;}
+@media(max-width:640px){.rule-strip{grid-template-columns:repeat(2,1fr);}.rule-cell:nth-child(2){border-right:none;}.rule-cell:nth-child(-n+2){border-bottom:var(--border);}}
+
+/* 2) Compact two-column table */
+.mini-table-wrap{border:var(--border);border-radius:var(--border-radius-sm);overflow:hidden;margin:var(--space-s) 0 var(--space-m);}
+.mini-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.75rem;}
+.mini-table th{padding:.4rem .7rem;text-align:left;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-bottom:var(--border);}
+.mini-table th.mt-impact{background:var(--color-light-blue);color:var(--color-navy);}
+.mini-table th.mt-fin{background:var(--purple-tint);color:var(--jai-a);}
+.mini-table th + th,.mini-table td + td{border-left:var(--border);}
+.mini-table td{padding:.4rem .7rem;line-height:1.4;color:var(--color-ink-2);vertical-align:top;border-top:1px solid #eef0f3;}
+.mini-table tr:first-child td{border-top:none;}
+.mini-table tbody tr:nth-child(even) td{background:#fafbfc;}
+
+/* 3 & 4) Compact bar charts */
+.mini-bars{display:flex;flex-direction:column;gap:.4rem;margin-top:.2rem;}
+.mini-bar{display:grid;grid-template-columns:minmax(0,190px) 1fr 52px;align-items:center;gap:.6rem;}
+.mini-bar-label{font-size:.7rem;font-weight:600;color:var(--color-ink-2);line-height:1.25;}
+.mini-bar .bar-track{height:7px;}
+.mini-bar-val{font-size:.78rem;font-weight:800;text-align:right;}
+.mini-bars.years .mini-bar{grid-template-columns:36px 1fr 52px;}
+.viz-pill{font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--jai-gradient);border-radius:9999px;padding:.1rem .45rem;margin-left:.4rem;vertical-align:middle;}
+@media(max-width:520px){.mini-bar{grid-template-columns:1fr 44px;}.mini-bar .bar-track{grid-column:1 / -1;grid-row:2;}}
+
+/* ===== Pop-out treatment (v3) ===== */
+.viz-card.viz-pop{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:3px solid transparent;border-image:none;position:relative;box-shadow:0 6px 20px rgba(83,0,206,.08);padding:.65rem var(--space-m) .75rem;margin:var(--space-m) 0 var(--space-l);}
+.viz-card.viz-pop::before{content:'';position:absolute;top:-3px;left:-1px;right:-1px;height:3px;background:var(--jai-gradient);border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.viz-pop .viz-title{color:var(--jai-a);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;}
+.viz-pop .rule-strip{border-color:var(--purple-soft);box-shadow:0 1px 3px rgba(11,13,18,.04);}
+.viz-pop .rule-cell{border-right-color:var(--purple-soft);}
+.viz-pop .rule-num{font-size:1.25rem;}
+
+.mini-table-wrap.mini-pop{border:1px solid var(--purple-soft);box-shadow:0 6px 20px rgba(83,0,206,.08);margin:var(--space-m) 0 var(--space-l);position:relative;}
+.mini-table-wrap.mini-pop::before{content:'';display:block;height:3px;background:var(--jai-gradient);}
+.mini-pop .mini-table th{font-size:.62rem;padding:.5rem .7rem;color:#fff;border-bottom:none;}
+.mini-pop .mini-table th.mt-impact{background:var(--color-navy);color:#fff;}
+.mini-pop .mini-table th.mt-fin{background:var(--jai-a);color:#fff;}
+.mini-pop .mini-table th + th{border-left:1px solid #ffffff30;}
+.mini-pop .mini-table td{background:var(--color-white);}
+.mini-pop .mini-table tbody tr:nth-child(even) td{background:var(--purple-tint-3);}
+.mini-pop .mini-table td + td{border-left-color:var(--purple-soft);}
+.mini-pop .mini-table td{border-top-color:var(--purple-tint-2);}
+
+/* ===== Uniform stat typography (v4) ===== */
+article .rule-num,article .viz-pop .rule-num,article .metric-num,article .hook-stat-num,article .pair-big{font-size:1.25rem;font-weight:800;line-height:1.1;}
+article .rule-label,article .metric-label,article .hook-stat-lead,article .pair-lead{font-size:.72rem;font-weight:600;line-height:1.35;}
+article .hook-stat-sub,article .pair-sub{font-size:.66rem;font-weight:400;}
+article .donut-num{font-size:.56rem;}
+
+/* ===== Vendor selection additions (built on the reference tokens) ===== */
+/* Uniform rhythm for in-article visuals */
+article .viz-card,article .obl-table-wrap,article .callout-note,article .chip-row,article .formula,article .scope-strip{margin:var(--space-m) 0 var(--space-l);}
+article .obl-table-wrap{margin:var(--space-m) 0 var(--space-l);}
+.link-pending{text-decoration:underline;text-decoration-color:var(--jai-a);text-decoration-thickness:1px;text-underline-offset:3px;}
+
+/* Scope strip (sourcing / selection / supplier management) */
+.scope-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);overflow:hidden;background:var(--color-white);box-shadow:0 2px 10px rgba(83,0,206,.05);}
+.scope-cell{padding:.75rem .9rem;border-right:1px solid var(--purple-tint-2);position:relative;}
+.scope-cell:last-child{border-right:none;}
+.scope-cell.is-focus{background:var(--purple-tint);}
+.scope-cell.is-focus::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:var(--jai-gradient);}
+.scope-tag{display:block;font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-b);margin-bottom:.2rem;}
+.scope-title{display:block;font-size:.85rem;font-weight:700;color:var(--color-ink);line-height:1.25;margin-bottom:.2rem;}
+article .scope-desc{font-size:.72rem;line-height:1.45;color:var(--color-ink-2);margin:0;}
+
+/* Step timeline */
+.steps{list-style:none;padding:0;margin:var(--space-m) 0 var(--space-l);display:flex;flex-direction:column;gap:.75rem;position:relative;}
+.steps::before{content:'';position:absolute;left:17px;top:22px;bottom:22px;width:2px;background:linear-gradient(180deg,#5300CE,#E22B83);opacity:.22;border-radius:2px;}
+article .steps > li.step{display:grid;grid-template-columns:36px minmax(0,1fr);gap:.8rem;margin:0;position:relative;}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--jai-gradient);color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;box-shadow:0 0 0 4px var(--color-white),0 4px 12px rgba(83,0,206,.22);margin-top:.45rem;}
+.step-card{border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);background:var(--color-white);overflow:hidden;box-shadow:0 2px 10px rgba(83,0,206,.05);transition:box-shadow .2s ease,border-color .2s ease;}
+.step-card:hover{box-shadow:0 8px 24px rgba(83,0,206,.1);border-color:#C3AEEA;}
+.step-head{padding:.6rem 1rem .55rem;background:var(--purple-tint-3);border-bottom:1px solid var(--purple-tint-2);}
+.step-kicker{display:block;font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);margin-bottom:.2rem;}
+article .step-head h3{margin:0;font-size:.98rem;font-weight:700;text-transform:none;letter-spacing:0;line-height:1.3;color:var(--color-ink);}
+.step-body{padding:.75rem 1rem .8rem;}
+article .step-body p{margin-bottom:0;}
+article .step-body .step-visual{margin:.7rem 0 0;}
+article .step-body .step-visual .chip-row{margin:0;}
+.step-out{display:flex;align-items:flex-start;gap:.55rem;padding:.55rem 1rem;background:var(--purple-tint);border-top:1px solid var(--purple-soft);}
+.step-out-icon{width:18px;height:18px;border-radius:50%;background:var(--jai-gradient);color:#fff;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;}
+.step-out-label{display:block;font-size:.54rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);margin-bottom:.05rem;}
+article .step-out p{margin:0;font-size:.8rem;font-weight:600;color:var(--color-ink);line-height:1.4;}
+.sub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.45rem;}
+.sub-item{position:relative;border:1px solid var(--purple-tint-2);border-radius:var(--border-radius-sm);padding:.55rem .7rem .55rem .85rem;background:var(--purple-tint-3);overflow:hidden;}
+.sub-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--jai-gradient);}
+.sub-grid .sub-item:last-child:nth-child(odd){grid-column:1 / -1;}
+.sub-title{display:block;font-size:.74rem;font-weight:700;color:var(--color-ink);margin-bottom:.15rem;}
+article .sub-desc{font-size:.75rem;line-height:1.5;margin:0;color:var(--color-ink-2);}
+
+/* Formula */
+.formula{display:flex;align-items:center;justify-content:flex-start;gap:var(--space-m);flex-wrap:wrap;padding:.6rem .9rem;border:1px dashed var(--purple-soft);border-radius:var(--border-radius-sm);background:var(--purple-tint-3);}
+.formula-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);}
+.formula-eq{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;color:var(--color-ink);}
+.formula-frac{display:inline-flex;flex-direction:column;align-items:center;line-height:1.25;}
+.formula-frac span:first-child{border-bottom:1.5px solid var(--color-ink);padding:0 .3rem .1rem;}
+.formula-frac span:last-child{padding:.1rem .3rem 0;}
+.formula-op{color:var(--jai-b);font-weight:800;}
+
+/* Software-vendor callout */
+.callout-note.callout-purple .callout-note-label{font-size:.7rem;letter-spacing:.06em;}
+
+/* Scorecard table */
+.obl-table.scorecard{min-width:620px;}
+.obl-table.scorecard th:not(:first-child),.obl-table.scorecard td:not(:first-child){text-align:center;white-space:nowrap;}
+.obl-table.scorecard tr.total-row td{background:var(--purple-tint);color:var(--color-ink);font-weight:800;border-top:2px solid var(--purple-soft);}
+.obl-table.scorecard tr.total-row td:first-child{background:var(--purple-tint);}
+.score-lo{color:var(--color-ink-3);}
+.score-hi{color:var(--jai-a);font-weight:700;}
+
+/* 7-step flow diagram (secondary visual) */
+.flow-diagram{margin:var(--space-m) 0 var(--space-l);padding:1rem 1rem .9rem;border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);background:linear-gradient(180deg,var(--purple-tint-3),var(--color-white));box-shadow:0 6px 20px rgba(83,0,206,.08);}
+.fd-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;}
+.fd-track{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;min-width:700px;}
+article .fd-track li.fd-step{margin:0;padding:0;}
+article a.fd-link,article a.fd-link:hover{display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none;border-bottom:none;background:none;box-shadow:none;color:inherit;height:100%;}
+.fd-chev{display:flex;align-items:center;justify-content:center;width:100%;height:38px;background:var(--c);clip-path:polygon(0 0,calc(100% - 13px) 0,100% 50%,calc(100% - 13px) 100%,0 100%,13px 50%);transition:filter .2s ease;}
+.fd-step:first-child .fd-chev{clip-path:polygon(0 0,calc(100% - 13px) 0,100% 50%,calc(100% - 13px) 100%,0 100%);border-radius:6px 0 0 6px;}
+.fd-step:last-child .fd-chev{clip-path:polygon(0 0,100% 0,100% 100%,0 100%,13px 50%);border-radius:0 6px 6px 0;}
+.fd-num{color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.06em;}
+.fd-icon{width:40px;height:40px;margin:-8px 0 .45rem;border-radius:50%;background:var(--color-white);border:2px solid var(--c);color:var(--c);display:flex;align-items:center;justify-content:center;position:relative;z-index:1;box-shadow:0 3px 10px rgba(83,0,206,.15);transition:background .2s ease,color .2s ease,transform .2s ease;}
+.fd-icon svg{width:18px;height:18px;}
+.fd-label{font-size:.68rem;font-weight:700;line-height:1.3;color:var(--color-ink);padding:0 .3rem;}
+.fd-link:hover .fd-chev,.fd-link:focus-visible .fd-chev{filter:brightness(1.12);}
+.fd-link:hover .fd-icon,.fd-link:focus-visible .fd-icon{background:var(--c);color:#fff;transform:translateY(-2px);}
+.fd-link:hover .fd-label{color:var(--c);}
+.steps > li.step{scroll-margin-top:1.5rem;}
+
+/* Scorecard primary visual */
+.scorecard-card{margin:var(--space-m) 0 var(--space-l);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);overflow:hidden;background:var(--color-white);box-shadow:0 6px 20px rgba(83,0,206,.08);}
+article .scorecard-card .obl-table-wrap{margin:0;border:none;border-radius:0;}
+.obl-table.scorecard td{vertical-align:middle;}
+.obl-table.scorecard tr.row-lead td{background:var(--purple-tint-3);}
+.obl-table.scorecard tr.row-lead td:first-child{box-shadow:inset 3px 0 0 var(--jai-a);}
+.w-cell{display:inline-flex;flex-direction:column;align-items:center;gap:.25rem;min-width:3.2rem;}
+.w-val{font-weight:700;color:var(--color-ink);}
+.w-bar{display:block;width:100%;height:4px;border-radius:2px;background:var(--purple-tint-2);overflow:hidden;}
+.w-bar span{display:block;height:100%;background:var(--jai-gradient);border-radius:2px;}
+.tot-lo{color:var(--color-ink-3);}
+.tot-hi{color:var(--jai-a);font-weight:700;}
+.obl-table.scorecard td.score-hi{color:var(--jai-a);font-weight:700;}
+.obl-table.scorecard td.score-lo{color:var(--color-ink-3);}
+.sc-result{display:flex;flex-direction:column;gap:.45rem;padding:.75rem 1rem .8rem;border-top:1px solid var(--purple-soft);background:var(--purple-tint-3);}
+.sc-bar{display:grid;grid-template-columns:72px 1fr 40px;align-items:center;gap:.6rem;}
+.sc-name{font-size:.7rem;font-weight:700;color:var(--color-ink-2);}
+.sc-track{height:8px;border-radius:4px;background:var(--purple-tint-2);overflow:hidden;}
+.sc-fill{display:block;height:100%;border-radius:4px;}
+.sc-fill-a{background:var(--color-grey);}
+.sc-fill-b{background:var(--jai-gradient);}
+.sc-val{font-size:.8rem;font-weight:800;text-align:right;color:var(--color-ink-3);}
+.sc-bar.is-win .sc-name,.sc-bar.is-win .sc-val{color:var(--jai-a);}
+
+
+@media(max-width:640px){
+.scope-strip{grid-template-columns:1fr;}
+.scope-cell{border-right:none;border-bottom:1px solid var(--purple-tint-2);}
+.scope-cell:last-child{border-bottom:none;}
+.steps::before{left:15px;}
+article .steps > li.step{grid-template-columns:32px minmax(0,1fr);gap:.6rem;}
+.step-num{width:32px;height:32px;font-size:.7rem;}
+.sub-grid{grid-template-columns:1fr;}
+.sub-grid .sub-item:last-child:nth-child(odd){grid-column:auto;}
+}
+
+/* ===== Guided buying additions (built on the reference tokens) ===== */
+article .fd-link{display:flex;flex-direction:column;align-items:center;text-align:center;height:100%;color:inherit;}
+article .fd-link:hover .fd-chev{filter:brightness(1.12);}
+article .fd-link:hover .fd-icon{background:var(--c);color:#fff;transform:translateY(-2px);}
+.flow-diagram .viz-head{margin-bottom:.7rem;}
+</style>
+<style>
+/* ===== Category management additions (built on the reference tokens) ===== */
+article .chip-row,article .q-grid,article .mini-table-wrap{margin:var(--space-m) 0 var(--space-l);}
+.mini-bar{grid-template-columns:minmax(0,260px) 1fr 52px;}
+.phase-cards .phase-title{margin:0 0 .15rem;}
+/* FAQ dropdowns */
+.faq-list{margin:var(--space-m) 0 var(--space-l);}
+.faq-item summary .faq-q{margin:0;font-size:var(--font-size-sm);font-weight:600;line-height:1.4;color:var(--color-ink);}
+.faq-item .faq-body p{margin:0;font-size:.8125rem;color:var(--color-ink-2);line-height:1.6;}
+/* Compact 4 Ps grid */
+.p4-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem;margin:var(--space-m) 0 var(--space-l);}
+.p4-card{position:relative;border:1px solid var(--purple-tint-2);border-radius:var(--border-radius-sm);padding:.55rem .65rem .6rem;background:var(--purple-tint-3);overflow:hidden;display:flex;flex-direction:column;gap:.2rem;}
+.p4-card::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:var(--jai-gradient);}
+.p4-top{display:flex;align-items:center;gap:.4rem;}
+.p4-num{width:22px;height:22px;border-radius:50%;background:var(--jai-gradient);color:#fff;font-size:.6rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.p4-name{font-size:.82rem;font-weight:700;color:var(--color-ink);line-height:1.2;}
+.p4-role{font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);}
+article .p4-q{font-size:.7rem;line-height:1.4;color:var(--color-ink-2);margin:0;}
+@media(max-width:700px){.p4-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+/* Compact 4 Ps tables */
+.p4-table .mini-table td:first-child{font-weight:600;color:var(--color-ink);}
+.p4-table .mini-table td{font-size:.72rem;padding:.38rem .7rem;}
+.p4-table .mini-table tr.p4-out td{background:var(--purple-tint);}
+.p4-table .mini-table tr.p4-out td:first-child{color:var(--jai-a);}
+/* Risk strip: red accents and mobile stacking */
+.risk-strip .scope-tag{color:var(--color-red);}
+.risk-strip .scope-cell{border-top:3px solid var(--color-red);}
+@media(max-width:640px){.scope-strip{grid-template-columns:1fr;}.scope-cell{border-right:none;border-bottom:1px solid var(--purple-tint-2);}.scope-cell:last-child{border-bottom:none;}}
+/* Compact playbook list */
+.pb-list{list-style:none;padding:0;margin:var(--space-m) 0 var(--space-l);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);overflow:hidden;background:var(--color-white);box-shadow:0 2px 10px rgba(83,0,206,.05);}
+article .pb-list li.pb-row{display:grid;grid-template-columns:24px minmax(0,1fr);gap:.7rem;align-items:start;padding:.6rem .9rem;margin:0;border-top:1px solid var(--purple-tint-2);}
+article .pb-list li.pb-row:first-child{border-top:none;}
+article .pb-list li.pb-row:nth-child(even){background:var(--purple-tint-3);}
+.pb-num{width:24px;height:24px;border-radius:50%;background:var(--jai-gradient);color:#fff;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:.05rem;}
+article .pb-text{margin:0 0 .2rem;font-size:.84rem;line-height:1.5;color:var(--color-ink-2);}
+article .pb-text strong{color:var(--color-ink);}
+article .pb-track{margin:0;font-size:.74rem;font-style:italic;line-height:1.4;color:var(--color-ink-3);}
+.pb-track-lbl{font-weight:700;font-style:italic;color:var(--jai-a);}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="page-wrapper">
+
+  <!-- TOC SIDEBAR -->
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What is MRO Spend in Manufacturing?</a>
+      <a class="toc-link" href="#s2">Why MRO and Indirect Spend are Hard to Control</a>
+      <a class="toc-link" href="#s3">What to Analyze in MRO Spend</a>
+      <a class="toc-link" href="#s4">How AI improves MRO Spend Analysis</a>
+      <a class="toc-link" href="#s5">From Insight to Control: Reducing MRO Spend</a>
+      <a class="toc-link" href="#s6">MRO Spend Control Playbook</a>
+      <a class="toc-link" href="#s7">Next Steps</a>
+      <a class="toc-link" href="#s8">Frequently Asked Questions</a>
+    </nav>
+  </aside>
+
+  <!-- ARTICLE -->
+  <article>
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-badges">
+          <span class="badge badge-blue">Spend Analytics</span>
+          <span class="badge badge-green">Manufacturing</span>
+        </div>
+        <h1 id="s0">MRO Spend Analysis with AI for Manufacturers: Control Spend</h1>
+        <div class="article-meta">
+          <span class="meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5 min read
+          </span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">Published:</span><time datetime="2026-11">November 2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item"><span class="meta-label">By:</span>Visnja Radosavljevic</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- INTRO -->
+    <p>MRO spend analysis with AI shows manufacturers what they buy, from whom and at what price, then turns that view into control of indirect spend. MRO in manufacturing means the maintenance, repair and operations purchases that keep plants running. Yet small orders scatter MRO spend across sites, systems and suppliers. <a href="https://www.jaggaer.com/need/ai-in-procurement" target="_blank" rel="noopener">AI in procurement</a> now makes that scattered data usable at scale. This guide explains what MRO spend covers, why it leaks, what to analyze, how AI helps and how <a href="https://www.jaggaer.com/vertical/manufacturing" target="_blank" rel="noopener">manufacturing procurement</a> teams turn insight into control.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Jaggaer One: The Manufacturing Procurement Software</p>
+        <p class="jag-cta-sub">Jaggaer One is built for discrete and process manufacturers for MRO and direct materials sourcing. It is integrated with 40+ ERP systems, with JAI agentic AI embedded across workflows.</p>
+      </div>
+      <a href="https://www.jaggaer.com/vertical/manufacturing" class="jag-cta-btn" target="_blank" rel="noopener">Learn More</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S1 -->
+    <span class="section-eyebrow">Definitions</span>
+    <h2 id="s1">What is MRO Spend in Manufacturing?</h2>
+
+    <p>MRO spend is what a manufacturer pays for the parts, supplies and services that keep plants running but never go into the product. It covers spare parts, maintenance supplies, tools, safety gear, facility supplies and repair services. Unlike direct materials, MRO spend has no bill of materials to plan from. That changes how it is bought, and why <a href="https://www.jaggaer.com/need/direct-procurement" target="_blank" rel="noopener">direct and indirect procurement</a> need different controls.</p>
+    <div class="mini-table-wrap mini-pop">
+      <table class="mini-table">
+        <colgroup><col style="width:28%"><col><col></colgroup>
+        <thead><tr><th class="mt-impact" scope="col"><span class="sr-only">Attribute</span></th><th class="mt-impact" scope="col">Direct Materials</th><th class="mt-fin" scope="col">MRO Spend</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Demand comes from</strong></td><td>Production plans</td><td>Wear, safety needs, breakdowns</td></tr>
+          <tr><td><strong>Who buys</strong></td><td>Central category teams</td><td>Staff at every site</td></tr>
+          <tr><td><strong>Order pattern</strong></td><td>Large and scheduled</td><td>Small, frequent, often urgent</td></tr>
+          <tr><td><strong>Supplier base</strong></td><td>Few strategic suppliers</td><td>Many distributors and local vendors</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Each order is small, but across thousands of orders and sites, the gaps add up.</p>
+
+    <hr class="section-divider">
+
+    <!-- S2 -->
+    <span class="section-eyebrow">The Challenge</span>
+    <h2 id="s2">Why MRO and Indirect Spend are Hard to Control</h2>
+
+    <p>MRO and indirect spend are hard to control because buying is scattered, records are inconsistent, rising prices mask waste and uptime comes first. Staff buy at every site, often mid-breakdown, when speed matters more than contracts. In a <a href="https://www.efficioconsulting.com/en-gb/resources/news/the-majority-of-procurement-and-finance-leaders-say-over-25-of-indirect-spend-has-no-financial-oversight/" target="_blank" rel="noopener">2025 Efficio survey</a>, 93% of European CPOs and CFOs named maverick spending a major source of leakage.</p>
+    <div class="hook-stat">
+      <span class="hook-stat-num">93%</span>
+      <div class="hook-stat-body">
+        <p class="hook-stat-lead">European CPOs and CFOs who named maverick spending a major source of leakage</p>
+        <p class="hook-stat-sub">Source · Efficio 2025 survey</p>
+      </div>
+    </div>
+
+    <p>Scattered buying leaves scattered data. One bearing may carry several descriptions and supplier codes, hiding what each site pays. Rising prices then disguise leakage as inflation. Fastenal is an industrial distributor and its pricing alone added 2.4 to 2.7 points to <a href="https://investor.fastenal.com/news/default.aspx" target="_blank" rel="noopener">sales growth</a> in Q3 2025, and about 2.4 points in Q3 2026.</p>
+    <p>Tighter approvals, the usual fix, can backfire. A delayed spare part keeps a line down, and Fluke puts an average downtime up to <a href="https://www.fluke.com/en-th/learn/blog/condition-monitoring-and-alignment-software/unplanned-downtime-costs-manufacturers-up-to-852m-weekly" target="_blank" rel="noopener">$1.7 million per hour</a> as per the 3-country survey. In <a href="https://www.jaggaer.com/vertical/industrial-equipment" target="_blank" rel="noopener">industrial equipment procurement</a>, spares often serve customers’ machines too, so delays spread further. Control must therefore make the compliant route the fastest route. That is the core of indirect spend management, and of lasting <a href="https://www.jaggaer.com/blog/indirect-savings-manufacturing-procurement" target="_blank" rel="noopener">indirect spend savings in manufacturing</a>.</p>
+    <div class="hook-stat">
+      <span class="hook-stat-num">$1.7M</span>
+      <div class="hook-stat-body">
+        <p class="hook-stat-lead">Average cost of one downtime hour</p>
+        <p class="hook-stat-sub">Source · Fluke</p>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S3 -->
+    <span class="section-eyebrow">Analysis</span>
+    <h2 id="s3">What to Analyze in MRO Spend</h2>
+
+    <p>MRO spend analysis should answer 4 questions: what you buy, who you buy from, what you pay and how you buy.</p>
+    <div class="mini-table-wrap mini-pop">
+      <table class="mini-table">
+        <colgroup><col style="width:34%"><col></colgroup>
+        <thead><tr><th class="mt-impact" scope="col">Dimension</th><th class="mt-fin" scope="col">What it reveals</th></tr></thead>
+        <tbody>
+          <tr><td>What you buy</td><td>Duplicate parts and near-identical specifications</td></tr>
+          <tr><td>Who you buy from</td><td>A long tail of small suppliers</td></tr>
+          <tr><td>What you pay</td><td>Price gaps for the same item</td></tr>
+          <tr><td>How you buy</td><td>Off-catalog and off-contract orders</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Grouping duplicates comes first, because suppliers and prices only compare once each part is one item. As one part, the bearing filed under several descriptions shows every supplier, each site’s price and how often orders skip the catalog. Much of this evidence sits outside purchase orders. <a href="https://www.mckinsey.com/capabilities/operations/how-we-help-clients/product-development-procurement/analytics-transformations-in-procurement" target="_blank" rel="noopener">McKinsey</a> finds procurement functions often use under 20% of their available data, with key evidence held in contracts and specifications. Full <a href="https://www.jaggaer.com/need/spend-visibility" target="_blank" rel="noopener">spend visibility</a> joins purchase, invoice, contract and catalog data in one view. Doing that by hand across thousands of free-text lines does not scale.</p>
+    <div class="hook-stat">
+      <span class="hook-stat-num">&lt;20%</span>
+      <div class="hook-stat-body">
+        <p class="hook-stat-lead">Share of available data procurement functions often use</p>
+        <p class="hook-stat-sub">Source · McKinsey</p>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S4 -->
+    <span class="section-eyebrow">AI in Practice</span>
+    <h2 id="s4">How AI improves MRO Spend Analysis</h2>
+
+    <p>AI makes MRO spend analysis workable at MRO’s scale. It classifies every line, merges duplicate parts and flags leaks, so automated spend analysis replaces manual spreadsheet cleanup. Classification reads free-text descriptions and assigns each line to a category, even when every site words the same item differently.</p>
+    <div class="chip-row"><span class="chip-lead">What AI does</span><span class="chip">Classifies every line</span><span class="chip">Merges duplicate parts</span><span class="chip">Flags leaks</span></div>
+    <p>Matching then compares part numbers, specifications and supplier codes. The bearing filed under several names becomes one item, with one price history across suppliers and sites. Category managers confirm the proposed matches. Clean data then lets MRO spend analytics flag price outliers and orders placed outside contracts or catalogs.</p>
+    <p>Spend analytics is already one of procurement’s leading AI uses, according to <a href="https://www.thehackettgroup.com/insights/2026-procurement-key-issues-2601/" target="_blank" rel="noopener">Hackett’s 2026 study</a>. In one McKinsey case, a tier-one automotive supplier saved over <a href="https://www.mckinsey.com/capabilities/operations/our-insights/agentic-ai-in-strategic-sourcing-hype-or-hero" target="_blank" rel="noopener">$5 million in under 6 weeks</a> by applying AI agents to fragmented tail spend. Platforms now automate these steps. <a href="https://www.jaggaer.com/solutions/spend-analytics" target="_blank" rel="noopener">Jaggaer spend analytics</a> uses AI to classify spend pulled from multiple ERP systems. <a href="https://www.jaggaer.com/solutions/jai" target="_blank" rel="noopener">JAGGAER AI (JAI)</a> then lets teams ask, in plain language, where money is leaving approved channels. Finding those leaks is only half the job. Closing them means changing how people buy.</p>
+    <div class="hook-stat">
+      <span class="hook-stat-num">$5M+</span>
+      <div class="hook-stat-body">
+        <p class="hook-stat-lead">Saved in under 6 weeks by a tier-one automotive supplier applying AI agents to fragmented tail spend</p>
+        <p class="hook-stat-sub">Source · McKinsey</p>
+      </div>
+    </div>
+
+    <div class="jag-cta">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">AI spend analysis is embedded in Jaggaer's procurement software</p>
+        <p class="jag-cta-sub">AI classification through IntelliClass auto-classifies taxonomy with 95%+ accuracy. It helps with anomaly and outlier detection with price spikes, duplicate payments and inaccuracies flagged automatically.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/spend-analytics" class="jag-cta-btn" target="_blank" rel="noopener">Explore Spend Analysis</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S5 -->
+    <span class="section-eyebrow">Insight to Control</span>
+    <h2 id="s5">From Insight to Control: Reducing MRO Spend</h2>
+
+    <p>Reducing MRO spend means turning each finding into a buying change: catalogs for repeat items, fewer suppliers and protection for critical spares.</p>
+    <div class="scope-strip">
+      <div class="scope-cell"><span class="scope-tag">Lever 1</span><span class="scope-title">Catalogs for repeat items</span></div>
+      <div class="scope-cell"><span class="scope-tag">Lever 2</span><span class="scope-title">Fewer suppliers</span></div>
+      <div class="scope-cell is-focus"><span class="scope-tag">Lever 3</span><span class="scope-title">Protection for critical spares</span></div>
+    </div>
+
+    <h3>Build an indirect procurement strategy around criticality</h3>
+    <p>Start by sorting items by what a failure would cost. A sound indirect procurement strategy protects critical spares first, keeping stock and a backup supplier for each. Everything else can be pushed hard on price. Deloitte’s 2025 CPO survey found <a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" target="_blank" rel="noopener">74%</a> rate active alternative sources among their most effective risk strategies.</p>
+    <div class="hook-stat">
+      <span class="hook-stat-num">74%</span>
+      <div class="hook-stat-body">
+        <p class="hook-stat-lead">Rate active alternative sources among their most effective risk strategies</p>
+        <p class="hook-stat-sub">Source · Deloitte 2025 Global CPO Survey</p>
+      </div>
+    </div>
+
+    <p>For repeat items, the fix is the buying route. <a href="https://www.jaggaer.com/solutions/eprocurement" target="_blank" rel="noopener">eProcurement catalogs and guided buying</a> put the approved part, supplier and price in front of the person ordering. When the compliant route is also the fastest, technicians have little reason to buy around it. For the long supplier tail, consolidation moves volume to fewer distributors. Larger volumes earn better terms, and fewer suppliers mean fewer prices to track. <a href="https://www.jaggaer.com/solutions/supplier-intelligence" target="_blank" rel="noopener">Supplier risk and onboarding</a> checks confirm the shortlist can still deliver.</p>
+    <p>McKinsey cited one company that cut MRO costs <a href="https://www.mckinsey.com/capabilities/operations/our-insights/transforming-procurement-functions-for-an-ai-driven-world" target="_blank" rel="noopener">20%</a> by competing that volume through e-sourcing. These levers work best in a set order.</p>
+
+    <hr class="section-divider">
+
+    <!-- S6 -->
+    <span class="section-eyebrow">Playbook</span>
+    <h2 id="s6">MRO Spend Control Playbook</h2>
+
+    <p>The best practices for MRO procurement in manufacturing follow one rule: fix the data, protect uptime, then change how people buy. Run them in this order:</p>
+    <ol class="pb-list">
+      <li class="pb-row"><span class="pb-num" aria-hidden="true">1</span><div class="pb-main"><p class="pb-text"><strong>Unify the data.</strong> Combine ERP, p-card and invoice records, and test AI matching on last year’s orders.</p><p class="pb-track"><span class="pb-track-lbl">Track:</span> share of spend classified.</p></div></li>
+      <li class="pb-row"><span class="pb-num" aria-hidden="true">2</span><div class="pb-main"><p class="pb-text"><strong>Rank by criticality.</strong> Agree with maintenance which spares can stop a line.</p><p class="pb-track"><span class="pb-track-lbl">Track:</span> critical spares with a backup source.</p></div></li>
+      <li class="pb-row"><span class="pb-num" aria-hidden="true">3</span><div class="pb-main"><p class="pb-text"><strong>Close the biggest gaps.</strong> Merge top duplicates and align prices across sites.</p><p class="pb-track"><span class="pb-track-lbl">Track:</span> price variance on top items.</p></div></li>
+      <li class="pb-row"><span class="pb-num" aria-hidden="true">4</span><div class="pb-main"><p class="pb-text"><strong>Catalog repeat buys.</strong> Make agreed items the quickest to order.</p><p class="pb-track"><span class="pb-track-lbl">Track:</span> catalog share of orders.</p></div></li>
+      <li class="pb-row"><span class="pb-num" aria-hidden="true">5</span><div class="pb-main"><p class="pb-text"><strong>Consolidate suppliers.</strong> Move tail volume to a vetted shortlist.</p><p class="pb-track"><span class="pb-track-lbl">Track:</span> active MRO suppliers.</p></div></li>
+      <li class="pb-row"><span class="pb-num" aria-hidden="true">6</span><div class="pb-main"><p class="pb-text"><strong>Review yearly.</strong> New parts, sites and suppliers reopen old leaks. Only 19% of firms in <a href="https://www.efficioconsulting.com/en-gb/resources/reports/the-illusion-of-control-in-indirect-spend/" target="_blank" rel="noopener">Efficio’s 2025 survey</a> review indirect spend annually.</p><p class="pb-track"><span class="pb-track-lbl">Track:</span> new leakage found.</p></div></li>
+    </ol>
+
+    <hr class="section-divider">
+
+    <!-- S7 -->
+    <span class="section-eyebrow">Next Steps</span>
+    <h2 id="s7">Next Steps</h2>
+
+    <p>MRO spend analysis gives manufacturers control of a category that rarely gets it. AI turns scattered, inconsistent records into one clear view of items, suppliers and prices. Buying channels then turn that view into lasting savings, without putting uptime at risk.</p>
+    <p>Start with the data you already have. <a href="https://www.jaggaer.com/solutions/spend-analytics" target="_blank" rel="noopener">Jaggaer spend analytics</a> classifies MRO spend across your ERP systems, so the first findings come from your own records. From there, Jaggaer’s <a href="https://www.jaggaer.com/vertical/manufacturing" target="_blank" rel="noopener">manufacturing procurement</a> platform manages MRO alongside direct materials, supplier quality and CAPEX on one system.</p>
+
+    <div class="jag-cta jag-cta--red">
+      <div class="jag-cta-body">
+        <p class="jag-cta-head">Jaggaer has eProcurement solutions built for the manufacturing industry</p>
+        <p class="jag-cta-sub">Jaggaer's eProcurement software provides MRO and catalog compliance at plant level. It creates approval thresholds by commodity and value.</p>
+      </div>
+      <a href="https://www.jaggaer.com/solutions/eprocurement" class="jag-cta-btn" target="_blank" rel="noopener">Explore Jaggaer eProcurement</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- S8 -->
+    <span class="section-eyebrow">FAQs</span>
+    <h2 id="s8">Frequently Asked Questions</h2>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary><h3 class="faq-q">What is MRO spend analysis?</h3><span class="faq-icon" aria-hidden="true">+</span></summary>
+        <div class="faq-body"><p>MRO spend analysis reviews maintenance, repair and operations purchases to show what a manufacturer buys, from which suppliers and at what price. It exposes duplicate parts, price gaps between sites and off-contract buying.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><h3 class="faq-q">What counts as MRO spend in manufacturing?</h3><span class="faq-icon" aria-hidden="true">+</span></summary>
+        <div class="faq-body"><p>MRO spend in manufacturing covers spare parts, maintenance supplies, tools, safety gear, facility supplies and repair services. These purchases keep plants running but never become part of the finished product.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><h3 class="faq-q">What is an indirect procurement strategy for MRO?</h3><span class="faq-icon" aria-hidden="true">+</span></summary>
+        <div class="faq-body"><p>An indirect procurement strategy for MRO sorts items by how critical they are to production. Critical spares get assured supply, while commodity items are bought through catalogs at negotiated prices.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><h3 class="faq-q">How does AI improve MRO spend analysis?</h3><span class="faq-icon" aria-hidden="true">+</span></summary>
+        <div class="faq-body"><p>AI improves MRO spend analysis by classifying free-text purchase lines, merging duplicate parts and flagging price outliers automatically. Category managers then review the findings instead of cleaning spreadsheets by hand.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><h3 class="faq-q">How can manufacturers reduce MRO spend?</h3><span class="faq-icon" aria-hidden="true">+</span></summary>
+        <div class="faq-body"><p>Manufacturers reduce MRO spend by routing repeat items to eProcurement catalogs, consolidating suppliers and standardizing duplicate parts. Critical spares should keep a backup supplier so cost cuts never risk uptime.</p></div>
+      </details>
+    </div>
+
+  </article>
+
+  <!-- EXPERT SIDEBAR -->
+  <aside class="expert-sidebar" aria-label="Data at a glance">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">The Hackett Group · 2026</span>
+        <span class="exp-num small">Top AI use</span>
+        <p class="exp-stat">Spend analytics is one of procurement’s leading AI uses</p>
+        <a href="https://www.thehackettgroup.com/insights/2026-procurement-key-issues-2601/" class="exp-link" target="_blank" rel="noopener">Source →</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Deloitte · 2025</span>
+        <span class="exp-num">74%</span>
+        <p class="exp-stat">CPO survey respondents who rate active alternative sources among their most effective risk strategies</p>
+        <a href="https://www.deloitte.com/us/en/services/consulting/articles/2025-global-chief-procurement-officer-survey.html" class="exp-link" target="_blank" rel="noopener">Source →</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Efficio · 2025</span>
+        <span class="exp-num red">93%</span>
+        <p class="exp-stat">European CPOs and CFOs who named maverick spending a major source of leakage</p>
+        <a href="https://www.efficioconsulting.com/en-gb/resources/news/the-majority-of-procurement-and-finance-leaders-say-over-25-of-indirect-spend-has-no-financial-oversight/" class="exp-link" target="_blank" rel="noopener">Source →</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Efficio · 2025</span>
+        <span class="exp-num">19%</span>
+        <p class="exp-stat">Firms that review indirect spend annually</p>
+        <a href="https://www.efficioconsulting.com/en-gb/resources/reports/the-illusion-of-control-in-indirect-spend/" class="exp-link" target="_blank" rel="noopener">Source →</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+// Reading progress bar
+try {
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+} catch (err) { /* progress bar is cosmetic only */ }
+
+// Active TOC link on scroll
+try {
+  const sections = document.querySelectorAll('article h2[id]');
+  const links = document.querySelectorAll('.toc-link');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+} catch (err) { /* TOC highlighting is cosmetic only */ }
+
+// Animate bar charts into view
+try {
+  const animObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      if (el.classList.contains('bar-fill')) el.style.width = el.dataset.w + '%';
+      animObs.unobserve(el);
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('.bar-fill').forEach(el => animObs.observe(el));
+} catch (err) { /* bar chart animation is cosmetic only */ }
+
+// --- Copy-prompt buttons ---
+try {
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    const targetId = btn.getAttribute('data-copy-target');
+    const label = btn.querySelector('.copy-btn-label');
+    const defaultLabel = label ? label.textContent : '';
+    btn.addEventListener('click', async () => {
+      const source = document.getElementById(targetId);
+      if (!source) return;
+      const text = source.textContent.trim().replace(/^"|"$/g, '');
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        }
+        btn.classList.add('is-copied');
+        if (label) label.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('is-copied');
+          if (label) label.textContent = defaultLabel;
+        }, 1800);
+      } catch (copyErr) {
+        if (label) label.textContent = 'Press Ctrl+C';
+        setTimeout(() => { if (label) label.textContent = defaultLabel; }, 1800);
+      }
+    });
+  });
+} catch (err) { /* copy buttons are a progressive enhancement */ }
+
+// --- "Claude is thinking" reveal effect ---
+const revealNow = win => {
+  const typing = win.querySelector('.claude-typing');
+  const body = win.querySelector('.claude-response-body');
+  if (typing) typing.style.display = 'none';
+  if (body) { body.classList.remove('cr-hidden'); body.classList.add('cr-visible'); }
+};
+const allClaudeWindows = document.querySelectorAll('[data-claude-window]');
+const safetyTimer = setTimeout(() => allClaudeWindows.forEach(revealNow), 6000);
+try {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealObs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const win = entry.target;
+      const delay = prefersReducedMotion ? 0 : 900;
+      setTimeout(() => revealNow(win), delay);
+      observer.unobserve(win);
+    });
+  }, { threshold: 0.3 });
+  allClaudeWindows.forEach(win => revealObs.observe(win));
+} catch (err) {
+  clearTimeout(safetyTimer);
+  allClaudeWindows.forEach(revealNow);
+}
+
+// --- Sortable scorecard table ---
+try {
+  const scoreTable = document.getElementById('score-table');
+  if (scoreTable) {
+    const tbody = scoreTable.querySelector('tbody');
+    const headers = scoreTable.querySelectorAll('th[data-sort]');
+    const colKeyByIndex = ['', 'cost', 'quality', 'sustainability', 'weighted', 'rank'];
+    headers.forEach(th => {
+      const activate = () => {
+        const colIndex = parseInt(th.getAttribute('data-col'), 10);
+        const key = colKeyByIndex[colIndex];
+        const currentDir = th.getAttribute('aria-sort');
+        const nextDir = currentDir === 'ascending' ? 'descending' : 'ascending';
+        headers.forEach(h => { h.setAttribute('aria-sort', 'none'); h.querySelector('.sort-arrow').textContent = '↕'; });
+        th.setAttribute('aria-sort', nextDir);
+        th.querySelector('.sort-arrow').textContent = nextDir === 'ascending' ? '↑' : '↓';
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        rows.sort((a, b) => {
+          const av = parseFloat(a.getAttribute('data-' + key));
+          const bv = parseFloat(b.getAttribute('data-' + key));
+          return nextDir === 'ascending' ? av - bv : bv - av;
+        });
+        rows.forEach(r => tbody.appendChild(r));
+      };
+      th.addEventListener('click', activate);
+      th.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+      });
+    });
+  }
+} catch (err) { /* sorting is a progressive enhancement */ }
+
+// Animate donut charts into view
+try {
+  const donutObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const v = parseFloat(e.target.dataset.dash) || 0;
+      e.target.style.strokeDasharray = v + ' ' + (100 - v);
+      donutObs.unobserve(e.target);
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('.donut-seg').forEach(el => donutObs.observe(el));
+} catch (err) {
+  document.querySelectorAll('.donut-seg').forEach(el => { const v = parseFloat(el.dataset.dash) || 0; el.style.strokeDasharray = v + ' ' + (100 - v); });
+}
+</script>
+
+</body>
+</html>
