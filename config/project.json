@@ -2187,11 +2187,11 @@
               "title": "Maverick Spend: Definition, Examples and 5 Tips to Prevent and Control It",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "writing",
+              "status": "ed-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 1,
+              "revision_count": 2,
               "primary_keyword": "maverick spend",
               "geography": "all",
               "created_via": "briefs-tab",
@@ -2210,10 +2210,15 @@
                   "stage": "writing",
                   "ts": "2026-11-24T12:34:13.017Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-11-25T05:59:42.843Z",
+                  "by": "m-e10nz"
                 }
               ],
-              "last_updated": "2026-11-24T12:34:13.017Z",
-              "last_updated_by": "m-14bwv",
+              "last_updated": "2026-11-25T05:59:42.842Z",
+              "last_updated_by": "m-e10nz",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Maverick_Spend_Refresh.pdf",
@@ -2226,9 +2231,9 @@
               "priority": "P2",
               "priority_updated": "2026-11-04T09:58:11.077Z",
               "priority_updated_by": "m-14bwv",
-              "deliverable_ext": "htm",
-              "return_to_stage": "ed-review",
-              "last_upload": "2026-11-17T11:42:35.061Z",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-11-25T05:59:42.842Z",
               "last_upload_by": "m-e10nz",
               "seo": {
                 "meta_title": "Maverick Spend: Definition, Examples & 5 Tips to Control It",
