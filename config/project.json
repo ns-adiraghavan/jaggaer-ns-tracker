@@ -2766,6 +2766,30 @@
                 }
               ],
               "brief_last_updated": "2026-11-24T13:42:53.579Z"
+            },
+            {
+              "id": "piece-0454gt",
+              "title": "How Procurement Is Moving from Reactive to Predictive Risk Management in 2026",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-pifrn",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "supplier risk monitoring",
+              "geography": "all",
+              "notes": "https://www.jaggaer.com/blog/how-procurement-is-moving-from-reactive-to-predictive-risk-management-in-2026 - rewrite the piece",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-25T12:40:06.000Z",
+                  "by": "m-pifrn"
+                }
+              ],
+              "last_updated": "2026-11-25T12:40:06.000Z",
+              "last_updated_by": "m-pifrn"
             }
           ]
         }
