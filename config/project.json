@@ -1670,7 +1670,7 @@
               "title": "Intake Management in Procurement: Process, Compliance and How to Get  Started",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1708,6 +1708,11 @@
                   "stage": "ed-review",
                   "ts": "2026-11-19T05:48:19.112Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-25T08:48:40.652Z",
+                  "by": "m-14bwv"
                 }
               ],
               "last_updated": "2026-11-19T05:48:19.112Z",
@@ -1735,7 +1740,14 @@
                 "updated_at": "2026-11-05T06:58:34.750Z",
                 "updated_by": "m-5jitd"
               },
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Prashanth",
+                "launch_date": "2026-11-20",
+                "live_url": "https://www.jaggaer.com/blog/intake-management-in-procurement",
+                "performance_data": "",
+                "updated_at": "2026-11-25T08:48:40.652Z"
+              }
             },
             {
               "id": "piece-oxoi6j",
