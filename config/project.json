@@ -12889,6 +12889,16 @@
         "annotation": true,
         "section": "General",
         "revision": 1
+      },
+      {
+        "id": "ann-qolkmj",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "The EY outlook is a February 2025 report, which is dated for a \"2027\" guide.",
+        "ts": "2026-11-25T08:32:10.520Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
