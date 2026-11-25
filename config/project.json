@@ -1041,7 +1041,7 @@
               "title": "Spend Analysis in 2027: AI Trends and Strategies That Work",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1088,6 +1088,11 @@
                   "stage": "ed-review",
                   "ts": "2026-10-30T06:00:04.276Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-25T08:50:32.576Z",
+                  "by": "m-14bwv"
                 }
               ],
               "last_updated": "2026-10-30T06:00:04.276Z",
@@ -1112,7 +1117,14 @@
                 }
               ],
               "brief_last_updated": "2026-10-27T05:02:41.722Z",
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Prashanth",
+                "launch_date": "2026-11-23",
+                "live_url": "https://www.jaggaer.com/blog/what-is-spend-analysis",
+                "performance_data": "",
+                "updated_at": "2026-11-25T08:50:32.576Z"
+              }
             },
             {
               "id": "piece-h5h0ak",
@@ -1811,7 +1823,7 @@
               "title": "AI in Procurement Orchestration: How Intake and Orchestration Agents  Work",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1844,6 +1856,11 @@
                   "stage": "approved",
                   "ts": "2026-11-18T09:54:18.437Z",
                   "by": "m-72umx"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-25T08:51:29.449Z",
+                  "by": "m-14bwv"
                 }
               ],
               "last_updated": "2026-11-18T09:54:18.437Z",
@@ -1871,6 +1888,13 @@
                 "slug": "intake-and-orchestration-in-procurement",
                 "updated_at": "2026-11-13T12:48:36.932Z",
                 "updated_by": "m-14bwv"
+              },
+              "publishing": {
+                "published_by": "Prashanth",
+                "launch_date": "2026-11-23",
+                "live_url": "https://www.jaggaer.com/blog/intake-and-orchestration-in-procurement",
+                "performance_data": "",
+                "updated_at": "2026-11-25T08:51:29.449Z"
               }
             },
             {
