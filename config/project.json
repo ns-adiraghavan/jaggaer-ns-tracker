@@ -2297,7 +2297,7 @@
               "title": "MRO Spend Analysis with AI: How Manufacturers Control Indirect Spend",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2325,10 +2325,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-25T09:09:33.565Z",
                   "by": "jason"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-25T12:31:42.374Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-25T09:09:33.564Z",
-              "last_updated_by": "jason",
+              "last_updated": "2026-11-25T12:31:42.374Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_MRO_Spend_Analysis_AI_New_Blog.pdf",
@@ -12902,6 +12907,14 @@
         "body": "Check comments",
         "ts": "2026-11-24T10:49:31.847Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "fb-nbk6yt",
+        "author": "m-72umx",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-25T12:31:42.372Z",
+        "stage": "ed-review"
       }
     ],
     "piece-0duw5x": [
@@ -12972,6 +12985,16 @@
         "body": "Check comments",
         "ts": "2026-11-24T12:34:13.014Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "ann-hmg7xx",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "please check the link it not opening for me",
+        "ts": "2026-11-25T12:33:41.725Z",
+        "annotation": true,
+        "section": "¶2 — \"According to Efficio’s October 2025 surv…\"",
+        "revision": 2
       }
     ],
     "piece-c46xog": [
