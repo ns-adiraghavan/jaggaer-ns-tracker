@@ -5230,7 +5230,7 @@
               "title": "Tail Spend Management Solutions: A General Overview",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -5264,6 +5264,11 @@
                   "stage": "approved",
                   "ts": "2026-10-28T08:48:06.577Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-25T08:47:06.693Z",
+                  "by": "m-14bwv"
                 }
               ],
               "seo": {
@@ -5272,6 +5277,13 @@
                 "slug": "tail-spend-management-solutions",
                 "updated_at": "2026-10-06T13:12:23.959Z",
                 "updated_by": "orlagh"
+              },
+              "publishing": {
+                "published_by": "Prashanth",
+                "launch_date": "2026-11-19",
+                "live_url": "https://www.jaggaer.com/blog/tail-spend-management-solutions",
+                "performance_data": "",
+                "updated_at": "2026-11-25T08:47:06.693Z"
               }
             },
             {
