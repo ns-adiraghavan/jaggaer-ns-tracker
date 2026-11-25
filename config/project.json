@@ -12878,6 +12878,18 @@
         "ts": "2026-11-24T15:55:42.590Z",
         "stage": "marketing-review"
       }
+    ],
+    "piece-t7jhnu": [
+      {
+        "id": "ann-nbcrng",
+        "author": "m-14bwv",
+        "verdict": "question",
+        "body": "There are a lot of dead links - \"wider procurement strategy framework\" (intro), \"supplier relationship management strategy\", the Next steps cards (\"Read the pillar guide →\", \"Read more →\" twice) and \"procure-to-pay software evaluation criteria\".",
+        "ts": "2026-11-25T08:26:38.728Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
