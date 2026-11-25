@@ -13029,6 +13029,16 @@
         "body": "check comments",
         "ts": "2026-11-25T12:47:46.338Z",
         "stage": "ed-review"
+      },
+      {
+        "id": "ann-gvl71d",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "change the CTA - download datsheet or product brief",
+        "ts": "2026-11-25T12:48:30.001Z",
+        "annotation": true,
+        "section": "¶8 — \"The Adopt datasheet covers in-solution g…\"",
+        "revision": 2
       }
     ],
     "piece-fmg9pm": [
