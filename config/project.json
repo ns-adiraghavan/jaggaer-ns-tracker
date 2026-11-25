@@ -2406,7 +2406,7 @@
               "title": "AI Guardrails for Procurement: Permissions and Human Approval",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ed-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2434,10 +2434,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-25T07:05:13.889Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-25T12:29:53.357Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-25T07:05:13.889Z",
-              "last_updated_by": "orlagh",
+              "last_updated": "2026-11-25T12:29:53.357Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_AI_Guardrails_for_Procurement_New_Blog.pdf",
@@ -2448,7 +2453,7 @@
               ],
               "brief_last_updated": "2026-11-17T13:00:07.813Z",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-11-25T07:05:13.889Z",
               "last_upload_by": "orlagh",
               "seo": {
@@ -12769,6 +12774,14 @@
         "annotation": true,
         "section": "¶68 — \"How JAI follows these guardrails#…\"",
         "revision": 2
+      },
+      {
+        "id": "fb-lg8xh9",
+        "author": "m-72umx",
+        "verdict": "needs-revision",
+        "body": "please check comment",
+        "ts": "2026-11-25T12:29:53.355Z",
+        "stage": "ed-review"
       }
     ],
     "piece-5wxtri": [
