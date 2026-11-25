@@ -12852,6 +12852,16 @@
         "body": "Check comments",
         "ts": "2026-11-24T10:18:31.853Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "ann-6lq8gl",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "change the CTA to book a demo",
+        "ts": "2026-11-25T12:39:48.288Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 2
       }
     ],
     "piece-g2cq2j": [
