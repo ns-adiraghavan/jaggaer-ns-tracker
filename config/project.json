@@ -12759,6 +12759,16 @@
         "body": "Check comments",
         "ts": "2026-11-23T17:03:46.721Z",
         "stage": "marketing-review"
+      },
+      {
+        "id": "ann-kfh7lc",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "please include 26.3 release of AI Worker as this release focus on Built for your industry and Governed by your guardrails.",
+        "ts": "2026-11-25T12:28:39.970Z",
+        "annotation": true,
+        "section": "¶68 — \"How JAI follows these guardrails#…\"",
+        "revision": 2
       }
     ],
     "piece-5wxtri": [
