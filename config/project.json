@@ -2235,7 +2235,7 @@
               "title": "Maverick Spend: Definition, Examples and 5 Tips to Prevent and Control It",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ed-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2263,10 +2263,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-25T05:59:42.843Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-25T12:36:53.394Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-25T05:59:42.842Z",
-              "last_updated_by": "m-e10nz",
+              "last_updated": "2026-11-25T12:36:53.393Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Maverick_Spend_Refresh.pdf",
@@ -2280,7 +2285,7 @@
               "priority_updated": "2026-11-04T09:58:11.077Z",
               "priority_updated_by": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-11-25T05:59:42.842Z",
               "last_upload_by": "m-e10nz",
               "seo": {
@@ -13015,6 +13020,14 @@
         "annotation": true,
         "section": "¶80 — \"Maverick spend statistics (2025)…\"",
         "revision": 2
+      },
+      {
+        "id": "fb-todpnb",
+        "author": "m-72umx",
+        "verdict": "needs-revision",
+        "body": "check comments",
+        "ts": "2026-11-25T12:36:53.390Z",
+        "stage": "ed-review"
       }
     ],
     "piece-c46xog": [
