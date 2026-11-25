@@ -1947,7 +1947,7 @@
               "title": "Intake to Procure vs Procure to Pay: What Is the Difference?",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1980,6 +1980,11 @@
                   "stage": "approved",
                   "ts": "2026-11-19T10:00:02.062Z",
                   "by": "m-72umx"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-25T10:38:40.012Z",
+                  "by": "m-14bwv"
                 }
               ],
               "last_updated": "2026-11-19T10:00:02.062Z",
@@ -2007,6 +2012,13 @@
                 "slug": "blog-intake-to-procure-vs-procure-to-pay",
                 "updated_at": "2026-11-11T17:40:22.824Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Prashanth",
+                "launch_date": "2026-11-25",
+                "live_url": "11-25-2026",
+                "performance_data": "",
+                "updated_at": "2026-11-25T10:38:40.011Z"
               }
             },
             {
