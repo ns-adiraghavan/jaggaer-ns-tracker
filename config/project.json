@@ -6885,7 +6885,7 @@
               "title": "What Is CLM? Meaning, Stages and How CLM Software Works",
               "format": "Article",
               "assignee": "",
-              "status": "approved",
+              "status": "live",
               "content_type": "seo",
               "phase": 3,
               "tier": "SEO Tier 1 (Quick Win)",
@@ -6944,6 +6944,11 @@
                   "stage": "approved",
                   "ts": "2026-11-09T12:11:41.647Z",
                   "by": "m-72umx"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-25T08:49:38.068Z",
+                  "by": "m-14bwv"
                 }
               ],
               "last_updated": "2026-11-09T12:11:41.646Z",
@@ -6970,6 +6975,13 @@
                 "slug": "blog-what-is-clm-contract-lifecycle-management",
                 "updated_at": "2026-10-30T11:50:20.739Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Prashanth",
+                "launch_date": "2026-11-19",
+                "live_url": "https://www.jaggaer.com/blog/what-is-clm-contract-lifecycle-management",
+                "performance_data": "",
+                "updated_at": "2026-11-25T08:49:38.068Z"
               }
             },
             {
