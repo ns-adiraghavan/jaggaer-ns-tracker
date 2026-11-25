@@ -2093,7 +2093,7 @@
               "title": "AI Intake for Procurement: How It Works, What to Look For and How to  Pilot It",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ed-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2121,10 +2121,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-24T13:21:24.312Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-25T12:40:46.639Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-24T13:21:24.312Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-25T12:40:46.639Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_AI_Intake_New_Blog.pdf",
@@ -2136,7 +2141,7 @@
               "brief_last_updated": "2026-11-11T09:01:43.542Z",
               "review_owner": "m-14bwv",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ed-review",
               "last_upload": "2026-11-24T13:21:24.312Z",
               "last_upload_by": "m-5jitd",
               "seo": {
@@ -12895,6 +12900,14 @@
         "annotation": true,
         "section": "General",
         "revision": 2
+      },
+      {
+        "id": "fb-5gi8m4",
+        "author": "m-72umx",
+        "verdict": "needs-revision",
+        "body": "check",
+        "ts": "2026-11-25T12:40:46.637Z",
+        "stage": "ed-review"
       }
     ],
     "piece-g2cq2j": [
