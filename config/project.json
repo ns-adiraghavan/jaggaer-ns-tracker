@@ -2505,11 +2505,11 @@
               "title": "Supply Chain Risk Management: Steps, Supplier Risk and Solutions",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "not-started",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 0,
+              "revision_count": 1,
               "primary_keyword": "supply chain risk management",
               "geography": "all",
               "created_via": "briefs-tab",
@@ -2518,10 +2518,15 @@
                   "stage": "not-started",
                   "ts": "2026-11-17T13:13:09.523Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-11-26T10:15:19.462Z",
+                  "by": "m-e10nz"
                 }
               ],
-              "last_updated": "2026-11-24T10:33:51.932Z",
-              "last_updated_by": "manager",
+              "last_updated": "2026-11-26T10:15:19.461Z",
+              "last_updated_by": "m-e10nz",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Supply_Chain_Risk_Management_Refresh.pdf",
@@ -2530,7 +2535,11 @@
                   "uploaded_at": "2026-11-24T10:33:51.932Z"
                 }
               ],
-              "brief_last_updated": "2026-11-24T10:33:51.932Z"
+              "brief_last_updated": "2026-11-24T10:33:51.932Z",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-11-26T10:15:19.461Z",
+              "last_upload_by": "m-e10nz"
             },
             {
               "id": "piece-l1js7y",
