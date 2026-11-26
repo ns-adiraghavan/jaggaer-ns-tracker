@@ -2917,6 +2917,29 @@
                 }
               ],
               "brief_last_updated": "2026-11-26T10:24:21.426Z"
+            },
+            {
+              "id": "piece-madrph",
+              "title": "Public Procurement in 2027: 6 Changes for UK, US and EU Buyers",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-14bwv",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "public procurement trends",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-26T10:25:47.496Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-11-26T10:25:47.496Z",
+              "last_updated_by": "m-14bwv"
             }
           ]
         }
