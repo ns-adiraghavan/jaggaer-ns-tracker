@@ -2766,7 +2766,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-26T11:50:23.739Z",
-              "last_upload_by": "m-e10nz"
+              "last_upload_by": "m-e10nz",
+              "seo": {
+                "meta_title": "Agentic AI in Procurement: AI Agents, Uses & Risks | Jaggaer",
+                "meta_description": "Agentic AI in procurement explained: how procurement AI agents work, where they add value and what to watch for. Read the complete guide today.",
+                "slug": "blog-agentic-ai-in-procurement-complete-guide",
+                "updated_at": "2026-11-26T11:53:49.660Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "piece-f3e58b",
