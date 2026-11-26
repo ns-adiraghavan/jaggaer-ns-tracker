@@ -2700,7 +2700,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-26T11:10:50.531Z",
-              "last_upload_by": "orlagh"
+              "last_upload_by": "orlagh",
+              "seo": {
+                "meta_title": "Category Management Tools for Procurement: A Practical Guide",
+                "meta_description": "Category management tools help procurement teams analyze spend, manage suppliers and\ntrack results. See what to look for",
+                "slug": "blog-category-management-tools-dashboards",
+                "updated_at": "2026-11-26T11:11:35.504Z",
+                "updated_by": "orlagh"
+              }
             },
             {
               "id": "piece-0eovt0",
