@@ -2885,6 +2885,38 @@
                 }
               ],
               "brief_last_updated": "2026-11-25T12:55:38.031Z"
+            },
+            {
+              "id": "piece-d47t8g",
+              "title": "8 Procurement Challenges for 2027 and How Leading Teams Respond",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-14bwv",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "procurement challenges",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-26T10:24:02.960Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-11-26T10:24:21.426Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Procurement_Challenges_2027_New_Blog.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-d47t8g/brief/JAGGAER_SEO_Brief_Procurement_Challenges_2027_New_Blog.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-11-26T10:24:21.426Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-26T10:24:21.426Z"
             }
           ]
         }
