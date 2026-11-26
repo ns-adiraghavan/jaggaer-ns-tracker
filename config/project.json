@@ -2938,8 +2938,17 @@
                   "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-26T10:25:47.496Z",
-              "last_updated_by": "m-14bwv"
+              "last_updated": "2026-11-26T10:26:06.146Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Public_Procurement_Trends_2027.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-madrph/brief/JAGGAER_SEO_Brief_Public_Procurement_Trends_2027.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-11-26T10:26:06.146Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-26T10:26:06.146Z"
             }
           ]
         }
