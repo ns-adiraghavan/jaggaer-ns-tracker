@@ -2719,11 +2719,11 @@
               "title": "Agentic AI in Procurement: The Complete Guide",
               "format": "Ad-Hoc Article",
               "assignee": "m-pifrn",
-              "status": "not-started",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 0,
+              "revision_count": 1,
               "primary_keyword": "agentic AI in procurement",
               "geography": "all",
               "notes": "Go through brief - message me with any questions; this is an update of an old piece - here's the link for reference: http://jaggaer.com//blog/agentic-ai-in-procurement-complete-guide",
@@ -2733,10 +2733,15 @@
                   "stage": "not-started",
                   "ts": "2026-11-19T16:49:55.823Z",
                   "by": "m-pifrn"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-11-26T11:50:23.739Z",
+                  "by": "m-e10nz"
                 }
               ],
-              "last_updated": "2026-11-24T13:42:59.429Z",
-              "last_updated_by": "m-pifrn",
+              "last_updated": "2026-11-26T11:50:23.739Z",
+              "last_updated_by": "m-e10nz",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Agentic_AI_in_Procurement_Guide (2).pdf",
@@ -2757,7 +2762,11 @@
                   "uploaded_at": "2026-11-24T13:42:59.429Z"
                 }
               ],
-              "brief_last_updated": "2026-11-24T13:42:59.429Z"
+              "brief_last_updated": "2026-11-24T13:42:59.429Z",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-11-26T11:50:23.739Z",
+              "last_upload_by": "m-e10nz"
             },
             {
               "id": "piece-f3e58b",
