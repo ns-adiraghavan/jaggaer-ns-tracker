@@ -2539,7 +2539,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-26T10:15:19.461Z",
-              "last_upload_by": "m-e10nz"
+              "last_upload_by": "m-e10nz",
+              "seo": {
+                "meta_title": "Supply Chain Risk Management: Steps, Supplier Risk, Solutions",
+                "meta_description": "Supply chain risk management identifies and reduces supplier risk. See the steps and what to look for in supplier risk management solutions.",
+                "slug": "blog-supply-chain-risk-management",
+                "updated_at": "2026-11-26T10:17:59.056Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "piece-l1js7y",
