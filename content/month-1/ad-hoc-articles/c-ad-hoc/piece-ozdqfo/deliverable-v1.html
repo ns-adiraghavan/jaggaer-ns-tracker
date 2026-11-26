@@ -1,0 +1,965 @@
+<!-- uploaded by m-e10nz at 2026-11-26T10:15:16.576Z -->
+<!-- piece: Supply Chain Risk Management: Steps, Supplier Risk and Solutions -->
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Supply Chain Risk Management: Steps, Supplier Risk, Solutions</title>
+<meta name="description" content="Supply chain risk management identifies and reduces supplier risk. See the steps and what to look for in supplier risk management solutions.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Visnja Radosavljevic">
+<link rel="canonical" href="https://www.jaggaer.com/blog/supply-chain-risk-management">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Jaggaer">
+<meta property="og:title" content="Supply Chain Risk Management: Steps, Supplier Risk and Solutions">
+<meta property="og:description" content="Supply chain risk management identifies and reduces supplier risk. See the steps and what to look for in supplier risk management solutions.">
+<meta property="og:url" content="https://www.jaggaer.com/blog/supply-chain-risk-management">
+<meta property="article:published_time" content="2021-10-27">
+<meta property="article:modified_time" content="2026-11-23">
+<meta property="article:author" content="Visnja Radosavljevic">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Supply Chain Risk Management: Steps, Supplier Risk and Solutions">
+<meta name="twitter:description" content="Supply chain risk management identifies and reduces supplier risk. See the steps and what to look for in supplier risk management solutions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@500..800&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Supply Chain Risk Management: Steps, Supplier Risk and Solutions","description":"Supply chain risk management identifies and reduces supplier risk. See the steps and what to look for in supplier risk management solutions.","datePublished":"2021-10-27","dateModified":"2026-11-23","inLanguage":"en-US","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.jaggaer.com/blog/supply-chain-risk-management"},"author":{"@type":"Person","name":"Visnja Radosavljevic"},"publisher":{"@type":"Organization","name":"Jaggaer","url":"https://www.jaggaer.com"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Who should own supply chain risk management?","acceptedAnswer":{"@type":"Answer","text":"Procurement usually owns supplier risk, while supply chain operations owns logistics and network risk. A cross-functional risk council adds security, finance and legal. Each risk category needs one named owner with authority to act."}},{"@type":"Question","name":"How do you assess Tier 2 suppliers without a direct contract?","acceptedAnswer":{"@type":"Answer","text":"Add sub-tier disclosure clauses to Tier 1 contracts for critical parts. Combine supplier-provided maps with external data on sites, ownership and events. Start with sole-source and long-lead parts, where a Tier 2 failure causes the longest outage."}},{"@type":"Question","name":"What KPIs measure a supplier risk management program?","acceptedAnswer":{"@type":"Answer","text":"Common KPIs include the share of critical spend with mapped sub-tiers, time from alert to owner response, and the share of sole-source parts with approved alternates. Track recovery time after each incident."}},{"@type":"Question","name":"What should supplier risk management solutions include?","acceptedAnswer":{"@type":"Answer","text":"Supplier risk management solutions should combine multiple risk categories in one supplier record. They should also support multi-tier visibility, configurable alerts, workflow actions and explainable scores. ERP and sourcing integration lets alerts change purchasing decisions."}},{"@type":"Question","name":"Is supply chain risk management the same as third-party risk management?","acceptedAnswer":{"@type":"Answer","text":"No. Third-party risk management focuses on vendor security, data and legal exposure, while supply chain risk management also covers logistics, geopolitics, climate and supply continuity. The 2 programs share cyber risk data."}}]}
+</script>
+
+<style>
+:root {
+  --color-ink:         #0B0D12;
+  --color-ink-2:       #3a3f4a;
+  --color-ink-3:       #6a7180;
+  --color-red:         #D22428;
+  --color-grey:        #3F434F;
+  --color-border:      #dce0e8;
+  --color-cream:       #eef0f3;
+  --color-light-grey:  #dce0e8;
+  --color-light-blue:  #E9EFF4;
+  --color-white:       #ffffff;
+  --color-teal:        #4D8194;
+  --color-navy:        #1B3A5C;
+  --jai-a:             #5300CE;
+  --purple-tint:       #EAE2F8;
+  --purple-tint-2:     #E0D4F4;
+  --purple-soft:       #D4C4F0;
+  --purple-tint-3:     #F6F2FC;
+  --jai-b:             #E22B83;
+  --jai-gradient:      linear-gradient(90deg, #5300CE 0%, #E22B83 100%);
+  --font-base:         Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:      'Plus Jakarta Sans', var(--font-base);
+  --font-size-xs: 0.8125rem;
+  --font-size-sm:      0.8125rem;
+  --font-size-base:    0.875rem;
+  --font-size-lg:      1rem;
+  --font-size-h5:      clamp(1rem, 0.95rem + 0.23vw, 1.13rem);
+  --font-size-h4:      clamp(1.2rem, 1.13rem + 0.38vw, 1.41rem);
+  --font-size-h3:      clamp(1.44rem, 1.32rem + 0.58vw, 1.76rem);
+  --font-size-h2:      clamp(1.73rem, 1.56rem + 0.85vw, 2.2rem);
+  --font-size-h1:      clamp(2rem, calc(1.72rem + 1.05vw), 2.25rem);
+  --font-weight-heading: 600;
+  --line-height-base:  1.7;
+  --line-height-heading: 1.15;
+  --space-2xs: 0.44rem;
+  --space-xs:  0.67rem;
+  --space-s:   clamp(0.75rem, 0.68rem + 0.37vw, 1rem);
+  --space-m:   clamp(1rem, 0.85rem + 0.74vw, 1.5rem);
+  --space-l:   clamp(1.5rem, 1.28rem + 1.11vw, 2.25rem);
+  --space-xl:  clamp(2rem, 1.59rem + 2.04vw, 3.38rem);
+  --space-2xl: clamp(3rem, 2.39rem + 3.05vw, 5.06rem);
+  --border-radius: 1rem;
+  --border-radius-sm: 0.5rem;
+  --border-color: #dce0e8;
+  --border: 1px solid var(--border-color);
+  interpolate-size: allow-keywords;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-base);font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink-2);background:var(--color-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:var(--font-weight-heading);line-height:var(--line-height-heading);color:var(--color-ink);letter-spacing:-0.01em;}
+h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;}
+h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;}
+p{color:var(--color-ink-2);line-height:var(--line-height-base);margin-bottom:var(--space-m);font-size:var(--font-size-base);}
+p:last-child{margin-bottom:0;}
+a{color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;transition:color .2s,border-color .2s;font-weight:400;}
+a:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+ul,ol{padding-left:1.25rem;margin-bottom:var(--space-m);}
+ul li,ol li{color:var(--color-ink-2);font-size:var(--font-size-base);line-height:1.65;margin-bottom:.3rem;}
+strong{color:var(--color-ink-3);font-weight:700;}
+.section-divider{border:none;border-top:var(--border);margin:var(--space-l) 0 0;}
+
+/* Article Header */
+.article-header{padding-top:var(--space-l);margin-bottom:var(--space-m);}
+.article-header-inner{max-width:980px;}
+.article-tags{display:flex;gap:.5rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.tag-pill{display:inline-flex;align-items:center;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--color-navy);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:999px;padding:.4rem .9rem;}
+.article-header h1{font-size:var(--font-size-h1);font-weight:700;letter-spacing:-0.02em;line-height:var(--line-height-heading);color:var(--color-ink);max-width:980px;}
+.article-meta{display:flex;align-items:center;gap:var(--space-m);margin-top:var(--space-s);padding:.3rem var(--space-m);background:var(--purple-tint);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:var(--space-2xs);font-size:.8125rem;color:var(--color-ink-2);font-weight:400;}
+.meta-sep{color:var(--color-light-grey);font-size:1rem;line-height:1;}
+
+/* Page Layout */
+.page-wrapper{display:flex;align-items:flex-start;max-width:1480px;margin:0 auto;padding:0 var(--space-m) 0 0;gap:0;}
+
+/* TOC Sidebar */
+.toc-sidebar{width:230px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-s) var(--space-l) var(--space-m);scrollbar-width:thin;}
+.toc-sidebar::-webkit-scrollbar{width:3px;}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.toc-head{background:var(--purple-tint-2);padding:var(--space-xs) var(--space-m);margin-bottom:4px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.toc-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--jai-a);display:block;}
+.toc-nav{display:flex;flex-direction:column;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.toc-link{display:block;padding:var(--space-xs) var(--space-m);font-size:.8125rem;font-weight:400;color:var(--color-ink-3);text-decoration:none;line-height:1.4;border:none;border-bottom:1px solid var(--purple-soft);transition:color .2s,background .2s;}
+.toc-link:last-child{border-bottom:none;}
+.toc-link:hover{color:var(--jai-a);background:var(--purple-tint);}
+.toc-link.active{color:var(--jai-a);font-weight:600;background:var(--purple-tint);border-left:2px solid var(--jai-a);}
+
+/* Article Body */
+article{flex:1;min-width:0;max-width:980px;padding:0 0 var(--space-2xl) var(--space-l);}
+article h2{font-size:var(--font-size-h2);font-weight:600;letter-spacing:-0.015em;color:var(--color-ink);margin:var(--space-l) 0 var(--space-m);line-height:var(--line-height-heading);padding-bottom:var(--space-s);border-bottom:var(--border);}
+article h3{font-family:var(--font-display);font-size:var(--font-size-sm);font-weight:600;color:var(--color-ink);margin:var(--space-l) 0 var(--space-s);line-height:var(--line-height-heading);}
+article h3.sub-question{font-size:var(--font-size-h4);text-transform:none;letter-spacing:-0.01em;font-weight:700;border-bottom:none;padding-bottom:0;}
+
+/* Comparison / data tables */
+.table-wrap{overflow-x:auto;margin:var(--space-m) 0 var(--space-l);border:var(--border);border-radius:var(--border-radius-sm);}
+.data-table{width:100%;border-collapse:collapse;font-size:var(--font-size-base);min-width:520px;}
+.data-table th{background:var(--purple-tint-2);color:var(--color-navy);font-family:var(--font-display);font-weight:700;font-size:.8125rem;text-align:left;padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--purple-soft);}
+.data-table td{padding:var(--space-s) var(--space-m);border-bottom:1px solid var(--border-color);vertical-align:top;color:var(--color-ink-2);}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--color-cream);}
+.data-table td strong,.data-table th strong{color:var(--color-ink);}
+
+/* Roadmap / framework phase cards */
+.phase-cards{display:flex;flex-direction:column;gap:2px;margin:var(--space-m) 0 var(--space-l);border-radius:var(--border-radius-sm);overflow:hidden;border:var(--border);}
+.phase-item{display:flex;gap:var(--space-m);padding:var(--space-s) var(--space-m);background:var(--color-white);align-items:flex-start;}
+.phase-num{flex-shrink:0;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--jai-gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);}
+.phase-body{flex:1;min-width:0;}
+.phase-title{font-family:var(--font-display);font-weight:700;font-size:var(--font-size-base);color:var(--color-ink);margin-bottom:.15rem;display:block;}
+.phase-desc{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.6;}
+
+/* Hook stat contrast callout */
+.hook-stat{background:var(--color-cream);border-left:3px solid var(--color-teal);border-radius:var(--border-radius-sm);padding:var(--space-m);margin:var(--space-m) 0;}
+.hook-stat p{font-size:var(--font-size-base);color:var(--color-ink-2);margin:0;line-height:1.65;}
+.hook-stat .stat-num{font-family:var(--font-display);font-weight:700;color:var(--color-ink-3);}
+
+/* Interactive toggle: expertise gap vs process gap */
+.toggle-box{border:1.5px solid var(--purple-soft);border-radius:var(--border-radius);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0 var(--space-l);background:var(--purple-tint-3);}
+.toggle-head{display:flex;gap:.4rem;margin-bottom:var(--space-m);flex-wrap:wrap;}
+.toggle-btn{font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.02em;color:var(--jai-a);background:var(--color-white);border:1.5px solid var(--purple-soft);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.toggle-btn:hover{border-color:var(--jai-a);}
+.toggle-btn.active{background:var(--jai-gradient);color:#fff;border-color:transparent;}
+.toggle-panel{display:none;}
+.toggle-panel.active{display:block;animation:fadeIn .25s ease;}
+.toggle-panel p{margin-bottom:.6rem;}
+.toggle-panel p:last-child{margin-bottom:0;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* Decision-checker widget */
+.decision-widget{border:1.5px solid var(--color-teal);border-radius:var(--border-radius);padding:var(--space-l) var(--space-m);margin:var(--space-l) 0;background:var(--color-white);}
+.decision-widget-head{font-family:var(--font-display);font-size:var(--font-size-lg);font-weight:700;color:var(--color-ink);margin:0 0 var(--space-2xs);}
+.decision-widget-sub{font-size:.8125rem;color:var(--color-ink-3);margin:0 0 var(--space-m);}
+.decision-options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:var(--space-m);}
+.decision-option{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem var(--space-s);border:var(--border);border-radius:var(--border-radius-sm);cursor:pointer;transition:border-color .2s,background .2s;font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-option:hover{border-color:var(--jai-a);background:var(--purple-tint-3);}
+.decision-option input{margin-top:.2rem;accent-color:var(--jai-a);}
+.decision-result{display:none;background:var(--color-cream);border-left:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);}
+.decision-result.show{display:block;animation:fadeIn .25s ease;}
+.decision-reset{display:inline-block;margin-top:var(--space-s);font-size:.8125rem;font-weight:600;color:var(--color-teal);cursor:pointer;background:none;border:none;padding:0;border-bottom:1px solid #4D819440;font-family:var(--font-base);}
+.decision-reset:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+
+/* Benefit / risk checklist */
+.diag-checklist{background:var(--color-cream);border:var(--border);border-radius:var(--border-radius-sm);padding:var(--space-m) var(--space-l);margin:var(--space-m) 0;}
+.diag-checklist ul{list-style:none;padding-left:0;margin-bottom:0;}
+.diag-checklist li{position:relative;padding-left:1.6rem;margin-bottom:.55rem;font-size:var(--font-size-base);}
+.diag-checklist li:last-child{margin-bottom:0;}
+.diag-checklist li::before{content:"";position:absolute;left:0;top:.2rem;width:1.05rem;height:1.05rem;border-radius:4px;border:1.5px solid var(--color-teal);background:var(--color-white);}
+.diag-checklist li::after{content:"✓";position:absolute;left:.22rem;top:-.05rem;color:var(--color-teal);font-size:.8125rem;font-weight:700;}
+
+/* Expert Sidebar */
+.expert-sidebar{width:200px;flex-shrink:0;position:sticky;top:30px;max-height:calc(100vh - 60px);overflow-y:auto;padding:0 var(--space-m) var(--space-m) var(--space-s);scrollbar-width:thin;}
+.expert-sidebar::-webkit-scrollbar{width:3px;}
+.expert-sidebar::-webkit-scrollbar-thumb{background:var(--border-color);}
+.exp-head{background:var(--purple-tint-2);padding:.35rem var(--space-s);margin-bottom:2px;border-radius:var(--border-radius-sm) var(--border-radius-sm) 0 0;}
+.exp-head-lbl{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);display:block;line-height:1.3;}
+.exp-list{background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-top:none;border-radius:0 0 var(--border-radius-sm) var(--border-radius-sm);}
+.exp-item{padding:.5rem var(--space-s);border-bottom:1px solid var(--purple-soft);}
+.exp-item:last-child{border-bottom:none;}
+.exp-source{font-family:var(--font-display);font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--jai-a);display:block;margin-bottom:.3rem;}
+.exp-num{font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--color-ink);line-height:1.15;display:block;margin-bottom:.15rem;font-variant-numeric:tabular-nums;}
+.exp-num.red{color:var(--color-red);}
+.exp-stat{font-size:.8125rem;color:var(--color-ink-2);line-height:1.4;margin:0;font-weight:400;}
+.exp-link{font-size:.8125rem;font-weight:600;color:var(--color-teal);text-decoration:none;border-bottom:1px solid #4D819440;letter-spacing:.03em;transition:color .15s;display:inline-block;margin-top:.3rem;}
+.exp-link:hover{color:var(--color-navy);border-bottom-color:var(--color-navy);}
+@media(max-width:1100px){.page-wrapper{flex-wrap:wrap;}.expert-sidebar{position:static;width:100%;max-height:none;padding:0 0 var(--space-l) 0;order:99;}.exp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;}.exp-item{border-bottom:none;border-right:1px solid var(--purple-soft);}}
+@media(max-width:640px){.expert-sidebar .exp-list{grid-template-columns:1fr;}.expert-sidebar .exp-item{border-right:none;border-bottom:1px solid var(--purple-soft);}}
+
+/* CTA block */
+.jag-cta{display:flex;align-items:center;justify-content:space-between;gap:var(--space-l);border:1.5px solid var(--color-red);border-radius:14px;background:var(--color-white);padding:var(--space-m) var(--space-l);margin:var(--space-l) 0;transition:box-shadow .2s;flex-wrap:wrap;}
+.jag-cta:hover{box-shadow:0 6px 20px rgba(210,36,40,.1);}
+.jag-cta-body{flex:1;min-width:0;}
+.jag-cta-head{font-size:var(--font-size-base);font-weight:700;color:var(--color-ink);margin:0 0 .3rem;line-height:1.4;}
+.jag-cta-desc{font-size:var(--font-size-base);color:var(--color-ink-3);margin:0;line-height:1.55;}
+.jag-cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-base);font-size:var(--font-size-base);font-weight:700;color:#fff;background:var(--color-red);padding:.65rem 1.4rem;text-decoration:none;border:none;white-space:nowrap;text-align:center;line-height:1.4;flex-shrink:0;border-radius:8px;transition:background .2s;}
+.jag-cta-btn:hover{background:var(--color-grey);color:#fff;border-bottom:none;}
+@media(max-width:580px){.jag-cta{flex-direction:column;align-items:flex-start;}.jag-cta-btn{align-self:stretch;text-align:center;}}
+
+/* FAQ */
+.faq-item{border:var(--border);border-radius:var(--border-radius-sm);margin-bottom:3px;overflow:hidden;}
+.faq-item summary{display:flex;justify-content:space-between;align-items:center;padding:var(--space-s) var(--space-m);font-weight:600;color:var(--color-ink);cursor:pointer;font-size:var(--font-size-base);list-style:none;gap:var(--space-m);background:var(--color-white);transition:background .15s;}
+.faq-item summary:hover{background:var(--color-cream);}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-icon{font-size:1.1rem;color:var(--color-teal);flex-shrink:0;line-height:1;}
+.faq-body{padding:var(--space-s) var(--space-m) var(--space-m);font-size:var(--font-size-base);color:var(--color-ink-2);line-height:1.65;border-top:var(--border);background:var(--color-white);}
+
+/* Responsive */
+@media(max-width:1060px){.toc-sidebar{display:none;}.page-wrapper{padding:0;max-width:100%;}article{max-width:760px;margin:0 auto;padding:var(--space-xl) var(--space-l) var(--space-2xl);}}
+@media(max-width:768px){.article-header{padding:var(--space-l) var(--space-l) 0;}.article-header h1{font-size:clamp(1.75rem,5vw,2.4rem);}article{padding:var(--space-l) var(--space-m) var(--space-2xl);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* Font-size floor: all body and UI text held between 13px and 14px */
+.tag-pill,.meta-item,.toc-link,.exp-head-lbl,.exp-source,.exp-stat,.exp-link,.toc-head-lbl{font-size:.8125rem;}
+.exp-stat{line-height:1.45;}
+article .phase-body ul,article .phase-body ol{margin:.35rem 0 0;}
+article .phase-body li{margin-bottom:.15rem;}
+
+/* Interactive tables */
+.interactive-table tbody tr{transition:background .15s;cursor:default;}
+.interactive-table tbody tr:hover td{background:var(--purple-tint-3);}
+.interactive-table td.col-on,.interactive-table th.col-on{background:var(--purple-tint)!important;color:var(--color-ink);}
+.interactive-table th.col-on{background:var(--jai-gradient)!important;color:#fff;}
+.col-toggle{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin:var(--space-m) 0 -.4rem;}
+.col-toggle-lbl{font-size:.8125rem;font-weight:600;color:var(--color-ink-3);text-transform:uppercase;letter-spacing:.06em;margin-right:.2rem;}
+.table-filter{display:flex;align-items:center;gap:.6rem;margin:var(--space-m) 0 -.4rem;flex-wrap:wrap;}
+.table-filter input{flex:1;min-width:200px;max-width:340px;font-family:var(--font-base);font-size:.8125rem;padding:.5rem .9rem;border:1.5px solid var(--purple-soft);border-radius:999px;outline:none;background:var(--purple-tint-3);transition:border-color .2s;}
+.table-filter input:focus{border-color:var(--jai-a);background:#fff;}
+.table-filter span{font-size:.8125rem;color:var(--color-ink-3);font-weight:600;}
+
+/* Kraljic matrix */
+.kraljic{display:grid;grid-template-columns:auto 1fr;gap:.5rem;margin:var(--space-s) 0 0;}
+.k-axis-y{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);text-align:center;}
+.k-axis-x{grid-column:2;font-family:var(--font-display);font-size:.8125rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--jai-a);text-align:center;}
+.k-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;}
+.k-cell{text-align:left;font-family:var(--font-base);font-size:.8125rem;line-height:1.5;color:var(--color-ink-2);background:var(--purple-tint-3);border:1.5px solid var(--purple-soft);border-radius:var(--border-radius-sm);padding:.75rem .9rem;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;}
+.k-cell:hover{transform:translateY(-2px);border-color:var(--jai-a);box-shadow:0 6px 18px rgba(83,0,206,.1);}
+.k-cell strong{color:var(--jai-a);}
+.k-cell.active{background:var(--jai-gradient);border-color:transparent;color:#fff;}
+.k-cell.active strong{color:#fff;}
+
+/* RFI / RFP / RFQ cards */
+.mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:var(--space-s) 0 var(--space-m);}
+.mini-card{font-size:.8125rem;line-height:1.55;background:#fff;border:var(--border);border-top:3px solid var(--jai-a);border-radius:var(--border-radius-sm);padding:.8rem .9rem;transition:transform .2s,box-shadow .2s;}
+.mini-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(83,0,206,.1);}
+.mini-card strong{display:block;color:var(--jai-a);margin-bottom:.25rem;}
+
+/* Software tool tiles */
+.tool-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:.45rem;margin:var(--space-s) 0 var(--space-m);}
+.tool-tile{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.6rem .85rem;background:var(--purple-tint-3);border:1px solid var(--purple-soft);border-radius:var(--border-radius-sm);font-size:.8125rem;font-weight:600;color:var(--color-navy);transition:background .2s,border-color .2s,transform .2s;}
+.tool-tile::after{content:"\2192";color:var(--jai-a);transition:transform .2s;}
+.tool-tile:hover{background:var(--purple-tint);border-color:var(--jai-a);color:var(--jai-a);transform:translateY(-1px);}
+.tool-tile:hover::after{transform:translateX(3px);}
+
+/* Phase cards & checklist hover polish */
+.phase-item{transition:background .2s;}
+.phase-item:hover{background:var(--purple-tint-3);}
+.faq-item[open] summary{background:var(--purple-tint-3);}
+.faq-item[open] .faq-icon{transform:rotate(45deg);}
+.faq-icon{transition:transform .2s;}
+
+@media(max-width:640px){.mini-cards{grid-template-columns:1fr;}.k-cell{padding:.6rem .7rem;}}
+
+.inline-toc{background:var(--color-light-blue);border:1px solid var(--color-border);border-radius:var(--border-radius-sm);padding:1rem 1.25rem;margin:1.5rem 0;}
+.inline-toc-title{font-weight:700;color:var(--color-navy);margin:0 0 .5rem;font-size:.9375rem;}
+.inline-toc ul{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;list-style:none;margin:0;padding:0;}
+.inline-toc li{margin:0;font-size:.9375rem;}
+.inline-toc a{color:var(--color-teal);text-decoration:underline;}
+.jag-cta-desc a{color:inherit;text-decoration:underline;}
+article h2[id],article h3[id]{scroll-margin-top:1.5rem;}
+
+/* Article-specific: AI statistics donut grid (font floor 13px, sentence case) */
+.ai-stats{border:1.5px solid var(--purple-soft);border-radius:var(--border-radius);background:var(--purple-tint-3);padding:var(--space-m);margin:var(--space-m) 0 var(--space-l);}
+.ai-stats-title{font-family:var(--font-display);font-weight:700;color:var(--color-navy);font-size:.9375rem;margin:0 0 var(--space-s);}
+.ai-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+.ai-stat{display:flex;align-items:center;gap:var(--space-s);background:#fff;border:var(--border);border-radius:var(--border-radius-sm);padding:.75rem .9rem;}
+.donut{position:relative;width:64px;height:64px;flex-shrink:0;}
+.donut svg{width:100%;height:100%;transform:rotate(-90deg);}
+.donut-ring{fill:none;stroke:var(--color-cream);stroke-width:4;}
+.donut-seg{fill:none;stroke:url(#donutGrad);stroke-width:4;stroke-linecap:round;animation:donutIn 1.2s ease-out both;}
+.donut-seg.red{stroke:var(--color-red);}
+@keyframes donutIn{from{stroke-dasharray:0 100;}}
+.donut-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:.8125rem;color:var(--jai-a);}
+.donut-num.red{color:var(--color-red);}
+.ai-stat-lead{display:block;font-weight:700;color:var(--color-ink);font-size:var(--font-size-base);line-height:1.4;}
+.ai-stat-sub{display:block;font-size:.8125rem;color:var(--color-ink-3);line-height:1.45;margin-top:.15rem;}
+@media(max-width:640px){.ai-stats-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+
+<body>
+
+<div id="progress-bar" style="position:fixed;top:0;left:0;width:0%;height:3px;background:var(--color-red);z-index:1000;"></div>
+
+<div class="page-wrapper">
+
+  <aside class="toc-sidebar" aria-label="Table of Contents">
+    <div class="toc-head"><span class="toc-head-lbl">Contents</span></div>
+    <nav class="toc-nav" aria-label="Article sections">
+      <a class="toc-link" href="#s1">What is supply chain risk management?</a>
+      <a class="toc-link" href="#s2">Types of supply chain and supplier risks</a>
+      <a class="toc-link" href="#s3">Why supply chain risk management matters</a>
+      <a class="toc-link" href="#s4">Steps to manage supply chain and supplier risk</a>
+      <a class="toc-link" href="#s5">How AI supports predictive supplier risk management</a>
+      <a class="toc-link" href="#s6">Supplier risk management solutions: what to look for</a>
+      <a class="toc-link" href="#s7">FAQs</a>
+      <a class="toc-link" href="#s8">Next steps</a>
+    </nav>
+  </aside>
+
+  <article>
+
+    <header class="article-header">
+      <div class="article-header-inner">
+        <div class="article-tags">
+          <span class="tag-pill">Supplier Management</span>
+          <span class="tag-pill">Supply Chain Risk</span>
+        </div>
+        <h1>Supply Chain Risk Management: Steps, Supplier Risk and Solutions</h1>
+        <div class="article-meta">
+          <span class="meta-item">12 min read</span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Published: <time datetime="2021-10-27">October 2021</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">Updated: <time datetime="2026-11-23">November 2026</time></span>
+          <span class="meta-sep" aria-hidden="true">|</span>
+          <span class="meta-item">By Visnja Radosavljevic</span>
+        </div>
+      </div>
+    </header>
+
+    <p><strong>According to <a href="https://www.mckinsey.com/capabilities/operations/our-insights/supply-chain-risk-survey" target="_blank" rel="noopener">McKinsey’s</a> 2025 supply chain survey, 95% of respondents have Tier 1 risk visibility, yet only 42% have visibility at Tier 2 or beyond.</strong></p>
+
+    <p>That gap is where disruption hides. <strong>A failure at a Tier 2 or Tier 3 supplier still stops a production line, even when every Tier 1 supplier scores green.</strong></p>
+
+    <p><strong>Supply chain risk management closes the visibility gap with a repeatable cycle: map, assess, prioritize, mitigate and monitor.</strong> The <a href="https://www.jaggaer.com/download/checklist/golden-rules-supplier-risk/" target="_blank" rel="noopener">golden rules of supplier risk management</a> set the baseline for each stage of that cycle.</p>
+
+    <div data-cta="scrm-cta1-golden-rules" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; padding:32px 40px; margin:32px 0; border:1px solid #d42027; border-radius:16px; background:#ffffff; box-sizing:border-box;">
+      <div style="flex:1 1 320px;">
+        <p style="margin:0 0 6px; font-size:16px; font-weight:700; color:#111111;">Download the golden rules checklist</p>
+        <p style="margin:0; font-size:16px; line-height:1.6; color:#6b7280;">Jaggaer’s 10-rule checklist for setting up and reviewing a supplier risk program.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/checklist/golden-rules-supplier-risk/?utm_source=jaggaer-blog&amp;utm_medium=cta&amp;utm_campaign=supply-chain-risk-management&amp;utm_content=scrm-cta1-golden-rules" target="_blank" rel="noopener" style="flex-shrink:0; display:inline-block; padding:14px 28px; background:#d42027; color:#ffffff; font-weight:700; text-decoration:none; border-radius:8px;">Get the Golden Rules Checklist →</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s1">What Is Supply Chain Risk Management?</h2>
+
+    <p><strong>Supply chain risk management is the ongoing process of identifying, assessing, mitigating and monitoring threats to the flow of goods, services, data and cash across a supplier network.</strong> The scope runs from direct suppliers to the sub-tier suppliers behind them. It also covers logistics providers and any vendor with access to company systems.</p>
+
+    <p>Teams often use the term interchangeably with 3 others. Each has a different scope and a different owner:</p>
+
+    <div style="margin:24px 0; border:1px solid #e0dcee; border-radius:12px; overflow-x:auto; background:#ffffff; box-sizing:border-box;">
+      <table style="width:100%; min-width:640px; border-collapse:collapse; font-size:16px; line-height:1.6; color:#374151;">
+        <thead>
+          <tr style="background:#e9e3f7;">
+            <th style="width:20%; padding:16px 20px; text-align:left; font-size:15px; font-weight:700; color:#111111; border-bottom:1px solid #e0dcee;">Term</th>
+            <th style="width:40%; padding:16px 20px; text-align:left; font-size:15px; font-weight:700; color:#111111; border-bottom:1px solid #e0dcee;">Scope</th>
+            <th style="width:40%; padding:16px 20px; text-align:left; font-size:15px; font-weight:700; color:#111111; border-bottom:1px solid #e0dcee;">Typical owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#ffffff;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">SCRM</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">The full supply network, including logistics, geography and sub-tiers</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Supply chain and procurement</td>
+          </tr>
+          <tr style="background:#eef0f4;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Supplier risk management</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Vetting, scoring and monitoring individual suppliers</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Procurement</td>
+          </tr>
+          <tr style="background:#ffffff;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Third-party risk management (TPRM)</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Vendor security, data and legal exposure</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Security, legal, compliance</td>
+          </tr>
+          <tr style="background:#eef0f4;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top;">Supply chain resilience</td>
+            <td style="padding:14px 20px; vertical-align:top;">The capacity to absorb a shock and recover</td>
+            <td style="padding:14px 20px; vertical-align:top;">Operations leadership</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>SCRM ties these disciplines together, so procurement, security, finance and operations work from one shared risk picture instead of separate registers.</strong></p>
+
+    <hr class="section-divider">
+
+    <h2 id="s2">Types of Supply Chain and Supplier Risks</h2>
+
+    <p><strong>Supply chain and supplier risks fall into 8 categories, and each category needs its own data and a named owner.</strong></p>
+
+    <div style="margin:24px 0; border:1px solid #e0dcee; border-radius:12px; overflow-x:auto; background:#ffffff; box-sizing:border-box;">
+      <table style="width:100%; min-width:640px; border-collapse:collapse; font-size:16px; line-height:1.6; color:#374151;">
+        <thead>
+          <tr style="background:#e9e3f7;">
+            <th style="width:20%; padding:16px 20px; text-align:left; font-size:15px; font-weight:700; color:#111111; border-bottom:1px solid #e0dcee;">Risk category</th>
+            <th style="width:40%; padding:16px 20px; text-align:left; font-size:15px; font-weight:700; color:#111111; border-bottom:1px solid #e0dcee;">What the risk looks like</th>
+            <th style="width:40%; padding:16px 20px; text-align:left; font-size:15px; font-weight:700; color:#111111; border-bottom:1px solid #e0dcee;">Signals to monitor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#ffffff;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Financial</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Insolvency, liquidity stress, off-balance-sheet debt</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Payment behavior, rating changes, financing structures, late filings</td>
+          </tr>
+          <tr style="background:#eef0f4;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Geopolitical and trade</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Tariffs, export controls, sanctions</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Trade policy changes, restricted-party lists, country-of-origin exposure</td>
+          </tr>
+          <tr style="background:#ffffff;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Cyber and third-party</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Breaches or outages that start at a vendor</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Security posture, incident reports, system access reviews</td>
+          </tr>
+          <tr style="background:#eef0f4;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Operational and quality</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Capacity limits, defects, factory incidents</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">On-time delivery, nonconformance reports, capacity data</td>
+          </tr>
+          <tr style="background:#ffffff;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Logistics</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Chokepoint closures, port congestion, freight spikes</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Route exposure, lead-time variance, freight rates</td>
+          </tr>
+          <tr style="background:#eef0f4;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Climate and natural hazard</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Storms, floods, heat, water stress</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Supplier site locations matched to hazard data</td>
+          </tr>
+          <tr style="background:#ffffff;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Regulatory and ESG</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Forced labor rules, emissions reporting, due diligence laws</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Certifications, audits, adverse media, questionnaires</td>
+          </tr>
+          <tr style="background:#eef0f4;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top;">Concentration</td>
+            <td style="padding:14px 20px; vertical-align:top;">Single-source, sole-source or regional dependency</td>
+            <td style="padding:14px 20px; vertical-align:top;">Spend share, qualified alternates, geographic clustering</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Cyber and multi-tier exposure now lead the list for large US companies. <strong><a href="https://kpmg.com/us/en/articles/2026/2026-supply-chain-survey.html" target="_blank" rel="noopener">KPMG’s</a> 2026 US Supply Chain Survey ranked cybersecurity threats first, followed by multi-tier supplier risk.</strong> The survey covered 462 leaders at companies with $1 billion or more in revenue. Regulatory risks and supply shortages ranked close behind.</p>
+
+    <p>Concentration deserves special attention because concentration amplifies the other 7 categories. <strong>A sole-source supplier in a flood zone turns one local storm into a company-wide outage.</strong></p>
+
+    <hr class="section-divider">
+
+    <h2 id="s3">Why Supply Chain Risk Management Matters</h2>
+
+    <p>Most companies still do not consider themselves ready for major disruption. <strong>The 2025 Resilience Consortium Pulse Check, reported by <a href="https://www.mckinsey.com/capabilities/risk-and-resilience/our-insights/resilient-firms-and-economies-unlocking-growth-in-emerging-markets" target="_blank" rel="noopener">McKinsey and the World Economic Forum</a>, found only 1 in 4 companies ready for major disruption across all resilience dimensions.</strong> The survey covered more than 270 executives.</p>
+
+    <p>Pressure is coming from several directions at once:</p>
+
+    <ul>
+      <li>Trade policy: <strong>in McKinsey’s supply chain survey, 82% of respondents said new tariffs affect their supply chains.</strong></li>
+      <li>Supplier finances: <strong><a href="https://www.clepa.eu/?p=37150" target="_blank" rel="noopener">CLEPA’s</a> Spring 2026 Pulse Check found 24% of European automotive suppliers expect negative profitability in 2026</strong>, up from 15% in the previous survey.</li>
+    </ul>
+
+    <div style="margin:32px 0; padding:40px 32px; border:1px solid #4a7c8c; border-radius:20px; background:#ffffff; text-align:center; box-sizing:border-box;">
+      <p style="margin:0 0 24px; font-size:20px; font-weight:700; color:#111111;">Supply chain risk at a glance (2025–2026)</p>
+      <p style="max-width:680px; margin:0 auto 36px; font-size:16px; line-height:1.7; color:#374151;">Data from <a href="https://www.mckinsey.com/capabilities/operations/our-insights/supply-chain-risk-survey" target="_blank" rel="noopener" style="color:#4a7c8c; text-decoration:underline;">McKinsey</a>, Verizon and CLEPA shows where visibility, cyber and financial risk now concentrate.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:24px; justify-content:center;">
+        <div style="flex:1 1 200px; max-width:260px;">
+          <div style="font-size:30px; font-weight:700; line-height:1.2; color:#4a7c8c;">42%</div>
+          <div style="margin-top:6px; font-size:14px; line-height:1.5; color:#374151;">Respondents with supplier risk visibility at Tier 2 or beyond, against 95% at Tier 1 (McKinsey, 2025)</div>
+        </div>
+        <div style="flex:1 1 200px; max-width:260px;">
+          <div style="font-size:30px; font-weight:700; line-height:1.2; color:#4a7c8c;">48%</div>
+          <div style="margin-top:6px; font-size:14px; line-height:1.5; color:#374151;">Breaches with third-party involvement, up 60% year over year (Verizon DBIR, 2026)</div>
+        </div>
+        <div style="flex:1 1 200px; max-width:260px;">
+          <div style="font-size:30px; font-weight:700; line-height:1.2; color:#4a7c8c;">24%</div>
+          <div style="margin-top:6px; font-size:14px; line-height:1.5; color:#374151;">European automotive suppliers expecting negative profitability in 2026 (CLEPA, Spring 2026)</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-question">What Changed in 2025 and 2026</h3>
+
+    <p>5 events show how quickly risk now moves through supplier tiers.</p>
+
+    <div style="margin:24px 0; border:1px solid #e0dcee; border-radius:12px; overflow:hidden; background:#ffffff; box-sizing:border-box;">
+      <div onmouseover="this.style.background='#e8edf4'" onmouseout="this.style.background='#ffffff'" style="display:flex; align-items:flex-start; gap:20px; padding:24px 28px; background:#ffffff; transition:background 0.2s ease; box-sizing:border-box;">
+        <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#6b21d6,#d6338a); color:#ffffff; font-size:16px; font-weight:700; line-height:1;">1</span>
+        <div>
+          <p style="margin:0 0 4px; font-size:16px; font-weight:700; color:#111111;">Export controls hit a sub-tier chip supplier (October 2025)</p>
+          <p style="margin:0 0 10px; font-size:16px; line-height:1.5; color:#374151;"><strong style="color:#6b7280;">According to <a href="https://www.nexperia.com/about/news-events/press-releases/update-on-company-developments" target="_blank" rel="noopener" style="color:#4a7c8c; text-decoration:underline;">Nexperia</a>, China’s Ministry of Commerce issued an October 4 notice barring Nexperia China and its subcontractors from exporting specific components made in China.</strong> <a href="https://autotechinsight.spglobal.com/news/5284615/dutch-move-on-nexperia-triggers-nervousness-among-auto-suppliers-and-oems" target="_blank" rel="noopener" style="color:#4a7c8c; text-decoration:underline;">S&amp;P Global Mobility</a> notes that Nexperia’s parts are essential for modules ranging from lighting and body electronics to airbag systems and powertrain controllers.</p>
+          <p style="margin:0; font-size:16px; line-height:1.5; color:#374151;"><strong style="color:#6b7280;">A single sub-tier supplier can still stop vehicle production when its parts sit inside Tier 1 modules.</strong></p>
+        </div>
+      </div>
+      <div onmouseover="this.style.background='#e8edf4'" onmouseout="this.style.background='#ffffff'" style="display:flex; align-items:flex-start; gap:20px; padding:24px 28px; background:#ffffff; transition:background 0.2s ease; box-sizing:border-box;">
+        <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#6b21d6,#d6338a); color:#ffffff; font-size:16px; font-weight:700; line-height:1;">2</span>
+        <div>
+          <p style="margin:0 0 4px; font-size:16px; font-weight:700; color:#111111;">A cyberattack at one manufacturer spread through supplier tiers (from late August 2025)</p>
+          <p style="margin:0 0 10px; font-size:16px; line-height:1.5; color:#374151;"><strong style="color:#6b7280;">The <a href="https://cybermonitoringcentre.com/2025/10/22/cyber-monitoring-centre-statement-on-the-jaguar-land-rovercyber-incident-october-2025/" target="_blank" rel="noopener" style="color:#4a7c8c; text-decoration:underline;">Cyber Monitoring Centre</a> modeled a £1.9 billion UK impact from the Jaguar Land Rover incident, affecting over 5,000 UK organizations.</strong> The modeled range ran from £1.6 billion to £2.1 billion. JLR suspended vehicle production for approximately 5 weeks across major UK plants.</p>
+          <p style="margin:0; font-size:16px; line-height:1.5; color:#374151;">The CMC also noted that JLR relies on nearly 1,000 Tier 1 suppliers and thousands of Tier 2 and 3 suppliers, and <strong style="color:#6b7280;">lacks direct relationships with many lower-tier suppliers.</strong></p>
+        </div>
+      </div>
+      <div onmouseover="this.style.background='#e8edf4'" onmouseout="this.style.background='#ffffff'" style="display:flex; align-items:flex-start; gap:20px; padding:24px 28px; background:#ffffff; transition:background 0.2s ease; box-sizing:border-box;">
+        <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#6b21d6,#d6338a); color:#ffffff; font-size:16px; font-weight:700; line-height:1;">3</span>
+        <div>
+          <p style="margin:0 0 4px; font-size:16px; font-weight:700; color:#111111;">A supplier’s financing structure hid risk (September 2025)</p>
+          <p style="margin:0 0 10px; font-size:16px; line-height:1.5; color:#374151;"><strong style="color:#6b7280;"><a href="https://news.bloomberglaw.com/bankruptcy-law/americas-distress-daily-first-brands-files-bankruptcy-case" target="_blank" rel="noopener" style="color:#4a7c8c; text-decoration:underline;">Bloomberg Law</a> reported that First Brands filed for Chapter 11 with liabilities between $10 billion and $50 billion.</strong> The filing followed weeks of turmoil sparked by creditor concern over the company’s opaque off-balance-sheet financing.</p>
+          <p style="margin:0; font-size:16px; line-height:1.5; color:#374151;"><strong style="color:#6b7280;">A credit score alone does not reveal off-balance-sheet financing.</strong></p>
+        </div>
+      </div>
+      <div onmouseover="this.style.background='#e8edf4'" onmouseout="this.style.background='#ffffff'" style="display:flex; align-items:flex-start; gap:20px; padding:24px 28px; background:#ffffff; transition:background 0.2s ease; box-sizing:border-box;">
+        <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#6b21d6,#d6338a); color:#ffffff; font-size:16px; font-weight:700; line-height:1;">4</span>
+        <div>
+          <p style="margin:0 0 4px; font-size:16px; font-weight:700; color:#111111;">A shipping chokepoint closed (first half of 2026)</p>
+          <p style="margin:0; font-size:16px; line-height:1.5; color:#374151;"><strong style="color:#6b7280;">The <a href="https://blogs.worldbank.org/en/opendata/strait-of-hormuz-disruption-sends-oil-prices-surging" target="_blank" rel="noopener" style="color:#4a7c8c; text-decoration:underline;">World Bank</a> described the Strait of Hormuz closure as the largest oil market disruption in history.</strong> Global oil supply fell by 10.1 million barrels per day in March 2026.</p>
+        </div>
+      </div>
+      <div onmouseover="this.style.background='#e8edf4'" onmouseout="this.style.background='#ffffff'" style="display:flex; align-items:flex-start; gap:20px; padding:24px 28px; background:#ffffff; transition:background 0.2s ease; box-sizing:border-box;">
+        <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#6b21d6,#d6338a); color:#ffffff; font-size:16px; font-weight:700; line-height:1;">5</span>
+        <div>
+          <p style="margin:0 0 4px; font-size:16px; font-weight:700; color:#111111;">Breaches with third-party involvement approached half of all breaches (2026)</p>
+          <p style="margin:0; font-size:16px; line-height:1.5; color:#374151;"><strong style="color:#6b7280;"><a href="https://www.verizon.com/about/news/breach-industry-wide-dbir-finds" target="_blank" rel="noopener" style="color:#4a7c8c; text-decoration:underline;">Verizon’s</a> 2026 Data Breach Investigations Report found that breaches with third-party involvement rose 60% and now account for 48% of all breaches.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin:24px 0; padding:28px 32px; background:#eef0f4; border-left:4px solid #4a7c8c; border-radius:4px 12px 12px 4px; box-sizing:border-box;">
+      <p style="margin:0; font-size:16px; line-height:1.8; color:#374151;"><strong style="color:#6b7280;">In every event, the trigger sat outside the buyer’s direct line of sight.</strong> Chips arrived inside Tier 1 modules. Debt sat off the supplier’s balance sheet. Breaches came with third-party involvement.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s4">Steps to Manage Supply Chain and Supplier Risk</h2>
+
+    <p><strong>A supplier risk management program runs as a 5-step cycle, and each step produces an output the next step uses.</strong></p>
+
+    <p>The events of 2025 and 2026 point to one recurring gap: visibility below Tier 1. A structured program closes that gap step by step.</p>
+
+    <h3 class="sub-question">Step 1: Map Your Supply Base and Set Risk Appetite</h3>
+
+    <p><em>Step 1 of 5 &middot; Map</em></p>
+
+    <p><strong>Mapping starts with criticality, not spend alone.</strong> Segment your suppliers by spend, criticality and substitutability. For critical categories, ask Tier 1 suppliers to disclose the sub-tier sources and sites behind each part.</p>
+
+    <p>The Cyber Monitoring Centre’s JLR analysis makes the same point. <strong>A manufacturer without direct lower-tier relationships depends on its direct suppliers to support every key element of the supply chain.</strong></p>
+
+    <p><strong>Risk appetite defines which risks procurement can accept and which risks need executive sign-off.</strong> Assign one owner per risk category before scoring begins.</p>
+
+    <h3 class="sub-question">Step 2: Identify and Assess Supplier Risk</h3>
+
+    <p><em>Step 2 of 5 &middot; Assess</em></p>
+
+    <p><strong>Supplier due diligence at onboarding sets the baseline, and scorecards track movement from that baseline.</strong></p>
+
+    <p>Onboarding checks should cover:</p>
+
+    <div style="margin:24px 0; padding:28px 40px; background:#eef0f4; border:1px solid #dfe2ea; border-radius:12px; box-sizing:border-box;">
+      <ul style="margin:0; padding:0; list-style:none;">
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Ownership and parent-company structure</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Financial health and financing structures</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Certifications and sanctions screening</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Security posture</span>
+        </li>
+      </ul>
+    </div>
+
+    <p>Scorecards then convert performance and risk data into comparable supplier scores. Use a <a href="https://www.jaggaer.com/download/checklist/supplier-performance-rating/" target="_blank" rel="noopener">supplier scorecard checklist</a> to agree on criteria and weightings before automating any scoring. <strong>Weightings decide which suppliers surface first, so finance and operations should approve the weightings.</strong></p>
+
+    <div data-cta="scrm-cta2-scorecard-checklist" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; padding:32px 40px; margin:32px 0; border:1px solid #d42027; border-radius:16px; background:#ffffff; box-sizing:border-box;">
+      <div style="flex:1 1 320px;">
+        <p style="margin:0 0 6px; font-size:16px; font-weight:700; color:#111111;">Download the supplier scorecard checklist</p>
+        <p style="margin:0; font-size:16px; line-height:1.6; color:#6b7280;">Criteria and rating structure for scoring supplier performance.</p>
+      </div>
+      <a href="https://www.jaggaer.com/download/checklist/supplier-performance-rating/?utm_source=jaggaer-blog&amp;utm_medium=cta&amp;utm_campaign=supply-chain-risk-management&amp;utm_content=scrm-cta2-scorecard-checklist" target="_blank" rel="noopener" style="flex-shrink:0; display:inline-block; padding:14px 28px; background:#d42027; color:#ffffff; font-weight:700; text-decoration:none; border-radius:8px;">Get the Scorecard Checklist →</a>
+    </div>
+
+    <h3 class="sub-question">Step 3: Prioritize With a Risk Matrix</h3>
+
+    <p><em>Step 3 of 5 &middot; Prioritize</em></p>
+
+    <p>Not every risk deserves the same attention. <strong>A likelihood-impact matrix ranks each risk, and mitigation budget goes to risks that score high on both axes.</strong></p>
+
+    <p>Score impact against criteria such as:</p>
+
+    <div style="margin:24px 0; padding:28px 40px; background:#eef0f4; border:1px solid #dfe2ea; border-radius:12px; box-sizing:border-box;">
+      <ul style="margin:0; padding:0; list-style:none;">
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Time to recover from a supplier failure</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Time to qualify an alternate supplier</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Revenue and margin at risk</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Number of customers affected</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Number of approved alternates</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Regulatory and reputational exposure</span>
+        </li>
+      </ul>
+    </div>
+
+    <p><strong>Sales and finance teams know which products carry the most revenue, so their input should set the impact scores.</strong></p>
+
+    <h3 class="sub-question">Step 4: Mitigate Before and During Disruption</h3>
+
+    <p><em>Step 4 of 5 &middot; Mitigate</em></p>
+
+    <p><strong>Mitigation has 2 parts: reduce exposure before an event, and respond fast during an event.</strong></p>
+
+    <p>Before an event, the strongest proactive measures are:</p>
+
+    <div style="margin:24px 0; padding:28px 40px; background:#eef0f4; border:1px solid #dfe2ea; border-radius:12px; box-sizing:border-box;">
+      <ul style="margin:0; padding:0; list-style:none;">
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span><strong style="color:#6b7280;">Dual sourcing</strong> for parts with long qualification times.</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span><strong style="color:#6b7280;">Regional diversification</strong> where suppliers cluster in one country or hazard zone.</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span><strong style="color:#6b7280;">Targeted buffer stock</strong> for critical, hard-to-substitute items only.</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span><strong style="color:#6b7280;">Contract terms</strong> requiring disruption notice, sub-tier disclosure and business continuity plans.</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span><strong style="color:#6b7280;">Supplier development</strong> for strategic suppliers with weak financial or operational scores.</span>
+        </li>
+      </ul>
+    </div>
+
+    <p><strong>Applying <a href="https://www.jaggaer.com/blog/category-management-risk-supply-resilience" target="_blank" rel="noopener">category management for supply resilience</a> builds these measures into each category strategy, so mitigation outlasts a single crisis.</strong></p>
+
+    <p>During an event, speed depends on preparation. <strong>A crisis playbook names the trigger, the owner, the first actions, approved alternates and communication templates for each high-priority risk.</strong> In the opening days of a disruption, tighten purchase approvals and review force majeure and termination clauses.</p>
+
+    <h3 class="sub-question">Step 5: Monitor Continuously and Review</h3>
+
+    <p><em>Step 5 of 5 &middot; Monitor</em></p>
+
+    <p><strong>Continuous monitoring converts a static supplier score into an early warning.</strong> Set alert thresholds by category and criticality across your supplier base, and route each alert to the named owner.</p>
+
+    <p>Build review into the operating rhythm:</p>
+
+    <div style="margin:24px 0; padding:28px 40px; background:#eef0f4; border:1px solid #dfe2ea; border-radius:12px; box-sizing:border-box;">
+      <ul style="margin:0; padding:0; list-style:none;">
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Review the highest-priority risks every quarter.</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0 0 14px; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Run a post-incident review after every disruption.</span>
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:12px; margin:0; padding:0; font-size:16px; line-height:1.6; color:#374151;">
+          <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; margin-top:3px; border:1.5px solid #4a7c8c; border-radius:4px; background:#ffffff; color:#4a7c8c; font-size:13px; font-weight:700; line-height:1;">✓</span>
+          <span>Feed the findings back into the risk matrix.</span>
+        </li>
+      </ul>
+    </div>
+
+    <p><strong>At each annual program review, check the program against the <a href="https://www.jaggaer.com/download/checklist/golden-rules-supplier-risk/" target="_blank" rel="noopener">golden rules of supplier risk management</a>.</strong></p>
+
+    <div data-cta="scrm-cta3-supplier-intelligence-monitoring" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; padding:32px 40px; margin:32px 0; border:1px solid #d42027; border-radius:16px; background:#ffffff; box-sizing:border-box;">
+      <div style="flex:1 1 320px;">
+        <p style="margin:0 0 6px; font-size:16px; font-weight:700; color:#111111;">See supplier risk monitoring in Supplier Intelligence</p>
+        <p style="margin:0; font-size:16px; line-height:1.6; color:#6b7280;">Supplier Intelligence scores financial, geographic and geopolitical risk per supplier.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo?utm_source=jaggaer-blog&amp;utm_medium=cta&amp;utm_campaign=supply-chain-risk-management&amp;utm_content=scrm-cta3-supplier-intelligence-monitoring" target="_blank" rel="noopener" style="flex-shrink:0; display:inline-block; padding:14px 28px; background:#d42027; color:#ffffff; font-weight:700; text-decoration:none; border-radius:8px;">Request a Supplier Intelligence Demo →</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2 id="s5">How AI Supports Predictive Supplier Risk Management</h2>
+
+    <p><strong>Confidence in scaling AI across procurement remains low.</strong></p>
+
+    <ul>
+      <li><strong>A <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-survey-shows-just-36-perecent-of-chief-procurement-officers-are-very-confident-in-ability-to-redesign-function-for-ai" target="_blank" rel="noopener">Gartner</a> survey of 101 CPOs, conducted in January and February 2026, found only 36% very confident in their ability to redesign roles and processes around AI.</strong></li>
+      <li>In the KPMG 2026 survey, <strong>7 in 10 supply chain leaders expect AI and GenAI to significantly reshape the supply chain workforce.</strong></li>
+    </ul>
+
+    <p>Continuous monitoring at scale is where AI earns its place. AI helps most in the repetitive, high-volume work of supplier risk. AI supports 5 supplier risk tasks, and <strong>each task keeps a human decision point:</strong></p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:24px; margin:24px 0; box-sizing:border-box;">
+      <div style="padding:28px; background:#ffffff; border:1px solid #e0dcee; border-top:3px solid #4a7c8c; border-radius:12px; box-sizing:border-box;">
+        <p style="margin:0 0 10px; font-size:16px; font-weight:700; color:#111111;">Signal sensing</p>
+        <p style="margin:0; font-size:16px; line-height:1.6; color:#374151;">AI scans news and regulatory notices across languages and links each event to affected suppliers and sites. A buyer decides whether the event is material.</p>
+      </div>
+      <div style="padding:28px; background:#ffffff; border:1px solid #e0dcee; border-top:3px solid #4a7c8c; border-radius:12px; box-sizing:border-box;">
+        <p style="margin:0 0 10px; font-size:16px; font-weight:700; color:#111111;">Sub-tier mapping</p>
+        <p style="margin:0; font-size:16px; line-height:1.6; color:#374151;">AI matches supplier names, parent companies and sites across systems. The category owner decides which sub-tier gaps to close first.</p>
+      </div>
+      <div style="padding:28px; background:#ffffff; border:1px solid #e0dcee; border-top:3px solid #4a7c8c; border-radius:12px; box-sizing:border-box;">
+        <p style="margin:0 0 10px; font-size:16px; font-weight:700; color:#111111;">Early-warning scoring</p>
+        <p style="margin:0; font-size:16px; line-height:1.6; color:#374151;">AI combines performance trends, financial indicators and external events to flag rising risk. The risk owner decides on acceptance or escalation.</p>
+      </div>
+      <div style="padding:28px; background:#ffffff; border:1px solid #e0dcee; border-top:3px solid #4a7c8c; border-radius:12px; box-sizing:border-box;">
+        <p style="margin:0 0 10px; font-size:16px; font-weight:700; color:#111111;">Scenario support</p>
+        <p style="margin:0; font-size:16px; line-height:1.6; color:#374151;">AI lists affected parts, open contracts and qualified alternates. The buyer decides whether to switch or exit a supplier.</p>
+      </div>
+      <div style="padding:28px; background:#ffffff; border:1px solid #e0dcee; border-top:3px solid #4a7c8c; border-radius:12px; box-sizing:border-box;">
+        <p style="margin:0 0 10px; font-size:16px; font-weight:700; color:#111111;">Triage and drafting</p>
+        <p style="margin:0; font-size:16px; line-height:1.6; color:#374151;">AI summarizes alerts and drafts corrective-action plans. The supplier manager approves the final corrective-action terms.</p>
+      </div>
+    </div>
+
+    <p><strong>AI output is only as reliable as the supplier master data behind the output.</strong> Require every AI-generated alert to cite its source data, and log every decision a buyer makes on an alert.</p>
+
+    <p><strong>Procurement teams moving from reactive alerts to forecasting are adopting <a href="https://www.jaggaer.com/blog/how-procurement-is-moving-from-reactive-to-predictive-risk-management-in-2026" target="_blank" rel="noopener">predictive supplier risk management</a>.</strong></p>
+
+    <hr class="section-divider">
+
+    <h2 id="s6">Supplier Risk Management Solutions: What to Look for</h2>
+
+    <p>Once the process and data foundations are in place, technology determines how far a program can scale.</p>
+
+    <p><strong>The most useful supplier risk management solutions trigger action inside onboarding, sourcing and contracting, not only on a dashboard.</strong> A supplier risk management platform that stops at reporting leaves buyers to act manually.</p>
+
+    <p>Use the 8 criteria below to compare supplier risk management tools and broader supply risk management solutions:</p>
+
+    <div style="margin:24px 0; border:1px solid #e0dcee; border-radius:12px; overflow-x:auto; background:#ffffff; box-sizing:border-box;">
+      <table style="width:100%; min-width:640px; border-collapse:collapse; font-size:16px; line-height:1.6; color:#374151;">
+        <thead>
+          <tr style="background:#e9e3f7;">
+            <th style="width:20%; padding:16px 20px; text-align:left; font-size:15px; font-weight:700; color:#111111; border-bottom:1px solid #e0dcee;">Criterion</th>
+            <th style="width:40%; padding:16px 20px; text-align:left; font-size:15px; font-weight:700; color:#111111; border-bottom:1px solid #e0dcee;">What good looks like</th>
+            <th style="width:40%; padding:16px 20px; text-align:left; font-size:15px; font-weight:700; color:#111111; border-bottom:1px solid #e0dcee;">Question to ask vendors</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#ffffff;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Risk coverage</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Financial, geopolitical, cyber, ESG, operational and logistics risk in one supplier record</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Which risk categories are native, and which come from partners?</td>
+          </tr>
+          <tr style="background:#eef0f4;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Multi-tier visibility</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Sub-tier suppliers and sites mapped for critical categories</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">How is Tier 2+ data collected, validated and refreshed?</td>
+          </tr>
+          <tr style="background:#ffffff;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Data sources</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Named external data partners plus internal performance data</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Which third-party feeds are included, and how often do the feeds update?</td>
+          </tr>
+          <tr style="background:#eef0f4;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Continuous monitoring</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Configurable thresholds with alerts routed to owners</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Can thresholds differ by category and criticality?</td>
+          </tr>
+          <tr style="background:#ffffff;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Workflow action</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Alerts trigger corrective plans, reviews or sourcing events</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">What happens in the system after a threshold is breached?</td>
+          </tr>
+          <tr style="background:#eef0f4;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Explainability</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Every score traceable to source data</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Can a buyer see why a supplier’s score changed?</td>
+          </tr>
+          <tr style="background:#ffffff;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top; border-bottom:1px solid #e0dcee;">Integration</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Connects to ERP, sourcing, contracts and onboarding</td>
+            <td style="padding:14px 20px; vertical-align:top; border-bottom:1px solid #e0dcee;">Which ERPs have pre-built connectors?</td>
+          </tr>
+          <tr style="background:#eef0f4;">
+            <td style="padding:14px 20px; font-weight:700; color:#6b7280; vertical-align:top;">Supplier collaboration</td>
+            <td style="padding:14px 20px; vertical-align:top;">Suppliers update data and respond through a portal</td>
+            <td style="padding:14px 20px; vertical-align:top;">How do suppliers view and respond to their scores?</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Weight the 8 criteria by risk profile.</strong> A discrete manufacturer with deep electronics bills of materials needs multi-tier mapping first. A public sector buyer may weight audit trails higher.</p>
+
+    <p>Before full rollout, pilot any supplier risk management tool on a small group of critical suppliers. <strong>A supplier risk management solution passes the pilot when alerts lead to recorded decisions.</strong></p>
+
+    <h3 class="sub-question">How Jaggaer Supports Supplier Risk Management</h3>
+
+    <p data-cta="scrm-bofu-supplier-intelligence-1"><a href="https://www.jaggaer.com/solutions/supplier-intelligence" target="_blank" rel="noopener">Jaggaer supplier risk management</a> sits within Supplier Intelligence. Supplier Intelligence connects supplier onboarding, risk, performance and compliance. <strong>Supplier Intelligence scores financial, geographic and geopolitical risk per supplier and triggers action plans automatically.</strong> Scorecards track quality, delivery and ESG.</p>
+
+    <p>External risk data comes through partners, including <a href="https://www.jaggaer.com/partner/prewave" target="_blank" rel="noopener">Prewave risk monitoring</a>. <strong>Prewave scrapes publicly accessible media in dozens of languages and maps supply chains top-down from direct suppliers and bottom-up from commodities.</strong></p>
+
+    <hr class="section-divider">
+
+    <h2 id="s7">Frequently Asked Questions About Supply Chain Risk Management</h2>
+
+    <details class="faq-item">
+      <summary>Who should own supply chain risk management? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Procurement usually owns supplier risk, while supply chain operations owns logistics and network risk.</strong> A cross-functional risk council adds security, finance and legal. Each risk category needs one named owner with authority to act.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do you assess Tier 2 suppliers without a direct contract? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Add sub-tier disclosure clauses to Tier 1 contracts for critical parts.</strong> Combine supplier-provided maps with external data on sites, ownership and events. Start with sole-source and long-lead parts, where a Tier 2 failure causes the longest outage.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What KPIs measure a supplier risk management program? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Common KPIs include the share of critical spend with mapped sub-tiers, time from alert to owner response, and the share of sole-source parts with approved alternates.</strong> Track recovery time after each incident.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What should supplier risk management solutions include? <span class="faq-icon">+</span></summary>
+      <div class="faq-body"><strong>Supplier risk management solutions should combine multiple risk categories in one supplier record.</strong> They should also support multi-tier visibility, configurable alerts, workflow actions and explainable scores. ERP and sourcing integration lets alerts change purchasing decisions.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is supply chain risk management the same as third-party risk management? <span class="faq-icon">+</span></summary>
+      <div class="faq-body">No. <strong>Third-party risk management focuses on vendor security, data and legal exposure, while supply chain risk management also covers logistics, geopolitics, climate and supply continuity.</strong> The 2 programs share cyber risk data.</div>
+    </details>
+
+    <hr class="section-divider">
+
+    <h2 id="s8">Next Steps: Strengthen Supplier Risk Visibility</h2>
+
+    <p><strong>Supply chain risk management delivers results when visibility, ownership and action connect.</strong> None of the 3 works alone. Visibility without an owner produces unread alerts, and ownership without action produces reports.</p>
+
+    <p>Start with 3 actions this quarter:</p>
+
+    <div style="display:flex; flex-wrap:wrap; gap:2px; margin:24px 0; border-radius:12px; overflow:hidden; background:#ffffff; box-sizing:border-box;">
+      <div style="flex:1 1 200px; display:flex; align-items:center; gap:10px; padding:14px 16px; background:#e8edf4; box-sizing:border-box;">
+        <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:#4a7c8c; color:#ffffff; font-size:13px; font-weight:700; line-height:1;">1</span>
+        <span style="font-size:16px; font-weight:700; color:#111111;">Map Tier 2 sources for your sole-source and long-lead parts.</span>
+      </div>
+      <div style="flex:1 1 200px; display:flex; align-items:center; gap:10px; padding:14px 16px; background:#e8edf4; box-sizing:border-box;">
+        <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:#4a7c8c; color:#ffffff; font-size:13px; font-weight:700; line-height:1;">2</span>
+        <span style="font-size:16px; font-weight:700; color:#111111;">Assign an owner and an alert threshold to each of the 8 risk categories.</span>
+      </div>
+      <div style="flex:1 1 200px; display:flex; align-items:center; gap:10px; padding:14px 16px; background:#e8edf4; box-sizing:border-box;">
+        <span style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:#4a7c8c; color:#ffffff; font-size:13px; font-weight:700; line-height:1;">3</span>
+        <span style="font-size:16px; font-weight:700; color:#111111;">Link supplier risk scores to sourcing and contract approvals.</span>
+      </div>
+    </div>
+
+    <p data-cta="scrm-bofu-supplier-intelligence-2"><strong>Next steps:</strong> Explore <a href="https://www.jaggaer.com/solutions/supplier-intelligence" target="_blank" rel="noopener">Jaggaer supplier risk management</a> to see supplier risk, performance and compliance data in one supplier record.</p>
+
+    <div data-cta="scrm-cta4-supplier-intelligence-demo" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; padding:32px 40px; margin:32px 0; border:1px solid #d42027; border-radius:16px; background:#ffffff; box-sizing:border-box;">
+      <div style="flex:1 1 320px;">
+        <p style="margin:0 0 6px; font-size:16px; font-weight:700; color:#111111;">See Supplier Intelligence end to end</p>
+        <p style="margin:0; font-size:16px; line-height:1.6; color:#6b7280;">Supplier Intelligence connects supplier onboarding, risk, performance and compliance in one supplier record.</p>
+      </div>
+      <a href="https://www.jaggaer.com/book-a-demo?utm_source=jaggaer-blog&amp;utm_medium=cta&amp;utm_campaign=supply-chain-risk-management&amp;utm_content=scrm-cta4-supplier-intelligence-demo" target="_blank" rel="noopener" style="flex-shrink:0; display:inline-block; padding:14px 28px; background:#d42027; color:#ffffff; font-weight:700; text-decoration:none; border-radius:8px;">Book a Demo →</a>
+    </div>
+
+  </article>
+
+  <aside class="expert-sidebar" aria-label="What the experts are saying">
+    <div class="exp-head"><span class="exp-head-lbl">What the Experts Are Saying</span></div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <span class="exp-source">Gartner &middot; May 2026</span>
+        <span class="exp-num">36%</span>
+        <p class="exp-stat">CPOs very confident in their ability to redesign roles and processes around AI.</p>
+        <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-19-gartner-survey-shows-just-36-perecent-of-chief-procurement-officers-are-very-confident-in-ability-to-redesign-function-for-ai" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Verizon DBIR &middot; May 2026</span>
+        <span class="exp-num red">48%</span>
+        <p class="exp-stat">Breaches with third-party involvement, up 60% year over year.</p>
+        <a href="https://www.verizon.com/about/news/breach-industry-wide-dbir-finds" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">World Bank &middot; 2026</span>
+        <span class="exp-num">10.1M</span>
+        <p class="exp-stat">Barrels per day lost from global oil supply in March 2026 after the Strait of Hormuz disruption.</p>
+        <a href="https://blogs.worldbank.org/en/opendata/strait-of-hormuz-disruption-sends-oil-prices-surging" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">CLEPA &middot; Spring 2026</span>
+        <span class="exp-num red">24%</span>
+        <p class="exp-stat">European automotive suppliers expecting negative profitability in 2026, up from 15%.</p>
+        <a href="https://www.clepa.eu/?p=37150" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">McKinsey &amp; WEF &middot; Dec 2025</span>
+        <span class="exp-num">1 in 4</span>
+        <p class="exp-stat">Companies ready to withstand major disruptions across all resilience dimensions.</p>
+        <a href="https://www.mckinsey.com/capabilities/risk-and-resilience/our-insights/resilient-firms-and-economies-unlocking-growth-in-emerging-markets" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">Cyber Monitoring Centre &middot; Oct 2025</span>
+        <span class="exp-num red">&pound;1.9B</span>
+        <p class="exp-stat">Modeled UK impact of the JLR cyber incident, affecting over 5,000 UK organizations.</p>
+        <a href="https://cybermonitoringcentre.com/2025/10/22/cyber-monitoring-centre-statement-on-the-jaguar-land-rovercyber-incident-october-2025/" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+      <div class="exp-item">
+        <span class="exp-source">McKinsey &middot; 2025</span>
+        <span class="exp-num">42%</span>
+        <p class="exp-stat">Supply chain leaders with risk visibility at Tier 2 or beyond, against 95% at Tier 1.</p>
+        <a href="https://www.mckinsey.com/capabilities/operations/our-insights/supply-chain-risk-survey" class="exp-link" target="_blank" rel="noopener">View source &rarr;</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  bar.style.width = pct + '%';
+}, { passive: true });
+
+const sections = document.querySelectorAll('article h2[id]');
+const links = document.querySelectorAll('.toc-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-15% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
