@@ -2644,11 +2644,11 @@
               "title": "Category Management Tools for Procurement: A Practical Guide",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "not-started",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 0,
+              "revision_count": 1,
               "primary_keyword": "category management tools",
               "geography": "all",
               "created_via": "briefs-tab",
@@ -2657,10 +2657,15 @@
                   "stage": "not-started",
                   "ts": "2026-11-18T13:40:02.145Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-11-26T11:10:50.531Z",
+                  "by": "orlagh"
                 }
               ],
-              "last_updated": "2026-11-24T10:36:06.516Z",
-              "last_updated_by": "manager",
+              "last_updated": "2026-11-26T11:10:50.531Z",
+              "last_updated_by": "orlagh",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Category_Management_Tools_Refresh.pdf",
@@ -2681,7 +2686,11 @@
                   "uploaded_at": "2026-11-24T10:36:06.516Z"
                 }
               ],
-              "brief_last_updated": "2026-11-24T10:36:06.516Z"
+              "brief_last_updated": "2026-11-24T10:36:06.516Z",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-11-26T11:10:50.531Z",
+              "last_upload_by": "orlagh"
             },
             {
               "id": "piece-0eovt0",
