@@ -2970,8 +2970,17 @@
                   "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-26T10:26:33.545Z",
-              "last_updated_by": "m-14bwv"
+              "last_updated": "2026-11-26T10:26:52.237Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Supplier_Risk_Signals_2027_Rebuild.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-421j8g/brief/JAGGAER_SEO_Brief_Supplier_Risk_Signals_2027_Rebuild.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-11-26T10:26:52.237Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-26T10:26:52.237Z"
             }
           ]
         }
