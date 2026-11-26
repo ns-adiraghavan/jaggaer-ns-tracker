@@ -2605,7 +2605,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-26T07:52:29.671Z",
-              "last_upload_by": "m-5jitd"
+              "last_upload_by": "m-5jitd",
+              "seo": {
+                "meta_title": "Supplier Performance Management Solutions: 2027 Guide",
+                "meta_description": "Supplier performance management solutions track quality, delivery, cost and risk. See the\n2027 trends, scorecards, KPIs and how to choose.",
+                "slug": "blog-supplier-performance-management-solutions",
+                "updated_at": "2026-11-26T07:53:23.001Z",
+                "updated_by": "m-5jitd"
+              }
             },
             {
               "id": "piece-qo8b9r",
