@@ -3002,8 +3002,17 @@
                   "by": "m-14bwv"
                 }
               ],
-              "last_updated": "2026-11-26T10:28:26.865Z",
-              "last_updated_by": "m-14bwv"
+              "last_updated": "2026-11-26T10:28:30.107Z",
+              "last_updated_by": "m-14bwv",
+              "brief_files": [
+                {
+                  "filename": "JAGGAER_SEO_Brief_Procurement_KPIs_2027_Refresh.pdf",
+                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-j0lfrn/brief/JAGGAER_SEO_Brief_Procurement_KPIs_2027_Refresh.pdf",
+                  "uploaded_by": "m-14bwv",
+                  "uploaded_at": "2026-11-26T10:28:30.107Z"
+                }
+              ],
+              "brief_last_updated": "2026-11-26T10:28:30.107Z"
             }
           ]
         }
