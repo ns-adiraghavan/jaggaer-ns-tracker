@@ -2981,6 +2981,29 @@
                 }
               ],
               "brief_last_updated": "2026-11-26T10:26:52.237Z"
+            },
+            {
+              "id": "piece-j0lfrn",
+              "title": "15 Procurement KPIs to Report in 2027 (With Formulas)",
+              "format": "Ad-Hoc Article",
+              "assignee": "m-14bwv",
+              "status": "not-started",
+              "content_type": "ad-hoc",
+              "phase": 3,
+              "schedule_month": "p3-month-1",
+              "revision_count": 0,
+              "primary_keyword": "procurement kpis",
+              "geography": "all",
+              "created_via": "briefs-tab",
+              "status_history": [
+                {
+                  "stage": "not-started",
+                  "ts": "2026-11-26T10:28:26.865Z",
+                  "by": "m-14bwv"
+                }
+              ],
+              "last_updated": "2026-11-26T10:28:26.865Z",
+              "last_updated_by": "m-14bwv"
             }
           ]
         }
