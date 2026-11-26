@@ -1430,7 +1430,7 @@
               "title": "Change Management in Procurement: 10 Principles for Success",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1467,10 +1467,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-26T06:08:34.538Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-26T11:10:39.084Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-26T06:08:34.538Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-26T11:10:39.084Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Procurement_Change_Management_Update (1).pdf",
@@ -2112,7 +2117,7 @@
               "title": "AI Intake for Procurement: How It Works, What to Look For and How to  Pilot It",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2150,10 +2155,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-26T06:15:00.006Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-26T11:11:24.197Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-26T06:15:00.006Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-26T11:11:24.197Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_AI_Intake_New_Blog.pdf",
@@ -13135,6 +13145,14 @@
         "body": "check",
         "ts": "2026-11-25T12:40:46.637Z",
         "stage": "ed-review"
+      },
+      {
+        "id": "fb-kvw5bh",
+        "author": "m-72umx",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-26T11:11:24.194Z",
+        "stage": "ed-review"
       }
     ],
     "piece-g2cq2j": [
@@ -13261,6 +13279,14 @@
         "annotation": true,
         "section": "¶8 — \"The Adopt datasheet covers in-solution g…\"",
         "revision": 2
+      },
+      {
+        "id": "fb-71x691",
+        "author": "m-72umx",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-26T11:10:39.081Z",
+        "stage": "ed-review"
       }
     ],
     "piece-fmg9pm": [
