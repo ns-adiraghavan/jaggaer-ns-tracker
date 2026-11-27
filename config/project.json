@@ -2632,7 +2632,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-27T11:10:12.225Z",
-              "last_upload_by": "m-5jitd"
+              "last_upload_by": "m-5jitd",
+              "seo": {
+                "meta_title": "Source to Pay Procurement Software: What It Covers",
+                "meta_description": "Source to pay procurement software connects sourcing, contracts, purchasing and payment.\n\nSee what it covers and how to evaluate it.",
+                "slug": "blog-source-to-pay-procurement-software",
+                "updated_at": "2026-11-27T11:11:05.942Z",
+                "updated_by": "m-5jitd"
+              }
             },
             {
               "id": "piece-t7jhnu",
