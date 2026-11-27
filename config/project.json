@@ -2844,11 +2844,11 @@
               "title": "Agentic AI in Source to Pay: What Governance Looks Like in Practice",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "not-started",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 0,
+              "revision_count": 1,
               "primary_keyword": "agentic ai governance",
               "geography": "all",
               "created_via": "briefs-tab",
@@ -2857,10 +2857,15 @@
                   "stage": "not-started",
                   "ts": "2026-11-24T10:08:34.776Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-11-27T11:43:49.131Z",
+                  "by": "m-e10nz"
                 }
               ],
-              "last_updated": "2026-11-27T08:23:40.335Z",
-              "last_updated_by": "manager",
+              "last_updated": "2026-11-27T11:43:49.131Z",
+              "last_updated_by": "m-e10nz",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Agentic_AI_Governance_Source_to_Pay_AIO_Blog.pdf",
@@ -2869,7 +2874,11 @@
                   "uploaded_at": "2026-11-27T08:23:40.335Z"
                 }
               ],
-              "brief_last_updated": "2026-11-27T08:23:40.335Z"
+              "brief_last_updated": "2026-11-27T08:23:40.335Z",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-11-27T11:43:49.131Z",
+              "last_upload_by": "m-e10nz"
             },
             {
               "id": "piece-5hf8c6",
