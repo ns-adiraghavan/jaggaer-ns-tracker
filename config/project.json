@@ -13641,6 +13641,16 @@
         "annotation": true,
         "section": "¶100 — \"What Changed in 2025 and 2026…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-d6fvfm",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "change the whole content as we need to mention what's in it for them ( benefits ) why they download that assets.",
+        "ts": "2026-11-27T12:19:04.238Z",
+        "annotation": true,
+        "section": "¶41 — \"Download the supplier scorecard checklis…\"",
+        "revision": 1
       }
     ]
   },
