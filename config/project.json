@@ -13621,6 +13621,16 @@
         "annotation": true,
         "section": "¶5 — \"Jaggaer’s 10-rule checklist for setting …\"",
         "revision": 1
+      },
+      {
+        "id": "ann-mogkc1",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "change the whole content as we need to mention what's in it for them ( benefits ) why they download that assets.",
+        "ts": "2026-11-27T12:17:47.565Z",
+        "annotation": true,
+        "section": "¶4 — \"Download the golden rules checklist…\"",
+        "revision": 1
       }
     ]
   },
