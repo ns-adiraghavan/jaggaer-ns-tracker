@@ -1166,7 +1166,7 @@
               "title": "Spend Analytics in Procurement: Visibility, KPIs and Cost Control",
               "format": "Ad-Hoc Article",
               "assignee": "m-5jitd",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1193,6 +1193,11 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-10-28T11:38:12.016Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-27T09:45:09.741Z",
+                  "by": "m-14bwv"
                 }
               ],
               "last_updated": "2026-10-28T11:38:12.016Z",
@@ -1217,7 +1222,14 @@
                 }
               ],
               "brief_last_updated": "2026-10-26T07:48:39.842Z",
-              "secondary_keyword": ""
+              "secondary_keyword": "",
+              "publishing": {
+                "published_by": "Visnja",
+                "launch_date": "2026-11-23",
+                "live_url": "https://www.jaggaer.com/blog/spend-analytics-optimization-visibility-kpis-control",
+                "performance_data": "",
+                "updated_at": "2026-11-27T09:45:09.741Z"
+              }
             },
             {
               "id": "piece-zgthd0",
@@ -2614,7 +2626,7 @@
               "title": "Supplier Performance Management Solutions: 2027 Guide to Trends, Scorecards and AI",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2647,6 +2659,11 @@
                   "stage": "approved",
                   "ts": "2026-11-27T09:39:16.162Z",
                   "by": "m-14bwv"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-27T09:39:47.341Z",
+                  "by": "m-14bwv"
                 }
               ],
               "last_updated": "2026-11-27T09:39:16.161Z",
@@ -2671,6 +2688,13 @@
                 "slug": "blog-supplier-performance-management-solutions",
                 "updated_at": "2026-11-26T07:53:23.001Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Prashanth",
+                "launch_date": "2026-11-27",
+                "live_url": "https://www.jaggaer.com/blog/supplier-performance-management-solutions",
+                "performance_data": "",
+                "updated_at": "2026-11-27T09:39:47.341Z"
               }
             },
             {
