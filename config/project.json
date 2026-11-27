@@ -13600,6 +13600,18 @@
         "ts": "2026-11-27T12:12:47.315Z",
         "stage": "ad-hoc-review"
       }
+    ],
+    "piece-ozdqfo": [
+      {
+        "id": "ann-js2j8n",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "the start is very technical, and niche let's start with an answer that can get us mentions on AIO, we can include this point as proof of that answer",
+        "ts": "2026-11-27T12:14:54.081Z",
+        "annotation": true,
+        "section": "¶1 — \"According to McKinsey’s 2025 supply chai…\"",
+        "revision": 1
+      }
     ]
   },
   "build_with_claude": [
