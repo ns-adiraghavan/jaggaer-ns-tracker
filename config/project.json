@@ -13611,6 +13611,16 @@
         "annotation": true,
         "section": "¶1 — \"According to McKinsey’s 2025 supply chai…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-hagr1s",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "need to change the content of this banner, nobody will download golden rules checklist if we just say that we need to mention how it will benefit them what in it for them",
+        "ts": "2026-11-27T12:16:19.000Z",
+        "annotation": true,
+        "section": "¶5 — \"Jaggaer’s 10-rule checklist for setting …\"",
+        "revision": 1
       }
     ]
   },
