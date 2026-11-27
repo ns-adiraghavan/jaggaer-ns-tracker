@@ -2490,7 +2490,7 @@
               "title": "AI Guardrails for Procurement: Permissions and Human Approval",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ed-review",
+              "status": "approved",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2528,10 +2528,15 @@
                   "stage": "ed-review",
                   "ts": "2026-11-27T06:56:09.870Z",
                   "by": "orlagh"
+                },
+                {
+                  "stage": "approved",
+                  "ts": "2026-11-27T12:09:55.423Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-27T06:56:09.870Z",
-              "last_updated_by": "orlagh",
+              "last_updated": "2026-11-27T12:09:55.423Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_AI_Guardrails_for_Procurement_New_Blog.pdf",
@@ -13207,6 +13212,14 @@
         "body": "please check comment",
         "ts": "2026-11-25T12:29:53.355Z",
         "stage": "ed-review"
+      },
+      {
+        "id": "fb-jdy75f",
+        "author": "m-72umx",
+        "verdict": "approved",
+        "body": "(no note)",
+        "ts": "2026-11-27T12:09:55.419Z",
+        "stage": "ed-review"
       }
     ],
     "piece-5wxtri": [
@@ -13561,6 +13574,18 @@
         "body": "(no note)",
         "ts": "2026-11-27T09:39:16.158Z",
         "stage": "ad-hoc-review"
+      }
+    ],
+    "piece-as3hmb": [
+      {
+        "id": "ann-qglmdb",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "Please include the FAQs",
+        "ts": "2026-11-27T12:11:51.899Z",
+        "annotation": true,
+        "section": "General",
+        "revision": 1
       }
     ]
   },
