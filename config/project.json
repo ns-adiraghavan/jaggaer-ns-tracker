@@ -1442,7 +1442,7 @@
               "title": "Change Management in Procurement: 10 Principles for Success",
               "format": "Ad-Hoc Article",
               "assignee": "manager",
-              "status": "approved",
+              "status": "live",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -1484,6 +1484,11 @@
                   "stage": "approved",
                   "ts": "2026-11-26T11:10:39.084Z",
                   "by": "m-72umx"
+                },
+                {
+                  "stage": "live",
+                  "ts": "2026-11-27T10:48:47.924Z",
+                  "by": "m-14bwv"
                 }
               ],
               "last_updated": "2026-11-26T11:10:39.084Z",
@@ -1508,6 +1513,13 @@
                 "slug": "blog-procurement-change-management-principles",
                 "updated_at": "2026-10-27T11:49:56.178Z",
                 "updated_by": "m-5jitd"
+              },
+              "publishing": {
+                "published_by": "Prashanth",
+                "launch_date": "2026-11-27",
+                "live_url": "https://www.jaggaer.com/blog/procurement-change-management-principles",
+                "performance_data": "",
+                "updated_at": "2026-11-27T10:48:47.924Z"
               }
             },
             {
