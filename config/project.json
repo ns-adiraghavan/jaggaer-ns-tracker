@@ -2878,7 +2878,14 @@
               "deliverable_ext": "html",
               "return_to_stage": null,
               "last_upload": "2026-11-27T11:43:49.131Z",
-              "last_upload_by": "m-e10nz"
+              "last_upload_by": "m-e10nz",
+              "seo": {
+                "meta_title": "Agentic AI Governance in Source to Pay: What It Looks Like",
+                "meta_description": "AI compliance is \"a governance discipline\", says Jaggaer's CEO. See what agentic AI governance looks like across 6 JAI AI Workers, where people decide.",
+                "slug": "blog-agentic-ai-governance-in-source-to-pay",
+                "updated_at": "2026-11-27T11:47:25.574Z",
+                "updated_by": "m-e10nz"
+              }
             },
             {
               "id": "piece-5hf8c6",
