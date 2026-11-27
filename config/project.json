@@ -2864,7 +2864,7 @@
               "title": "Agentic AI in Source to Pay: What Governance Looks Like in Practice",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ad-hoc-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2882,10 +2882,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-27T11:43:49.131Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-27T13:19:56.784Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-27T11:43:49.131Z",
-              "last_updated_by": "m-e10nz",
+              "last_updated": "2026-11-27T13:19:56.784Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Agentic_AI_Governance_Source_to_Pay_AIO_Blog.pdf",
@@ -2896,7 +2901,7 @@
               ],
               "brief_last_updated": "2026-11-27T08:23:40.335Z",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ad-hoc-review",
               "last_upload": "2026-11-27T11:43:49.131Z",
               "last_upload_by": "m-e10nz",
               "seo": {
@@ -13688,6 +13693,16 @@
         "verdict": "needs-revision",
         "body": "need few thing to be checked - interlinks , banners copy , and if we can mention the adoption rate of the software by diffrent industry or by role it will be usefull for the reader",
         "ts": "2026-11-27T12:54:55.835Z",
+        "stage": "ad-hoc-review"
+      }
+    ],
+    "piece-f3e58b": [
+      {
+        "id": "fb-qyiurx",
+        "author": "m-72umx",
+        "verdict": "needs-revision",
+        "body": "shared review on email",
+        "ts": "2026-11-27T13:19:56.781Z",
         "stage": "ad-hoc-review"
       }
     ]
