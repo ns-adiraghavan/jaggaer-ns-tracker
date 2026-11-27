@@ -2569,7 +2569,7 @@
               "title": "Supply Chain Risk Management: Steps, Supplier Risk and Solutions",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ad-hoc-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2587,10 +2587,15 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-26T10:15:19.462Z",
                   "by": "m-e10nz"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-27T12:50:46.588Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-26T10:15:19.461Z",
-              "last_updated_by": "m-e10nz",
+              "last_updated": "2026-11-27T12:50:46.587Z",
+              "last_updated_by": "m-72umx",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_Supply_Chain_Risk_Management_Refresh.pdf",
@@ -2601,7 +2606,7 @@
               ],
               "brief_last_updated": "2026-11-24T10:33:51.932Z",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ad-hoc-review",
               "last_upload": "2026-11-26T10:15:19.461Z",
               "last_upload_by": "m-e10nz",
               "seo": {
@@ -13661,6 +13666,14 @@
         "annotation": true,
         "section": "¶56 — \"See supplier risk monitoring in Supplier…\"",
         "revision": 1
+      },
+      {
+        "id": "fb-5w8mh9",
+        "author": "m-72umx",
+        "verdict": "needs-revision",
+        "body": "check",
+        "ts": "2026-11-27T12:50:46.583Z",
+        "stage": "ad-hoc-review"
       }
     ]
   },
