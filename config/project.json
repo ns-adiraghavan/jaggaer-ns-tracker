@@ -2607,11 +2607,11 @@
               "title": "Source to Pay Procurement Software: What It Covers and How to Evaluate It",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "not-started",
+              "status": "ad-hoc-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 0,
+              "revision_count": 1,
               "primary_keyword": "source to pay procurement software",
               "geography": "all",
               "created_via": "briefs-tab",
@@ -2620,19 +2620,19 @@
                   "stage": "not-started",
                   "ts": "2026-11-17T13:13:49.021Z",
                   "by": "m-14bwv"
-                }
-              ],
-              "last_updated": "2026-11-27T08:23:49.871Z",
-              "last_updated_by": "manager",
-              "brief_files": [
+                },
                 {
-                  "filename": "JAGGAER_SEO_Brief_Source_to_Pay_Procurement_Software_New_Blog.pdf",
-                  "path": "content/month-1/ad-hoc-articles/c-ad-hoc/piece-l1js7y/brief/JAGGAER_SEO_Brief_Source_to_Pay_Procurement_Software_New_Blog.pdf",
-                  "uploaded_by": "manager",
-                  "uploaded_at": "2026-11-27T08:23:49.871Z"
+                  "stage": "ad-hoc-review",
+                  "ts": "2026-11-27T11:10:12.225Z",
+                  "by": "m-5jitd"
                 }
               ],
-              "brief_last_updated": "2026-11-27T08:23:49.871Z"
+              "last_updated": "2026-11-27T11:10:12.225Z",
+              "last_updated_by": "m-5jitd",
+              "deliverable_ext": "html",
+              "return_to_stage": null,
+              "last_upload": "2026-11-27T11:10:12.225Z",
+              "last_upload_by": "m-5jitd"
             },
             {
               "id": "piece-t7jhnu",
