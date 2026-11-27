@@ -13651,6 +13651,16 @@
         "annotation": true,
         "section": "¶41 — \"Download the supplier scorecard checklis…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-752e6x",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "no the banner copy is not good also the CTA will be = book a demo",
+        "ts": "2026-11-27T12:20:07.182Z",
+        "annotation": true,
+        "section": "¶56 — \"See supplier risk monitoring in Supplier…\"",
+        "revision": 1
       }
     ]
   },
