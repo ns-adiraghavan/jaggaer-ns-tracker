@@ -13631,6 +13631,16 @@
         "annotation": true,
         "section": "¶4 — \"Download the golden rules checklist…\"",
         "revision": 1
+      },
+      {
+        "id": "ann-1900uo",
+        "author": "m-72umx",
+        "verdict": "question",
+        "body": "mention the trend of 2027",
+        "ts": "2026-11-27T12:18:42.835Z",
+        "annotation": true,
+        "section": "¶100 — \"What Changed in 2025 and 2026…\"",
+        "revision": 1
       }
     ]
   },
