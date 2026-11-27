@@ -2465,11 +2465,11 @@
               "title": "AI Guardrails for Procurement: Permissions and Human Approval",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "writing",
+              "status": "ed-review",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
-              "revision_count": 2,
+              "revision_count": 3,
               "primary_keyword": "ai guardrails",
               "geography": "all",
               "created_via": "briefs-tab",
@@ -2498,10 +2498,15 @@
                   "stage": "writing",
                   "ts": "2026-11-25T12:29:53.357Z",
                   "by": "m-72umx"
+                },
+                {
+                  "stage": "ed-review",
+                  "ts": "2026-11-27T06:56:09.870Z",
+                  "by": "orlagh"
                 }
               ],
-              "last_updated": "2026-11-25T12:29:53.357Z",
-              "last_updated_by": "m-72umx",
+              "last_updated": "2026-11-27T06:56:09.870Z",
+              "last_updated_by": "orlagh",
               "brief_files": [
                 {
                   "filename": "JAGGAER_SEO_Brief_AI_Guardrails_for_Procurement_New_Blog.pdf",
@@ -2512,8 +2517,8 @@
               ],
               "brief_last_updated": "2026-11-17T13:00:07.813Z",
               "deliverable_ext": "html",
-              "return_to_stage": "ed-review",
-              "last_upload": "2026-11-25T07:05:13.889Z",
+              "return_to_stage": null,
+              "last_upload": "2026-11-27T06:56:09.870Z",
               "last_upload_by": "orlagh",
               "seo": {
                 "meta_title": "AI Guardrails for Procurement: Permissions and Human Approval",
