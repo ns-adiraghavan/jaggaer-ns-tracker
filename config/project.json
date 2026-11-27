@@ -2622,7 +2622,7 @@
               "title": "Source to Pay Procurement Software: What It Covers and How to Evaluate It",
               "format": "Ad-Hoc Article",
               "assignee": "m-14bwv",
-              "status": "ad-hoc-review",
+              "status": "writing",
               "content_type": "ad-hoc",
               "phase": 3,
               "schedule_month": "p3-month-1",
@@ -2640,12 +2640,17 @@
                   "stage": "ad-hoc-review",
                   "ts": "2026-11-27T11:10:12.225Z",
                   "by": "m-5jitd"
+                },
+                {
+                  "stage": "writing",
+                  "ts": "2026-11-27T12:54:55.840Z",
+                  "by": "m-72umx"
                 }
               ],
-              "last_updated": "2026-11-27T11:10:12.225Z",
-              "last_updated_by": "m-5jitd",
+              "last_updated": "2026-11-27T12:54:55.840Z",
+              "last_updated_by": "m-72umx",
               "deliverable_ext": "html",
-              "return_to_stage": null,
+              "return_to_stage": "ad-hoc-review",
               "last_upload": "2026-11-27T11:10:12.225Z",
               "last_upload_by": "m-5jitd",
               "seo": {
@@ -13673,6 +13678,16 @@
         "verdict": "needs-revision",
         "body": "check",
         "ts": "2026-11-27T12:50:46.583Z",
+        "stage": "ad-hoc-review"
+      }
+    ],
+    "piece-l1js7y": [
+      {
+        "id": "fb-ve93pi",
+        "author": "m-72umx",
+        "verdict": "needs-revision",
+        "body": "need few thing to be checked - interlinks , banners copy , and if we can mention the adoption rate of the software by diffrent industry or by role it will be usefull for the reader",
+        "ts": "2026-11-27T12:54:55.835Z",
         "stage": "ad-hoc-review"
       }
     ]
